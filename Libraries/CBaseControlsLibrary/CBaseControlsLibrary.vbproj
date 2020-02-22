@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F991561A-78F8-487C-A873-E6436B41D801}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AATM.Libraries.CBaseControlsLibrary</RootNamespace>
+    <AssemblyName>CBaseControlsLibrary</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CBaseControlsLibrary.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CBaseControlsLibrary.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ATabPage.Designer.vb">
+      <DependentUpon>ATabPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ATabPage.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BlendItemsConverter.vb" />
+    <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CaDgvComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CaDgvComboBoxCell.vb" />
+    <Compile Include="CaDgvComboBoxColumn.vb" />
+    <Compile Include="cBlendItems.vb" />
+    <Compile Include="cblPointer.vb" />
+    <Compile Include="CButton.Designer.vb">
+      <DependentUpon>CButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CButtonActionList.vb" />
+    <Compile Include="CButtonDesigner.vb" />
+    <Compile Include="CDgvCaComboboxCell.vb" />
+    <Compile Include="CDgvCaComboboxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CdgvCaComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CdgvEcbComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CdgvTestColumnComboBox.vb" />
+    <Compile Include="CdgvComboBoxOld.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CdgvComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CaComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cbsComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCheckBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CDateTimePicker.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cdgvCaComboboxColumn.vb" />
+    <Compile Include="CDGVCellMoney.vb" />
+    <Compile Include="CDGVCellText.vb" />
+    <Compile Include="CdgvColumnComboBox.vb" />
+    <Compile Include="CdgvColumnMoney.vb" />
+    <Compile Include="CDGVColumnText.vb" />
+    <Compile Include="CdgvComboBoxCell.vb" />
+    <Compile Include="CFindForm.designer.vb">
+      <DependentUpon>CFindForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFindForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFlowLayout.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cFocalPoints.vb" />
+    <Compile Include="CForm.Designer.vb">
+      <DependentUpon>CForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CForm1.Designer.vb">
+      <DependentUpon>CForm.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="cfsComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CGroupBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChooseGlyph.vb" />
+    <Compile Include="CLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CListBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CListBoxForm.Designer.vb">
+      <DependentUpon>CListBoxForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CListBoxForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMaskedTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CMessageBox.Designer.vb">
+      <DependentUpon>CMessageBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CMessageBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CModalForm.Designer.vb">
+      <DependentUpon>CModalForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CModalForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMyCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CNewTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CornerConverter.vb" />
+    <Compile Include="CornerGlyph.vb" />
+    <Compile Include="CornersProperty.vb" />
+    <Compile Include="CTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CRadioButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CSuggestFilterComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CTabPage.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CTextBoxArabic.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CTextBoxIdNo.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CToolStripMenu.Designer.vb">
+      <DependentUpon>CToolStripMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CToolStripMenu.vb" />
+    <Compile Include="CTreeView.Designer.vb">
+      <DependentUpon>CTreeView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CTreeView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGridViewCaComboBoxCell.vb" />
+    <Compile Include="DataGridViewExtensions.vb" />
+    <Compile Include="DropdownColorBlender.designer.vb">
+      <DependentUpon>DropdownColorBlender.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DropdownColorBlender.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EcbComboBoxCell.vb" />
+    <Compile Include="EcbComboBoxColumn.vb" />
+    <Compile Include="EcbComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ErrorProviderExendedOrig.vb" />
+    <Compile Include="ErrorProviderExtended.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FocalPointsConverter.vb" />
+    <Compile Include="FocalPtGlyph.vb" />
+    <Compile Include="IEntryControl.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PadGlyph.vb" />
+    <Compile Include="Strings.Designer.vb">
+      <DependentUpon>Strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ValidationControl.vb" />
+    <Compile Include="ValidationControlCollection.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ATabPage.resx">
+      <DependentUpon>ATabPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaDgvComboBox.resx">
+      <DependentUpon>CaDgvComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CButton.resx">
+      <DependentUpon>CButton.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CComboBox.resx">
+      <DependentUpon>CComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CdgvComboBox.resx">
+      <DependentUpon>CdgvComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFindForm.resx">
+      <DependentUpon>CFindForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CForm.ar-SA.resx">
+      <DependentUpon>CForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CForm.resx">
+      <DependentUpon>CForm.vb</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CForm1.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CListBoxForm.resx">
+      <DependentUpon>CListBoxForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTextBox.resx">
+      <DependentUpon>CTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CToolStripMenu.resx">
+      <DependentUpon>CToolStripMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTreeView.resx">
+      <DependentUpon>CTreeView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropdownColorBlender.resx">
+      <DependentUpon>DropdownColorBlender.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyTabControl.resx">
+      <DependentUpon>MyTabControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomComboBox\CustomComboBox.csproj">
+      <Project>{78a0ac9e-8e5c-422a-a45a-2bd0035f14e2}</Project>
+      <Name>CustomComboBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalResources\GlobalResources.vbproj">
+      <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
+      <Name>GlobalResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HelperLibraries\HelperLibraries.vbproj">
+      <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
+      <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Languages\Languages.vbproj">
+      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\GreenGradientBackgroundLarge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CButton.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

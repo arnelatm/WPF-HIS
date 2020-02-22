@@ -1,0 +1,43 @@
+﻿Imports System.Windows.Forms
+
+Public Class EcbComboBoxCell
+    Inherits DataGridViewComboBoxCell
+
+    'Public Sub New()
+    '    MyBase.New()
+    '    ' Use the short date format say for date Cell
+    '    'Me.Style.Format = "d"
+    'End Sub
+
+    Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal initialFormattedValue As Object, ByVal dataGridViewCellStyle As DataGridViewCellStyle)
+        ' Set the value of the editing control to the current cell value.
+        MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
+        Dim ctl As EcbComboBoxEditingControl = TryCast(DataGridView.EditingControl, EcbComboBoxEditingControl)
+        ctl.ValueMember = "IdNo"
+        ctl.DisplayMember = "Name"
+        ctl.SelectedValue = Me.Value
+        ctl.CausesValidation = False
+    End Sub
+
+    Public Overrides ReadOnly Property EditType() As Type
+        Get
+            ' Return the type of the editing contol that CalendarCell uses.
+            Return GetType(EcbComboBoxEditingControl)
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property ValueType() As Type
+        Get
+            ' Return the type of the value that CalendarCell contains.
+            Return GetType(Integer)
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property DefaultNewRowValue() As Object
+        Get
+            ' Use the 0 as the default value.
+            Return 0
+        End Get
+    End Property
+
+End Class

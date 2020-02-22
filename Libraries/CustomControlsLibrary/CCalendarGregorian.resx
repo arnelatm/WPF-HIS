@@ -1,0 +1,810 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cboMonths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cboMonths.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="cboMonths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cboMonths.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cboMonths.Name" xml:space="preserve">
+    <value>cboMonths</value>
+  </data>
+  <data name="&gt;&gt;cboMonths.Type" xml:space="preserve">
+    <value>AATM.CControls.CComboBox, CControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboMonths.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;cboMonths.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="YearsEdit.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt, style=Bold</value>
+  </data>
+  <data name="YearsEdit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 0</value>
+  </data>
+  <data name="YearsEdit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="YearsEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="YearsEdit.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;YearsEdit.Name" xml:space="preserve">
+    <value>YearsEdit</value>
+  </data>
+  <data name="&gt;&gt;YearsEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YearsEdit.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;YearsEdit.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnPrevMonth.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnPrevMonth.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABR0RVh0QXV0aG9yAEFybmVsIE1hcmNlbG+DmWaEAAAAIHRFWHRDcmVhdGlvblRp
+        bWUAMjAxODoxMjoxOSAxMjowODowMwpZRV0AAAEYSURBVDhP1ZG/ioQwEIftFwthwU4RhMVG0ULwLaxt
+        3GabtVErS99K8EG0ER/AStDOP79lwnpcwu4dx3HFfRAyGZMvM1HCL/kbwb7v3PwVbwXLsmBdV7Zu2xZ9
+        37NY5K1g2zY2iDAMEccxi0U4AR04biWmacLlcoHjOEjT9Jnl4QR0mEon6rpGWZawbZsJsixjeZEPwVE2
+        MQwD8jyHaZrwfZ9JvhUQh0CSJOi6Ds/z4LouLMtCkiTsmwhXAbVA8zzPuN/vOJ/P7A00TcPtdnvu5OEE
+        n9uoqgpFUUBRFKiqiuv1yvIiXAsHJCLGccTpdIIsy4iiiOVE3gqOv0EYhoEgCJ4rnpcCauMYRNM06LqO
+        xSIvBT/h3wuAB/vhKhVdi/8cAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnPrevMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnPrevMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="btnPrevMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="btnPrevMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 21</value>
+  </data>
+  <data name="btnPrevMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnPrevMonth.Name" xml:space="preserve">
+    <value>btnPrevMonth</value>
+  </data>
+  <data name="&gt;&gt;btnPrevMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPrevMonth.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;btnPrevMonth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnNextMonth.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnNextMonth.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt, style=Bold</value>
+  </data>
+  <data name="btnNextMonth.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABR0RVh0QXV0aG9yAEFybmVsIE1hcmNlbG+DmWaEAAAAIHRFWHRDcmVhdGlvblRp
+        bWUAMjAxODoxMjoxOSAxMjowODowMwpZRV0AAAEMSURBVDhP3ZK9ioQwFIXtxUIQ7BRBEBtFC8G3sLbR
+        xkYbtbL0rYR5kLERH8BOsfPnLMnq4g5ZZmen2wOBe29yvuQm4fCm/iug6zrc73cab9v2NVhiAnzfh6Zp
+        RwYsy4J934/su5iAMAwhCAJ4nsc4jrT2EiCOY8iyDFEUUVUVmqahddIGAV1hTECSJFAUBYZhQJIkpGmK
+        eZ6pcV3X54Asy2CaJhzHgeu6UFUVHPe59PEymYCiKGBZFjzPg67rKMsSwzDQubONUz8CbNumkLqucbvd
+        aJ28BmnhKiYgz3MKIHcwTdNRBTX/qoUoihAEAY2J4fHYVzEBfd+jbVsak11f/khXncY/A57pTQDwARrG
+        KhX+fM/nAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnNextMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnNextMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 0</value>
+  </data>
+  <data name="btnNextMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="btnNextMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 21</value>
+  </data>
+  <data name="btnNextMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnNextMonth.Name" xml:space="preserve">
+    <value>btnNextMonth</value>
+  </data>
+  <data name="&gt;&gt;btnNextMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNextMonth.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;btnNextMonth.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
+    <value>AATM.CControls.CFlowLayout, CControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblTodayMark.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTodayMark.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 175</value>
+  </data>
+  <data name="lblTodayMark.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblTodayMark.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 15</value>
+  </data>
+  <data name="lblTodayMark.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="lblTodayMark.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblTodayMark.Name" xml:space="preserve">
+    <value>lblTodayMark</value>
+  </data>
+  <data name="&gt;&gt;lblTodayMark.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTodayMark.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTodayMark.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblThursday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblThursday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblThursday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 43</value>
+  </data>
+  <data name="lblThursday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblThursday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblThursday.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="lblThursday.Text" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="lblThursday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblThursday.Name" xml:space="preserve">
+    <value>lblThursday</value>
+  </data>
+  <data name="&gt;&gt;lblThursday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblThursday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblThursday.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblFriday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblFriday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFriday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 43</value>
+  </data>
+  <data name="lblFriday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblFriday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblFriday.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="lblFriday.Text" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="lblFriday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblFriday.Name" xml:space="preserve">
+    <value>lblFriday</value>
+  </data>
+  <data name="&gt;&gt;lblFriday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFriday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFriday.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblWednesday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblWednesday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblWednesday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 43</value>
+  </data>
+  <data name="lblWednesday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblWednesday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblWednesday.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="lblWednesday.Text" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="lblWednesday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblWednesday.Name" xml:space="preserve">
+    <value>lblWednesday</value>
+  </data>
+  <data name="&gt;&gt;lblWednesday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWednesday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblWednesday.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblTuesday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblTuesday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTuesday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 43</value>
+  </data>
+  <data name="lblTuesday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblTuesday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblTuesday.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="lblTuesday.Text" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="lblTuesday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblTuesday.Name" xml:space="preserve">
+    <value>lblTuesday</value>
+  </data>
+  <data name="&gt;&gt;lblTuesday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTuesday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTuesday.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblMonday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblMonday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>37, 43</value>
+  </data>
+  <data name="lblMonday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblMonday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblMonday.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="lblMonday.Text" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="lblMonday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblMonday.Name" xml:space="preserve">
+    <value>lblMonday</value>
+  </data>
+  <data name="&gt;&gt;lblMonday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMonday.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblSaturday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblSaturday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSaturday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 43</value>
+  </data>
+  <data name="lblSaturday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblSaturday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblSaturday.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="lblSaturday.Text" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="lblSaturday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblSaturday.Name" xml:space="preserve">
+    <value>lblSaturday</value>
+  </data>
+  <data name="&gt;&gt;lblSaturday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSaturday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSaturday.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblSunday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="lblSunday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSunday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 43</value>
+  </data>
+  <data name="lblSunday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblSunday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 17</value>
+  </data>
+  <data name="lblSunday.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="lblSunday.Text" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="lblSunday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblSunday.Name" xml:space="preserve">
+    <value>lblSunday</value>
+  </data>
+  <data name="&gt;&gt;lblSunday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSunday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSunday.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblToday.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt, style=Bold</value>
+  </data>
+  <data name="lblToday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 172</value>
+  </data>
+  <data name="lblToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="lblToday.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="lblToday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblToday.Name" xml:space="preserve">
+    <value>lblToday</value>
+  </data>
+  <data name="&gt;&gt;lblToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblToday.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblToday.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="btnCalendarCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCalendarCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 194</value>
+  </data>
+  <data name="btnCalendarCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 23</value>
+  </data>
+  <data name="btnCalendarCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="btnCalendarCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarCancel.Name" xml:space="preserve">
+    <value>btnCalendarCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarCancel.Type" xml:space="preserve">
+    <value>AATM.BControls.CButton, BControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarCancel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnCalendarOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCalendarOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 194</value>
+  </data>
+  <data name="btnCalendarOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 23</value>
+  </data>
+  <data name="btnCalendarOk.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="btnCalendarOk.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarOk.Name" xml:space="preserve">
+    <value>btnCalendarOk</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarOk.Type" xml:space="preserve">
+    <value>AATM.BControls.CButton, BControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarOk.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCalendarOk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ShapeContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ShapeContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <metadata name="LineShape4.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>224, 0, 0, 224</value>
+  </metadata>
+  <metadata name="LineShape4.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>224, 0</value>
+  </metadata>
+  <metadata name="LineShape4.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 224</value>
+  </metadata>
+  <data name="LineShape4.BorderWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="LineShape4.X1" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="LineShape4.X2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="LineShape4.Y1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape4.Y2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <metadata name="LineShape3.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0, 0, 224</value>
+  </metadata>
+  <metadata name="LineShape3.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <metadata name="LineShape3.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 224</value>
+  </metadata>
+  <data name="LineShape3.BorderWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="LineShape3.X1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape3.X2" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape3.Y1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape3.Y2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <metadata name="LineShape2.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 224, 224, 0</value>
+  </metadata>
+  <metadata name="LineShape2.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 224</value>
+  </metadata>
+  <metadata name="LineShape2.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>224, 0</value>
+  </metadata>
+  <data name="LineShape2.BorderWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="LineShape2.X1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape2.X2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="LineShape2.Y1" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="LineShape2.Y2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <metadata name="LineShape1.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0, 224, 0</value>
+  </metadata>
+  <metadata name="LineShape1.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <metadata name="LineShape1.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>224, 0</value>
+  </metadata>
+  <data name="LineShape1.BorderWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="LineShape1.X1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape1.X2" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="LineShape1.Y1" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LineShape1.Y2" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ShapeContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 225</value>
+  </data>
+  <data name="ShapeContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="&gt;&gt;ShapeContainer1.Name" xml:space="preserve">
+    <value>ShapeContainer1</value>
+  </data>
+  <data name="&gt;&gt;ShapeContainer1.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.ShapeContainer, Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;ShapeContainer1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ShapeContainer1.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>225, 225</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>Manual</value>
+  </data>
+  <data name="&gt;&gt;LineShape4.Name" xml:space="preserve">
+    <value>LineShape4</value>
+  </data>
+  <data name="&gt;&gt;LineShape4.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;LineShape3.Name" xml:space="preserve">
+    <value>LineShape3</value>
+  </data>
+  <data name="&gt;&gt;LineShape3.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;LineShape2.Name" xml:space="preserve">
+    <value>LineShape2</value>
+  </data>
+  <data name="&gt;&gt;LineShape2.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;LineShape1.Name" xml:space="preserve">
+    <value>LineShape1</value>
+  </data>
+  <data name="&gt;&gt;LineShape1.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CCalendarGregorian</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>AATM.CControls.CForm, CControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>

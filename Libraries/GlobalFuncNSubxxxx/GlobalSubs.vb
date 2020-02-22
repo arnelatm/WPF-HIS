@@ -1,0 +1,114 @@
+﻿Imports System.Globalization
+Imports System.Reflection
+Imports System.Text.RegularExpressions
+Imports System.Windows.Forms
+
+Public Module GlobalSubs
+
+    Public Sub SetPropertyValue(obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
+        Dim objType As Type = obj.GetType()
+        Dim pInfo As PropertyInfo = objType.GetProperty(propName,
+                                                        BindingFlags.IgnoreCase Or BindingFlags.IgnoreCase Or
+                                                        BindingFlags.Public Or BindingFlags.Instance)
+        'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
+        Try
+            'If  objType.FullName = "AATM.CCustomControls.CCustomDateTimePicker" Then   
+            '   Debugger.Break 
+            'End If
+            pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+        Catch ex As Exception
+            If Not ignoreException Then
+                MessageBox.Show("Invalid property " & propName & " in object " & obj.Name)
+                Throw
+                ' not set
+            End If
+        End Try
+    End Sub
+
+
+    'Public Function InvokeMethod(ByVal obj As Object, ByVal methodName As String, ByVal propValue As Object, ByVal ParamArray arguments() As Object) As Integer
+    '    Dim objType As Type = obj.GetType()
+    '    Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(methodName, Reflection.BindingFlags.IgnoreCase Or Reflection.BindingFlags.IgnoreCase Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
+
+    '    Try
+    '        'obj.GetType.InvokeMember(methodName, Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.CreateInstance , nothing, obj, arguments  )
+    '        'obj.GetType.InvokeMember(methodName, Reflection.BindingFlags.InvokeMethod or Reflection.BindingFlags.Public Or Reflection.BindingFlags.FlattenHierarchy , nothing, obj, arguments  )
+    '        Dim obj2 As Object = Activator.CreateInstance(obj)
+    '        obj2.GetType.InvokeMember("UpdateProfitCenter", Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.IgnoreCase, Nothing, obj2, arguments)
+
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("Invalid property " & methodName & " in object " & obj.Name)
+    '        Throw ex
+    '        ' not set
+    '        Dim i = 0
+    '    End Try
+    'End Function
+
+    'Private Const InvokePublicMethod As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.InvokeMethod      
+
+    'Public Function InvokeFunction(ByVal obj As Object, ByVal sName As String, ByVal ParamArray arguments() As Object) As Object
+
+    '    Return obj.GetType().InvokeMember(sName, InvokePublicMethod, Nothing, obj , Arguments)
+
+    'End Function
+
+
+    Public Sub MapObject(ByRef source As Object, ByRef target As Object)
+        Dim propList = target.GetType().GetProperties()
+        For Each t As PropertyInfo In propList
+            For Each s As PropertyInfo In source.GetType().GetProperties()
+                If t.SetMethod IsNot Nothing AndAlso t.Name.ToLower() = s.Name.ToLower() Then
+                    'If t.Name.ToLower() = "parentidno" Then
+                    '    Dim x As Integer = 0
+                    'End If
+                    t.SetValue(target, s.GetValue(source))
+                    Exit For
+                End If
+            Next
+        Next
+    End Sub
+
+    'Public Sub MapData(OF TS, TT)(ByRef source As TS, ByRef target As TT) 
+    '    Dim propertyInfos = target.GetType().GetProperties()
+    '    For Each propertyInfo As System.Reflection.PropertyInfo In propertyInfos
+    '        For Each s As System.Reflection.PropertyInfo In source.GetType().GetProperties()
+    '            If propertyInfo.Name.ToLower() = s.Name.ToLower() Then
+    '                propertyInfo.SetValue(target, s.GetValue(Source))
+    '                Exit For
+    '            End If
+    '        Next
+    '    Next           
+    'End Sub
+
+    Public Sub MapObject2(ByRef source As Object, target As Object)
+        Dim propList = target.GetType().GetProperties()
+        For Each t As PropertyInfo In propList
+            For Each s As PropertyInfo In source.GetType().GetProperties()
+                If t.Name.ToLower() = s.Name.ToLower() Then
+                    t.SetValue(target, s.GetValue(source))
+                    Exit For
+                End If
+            Next
+        Next
+    End Sub
+
+    Public Enum CalendarToUse
+        Gregorian = 0
+        Hijri = 1
+        UmAlQura = 2
+    End Enum
+
+    Public Sub Caller(classType As Type, classMethod As String, ByRef methodParameter As Object)
+        ' Get a type from the string 
+        'Dim type As Type = Type.GetType(className)
+        ' Create an instance of that type
+        'Dim obj As Object = Activator.CreateInstance(classType)
+        '' Retrieve the method you are looking for
+        'Dim methodInfo As MethodInfo = type.GetMethod(classMethod)
+        '' Invoke the method on the instance we created above
+        'methodInfo.Invoke(obj, methodParameter)
+    End Sub
+End Module
+
+
