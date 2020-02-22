@@ -11,22 +11,17 @@
 Option Strict On
 Option Explicit On
 
-Imports System.CodeDom.Compiler
-Imports System.ComponentModel
-Imports System.ComponentModel.Design
-Imports System.Configuration
-Imports System.Runtime.CompilerServices
 
 Namespace My
-
-    <CompilerGenerated(),
-     GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0"),
-     EditorBrowsable(EditorBrowsableState.Advanced)>
+    
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0"),  _
+     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
-        Inherits ApplicationSettingsBase
-
-        Private Shared defaultInstance As MySettings = CType(Synchronized(New MySettings()), MySettings)
-
+        Inherits Global.System.Configuration.ApplicationSettingsBase
+        
+        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
+        
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
     Private Shared addedHandler As Boolean
@@ -41,10 +36,10 @@ Namespace My
     End Sub
 #End If
 #End Region
-
+        
         Public Shared ReadOnly Property [Default]() As MySettings
             Get
-
+                
 #If _MyType = "WindowsForms" Then
                If Not addedHandler Then
                     SyncLock addedHandlerLockObject
@@ -58,44 +53,44 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-
-        <UserScopedSetting(),
-         DebuggerNonUserCode(),
-         DefaultSettingValue("Add")>
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Add")>  _
         Public Property CaptionAdd() As String
             Get
-                Return CType(Me("CaptionAdd"), String)
+                Return CType(Me("CaptionAdd"),String)
             End Get
             Set
-                Me("CaptionAdd") = Value
+                Me("CaptionAdd") = value
             End Set
         End Property
-
-        <UserScopedSetting(),
-         DebuggerNonUserCode(),
-         DefaultSettingValue("Delete")>
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Delete")>  _
         Public Property CaptionDelete() As String
             Get
-                Return CType(Me("CaptionDelete"), String)
+                Return CType(Me("CaptionDelete"),String)
             End Get
             Set
-                Me("CaptionDelete") = Value
+                Me("CaptionDelete") = value
             End Set
         End Property
     End Class
 End Namespace
 
 Namespace My
-
-    <HideModuleName(),
-     DebuggerNonUserCode(),
-     CompilerGenerated()>
+    
+    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
-
-        <HelpKeyword("My.Settings")>
-        Friend ReadOnly Property Settings() As MySettings
+        
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+        Friend ReadOnly Property Settings() As Global.AATM.PresentationLayer.Forms.My.MySettings
             Get
-                Return MySettings.Default
+                Return Global.AATM.PresentationLayer.Forms.My.MySettings.Default
             End Get
         End Property
     End Module

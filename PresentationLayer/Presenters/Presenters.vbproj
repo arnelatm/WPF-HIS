@@ -109,9 +109,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BusinessLayer\BusinessObject\BusinessObject.vbproj">
-      <Project>{8225273E-6618-4B8C-8629-F8A1CA857F01}</Project>
-      <Name>BusinessObject</Name>
+    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
+      <Name>BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>

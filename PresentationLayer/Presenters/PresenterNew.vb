@@ -3,7 +3,7 @@ Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Windows.Forms
-Imports AATM.BusinessLayer.BusinessObject
+Imports AATM.BusinessLayer
 Imports AATM.Libraries
 Imports AATM.LIBRARIES.GlobalFuncNSub
 Imports AATM.LIBRARIES.Languages

@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Threading
 Imports System.Transactions
 Imports System.Windows.Forms
+Imports AATM.Libraries
 Imports AATM.LIBRARIES.CBaseControlsLibrary
 Imports AATM.LIBRARIES.CustomControlsLibrary
 Imports AATM.LIBRARIES.GlobalFuncNSub

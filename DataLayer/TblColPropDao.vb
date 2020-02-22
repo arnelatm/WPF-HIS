@@ -1,4 +1,4 @@
-﻿Imports AATM.HIS.DataLayer.AdoNet
+﻿Imports AATM.DataLayer.AdoNet
 
 ' Data access object for TblColProp
 ' ** DAO Pattern
@@ -28,7 +28,7 @@ Public Class TblColPropDao
         New TblColProp() With {
         .FldName = Extensions.AsString(reader("FldName")),
         .FldType = Extensions.AsString(reader("FldType")),
-        .MaxLength = Extensions.AsInt (Of Long)(reader("MaxLength")),
+        .MaxLength = Extensions.AsInt(Of Long)(reader("MaxLength")),
         .IsNullable = Extensions.AsBool(reader("IsNullable")),
         .IsIdentity = Extensions.AsBool(reader("IsIdentity"))
         }

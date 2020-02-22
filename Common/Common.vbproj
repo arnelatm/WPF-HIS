@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1B81E19-89AC-4859-BE75-CB05C7BE5105}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AATM.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Common.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Common.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessLayer\Branch.vb" />
+    <Compile Include="BusinessLayer\CostCenter.vb" />
+    <Compile Include="BusinessLayer\Country.vb" />
+    <Compile Include="BusinessLayer\Department.vb" />
+    <Compile Include="BusinessLayer\GroupAccess.vb" />
+    <Compile Include="BusinessLayer\Login.vb" />
+    <Compile Include="BusinessLayer\OriginalMessages.vb" />
+    <Compile Include="BusinessLayer\PhoneType.vb" />
+    <Compile Include="BusinessLayer\ProfitCenter.vb" />
+    <Compile Include="BusinessLayer\Religion.vb" />
+    <Compile Include="BusinessLayer\RevenueGroup.vb" />
+    <Compile Include="BusinessLayer\Salt.vb" />
+    <Compile Include="BusinessLayer\SecurityGroup.vb" />
+    <Compile Include="BusinessLayer\SecurityObject.vb" />
+    <Compile Include="BusinessLayer\TranslatedMessages.vb" />
+    <Compile Include="BusinessLayer\User.vb" />
+    <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CostCenterDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactory.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactoryOld.vb" />
+    <Compile Include="DataLayer\AdoNet\DepartmentDao.vb" />
+    <Compile Include="DataLayer\AdoNet\GroupAccessDao.vb" />
+    <Compile Include="DataLayer\AdoNet\LoginDao.vb" />
+    <Compile Include="DataLayer\AdoNet\LoginService.vb" />
+    <Compile Include="DataLayer\AdoNet\OriginalMessagesDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PhoneTypeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ProfitCenterDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ReligionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\RevenueGroupDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SaltDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SecurityGroupDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SecurityObjectDao.vb" />
+    <Compile Include="DataLayer\AdoNet\TranslatedMessagesDao.vb" />
+    <Compile Include="DataLayer\AdoNet\UserDao.vb" />
+    <Compile Include="DataLayer\DaoFactories.vb" />
+    <Compile Include="DataLayer\DaoFactoriesOld.vb" />
+    <Compile Include="DataLayer\IBranchDao.vb" />
+    <Compile Include="DataLayer\ICostCenterDao.vb" />
+    <Compile Include="DataLayer\ICountryDao.vb" />
+    <Compile Include="DataLayer\IDaoFactory.vb" />
+    <Compile Include="DataLayer\IDaoFactoryOld.vb" />
+    <Compile Include="DataLayer\IDepartmentDao.vb" />
+    <Compile Include="DataLayer\IGroupAccesDao.vb" />
+    <Compile Include="DataLayer\ILoginDao.vb" />
+    <Compile Include="DataLayer\ILogoutDao..vb" />
+    <Compile Include="DataLayer\IOriginalMessagesDao.vb" />
+    <Compile Include="DataLayer\IPhoneTypeDao.vb" />
+    <Compile Include="DataLayer\IProfitCenterDao.vb" />
+    <Compile Include="DataLayer\IReligionDao.vb" />
+    <Compile Include="DataLayer\IRevenueGroupDao.vb" />
+    <Compile Include="DataLayer\ISaltDao.vb" />
+    <Compile Include="DataLayer\ISecurityGroupDao.vb" />
+    <Compile Include="DataLayer\ISecurityObjectDao.vb" />
+    <Compile Include="DataLayer\ITranslatedMessagesDao.vb" />
+    <Compile Include="DataLayer\IUserDao.vb" />
+    <Compile Include="LocalizedEnumConverter.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Forms\BranchEntryTV.Designer.vb">
+      <DependentUpon>BranchEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\BranchEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CostCenterEntry.Designer.vb">
+      <DependentUpon>CostCenterEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CostCenterEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CountryEntryTv.Designer.vb">
+      <DependentUpon>CountryEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CountryEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DepartmentEntryTv.Designer.vb">
+      <DependentUpon>DepartmentEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DepartmentEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\FormAbout.designer.vb">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\FormAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\FormLogin.designer.vb">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\FormLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginEntry.Designer.vb">
+      <DependentUpon>LoginEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginEntryError.Designer.vb">
+      <DependentUpon>LoginEntryError.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginEntryError.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginFormNew.Designer.vb">
+      <DependentUpon>LoginFormNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\LoginFormNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\OriginalMessagesEntryTv.Designer.vb">
+      <DependentUpon>OriginalMessagesEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\OriginalMessagesEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PhoneTypeEntryTV.Designer.vb">
+      <DependentUpon>PhoneTypeEntryTV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PhoneTypeEntryTV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ProfitCenterEntryTv.Designer.vb">
+      <DependentUpon>ProfitCenterEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ProfitCenterEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ReligionEntryTv.Designer.vb">
+      <DependentUpon>ReligionEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ReligionEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.Designer.vb">
+      <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.Designer.vb">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.Designer.vb">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.Designer.vb">
+      <DependentUpon>TranslatedMessagesEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.Designer.vb">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Models\BranchModel.vb" />
+    <Compile Include="PresentationLayer\Models\Class1.vb" />
+    <Compile Include="PresentationLayer\Models\CostCenterModel.vb" />
+    <Compile Include="PresentationLayer\Models\CountryModel.vb" />
+    <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
+    <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\IModelCommonOld.vb" />
+    <Compile Include="PresentationLayer\Models\LoginModel.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCommonOld.vb" />
+    <Compile Include="PresentationLayer\Models\OriginalMessageModel.vb" />
+    <Compile Include="PresentationLayer\Models\PhoneTypeModel.vb" />
+    <Compile Include="PresentationLayer\Models\ProfitCenterModel.vb" />
+    <Compile Include="PresentationLayer\Models\ReligionModel.vb" />
+    <Compile Include="PresentationLayer\Models\RevenueGroupModel.vb" />
+    <Compile Include="PresentationLayer\Models\SaltModel.vb" />
+    <Compile Include="PresentationLayer\Models\SecurityGroupModel.vb" />
+    <Compile Include="PresentationLayer\Models\SecurityObjectModel.vb" />
+    <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
+    <Compile Include="PresentationLayer\Models\UserControl1.Designer.vb" />
+    <Compile Include="PresentationLayer\Models\UserControl1.vb" />
+    <Compile Include="PresentationLayer\Models\UserModel.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CommonPresenterNew.vb" />
+    <Compile Include="PresentationLayer\Presenters\CommonPresenterOld.vb" />
+    <Compile Include="PresentationLayer\Presenters\CostCenterPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CountryPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DepartmentPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GroupAccessesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\LoginPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\OriginalMessagesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PhoneTypePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ProfitCenterPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ReligionPresener.vb" />
+    <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SaltPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityGroupPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityGroupsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityObjectPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityObjectsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\IBranchView.vb" />
+    <Compile Include="PresentationLayer\Views\ICostCenterView.vb" />
+    <Compile Include="PresentationLayer\Views\ICountryView.vb" />
+    <Compile Include="PresentationLayer\Views\IDepartmentView.vb" />
+    <Compile Include="PresentationLayer\Views\IGroupAccessesView.vb" />
+    <Compile Include="PresentationLayer\Views\ILoginView.vb" />
+    <Compile Include="PresentationLayer\Views\IMainView.vb" />
+    <Compile Include="PresentationLayer\Views\IOriginalMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\IPhoneTypeView.vb" />
+    <Compile Include="PresentationLayer\Views\IProfitCenterView.vb" />
+    <Compile Include="PresentationLayer\Views\IReligionView.vb" />
+    <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\ISaltView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityGroupsView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityObjectsView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityObjectView.vb" />
+    <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\ITranslatedMessagesView1.vb" />
+    <Compile Include="PresentationLayer\Views\IUsersView.vb" />
+    <Compile Include="PresentationLayer\Views\IUserView.vb" />
+    <Compile Include="ServiceLayer\ActionServices\BranchService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\CostCenterService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\CountryService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\DepartmentService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\GroupAccessService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\ICommonService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\IServiceCommon.vb" />
+    <Compile Include="ServiceLayer\ActionServices\IServiceCommonOld.vb" />
+    <Compile Include="ServiceLayer\ActionServices\LoginService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\LogoutService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\OriginalMessagesService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\PhoneTypeService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\ProfitCenterService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\ReligionService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\RevenueGroupService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\SaltService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\SecurityGroupService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\SecurityObjectService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\ServiceCommon.vb" />
+    <Compile Include="ServiceLayer\ActionServices\ServiceCommonOld.vb" />
+    <Compile Include="ServiceLayer\ActionServices\TranslatedMessagesService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\UserService.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTv.ar-SA.resx">
+      <DependentUpon>BranchEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTv.ar.resx">
+      <DependentUpon>BranchEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTV.resx">
+      <DependentUpon>BranchEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\CostCenterEntry.resx">
+      <DependentUpon>CostCenterEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\CountryEntryTv.resx">
+      <DependentUpon>CountryEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DepartmentEntryTv.resx">
+      <DependentUpon>DepartmentEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.ar-SA.resx">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.ar-SA.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.ar.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.en-GB.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\LoginEntry.resx">
+      <DependentUpon>LoginEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\LoginEntryError.resx">
+      <DependentUpon>LoginEntryError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\LoginFormNew.resx">
+      <DependentUpon>LoginFormNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\OriginalMessagesEntryTv.resx">
+      <DependentUpon>OriginalMessagesEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\PhoneTypeEntryTV.resx">
+      <DependentUpon>PhoneTypeEntryTV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\ProfitCenterEntryTv.resx">
+      <DependentUpon>ProfitCenterEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\ReligionEntryTv.resx">
+      <DependentUpon>ReligionEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\RevenueGroupEntryTv.resx">
+      <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupEntryTv.resx">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.resx">
+      <DependentUpon>TranslatedMessagesEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\UserEntryTv.resx">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.vbproj">
+      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58F5EC33-2974-4823-AB62-1D4E5B3EF152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
+      <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
+      <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
+      <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
+      <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
+      <Name>LocalizationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
+      <Project>{51DA927A-505F-49CF-9768-9E401219B91C}</Project>
+      <Name>Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Models\Models.vbproj">
+      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Presenters\Presenters.vbproj">
+      <Project>{021A8A1A-B69A-4254-9081-12357F20C01B}</Project>
+      <Name>Presenters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Views\Views.vbproj">
+      <Project>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</Project>
+      <Name>Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicesLayer\ServicesLayer.vbproj">
+      <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
+      <Name>ServicesLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

@@ -1,0 +1,170 @@
+﻿Imports AATM.DataLayer.AdoNet
+Imports AATM.Accounts.BusinessLayer
+
+Namespace DataLayer.AdoNet
+    ' Data access object for Employee
+    ' ** DAO Pattern
+
+    Public Class EmployeeDao
+        Inherits CommonDaoOld
+        Implements IEmployeeDao
+
+        Private Shared ReadOnly Db As New Db()
+
+        Public Sub New()
+            DbCommon = Db
+        End Sub
+
+        Public Function GetRecordById(idNo As Integer) As Employee Implements IEmployeeDao.GetRecordById
+            Dim sql As String =
+                    " SELECT IDNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
+                    " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active" &
+                    "   FROM [Employee]" &
+                    " WHERE IDNo = @IDNo"
+            Dim params() As Object = {"@IDNo", idNo}
+            'Dim x As Employee
+            'x = Db.Read(sql, Make, params).FirstOrDefault()
+            'Return x
+            Return Db.Read(sql, Make, params).FirstOrDefault()
+        End Function
+
+        Public Function GetAll(Optional sortExpression As String = "EmployeeName ASC") As List(Of Employee) _
+            Implements IEmployeeDao.GetAll
+            Dim sql As String =
+                    " SELECT IDNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
+                    "   FROM [Employee] order by " & sortExpression
+            Return Db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IEmployeeDao.UpdateRecord
+            Dim sql As String =
+                    " UPDATE [Employee]" &
+                    "   SET EmployeeCode = @EmployeeCode," &
+                    "       Title = @Title," &
+                    "       EmployeeName = @EmployeeName," &
+                    "       EmployeeNameAra = @EmployeeNameAra," &
+                    "       Gender = @Gender," &
+                    "       BirthDate = @BirthDate," &
+                    "       MaritalStatus = @MaritalStatus," &
+                    "       NationalityCode = @NationalityCode," &
+                    "       ReligionIdNo = @ReligionIdNo," &
+                    "       NationalIdNo = @NationalIdNo," &
+                    "       Street = @Street," &
+                    "       District = @District," &
+                    "       TownCity = @TownCity," &
+                    "       ProvinceState = @ProvinceState," &
+                    "       CountryCode = @CountryCode," &
+                    "       PoBox = @PoBox," &
+                    "       ZipCode = @ZipCode," &
+                    "       Phone1 = @Phone1," &
+                    "       Phone2 = @Phone2," &
+                    "       Email = @Email," &
+                    "       DepartmentIdNo = @DepartmentIdNo," &
+                    "       DesignationIdNo = @DesignationIdNo," &
+                    "       HiredDate = @HiredDate," &
+                    "       ReleasedDate = @ReleasedDate," &
+                    "       ArAccountIdNo = @ArAccountIdNo," &
+                    "       BankIdNo = @BankIdNo," &
+                    "       BankAccountNo = @BankAccountNo," &
+                    "       Iban = @Iban," &
+                    "       Notes = @Notes," &
+                    "       OpeningBalance = @OpeningBalance," &
+                    "       Balance = @Balance," &
+                    "       Active = @Active" &
+                    "  WHERE IDNo = @IDNo"
+
+            Return Db.Update(sql, Take(employee))
+        End Function
+
+        Public Function AddRecord(ByRef employee As Employee) As Integer Implements IEmployeeDao.AddRecord
+            Dim sql As String =
+                    " INSERT INTO [Employee] " &
+                    "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
+                    "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
+                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active)" &
+                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, @" &
+                    "         ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, @" &
+                    "         ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @Active)"
+            Return Db.Insert(sql, Take(employee))
+        End Function
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, Employee) =
+                                    Function(reader) _
+            New Employee(False, Nothing) With {
+            .IdNo = Extensions.AsId(reader("IDNo")),
+            .EmployeeCode = Extensions.AsString(reader("EmployeeCode")),
+            .Title = Extensions.AsString(reader("Title")),
+            .EmployeeName = Extensions.AsString(reader("EmployeeName")),
+            .EmployeeNameAra = Extensions.AsString(reader("EmployeeNameAra")),
+            .Gender = Extensions.AsString(reader("Gender")),
+            .BirthDate = Extensions.AsDate(reader("BirthDate")),
+            .MaritalStatus = Extensions.AsString(reader("MaritalStatus")),
+            .NationalityCode = Extensions.AsString(reader("NationalityCode")),
+            .ReligionIdNo = Extensions.AsNullableInt(Of Integer)(reader("ReligionIdNo")),
+            .NationalIdNo = Extensions.AsString(reader("NationalIdNo")),
+            .Street = Extensions.AsString(reader("Street")),
+            .District = Extensions.AsString(reader("District")),
+            .TownCity = Extensions.AsString(reader("TownCity")),
+            .ProvinceState = Extensions.AsString(reader("ProvinceState")),
+            .CountryCode = Extensions.AsString(reader("CountryCode")),
+            .PoBox = Extensions.AsString(reader("PoBox")),
+            .ZipCode = Extensions.AsString(reader("ZipCode")),
+            .Phone1 = Extensions.AsString(reader("Phone1")),
+            .Phone2 = Extensions.AsString(reader("Phone2")),
+            .Email = Extensions.AsString(reader("Email")),
+            .DepartmentIdNo = Extensions.AsNullableInt(Of Integer)(reader("DepartmentIdNo")),
+            .DesignationIdNo = Extensions.AsNullableInt(Of Integer)(reader("DesignationIdNo")),
+            .HiredDate = Extensions.AsDate(reader("HiredDate")),
+            .ReleasedDate = Extensions.AsDate(reader("ReleasedDate")),
+            .ArAccountIdNo = Extensions.AsInt(Of Integer)(reader("ArAccountIdNo")),
+            .BankIdNo = Extensions.AsInt(Of Short)(reader("BankIdNo")),
+            .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
+            .Iban = Extensions.AsString(reader("Iban")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
+            .Balance = Extensions.AsDecimal(reader("Balance")),
+            .Active = Extensions.AsBool(reader("Active"))
+            }
+
+        Private Function Take(ByRef employee As Employee) As Object()
+            Return New Object() {
+                                    "@IDNo", employee.IdNo,
+                                    "@EmployeeCode", employee.EmployeeCode,
+                                    "@Title", employee.Title,
+                                    "@EmployeeName", employee.EmployeeName,
+                                    "@EmployeeNameAra", employee.EmployeeNameAra,
+                                    "@Gender", employee.Gender,
+                                    "@BirthDate", employee.BirthDate,
+                                    "@MaritalStatus", employee.MaritalStatus,
+                                    "@NationalityCode", employee.NationalityCode,
+                                    "@ReligionIdNo", employee.ReligionIdNo,
+                                    "@NationalIdNo", employee.NationalIdNo,
+                                    "@Street", employee.Street,
+                                    "@District", employee.District,
+                                    "@TownCity", employee.TownCity,
+                                    "@ProvinceState", employee.ProvinceState,
+                                    "@CountryCode", employee.CountryCode,
+                                    "@PoBox", employee.PoBox,
+                                    "@ZipCode", employee.ZipCode,
+                                    "@Phone1", employee.Phone1,
+                                    "@Phone2", employee.Phone2,
+                                    "@Email", employee.Email,
+                                    "@DepartmentIdNo", employee.DepartmentIdNo,
+                                    "@DesignationIdNo", employee.DesignationIdNo,
+                                    "@HiredDate", employee.HiredDate,
+                                    "@ReleasedDate", employee.ReleasedDate,
+                                    "@ArAccountIdNo", employee.ArAccountIdNo,
+                                    "@BankIdNo", employee.BankIdNo,
+                                    "@BankAccountNo", employee.BankAccountNo,
+                                    "@Iban", employee.Iban,
+                                    "@Notes", employee.Notes,
+                                    "@OpeningBalance", employee.OpeningBalance,
+                                    "@Balance", employee.Balance,
+                                    "@Active", employee.Active
+                                }
+        End Function
+
+    End Class
+
+End Namespace

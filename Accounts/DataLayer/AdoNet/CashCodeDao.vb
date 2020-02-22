@@ -1,0 +1,113 @@
+﻿Imports AATM.DataLayer.AdoNet
+Imports AATM.Accounts.BusinessLayer
+
+Namespace DataLayer.AdoNet
+    ' Data access object for CashCode
+    ' ** DAO Pattern
+
+    Public Class CashCodeDao
+        Implements ICashCodeDao
+
+        Private Shared ReadOnly Db As New Db()
+
+        Public Function GetRecordById(idNo As Integer) As CashCode Implements ICashCodeDao.GetRecordById
+            Dim sql As String =
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "BankChargesAccountIdNo," &
+                    "BankChargesVatAccountIdNo," &
+                    "CashCode," &
+                    "CashName," &
+                    "CashNameAra," &
+                    "IdNo," &
+                    "Rate," &
+                    " FROM [CashCode]" &
+                    " WHERE IDNo = @IDNo"
+            Dim params() As Object = {"@IDNo", idNo}
+            Dim x = Db.Read(sql, Make, params).FirstOrDefault()
+            Return x
+        End Function
+
+        Public Function GetAll(Optional sortExpression As String = "CashName ASC") As List(Of CashCode) _
+            Implements ICashCodeDao.GetAll
+            Dim sql As String = " SELECT " &
+                    "AccountIdNo," &
+                    "BankChargesAccountIdNo," &
+                    "BankChargesVatAccountIdNo," &
+                    "CashCode," &
+                    "CashName," &
+                    "CashNameAra," &
+                    "IdNo, " &
+                    "Rate" &
+                    " FROM [CashCode] order by CashName"
+            Return Db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function UpdateRecord(ByRef cashCode As CashCode) As Integer Implements ICashCodeDao.UpdateRecord
+            Dim sql As String =
+                    "UPDATE [CashCode] SET " &
+                    "AccountIdNo = @AccountIdNo," &
+                    "BankChargesAccountIdNo = @BankChargesAccountIdNo," &
+                    "BankChargesVatAccountIdNo = @BankChargesVatAccountIdNo," &
+                    "CashCode = @CashCode," &
+                    "CashName = @CashName," &
+                    "CashNameAra = @CashNameAra," &
+                    "IdNo = @IdNo, " &
+                    "Rate = @Rate" &
+                    " WHERE IDNo = @IDNo"
+            Return Db.Update(sql, Take(cashCode))
+        End Function
+
+        Public Function AddRecord(ByRef cashCode As CashCode) As Integer Implements ICashCodeDao.AddRecord
+            Dim sql As String =
+                    "INSERT INTO [CashCode] (" &
+                    "AccountIdNo," &
+                    "BankChargesAccountIdNo," &
+                    "BankChargesVatAccountIdNo," &
+                    "CashCode," &
+                    "CashName," &
+                    "CashNameAra," &
+                    "IdNo, " &
+                    "Rate" &
+                    ") VALUES (" &
+                    "@AccountIdNo," &
+                    "@BankChargesAccountIdNo," &
+                    "@BankChargesVatAccountIdNo," &
+                    "@CashCode," &
+                    "@CashName," &
+                    "@CashNameAra," &
+                    "@IdNo, " &
+                    "@Rate" &
+                    ")"
+            Return Db.Insert(sql, Take(cashCode))
+        End Function
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, CashCode) =
+                                    Function(reader) _
+            New CashCode() With {
+            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .BankChargesAccountIdNo = Extensions.AsInt(Of Integer)(reader("BankChargesAccountIdNo")),
+            .BankChargesVatAccountIdNo = Extensions.AsInt(Of Integer)(reader("BankChargesVatAccountIdNo")),
+            .CashCode = Extensions.AsString(reader("CashCode")),
+            .CashName = Extensions.AsString(reader("CashName")),
+            .CashNameAra = Extensions.AsString(reader("CashNameAra")),
+            .IdNo = Extensions.AsId(reader("IDNo")),
+            .Rate = Extensions.AsDecimal(reader("Rate"))
+            }
+
+        Private Function Take(cashCode As CashCode) As Object()
+            Return New Object() {
+                                    "@AccountIdNo", cashCode.AccountIdNo,
+                                    "@BankChargesAccountIdNo" = cashCode.BankChargesAccountIdNo,
+                                    "@BankChargesVatAccountIdNo" = cashCode.BankChargesVatAccountIdNo,
+                                    "@CashCode", cashCode.CashCode,
+                                    "@CashName", cashCode.CashName,
+                                    "@CashNameAra", cashCode.CashNameAra,
+                                    "@IDNo", cashCode.IdNo,
+                                    "@Rate", cashCode.Rate
+                                }
+        End Function
+
+    End Class
+
+End Namespace

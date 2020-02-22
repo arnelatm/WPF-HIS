@@ -1,8 +1,7 @@
-﻿Imports AATM.HIS.DataLayer
+﻿Imports AATM.DataLayer
 
 Namespace Services
-
-    Interface IService
+    Public Interface IService
 
         'Function GetRecordById(tableName As String, idNo As Integer)
         Function AddRecord(ByRef model As Object) As Integer

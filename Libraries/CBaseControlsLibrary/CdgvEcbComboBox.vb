@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
+Imports AATM.Libraries.CustomComboBox
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvEcbComboBox

@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Threading
 Imports System.Transactions
 Imports System.Windows.Forms
+Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -447,7 +448,7 @@ Public Class BfEntry
         AddMode = False
         UpdateButtonDisplays(False, False)
         DisplayView()
-        Me.Refresh()
+        Refresh()
         UndoMode = False
     End Sub
 

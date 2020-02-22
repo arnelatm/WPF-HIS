@@ -1,7 +1,7 @@
 ﻿' defines methods to access DefaultFieldValues.
 ' this is a database-independent interface. Implementations are database specific
 ' ** DAO Pattern
-Imports AATM.HIS.BusinessLayer.BusinessObjects
+Imports AATM.BusinessLayer.BusinessObjects
 
 Public Interface IDefaultFieldValueDao
     ' gets a specific DefaultFieldValue

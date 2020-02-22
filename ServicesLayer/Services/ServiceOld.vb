@@ -1,6 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Reflection
-Imports AATM.HIS.DataLayer
+Imports AATM.DataLayer
 
 Namespace Services
 
