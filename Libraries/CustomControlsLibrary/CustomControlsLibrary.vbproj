@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37CA633C-5F75-45E4-BB37-D37DE1B692B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AATM.Libraries.CustomControlsLibrary</RootNamespace>
+    <AssemblyName>CustomControlsLibrary</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CustomControlsLibrary.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CustomControlsLibrary.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HIS\packages\VisualBasic.PowerPacks.Vs.1.0.0\lib\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BFCalendarUmAlQura.Designer.vb">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFCalendarUmAlQura.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BFGregorianCalendar.Designer.vb">
+      <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFGregorianCalendar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CCalendar.Designer.vb">
+      <DependentUpon>CCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCalendar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CCalendarGregorian.Designer.vb">
+      <DependentUpon>CCalendarGregorian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCalendarGregorian.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CCustomDateTimePicker.Designer.vb">
+      <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCustomDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CDtpGregorianDate.Designer.vb">
+      <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDtpGregorianDate.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CDTPHijriDate.Designer.vb">
+      <DependentUpon>CDTPHijriDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDTPHijriDate.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CFindForm.Designer.vb">
+      <DependentUpon>CFindForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFindForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CGDateTimePicker.Designer.vb">
+      <DependentUpon>CGDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CGDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CHijriCalendar.Designer.vb">
+      <DependentUpon>CHijriCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CHijriCalendar.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMonthPicker.Designer.vb">
+      <DependentUpon>CMonthPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CMonthPicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GregorianDates.vb" />
+    <Compile Include="HijriDates.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyTabControl.Designer.vb">
+      <DependentUpon>MyTabControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MyTabControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewTabControl.vb" />
+    <Compile Include="TdpDateTime.designer.vb">
+      <DependentUpon>TdpDateTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TdpDateTime.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TdpDateTimePicker.Designer.vb">
+      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TdpDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tdpDateTimePickerCI.Designer.vb">
+      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tdpDateTimePickerCI.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tdpGregorian.Designer.vb">
+      <DependentUpon>tdpGregorian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tdpGregorian.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TxtComboBox.Designer.vb">
+      <DependentUpon>TxtComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TxtComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BFCalendarUmAlQura.ar-SA.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.ar.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.en-GB.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFGregorianCalendar.resx">
+      <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CCalendar.resx">
+      <DependentUpon>CCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CCalendarGregorian.resx">
+      <DependentUpon>CCalendarGregorian.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CCustomDateTimePicker.resx">
+      <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDtpGregorianDate.resx">
+      <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDTPHijriDate.resx">
+      <DependentUpon>CDTPHijriDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFindForm.resx">
+      <DependentUpon>CFindForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CGDateTimePicker.resx">
+      <DependentUpon>CGDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHijriCalendar.resx">
+      <DependentUpon>CHijriCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMonthPicker.resx">
+      <DependentUpon>CMonthPicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyTabControl.resx">
+      <DependentUpon>MyTabControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TdpDateTime.resx">
+      <DependentUpon>TdpDateTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TdpDateTimePicker.resx">
+      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tdpDateTimePickerCI.resx">
+      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tdpGregorian.resx">
+      <DependentUpon>tdpGregorian.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TxtComboBox.resx">
+      <DependentUpon>TxtComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalResources\GlobalResources.vbproj">
+      <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
+      <Name>GlobalResources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnprevious_ar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar18x18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\downArrow.png" />
+    <None Include="Resources\dropDown.png" />
+    <None Include="Resources\rightarrow.png" />
+    <None Include="Resources\leftarrow.PNG" />
+    <None Include="Resources\leftarrow_ar.bmp" />
+    <None Include="Resources\leftarrow_ar.png" />
+    <None Include="Resources\rightarrow_ar.PNG" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
