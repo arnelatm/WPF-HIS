@@ -1,6 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Reflection
-Imports AATM.HIS.DataLayer
+Imports AATM.DataLayer
 
 Namespace Services
 
@@ -18,16 +18,7 @@ Namespace Services
         Private Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
         Private Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
-        Private _dataDao As Object
-
         Public Property DataDao As Object
-            Set(value As Object)
-                _dataDao = value
-            End Set
-            Get
-                Return _dataDao
-            End Get
-        End Property
 
         Public ReadOnly Property CommonDaoProp
             Get

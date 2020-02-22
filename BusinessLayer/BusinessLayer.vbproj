@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F1004885-D468-41ED-8572-5BA952B9C39E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.HIS.BusinessLayer</RootNamespace>
+    <RootNamespace>AATM.BusinessLayer</RootNamespace>
     <AssemblyName>BusinessLayer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

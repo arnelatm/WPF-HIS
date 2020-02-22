@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{826EE6DC-954A-4C18-9108-EBD592FCB1E8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Accounts</RootNamespace>
+    <RootNamespace>AATM.Accounts</RootNamespace>
     <AssemblyName>Accounts</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
@@ -46,9 +46,16 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -70,6 +77,121 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountStrings.Designer.vb" />
+    <Compile Include="BusinessLayer\AccountReconciliation.vb" />
+    <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
+    <Compile Include="BusinessLayer\ApJournal.vb" />
+    <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\ArJournal.vb" />
+    <Compile Include="BusinessLayer\ArOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Bank.vb" />
+    <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
+    <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
+    <Compile Include="BusinessLayer\CadOiItem.vb" />
+    <Compile Include="BusinessLayer\CashCode.vb" />
+    <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
+    <Compile Include="BusinessLayer\Category.vb" />
+    <Compile Include="BusinessLayer\Chart.vb" />
+    <Compile Include="BusinessLayer\ChequeDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CkdOiItem.vb" />
+    <Compile Include="BusinessLayer\CsrOiItem.vb" />
+    <Compile Include="BusinessLayer\Customer.vb" />
+    <Compile Include="BusinessLayer\Designation.vb" />
+    <Compile Include="BusinessLayer\DistributionScheme.vb" />
+    <Compile Include="BusinessLayer\DistributionSchemeItem.vb" />
+    <Compile Include="BusinessLayer\Employee.vb" />
+    <Compile Include="BusinessLayer\GeneralJournal.vb" />
+    <Compile Include="BusinessLayer\GlLedgerItem.vb" />
+    <Compile Include="BusinessLayer\JournalItem.vb" />
+    <Compile Include="BusinessLayer\PcsOiItem.vb" />
+    <Compile Include="BusinessLayer\PettyCashJournal.vb" />
+    <Compile Include="BusinessLayer\PurchaseItem.vb" />
+    <Compile Include="BusinessLayer\PurchaseJournal.vb" />
+    <Compile Include="BusinessLayer\Reconciled.vb" />
+    <Compile Include="BusinessLayer\SalesCashItem.vb" />
+    <Compile Include="BusinessLayer\SalesJournal.vb" />
+    <Compile Include="BusinessLayer\Supplier.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountReconciliationItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ApJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ArJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ArOpenInvoiceDao.vb" />
+    <Compile Include="DataLayer\AdoNet\BankDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CsroiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactory.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactoryOld.vb" />
+    <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\GeneralJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\GeneralJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PcsOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SalesCashItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SalesJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SalesJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
+    <Compile Include="DataLayer\DaoFactories.vb" />
+    <Compile Include="DataLayer\DaoFactoriesOld.vb" />
+    <Compile Include="DataLayer\IAccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\IAccountReconciliationItemDao.vb" />
+    <Compile Include="DataLayer\IApJournalDao.vb" />
+    <Compile Include="DataLayer\IApOpenInvoiceDao.vb" />
+    <Compile Include="DataLayer\IArJournalDao.vb" />
+    <Compile Include="DataLayer\IArOpenInvoiceDao.vb" />
+    <Compile Include="DataLayer\IBankDao.vb" />
+    <Compile Include="DataLayer\ICadOiItemDao.vb" />
+    <Compile Include="DataLayer\ICashCodeDao.vb" />
+    <Compile Include="DataLayer\ICashDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\ICashReceiptJournalDao.vb" />
+    <Compile Include="DataLayer\ICategoryDao.vb" />
+    <Compile Include="DataLayer\IChartDao.vb" />
+    <Compile Include="DataLayer\IChequeDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\ICkdOiItemDao.vb" />
+    <Compile Include="DataLayer\ICsrOiItemDao.vb" />
+    <Compile Include="DataLayer\ICustomerDao.vb" />
+    <Compile Include="DataLayer\IDaoFactory.vb" />
+    <Compile Include="DataLayer\IDaoFactoryOld.vb" />
+    <Compile Include="DataLayer\IDesignationDao.vb" />
+    <Compile Include="DataLayer\IDistributionSchemeDao.vb" />
+    <Compile Include="DataLayer\IDistributionSchemeItemDao.vb" />
+    <Compile Include="DataLayer\IEmployeeDao.vb" />
+    <Compile Include="DataLayer\IGeneralJournalDao.vb" />
+    <Compile Include="DataLayer\IGlLedgerItemDao.vb" />
+    <Compile Include="DataLayer\IJournaltemDao.vb" />
+    <Compile Include="DataLayer\IPcsOiItemDao.vb" />
+    <Compile Include="DataLayer\IPettyCashJournalDao.vb" />
+    <Compile Include="DataLayer\IPurchaseItemDao.vb" />
+    <Compile Include="DataLayer\IPurchaseJournalDao.vb" />
+    <Compile Include="DataLayer\IReconciledDao.vb" />
+    <Compile Include="DataLayer\ISalesCashItemDao.vb" />
+    <Compile Include="DataLayer\ISalesJournalDao.vb" />
+    <Compile Include="DataLayer\ISupplierDao.vb" />
+    <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -85,14 +207,350 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Forms\AccountReconciliationEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\AccountReconciliationEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ApJournalEntry.designer.vb" />
+    <Compile Include="PresentationLayer\Forms\ApJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ArJournalEntry.designer.vb" />
+    <Compile Include="PresentationLayer\Forms\ArJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\BankEntryScTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\BankEntryScTv.vb" />
+    <Compile Include="PresentationLayer\Forms\BankEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\BankEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\CategoryEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ChartEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\ChartEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DesignationEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\DesignationEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Form1.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\Form1.vb" />
+    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Main.designer.vb" />
+    <Compile Include="PresentationLayer\Forms\Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReportForm.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\APJournalReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\APJournalReportForm.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\ApStatementReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\APSummaryReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\ArStatementReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\ArSummaryReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheetMonthlyReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheetYearlyReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\IncomeStatementMonthlyReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\IncomeStatementYearly.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\TrialBalanceMonthlyReport.vb" />
+    <Compile Include="PresentationLayer\Forms\Reports\TrialBalanceYearlyReport.vb" />
+    <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\SalesJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.Designer.vb" />
+    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
+    <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ApOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\BankModel.vb" />
+    <Compile Include="PresentationLayer\Models\CadOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashCodeModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CategoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\ChartModel.vb" />
+    <Compile Include="PresentationLayer\Models\ChequeDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CkdOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
+    <Compile Include="PresentationLayer\Models\DesignationModel.vb" />
+    <Compile Include="PresentationLayer\Models\DistributionSchemeModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeModel.vb" />
+    <Compile Include="PresentationLayer\Models\GeneralJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\GlLedgerItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\IModelAccounts.vb" />
+    <Compile Include="PresentationLayer\Models\IModelAccountsOld.vb" />
+    <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\ModelAccountReconciliation.vb" />
+    <Compile Include="PresentationLayer\Models\ModelAccountReconciliationItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
+    <Compile Include="PresentationLayer\Models\ModelAccountsOld.vb" />
+    <Compile Include="PresentationLayer\Models\ModelApJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelApJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelApOpenInvoice.vb" />
+    <Compile Include="PresentationLayer\Models\ModelArJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelArJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelArOpenInvoice.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCadOiItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCashCode.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCashDisbursementJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCashDisbursementJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCashReceiptJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCashReceiptJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCategory.vb" />
+    <Compile Include="PresentationLayer\Models\ModelChart.vb" />
+    <Compile Include="PresentationLayer\Models\ModelChequeDisbursementJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelChequeDisbursementJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCkdOiItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCsrOiItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelGeneralJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelGeneralJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPcsOiItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPettyCashJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPettyCashJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPurchaseItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPurchaseJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelPurchaseJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelReconciled.vb" />
+    <Compile Include="PresentationLayer\Models\ModelSalesCashItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelSalesJournal.vb" />
+    <Compile Include="PresentationLayer\Models\ModelSalesJournalItem.vb" />
+    <Compile Include="PresentationLayer\Models\ModelSupplier.vb" />
+    <Compile Include="PresentationLayer\Models\PcsOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\PettyCashJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
+    <Compile Include="PresentationLayer\Models\SaleCashItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountReconciliationItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ArJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CadOiItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashReceiptJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ChequeDisbursementJournalItemPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ChequeDisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CkdOiItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DesignationPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DistributionSchemeItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DistributionSchemePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PcsOiItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SalesCashItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
+    <Compile Include="PresentationLayer\Views\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IArJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IBankView.vb" />
+    <Compile Include="PresentationLayer\Views\IBranchView.vb" />
+    <Compile Include="PresentationLayer\Views\ICadOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICadOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashCodeView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashReceiptJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICategoryView.vb" />
+    <Compile Include="PresentationLayer\Views\IChartView.vb" />
+    <Compile Include="PresentationLayer\Views\IChequeDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICkdOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICkdOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICsrOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICsrOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICustomerView.vb" />
+    <Compile Include="PresentationLayer\Views\IDesignationView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeView.vb" />
+    <Compile Include="PresentationLayer\Views\IEmployeeView.vb" />
+    <Compile Include="PresentationLayer\Views\IGeneralJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IJournalItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IJournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPcsOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IPcsOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPettyCashJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IPurchaseItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPurchaseJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesCashItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesCashItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
+    <Compile Include="ServiceLayer\ActionService\AccountReconciliationItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\AccountReconciliationService.vb" />
+    <Compile Include="ServiceLayer\ActionService\AccountsService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ApJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ApJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ApOpenInvoiceService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ArJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ArJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ArOpenInvoiceService.vb" />
+    <Compile Include="ServiceLayer\ActionService\BankService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CadOiItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CashCodeService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CashDisbursementJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CashDisbursementJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CashReceiptJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CashReceiptJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CategoryService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ChartService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ChequeDisbursementJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ChequeDisbursementJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CkdOiItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CsrOiItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\CustomerService.vb" />
+    <Compile Include="ServiceLayer\ActionService\DesignationService.vb" />
+    <Compile Include="ServiceLayer\ActionService\DistributionSchemeItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\DistributionSchemeService.vb" />
+    <Compile Include="ServiceLayer\ActionService\EmployeeService.vb" />
+    <Compile Include="ServiceLayer\ActionService\GeneralJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\GeneralJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IAccountsService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IAccountsServiceOld.vb" />
+    <Compile Include="ServiceLayer\ActionService\IApJournalService .vb" />
+    <Compile Include="ServiceLayer\ActionService\IArJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ICashDisbursementJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ICashReceiptJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ICategoryService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IChartService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IChequeDisbursementJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IGeneralJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IPettyCashJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IPurchaseItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IPurchaseJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
+    <Compile Include="ServiceLayer\ActionService\IServiceAccountsOld.vb" />
+    <Compile Include="ServiceLayer\ActionService\JournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PcsOiItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PettyCashJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PettyCashJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PurchaseItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PurchaseJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\PurchaseJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ReconciledService.vb" />
+    <Compile Include="ServiceLayer\ActionService\SalesCashItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\SalesJournalItemService.vb" />
+    <Compile Include="ServiceLayer\ActionService\SalesJournalService.vb" />
+    <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
+    <Compile Include="ServiceLayer\ActionService\ServiceAccountsOld.vb" />
+    <Compile Include="ServiceLayer\ActionService\SupplierService.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AccountStrings.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\AccountReconciliationEntry.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\ApJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\ArJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\BankEntryScTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\BankEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CashReceiptJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CategoryEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\ChartEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\CustomerEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DesignationEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\GeneralJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\Main.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\Main.ar.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\Main.en-GB.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\Main.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\PurchaseItemEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\PurchaseJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.ar-SA.resx" />
+    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -104,9 +562,93 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.vbproj">
+      <Project>{b1b81e19-89ac-4859-be75-cb05c7be5105}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.vbproj">
+      <Project>{440c4740-2584-4050-9086-543018eac766}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CustomComboBox\CustomComboBox.csproj">
+      <Project>{78a0ac9e-8e5c-422a-a45a-2bd0035f14e2}</Project>
+      <Name>CustomComboBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CustomControlsLibrary\CustomControlsLibrary.vbproj">
+      <Project>{37ca633c-5f75-45e4-bb37-d37de1b692b1}</Project>
+      <Name>CustomControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\EnumLocalization\EnumLocalization.vbproj">
+      <Project>{efec4547-2f73-4eab-8adc-afaf596f8288}</Project>
+      <Name>EnumLocalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj">
+      <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>
+      <Name>ErrorsAndEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalResources\GlobalResources.vbproj">
+      <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
+      <Name>GlobalResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
+      <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
+      <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
+      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
+      <Project>{63aacd2c-a92e-4cf4-8f4d-49c774e2b1c6}</Project>
+      <Name>LocalizationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Translations\Translations.vbproj">
+      <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
+      <Name>Translations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
+      <Project>{51da927a-505f-49cf-9768-9e401219b91c}</Project>
+      <Name>Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Models\Models.vbproj">
+      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Presenters\Presenters.vbproj">
+      <Project>{021a8a1a-b69a-4254-9081-12357f20c01b}</Project>
+      <Name>Presenters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Views\Views.vbproj">
+      <Project>{4eedc5f0-dca9-4cfb-8926-07d7e5b37fa0}</Project>
+      <Name>Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicesLayer\ServicesLayer.vbproj">
+      <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
+      <Name>ServicesLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

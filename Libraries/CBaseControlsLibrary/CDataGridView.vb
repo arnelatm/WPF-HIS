@@ -2,6 +2,7 @@
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.GlobalResources
 
 Public Class CDataGridView
     Inherits DataGridView
@@ -147,7 +148,7 @@ Public Class CDataGridView
             If GetPropertyValue(parentForm, "EditMode") Or GetPropertyValue(parentForm, "AddMode") Then
                 Dim dgvInsColumn As New DataGridViewImageColumn
                 .Insert(.Count, dgvInsColumn)
-                dgvInsColumn.Image = GlobalResources.SharedResources.Images.InsertRowImage
+                dgvInsColumn.Image = Images.InsertRowImage
                 dgvInsColumn.Width = 30
                 dgvInsColumn.Name = "dgvInsertColumn"
                 dgvInsColumn.HeaderText = "Ins."

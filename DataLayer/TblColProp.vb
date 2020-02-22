@@ -1,8 +1,10 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
+Imports AATM.BusinessLayer
+
 Public Class TblColProp
-    Inherits BusinessLayer.BusinessObject
+    Inherits BusinessObject
 
     ' ** Enterprise Design Pattern: Identity field pattern
 

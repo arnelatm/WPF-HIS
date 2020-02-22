@@ -1,0 +1,24 @@
+﻿Imports AATM.Common.BusinessLayer
+
+Namespace DataLayer
+    ' defines methods to access Users.
+    ' this is a database-independent interface. Implementations are database specific
+    ' ** DAO Pattern
+
+    Public Interface IUserDao
+
+        ' gets a specific User
+        Function GetRecordById(idNo As Integer) As User
+
+        ' gets a sorted list of all Users
+        Function GetAll(Optional ByVal sortExpression As String = "UserName ASC") As List(Of User)
+
+        ' Add a User
+        Function AddRecord(ByRef user As User) As Integer
+
+        ' updates a User
+        Function UpdateRecord(ByRef user As User) As Integer
+
+    End Interface
+
+End Namespace

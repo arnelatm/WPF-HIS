@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalResources.SharedResources
+Imports AATM.Libraries.GlobalResources
 
 Public Class CTabPage
     Inherits TabPage

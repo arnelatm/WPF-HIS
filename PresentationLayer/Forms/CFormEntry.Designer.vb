@@ -1,6 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
 Imports AATM.LIBRARIES.CBaseControlsLibrary
 Imports AATM.LIBRARIES.LocalizationUtilities
 Imports Microsoft.VisualBasic.CompilerServices
@@ -48,7 +46,7 @@ Partial Class CFormEntry
         Me.BtnQuit = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
         Me.btnDebugSwitch = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
         Me.floNavigationAndRecordCounter = New AATM.LIBRARIES.CBaseControlsLibrary.CFlowLayout()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit
         Me.floNavigationButtons.SuspendLayout
         Me.floNavigationAndRecordCounter.SuspendLayout
         Me.SuspendLayout
@@ -157,7 +155,7 @@ Partial Class CFormEntry
         Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnAdd.DesignerSelected = false
         Me.BtnAdd.DisplayOnly = true
-        Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"),System.Drawing.Image)
+        Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"), System.Drawing.Image)
         Me.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnAdd.ImageIndex = 0
         Me.BtnAdd.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -176,7 +174,7 @@ Partial Class CFormEntry
         Me.BtnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnEdit.DesignerSelected = false
         Me.BtnEdit.DisplayOnly = true
-        Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"),System.Drawing.Image)
+        Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
         Me.BtnEdit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnEdit.ImageIndex = 0
         Me.BtnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -195,7 +193,7 @@ Partial Class CFormEntry
         Me.BtnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnDelete.DesignerSelected = false
         Me.BtnDelete.DisplayOnly = true
-        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"),System.Drawing.Image)
+        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
         Me.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnDelete.ImageIndex = 0
         Me.BtnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -214,7 +212,7 @@ Partial Class CFormEntry
         Me.BtnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnSave.DesignerSelected = false
         Me.BtnSave.DisplayOnly = true
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"),System.Drawing.Image)
+        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
         Me.BtnSave.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnSave.ImageIndex = 0
         Me.BtnSave.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -233,7 +231,7 @@ Partial Class CFormEntry
         Me.BtnFind.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnFind.DesignerSelected = false
         Me.BtnFind.DisplayOnly = true
-        Me.BtnFind.Image = CType(resources.GetObject("BtnFind.Image"),System.Drawing.Image)
+        Me.BtnFind.Image = CType(resources.GetObject("BtnFind.Image"), System.Drawing.Image)
         Me.BtnFind.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnFind.ImageIndex = 0
         Me.BtnFind.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -252,7 +250,7 @@ Partial Class CFormEntry
         Me.BtnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnFirst.DesignerSelected = false
         Me.BtnFirst.DisplayOnly = true
-        Me.BtnFirst.Image = CType(resources.GetObject("BtnFirst.Image"),System.Drawing.Image)
+        Me.BtnFirst.Image = CType(resources.GetObject("BtnFirst.Image"), System.Drawing.Image)
         Me.BtnFirst.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnFirst.ImageIndex = 0
         Me.BtnFirst.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -271,7 +269,7 @@ Partial Class CFormEntry
         Me.BtnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnPrev.DesignerSelected = false
         Me.BtnPrev.DisplayOnly = true
-        Me.BtnPrev.Image = CType(resources.GetObject("BtnPrev.Image"),System.Drawing.Image)
+        Me.BtnPrev.Image = CType(resources.GetObject("BtnPrev.Image"), System.Drawing.Image)
         Me.BtnPrev.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnPrev.ImageIndex = 0
         Me.BtnPrev.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -290,7 +288,7 @@ Partial Class CFormEntry
         Me.BtnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnNext.DesignerSelected = false
         Me.BtnNext.DisplayOnly = true
-        Me.BtnNext.Image = CType(resources.GetObject("BtnNext.Image"),System.Drawing.Image)
+        Me.BtnNext.Image = CType(resources.GetObject("BtnNext.Image"), System.Drawing.Image)
         Me.BtnNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnNext.ImageIndex = 0
         Me.BtnNext.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -309,7 +307,7 @@ Partial Class CFormEntry
         Me.BtnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnLast.DesignerSelected = false
         Me.BtnLast.DisplayOnly = true
-        Me.BtnLast.Image = CType(resources.GetObject("BtnLast.Image"),System.Drawing.Image)
+        Me.BtnLast.Image = CType(resources.GetObject("BtnLast.Image"), System.Drawing.Image)
         Me.BtnLast.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnLast.ImageIndex = 0
         Me.BtnLast.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -330,7 +328,7 @@ Partial Class CFormEntry
         Me.BtnUndo.DesignerSelected = false
         Me.BtnUndo.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.BtnUndo.DisplayOnly = true
-        Me.BtnUndo.Image = CType(resources.GetObject("BtnUndo.Image"),System.Drawing.Image)
+        Me.BtnUndo.Image = CType(resources.GetObject("BtnUndo.Image"), System.Drawing.Image)
         Me.BtnUndo.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnUndo.ImageIndex = 0
         Me.BtnUndo.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -350,7 +348,7 @@ Partial Class CFormEntry
         Me.BtnQuit.DesignerSelected = false
         Me.BtnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.BtnQuit.DisplayOnly = true
-        Me.BtnQuit.Image = CType(resources.GetObject("BtnQuit.Image"),System.Drawing.Image)
+        Me.BtnQuit.Image = CType(resources.GetObject("BtnQuit.Image"), System.Drawing.Image)
         Me.BtnQuit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnQuit.ImageIndex = 0
         Me.BtnQuit.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -394,13 +392,13 @@ Partial Class CFormEntry
         '
         'CFormEntry
         '
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(865, 571)
         Me.Controls.Add(Me.floNavigationAndRecordCounter)
         Me.MinimumSize = New System.Drawing.Size(320, 250)
         Me.Name = "CFormEntry"
         Me.SecurityPresenterObj = SecurityPresenter2
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit
         Me.floNavigationButtons.ResumeLayout(false)
         Me.floNavigationButtons.PerformLayout
         Me.floNavigationAndRecordCounter.ResumeLayout(false)
@@ -408,7 +406,7 @@ Partial Class CFormEntry
         Me.ResumeLayout(false)
         Me.PerformLayout
 
-End Sub
+    End Sub
     Public WithEvents BtnAdd As CButton
     Public WithEvents BtnEdit As CButton
     Public WithEvents BtnDelete As CButton

@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.GlobalResources
 
 Public Class CCustomDateTimePicker
     Implements IEntryControl
@@ -99,16 +100,16 @@ Public Class CCustomDateTimePicker
                 If Not CultureSupportUmAlQura(_targetCulture) Then
                     _targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                 End If
-                btnCalendarType.Text = GlobalResources.SharedResources.Strings.HijriCalendarMarker
+                btnCalendarType.Text = Strings.HijriCalendarMarker
             Case CalendarToUse.UmAlQura
                 TargetCalendar = New UmAlQuraCalendar()
                 If Not CultureSupportUmAlQura(_targetCulture) Then
                     _targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                 End If
-                btnCalendarType.Text = GlobalResources.SharedResources.Strings.UmAlQuraCalendarMarker
+                btnCalendarType.Text = Strings.UmAlQuraCalendarMarker
             Case Else
                 TargetCalendar = New GregorianCalendar()
-                btnCalendarType.Text = GlobalResources.SharedResources.Strings.GregorianCalendarMarker
+                btnCalendarType.Text = Strings.GregorianCalendarMarker
 
         End Select
         _targetCulture.DateTimeFormat.Calendar = TargetCalendar

@@ -1,5 +1,5 @@
 ﻿
-Imports AATM.HIS.BusinessLayer.BusinessObjects
+Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object for DefaultFieldValue

@@ -1,7 +1,7 @@
 ﻿' Factory of factories. This class is a factory class that creates
 ' data-base specific factories which in turn create data access objects.
 ' ** GoF Design Patterns: Factory.
-Imports AATM.HIS.DataLayer.AdoNet
+Imports AATM.DataLayer.AdoNet
 
 Public Class DaoFactoriesOld
     ' gets a provider specific (i.e. database specific) factory

@@ -1,0 +1,13 @@
+﻿
+Namespace PresentationLayer.Models
+    Public Class RevenueGroupModel
+        Public Property IdNo As Integer
+        Public Property ParentIdNo As Integer?
+        Public Property RevenueGroupCode As String
+        Public Property RevenueGroupName As String
+        Public Property RevenueGroupNameAra As String
+        Public Property LevelNumber As Int16
+        Public Property Notes As String
+        Public Property SortKey As String
+    End Class
+End NameSpace

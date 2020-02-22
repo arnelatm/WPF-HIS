@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{440C4740-2584-4050-9086-543018EAC766}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.HIS.DataLayer</RootNamespace>
+    <RootNamespace>AATM.DataLayer</RootNamespace>
     <AssemblyName>DataLayer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

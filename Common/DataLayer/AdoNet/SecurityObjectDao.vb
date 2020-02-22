@@ -1,0 +1,71 @@
+﻿
+Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer.AdoNet
+
+Namespace DataLayer.AdoNet
+    ' Data access object for SecurityObject
+    ' ** DAO Pattern
+
+    Public Class SecurityObjectDao
+        Inherits CommonDaoOld
+        Implements ISecurityObjectDao
+
+        Private Shared ReadOnly Db As New Db()
+
+        Public Sub New()
+            DbCommon = Db
+        End Sub
+
+
+        Public Function GetRecordById(idNo As Integer) As SecurityObject _
+            Implements ISecurityObjectDao.GetRecordById
+            Dim sql As String =
+                    " SELECT IDNo, SecurityObjectName, Notes" &
+                    "   FROM [SecurityObject]" &
+                    " WHERE IDNo = @IDNo"
+            Dim parms() As Object = {"@IDNo", idNo}
+            Return Db.Read(sql, Make, parms).FirstOrDefault()
+        End Function
+
+        Public Function GetAll(Optional sortExpression As String = "SecurityObjectName") As List(Of SecurityObject) Implements ISecurityObjectDao.GetAll
+            Dim sql As String =
+                    " SELECT IDNo, SecurityObjectName, Notes" &
+                    "   FROM [SecurityObject] " & "order by " & sortExpression
+            Return Db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function UpdateRecord(ByRef securityObject As SecurityObject) As Integer Implements ISecurityObjectDao.UpdateRecord
+            Dim sql As String =
+                    " UPDATE [SecurityObject]" &
+                    "    SET SecurityObjectName = @SecurityObjectName," &
+                    "        Notes = @Notes" &
+                    "  WHERE IDNo = @IDNo"
+
+            Return Db.Update(sql, Take(securityObject))
+        End Function
+
+        Public Function AddRecord(ByRef securityObject As SecurityObject) As Integer Implements ISecurityObjectDao.AddRecord
+            Dim sql As String =
+                    " INSERT INTO [SecurityObject] " &
+                    " (SecurityObjectName,Notes) " &
+                    " VALUES (@SecurityObjectName,@Notes)"
+            Return Db.Insert(sql, Take(securityObject))
+        End Function
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, SecurityObject) =
+                                    Function(reader) _
+            New SecurityObject() With {
+            .IdNo = Extensions.AsId(reader("IDNo")),
+            .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
+            .Notes = Extensions.AsString(reader("Notes"))}
+
+        Private Function Take(securityObject As SecurityObject) As Object()
+            Return New Object() {
+                                    "@IDNo", securityObject.IdNo,
+                                    "@SecurityObjectName", securityObject.SecurityObjectName,
+                                    "@Notes", securityObject.Notes}
+        End Function
+
+    End Class
+
+End Namespace

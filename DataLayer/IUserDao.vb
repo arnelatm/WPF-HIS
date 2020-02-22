@@ -1,4 +1,4 @@
-﻿Imports AATM.HIS.BusinessLayer.BusinessObjects
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Public Interface IUserDao
     ' defines methods to access Users.

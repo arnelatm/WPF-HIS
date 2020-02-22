@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalResources
 
 Public Class BForm
     Inherits Form
@@ -11,7 +12,7 @@ Public Class BForm
 
         ' Add any initialization after the InitializeComponent() call.
         BackColor = SystemColors.Desktop
-        BackgroundImage = GlobalResources.SharedResources.Images.GreenGradientBackgroundLarge
+        BackgroundImage = Images.GreenGradientBackgroundLarge
         BackgroundImageLayout = ImageLayout.Stretch
         KeyPreview = True
     End Sub
