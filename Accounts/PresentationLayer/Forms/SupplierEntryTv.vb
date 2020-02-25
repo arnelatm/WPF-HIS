@@ -1,6 +1,6 @@
-﻿
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -393,44 +393,45 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"AccountStatus", cacAccountStatus},
-                {"Active", chkActive},
-                {"ApAccountIdNo", cacApAccountIdNo},
-                {"BankAccountNo", txtBankAccountNo},
-                {"BankIdNo", cacBankIdNo},
-                {"ContactDesignation", txtContactDesignation},
-                {"ContactPerson", txtContactPerson},
-                {"CountryCode", cacCountryCode},
-                {"CreditLimit", txtCreditLimit},
-                {"CrNumber", txtCrNumber},
-                {"DateAccountOpen", dtpDateAccountOpen},
-                {"District", txtDistrict},
-                {"Email", txtEmail},
-                {"ExpAccountIdNo", cacExpAccountIdNo},
-                {"Fax", txtFax},
-                {"Iban", txtIban},
-                {"IDNo", TxtIDNo},
-                {"Mobile", txtMobile},
-                {"Notes", txtNotes},
-                {"OpeningBalance", txtOpeningBalance},
-                {"PaymentDueDays", txtPaymentDueDays},
-                {"PaymentMethod", cacPaymentMethod},
-                {"Phone1", txtPhone1},
-                {"Phone2", txtPhone2},
-                {"PoBox", txtPoBox},
-                {"ProvinceState", txtProvinceState},
-                {"SettlementDiscount", txtSettlementDiscount},
-                {"SettlementDueDays", txtSettlementDueDays},
-                {"Street", txtStreet},
-                {"SupplierCode", txtSupplierCode},
-                {"SupplierName", txtSupplierName},
-                {"SupplierNameAra", txtSupplierNameAra},
-                {"TownCity", txtTownCity},
-                {"VatNumber", txtVatNumber},
-                {"Website", txtWebsite},
-                {"ZipCode", txtZipCode}
+                 {"AccountStatus", cacAccountStatus},
+                 {"Active", chkActive},
+                 {"ApAccountIdNo", cacApAccountIdNo},
+                 {"BankAccountNo", txtBankAccountNo},
+                 {"BankIdNo", cacBankIdNo},
+                 {"ContactDesignation", txtContactDesignation},
+                 {"ContactPerson", txtContactPerson},
+                 {"CountryCode", cacCountryCode},
+                 {"CreditLimit", txtCreditLimit},
+                 {"CrNumber", txtCrNumber},
+                 {"DateAccountOpen", dtpDateAccountOpen},
+                 {"District", txtDistrict},
+                 {"Email", txtEmail},
+                 {"ExpAccountIdNo", cacExpAccountIdNo},
+                 {"Fax", txtFax},
+                 {"Iban", txtIban},
+                 {"IDNo", TxtIDNo},
+                 {"Mobile", txtMobile},
+                 {"Notes", txtNotes},
+                 {"OpeningBalance", txtOpeningBalance},
+                 {"PaymentDueDays", txtPaymentDueDays},
+                 {"PaymentMethod", cacPaymentMethod},
+                 {"Phone1", txtPhone1},
+                 {"Phone2", txtPhone2},
+                 {"PoBox", txtPoBox},
+                 {"ProvinceState", txtProvinceState},
+                 {"SettlementDiscount", txtSettlementDiscount},
+                 {"SettlementDueDays", txtSettlementDueDays},
+                 {"Street", txtStreet},
+                 {"SupplierCode", txtSupplierCode},
+                 {"SupplierName", txtSupplierName},
+                 {"SupplierNameAra", txtSupplierNameAra},
+                 {"TownCity", txtTownCity},
+                 {"VatNumber", txtVatNumber},
+                 {"Website", txtWebsite},
+                 {"ZipCode", txtZipCode}
                 }
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

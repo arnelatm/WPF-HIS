@@ -1,7 +1,6 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _

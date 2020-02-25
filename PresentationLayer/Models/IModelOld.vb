@@ -97,7 +97,7 @@ Public Interface IModelOld
     Function GetLookupFilteredDataByCode(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function Login(userName As String, password As String) As Boolean
+    'Function Login(userName As String, password As String) As Boolean
 
     Sub Logout()
 End Interface

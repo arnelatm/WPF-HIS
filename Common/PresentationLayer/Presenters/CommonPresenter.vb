@@ -8,7 +8,7 @@ Imports AATM.Common.PresentationLayer.Models
 Namespace PresentationLayer.Presenters
 
     Public Class CommonPresenter(Of T As IView, TBiz As BusinessObject, TM As New)
-        Inherits Presenter(Of T, TBiz, TM)
+        Inherits Presenter(Of T, BusinessObject, TM)
 
         'Private Shadows Shared Property CommonModel As IModelCommon
 
@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
             CommonModel = New ModelCommon()
         End Sub
 
-        Public Sub New(view As T)
+        Public Sub New(view As IView)
             MyBase.New(view)
         End Sub
 

@@ -3,6 +3,7 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -10,7 +11,7 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of ISalesCashItemsView, SalesCashItem, SalesCashItemModel)
 
         Public ParentViewList As List(Of SalesCashItemModel)
-        Private ReadOnly _vatRate As Decimal = GetVatPercentage()
+        Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
         Private _cashCodesModel As List(Of CashCodeModel)
 
         Public Sub New(view As ISalesCashItemsView)

@@ -3,9 +3,10 @@ Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class DistributionSchemeEntryTv
         Implements IDistributionSchemeView, IDistributionSchemeItemsView
@@ -398,5 +399,7 @@ Namespace PresentationLayer.Forms
         '    Dim x = 0
         '    x = x + 1
         'End Sub
+
     End Class
-End NameSpace
+
+End Namespace

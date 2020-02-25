@@ -1,5 +1,6 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for GlLedgerItem
@@ -119,7 +120,7 @@ Namespace DataLayer.AdoNet
                     "Sequence," &
                     "TransactionDate" &
                     " FROM " & TableFileName &
-                    " WHERE TransactionDate <= " & DtoS(transactionDate) &
+                    " WHERE TransactionDate <= " & GlobalFunctions.DtoS(transactionDate) &
                     " ORDER BY " & sortExpression
             Dim x = Db.Read(sql, Make).ToList()
             Return x
@@ -137,14 +138,14 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GlLedgerItem) =
                                     Function(reader) _
             New GlLedgerItem() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .Credit = Extensions.AsDecimal(reader("Credit")),
-            .Debit = Extensions.AsDecimal(reader("Debit")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
-            .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
-            .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence"))
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
+            .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IDNo")),
+            .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
+            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+            .ProfitCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("Sequence"))
             }
 
         Private Function Take(glLedgerItem As GlLedgerItem) As Object()

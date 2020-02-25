@@ -5,6 +5,8 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 

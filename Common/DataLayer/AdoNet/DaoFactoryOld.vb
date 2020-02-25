@@ -50,25 +50,25 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property UserDao As IUserDao Implements IDaoFactoryOld.UserDao
-            Get
-                Return New UserDao()
-            End Get
-        End Property
+        'Public ReadOnly Property UserDao As IUserDao Implements IDaoFactoryOld.UserDao
+        '    Get
+        '        Return New UserDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactoryOld.LoginDao
-            Get
-                Return New LoginDao()
-            End Get
-        End Property
+        'Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactoryOld.LoginDao
+        '    Get
+        '        Return New LoginDao()
+        '    End Get
+        'End Property
 
         Public ReadOnly Property LogoutDao As ILogoutDao Implements IDaoFactoryOld.LogoutDao
 
-        Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactoryOld.SaltDao
-            Get
-                Return New SaltDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactoryOld.SaltDao
+        '    Get
+        '        Return New SaltDao()
+        '    End Get
+        'End Property
 
         'Public ReadOnly Property UserDao As IUserDao Implements IDaoFactoryOld.UserDao
         '    Get

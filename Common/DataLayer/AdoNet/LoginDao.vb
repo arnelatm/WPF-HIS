@@ -1,20 +1,14 @@
-﻿
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Login
     ' ** DAO Pattern
 
     Public Class LoginDao
-        Inherits CommonDaoOld
         Implements ILoginDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetLogin(idNo As Integer) As Login Implements ILoginDao.GetLogin
             Dim sql As String =

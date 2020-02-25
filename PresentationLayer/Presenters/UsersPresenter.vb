@@ -1,8 +1,11 @@
-﻿Imports AATM.Businesslayer
+﻿Imports AATM.BusinessLayer
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer.AdoNet
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
 
 Public Class UsersPresenter
-    Inherits Presenter(Of IUsersView)
+    Inherits Presenter(Of IUsersView, User, UserModel)
 
     Protected ViewObject As List(Of UserModel)
 

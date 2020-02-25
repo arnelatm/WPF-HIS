@@ -1,7 +1,6 @@
 ﻿Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
-Imports ServicesLayer.Services
 
 ''' <summary>
 '''     The Model in MVP design pattern.
@@ -257,10 +256,10 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function Login(userName As String, password As String) As Boolean Implements IModel.Login
-        Return True
-        'Return Service.Login(userName, password)
-    End Function
+    'Public Function Login(userName As String, password As String) As Boolean Implements IModel.Login
+    '    Return True
+    '    'Return Service.Login(userName, password)
+    'End Function
 
     Public Sub Logout() Implements IModel.Logout
         Throw New NotImplementedException

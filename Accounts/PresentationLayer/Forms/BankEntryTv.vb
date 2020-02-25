@@ -1,13 +1,12 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
-
     Public Class BankEntryTv
         Implements IBankView
-
-        Public FieldsDictionary As New Dictionary(Of String, Object)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -107,4 +106,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

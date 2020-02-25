@@ -7,6 +7,7 @@ Imports System.Drawing
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.Translations
 
 Public Class BfMain
     Implements IView
@@ -49,18 +50,18 @@ Public Class BfMain
 
     End Sub
 
-    'Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
-    '    MyBase.New()
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-    '    If Not DesignMode Then
-    '        TranslatorDAC = transDac
-    '        AppDataDAC = appDac
-    '    End If
+    Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
+        MyBase.New()
+        ' This call is required by the designer.
+        InitializeComponent()
+        If Not DesignMode Then
+            TranslatorDAC = transDac
+            AppDataDAC = appDac
+        End If
 
-    '    ' Add any initialization after the InitializeComponent() call.
+        ' Add any initialization after the InitializeComponent() call.
 
-    'End Sub
+    End Sub
 
     Public Event TextDisplayLanguageChanged()
 
@@ -464,10 +465,10 @@ Public Class BfMain
             'Dim ds As New DataSet
             'ds = TranslatorDAC.ReturnDs(
             '     "Select lang from languages")
-            ''cmbLanguagePicker.Items.Clear()
-            ''For Each dr As DataRow In ds.Tables(0).Rows
-            ''    cmbLanguagePicker.Items.Add(dr("lang"))
-            ''Next
+            'cmbLanguagePicker.Items.Clear()
+            'For Each dr As DataRow In ds.Tables(0).Rows
+            '    cmbLanguagePicker.Items.Add(dr("lang"))
+            'Next
             'ds = Nothing
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             Dim cmd As String

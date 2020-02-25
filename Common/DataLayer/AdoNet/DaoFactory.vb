@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** Factory Pattern
 
     Public Class DaoFactory
-        Inherits AATM.DataLayer.AdoNet.DaoFactoryOld
+        'Inherits AATM.DataLayer.AdoNet.DaoFactory
         Implements IDaoFactory
 
         Sub New(logoutDao As ILogoutDao)
@@ -56,19 +56,19 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactory.LoginDao
-            Get
-                Return New LoginDao()
-            End Get
-        End Property
+        'Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactory.LoginDao
+        '    Get
+        '        Return New LoginDao()
+        '    End Get
+        'End Property
 
         Public ReadOnly Property LogoutDao As ILogoutDao Implements IDaoFactory.LogoutDao
 
-        Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactory.SaltDao
-            Get
-                Return New SaltDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactory.SaltDao
+        '    Get
+        '        Return New SaltDao()
+        '    End Get
+        'End Property
 
         'Public ReadOnly Property UserDao As IUserDao Implements IDaoFactory.UserDao
         '    Get

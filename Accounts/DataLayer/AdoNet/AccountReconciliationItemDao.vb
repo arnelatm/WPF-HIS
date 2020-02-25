@@ -1,5 +1,6 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for AccountReconciliationItem
@@ -178,7 +179,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate" &
                     " FROM GlReconciliation_View" &
                     " WHERE AccountIdNo = " & accountIdNo &
-                    " and TransactionDate <= '" & DtoS(reconciliationDate) & "'" &
+                    " and TransactionDate <= '" & GlobalFunctions.DtoS(reconciliationDate) & "'" &
                     " and Reconciled Is Null" &
                     " ORDER BY " & sortExpression
             Dim x = Db.Read(sql, Make).ToList()
@@ -242,40 +243,40 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, AccountReconciliationItem) =
                                     Function(reader) _
             New AccountReconciliationItem() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .AccountReconciliationIdNo = Extensions.AsInt(Of Integer)(reader("AccountReconciliationIdNo")),
-            .Cleared = Extensions.AsBool(reader("Cleared")),
-            .Credit = Extensions.AsDecimal(reader("Credit")),
-            .Debit = Extensions.AsDecimal(reader("Debit")),
-            .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
-            .JournalCode = Extensions.AsString(reader("JournalCode")),
-            .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
-            .PayDescription = Extensions.AsString(reader("PayDescription")),
-            .PayDescriptionAra = Extensions.AsString(reader("PayDescriptionAra")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .Sequence = Extensions.AsString(reader("Sequence"))
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountReconciliationIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountReconciliationIdNo")),
+            .Cleared = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cleared")),
+            .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
+            .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
+            .DocumentNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DocumentNumber")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .JournalCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("JournalCode")),
+            .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
+            .JournalItemIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
+            .PayDescription = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayDescription")),
+            .PayDescriptionAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayDescriptionAra")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Sequence"))
             }
 
         Public Shared ReadOnly MakeAccountReconciliationItem As Func(Of IDataReader, AccountReconciliationItem) = Function(reader) New AccountReconciliationItem() With
             {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .AccountReconciliationIdNo = Extensions.AsInt(Of Integer)(reader("AccountReconciliationIdNo")),
-            .Cleared = Extensions.AsBool(reader("Cleared")),
-            .Credit = Extensions.AsDecimal(reader("Credit")),
-            .Debit = Extensions.AsDecimal(reader("Debit")),
-            .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
-            .JournalCode = Extensions.AsString(reader("JournalCode")),
-            .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
-            .PayDescription = Extensions.AsString(reader("PayDescription")),
-            .PayDescriptionAra = Extensions.AsString(reader("PayDescriptionAra")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .Sequence = Extensions.AsString(reader("Sequence"))
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountReconciliationIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountReconciliationIdNo")),
+            .Cleared = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cleared")),
+            .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
+            .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
+            .DocumentNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DocumentNumber")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .JournalCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("JournalCode")),
+            .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
+            .JournalItemIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
+            .PayDescription = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayDescription")),
+            .PayDescriptionAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayDescriptionAra")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Sequence"))
             }
 
     End Class

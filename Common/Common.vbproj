@@ -76,17 +76,14 @@
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\Department.vb" />
     <Compile Include="BusinessLayer\GroupAccess.vb" />
-    <Compile Include="BusinessLayer\Login.vb" />
     <Compile Include="BusinessLayer\OriginalMessages.vb" />
     <Compile Include="BusinessLayer\PhoneType.vb" />
     <Compile Include="BusinessLayer\ProfitCenter.vb" />
     <Compile Include="BusinessLayer\Religion.vb" />
     <Compile Include="BusinessLayer\RevenueGroup.vb" />
-    <Compile Include="BusinessLayer\Salt.vb" />
     <Compile Include="BusinessLayer\SecurityGroup.vb" />
     <Compile Include="BusinessLayer\SecurityObject.vb" />
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
-    <Compile Include="BusinessLayer\User.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CostCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
@@ -94,14 +91,11 @@
     <Compile Include="DataLayer\AdoNet\DaoFactoryOld.vb" />
     <Compile Include="DataLayer\AdoNet\DepartmentDao.vb" />
     <Compile Include="DataLayer\AdoNet\GroupAccessDao.vb" />
-    <Compile Include="DataLayer\AdoNet\LoginDao.vb" />
-    <Compile Include="DataLayer\AdoNet\LoginService.vb" />
     <Compile Include="DataLayer\AdoNet\OriginalMessagesDao.vb" />
     <Compile Include="DataLayer\AdoNet\PhoneTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\ProfitCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReligionDao.vb" />
     <Compile Include="DataLayer\AdoNet\RevenueGroupDao.vb" />
-    <Compile Include="DataLayer\AdoNet\SaltDao.vb" />
     <Compile Include="DataLayer\AdoNet\SecurityGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\SecurityObjectDao.vb" />
     <Compile Include="DataLayer\AdoNet\TranslatedMessagesDao.vb" />
@@ -115,14 +109,12 @@
     <Compile Include="DataLayer\IDaoFactoryOld.vb" />
     <Compile Include="DataLayer\IDepartmentDao.vb" />
     <Compile Include="DataLayer\IGroupAccesDao.vb" />
-    <Compile Include="DataLayer\ILoginDao.vb" />
     <Compile Include="DataLayer\ILogoutDao..vb" />
     <Compile Include="DataLayer\IOriginalMessagesDao.vb" />
     <Compile Include="DataLayer\IPhoneTypeDao.vb" />
     <Compile Include="DataLayer\IProfitCenterDao.vb" />
     <Compile Include="DataLayer\IReligionDao.vb" />
     <Compile Include="DataLayer\IRevenueGroupDao.vb" />
-    <Compile Include="DataLayer\ISaltDao.vb" />
     <Compile Include="DataLayer\ISecurityGroupDao.vb" />
     <Compile Include="DataLayer\ISecurityObjectDao.vb" />
     <Compile Include="DataLayer\ITranslatedMessagesDao.vb" />
@@ -161,12 +153,6 @@
       <DependentUpon>FormAbout.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\FormAbout.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\FormLogin.designer.vb">
-      <DependentUpon>FormLogin.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\FormLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\LoginEntry.Designer.vb">
@@ -229,12 +215,6 @@
     <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.Designer.vb">
-      <DependentUpon>TranslatedMessagesEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Forms\UserEntryTv.Designer.vb">
       <DependentUpon>UserEntryTv.vb</DependentUpon>
     </Compile>
@@ -249,7 +229,6 @@
     <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommonOld.vb" />
-    <Compile Include="PresentationLayer\Models\LoginModel.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommonOld.vb" />
     <Compile Include="PresentationLayer\Models\OriginalMessageModel.vb" />
@@ -257,7 +236,6 @@
     <Compile Include="PresentationLayer\Models\ProfitCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\ReligionModel.vb" />
     <Compile Include="PresentationLayer\Models\RevenueGroupModel.vb" />
-    <Compile Include="PresentationLayer\Models\SaltModel.vb" />
     <Compile Include="PresentationLayer\Models\SecurityGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\SecurityObjectModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
@@ -283,40 +261,33 @@
     <Compile Include="PresentationLayer\Presenters\CountryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepartmentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GroupAccessesPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\LoginPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\OriginalMessagesPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PhoneTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProfitCenterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReligionPresener.vb" />
     <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SaltPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SecurityGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SecurityGroupsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SecurityObjectPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SecurityObjectsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\ICostCenterView.vb" />
     <Compile Include="PresentationLayer\Views\ICountryView.vb" />
     <Compile Include="PresentationLayer\Views\IDepartmentView.vb" />
     <Compile Include="PresentationLayer\Views\IGroupAccessesView.vb" />
-    <Compile Include="PresentationLayer\Views\ILoginView.vb" />
     <Compile Include="PresentationLayer\Views\IMainView.vb" />
     <Compile Include="PresentationLayer\Views\IOriginalMessagesView.vb" />
     <Compile Include="PresentationLayer\Views\IPhoneTypeView.vb" />
     <Compile Include="PresentationLayer\Views\IProfitCenterView.vb" />
     <Compile Include="PresentationLayer\Views\IReligionView.vb" />
     <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\ISaltView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityGroupsView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityGroupView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityObjectsView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityObjectView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView1.vb" />
-    <Compile Include="PresentationLayer\Views\IUsersView.vb" />
-    <Compile Include="PresentationLayer\Views\IUserView.vb" />
     <Compile Include="ServiceLayer\ActionServices\BranchService.vb" />
     <Compile Include="ServiceLayer\ActionServices\CostCenterService.vb" />
     <Compile Include="ServiceLayer\ActionServices\CountryService.vb" />
@@ -325,14 +296,12 @@
     <Compile Include="ServiceLayer\ActionServices\ICommonService.vb" />
     <Compile Include="ServiceLayer\ActionServices\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ActionServices\IServiceCommonOld.vb" />
-    <Compile Include="ServiceLayer\ActionServices\LoginService.vb" />
     <Compile Include="ServiceLayer\ActionServices\LogoutService.vb" />
     <Compile Include="ServiceLayer\ActionServices\OriginalMessagesService.vb" />
     <Compile Include="ServiceLayer\ActionServices\PhoneTypeService.vb" />
     <Compile Include="ServiceLayer\ActionServices\ProfitCenterService.vb" />
     <Compile Include="ServiceLayer\ActionServices\ReligionService.vb" />
     <Compile Include="ServiceLayer\ActionServices\RevenueGroupService.vb" />
-    <Compile Include="ServiceLayer\ActionServices\SaltService.vb" />
     <Compile Include="ServiceLayer\ActionServices\SecurityGroupService.vb" />
     <Compile Include="ServiceLayer\ActionServices\SecurityObjectService.vb" />
     <Compile Include="ServiceLayer\ActionServices\ServiceCommon.vb" />
@@ -371,18 +340,6 @@
     <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.ar-SA.resx">
-      <DependentUpon>FormLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.ar.resx">
-      <DependentUpon>FormLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.en-GB.resx">
-      <DependentUpon>FormLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormLogin.resx">
-      <DependentUpon>FormLogin.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\LoginEntry.resx">
       <DependentUpon>LoginEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -412,9 +369,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">
       <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\TranslatedMessagesEntryTv.resx">
-      <DependentUpon>TranslatedMessagesEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\UserEntryTv.resx">
       <DependentUpon>UserEntryTv.vb</DependentUpon>

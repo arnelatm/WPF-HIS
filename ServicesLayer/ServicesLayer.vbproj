@@ -93,11 +93,12 @@
     <Compile Include="Services\IServiceNew.vb" />
     <Compile Include="Services\IServiceOld.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
-    <Compile Include="Services\LoginSecurity.vb" />
+    <Compile Include="Services\LoginService.vb" />
     <Compile Include="Services\SecurityService.vb" />
     <Compile Include="Services\Service.vb" />
     <Compile Include="Services\ServiceOld.vb" />
     <Compile Include="Services\TblColPropService.vb" />
+    <Compile Include="Services\UserService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -129,6 +130,10 @@
     <ProjectReference Include="..\DataLayer\DataLayer.vbproj">
       <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
       <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
+      <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
+      <Name>Languages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

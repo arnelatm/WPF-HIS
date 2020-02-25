@@ -3,9 +3,9 @@ Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class ChartEntryTv
         Implements IChartView
@@ -234,23 +234,23 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountCode", txtAccountCode},
-                {"AccountGroup", cboAccountGroup},
-                {"AccountName", txtAccountName},
-                {"AccountNameAra", txtAccountNameAra},
-                {"Active", chkActive},
-                {"DetailAccount", chkDetailAccount},
-                {"IDNo", txtIdNo},
-                {"LevelNumber", txtLevelNumber},
-                {"NormalBalance", cboNormalBalance},
-                {"Notes", txtNotes},
-                {"ParentIdNo", cboParentIdNo},
-                {"PayeeType", cboPayeeType},
-                {"SortKey", txtSortKey},
-                {"SpecialAccount", cboSpecialAccount},
-                {"WithReconciliation", chkWithReconciliation}
-                }
+                    {
+                    {"AccountCode", txtAccountCode},
+                    {"AccountGroup", cboAccountGroup},
+                    {"AccountName", txtAccountName},
+                    {"AccountNameAra", txtAccountNameAra},
+                    {"Active", chkActive},
+                    {"DetailAccount", chkDetailAccount},
+                    {"IDNo", txtIdNo},
+                    {"LevelNumber", txtLevelNumber},
+                    {"NormalBalance", cboNormalBalance},
+                    {"Notes", txtNotes},
+                    {"ParentIdNo", cboParentIdNo},
+                    {"PayeeType", cboPayeeType},
+                    {"SortKey", txtSortKey},
+                    {"SpecialAccount", cboSpecialAccount},
+                    {"WithReconciliation", chkWithReconciliation}
+                    }
         End Sub
 
         'Private Sub UpdateParentIdComboListData()
@@ -295,4 +295,5 @@ Namespace PresentationLayer.Forms
         'End Sub
 
     End Class
+
 End Namespace

@@ -33,13 +33,13 @@ Public Class CrReportViewer
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Dispose()
-        Me.Close()
+        Dispose()
+        Close()
     End Sub
 
     Private Sub CButton1_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        Me.Dispose()
-        Me.Close()
+        Dispose()
+        Close()
     End Sub
 
 End Class

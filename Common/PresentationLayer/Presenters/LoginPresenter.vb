@@ -1,8 +1,9 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.DataLayer.AdoNet
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -13,7 +14,7 @@ Namespace PresentationLayer.Presenters
     '''     MV Patterns: MVP design pattern.
     ''' </remarks>
     Public Class LoginPresenter
-        Inherits CommonPresenterOld(Of ILoginView, Login, LoginModel)
+        Inherits Presenter(Of ILoginView, Login, LoginModel)
 
         ''' <summary>
         '''     Constructor.
@@ -26,7 +27,9 @@ Namespace PresentationLayer.Presenters
             BizObject = New Login
             DataModel = New LoginModel
             DbDataDao = New LoginDao
-            Model.SetService(New ServiceLayer.ActionServices.LoginService)
+            Dim myService = New LoginService()
+            'Service = myService
+            CommonModel.SetService(myService)
         End Sub
 
         'Public Sub Display()
@@ -42,7 +45,7 @@ Namespace PresentationLayer.Presenters
             Dim password As String = View.Password
 
             'Return OriginalModel.Login(username,password)
-            Return Model.Login(username, password)
+            Return CommonModel.Login(username, password)
 
         End Function
 

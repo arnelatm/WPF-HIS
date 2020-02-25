@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Languages
+Imports AATM.Libraries.Languages
 
 Namespace PresentationLayer.Forms.Reports
 

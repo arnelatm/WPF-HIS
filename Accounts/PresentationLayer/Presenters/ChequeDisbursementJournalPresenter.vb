@@ -1,7 +1,8 @@
-﻿Imports System.Windows.Forms
+﻿
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -29,7 +30,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function ChangesMade() As Boolean
             Dim chequeDisbursementJournalChangesMade As Boolean
-            If ObjectsCompare(OriginalModel, View) Then
+            If GlobalFunctions.ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
                     chequeDisbursementJournalChangesMade = True
                 ElseIf CkdOiItemsPresenter.ChangesMadeInCkdOiItem Then

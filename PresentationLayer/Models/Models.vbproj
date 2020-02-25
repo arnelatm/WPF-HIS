@@ -75,7 +75,9 @@
     <Compile Include="IModelOld.vb" />
     <Compile Include="IModelSecurity.vb" />
     <Compile Include="IModelTblColProp.vb" />
+    <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
+    <Compile Include="ModelLogin.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelOld.vb" />
     <Compile Include="ModelTblColProp.vb" />
@@ -95,7 +97,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SaltModel.vb" />
     <Compile Include="TblColPropModel.vb" />
+    <Compile Include="UserModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

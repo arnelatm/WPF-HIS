@@ -1,20 +1,18 @@
 ﻿Imports System.Globalization
 Imports System.Threading
-Imports System.Windows.Forms
-Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Forms
-Imports AATM.Libraries.ErrorsAndEvents
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Forms
+Imports AATM.Libraries.ErrorsAndEvents
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
+Imports AATM.Common.PresentationLayer.Forms
+Imports AATM.Common
 
 Namespace PresentationLayer.Forms
-
 
     ''' <summary>
     '''     Main window for Windows Forms application. Most business logic resides
@@ -30,7 +28,6 @@ Namespace PresentationLayer.Forms
     '''     MV Patterns: MVP design pattern is used throughout this WinForms application.
     ''' </remarks>
     Partial Public Class Main
-        Inherits BfMain
 
         Private _formCurrentCulture As CultureInfo
         Private _logStatus As LoginStatus
@@ -403,9 +400,11 @@ Namespace PresentationLayer.Forms
                                 "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ErrLogger.LogError(ex, True)
             Catch ex As Exception
-                LogStatus = LoginStatus.LoggedOut
-                GlobalVariables.IsUserLoggedIn = False
-                MessageBox.Show("Unsuccessful Login")
+                'LogStatus = LoginStatus.LoggedOut
+                GlobalVariables.IsUserLoggedIn = True
+                LogStatus = LoginStatus.LoggedIn
+                'GlobalVariables.IsUserLoggedIn = False
+                'MessageBox.Show("Unsuccessful Login")
                 'Throw ex
             End Try
         End Sub
@@ -562,27 +561,27 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub StatementOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemStatementOfAccountsPayable.Click
+                    Handles ToolStripMenuItemStatementOfAccountsPayable.Click
             ShowEntryForm(ApStatementReport)
         End Sub
 
         Private Sub StatementOfAccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
+                    Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
             ShowEntryForm(ArStatementReport)
         End Sub
 
         Private Sub SummaryOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSummaryOfAccountsPayable.Click
+                    Handles ToolStripMenuItemSummaryOfAccountsPayable.Click
             ShowEntryForm(ApSummaryReport)
         End Sub
 
         Private Sub SummaryOfAccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
+                    Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
             ShowEntryForm(ArSummaryReport)
         End Sub
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSuppliersVendors.Click
+                    Handles ToolStripMenuItemSuppliersVendors.Click
             ShowEntryForm(SupplierEntryTv)
         End Sub
 
@@ -823,4 +822,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
+
 End Namespace

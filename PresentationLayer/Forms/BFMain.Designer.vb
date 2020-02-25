@@ -27,32 +27,35 @@ Partial Class BfMain
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New Container()
-        Dim resources As ComponentResourceManager = New ComponentResourceManager(GetType(BfMain))
-        Me.LocalizableContent1 = New LocalizableContent()
-        Me._MBDeletionNotAllowed = New LocalizableMessageBox()
-        Me._MBAddRecordFailed = New LocalizableMessageBox()
-        Me._MBSaveRecordFailed = New LocalizableMessageBox()
-        Me._MBRecordNotSaved = New LocalizableMessageBox()
-        Me._MBRecordSuccessfullySaved = New LocalizableMessageBox()
-        Me._MBUndoEdits = New LocalizableMessageBox()
-        Me._MBTextToFindNotFound = New LocalizableMessageBox()
-        Me._MBFoundLastRecStartOnFirst = New LocalizableMessageBox()
-        Me._MBSaveChangesBeforeMoving = New LocalizableMessageBox()
-        Me._MBFirstRecordAlready = New LocalizableMessageBox()
-        Me._MBLastRecordAlready = New LocalizableMessageBox()
-        Me._MBLastRecordReachedStartFromBeginning = New LocalizableMessageBox()
-        Me._MBDeleteRecordFailed = New LocalizableMessageBox()
-        Me._MBDeleteRecordAsk = New LocalizableMessageBox()
-        Me._MBRecordSuccessfullyDeleted = New LocalizableMessageBox()
-        Me._MBDependentRecordExists = New LocalizableMessageBox()
-        Me._MBNoChangesMadeNothingToSave = New LocalizableMessageBox()
-        Me._MBUniqueConstraintViolated = New LocalizableMessageBox()
-        Me._MsgRecordNo = New LocalizableMessage()
-        Me._MsgOf = New LocalizableMessage()
-        Me._MBDataEntryIsNotUnique = New LocalizableMessage()
-        Me.ImageList1 = New ImageList(Me.components)
-        Me.BackgroundWorker1 = New BackgroundWorker()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BfMain))
+        Me.LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
+        Me._MBDeletionNotAllowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBAddRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBSaveRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBRecordNotSaved = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBRecordSuccessfullySaved = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBUndoEdits = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBTextToFindNotFound = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBFoundLastRecStartOnFirst = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBSaveChangesBeforeMoving = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBFirstRecordAlready = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBLastRecordAlready = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBLastRecordReachedStartFromBeginning = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBDeleteRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBDeleteRecordAsk = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBRecordSuccessfullyDeleted = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBDependentRecordExists = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBNoChangesMadeNothingToSave = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MBUniqueConstraintViolated = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+        Me._MsgRecordNo = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
+        Me._MsgOf = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
+        Me._MBDataEntryIsNotUnique = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.TranslatorDAC = New AATM.Libraries.Translations.Dac()
+        Me.AppDataDAC = New AATM.Libraries.Translations.Dac()
+        Me.StoreCaptions1 = New StoreCaptions()
         Me.SuspendLayout()
         '
         'LocalizableContent1
@@ -86,19 +89,19 @@ Partial Class BfMain
         '
         '_MBAddRecordFailed
         '
-        Me._MBAddRecordFailed.Type = MessageBoxType.[Error]
+        Me._MBAddRecordFailed.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MBSaveRecordFailed
         '
         Me._MBSaveRecordFailed.Caption = "Save Failed"
         Me._MBSaveRecordFailed.Text = "The request to save the record failed!"
-        Me._MBSaveRecordFailed.Type = MessageBoxType.[Error]
+        Me._MBSaveRecordFailed.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MBRecordNotSaved
         '
         Me._MBRecordNotSaved.Caption = "Save Failed"
         Me._MBRecordNotSaved.Text = "Record Not Saved!"
-        Me._MBRecordNotSaved.Type = MessageBoxType.[Error]
+        Me._MBRecordNotSaved.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MBRecordSuccessfullySaved
         '
@@ -107,30 +110,30 @@ Partial Class BfMain
         '
         '_MBUndoEdits
         '
-        Me._MBUndoEdits.Buttons = MessageBoxButtons.YesNo
+        Me._MBUndoEdits.Buttons = System.Windows.Forms.MessageBoxButtons.YesNo
         Me._MBUndoEdits.Caption = "Undo Edit"
-        Me._MBUndoEdits.DefaultButton = MessageBoxDefaultButton.Button2
+        Me._MBUndoEdits.DefaultButton = System.Windows.Forms.MessageBoxDefaultButton.Button2
         Me._MBUndoEdits.Text = "All your changes will be discarded! Are you sure you want to undo changes? "
-        Me._MBUndoEdits.Type = MessageBoxType.Warning
+        Me._MBUndoEdits.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.Warning
         '
         '_MBTextToFindNotFound
         '
         Me._MBTextToFindNotFound.Caption = "Text Search"
         Me._MBTextToFindNotFound.Text = "Sorry the searched text <{0}> was not found!"
-        Me._MBTextToFindNotFound.Type = MessageBoxType.Warning
+        Me._MBTextToFindNotFound.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.Warning
         '
         '_MBFoundLastRecStartOnFirst
         '
-        Me._MBFoundLastRecStartOnFirst.Buttons = MessageBoxButtons.YesNo
+        Me._MBFoundLastRecStartOnFirst.Buttons = System.Windows.Forms.MessageBoxButtons.YesNo
         Me._MBFoundLastRecStartOnFirst.Caption = "Last Record Found."
         Me._MBFoundLastRecStartOnFirst.Text = "This is already the last matching record! Do you want to start search from the fi" &
     "rst record?"
         '
         '_MBSaveChangesBeforeMoving
         '
-        Me._MBSaveChangesBeforeMoving.Buttons = MessageBoxButtons.YesNoCancel
+        Me._MBSaveChangesBeforeMoving.Buttons = System.Windows.Forms.MessageBoxButtons.YesNoCancel
         Me._MBSaveChangesBeforeMoving.Caption = "Changes Made"
-        Me._MBSaveChangesBeforeMoving.DefaultButton = MessageBoxDefaultButton.Button2
+        Me._MBSaveChangesBeforeMoving.DefaultButton = System.Windows.Forms.MessageBoxDefaultButton.Button2
         Me._MBSaveChangesBeforeMoving.Text = "Changes have been made to this record.  Press [Yes] to save changes before moving" &
     ", press [No] to Abandon changes, or press [Cancel] to continue editing record? S" &
     "ave Changes ?"
@@ -139,7 +142,7 @@ Partial Class BfMain
         '
         Me._MBFirstRecordAlready.Caption = "Warning!"
         Me._MBFirstRecordAlready.Text = "This is already the first record!"
-        Me._MBFirstRecordAlready.Type = MessageBoxType.Warning
+        Me._MBFirstRecordAlready.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.Warning
         '
         '_MBLastRecordAlready
         '
@@ -148,7 +151,7 @@ Partial Class BfMain
         '
         '_MBLastRecordReachedStartFromBeginning
         '
-        Me._MBLastRecordReachedStartFromBeginning.Buttons = MessageBoxButtons.YesNo
+        Me._MBLastRecordReachedStartFromBeginning.Buttons = System.Windows.Forms.MessageBoxButtons.YesNo
         Me._MBLastRecordReachedStartFromBeginning.Caption = "Last Record Found."
         Me._MBLastRecordReachedStartFromBeginning.Text = "This is already the last matching record. Do you want to search again from the st" &
     "art?"
@@ -157,13 +160,13 @@ Partial Class BfMain
         '
         Me._MBDeleteRecordFailed.Caption = "Warning!"
         Me._MBDeleteRecordFailed.Text = "Something went wrong during deleteion. Record not deleted!"
-        Me._MBDeleteRecordFailed.Type = MessageBoxType.[Error]
+        Me._MBDeleteRecordFailed.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MBDeleteRecordAsk
         '
-        Me._MBDeleteRecordAsk.Buttons = MessageBoxButtons.YesNoCancel
+        Me._MBDeleteRecordAsk.Buttons = System.Windows.Forms.MessageBoxButtons.YesNoCancel
         Me._MBDeleteRecordAsk.Caption = "Warning!"
-        Me._MBDeleteRecordAsk.DefaultButton = MessageBoxDefaultButton.Button2
+        Me._MBDeleteRecordAsk.DefaultButton = System.Windows.Forms.MessageBoxDefaultButton.Button2
         Me._MBDeleteRecordAsk.Text = "Are you sure you want to delete this record? "
         '
         '_MBRecordSuccessfullyDeleted
@@ -174,7 +177,7 @@ Partial Class BfMain
         '_MBDependentRecordExists
         '
         Me._MBDependentRecordExists.Text = "Dependent record exists, deletion not allowed!"
-        Me._MBDependentRecordExists.Type = MessageBoxType.[Error]
+        Me._MBDependentRecordExists.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MBNoChangesMadeNothingToSave
         '
@@ -185,7 +188,7 @@ Partial Class BfMain
         Me._MBUniqueConstraintViolated.Caption = "Duplicate Entries."
         Me._MBUniqueConstraintViolated.Text = "A record with the value <{0}> entered in field <{1}> already exists on file. Dupl" &
     "icates not allowed!"
-        Me._MBUniqueConstraintViolated.Type = MessageBoxType.[Error]
+        Me._MBUniqueConstraintViolated.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
         '_MsgRecordNo
         '
@@ -201,14 +204,14 @@ Partial Class BfMain
         '
         'ImageList1
         '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), ImageListStreamer)
-        Me.ImageList1.TransparentColor = Color.Transparent
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageList1.Images.SetKeyName(1, "TreeNode.ico")
         '
         'BfMain
         '
-        Me.ClientSize = New Size(1114, 709)
+        Me.ClientSize = New System.Drawing.Size(1114, 709)
         Me.Name = "BfMain"
         Me.Text = "Base Form"
         Me.ResumeLayout(False)
@@ -238,7 +241,7 @@ Partial Class BfMain
     Friend WithEvents LocalizableContent1 As LocalizableContent
     Friend WithEvents _MBUniqueConstraintViolated As LocalizableMessageBox
     Friend WithEvents BackgroundWorker1 As BackgroundWorker
+    Protected WithEvents StoreCaptions1 As StoreCaptions
     Public WithEvents TranslatorDAC As Dac
     Public WithEvents AppDataDAC As Dac
-    Protected WithEvents StoreCaptions1 As StoreCaptions
 End Class

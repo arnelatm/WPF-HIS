@@ -1,20 +1,20 @@
-﻿
-Imports System.Configuration
+﻿Imports System.Configuration
 Imports System.Security.Cryptography
 Imports System.Text
-Imports AATM.Libraries
 Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer
+Imports AATM.DataLayer
+Imports AATM.Libraries
 Imports AATM.ServicesLayer.Services
-Imports ServicesLayer.Services
+Imports IDaoFactory = AATM.Common.DataLayer.IDaoFactory
 
-Namespace ServiceLayer.ActionServices
+Namespace ServiceLayer.ActionService
 
     Public Class LoginService
-        Inherits ServiceOld
+        Inherits Service
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As IDaoFactoryOld = DaoFactoriesOld.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As IDaoFactory = DataLayer.DaoFactories.GetFactory(Provider)
         Private Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao
         Private Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
 

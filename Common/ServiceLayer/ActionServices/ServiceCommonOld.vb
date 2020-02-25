@@ -1,6 +1,5 @@
 ﻿
 Imports AATM.ServicesLayer.Services
-Imports ServicesLayer.Services
 
 Namespace ServiceLayer.ActionServices
 

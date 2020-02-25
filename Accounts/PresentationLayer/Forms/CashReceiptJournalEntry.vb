@@ -4,10 +4,11 @@ Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.Languages
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class CashReceiptJournalEntry
         Implements ICashReceiptJournalView, IJournalItemsView, ICsrOiItemsView
@@ -285,7 +286,7 @@ Namespace PresentationLayer.Forms
 
         Public Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
             Get
-                Return Convert.ToDecimal(GlobalFunctions.NumParser(Of Decimal)(txtTotalDebits.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebits.Text), _nfi)
             End Get
             Set
                 txtTotalDebits.Text = FormatMoney(Value)
@@ -329,14 +330,14 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
-                    .JournalIdNo = IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = 0,
-                    .Debit = Amount,
-                    .ProfitCenterIdNo = 0,
-                    .Notes = ""
-                    }
+                .JournalIdNo = IdNo,
+                .Sequence = 1,
+                .AccountIdNo = Nothing,
+                .Credit = 0,
+                .Debit = Amount,
+                .ProfitCenterIdNo = 0,
+                .Notes = ""
+            }
             bsJournalItems.Add(item)
             DataGridViewJournalItems.Refresh()
 
@@ -375,7 +376,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-            Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+             Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             If AddMode Then
                 IdNo = passedValue
             End If
@@ -566,27 +567,27 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Amount", txtAmount},
-                {"Applied", txtApplied},
-                {"Cancelled", chkCancelled},
-                {"CheckDate", dtpCheckDate},
-                {"CheckNumber", txtCheckNumber},
-                {"DateCreated", txtDateCreated},
-                {"DiscountAccountIdNo", cboDiscountAccountIdNo},
-                {"DiscountTaken", txtDiscountTaken},
-                {"IdNo", TxtIDNo},
-                {"Notes", txtNotes},
-                {"OrNumber", txtORNumber},
-                {"PayorIdNo", cboPayorIdNo},
-                {"PayorName", txtPayorName},
-                {"PayorType", cboPayorType},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate},
-                {"UnApplied", txtUnapplied}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Amount", txtAmount},
+         {"Applied", txtApplied},
+         {"Cancelled", chkCancelled},
+         {"CheckDate", dtpCheckDate},
+         {"CheckNumber", txtCheckNumber},
+         {"DateCreated", txtDateCreated},
+         {"DiscountAccountIdNo", cboDiscountAccountIdNo},
+         {"DiscountTaken", txtDiscountTaken},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"OrNumber", txtORNumber},
+         {"PayorIdNo", cboPayorIdNo},
+         {"PayorName", txtPayorName},
+         {"PayorType", cboPayorType},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"TransactionDate", dtpTransactionDate},
+         {"UnApplied", txtUnapplied}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -658,7 +659,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub AddCustomerOpenInvoices()
             Dim unpaidInvoices = _csrOiItemsPresenter.GetCustomerOpenInvoices(PayorIdNo)
-            Dim newItem As CsrOiItemModel
             Dim nSeq As Integer
             If AddMode Then
                 bsCsrOiItems.Clear()
@@ -1010,14 +1010,14 @@ Namespace PresentationLayer.Forms
                     If unAppliedSwitch = 0 Then
                         ' advance payment journal entry not yet created
                         Dim jiModel As New JournalItemModel With {
-                                .JournalIdNo = IdNo,
-                                .Sequence = 0,
-                                .AccountIdNo = _advancesToCustomerAccountIdNo,
-                                .Debit = 0,
-                                .Credit = UnApplied,
-                                .ProfitCenterIdNo = 0,
-                                .Notes = ""
-                                }
+                            .JournalIdNo = IdNo,
+                            .Sequence = 0,
+                            .AccountIdNo = _advancesToCustomerAccountIdNo,
+                            .Debit = 0,
+                            .Credit = UnApplied,
+                            .ProfitCenterIdNo = 0,
+                            .Notes = ""
+                            }
                         bsJournalItems.Add(jiModel)
                     End If
                 Else
@@ -1331,4 +1331,5 @@ Namespace PresentationLayer.Forms
         'End Sub
 
     End Class
-End NameSpace
+
+End Namespace

@@ -3,6 +3,7 @@ Imports System.Resources
 Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -450,4 +451,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

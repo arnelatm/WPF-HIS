@@ -1,6 +1,5 @@
 ﻿Imports AATM.LIBRARIES.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
-Imports ServicesLayer.Services
 
 ''' <summary>
 '''     The Model in MVP design pattern.

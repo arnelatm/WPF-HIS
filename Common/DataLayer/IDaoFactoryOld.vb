@@ -15,10 +15,10 @@ Namespace DataLayer
         ReadOnly Property ReligionDao As IReligionDao
         ReadOnly Property RevenueGroupDao As IRevenueGroupDao
 
-        ReadOnly Property UserDao As IUserDao
-        ReadOnly Property LoginDao As ILoginDao
+        'ReadOnly Property UserDao As IUserDao
+        'ReadOnly Property LoginDao As ILoginDao
         ReadOnly Property LogoutDao As ILogoutDao
-        ReadOnly Property SaltDao As ISaltDao
+        'ReadOnly Property SaltDao As ISaltDao
 
         ReadOnly Property PhoneTypeDao As IPhoneTypeDao
         ReadOnly Property SecurityGroupDao As ISecurityGroupDao

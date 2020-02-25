@@ -5,5 +5,7 @@
     Property UserName As String
     Property Password As String
     Property FullName As String
+    Property FullNameAra As String
+    Property SecurityLevel As Int16
     Property SecurityGroupIdNo As Integer
 End Interface
