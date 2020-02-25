@@ -1,10 +1,13 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms
+Imports AATM.Accounts.My.Resources
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class PurchaseItemEntry
         Implements IPurchaseItemView
@@ -228,26 +231,26 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"IdNo", TxtIDNo},
-                {"PurchaseItemCode", txtPurchaseItemCode},
-                {"PurchaseItemName", txtPurchaseItemName},
-                {"PurchaseItemNameAra", txtPurchaseItemNameAra},
-                {"CategoryIdNo", cboCategoryIdNo},
-                {"GlAccountIdNo", cboGlAccountIdNo},
-                {"VatAccountIdNo", cboVatAccountIdNo},
-                {"Unit1", txtUnit1},
-                {"Unit2", txtUnit2},
-                {"Unit3", txtUnit3},
-                {"Unit1Ara", txtUnit1Ara},
-                {"Unit2Ara", txtUnit2},
-                {"Unit3Ara", txtUnit3},
-                {"StdPrice1", txtStdPrice1},
-                {"StdPrice2", txtStdPrice2},
-                {"StdPrice3", txtStdPrice3},
-                {"Active", chkActive},
-                {"DateCreated", txtDateCreated}
-                }
+        {
+         {"IdNo", TxtIDNo},
+         {"PurchaseItemCode", txtPurchaseItemCode},
+         {"PurchaseItemName", txtPurchaseItemName},
+         {"PurchaseItemNameAra", txtPurchaseItemNameAra},
+         {"CategoryIdNo", cboCategoryIdNo},
+         {"GlAccountIdNo", cboGlAccountIdNo},
+         {"VatAccountIdNo", cboVatAccountIdNo},
+         {"Unit1", txtUnit1},
+         {"Unit2", txtUnit2},
+         {"Unit3", txtUnit3},
+         {"Unit1Ara", txtUnit1Ara},
+         {"Unit2Ara", txtUnit2},
+         {"Unit3Ara", txtUnit3},
+         {"StdPrice1", txtStdPrice1},
+         {"StdPrice2", txtStdPrice2},
+         {"StdPrice3", txtStdPrice3},
+         {"Active", chkActive},
+         {"DateCreated", txtDateCreated}
+        }
         End Sub
 
         Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
@@ -267,4 +270,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

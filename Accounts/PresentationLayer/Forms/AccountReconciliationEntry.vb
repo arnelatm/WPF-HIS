@@ -1,15 +1,16 @@
 ﻿Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries.CustomControlsLibrary
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 Imports CrystalDecisions.CrystalReports.Engine
 
 Namespace PresentationLayer.Forms
-
 
     Public Class AccountReconciliationEntry
         Implements IAccountReconciliationView, IAccountReconciliationItemsView
@@ -151,7 +152,7 @@ Namespace PresentationLayer.Forms
 
         Public Property TotalDebitsNotCleared As Decimal Implements IAccountReconciliationView.TotalDebitsNotCleared
             Get
-                Return Convert.ToDecimal(GlobalFunctions.NumParser(Of Decimal)(txtTotalDebitsNotCleared.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebitsNotCleared.Text), _nfi)
             End Get
             Set
                 txtTotalDebitsNotCleared.Text = FormatMoney(Value)
@@ -290,12 +291,12 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Balance", txtBalance},
-                {"IdNo", TxtIDNo},
-                {"ReconciliationDate", dtpReconciliationDate}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Balance", txtBalance},
+         {"IdNo", TxtIDNo},
+         {"ReconciliationDate", dtpReconciliationDate}
+        }
         End Sub
 
         'Protected Overrides Function DataIsValid() As Boolean
@@ -808,4 +809,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

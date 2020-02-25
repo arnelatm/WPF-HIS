@@ -1,4 +1,6 @@
-﻿Namespace AdoNet
+﻿
+
+Namespace AdoNet
     ' Data access object factory
     ' ** Factory Pattern
 
@@ -29,5 +31,24 @@
                 Return New SecurityDao()
             End Get
         End Property
+
+        Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactory.LoginDao
+            Get
+                Return New LoginDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactory.SaltDao
+            Get
+                Return New SaltDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property UserDao As IUserDao Implements IDaoFactory.UserDao
+            Get
+                Return New UserDao()
+            End Get
+        End Property
+
     End Class
 End Namespace

@@ -1,4 +1,4 @@
-﻿
+﻿Imports AATM.PresentationLayer.Models
 
 ''' represents view of a list of Users
 Public Interface IUsersView

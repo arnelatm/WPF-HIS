@@ -64,7 +64,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoginView.vb" />
     <Compile Include="IMainView.vb" />
+    <Compile Include="ISaltView.vb" />
+    <Compile Include="IUsersView.vb" />
+    <Compile Include="IUserView.vb" />
     <Compile Include="IViewNew.vb" />
     <Compile Include="IView.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

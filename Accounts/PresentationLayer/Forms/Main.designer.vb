@@ -1,7 +1,10 @@
 ﻿Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
     Partial Public Class Main
+        Inherits BfMain
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -133,12 +136,12 @@ Namespace PresentationLayer.Forms
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
             Me.PettyCashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit
-            Me.ToolStrip.SuspendLayout
-            Me.MainMenu.SuspendLayout
-            Me.contextMenuStripMember.SuspendLayout
-            Me.contextMenuStrip1.SuspendLayout
-            Me.SuspendLayout
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.ToolStrip.SuspendLayout()
+            Me.MainMenu.SuspendLayout()
+            Me.contextMenuStripMember.SuspendLayout()
+            Me.contextMenuStrip1.SuspendLayout()
+            Me.SuspendLayout()
             '
             'imageListMember
             '
@@ -702,24 +705,24 @@ Namespace PresentationLayer.Forms
             '
             'Main
             '
-            Me.AllowDrop = true
+            Me.AllowDrop = True
             resources.ApplyResources(Me, "$this")
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.MainMenu)
-            Me.IsMdiContainer = true
+            Me.IsMdiContainer = True
             Me.Name = "Main"
             Me.SecurityPresenterObj = SecurityPresenter1
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit
-            Me.ToolStrip.ResumeLayout(false)
-            Me.ToolStrip.PerformLayout
-            Me.MainMenu.ResumeLayout(false)
-            Me.MainMenu.PerformLayout
-            Me.contextMenuStripMember.ResumeLayout(false)
-            Me.contextMenuStrip1.ResumeLayout(false)
-            Me.ResumeLayout(false)
-            Me.PerformLayout
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ToolStrip.ResumeLayout(False)
+            Me.ToolStrip.PerformLayout()
+            Me.MainMenu.ResumeLayout(False)
+            Me.MainMenu.PerformLayout()
+            Me.contextMenuStripMember.ResumeLayout(False)
+            Me.contextMenuStrip1.ResumeLayout(False)
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
         End Sub
 

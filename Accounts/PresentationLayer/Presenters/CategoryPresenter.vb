@@ -40,7 +40,7 @@ Namespace PresentationLayer.Presenters
             Return CategoryChangesMade
         End Function
 
-        Public Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
             Dim modelData As CategoryModel
             modelData = Model.GetRecordById(Of CategoryModel)(idNo)
             If modelData IsNot Nothing Then

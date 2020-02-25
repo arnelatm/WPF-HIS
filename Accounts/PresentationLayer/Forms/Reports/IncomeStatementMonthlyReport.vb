@@ -1,7 +1,6 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Languages
-Imports AATM.Libraries.GlobalFuncNSub.GlobalFunctions
 Imports AATM.Libraries.Languages
+Imports AATM.Libraries.GlobalFuncNSub.GlobalFunctions
 
 Namespace PresentationLayer.Forms.Reports
 

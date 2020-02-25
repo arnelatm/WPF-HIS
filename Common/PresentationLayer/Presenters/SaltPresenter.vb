@@ -1,13 +1,11 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+﻿Imports AATM.BusinessLayer.BusinessLayer
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class SaltPresenter
-        Inherits CommonPresenterOld(Of ISaltView, Salt, SaltModel)
+        Inherits Presenter(Of ISaltView, Salt, SaltModel)
 
         Public Sub New(ByRef view As ISaltView)
             MyBase.New(view)

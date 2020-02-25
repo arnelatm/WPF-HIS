@@ -1,6 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Common
-Imports AATM.PresentationLayer.Models
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -47,11 +45,11 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of Purchase Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Function IsInputVatAccount(ByVal accountIdNo As Integer)
+        Public Overloads Function IsInputVatAccount(ByVal accountIdNo As Integer)
             If Model.CountRecordWith2Key(accountIdNo, "VI", "AccountTypes", "AccountIdNo", "AccountTypes") > 0 Then
                 Return True
             End If

@@ -43,7 +43,7 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("AATM.HIS.Accounts.AccountStrings", GetType(AccountStrings).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("AATM.Accounts.AccountStrings", GetType(AccountStrings).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan

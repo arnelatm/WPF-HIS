@@ -5,16 +5,16 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class GeneralJournalEntry
         Implements IGeneralJournalView, IJournalItemsView
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _journalItemsPresenter As Presenters.GeneralJournalItemsPresenter
+        Private ReadOnly _journalItemsPresenter As GeneralJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _journalItems As List(Of JournalItemModel)
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Forms
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New GeneralJournalPresenter(Me)
 
-            _journalItemsPresenter = New Presenters.GeneralJournalItemsPresenter(Me)
+            _journalItemsPresenter = New GeneralJournalItemsPresenter(Me)
 
             PresenterObj.JournalItemsPresenter = _journalItemsPresenter
 
@@ -243,15 +243,15 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"Cancelled", chkCancelled},
-                {"DateCreated", txtDateCreated},
-                {"IdNo", TxtIDNo},
-                {"Notes", txtNotes},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate}
-                }
+        {
+         {"Cancelled", chkCancelled},
+         {"DateCreated", txtDateCreated},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"TransactionDate", dtpTransactionDate}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -359,7 +359,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewJournalItems.CellEndEdit
+                    Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     'Case $"dgvaccountidno"
@@ -492,8 +492,7 @@ Namespace PresentationLayer.Forms
         '    Handles DataGridViewJournalItems.UserDeletingRow
 
         'End Sub
+
     End Class
 
-    Friend Class GeneralJournalItemsPresenter
-    End Class
-End NameSpace
+End Namespace

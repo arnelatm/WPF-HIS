@@ -1,9 +1,11 @@
 ﻿Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
-
 
     Public Class EmployeeEntryTv
         Implements IEmployeeView
@@ -362,40 +364,40 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"Active", chkActive},
-                {"ArAccountIdNo", cacArAccountIdNo},
-                {"Balance", txtBalance},
-                {"BankAccountNo", txtBankAccountNo},
-                {"BankIdNo", cacBankIdNo},
-                {"BirthDate", dtpBirthDate},
-                {"CountryCode", cacCountryCode},
-                {"DepartmentIdNo", cacDepartmentIdNo},
-                {"DesignationIdNo", cacDesignationIdNo},
-                {"District", txtDistrict},
-                {"Email", txtEmail},
-                {"EmployeeCode", txtEmployeeCode},
-                {"EmployeeName", txtEmployeeName},
-                {"EmployeeNameAra", txtEmployeeNameAra},
-                {"Gender", cacGender},
-                {"HiredDate", dtpHiredDate},
-                {"Iban", txtIban},
-                {"MaritalStatus", cacMaritalStatus},
-                {"NationalIdNo", txtNationalIdNo},
-                {"NationalityCode", cacNationalityCode},
-                {"Notes", txtNotes},
-                {"OpeningBalance", txtOpeningBalance},
-                {"Phone1", txtPhone1},
-                {"Phone2", txtPhone2},
-                {"PoBox", txtPoBox},
-                {"ProvinceState", txtProvinceState},
-                {"ReleasedDate", dtpReleasedDate},
-                {"ReligionIdNo", cacReligionIdNo},
-                {"Street", txtStreet},
-                {"TownCity", txtTownCity},
-                {"ZipCode", txtZipCode},
-                {"IdNo", TxtIDNo}
-                }
+        {
+         {"Active", chkActive},
+         {"ArAccountIdNo", cacArAccountIdNo},
+         {"Balance", txtBalance},
+         {"BankAccountNo", txtBankAccountNo},
+         {"BankIdNo", cacBankIdNo},
+         {"BirthDate", dtpBirthDate},
+         {"CountryCode", cacCountryCode},
+         {"DepartmentIdNo", cacDepartmentIdNo},
+         {"DesignationIdNo", cacDesignationIdNo},
+         {"District", txtDistrict},
+         {"Email", txtEmail},
+         {"EmployeeCode", txtEmployeeCode},
+         {"EmployeeName", txtEmployeeName},
+         {"EmployeeNameAra", txtEmployeeNameAra},
+         {"Gender", cacGender},
+         {"HiredDate", dtpHiredDate},
+         {"Iban", txtIban},
+         {"MaritalStatus", cacMaritalStatus},
+         {"NationalIdNo", txtNationalIdNo},
+         {"NationalityCode", cacNationalityCode},
+         {"Notes", txtNotes},
+         {"OpeningBalance", txtOpeningBalance},
+         {"Phone1", txtPhone1},
+         {"Phone2", txtPhone2},
+         {"PoBox", txtPoBox},
+         {"ProvinceState", txtProvinceState},
+         {"ReleasedDate", dtpReleasedDate},
+         {"ReligionIdNo", cacReligionIdNo},
+         {"Street", txtStreet},
+         {"TownCity", txtTownCity},
+         {"ZipCode", txtZipCode},
+        {"IdNo", TxtIDNo}
+        }
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -413,4 +415,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

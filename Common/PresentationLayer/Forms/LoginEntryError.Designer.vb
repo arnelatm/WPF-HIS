@@ -38,7 +38,6 @@ Namespace PresentationLayer.Forms
             '
             'PictureBox1
             '
-            Me.PictureBox1.Image = Global.AATM.HIS.Common.My.Resources.Resources.Capture
             Me.PictureBox1.Location = New System.Drawing.Point(13, 12)
             Me.PictureBox1.Name = "PictureBox1"
             Me.PictureBox1.Size = New System.Drawing.Size(348, 165)

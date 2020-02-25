@@ -5,9 +5,9 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class CheckDisbursementJournalEntry
         Implements IChequeDisbursementJournalView, IJournalItemsView, ICkdOiItemsView
@@ -348,14 +348,14 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
-                    .JournalIdNo = IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = Amount,
-                    .Debit = 0,
-                    .ProfitCenterIdNo = 0,
-                    .Notes = ""
-                    }
+                .JournalIdNo = IdNo,
+                .Sequence = 1,
+                .AccountIdNo = Nothing,
+                .Credit = Amount,
+                .Debit = 0,
+                .ProfitCenterIdNo = 0,
+                .Notes = ""
+            }
             bsJournalItems.Add(item)
             DataGridViewJournalItems.Refresh()
 
@@ -584,29 +584,29 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Amount", txtAmount},
-                {"Applied", txtApplied},
-                {"Cancelled", chkCancelled},
-                {"CheckDate", dtpCheckDate},
-                {"CheckNumber", txtCheckNumber},
-                {"DateCreated", txtDateCreated},
-                {"DiscountAccountIdNo", cboDiscountAccountIdNo},
-                {"DiscountTaken", txtDiscountTaken},
-                {"IdNo", TxtIDNo},
-                {"Notes", txtNotes},
-                {"OrNumber", txtORNumber},
-                {"PaymentType", cboPaymentType},
-                {"PayeeIdNo", cboPayeeIdNo},
-                {"PayeeName", txtPayeeName},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate},
-                {"UnApplied", txtUnapplied},
-                {"VatAmount", txtVatAmount},
-                {"VatNumber", txtVatNumber}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Amount", txtAmount},
+         {"Applied", txtApplied},
+         {"Cancelled", chkCancelled},
+         {"CheckDate", dtpCheckDate},
+         {"CheckNumber", txtCheckNumber},
+         {"DateCreated", txtDateCreated},
+         {"DiscountAccountIdNo", cboDiscountAccountIdNo},
+         {"DiscountTaken", txtDiscountTaken},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"OrNumber", txtORNumber},
+         {"PaymentType", cboPaymentType},
+         {"PayeeIdNo", cboPayeeIdNo},
+         {"PayeeName", txtPayeeName},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"TransactionDate", dtpTransactionDate},
+         {"UnApplied", txtUnapplied},
+         {"VatAmount", txtVatAmount},
+         {"VatNumber", txtVatNumber}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -677,7 +677,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub AddSupplierOpenInvoices()
             Dim unpaidInvoices = _ckdOiItemsPresenter.GetSupplierOpenInvoices(PayeeIdNo)
-            Dim newItem As CkdOiItemModel
             Dim nSeq As Integer
             If AddMode Then
                 bsCkdOiItems.Clear()
@@ -1042,14 +1041,14 @@ Namespace PresentationLayer.Forms
                     If unAppliedSwitch = 0 Then
                         ' advance payment journal entry not yet created
                         Dim jiModel As New JournalItemModel With {
-                                .JournalIdNo = IdNo,
-                                .Sequence = 0,
-                                .AccountIdNo = _advancesToSupplierAccountIdNo,
-                                .Credit = 0,
-                                .Debit = UnApplied,
-                                .ProfitCenterIdNo = 0,
-                                .Notes = ""
-                                }
+                            .JournalIdNo = IdNo,
+                            .Sequence = 0,
+                            .AccountIdNo = _advancesToSupplierAccountIdNo,
+                            .Credit = 0,
+                            .Debit = UnApplied,
+                            .ProfitCenterIdNo = 0,
+                            .Notes = ""
+                            }
                         bsJournalItems.Add(jiModel)
                     End If
                 Else
@@ -1399,4 +1398,5 @@ Namespace PresentationLayer.Forms
         'End Sub
 
     End Class
+
 End Namespace

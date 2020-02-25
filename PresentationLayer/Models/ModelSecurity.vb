@@ -1,6 +1,4 @@
 ﻿Imports AATM.ServicesLayer.Services
-Imports ServicesLayer.Services
-
 ''' <summary>
 '''     The Model in MVP design pattern.
 '''     Implements IModel and communicates with WCF Service.

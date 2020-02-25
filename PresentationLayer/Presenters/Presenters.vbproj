@@ -69,6 +69,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginPresenter.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -88,6 +89,8 @@
     <Compile Include="PresenterOld.vb" />
     <Compile Include="PresenterNew.vb" />
     <Compile Include="SecurityPresenter.vb" />
+    <Compile Include="UserPresenter.vb" />
+    <Compile Include="UsersPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -113,6 +116,10 @@
       <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.vbproj">
+      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
       <Name>GlobalFuncNSub</Name>
@@ -124,6 +131,10 @@
     <ProjectReference Include="..\..\Libraries\Languages\Languages.vbproj">
       <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
       <Name>Languages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
+      <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
+      <Name>ServicesLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.vbproj">
       <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>

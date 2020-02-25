@@ -5,9 +5,9 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class CashDisbursementJournalEntry
         Implements ICashDisbursementJournalView, IJournalItemsView, ICadOiItemsView
@@ -283,7 +283,7 @@ Namespace PresentationLayer.Forms
 
         Public Property UnApplied As Decimal Implements ICashDisbursementJournalView.UnApplied
             Get
-                Return Convert.ToDecimal(GlobalFunctions.NumParser(Of Decimal)(txtUnapplied.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnapplied.Text), _nfi)
             End Get
             Set
                 txtUnapplied.Text = FormatMoney(Value)
@@ -323,14 +323,14 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
-                    .JournalIdNo = IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = Amount,
-                    .Debit = 0,
-                    .ProfitCenterIdNo = 0,
-                    .Notes = ""
-                    }
+                .JournalIdNo = IdNo,
+                .Sequence = 1,
+                .AccountIdNo = Nothing,
+                .Credit = Amount,
+                .Debit = 0,
+                .ProfitCenterIdNo = 0,
+                .Notes = ""
+            }
             bsJournalItems.Add(item)
             DataGridViewJournalItems.Refresh()
 
@@ -559,27 +559,27 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Amount", txtAmount},
-                {"Applied", txtApplied},
-                {"Cancelled", chkCancelled},
-                {"DateCreated", txtDateCreated},
-                {"DiscountAccountIdNo", cboDiscountAccountIdNo},
-                {"DiscountTaken", txtDiscountTaken},
-                {"IdNo", TxtIDNo},
-                {"Notes", txtNotes},
-                {"OrNumber", txtORNumber},
-                {"PaymentType", cboPaymentType},
-                {"PayeeIdNo", cboPayeeIdNo},
-                {"PayeeName", txtPayeeName},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate},
-                {"UnApplied", txtUnapplied},
-                {"VatAmount", txtVatAmount},
-                {"VatNumber", txtVatNumber}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Amount", txtAmount},
+         {"Applied", txtApplied},
+         {"Cancelled", chkCancelled},
+         {"DateCreated", txtDateCreated},
+         {"DiscountAccountIdNo", cboDiscountAccountIdNo},
+         {"DiscountTaken", txtDiscountTaken},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"OrNumber", txtORNumber},
+         {"PaymentType", cboPaymentType},
+         {"PayeeIdNo", cboPayeeIdNo},
+         {"PayeeName", txtPayeeName},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"TransactionDate", dtpTransactionDate},
+         {"UnApplied", txtUnapplied},
+         {"VatAmount", txtVatAmount},
+         {"VatNumber", txtVatNumber}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -1017,14 +1017,14 @@ Namespace PresentationLayer.Forms
                     If unAppliedSwitch = 0 Then
                         ' advance payment journal entry not yet created
                         Dim jiModel As New JournalItemModel With {
-                                .JournalIdNo = IdNo,
-                                .Sequence = 0,
-                                .AccountIdNo = _advancesToSupplierAccountIdNo,
-                                .Credit = 0,
-                                .Debit = UnApplied,
-                                .ProfitCenterIdNo = 0,
-                                .Notes = ""
-                                }
+                            .JournalIdNo = IdNo,
+                            .Sequence = 0,
+                            .AccountIdNo = _advancesToSupplierAccountIdNo,
+                            .Credit = 0,
+                            .Debit = UnApplied,
+                            .ProfitCenterIdNo = 0,
+                            .Notes = ""
+                            }
                         bsJournalItems.Add(jiModel)
                     End If
                 Else
@@ -1324,7 +1324,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub UserDeletingRow(ByVal sender As Object,
                                     ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow _
-            
+
             ' Check if the starting balance row is included in the selected rows
             Dim cashDisbursementRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
 
@@ -1381,4 +1381,5 @@ Namespace PresentationLayer.Forms
         'End Sub
 
     End Class
-End NameSpace
+
+End Namespace

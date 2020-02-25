@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class AccountsPresenter(Of T As IView, TBiz As BusinessObject, TM As New)
-        Inherits CommonPresenter(Of T, TBiz, TM)
+        Inherits CommonPresenter(Of T, BusinessObject, TM)
 
         Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
         Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice

@@ -1,17 +1,14 @@
-﻿Imports AATM.HIS.Accounts.My.Resources
-Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.BaseFormsLibrary
 
 Namespace PresentationLayer.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class AccountReconciliationEntry
         Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -25,7 +22,7 @@ Namespace PresentationLayer.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountReconciliationEntry))
@@ -105,18 +102,18 @@ Namespace PresentationLayer.Forms
             Me.dgvAccountReconciliationIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvAccountIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsAccountReconciliationItems = New System.Windows.Forms.BindingSource(Me.components)
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit
-            Me.floHeader.SuspendLayout
-            Me.CFlowLayout1.SuspendLayout
-            Me.CFlowLayout3.SuspendLayout
-            Me.CFlowLayout2.SuspendLayout
-            Me.CFlowLayout5.SuspendLayout
-            Me.CFlowLayout6.SuspendLayout
-            CType(Me.CsrOiItemModelBindingSource, System.ComponentModel.ISupportInitialize).BeginInit
-            Me.CFlowLayout4.SuspendLayout
-            CType(Me.DataGridViewReconciliationItems, System.ComponentModel.ISupportInitialize).BeginInit
-            CType(Me.bsAccountReconciliationItems, System.ComponentModel.ISupportInitialize).BeginInit
-            Me.SuspendLayout
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floHeader.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
+            Me.CFlowLayout2.SuspendLayout()
+            Me.CFlowLayout5.SuspendLayout()
+            Me.CFlowLayout6.SuspendLayout()
+            CType(Me.CsrOiItemModelBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout4.SuspendLayout()
+            CType(Me.DataGridViewReconciliationItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsAccountReconciliationItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SuspendLayout()
             '
             'floHeader
             '
@@ -548,7 +545,7 @@ Namespace PresentationLayer.Forms
             'btnPrint
             '
             CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer)), System.Drawing.Color.White}
-            CBlendItems1.iPoint = New Single() {0!, 1.006211!, 1!}
+            CBlendItems1.iPoint = New Single() {0!, 1.006211!, 1.0!}
             Me.btnPrint.ColorFillBlend = CBlendItems1
             Me.btnPrint.DesignerSelected = True
             Me.btnPrint.DisplayOnly = True
@@ -561,7 +558,7 @@ Namespace PresentationLayer.Forms
             'btnPost
             '
             CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer)), System.Drawing.Color.White}
-            CBlendItems2.iPoint = New Single() {0!, 1.006211!, 1!}
+            CBlendItems2.iPoint = New Single() {0!, 1.006211!, 1.0!}
             Me.btnPost.ColorFillBlend = CBlendItems2
             Me.btnPost.DesignerSelected = False
             Me.btnPost.DisplayOnly = True
@@ -726,7 +723,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.Font = New System.Drawing.Font("Tahoma", 8!)
+            DataGridViewCellStyle11.Font = New System.Drawing.Font("Tahoma", 8.0!)
             DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -848,7 +845,7 @@ Namespace PresentationLayer.Forms
             Me.dgvPayDescription.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvPayDescription.DisplayOnly = True
             Me.dgvPayDescription.EditingMode = False
-            Me.dgvPayDescription.FillWeight = 10!
+            Me.dgvPayDescription.FillWeight = 10.0!
             resources.ApplyResources(Me.dgvPayDescription, "dgvPayDescription")
             Me.dgvPayDescription.Name = "dgvPayDescription"
             Me.dgvPayDescription.ReadOnly = True
@@ -877,23 +874,23 @@ Namespace PresentationLayer.Forms
             Me.Name = "AccountReconciliationEntry"
             Me.SecurityPresenterObj = SecurityPresenter1
             Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floHeader.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
-            Me.CFlowLayout1.PerformLayout
+            Me.CFlowLayout1.PerformLayout()
             Me.CFlowLayout3.ResumeLayout(False)
             Me.CFlowLayout2.ResumeLayout(False)
-            Me.CFlowLayout2.PerformLayout
+            Me.CFlowLayout2.PerformLayout()
             Me.CFlowLayout5.ResumeLayout(False)
-            Me.CFlowLayout5.PerformLayout
+            Me.CFlowLayout5.PerformLayout()
             Me.CFlowLayout6.ResumeLayout(False)
-            Me.CFlowLayout6.PerformLayout
-            CType(Me.CsrOiItemModelBindingSource, System.ComponentModel.ISupportInitialize).EndInit
+            Me.CFlowLayout6.PerformLayout()
+            CType(Me.CsrOiItemModelBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout4.ResumeLayout(False)
-            CType(Me.DataGridViewReconciliationItems, System.ComponentModel.ISupportInitialize).EndInit
-            CType(Me.bsAccountReconciliationItems, System.ComponentModel.ISupportInitialize).EndInit
+            CType(Me.DataGridViewReconciliationItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsAccountReconciliationItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
         End Sub
 
@@ -960,4 +957,4 @@ Namespace PresentationLayer.Forms
         Friend WithEvents btnPrint As CButton
         Friend WithEvents btnPost As CButton
     End Class
-End Namespace
+End NameSpace

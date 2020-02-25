@@ -1,5 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.BusinessLayer.BusinessRules
+
 Namespace BusinessLayer
 
     Public Class DistributionScheme
@@ -20,4 +22,4 @@ Namespace BusinessLayer
         Public Property Notes As String
         Public Property DistributionSchemeItems As List(Of DistributionSchemeItem)
     End Class
-End NameSpace
+End Namespace

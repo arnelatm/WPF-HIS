@@ -1,7 +1,9 @@
-﻿Namespace PresentationLayer.Forms
+﻿Imports AATM.PresentationLayer.Forms
+
+Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class EmployeeEntryTv
-        Inherits AATM.PresentationLayer.Forms.CFormEntryTv
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

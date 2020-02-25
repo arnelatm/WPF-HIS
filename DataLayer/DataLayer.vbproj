@@ -78,6 +78,8 @@
     <Compile Include="AdoNet\DB.vb" />
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="AdoNet\Extensions.vb" />
+    <Compile Include="AdoNet\LoginDao.vb" />
+    <Compile Include="AdoNet\SaltDao.vb" />
     <Compile Include="AdoNet\SecurityDao.vb" />
     <Compile Include="AdoNet\UserDao.vb" />
     <Compile Include="DaoFactories.vb" />
@@ -87,6 +89,8 @@
     <Compile Include="IDaoFactoryOld.vb" />
     <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />
+    <Compile Include="ILoginDao.vb" />
+    <Compile Include="ISaltDao.vb" />
     <Compile Include="ISecurityDao.vb" />
     <Compile Include="ITblColPropDao.vb" />
     <Compile Include="IUserDao.vb" />

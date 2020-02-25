@@ -1,32 +1,32 @@
-﻿Imports AATM.Businesslayer
+﻿Imports AATM.BusinessLayer
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer.AdoNet
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
+
 
 Public Class UserPresenter
-    Inherits Presenter(Of IUserView)
+    Inherits Presenter(Of IUserView, User, UserModel)
 
-    Public Sub New(ByRef view As IUserView)
+    Public ParentViewList As List(Of UserModel)
+
+    Public Sub New(view As IUserView)
         MyBase.New(view)
         TableName = "User"
         SortOrderKey = "FullName"
-        OriginalModel = New UserModel
+        TreeViewMainField = "FullName"
+        TreeViewSecondaryField = "UserName"
+        OriginalModel = New UserModel()
         BizObject = New User
+        DataModel = New UserModel
         DbDataDao = New UserDao
+        TreeViewList = New List(Of UserModel)
+        ParentViewList = New List(Of UserModel)
+        Model.SetService(New UserService)
     End Sub
 
-    Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
-        Return Model.EncryptPassword(userLoginIdNo, password)
-    End Function
-
-    Public Function GetSaltByLoginId(userLoginIdNo As Integer) As SaltModel
-        Return Model.GetSaltByLoginIdNo(userLoginIdNo)
-    End Function
-
-    Public Function AddSalt(userLoginIdNo As Integer, password As String) As Integer
-        Dim ePassword As String
-        Dim salt As New SaltModel
-        Dim saltString As String
-        salt.Salt = Model.CreateNewSaltString(18)
-        salt.LoginIdNo = userLoginIdNo
-        Return Model.AddSalt(salt)
-    End Function
+    'Public Function GetUserList()
+    '    Return GetTreeViewList("UserName")
+    'End Function
 End Class

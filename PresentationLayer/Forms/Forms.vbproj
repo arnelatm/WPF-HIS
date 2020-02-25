@@ -167,6 +167,12 @@
     <Compile Include="HijriCalendarForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LoginEntry.Designer.vb">
+      <DependentUpon>LoginEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LoginEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MyMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -241,6 +247,9 @@
     <EmbeddedResource Include="HijriCalendarForm.resx">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginEntry.resx">
+      <DependentUpon>LoginEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -274,6 +283,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\BaseControlslibrary\BaseControlsLibrary.vbproj">
       <Project>{0e2c8945-f992-4cfc-bc92-cfa742fec933}</Project>
       <Name>BaseControlsLibrary</Name>
@@ -317,6 +330,10 @@
     <ProjectReference Include="..\..\Libraries\Translations\Translations.vbproj">
       <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
       <Name>Translations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.vbproj">
+      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

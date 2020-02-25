@@ -6,9 +6,9 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class SalesJournalEntry
         Implements ISalesJournalView, IJournalItemsView, ISalesCashItemsView
@@ -254,7 +254,7 @@ Namespace PresentationLayer.Forms
 #End Region
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If GlobalFunctions.IsEmpty(ReferenceNo) Then
+            If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If AddMode Then
@@ -268,8 +268,8 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New SalesCashItem With {
-                    .Sequence = 1
-                    }
+                .Sequence = 1
+            }
             bsSalesCashItems.Clear()
             DataGridViewSalesCashItems.Refresh()
             TotalBankCharges = 0
@@ -373,22 +373,22 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Cancelled", chkCancelled},
-                {"DateCreated", txtDateCreated},
-                {"IdNo", TxtIDNo},
-                {"Notes", txtNotes},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"TotalBankCharges", txtTotalBankCharges},
-                {"TotalBankChargesVat", txtTotalBankChargesVat},
-                {"TotalDeposits", txtTotalDeposits},
-                {"TotalCredit", txtTotalCredits},
-                {"TotalDebit", txtTotalDebits},
-                {"TotalSalesAmount", txtTotalSales},
-                {"TransactionDate", dtpTransactionDate}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Cancelled", chkCancelled},
+         {"DateCreated", txtDateCreated},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"TotalBankCharges", txtTotalBankCharges},
+         {"TotalBankChargesVat", txtTotalBankChargesVat},
+         {"TotalDeposits", txtTotalDeposits},
+         {"TotalCredit", txtTotalCredits},
+         {"TotalDebit", txtTotalDebits},
+         {"TotalSalesAmount", txtTotalSales},
+         {"TransactionDate", dtpTransactionDate}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -553,7 +553,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                          pAccountIdNo As Integer, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
+                                          pAccountIdNo As Integer, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String) 
             If debitAmount <> 0 Or creditAmount <> 0 Then
                 counter = counter + 1
                 If counter <= oldJournalItems.Count() Then
@@ -575,7 +575,7 @@ Namespace PresentationLayer.Forms
                     bsJournalItems.Add(ji)
                 End If
             End If
-        End sUB
+        End Sub
 
         Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
             If Not DataGridViewSalesCashItems.DataBindings Is Nothing Then
@@ -696,4 +696,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
+
 End Namespace

@@ -1,4 +1,4 @@
-﻿Imports AATM.HIS.Accounts.My.Resources
+﻿Imports AATM.Accounts.My.Resources
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms

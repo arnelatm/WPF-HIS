@@ -1,13 +1,14 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class PurchaseJournalEntry
         Implements IPurchaseJournalView, IJournalItemsView
@@ -221,7 +222,7 @@ Namespace PresentationLayer.Forms
 
         Public Property TotalCredits As Decimal Implements IPurchaseJournalView.TotalCredits
             Get
-                Return Convert.ToDecimal(GlobalFunctions.NumParser(Of Decimal)(txtTotalCredits.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCredits.Text), _nfi)
             End Get
             Set
                 txtTotalCredits.Text = FormatMoney(Value)
@@ -300,14 +301,14 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
-                    .JournalIdNo = IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = Amount,
-                    .Debit = 0,
-                    .ProfitCenterIdNo = 0,
-                    .Notes = ""
-                    }
+                .JournalIdNo = IdNo,
+                .Sequence = 1,
+                .AccountIdNo = Nothing,
+                .Credit = Amount,
+                .Debit = 0,
+                .ProfitCenterIdNo = 0,
+                .Notes = ""
+            }
             bsJournalItems.Add(item)
             DataGridViewJournalItems.Refresh()
             ResumeLayout()
@@ -381,19 +382,19 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"IdNo", TxtIDNo},
-                {"TransactionDate", dtpTransactionDate},
-                {"ReferenceNo", txtReferenceNo},
-                {"Amount", txtAmount},
-                {"AccountIdNo", cboAccountIdNo},
-                {"VatNumber", txtVatNumber},
-                {"VatAmount", txtVatAmount},
-                {"Posted", chkPosted},
-                {"Notes", txtNotes},
-                {"Cancelled", chkCancelled},
-                {"DateCreated", txtDateCreated}
-                }
+        {
+         {"IdNo", TxtIDNo},
+         {"TransactionDate", dtpTransactionDate},
+         {"ReferenceNo", txtReferenceNo},
+         {"Amount", txtAmount},
+         {"AccountIdNo", cboAccountIdNo},
+         {"VatNumber", txtVatNumber},
+         {"VatAmount", txtVatAmount},
+         {"Posted", chkPosted},
+         {"Notes", txtNotes},
+         {"Cancelled", chkCancelled},
+         {"DateCreated", txtDateCreated}
+        }
         End Sub
 
         Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
@@ -440,14 +441,14 @@ Namespace PresentationLayer.Forms
             SuspendLayout()
             If JournalItems Is Nothing OrElse JournalItems.Count() > 0 Then
                 Dim item As New JournalItemModel With {
-                        .JournalIdNo = IdNo,
-                        .Sequence = 1,
-                        .AccountIdNo = AccountIdNo,
-                        .Credit = Amount,
-                        .Debit = 0,
-                        .ProfitCenterIdNo = 0,
-                        .Notes = ""
-                        }
+                    .JournalIdNo = IdNo,
+                    .Sequence = 1,
+                    .AccountIdNo = AccountIdNo,
+                    .Credit = Amount,
+                    .Debit = 0,
+                    .ProfitCenterIdNo = 0,
+                    .Notes = ""
+                }
             Else
                 For Each item In JournalItems
                     item.JournalIdNo = IdNo
@@ -712,4 +713,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

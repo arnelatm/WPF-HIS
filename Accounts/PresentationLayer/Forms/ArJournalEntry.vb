@@ -5,9 +5,9 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
-
 
     Public Class ArJournalEntry
         Implements IArJournalView, IJournalItemsView
@@ -248,7 +248,7 @@ Namespace PresentationLayer.Forms
         End Property
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If GlobalFunctions.IsEmpty(ReferenceNo) Then
+            If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If AddMode Then
@@ -262,14 +262,14 @@ Namespace PresentationLayer.Forms
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
-                    .JournalIdNo = IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = Amount,
-                    .Debit = 0,
-                    .ProfitCenterIdNo = 0,
-                    .Notes = ""
-                    }
+                .JournalIdNo = IdNo,
+                .Sequence = 1,
+                .AccountIdNo = Nothing,
+                .Credit = Amount,
+                .Debit = 0,
+                .ProfitCenterIdNo = 0,
+                .Notes = ""
+            }
             bsJournalItems.Add(item)
             DataGridViewJournalItems.Refresh()
             ResumeLayout()
@@ -419,25 +419,25 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Amount", txtAmount},
-                {"Cancelled", chkCancelled},
-                {"CustomerIdNo", cboCustomerIdNo},
-                {"DateCreated", txtDateCreated},
-                {"DueDate", dtpDueDate},
-                {"IdNo", TxtIDNo},
-                {"InvoiceNo", txtInvoiceNo},
-                {"Notes", txtNotes},
-                {"Posted", chkPosted},
-                {"ReferenceNo", txtReferenceNo},
-                {"SettlementDiscount", txtSettlementDiscount},
-                {"SettlementDueDate", dtpSettlementDueDate},
-                {"TotalCredits", txtTotalCredits},
-                {"TotalDebits", txtTotalDebits},
-                {"TransactionDate", dtpTransactionDate},
-                {"TransactionType", cboTransactionType}
-                }
+        {
+         {"AccountIdNo", cboAccountIdNo},
+         {"Amount", txtAmount},
+         {"Cancelled", chkCancelled},
+         {"CustomerIdNo", cboCustomerIdNo},
+         {"DateCreated", txtDateCreated},
+         {"DueDate", dtpDueDate},
+         {"IdNo", TxtIDNo},
+         {"InvoiceNo", txtInvoiceNo},
+         {"Notes", txtNotes},
+         {"Posted", chkPosted},
+         {"ReferenceNo", txtReferenceNo},
+         {"SettlementDiscount", txtSettlementDiscount},
+         {"SettlementDueDate", dtpSettlementDueDate},
+         {"TotalCredits", txtTotalCredits},
+         {"TotalDebits", txtTotalDebits},
+         {"TransactionDate", dtpTransactionDate},
+         {"TransactionType", cboTransactionType}
+        }
         End Sub
 
         Protected Overrides Function DataIsValid() As Boolean
@@ -526,7 +526,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewJournalItems.CellClick
+                            Handles DataGridViewJournalItems.CellClick
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
@@ -754,7 +754,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object,
-                                    ByVal e As DataGridViewRowCancelEventArgs) _
+                                            ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
             ' Check if the starting balance row is included in the selected rows
             Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
@@ -775,4 +775,5 @@ Namespace PresentationLayer.Forms
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

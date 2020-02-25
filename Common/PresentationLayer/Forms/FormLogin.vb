@@ -14,7 +14,6 @@ Imports AATM.PresentationLayer.Views
 '''     password: secret123
 ''' </remarks>
 Partial Public Class FormLogin
-    Inherits Form
     Implements ILoginView
 
     Private ReadOnly _cancelLogin As Boolean

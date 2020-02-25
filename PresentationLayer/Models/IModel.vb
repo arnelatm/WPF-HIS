@@ -92,7 +92,7 @@ Public Interface IModel
 
     Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) As Boolean
 
-    Function Login(userName As String, password As String) As Boolean
+    'Function Login(userName As String, password As String) As Boolean
 
     Function UpdateRecord (Of TBiz)(ByRef modelBiz As TBiz) As Integer
 

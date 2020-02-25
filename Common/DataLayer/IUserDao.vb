@@ -1,4 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace DataLayer
     ' defines methods to access Users.

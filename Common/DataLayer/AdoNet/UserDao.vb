@@ -1,5 +1,6 @@
-﻿Imports AATM.Common.BusinessLayer
+﻿Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer.AdoNet
+Imports AATM.ServicesLayer.Services
 
 Namespace DataLayer.AdoNet
     ' Data access object for User

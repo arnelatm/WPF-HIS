@@ -67,18 +67,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function GetSupplierPaymentDueDays(idNo As String)
-            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
-        End Function
-
-        Public Function GetSupplierSettlementDiscount(idNo As String)
-            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
-        End Function
-
-        Public Function GetSupplierSettlementDueDays(idNo As String)
-            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
-        End Function
-
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             'DataModel = GlobalVariables.Mapper.Map(Of PurchaseJournalModel)(BizObject)
