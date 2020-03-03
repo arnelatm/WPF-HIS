@@ -7,14 +7,14 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class SecurityGroupDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements ISecurityGroupDao
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
+        'Public Sub New()
+        '    DbCommon = Db
+        'End Sub
 
         Public Function GetRecordById(idNo As Integer) As SecurityGroup Implements ISecurityGroupDao.GetRecordById
             Dim sql As String =

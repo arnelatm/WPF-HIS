@@ -5,25 +5,25 @@ Imports AATM.Accounts.DataLayer.AdoNet
 
 Namespace DataLayer
 
-    Public Class DaoFactories
+    Public Class AccountsDaoFactories
         ' gets a provider specific (i.e. database specific) factory
 
         ' ** GoF Design Pattern: Factory
 
-        Public Shared Function GetFactory(dataProvider As String) As IDaoFactory
-            ' return the requested DaoFactory
+        Public Shared Function GetFactory(dataProvider As String) As IAccountsDaoFactory
+            ' return the requested CommonDaoFactory
 
             Select Case dataProvider.ToLower()
                 Case "ado.net"
-                    Dim retVal = New DaoFactory()
+                    Dim retVal = New AccountsDaoFactory()
                     Return retVal
                     'Case "linq2sql"
-                    'Return New Linq2Sql.DaoFactory()
+                    'Return New Linq2Sql.CommonDaoFactory()
                     'Case "entityframework"
-                    'Return New EntityFramework.DaoFactory()
+                    'Return New EntityFramework.CommonDaoFactory()
 
                 Case Else
-                    Return New DaoFactory()
+                    Return New AccountsDaoFactory()
             End Select
         End Function
 

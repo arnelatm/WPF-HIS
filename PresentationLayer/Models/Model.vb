@@ -37,7 +37,11 @@ Public Class Model
     End Function
 
     Public Overridable Function GetBo(ByRef model)
-        Return Nothing
+        Return BizObject
+    End Function
+
+    Public Overridable Function IsValid(ByRef model)
+        Return BizObject.IsValid()
     End Function
 
     Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) _
@@ -52,10 +56,10 @@ Public Class Model
         Return modelObject
     End Function
 
-    Public Function AddRecord(Of TBiz)(ByRef displayModel As TBiz) As Integer _
+    Public Function AddRecord(Of TBiz)(ByRef bizObject As TBiz) As Integer _
         Implements IModel.AddRecord
         Dim newlyAddedRecordIdNo As Integer
-        newlyAddedRecordIdNo = GetDataService().AddRecord(displayModel)
+        newlyAddedRecordIdNo = GetDataService().AddRecord(bizObject)
         Return newlyAddedRecordIdNo
     End Function
 
@@ -79,6 +83,13 @@ Public Class Model
         updateResult = GetDataService().UpdateRecord(modelBiz)
         Return updateResult
     End Function
+
+    'Public Function UpdateRecord(ByRef modelBiz As TBiz) As Integer _
+    '    Implements IModel.UpdateRecord
+    '    Dim updateResult As Integer
+    '    updateResult = GetDataService().UpdateRecord(modelBiz)
+    '    Return updateResult
+    'End Function
 
     Public Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
         As Integer _
@@ -387,4 +398,19 @@ Public Class Model
         Implements IModel.GetSqlValue
         Return Service.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
     End Function
+
+
+    Public Function GetBizObjectErrors()
+        Return BizObject.GetBizObjectErrors()
+    End Function
+
+
+    Public Function GetBizObjectRules()
+        Return BizObject.GetBizObjectRules()
+    End Function
+
+    Public Function IsValid()
+        Return BizObject.IsValid()
+    End Function
+
 End Class

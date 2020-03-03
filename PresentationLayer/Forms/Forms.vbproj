@@ -283,10 +283,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\BaseControlslibrary\BaseControlsLibrary.vbproj">
       <Project>{0e2c8945-f992-4cfc-bc92-cfa742fec933}</Project>
       <Name>BaseControlsLibrary</Name>

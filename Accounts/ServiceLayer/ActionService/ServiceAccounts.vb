@@ -12,7 +12,7 @@ Namespace ServiceLayer.ActionService
         Protected Service As Object
 
         Private Shared Shadows ReadOnly Provider As String = System.Configuration.ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As IAccountsDaoFactory = AccountsDaoFactories.GetFactory(Provider)
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
             Return GetDao().UpdateGlReferenceNumber(model)

@@ -1,18 +1,19 @@
 ﻿Imports System.Configuration
 Imports System.Reflection
+Imports AATM.BusinessLayer
 Imports AATM.DataLayer
 
 Namespace Services
 
-' implementation of IService interface. It can handle different data providers.
+    ' implementation of IService interface. It can handle different data providers.
 
-' ** Facade pattern.
-' ** Repository pattern (Service could be split up in individual Repositories: Product, Category, etc).
+    ' ** Facade pattern.
+    ' ** Repository pattern (Service could be split up in individual Repositories: Product, Category, etc).
 
     Public Class Service
         Implements IService
 
-        Private Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
+        Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Private Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Private Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Private Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
@@ -249,7 +250,23 @@ Namespace Services
         '        End If
         '    End Sub
 
+        Public Function GetBizObjectErrors()
+            'Return GetBO.GetBizObjectErrors()
+            Return Nothing
+        End Function
+
+
+        Public Function GetBizObjectRules()
+            'Return GetBO.GetBizObjectRules()
+            Return Nothing
+        End Function
+
+        'Public Function IsValid()
+        '    Return GetBO.IsValid()
+        '    'Return Nothing
+        'End Function
+
 #End Region
 
     End Class
-End NameSpace
+End Namespace

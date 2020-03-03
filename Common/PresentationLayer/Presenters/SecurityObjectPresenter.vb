@@ -7,7 +7,7 @@ Imports AATM.Common.ServiceLayer.ActionServices
 Namespace PresentationLayer.Presenters
 
     Public Class SecurityObjectPresenter
-        Inherits CommonPresenterOld(Of ISecurityObjectView, SecurityObject, SecurityObjectModel)
+        Inherits CommonPresenter(Of ISecurityObjectView, SecurityObjectModel)
 
         Public Sub New(view As ISecurityObjectView)
             MyBase.New(view)
@@ -16,11 +16,11 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "SecurityObjectName"
             TreeViewSecondaryField = ""
             OriginalModel = New SecurityObjectModel()
-            BizObject = New SecurityObject
+            'BizObject = New SecurityObject
             DataModel = New SecurityObjectModel
-            DbDataDao = New SecurityObjectDao
+            'DbDataDao = New SecurityObjectDao
             TreeViewList = New List(Of SecurityObjectModel)
-            Model.SetService(New SecurityObjectService)
+            'Model.SetService(New SecurityObjectService)
 
         End Sub
 

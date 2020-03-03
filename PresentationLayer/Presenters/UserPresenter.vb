@@ -7,7 +7,7 @@ Imports AATM.ServicesLayer.Services
 
 
 Public Class UserPresenter
-    Inherits Presenter(Of IUserView, User, UserModel)
+    Inherits Presenter(Of IUserView, UserModel)
 
     Public ParentViewList As List(Of UserModel)
 
@@ -18,12 +18,12 @@ Public Class UserPresenter
         TreeViewMainField = "FullName"
         TreeViewSecondaryField = "UserName"
         OriginalModel = New UserModel()
-        BizObject = New User
+        'BizObject = New User
         DataModel = New UserModel
-        DbDataDao = New UserDao
+        'DbDataDao = New UserDao
         TreeViewList = New List(Of UserModel)
         ParentViewList = New List(Of UserModel)
-        Model.SetService(New UserService)
+        'Model.SetService(New UserService)
     End Sub
 
     'Public Function GetUserList()

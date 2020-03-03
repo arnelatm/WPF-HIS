@@ -72,14 +72,12 @@
     <Compile Include="DefaultFieldValueModel.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelDefaultFieldValue.vb" />
-    <Compile Include="IModelOld.vb" />
     <Compile Include="IModelSecurity.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
     <Compile Include="ModelLogin.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
-    <Compile Include="ModelOld.vb" />
     <Compile Include="ModelTblColProp.vb" />
     <Compile Include="ModelSecurity.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.BusinessLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -7,10 +6,10 @@ Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CommonPresenter(Of T As IView, TBiz As BusinessObject, TM As New)
-        Inherits Presenter(Of T, BusinessObject, TM)
+    Public Class CommonPresenter(Of T As IView, TM As New)
+        Inherits Presenter(Of T, TM)
 
-        'Private Shadows Shared Property CommonModel As IModelCommon
+        Private Shared Shadows Property CommonModel As IModelCommon
 
         Shared Sub New()
             CommonModel = New ModelCommon()

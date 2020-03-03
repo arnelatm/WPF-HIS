@@ -4,10 +4,10 @@ Imports AATM.DataLayer
 Namespace Services
 
     Public Class DefaultFieldValueService
-        Inherits ServiceOld
+        Inherits Service
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As IDaoFactoryOld = DaoFactoriesOld.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Private Shared Shadows ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
         Public Sub New()

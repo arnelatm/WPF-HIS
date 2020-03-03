@@ -86,8 +86,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Presenter.vb" />
-    <Compile Include="PresenterOld.vb" />
-    <Compile Include="PresenterNew.vb" />
     <Compile Include="SecurityPresenter.vb" />
     <Compile Include="UserPresenter.vb" />
     <Compile Include="UsersPresenter.vb" />

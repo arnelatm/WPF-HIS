@@ -12,7 +12,7 @@ Imports AATM.LIBRARIES.Languages
 Public Class CFormEntry
     Inherits BfMain
 
-    Public FieldsDictionary As Dictionary(Of String, Object)
+    Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False

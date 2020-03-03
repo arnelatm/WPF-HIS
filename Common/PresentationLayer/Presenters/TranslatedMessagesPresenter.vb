@@ -3,12 +3,14 @@ Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Common.ServiceLayer
 Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class TranslatedMessagesPresenter
-        Inherits CommonPresenterOld(Of ITranslatedMessagesView, TranslatedMessages, TranslatedMessagesModel)
+        Inherits CommonPresenter(Of ITranslatedMessagesView, TranslatedMessagesModel)
 
         Public Property FieldRetrievalMappingDictionary As Dictionary(Of String, String)
         Public Property FieldSavingMappingDictionary As Dictionary(Of String, String)
@@ -20,9 +22,9 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New TranslatedMessagesModel()
-            BizObject = New TranslatedMessages
+            'BizObject = New TranslatedMessages
             DataModel = New TranslatedMessagesModel
-            DbDataDao = New TranslatedMessagesDao
+            'DbDataDao = New TranslatedMessagesDao
             TreeViewList = New List(Of TranslatedMessagesModel)
             Model.SetService(New TranslatedMessagesService)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
@@ -58,20 +60,20 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
             MapObject(View, BizObject, FieldSavingMappingDictionary)
-            If BizObject.IsValid() Then
+            If Model.IsValid() Then
                 If DataIsValid() Then
-                    If addMode Or BizObject.IdNo = 0 Then
+                    If addMode Or Model.IdNo = 0 Then
                         NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(BizObject)
                         retVal = NewlyAddedRecordIdNo
                     Else
 
-                        retVal = Model.UpdateRecord(BizObject)
+                        retVal = Model.UpdateRecord(Model)
 
                     End If
                 End If
             Else
                 Dim errorList As String = ""
-                For Each bizError In BizObject.Errors
+                For Each bizError In Model.Errors
                     errorList = errorList & bizError & Environment.NewLine
                 Next
                 MessageBox.Show(errorList)

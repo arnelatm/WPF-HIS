@@ -11,7 +11,7 @@ Imports AATM.PresentationLayer.Views
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 Public Class LoginPresenter
-    Inherits Presenter(Of ILoginView, Login, LoginModel)
+    Inherits Presenter(Of ILoginView, LoginModel)
 
     ''' <summary>
     '''     Constructor.
@@ -22,7 +22,6 @@ Public Class LoginPresenter
         CurrentModel = New ModelLogin()
         TableName = "Login"
         OriginalModel = New LoginModel()
-        BizObject = New Login
         DataModel = New LoginModel
         DbDataDao = New LoginDao
         Model = New ModelLogin
