@@ -3,7 +3,6 @@ Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Windows.Forms
-Imports AATM.BusinessLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
@@ -18,7 +17,7 @@ Imports AATM.PresentationLayer.Views
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 ''' <typeparam name="T">Type of view.</typeparam>
-Public MustInherit Class Presenter(Of T As IView, TBiz As BusinessObject, TM As New)
+Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
     Protected BizObject
@@ -78,10 +77,12 @@ Public MustInherit Class Presenter(Of T As IView, TBiz As BusinessObject, TM As 
     End Sub
 
     Public Function GetBizObjectRules()
+        'Return Model.GetBizObjectRules()
         Return BizObject.GetRules()
     End Function
 
     Public Function GetBizObjectErrors()
+        'Return Model.GetBizObjectErrors()
         Return BizObject.GetErrors()
     End Function
 
@@ -242,14 +243,20 @@ Public MustInherit Class Presenter(Of T As IView, TBiz As BusinessObject, TM As 
 
     Public Overridable Function Save(ByRef addMode As Boolean)
         Dim retVal As Integer
+        'Dim record As New TM
+        GlobalVariables.Mapper.Map(View, BizObject)
         If addMode Then
-            NewlyAddedRecordIdNo = Model.AddRecord(Of TBiz)(BizObject)
+            NewlyAddedRecordIdNo = Model.AddRecord(BizObject)
             retVal = NewlyAddedRecordIdNo
             BizObject.IdNo = retVal
         Else
             retVal = Model.UpdateRecord(BizObject)
         End If
         Return retVal
+    End Function
+
+    Public Function IsValid() As Boolean
+        Return BizObject.IsValid()
     End Function
 
     Private errorList As String = ""
@@ -269,7 +276,7 @@ Public MustInherit Class Presenter(Of T As IView, TBiz As BusinessObject, TM As 
         If additionalMessage IsNot Nothing Then
             errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In BizObject.Errors
+        For Each bizError In Model.Errors
             If errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
@@ -287,12 +294,12 @@ Public MustInherit Class Presenter(Of T As IView, TBiz As BusinessObject, TM As 
     Public Overridable Function DataIsValid() As Boolean
         Dim retVal = False
 
-        GlobalVariables.Mapper.Map(View, BizObject)
-        If BizObject.IsValid() Then
+        'GlobalVariables.Mapper.Map(View, BizObject)
+        If Model.IsValid() Then
             retVal = True
         Else
             errorList = ""
-            For Each bizError In BizObject.Errors
+            For Each bizError In Model.Errors
                 errorList = errorList & bizError & Environment.NewLine
             Next
         End If

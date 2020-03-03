@@ -7,14 +7,14 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class SecurityObjectDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements ISecurityObjectDao
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
+        'Public Sub New()
+        '    DbCommon = Db
+        'End Sub
 
 
         Public Function GetRecordById(idNo As Integer) As SecurityObject _

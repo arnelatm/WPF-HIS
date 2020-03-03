@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
     '''     MV Patterns: MVP design pattern.
     ''' </remarks>
     Public Class SecurityObjectsPresenter
-        Inherits CommonPresenterOld(Of ISecurityObjectsView, SecurityObject, SecurityObjectModel)
+        Inherits CommonPresenter(Of ISecurityObjectsView, SecurityObjectModel)
 
         Protected ViewObject As List(Of SecurityObjectModel)
 
@@ -28,10 +28,10 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "SecurityObjectName"
             TreeViewSecondaryField = ""
             OriginalModel = New SecurityObjectModel()
-            BizObject = New SecurityObject
+            'BizObject = New SecurityObject
             DataModel = New SecurityObjectModel
-            DbDataDao = New SecurityObjectDao
-            Model.SetService(New SecurityObjectService)
+            'DbDataDao = New SecurityObjectDao
+            'Model.SetService(New SecurityObjectService)
         End Sub
 
         ''' <summary>

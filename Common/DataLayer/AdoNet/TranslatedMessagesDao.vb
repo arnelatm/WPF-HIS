@@ -1,5 +1,4 @@
-﻿
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,14 +6,10 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class TranslatedMessagesDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements ITranslatedMessagesDao
 
         Private Shared ReadOnly Db As New Db("TRANSLATIONS")
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements ITranslatedMessagesDao.GetRecordById
             Dim sql As String =

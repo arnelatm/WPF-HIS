@@ -6,14 +6,14 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CategoryDao
-        Inherits AATM.DataLayer.AdoNet.CommonDaoOld
+        Inherits AATM.DataLayer.AdoNet.CommonDao
         Implements ICategoryDao
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
+        'Public Sub New()
+        '    DbCommon = Db
+        'End Sub
 
         Public Function GetRecordById(idNo As Integer) As Category Implements ICategoryDao.GetRecordById
             Dim sql As String =

@@ -91,14 +91,11 @@
     <Compile Include="Services\ISecurityService.vb" />
     <Compile Include="Services\IService.vb" />
     <Compile Include="Services\IServiceNew.vb" />
-    <Compile Include="Services\IServiceOld.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
     <Compile Include="Services\LoginService.vb" />
     <Compile Include="Services\SecurityService.vb" />
     <Compile Include="Services\Service.vb" />
-    <Compile Include="Services\ServiceOld.vb" />
     <Compile Include="Services\TblColPropService.vb" />
-    <Compile Include="Services\UserService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
     '''     MV Patterns: MVP design pattern.
     ''' </remarks>
     Public Class GroupAccessesPresenter
-        Inherits CommonPresenterOld(Of IGroupAccessesView, GroupAccess, GroupAccessModel)
+        Inherits CommonPresenter(Of IGroupAccessesView, GroupAccessModel)
 
         'Public Property SecurityObjects As IList(Of SecurityObjectModel)
 
@@ -26,10 +26,10 @@ Namespace PresentationLayer.Presenters
             TableName = "GroupAccess_View"
             SortOrderKey = "SecurityGroupIDNo"
             OriginalModel = New GroupAccessModel()
-            BizObject = New GroupAccess
+            'BizObject = New GroupAccess
             DataModel = New GroupAccessModel
             DbDataDao = New GroupAccessDao
-            Model.SetService(New GroupAccessService)
+            'Model.SetService(New GroupAccessService)
             'Dim modelSecurityObject = New SecurityObjectDisplayModel()
             'SecurityObjects = modelSecurityObject.GetAll(Of SecurityObjectModel)("SecurityObjectName")
 

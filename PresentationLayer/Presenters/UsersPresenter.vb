@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Public Class UsersPresenter
-    Inherits Presenter(Of IUsersView, User, UserModel)
+    Inherits Presenter(Of IUsersView, UserModel)
 
     Protected ViewObject As List(Of UserModel)
 
@@ -18,8 +18,8 @@ Public Class UsersPresenter
         TableName = "User"
         SortOrderKey = "FullName"
         OriginalModel = New List(Of UserModel)
-        BizObject = New List(OF User)
+        'BizObject = New List(OF User)
         ViewObject = New List(Of UserModel)
-        DbDataDao = New UserDao
+        'DbDataDao = New UserDao
     End Sub
 End Class

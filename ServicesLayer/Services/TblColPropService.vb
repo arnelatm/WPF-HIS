@@ -7,7 +7,7 @@ Namespace Services
         Implements ITblColPropService
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As IDaoFactoryOld = DaoFactoriesOld.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Private Shared Shadows ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
 
         Public Property DataDao As ITblColPropDao

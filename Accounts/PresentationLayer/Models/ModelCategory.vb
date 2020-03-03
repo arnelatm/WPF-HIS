@@ -1,4 +1,5 @@
 ﻿
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.ServiceLayer.ActionService
 
 Namespace PresentationLayer.Models
@@ -13,8 +14,12 @@ Namespace PresentationLayer.Models
             Return Service
         End Function
 
+        Public Shadows Function GetBo()
+            Return New Category
+        End Function
+
     End Class
 
     Public Interface IModelCategory
     End Interface
-End NameSpace
+End Namespace

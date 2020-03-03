@@ -7,7 +7,7 @@ Namespace Services
         Implements ISecurityService
 
         Protected Shared Provider As String
-        Protected Shared Factory As IDaoFactoryOld
+        Protected Shared Factory As IDaoFactory
         Protected Shared TblColPropDao As ITblColPropDao
         Protected Shared DefaultFieldValueDao As IDefaultFieldValueDao
         Protected Shared SecurityDao As ISecurityDao
@@ -21,7 +21,7 @@ Namespace Services
         Public Function GetControlSecurityIdNo(searchValue As String) As String Implements ISecurityService.GetControlSecurityIdNo
             If Provider Is Nothing Then
                 Provider = ConfigurationManager.AppSettings.Get("DataProvider")
-                Factory = DaoFactoriesOld.GetFactory(Provider)
+                Factory = DaoFactories.GetFactory(Provider)
                 SecurityDao = Factory.SecurityDao
             End If
             Return SecurityDao.GetControlSecurityIdNo(searchValue)
@@ -30,7 +30,7 @@ Namespace Services
         Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurity
             If Provider Is Nothing Then
                 Provider = ConfigurationManager.AppSettings.Get("DataProvider")
-                Factory = DaoFactoriesOld.GetFactory(Provider)
+                Factory = DaoFactories.GetFactory(Provider)
                 SecurityDao = Factory.SecurityDao
             End If
             Return SecurityDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)

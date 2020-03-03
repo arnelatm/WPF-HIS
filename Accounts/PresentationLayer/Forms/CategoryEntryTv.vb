@@ -91,6 +91,18 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                    {
+                    {"CategoryCode", txtCategoryCode},
+                    {"CategoryName", txtCategoryName},
+                    {"CategoryNameAra", txtCategoryNameAra},
+                    {"IDNo", TxtIDNo},
+                    {"Notes", txtNotes}
+                    }
+        End Sub
+
     End Class
 
 End Namespace

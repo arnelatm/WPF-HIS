@@ -72,9 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdoNet\CommonDao.vb" />
-    <Compile Include="AdoNet\CommonDaoOld.vb" />
     <Compile Include="AdoNet\DaoFactory.vb" />
-    <Compile Include="AdoNet\DaoFactoryOld.vb" />
     <Compile Include="AdoNet\DB.vb" />
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="AdoNet\Extensions.vb" />
@@ -83,10 +81,8 @@
     <Compile Include="AdoNet\SecurityDao.vb" />
     <Compile Include="AdoNet\UserDao.vb" />
     <Compile Include="DaoFactories.vb" />
-    <Compile Include="DaoFactoriesOld.vb" />
     <Compile Include="ICommonDao.vb" />
     <Compile Include="IDaoFactory.vb" />
-    <Compile Include="IDaoFactoryOld.vb" />
     <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />
     <Compile Include="ILoginDao.vb" />

@@ -26,7 +26,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             _cancelLogin = False
             AddHandler FormClosing, AddressOf FormLogin_Closing
-            textBoxUserName.Text = Environment.UserName
+            textBoxUserName.Text = $"Arnel" 'Environment.UserName
             _loginPresenter = New LoginPresenter(Me)
 
         End Sub

@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class CategoryPresenter
-        Inherits AccountsPresenter(Of ICategoryView, Category, CategoryModel)
+        Inherits AccountsPresenter(Of ICategoryView, CategoryModel)
 
         Public ParentViewList As List(Of CategoryModel)
 
@@ -50,4 +50,4 @@ Namespace PresentationLayer.Presenters
         End Sub
 
     End Class
-End NameSpace
+End Namespace

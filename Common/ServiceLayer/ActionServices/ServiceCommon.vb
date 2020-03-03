@@ -9,16 +9,7 @@ Namespace ServiceLayer.ActionServices
         Inherits Service
         Implements IServiceCommon
 
-        Private Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
-
-        'Public Overrides Function GetDataDao2()
-        '    Return GetDataDao3()
-        'End Function
-
-        'Public Overridable Function GetDataDao3()
-        '    Return Nothing
-        'End Function
+        Private Shared ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
 
         Public Overrides Function GetDao() As Object
             Return CommonDaoProp

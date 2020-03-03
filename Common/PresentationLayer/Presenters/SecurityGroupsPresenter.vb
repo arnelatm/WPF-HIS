@@ -6,7 +6,7 @@ Imports AATM.Common.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class SecurityGroupsPresenter
-        Inherits CommonPresenter(Of IGroupAccessesView, GroupAccess, GroupAccessModel)
+        Inherits CommonPresenter(Of IGroupAccessesView, GroupAccessModel)
 
         Protected ViewObject As List(Of SecurityGroupModel)
 
@@ -19,9 +19,9 @@ Namespace PresentationLayer.Presenters
             TableName = "SecurityGroup"
             SortOrderKey = "SecurityGroupName"
             OriginalModel = New List(Of SecurityGroupModel)
-            BizObject = New List(Of SecurityGroup)
+            'BizObject = New List(Of SecurityGroup)
             ViewObject = New List(Of SecurityGroupModel)
-            DbDataDao = New SecurityGroupDao
+            'DbDataDao = New SecurityGroupDao
         End Sub
 
     End Class

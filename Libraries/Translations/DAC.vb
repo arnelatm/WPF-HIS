@@ -336,6 +336,7 @@ Public Class Dac
                     BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Persist Security Info=True; User ID=" +
                                        DacUid + ";Password=" + DacPassword
                 Else
+                    'BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Persist Security Info=True;User ID=MARCELO-DELL\Arnel;Password=JaSi5214@"
                     BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Integrated Security=True;Connection Timeout=5"
                 End If
                 '                  + ";Integrated Security=SSPI;Persist Security Info=False"

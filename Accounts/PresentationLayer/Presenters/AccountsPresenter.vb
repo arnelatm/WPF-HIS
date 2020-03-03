@@ -1,29 +1,27 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.BusinessLayer
-Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenter(Of T As IView, TBiz As BusinessObject, TM As New)
-        Inherits CommonPresenter(Of T, BusinessObject, TM)
+    Public Class AccountsPresenter(Of T As IView, TM As New)
+        Inherits CommonPresenter(Of T, TM)
 
-        Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
-        Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice
-        Protected Shared Property ModelCashCode As IModelCashCode
+        'Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
+        'Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice
+        'Protected Shared Property ModelCashCode As IModelCashCode
 
         Public Sub New(view As T)
             MyBase.New(view)
+
         End Sub
 
         Shared Sub New()
             ModelTblColProp = New ModelTblColProp
             ModelDefaultFieldValue = New ModelDefaultFieldValue
-            ModelApOpenInvoice = New ModelApOpenInvoice
-            ModelArOpenInvoice = New ModelArOpenInvoice
-            ModelCashCode = New ModelCashCode
+            'ModelApOpenInvoice = New ModelApOpenInvoice
+            'ModelArOpenInvoice = New ModelArOpenInvoice
+            'ModelCashCode = New ModelCashCode
         End Sub
 
         Public Function GetSupplierVatNumber(idNo As String)
@@ -74,62 +72,62 @@ Namespace PresentationLayer.Presenters
             Return CommonModel.GetRecordFieldWithKey("AC", "Chart", "SpecialAccount", "IdNo")
         End Function
 
-        Public Function GetChart(idNo As String)
-            Dim lModel As New ModelChart
-            Return lModel.GetRecordById(Of ChartModel)(idNo)
-        End Function
+        'Public Function GetChart(idNo As String)
+        '    Dim lModel As New ModelChart
+        '    Return lModel.GetRecordById(Of ChartModel)(idNo)
+        'End Function
 
-        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim retVal As Integer
-            Dim apOpenInvoiceBo As New ApOpenInvoice
+        'Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+        '    Dim retVal As Integer
+        '    Dim apOpenInvoiceBo As New ApOpenInvoice
 
-            apOpenInvoiceBo.PaidAmount = 0
-            apOpenInvoiceBo.DiscountTaken = 0
-            apOpenInvoiceBo.JournalCode = journalCode
-            apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-            apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
-            Return retVal
-        End Function
+        '    apOpenInvoiceBo.PaidAmount = 0
+        '    apOpenInvoiceBo.DiscountTaken = 0
+        '    apOpenInvoiceBo.JournalCode = journalCode
+        '    apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
+        '    apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+        '    retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
+        '    Return retVal
+        'End Function
 
-        Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
-            Dim retValue As String
-            retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-            Return retValue
-        End Function
+        'Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
+        '    Dim retValue As String
+        '    retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+        '    Return retValue
+        'End Function
 
-        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim retVal As Integer
-            Dim arOpenInvoiceBo As New ArOpenInvoice
+        'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+        '    Dim retVal As Integer
+        '    Dim arOpenInvoiceBo As New ArOpenInvoice
 
-            arOpenInvoiceBo.PaidAmount = 0
-            arOpenInvoiceBo.DiscountTaken = 0
-            arOpenInvoiceBo.JournalCode = journalCode
-            arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-            arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
-            Return retVal
-        End Function
+        '    arOpenInvoiceBo.PaidAmount = 0
+        '    arOpenInvoiceBo.DiscountTaken = 0
+        '    arOpenInvoiceBo.JournalCode = journalCode
+        '    arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
+        '    arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+        '    retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
+        '    Return retVal
+        'End Function
 
-        Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
-            Dim retValue As String
-            retValue = ModelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
-            Return retValue
-        End Function
+        'Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
+        '    Dim retValue As String
+        '    retValue = ModelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+        '    Return retValue
+        'End Function
 
-        Public Function GetCashCodesModel() As List(Of CashCodeModel)
-            Dim cashCodes As New List(Of CashCodeModel)
-            Return ModelCashCode.GetAll(Of CashCodeModel)("CashName")
-        End Function
+        'Public Function GetCashCodesModel() As List(Of CashCodeModel)
+        '    Dim cashCodes As New List(Of CashCodeModel)
+        '    Return ModelCashCode.GetAll(Of CashCodeModel)("CashName")
+        'End Function
 
-        Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
-            Return GetLookupData("CashName", "CashNameAra", "CashCode",
-                                 "CashCode", sortKey, "")
-        End Function
+        'Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
+        '    Return GetLookupData("CashName", "CashNameAra", "CashCode",
+        '                         "CashCode", sortKey, "")
+        'End Function
 
-        Public Function GetEndingGlBalance(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date) As Decimal
-            Return CommonModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
-        End Function
+        'Public Function GetEndingGlBalance(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date) As Decimal
+        '    Return CommonModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
+        'End Function
 
     End Class
 End NameSpace
