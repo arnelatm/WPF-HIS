@@ -1,15 +1,11 @@
-﻿Imports AATM.BusinessLayer.BusinessObject
-Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class UserPresenter
-        Inherits CommonPresenterOld(Of IUserView, User, UserModel)
+        Inherits CommonPresenter(Of IUserView, UserModel)
 
         Public ParentViewList As List(Of UserModel)
 
@@ -22,10 +18,10 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New UserModel()
             BizObject = New User
             DataModel = New UserModel
-            DbDataDao = New UserDao
+            'DbDataDao = New UserDao
             TreeViewList = New List(Of UserModel)
             ParentViewList = New List(Of UserModel)
-            Model.SetService(New UserService)
+            'Model.SetService(New UserService)
         End Sub
 
         'Public Function GetUserList()

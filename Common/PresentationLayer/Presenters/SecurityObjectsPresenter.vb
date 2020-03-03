@@ -23,12 +23,13 @@ Namespace PresentationLayer.Presenters
         ''' <param name="view">The view</param>
         Public Sub New(view As ISecurityObjectsView)
             MyBase.New(view)
+            CurrentModel = New ModelSecurityObject
             TableName = "SecurityObject"
             SortOrderKey = "SecurityObjectName"
             TreeViewMainField = "SecurityObjectName"
             TreeViewSecondaryField = ""
             OriginalModel = New SecurityObjectModel()
-            'BizObject = New SecurityObject
+            BizObject = New SecurityObject
             DataModel = New SecurityObjectModel
             'DbDataDao = New SecurityObjectDao
             'Model.SetService(New SecurityObjectService)
