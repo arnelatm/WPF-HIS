@@ -8,8 +8,6 @@ Namespace PresentationLayer.Forms
     Public Class CategoryEntryTv
         Implements ICategoryView
 
-        Public FieldsDictionary As New Dictionary(Of String, Object)
-
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.

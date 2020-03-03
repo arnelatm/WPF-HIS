@@ -10,7 +10,6 @@ Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
 Imports AATM.PresentationLayer.Forms.PresentationLayer.Forms
-Imports AATM.Common.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
 
@@ -827,18 +826,18 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSecurityGroups.Click
-            Try
-                Dim childMdiForm As SecurityGroupEntryTv
-                childMdiForm = New SecurityGroupEntryTv With {
-                    .MdiParent = Me
-                    }
-                childMdiForm.Show()
-            Catch ex As Exception
-                Debugger.Break()
-            End Try
-        End Sub
+        'Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+        '    Handles ToolStripMenuItemSecurityGroups.Click
+        '    Try
+        '        Dim childMdiForm As SecurityGroupEntryTv
+        '        childMdiForm = New SecurityGroupEntryTv With {
+        '            .MdiParent = Me
+        '            }
+        '        childMdiForm.Show()
+        '    Catch ex As Exception
+        '        Debugger.Break()
+        '    End Try
+        'End Sub
 
         ''Private Sub UsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
         ''    Dim childMdiForm As AATM.PresentationLayer.UserEntry
@@ -1055,11 +1054,11 @@ Namespace PresentationLayer.Forms
         '    frm.Show()
         'End Sub
 
-        Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
-            Dim childMdiForm As UserEntryTv
-            childMdiForm = New UserEntryTv With {.MdiParent = Me}
-            childMdiForm.Show()
-        End Sub
+        'Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
+        '    Dim childMdiForm As UserEntryTv
+        '    childMdiForm = New UserEntryTv With {.MdiParent = Me}
+        '    childMdiForm.Show()
+        'End Sub
 
         'Private Sub TranslationFormToolStripMenuItem_Click(sender As Object, e As EventArgs)
         '    Dim frm As New TranslationTableManager
