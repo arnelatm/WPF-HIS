@@ -1,4 +1,5 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -18,7 +19,7 @@ Namespace PresentationLayer.Forms
             SortOrderKey = "SecurityObjectName"
             FirstControl = txtSecurityObjectName
             ' Add any initialization after the InitializeComponent() call.
-            'Dim model = New SecurityObjectModel
+            Dim model = New SecurityObjectModel
             PresenterObj = New SecurityObjectPresenter(Me)
 
             '_SecurityObjectsPresenter = New SecurityObjectsPresenter(Me)

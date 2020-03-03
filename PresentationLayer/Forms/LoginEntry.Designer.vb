@@ -24,8 +24,8 @@ Namespace PresentationLayer.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Me.btn_Login = New CButton()
-            Me.btnCancel = New CButton()
+            Me.btn_Login = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.PictureBox1 = New System.Windows.Forms.PictureBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.Label4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Forms
             '
             'PictureBox1
             '
-            'Me.PictureBox1.Image = Global.AATM.Common.My.Resources.Resources.Capture
+            Me.PictureBox1.Image = Global.AATM.PresentationLayer.Forms.My.Resources.Resources.Logo
             Me.PictureBox1.Location = New System.Drawing.Point(75, 12)
             Me.PictureBox1.Name = "PictureBox1"
             Me.PictureBox1.Size = New System.Drawing.Size(200, 150)
@@ -118,11 +118,10 @@ Namespace PresentationLayer.Forms
             '
             'textBoxUserName
             '
-            Me.textBoxUserName.AcceptsReturn = False
-            Me.textBoxUserName.AcceptsTab = False
             Me.textBoxUserName.BackColor = System.Drawing.Color.White
             Me.textBoxUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.textBoxUserName.ComputedValue = False
+            Me.textBoxUserName.CustomFormat = Nothing
             Me.textBoxUserName.DataBoundControl = True
             Me.textBoxUserName.EditingMode = False
             Me.textBoxUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -131,6 +130,7 @@ Namespace PresentationLayer.Forms
             Me.textBoxUserName.Location = New System.Drawing.Point(96, 20)
             Me.textBoxUserName.Margin = New System.Windows.Forms.Padding(0)
             Me.textBoxUserName.Name = "textBoxUserName"
+            Me.textBoxUserName.OldValue = Nothing
             Me.textBoxUserName.Size = New System.Drawing.Size(201, 23)
             Me.textBoxUserName.TabIndex = 20
             '
@@ -146,11 +146,10 @@ Namespace PresentationLayer.Forms
             '
             'textBoxPassword
             '
-            Me.textBoxPassword.AcceptsReturn = False
-            Me.textBoxPassword.AcceptsTab = False
             Me.textBoxPassword.BackColor = System.Drawing.Color.White
             Me.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.textBoxPassword.ComputedValue = False
+            Me.textBoxPassword.CustomFormat = Nothing
             Me.textBoxPassword.DataBoundControl = True
             Me.textBoxPassword.EditingMode = False
             Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -159,6 +158,7 @@ Namespace PresentationLayer.Forms
             Me.textBoxPassword.Location = New System.Drawing.Point(96, 43)
             Me.textBoxPassword.Margin = New System.Windows.Forms.Padding(0)
             Me.textBoxPassword.Name = "textBoxPassword"
+            Me.textBoxPassword.OldValue = Nothing
             Me.textBoxPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
             Me.textBoxPassword.Size = New System.Drawing.Size(201, 23)
             Me.textBoxPassword.TabIndex = 21

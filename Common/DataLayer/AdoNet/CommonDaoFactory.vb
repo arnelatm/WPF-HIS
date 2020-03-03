@@ -82,23 +82,23 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-        'Public ReadOnly Property SecurityGroupDao As ISecurityGroupDao Implements ICommonDaoFactory.SecurityGroupDao
-        '    Get
-        '        Return New SecurityGroupDao()
-        '    End Get
-        'End Property
+        Public ReadOnly Property SecurityGroupDao As ISecurityGroupDao Implements ICommonDaoFactory.SecurityGroupDao
+            Get
+                Return New SecurityGroupDao()
+            End Get
+        End Property
 
-        'Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements ICommonDaoFactory.SecurityObjectDao
-        '    Get
-        '        Return New SecurityObjectDao()
-        '    End Get
-        'End Property
+        Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements ICommonDaoFactory.SecurityObjectDao
+            Get
+                Return New SecurityObjectDao()
+            End Get
+        End Property
 
-        'Public ReadOnly Property GroupAccessDao As IGroupAccessDao Implements ICommonDaoFactory.GroupAccessDao
-        '    Get
-        '        Return New GroupAccessDao()
-        '    End Get
-        'End Property
+        Public ReadOnly Property GroupAccessDao As IGroupAccessDao Implements ICommonDaoFactory.GroupAccessDao
+            Get
+                Return New GroupAccessDao()
+            End Get
+        End Property
 
         'Public ReadOnly Property PhoneTypeDao As IPhoneTypeDao Implements ICommonDaoFactory.PhoneTypeDao
         '    Get
@@ -118,12 +118,11 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
-
-        'Public Overloads ReadOnly Property SecurityDao As ISecurityDao Implements ICommonDaoFactory.SecurityDao
-        '    Get
-        '        Return New SecurityDao()
-        '    End Get
-        'End Property
+        Public Overloads ReadOnly Property SecurityDao As ISecurityDao Implements ICommonDaoFactory.SecurityDao
+            Get
+                Return New SecurityDao()
+            End Get
+        End Property
 
     End Class
 

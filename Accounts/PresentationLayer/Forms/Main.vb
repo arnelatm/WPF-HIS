@@ -9,6 +9,10 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
+Imports AATM.Common.BusinessLayer
+Imports AATM.Common.PresentationLayer.Forms
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Views
 Imports AATM.PresentationLayer.Forms.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
@@ -70,7 +74,10 @@ Namespace PresentationLayer.Forms
             Dim mapperConfiguration = New MapperConfiguration(Function(cfg)
                                                                   Return {cfg.CreateMap(Of Category, CategoryModel)().ReverseMap(),
                                                                           cfg.CreateMap(Of CategoryModel, ICategoryView)().ReverseMap(),
-                                                                          cfg.CreateMap(Of ICategoryView, Category)()
+                                                                          cfg.CreateMap(Of ICategoryView, Category)(),
+                                                                          cfg.CreateMap(Of SecurityObject, SecurityObjectModel)().ReverseMap(),
+                                                                          cfg.CreateMap(Of SecurityObjectModel, ISecurityObjectView)().ReverseMap(),
+                                                                          cfg.CreateMap(Of ISecurityObjectView, SecurityObject)()
                                                                           }
                                                               End Function)
             AccountsMapper = mapperConfiguration.CreateMapper()
@@ -826,18 +833,18 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemSecurityGroups.Click
-        '    Try
-        '        Dim childMdiForm As SecurityGroupEntryTv
-        '        childMdiForm = New SecurityGroupEntryTv With {
-        '            .MdiParent = Me
-        '            }
-        '        childMdiForm.Show()
-        '    Catch ex As Exception
-        '        Debugger.Break()
-        '    End Try
-        'End Sub
+        Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemSecurityGroups.Click
+            Try
+                Dim childMdiForm As SecurityGroupEntryTv
+                childMdiForm = New SecurityGroupEntryTv With {
+                    .MdiParent = Me
+                    }
+                childMdiForm.Show()
+            Catch ex As Exception
+                Debugger.Break()
+            End Try
+        End Sub
 
         ''Private Sub UsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
         ''    Dim childMdiForm As AATM.PresentationLayer.UserEntry
@@ -848,16 +855,17 @@ Namespace PresentationLayer.Forms
         ''    'Display the new form.
         ''    childMdiForm.Show()
         ''End Sub
-        'Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemSecurityObjects.Click
-        '    Dim childMdiForm As SecurityObjectEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New SecurityObjectEntryTv With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+
+        Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemSecurityObjects.Click
+            Dim childMdiForm As SecurityObjectEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New SecurityObjectEntryTv With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub SetLanguageChangeButtons()
         '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -1054,11 +1062,11 @@ Namespace PresentationLayer.Forms
         '    frm.Show()
         'End Sub
 
-        'Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
-        '    Dim childMdiForm As UserEntryTv
-        '    childMdiForm = New UserEntryTv With {.MdiParent = Me}
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
+            Dim childMdiForm As UserEntryTv
+            childMdiForm = New UserEntryTv With {.MdiParent = Me}
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub TranslationFormToolStripMenuItem_Click(sender As Object, e As EventArgs)
         '    Dim frm As New TranslationTableManager

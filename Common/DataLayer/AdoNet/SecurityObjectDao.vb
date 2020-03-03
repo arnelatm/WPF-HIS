@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordById(idNo As Integer) As SecurityObject _
             Implements ISecurityObjectDao.GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, SecurityObjectName, Notes" &
+                    " SELECT IDNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &
                     " WHERE IDNo = @IDNo"
             Dim parms() As Object = {"@IDNo", idNo}
@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetAll(Optional sortExpression As String = "SecurityObjectName") As List(Of SecurityObject) Implements ISecurityObjectDao.GetAll
             Dim sql As String =
-                    " SELECT IDNo, SecurityObjectName, Notes" &
+                    " SELECT IDNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -38,6 +38,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [SecurityObject]" &
                     "    SET SecurityObjectName = @SecurityObjectName," &
+                    "        SecurityObjectNameAra = @SecurityObjectNameAra," &
                     "        Notes = @Notes" &
                     "  WHERE IDNo = @IDNo"
 
@@ -47,8 +48,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef securityObject As SecurityObject) As Integer Implements ISecurityObjectDao.AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityObject] " &
-                    " (SecurityObjectName,Notes) " &
-                    " VALUES (@SecurityObjectName,@Notes)"
+                    " (SecurityObjectName,SecurityObjectNameAra,Notes) " &
+                    " VALUES (@SecurityObjectName,@SecurityObjectNameAra,@Notes)"
             Return Db.Insert(sql, Take(securityObject))
         End Function
 
@@ -57,12 +58,14 @@ Namespace DataLayer.AdoNet
             New SecurityObject() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
+            .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra")),
             .Notes = Extensions.AsString(reader("Notes"))}
 
         Private Function Take(securityObject As SecurityObject) As Object()
             Return New Object() {
                                     "@IDNo", securityObject.IdNo,
                                     "@SecurityObjectName", securityObject.SecurityObjectName,
+                                    "@SecurityObjectNameAra", securityObject.SecurityObjectNameAra,
                                     "@Notes", securityObject.Notes}
         End Function
 

@@ -1,9 +1,10 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class SecurityGroupEntryTv
-        Inherits AATM.PresentationLayer.Forms.BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

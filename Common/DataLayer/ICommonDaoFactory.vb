@@ -6,7 +6,7 @@ Namespace DataLayer
 
     Public Interface ICommonDaoFactory
 
-        'ReadOnly Property SecurityDao As ISecurityDao
+        ReadOnly Property SecurityDao As ISecurityDao
         'ReadOnly Property CountryDao As ICountryDao
         'ReadOnly Property BranchDao As IBranchDao
         'ReadOnly Property ProfitCenterDao As IProfitCenterDao
@@ -21,9 +21,9 @@ Namespace DataLayer
         ''ReadOnly Property SaltDao As ISaltDao
 
         'ReadOnly Property PhoneTypeDao As IPhoneTypeDao
-        'ReadOnly Property SecurityGroupDao As ISecurityGroupDao
-        'ReadOnly Property SecurityObjectDao As ISecurityObjectDao
-        'ReadOnly Property GroupAccessDao As IGroupAccessDao
+        ReadOnly Property SecurityGroupDao As ISecurityGroupDao
+        ReadOnly Property SecurityObjectDao As ISecurityObjectDao
+        ReadOnly Property GroupAccessDao As IGroupAccessDao
         'ReadOnly Property OriginalMessagesDao As IOriginalMessagesDao
         ReadOnly Property TranslatedMessagesDao As ITranslatedMessagesDao
 

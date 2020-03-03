@@ -11,16 +11,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISecurityObjectView)
             MyBase.New(view)
+            CurrentModel = New ModelSecurityObject
             TableName = "SecurityObject"
             SortOrderKey = "SecurityObjectName"
             TreeViewMainField = "SecurityObjectName"
             TreeViewSecondaryField = ""
             OriginalModel = New SecurityObjectModel()
-            'BizObject = New SecurityObject
+            BizObject = New SecurityObject
             DataModel = New SecurityObjectModel
-            'DbDataDao = New SecurityObjectDao
             TreeViewList = New List(Of SecurityObjectModel)
-            'Model.SetService(New SecurityObjectService)
 
         End Sub
 

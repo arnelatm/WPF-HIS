@@ -1,6 +1,7 @@
 ﻿
 Imports System.Configuration
 Imports AATM.Common.DataLayer
+Imports AATM.DataLayer
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer.ActionServices
@@ -9,7 +10,10 @@ Namespace ServiceLayer.ActionServices
         Inherits Service
         Implements IServiceCommon
 
-        Private Shared ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
+        Private Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
+        Private Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+        Private Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
+        Private Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
         Public Overrides Function GetDao() As Object
             Return CommonDaoProp

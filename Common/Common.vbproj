@@ -102,8 +102,27 @@
     <Compile Include="PresentationLayer\Forms\FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.Designer.vb">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.Designer.vb">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.Designer.vb">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\ModelSecurityObject.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\SecurityGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\SecurityObjectModel.vb" />
@@ -120,7 +139,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GroupAccessesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityGroupPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityGroupsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityObjectPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityObjectsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IGroupAccessesView.vb" />
     <Compile Include="PresentationLayer\Views\IMainView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityGroupsView.vb" />
@@ -128,6 +153,9 @@
     <Compile Include="PresentationLayer\Views\ISecurityObjectsView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityObjectView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
+    <Compile Include="ServiceLayer\ActionServices\GroupAccessService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\SecurityGroupService.vb" />
+    <Compile Include="ServiceLayer\ActionServices\SecurityObjectService.vb" />
     <Compile Include="ServiceLayer\ActionServices\ServiceCommon.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\TranslatedMessagesService.vb" />
@@ -144,6 +172,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupEntryTv.resx">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\UserEntryTv.resx">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
