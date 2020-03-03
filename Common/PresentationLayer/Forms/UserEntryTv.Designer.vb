@@ -5,7 +5,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class UserEntryTv
-        Inherits BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _

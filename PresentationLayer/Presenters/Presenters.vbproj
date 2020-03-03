@@ -87,8 +87,6 @@
     </Compile>
     <Compile Include="Presenter.vb" />
     <Compile Include="SecurityPresenter.vb" />
-    <Compile Include="UserPresenter.vb" />
-    <Compile Include="UsersPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

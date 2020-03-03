@@ -452,13 +452,13 @@ Public Class BfMain
         End If
     End Sub
 
-    Private Sub BfForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim allControls As New List(Of Control)
-        SecurityPresenterObj = New SecurityPresenter
-        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-            SetControlSecurity(cCtrl)
-        Next
-    End Sub
+    'Private Sub BfForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    Dim allControls As New List(Of Control)
+    '    SecurityPresenterObj = New SecurityPresenter
+    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+    '        SetControlSecurity(cCtrl)
+    '    Next
+    'End Sub
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not DesignMode Then
