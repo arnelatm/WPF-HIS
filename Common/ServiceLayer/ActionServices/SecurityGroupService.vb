@@ -8,9 +8,9 @@ Namespace ServiceLayer.ActionServices
     Public Class SecurityGroupService
         Inherits Service
 
-        Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
-        Private Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao
+        Protected Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
+        Protected Shared Shadows ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
+        Protected Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao
 
         Public Sub New()
             DataDao = SecurityGroupDao

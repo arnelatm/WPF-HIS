@@ -1,4 +1,5 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
@@ -11,6 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IUserView)
             MyBase.New(view)
+            CurrentModel = New ModelUser
             TableName = "User"
             SortOrderKey = "FullName"
             TreeViewMainField = "FullName"
@@ -18,10 +20,9 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New UserModel()
             BizObject = New User
             DataModel = New UserModel
-            'DbDataDao = New UserDao
             TreeViewList = New List(Of UserModel)
             ParentViewList = New List(Of UserModel)
-            'Model.SetService(New UserService)
+
         End Sub
 
         'Public Function GetUserList()

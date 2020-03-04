@@ -2,6 +2,7 @@
 Imports System.Configuration
 Imports AATM.Accounts.DataLayer
 Imports AATM.Common.ServiceLayer.ActionServices
+Imports ServiceCommon = AATM.Common.ServiceLayer.ServiceCommon
 
 Namespace ServiceLayer.ActionService
 
