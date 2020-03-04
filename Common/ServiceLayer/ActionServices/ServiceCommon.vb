@@ -14,6 +14,7 @@ Namespace ServiceLayer.ActionServices
         Private Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Private Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
         Private Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
+        Private Shared ReadOnly UserDao As IUserDao = Factory.UserDao
 
         Public Overrides Function GetDao() As Object
             Return CommonDaoProp

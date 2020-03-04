@@ -5,20 +5,16 @@ Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer.ActionServices
 
-    Public Class SecurityObjectService
-        Inherits ServiceLayer.ServiceCommon
+    Public Class UserService
+        Inherits ServiceCommon
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Private Shared Shadows ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
-        Private Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao
+        Private Shared ReadOnly UserDao As IUserDao = Factory.UserDao
 
         Public Overrides Function GetDao()
-            Return SecurityObjectDao
+            Return UserDao
         End Function
-
-        'Public Sub New()
-        '    DataDao = SecurityObjectDao
-        'End Sub
 
     End Class
 

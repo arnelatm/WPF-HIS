@@ -14,10 +14,10 @@ Namespace Services
         Implements IService
 
         Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
-        Private Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
-        Private Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
-        Private Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
+        Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
+        Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+        Protected Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
+        Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
         Public Property DataDao As Object
 
