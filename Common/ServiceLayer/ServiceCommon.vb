@@ -11,11 +11,11 @@ Namespace ServiceLayer
         Private Shared ReadOnly CommonFactory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
 
         Public Overrides Function GetDao() As Object
-            Return GetCommonDao()
+            Return GetBaseDao()
         End Function
 
-        Public Overridable Function GetCommonDao()
-            Return CommonDaoProp
+        Public Overridable Function GetBaseDao()
+            Return BaseDaoProp
         End Function
 
     End Class

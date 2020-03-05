@@ -56,7 +56,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
-        CommonModel = New ModelCommon()
+        'CommonModel = New ModelCommon()
     End Sub
 
     Public Sub New(view As T)
