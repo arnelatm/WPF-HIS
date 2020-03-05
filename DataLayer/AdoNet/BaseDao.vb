@@ -1,8 +1,8 @@
 ﻿Imports System.Windows.Forms
 
 Namespace AdoNet
-    Public Class CommonDao
-        Implements ICommonDao
+    Public Class BaseDao
+        Implements IBaseDao
 
         Private Shared ReadOnly Db As New Db()
 
@@ -16,7 +16,7 @@ Namespace AdoNet
         'End Sub
 
         Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-            Implements ICommonDao.GetUserSecurity
+            Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
                     {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
             Dim sql =
@@ -25,13 +25,13 @@ Namespace AdoNet
         End Function
 
         Public Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object _
-            Implements ICommonDao.GetFilteredRecords
+            Implements IBaseDao.GetFilteredRecords
             Throw New NotImplementedException
         End Function
 
         Public Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String,
                                            returnFieldsArray As Array) As ArrayList _
-            Implements ICommonDao.GetFilteredRecords
+            Implements IBaseDao.GetFilteredRecords
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim returnFields = ""
             Dim retVal As ArrayList
@@ -53,7 +53,7 @@ Namespace AdoNet
         'End Function
 
         Public Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
-            Implements ICommonDao.GetSortedRecordNumber
+            Implements IBaseDao.GetSortedRecordNumber
             If recordNo = 0 Then
                 Return 0
             Else
@@ -78,7 +78,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer _
-            Implements ICommonDao.GetSortedRecordPosition
+            Implements IBaseDao.GetSortedRecordPosition
             Dim sql As String =
                     " Select count(*) From [" & tableName &
                     "] where " & sortOrder & " <= (Select " & sortOrder &
@@ -87,14 +87,14 @@ Namespace AdoNet
         End Function
 
         Public Function GetRecordCount(tableName As String) As Integer _
-            Implements ICommonDao.GetRecordCount
+            Implements IBaseDao.GetRecordCount
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] "
             Return Db.Scalar(sql)
         End Function
 
         Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
-            Implements ICommonDao.GetRecordPosition
+            Implements IBaseDao.GetRecordPosition
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where IDNo < " & idNo
@@ -103,7 +103,7 @@ Namespace AdoNet
 
         Public Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) _
             As Integer _
-            Implements ICommonDao.GetRecordPositionByName
+            Implements IBaseDao.GetRecordPositionByName
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & sortField & "< '" & nameValue & "'"
@@ -112,7 +112,7 @@ Namespace AdoNet
 
         Public Function FindField(tableName As String, fieldName As String, searchString As String,
                                   Optional searchAnywhere As Boolean = False) As Integer _
-            Implements ICommonDao.FindField
+            Implements IBaseDao.FindField
             Dim retVal As Integer
             Dim sql As String =
                     " SELECT IDNo FROM [" & tableName & "] " &
@@ -133,7 +133,7 @@ Namespace AdoNet
         End Function
 
         Public Function FindFieldContinue(tableName As String, lastIdNo As Integer) _
-            Implements ICommonDao.FindFieldContinue
+            Implements IBaseDao.FindFieldContinue
             Dim retVal As Integer
             If _lastFindQuery Is Nothing Then
                 MessageBox.Show(
@@ -154,7 +154,7 @@ Namespace AdoNet
         End Function
 
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Int16 _
-            Implements ICommonDao.DeleteRecord
+            Implements IBaseDao.DeleteRecord
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
                     " Where IdNo = " & idNo
@@ -170,7 +170,7 @@ Namespace AdoNet
 
         Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                               returnFieldName As String) As String _
-            Implements ICommonDao.GetRecordFieldWithKey
+            Implements IBaseDao.GetRecordFieldWithKey
             Dim sql As String =
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
@@ -185,7 +185,7 @@ Namespace AdoNet
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                                searchFieldName1 As String, searchFieldName2 As String,
                                                returnFieldName As String) As String _
-            Implements ICommonDao.GetRecordFieldWith2Key
+            Implements IBaseDao.GetRecordFieldWith2Key
             Dim sql As String =
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = @SearchValue2 "
@@ -199,7 +199,7 @@ Namespace AdoNet
 
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
             As Integer _
-            Implements ICommonDao.CountRecordWithKey
+            Implements IBaseDao.CountRecordWithKey
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
@@ -210,7 +210,7 @@ Namespace AdoNet
         Public Function CountRecordWith2Key(searchValue1 As Integer, searchValue2 As String,
                                             tableName As String, searchFieldName1 As String,
                                             searchFieldName2 As String) As Integer _
-            Implements ICommonDao.CountRecordWith2Key
+            Implements IBaseDao.CountRecordWith2Key
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = '" & searchValue2 &
@@ -221,7 +221,7 @@ Namespace AdoNet
 
         Public Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String,
                                       currentIdNo As Int64) As String _
-            Implements ICommonDao.CheckIfUnique
+            Implements IBaseDao.CheckIfUnique
             Dim sql As String =
                     " Select count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue " &
@@ -232,7 +232,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String _
-            Implements ICommonDao.GetRecordWithIdNo
+            Implements IBaseDao.GetRecordWithIdNo
             Dim sql As String =
                     " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where IDNO = @IDNo "
@@ -242,7 +242,7 @@ Namespace AdoNet
 
         Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, dateTimeStampField As String) _
             As Object _
-            Implements ICommonDao.GetRecordDateTimeStamp
+            Implements IBaseDao.GetRecordDateTimeStamp
             Dim sql As String =
                     " Select top 1 " & dateTimeStampField & " FROM [" & tableName & "] " &
                     " Where IdNo = @IdNo "
@@ -254,7 +254,7 @@ Namespace AdoNet
         End Function
 
         Public Function IsFieldUnique(tableName As String, fieldName As String) As Boolean _
-            Implements ICommonDao.IsFieldUnique
+            Implements IBaseDao.IsFieldUnique
             Dim sql As String
             sql = "SELECT count(*) " &
                   "FROM sys.indexes i " &
@@ -278,7 +278,7 @@ Namespace AdoNet
 
         Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampValue As Byte,
                                          Optional ByVal timeStampedField As String = "DateTimeStamp") As Boolean _
-            Implements ICommonDao.HasRecordChanged
+            Implements IBaseDao.HasRecordChanged
             Dim sql As String = " Select count(*) FROM [" & tableName & "] " &
                                 " Where IdNo = @IdNo and timeStampedField = @timeStampValue "
             Dim params() As Object = {"@IDNo", idNo, "@timeStampValue", timeStampValue}
@@ -287,7 +287,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetLastSortKey(searchValue As String, tableName As String) As String _
-            Implements ICommonDao.GetLastSortKey
+            Implements IBaseDao.GetLastSortKey
             Dim sql As String
             If searchValue Is Nothing OrElse searchValue = "" Then
                 sql = " Select Top 1 SortKey FROM " & tableName &
@@ -311,7 +311,7 @@ Namespace AdoNet
 
         Public Function UpdateRecordWithIdNo (Of T)(idNo As Integer, tableName As String, fieldName As String,
                                                     value As T) As Integer _
-            Implements ICommonDao.UpdateRecordWithIdNo
+            Implements IBaseDao.UpdateRecordWithIdNo
             Dim sql As String =
                     " Update [" & tableName & "] " &
                     " Set " & fieldName & " = @Value" &
@@ -414,7 +414,7 @@ Namespace AdoNet
         'End Sub
 
         Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) _
-            Implements ICommonDao.GetRecords
+            Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
             Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
             Return Db.SqlRead(sql)
@@ -422,7 +422,7 @@ Namespace AdoNet
 
         Public Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                            ByVal ParamArray fieldNames() As String) _
-            Implements ICommonDao.GetRecordsFiltered
+            Implements IBaseDao.GetRecordsFiltered
             Dim fields = String.Join(",", fieldNames)
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
@@ -435,7 +435,7 @@ Namespace AdoNet
 
         Public Function GetSqlValue (Of TType)(sqlStatement As String, tableName As String, condition As String) _
             As TType _
-            Implements ICommonDao.GetSqlValue
+            Implements IBaseDao.GetSqlValue
             Dim sql As String =
                     " Select " & sqlStatement & " FROM [" & tableName & "] " &
                     " Where " & condition

@@ -4,7 +4,7 @@ Namespace AdoNet
     ' Data access object for User
     ' ** DAO Pattern
     Public Class UserDao
-        Inherits CommonDao
+        Inherits BaseDao
         Implements IUserDao
 
         Private Shared ReadOnly _db As New Db()

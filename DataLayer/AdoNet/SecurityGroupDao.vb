@@ -6,7 +6,7 @@ Namespace AdoNet
     ' ** DAO Pattern
 
     Public Class SecurityGroupDao
-        Inherits CommonDao
+        Inherits BaseDao
         Implements ISecurityGroupDao
 
         Private Shared ReadOnly Db As New Db()

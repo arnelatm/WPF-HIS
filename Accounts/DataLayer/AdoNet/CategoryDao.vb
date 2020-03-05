@@ -6,7 +6,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CategoryDao
-        Inherits AATM.DataLayer.AdoNet.CommonDao
+        Inherits AATM.DataLayer.AdoNet.BaseDao
         Implements ICategoryDao
 
         Private Shared ReadOnly Db As New Db()
