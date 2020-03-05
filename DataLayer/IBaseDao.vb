@@ -1,4 +1,4 @@
-﻿Public Interface ICommonDao
+﻿Public Interface IBaseDao
     'Function CheckIfUnique(control As Control, tableName As String, fieldName As String, targetIdNo As Int32)
     Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String, currentIdNo As Long) _
         As String

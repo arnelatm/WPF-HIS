@@ -29,7 +29,7 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Overridable Function GetServiceDao()
-            Return CommonDaoProp
+            Return BaseDaoProp
         End Function
 
     End Class

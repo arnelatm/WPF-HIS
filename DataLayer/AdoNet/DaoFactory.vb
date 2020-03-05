@@ -8,9 +8,9 @@ Namespace AdoNet
     Public Class DaoFactory
         Implements IDaoFactory
 
-        Public ReadOnly Property CommonDao As ICommonDao Implements IDaoFactory.CommonDao
+        Public ReadOnly Property BaseDao As IBaseDao Implements IDaoFactory.BaseDao
             Get
-                Return New CommonDao()
+                Return New BaseDao()
             End Get
         End Property
 

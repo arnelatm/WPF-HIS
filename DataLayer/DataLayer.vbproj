@@ -71,7 +71,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdoNet\CommonDao.vb" />
+    <Compile Include="AdoNet\BaseDao.vb" />
     <Compile Include="AdoNet\DaoFactory.vb" />
     <Compile Include="AdoNet\DB.vb" />
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
@@ -85,7 +85,7 @@
     <Compile Include="AdoNet\UserDao.vb" />
     <Compile Include="ISecurityObjectDao.vb" />
     <Compile Include="DaoFactories.vb" />
-    <Compile Include="ICommonDao.vb" />
+    <Compile Include="IBaseDao.vb" />
     <Compile Include="IDaoFactory.vb" />
     <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />

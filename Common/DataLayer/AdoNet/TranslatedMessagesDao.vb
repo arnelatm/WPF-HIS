@@ -6,7 +6,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class TranslatedMessagesDao
-        Inherits CommonDao
+        Inherits BaseDao
         Implements ITranslatedMessagesDao
 
         Private Shared ReadOnly Db As New Db("TRANSLATIONS")

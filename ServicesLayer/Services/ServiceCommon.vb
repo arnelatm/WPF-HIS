@@ -14,7 +14,7 @@ Namespace Services
         End Function
 
         Public Overridable Function GetCommonDao()
-            Return CommonDaoProp
+            Return BaseDaoProp
         End Function
 
     End Class

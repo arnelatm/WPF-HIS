@@ -3,7 +3,7 @@
 
 
 Public Interface IDaoFactory
-    ReadOnly Property CommonDao As ICommonDao
+    ReadOnly Property BaseDao As IBaseDao
 
     ReadOnly Property DefaultFieldValueDao As IDefaultFieldValueDao
     ReadOnly Property TblColPropDao As ITblColPropDao

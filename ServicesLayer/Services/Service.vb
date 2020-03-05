@@ -17,7 +17,7 @@ Namespace Services
         Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
-        Protected Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
+        Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly UserDao As IUserDao = Factory.UserDao
         Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
@@ -26,14 +26,14 @@ Namespace Services
 
         Public Property DataDao As Object
 
-        Public ReadOnly Property CommonDaoProp
+        Public ReadOnly Property BaseDaoProp
             Get
-                Return CommonDao
+                Return BaseDao
             End Get
         End Property
 
         Public Overridable Function GetDao() As Object
-            Return CommonDao
+            Return BaseDao
         End Function
 
         'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
@@ -97,7 +97,7 @@ Namespace Services
         End Function
 
         Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
-            Return CommonDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
+            Return BaseDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
         End Function
 
         Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Integer, ByRef dataModel As TM,
@@ -109,100 +109,100 @@ Namespace Services
 
         Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
             As Boolean Implements IService.CheckIfUnique
-            Return CommonDao.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
+            Return BaseDao.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
         End Function
 
         Public Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer _
             Implements IService.CountRecordWith2Key
-            Return CommonDao.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
+            Return BaseDao.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
         End Function
 
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer _
             Implements IService.CountRecordWithKey
-            Return CommonDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
+            Return BaseDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
         End Function
 
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer _
             Implements IService.DeleteRecord
-            Return CommonDao.DeleteRecord(idNo, tableName)
+            Return BaseDao.DeleteRecord(idNo, tableName)
         End Function
 
         Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer _
             Implements IService.FindField
-            Return CommonDao.FindField(tableName, fieldName, searchString, searchAnywhere)
+            Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere)
         End Function
 
         Public Function FindFieldContinue(tableName As String, idNo As Integer) As Integer _
             Implements IService.FindFieldContinue
-            Return CommonDao.FindFieldContinue(tableName, idNo)
+            Return BaseDao.FindFieldContinue(tableName, idNo)
         End Function
 
         Public Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) As Object _
             Implements IService.GetFilteredRecords
-            Return CommonDao.GetFilteredRecords(filterExpression, sortKey)
+            Return BaseDao.GetFilteredRecords(filterExpression, sortKey)
         End Function
 
         Public Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String Implements IService.GetLastSortKey
-            Return CommonDao.GetLastSortKey(searchValue, tableName)
+            Return BaseDao.GetLastSortKey(searchValue, tableName)
         End Function
 
         Public Function GetRecordCount(tableName As String) As Integer _
             Implements IService.GetRecordCount
-            Return CommonDao.GetRecordCount(tableName)
+            Return BaseDao.GetRecordCount(tableName)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object _
             Implements IService.GetRecordDateTimeStamp
-            Return CommonDao.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
+            Return BaseDao.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
         End Function
 
         Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String _
             Implements IService.GetRecordFieldWithKey
-            Return CommonDao.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
+            Return BaseDao.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String _
             Implements IService.GetRecordFieldWith2Key
-            Return CommonDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
+            Return BaseDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
         Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
             Implements IService.GetRecordPosition
-            Return CommonDao.GetRecordPosition(tableName, idNo)
+            Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
 
         Public Overloads Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecords
-            Return CommonDao.GetRecords(tableName, sortKey, fields)
+            Return BaseDao.GetRecords(tableName, sortKey, fields)
         End Function
 
         Public Overloads Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecordsFiltered
-            Return CommonDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
+            Return BaseDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
         End Function
 
         Public Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String _
             Implements IService.GetRecordWithIdNo
-            Return CommonDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
+            Return BaseDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
         Public Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
             Implements IService.GetSortedRecordNumber
-            Return CommonDao.GetSortedRecordNumber(recordNo, tableName, sortOrder)
+            Return BaseDao.GetSortedRecordNumber(recordNo, tableName, sortOrder)
         End Function
 
         Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer _
             Implements IService.GetSortedRecordPosition
-            Return CommonDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
+            Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
         End Function
 
         Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
             Implements IService.GetUserSecurity
-            Return CommonDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
 
         Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object,
                                          Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean _
             Implements IService.HasRecordChanged
-            Return CommonDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
+            Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
 
         '' ReSharper disable once UnusedMember.Local
@@ -238,7 +238,7 @@ Namespace Services
 
         '        Thread.Sleep(0)
 
-        '        'AdoNet.CommonDao.HasRecordChanged(eidNo, tableName, timeStampedValue, timeStampField)
+        '        'AdoNet.BaseDao.HasRecordChanged(eidNo, tableName, timeStampedValue, timeStampField)
 
         '        If e.Arguments.Count > 0 Then
         '            e.Result = e.Arguments(0).ToString()
