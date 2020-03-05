@@ -8,5 +8,6 @@ Public Class UserModel
     Public Property Password As String
     Public Property SecurityLevel As Int16
     Public Property SecurityGroupIdNo As Integer
-    Public Property SecurityGroupName As String
+    'Public Property SecurityGroupName As String
+    Public Errors As List(Of String)
 End Class

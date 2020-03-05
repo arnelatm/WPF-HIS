@@ -94,6 +94,7 @@ Public Class CFormEntry
         InitializeComponent()
         KeyPreview = True
 
+
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub

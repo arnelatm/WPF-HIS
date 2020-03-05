@@ -94,21 +94,6 @@ Public Enum AccountGroupSelection
 End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
-Public Enum SecurityLevelSelection
-    None
-    Guest
-    User1
-    User2
-    User3
-    Manager1
-    Manager2
-    Manager3
-    Administrator1
-    Administrator2
-    Administrator3
-End Enum
-
-<TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum DebitCreditSelection
     None
     Debit

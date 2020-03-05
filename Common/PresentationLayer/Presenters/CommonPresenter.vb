@@ -3,6 +3,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.Common.PresentationLayer.Models
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -19,24 +20,6 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
         End Sub
 
-#Region "GetLookupTable"
-
-        Private Property TableToGet As String
-        Private Property SortExpression As String
-        Private Property DisplayName As String
-        Private Property DisplayCode As String
-        Private Property DisplayNameArabic As String
-        Private Property FilterKey As String = Nothing
-        Private Property FieldsToShow As String()
-
-        Public Function GetSecurityGroupList(Optional ByVal sortKey As String = "SecurityGroupName")
-            TableToGet = "SecurityGroup"
-            SortExpression = sortKey
-            DisplayName = "SecurityGroupName"
-            DisplayNameArabic = "SecurityGroupNameAra"
-            DisplayCode = "SecurityGroupCode"
-            Return GetLookupDataByCode()
-        End Function
 
         Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
@@ -237,76 +220,7 @@ Namespace PresentationLayer.Presenters
             Next
             Return GetTableListFiltered()
         End Function
-
-        Private Function GetLookupDataByCode()
-            FormatFields()
-            Return CommonModel.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
-        End Function
-
-        Private Function GetLookupDataByName()
-            FormatFields()
-            Return CommonModel.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
-        End Function
-
-        Private Function GetLookupDataByNameWithCode()
-            FormatFields()
-            Return CommonModel.GetLookupDataByNameWithCode(TableToGet, SortExpression, FieldsToShow)
-        End Function
-
-        Private Function GetTableList()
-            FormatFields()
-            Return CommonModel.GetRecords(TableToGet, SortExpression, FieldsToShow)
-        End Function
-
-        Public Function GetTableListFiltered()
-            FormatFields()
-            Return CommonModel.GetRecordsFiltered(TableToGet, SortExpression, FilterKey, FieldsToShow)
-        End Function
-
-        Private Function GetLookupFilteredData()
-            FormatFields()
-            Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
-        End Function
-
-        Private Function GetLookupFilteredDataByName()
-            FormatFields()
-            Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
-        End Function
-
-        Private Function GetLookupFilteredDataByCode()
-            FormatFields()
-            Return CommonModel.GetLookupFilteredDataByCode(TableToGet, SortExpression, FilterKey, FieldsToShow)
-        End Function
-
-        Private Sub FormatFields()
-            Dim dFieldName As String
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                If SortExpression = DisplayName Then
-                    SortExpression = DisplayNameArabic
-                End If
-                dFieldName = DisplayNameArabic
-            Else
-                dFieldName = DisplayName
-            End If
-            FieldsToShow = {"IdNo", dFieldName, DisplayCode}
-        End Sub
-
-        Protected Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pTableToGet, pSortExpression, pFilterKey)
-            Dim dFieldName As String
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                If SortExpression = pDisplayName Then
-                    SortExpression = pDisplayNameArabic
-                End If
-                dFieldName = pDisplayNameArabic
-            Else
-                dFieldName = pDisplayName
-            End If
-            FieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-            Return CommonModel.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
-        End Function
-
-#End Region
-
+  
     End Class
 
 End Namespace

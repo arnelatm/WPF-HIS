@@ -73,8 +73,11 @@
     <Compile Include="BusinessObject.vb" />
     <Compile Include="BusinessObjects\Common.vb" />
     <Compile Include="BusinessObjects\DefaultFieldValue.vb" />
+    <Compile Include="BusinessObjects\GroupAccess.vb" />
     <Compile Include="BusinessObjects\Login.vb" />
     <Compile Include="BusinessObjects\Salt.vb" />
+    <Compile Include="BusinessObjects\SecurityGroup.vb" />
+    <Compile Include="BusinessObjects\SecurityObject.vb" />
     <Compile Include="BusinessObjects\User.vb" />
     <Compile Include="BusinessRules\BusinessRule.vb" />
     <Compile Include="BusinessRules\ValidateCompare.vb" />

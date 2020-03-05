@@ -1,10 +1,8 @@
 ﻿Imports System.Windows.Forms
 Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Common.ServiceLayer
-Imports AATM.Common.ServiceLayer.ActionServices
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters

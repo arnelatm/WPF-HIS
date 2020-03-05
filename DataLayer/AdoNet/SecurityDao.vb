@@ -3,6 +3,7 @@
     ' ** DAO Pattern
 
     Public Class SecurityDao
+        Inherits CommonDao
         Implements ISecurityDao
 
         Private Shared ReadOnly Db As New Db("ISPDATA")

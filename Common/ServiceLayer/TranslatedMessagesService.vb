@@ -1,8 +1,6 @@
 ﻿
 Imports System.Configuration
 Imports AATM.Common.DataLayer
-Imports AATM.Common.ServiceLayer.ActionServices
-Imports AATM.DataLayer
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer

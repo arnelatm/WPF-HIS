@@ -134,6 +134,7 @@
     <Compile Include="ServiceLayer\ActionService\ICategoryService.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
+    <Compile Include="MappingProfileAccounts.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AccountStrings.resx" />

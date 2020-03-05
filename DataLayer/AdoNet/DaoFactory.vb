@@ -1,4 +1,5 @@
 ﻿
+Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object factory
@@ -50,5 +51,22 @@ Namespace AdoNet
             End Get
         End Property
 
+        Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements IDaoFactory.SecurityObjectDao
+            Get
+                Return New SecurityObjectDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property GroupAccessDao As IGroupAccessDao Implements IDaoFactory.GroupAccessDao
+            Get
+                Return New GroupAccessDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property SecurityGroupDao As ISecurityGroupDao Implements IDaoFactory.SecurityGroupDao
+            Get
+                Return New SecurityGroupDao()
+            End Get
+        End Property
     End Class
 End Namespace

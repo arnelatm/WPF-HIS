@@ -69,6 +69,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupAccessesPresenter.vb" />
     <Compile Include="LoginPresenter.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -86,7 +87,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Presenter.vb" />
+    <Compile Include="SecurityGroupPresenter.vb" />
+    <Compile Include="SecurityGroupsPresenter.vb" />
+    <Compile Include="SecurityObjectPresenter.vb" />
+    <Compile Include="SecurityObjectsPresenter.vb" />
     <Compile Include="SecurityPresenter.vb" />
+    <Compile Include="UserPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
