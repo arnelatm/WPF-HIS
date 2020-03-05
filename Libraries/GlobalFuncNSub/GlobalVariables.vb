@@ -189,7 +189,9 @@ Public Class GlobalVariables
 
 #End Region
 
-    Public Shared Property Mapper As IMapper
+    Public Shared Property Mapper 
+    'Public Shared Property Mapper As IMapper
+    'Public Shared Property Mapper As MapperConfiguration
 
     Public Shared Property AppCurrentCultureInfo() As CultureInfo
         Get

@@ -1,7 +1,7 @@
 ﻿' defines methods to access groupAccesss.
 ' this is a database-independent interface. Implementations are database specific
 ' ** DAO Pattern
-Imports AATM.Common.BusinessLayer
+Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace DataLayer
 

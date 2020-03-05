@@ -2,6 +2,7 @@
 Imports System.Reflection
 Imports AATM.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace Services
 
@@ -18,6 +19,10 @@ Namespace Services
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Protected Shared ReadOnly CommonDao As ICommonDao = Factory.CommonDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
+        Protected Shared ReadOnly UserDao As IUserDao = Factory.UserDao
+        Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
+        Protected Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao()
+        Protected Shared ReadOnly GroupAccessDao As IGroupAccessDao = Factory.GroupAccessDao()
 
         Public Property DataDao As Object
 
@@ -26,14 +31,6 @@ Namespace Services
                 Return CommonDao
             End Get
         End Property
-
-        'Public Overridable Function GetDao() As Object
-        '    Return GetDao2()
-        'End Function
-
-        'Public Overridable Function GetDao2() As Object
-        '    Return CommonDao
-        'End Function
 
         Public Overridable Function GetDao() As Object
             Return CommonDao
@@ -268,5 +265,34 @@ Namespace Services
 
 #End Region
 
+    End Class
+
+    Public Class ServiceUser
+        Inherits Service
+
+        Public Overrides Function GetDao()
+            Return UserDao
+        End Function
+    End Class
+
+    Public Class ServiceSecurityObject
+        Inherits Service
+        Public Overrides Function GetDao()
+            Return SecurityObjectDao
+        End Function
+    End Class
+
+    Public Class ServiceSecurityGroup
+        Inherits Service
+        Public Overrides Function GetDao()
+            Return SecurityGroupDao
+        End Function
+    End Class
+    
+    Public Class ServiceGroupAccesses
+        Inherits Service
+        Public Overrides Function GetDao()
+            Return GroupAccessDao
+        End Function
     End Class
 End Namespace

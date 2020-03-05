@@ -50,6 +50,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Design.dll</HintPath>
@@ -64,6 +67,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -173,6 +177,7 @@
     <Compile Include="LoginEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MappingProfile.vb" />
     <Compile Include="MyMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -201,10 +206,28 @@
     <Compile Include="MessagesTableManager.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SecurityGroupEntryTv.designer.vb">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SecurityObjectEntryTv.designer.vb">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityObjectEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TranslationTableManager.Designer.vb">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
     </Compile>
     <Compile Include="TranslationTableManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserEntryTv.Designer.vb">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -262,8 +285,17 @@
     <EmbeddedResource Include="MessagesTableManager.resx">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SecurityGroupEntryTv.resx">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecurityObjectEntryTv.resx">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TranslationTableManager.resx">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserEntryTv.resx">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +315,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\BaseControlslibrary\BaseControlsLibrary.vbproj">
       <Project>{0e2c8945-f992-4cfc-bc92-cfa742fec933}</Project>
       <Name>BaseControlsLibrary</Name>

@@ -1,18 +1,15 @@
-﻿
-Imports System.Configuration
-Imports AATM.Accounts.DataLayer
-Imports AATM.Common.ServiceLayer.ActionServices
-Imports ServiceCommon = AATM.Common.ServiceLayer.ServiceCommon
+﻿Imports AATM.Accounts.DataLayer
+Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer.ActionService
 
     Public Class ServiceAccounts
         Inherits ServiceCommon
-        Implements ActionService.IServiceAccounts
+        Implements IServiceAccounts
 
         Protected Service As Object
 
-        Private Shared Shadows ReadOnly Provider As String = System.Configuration.ConfigurationManager.AppSettings.Get("DataProvider")
+        Private Shared Shadows ReadOnly Provider As String = Configuration.ConfigurationManager.AppSettings.Get("DataProvider")
         Private Shared Shadows ReadOnly Factory As IAccountsDaoFactory = AccountsDaoFactories.GetFactory(Provider)
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber

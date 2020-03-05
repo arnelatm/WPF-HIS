@@ -4,15 +4,16 @@ Namespace AdoNet
     ' Data access object for User
     ' ** DAO Pattern
     Public Class UserDao
+        Inherits CommonDao
         Implements IUserDao
 
         Private Shared ReadOnly _db As New Db()
 
-        Public Sub DeleteUser(user As User) Implements IUserDao.DeleteUser
+        Public Sub DeleteUser(user As User) Implements IUserDao.DeleteRecord
             Throw New NotImplementedException()
         End Sub
 
-        Public Function GetUser(idNo As Integer) As User Implements IUserDao.GetUser
+        Public Function GetRecordById(idNo As Integer) As User Implements IUserDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, UserName, Password, FullName, SecurityGroupIDNo " &
                     "   FROM [User]" &
@@ -21,19 +22,19 @@ Namespace AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetUserByUserName(userName As String) As User Implements IUserDao.GetUserByName
-            Throw New NotImplementedException()
+        Public Function GetUserByName(fullName As String) As User Implements IUserDao.GetUserByName
+            Throw New NotImplementedException
         End Function
 
-        Public Function GetUsers(Optional sortExpression As String = "FullName ASC") As List(Of User) _
-            Implements IUserDao.GetUsers
+        Public Function GetAll(Optional sortExpression As String = "FullName ASC") As List(Of User) _
+            Implements IUserDao.GetAll
             Dim sql As String =
                     " SELECT IDNo, UserName, Password, FullName, SecurityGroupIDNo " &
                     "   FROM [User] order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function InsertUser(user As User) As Integer Implements IUserDao.InsertUser
+        Public Function AddUser(user As User) As Integer Implements IUserDao.AddRecord
             Dim sql As String =
                     " INSERT INTO [User] " &
                     " (UserName,Password,FullName,SecurityGroupIDNo) " &
@@ -41,7 +42,7 @@ Namespace AdoNet
             Return _db.Insert(sql, Take(user))
         End Function
 
-        Public Function UpdateUser(user As User) As Integer Implements IUserDao.UpdateUser
+        Public Function UpdateRecord(user As User) As Integer Implements IUserDao.UpdateRecord
             Dim sql As String =
                     " UPDATE [User]" &
                     "    SET UserName = @UserName," &

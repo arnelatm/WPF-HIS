@@ -2,17 +2,12 @@
 Imports System.Threading
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Forms
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
 Imports AATM.PresentationLayer.Forms.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
@@ -71,18 +66,31 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub SetupMapper()
-            Dim mapperConfiguration = New MapperConfiguration(Function(cfg)
-                                                                  Return {cfg.CreateMap(Of Category, CategoryModel)().ReverseMap(),
-                                                                          cfg.CreateMap(Of CategoryModel, ICategoryView)().ReverseMap(),
-                                                                          cfg.CreateMap(Of ICategoryView, Category)(),
-                                                                          cfg.CreateMap(Of SecurityObject, SecurityObjectModel)().ReverseMap(),
-                                                                          cfg.CreateMap(Of SecurityObjectModel, ISecurityObjectView)().ReverseMap(),
-                                                                          cfg.CreateMap(Of ISecurityObjectView, SecurityObject)()
-                                                                          }
-                                                              End Function)
-            AccountsMapper = mapperConfiguration.CreateMapper()
-            mapperConfiguration.AssertConfigurationIsValid()
-            GlobalVariables.Mapper = AccountsMapper
+
+            Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
+                cfg.AddProfile(New MappingProfileAccounts)
+                cfg.AddProfile(New MappingProfile)
+            End Sub)
+            mapperConfigurationAccounts.AssertConfigurationIsValid()
+
+            'AccountsMapper = mapperConfigurationAccounts.CreateMapper()
+            GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
+
+            'Dim config = New MapperConfiguration(Function(cfg) Return { cfg.CreateMap(cfg.AddProfile(Of MappingProfile)() } End Function)
+
+            'Dim mapperConfiguration = New MapperConfiguration(Function(cfg)
+            '                                                      Return {cfg.CreateMap(Of Category, CategoryModel)().ReverseMap(),
+            '                                                              cfg.CreateMap(Of CategoryModel, ICategoryView)().ReverseMap(),
+            '                                                              cfg.CreateMap(Of ICategoryView, Category)(),
+            '                                                              cfg.CreateMap(Of SecurityObject, SecurityObjectModel)().ReverseMap(),
+            '                                                              cfg.CreateMap(Of SecurityObjectModel, ISecurityObjectView)().ReverseMap(),
+            '                                                              cfg.CreateMap(Of ISecurityObjectView, SecurityObject)(),
+            '                                                              cfg.AddMaps(Of MappingProfile)
+            '                                                              }
+            '                                                  End Function)
+            'AccountsMapper = mapperConfiguration.CreateMapper()
+            'mapperConfiguration.AssertConfigurationIsValid()
+            'GlobalVariables.Mapper = AccountsMapper
         End Sub
 
         Public Event FormCultureChanged()

@@ -70,12 +70,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultFieldValueModel.vb" />
+    <Compile Include="GroupAccessModel.vb" />
+    <Compile Include="ICommonModel.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelDefaultFieldValue.vb" />
     <Compile Include="IModelSecurity.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
+    <Compile Include="ModelCommon.vb" />
     <Compile Include="ModelLogin.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelTblColProp.vb" />
@@ -96,6 +99,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SaltModel.vb" />
+    <Compile Include="SecurityGroupModel.vb" />
+    <Compile Include="SecurityObjectModel.vb" />
     <Compile Include="TblColPropModel.vb" />
     <Compile Include="UserModel.vb" />
   </ItemGroup>
@@ -119,6 +124,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
       <Name>GlobalFuncNSub</Name>

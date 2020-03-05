@@ -1,6 +1,8 @@
-﻿Imports AATM.Libraries
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
+Imports AutoMapper
 
 ''' <summary>
 '''     The Model in MVP design pattern.
@@ -31,6 +33,7 @@ Public Class Model
             If BizObject IsNot Nothing Then
                 'Dim modelData As New TM
                 modelData = GlobalVariables.Mapper.Map(Of TM)(BizObject)
+                'modelData = Mapper.Map(Of TM)(BizObject)
             End If
         End If
         Return modelData
@@ -411,6 +414,60 @@ Public Class Model
 
     Public Function IsValid()
         Return BizObject.IsValid()
+    End Function
+
+End Class
+
+Public Class ModelUser
+    Inherits Model
+
+    Public Overrides Function GetDataService()
+        Return New ServiceUser
+    End Function
+
+    Public Shadows Function GetBo()
+        Return New User
+    End Function
+
+End Class
+
+Public Class ModelSecurityObject
+    Inherits Model
+
+    Public Overrides Function GetDataService()
+        Return New ServiceSecurityObject()
+    End Function
+
+    Public Shadows Function GetBo()
+        Return New SecurityObject
+    End Function
+
+End Class
+
+
+Public Class ModelSecurityGroup
+    Inherits Model
+
+    Public Overrides Function GetDataService()
+        Return New ServiceSecurityGroup()
+    End Function
+
+    Public Shadows Function GetBo()
+        Return New SecurityGroup
+    End Function
+
+End Class
+
+
+Public Class ModelGroupAccesses
+    Inherits Model
+
+    Public Overrides Function GetDataService()
+        Return New ServiceGroupAccesses()
+    End Function
+
+    Public Shadows Function GetBo()
+        Return New ModelGroupAccesses
     End Function
 
 End Class

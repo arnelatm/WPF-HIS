@@ -56,6 +56,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
+        CommonModel = New ModelCommon()
     End Sub
 
     Public Sub New(view As T)
@@ -202,7 +203,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(View, OriginalModel)
+        OriginalModel = GlobalVariables.Mapper.Map(Of T)(View)
     End Sub
 
     'Public Function GetTreeViewData(ByVal sortKey As String) As Object
@@ -722,4 +723,93 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Return Nothing
         End Try
     End Function
+
+#Region "GetLookupTable"
+    Protected Property TableToGet As String
+    Protected Property SortExpression As String
+    Protected Property DisplayName As String
+    Protected Property DisplayCode As String
+    Protected Property DisplayNameArabic As String
+    Protected Property FilterKey As String = Nothing
+    Protected Property FieldsToShow As String()
+
+    Public Function GetSecurityGroupList(Optional ByVal sortKey As String = "SecurityGroupName")
+        TableToGet = "SecurityGroup"
+        SortExpression = sortKey
+        DisplayName = "SecurityGroupName"
+        DisplayNameArabic = "SecurityGroupNameAra"
+        DisplayCode = "SecurityGroupCode"
+        Return GetLookupDataByCode()
+    End Function
+
+    Protected Function GetLookupDataByCode()
+        FormatFields()
+        Return CommonModel.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
+    End Function
+
+    Protected Function GetLookupDataByName()
+        FormatFields()
+        Return CommonModel.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
+    End Function
+
+    Protected Function GetLookupDataByNameWithCode()
+        FormatFields()
+        Return CommonModel.GetLookupDataByNameWithCode(TableToGet, SortExpression, FieldsToShow)
+    End Function
+
+    Protected Function GetTableList()
+        FormatFields()
+        Return CommonModel.GetRecords(TableToGet, SortExpression, FieldsToShow)
+    End Function
+
+    Protected Function GetTableListFiltered()
+        FormatFields()
+        Return CommonModel.GetRecordsFiltered(TableToGet, SortExpression, FilterKey, FieldsToShow)
+    End Function
+
+    Protected Function GetLookupFilteredData()
+        FormatFields()
+        Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
+    End Function
+
+    Protected Function GetLookupFilteredDataByName()
+        FormatFields()
+        Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
+    End Function
+
+    Protected Function GetLookupFilteredDataByCode()
+        FormatFields()
+        Return CommonModel.GetLookupFilteredDataByCode(TableToGet, SortExpression, FilterKey, FieldsToShow)
+    End Function
+
+    Protected Sub FormatFields()
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If SortExpression = DisplayName Then
+                SortExpression = DisplayNameArabic
+            End If
+            dFieldName = DisplayNameArabic
+        Else
+            dFieldName = DisplayName
+        End If
+        FieldsToShow = {"IdNo", dFieldName, DisplayCode}
+    End Sub
+
+    Protected Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pTableToGet, pSortExpression, pFilterKey)
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If SortExpression = pDisplayName Then
+                SortExpression = pDisplayNameArabic
+            End If
+            dFieldName = pDisplayNameArabic
+        Else
+            dFieldName = pDisplayName
+        End If
+        FieldsToShow = {"IdNo", dFieldName, pDisplayCode}
+        Return CommonModel.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
+    End Function
+
+#End Region
+
+
 End Class
