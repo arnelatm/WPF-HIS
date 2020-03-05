@@ -1,6 +1,7 @@
 ﻿
 Imports AATM.Common.ServiceLayer
 Imports AATM.PresentationLayer.Models
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Models
 

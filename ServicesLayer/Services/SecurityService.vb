@@ -27,14 +27,14 @@ Namespace Services
             Return SecurityDao.GetControlSecurityIdNo(searchValue)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurity
-            If Provider Is Nothing Then
-                Provider = ConfigurationManager.AppSettings.Get("DataProvider")
-                Factory = DaoFactories.GetFactory(Provider)
-                SecurityDao = Factory.SecurityDao
-            End If
-            Return SecurityDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-        End Function
+        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurity
+        '    If Provider Is Nothing Then
+        '        Provider = ConfigurationManager.AppSettings.Get("DataProvider")
+        '        Factory = DaoFactories.GetFactory(Provider)
+        '        SecurityDao = Factory.SecurityDao
+        '    End If
+        '    Return SecurityDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        'End Function
 
     End Class
 End NameSpace

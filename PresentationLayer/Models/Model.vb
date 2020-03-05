@@ -14,7 +14,7 @@ Public Class Model
     Protected BizObject
     Private Shared ReadOnly Service As New Service()
 
-    Public Property CommonService
+    'Public Property CommonService
 
     Public Property DataService As Object
 

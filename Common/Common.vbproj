@@ -94,6 +94,8 @@
     <Compile Include="PresentationLayer\Forms\FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
@@ -110,6 +112,8 @@
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IMainView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
+    <Compile Include="ServiceLayer\IServiceCommon.vb" />
+    <Compile Include="ServiceLayer\ServiceCommon.vb" />
     <Compile Include="ServiceLayer\TranslatedMessagesService.vb" />
   </ItemGroup>
   <ItemGroup>

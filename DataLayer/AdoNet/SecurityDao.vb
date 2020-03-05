@@ -21,13 +21,13 @@
             Return retVal.ToString()
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-            Implements ISecurityDao.GetUserSecurity
-            Dim params() As Object =
-                    {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
-            Dim sql =
-                    " SELECT top 1 Visible, Selectable, Viewable, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
-            Return Db.SqlRead(sql, params)
-        End Function
+        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        '    Implements ISecurityDao.GetUserSecurity
+        '    Dim params() As Object =
+        '            {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
+        '    Dim sql =
+        '            " SELECT top 1 Visible, Selectable, Viewable, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
+        '    Return Db.SqlRead(sql, params)
+        'End Function
     End Class
 End Namespace

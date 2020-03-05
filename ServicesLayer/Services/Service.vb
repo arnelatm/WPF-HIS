@@ -35,7 +35,7 @@ Namespace Services
         Public Overridable Function GetDao() As Object
             Return BaseDao
         End Function
-
+        
         'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
         '    Implements IService.GetRecords
         '    Dim p = PluralizationService.CreateService(New CultureInfo("en-US"))

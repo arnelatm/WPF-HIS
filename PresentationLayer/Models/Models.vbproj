@@ -71,14 +71,12 @@
   <ItemGroup>
     <Compile Include="DefaultFieldValueModel.vb" />
     <Compile Include="GroupAccessModel.vb" />
-    <Compile Include="ICommonModel.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelDefaultFieldValue.vb" />
     <Compile Include="IModelSecurity.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
-    <Compile Include="ModelCommon.vb" />
     <Compile Include="ModelLogin.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelTblColProp.vb" />
