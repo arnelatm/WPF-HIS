@@ -1,17 +1,17 @@
-﻿Imports AATM.PresentationLayer.Models
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class BranchPresenter
-        Inherits CommonPresenterOld(Of IBranchView, Branch, BranchModel)
+        Inherits CommonPresenter(Of IBranchView, BranchModel)
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)
+            CurrentModel = New ModelBranch
             TableName = "Branch"
             SortOrderKey = "BranchName"
             TreeViewMainField = "BranchName"
@@ -21,8 +21,6 @@ Namespace PresentationLayer.Presenters
             DataModel = New BranchModel
             DbDataDao = New BranchDao
             TreeViewList = New List(Of BranchModel)
-            'Model = New Model()
-            Model.SetService(New BranchService)
         End Sub
 
         Public Function GetBranchList(Optional ByVal sortKey As String = "") As List(Of BranchModel)
@@ -34,7 +32,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New BranchModel
-                MapObject(modData, modelTb)
+                GlobalSubs.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

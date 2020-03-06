@@ -8,6 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
+Imports AATM.Common.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Forms.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
@@ -69,6 +70,7 @@ Namespace PresentationLayer.Forms
 
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                 cfg.AddProfile(New MappingProfileAccounts)
+                cfg.AddProfile(New MappingProfileCommon)
                 cfg.AddProfile(New MappingProfile)
             End Sub)
             mapperConfigurationAccounts.AssertConfigurationIsValid()
@@ -583,16 +585,16 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub BranchesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemBranches.Click
-        '    Dim childMdiForm As BranchEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New BranchEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub BranchesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemBranches.Click
+            Dim childMdiForm As BranchEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New BranchEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
         '    Handles ToolStripMenuItemCashDisbursementEntry.Click

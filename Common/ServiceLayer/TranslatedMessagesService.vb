@@ -9,7 +9,7 @@ Namespace ServiceLayer
         Inherits ServiceCommon
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As ICommonDaoFactory = CommonDaoFactories.GetCommonFactory(Provider)
         Private Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = Factory.TranslatedMessagesDao
 
         Public Sub New()

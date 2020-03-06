@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** Factory Pattern
 
     Public Class CommonDaoFactory
-        Inherits AATM.DataLayer.AdoNet.DaoFactory
+        Inherits DaoFactory
         Implements ICommonDaoFactory
 
         'Sub New(logoutDao As ILogoutDao)
@@ -20,11 +20,17 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-        'Public ReadOnly Property BranchDao As IBranchDao Implements ICommonDaoFactory.BranchDao
-        '    Get
-        '        Return New BranchDao()
-        '    End Get
-        'End Property
+        Public ReadOnly Property CommonDao As ICommonDao Implements ICommonDaoFactory.CommonDao
+            Get
+                Return New CommonDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property BranchDao As IBranchDao Implements ICommonDaoFactory.BranchDao
+            Get
+                Return New BranchDao()
+            End Get
+        End Property
 
         'Public ReadOnly Property ProfitCenterDao As IProfitCenterDao Implements ICommonDaoFactory.ProfitCenterDao
         '    Get

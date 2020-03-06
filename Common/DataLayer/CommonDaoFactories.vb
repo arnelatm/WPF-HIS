@@ -11,7 +11,7 @@ Namespace DataLayer
 
         ' ** GoF Design Pattern: Factory
 
-        Public Shared Function GetFactory(dataProvider As String) As ICommonDaoFactory
+        Public Shared Function GetCommonFactory(dataProvider As String) As ICommonDaoFactory
             ' return the requested CommonDaoFactory
 
             Select Case dataProvider.ToLower()

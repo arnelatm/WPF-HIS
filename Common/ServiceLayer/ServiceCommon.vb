@@ -1,5 +1,5 @@
-﻿Imports AATM.Common.DataLayer
-Imports AATM.DataLayer
+﻿
+Imports AATM.Common.DataLayer
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer
@@ -8,8 +8,10 @@ Namespace ServiceLayer
         Inherits Service
         Implements IServiceCommon
 
-        Private Shared ReadOnly CommonFactory As ICommonDaoFactory = CommonDaoFactories.GetFactory(Provider)
-
+        Private Shared ReadOnly CommonFactory As ICommonDaoFactory = CommonDaoFactories.GetCommonFactory(Provider)
+        Protected Shared ReadOnly CommonDao As ICommonDao = CommonFactory.CommonDao
+        Protected Shared ReadOnly BranchDao As IBranchDao = CommonFactory.BranchDao
+        
         Public Overrides Function GetDao() As Object
             Return GetBaseDao()
         End Function
@@ -17,6 +19,16 @@ Namespace ServiceLayer
         Public Overridable Function GetBaseDao()
             Return BaseDaoProp
         End Function
+
+    End Class
+
+    Public Class ServiceBranch
+        Inherits ServiceCommon
+
+        Public Overrides Function GetDao()
+            Return BranchDao
+        End Function
+
 
     End Class
 
