@@ -6,14 +6,10 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class BranchDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IBranchDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetRecordById(idNo As Integer) As Branch Implements IBranchDao.GetRecordById
             Dim sql As String =

@@ -1,7 +1,7 @@
 ﻿
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.ServiceLayer
 Imports AATM.PresentationLayer.Models
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Models
 
@@ -18,8 +18,18 @@ Namespace PresentationLayer.Models
         End Function
 
     End Class
-
     
+    Public Class ModelBranch
+        Inherits ModelCommon
 
+        Public Overrides Function GetCommonService()
+            Return New ServiceBranch()
+        End Function
+
+        Public Shadows Function GetBo()
+            Return New Branch
+        End Function
+
+    End Class
 
 End NameSpace

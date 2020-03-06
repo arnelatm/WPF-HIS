@@ -7,9 +7,10 @@ Namespace DataLayer
     Public Interface ICommonDaoFactory
         Inherits IDaoFactory
 
+        ReadOnly Property CommonDao As ICommonDao
         'ReadOnly Property SecurityDao As ISecurityDao
         'ReadOnly Property CountryDao As ICountryDao
-        'ReadOnly Property BranchDao As IBranchDao
+        ReadOnly Property BranchDao As IBranchDao
         'ReadOnly Property ProfitCenterDao As IProfitCenterDao
         'ReadOnly Property CostCenterDao As ICostCenterDao
         'ReadOnly Property DepartmentDao As IDepartmentDao
