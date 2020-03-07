@@ -67,32 +67,13 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub SetupMapper()
-
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                 cfg.AddProfile(New MappingProfileAccounts)
                 cfg.AddProfile(New MappingProfileCommon)
                 cfg.AddProfile(New MappingProfile)
             End Sub)
             mapperConfigurationAccounts.AssertConfigurationIsValid()
-
-            'AccountsMapper = mapperConfigurationAccounts.CreateMapper()
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
-
-            'Dim config = New MapperConfiguration(Function(cfg) Return { cfg.CreateMap(cfg.AddProfile(Of MappingProfile)() } End Function)
-
-            'Dim mapperConfiguration = New MapperConfiguration(Function(cfg)
-            '                                                      Return {cfg.CreateMap(Of Category, CategoryModel)().ReverseMap(),
-            '                                                              cfg.CreateMap(Of CategoryModel, ICategoryView)().ReverseMap(),
-            '                                                              cfg.CreateMap(Of ICategoryView, Category)(),
-            '                                                              cfg.CreateMap(Of SecurityObject, SecurityObjectModel)().ReverseMap(),
-            '                                                              cfg.CreateMap(Of SecurityObjectModel, ISecurityObjectView)().ReverseMap(),
-            '                                                              cfg.CreateMap(Of ISecurityObjectView, SecurityObject)(),
-            '                                                              cfg.AddMaps(Of MappingProfile)
-            '                                                              }
-            '                                                  End Function)
-            'AccountsMapper = mapperConfiguration.CreateMapper()
-            'mapperConfiguration.AssertConfigurationIsValid()
-            'GlobalVariables.Mapper = AccountsMapper
         End Sub
 
         Public Event FormCultureChanged()
@@ -140,8 +121,6 @@ Namespace PresentationLayer.Forms
                 RaiseEvent FormCultureChanged()
             End Set
         End Property
-
-        'Protected Shared Property Service As New Service
 
         ''' <summary>
         '''     Opens the about dialog window.
@@ -611,43 +590,43 @@ Namespace PresentationLayer.Forms
         '    ShowEntryForm(ChartEntryTv)
         'End Sub
 
-        'Private Sub CostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemCostCenters.Click
-        '    Dim childMdiForm As CostCenterEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New CostCenterEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub CostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCostCenters.Click
+            Dim childMdiForm As CostCenterEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New CostCenterEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
-        'Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemCountries.Click
-        '    Dim childMdiForm As CountryEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New CountryEntryTv With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCountries.Click
+            Dim childMdiForm As CountryEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New CountryEntryTv With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
         '    Handles ToolStripMenuItemCustomersClients.Click
         '    ShowEntryForm(CustomerEntryTv)
         'End Sub
 
-        'Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemDepartments.Click
-        '    Dim childMdiForm As DepartmentEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New DepartmentEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemDepartments.Click
+            Dim childMdiForm As DepartmentEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New DepartmentEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesignationsToolStripMenuItem.Click
         '    Dim childMdiForm As DesignationEntryTv
@@ -789,59 +768,59 @@ Namespace PresentationLayer.Forms
         '    'labelAnnouncement.Visible = True
         'End Sub
 
-        'Private Sub MessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMessages.Click
-        '    Dim childMdiForm As OriginalMessagesEntryTv
-        '    childMdiForm = New OriginalMessagesEntryTv() With {.MdiParent = Me}
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub MessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMessages.Click
+            Dim childMdiForm As OriginalMessagesEntryTv
+            childMdiForm = New OriginalMessagesEntryTv() With {.MdiParent = Me}
+            childMdiForm.Show()
+        End Sub
 
-        'Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemPhoneTypes.Click
-        '    Dim childMdiForm As PhoneTypeEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New PhoneTypeEntryTv With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemPhoneTypes.Click
+            Dim childMdiForm As PhoneTypeEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New PhoneTypeEntryTv With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
-        'Private Sub ProfitCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemProfitCenters.Click
-        '    Dim childMdiForm As ProfitCenterEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New ProfitCenterEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ProfitCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemProfitCenters.Click
+            Dim childMdiForm As ProfitCenterEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New ProfitCenterEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
         '    ShowEntryForm(PurchaseJournalEntry)
         'End Sub
 
-        'Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemReligions.Click
-        '    Dim childMdiForm As ReligionEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New ReligionEntryTv With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemReligions.Click
+            Dim childMdiForm As ReligionEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New ReligionEntryTv With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
-        'Private Sub ReveneGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReveneGroupsToolStripMenuItem.Click
-        '    Dim childMdiForm As RevenueGroupEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New RevenueGroupEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ReveneGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReveneGroupsToolStripMenuItem.Click
+            Dim childMdiForm As RevenueGroupEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New RevenueGroupEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemSecurityGroups.Click

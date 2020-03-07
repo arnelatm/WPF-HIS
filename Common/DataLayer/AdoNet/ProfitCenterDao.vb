@@ -7,15 +7,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class ProfitCenterDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IProfitCenterDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
+        
         Public Function GetRecordById(idNo As Integer) As ProfitCenter Implements IProfitCenterDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &

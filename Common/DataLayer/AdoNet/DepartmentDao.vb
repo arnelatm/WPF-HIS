@@ -7,15 +7,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DepartmentDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IDepartmentDao
 
         Private Shared db As New Db()
-
-        Public Sub New()
-            DbCommon = db
-        End Sub
-
+        
         Public Function GetRecordById(idNo As Integer) As Department Implements IDepartmentDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &

@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class PhoneTypeModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property PhoneTypeCode As String
         Public Property PhoneTypeName As String
         Public Property PhoneTypeNameAra As String

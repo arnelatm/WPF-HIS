@@ -2,12 +2,12 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class OriginalMessagesPresenter
-        Inherits CommonPresenterOld(Of IOriginalMessagesView, OriginalMessages, OriginalMessagesModel)
+        Inherits CommonPresenter(Of IOriginalMessagesView, OriginalMessagesModel)
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)
@@ -20,7 +20,6 @@ Namespace PresentationLayer.Presenters
             DataModel = New OriginalMessagesModel
             DbDataDao = New OriginalMessagesDao
             TreeViewList = New List(Of OriginalMessagesModel)
-            Model.SetService(New OriginalMessagesService)
         End Sub
 
         Public Property TranslatedMessagesPresenter As TranslatedMessagesPresenter
@@ -34,7 +33,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New OriginalMessagesModel
-                MapObject(modData, modelTb)
+                GlobalVariables.Mapper.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

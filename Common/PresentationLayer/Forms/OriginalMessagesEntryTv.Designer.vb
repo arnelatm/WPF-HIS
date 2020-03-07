@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class OriginalMessagesEntryTv
-        Inherits BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -55,36 +55,36 @@ Namespace PresentationLayer.Forms
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.DisplayOnly = true
+        Me.TxtIDNo.EditingMode = true
         resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.EditingMode = true
         Me.TxtIDNo.TabStop = false
         '
         'txtMessageKey
         '
-        Me.txtMessageKey.AcceptsReturn = false
-        Me.txtMessageKey.AcceptsTab = false
         Me.txtMessageKey.BackColor = System.Drawing.Color.White
         Me.txtMessageKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMessageKey.ComputedValue = false
+        Me.txtMessageKey.CustomFormat = Nothing
         Me.txtMessageKey.DataBoundControl = true
+        Me.txtMessageKey.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtMessageKey, true)
         resources.ApplyResources(Me.txtMessageKey, "txtMessageKey")
         Me.txtMessageKey.ForeColor = System.Drawing.Color.Black
         Me.txtMessageKey.LinkedLabel = Me.lblMessageKey
         Me.txtMessageKey.Name = "txtMessageKey"
-        Me.txtMessageKey.EditingMode = false
+        Me.txtMessageKey.OldValue = Nothing
         Me.txtMessageKey.SecurityKey = "_DeveloperOnly"
         Me.txtMessageKey.TabStop = false
         Me.txtMessageKey.ValueIsMandatory = true
@@ -96,40 +96,41 @@ Namespace PresentationLayer.Forms
         '
         'txtMessage
         '
-        Me.txtMessage.AcceptsReturn = false
-        Me.txtMessage.AcceptsTab = false
         Me.txtMessage.BackColor = System.Drawing.Color.White
         Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMessage.ComputedValue = false
+        Me.txtMessage.CustomFormat = Nothing
         Me.txtMessage.DataBoundControl = true
+        Me.txtMessage.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtMessage, true)
         resources.ApplyResources(Me.txtMessage, "txtMessage")
         Me.txtMessage.ForeColor = System.Drawing.Color.Black
         Me.txtMessage.LinkedLabel = Nothing
         Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.EditingMode = false
+        Me.txtMessage.OldValue = Nothing
         Me.txtMessage.SecurityKey = "_DeveloperOnly"
         Me.txtMessage.ValueIsMandatory = true
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.EditingMode = false
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.SecurityKey = "_DeveloperOnly"
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
         '
         resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
         Me.floDataDisplay.Controls.Add(Me.lblMessageKey)
@@ -167,18 +168,18 @@ Namespace PresentationLayer.Forms
         '
         'txtTranslatedMessage
         '
-        Me.txtTranslatedMessage.AcceptsReturn = false
-        Me.txtTranslatedMessage.AcceptsTab = false
         Me.txtTranslatedMessage.BackColor = System.Drawing.Color.White
         Me.txtTranslatedMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTranslatedMessage.ComputedValue = false
+        Me.txtTranslatedMessage.CustomFormat = Nothing
         Me.txtTranslatedMessage.DataBoundControl = true
+        Me.txtTranslatedMessage.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedMessage, true)
         resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
         Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
         Me.txtTranslatedMessage.LinkedLabel = Me.lblTranslatedMessage
         Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
-        Me.txtTranslatedMessage.EditingMode = false
+        Me.txtTranslatedMessage.OldValue = Nothing
         Me.txtTranslatedMessage.ValueIsMandatory = true
         '
         'lblCaption
@@ -188,18 +189,18 @@ Namespace PresentationLayer.Forms
         '
         'txtCaption
         '
-        Me.txtCaption.AcceptsReturn = false
-        Me.txtCaption.AcceptsTab = false
         Me.txtCaption.BackColor = System.Drawing.Color.White
         Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCaption.ComputedValue = false
+        Me.txtCaption.CustomFormat = Nothing
         Me.txtCaption.DataBoundControl = true
+        Me.txtCaption.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtCaption, true)
         resources.ApplyResources(Me.txtCaption, "txtCaption")
         Me.txtCaption.ForeColor = System.Drawing.Color.Black
         Me.txtCaption.LinkedLabel = Nothing
         Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.EditingMode = false
+        Me.txtCaption.OldValue = Nothing
         Me.txtCaption.SecurityKey = "_DeveloperOnly"
         Me.txtCaption.ValueIsMandatory = true
         '
@@ -210,18 +211,18 @@ Namespace PresentationLayer.Forms
         '
         'txtTranslatedCaption
         '
-        Me.txtTranslatedCaption.AcceptsReturn = false
-        Me.txtTranslatedCaption.AcceptsTab = false
         Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
         Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTranslatedCaption.ComputedValue = false
+        Me.txtTranslatedCaption.CustomFormat = Nothing
         Me.txtTranslatedCaption.DataBoundControl = true
+        Me.txtTranslatedCaption.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, true)
         resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
         Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
         Me.txtTranslatedCaption.LinkedLabel = Nothing
         Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
-        Me.txtTranslatedCaption.EditingMode = false
+        Me.txtTranslatedCaption.OldValue = Nothing
         Me.txtTranslatedCaption.TabStop = false
         Me.txtTranslatedCaption.ValueIsMandatory = true
         '
@@ -232,53 +233,53 @@ Namespace PresentationLayer.Forms
         '
         'txtLanguageIdNo
         '
-        Me.txtLanguageIdNo.AcceptsReturn = false
-        Me.txtLanguageIdNo.AcceptsTab = false
         Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
         Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtLanguageIdNo.ComputedValue = false
+        Me.txtLanguageIdNo.CustomFormat = Nothing
         Me.txtLanguageIdNo.DataBoundControl = true
         Me.txtLanguageIdNo.DisplayOnly = true
+        Me.txtLanguageIdNo.EditingMode = true
         resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
         Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtLanguageIdNo.LinkedLabel = Nothing
         Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
+        Me.txtLanguageIdNo.OldValue = Nothing
         Me.txtLanguageIdNo.ReadOnly = true
-        Me.txtLanguageIdNo.EditingMode = true
         Me.txtLanguageIdNo.TabStop = false
         '
         'txtOriginalIdNo
         '
-        Me.txtOriginalIdNo.AcceptsReturn = false
-        Me.txtOriginalIdNo.AcceptsTab = false
         Me.txtOriginalIdNo.BackColor = System.Drawing.Color.White
         Me.txtOriginalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtOriginalIdNo.ComputedValue = false
+        Me.txtOriginalIdNo.CustomFormat = Nothing
         Me.txtOriginalIdNo.DataBoundControl = true
         Me.txtOriginalIdNo.DisplayOnly = true
+        Me.txtOriginalIdNo.EditingMode = true
         resources.ApplyResources(Me.txtOriginalIdNo, "txtOriginalIdNo")
         Me.txtOriginalIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtOriginalIdNo.LinkedLabel = Nothing
         Me.txtOriginalIdNo.Name = "txtOriginalIdNo"
+        Me.txtOriginalIdNo.OldValue = Nothing
         Me.txtOriginalIdNo.ReadOnly = true
-        Me.txtOriginalIdNo.EditingMode = true
         Me.txtOriginalIdNo.TabStop = false
         '
         'txtIdNoTranslated
         '
-        Me.txtIdNoTranslated.AcceptsReturn = false
-        Me.txtIdNoTranslated.AcceptsTab = false
         Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
         Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtIdNoTranslated.ComputedValue = false
+        Me.txtIdNoTranslated.CustomFormat = Nothing
         Me.txtIdNoTranslated.DataBoundControl = true
         Me.txtIdNoTranslated.DisplayOnly = true
+        Me.txtIdNoTranslated.EditingMode = true
         resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
         Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
         Me.txtIdNoTranslated.LinkedLabel = Nothing
         Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
+        Me.txtIdNoTranslated.OldValue = Nothing
         Me.txtIdNoTranslated.ReadOnly = true
-        Me.txtIdNoTranslated.EditingMode = true
         Me.txtIdNoTranslated.TabStop = false
         '
         'Button1

@@ -2,13 +2,12 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
-
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class RevenueGroupPresenter
-        Inherits CommonPresenterOld(Of IRevenueGroupView, RevenueGroup, RevenueGroupModel)
+        Inherits CommonPresenter(Of IRevenueGroupView, RevenueGroupModel)
 
         Public ParentViewList As List(Of RevenueGroupModel)
 
@@ -22,10 +21,10 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New RevenueGroupModel()
             BizObject = New RevenueGroup
             DataModel = New RevenueGroupModel
-            DbDataDao = New RevenueGroupDao
+            'DbDataDao = New RevenueGroupDao
             TreeViewList = New List(Of RevenueGroupModel)
             ParentViewList = New List(Of RevenueGroupModel)
-            Model.SetService(New RevenueGroupService)
+            'Model.SetService(New RevenueGroupService)
         End Sub
 
         Public Function GetParentList() As List(Of RevenueGroupModel)
@@ -37,7 +36,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New RevenueGroupModel
-                MapObject(modData, modelTb)
+                GlobalVariables.Mapper.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

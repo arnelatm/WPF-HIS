@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObject.vb" />
-    <Compile Include="BusinessObjects\Common.vb" />
     <Compile Include="BusinessObjects\DefaultFieldValue.vb" />
     <Compile Include="BusinessObjects\GroupAccess.vb" />
     <Compile Include="BusinessObjects\Login.vb" />

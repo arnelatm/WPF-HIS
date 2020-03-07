@@ -6,15 +6,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CountryDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements ICountryDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
+        
         'Public Function GetCountryByName(countryName As String) As Country Implements ICountryDao.GetCountryByName
         '    Throw New NotImplementedException
         'End Function

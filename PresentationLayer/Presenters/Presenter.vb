@@ -33,7 +33,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
 
     Protected Shared Property Model
-    Protected Shared Property CommonModel
     Protected Shared Property ModelTblColProp As IModelTblColProp
     Protected Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 
@@ -56,7 +55,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
-        'CommonModel = New ModelCommon()
     End Sub
 
     Public Sub New(view As T)
@@ -198,12 +196,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim modelData
         modelData = Model.GetRecordById(Of TM)(idNo)
         If modelData IsNot Nothing And modelData.IdNo > 0 Then
-            GlobalVariables.Mapper.Map(modelData, View)
+            GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
         End If
     End Sub
 
     Public Sub SaveOriginalValues()
-        OriginalModel = GlobalVariables.Mapper.Map(Of T)(View)
+        GlobalVariables.Mapper.Map(OF T, TM)(View, OriginalModel)
+        'GlobalVariables.Mapper.Map(Of TM)(View, Origin'alModel)
+        'GlobalVariables.Mapper.Map(View,OriginalModel)
     End Sub
 
     'Public Function GetTreeViewData(ByVal sortKey As String) As Object
@@ -244,14 +244,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function Save(ByRef addMode As Boolean)
         Dim retVal As Integer
-        'Dim record As New TM
-        GlobalVariables.Mapper.Map(View, BizObject)
+        Dim record As New TM
+        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         If addMode Then
-            NewlyAddedRecordIdNo = Model.AddRecord(BizObject)
+            NewlyAddedRecordIdNo = Model.AddRecord(record)
             retVal = NewlyAddedRecordIdNo
             BizObject.IdNo = retVal
         Else
-            retVal = Model.UpdateRecord(BizObject)
+            retVal = Model.UpdateRecord(record)
+            'retVal = Model.UpdateRecord(BizObject)
         End If
         Return retVal
     End Function
@@ -744,42 +745,42 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected Function GetLookupDataByCode()
         FormatFields()
-        Return CommonModel.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
+        Return Model.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
     End Function
 
     Protected Function GetLookupDataByName()
         FormatFields()
-        Return CommonModel.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
+        Return Model.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
     End Function
 
     Protected Function GetLookupDataByNameWithCode()
         FormatFields()
-        Return CommonModel.GetLookupDataByNameWithCode(TableToGet, SortExpression, FieldsToShow)
+        Return Model.GetLookupDataByNameWithCode(TableToGet, SortExpression, FieldsToShow)
     End Function
 
     Protected Function GetTableList()
         FormatFields()
-        Return CommonModel.GetRecords(TableToGet, SortExpression, FieldsToShow)
+        Return Model.GetRecords(TableToGet, SortExpression, FieldsToShow)
     End Function
 
     Protected Function GetTableListFiltered()
         FormatFields()
-        Return CommonModel.GetRecordsFiltered(TableToGet, SortExpression, FilterKey, FieldsToShow)
+        Return Model.GetRecordsFiltered(TableToGet, SortExpression, FilterKey, FieldsToShow)
     End Function
 
     Protected Function GetLookupFilteredData()
         FormatFields()
-        Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
+        Return Model.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
     End Function
 
     Protected Function GetLookupFilteredDataByName()
         FormatFields()
-        Return CommonModel.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
+        Return Model.GetLookupFilteredDataByName(TableToGet, SortExpression, FilterKey, FieldsToShow)
     End Function
 
     Protected Function GetLookupFilteredDataByCode()
         FormatFields()
-        Return CommonModel.GetLookupFilteredDataByCode(TableToGet, SortExpression, FilterKey, FieldsToShow)
+        Return Model.GetLookupFilteredDataByCode(TableToGet, SortExpression, FilterKey, FieldsToShow)
     End Function
 
     Protected Sub FormatFields()
@@ -806,7 +807,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             dFieldName = pDisplayName
         End If
         FieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-        Return CommonModel.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
+        Return Model.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
     End Function
 
 #End Region

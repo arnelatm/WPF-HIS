@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class CostCenterModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property ParentIdNo As Integer?
         Public Property CostCenterCode As String
         Public Property CostCenterName As String

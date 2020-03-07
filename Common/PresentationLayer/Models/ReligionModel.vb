@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class ReligionModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property ReligionCode As String
         Public Property ReligionName As String
         Public Property ReligionNameAra As String

@@ -22,6 +22,10 @@ Public Class Model
         Return Service
     End Function
 
+    Public Overridable Function GetBo() As Object
+        Return nothing
+    End Function
+
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
         Dim modelData As New TM
@@ -80,12 +84,21 @@ Public Class Model
         Return viewObject
     End Function
 
-    Public Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer _
+    Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
         Implements IModel.UpdateRecord
+        Dim bo = GetBo()
+        GlobalVariables.Mapper.Map(dataModel, Bo)
         Dim updateResult As Integer
-        updateResult = GetDataService().UpdateRecord(modelBiz)
+        updateResult = GetDataService().UpdateRecord(bo)
         Return updateResult
     End Function
+
+    'Public Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer _
+    '    Implements IModel.UpdateRecord
+    '    Dim updateResult As Integer
+    '    updateResult = GetDataService().UpdateRecord(modelBiz)
+    '    Return updateResult
+    'End Function
 
     'Public Function UpdateRecord(ByRef modelBiz As TBiz) As Integer _
     '    Implements IModel.UpdateRecord

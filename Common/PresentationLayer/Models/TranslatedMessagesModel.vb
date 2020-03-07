@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class TranslatedMessagesModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property OriginalIdNo As Integer
         Public Property LanguageIdNo As Integer
         Public Property TranslatedMessage As String

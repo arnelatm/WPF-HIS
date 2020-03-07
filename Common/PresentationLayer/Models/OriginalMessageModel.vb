@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class OriginalMessagesModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property MessageKey As String
         Public Property Message As String
         Public Property Caption As String
