@@ -1,18 +1,18 @@
 ﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class DepartmentPresenter
-        Inherits CommonPresenterOld(Of IDepartmentView, Department, DepartmentModel)
+        Inherits CommonPresenter(Of IDepartmentView, DepartmentModel)
 
         Public ParentViewList As List(Of DepartmentModel)
 
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
+            CurrentModel = New ModelDepartment
             TableName = "Department_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "DepartmentName"
@@ -21,10 +21,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New DepartmentModel()
             BizObject = New Department
             DataModel = New DepartmentModel
-            DbDataDao = New DepartmentDao
             TreeViewList = New List(Of DepartmentModel)
             ParentViewList = New List(Of DepartmentModel)
-            Model.SetService(New DepartmentService)
         End Sub
 
         'Public Function GetDepartmentList(Optional ByVal sortKey As String = "") As List(Of DepartmentModel)
@@ -51,7 +49,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New DepartmentModel
-                MapObject(modData, modelTb)
+                GlobalVariables.Mapper.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

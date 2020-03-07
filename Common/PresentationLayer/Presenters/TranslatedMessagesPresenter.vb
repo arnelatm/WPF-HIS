@@ -24,7 +24,6 @@ Namespace PresentationLayer.Presenters
             DataModel = New TranslatedMessagesModel
             'DbDataDao = New TranslatedMessagesDao
             TreeViewList = New List(Of TranslatedMessagesModel)
-            Model.SetService(New TranslatedMessagesService)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
             FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}
         End Sub

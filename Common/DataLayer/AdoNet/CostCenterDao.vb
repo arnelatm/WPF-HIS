@@ -7,14 +7,10 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CostCenterDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements ICostCenterDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetRecordById(idNo As Integer) As CostCenter Implements ICostCenterDao.GetRecordById
             Dim sql As String =

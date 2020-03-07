@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class RevenueGroupModel
-        Public Property IdNo As Integer
+        Inherits CommonModel
+
         Public Property ParentIdNo As Integer?
         Public Property RevenueGroupCode As String
         Public Property RevenueGroupName As String

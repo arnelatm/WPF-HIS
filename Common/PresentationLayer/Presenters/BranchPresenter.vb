@@ -19,7 +19,6 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New BranchModel()
             BizObject = New Branch
             DataModel = New BranchModel
-            DbDataDao = New BranchDao
             TreeViewList = New List(Of BranchModel)
         End Sub
 

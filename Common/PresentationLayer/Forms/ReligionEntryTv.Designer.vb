@@ -40,7 +40,7 @@
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.RightToLeftLayout = false
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 168)
         '
         'lblIDNo
         '
@@ -56,12 +56,13 @@
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
+        Me.TxtIDNo.DisplayOnly = true
+        Me.TxtIDNo.EditingMode = true
         Me.CFlowLayout1.SetFlowBreak(Me.TxtIDNo, true)
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
@@ -69,12 +70,11 @@
         Me.TxtIDNo.Location = New System.Drawing.Point(174, 1)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.EditingMode = true
         Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIDNo.TabIndex = 117
         Me.TxtIDNo.TabStop = false
-        Me.TxtIDNo.DisplayOnly = true
         '
         'lblReligionCode
         '
@@ -126,12 +126,12 @@
         '
         'txtReligionCode
         '
-        Me.txtReligionCode.AcceptsReturn = false
-        Me.txtReligionCode.AcceptsTab = false
         Me.txtReligionCode.BackColor = System.Drawing.Color.White
         Me.txtReligionCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtReligionCode.ComputedValue = false
+        Me.txtReligionCode.CustomFormat = Nothing
         Me.txtReligionCode.DataBoundControl = true
+        Me.txtReligionCode.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.txtReligionCode, true)
         Me.txtReligionCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionCode.ForeColor = System.Drawing.Color.Black
@@ -139,19 +139,19 @@
         Me.txtReligionCode.Location = New System.Drawing.Point(174, 26)
         Me.txtReligionCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionCode.Name = "txtReligionCode"
-        Me.txtReligionCode.EditingMode = false
+        Me.txtReligionCode.OldValue = Nothing
         Me.txtReligionCode.Size = New System.Drawing.Size(62, 23)
         Me.txtReligionCode.TabIndex = 118
         Me.txtReligionCode.ValueIsMandatory = true
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.txtNotes, true)
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
@@ -160,19 +160,19 @@
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.EditingMode = false
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.Size = New System.Drawing.Size(228, 44)
         Me.txtNotes.TabIndex = 121
         Me.txtNotes.ValueIsMandatory = true
         '
         'txtReligionNameAra
         '
-        Me.txtReligionNameAra.AcceptsReturn = false
-        Me.txtReligionNameAra.AcceptsTab = false
         Me.txtReligionNameAra.BackColor = System.Drawing.Color.White
         Me.txtReligionNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtReligionNameAra.ComputedValue = false
+        Me.txtReligionNameAra.CustomFormat = Nothing
         Me.txtReligionNameAra.DataBoundControl = true
+        Me.txtReligionNameAra.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.txtReligionNameAra, true)
         Me.txtReligionNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionNameAra.ForeColor = System.Drawing.Color.Black
@@ -180,19 +180,19 @@
         Me.txtReligionNameAra.Location = New System.Drawing.Point(174, 76)
         Me.txtReligionNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionNameAra.Name = "txtReligionNameAra"
-        Me.txtReligionNameAra.EditingMode = false
+        Me.txtReligionNameAra.OldValue = Nothing
         Me.txtReligionNameAra.Size = New System.Drawing.Size(228, 23)
         Me.txtReligionNameAra.TabIndex = 120
         Me.txtReligionNameAra.ValueIsMandatory = true
         '
         'txtReligionName
         '
-        Me.txtReligionName.AcceptsReturn = false
-        Me.txtReligionName.AcceptsTab = false
         Me.txtReligionName.BackColor = System.Drawing.Color.White
         Me.txtReligionName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtReligionName.ComputedValue = false
+        Me.txtReligionName.CustomFormat = Nothing
         Me.txtReligionName.DataBoundControl = true
+        Me.txtReligionName.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.txtReligionName, true)
         Me.txtReligionName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionName.ForeColor = System.Drawing.Color.Black
@@ -200,13 +200,14 @@
         Me.txtReligionName.Location = New System.Drawing.Point(174, 51)
         Me.txtReligionName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionName.Name = "txtReligionName"
-        Me.txtReligionName.EditingMode = false
+        Me.txtReligionName.OldValue = Nothing
         Me.txtReligionName.Size = New System.Drawing.Size(228, 23)
         Me.txtReligionName.TabIndex = 119
         Me.txtReligionName.ValueIsMandatory = true
         '
         'CFlowLayout1
         '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblIDNo)
         Me.CFlowLayout1.Controls.Add(Me.TxtIDNo)
         Me.CFlowLayout1.Controls.Add(Me.lblReligionCode)
@@ -224,7 +225,7 @@
         '
         'ReligionEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(737, 279)
+        Me.ClientSize = New System.Drawing.Size(737, 302)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "ReligionEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

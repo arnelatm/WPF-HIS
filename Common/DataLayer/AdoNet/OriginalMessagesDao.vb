@@ -7,14 +7,10 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class OriginalMessagesDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IOriginalMessagesDao
 
         Private Shared ReadOnly Db As New Db("TRANSLATIONS")
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IOriginalMessagesDao.GetRecordById
             Dim sql As String =

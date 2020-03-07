@@ -8,15 +8,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PhoneTypeDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IPhoneTypeDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
+        
         Public Function GetRecordById(idNo As Integer) As PhoneType Implements IPhoneTypeDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &

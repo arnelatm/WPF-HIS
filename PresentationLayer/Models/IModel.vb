@@ -94,7 +94,8 @@ Public Interface IModel
 
     'Function Login(userName As String, password As String) As Boolean
 
-    Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer
+    'Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer
+    Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
 
     Function UpdateTvp(ByRef dtTable As DataTable) As Integer
 

@@ -1,18 +1,18 @@
 ﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class CostCenterPresenter
-        Inherits CommonPresenterOld(Of ICostCenterView, CostCenter, CostCenterModel)
+        Inherits CommonPresenter(Of ICostCenterView, CostCenterModel)
 
         Public ParentViewList As List(Of CostCenterModel)
 
         Public Sub New(view As ICostCenterView)
             MyBase.New(view)
+            CurrentModel = New ModelCostCenter
             TableName = "CostCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "CostCenterName"
@@ -21,26 +21,9 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New CostCenterModel()
             BizObject = New CostCenter
             DataModel = New CostCenterModel
-            DbDataDao = New CostCenterDao
             TreeViewList = New List(Of CostCenterModel)
             ParentViewList = New List(Of CostCenterModel)
-            Model.SetService(New CostCenterService)
         End Sub
-
-        'Public Function GetCostCenterList(Optional ByVal sortKey As String = "") As List(Of CostCenterModel)
-        '    Dim xModel As New CostCenterModel
-        '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of CostCenterModel)(sortKey, xModel)
-        '    Dim modelData = Model.GetAll(Of CostCenterModel)(newSortOrderKey)
-        '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-        '        TreeViewList.Clear()
-        '    End If
-        '    For Each modData In modelData
-        '        Dim modelTb As New CostCenterModel
-        '        MapObject(modData, modelTb)
-        '        TreeViewList.Add(modelTb)
-        '    Next
-        '    Return TreeViewList
-        'End Function
 
         Public Function GetParentList() As List(Of CostCenterModel)
             Dim xModel As New CostCenterModel
@@ -51,7 +34,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New CostCenterModel
-                MapObject(modData, modelTb)
+                GlobalVariables.Mapper.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

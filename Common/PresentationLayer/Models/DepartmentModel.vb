@@ -1,7 +1,8 @@
 ﻿
 Namespace PresentationLayer.Models
     Public Class DepartmentModel
-        Public Property IdNo() As Integer
+        Inherits CommonModel
+
         Public Property DepartmentCode() As String
         Public Property DepartmentName() As String
         Public Property DepartmentNameAra() As String

@@ -1,13 +1,12 @@
 ﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer.ActionServices
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class ProfitCenterPresenter
-        Inherits CommonPresenterOld(Of IProfitCenterView, ProfitCenter, ProfitCenterModel)
+        Inherits CommonPresenter(Of IProfitCenterView, ProfitCenterModel)
 
         Public ParentViewList As List(Of ProfitCenterModel)
 
@@ -21,10 +20,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New ProfitCenterModel()
             BizObject = New ProfitCenter
             DataModel = New ProfitCenterModel
-            DbDataDao = New ProfitCenterDao
             TreeViewList = New List(Of ProfitCenterModel)
             ParentViewList = New List(Of ProfitCenterModel)
-            Model.SetService(New ProfitCenterService)
         End Sub
 
         Public Function GetParentList() As List(Of ProfitCenterModel)
@@ -36,7 +33,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New ProfitCenterModel
-                MapObject(modData, modelTb)
+                GlobalVariables.Mapper.MapObject(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

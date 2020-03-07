@@ -5,6 +5,10 @@ Namespace PresentationLayer.Models
     Public Interface IModelCommon
         Inherits IModel
 
+        Function GetDataService() As Object
+        Function GetCommonService() As Object
+        Function GetBo() As Object
+
 
         'Function GetRecordById(Of TM As New)(TableName As String, idNo As Integer) As TM
 

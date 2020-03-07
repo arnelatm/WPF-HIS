@@ -90,7 +90,6 @@
     <Compile Include="Services\IRepositories.vb" />
     <Compile Include="Services\ISecurityService.vb" />
     <Compile Include="Services\IService.vb" />
-    <Compile Include="Services\IServiceNew.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
     <Compile Include="Services\LoginService.vb" />
     <Compile Include="Services\SecurityService.vb" />

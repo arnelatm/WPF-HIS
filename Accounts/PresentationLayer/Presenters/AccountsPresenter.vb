@@ -25,51 +25,51 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetSupplierVatNumber(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
+            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
         End Function
 
         Public Function GetSupplierPaymentDueDays(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
+            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
         End Function
 
         Public Function GetSupplierSettlementDiscount(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
+            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
         End Function
 
         Public Function GetSupplierSettlementDueDays(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
+            Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
         End Function
 
         Public Function GetCustomerPaymentDueDays(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "PaymentDueDays")
+            Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "PaymentDueDays")
         End Function
 
         Public Function GetCustomerSettlementDiscount(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDiscount")
+            Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDiscount")
         End Function
 
         Public Function GetCustomerSettlementDueDays(idNo As String)
-            Return CommonModel.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
+            Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
         End Function
 
         Public Function IsAccountsPayableAccount(ByVal accountIdNo As Integer)
-            Return CommonModel.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
         End Function
 
         Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Integer)
-            Return CommonModel.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
         End Function
 
         Public Function IsInputVatAccount(ByVal accountIdNo As Integer)
-            Return CommonModel.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
         End Function
 
         Public Function GetAdvancesToSupplierAccountIdNo()
-            Return CommonModel.GetRecordFieldWithKey("AS", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("AS", "Chart", "SpecialAccount", "IdNo")
         End Function
 
         Public Function GetCustomerAdvancesAccountIdNo()
-            Return CommonModel.GetRecordFieldWithKey("AC", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("AC", "Chart", "SpecialAccount", "IdNo")
         End Function
 
         'Public Function GetChart(idNo As String)
