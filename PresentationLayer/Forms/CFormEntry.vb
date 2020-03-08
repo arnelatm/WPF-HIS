@@ -766,7 +766,7 @@ Public Class CFormEntry
         If AddMode OrElse ChangesMade() Then
             Dim errorList As String = ""
             Dim retValue As Integer = -1
-            If AutomaticValidationsOk() AndAlso DataIsValid(errorList) Then
+            If AutomaticValidationsOk() AndAlso DataIsValid() Then
                 If AddMode Then
                     retValue = SaveDataEntry()
                 Else
@@ -807,7 +807,6 @@ Public Class CFormEntry
                 End If
             End If
             If retValue < 1 Then
-
                 MyErrorProvider.ClearAllErrorMessages()
                 Dim lErrors = PresenterObj.GetErrors()
                 For Each _err In lErrors
@@ -824,10 +823,10 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Protected Overridable Function DataIsValid(ByRef errorList As String) As Boolean
+    Protected Overridable Function DataIsValid() As Boolean
         Dim retValue As Boolean = False
         RaiseEvent BeforeValidate()
-        If PresenterObj.DataIsValid(errorList) Then
+        If PresenterObj.DataIsValid() Then
             retValue = True
         End If
         Return retValue

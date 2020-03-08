@@ -258,8 +258,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function IsValid(ByRef pErrorList As String) As Boolean
         Dim result As Boolean
-        result = BizObject.IsValid()
-        _errorList = BizObject.Get
+        Dim record As New TM
+        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+        result = Model.IsValid(Of TM)(record)
+        _errorList = Model.GetErrors()
         Return result
     End Function
 
@@ -298,11 +300,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    Return True
     'End Function
 
-    Public Overridable Function DataIsValid(ByRef errorList As String) As Boolean
+    Public Overridable Function DataIsValid() As Boolean
         Dim retVal = False
         Dim modelRecord As New TM
-        GlobalVariables.Mapper.Map(Of T)(View, BizObject)
-        If BizObject.IsValid() Then ' (modelRecord, errorList) Then
+        GlobalVariables.Mapper.Map(Of T, TM)(View, modelRecord)
+        GlobalVariables.Mapper.Map(modelRecord, BizObject)
+        If BizObject.IsValid() Then
             retVal = True
         End If
         Return retVal
