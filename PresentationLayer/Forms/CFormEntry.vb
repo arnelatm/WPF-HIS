@@ -4,10 +4,10 @@ Imports System.Threading
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.Libraries
-Imports AATM.LIBRARIES.CBaseControlsLibrary
-Imports AATM.LIBRARIES.CustomControlsLibrary
-Imports AATM.LIBRARIES.GlobalFuncNSub
-Imports AATM.LIBRARIES.Languages
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.CustomControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Languages
 
 Public Class CFormEntry
     Inherits BfMain
@@ -93,7 +93,6 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
-
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -765,8 +764,9 @@ Public Class CFormEntry
 
     Public Sub Save()
         If AddMode OrElse ChangesMade() Then
+            Dim errorList As String = ""
             Dim retValue As Integer = -1
-            If AutomaticValidationsOk() AndAlso DataIsValid() Then
+            If AutomaticValidationsOk() AndAlso DataIsValid(errorList) Then
                 If AddMode Then
                     retValue = SaveDataEntry()
                 Else
@@ -807,9 +807,10 @@ Public Class CFormEntry
                 End If
             End If
             If retValue < 1 Then
-                Dim errorsList = PresenterObj.GetBizObjectErrors()
+
                 MyErrorProvider.ClearAllErrorMessages()
-                For Each _err In errorsList
+                Dim lErrors = PresenterObj.GetErrors()
+                For Each _err In lErrors
                     For Each ctrl In MyErrorProvider.Controls
                         If ctrl.errormessage = _err Then
                             MyErrorProvider.SetError(ctrl.ControlObj, _err)
@@ -823,10 +824,10 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Protected Overridable Function DataIsValid() As Boolean
+    Protected Overridable Function DataIsValid(ByRef errorList As String) As Boolean
         Dim retValue As Boolean = False
         RaiseEvent BeforeValidate()
-        If PresenterObj.DataIsValid() Then
+        If PresenterObj.DataIsValid(errorList) Then
             retValue = True
         End If
         Return retValue
@@ -888,6 +889,7 @@ Public Class CFormEntry
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
             End Try
+
             'TableDefaultFieldValues = PresenterObj.GetDefaultFieldValues()
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules

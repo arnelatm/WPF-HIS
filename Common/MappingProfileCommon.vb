@@ -8,15 +8,13 @@ Public Class MappingProfileCommon
     Inherits Profile
 
     Public Sub New()
-        ' copy BO to model ok
-        CreateMap(Of Branch, BranchModel)().ReverseMap()
-        ' copy model to view ok
-        CreateMap(Of BranchModel, IBranchView)().ReverseMap()
-        CreateMap(Of Department, DepartmentModel)().ReverseMap()
-        CreateMap(Of DepartmentModel, IDepartmentView)()
-        CreateMap(Of IDepartmentView, Department)()
+        CreateMap(Of Branch, BranchModel).ReverseMap()
+        CreateMap(Of BranchModel, IBranchView).ReverseMap()
+        CreateMap(Of Department, DepartmentModel).ReverseMap()
+        CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
+        CreateMap(Of Country, CountryModel).ReverseMap()
+        CreateMap(Of CountryModel, ICountryView).ReverseMap()
 
     End Sub
 
 End Class
-

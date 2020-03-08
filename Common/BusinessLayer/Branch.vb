@@ -9,9 +9,9 @@ Namespace BusinessLayer
         Inherits BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New()
-            If GetRules().Count() = 0 Then
-                ' establish business rules
+        Public Sub New(ByVal Optional validate As Boolean = False)
+            ' establish business rules
+            If validate Then
                 AddRule(New ValidateRequired("BranchName"))
             End If
         End Sub
@@ -22,4 +22,5 @@ Namespace BusinessLayer
         Public Property BranchNameAra As String
         Public Property Notes As String
     End Class
+
 End Namespace

@@ -6,7 +6,6 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class CategoryPresenter
         Inherits AccountsPresenter(Of ICategoryView, CategoryModel)
 
@@ -50,4 +49,5 @@ Namespace PresentationLayer.Presenters
         End Sub
 
     End Class
+
 End Namespace

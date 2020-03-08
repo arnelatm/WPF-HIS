@@ -23,7 +23,7 @@ Public Class Model
     End Function
 
     Public Overridable Function GetBo() As Object
-        Return nothing
+        Return Nothing
     End Function
 
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
@@ -43,13 +43,20 @@ Public Class Model
         Return modelData
     End Function
 
-    Public Overridable Function GetBo(ByRef model)
-        Return BizObject
-    End Function
+    'Public Overridable Function GetBo()
+    '    Return BizObject
+    'End Function
 
-    Public Overridable Function IsValid(ByRef model)
-        Return BizObject.IsValid()
-    End Function
+    'Public Overridable Function IsValid(ByRef errorList As String)
+    '    GlobalVariables.Mapper.Map(pModel, BizObject)
+    '    Dim result = BizObject.IsValid()
+    '    If Not result Then
+    '        For Each item In BizObject.Errors
+    '            errorList += item + Environment.NewLine
+    '        Next
+    '    End If
+    '    Return result
+    'End Function
 
     Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) _
         Implements IModel.GetAll
@@ -87,7 +94,7 @@ Public Class Model
     Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
         Implements IModel.UpdateRecord
         Dim bo = GetBo()
-        GlobalVariables.Mapper.Map(dataModel, Bo)
+        GlobalVariables.Mapper.Map(dataModel, bo)
         Dim updateResult As Integer
         updateResult = GetDataService().UpdateRecord(bo)
         Return updateResult
@@ -415,11 +422,9 @@ Public Class Model
         Return Service.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
     End Function
 
-
     Public Function GetBizObjectErrors()
         Return BizObject.GetBizObjectErrors()
     End Function
-
 
     Public Function GetBizObjectRules()
         Return BizObject.GetBizObjectRules()
@@ -457,7 +462,6 @@ Public Class ModelSecurityObject
 
 End Class
 
-
 Public Class ModelSecurityGroup
     Inherits Model
 
@@ -470,7 +474,6 @@ Public Class ModelSecurityGroup
     End Function
 
 End Class
-
 
 Public Class ModelGroupAccesses
     Inherits Model

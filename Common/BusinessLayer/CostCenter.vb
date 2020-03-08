@@ -9,8 +9,10 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
-            ' establish business rules
-            AddRule(New ValidateRequired("CostCenterName"))
+            If GetRules().Count() = 0 Then
+                ' establish business rules
+                AddRule(New ValidateRequired("CostCenterName"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -24,4 +26,5 @@ Namespace BusinessLayer
         Public Property SortKey As String
 
     End Class
-End NameSpace
+
+End Namespace

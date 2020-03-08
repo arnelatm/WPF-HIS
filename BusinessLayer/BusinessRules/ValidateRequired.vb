@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
+
 Namespace BusinessRules
     ' represents a validation rules that states that a value is required
 
@@ -8,6 +9,7 @@ Namespace BusinessRules
         Private ReadOnly _propertyNames() As String
 
         Public Sub New(propertyName As String)
+
             MyBase.New(propertyName)
             [Error] = propertyName & " is a required field."
         End Sub
@@ -66,5 +68,7 @@ Namespace BusinessRules
             ' note: reflection is relatively slow
             Return businessObject.GetType().GetProperty(propertyName).GetValue(businessObject, Nothing)
         End Function
+
     End Class
+
 End Namespace

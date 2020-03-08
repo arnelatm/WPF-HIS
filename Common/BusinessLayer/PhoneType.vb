@@ -2,16 +2,18 @@
 
 Namespace BusinessLayer
 
-' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
+    ' Category business object
+    ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
     Public Class PhoneType
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
-            ' establish business rules
-            AddRule(New ValidateRequired("PhoneTypeName"))
+            If GetRules().Count() = 0 Then
+                ' establish business rules
+                AddRule(New ValidateRequired("PhoneTypeName"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -20,4 +22,5 @@ Namespace BusinessLayer
         Public Property PhoneTypeNameAra As String
         Public Property Notes As String
     End Class
-End NameSpace
+
+End Namespace

@@ -58,16 +58,16 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             MapObject(View, BizObject, FieldSavingMappingDictionary)
             If Model.IsValid() Then
-                If DataIsValid() Then
-                    If addMode Or Model.IdNo = 0 Then
-                        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(BizObject)
-                        retVal = NewlyAddedRecordIdNo
-                    Else
+                'If DataIsValid() Then
+                '    If addMode Or Model.IdNo = 0 Then
+                '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(BizObject)
+                '        retVal = NewlyAddedRecordIdNo
+                '    Else
 
-                        retVal = Model.UpdateRecord(Model)
+                '        retVal = Model.UpdateRecord(Model)
 
-                    End If
-                End If
+                '    End If
+                'End If
             Else
                 Dim errorList As String = ""
                 For Each bizError In Model.Errors
