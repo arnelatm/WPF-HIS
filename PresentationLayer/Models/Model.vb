@@ -430,8 +430,11 @@ Public Class Model
         Return BizObject.GetBizObjectRules()
     End Function
 
-    Public Function IsValid()
-        Return BizObject.IsValid()
+    Public Function IsValid(Of TM)(ByRef dModel As TM)
+        Dim bo = GetBo()
+        GlobalVariables.Mapper.Map(dModel, bo)
+        Return bo.IsValid()
+        'Return GetDataService.IsValid(dModel)
     End Function
 
 End Class

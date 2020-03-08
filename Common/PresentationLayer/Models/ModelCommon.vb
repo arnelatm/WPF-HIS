@@ -1,5 +1,4 @@
-﻿
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.Common.ServiceLayer
 Imports AATM.PresentationLayer.Models
 
@@ -22,7 +21,7 @@ Namespace PresentationLayer.Models
         End Function
 
     End Class
-    
+
     Public Class ModelBranch
         Inherits ModelCommon
 
@@ -31,7 +30,7 @@ Namespace PresentationLayer.Models
         End Function
 
         Public Overrides Function GetBo()
-            Return New Branch
+            Return New Branch(True)
         End Function
 
     End Class
@@ -44,7 +43,7 @@ Namespace PresentationLayer.Models
         End Function
 
         Public Overrides Function GetBo()
-            Return New CostCenter
+            Return New CostCenter()
         End Function
 
     End Class
@@ -140,5 +139,4 @@ Namespace PresentationLayer.Models
 
     End Class
 
-
-End NameSpace
+End Namespace

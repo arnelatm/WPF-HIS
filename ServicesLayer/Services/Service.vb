@@ -35,7 +35,7 @@ Namespace Services
         Public Overridable Function GetDao() As Object
             Return BaseDao
         End Function
-        
+
         'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
         '    Implements IService.GetRecords
         '    Dim p = PluralizationService.CreateService(New CultureInfo("en-US"))
@@ -252,15 +252,15 @@ Namespace Services
             Return Nothing
         End Function
 
-
         Public Function GetBizObjectRules()
             'Return GetBO.GetBizObjectRules()
             Return Nothing
         End Function
 
         'Public Function IsValid()
+        '    Dim bizObject = GetBo()
         '    Return GetBO.IsValid()
-        '    'Return Nothing
+        '    Return Nothing
         'End Function
 
 #End Region
@@ -273,26 +273,34 @@ Namespace Services
         Public Overrides Function GetDao()
             Return UserDao
         End Function
+
     End Class
 
     Public Class ServiceSecurityObject
         Inherits Service
+
         Public Overrides Function GetDao()
             Return SecurityObjectDao
         End Function
+
     End Class
 
     Public Class ServiceSecurityGroup
         Inherits Service
+
         Public Overrides Function GetDao()
             Return SecurityGroupDao
         End Function
+
     End Class
-    
+
     Public Class ServiceGroupAccesses
         Inherits Service
+
         Public Overrides Function GetDao()
             Return GroupAccessDao
         End Function
+
     End Class
+
 End Namespace
