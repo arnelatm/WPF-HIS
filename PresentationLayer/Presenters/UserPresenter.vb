@@ -2,7 +2,6 @@
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
-
 Public Class UserPresenter
     Inherits Presenter(Of IUserView, UserModel)
 

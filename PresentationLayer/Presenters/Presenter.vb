@@ -20,8 +20,10 @@ Imports AATM.PresentationLayer.Views
 Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
+
     Protected BizObject
     Protected DataModel
+
     Protected TreeViewMainField As String
     Protected TreeViewSecondaryField As String
     Protected TreeViewParentIdField As String
@@ -76,12 +78,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Function GetBizObjectRules()
-        'Return Model.GetBizObjectRules()
         Return BizObject.GetRules()
     End Function
 
     Public Function GetBizObjectErrors()
-        'Return Model.GetBizObjectErrors()
         Return BizObject.GetErrors()
     End Function
 
@@ -201,7 +201,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(OF T, TM)(View, OriginalModel)
+        GlobalVariables.Mapper.Map(Of T, TM)(View, OriginalModel)
         'GlobalVariables.Mapper.Map(Of TM)(View, Origin'alModel)
         'GlobalVariables.Mapper.Map(View,OriginalModel)
     End Sub
@@ -249,19 +249,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         If addMode Then
             NewlyAddedRecordIdNo = Model.AddRecord(record)
             retVal = NewlyAddedRecordIdNo
-            BizObject.IdNo = retVal
+            CallByName(View, "IdNo", CallType.Set, retVal)
         Else
             retVal = Model.UpdateRecord(record)
-            'retVal = Model.UpdateRecord(BizObject)
         End If
         Return retVal
     End Function
 
-    Public Function IsValid() As Boolean
-        Return BizObject.IsValid()
+    Public Function IsValid(ByRef pErrorList As String) As Boolean
+        Dim result As Boolean
+        result = BizObject.IsValid()
+        _errorList = BizObject.Get
+        Return result
     End Function
 
-    Private errorList As String = ""
+    Private _errorList As String = ""
 
     'Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
     '    If additionalMessage IsNot Nothing Then
@@ -274,36 +276,34 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'End Sub
 
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
-        Dim errorList = ""
         If additionalMessage IsNot Nothing Then
-            errorList = additionalMessage + Environment.NewLine
+            _errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In Model.Errors
-            If errorList.Contains(bizError & Environment.NewLine) Then
+        For Each bizError In BizObject.Errors
+            If _errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
-                errorList = errorList & bizError & Environment.NewLine
+                _errorList = _errorList & bizError & Environment.NewLine
             End If
         Next
-        MessageBox.Show(errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
+
+    Public Function GetErrors() As List(Of String)
+        Return BizObject.GetErrors()
+    End Function
 
     'Public OverLoads Overridable Function DataIsValid()
     '    '' override this and enter any validation rules you want to add to the presenter.
     '    Return True
     'End Function
 
-    Public Overridable Function DataIsValid() As Boolean
+    Public Overridable Function DataIsValid(ByRef errorList As String) As Boolean
         Dim retVal = False
-
-        'GlobalVariables.Mapper.Map(View, BizObject)
-        If Model.IsValid() Then
+        Dim modelRecord As New TM
+        GlobalVariables.Mapper.Map(Of T)(View, BizObject)
+        If BizObject.IsValid() Then ' (modelRecord, errorList) Then
             retVal = True
-        Else
-            errorList = ""
-            For Each bizError In Model.Errors
-                errorList = errorList & bizError & Environment.NewLine
-            Next
         End If
         Return retVal
     End Function
@@ -726,6 +726,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
 #Region "GetLookupTable"
+
     Protected Property TableToGet As String
     Protected Property SortExpression As String
     Protected Property DisplayName As String
@@ -811,6 +812,5 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
 #End Region
-
 
 End Class

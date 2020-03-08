@@ -1,6 +1,5 @@
 ﻿Imports AATM.BusinessLayer.BusinessRules
 
-
 ' abstract business object class
 ' ** Enterprise Design Pattern: Domain Model
 Public MustInherit Class BusinessObject
@@ -46,7 +45,7 @@ Public MustInherit Class BusinessObject
         Return _rules
     End Function
 
-    Public Function GetErrors()
+    Public Function GetErrors() As List(Of String)
         Return _errors
     End Function
 
