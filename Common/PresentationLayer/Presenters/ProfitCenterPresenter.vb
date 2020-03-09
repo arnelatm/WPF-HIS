@@ -12,6 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IProfitCenterView)
             MyBase.New(view)
+            ModelPresenter = New ModelProfitCenter
             TableName = "ProfitCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "ProfitCenterName"

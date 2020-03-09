@@ -22,6 +22,10 @@ Public Class MappingProfileCommon
         CreateMap(Of PhoneTypeModel, IPhoneTypeView).ReverseMap()
         CreateMap(Of Religion, ReligionModel).ReverseMap()
         CreateMap(Of ReligionModel, IReligionView).ReverseMap()
+        CreateMap(Of RevenueGroup, RevenueGroupModel).ReverseMap()
+        CreateMap(Of RevenueGroupModel, IRevenueGroupView).ReverseMap()
+        CreateMap(Of TranslatedMessages, TranslatedMessagesModel).ReverseMap()
+        CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView).ReverseMap()
         'CreateMap(Of OriginalMessage, OriginalMessageModel).ReverseMap()
         'CreateMap(Of OriginalMessageModel, IOriginalMessageView).ReverseMap()
     End Sub

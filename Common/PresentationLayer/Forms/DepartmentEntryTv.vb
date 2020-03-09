@@ -166,6 +166,22 @@ Namespace PresentationLayer.Forms
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
         End Sub
 
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"DepartmentCode", txtDepartmentCode},
+                {"DepartmentName", txtDepartmentName},
+                {"DepartmentNameAra", txtDepartmentNameAra},
+                {"IDNo", TxtIDNo},
+                {"ParentIdNo", cacParentIdNo},
+                {"CostCenterIdNo", cacCostCenterIdNo},
+                {"ProfitCenterIdNo", cacProfitCenterIdNo},
+                {"ParentId", TxtIDNo},
+                {"Notes", txtNotes}
+                }
+        End Sub
+
+
     End Class
 
 End Namespace

@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
-            ModelController = New ModelDepartment
+            ModelPresenter = New ModelDepartment
             TableName = "Department_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "DepartmentName"

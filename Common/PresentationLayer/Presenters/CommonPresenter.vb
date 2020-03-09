@@ -1,9 +1,6 @@
-﻿Imports System.Globalization
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
+﻿Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.Common.PresentationLayer.Models
-Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -220,7 +217,7 @@ Namespace PresentationLayer.Presenters
             Next
             Return GetTableListFiltered()
         End Function
-  
+
     End Class
 
 End Namespace

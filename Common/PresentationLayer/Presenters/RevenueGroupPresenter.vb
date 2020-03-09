@@ -13,6 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IRevenueGroupView)
             MyBase.New(view)
+            ModelPresenter = New ModelRevenueGroup
             TableName = "RevenueGroup_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"
@@ -21,10 +22,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New RevenueGroupModel()
             DataBizObject = New RevenueGroup
             DataModel = New RevenueGroupModel
-            'DbDataDao = New RevenueGroupDao
             TreeViewList = New List(Of RevenueGroupModel)
             ParentViewList = New List(Of RevenueGroupModel)
-            'Model.SetService(New RevenueGroupService)
         End Sub
 
         Public Function GetParentList() As List(Of RevenueGroupModel)

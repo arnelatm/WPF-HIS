@@ -7,7 +7,7 @@ Public Class SecurityGroupPresenter
 
     Public Sub New(view As ISecurityGroupView)
         MyBase.New(view)
-        ModelController = New ModelSecurityGroup
+        ModelPresenter = New ModelSecurityGroup
         TableName = "SecurityGroup"
         SortOrderKey = "SecurityGroupName"
         TreeViewMainField = "SecurityGroupName"

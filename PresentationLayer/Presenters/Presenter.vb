@@ -45,7 +45,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Shared SecurityModel As New Model
 
-    Public Property ModelController
+    Public Property ModelPresenter
         Get
             Return Model
         End Get

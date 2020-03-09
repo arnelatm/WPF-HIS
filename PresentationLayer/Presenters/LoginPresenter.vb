@@ -17,7 +17,7 @@ Public Class LoginPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As IView)
         MyBase.New(view)
-        ModelController = New ModelLogin()
+        ModelPresenter = New ModelLogin()
         TableName = "Login"
         OriginalModel = New LoginModel()
         DataModel = New LoginModel

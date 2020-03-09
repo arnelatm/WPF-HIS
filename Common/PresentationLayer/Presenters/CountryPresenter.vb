@@ -11,6 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICountryView)
             MyBase.New(view)
+            ModelPresenter = New ModelCountry
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"
@@ -18,7 +19,6 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New CountryModel()
             DataBizObject = New Country
             DataModel = New CountryModel
-            'DbDataDao = New CountryDao
             TreeViewList = New List(Of CountryModel)
             ParentViewList = New List(Of CountryModel)
         End Sub
