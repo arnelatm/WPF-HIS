@@ -6,9 +6,8 @@ Namespace PresentationLayer.Models
         Inherits IModel
 
         Function GetDataService() As Object
-        Function GetCommonService() As Object
-        Function GetBo() As Object
 
+        Function GetCommonService() As Object
 
         'Function GetRecordById(Of TM As New)(TableName As String, idNo As Integer) As TM
 
@@ -16,4 +15,4 @@ Namespace PresentationLayer.Models
 
     End Interface
 
-End NameSpace
+End Namespace

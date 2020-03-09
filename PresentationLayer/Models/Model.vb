@@ -22,10 +22,6 @@ Public Class Model
         Return Service
     End Function
 
-    Public Overridable Function GetBo() As Object
-        Return Nothing
-    End Function
-
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
         Dim modelData As New TM
@@ -42,10 +38,6 @@ Public Class Model
         End If
         Return modelData
     End Function
-
-    'Public Overridable Function GetBo()
-    '    Return DataBizObject
-    'End Function
 
     'Public Overridable Function IsValid(ByRef errorList As String)
     '    GlobalVariables.Mapper.Map(pModel, DataBizObject)
@@ -430,10 +422,8 @@ Public Class Model
     End Function
 
     Public Function IsValid(Of TM)(ByRef dModel As TM)
-        Dim bo = GetBo()
-        GlobalVariables.Mapper.Map(dModel, bo)
-        Return bo.IsValid()
-        'Return GetDataService.IsValid(dModel)
+        GlobalVariables.Mapper.Map(dModel, DataBizObject)
+        Return DataBizObject.IsValid()
     End Function
 
 End Class
@@ -445,10 +435,6 @@ Public Class ModelUser
         Return New ServiceUser
     End Function
 
-    Public Shadows Function GetBo()
-        Return New User
-    End Function
-
 End Class
 
 Public Class ModelSecurityObject
@@ -456,10 +442,6 @@ Public Class ModelSecurityObject
 
     Public Overrides Function GetDataService()
         Return New ServiceSecurityObject()
-    End Function
-
-    Public Shadows Function GetBo()
-        Return New SecurityObject
     End Function
 
 End Class
@@ -471,10 +453,6 @@ Public Class ModelSecurityGroup
         Return New ServiceSecurityGroup()
     End Function
 
-    Public Shadows Function GetBo()
-        Return New SecurityGroup
-    End Function
-
 End Class
 
 Public Class ModelGroupAccesses
@@ -482,10 +460,6 @@ Public Class ModelGroupAccesses
 
     Public Overrides Function GetDataService()
         Return New ServiceGroupAccesses()
-    End Function
-
-    Public Shadows Function GetBo()
-        Return New ModelGroupAccesses
     End Function
 
 End Class

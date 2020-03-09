@@ -17,10 +17,6 @@ Namespace PresentationLayer.Models
             Return New ServiceCommon()
         End Function
 
-        Public Overrides Function GetBo() Implements IModelCommon.GetBo
-            Return Nothing
-        End Function
-
     End Class
 
     Public Class ModelBranch
@@ -41,10 +37,6 @@ Namespace PresentationLayer.Models
             Return New ServiceCostCenter()
         End Function
 
-        Public Overrides Function GetBo()
-            Return New CostCenter()
-        End Function
-
     End Class
 
     Public Class ModelCountry
@@ -52,10 +44,6 @@ Namespace PresentationLayer.Models
 
         Public Overrides Function GetCommonService()
             Return New ServiceCountry()
-        End Function
-
-        Public Overrides Function GetBo()
-            Return New Country
         End Function
 
     End Class
@@ -67,10 +55,6 @@ Namespace PresentationLayer.Models
             Return New ServiceDepartment()
         End Function
 
-        Public Overrides Function GetBo()
-            Return New Department
-        End Function
-
     End Class
 
     Public Class ModelOriginalMessages
@@ -78,10 +62,6 @@ Namespace PresentationLayer.Models
 
         Public Overrides Function GetCommonService()
             Return New ServiceOriginalMessages()
-        End Function
-
-        Public Overrides Function GetBo()
-            Return New OriginalMessages
         End Function
 
     End Class
@@ -93,10 +73,6 @@ Namespace PresentationLayer.Models
             Return New ServiceProfitCenter()
         End Function
 
-        Public Overrides Function GetBo()
-            Return New ProfitCenter
-        End Function
-
     End Class
 
     Public Class ModelReligion
@@ -104,10 +80,6 @@ Namespace PresentationLayer.Models
 
         Public Overrides Function GetCommonService()
             Return New ServiceReligion()
-        End Function
-
-        Public Overrides Function GetBo()
-            Return New Religion
         End Function
 
     End Class
@@ -119,10 +91,6 @@ Namespace PresentationLayer.Models
             Return New ServiceRevenueGroup()
         End Function
 
-        Public Overrides Function GetBo()
-            Return New RevenueGroup
-        End Function
-
     End Class
 
     Public Class ModelTranslatedMessages
@@ -130,10 +98,6 @@ Namespace PresentationLayer.Models
 
         Public Overrides Function GetCommonService()
             Return New ServiceTranslatedMessages()
-        End Function
-
-        Public Overrides Function GetBo()
-            Return New TranslatedMessages
         End Function
 
     End Class

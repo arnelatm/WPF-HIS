@@ -19,7 +19,7 @@ Public Class SecurityObjectsPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As ISecurityObjectsView)
         MyBase.New(view)
-        CurrentModel = New ModelSecurityObject
+        ModelController = New ModelSecurityObject
         TableName = "SecurityObject"
         SortOrderKey = "SecurityObjectName"
         TreeViewMainField = "SecurityObjectName"

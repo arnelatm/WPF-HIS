@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICostCenterView)
             MyBase.New(view)
-            CurrentModel = New ModelCostCenter
+            ModelController = New ModelCostCenter
             TableName = "CostCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "CostCenterName"

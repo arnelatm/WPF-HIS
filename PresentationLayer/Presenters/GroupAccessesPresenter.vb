@@ -21,7 +21,7 @@ Public Class GroupAccessesPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As IGroupAccessesView)
         MyBase.New(view)
-        CurrentModel = New ModelGroupAccesses
+        ModelController = New ModelGroupAccesses
         TableName = "GroupAccess_View"
         SortOrderKey = "SecurityGroupIDNo"
         OriginalModel = New GroupAccessModel()
@@ -29,10 +29,6 @@ Public Class GroupAccessesPresenter
         DataModel = New GroupAccessModel
         DbDataDao = New GroupAccessDao
         DataService = New ServiceGroupAccesses
-        'Model.SetService(New GroupAccessService)
-        'Dim modelSecurityObject = New SecurityObjectDisplayModel()
-        'SecurityObjects = modelSecurityObject.GetAll(Of SecurityObjectModel)("SecurityObjectName")
-
     End Sub
 
     ''' <summary>

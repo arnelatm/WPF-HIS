@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICategoryView)
             MyBase.New(view)
-            CurrentModel = New ModelCategory()
+            ModelController = New ModelCategory()
             TableName = "Category"
             SortOrderKey = "IdNo"
             TreeViewMainField = "CategoryName"
