@@ -15,14 +15,14 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedMessagesView)
             MyBase.New(view)
+            ModelPresenter = New ModelTranslatedMessages
             TableName = "TranslatedMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New TranslatedMessagesModel()
-            'DataBizObject = New TranslatedMessages
+            DataBizObject = New TranslatedMessages
             DataModel = New TranslatedMessagesModel
-            'DbDataDao = New TranslatedMessagesDao
             TreeViewList = New List(Of TranslatedMessagesModel)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
             FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}

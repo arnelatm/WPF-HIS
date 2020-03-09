@@ -56,7 +56,7 @@ Namespace PresentationLayer.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 251)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 245)
         '
         'LocalizableContent1
         '

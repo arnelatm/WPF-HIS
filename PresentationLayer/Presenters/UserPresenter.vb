@@ -9,7 +9,7 @@ Public Class UserPresenter
 
     Public Sub New(view As IUserView)
         MyBase.New(view)
-        ModelController = New ModelUser
+        ModelPresenter = New ModelUser
         TableName = "User"
         SortOrderKey = "FullName"
         TreeViewMainField = "FullName"

@@ -1,5 +1,4 @@
 ﻿Imports AATM.Common.DataLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer

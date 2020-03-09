@@ -18,7 +18,6 @@ Namespace PresentationLayer.Forms
             SortOrderKey = "PhoneTypeName"
             FirstControl = txtPhoneTypeCode
             ' Add any initialization after the InitializeComponent() call.
-            'Dim model = New PhoneTypeModel
             PresenterObj = New PhoneTypePresenter(Me)
             '_PhoneTypeesPresenter = New PhoneTypesPresenter(Me)
             'CreateEnumResourceFile()
@@ -83,6 +82,18 @@ Namespace PresentationLayer.Forms
             MyErrorProvider.Controls.AddMandatory(txtPhoneTypeName, "PhoneType Name in English")
             'Set summary error message
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+        End Sub
+
+        
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"PhoneTypeCode", txtPhoneTypeCode},
+                {"PhoneTypeName", txtPhoneTypeName},
+                {"PhoneTypeNameAra", txtPhoneTypeNameAra},
+                {"IDNo", TxtIDNo},
+                {"Notes", txtNotes}
+                }
         End Sub
 
     End Class

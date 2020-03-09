@@ -11,6 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)
+            ModelPresenter = New ModelOriginalMessages
             TableName = "OriginalMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"

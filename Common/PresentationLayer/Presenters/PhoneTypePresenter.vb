@@ -9,6 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPhoneTypeView)
             MyBase.New(view)
+            ModelPresenter = New ModelPhoneType
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"

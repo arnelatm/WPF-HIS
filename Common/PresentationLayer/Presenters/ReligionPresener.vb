@@ -10,6 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
+            ModelPresenter = New ModelReligion
             TableName = "Religion"
             SortOrderKey = "ReligionName"
             TreeViewMainField = "ReligionName"

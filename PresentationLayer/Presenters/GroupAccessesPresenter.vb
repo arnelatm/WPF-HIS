@@ -21,7 +21,7 @@ Public Class GroupAccessesPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As IGroupAccessesView)
         MyBase.New(view)
-        ModelController = New ModelGroupAccesses
+        ModelPresenter = New ModelGroupAccesses
         TableName = "GroupAccess_View"
         SortOrderKey = "SecurityGroupIDNo"
         OriginalModel = New GroupAccessModel()

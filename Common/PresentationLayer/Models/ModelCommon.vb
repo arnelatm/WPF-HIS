@@ -102,4 +102,13 @@ Namespace PresentationLayer.Models
 
     End Class
 
+    Public Class ModelPhoneType
+        Inherits ModelCommon
+
+        Public Overrides Function GetCommonService()
+            Return New ServicePhoneType()
+        End Function
+
+    End Class
+
 End Namespace

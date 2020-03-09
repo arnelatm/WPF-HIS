@@ -7,7 +7,7 @@ Public Class SecurityObjectPresenter
 
     Public Sub New(view As ISecurityObjectView)
         MyBase.New(view)
-        ModelController = New ModelSecurityObject
+        ModelPresenter = New ModelSecurityObject
         TableName = "SecurityObject"
         SortOrderKey = "SecurityObjectName"
         TreeViewMainField = "SecurityObjectName"

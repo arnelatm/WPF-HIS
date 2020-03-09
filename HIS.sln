@@ -56,6 +56,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00-8C55-479E-94C2-19679791F55C}"
 	ProjectSection(SolutionItems) = preProject
 		CostCenter_View.sql = CostCenter_View.sql
+		ProfitCenter.sql = ProfitCenter.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"

@@ -43,17 +43,17 @@ Namespace PresentationLayer.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.RightToLeftLayout = false
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 194)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 180)
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
+        Me.TxtIDNo.DisplayOnly = true
+        Me.TxtIDNo.EditingMode = true
         Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
@@ -61,21 +61,20 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Location = New System.Drawing.Point(189, 1)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.EditingMode = true
         Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIDNo.TabIndex = 0
         Me.TxtIDNo.TabStop = false
-        Me.TxtIDNo.DisplayOnly = true
         '
         'txtPhoneTypeCode
         '
-        Me.txtPhoneTypeCode.AcceptsReturn = false
-        Me.txtPhoneTypeCode.AcceptsTab = false
         Me.txtPhoneTypeCode.BackColor = System.Drawing.Color.White
         Me.txtPhoneTypeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPhoneTypeCode.ComputedValue = false
+        Me.txtPhoneTypeCode.CustomFormat = Nothing
         Me.txtPhoneTypeCode.DataBoundControl = true
+        Me.txtPhoneTypeCode.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeCode, true)
         Me.txtPhoneTypeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPhoneTypeCode.ForeColor = System.Drawing.Color.Black
@@ -83,19 +82,19 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeCode.Location = New System.Drawing.Point(189, 26)
         Me.txtPhoneTypeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeCode.Name = "txtPhoneTypeCode"
-        Me.txtPhoneTypeCode.EditingMode = false
+        Me.txtPhoneTypeCode.OldValue = Nothing
         Me.txtPhoneTypeCode.Size = New System.Drawing.Size(100, 23)
         Me.txtPhoneTypeCode.TabIndex = 152
         Me.txtPhoneTypeCode.ValueIsMandatory = true
         '
         'txtPhoneTypeName
         '
-        Me.txtPhoneTypeName.AcceptsReturn = false
-        Me.txtPhoneTypeName.AcceptsTab = false
         Me.txtPhoneTypeName.BackColor = System.Drawing.Color.White
         Me.txtPhoneTypeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPhoneTypeName.ComputedValue = false
+        Me.txtPhoneTypeName.CustomFormat = Nothing
         Me.txtPhoneTypeName.DataBoundControl = true
+        Me.txtPhoneTypeName.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeName, true)
         Me.txtPhoneTypeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPhoneTypeName.ForeColor = System.Drawing.Color.Black
@@ -103,19 +102,19 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeName.Location = New System.Drawing.Point(189, 51)
         Me.txtPhoneTypeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeName.Name = "txtPhoneTypeName"
-        Me.txtPhoneTypeName.EditingMode = false
+        Me.txtPhoneTypeName.OldValue = Nothing
         Me.txtPhoneTypeName.Size = New System.Drawing.Size(388, 23)
         Me.txtPhoneTypeName.TabIndex = 154
         Me.txtPhoneTypeName.ValueIsMandatory = true
         '
         'txtPhoneTypeNameAra
         '
-        Me.txtPhoneTypeNameAra.AcceptsReturn = false
-        Me.txtPhoneTypeNameAra.AcceptsTab = false
         Me.txtPhoneTypeNameAra.BackColor = System.Drawing.Color.White
         Me.txtPhoneTypeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPhoneTypeNameAra.ComputedValue = false
+        Me.txtPhoneTypeNameAra.CustomFormat = Nothing
         Me.txtPhoneTypeNameAra.DataBoundControl = true
+        Me.txtPhoneTypeNameAra.EditingMode = false
         Me.txtPhoneTypeNameAra.EnglishControl = Me.txtPhoneTypeName
         Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeNameAra, true)
         Me.txtPhoneTypeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
@@ -124,19 +123,19 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeNameAra.Location = New System.Drawing.Point(189, 76)
         Me.txtPhoneTypeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeNameAra.Name = "txtPhoneTypeNameAra"
-        Me.txtPhoneTypeNameAra.EditingMode = false
+        Me.txtPhoneTypeNameAra.OldValue = Nothing
         Me.txtPhoneTypeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtPhoneTypeNameAra.Size = New System.Drawing.Size(388, 23)
         Me.txtPhoneTypeNameAra.TabIndex = 156
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
@@ -144,7 +143,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.EditingMode = false
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.Size = New System.Drawing.Size(388, 60)
         Me.txtNotes.TabIndex = 3
         Me.txtNotes.ValueIsMandatory = true
@@ -152,6 +151,7 @@ Namespace PresentationLayer.Forms
         'floDataDisplay
         '
         Me.floDataDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
         Me.floDataDisplay.Controls.Add(Me.lblPhoneTypeCode)
@@ -165,7 +165,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Location = New System.Drawing.Point(309, 3)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(587, 180)
+        Me.floDataDisplay.Size = New System.Drawing.Size(598, 180)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -225,10 +225,10 @@ Namespace PresentationLayer.Forms
         '
         'PhoneTypeEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(897, 251)
+        Me.ClientSize = New System.Drawing.Size(907, 268)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "PhoneTypeEntryTv"
-        Me.Text = "Branches Maintenance Form"
+        Me.Text = "Phone Type Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

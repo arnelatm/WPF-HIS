@@ -1,5 +1,4 @@
 ﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)
-            ModelController = New ModelBranch
+            ModelPresenter = New ModelBranch
             TableName = "Branch"
             SortOrderKey = "BranchName"
             TreeViewMainField = "BranchName"
@@ -31,7 +30,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New BranchModel
-                GlobalSubs.MapObject(modData, modelTb)
+                GlobalVariables.Mapper.Map(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList
