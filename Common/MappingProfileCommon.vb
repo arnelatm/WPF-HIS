@@ -12,9 +12,18 @@ Public Class MappingProfileCommon
         CreateMap(Of BranchModel, IBranchView).ReverseMap()
         CreateMap(Of Department, DepartmentModel).ReverseMap()
         CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
+        CreateMap(Of CostCenter, CostCenterModel).ReverseMap()
+        CreateMap(Of CostCenterModel, ICostCenterView).ReverseMap()
         CreateMap(Of Country, CountryModel).ReverseMap()
         CreateMap(Of CountryModel, ICountryView).ReverseMap()
-
+        CreateMap(Of ProfitCenter, ProfitCenterModel).ReverseMap()
+        CreateMap(Of ProfitCenterModel, IProfitCenterView).ReverseMap()
+        CreateMap(Of PhoneType, PhoneTypeModel).ReverseMap()
+        CreateMap(Of PhoneTypeModel, IPhoneTypeView).ReverseMap()
+        CreateMap(Of Religion, ReligionModel).ReverseMap()
+        CreateMap(Of ReligionModel, IReligionView).ReverseMap()
+        'CreateMap(Of OriginalMessage, OriginalMessageModel).ReverseMap()
+        'CreateMap(Of OriginalMessageModel, IOriginalMessageView).ReverseMap()
     End Sub
 
 End Class

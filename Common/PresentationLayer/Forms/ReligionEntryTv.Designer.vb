@@ -1,7 +1,9 @@
-﻿Namespace PresentationLayer.Forms
+﻿Imports AATM.PresentationLayer.Forms
+
+Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class ReligionEntryTv
-        Inherits AATM.PresentationLayer.Forms.BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -40,7 +42,7 @@
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 168)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 163)
         '
         'lblIDNo
         '
@@ -225,7 +227,7 @@
         '
         'ReligionEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(737, 302)
+        Me.ClientSize = New System.Drawing.Size(925, 255)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "ReligionEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
@@ -250,4 +252,4 @@ End Sub
         Friend WithEvents txtReligionName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
     End Class
-End NameSpace
+End Namespace

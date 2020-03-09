@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "PhoneTypeName"
             TreeViewSecondaryField = "PhoneTypeCode"
             OriginalModel = New PhoneTypeModel
-            BizObject = New PhoneType
+            DataBizObject = New PhoneType
             DataModel = New PhoneTypeModel
             TreeViewList = New List(Of PhoneTypeModel)
         End Sub

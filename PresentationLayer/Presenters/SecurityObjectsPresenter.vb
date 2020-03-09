@@ -25,10 +25,8 @@ Public Class SecurityObjectsPresenter
         TreeViewMainField = "SecurityObjectName"
         TreeViewSecondaryField = ""
         OriginalModel = New SecurityObjectModel()
-        BizObject = New SecurityObject
+        DataBizObject = New SecurityObject
         DataModel = New SecurityObjectModel
-        'DbDataDao = New SecurityObjectDao
-        'Model.SetService(New SecurityObjectService)
     End Sub
 
     ''' <summary>

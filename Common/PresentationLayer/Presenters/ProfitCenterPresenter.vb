@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "ProfitCenterCode"
             TreeViewParentIdField = "ParentIdNo"
             OriginalModel = New ProfitCenterModel()
-            BizObject = New ProfitCenter
+            DataBizObject = New ProfitCenter
             DataModel = New ProfitCenterModel
             TreeViewList = New List(Of ProfitCenterModel)
             ParentViewList = New List(Of ProfitCenterModel)

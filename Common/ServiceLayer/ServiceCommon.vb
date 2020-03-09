@@ -1,5 +1,4 @@
-﻿
-Imports AATM.Common.DataLayer
+﻿Imports AATM.Common.DataLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.ServicesLayer.Services
 
@@ -21,7 +20,7 @@ Namespace ServiceLayer
         Protected Shared ReadOnly ReligionDao As IReligionDao = CommonFactory.ReligionDao
         Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = CommonFactory.RevenueGroupDao
         Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = CommonFactory.TranslatedMessagesDao
-        
+
         Public Overrides Function GetDao() As Object
             Return GetBaseDao()
         End Function
@@ -38,6 +37,7 @@ Namespace ServiceLayer
         Public Overrides Function GetDao()
             Return BranchDao
         End Function
+
     End Class
 
     Public Class ServiceCostCenter
@@ -46,6 +46,7 @@ Namespace ServiceLayer
         Public Overrides Function GetDao()
             Return CostCenterDao
         End Function
+
     End Class
 
     Public Class ServiceCountry
@@ -54,6 +55,7 @@ Namespace ServiceLayer
         Public Overrides Function GetDao()
             Return CountryDao
         End Function
+
     End Class
 
     Public Class ServiceDepartment
@@ -62,6 +64,7 @@ Namespace ServiceLayer
         Public Overrides Function GetDao()
             Return DepartmentDao
         End Function
+
     End Class
 
     Public Class ServiceOriginalMessages
@@ -70,46 +73,52 @@ Namespace ServiceLayer
         Public Overrides Function GetDao()
             Return OriginalMessagesDao
         End Function
+
     End Class
-    
+
     Public Class ServicePhoneType
         Inherits ServiceCommon
 
         Public Overrides Function GetDao()
             Return PhoneTypeDao
         End Function
+
     End Class
-    
+
     Public Class ServiceProfitCenter
         Inherits ServiceCommon
 
         Public Overrides Function GetDao()
             Return ProfitCenterDao
         End Function
+
     End Class
-    
+
     Public Class ServiceReligion
         Inherits ServiceCommon
 
         Public Overrides Function GetDao()
             Return ReligionDao
         End Function
+
     End Class
-    
+
     Public Class ServiceRevenueGroup
         Inherits ServiceCommon
 
         Public Overrides Function GetDao()
             Return RevenueGroupDao
         End Function
+
     End Class
-    
+
     Public Class ServiceTranslatedMessages
         Inherits ServiceCommon
 
         Public Overrides Function GetDao()
             Return TranslatedMessagesDao
         End Function
+
     End Class
 
 End Namespace

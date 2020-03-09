@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Public Class SecurityGroupsPresenter
@@ -15,9 +16,8 @@ Public Class SecurityGroupsPresenter
         TableName = "SecurityGroup"
         SortOrderKey = "SecurityGroupName"
         OriginalModel = New List(Of SecurityGroupModel)
-        'BizObject = New List(Of SecurityGroup)
+        DataBizObject = New List(Of SecurityGroup)
         ViewObject = New List(Of SecurityGroupModel)
-        'DbDataDao = New SecurityGroupDao
     End Sub
 
 End Class

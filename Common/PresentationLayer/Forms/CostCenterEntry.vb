@@ -124,7 +124,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-
         Protected Overrides Sub AddMandatoryFieldCheck()
             'Add controls one by one in error provider.
             MyErrorProvider.Controls.AddMandatory(txtCostCenterCode, "CostCenter Code")
@@ -145,6 +144,18 @@ Namespace PresentationLayer.Forms
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             cacParentIdNo.DataSource = PresenterObj.GetCostCenterList()
             cacParentIdNo.Refresh()
+        End Sub
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"CostCenterCode", txtCostCenterCode},
+                {"CostCenterName", txtCostCenterName},
+                {"CostCenterNameAra", txtCostCenterNameAra},
+                {"IDNo", TxtIDNo},
+                {"ParentIdNo", cacParentIdNo},
+                {"Notes", txtNotes}
+                }
         End Sub
 
     End Class

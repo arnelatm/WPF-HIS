@@ -258,7 +258,7 @@ Namespace Services
         End Function
 
         'Public Function IsValid()
-        '    Dim bizObject = GetBo()
+        '    Dim DataBizObject = GetBo()
         '    Return GetBO.IsValid()
         '    Return Nothing
         'End Function

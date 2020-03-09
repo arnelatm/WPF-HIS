@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.BusinessLayer
 Imports AATM.Common.ServiceLayer
 Imports AATM.PresentationLayer.Models
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Models
 
@@ -25,12 +26,10 @@ Namespace PresentationLayer.Models
     Public Class ModelBranch
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceBranch()
-        End Function
+        Private ReadOnly _service As New ServiceBranch()
 
-        Public Overrides Function GetBo()
-            Return New Branch(True)
+        Public Overrides Function GetCommonService()
+            Return _service
         End Function
 
     End Class

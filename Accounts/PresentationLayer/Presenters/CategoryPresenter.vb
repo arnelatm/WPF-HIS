@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "CategoryCode"
             TreeViewList = New List(Of CategoryModel)
             OriginalModel = New CategoryModel()
-            BizObject = New Category
+            DataBizObject = New Category
             DataModel = New CategoryModel
         End Sub
 

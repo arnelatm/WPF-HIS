@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New TranslatedMessagesModel()
-            'BizObject = New TranslatedMessages
+            'DataBizObject = New TranslatedMessages
             DataModel = New TranslatedMessagesModel
             'DbDataDao = New TranslatedMessagesDao
             TreeViewList = New List(Of TranslatedMessagesModel)
@@ -56,11 +56,11 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
-            MapObject(View, BizObject, FieldSavingMappingDictionary)
+            MapObject(View, DataBizObject, FieldSavingMappingDictionary)
             If Model.IsValid() Then
                 'If DataIsValid() Then
                 '    If addMode Or Model.IdNo = 0 Then
-                '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(BizObject)
+                '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(DataBizObject)
                 '        retVal = NewlyAddedRecordIdNo
                 '    Else
 
