@@ -16,7 +16,6 @@ Namespace PresentationLayer.Forms
             TvMainFieldName = "CountryName"
             TvSecondaryFieldName = "ISOA2"
             SortOrderKey = "SortKey"
-            'ParentFieldName = "ParentIdNo"
             FirstControl = txtIsoA2
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CountryPresenter(Me)

@@ -17,7 +17,7 @@ Public Class LoginPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As IView)
         MyBase.New(view)
-        CurrentModel = New ModelLogin()
+        ModelController = New ModelLogin()
         TableName = "Login"
         OriginalModel = New LoginModel()
         DataModel = New LoginModel
@@ -36,7 +36,7 @@ Public Class LoginPresenter
     Function Login()
         Dim username As String = View.UserName
         Dim password As String = View.Password
-        Return CurrentModel.Login(username, password)
+        Return DataModel.Login(username, password)
     End Function
 
 End Class

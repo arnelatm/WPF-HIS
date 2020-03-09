@@ -11,13 +11,13 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)
-            CurrentModel = New ModelBranch
+            ModelController = New ModelBranch
             TableName = "Branch"
             SortOrderKey = "BranchName"
             TreeViewMainField = "BranchName"
             TreeViewSecondaryField = "BranchCode"
             OriginalModel = New BranchModel()
-            DataBizObject = New Branch()
+            DataBizObject = New Branch(True)
             DataModel = New BranchModel
             TreeViewList = New List(Of BranchModel)
         End Sub

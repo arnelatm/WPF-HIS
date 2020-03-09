@@ -45,7 +45,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Shared SecurityModel As New Model
 
-    Public Property CurrentModel
+    Public Property ModelController
         Get
             Return Model
         End Get
@@ -303,9 +303,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function DataIsValid() As Boolean
         Dim retVal = False
-        Dim modelRecord As New TM
-        GlobalVariables.Mapper.Map(Of T, TM)(View, modelRecord)
-        GlobalVariables.Mapper.Map(modelRecord, DataBizObject)
+        'Dim modelRecord As New TM
+        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        GlobalVariables.Mapper.Map(DataModel, DataBizObject)
         If DataBizObject.IsValid() Then
             retVal = True
         End If

@@ -248,20 +248,12 @@ Namespace Services
         '    End Sub
 
         Public Function GetBizObjectErrors()
-            'Return GetBO.GetBizObjectErrors()
             Return Nothing
         End Function
 
         Public Function GetBizObjectRules()
-            'Return GetBO.GetBizObjectRules()
             Return Nothing
         End Function
-
-        'Public Function IsValid()
-        '    Dim DataBizObject = GetBo()
-        '    Return GetBO.IsValid()
-        '    Return Nothing
-        'End Function
 
 #End Region
 
