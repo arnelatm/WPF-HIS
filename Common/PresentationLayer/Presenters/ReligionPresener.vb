@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "ReligionName"
             TreeViewSecondaryField = "ReligionCode"
             OriginalModel = New ReligionModel()
-            BizObject = New Religion
+            DataBizObject = New Religion
             DataModel = New ReligionModel
             TreeViewList = New List(Of ReligionModel)
         End Sub

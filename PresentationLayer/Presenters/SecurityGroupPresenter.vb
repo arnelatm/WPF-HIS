@@ -13,12 +13,9 @@ Public Class SecurityGroupPresenter
         TreeViewMainField = "SecurityGroupName"
         TreeViewSecondaryField = "SecurityGroupCode"
         OriginalModel = New SecurityGroupModel()
-        BizObject = New SecurityGroup
+        DataBizObject = New SecurityGroup
         DataModel = New SecurityGroupModel
-        'DbDataDao = New SecurityGroupDao
         TreeViewList = New List(Of SecurityGroupModel)
-        'Model.SetService(New SecurityGroupService)
-
     End Sub
 
     Public Property GroupAccessesPresenter As GroupAccessesPresenter

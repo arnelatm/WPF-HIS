@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "DepartmentCode"
             TreeViewParentIdField = "ParentIdNo"
             OriginalModel = New DepartmentModel()
-            BizObject = New Department
+            DataBizObject = New Department
             DataModel = New DepartmentModel
             TreeViewList = New List(Of DepartmentModel)
             ParentViewList = New List(Of DepartmentModel)

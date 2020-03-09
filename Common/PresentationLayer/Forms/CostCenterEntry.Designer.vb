@@ -5,7 +5,7 @@ Imports AATM.Libraries.LocalizationUtilities
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class CostCenterEntryTv
-        Inherits BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -55,11 +55,10 @@ Namespace PresentationLayer.Forms
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.DisplayOnly = true
         Me.TxtIDNo.EditingMode = true
@@ -70,6 +69,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Location = New System.Drawing.Point(235, 1)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIDNo.TabIndex = 0
@@ -77,11 +77,10 @@ Namespace PresentationLayer.Forms
         '
         'txtCostCenterCode
         '
-        Me.txtCostCenterCode.AcceptsReturn = false
-        Me.txtCostCenterCode.AcceptsTab = false
         Me.txtCostCenterCode.BackColor = System.Drawing.Color.White
         Me.txtCostCenterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCostCenterCode.ComputedValue = false
+        Me.txtCostCenterCode.CustomFormat = Nothing
         Me.txtCostCenterCode.DataBoundControl = true
         Me.txtCostCenterCode.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtCostCenterCode, true)
@@ -91,17 +90,17 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterCode.Location = New System.Drawing.Point(235, 26)
         Me.txtCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtCostCenterCode.Name = "txtCostCenterCode"
+        Me.txtCostCenterCode.OldValue = Nothing
         Me.txtCostCenterCode.Size = New System.Drawing.Size(62, 23)
         Me.txtCostCenterCode.TabIndex = 0
         Me.txtCostCenterCode.ValueIsMandatory = true
         '
         'txtCostCenterName
         '
-        Me.txtCostCenterName.AcceptsReturn = false
-        Me.txtCostCenterName.AcceptsTab = false
         Me.txtCostCenterName.BackColor = System.Drawing.Color.White
         Me.txtCostCenterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCostCenterName.ComputedValue = false
+        Me.txtCostCenterName.CustomFormat = Nothing
         Me.txtCostCenterName.DataBoundControl = true
         Me.txtCostCenterName.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtCostCenterName, true)
@@ -111,17 +110,17 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterName.Location = New System.Drawing.Point(235, 51)
         Me.txtCostCenterName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtCostCenterName.Name = "txtCostCenterName"
+        Me.txtCostCenterName.OldValue = Nothing
         Me.txtCostCenterName.Size = New System.Drawing.Size(418, 23)
         Me.txtCostCenterName.TabIndex = 1
         Me.txtCostCenterName.ValueIsMandatory = true
         '
         'txtCostCenterNameAra
         '
-        Me.txtCostCenterNameAra.AcceptsReturn = false
-        Me.txtCostCenterNameAra.AcceptsTab = false
         Me.txtCostCenterNameAra.BackColor = System.Drawing.Color.White
         Me.txtCostCenterNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCostCenterNameAra.ComputedValue = false
+        Me.txtCostCenterNameAra.CustomFormat = Nothing
         Me.txtCostCenterNameAra.DataBoundControl = true
         Me.txtCostCenterNameAra.EditingMode = false
         Me.txtCostCenterNameAra.EnglishControl = Me.txtCostCenterName
@@ -132,17 +131,17 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterNameAra.Location = New System.Drawing.Point(235, 76)
         Me.txtCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtCostCenterNameAra.Name = "txtCostCenterNameAra"
+        Me.txtCostCenterNameAra.OldValue = Nothing
         Me.txtCostCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtCostCenterNameAra.Size = New System.Drawing.Size(418, 23)
         Me.txtCostCenterNameAra.TabIndex = 2
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtNotes, true)
@@ -153,6 +152,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.Size = New System.Drawing.Size(418, 60)
         Me.txtNotes.TabIndex = 6
         Me.txtNotes.ValueIsMandatory = true
@@ -261,7 +261,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.Location = New System.Drawing.Point(235, 101)
         Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cacParentIdNo.Name = "cacParentIdNo"
-        Me.cacParentIdNo.OldValue = Nothing
+        Me.cacParentIdNo.OldValue = 0
         Me.cacParentIdNo.OriginalDataSource = Nothing
         Me.cacParentIdNo.OriginalList = Nothing
         Me.cacParentIdNo.OverrideDropDownStyleList = false
@@ -294,11 +294,10 @@ Namespace PresentationLayer.Forms
         '
         'txtLevelNumber
         '
-        Me.txtLevelNumber.AcceptsReturn = false
-        Me.txtLevelNumber.AcceptsTab = false
         Me.txtLevelNumber.BackColor = System.Drawing.Color.White
         Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtLevelNumber.ComputedValue = false
+        Me.txtLevelNumber.CustomFormat = Nothing
         Me.txtLevelNumber.DataBoundControl = true
         Me.txtLevelNumber.DisplayOnly = true
         Me.txtLevelNumber.EditingMode = true
@@ -310,6 +309,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.Location = New System.Drawing.Point(235, 127)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.txtLevelNumber.Name = "txtLevelNumber"
+        Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
         Me.txtLevelNumber.Size = New System.Drawing.Size(72, 23)
         Me.txtLevelNumber.TabIndex = 4
@@ -348,7 +348,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterIdNo.Location = New System.Drawing.Point(235, 155)
         Me.cacProfitCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cacProfitCenterIdNo.Name = "cacProfitCenterIdNo"
-        Me.cacProfitCenterIdNo.OldValue = Nothing
+        Me.cacProfitCenterIdNo.OldValue = 0
         Me.cacProfitCenterIdNo.OriginalDataSource = Nothing
         Me.cacProfitCenterIdNo.OriginalList = Nothing
         Me.cacProfitCenterIdNo.OverrideDropDownStyleList = false
@@ -380,11 +380,10 @@ Namespace PresentationLayer.Forms
         '
         'txtSortKey
         '
-        Me.txtSortKey.AcceptsReturn = false
-        Me.txtSortKey.AcceptsTab = false
         Me.txtSortKey.BackColor = System.Drawing.Color.White
         Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSortKey.ComputedValue = false
+        Me.txtSortKey.CustomFormat = Nothing
         Me.txtSortKey.DataBoundControl = true
         Me.txtSortKey.EditingMode = false
         Me.txtSortKey.Enabled = false
@@ -394,6 +393,7 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.Location = New System.Drawing.Point(3, 246)
         Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtSortKey.Name = "txtSortKey"
+        Me.txtSortKey.OldValue = Nothing
         Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
         Me.txtSortKey.TabIndex = 164
         Me.txtSortKey.ValueIsMandatory = true

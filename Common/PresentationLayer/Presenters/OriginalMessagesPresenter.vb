@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New OriginalMessagesModel()
-            BizObject = New OriginalMessages
+            DataBizObject = New OriginalMessages
             DataModel = New OriginalMessagesModel
             DbDataDao = New OriginalMessagesDao
             TreeViewList = New List(Of OriginalMessagesModel)

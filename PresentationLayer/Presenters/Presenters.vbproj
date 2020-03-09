@@ -115,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
+      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DataLayer\DataLayer.vbproj">

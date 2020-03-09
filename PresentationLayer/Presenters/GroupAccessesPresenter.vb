@@ -2,6 +2,7 @@
 Imports AATM.DataLayer.AdoNet
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 
 ''' <summary>
 '''     GroupAccesses Presenter class.
@@ -24,9 +25,10 @@ Public Class GroupAccessesPresenter
         TableName = "GroupAccess_View"
         SortOrderKey = "SecurityGroupIDNo"
         OriginalModel = New GroupAccessModel()
-        BizObject = New GroupAccess
+        DataBizObject = New GroupAccess
         DataModel = New GroupAccessModel
         DbDataDao = New GroupAccessDao
+        DataService = New ServiceGroupAccesses
         'Model.SetService(New GroupAccessService)
         'Dim modelSecurityObject = New SecurityObjectDisplayModel()
         'SecurityObjects = modelSecurityObject.GetAll(Of SecurityObjectModel)("SecurityObjectName")

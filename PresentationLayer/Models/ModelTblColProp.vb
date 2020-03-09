@@ -7,7 +7,7 @@
 Public Class ModelTblColProp
     Implements IModelTblColProp
 
-    Protected BizObject
+    Protected DataBizObject
     Private Shared ReadOnly TblColPropService = New TblColPropService()
 
     'Public Function GetControlTblColPropIdNo(searchValue As String) As String _

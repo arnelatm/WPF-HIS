@@ -10,7 +10,7 @@ Namespace PresentationLayer.Models
         Implements IModelAccounts
 
         Private Shared ReadOnly Property ServiceAccounts As New ServiceAccounts()
-        Private Shared Shadows Property BizObject
+        Private Shared Shadows Property DataBizObject
 
         Public Function UpdateGlReferenceNumber(Of TBiz)(ByRef modelBiz As TBiz) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
             Dim updateResult As Integer

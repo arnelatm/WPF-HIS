@@ -9,8 +9,9 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New()
-            If GetRules().Count() = 0 Then
+        Public Sub New(ByVal Optional validate As Boolean = False)
+            ' establish business rules
+            If validate Then
                 ' establish business rules
                 AddRule(New ValidateRequired("PhoneTypeName"))
             End If

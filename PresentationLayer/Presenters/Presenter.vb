@@ -21,7 +21,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
 
-    Protected BizObject
+    Protected DataBizObject
+    Protected DataService
     Protected DataModel
 
     Protected TreeViewMainField As String
@@ -78,11 +79,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Function GetBizObjectRules()
-        Return BizObject.GetRules()
+        Return DataBizObject.GetRules()
     End Function
 
     Public Function GetBizObjectErrors()
-        Return BizObject.GetErrors()
+        Return DataBizObject.GetErrors()
     End Function
 
     Public Property View As T
@@ -256,14 +257,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function IsValid(ByRef pErrorList As String) As Boolean
-        Dim result As Boolean
-        Dim record As New TM
-        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-        result = Model.IsValid(Of TM)(record)
-        _errorList = Model.GetErrors()
-        Return result
-    End Function
+    'Public Function IsValid(ByRef pErrorList As String) As Boolean
+    '    Dim result As Boolean
+    '    Dim record As New TM
+    '    GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+    '    result = Model.IsValid(Of TM)(record)
+    '    _errorList = Model.GetErrors()
+    '    Return result
+    'End Function
 
     Private _errorList As String = ""
 
@@ -281,7 +282,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         If additionalMessage IsNot Nothing Then
             _errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In BizObject.Errors
+        For Each bizError In DataBizObject.Errors
             If _errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
@@ -292,7 +293,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Function GetErrors() As List(Of String)
-        Return BizObject.GetErrors()
+        Return DataBizObject.GetErrors()
     End Function
 
     'Public OverLoads Overridable Function DataIsValid()
@@ -304,8 +305,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retVal = False
         Dim modelRecord As New TM
         GlobalVariables.Mapper.Map(Of T, TM)(View, modelRecord)
-        GlobalVariables.Mapper.Map(modelRecord, BizObject)
-        If BizObject.IsValid() Then
+        GlobalVariables.Mapper.Map(modelRecord, DataBizObject)
+        If DataBizObject.IsValid() Then
             retVal = True
         End If
         Return retVal
