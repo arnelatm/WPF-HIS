@@ -51,11 +51,11 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements IDaoFactory.SecurityObjectDao
-            Get
-                Return New SecurityObjectDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements IDaoFactory.SecurityObjectDao
+        '    Get
+        '        Return New SecurityObjectDao()
+        '    End Get
+        'End Property
 
         Public ReadOnly Property GroupAccessDao As IGroupAccessDao Implements IDaoFactory.GroupAccessDao
             Get
@@ -69,9 +69,9 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property SecurityObjectDao1 As IDao(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao1
+        Public ReadOnly Property SecurityObjectDao As IDaoWithAll(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao
             Get
-                Return New SecurityObjectDao1
+                Return New SecurityObjectDao
             End Get
         End Property
 

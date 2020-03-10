@@ -13,9 +13,9 @@ Public Interface IDaoFactory
     ReadOnly Property LoginDao As ILoginDao
     ReadOnly Property SaltDao As ISaltDao
     ReadOnly Property UserDao As IUserDao
-    ReadOnly Property SecurityObjectDao As ISecurityObjectDao
+    'ReadOnly Property SecurityObjectDao As ISecurityObjectDao
     ReadOnly Property GroupAccessDao As IGroupAccessDao
     ReadOnly Property SecurityGroupDao As ISecurityGroupDao
-    ReadOnly Property SecurityObjectDao1 As IDao(Of SecurityObject)
+    ReadOnly Property SecurityObjectDao As IDaoWithAll(Of SecurityObject)
 
 End Interface
