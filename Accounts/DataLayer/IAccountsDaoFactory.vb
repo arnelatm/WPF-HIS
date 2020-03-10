@@ -6,6 +6,7 @@ Namespace DataLayer
         Inherits AATM.Common.DataLayer.ICommonDaoFactory
         'Inherits AATM.DataLayer.IDaoFactory
 
+        ReadOnly Property AccountsDao As IAccountsDao
         'ReadOnly Property ApJournalDao As IApJournalDao
         'ReadOnly Property ApJournalItemDao As IJournalItemDao
         'ReadOnly Property ApOpenInvoiceDao As IApOpenInvoiceDao
@@ -28,7 +29,7 @@ Namespace DataLayer
         'ReadOnly Property DesignationDao As IDesignationDao
         'ReadOnly Property DistributionSchemeDao As IDistributionSchemeDao
         'ReadOnly Property DistributionSchemeItemDao As IDistributionSchemeItemDao
-        'ReadOnly Property EmployeeDao As IEmployeeDao
+        ReadOnly Property EmployeeDao As IEmployeeDao
         'ReadOnly Property GeneralJournalDao As IGeneralJournalDao
         'ReadOnly Property GeneralJournalItemDao As IJournalItemDao
         'ReadOnly Property JournalItemDao As IJournalItemDao

@@ -10,7 +10,8 @@ Public Class MappingProfileAccounts
     Public Sub New()
         CreateMap(Of Category, CategoryModel)().ReverseMap()
         CreateMap(Of CategoryModel, ICategoryView)().ReverseMap()
-        CreateMap(Of ICategoryView, Category)()
+        CreateMap(Of Employee, EmployeeModel)().ReverseMap()
+        CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
 
     End Sub
 

@@ -656,21 +656,12 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemEmployees.Click
-        '    Dim myForm = New EmployeeEntryTv
-        '    myForm.Show()
-        '    'ShowEntryForm(EmployeeEntryTv)
-        'End Sub
+        Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemEmployees.Click
+            Dim myForm = New EmployeeEntryTv
+            myForm.Show()
+        End Sub
 
-        'Private Sub EnableLogin()
-        '    ToolStripButtonLogin.Enabled = True
-        '    ToolStripButtonLogout.Enabled = False
-        '    ToolStripMenuItemLogin.Enabled = True
-        '    ToolStripMenuItemLogout.Enabled = False
-        '    ToolStripMenuItemExit.Enabled = True
-        '    SetLanguageChangeButtons()
-        'End Sub
 
         '''' <summary>
         ''''     Exits application.

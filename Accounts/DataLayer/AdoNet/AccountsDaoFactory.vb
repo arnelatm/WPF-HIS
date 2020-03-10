@@ -1,4 +1,5 @@
 ﻿
+Imports AATM.Common.DataLayer
 Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -8,6 +9,13 @@ Namespace DataLayer.AdoNet
     Public Class AccountsDaoFactory
         Inherits CommonDaoFactory
         Implements IAccountsDaoFactory
+
+
+        Public ReadOnly Property AccountsDao As IAccountsDao Implements IAccountsDaoFactory.AccountsDao
+            Get
+                Return New AccountsDao()
+            End Get
+        End Property
 
         'Public ReadOnly Property ApJournalDao As IApJournalDao Implements ICommonDaoFactory.ApJournalDao
         '    Get
@@ -84,6 +92,12 @@ Namespace DataLayer.AdoNet
         Public ReadOnly Property CategoryDao As ICategoryDao Implements IAccountsDaoFactory.CategoryDao
             Get
                 Return New CategoryDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property EmployeeDao As IEmployeeDao Implements IAccountsDaoFactory.EmployeeDao
+            Get
+                Return New EmployeeDao()
             End Get
         End Property
 

@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "RevenueGroupCode"
             TreeViewParentIdField = "ParentIdNo"
             OriginalModel = New RevenueGroupModel()
-            DataBizObject = New RevenueGroup
+            DataBizObject = New RevenueGroup(True)
             DataModel = New RevenueGroupModel
             TreeViewList = New List(Of RevenueGroupModel)
             ParentViewList = New List(Of RevenueGroupModel)

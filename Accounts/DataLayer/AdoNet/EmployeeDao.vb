@@ -1,19 +1,16 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for Employee
     ' ** DAO Pattern
 
     Public Class EmployeeDao
-        Inherits CommonDaoOld
+        Inherits CommonDao
         Implements IEmployeeDao
 
         Private Shared ReadOnly Db As New Db()
-
-        Public Sub New()
-            DbCommon = Db
-        End Sub
 
         Public Function GetRecordById(idNo As Integer) As Employee Implements IEmployeeDao.GetRecordById
             Dim sql As String =
@@ -91,7 +88,7 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Employee) =
                                     Function(reader) _
-            New Employee(False, Nothing) With {
+            New Employee() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
             .EmployeeCode = Extensions.AsString(reader("EmployeeCode")),
             .Title = Extensions.AsString(reader("Title")),
