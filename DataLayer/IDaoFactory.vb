@@ -2,6 +2,8 @@
 ' ** GoF Design Pattern: Factory.
 
 
+Imports AATM.BusinessLayer.BusinessObjects
+
 Public Interface IDaoFactory
     ReadOnly Property BaseDao As IBaseDao
 
@@ -14,5 +16,6 @@ Public Interface IDaoFactory
     ReadOnly Property SecurityObjectDao As ISecurityObjectDao
     ReadOnly Property GroupAccessDao As IGroupAccessDao
     ReadOnly Property SecurityGroupDao As ISecurityGroupDao
+    ReadOnly Property SecurityObjectDao1 As IDao(Of SecurityObject)
 
 End Interface

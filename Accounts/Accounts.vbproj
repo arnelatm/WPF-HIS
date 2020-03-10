@@ -143,8 +143,6 @@
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Views\ICategoryView.vb" />
     <Compile Include="PresentationLayer\Views\IEmployeeView.vb" />
-    <Compile Include="ServiceLayer\ActionService\CategoryService.vb" />
-    <Compile Include="ServiceLayer\ActionService\ICategoryService.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
