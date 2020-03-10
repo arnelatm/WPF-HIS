@@ -82,8 +82,10 @@
     <Compile Include="AdoNet\SecurityDao.vb" />
     <Compile Include="AdoNet\SecurityGroupDao.vb" />
     <Compile Include="AdoNet\SecurityObjectDao.vb" />
-    <Compile Include="AdoNet\SecurityObjectDao1.vb" />
     <Compile Include="AdoNet\UserDao.vb" />
+    <Compile Include="IDaoWithAll.vb" />
+    <Compile Include="IDaoWithChildNAll.vb" />
+    <Compile Include="IDaoChild.vb" />
     <Compile Include="IDao.vb" />
     <Compile Include="ISecurityObjectDao.vb" />
     <Compile Include="DaoFactories.vb" />

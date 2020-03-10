@@ -24,7 +24,7 @@ Namespace Services
         'Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
         Protected Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao()
         Protected Shared ReadOnly GroupAccessDao As IGroupAccessDao = Factory.GroupAccessDao()
-        Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao1()
+        Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao()
 
         Public Property DataDao As Object
 
