@@ -68,5 +68,12 @@ Namespace AdoNet
                 Return New SecurityGroupDao()
             End Get
         End Property
+
+        Public ReadOnly Property SecurityObjectDao1 As IDao(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao1
+            Get
+                Return New SecurityObjectDao1
+            End Get
+        End Property
+
     End Class
 End Namespace

@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Reflection
 Imports AATM.BusinessLayer
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
@@ -20,9 +21,10 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly UserDao As IUserDao = Factory.UserDao
-        Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
+        'Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
         Protected Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao()
         Protected Shared ReadOnly GroupAccessDao As IGroupAccessDao = Factory.GroupAccessDao()
+        Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao1()
 
         Public Property DataDao As Object
 
