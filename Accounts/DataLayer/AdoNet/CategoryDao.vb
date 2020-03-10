@@ -1,19 +1,16 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for Category
     ' ** DAO Pattern
 
     Public Class CategoryDao
-        Inherits AATM.DataLayer.AdoNet.BaseDao
+        Inherits CommonDao
         Implements ICategoryDao
 
         Private Shared ReadOnly Db As New Db()
-
-        'Public Sub New()
-        '    DbCommon = Db
-        'End Sub
 
         Public Function GetRecordById(idNo As Integer) As Category Implements ICategoryDao.GetRecordById
             Dim sql As String =

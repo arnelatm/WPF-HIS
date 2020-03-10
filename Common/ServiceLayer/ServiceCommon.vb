@@ -20,6 +20,12 @@ Namespace ServiceLayer
         Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = CommonFactory.RevenueGroupDao
         Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = CommonFactory.TranslatedMessagesDao
 
+        Public ReadOnly Property CommonDaoProp
+            Get
+                Return CommonDao
+            End Get
+        End Property
+
         Public Overrides Function GetDao() As Object
             Return GetBaseDao()
         End Function

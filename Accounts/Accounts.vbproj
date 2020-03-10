@@ -89,11 +89,16 @@
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
     <Compile Include="BusinessLayer\Category.vb" />
+    <Compile Include="BusinessLayer\Employee.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountsDao.vb" />
     <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountsDaoFactory.vb" />
     <Compile Include="DataLayer\AccountsDaoFactories.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeDao.vb" />
+    <Compile Include="DataLayer\IAccountsDao.vb" />
     <Compile Include="DataLayer\ICategoryDao.vb" />
     <Compile Include="DataLayer\IAccountsDaoFactory.vb" />
+    <Compile Include="DataLayer\IEmployeeDao.vb" />
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -117,6 +122,12 @@
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.Designer.vb">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\Main.designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
@@ -124,12 +135,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Models\CategoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelAccounts.vb" />
     <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
-    <Compile Include="PresentationLayer\Models\ModelCategory.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Views\ICategoryView.vb" />
+    <Compile Include="PresentationLayer\Views\IEmployeeView.vb" />
     <Compile Include="ServiceLayer\ActionService\CategoryService.vb" />
     <Compile Include="ServiceLayer\ActionService\ICategoryService.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
@@ -147,6 +160,9 @@
     <EmbeddedResource Include="PresentationLayer\Forms\CategoryEntryTv.resx">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Main.en-GB.resx">
       <DependentUpon>Main.vb</DependentUpon>

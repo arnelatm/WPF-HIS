@@ -8,20 +8,17 @@ Namespace BusinessLayer
 
     Public Class Employee
         Inherits AATM.BusinessLayer.BusinessObject
-        Protected Presenter As Object
-        Protected TargetIdNo As Int32
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New(createRules As Boolean, ByRef presenterObj As Object)
+        Public Sub New(ByVal Optional validate As Boolean = False)
             ' establish business rules
-            Presenter = presenterObj
-            If createRules Then
+            If validate Then
                 AddRule(New ValidateRequired("EmployeeName"))
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("EmployeeCode"))
                 AddRule(New ValidateEmail("Email"))
-                AddRule(New ValidateUnique("EmployeeCode", presenter))
-                AddRule(New ValidateUnique("EmployeeName", presenter))
+                'AddRule(New ValidateUnique("EmployeeCode"))
+                'AddRule(New ValidateUnique("EmployeeName"))
             End If
         End Sub
         

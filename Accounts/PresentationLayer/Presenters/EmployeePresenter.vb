@@ -9,9 +9,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenter
-        Inherits CommonPresenterNew(Of IEmployeeView, Employee, EmployeeModel)
-
-        Public ParentViewList As List(Of EmployeeModel)
+        Inherits AccountsPresenter(Of IEmployeeView, EmployeeModel)
 
         Public Sub New(view As IEmployeeView)
             MyBase.New(view)
@@ -19,13 +17,12 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "EmployeeName"
             TreeViewMainField = "EmployeeName"
             TreeViewSecondaryField = "EmployeeCode"
+            ModelPresenter = New ModelEmployee
             OriginalModel = New EmployeeModel()
-            BizObject = New Employee(True, Me)
+            DataBizObject = New Employee(True)
             DataModel = New EmployeeModel
-            DbDataDao = New EmployeeDao
             TreeViewList = New List(Of EmployeeModel)
-            ParentViewList = New List(Of EmployeeModel)
-            Model.SetService(New EmployeeService)
+            'Model.SetService(New EmployeeService)
         End Sub
 
     End Class

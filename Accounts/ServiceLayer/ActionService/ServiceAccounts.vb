@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.DataLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Common.ServiceLayer
 Imports AATM.ServicesLayer.Services
 
@@ -10,27 +11,45 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Private Shared Shadows ReadOnly Provider As String = Configuration.ConfigurationManager.AppSettings.Get("DataProvider")
-        Private Shared Shadows ReadOnly Factory As IAccountsDaoFactory = AccountsDaoFactories.GetFactory(Provider)
+        Private Shared ReadOnly AccountsFactory As IAccountsDaoFactory = AccountsDaoFactories.GetAccountsFactory(Provider)
+        Protected Shared ReadOnly AccountsDao As IAccountsDao = AccountsFactory.AccountsDao
+        Protected Shared ReadOnly CategoryDao As ICategoryDao = AccountsFactory.CategoryDao
+        Protected Shared ReadOnly EmployeeDao As IEmployeeDao = AccountsFactory.EmployeeDao
 
+        Public ReadOnly Property AccountsDaoProp
+            Get
+                Return AccountsDao
+            End Get
+        End Property
+        
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
-            Return GetDao().UpdateGlReferenceNumber(model)
+            Return GetServiceDao().UpdateGlReferenceNumber(model)
         End Function
 
-        'Public Overrides Function GetDataDao3()
-        '    Return GetDataDao4()
-        'End Function
-
-        'Public Overridable Function GetDataDao4()
-        '    Return GetDataDao()
-        'End Function
-
-        Public Overrides Function GetDao() As Object
+        Public Overrides Function GetBaseDao() As Object
             Return GetServiceDao()
         End Function
 
         Public Overridable Function GetServiceDao()
-            Return BaseDaoProp
+            Return CommonDaoProp
+        End Function
+
+    End Class
+
+    Public Class ServiceCategory
+        Inherits ServiceAccounts
+
+        Public Overrides Function GetDao()
+            Return CategoryDao
+        End Function
+
+    End Class
+
+    Public Class ServiceEmployee
+        Inherits ServiceAccounts
+
+        Public Overrides Function GetDao()
+            Return EmployeeDao
         End Function
 
     End Class

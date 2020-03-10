@@ -8,7 +8,7 @@ Namespace ServiceLayer.ActionService
         Inherits ServiceAccounts
         Implements ICategoryService
 
-        Private Shared Shadows ReadOnly Factory As IAccountsDaoFactory = AccountsDaoFactories.GetFactory(Provider)
+        Private Shared Shadows ReadOnly Factory As IAccountsDaoFactory = AccountsDaoFactories.GetAccountsFactory(Provider)
         Private Shared ReadOnly CategoryDao As ICategoryDao = Factory.CategoryDao
 
         Public Overrides Function GetServiceDao()

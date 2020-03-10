@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New TranslatedMessagesModel()
-            DataBizObject = New TranslatedMessages
+            DataBizObject = New TranslatedMessages(True)
             DataModel = New TranslatedMessagesModel
             TreeViewList = New List(Of TranslatedMessagesModel)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
