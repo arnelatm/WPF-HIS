@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessObjects
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object for Login
@@ -16,8 +15,8 @@ Namespace AdoNet
                     "  FROM [User]" &
                     " WHERE IDNo = @IDNo"
 
-            Dim parms() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, parms).FirstOrDefault()
+            Dim params() As Object = {"@IDNo", idNo}
+            Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetLoginByUserName(userName As String) As Login Implements ILoginDao.GetLoginByUserName
@@ -25,18 +24,15 @@ Namespace AdoNet
                     " SELECT IDNo, UserName, Password" &
                     "   FROM [User]" &
                     "  WHERE UserName = @UserName"
-
-            Dim parms() As Object = {"@UserName", userName}
-            Dim x = Db.Read(sql, Make, parms).FirstOrDefault()
+            Dim params() As Object = {"@UserName", userName}
+            Dim x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
         End Function
 
-        Public Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login) _
-            Implements ILoginDao.GetLogins
+        Public Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login) Implements ILoginDao.GetLogins
             Dim sql As String =
                     " SELECT IDNo, UserName, Password" &
                     "   FROM [User] ".OrderBy(sortExpression)
-
             Return Db.Read(sql, Make).ToList()
         End Function
 
@@ -82,6 +78,15 @@ Namespace AdoNet
                                     "@UserName", login.UserName,
                                     "@Password", login.Password}
         End Function
+
+        'Public Function GetRecordById(idNo As Integer) As Login Implements IDao(Of Login).GetRecordById
+        '    Dim sql As String =
+        '            " SELECT IDNo, UserName, Password" &
+        '            "  FROM [User]" &
+        '            " WHERE IDNo = @IDNo"
+        '    Dim params() As Object = {"@IDNo", idNo}
+        '    Return Db.Read(sql, Make, params).FirstOrDefault()
+        'End Function
 
     End Class
 

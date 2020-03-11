@@ -2,7 +2,7 @@
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views
 Imports AutoMapper
 
 Public Class SecurityObjectEntryTv

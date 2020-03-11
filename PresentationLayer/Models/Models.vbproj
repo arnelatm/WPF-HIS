@@ -77,7 +77,6 @@
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
-    <Compile Include="ModelLogin.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelTblColProp.vb" />
     <Compile Include="ModelSecurity.vb" />

@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessObjects
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object for SecurityGroup
@@ -7,15 +6,11 @@ Namespace AdoNet
 
     Public Class SecurityGroupDao
         Inherits BaseDao
-        Implements ISecurityGroupDao
+        Implements IDaoAll(Of SecurityGroup)
 
         Private Shared ReadOnly Db As New Db()
 
-        'Public Sub New()
-        '    DbCommon = Db
-        'End Sub
-
-        Public Function GetRecordById(idNo As Integer) As SecurityGroup Implements ISecurityGroupDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As SecurityGroup Implements IDao(Of SecurityGroup).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode, Notes" &
                     "   FROM [SecurityGroup]" &
@@ -24,14 +19,17 @@ Namespace AdoNet
             Return Db.Read(sql, Make, parms).FirstOrDefault()
         End Function
 
-        Private Function GetAll(Optional sortExpression As String = "SecurityGroupName ASC") As List(Of SecurityGroup) Implements ISecurityGroupDao.GetAll
+        Private Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityGroup) Implements IDaoAll(Of SecurityGroup).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "SecurityGroupName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, SecurityGroupName, FullName, FullNameName " &
                     "   FROM [SecurityGroup] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef securityGroup As SecurityGroup) As Integer Implements ISecurityGroupDao.UpdateRecord
+        Public Function UpdateRecord(ByRef securityGroup As SecurityGroup) As Integer Implements IDao(Of SecurityGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [SecurityGroup]" &
                     "    SET SecurityGroupName = @SecurityGroupName," &
@@ -42,7 +40,7 @@ Namespace AdoNet
             Return Db.Update(sql, Take(securityGroup))
         End Function
 
-        Public Function AddRecord(ByRef securityGroup As SecurityGroup) As Integer Implements ISecurityGroupDao.AddRecord
+        Public Function AddRecord(ByRef securityGroup As SecurityGroup) As Integer Implements IDao(Of SecurityGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityGroup] " &
                     " (SecurityGroupName,SecurityGroupNameAra,SecurityGroupCode,Notes) " &
@@ -50,7 +48,7 @@ Namespace AdoNet
             Return Db.Insert(sql, Take(securityGroup))
         End Function
 
-        'Public Sub DeleteSecurityGroup(securityGroup As SecurityGroup) Implements ISecurityGroupDao.DeleteSecurityGroup
+        'Public Sub DeleteSecurityGroup(securityGroup As SecurityGroup) Implements IDao(Of SecurityGroup).DeleteSecurityGroup
         '    Dim sql As String =
         '            " DELETE FROM [SecurityGroup]" &
         '            "  WHERE IDNo = @IDNo"
@@ -75,37 +73,6 @@ Namespace AdoNet
                                     "@Notes", securityGroup.Notes}
         End Function
 
-        'Public Function GetSecurityGroups(Optional sortExpression As String = "SecurityGroupName ASC") _
-        '    As List(Of SecurityGroup) Implements ISecurityGroupDao.GetSecurityGroups
-        '    Dim sql As String =
-        '            " SELECT IDNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode, Notes " &
-        '            "   FROM [SecurityGroup] " &
-        '            "   Order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
-
-        'Public Function GetSecurityGroupList(Optional sortExpression As String = "SecurityGroupName ASC") _
-        '    As List(Of SecurityGroup) Implements ISecurityGroupDao.GetSecurityGroupList
-        '    Dim sql As String =
-        '            " SELECT IDNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode " &
-        '            "   FROM [SecurityGroup] " &
-        '            "   Order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
-
-        'Public Function GetSecurityGroupByGroupAccess(idNo As Integer) As SecurityGroup _
-        '    Implements ISecurityGroupDao.GetSecurityGroupByGroupAccess
-        '    Dim sql As String =
-        '            " SELECT C.IDNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode,         Public Property GeneralJournalItemsPresenter As GeneralJournalItemsPresenter
-        '" &
-        '            "  FROM [groupAccess] O " &
-        '            "  JOIN [SecurityGroup] C " &
-        '            "  ON O.SecurityGroupIdNo = C.IDNo" &
-        '            "  WHERE O.IDNo = @IDNo"
-
-        '    Dim parms() As Object = {"@IDNo", IDNo}
-        '    Return Db.Read(sql, Make, parms).FirstOrDefault()
-        'End Function
     End Class
 
 End Namespace

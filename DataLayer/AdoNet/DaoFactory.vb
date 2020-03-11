@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessObjects
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object factory
@@ -33,7 +32,7 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property LoginDao As ILoginDao Implements IDaoFactory.LoginDao
+        Private ReadOnly Property IDaoFactory_LoginDao As ILoginDao Implements IDaoFactory.LoginDao
             Get
                 Return New LoginDao()
             End Get
@@ -45,35 +44,30 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property UserDao As IUserDao Implements IDaoFactory.UserDao
-            Get
-                Return New UserDao()
-            End Get
-        End Property
-
-        'Public ReadOnly Property SecurityObjectDao As ISecurityObjectDao Implements IDaoFactory.SecurityObjectDao
-        '    Get
-        '        Return New SecurityObjectDao()
-        '    End Get
-        'End Property
-
-        Public ReadOnly Property GroupAccessDao As IGroupAccessDao Implements IDaoFactory.GroupAccessDao
+        Public ReadOnly Property GroupAccessDao As IDaoChild(Of GroupAccess) Implements IDaoFactory.GroupAccessDao
             Get
                 Return New GroupAccessDao()
             End Get
         End Property
 
-        Public ReadOnly Property SecurityGroupDao As ISecurityGroupDao Implements IDaoFactory.SecurityGroupDao
+        Public ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup) Implements IDaoFactory.SecurityGroupDao
             Get
                 Return New SecurityGroupDao()
             End Get
         End Property
 
-        Public ReadOnly Property SecurityObjectDao As IDaoWithAll(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao
+        Public ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao
             Get
-                Return New SecurityObjectDao
+                Return New SecurityObjectDao()
+            End Get
+        End Property
+
+        Private ReadOnly Property UserDao As IDaoAll(Of User) Implements IDaoFactory.UserDao
+            Get
+                Return New UserDao()
             End Get
         End Property
 
     End Class
+
 End Namespace

@@ -57,7 +57,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
             MapObject(View, DataBizObject, FieldSavingMappingDictionary)
-            If Model.IsValid() Then
+            If Model.IsValid(DataBizObject) Then
                 'If DataIsValid() Then
                 '    If addMode Or Model.IdNo = 0 Then
                 '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(DataBizObject)
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
                 'End If
             Else
                 Dim errorList As String = ""
-                For Each bizError In Model.Errors
+                For Each bizError In DataBizObject.Errors
                     errorList = errorList & bizError & Environment.NewLine
                 Next
                 MessageBox.Show(errorList)

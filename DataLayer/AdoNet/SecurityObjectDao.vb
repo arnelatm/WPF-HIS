@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityObjectDao
         Inherits BaseDao
-        Implements IDaoWithAll(Of SecurityObject)
+        Implements IDaoAll(Of SecurityObject)
 
         Private Shared ReadOnly Db As New Db()
 
@@ -26,7 +26,7 @@ Namespace AdoNet
                                     "@Notes", securityObject.Notes}
         End Function
 
-        Public Function GetRecordById(idNo As Integer) As SecurityObject Implements IDao(Of SecurityObject).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As SecurityObject Implements IDaoAll(Of SecurityObject).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &
@@ -35,7 +35,7 @@ Namespace AdoNet
             Return Db.Read(sql, Make, parms).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) Implements IDaoWithAll(Of SecurityObject).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) Implements IDaoAll(Of SecurityObject).GetAll
             Dim sql As String =
                     " SELECT IDNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject] " & "order by " & sortExpression
@@ -63,6 +63,7 @@ Namespace AdoNet
 
             Return Db.Update(sql, Take(recordData))
         End Function
+
     End Class
 
 End Namespace

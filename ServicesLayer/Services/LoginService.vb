@@ -12,12 +12,7 @@ Namespace Services
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Private Shared Shadows ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
-        Private Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao
         Private Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
-
-        Public Sub New()
-            DataDao = LoginDao
-        End Sub
 
         Public Function Login(userName As String, password As String) As Boolean
             ' websecurity does not accept null or empty
@@ -149,7 +144,7 @@ Namespace Services
 
         End Function
 
-        Friend Function HashEncryptStringWithSalt(s As String, salt As String) As String
+        Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
             Return HashEncryptString(salt + s)
         End Function
 

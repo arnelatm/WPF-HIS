@@ -35,7 +35,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _tableColumnPropertyList As List(Of TblColPropModel)
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
 
-    Protected Shared Property Model
+    Protected Shared Property Model As New Model()
     Protected Shared Property ModelTblColProp As IModelTblColProp
     Protected Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 
@@ -43,7 +43,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
     Public Shared Property SortOrderKey As String = "IDNo"
 
-    Public Shared SecurityModel As New Model
+    'Public Shared SecurityModel As New Model
 
     Public Property ModelPresenter
         Get

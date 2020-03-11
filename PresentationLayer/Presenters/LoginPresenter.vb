@@ -1,4 +1,5 @@
-﻿Imports AATM.DataLayer.AdoNet
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.DataLayer.AdoNet
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
@@ -15,13 +16,14 @@ Public Class LoginPresenter
     '''     Constructor.
     ''' </summary>
     ''' <param name="view">The view</param>
-    Public Sub New(view As IView)
+    Public Sub New(ByVal view As ILoginView)
         MyBase.New(view)
-        ModelPresenter = New ModelLogin()
-        TableName = "Login"
-        OriginalModel = New LoginModel()
-        DataModel = New LoginModel
-        DbDataDao = New LoginDao
+        'Model = New ModelLogin
+        ''ModelPresenter = New ModelLogin()
+        'TableName = "User"
+        'OriginalModel = New LoginModel()
+        'DataBizObject = New Login
+        DataModel = New LoginModel()
         Model = New ModelLogin
     End Sub
 
@@ -36,7 +38,7 @@ Public Class LoginPresenter
     Function Login()
         Dim username As String = View.UserName
         Dim password As String = View.Password
-        Return DataModel.Login(username, password)
+        Return Model.Login(username, password)
     End Function
 
 End Class

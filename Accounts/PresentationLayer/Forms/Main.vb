@@ -1,7 +1,5 @@
 ﻿Imports System.Globalization
 Imports System.Threading
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
@@ -9,7 +7,6 @@ Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Forms.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
 
@@ -169,13 +166,14 @@ Namespace PresentationLayer.Forms
             MessageBox.Show(" Help is not implemented... ", "Help")
         End Sub
 
+
         ''' <summary>
         '''     Displays login dialog box and loads member list in treeview.
         ''' </summary>
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-            Dim form As LoginEntry
+            Dim form As New LoginEntry
             Try
                 form = New LoginEntry()
                 If form.ShowDialog() = DialogResult.OK Then

@@ -378,5 +378,6 @@
   <ItemGroup>
     <None Include="Resources\Logo.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

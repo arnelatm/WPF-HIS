@@ -1,6 +1,7 @@
 ﻿Imports AATM.DataLayer
 
 Namespace Services
+
     Public Interface IService
 
         'Function GetRecordById(tableName As String, idNo As Integer)
@@ -71,4 +72,5 @@ Namespace Services
         Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, ByRef value As T) As Integer
 
     End Interface
-End NameSpace
+
+End Namespace
