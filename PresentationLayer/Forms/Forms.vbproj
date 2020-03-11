@@ -141,12 +141,6 @@
     <Compile Include="CFormEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormEntryOld.designer.vb">
-      <DependentUpon>CFormEntryOld.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFormEntryOld.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </Compile>
@@ -256,9 +250,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntryOld.resx">
-      <DependentUpon>CFormEntryOld.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
