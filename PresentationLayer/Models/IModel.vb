@@ -2,7 +2,8 @@
 Imports AATM.Libraries
 
 Public Interface IModel
-    Function AddRecord (Of TBiz)(ByRef displayModel As TBiz) As Integer
+
+    Function AddRecord(Of TBiz)(ByRef displayModel As TBiz) As Integer
 
     Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) _
         As Boolean
@@ -21,7 +22,7 @@ Public Interface IModel
 
     Function FindFieldContinue(tableName As String, idNo As Integer) As Integer
 
-    Function GetAll (Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
+    Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
 
     Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.HLookupData)
@@ -43,7 +44,7 @@ Public Interface IModel
     Function GetLookupFilteredDataByName(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecordById (Of TM As New)(idNo As Integer) As TM
+    Function GetRecordById(Of TM As New)(idNo As Integer) As TM
 
     Function GetRecordCount(tableName As String) As Integer
 
@@ -68,13 +69,13 @@ Public Interface IModel
     Function GetRecords2ColumnsFiltered(tableName As String, sortKey As String, filterKey As String,
                                         ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function UpdateRecordWithIdNo (Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
+    Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
         As Integer
 
     Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                 ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecordsWithIdNo (Of TM As New)(idNo As Integer, Optional ByRef sortExpression As String = Nothing) _
+    Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortExpression As String = Nothing) _
         As List(Of TM)
 
     Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String
@@ -92,7 +93,7 @@ Public Interface IModel
 
     Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) As Boolean
 
-    'Function Login(userName As String, password As String) As Boolean
+    Function Login(userName As String, password As String) As Boolean
 
     'Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer
     Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
@@ -101,5 +102,6 @@ Public Interface IModel
 
     Sub Logout()
 
-    Function GetSqlValue (Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+
 End Interface

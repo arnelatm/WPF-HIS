@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class GroupAccessDao
         Inherits BaseDao
-        Implements IGroupAccessDao
+        Implements IDaoChild(Of GroupAccess)
 
         Private Shared ReadOnly Db As New Db()
 
@@ -14,26 +14,30 @@ Namespace AdoNet
         '    DbCommon = Db
         'End Sub
 
-        Public Function GetRecordById(idNo As Integer) As GroupAccess _
-            Implements IGroupAccessDao.GetRecordById
-            Dim sql As String =
-                    " SELECT IDNo, SecurityGroupIDNo, SecurityObjectIDNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
-                    "   FROM [GroupAccess_View] " &
-                    "  WHERE IDNo = @IDNo"
+        'Public Function GetRecordById(idNo As Integer) As GroupAccess Implements IDao(Of GroupAccess).GetRecordById
+        '    Dim sql As String =
+        '            " SELECT IDNo, SecurityGroupIDNo, SecurityObjectIDNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
+        '            "   FROM [GroupAccess_View] " &
+        '            "  WHERE IDNo = @IDNo"
 
-            Dim parms() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, parms).FirstOrDefault()
-        End Function
+        '    Dim parms() As Object = {"@IDNo", idNo}
+        '    Return Db.Read(sql, Make, parms).FirstOrDefault()
+        'End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of GroupAccess) _
-            Implements IGroupAccessDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, SecurityGroupIdNo,  " &
-                    "   FROM [GroupAccess_View] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoWithAll(Of GroupAccess).GetAll
+        '    If sortExpression = Nothing THEN
+        '        sortExpression = "IdNo"
+        '    End If
+        '    Dim sql As String =
+        '            " SELECT IDNo, SecurityGroupIdNo,  " &
+        '            "   FROM [GroupAccess_View] " & "order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = "IdNo") As List(Of GroupAccess)
+        Public Function GetRecordsById(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsById
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
             Dim sql As String = "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Selectable, GroupAccess.Viewable, GroupAccess.Editable from SecurityObject  " &
                                 "left join groupAccess " &
                                 "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
@@ -42,20 +46,11 @@ Namespace AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        'Public Function InsertGroupAccess(tvpTable As DataTable) As Integer Implements IGroupAccessDao.InsertGroupAccess
-        '    Return Db.TVPInsert("dbo.InsertGroupAccessTVP", TVPTable, "@MParam")
-        'End Function
-
-        'Public Function UpdateGroupAccess(tvpTable As DataTable) As Integer Implements IGroupAccessDao.UpdateGroupAccess
-        '    Return Db.TVPUpdate("dbo.UpdateGroupAccessTVP", TVPTable, "@MParam")
-        'End Function
-
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupAccessIdNo As Integer) As Integer _
-            Implements IGroupAccessDao.DelUpdateTvp
-            Return Db.TvpDelUpdate("dbo.UpdateGroupAccessTVP", tvpTable, "@MParam", groupAccessIdNo)
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupAccessIdNo As Integer) As Integer Implements IDaoChild(Of GroupAccess).DelUpdateTvp
+            Return Db.DelUpdateTvp("dbo.UpdateGroupAccessTVP", tvpTable, "@MParam", groupAccessIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IGroupAccessDao.InsertTvp
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of GroupAccess).InsertTvp
             Return Db.TvpInsert("dbo.InsertGroupAccessTVP", tvpTable, "@MParam")
         End Function
 

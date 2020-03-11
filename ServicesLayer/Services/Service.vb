@@ -19,11 +19,12 @@ Namespace Services
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
+        Protected Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
+        Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
-        Protected Shared ReadOnly UserDao As IUserDao = Factory.UserDao
-        'Protected Shared ReadOnly SecurityObjectDao As ISecurityObjectDao = Factory.SecurityObjectDao()
-        Protected Shared ReadOnly SecurityGroupDao As ISecurityGroupDao = Factory.SecurityGroupDao()
-        Protected Shared ReadOnly GroupAccessDao As IGroupAccessDao = Factory.GroupAccessDao()
+        Protected Shared ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
+        Protected Shared ReadOnly SecurityGroupDao As IDaoAll(Of SecurityGroup) = Factory.SecurityGroupDao()
+        Protected Shared ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
         Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao()
 
         Public Property DataDao As Object
@@ -258,6 +259,15 @@ Namespace Services
         End Function
 
 #End Region
+
+    End Class
+
+    Public Class ServiceLogin
+        Inherits Service
+
+        Public Overrides Function GetDao()
+            Return LoginDao
+        End Function
 
     End Class
 

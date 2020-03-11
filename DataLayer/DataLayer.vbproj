@@ -83,9 +83,6 @@
     <Compile Include="AdoNet\SecurityGroupDao.vb" />
     <Compile Include="AdoNet\SecurityObjectDao.vb" />
     <Compile Include="AdoNet\UserDao.vb" />
-    <Compile Include="IDaoWithAll.vb" />
-    <Compile Include="IDaoWithChildNAll.vb" />
-    <Compile Include="IDaoChild.vb" />
     <Compile Include="IDao.vb" />
     <Compile Include="ISecurityObjectDao.vb" />
     <Compile Include="DaoFactories.vb" />
@@ -93,11 +90,9 @@
     <Compile Include="IDaoFactory.vb" />
     <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />
-    <Compile Include="IGroupAccessDao.vb" />
     <Compile Include="ILoginDao.vb" />
     <Compile Include="ISaltDao.vb" />
     <Compile Include="ISecurityDao.vb" />
-    <Compile Include="ISecurityGroupDao.vb" />
     <Compile Include="ITblColPropDao.vb" />
     <Compile Include="IUserDao.vb" />
     <Compile Include="My Project\Application.Designer.vb">

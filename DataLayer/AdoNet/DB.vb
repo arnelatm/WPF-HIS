@@ -588,7 +588,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function TvpDelUpdate(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
+        Public Function DelUpdateTvp(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
                                      groupIdNo As Integer) _
             As Integer
             Dim retValue = 0

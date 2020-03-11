@@ -1,4 +1,5 @@
 ﻿Public Interface IDao(Of TBiz)
+
     ' gets a specific record data
     Function GetRecordById(idNo As Integer) As TBiz
 
@@ -7,5 +8,24 @@
 
     ' updates a recordData
     Function UpdateRecord(ByRef recordData As TBiz) As Integer
+
+End Interface
+
+Public Interface IDaoAll(Of TBiz)
+    Inherits IDao(Of TBiz)
+
+    ' gets a specific record data
+    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+End Interface
+
+Public Interface IDaoChild(Of TBiz)
+    ' gets a specific record data
+
+    Function GetRecordsById(idNo As Integer, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+
+    Function InsertTvp(ByRef tvpTable As DataTable) As Integer
 
 End Interface

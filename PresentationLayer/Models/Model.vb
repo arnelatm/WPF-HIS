@@ -13,6 +13,7 @@ Public Class Model
 
     Protected DataBizObject
     Private Shared ReadOnly Service As New Service()
+    Private Shared ReadOnly LoginService As New LoginService()
 
     'Public Property CommonService
 
@@ -281,10 +282,9 @@ Public Class Model
         Return tlData
     End Function
 
-    'Public Function Login(userName As String, password As String) As Boolean Implements IModel.Login
-    '    Return True
-    '    'Return Service.Login(userName, password)
-    'End Function
+    Public Function Login(userName As String, password As String) As Boolean Implements IModel.Login
+        Return LoginService.Login(userName, password)
+    End Function
 
     Public Sub Logout() Implements IModel.Logout
         Throw New NotImplementedException
@@ -424,6 +424,15 @@ Public Class Model
     Public Function IsValid(Of TM)(ByRef dModel As TM)
         GlobalVariables.Mapper.Map(dModel, DataBizObject)
         Return DataBizObject.IsValid()
+    End Function
+
+End Class
+
+Public Class ModelLogin
+    Inherits Model
+
+    Public Overrides Function GetDataService()
+        Return New ServiceLogin
     End Function
 
 End Class

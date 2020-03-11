@@ -109,7 +109,6 @@
     <Compile Include="DataLayer\ICostCenterDao.vb" />
     <Compile Include="DataLayer\ICountryDao.vb" />
     <Compile Include="DataLayer\IDepartmentDao.vb" />
-    <Compile Include="DataLayer\IGroupAccesDao.vb" />
     <Compile Include="DataLayer\IOriginalMessagesDao.vb" />
     <Compile Include="DataLayer\IPhoneTypeDao.vb" />
     <Compile Include="DataLayer\IProfitCenterDao.vb" />
