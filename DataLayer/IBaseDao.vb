@@ -1,4 +1,5 @@
 ﻿Public Interface IBaseDao
+
     'Function CheckIfUnique(control As Control, tableName As String, fieldName As String, targetIdNo As Int32)
     Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String, currentIdNo As Long) _
         As String
@@ -48,15 +49,16 @@
 
     Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer
 
-    Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
+    'Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
 
     Function HasRecordChanged(idNo As Integer, tableName As String, timeStampValue As Byte,
                               Optional timeStampedField As String = "DateTimeStamp") As Boolean
 
     Function IsFieldUnique(tableName As String, fieldName As String) As Boolean
 
-    Function GetSqlValue (Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
-    Function UpdateRecordWithIdNo (Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
+    Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
         As Integer
+
 End Interface

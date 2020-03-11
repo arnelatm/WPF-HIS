@@ -372,10 +372,10 @@ Public Class Model
         Return Service.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-        Implements IModel.GetUserSecurity
-        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-    End Function
+    'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+    '    Implements IModel.GetUserSecurity
+    '    Return SecurityService.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+    'End Function
 
     Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) _
         As Boolean _

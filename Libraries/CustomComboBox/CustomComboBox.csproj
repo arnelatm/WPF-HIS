@@ -53,9 +53,6 @@
     <Compile Include="StringMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\..\HIS\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

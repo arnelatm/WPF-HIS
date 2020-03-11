@@ -19,8 +19,10 @@ Namespace Services
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
-        Protected Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
+
+        'Protected Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
         Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
+
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
         Protected Shared ReadOnly SecurityGroupDao As IDaoAll(Of SecurityGroup) = Factory.SecurityGroupDao()
@@ -197,10 +199,10 @@ Namespace Services
             Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-            Implements IService.GetUserSecurity
-            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-        End Function
+        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        '    Implements IService.GetUserSecurity
+        '    Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        'End Function
 
         Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object,
                                          Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean _
