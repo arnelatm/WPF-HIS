@@ -11,13 +11,10 @@ Public Class MappingProfile
         CreateMap(Of SecurityObjectModel, ISecurityObjectView).ReverseMap()
         CreateMap(Of SecurityGroup, SecurityGroupModel)().ReverseMap()
         CreateMap(Of SecurityGroupModel, ISecurityGroupView).ReverseMap()
-        CreateMap(Of ISecurityGroupView, SecurityGroup)()
         CreateMap(Of GroupAccess, GroupAccessModel)().ReverseMap()
-        CreateMap(Of GroupAccessModel, IGroupAccessView)()
-        CreateMap(Of IGroupAccessView, GroupAccess)()
+        CreateMap(Of GroupAccessModel, IGroupAccessView).ReverseMap()
         CreateMap(Of User, UserModel)().ReverseMap()
-        CreateMap(Of UserModel, IUserView)()
-        CreateMap(Of IUserView, User)()
+        CreateMap(Of UserModel, IUserView).ReverseMap()
     End Sub
 
 End Class

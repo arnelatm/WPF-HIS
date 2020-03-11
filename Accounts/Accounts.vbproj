@@ -86,10 +86,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountStrings.Designer.vb" />
+    <Compile Include="BusinessLayer\AccountReconciliation.vb" />
+    <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
+    <Compile Include="BusinessLayer\ApJournal.vb" />
+    <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\ArJournal.vb" />
+    <Compile Include="BusinessLayer\ArOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Bank.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
+    <Compile Include="BusinessLayer\CadOiItem.vb" />
+    <Compile Include="BusinessLayer\CashCode.vb" />
+    <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\Category.vb" />
+    <Compile Include="BusinessLayer\Chart.vb" />
+    <Compile Include="BusinessLayer\ChequeDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CkdOiItem.vb" />
+    <Compile Include="BusinessLayer\CsrOiItem.vb" />
+    <Compile Include="BusinessLayer\Customer.vb" />
+    <Compile Include="BusinessLayer\Designation.vb" />
+    <Compile Include="BusinessLayer\DistributionScheme.vb" />
+    <Compile Include="BusinessLayer\DistributionSchemeItem.vb" />
     <Compile Include="BusinessLayer\Employee.vb" />
+    <Compile Include="BusinessLayer\GeneralJournal.vb" />
+    <Compile Include="BusinessLayer\GlLedgerItem.vb" />
+    <Compile Include="BusinessLayer\JournalItem.vb" />
+    <Compile Include="BusinessLayer\PcsOiItem.vb" />
+    <Compile Include="BusinessLayer\PettyCashJournal.vb" />
+    <Compile Include="BusinessLayer\PurchaseItem.vb" />
+    <Compile Include="BusinessLayer\PurchaseJournal.vb" />
+    <Compile Include="BusinessLayer\Reconciled.vb" />
+    <Compile Include="BusinessLayer\SalesCashItem.vb" />
+    <Compile Include="BusinessLayer\SalesJournal.vb" />
+    <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountsDao.vb" />
     <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountsDaoFactory.vb" />
@@ -134,15 +164,78 @@
     <Compile Include="PresentationLayer\Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
+    <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ApOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\BankModel.vb" />
+    <Compile Include="PresentationLayer\Models\CadOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashCodeModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CategoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\ChartModel.vb" />
+    <Compile Include="PresentationLayer\Models\ChequeDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CkdOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
+    <Compile Include="PresentationLayer\Models\DesignationModel.vb" />
+    <Compile Include="PresentationLayer\Models\DistributionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeModel.vb" />
+    <Compile Include="PresentationLayer\Models\GeneralJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\GlLedgerItemModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelAccounts.vb" />
+    <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
+    <Compile Include="PresentationLayer\Models\PcsOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\PettyCashJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
+    <Compile Include="PresentationLayer\Models\SaleCashItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
+    <Compile Include="PresentationLayer\Views\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IArJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IBankView.vb" />
+    <Compile Include="PresentationLayer\Views\IBranchView.vb" />
+    <Compile Include="PresentationLayer\Views\ICadOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICadOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashCodeView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICashReceiptJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ICategoryView.vb" />
+    <Compile Include="PresentationLayer\Views\IChartView.vb" />
+    <Compile Include="PresentationLayer\Views\IChequeDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICkdOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICkdOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICsrOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ICsrOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ICustomerView.vb" />
+    <Compile Include="PresentationLayer\Views\IDesignationView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeView.vb" />
     <Compile Include="PresentationLayer\Views\IEmployeeView.vb" />
+    <Compile Include="PresentationLayer\Views\IGeneralJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IJournalItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IJournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPcsOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IPcsOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPettyCashJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IPurchaseItemView.vb" />
+    <Compile Include="PresentationLayer\Views\IPurchaseJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesCashItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesCashItemView.vb" />
+    <Compile Include="PresentationLayer\Views\ISalesJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
@@ -270,6 +363,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PresentationLayer\Forms\Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessLayer\BoAccounts.vbproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

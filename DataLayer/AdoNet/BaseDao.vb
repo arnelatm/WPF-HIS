@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Namespace AdoNet
+
     Public Class BaseDao
         Implements IBaseDao
 
@@ -15,14 +16,14 @@ Namespace AdoNet
         '    Db = Db
         'End Sub
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-            Implements IBaseDao.GetUserSecurity
-            Dim params() As Object =
-                    {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
-            Dim sql =
-                    " SELECT top 1 Visible, Selectable, Viewable, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
-            Return Db.SqlRead(sql, params)
-        End Function
+        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        '    Implements IBaseDao.GetUserSecurity
+        '    Dim params() As Object =
+        '            {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
+        '    Dim sql =
+        '            " SELECT top 1 Visible, Selectable, Viewable, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
+        '    Return Db.SqlRead(sql, params)
+        'End Function
 
         Public Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object _
             Implements IBaseDao.GetFilteredRecords
@@ -309,7 +310,7 @@ Namespace AdoNet
             End If
         End Function
 
-        Public Function UpdateRecordWithIdNo (Of T)(idNo As Integer, tableName As String, fieldName As String,
+        Public Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String,
                                                     value As T) As Integer _
             Implements IBaseDao.UpdateRecordWithIdNo
             Dim sql As String =
@@ -433,7 +434,7 @@ Namespace AdoNet
             Return Db.SqlRead(sql)
         End Function
 
-        Public Function GetSqlValue (Of TType)(sqlStatement As String, tableName As String, condition As String) _
+        Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) _
             As TType _
             Implements IBaseDao.GetSqlValue
             Dim sql As String =
@@ -445,5 +446,7 @@ Namespace AdoNet
             End If
             Return Convert.ChangeType(x, GetType(TType))
         End Function
+
     End Class
+
 End Namespace
