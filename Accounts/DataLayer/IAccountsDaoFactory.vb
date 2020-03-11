@@ -1,15 +1,19 @@
-﻿
+﻿' ** GoF Design Pattern: Factory.
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
-' ** GoF Design Pattern: Factory.
 Namespace DataLayer
+
     Public Interface IAccountsDaoFactory
         Inherits AATM.Common.DataLayer.ICommonDaoFactory
-        'Inherits AATM.DataLayer.IDaoFactory
+        Inherits AATM.DataLayer.IDaoFactory
 
         ReadOnly Property AccountsDao As IAccountsDao
-        'ReadOnly Property ApJournalDao As IApJournalDao
-        'ReadOnly Property ApJournalItemDao As IJournalItemDao
-        'ReadOnly Property ApOpenInvoiceDao As IApOpenInvoiceDao
+        ReadOnly Property ApJournalDao As IDao(Of ApJournal)
+        ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem)
+
+        ReadOnly Property ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice)
+
         'ReadOnly Property ArJournalDao As IArJournalDao
         'ReadOnly Property ArJournalItemDao As IJournalItemDao
         'ReadOnly Property ArOpenInvoiceDao As IArOpenInvoiceDao
@@ -20,6 +24,7 @@ Namespace DataLayer
         'ReadOnly Property CashReceiptJournalDao As ICashReceiptJournalDao
         'ReadOnly Property CashReceiptJournalItemDao As IJournalItemDao
         ReadOnly Property CategoryDao As ICategoryDao
+
         'ReadOnly Property ChartDao As IChartDao
         'ReadOnly Property ChequeDisbursementJournalDao As IChequeDisbursementJournalDao
         'ReadOnly Property ChequeDisbursementJournalItemDao As IJournalItemDao
@@ -30,6 +35,7 @@ Namespace DataLayer
         'ReadOnly Property DistributionSchemeDao As IDistributionSchemeDao
         'ReadOnly Property DistributionSchemeItemDao As IDistributionSchemeItemDao
         ReadOnly Property EmployeeDao As IEmployeeDao
+
         'ReadOnly Property GeneralJournalDao As IGeneralJournalDao
         'ReadOnly Property GeneralJournalItemDao As IJournalItemDao
         'ReadOnly Property JournalItemDao As IJournalItemDao
@@ -48,4 +54,5 @@ Namespace DataLayer
         'ReadOnly Property AccountReconciliationItemDao As IAccountReconciliationItemDao
         'ReadOnly Property ReconciledDao As IReconciledDao
     End Interface
-End NameSpace
+
+End Namespace

@@ -1,17 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for ApJournal
     ' ** DAO Pattern
 
     Public Class ApJournalDao
-        Implements IApJournalDao
+        Implements IDao(Of ApJournal), IJournalsDao(Of ApJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As ApJournal _
-        Implements IApJournalDao.GetRecordById
+        Implements IDao(Of ApJournal).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -38,16 +40,16 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ApJournal) _
-            Implements IApJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, SupplierIdNo, TransactionDate " &
-                    "   FROM [ApJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ApJournal) _
+        '    Implements IApJournalDao.GetAll
+        '    Dim sql As String =
+        '            " SELECT IDNo, SupplierIdNo, TransactionDate " &
+        '            "   FROM [ApJournal] " & "order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
 
         Public Function UpdateRecord(ByRef apJournal As ApJournal) As Integer _
-            Implements IApJournalDao.UpdateRecord
+            Implements IDao(Of ApJournal).UpdateRecord
             Dim sql As String =
                     " UPDATE [ApJournal] Set " &
                     "AccountIdNo = @AccountIdNo," &
@@ -71,7 +73,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef apJournal As ApJournal) As Integer _
-            Implements IApJournalDao.AddRecord
+            Implements IDao(Of ApJournal).AddRecord
             Dim sql As String = "INSERT INTO [ApJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
@@ -156,11 +158,11 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IApJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As ApJournal) As Integer Implements IJournalsDao(Of ApJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = model.TransactionDate
+            Dim transactionDate = bizObj.TransactionDate
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
@@ -185,11 +187,14 @@ Namespace DataLayer.AdoNet
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [ApJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & model.IdNo
+                   ")) where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
 
+        'Public Function UpdateGlReferenceNumber(ByRef model As ApJournal) As Integer Implements IJournalsDao(Of ApJournal).UpdateGlReferenceNumber
+        '    Throw New NotImplementedException
+        'End Function
     End Class
 
 End Namespace

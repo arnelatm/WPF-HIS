@@ -2,8 +2,16 @@
 Imports AATM.DataLayer
 
 Namespace DataLayer
+
     Public Interface IAccountsDao
         Inherits ICommonDao
 
     End Interface
-End NameSpace
+
+    Public Interface IJournalsDao(Of TM)
+
+        Function UpdateGlReferenceNumber(ByRef model As TM) As Integer
+
+    End Interface
+
+End Namespace

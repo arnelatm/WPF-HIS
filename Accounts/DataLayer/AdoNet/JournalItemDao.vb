@@ -1,5 +1,7 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for JournalItem
@@ -7,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class JournalItemDao
         Inherits CommonDao
-        Implements IJournalItemDao
+        Implements IDaoChild(Of JournalItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = ""
@@ -18,29 +20,29 @@ Namespace DataLayer.AdoNet
         '    DbCommon = Db
         'End Sub
 
-        Public Function GetRecordById(idNo As Integer) As JournalItem Implements IJournalItemDao.GetRecordById
-            Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
-                    "AccountName," &
-                    "Credit," &
-                    "DiscountTaken," &
-                    "Debit," &
-                    "IDNo," &
-                    "JournalIdNo," &
-                    "Notes," &
-                    "OpenInvoiceIdNo," &
-                    "OriginalAmount," &
-                    "PaidAmount," &
-                    "PayeeType," &
-                    "ProfitCenterIdNo," &
-                    "Sequence," &
-                    "SpecialAccount" &
-                    " FROM " & TableFileName &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-        End Function
+        'Public Function GetRecordById(idNo As Integer) As JournalItem Implements IDaoChild(Of JournalItem).GetRecordById
+        '    Dim sql As String =
+        '            "SELECT " &
+        '            "AccountIdNo," &
+        '            "AccountName," &
+        '            "Credit," &
+        '            "DiscountTaken," &
+        '            "Debit," &
+        '            "IDNo," &
+        '            "JournalIdNo," &
+        '            "Notes," &
+        '            "OpenInvoiceIdNo," &
+        '            "OriginalAmount," &
+        '            "PaidAmount," &
+        '            "PayeeType," &
+        '            "ProfitCenterIdNo," &
+        '            "Sequence," &
+        '            "SpecialAccount" &
+        '            " FROM " & TableFileName &
+        '            " WHERE IDNo = @IDNo"
+        '    Dim params() As Object = {"@IDNo", idNo}
+        '    Return Db.Read(sql, Make, params).FirstOrDefault()
+        'End Function
 
         Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItem)
             Dim sql As String =
@@ -67,16 +69,15 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of JournalItem) _
-            Implements IJournalItemDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, JournalIdNo,  " &
-                    "   FROM " & TableFileName & " order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of JournalItem) _
+        '    Implements IDaoChild(Of JournalItem).GetAll
+        '    Dim sql As String =
+        '            " SELECT IDNo, JournalIdNo,  " &
+        '            "   FROM " & TableFileName & " order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = "Sequence") _
-            As List(Of JournalItem)
+        Public Function GetRecordsById(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -102,11 +103,11 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Integer) As Integer _
-            Implements IJournalItemDao.DelUpdateTvp
-            Return Db.TvpDelUpdate(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
+            Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IJournalItemDao.InsertTvp
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
             Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
