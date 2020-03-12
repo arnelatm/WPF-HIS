@@ -8,8 +8,6 @@ Namespace PresentationLayer.Presenters
     Public Class GeneralJournalItemsPresenter
         Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
-        Public ParentViewList As List(Of JournalItemModel)
-
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
             ModelPresenter = New ModelGeneralJournalItem()
@@ -49,7 +47,6 @@ Namespace PresentationLayer.Presenters
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
         Public Overloads Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
-            'View.JournalItems = Model.GetJournalItems(journalIdNo)
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

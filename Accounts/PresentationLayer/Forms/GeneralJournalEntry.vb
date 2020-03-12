@@ -484,8 +484,15 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateTotals()
-            TotalDebits = JournalItems.Sum(Function(totals) totals.Debit)
-            TotalCredits = JournalItems.Sum(Function(totals) totals.Credit)
+            TotalDebits = 0
+            TotalCredits = 0
+            For Each item In bsJournalItems
+                TotalDebits += item.Debit
+                TotalCredits += item.Credit
+            Next
+            'TotalDebits = JournalItems.Sum(Function(totals) totals.Debit)
+            'TotalCredits = JournalItems.Sum(Function(totals) totals.Credit)
+            'TotalCredits = bsJournalItems.DataSource.Sum(Function(totals) totals.Credit)
         End Sub
 
         'Private Sub UserDeletingRow(ByVal sender As Object,

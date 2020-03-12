@@ -1,4 +1,6 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
@@ -7,8 +9,8 @@ Namespace PresentationLayer.Presenters
     Public Class AccountsPresenter(Of T As IView, TM As New)
         Inherits CommonPresenter(Of T, TM)
 
-        'Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
-        'Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice
+        Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
+        Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice
         'Protected Shared Property ModelCashCode As IModelCashCode
 
         Public Sub New(view As T)
@@ -77,24 +79,24 @@ Namespace PresentationLayer.Presenters
         '    Return lModel.GetRecordById(Of ChartModel)(idNo)
         'End Function
 
-        'Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-        '    Dim retVal As Integer
-        '    Dim apOpenInvoiceBo As New ApOpenInvoice
+        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim retVal As Integer
+            Dim apOpenInvoiceBo As New ApOpenInvoice
 
-        '    apOpenInvoiceBo.PaidAmount = 0
-        '    apOpenInvoiceBo.DiscountTaken = 0
-        '    apOpenInvoiceBo.JournalCode = journalCode
-        '    apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-        '    apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-        '    retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
-        '    Return retVal
-        'End Function
+            apOpenInvoiceBo.PaidAmount = 0
+            apOpenInvoiceBo.DiscountTaken = 0
+            apOpenInvoiceBo.JournalCode = journalCode
+            apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
+            apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
+            Return retVal
+        End Function
 
-        'Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
-        '    Dim retValue As String
-        '    retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-        '    Return retValue
-        'End Function
+        Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
+            Dim retValue As String
+            retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+            Return retValue
+        End Function
 
         'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
         '    Dim retVal As Integer
@@ -130,4 +132,5 @@ Namespace PresentationLayer.Presenters
         'End Function
 
     End Class
-End NameSpace
+
+End Namespace

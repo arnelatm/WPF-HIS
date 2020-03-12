@@ -100,10 +100,10 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournalItems
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly JournalItemDao As IDaoChild(Of JournalItem) = AccountsFactory.JournalItemDao
+        Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems(Of JournalItem) = AccountsFactory.ApJournalItemDao
 
         Public Overrides Function GetDao()
-            Return JournalItemDao
+            Return ApJournalItemDao
         End Function
 
     End Class

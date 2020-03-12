@@ -1063,15 +1063,15 @@ Namespace PresentationLayer.Forms
         '    ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         'End Sub
 
-        'Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsPayableEntryToolStripMenuItem.Click
-        '    Dim childMdiForm As ApJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New ApJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsPayableEntryToolStripMenuItem.Click
+            Dim childMdiForm As ApJournalEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New ApJournalEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableEntryToolStripMenuItem.Click
         '    Dim childMdiForm As ArJournalEntry
