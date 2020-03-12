@@ -1,5 +1,6 @@
 ﻿' ** GoF Design Pattern: Factory.
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.DataLayer
 
 Namespace DataLayer
@@ -23,7 +24,7 @@ Namespace DataLayer
         'ReadOnly Property CashDisbursementJournalItemDao As IJournalItemDao
         'ReadOnly Property CashReceiptJournalDao As ICashReceiptJournalDao
         'ReadOnly Property CashReceiptJournalItemDao As IJournalItemDao
-        ReadOnly Property CategoryDao As ICategoryDao
+        ReadOnly Property CategoryDao As IDaoAll(Of Category)
 
         'ReadOnly Property ChartDao As IChartDao
         'ReadOnly Property ChequeDisbursementJournalDao As IChequeDisbursementJournalDao
@@ -34,11 +35,12 @@ Namespace DataLayer
         'ReadOnly Property DesignationDao As IDesignationDao
         'ReadOnly Property DistributionSchemeDao As IDistributionSchemeDao
         'ReadOnly Property DistributionSchemeItemDao As IDistributionSchemeItemDao
-        ReadOnly Property EmployeeDao As IEmployeeDao
+        ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
 
-        'ReadOnly Property GeneralJournalDao As IGeneralJournalDao
-        'ReadOnly Property GeneralJournalItemDao As IJournalItemDao
-        'ReadOnly Property JournalItemDao As IJournalItemDao
+        ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
+        ReadOnly Property GeneralJournalItemDao As IDaoJournalItems(Of JournalItem)
+        ReadOnly Property JournalItemDao As IDaoJournalItems(Of JournalItem)
+
         'ReadOnly Property PcsOiItemDao As IPcsOiItemDao
         'ReadOnly Property PettyCashJournalDao As IPettyCashJournalDao
         'ReadOnly Property PettyCashJournalItemDao As IJournalItemDao

@@ -1,12 +1,15 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for ApOpenInvoice
     ' ** DAO Pattern
 
     Public Class ApOpenInvoiceDao
-        Implements IApOpenInvoiceDao
+        Implements IDaoChild(Of ApOpenInvoice)
+
+        Private Shared ReadOnly Db As New Db()
 
         Private Shared ReadOnly Make As Func(Of IDataReader, ApOpenInvoice) =
                                     Function(reader) _
@@ -19,85 +22,95 @@ Namespace DataLayer.AdoNet
             .PaidAmount = Extensions.AsDecimal(reader("PaidAmount"))
             }
 
-        Private Shared ReadOnly Db As New Db()
+        'Public Function AddRecord(ByRef apOpenInvoice As ApOpenInvoice) As Integer _
+        '    Implements IApOpenInvoiceDao.AddRecord
+        '    Dim sql As String =
+        '            "INSERT INTO [ApOpenInvoice] (" &
+        '            "DiscountTaken," &
+        '            "JournalCode," &
+        '            "JournalIdNo," &
+        '            "JournalItemIdNo," &
+        '            "PaidAmount" &
+        '            ") VALUES (" &
+        '            "@DiscountTaken," &
+        '            "@JournalCode," &
+        '            "@JournalIdNo," &
+        '            "@JournalItemIdNo," &
+        '            "@PaidAmount" &
+        '            ")"
+        '    Return Db.Insert(sql, Take(apOpenInvoice))
+        'End Function
 
-        Public Function AddRecord(ByRef apOpenInvoice As ApOpenInvoice) As Integer _
-            Implements IApOpenInvoiceDao.AddRecord
-            Dim sql As String =
-                    "INSERT INTO [ApOpenInvoice] (" &
-                    "DiscountTaken," &
-                    "JournalCode," &
-                    "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "PaidAmount" &
-                    ") VALUES (" &
-                    "@DiscountTaken," &
-                    "@JournalCode," &
-                    "@JournalIdNo," &
-                    "@JournalItemIdNo," &
-                    "@PaidAmount" &
-                    ")"
-            Return Db.Insert(sql, Take(apOpenInvoice))
+        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ApOpenInvoice) _
+        '    Implements IApOpenInvoiceDao.GetAll
+        '    Dim sql As String =
+        '            " SELECT IDNo, PaidAmount " &
+        '            "   FROM [ApOpenInvoice] " & "order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
+
+        'Public Function GetRecordById(idNo As Integer) As ApOpenInvoice _
+        '                Implements IDao(Of ApOpenInvoice).GetRecordById
+        '    Dim sql As String =
+        '            " SELECT " &
+        '            "DiscountTaken" &
+        '            "IdNo," &
+        '            "JournalCode," &
+        '            "JournalIdNo," &
+        '            "JournalItemIdNo," &
+        '            "PaidAmount" &
+        '            "   FROM [ApOpenInvoice]" &
+        '            " WHERE IDNo = @IDNo"
+        '    Dim params() As Object = {"@IDNo", idNo}
+        '    Return Db.Read(sql, Make, params).FirstOrDefault()
+        'End Function
+
+        'Public Function UpdateRecord(ByRef apOpenInvoice As ApOpenInvoice) As Integer _
+        '    Implements IDaoChild(Of ApOpenInvoice).UpdateRecord
+        '    Dim sql As String = "UPDATE [ApOpenInvoice] Set Balance = @Balance WHERE IDNo = @IDNo"
+        '    Return Db.Update(sql, Take(apOpenInvoice))
+        'End Function
+
+        'Public Function GetRecordsByJournalItemIdNo(ByVal journalItemIdNo As Integer, ByVal journalCode As String) As ApOpenInvoice _
+        '    Implements IApOpenInvoiceDao.GetRecordByJournalItemIdNo
+        '    Dim sql As String =
+        '            " SELECT " &
+        '            "DiscountTaken" &
+        '            "IdNo," &
+        '            "JournalCode," &
+        '            "JournalIdNo," &
+        '            "JournalItemIdNo," &
+        '            "PaidAmount" &
+        '            "   FROM [ApOpenInvoice]" &
+        '            " WHERE JournalItemIDNo = @journalItemIdNo and JournalCode = @journalCode"
+        '    Dim params() As Object = {"@JournalItemIdNo", journalItemIdNo, "@JournalCode", journalCode}
+        '    Return Db.Read(sql, Make, params).FirstOrDefault()
+        'End Function
+
+        'Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
+        '    Implements IApOpenInvoiceDao.AddInvoicePayment
+        '    Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
+        '    Dim sql As String = "UPDATE [ApOpenInvoice] Set PaidAmount = (PaidAmount + @Amount), DiscountTaken = (DiscountTaken + @DiscountTaken) WHERE IdNo = @IdNo"
+        '    Return Db.Update(sql, params)
+        'End Function
+
+        'Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
+        '    Implements IApOpenInvoiceDao.RemoveInvoicePayment
+        '    Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
+        '    Dim sql As String = "UPDATE [ApOpenInvoice] Set PaidAmount = (PaidAmount - @Amount), DiscountTaken = (DiscountTaken - @DiscountTaken) WHERE IdNo = @IdNo"
+        '    Return Db.Update(sql, params)
+        'End Function
+
+        Public Function GetRecordsById(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of ApOpenInvoice) Implements IDaoChild(Of ApOpenInvoice).GetRecordsById
+            Throw New NotImplementedException()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ApOpenInvoice) _
-            Implements IApOpenInvoiceDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, PaidAmount " &
-                    "   FROM [ApOpenInvoice] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of ApOpenInvoice).DelUpdateTvp
+            Throw New NotImplementedException()
         End Function
 
-        Public Function GetRecordById(idNo As Integer) As ApOpenInvoice _
-                        Implements IApOpenInvoiceDao.GetRecordById
-            Dim sql As String =
-                    " SELECT " &
-                    "DiscountTaken" &
-                    "IdNo," &
-                    "JournalCode," &
-                    "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "PaidAmount" &
-                    "   FROM [ApOpenInvoice]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-        End Function
-
-        Public Function GetRecordByJournalItemIdNo(ByVal journalItemIdNo As Integer, ByVal journalCode As String) As ApOpenInvoice _
-            Implements IApOpenInvoiceDao.GetRecordByJournalItemIdNo
-            Dim sql As String =
-                    " SELECT " &
-                    "DiscountTaken" &
-                    "IdNo," &
-                    "JournalCode," &
-                    "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "PaidAmount" &
-                    "   FROM [ApOpenInvoice]" &
-                    " WHERE JournalItemIDNo = @journalItemIdNo and JournalCode = @journalCode"
-            Dim params() As Object = {"@JournalItemIdNo", journalItemIdNo, "@JournalCode", journalCode}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-        End Function
-
-        Public Function UpdateRecord(ByRef apOpenInvoice As ApOpenInvoice) As Integer _
-            Implements IApOpenInvoiceDao.UpdateRecord
-            Dim sql As String = "UPDATE [ApOpenInvoice] Set Balance = @Balance WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(apOpenInvoice))
-        End Function
-
-        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
-            Implements IApOpenInvoiceDao.AddInvoicePayment
-            Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
-            Dim sql As String = "UPDATE [ApOpenInvoice] Set PaidAmount = (PaidAmount + @Amount), DiscountTaken = (DiscountTaken + @DiscountTaken) WHERE IdNo = @IdNo"
-            Return Db.Update(sql, params)
-        End Function
-
-        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
-            Implements IApOpenInvoiceDao.RemoveInvoicePayment
-            Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
-            Dim sql As String = "UPDATE [ApOpenInvoice] Set PaidAmount = (PaidAmount - @Amount), DiscountTaken = (DiscountTaken - @DiscountTaken) WHERE IdNo = @IdNo"
-            Return Db.Update(sql, params)
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of ApOpenInvoice).InsertTvp
+            Throw New NotImplementedException()
         End Function
 
         Private Function Take(apOpenInvoice As ApOpenInvoice) As Object()

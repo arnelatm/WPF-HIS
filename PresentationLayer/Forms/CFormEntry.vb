@@ -907,7 +907,7 @@ Public Class CFormEntry
                 btnArabic.Visible = True
                 btnOriginal.Visible = False
             End If
-
+            DisplayView()
             'AddHandler BtnNext.DoubleClick, AddressOf BtnNext.MyDoubleClick
             'AddHandler BtnNext.DoubleClick, AddressOf TurnOnDebugger
         End If

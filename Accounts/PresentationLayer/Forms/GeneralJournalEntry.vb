@@ -265,10 +265,12 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub DisplayView()
             MyBase.DisplayView()
             _journalItemsPresenter.Display(TargetIdNo, UndoMode)
+            BindJournalItem()
             With JournalItems
                 TotalDebits = .Sum(Function(totals) totals.Debit)
                 TotalCredits = .Sum(Function(totals) totals.Credit)
             End With
+            Refresh()
         End Sub
 
         Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
@@ -341,7 +343,6 @@ Namespace PresentationLayer.Forms
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
             JournalItems = New List(Of JournalItemModel)
-            BindJournalItem()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _

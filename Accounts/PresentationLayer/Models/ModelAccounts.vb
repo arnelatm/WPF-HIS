@@ -7,9 +7,11 @@ Namespace PresentationLayer.Models
         Inherits ModelCommon
         Implements IModelAccounts
 
+        Private Shared ReadOnly Service = New ServiceAccounts
+
         Public Function UpdateGlReferenceNumber(Of TBiz)(ByRef modelBiz As TBiz) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
             Dim updateResult As Integer
-            updateResult = GetDataService().UpdateGlReferenceNumber(modelBiz)
+            updateResult = GetAccountsService().UpdateGlReferenceNumber(modelBiz)
             Return updateResult
         End Function
 
@@ -18,12 +20,11 @@ Namespace PresentationLayer.Models
         End Function
 
         Public Overridable Function GetAccountsService()
-            Return New ServiceAccounts
+            Return Service
         End Function
 
     End Class
 
-    
     Public Class ModelCategory
         Inherits ModelAccounts
 
@@ -42,4 +43,60 @@ Namespace PresentationLayer.Models
 
     End Class
 
-End NameSpace
+    Public Class ModelApJournal
+        Inherits ModelAccounts
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceApJournal()
+        End Function
+
+    End Class
+
+    Public Class ModelJournalItems
+        Inherits ModelAccounts
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceJournalItem()
+        End Function
+
+    End Class
+
+    Public Class ModelApJournalItems
+        Inherits ModelAccounts
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceApJournalItems()
+        End Function
+
+    End Class
+
+    Public Class ModelGeneralJournal
+        Inherits ModelAccounts
+
+        Private Shared ReadOnly Service = New ServiceGeneralJournal()
+
+        Public Overrides Function GetAccountsService()
+            Return Service
+        End Function
+
+    End Class
+
+    Public Class ModelGeneralJournalItem
+        Inherits ModelAccounts
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceGeneralJournalItem()
+        End Function
+
+    End Class
+
+    Public Class ModelApOpenInvoice
+        Inherits ModelAccounts
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceApOpenInvoice()
+        End Function
+
+    End Class
+
+End Namespace

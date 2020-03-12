@@ -23,8 +23,8 @@ Public Class LoginPresenter
         'TableName = "User"
         'OriginalModel = New LoginModel()
         'DataBizObject = New Login
-        DataModel = New LoginModel()
-        Model = New ModelLogin
+        'DataModel = New LoginModel()
+        'Model = New ModelLogin
     End Sub
 
     'Shared Sub New()
