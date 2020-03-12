@@ -124,48 +124,15 @@
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ArJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ArOpenInvoiceDao.vb" />
-    <Compile Include="DataLayer\AdoNet\BankDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountsDaoFactory.vb" />
     <Compile Include="DataLayer\AccountsDaoFactories.vb" />
-    <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CsroiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
-    <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
-    <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
-    <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeDao.vb" />
     <Compile Include="DataLayer\AdoNet\GeneralJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\GeneralJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PcsOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PurchaseJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />
-    <Compile Include="DataLayer\AdoNet\SalesCashItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\SalesJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\SalesJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
     <Compile Include="DataLayer\IAccountsDao.vb" />
-    <Compile Include="DataLayer\ICategoryDao.vb" />
     <Compile Include="DataLayer\IAccountsDaoFactory.vb" />
-    <Compile Include="DataLayer\IEmployeeDao.vb" />
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -183,6 +150,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Forms\ApJournalEntry.designer.vb">
+      <DependentUpon>ApJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ApJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
     </Compile>
@@ -193,6 +166,12 @@
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.Designer.vb">
+      <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Main.designer.vb">
@@ -235,8 +214,12 @@
     <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
@@ -285,12 +268,18 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\ApJournalEntry.resx">
+      <DependentUpon>ApJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CategoryEntryTv.resx">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\GeneralJournalEntry.resx">
+      <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Main.en-GB.resx">
       <DependentUpon>Main.vb</DependentUpon>

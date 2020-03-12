@@ -59,11 +59,6 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -72,14 +67,11 @@ Namespace PresentationLayer.Forms
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -133,6 +125,7 @@ Namespace PresentationLayer.Forms
         Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
         Me.txtJournalCode.LinkedLabel = Nothing
         Me.txtJournalCode.Name = "txtJournalCode"
+        Me.txtJournalCode.OldValue = Nothing
         Me.txtJournalCode.ReadOnly = true
         Me.txtJournalCode.TabStop = false
         Me.txtJournalCode.ValueIsMandatory = true
@@ -150,6 +143,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         '
         'lblReferenceNo
@@ -171,6 +165,7 @@ Namespace PresentationLayer.Forms
         Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
         Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
         Me.txtReferenceNo.Name = "txtReferenceNo"
+        Me.txtReferenceNo.OldValue = Nothing
         Me.txtReferenceNo.ValueIsMandatory = true
         '
         'lblTransactionDate
@@ -219,6 +214,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'CFlowLayout2
@@ -290,6 +286,7 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Me.lblReferenceNo
         Me.txtDateCreated.Name = "txtDateCreated"
+        Me.txtDateCreated.OldValue = Nothing
         Me.txtDateCreated.ValueIsMandatory = true
         '
         'lblAmount
@@ -302,12 +299,10 @@ Namespace PresentationLayer.Forms
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
         Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvJournalIdNo, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvJournalIdNo, Me.dgvIdNo})
         Me.DataGridViewJournalItems.DataInGridChanged = false
-        Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.Font = New System.Drawing.Font("Tahoma", 8!)
@@ -323,62 +318,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.StartTrackingChanges = false
-        '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-        '
-        'txtTotalDebits
-        '
-        Me.txtTotalDebits.BackColor = System.Drawing.Color.White
-        Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDebits.ComputedValue = true
-        Me.txtTotalDebits.CustomFormat = Nothing
-        Me.txtTotalDebits.DataBoundControl = true
-        Me.txtTotalDebits.DisplayOnly = true
-        Me.txtTotalDebits.EditingMode = true
-        resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
-        Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalDebits.LinkedLabel = Nothing
-        Me.txtTotalDebits.Name = "txtTotalDebits"
-        Me.txtTotalDebits.ReadOnly = true
-        Me.txtTotalDebits.TabStop = false
-        Me.txtTotalDebits.ValueIsMandatory = true
-        '
-        'txtTotalCredits
-        '
-        Me.txtTotalCredits.BackColor = System.Drawing.Color.White
-        Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalCredits.ComputedValue = true
-        Me.txtTotalCredits.CustomFormat = Nothing
-        Me.txtTotalCredits.DataBoundControl = true
-        Me.txtTotalCredits.DisplayOnly = true
-        Me.txtTotalCredits.EditingMode = true
-        resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
-        Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalCredits.LinkedLabel = Nothing
-        Me.txtTotalCredits.Name = "txtTotalCredits"
-        Me.txtTotalCredits.ReadOnly = true
-        Me.txtTotalCredits.TabStop = false
-        Me.txtTotalCredits.ValueIsMandatory = true
-        '
-        'CFlowLayout3
-        '
-        Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout3.Controls.Add(Me.lblAmount)
-        Me.CFlowLayout3.Controls.Add(Me.txtTotalDebits)
-        Me.CFlowLayout3.Controls.Add(Me.txtTotalCredits)
-        resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
-        Me.CFlowLayout3.Name = "CFlowLayout3"
-        '
-        'CFlowLayout4
-        '
-        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-        Me.CFlowLayout4.Controls.Add(Me.CFlowLayout3)
-        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-        Me.CFlowLayout4.Name = "CFlowLayout4"
         '
         'dgvSequence
         '
@@ -478,53 +417,63 @@ Namespace PresentationLayer.Forms
         Me.dgvIdNo.Name = "dgvIdNo"
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'AccountNameDataGridViewTextBoxColumn
+        'bsJournalItems
         '
-        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
         '
-        'CancelledDataGridViewCheckBoxColumn
+        'txtTotalDebits
         '
-        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
-        resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
-        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
+        Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+        Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalDebits.ComputedValue = true
+        Me.txtTotalDebits.CustomFormat = Nothing
+        Me.txtTotalDebits.DataBoundControl = true
+        Me.txtTotalDebits.DisplayOnly = true
+        Me.txtTotalDebits.EditingMode = true
+        resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+        Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalDebits.LinkedLabel = Nothing
+        Me.txtTotalDebits.Name = "txtTotalDebits"
+        Me.txtTotalDebits.OldValue = Nothing
+        Me.txtTotalDebits.ReadOnly = true
+        Me.txtTotalDebits.TabStop = false
+        Me.txtTotalDebits.ValueIsMandatory = true
         '
-        'DiscountTakenDataGridViewTextBoxColumn
+        'txtTotalCredits
         '
-        Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
-        resources.ApplyResources(Me.DiscountTakenDataGridViewTextBoxColumn, "DiscountTakenDataGridViewTextBoxColumn")
-        Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
+        Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+        Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalCredits.ComputedValue = true
+        Me.txtTotalCredits.CustomFormat = Nothing
+        Me.txtTotalCredits.DataBoundControl = true
+        Me.txtTotalCredits.DisplayOnly = true
+        Me.txtTotalCredits.EditingMode = true
+        resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+        Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalCredits.LinkedLabel = Nothing
+        Me.txtTotalCredits.Name = "txtTotalCredits"
+        Me.txtTotalCredits.OldValue = Nothing
+        Me.txtTotalCredits.ReadOnly = true
+        Me.txtTotalCredits.TabStop = false
+        Me.txtTotalCredits.ValueIsMandatory = true
         '
-        'OpenInvoiceIdNoDataGridViewTextBoxColumn
+        'CFlowLayout3
         '
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
-        resources.ApplyResources(Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, "OpenInvoiceIdNoDataGridViewTextBoxColumn")
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
+        Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout3.Controls.Add(Me.lblAmount)
+        Me.CFlowLayout3.Controls.Add(Me.txtTotalDebits)
+        Me.CFlowLayout3.Controls.Add(Me.txtTotalCredits)
+        resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
+        Me.CFlowLayout3.Name = "CFlowLayout3"
         '
-        'OriginalAmountDataGridViewTextBoxColumn
+        'CFlowLayout4
         '
-        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
-        resources.ApplyResources(Me.OriginalAmountDataGridViewTextBoxColumn, "OriginalAmountDataGridViewTextBoxColumn")
-        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
-        '
-        'PaidAmountDataGridViewTextBoxColumn
-        '
-        Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
-        resources.ApplyResources(Me.PaidAmountDataGridViewTextBoxColumn, "PaidAmountDataGridViewTextBoxColumn")
-        Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
-        '
-        'PayeeTypeDataGridViewTextBoxColumn
-        '
-        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
-        resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
-        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
-        '
-        'SpecialAccountDataGridViewTextBoxColumn
-        '
-        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
-        resources.ApplyResources(Me.SpecialAccountDataGridViewTextBoxColumn, "SpecialAccountDataGridViewTextBoxColumn")
-        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
+        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+        Me.CFlowLayout4.Controls.Add(Me.CFlowLayout3)
+        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+        Me.CFlowLayout4.Name = "CFlowLayout4"
         '
         'GeneralJournalEntry
         '
@@ -582,13 +531,5 @@ End Sub
         Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents dgvJournalIdNo As CdgvColumnText
         Friend WithEvents dgvIdNo As CdgvColumnText
-        Friend WithEvents AccountNameDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents CancelledDataGridViewCheckBoxColumn As Windows.Forms.DataGridViewCheckBoxColumn
-        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
     End Class
 End NameSpace

@@ -1,6 +1,7 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Category
@@ -8,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class CategoryDao
         Inherits CommonDao
-        Implements ICategoryDao
+        Implements IDaoAll(Of Category)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Category Implements ICategoryDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Category Implements IDaoAll(Of Category).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
                     "   FROM [Category]" &
@@ -21,15 +22,18 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "CategoryName ASC") As List(Of Category) _
-            Implements ICategoryDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Category) _
+            Implements IDaoAll(Of Category).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "CategoryName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
                     "   FROM [Category] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef category As Category) As Integer Implements ICategoryDao.UpdateRecord
+        Public Function UpdateRecord(ByRef category As Category) As Integer Implements IDaoAll(Of Category).UpdateRecord
             Dim sql As String =
                     " UPDATE [Category]" &
                     "    SET CategoryCode = @CategoryCode," &
@@ -41,7 +45,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(category))
         End Function
 
-        Public Function AddRecord(ByRef category As Category) As Integer Implements ICategoryDao.AddRecord
+        Public Function AddRecord(ByRef category As Category) As Integer Implements IDaoAll(Of Category).AddRecord
             Dim sql As String =
                     " INSERT INTO [Category] " &
                     " (CategoryCode,CategoryName,CategoryNameAra,Notes) " &

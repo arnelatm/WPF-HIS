@@ -1,7 +1,7 @@
-﻿
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
+
     Public Interface IModelAccounts
         Inherits IModelCommon
 
@@ -9,5 +9,4 @@ Namespace PresentationLayer.Models
 
     End Interface
 
-
-End NameSpace
+End Namespace

@@ -63,12 +63,20 @@ Public Class Model
         Return modelObject
     End Function
 
-    Public Function AddRecord(Of TBiz)(ByRef DataBizObject As TBiz) As Integer _
+    Public Function AddRecord(Of TM)(ByRef dataModel As TM) As Integer _
         Implements IModel.AddRecord
         Dim newlyAddedRecordIdNo As Integer
+        GlobalVariables.Mapper.Map(dataModel, DataBizObject)
         newlyAddedRecordIdNo = GetDataService().AddRecord(DataBizObject)
         Return newlyAddedRecordIdNo
     End Function
+
+    'Public Function AddRecord(Of TBiz)(ByRef DataBizObject As TBiz) As Integer _
+    '    Implements IModel.AddRecord
+    '    Dim newlyAddedRecordIdNo As Integer
+    '    newlyAddedRecordIdNo = GetDataService().AddRecord(DataBizObject)
+    '    Return newlyAddedRecordIdNo
+    'End Function
 
     Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
         As List(Of TM) _

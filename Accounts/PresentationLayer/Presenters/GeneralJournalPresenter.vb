@@ -4,27 +4,20 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class GeneralJournalPresenter
-        Inherits AccountsPresenter(Of IGeneralJournalView, GeneralJournal, GeneralJournalModel)
-
-        Public ParentViewList As List(Of GeneralJournalModel)
-
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
+        Inherits AccountsPresenter(Of IGeneralJournalView, GeneralJournalModel)
 
         Public Sub New(view As IGeneralJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelGeneralJournal()
+            ModelPresenter = New ModelGeneralJournal()
             TableName = "GeneralJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New GeneralJournalModel()
-            BizObject = New GeneralJournal
+            DataBizObject = New GeneralJournal
             DataModel = New GeneralJournalModel
         End Sub
 
@@ -69,10 +62,13 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            DataModel = GlobalVariables.Mapper.Map(Of GeneralJournalModel)(BizObject)
-            retValue = Model.UpdateGlReferenceNumber(DataModel)
+            'DataModel = GlobalVariables.Mapper.Map(Of GeneralJournalModel)(DataBizObject)
+            GlobalVariables.Mapper.Map(View, DataModel)
+            GlobalVariables.Mapper.Map(DataModel, DataBizObject)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataBizObject)
             Return retValue
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

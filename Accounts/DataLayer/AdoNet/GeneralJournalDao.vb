@@ -1,17 +1,18 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for GeneralJournal
     ' ** DAO Pattern
 
     Public Class GeneralJournalDao
-        Implements IGeneralJournalDao
+        Implements IDao(Of GeneralJournal), IJournalsDao(Of GeneralJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As GeneralJournal _
-            Implements IGeneralJournalDao.GetRecordById
+            Implements IDao(Of GeneralJournal).GetRecordById
             Dim sql As String =
                     " SELECT " &
                     "Amount," &
@@ -28,16 +29,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of GeneralJournal) _
-            Implements IGeneralJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [GeneralJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef generalJournal As GeneralJournal) As Integer _
-            Implements IGeneralJournalDao.UpdateRecord
+            Implements IDao(Of GeneralJournal).UpdateRecord
             Dim sql As String =
                     "UPDATE [GeneralJournal] SET " &
                     "Cancelled = @Cancelled," &
@@ -50,7 +43,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef generalJournal As GeneralJournal) As Integer _
-            Implements IGeneralJournalDao.AddRecord
+            Implements IDao(Of GeneralJournal).AddRecord
             Dim sql As String =
                     " INSERT INTO [GeneralJournal] " &
                     "(" &
@@ -93,7 +86,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IGeneralJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef model As GeneralJournal) As Integer Implements IJournalsDao(Of GeneralJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String

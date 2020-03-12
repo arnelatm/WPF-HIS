@@ -1,6 +1,7 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Employee
@@ -8,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeDao
         Inherits CommonDao
-        Implements IEmployeeDao
+        Implements IDaoAll(Of Employee)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Employee Implements IEmployeeDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
@@ -26,15 +27,18 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "EmployeeName ASC") As List(Of Employee) _
-            Implements IEmployeeDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Employee) _
+            Implements IDaoAll(Of Employee).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "EmployeeName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
                     "   FROM [Employee] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IEmployeeDao.UpdateRecord
+        Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).UpdateRecord
             Dim sql As String =
                     " UPDATE [Employee]" &
                     "   SET EmployeeCode = @EmployeeCode," &
@@ -74,7 +78,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(employee))
         End Function
 
-        Public Function AddRecord(ByRef employee As Employee) As Integer Implements IEmployeeDao.AddRecord
+        Public Function AddRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).AddRecord
             Dim sql As String =
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &

@@ -117,14 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>147, 17</value>
+  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>152, 17</value>
   </metadata>
-  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>271, 17</value>
+  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>282, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>406, 17</value>
@@ -832,57 +832,6 @@
   <data name="dgvIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="AccountNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>AccountName</value>
-  </data>
-  <data name="AccountNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="CancelledDataGridViewCheckBoxColumn.HeaderText" xml:space="preserve">
-    <value>Cancelled</value>
-  </data>
-  <data name="CancelledDataGridViewCheckBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="DiscountTakenDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>DiscountTaken</value>
-  </data>
-  <data name="DiscountTakenDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="OpenInvoiceIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>OpenInvoiceIdNo</value>
-  </data>
-  <data name="OpenInvoiceIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="OriginalAmountDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>OriginalAmount</value>
-  </data>
-  <data name="OriginalAmountDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PaidAmountDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PaidAmount</value>
-  </data>
-  <data name="PaidAmountDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PayeeTypeDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PayeeType</value>
-  </data>
-  <data name="PayeeTypeDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="SpecialAccountDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>SpecialAccount</value>
-  </data>
-  <data name="SpecialAccountDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>546, 17</value>
-  </metadata>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 143</value>
   </data>
@@ -907,6 +856,9 @@
   <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>546, 17</value>
+  </metadata>
   <data name="txtTotalDebits.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
@@ -2172,6 +2124,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>General GeneralJournal Entry</value>
   </data>
+  <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
+    <value>StoreCaptions1</value>
+  </data>
+  <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
+    <value>AATM.Libraries.Translations.StoreCaptions, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
     <value>TranslatorDAC</value>
   </data>
@@ -2184,23 +2142,11 @@
   <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
     <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
-    <value>StoreCaptions1</value>
-  </data>
-  <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.StoreCaptions, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
     <value>MyErrorProvider</value>
   </data>
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
@@ -2250,53 +2196,11 @@
   <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>AccountNameDataGridViewTextBoxColumn</value>
+  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
+    <value>bsJournalItems</value>
   </data>
-  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Name" xml:space="preserve">
-    <value>CancelledDataGridViewCheckBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>DiscountTakenDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>OpenInvoiceIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>OriginalAmountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PaidAmountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PayeeTypeDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>SpecialAccountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralJournalEntry</value>

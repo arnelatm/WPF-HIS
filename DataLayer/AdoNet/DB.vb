@@ -173,7 +173,7 @@ Namespace AdoNet
         'End Sub
 
         ' fast read and instantiate (i.e. make) a collection of objects
-        Public Iterator Function Read (Of T)(sql As String, make As Func(Of IDataReader, T),
+        Public Iterator Function Read(Of T)(sql As String, make As Func(Of IDataReader, T),
                                              ParamArray ByVal params() As Object) As IEnumerable(Of T)
             'Dim retVal As Object = Nothing
             Dim tryAgain As Boolean
@@ -885,7 +885,7 @@ Namespace AdoNet
                     Return DialogResult.Retry
                 End If
             Else
-                Debugger.Break()
+                'Debugger.Break()
                 MessageBox.Show(ex.Message)
                 Return DialogResult.Abort
             End If
@@ -937,6 +937,7 @@ Namespace AdoNet
             End Using
             Return retValue
         End Function
+
     End Class
 
     ' extension methods
@@ -975,5 +976,6 @@ Namespace AdoNet
                 Next i
             End If
         End Sub
+
     End Module
 End Namespace

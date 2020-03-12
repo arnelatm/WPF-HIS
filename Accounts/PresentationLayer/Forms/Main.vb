@@ -65,10 +65,10 @@ Namespace PresentationLayer.Forms
 
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
-                cfg.AddProfile(New MappingProfileAccounts)
-                cfg.AddProfile(New MappingProfileCommon)
-                cfg.AddProfile(New MappingProfile)
-            End Sub)
+                                                                          cfg.AddProfile(New MappingProfileAccounts)
+                                                                          cfg.AddProfile(New MappingProfileCommon)
+                                                                          cfg.AddProfile(New MappingProfile)
+                                                                      End Sub)
             mapperConfigurationAccounts.AssertConfigurationIsValid()
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
         End Sub
@@ -166,7 +166,6 @@ Namespace PresentationLayer.Forms
             MessageBox.Show(" Help is not implemented... ", "Help")
         End Sub
 
-
         ''' <summary>
         '''     Displays login dialog box and loads member list in treeview.
         ''' </summary>
@@ -217,7 +216,6 @@ Namespace PresentationLayer.Forms
             LogStatus = LoginStatus.LoggedOut
             'labelAnnouncement.Visible = True
         End Sub
-
 
         Private Sub SetLanguageChangeButtons()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -399,7 +397,6 @@ Namespace PresentationLayer.Forms
         Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
-
 
         Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem.Click
             Dim childMdiForm As CategoryEntryTv
@@ -660,7 +657,6 @@ Namespace PresentationLayer.Forms
             myForm.Show()
         End Sub
 
-
         '''' <summary>
         ''''     Exits application.
         '''' </summary>
@@ -682,10 +678,10 @@ Namespace PresentationLayer.Forms
         '    ToolStripButtonExit.Enabled = True
         'End Sub
 
-        'Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemGeneralJournalEntry.Click
-        '    ShowEntryForm(GeneralJournalEntry)
-        'End Sub
+        Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemGeneralJournalEntry.Click
+            ShowEntryForm(GeneralJournalEntry)
+        End Sub
 
         'Private Sub IncomeStatementForAGivenMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) _
         '    Handles ToolStripMenuItemIncomeStatementForAGivenMonth.Click

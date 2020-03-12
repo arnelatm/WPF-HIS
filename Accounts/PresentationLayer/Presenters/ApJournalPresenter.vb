@@ -6,9 +6,8 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class ApJournalPresenter
-        Inherits AccountsPresenter(Of IApJournalView, ApJournal, ApJournalModel)
+        Inherits AccountsPresenter(Of IApJournalView, ApJournalModel)
 
         Public ParentViewList As List(Of ApJournalModel)
         Private ReadOnly _apOpenInvoiceModel As ModelApOpenInvoice
@@ -20,11 +19,11 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelApJournal()
+            ModelPresenter = New ModelApJournal()
             TableName = "ApJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
-            BizObject = New ApJournal
+            DataBizObject = New ApJournal
             DataModel = New ApJournalModel
             _apOpenInvoiceModel = New ModelApOpenInvoice
         End Sub
@@ -47,7 +46,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            retValue = Model.UpdateGlReferenceNumber(BizObject)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataBizObject)
             Return retValue
         End Function
 
@@ -63,4 +62,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

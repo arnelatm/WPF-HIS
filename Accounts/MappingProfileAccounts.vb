@@ -12,8 +12,11 @@ Public Class MappingProfileAccounts
         CreateMap(Of CategoryModel, ICategoryView)().ReverseMap()
         CreateMap(Of Employee, EmployeeModel)().ReverseMap()
         CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
+        CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
+        CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap()
+        CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()
+        CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
 
     End Sub
 
 End Class
-

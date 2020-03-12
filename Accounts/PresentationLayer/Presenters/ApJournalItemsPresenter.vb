@@ -6,19 +6,18 @@ Imports AATM.Common
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class ApJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItem, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
         Private journalItems As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelApJournalItem()
+            ModelPresenter = New ModelApJournalItems()
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            BizObject = New JournalItem
+            DataBizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 
@@ -75,4 +74,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace
