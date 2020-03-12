@@ -73,10 +73,8 @@ Namespace PresentationLayer.Models
     Public Class ModelGeneralJournal
         Inherits ModelAccounts
 
-        Private Shared ReadOnly Service = New ServiceGeneralJournal()
-
         Public Overrides Function GetAccountsService()
-            Return Service
+            Return New ServiceGeneralJournal()
         End Function
 
     End Class

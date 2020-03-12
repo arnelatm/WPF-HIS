@@ -9,13 +9,7 @@ Namespace PresentationLayer.Presenters
     Public Class ApJournalPresenter
         Inherits AccountsPresenter(Of IApJournalView, ApJournalModel)
 
-        Public ParentViewList As List(Of ApJournalModel)
         Private ReadOnly _apOpenInvoiceModel As ModelApOpenInvoice
-
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
@@ -46,6 +40,8 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
+            GlobalVariables.Mapper.Map(View, DataModel)
+            GlobalVariables.Mapper.Map(DataModel, DataBizObject)
             retValue = ModelPresenter.UpdateGlReferenceNumber(DataBizObject)
             Return retValue
         End Function

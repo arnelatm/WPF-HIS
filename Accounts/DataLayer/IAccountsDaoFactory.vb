@@ -11,8 +11,7 @@ Namespace DataLayer
 
         ReadOnly Property AccountsDao As IAccountsDao
         ReadOnly Property ApJournalDao As IDao(Of ApJournal)
-        ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem)
-
+        ReadOnly Property ApJournalItemDao As IDaoJournalItems(Of JournalItem)
         ReadOnly Property ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice)
 
         'ReadOnly Property ArJournalDao As IArJournalDao

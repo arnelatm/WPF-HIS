@@ -9,8 +9,7 @@ Namespace PresentationLayer.Presenters
     Public Class ApJournalItemsPresenter
         Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
-        Public ParentViewList As List(Of JournalItemModel)
-        Private journalItems As List(Of JournalItemModel)
+        'Private journalItems As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
@@ -50,9 +49,9 @@ Namespace PresentationLayer.Presenters
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
-        End Function
+        'Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
+        '    Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+        'End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        journalIdNo As Integer)

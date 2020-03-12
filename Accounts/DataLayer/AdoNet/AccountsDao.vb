@@ -20,4 +20,8 @@ Namespace DataLayer.AdoNet
 
     End Interface
 
+    Public Interface IDaoOpenInvoice(Of TBiz)
+
+    End Interface
+
 End Namespace

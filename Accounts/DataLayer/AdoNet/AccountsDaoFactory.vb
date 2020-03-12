@@ -29,6 +29,30 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
+        Public ReadOnly Property ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) Implements IAccountsDaoFactory.ApOpenInvoiceDao
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
+
+        Public ReadOnly Property ApJournalItemDao As IDaoJournalItems(Of JournalItem) Implements IAccountsDaoFactory.ApJournalItemDao
+            Get
+                Return New ApJournalItemDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal) Implements IAccountsDaoFactory.GeneralJournalDao
+            Get
+                Return New GeneralJournalDao()
+            End Get
+        End Property
+
+        Public ReadOnly Property GeneralJournalItemDao As IDaoJournalItems(Of JournalItem) Implements IAccountsDaoFactory.GeneralJournalItemDao
+            Get
+                Return New GeneralJournalItemDao()
+            End Get
+        End Property
+
         'Public ReadOnly Property ArJournalDao As IArJournalDao Implements ICommonDaoFactory.ArJournalDao
         '    Get
         '        Return New ArJournalDao()
@@ -92,18 +116,6 @@ Namespace DataLayer.AdoNet
         Public ReadOnly Property EmployeeDao As IDaoAll(Of Employee) Implements IAccountsDaoFactory.EmployeeDao
             Get
                 Return New EmployeeDao()
-            End Get
-        End Property
-
-        Public ReadOnly Property ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) Implements IAccountsDaoFactory.ApOpenInvoiceDao
-            Get
-                Throw New NotImplementedException()
-            End Get
-        End Property
-
-        Public ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem) Implements IAccountsDaoFactory.ApJournalItemDao
-            Get
-                Throw New NotImplementedException()
             End Get
         End Property
 
@@ -177,18 +189,6 @@ Namespace DataLayer.AdoNet
         '        Return New JournalItemDao
         '    End Get
         'End Property
-
-        Public ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal) Implements IAccountsDaoFactory.GeneralJournalDao
-            Get
-                Return New GeneralJournalDao()
-            End Get
-        End Property
-
-        Public ReadOnly Property GeneralJournalItemDao As IDaoJournalItems(Of JournalItem) Implements IAccountsDaoFactory.GeneralJournalItemDao
-            Get
-                Return New GeneralJournalItemDao()
-            End Get
-        End Property
 
         'Public ReadOnly Property JournalItemDao As IDaoChild(Of JournalItem) Implements IAccountsDaoFactory.JournalItemDao
         '    Get
