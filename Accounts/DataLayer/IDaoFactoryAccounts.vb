@@ -1,30 +1,35 @@
 ﻿' ** GoF Design Pattern: Factory.
 Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Common.DataLayer
 Imports AATM.DataLayer
 
 Namespace DataLayer
 
-    Public Interface IAccountsDaoFactory
-        Inherits AATM.Common.DataLayer.ICommonDaoFactory
-        Inherits AATM.DataLayer.IDaoFactory
+    Public Interface IDaoFactoryAccounts
+        Inherits IDaoFactoryCommon
 
-        ReadOnly Property AccountsDao As IAccountsDao
+        ReadOnly Property DaoAccounts As IDaoAccounts
+        ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
+        ReadOnly Property CategoryDao As IDaoAll(Of Category)
+        ReadOnly Property JournalItemDao As IDaoJournalItems
+
         ReadOnly Property ApJournalDao As IDao(Of ApJournal)
-        ReadOnly Property ApJournalItemDao As IDaoJournalItems(Of JournalItem)
-        ReadOnly Property ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice)
+        ReadOnly Property ApJournalItemDao As IDaoJournalItems
+        ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice
 
-        'ReadOnly Property ArJournalDao As IArJournalDao
-        'ReadOnly Property ArJournalItemDao As IJournalItemDao
-        'ReadOnly Property ArOpenInvoiceDao As IArOpenInvoiceDao
+        ReadOnly Property ArJournalDao As IDao(Of ArJournal)
+        ReadOnly Property ArJournalItemDao As IDaoJournalItems
+        ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice
+
+        ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
+        ReadOnly Property GeneralJournalItemDao As IDaoJournalItems
+
         'ReadOnly Property BankDao As IBankDao
         'ReadOnly Property CadOiItemDao As ICadOiItemDao
         'ReadOnly Property CashDisbursementJournalDao As ICashDisbursementJournalDao
         'ReadOnly Property CashDisbursementJournalItemDao As IJournalItemDao
         'ReadOnly Property CashReceiptJournalDao As ICashReceiptJournalDao
         'ReadOnly Property CashReceiptJournalItemDao As IJournalItemDao
-        ReadOnly Property CategoryDao As IDaoAll(Of Category)
-
         'ReadOnly Property ChartDao As IChartDao
         'ReadOnly Property ChequeDisbursementJournalDao As IChequeDisbursementJournalDao
         'ReadOnly Property ChequeDisbursementJournalItemDao As IJournalItemDao
@@ -34,12 +39,6 @@ Namespace DataLayer
         'ReadOnly Property DesignationDao As IDesignationDao
         'ReadOnly Property DistributionSchemeDao As IDistributionSchemeDao
         'ReadOnly Property DistributionSchemeItemDao As IDistributionSchemeItemDao
-        ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
-
-        ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
-        ReadOnly Property GeneralJournalItemDao As IDaoJournalItems(Of JournalItem)
-        ReadOnly Property JournalItemDao As IDaoJournalItems(Of JournalItem)
-
         'ReadOnly Property PcsOiItemDao As IPcsOiItemDao
         'ReadOnly Property PettyCashJournalDao As IPettyCashJournalDao
         'ReadOnly Property PettyCashJournalItemDao As IJournalItemDao

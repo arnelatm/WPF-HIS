@@ -865,7 +865,7 @@ Namespace PresentationLayer.Forms
         '
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(11, 140)
+        Me.lblNotes.Location = New System.Drawing.Point(11, 139)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(145, 23)
@@ -884,7 +884,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(158, 140)
+        Me.txtNotes.Location = New System.Drawing.Point(158, 139)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"

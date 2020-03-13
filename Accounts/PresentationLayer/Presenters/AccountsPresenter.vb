@@ -9,8 +9,8 @@ Namespace PresentationLayer.Presenters
     Public Class AccountsPresenter(Of T As IView, TM As New)
         Inherits CommonPresenter(Of T, TM)
 
-        Protected Shared Property ModelApOpenInvoice As IModelApOpenInvoice
-        Protected Shared Property ModelArOpenInvoice As IModelArOpenInvoice
+        Protected Shared Property ModelApOpenInvoice As IModelOpenInvoice
+        Protected Shared Property ModelArOpenInvoice As IModelOpenInvoice
         'Protected Shared Property ModelCashCode As IModelCashCode
 
         Public Sub New(view As T)
@@ -98,24 +98,24 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-        '    Dim retVal As Integer
-        '    Dim arOpenInvoiceBo As New ArOpenInvoice
+        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim retVal As Integer
+            Dim arOpenInvoiceBo As New ArOpenInvoice
 
-        '    arOpenInvoiceBo.PaidAmount = 0
-        '    arOpenInvoiceBo.DiscountTaken = 0
-        '    arOpenInvoiceBo.JournalCode = journalCode
-        '    arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-        '    arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-        '    retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
-        '    Return retVal
-        'End Function
+            arOpenInvoiceBo.PaidAmount = 0
+            arOpenInvoiceBo.DiscountTaken = 0
+            arOpenInvoiceBo.JournalCode = journalCode
+            arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
+            arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+            retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
+            Return retVal
+        End Function
 
-        'Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
-        '    Dim retValue As String
-        '    retValue = ModelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
-        '    Return retValue
-        'End Function
+        Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
+            Dim retValue As String
+            retValue = ModelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+            Return retValue
+        End Function
 
         'Public Function GetCashCodesModel() As List(Of CashCodeModel)
         '    Dim cashCodes As New List(Of CashCodeModel)

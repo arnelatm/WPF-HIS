@@ -1,17 +1,18 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for ArJournal
     ' ** DAO Pattern
 
     Public Class ArJournalDao
-        Implements IArJournalDao
+        Implements IDao(Of ArJournal), IDaoJournals(Of ArJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As ArJournal _
-        Implements IArJournalDao.GetRecordById
+        Implements IDao(Of ArJournal).GetRecordById
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
@@ -35,16 +36,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ArJournal) _
-            Implements IArJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, CustomerIdNo, TransactionDate " &
-                    "   FROM [ArJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef arJournal As ArJournal) As Integer _
-            Implements IArJournalDao.UpdateRecord
+            Implements IDao(Of ArJournal).UpdateRecord
             Dim sql As String =
                     "UPDATE [ArJournal] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -65,7 +58,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef arJournal As ArJournal) As Integer _
-            Implements IArJournalDao.AddRecord
+            Implements IDao(Of ArJournal).AddRecord
             Dim sql As String = "INSERT INTO [ArJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
@@ -138,7 +131,7 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IArJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef model As ArJournal) As Integer Implements IDaoJournals(Of ArJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String

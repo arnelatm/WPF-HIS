@@ -6,39 +6,15 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class JournalItemDao
-        Inherits AccountsDao
-        Implements IDaoJournalItems(Of JournalItem)
+        Inherits DaoAccounts
+        Implements IDaoJournalItems
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
 
-        'Public Function GetRecordById(idNo As Integer) As JournalItem Implements IDaoChild(Of JournalItem).GetRecordById
-        '    Dim sql As String =
-        '            "SELECT " &
-        '            "AccountIdNo," &
-        '            "AccountName," &
-        '            "Credit," &
-        '            "DiscountTaken," &
-        '            "Debit," &
-        '            "IDNo," &
-        '            "JournalIdNo," &
-        '            "Notes," &
-        '            "OpenInvoiceIdNo," &
-        '            "OriginalAmount," &
-        '            "PaidAmount," &
-        '            "PayeeType," &
-        '            "ProfitCenterIdNo," &
-        '            "Sequence," &
-        '            "SpecialAccount" &
-        '            " FROM " & TableFileName &
-        '            " WHERE IDNo = @IDNo"
-        '    Dim params() As Object = {"@IDNo", idNo}
-        '    Return Db.Read(sql, Make, params).FirstOrDefault()
-        'End Function
-
-        Public Function GetRecordsWithIdNo(journalIdNo As Integer, ByRef Optional sortKey As String = Nothing) As Object Implements IDaoJournalItems(Of JournalItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(journalIdNo As Integer, ByRef Optional sortKey As String = Nothing) As Object Implements IDaoJournalItems.GetRecordsWithIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -66,46 +42,13 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of JournalItem) _
-        '    Implements IDaoChild(Of JournalItem).GetAll
-        '    Dim sql As String =
-        '            " SELECT IDNo, JournalIdNo,  " &
-        '            "   FROM " & TableFileName & " order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
-
-        'Public Function GetRecordsById(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsById
-        '    Dim sql As String =
-        '            "SELECT " &
-        '            "AccountIdNo," &
-        '            "AccountName," &
-        '            "Credit," &
-        '            "Debit," &
-        '            "DiscountTaken," &
-        '            "IDNo," &
-        '            "JournalIdNo," &
-        '            "Notes," &
-        '            "OriginalAmount," &
-        '            "OpenInvoiceIdNo," &
-        '            "PaidAmount," &
-        '            "PayeeType," &
-        '            "ProfitCenterIdNo," &
-        '            "Sequence," &
-        '            "SpecialAccount" &
-        '            " FROM " & TableFileName &
-        '            " WHERE JournalIdNo = " & idNo &
-        '            " ORDER BY " & sortExpression
-        '    Dim x = Db.Read(sql, Make).ToList()
-        '    Return x
-        'End Function
-
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Integer) As Integer _
-            Implements IDaoJournalItems(Of JournalItem).DelUpdateTvp
+            Implements IDaoJournalItems.DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
-            Implements IDaoJournalItems(Of JournalItem).InsertTvp
+            Implements IDaoJournalItems.InsertTvp
             Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
@@ -128,26 +71,6 @@ Namespace DataLayer.AdoNet
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
             }
-
-        'Private Function Take(journalItem As JournalItem) As Object()
-        '    Return New Object() {
-        '                            "@AccountIdNo", journalItem.AccountIdNo,
-        '                            "@AccountName", journalItem.AccountName,
-        '                            "@Credit", journalItem.Credit,
-        '                            "@Debit", journalItem.Debit,
-        '                            "DiscountTaken", journalItem.DiscountTaken,
-        '                            "@IDNo", journalItem.IdNo,
-        '                            "@JournalIdNo", journalItem.JournalIdNo,
-        '                            "@Notes", journalItem.Notes,
-        '                            "@OriginalAmount", journalItem.OriginalAmount,
-        '                            "@OpenInvoiceIdNo", journalItem.OpenInvoiceIdNo,
-        '                            "@PaidAmount", journalItem.PaidAmount,
-        '                            "@PayeeType", journalItem.PayeeType,
-        '                            "@ProfitCenterIdNo", journalItem.ProfitCenterIdNo,
-        '                            "@Sequence", journalItem.Sequence,
-        '                            "@SpecialAccount", journalItem.SpecialAccount
-        '                        }
-        'End Function
 
     End Class
 

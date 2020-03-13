@@ -120,19 +120,22 @@
     <Compile Include="BusinessLayer\SalesCashItem.vb" />
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
-    <Compile Include="DataLayer\AdoNet\AccountsDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
-    <Compile Include="DataLayer\AdoNet\AccountsDaoFactory.vb" />
-    <Compile Include="DataLayer\AccountsDaoFactories.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactoryAccounts.vb" />
+    <Compile Include="DataLayer\DaoFactoriesAccounts.vb" />
+    <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ArJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ArOpenInvoiceDao.vb" />
     <Compile Include="DataLayer\AdoNet\CategoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeDao.vb" />
     <Compile Include="DataLayer\AdoNet\GeneralJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\GeneralJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
-    <Compile Include="DataLayer\IAccountsDao.vb" />
-    <Compile Include="DataLayer\IAccountsDaoFactory.vb" />
+    <Compile Include="DataLayer\IDaoAccounts.vb" />
+    <Compile Include="DataLayer\IDaoFactoryAccounts.vb" />
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

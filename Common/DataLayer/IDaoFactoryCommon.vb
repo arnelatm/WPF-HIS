@@ -4,7 +4,7 @@ Imports AATM.DataLayer
 
 Namespace DataLayer
 
-    Public Interface ICommonDaoFactory
+    Public Interface IDaoFactoryCommon
         Inherits IDaoFactory
 
         ReadOnly Property CommonDao As ICommonDao

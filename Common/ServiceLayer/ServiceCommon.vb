@@ -7,18 +7,18 @@ Namespace ServiceLayer
         Inherits Service
         Implements IServiceCommon
 
-        Private Shared ReadOnly CommonFactory As ICommonDaoFactory = CommonDaoFactories.GetCommonFactory(Provider)
-        Protected Shared ReadOnly CommonDao As ICommonDao = CommonFactory.CommonDao
-        Protected Shared ReadOnly BranchDao As IBranchDao = CommonFactory.BranchDao
-        Protected Shared ReadOnly CostCenterDao As ICostCenterDao = CommonFactory.CostCenterDao
-        Protected Shared ReadOnly CountryDao As ICountryDao = CommonFactory.CountryDao
-        Protected Shared ReadOnly DepartmentDao As IDepartmentDao = CommonFactory.DepartmentDao
-        Protected Shared ReadOnly OriginalMessagesDao As IOriginalMessagesDao = CommonFactory.OriginalMessagesDao
-        Protected Shared ReadOnly PhoneTypeDao As IPhoneTypeDao = CommonFactory.PhoneTypeDao
-        Protected Shared ReadOnly ProfitCenterDao As IProfitCenterDao = CommonFactory.ProfitCenterDao
-        Protected Shared ReadOnly ReligionDao As IReligionDao = CommonFactory.ReligionDao
-        Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = CommonFactory.RevenueGroupDao
-        Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = CommonFactory.TranslatedMessagesDao
+        Private Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
+        Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CommonDao
+        Protected Shared ReadOnly BranchDao As IBranchDao = DaoFactoryCommonFactory.BranchDao
+        Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
+        Protected Shared ReadOnly CountryDao As ICountryDao = DaoFactoryCommonFactory.CountryDao
+        Protected Shared ReadOnly DepartmentDao As IDepartmentDao = DaoFactoryCommonFactory.DepartmentDao
+        Protected Shared ReadOnly OriginalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.OriginalMessagesDao
+        Protected Shared ReadOnly PhoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.PhoneTypeDao
+        Protected Shared ReadOnly ProfitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.ProfitCenterDao
+        Protected Shared ReadOnly ReligionDao As IReligionDao = DaoFactoryCommonFactory.ReligionDao
+        Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.RevenueGroupDao
+        Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.TranslatedMessagesDao
 
         Public ReadOnly Property CommonDaoProp
             Get

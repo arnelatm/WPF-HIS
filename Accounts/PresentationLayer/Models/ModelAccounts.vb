@@ -88,12 +88,45 @@ Namespace PresentationLayer.Models
 
     End Class
 
-    Public Class ModelApOpenInvoice
+    Public MustInherit Class ModelOpenInvoice
         Inherits ModelAccounts
+        Implements IModelOpenInvoice
+
+        Protected Property ServiceOpenInvoice
 
         Public Overrides Function GetAccountsService()
-            Return New ServiceApOpenInvoice()
+            Return ServiceOpenInvoice
         End Function
+
+        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
+            Dim updateResult As Integer
+            updateResult = ServiceOpenInvoice.AddInvoicePayment(idNo, amount, discountTaken)
+            Return updateResult
+        End Function
+
+        Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoicePayment
+            Dim updateResult As Integer
+            updateResult = ServiceOpenInvoice.RemoveInvoicePayment(idNo, amount, discountTaken)
+            Return updateResult
+        End Function
+
+    End Class
+
+    Public Class ModelApOpenInvoice
+        Inherits ModelOpenInvoice
+
+        Public Sub New()
+            ServiceOpenInvoice = New ServiceApOpenInvoice()
+        End Sub
+
+    End Class
+
+    Public Class ModelArOpenInvoice
+        Inherits ModelOpenInvoice
+
+        Public Sub New()
+            ServiceOpenInvoice = New ServiceArOpenInvoice()
+        End Sub
 
     End Class
 
