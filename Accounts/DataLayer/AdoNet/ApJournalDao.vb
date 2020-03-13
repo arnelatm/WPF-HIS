@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class ApJournalDao
-        Implements IDao(Of ApJournal), IJournalsDao(Of ApJournal)
+        Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal)
 
         Private Shared ReadOnly Db As New Db()
 
@@ -157,7 +157,7 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef bizObj As ApJournal) As Integer Implements IJournalsDao(Of ApJournal).UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As ApJournal) As Integer Implements IDaoJournals(Of ApJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String

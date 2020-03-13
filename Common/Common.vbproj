@@ -92,7 +92,7 @@
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CommonDaoFactory.vb" />
+    <Compile Include="DataLayer\AdoNet\DaoFactoryCommon.vb" />
     <Compile Include="DataLayer\AdoNet\CostCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepartmentDao.vb" />
@@ -102,10 +102,10 @@
     <Compile Include="DataLayer\AdoNet\ReligionDao.vb" />
     <Compile Include="DataLayer\AdoNet\RevenueGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\TranslatedMessagesDao.vb" />
-    <Compile Include="DataLayer\CommonDaoFactories.vb" />
+    <Compile Include="DataLayer\DaoFactoriesCommon.vb" />
     <Compile Include="DataLayer\IBranchDao.vb" />
     <Compile Include="DataLayer\ICommonDao.vb" />
-    <Compile Include="DataLayer\ICommonDaoFactory.vb" />
+    <Compile Include="DataLayer\IDaoFactoryCommon.vb" />
     <Compile Include="DataLayer\ICostCenterDao.vb" />
     <Compile Include="DataLayer\ICountryDao.vb" />
     <Compile Include="DataLayer\IDepartmentDao.vb" />

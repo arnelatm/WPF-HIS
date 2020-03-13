@@ -1,31 +1,32 @@
 ﻿' Factory of factories. This class is a factory class that creates
 ' data-base specific factories which in turn create data access objects.
 ' ** GoF Design Patterns: Factory.
-Imports AATM.Accounts.DataLayer.AdoNet
+
+Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer
 
-    Public Class AccountsDaoFactories
+    Public Class DaoFactoriesCommon
         ' gets a provider specific (i.e. database specific) factory
 
         ' ** GoF Design Pattern: Factory
 
-        Public Shared Function GetAccountsFactory(dataProvider As String) As IAccountsDaoFactory
-            ' return the requested CommonDaoFactory
+        Public Shared Function GetCommonFactory(dataProvider As String) As IDaoFactoryCommon
+            ' return the requested DaoFactoryCommon
 
             Select Case dataProvider.ToLower()
                 Case "ado.net"
-                    Dim retVal = New AccountsDaoFactory()
-                    Return retVal
+                    Return New DaoFactoryCommon()
                     'Case "linq2sql"
-                    'Return New Linq2Sql.CommonDaoFactory()
+                    'Return New Linq2Sql.DaoFactoryOld()
                     'Case "entityframework"
-                    'Return New EntityFramework.CommonDaoFactory()
+                    'Return New EntityFramework.DaoFactoryOld()
 
                 Case Else
-                    Return New AccountsDaoFactory()
+                    Return New DaoFactoryCommon()
             End Select
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

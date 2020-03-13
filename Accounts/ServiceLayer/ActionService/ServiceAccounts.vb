@@ -3,8 +3,6 @@ Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Common.ServiceLayer
 Imports AATM.DataLayer
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer.ActionService
 
@@ -14,17 +12,17 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Protected Shared ReadOnly AccountsFactory As IAccountsDaoFactory = AccountsDaoFactories.GetAccountsFactory(Provider)
-        Protected Shared ReadOnly AccountsDao As IAccountsDao = AccountsFactory.AccountsDao
+        Protected Shared ReadOnly DaoFactoryAccountsFactory As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
+        Protected Shared ReadOnly DaoAccounts As IDaoAccounts = DaoFactoryAccountsFactory.DaoAccounts
 
-        'Protected Shared ReadOnly ApJournalDao As IDaoAll(Of ApJournal) = AccountsFactory.ApJournalDao
-        'Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems(Of ApJournalItem) = AccountsFactory.ApJournalItemDao
+        'Protected Shared ReadOnly ApJournalDao As IDaoAll(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
+        'Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems(Of ApJournalItem) = DaoFactoryAccountsFactory.ApJournalItemDao
 
-        'Protected Shared ReadOnly ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) = AccountsFactory.ApOpenInvoiceDao
+        'Protected Shared ReadOnly ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) = DaoFactoryAccountsFactory.ApOpenInvoiceDao
 
-        Public ReadOnly Property AccountsDaoProp
+        Public ReadOnly Property DaoAccountsProp
             Get
-                Return AccountsDao
+                Return DaoAccounts
             End Get
         End Property
 
@@ -45,7 +43,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCategory
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly CategoryDao As IDaoAll(Of Category) = AccountsFactory.CategoryDao
+        Protected Shared ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccountsFactory.CategoryDao
 
         Public Overrides Function GetDao()
             Return CategoryDao
@@ -56,7 +54,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceEmployee
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly EmployeeDao As IDaoAll(Of Employee) = AccountsFactory.EmployeeDao
+        Protected Shared ReadOnly EmployeeDao As IDaoAll(Of Employee) = DaoFactoryAccountsFactory.EmployeeDao
 
         Public Overrides Function GetDao()
             Return EmployeeDao
@@ -67,7 +65,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournal
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ApJournalDao As IDao(Of ApJournal) = AccountsFactory.ApJournalDao
+        Protected Shared ReadOnly ApJournalDao As IDao(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
 
         Public Overrides Function GetDao()
             Return ApJournalDao
@@ -78,7 +76,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournal
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = AccountsFactory.GeneralJournalDao
+        Protected Shared ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccountsFactory.GeneralJournalDao
 
         Public Overrides Function GetAccountsDao()
             Return GeneralJournalDao
@@ -89,7 +87,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceJournalItem
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly JournalItemDao As IDaoJournalItems(Of JournalItem) = AccountsFactory.ApJournalItemDao
+        Protected Shared ReadOnly JournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
         Public Overrides Function GetDao()
             Return JournalItemDao
@@ -100,7 +98,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournalItems
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems(Of JournalItem) = AccountsFactory.ApJournalItemDao
+        Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
         Public Overrides Function GetDao()
             Return ApJournalItemDao
@@ -111,7 +109,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournalItem
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly GeneralJournalItemDao As IDaoJournalItems(Of JournalItem) = AccountsFactory.GeneralJournalItemDao
+        Protected Shared ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.GeneralJournalItemDao
 
         Public Overrides Function GetDao()
             Return GeneralJournalItemDao
@@ -119,14 +117,45 @@ Namespace ServiceLayer.ActionService
 
     End Class
 
-    Public Class ServiceApOpenInvoice
+    Public MustInherit Class ServiceOpenInvoice
         Inherits ServiceAccounts
+        Implements IOpenInvoiceService
 
-        Protected Shared ReadOnly ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) = AccountsFactory.ApOpenInvoiceDao
+        Protected Property OpenInvoiceDao
 
         Public Overrides Function GetDao()
-            Return ApOpenInvoiceDao
+            Return OpenInvoiceDao
         End Function
+
+        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+            Implements IOpenInvoiceService.AddInvoicePayment
+            Return OpenInvoiceDao.AddInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+            Implements IOpenInvoiceService.RemoveInvoicePayment
+            Return OpenInvoiceDao.RemoveInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+    End Class
+
+    Public Class ServiceApOpenInvoice
+        Inherits ServiceOpenInvoice
+        Implements IOpenInvoiceService
+
+        Public Sub New()
+            OpenInvoiceDao = DaoFactoryAccountsFactory.ApOpenInvoiceDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceArOpenInvoice
+        Inherits ServiceOpenInvoice
+        Implements IOpenInvoiceService
+
+        Public Sub New()
+            OpenInvoiceDao = DaoFactoryAccountsFactory.ArOpenInvoiceDao
+        End Sub
 
     End Class
 

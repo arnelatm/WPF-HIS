@@ -10,4 +10,12 @@ Namespace ServiceLayer.ActionService
 
     End Interface
 
+    Friend Interface IOpenInvoiceService
+
+        Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal)
+
+        Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal)
+
+    End Interface
+
 End Namespace

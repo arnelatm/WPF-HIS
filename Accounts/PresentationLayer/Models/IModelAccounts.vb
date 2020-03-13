@@ -9,4 +9,13 @@ Namespace PresentationLayer.Models
 
     End Interface
 
+    Public Interface IModelOpenInvoice
+        Inherits IModelAccounts
+
+        Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+
+        Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+
+    End Interface
+
 End Namespace
