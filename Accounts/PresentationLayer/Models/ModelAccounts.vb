@@ -4,15 +4,15 @@ Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
 
-    Public Class ModelAccounts
+    Public MustInherit Class ModelAccounts
         Inherits ModelCommon
         Implements IModelAccounts
 
         Private Shared ReadOnly Service = New ServiceAccounts
 
-        Public Function UpdateGlReferenceNumber(Of TBiz)(ByRef modelBiz As TBiz) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
             Dim updateResult As Integer
-            updateResult = GetAccountsService().UpdateGlReferenceNumber(modelBiz)
+            updateResult = GetAccountsService().UpdateGlReferenceNumber(model)
             Return updateResult
         End Function
 

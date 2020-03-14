@@ -40,8 +40,8 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            GlobalVariables.Mapper.Map(DataModel, DataBizObject)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataBizObject)
+            'GlobalVariables.Mapper.Map(DataModel, DataBizObject)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 

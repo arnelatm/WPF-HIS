@@ -81,7 +81,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim retVal As Integer
-            Dim apOpenInvoiceBo As New ApOpenInvoice
+            Dim apOpenInvoiceBo As New ApOpenInvoiceModel
 
             apOpenInvoiceBo.PaidAmount = 0
             apOpenInvoiceBo.DiscountTaken = 0
@@ -89,7 +89,7 @@ Namespace PresentationLayer.Presenters
             apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
             apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
             ModelApOpenInvoice = New ModelApOpenInvoice()
-            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
+            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceBo)
             Return retVal
         End Function
 
@@ -101,15 +101,15 @@ Namespace PresentationLayer.Presenters
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim retVal As Integer
-            Dim arOpenInvoiceBo As New ArOpenInvoice
+            Dim arOpenInvoiceModel As New ArOpenInvoiceModel
 
-            arOpenInvoiceBo.PaidAmount = 0
-            arOpenInvoiceBo.DiscountTaken = 0
-            arOpenInvoiceBo.JournalCode = journalCode
-            arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-            arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            ModelArOpenInvoice = New ModelArOpenInvoice()
-            retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
+            arOpenInvoiceModel.PaidAmount = 0
+            arOpenInvoiceModel.DiscountTaken = 0
+            arOpenInvoiceModel.JournalCode = journalCode
+            arOpenInvoiceModel.JournalIdNo = journalItem.JournalIdNo
+            arOpenInvoiceModel.JournalItemIdNo = journalItem.IdNo
+            'ModelArOpenInvoice = New ModelArOpenInvoice()
+            retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
             Return retVal
         End Function
 

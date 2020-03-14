@@ -3,6 +3,7 @@ Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Common.ServiceLayer
 Imports AATM.DataLayer
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace ServiceLayer.ActionService
 
@@ -13,21 +14,17 @@ Namespace ServiceLayer.ActionService
         Protected Service As Object
 
         Protected Shared ReadOnly DaoFactoryAccountsFactory As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
-        Protected Shared ReadOnly DaoAccounts As IDaoAccounts = DaoFactoryAccountsFactory.DaoAccounts
+        'Protected Shared ReadOnly DaoAccounts As IDaoAccounts = DaoFactoryAccountsFactory.DaoAccounts
 
-        'Protected Shared ReadOnly ApJournalDao As IDaoAll(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
-        'Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems(Of ApJournalItem) = DaoFactoryAccountsFactory.ApJournalItemDao
-
-        'Protected Shared ReadOnly ApOpenInvoiceDao As IDaoChild(Of ApOpenInvoice) = DaoFactoryAccountsFactory.ApOpenInvoiceDao
-
-        Public ReadOnly Property DaoAccountsProp
-            Get
-                Return DaoAccounts
-            End Get
-        End Property
+        'Public ReadOnly Property DaoAccountsProp
+        '    Get
+        '        Return DaoAccounts
+        '    End Get
+        'End Property
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
-            Return GetAccountsDao().UpdateGlReferenceNumber(model)
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return GetAccountsDao().UpdateGlReferenceNumber(DataBo)
         End Function
 
         Public Overrides Function GetBaseDao() As Object
@@ -45,7 +42,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccountsFactory.CategoryDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return CategoryDao
         End Function
 
@@ -56,7 +53,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly EmployeeDao As IDaoAll(Of Employee) = DaoFactoryAccountsFactory.EmployeeDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return EmployeeDao
         End Function
 
@@ -67,7 +64,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly ApJournalDao As IDao(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return ApJournalDao
         End Function
 
@@ -78,7 +75,11 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly ArJournalDao As IDao(Of ArJournal) = DaoFactoryAccountsFactory.ArJournalDao
 
-        Public Overrides Function GetDao()
+        Public Sub New()
+            DataBo = New ArJournal
+        End Sub
+
+        Public Overrides Function GetAccountsDao()
             Return ArJournalDao
         End Function
 
@@ -100,7 +101,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly JournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return JournalItemDao
         End Function
 
@@ -111,7 +112,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return ApJournalItemDao
         End Function
 
@@ -122,7 +123,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly ArJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ArJournalItemDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return ArJournalItemDao
         End Function
 
@@ -133,7 +134,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.GeneralJournalItemDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return GeneralJournalItemDao
         End Function
 
@@ -145,7 +146,7 @@ Namespace ServiceLayer.ActionService
 
         Protected Property OpenInvoiceDao
 
-        Public Overrides Function GetDao()
+        Public Overrides Function GetAccountsDao()
             Return OpenInvoiceDao
         End Function
 

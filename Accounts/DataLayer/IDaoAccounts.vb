@@ -18,15 +18,15 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoJournals(Of TM)
+    Public Interface IDaoJournals(Of TBiz)
 
-        Function UpdateGlReferenceNumber(ByRef model As TM) As Integer
+        Function UpdateGlReferenceNumber(ByRef bizObj As TBiz) As Integer
 
     End Interface
 
-    Public Interface IDaoOpenInvoice(Of TM)
+    Public Interface IDaoOpenInvoice(Of TBiz)
 
-        Function AddRecord(ByRef openInvoice As TM) As Integer
+        Function AddRecord(ByRef openInvoice As TBiz) As Integer
 
         Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 

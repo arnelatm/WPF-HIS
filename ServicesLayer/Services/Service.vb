@@ -30,6 +30,7 @@ Namespace Services
         Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao()
 
         Public Property DataDao As Object
+        Public Property DataBo As Object
 
         Public ReadOnly Property BaseDaoProp
             Get
