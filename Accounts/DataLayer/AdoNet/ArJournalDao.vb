@@ -131,11 +131,11 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model As ArJournal) As Integer Implements IDaoJournals(Of ArJournal).UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As ArJournal) As Integer Implements IDaoJournals(Of ArJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = model.TransactionDate
+            Dim transactionDate = bizObj.TransactionDate
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
@@ -160,7 +160,7 @@ Namespace DataLayer.AdoNet
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [ArJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & model.IdNo
+                   ")) where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function

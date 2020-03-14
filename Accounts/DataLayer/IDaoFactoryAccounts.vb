@@ -15,11 +15,11 @@ Namespace DataLayer
 
         ReadOnly Property ApJournalDao As IDao(Of ApJournal)
         ReadOnly Property ApJournalItemDao As IDaoJournalItems
-        ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice
+        ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice)
 
         ReadOnly Property ArJournalDao As IDao(Of ArJournal)
         ReadOnly Property ArJournalItemDao As IDaoJournalItems
-        ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice
+        ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice)
 
         ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
         ReadOnly Property GeneralJournalItemDao As IDaoJournalItems

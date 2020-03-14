@@ -1073,15 +1073,15 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableEntryToolStripMenuItem.Click
-        '    Dim childMdiForm As ArJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New ArJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableEntryToolStripMenuItem.Click
+            Dim childMdiForm As ArJournalEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New ArJournalEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem8.Click
         '    Dim childMdiForm As CheckDisbursementJournalEntry

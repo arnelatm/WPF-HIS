@@ -2,38 +2,31 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class ArJournalPresenter
-        Inherits AccountsPresenter(Of IArJournalView, ArJournal, ArJournalModel)
+        Inherits AccountsPresenter(Of IArJournalView, ArJournalModel)
 
-        Public ParentViewList As List(Of ArJournalModel)
         Private ReadOnly _arOpenInvoiceModel As ModelArOpenInvoice
-
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
 
         Public Sub New(view As IArJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelArJournal()
+            ModelPresenter = New ModelArJournal()
             TableName = "ArJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ArJournalModel()
-            BizObject = New ArJournal
+            DataBizObject = New ArJournal
             DataModel = New ArJournalModel
             _arOpenInvoiceModel = New ModelArOpenInvoice
+            ModelArOpenInvoice = New ModelArOpenInvoice
         End Sub
 
         Public Property JournalItemsPresenter As ArJournalItemsPresenter
 
         Public Overrides Function ChangesMade() As Boolean
             Dim arJournalChangesMade As Boolean
-            If GlobalFunctions.ObjectsCompare(OriginalModel, View) Then
+            If ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
                     arJournalChangesMade = True
                 Else
@@ -47,7 +40,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            retValue = Model.UpdateGlReferenceNumber(BizObject)
+            GlobalVariables.Mapper.Map(View, DataModel)
+            GlobalVariables.Mapper.Map(DataModel, DataBizObject)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataBizObject)
             Return retValue
         End Function
 
@@ -58,9 +53,10 @@ Namespace PresentationLayer.Presenters
             arOpenInvoiceBo.PaidAmount = journalItem.PaidAmount
             arOpenInvoiceBo.IdNo = journalItem.IdNo
             arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            retValue = _arOpenInvoiceModel.UpdateRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
+            retValue = ModelArOpenInvoice.UpdateRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
             Return retValue
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

@@ -24,7 +24,9 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoOpenInvoice
+    Public Interface IDaoOpenInvoice(Of TM)
+
+        Function AddRecord(ByRef openInvoice As TM) As Integer
 
         Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 

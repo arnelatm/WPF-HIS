@@ -73,6 +73,17 @@ Namespace ServiceLayer.ActionService
 
     End Class
 
+    Public Class ServiceArJournal
+        Inherits ServiceAccounts
+
+        Protected Shared ReadOnly ArJournalDao As IDao(Of ArJournal) = DaoFactoryAccountsFactory.ArJournalDao
+
+        Public Overrides Function GetDao()
+            Return ArJournalDao
+        End Function
+
+    End Class
+
     Public Class ServiceGeneralJournal
         Inherits ServiceAccounts
 
@@ -102,6 +113,17 @@ Namespace ServiceLayer.ActionService
 
         Public Overrides Function GetDao()
             Return ApJournalItemDao
+        End Function
+
+    End Class
+
+    Public Class ServiceArJournalItems
+        Inherits ServiceAccounts
+
+        Protected Shared ReadOnly ArJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ArJournalItemDao
+
+        Public Overrides Function GetDao()
+            Return ArJournalItemDao
         End Function
 
     End Class
