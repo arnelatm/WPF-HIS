@@ -17,16 +17,16 @@ Namespace ServiceLayer.ActionService
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
             GlobalVariables.Mapper.Map(model, DataBo)
-            Return GetAccountsDao().UpdateGlReferenceNumber(DataBo)
+            Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
-        Public Overrides Function GetBaseDao() As Object
-            Return GetAccountsDao()
-        End Function
+        'Public Overrides Function GetBaseDao() As Object
+        '    Return GetAccountsDao()
+        'End Function
 
-        Public Overridable Function GetAccountsDao()
-            Return CommonDaoProp
-        End Function
+        'Public Overridable Function GetAccountsDao()
+        '    Return CommonDaoProp
+        'End Function
 
     End Class
 

@@ -20,40 +20,10 @@ Namespace Services
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
-
-        'Protected Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
-        Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
-
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
-        Protected Shared ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
-        Protected Shared ReadOnly SecurityGroupDao As IDaoAll(Of SecurityGroup) = Factory.SecurityGroupDao()
-        Protected Shared ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
-        Protected Shared ReadOnly SecurityObjectDao As IDao(Of SecurityObject) = Factory.SecurityObjectDao()
 
         Public Property DataDao As Object
         Public Property DataBo As Object
-
-        Public ReadOnly Property BaseDaoProp
-            Get
-                Return BaseDao
-            End Get
-        End Property
-
-        'Public Overridable Function GetDao() As Object
-        '    Return BaseDao
-        'End Function
-
-        'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
-        '    Implements IService.GetRecords
-        '    Dim p = PluralizationService.CreateService(New CultureInfo("en-US"))
-        '    Dim pluralForm = ""
-        '    pluralForm = p.Pluralize(tableName)
-        '    If tableName = pluralForm Then
-        '        ' break the rule because cannot use the same method for the single rule
-        '        pluralForm = tableName + "s"
-        '    End If
-        '    Return Me.GetType.InvokeMember("Get" + pluralForm, BindingFlags.InvokeMethod, Nothing, Me, New Object() {sortOrder})
-        'End Function
 
         Public Function GetDefaultFieldValues(ByVal tableName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
@@ -63,8 +33,31 @@ Namespace Services
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
 
-        Public Function GetRecordsWithIdNo(ByVal idNo As Integer, Optional ByRef sortKey As String = Nothing) Implements IService.GetRecordsWithIdNo
-            Return DataDao.GetRecordsWithIdNo(idNo, sortKey)
+        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Integer, ByRef dataModel As TM,
+                                                            ByRef dbDataDao As TD, ByRef externalService As Object) As TM
+            Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
+        End Function
+
+        Public Function GetBizObjectErrors()
+            Return DataBo.GetErrors()
+        End Function
+
+        Public Function GetBizObjectRules()
+            Return DataBo.GetRules()
+        End Function
+
+#Region "Current Service Function"
+
+        Public Function GetRecordsWithIdNo(Of TM)(idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecordsWithIdNo
+            Dim bizData = DataDao.GetRecordsWithIdNo(idNo, sortKey)
+            Dim dataModel As New List(Of TM)
+            GlobalVariables.Mapper.Map(bizData, dataModel)
+            'For Each bObject In bizData
+            '    Dim model As TM
+            '    model = GlobalVariables.Mapper.Map(Of TM)(bObject)
+            '    viewObject.Add(model)
+            'Next
+            Return dataModel
         End Function
 
         Public Function AddRecord(ByRef model) As Integer Implements IService.AddRecord
@@ -80,12 +73,11 @@ Namespace Services
             Return DataDao.GetAll(sortKey)
         End Function
 
-        Public Shadows Function GetRecordById(idNo As Integer) Implements IService.GetRecordById
+        'Public Shadows Function GetRecordById(idNo As Integer) Implements IService.GetRecordById
+        '    Return DataDao.GetRecordById(Convert.ToInt32(idNo))
+        'End Function
 
-            Return DataDao.GetRecordById(Convert.ToInt32(idNo))
-        End Function
-
-        Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM Implements IService.GetRecordByIdNo
+        Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM Implements IService.GetRecordById
             Dim modelPresenter As New TM
             Dim record = DataDao.GetRecordById(Convert.ToInt32(idNo))
             GlobalVariables.Mapper.Map(record, modelPresenter)
@@ -113,16 +105,18 @@ Namespace Services
             Return DataDao.UpdateTvp(dtTable)
         End Function
 
+        Public Function IsValid(model) As Boolean Implements IService.IsValid
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return DataBo.IsValid()
+        End Function
+
+#End Region
+
+#Region "BaseDao Functions"
+
         Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
             Return BaseDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
         End Function
-
-        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Integer, ByRef dataModel As TM,
-                                                            ByRef dbDataDao As TD, ByRef externalService As Object) As TM
-            Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
-        End Function
-
-#Region "CommonDao"
 
         Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
             As Boolean Implements IService.CheckIfUnique
@@ -211,16 +205,18 @@ Namespace Services
             Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
         End Function
 
-        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-        '    Implements IService.GetUserSecurity
-        '    Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-        'End Function
-
         Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object,
                                          Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean _
             Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
+
+#End Region
+
+        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        '    Implements IService.GetUserSecurity
+        '    Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        'End Function
 
         '' ReSharper disable once UnusedMember.Local
         '    Private Function InvokeMethod(sender As Object, e As WaitWindowEventArgs) As Integer
@@ -264,30 +260,24 @@ Namespace Services
         '        End If
         '    End Sub
 
-        Public Function GetBizObjectErrors()
-            Return DataBo.GetErrors()
-        End Function
-
-        Public Function GetBizObjectRules()
-            Return DataBo.GetRUles()
-        End Function
-
-#End Region
-
     End Class
 
-    Public Class ServiceLogin
-        Inherits Service
+    'Public Class ServiceLogin
+    '    Inherits Service
 
-        Public Sub New()
-            DataDao = LoginDao
-            DataBo = New Login
-        End Sub
+    '    Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
 
-    End Class
+    '    Public Sub New()
+    '        DataDao = LoginDao
+    '        DataBo = New Login
+    '    End Sub
+
+    'End Class
 
     Public Class ServiceUser
         Inherits Service
+
+        Protected Shared ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
 
         Public Sub New()
             DataDao = UserDao
@@ -299,6 +289,8 @@ Namespace Services
     Public Class ServiceSecurityObject
         Inherits Service
 
+        Protected Shared ReadOnly SecurityObjectDao As IDaoAll(Of SecurityObject) = Factory.SecurityObjectDao()
+
         Public Sub New()
             DataDao = SecurityObjectDao
             DataBo = New SecurityObject
@@ -309,6 +301,8 @@ Namespace Services
     Public Class ServiceSecurityGroup
         Inherits Service
 
+        Protected Shared ReadOnly SecurityGroupDao As IDao(Of SecurityGroup) = Factory.SecurityGroupDao()
+
         Public Sub New()
             DataDao = SecurityGroupDao
             DataBo = New SecurityGroup
@@ -316,8 +310,10 @@ Namespace Services
 
     End Class
 
-    Public Class ServiceGroupAccesses
+    Public Class ServiceGroupAccess
         Inherits Service
+
+        Protected Shared ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
 
         Public Sub New()
             DataDao = GroupAccessDao

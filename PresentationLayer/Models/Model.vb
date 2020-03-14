@@ -13,7 +13,7 @@ Public Class Model
 
     Protected DataBizObject
     Private Shared ReadOnly Service As New Service()
-    Private Shared ReadOnly LoginService As New LoginService()
+    Private Shared ReadOnly LoginService As New ServiceLogin()
 
     'Public Property CommonService
 
@@ -23,33 +23,25 @@ Public Class Model
         Return Service
     End Function
 
-    Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM _
-        Implements IModel.GetRecordByIdNo
-        Dim modelData As New TM
-        If idNo <> 0 Then
-            modelData = DataService.GetRecordByIdNo(Of TM)(idNo)
-            'If modelData IsNot Nothing Then
-            '    'Dim modelData As New TM
-            '    modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
-            '    'modelData = Mapper.Map(Of TM)(DataBizObject)
-            'End If
-        End If
-        Return modelData
-    End Function
+    'Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM _
+    '    Implements IModel.GetRecordById
+    '    Dim modelData As New TM
+    '    If idNo <> 0 Then
+    '        modelData = DataService.GetRecordByIdNo(Of TM)(idNo)
+    '        'If modelData IsNot Nothing Then
+    '        '    'Dim modelData As New TM
+    '        '    modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
+    '        '    'modelData = Mapper.Map(Of TM)(DataBizObject)
+    '        'End If
+    '    End If
+    '    Return modelData
+    'End Function
 
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
         Dim modelData As New TM
         If idNo <> 0 Then
-            'If idNo = 8 Then
-            '    Debugger.Break()
-            'End If
-            DataBizObject = DataService.GetRecordByIdNo(idNo)
-            If DataBizObject IsNot Nothing Then
-                'Dim modelData As New TM
-                modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
-                'modelData = Mapper.Map(Of TM)(DataBizObject)
-            End If
+            modelData = DataService.GetRecordById(Of TM)(idNo)
         End If
         Return modelData
     End Function
@@ -90,18 +82,18 @@ Public Class Model
     '    Return newlyAddedRecordIdNo
     'End Function
 
-    Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
-        As List(Of TM) _
+    Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM) _
         Implements IModel.GetRecordsWithIdNo
-        Dim data = DataService.GetRecordsWithIdNo(idNo, sortKey)
-        Dim bizData = data
-        Dim viewObject As New List(Of TM)
-        For Each bObject In bizData
-            Dim model As TM
-            model = GlobalVariables.Mapper.Map(Of TM)(bObject)
-            viewObject.Add(model)
-        Next
-        Return viewObject
+        Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
+        'Dim bizData = data
+        'Dim viewObject As New List(Of TM)
+        'GlobalVariables.Mapper.Map(Of List(Of TM), List(Of ))
+        'For Each bObject In bizData
+        '    Dim model As TM
+        '    model = GlobalVariables.Mapper.Map(Of TM)(bObject)
+        '    viewObject.Add(model)
+        'Next
+        Return data
     End Function
 
     Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
@@ -442,8 +434,7 @@ Public Class Model
     End Function
 
     Public Function IsValid(Of TM)(ByRef dModel As TM)
-        GlobalVariables.Mapper.Map(dModel, DataBizObject)
-        Return DataService.IsValid()
+        Return DataService.IsValid(dModel)
     End Function
 
     'Public Function IsValid(Of TM)(ByRef dModel As TM)
@@ -465,35 +456,35 @@ End Class
 Public Class ModelUser
     Inherits Model
 
-    Public Overrides Function GetDataService()
-        Return New ServiceUser
-    End Function
+    Public Sub New()
+        DataService = New ServiceUser
+    End Sub
 
 End Class
 
 Public Class ModelSecurityObject
     Inherits Model
 
-    Public Overrides Function GetDataService()
-        Return New ServiceSecurityObject()
-    End Function
+    Public Sub New()
+        DataService = New ServiceSecurityObject()
+    End Sub
 
 End Class
 
 Public Class ModelSecurityGroup
     Inherits Model
 
-    Public Overrides Function GetDataService()
-        Return New ServiceSecurityGroup()
-    End Function
+    Public Sub New()
+        DataService = New ServiceSecurityGroup()
+    End Sub
 
 End Class
 
-Public Class ModelGroupAccesses
+Public Class ModelGroupAccess
     Inherits Model
 
-    Public Overrides Function GetDataService()
-        Return New ServiceGroupAccesses()
-    End Function
+    Public Sub New()
+        DataService = New ServiceGroupAccess()
+    End Sub
 
 End Class

@@ -4,12 +4,11 @@ Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports CrystalDecisions.CrystalReports.Engine
 
-
 Public Class SecurityGroupEntryTv
     Implements ISecurityGroupView, IGroupAccessesView, ISecurityGroupsView
 
     Private ReadOnly _securityObjectsPresenter As SecurityObjectsPresenter
-    Private ReadOnly _groupAccessPresenter as GroupAccessesPresenter
+    Private ReadOnly _groupAccessPresenter As GroupAccessesPresenter
     Protected DtInsertTable As New DataTable
     Protected DtUpdateTable As New DataTable
     Private _groupAccesses As List(Of GroupAccessModel)
@@ -135,6 +134,7 @@ Public Class SecurityGroupEntryTv
         DataGridViewGroupAccesses.DataSource = Nothing
         DataGridViewGroupAccesses.DataSource = GroupAccesses
         DataGridViewGroupAccesses.Refresh()
+        GroupAccessChanged = False
     End Sub
 
     Private Sub BindGroupAccess()
@@ -156,6 +156,7 @@ Public Class SecurityGroupEntryTv
     Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
         If Not DataGridViewGroupAccesses.DataBindings Is Nothing Then
             UpdateGroupAccessDisplay()
+            GroupAccessChanged = False
             DataGridViewGroupAccesses.DataInGridChanged = False
         End If
     End Sub
@@ -179,15 +180,25 @@ Public Class SecurityGroupEntryTv
         DataGridViewGroupAccesses.StartTrackingChanges = False
     End Sub
 
+    Public Property GroupAccessChanged As Boolean
+
 #End Region
 
 #Region "Event Handlers"
+
+    Protected Sub OnDataGridChanged() Handles DataGridViewGroupAccesses.ChangesMade
+        If DataGridViewGroupAccesses.DataInGridChanged Then
+            GroupAccessChanged = True
+        Else
+            GroupAccessChanged = False
+        End If
+    End Sub
 
     Protected Overrides Function ChangesMade()
         If PresenterObj.ChangesMade() Then
             Return True
         End If
-        Return PresenterObj.GroupAccessesPresenter.ChangesMade()
+        Return GroupAccessChanged 'PresenterObj.GroupAccessesPresenter.ChangesMade()
     End Function
 
     Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _

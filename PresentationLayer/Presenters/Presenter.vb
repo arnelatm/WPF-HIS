@@ -200,7 +200,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Overloads Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
         Dim modelData
-        modelData = Model.GetRecordByIdNo(Of TM)(idNo)
+        modelData = Model.GetRecordById(Of TM)(idNo)
         If modelData IsNot Nothing And modelData.IdNo > 0 Then
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
         End If
@@ -308,12 +308,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function DataIsValid() As Boolean
         Dim retVal = False
-        'Dim modelRecord As New TM
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        GlobalVariables.Mapper.Map(DataModel, DataBizObject)
-        If DataBizObject.IsValid() Then
+        If Model.IsValid(DataModel) Then
             retVal = True
         End If
+        'GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        'GlobalVariables.Mapper.Map(DataModel, DataBo)
+        'If DataBizObject.IsValid() Then
+        '    retVal = True
+        'End If
         Return retVal
     End Function
 

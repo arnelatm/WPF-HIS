@@ -1,5 +1,6 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
@@ -21,14 +22,14 @@ Public Class GroupAccessesPresenter
     ''' <param name="view">The view</param>
     Public Sub New(view As IGroupAccessesView)
         MyBase.New(view)
-        ModelPresenter = New ModelGroupAccesses
+        ModelPresenter = New ModelGroupAccess
         TableName = "GroupAccess_View"
         SortOrderKey = "SecurityGroupIDNo"
         OriginalModel = New GroupAccessModel()
         DataBizObject = New GroupAccess
         DataModel = New GroupAccessModel
         DbDataDao = New GroupAccessDao
-        DataService = New ServiceGroupAccesses
+        DataService = New ServiceGroupAccess
     End Sub
 
     ''' <summary>
@@ -39,15 +40,31 @@ Public Class GroupAccessesPresenter
         View.GroupAccesses = Model.GetRecordsWithIdNo(Of GroupAccessModel)(securityGroupIdNo, "SecurityObjectName")
     End Sub
 
-    Public Overrides Function ChangesMade() As Boolean
-        Dim changeMade As Boolean
-        Debugger.Break()
-        changeMade = True 'DirectCast(View, PresentationLayer.Forms.SecurityGroupEntryTv).DataGridViewGroupAccesses.DataInGridChanged
-        If changeMade Then
-            Return True
-        End If
-        Return False
-    End Function
+    'Public Overrides Function ChangesMade() As Boolean
+    '    Dim changeMade As Boolean
+    '    changeMade = DirectCast(view, AATM.PresentationLayer.Forms.SecurityGroupEntryTv).DataGridViewGroupAccesses.DataInGridChanged
+    '    If changeMade Then
+    '        Return True
+    '    End If
+    '    Return False
+
+    '    'Dim changeMade As Boolean = False
+    '    'Dim currentModel As New List(Of GroupAccessModel)
+    '    'GlobalVariables.Mapper.Map(View.GroupAccesses, currentModel)
+    '    'For I = 1 To currentModel.Count()
+    '    '    If currentModel(I) = OriginalModel(I) Then
+    '    '        changeMade = True
+    '    '        Exit For
+    '    '    End If
+    '    'Next
+    '    'Return changeMade
+
+    '    'Dim Result As Boolean = False
+    '    'myBindingSource.EndEdit()
+    '    'Result = (CType(myBindingSource.DataSource, DataTable)).GetChanges(DataRowState.Modified) IsNot Nothing
+    '    'Return Result
+
+    'End Function
 
     Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                    journalIdNo As Integer)
