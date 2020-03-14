@@ -17,10 +17,24 @@ Public Class Model
 
     'Public Property CommonService
 
-    Public Property DataService As Object
+    Protected Property DataService
 
     Public Overridable Function GetDataService() As Object
         Return Service
+    End Function
+
+    Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM _
+        Implements IModel.GetRecordByIdNo
+        Dim modelData As New TM
+        If idNo <> 0 Then
+            modelData = DataService.GetRecordByIdNo(Of TM)(idNo)
+            'If modelData IsNot Nothing Then
+            '    'Dim modelData As New TM
+            '    modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
+            '    'modelData = Mapper.Map(Of TM)(DataBizObject)
+            'End If
+        End If
+        Return modelData
     End Function
 
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
@@ -30,7 +44,7 @@ Public Class Model
             'If idNo = 8 Then
             '    Debugger.Break()
             'End If
-            DataBizObject = GetDataService().GetRecordById(idNo)
+            DataBizObject = DataService.GetRecordByIdNo(idNo)
             If DataBizObject IsNot Nothing Then
                 'Dim modelData As New TM
                 modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
@@ -53,7 +67,7 @@ Public Class Model
 
     Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) _
         Implements IModel.GetAll
-        Dim bizData = GetDataService().GetAll(sortExpression)
+        Dim bizData = DataService.GetAll(sortExpression)
         Dim modelObject As New List(Of TM)
         For Each bObject In bizData
             Dim model As TM
@@ -63,25 +77,23 @@ Public Class Model
         Return modelObject
     End Function
 
-    Public Function AddRecord(Of TM)(ByRef dataModel As TM) As Integer _
-        Implements IModel.AddRecord
+    Public Function AddRecord(Of TM)(ByRef dataModel As TM) As Integer Implements IModel.AddRecord
         Dim newlyAddedRecordIdNo As Integer
-        GlobalVariables.Mapper.Map(dataModel, DataBizObject)
-        newlyAddedRecordIdNo = GetDataService().AddRecord(DataBizObject)
+        newlyAddedRecordIdNo = DataService.AddRecord(dataModel)
         Return newlyAddedRecordIdNo
     End Function
 
     'Public Function AddRecord(Of TBiz)(ByRef DataBizObject As TBiz) As Integer _
     '    Implements IModel.AddRecord
     '    Dim newlyAddedRecordIdNo As Integer
-    '    newlyAddedRecordIdNo = GetDataService().AddRecord(DataBizObject)
+    '    newlyAddedRecordIdNo = DataService.AddRecord(DataBizObject)
     '    Return newlyAddedRecordIdNo
     'End Function
 
     Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
         As List(Of TM) _
         Implements IModel.GetRecordsWithIdNo
-        Dim data = GetDataService().GetRecordsWithIdNo(idNo, sortKey)
+        Dim data = DataService.GetRecordsWithIdNo(idNo, sortKey)
         Dim bizData = data
         Dim viewObject As New List(Of TM)
         For Each bObject In bizData
@@ -94,23 +106,23 @@ Public Class Model
 
     Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
         Implements IModel.UpdateRecord
-        GlobalVariables.Mapper.Map(dataModel, DataBizObject)
+        'GlobalVariables.Mapper.Map(dataModel, DataBizObject)
         Dim updateResult As Integer
-        updateResult = GetDataService().UpdateRecord(DataBizObject)
+        updateResult = DataService.UpdateRecord(dataModel)
         Return updateResult
     End Function
 
     'Public Function UpdateRecord(Of TBiz)(ByRef modelBiz As TBiz) As Integer _
     '    Implements IModel.UpdateRecord
     '    Dim updateResult As Integer
-    '    updateResult = GetDataService().UpdateRecord(modelBiz)
+    '    updateResult = DataService.UpdateRecord(modelBiz)
     '    Return updateResult
     'End Function
 
     'Public Function UpdateRecord(ByRef modelBiz As TBiz) As Integer _
     '    Implements IModel.UpdateRecord
     '    Dim updateResult As Integer
-    '    updateResult = GetDataService().UpdateRecord(modelBiz)
+    '    updateResult = DataService.UpdateRecord(modelBiz)
     '    Return updateResult
     'End Function
 
@@ -118,14 +130,14 @@ Public Class Model
         As Integer _
         Implements IModel.UpdateRecordWithIdNo
         Dim updateResult As Integer
-        updateResult = GetDataService().UpdateRecordWithidNo(idNo, tableName, fieldName, value)
+        updateResult = DataService.UpdateRecordWithidNo(idNo, tableName, fieldName, value)
         Return updateResult
     End Function
 
     Public Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.HLookupData) _
         Implements IModel.GetHRecords
-        Dim data = GetDataService().GetRecords(tableName, sortKey, fields)
+        Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.HLookupData)
         For i = 1 To Int(data.Count / 4)
             Dim tData As New ClassesLibrary.HLookupData
@@ -141,7 +153,7 @@ Public Class Model
     Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData) _
         Implements IModel.GetRecords
-        Dim data = GetDataService().GetRecords(tableName, sortKey, fields)
+        Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         If fields.Count = 3 Then
             For i = 1 To Int(data.Count / 3)
@@ -403,17 +415,17 @@ Public Class Model
     End Function
 
     Public Function UpdateTvp(ByRef dtTable As DataTable) As Integer Implements IModel.UpdateTvp
-        Return GetDataService().UpdateTvp(dtTable)
+        Return DataService.UpdateTvp(dtTable)
     End Function
 
     Public Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer _
         Implements IModel.DelUpdateTvp
-        Return GetDataService().DelUpdateTvp(dtTable, groupKey)
+        Return DataService.DelUpdateTvp(dtTable, groupKey)
     End Function
 
     Public Function InsertTvp(dtTable As DataTable) As Integer _
         Implements IModel.InsertTvp
-        Return GetDataService().InsertTvp(dtTable)
+        Return DataService.InsertTvp(dtTable)
     End Function
 
     Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType _
@@ -422,17 +434,22 @@ Public Class Model
     End Function
 
     Public Function GetBizObjectErrors()
-        Return DataBizObject.GetBizObjectErrors()
+        Return DataService.GetBizObjectErrors()
     End Function
 
     Public Function GetBizObjectRules()
-        Return DataBizObject.GetBizObjectRules()
+        Return DataService.GetBizObjectRules()
     End Function
 
     Public Function IsValid(Of TM)(ByRef dModel As TM)
         GlobalVariables.Mapper.Map(dModel, DataBizObject)
-        Return DataBizObject.IsValid()
+        Return DataService.IsValid()
     End Function
+
+    'Public Function IsValid(Of TM)(ByRef dModel As TM)
+    '    GlobalVariables.Mapper.Map(dModel, DataBizObject)
+    '    Return DataBizObject.IsValid()
+    'End Function
 
 End Class
 

@@ -128,6 +128,10 @@
       <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
       <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
       <Name>Languages</Name>

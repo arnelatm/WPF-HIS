@@ -31,6 +31,8 @@ Namespace Services
 
         Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp)
 
+        Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM
+
         Function GetRecordById(idNo As Integer) As Object
 
         Function GetRecordCount(tableName As String) As Integer
@@ -63,7 +65,7 @@ Namespace Services
 
         Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer
 
-        Function UpdateRecord(Of TBiz)(ByRef model As TBiz) As Integer
+        Function UpdateRecord(ByVal model) As Integer
 
         Function UpdateTvp(dtTable As DataTable) As Integer
 
