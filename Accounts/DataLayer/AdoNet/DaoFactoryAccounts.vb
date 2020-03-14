@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice Implements IDaoFactoryAccounts.ApOpenInvoiceDao
+        Public ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) Implements IDaoFactoryAccounts.ApOpenInvoiceDao
             Get
                 Return New ApOpenInvoiceDao()
             End Get
@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice Implements IDaoFactoryAccounts.ArOpenInvoiceDao
+        Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) Implements IDaoFactoryAccounts.ArOpenInvoiceDao
             Get
                 Return New ArOpenInvoiceDao()
             End Get

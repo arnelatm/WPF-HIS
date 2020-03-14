@@ -88,6 +88,7 @@ Namespace PresentationLayer.Presenters
             apOpenInvoiceBo.JournalCode = journalCode
             apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
             apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+            ModelApOpenInvoice = New ModelApOpenInvoice()
             retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
             Return retVal
         End Function
@@ -107,6 +108,7 @@ Namespace PresentationLayer.Presenters
             arOpenInvoiceBo.JournalCode = journalCode
             arOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
             arOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
+            ModelArOpenInvoice = New ModelArOpenInvoice()
             retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoice)(arOpenInvoiceBo)
             Return retVal
         End Function

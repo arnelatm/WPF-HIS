@@ -20,7 +20,10 @@ Public Class MappingProfileAccounts
         CreateMap(Of ArJournalModel, IArJournalView)().ReverseMap()
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()
         CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
-
+        CreateMap(Of ApOpenInvoice, ApOpenInvoiceModel)().ReverseMap()
+        CreateMap(Of ApOpenInvoiceModel, IApOpenInvoiceView)().ReverseMap()
+        CreateMap(Of ArOpenInvoice, ArOpenInvoiceModel)().ReverseMap()
+        CreateMap(Of ArOpenInvoiceModel, IArOpenInvoiceView)().ReverseMap()
     End Sub
 
 End Class

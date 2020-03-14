@@ -248,7 +248,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         If addMode Then
-            NewlyAddedRecordIdNo = Model.AddRecord(record)
+            NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
             retVal = NewlyAddedRecordIdNo
             CallByName(View, "IdNo", CallType.Set, retVal)
         Else

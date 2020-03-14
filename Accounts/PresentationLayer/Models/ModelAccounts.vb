@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.ServiceLayer.ActionService
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
@@ -46,8 +47,25 @@ Namespace PresentationLayer.Models
     Public Class ModelApJournal
         Inherits ModelAccounts
 
+        Public Sub New()
+            DataBizObject = New ApJournal
+        End Sub
+
         Public Overrides Function GetAccountsService()
             Return New ServiceApJournal()
+        End Function
+
+    End Class
+
+    Public Class ModelArJournal
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataBizObject = New ArJournal
+        End Sub
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceArJournal()
         End Function
 
     End Class
@@ -66,6 +84,19 @@ Namespace PresentationLayer.Models
 
         Public Overrides Function GetAccountsService()
             Return New ServiceApJournalItems()
+        End Function
+
+    End Class
+
+    Public Class ModelArJournalItems
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataBizObject = New ArOpenInvoice
+        End Sub
+
+        Public Overrides Function GetAccountsService()
+            Return New ServiceArJournalItems()
         End Function
 
     End Class
@@ -116,6 +147,7 @@ Namespace PresentationLayer.Models
         Inherits ModelOpenInvoice
 
         Public Sub New()
+            DataBizObject = New ApOpenInvoice()
             ServiceOpenInvoice = New ServiceApOpenInvoice()
         End Sub
 
@@ -125,6 +157,7 @@ Namespace PresentationLayer.Models
         Inherits ModelOpenInvoice
 
         Public Sub New()
+            DataBizObject = New ArOpenInvoice()
             ServiceOpenInvoice = New ServiceArOpenInvoice()
         End Sub
 
