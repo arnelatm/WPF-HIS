@@ -12,17 +12,17 @@ Namespace PresentationLayer.Models
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
             Dim updateResult As Integer
-            updateResult = GetAccountsService().UpdateGlReferenceNumber(model)
+            updateResult = DataService.UpdateGlReferenceNumber(model)
             Return updateResult
         End Function
 
-        Public Overrides Function GetCommonService() Implements IModelCommon.GetCommonService
-            Return GetAccountsService()
-        End Function
+        'Public Overrides Function GetCommonService() Implements IModelCommon.GetCommonService
+        '    Return GetAccountsService()
+        'End Function
 
-        Public Overridable Function GetAccountsService()
-            Return Service
-        End Function
+        'Public Overridable Function GetAccountsService()
+        '    Return Service
+        'End Function
 
     End Class
 
@@ -48,12 +48,8 @@ Namespace PresentationLayer.Models
         Inherits ModelAccounts
 
         Public Sub New()
-            DataBizObject = New ApJournal
+            DataService = New ServiceApJournal
         End Sub
-
-        Public Overrides Function GetAccountsService()
-            Return New ServiceApJournal()
-        End Function
 
     End Class
 
@@ -61,30 +57,26 @@ Namespace PresentationLayer.Models
         Inherits ModelAccounts
 
         Public Sub New()
-            DataBizObject = New ArJournal
+            DataService = New ServiceArJournal
         End Sub
-
-        Public Overrides Function GetAccountsService()
-            Return New ServiceArJournal()
-        End Function
 
     End Class
 
     Public Class ModelJournalItems
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceJournalItem()
-        End Function
+        Public Sub New()
+            DataService = New ServiceJournalItem
+        End Sub
 
     End Class
 
     Public Class ModelApJournalItems
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceApJournalItems()
-        End Function
+        Public Sub New()
+            DataService = New ServiceApJournalItems
+        End Sub
 
     End Class
 
@@ -92,30 +84,26 @@ Namespace PresentationLayer.Models
         Inherits ModelAccounts
 
         Public Sub New()
-            DataBizObject = New ArOpenInvoice
+            DataService = New ServiceArJournalItems
         End Sub
-
-        Public Overrides Function GetAccountsService()
-            Return New ServiceArJournalItems()
-        End Function
 
     End Class
 
     Public Class ModelGeneralJournal
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceGeneralJournal()
-        End Function
+        Public Sub New()
+            DataService = New ServiceGeneralJournal
+        End Sub
 
     End Class
 
     Public Class ModelGeneralJournalItem
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceGeneralJournalItem()
-        End Function
+        Public Sub New()
+            DataService = New ServiceGeneralJournal
+        End Sub
 
     End Class
 
@@ -123,21 +111,17 @@ Namespace PresentationLayer.Models
         Inherits ModelAccounts
         Implements IModelOpenInvoice
 
-        Protected Property ServiceOpenInvoice
-
-        Public Overrides Function GetAccountsService()
-            Return ServiceOpenInvoice
-        End Function
+        'Protected Property ServiceOpenInvoice
 
         Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
             Dim updateResult As Integer
-            updateResult = ServiceOpenInvoice.AddInvoicePayment(idNo, amount, discountTaken)
+            updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
             Return updateResult
         End Function
 
         Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoicePayment
             Dim updateResult As Integer
-            updateResult = ServiceOpenInvoice.RemoveInvoicePayment(idNo, amount, discountTaken)
+            updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
             Return updateResult
         End Function
 
@@ -147,8 +131,7 @@ Namespace PresentationLayer.Models
         Inherits ModelOpenInvoice
 
         Public Sub New()
-            DataBizObject = New ApOpenInvoice()
-            ServiceOpenInvoice = New ServiceApOpenInvoice()
+            DataService = New ServiceApOpenInvoice()
         End Sub
 
     End Class
@@ -157,8 +140,7 @@ Namespace PresentationLayer.Models
         Inherits ModelOpenInvoice
 
         Public Sub New()
-            DataBizObject = New ArOpenInvoice()
-            ServiceOpenInvoice = New ServiceArOpenInvoice()
+            DataService = New ServiceArOpenInvoice()
         End Sub
 
     End Class

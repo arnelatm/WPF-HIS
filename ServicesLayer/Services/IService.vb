@@ -31,17 +31,15 @@ Namespace Services
 
         Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp)
 
-        Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM
-
-        Function GetRecordById(idNo As Integer) As Object
+        Function GetRecordById(Of TM As New)(idNo As Integer) As TM
 
         Function GetRecordCount(tableName As String) As Integer
 
         Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
-        Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
-
         Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
+
+        Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
         Function GetRecordPosition(tableName As String, idNo As Integer) As Integer
 
@@ -49,7 +47,7 @@ Namespace Services
 
         Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object
 
-        Function GetRecordsWithIdNo(idNo As Integer, ByRef Optional sortKey As String = Nothing) As Object
+        Function GetRecordsWithIdNo(Of TM)(ByVal idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM)
 
         Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String
 
@@ -57,8 +55,9 @@ Namespace Services
 
         Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer
 
-        'Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
+        Function GetSqlValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
 
+        'Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
         Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 
         Function InsertTvp(dtTable As DataTable) As Integer
@@ -67,11 +66,11 @@ Namespace Services
 
         Function UpdateRecord(ByVal model) As Integer
 
+        Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, ByRef value As T) As Integer
+
         Function UpdateTvp(dtTable As DataTable) As Integer
 
-        Function GetSqlValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
-
-        Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, ByRef value As T) As Integer
+        Function IsValid(ByVal model) As Boolean
 
     End Interface
 

@@ -12,17 +12,17 @@ Namespace ServiceLayer
         Protected Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
         Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CommonDao
 
-        Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
+        'Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
 
-        Public ReadOnly Property CommonDaoProp
-            Get
-                Return CommonDao
-            End Get
-        End Property
+        'Public ReadOnly Property CommonDaoProp
+        '    Get
+        '        Return CommonDao
+        '    End Get
+        'End Property
 
-        Public Overridable Function GetBaseDao()
-            Return BaseDaoProp
-        End Function
+        'Public Overridable Function GetBaseDao()
+        '    Return BaseDaoProp
+        'End Function
 
     End Class
 
@@ -40,6 +40,8 @@ Namespace ServiceLayer
 
     Public Class ServiceCostCenter
         Inherits ServiceCommon
+
+        Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
 
         Public Sub New()
             DataDao = CostCenterDao

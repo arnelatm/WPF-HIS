@@ -39,8 +39,6 @@ Partial Class SecurityGroupEntryTv
         Me.lblSecurityGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DGVIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DGVSecurityGroupIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DGVSecurityObjectIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +47,8 @@ Partial Class SecurityGroupEntryTv
         Me.Selectable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Viewable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DGVEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         CType(Me.DataGridViewGroupAccesses,System.ComponentModel.ISupportInitialize).BeginInit
@@ -63,91 +63,92 @@ Partial Class SecurityGroupEntryTv
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.DisplayOnly = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
+        Me.TxtIDNo.EditingMode = true
         Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
+        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.EditingMode = true
         Me.TxtIDNo.TabStop = false
         '
         'txtSecurityGroupCode
         '
-        Me.txtSecurityGroupCode.AcceptsReturn = false
-        Me.txtSecurityGroupCode.AcceptsTab = false
         Me.txtSecurityGroupCode.BackColor = System.Drawing.Color.White
         Me.txtSecurityGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupCode.ComputedValue = false
+        Me.txtSecurityGroupCode.CustomFormat = Nothing
         Me.txtSecurityGroupCode.DataBoundControl = true
+        Me.txtSecurityGroupCode.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtSecurityGroupCode, true)
         resources.ApplyResources(Me.txtSecurityGroupCode, "txtSecurityGroupCode")
         Me.txtSecurityGroupCode.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupCode.LinkedLabel = Nothing
         Me.txtSecurityGroupCode.Name = "txtSecurityGroupCode"
-        Me.txtSecurityGroupCode.EditingMode = false
+        Me.txtSecurityGroupCode.OldValue = Nothing
         Me.txtSecurityGroupCode.ValueIsMandatory = true
         '
         'txtSecurityGroupName
         '
-        Me.txtSecurityGroupName.AcceptsReturn = false
-        Me.txtSecurityGroupName.AcceptsTab = false
         Me.txtSecurityGroupName.BackColor = System.Drawing.Color.White
         Me.txtSecurityGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupName.ComputedValue = false
+        Me.txtSecurityGroupName.CustomFormat = Nothing
         Me.txtSecurityGroupName.DataBoundControl = true
+        Me.txtSecurityGroupName.EditingMode = true
         Me.floDataDisplay.SetFlowBreak(Me.txtSecurityGroupName, true)
         resources.ApplyResources(Me.txtSecurityGroupName, "txtSecurityGroupName")
         Me.txtSecurityGroupName.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupName.LinkedLabel = Nothing
         Me.txtSecurityGroupName.Name = "txtSecurityGroupName"
+        Me.txtSecurityGroupName.OldValue = Nothing
         Me.txtSecurityGroupName.ReadOnly = true
-        Me.txtSecurityGroupName.EditingMode = true
         Me.txtSecurityGroupName.ValueIsMandatory = true
         '
         'txtSecurityGroupNameAra
         '
-        Me.txtSecurityGroupNameAra.AcceptsReturn = false
-        Me.txtSecurityGroupNameAra.AcceptsTab = false
         Me.txtSecurityGroupNameAra.BackColor = System.Drawing.Color.White
         Me.txtSecurityGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupNameAra.ComputedValue = false
+        Me.txtSecurityGroupNameAra.CustomFormat = Nothing
         Me.txtSecurityGroupNameAra.DataBoundControl = true
         Me.txtSecurityGroupNameAra.DisplayOnly = true
+        Me.txtSecurityGroupNameAra.EditingMode = true
         Me.txtSecurityGroupNameAra.EnglishControl = Me.txtSecurityGroupName
         Me.floDataDisplay.SetFlowBreak(Me.txtSecurityGroupNameAra, true)
         resources.ApplyResources(Me.txtSecurityGroupNameAra, "txtSecurityGroupNameAra")
         Me.txtSecurityGroupNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupNameAra.LinkedLabel = Nothing
         Me.txtSecurityGroupNameAra.Name = "txtSecurityGroupNameAra"
+        Me.txtSecurityGroupNameAra.OldValue = Nothing
         Me.txtSecurityGroupNameAra.ReadOnly = true
-        Me.txtSecurityGroupNameAra.EditingMode = true
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.EditingMode = false
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
         '
         resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
         Me.floDataDisplay.Controls.Add(Me.lblSecurityGroupCode)
@@ -193,12 +194,14 @@ Partial Class SecurityGroupEntryTv
         Me.DataGridViewGroupAccesses.AllowUserToResizeRows = false
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.DataGridViewGroupAccesses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewGroupAccesses.AutoGenerateColumns = false
         Me.DataGridViewGroupAccesses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridViewGroupAccesses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridViewGroupAccesses.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DGVIDNo, Me.DGVSecurityGroupIDNo, Me.DGVSecurityObjectIDNo, Me.DGVSecurityObjectName, Me.DGVVisible, Me.Selectable, Me.Viewable, Me.DGVEditable})
         Me.DataGridViewGroupAccesses.DataInGridChanged = false
+        Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Tahoma", 8!)
@@ -209,16 +212,11 @@ Partial Class SecurityGroupEntryTv
         Me.DataGridViewGroupAccesses.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewGroupAccesses.DisplayOnly = false
         resources.ApplyResources(Me.DataGridViewGroupAccesses, "DataGridViewGroupAccesses")
+        Me.DataGridViewGroupAccesses.EditingMode = false
         Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
-        Me.DataGridViewGroupAccesses.EditingMode = false
+        Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
         Me.DataGridViewGroupAccesses.StartTrackingChanges = false
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.Controls.Add(Me.DataGridViewGroupAccesses)
-        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-        Me.CFlowLayout1.Name = "CFlowLayout1"
         '
         'DGVIDNo
         '
@@ -245,10 +243,10 @@ Partial Class SecurityGroupEntryTv
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.DGVSecurityObjectName.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGVSecurityObjectName.EditingMode = false
         Me.DGVSecurityObjectName.FillWeight = 168.5721!
         resources.ApplyResources(Me.DGVSecurityObjectName, "DGVSecurityObjectName")
         Me.DGVSecurityObjectName.Name = "DGVSecurityObjectName"
-        Me.DGVSecurityObjectName.EditingMode = false
         Me.DGVSecurityObjectName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'DGVVisible
@@ -285,6 +283,13 @@ Partial Class SecurityGroupEntryTv
         Me.DGVEditable.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVEditable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
+        'CFlowLayout1
+        '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Controls.Add(Me.DataGridViewGroupAccesses)
+        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        '
         'SecurityGroupEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -303,7 +308,7 @@ Partial Class SecurityGroupEntryTv
         Me.ResumeLayout(false)
         Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents TxtIDNo As CTextBox
     Friend WithEvents txtSecurityGroupCode As CTextBox
     Friend WithEvents txtSecurityGroupName As CTextBox

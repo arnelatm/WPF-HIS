@@ -22,7 +22,7 @@ End Interface
 Public Interface IDaoChild(Of TBiz)
     ' gets a specific record data
 
-    Function GetRecordsById(idNo As Integer, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+    Function GetRecordsWithIdNo(idNo As Integer, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 
     Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
 

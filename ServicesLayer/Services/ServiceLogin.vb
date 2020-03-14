@@ -3,16 +3,24 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 
 Namespace Services
 
-    Public Class LoginService
+    Public Class ServiceLogin
         Inherits Service
 
         Private Shared Shadows ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Private Shared Shadows ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Private Shared ReadOnly SaltDao As ISaltDao = Factory.SaltDao
+
+        Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
+
+        Public Sub New()
+            DataDao = LoginDao
+            DataBo = New Login
+        End Sub
 
         Public Function Login(userName As String, password As String) As Boolean
             ' websecurity does not accept null or empty
@@ -26,7 +34,7 @@ Namespace Services
 
             Dim nLoginIdNo As Integer = 0
             Dim xLogin As Login
-            xLogin = LoginDao.GetLoginByUserName(userName)
+            xLogin = DataDao.GetLoginByUserName(userName)
             If xLogin IsNot Nothing Then
                 nLoginIdNo = xLogin.IdNo
             End If
@@ -46,7 +54,7 @@ Namespace Services
                         Dim ePassword As String
                         ePassword = HashEncryptStringWithSalt(password, salt.ToString)
 
-                        If LoginDao.GetLoginByUserName(userName).Password = ePassword Then
+                        If DataDao.GetLoginByUserName(userName).Password = ePassword Then
                             ' MsgBox("Welcome to my Application!")
                         Else
                             MsgBox("Invalid user name or password.")
@@ -119,7 +127,7 @@ Namespace Services
                 Return ""
             End If
             Dim nLoginIdNo As Integer
-            nLoginIdNo = LoginDao.GetLoginByUserName(userName).IdNo
+            nLoginIdNo = DataDao.GetLoginByUserName(userName).IdNo
 
             If nLoginIdNo <> 0 Then
                 'Get the salt value for this username
