@@ -4,6 +4,7 @@ Imports AATM.BusinessLayer
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace Services
 
@@ -38,9 +39,9 @@ Namespace Services
             End Get
         End Property
 
-        Public Overridable Function GetDao() As Object
-            Return BaseDao
-        End Function
+        'Public Overridable Function GetDao() As Object
+        '    Return BaseDao
+        'End Function
 
         'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
         '    Implements IService.GetRecords
@@ -63,43 +64,53 @@ Namespace Services
         End Function
 
         Public Function GetRecordsWithIdNo(ByVal idNo As Integer, Optional ByRef sortKey As String = Nothing) Implements IService.GetRecordsWithIdNo
-            Return GetDao().GetRecordsWithIdNo(idNo, sortKey)
+            Return DataDao.GetRecordsWithIdNo(idNo, sortKey)
         End Function
 
         Public Function AddRecord(ByRef model) As Integer Implements IService.AddRecord
-            Return GetDao().AddRecord(model)
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return DataDao.AddRecord(DataBo)
         End Function
 
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
-            Return GetDao().DelUpdateTvp(dtTable, groupKey)
+            Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
 
         Public Overloads Function GetAll(Optional ByRef sortKey As String = Nothing) Implements IService.GetAll
-            Return GetDao().GetAll(sortKey)
+            Return DataDao.GetAll(sortKey)
         End Function
 
         Public Shadows Function GetRecordById(idNo As Integer) Implements IService.GetRecordById
-            Return GetDao().GetRecordById(Convert.ToInt32(idNo))
+
+            Return DataDao.GetRecordById(Convert.ToInt32(idNo))
+        End Function
+
+        Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM Implements IService.GetRecordByIdNo
+            Dim modelPresenter As New TM
+            Dim record = DataDao.GetRecordById(Convert.ToInt32(idNo))
+            GlobalVariables.Mapper.Map(record, modelPresenter)
+            Return modelPresenter
         End Function
 
         Public Function InsertTvp(dtTable As DataTable) As Integer Implements IService.InsertTvp
-            Return GetDao().InsertTvp(dtTable)
+            Return DataDao.InsertTvp(dtTable)
         End Function
 
         Public Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer Implements IService.TransactionUpdate
-            Return GetDao().TransactionUpdate(model)
+            Return DataDao.TransactionUpdate(model)
         End Function
 
-        Public Function UpdateRecord(Of TBiz)(ByRef model As TBiz) As Integer Implements IService.UpdateRecord
-            Return GetDao().UpdateRecord(model)
+        Public Function UpdateRecord(ByVal model) As Integer Implements IService.UpdateRecord
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return DataDao.UpdateRecord(DataBo)
         End Function
 
         Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Integer, ByVal tableName As String, ByVal fieldName As String, ByRef value As T) As Integer Implements IService.UpdateRecordWithIdNo
-            Return GetDao().UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
+            Return DataDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
         Public Function UpdateTvp(dtTable As DataTable) As Integer Implements IService.UpdateTvp
-            Return GetDao().UpdateTvp(dtTable)
+            Return DataDao.UpdateTvp(dtTable)
         End Function
 
         Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
@@ -254,11 +265,11 @@ Namespace Services
         '    End Sub
 
         Public Function GetBizObjectErrors()
-            Return Nothing
+            Return DataBo.GetErrors()
         End Function
 
         Public Function GetBizObjectRules()
-            Return Nothing
+            Return DataBo.GetRUles()
         End Function
 
 #End Region
@@ -268,45 +279,50 @@ Namespace Services
     Public Class ServiceLogin
         Inherits Service
 
-        Public Overrides Function GetDao()
-            Return LoginDao
-        End Function
+        Public Sub New()
+            DataDao = LoginDao
+            DataBo = New Login
+        End Sub
 
     End Class
 
     Public Class ServiceUser
         Inherits Service
 
-        Public Overrides Function GetDao()
-            Return UserDao
-        End Function
+        Public Sub New()
+            DataDao = UserDao
+            DataBo = New User
+        End Sub
 
     End Class
 
     Public Class ServiceSecurityObject
         Inherits Service
 
-        Public Overrides Function GetDao()
-            Return SecurityObjectDao
-        End Function
+        Public Sub New()
+            DataDao = SecurityObjectDao
+            DataBo = New SecurityObject
+        End Sub
 
     End Class
 
     Public Class ServiceSecurityGroup
         Inherits Service
 
-        Public Overrides Function GetDao()
-            Return SecurityGroupDao
-        End Function
+        Public Sub New()
+            DataDao = SecurityGroupDao
+            DataBo = New SecurityGroup
+        End Sub
 
     End Class
 
     Public Class ServiceGroupAccesses
         Inherits Service
 
-        Public Overrides Function GetDao()
-            Return GroupAccessDao
-        End Function
+        Public Sub New()
+            DataDao = GroupAccessDao
+            DataBo = New GroupAccess
+        End Sub
 
     End Class
 

@@ -1,4 +1,6 @@
-﻿Imports AATM.Common.DataLayer
+﻿Imports AATM.Common.BusinessLayer
+Imports AATM.Common.DataLayer
+Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer
@@ -7,28 +9,16 @@ Namespace ServiceLayer
         Inherits Service
         Implements IServiceCommon
 
-        Private Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
+        Protected Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
         Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CommonDao
-        Protected Shared ReadOnly BranchDao As IBranchDao = DaoFactoryCommonFactory.BranchDao
+
         Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
-        Protected Shared ReadOnly CountryDao As ICountryDao = DaoFactoryCommonFactory.CountryDao
-        Protected Shared ReadOnly DepartmentDao As IDepartmentDao = DaoFactoryCommonFactory.DepartmentDao
-        Protected Shared ReadOnly OriginalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.OriginalMessagesDao
-        Protected Shared ReadOnly PhoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.PhoneTypeDao
-        Protected Shared ReadOnly ProfitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.ProfitCenterDao
-        Protected Shared ReadOnly ReligionDao As IReligionDao = DaoFactoryCommonFactory.ReligionDao
-        Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.RevenueGroupDao
-        Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.TranslatedMessagesDao
 
         Public ReadOnly Property CommonDaoProp
             Get
                 Return CommonDao
             End Get
         End Property
-
-        Public Overrides Function GetDao() As Object
-            Return GetBaseDao()
-        End Function
 
         Public Overridable Function GetBaseDao()
             Return BaseDaoProp
@@ -39,90 +29,118 @@ Namespace ServiceLayer
     Public Class ServiceBranch
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return BranchDao
-        End Function
+        Protected Shared ReadOnly BranchDao As IBranchDao = DaoFactoryCommonFactory.BranchDao
+
+        Public Sub New()
+            DataDao = BranchDao
+            DataBo = New Branch
+        End Sub
 
     End Class
 
     Public Class ServiceCostCenter
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return CostCenterDao
-        End Function
+        Public Sub New()
+            DataDao = CostCenterDao
+            DataBo = New CostCenter
+        End Sub
 
     End Class
 
     Public Class ServiceCountry
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return CountryDao
-        End Function
+        Protected Shared ReadOnly CountryDao As ICountryDao = DaoFactoryCommonFactory.CountryDao
+
+        Public Sub New()
+            DataDao = CountryDao
+            DataBo = New Country
+        End Sub
 
     End Class
 
     Public Class ServiceDepartment
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return DepartmentDao
-        End Function
+        Protected Shared ReadOnly DepartmentDao As IDepartmentDao = DaoFactoryCommonFactory.DepartmentDao
+
+        Public Sub New()
+            DataDao = DepartmentDao
+            DataBo = New Department
+        End Sub
 
     End Class
 
     Public Class ServiceOriginalMessages
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return OriginalMessagesDao
-        End Function
+        Protected Shared ReadOnly OriginalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.OriginalMessagesDao
+
+        Public Sub New()
+            DataDao = OriginalMessagesDao
+            DataBo = New OriginalMessages
+        End Sub
 
     End Class
 
     Public Class ServicePhoneType
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return PhoneTypeDao
-        End Function
+        Protected Shared ReadOnly PhoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.PhoneTypeDao
+
+        Public Sub New()
+            DataDao = PhoneTypeDao
+            DataBo = New PhoneType
+        End Sub
 
     End Class
 
     Public Class ServiceProfitCenter
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return ProfitCenterDao
-        End Function
+        Protected Shared ReadOnly ProfitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.ProfitCenterDao
+
+        Public Sub New()
+            DataDao = ProfitCenterDao
+            DataBo = New ProfitCenter
+        End Sub
 
     End Class
 
     Public Class ServiceReligion
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return ReligionDao
-        End Function
+        Protected Shared ReadOnly ReligionDao As IReligionDao = DaoFactoryCommonFactory.ReligionDao
+
+        Public Sub New()
+            DataDao = ReligionDao
+            DataBo = New Religion
+        End Sub
 
     End Class
 
     Public Class ServiceRevenueGroup
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return RevenueGroupDao
-        End Function
+        Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.RevenueGroupDao
+
+        Public Sub New()
+            DataDao = RevenueGroupDao
+            DataBo = New RevenueGroup
+        End Sub
 
     End Class
 
     Public Class ServiceTranslatedMessages
         Inherits ServiceCommon
 
-        Public Overrides Function GetDao()
-            Return TranslatedMessagesDao
-        End Function
+        Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.TranslatedMessagesDao
+
+        Public Sub New()
+            DataDao = TranslatedMessagesDao
+            DataBo = New TranslatedMessages
+        End Sub
 
     End Class
 

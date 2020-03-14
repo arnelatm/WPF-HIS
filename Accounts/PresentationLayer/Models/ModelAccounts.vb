@@ -29,18 +29,18 @@ Namespace PresentationLayer.Models
     Public Class ModelCategory
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceCategory()
-        End Function
+        Public Sub New()
+            DataService = New ServiceCategory()
+        End Sub
 
     End Class
 
     Public Class ModelEmployee
         Inherits ModelAccounts
 
-        Public Overrides Function GetAccountsService()
-            Return New ServiceEmployee()
-        End Function
+        Public Sub New()
+            DataService = New ServiceEmployee()
+        End Sub
 
     End Class
 

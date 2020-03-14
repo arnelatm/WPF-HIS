@@ -46,6 +46,8 @@ Public Interface IModel
 
     Function GetRecordById(Of TM As New)(idNo As Integer) As TM
 
+    Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM
+
     Function GetRecordCount(tableName As String) As Integer
 
     Function GetRecordDateTimeStamp(idNo As Integer, tableName As String,

@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
             TableName = "ArJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ArJournalModel()
-            DataBizObject = New ArJournal
+            'DataBizObject = New ArJournal
             DataModel = New ArJournalModel
             _arOpenInvoiceModel = New ModelArOpenInvoice
             ModelArOpenInvoice = New ModelArOpenInvoice

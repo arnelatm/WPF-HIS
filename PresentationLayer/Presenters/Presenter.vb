@@ -58,6 +58,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
+
     End Sub
 
     Public Sub New(view As T)
@@ -78,12 +79,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
+    'Public Function GetBizObjectRules()
+    '    Return DataBizObject.GetRules()
+    'End Function
+
     Public Function GetBizObjectRules()
-        Return DataBizObject.GetRules()
+        Return Model.GetBizObjectRules()
     End Function
 
     Public Function GetBizObjectErrors()
-        Return DataBizObject.GetErrors()
+        Return Model.GetBizObjectErrors()
     End Function
 
     Public Property View As T
@@ -195,7 +200,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Overloads Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
         Dim modelData
-        modelData = Model.GetRecordById(Of TM)(idNo)
+        modelData = Model.GetRecordByIdNo(Of TM)(idNo)
         If modelData IsNot Nothing And modelData.IdNo > 0 Then
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
         End If
