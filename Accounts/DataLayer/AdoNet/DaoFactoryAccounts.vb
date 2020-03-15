@@ -17,9 +17,22 @@ Namespace DataLayer.AdoNet
         End Property
 
         Public ReadOnly Property BankDao As IDaoAll(Of Bank) Implements IDaoFactoryAccounts.BankDao
+            Get
+                Return New BankDao()
+            End Get
+        End Property
+
         Public ReadOnly Property CashCodeDao As IDaoAll(Of CashCode) Implements IDaoFactoryAccounts.CashCodeDao
+            Get
+                Return New CashCodeDao()
+            End Get
+        End Property
 
         Public ReadOnly Property SupplierDao As IDaoAll(Of Supplier) Implements IDaoFactoryAccounts.SupplierDao
+            Get
+                Return New SupplierDao()
+            End Get
+        End Property
 
         Public ReadOnly Property ApJournalDao As IDao(Of ApJournal) Implements IDaoFactoryAccounts.ApJournalDao
             Get
@@ -82,7 +95,16 @@ Namespace DataLayer.AdoNet
         End Property
 
         Public ReadOnly Property CustomerDao As IDaoAll(Of Customer) Implements IDaoFactoryAccounts.CustomerDao
+            Get
+                Return New CustomerDao()
+            End Get
+        End Property
+
         Public ReadOnly Property DesignationDao As IDaoAll(Of Designation) Implements IDaoFactoryAccounts.DesignationDao
+            Get
+                Return New DesignationDao()
+            End Get
+        End Property
 
         Public ReadOnly Property EmployeeDao As IDaoAll(Of Employee) Implements IDaoFactoryAccounts.EmployeeDao
             Get
@@ -91,6 +113,10 @@ Namespace DataLayer.AdoNet
         End Property
 
         Public ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem) Implements IDaoFactoryAccounts.PurchaseItemDao
+            Get
+                Return New PurchaseItemDao()
+            End Get
+        End Property
 
         Public ReadOnly Property JournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.JournalItemDao
             Get

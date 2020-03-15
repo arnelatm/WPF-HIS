@@ -15,11 +15,7 @@ Public Class Model
 
     Private Shared ReadOnly LoginService As New ServiceLogin()
 
-    Protected Property DataService
-
-    Public Overridable Function GetDataService() As Object
-        Return Service
-    End Function
+    Public Property DataService As Object
 
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
@@ -126,8 +122,8 @@ Public Class Model
     Public Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                        ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
         Implements IModel.GetRecordsFiltered
-        Dim s = GetDataService()
-        Dim data = s.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
+        'Dim s = GetDataService()
+        Dim data = DataService.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
             Dim tData As New ClassesLibrary.LookupData
@@ -399,9 +395,13 @@ End Class
 Public Class ModelLogin
     Inherits Model
 
-    Public Overrides Function GetDataService()
-        Return New ServiceLogin
-    End Function
+    Public Sub New()
+        DataService = New ServiceLogin
+    End Sub
+
+    'Public Overrides Function GetDataService()
+    '    Return New ServiceLogin
+    'End Function
 
 End Class
 

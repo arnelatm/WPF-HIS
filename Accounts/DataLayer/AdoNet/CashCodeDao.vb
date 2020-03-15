@@ -1,16 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashCode
     ' ** DAO Pattern
 
     Public Class CashCodeDao
-        Implements ICashCodeDao
+        Inherits CommonDao
+        Implements IDaoAll(Of CashCode)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CashCode Implements ICashCodeDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As CashCode Implements IDaoAll(Of CashCode).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -28,8 +31,11 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "CashName ASC") As List(Of CashCode) _
-            Implements ICashCodeDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of CashCode) _
+            Implements IDaoAll(Of CashCode).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "CashName ASC"
+            End If
             Dim sql As String = " SELECT " &
                     "AccountIdNo," &
                     "BankChargesAccountIdNo," &
@@ -43,7 +49,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef cashCode As CashCode) As Integer Implements ICashCodeDao.UpdateRecord
+        Public Function UpdateRecord(ByRef cashCode As CashCode) As Integer Implements IDaoAll(Of CashCode).UpdateRecord
             Dim sql As String =
                     "UPDATE [CashCode] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -58,7 +64,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(cashCode))
         End Function
 
-        Public Function AddRecord(ByRef cashCode As CashCode) As Integer Implements ICashCodeDao.AddRecord
+        Public Function AddRecord(ByRef cashCode As CashCode) As Integer Implements IDaoAll(Of CashCode).AddRecord
             Dim sql As String =
                     "INSERT INTO [CashCode] (" &
                     "AccountIdNo," &

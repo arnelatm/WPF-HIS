@@ -25,7 +25,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCategory
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccountsFactory.CategoryDao
+        Protected ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccountsFactory.CategoryDao
 
         Public Sub New()
             DataBo = New Category()
@@ -37,7 +37,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceEmployee
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly EmployeeDao As IDaoAll(Of Employee) = DaoFactoryAccountsFactory.EmployeeDao
+        Protected ReadOnly EmployeeDao As IDaoAll(Of Employee) = DaoFactoryAccountsFactory.EmployeeDao
 
         Public Sub New()
             DataBo = New Employee
@@ -49,7 +49,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceChart
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ChartDao As IDaoAll(Of Chart) = DaoFactoryAccountsFactory.ChartDao
+        Protected ReadOnly ChartDao As IDaoAll(Of Chart) = DaoFactoryAccountsFactory.ChartDao
 
         Public Sub New()
             DataBo = New Chart
@@ -61,7 +61,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCustomer
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly CustomerDao As IDaoAll(Of Customer) = DaoFactoryAccountsFactory.CustomerDao
+        Protected ReadOnly CustomerDao As IDaoAll(Of Customer) = DaoFactoryAccountsFactory.CustomerDao
 
         Public Sub New()
             DataBo = New Customer
@@ -73,7 +73,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceSupplier
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly SupplierDao As IDaoAll(Of Supplier) = DaoFactoryAccountsFactory.SupplierDao
+        Protected ReadOnly SupplierDao As IDaoAll(Of Supplier) = DaoFactoryAccountsFactory.SupplierDao
 
         Public Sub New()
             DataBo = New Supplier
@@ -85,7 +85,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournal
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ApJournalDao As IDao(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
+        Protected ReadOnly ApJournalDao As IDao(Of ApJournal) = DaoFactoryAccountsFactory.ApJournalDao
 
         Public Sub New()
             DataBo = New ApJournal
@@ -97,7 +97,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceArJournal
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ArJournalDao As IDao(Of ArJournal) = DaoFactoryAccountsFactory.ArJournalDao
+        Protected ReadOnly ArJournalDao As IDao(Of ArJournal) = DaoFactoryAccountsFactory.ArJournalDao
 
         Public Sub New()
             DataBo = New ArJournal
@@ -109,7 +109,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournal
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccountsFactory.GeneralJournalDao
+        Protected ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccountsFactory.GeneralJournalDao
 
         Public Sub New()
             DataBo = New GeneralJournal
@@ -121,7 +121,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceJournalItem
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly JournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
+        Protected ReadOnly JournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -133,7 +133,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournalItems
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ApJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
+        Protected ReadOnly ApJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ApJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -145,7 +145,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceArJournalItems
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly ArJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ArJournalItemDao
+        Protected ReadOnly ArJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.ArJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -157,7 +157,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournalItems
         Inherits ServiceAccounts
 
-        Protected Shared ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.GeneralJournalItemDao
+        Protected ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.GeneralJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
