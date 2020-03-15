@@ -1,21 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for PurchaseItem
     ' ** DAO Pattern
 
     Public Class PurchaseItemDao
-        Inherits CommonDaoOld
-        Implements IPurchaseItemDao
+        Inherits CommonDao
+        Implements IDaoAll(Of PurchaseItem)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
-        Public Function GetRecordById(idNo As Integer) As PurchaseItem Implements IPurchaseItemDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &
@@ -25,15 +23,18 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "PurchaseItemName ASC") As List(Of PurchaseItem) _
-            Implements IPurchaseItemDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PurchaseItem) _
+            Implements IDaoAll(Of PurchaseItem).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "PurchaseItemName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra" &
                     "   FROM [PurchaseItem] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef purchaseItem As PurchaseItem) As Integer Implements IPurchaseItemDao.UpdateRecord
+        Public Function UpdateRecord(ByRef purchaseItem As PurchaseItem) As Integer Implements IDaoAll(Of PurchaseItem).UpdateRecord
             Dim sql As String =
                     " UPDATE [PurchaseItem]" &
                     "    SET PurchaseItemCode = @PurchaseItemCode," &
@@ -57,7 +58,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(purchaseItem))
         End Function
 
-        Public Function AddRecord(ByRef purchaseItem As PurchaseItem) As Integer Implements IPurchaseItemDao.AddRecord
+        Public Function AddRecord(ByRef purchaseItem As PurchaseItem) As Integer Implements IDaoAll(Of PurchaseItem).AddRecord
             Dim sql As String =
                     " INSERT INTO [PurchaseItem] " &
                     " (PurchaseItemCode,PurchaseItemName,PurchaseItemNameAra,CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &

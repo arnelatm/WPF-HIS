@@ -12,24 +12,12 @@ Namespace ServiceLayer
         Protected Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
         Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CommonDao
 
-        'Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
-
-        'Public ReadOnly Property CommonDaoProp
-        '    Get
-        '        Return CommonDao
-        '    End Get
-        'End Property
-
-        'Public Overridable Function GetBaseDao()
-        '    Return BaseDaoProp
-        'End Function
-
     End Class
 
     Public Class ServiceBranch
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly BranchDao As IBranchDao = DaoFactoryCommonFactory.BranchDao
+        Protected ReadOnly BranchDao As IBranchDao = DaoFactoryCommonFactory.BranchDao
 
         Public Sub New()
             DataDao = BranchDao
@@ -41,7 +29,7 @@ Namespace ServiceLayer
     Public Class ServiceCostCenter
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
+        Protected ReadOnly CostCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CostCenterDao
 
         Public Sub New()
             DataDao = CostCenterDao
@@ -53,7 +41,7 @@ Namespace ServiceLayer
     Public Class ServiceCountry
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly CountryDao As ICountryDao = DaoFactoryCommonFactory.CountryDao
+        Protected ReadOnly CountryDao As ICountryDao = DaoFactoryCommonFactory.CountryDao
 
         Public Sub New()
             DataDao = CountryDao
@@ -65,7 +53,7 @@ Namespace ServiceLayer
     Public Class ServiceDepartment
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly DepartmentDao As IDepartmentDao = DaoFactoryCommonFactory.DepartmentDao
+        Protected ReadOnly DepartmentDao As IDepartmentDao = DaoFactoryCommonFactory.DepartmentDao
 
         Public Sub New()
             DataDao = DepartmentDao
@@ -77,7 +65,7 @@ Namespace ServiceLayer
     Public Class ServiceOriginalMessages
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly OriginalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.OriginalMessagesDao
+        Protected ReadOnly OriginalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.OriginalMessagesDao
 
         Public Sub New()
             DataDao = OriginalMessagesDao
@@ -89,7 +77,7 @@ Namespace ServiceLayer
     Public Class ServicePhoneType
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly PhoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.PhoneTypeDao
+        Protected ReadOnly PhoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.PhoneTypeDao
 
         Public Sub New()
             DataDao = PhoneTypeDao
@@ -101,7 +89,7 @@ Namespace ServiceLayer
     Public Class ServiceProfitCenter
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly ProfitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.ProfitCenterDao
+        Protected ReadOnly ProfitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.ProfitCenterDao
 
         Public Sub New()
             DataDao = ProfitCenterDao
@@ -113,7 +101,7 @@ Namespace ServiceLayer
     Public Class ServiceReligion
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly ReligionDao As IReligionDao = DaoFactoryCommonFactory.ReligionDao
+        Protected ReadOnly ReligionDao As IReligionDao = DaoFactoryCommonFactory.ReligionDao
 
         Public Sub New()
             DataDao = ReligionDao
@@ -125,7 +113,7 @@ Namespace ServiceLayer
     Public Class ServiceRevenueGroup
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly RevenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.RevenueGroupDao
+        Protected ReadOnly RevenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.RevenueGroupDao
 
         Public Sub New()
             DataDao = RevenueGroupDao
@@ -137,7 +125,7 @@ Namespace ServiceLayer
     Public Class ServiceTranslatedMessages
         Inherits ServiceCommon
 
-        Protected Shared ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.TranslatedMessagesDao
+        Protected ReadOnly TranslatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.TranslatedMessagesDao
 
         Public Sub New()
             DataDao = TranslatedMessagesDao

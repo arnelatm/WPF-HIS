@@ -22,8 +22,9 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
-        Protected Shared Property DataDao As Object
-        Protected Shared Property DataBo As Object
+        Public Property DataDao As Object
+
+        Public Property DataBo As Object
 
         Public Function GetDefaultFieldValues(ByVal tableName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
@@ -277,7 +278,7 @@ Namespace Services
     Public Class ServiceUser
         Inherits Service
 
-        Protected Shared ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
+        Protected ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
 
         Public Sub New()
             DataDao = UserDao
@@ -289,7 +290,7 @@ Namespace Services
     Public Class ServiceSecurityObject
         Inherits Service
 
-        Protected Shared ReadOnly SecurityObjectDao As IDaoAll(Of SecurityObject) = Factory.SecurityObjectDao()
+        Protected ReadOnly SecurityObjectDao As IDaoAll(Of SecurityObject) = Factory.SecurityObjectDao()
 
         Public Sub New()
             DataDao = SecurityObjectDao
@@ -301,7 +302,7 @@ Namespace Services
     Public Class ServiceSecurityGroup
         Inherits Service
 
-        Protected Shared ReadOnly SecurityGroupDao As IDao(Of SecurityGroup) = Factory.SecurityGroupDao()
+        Protected ReadOnly SecurityGroupDao As IDao(Of SecurityGroup) = Factory.SecurityGroupDao()
 
         Public Sub New()
             DataDao = SecurityGroupDao
@@ -313,7 +314,7 @@ Namespace Services
     Public Class ServiceGroupAccess
         Inherits Service
 
-        Protected Shared ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
+        Protected ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
 
         Public Sub New()
             DataDao = GroupAccessDao
