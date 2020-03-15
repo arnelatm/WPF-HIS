@@ -21,7 +21,6 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
             OriginalModel = New TranslatedMessagesModel()
-            DataBizObject = New TranslatedMessages(True)
             DataModel = New TranslatedMessagesModel
             TreeViewList = New List(Of TranslatedMessagesModel)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
@@ -54,29 +53,29 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
-        Public Overrides Function Save(ByRef addMode As Boolean)
-            Dim retVal As Integer
-            MapObject(View, DataBizObject, FieldSavingMappingDictionary)
-            If Model.IsValid(DataBizObject) Then
-                'If DataIsValid() Then
-                '    If addMode Or Model.IdNo = 0 Then
-                '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(DataBizObject)
-                '        retVal = NewlyAddedRecordIdNo
-                '    Else
+        'Public Overrides Function Save(ByRef addMode As Boolean)
+        '    Dim retVal As Integer
+        '    MapObject(View, DataBizObject, FieldSavingMappingDictionary)
+        '    If Model.IsValid(DataBizObject) Then
+        '        'If DataIsValid() Then
+        '        '    If addMode Or Model.IdNo = 0 Then
+        '        '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(DataBizObject)
+        '        '        retVal = NewlyAddedRecordIdNo
+        '        '    Else
 
-                '        retVal = Model.UpdateRecord(Model)
+        '        '        retVal = Model.UpdateRecord(Model)
 
-                '    End If
-                'End If
-            Else
-                Dim errorList As String = ""
-                For Each bizError In DataBizObject.Errors
-                    errorList = errorList & bizError & Environment.NewLine
-                Next
-                MessageBox.Show(errorList)
-            End If
-            Return retVal
-        End Function
+        '        '    End If
+        '        'End If
+        '    Else
+        '        Dim errorList As String = ""
+        '        For Each bizError In Model.GetBizObjectErrors()
+        '            errorList = errorList & bizError & Environment.NewLine
+        '        Next
+        '        MessageBox.Show(errorList)
+        '    End If
+        '    Return retVal
+        'End Function
 
     End Class
 

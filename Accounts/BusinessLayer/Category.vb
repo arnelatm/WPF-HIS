@@ -8,7 +8,7 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New(ByVal Optional validate As Boolean = False)
+        Public Sub New(ByVal Optional validate As Boolean = True)
             ' establish business rules
             If validate Then
                 AddRule(New ValidateRequired("CategoryName"))
@@ -22,4 +22,5 @@ Namespace BusinessLayer
         Public Property CategoryNameAra As String
         Public Property Notes As String
     End Class
-End NameSpace
+
+End Namespace

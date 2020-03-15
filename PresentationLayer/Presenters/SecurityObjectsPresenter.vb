@@ -25,7 +25,6 @@ Public Class SecurityObjectsPresenter
         TreeViewMainField = "SecurityObjectName"
         TreeViewSecondaryField = ""
         OriginalModel = New SecurityObjectModel()
-        DataBizObject = New SecurityObject
         DataModel = New SecurityObjectModel
     End Sub
 

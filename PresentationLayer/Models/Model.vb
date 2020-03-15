@@ -11,31 +11,15 @@ Imports AutoMapper
 Public Class Model
     Implements IModel
 
-    Protected DataBizObject
     Private Shared ReadOnly Service As New Service()
-    Private Shared ReadOnly LoginService As New ServiceLogin()
 
-    'Public Property CommonService
+    Private Shared ReadOnly LoginService As New ServiceLogin()
 
     Protected Property DataService
 
     Public Overridable Function GetDataService() As Object
         Return Service
     End Function
-
-    'Public Function GetRecordByIdNo(Of TM As New)(idNo As Integer) As TM _
-    '    Implements IModel.GetRecordById
-    '    Dim modelData As New TM
-    '    If idNo <> 0 Then
-    '        modelData = DataService.GetRecordByIdNo(Of TM)(idNo)
-    '        'If modelData IsNot Nothing Then
-    '        '    'Dim modelData As New TM
-    '        '    modelData = GlobalVariables.Mapper.Map(Of TM)(DataBizObject)
-    '        '    'modelData = Mapper.Map(Of TM)(DataBizObject)
-    '        'End If
-    '    End If
-    '    Return modelData
-    'End Function
 
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
@@ -45,17 +29,6 @@ Public Class Model
         End If
         Return modelData
     End Function
-
-    'Public Overridable Function IsValid(ByRef errorList As String)
-    '    GlobalVariables.Mapper.Map(pModel, DataBizObject)
-    '    Dim result = DataBizObject.IsValid()
-    '    If Not result Then
-    '        For Each item In DataBizObject.Errors
-    '            errorList += item + Environment.NewLine
-    '        Next
-    '    End If
-    '    Return result
-    'End Function
 
     Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) _
         Implements IModel.GetAll
@@ -75,30 +48,14 @@ Public Class Model
         Return newlyAddedRecordIdNo
     End Function
 
-    'Public Function AddRecord(Of TBiz)(ByRef DataBizObject As TBiz) As Integer _
-    '    Implements IModel.AddRecord
-    '    Dim newlyAddedRecordIdNo As Integer
-    '    newlyAddedRecordIdNo = DataService.AddRecord(DataBizObject)
-    '    Return newlyAddedRecordIdNo
-    'End Function
-
     Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM) _
         Implements IModel.GetRecordsWithIdNo
         Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
-        'Dim bizData = data
-        'Dim viewObject As New List(Of TM)
-        'GlobalVariables.Mapper.Map(Of List(Of TM), List(Of ))
-        'For Each bObject In bizData
-        '    Dim model As TM
-        '    model = GlobalVariables.Mapper.Map(Of TM)(bObject)
-        '    viewObject.Add(model)
-        'Next
         Return data
     End Function
 
     Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
         Implements IModel.UpdateRecord
-        'GlobalVariables.Mapper.Map(dataModel, DataBizObject)
         Dim updateResult As Integer
         updateResult = DataService.UpdateRecord(dataModel)
         Return updateResult
@@ -436,11 +393,6 @@ Public Class Model
     Public Function IsValid(Of TM)(ByRef dModel As TM)
         Return DataService.IsValid(dModel)
     End Function
-
-    'Public Function IsValid(Of TM)(ByRef dModel As TM)
-    '    GlobalVariables.Mapper.Map(dModel, DataBizObject)
-    '    Return DataBizObject.IsValid()
-    'End Function
 
 End Class
 

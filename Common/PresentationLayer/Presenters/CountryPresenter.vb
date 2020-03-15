@@ -17,7 +17,6 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "CountryName"
             TreeViewSecondaryField = "Isoa2"
             OriginalModel = New CountryModel()
-            DataBizObject = New Country(True)
             DataModel = New CountryModel
             TreeViewList = New List(Of CountryModel)
             ParentViewList = New List(Of CountryModel)

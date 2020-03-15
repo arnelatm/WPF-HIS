@@ -8,7 +8,9 @@ Namespace BusinessObjects
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            AddRule(New ValidateRequired("SecurityObjectName"))
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("SecurityObjectName"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -17,4 +19,5 @@ Namespace BusinessObjects
         Public Property Notes As String
 
     End Class
-End NameSpace
+
+End Namespace

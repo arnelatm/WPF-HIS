@@ -18,19 +18,7 @@ Public Class LoginPresenter
     ''' <param name="view">The view</param>
     Public Sub New(ByVal view As ILoginView)
         MyBase.New(view)
-        'Model = New ModelLogin
-        ''ModelPresenter = New ModelLogin()
-        'TableName = "User"
-        'OriginalModel = New LoginModel()
-        'DataBizObject = New Login
-        'DataModel = New LoginModel()
-        'Model = New ModelLogin
     End Sub
-
-    'Shared Sub New()
-    '    ModelTblColProp = New ModelTblColProp
-    '    ModelDefaultFieldValue = New ModelDefaultFieldValue
-    'End Sub
 
     ''' <summary>
     '''     Perform login. Gets data from view and calls model.

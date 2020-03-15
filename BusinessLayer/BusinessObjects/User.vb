@@ -2,19 +2,20 @@
 
 Namespace BusinessObjects
 
-' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
-
+    ' Category business object
+    ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
     Public Class User
         Inherits BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
-            ' establish business rules
-            AddRule(New ValidateRequired("UserName"))
-            AddRule(New ValidateRequired("Password"))
-            AddRule(New ValidateRequired("FullName"))
+            If GetRules().Count() = 0 Then
+                ' establish business rules
+                AddRule(New ValidateRequired("UserName"))
+                AddRule(New ValidateRequired("Password"))
+                AddRule(New ValidateRequired("FullName"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -25,4 +26,5 @@ Namespace BusinessObjects
         Public Property SecurityLevel As Int16
         Public Property SecurityGroupIdNo As Integer
     End Class
-End NameSpace
+
+End Namespace

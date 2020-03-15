@@ -16,7 +16,6 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "BranchName"
             TreeViewSecondaryField = "BranchCode"
             OriginalModel = New BranchModel()
-            DataBizObject = New Branch(True)
             DataModel = New BranchModel
             TreeViewList = New List(Of BranchModel)
         End Sub

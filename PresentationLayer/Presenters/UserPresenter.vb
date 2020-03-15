@@ -15,7 +15,6 @@ Public Class UserPresenter
         TreeViewMainField = "FullName"
         TreeViewSecondaryField = "UserName"
         OriginalModel = New UserModel()
-        DataBizObject = New User
         DataModel = New UserModel
         TreeViewList = New List(Of UserModel)
         ParentViewList = New List(Of UserModel)

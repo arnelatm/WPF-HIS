@@ -21,8 +21,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
 
-    Protected DataBizObject
     Protected DataService
+
     Protected DataModel
 
     Protected TreeViewMainField As String
@@ -78,10 +78,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End If
     End Sub
-
-    'Public Function GetBizObjectRules()
-    '    Return DataBizObject.GetRules()
-    'End Function
 
     Public Function GetBizObjectRules()
         Return Model.GetBizObjectRules()
@@ -312,11 +308,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         If Model.IsValid(DataModel) Then
             retVal = True
         End If
-        'GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        'GlobalVariables.Mapper.Map(DataModel, DataBo)
-        'If DataBizObject.IsValid() Then
-        '    retVal = True
-        'End If
         Return retVal
     End Function
 

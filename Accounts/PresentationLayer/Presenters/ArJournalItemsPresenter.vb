@@ -15,7 +15,6 @@ Namespace PresentationLayer.Presenters
             ModelPresenter = New ModelArJournalItems()
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            DataBizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 
