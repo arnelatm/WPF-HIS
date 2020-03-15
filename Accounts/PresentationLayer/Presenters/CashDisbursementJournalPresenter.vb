@@ -5,9 +5,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class CashDisbursementJournalPresenter
-        Inherits AccountsPresenter(Of ICashDisbursementJournalView, CashDisbursementJournal, CashDisbursementJournalModel)
+        Inherits AccountsPresenter(Of ICashDisbursementJournalView, CashDisbursementJournalModel)
 
         Public ParentViewList As List(Of CashDisbursementJournalModel)
         Private _apOpenInvoiceBo As New ApOpenInvoice
@@ -15,11 +14,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICashDisbursementJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelCashDisbursementJournal()
+            ModelPresenter = New ModelCashDisbursementJournal()
             TableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New CashDisbursementJournalModel()
-            BizObject = New CashDisbursementJournal
             DataModel = New CashDisbursementJournalModel
             _apOpenInvoiceModel = New ModelApOpenInvoice
         End Sub
@@ -77,4 +75,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
+
 End Namespace

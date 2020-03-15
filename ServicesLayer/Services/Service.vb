@@ -22,8 +22,8 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
 
-        Public Property DataDao As Object
-        Public Property DataBo As Object
+        Protected Shared Property DataDao As Object
+        Protected Shared Property DataBo As Object
 
         Public Function GetDefaultFieldValues(ByVal tableName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)

@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISalesCashItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelSalesCashItem()
+            ModelPresenter = New ModelSalesCashItem()
             TableName = "SalesCashItem"
             SortOrderKey = "Sequence"
             BizObject = New SalesCashItem
@@ -110,7 +110,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of SalesCashItemModel)
-            Return CurrentModel.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

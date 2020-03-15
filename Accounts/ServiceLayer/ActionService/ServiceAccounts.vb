@@ -20,14 +20,6 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
-        'Public Overrides Function GetBaseDao() As Object
-        '    Return GetAccountsDao()
-        'End Function
-
-        'Public Overridable Function GetAccountsDao()
-        '    Return CommonDaoProp
-        'End Function
-
     End Class
 
     Public Class ServiceCategory
@@ -50,6 +42,42 @@ Namespace ServiceLayer.ActionService
         Public Sub New()
             DataBo = New Employee
             DataDao = EmployeeDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceChart
+        Inherits ServiceAccounts
+
+        Protected Shared ReadOnly ChartDao As IDaoAll(Of Chart) = DaoFactoryAccountsFactory.ChartDao
+
+        Public Sub New()
+            DataBo = New Chart
+            DataDao = ChartDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceCustomer
+        Inherits ServiceAccounts
+
+        Protected Shared ReadOnly CustomerDao As IDaoAll(Of Customer) = DaoFactoryAccountsFactory.CustomerDao
+
+        Public Sub New()
+            DataBo = New Customer
+            DataDao = CustomerDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceSupplier
+        Inherits ServiceAccounts
+
+        Protected Shared ReadOnly SupplierDao As IDaoAll(Of Supplier) = DaoFactoryAccountsFactory.SupplierDao
+
+        Public Sub New()
+            DataBo = New Supplier
+            DataDao = SupplierDao
         End Sub
 
     End Class
@@ -175,5 +203,31 @@ Namespace ServiceLayer.ActionService
         End Sub
 
     End Class
+
+    'Public Class ServiceDistributionScheme
+    '    Inherits ServiceOpenInvoice
+    '    Implements IOpenInvoiceService
+
+    '    Protected Shared ReadOnly DistributionSchemeDao As IDaoAll(Of DistributionScheme) = DaoFactoryAccountsFactory.DistributionSchemeDao
+
+    '    Public Sub New()
+    '        DataDao = DaoFactoryAccountsFactory.DistributionSchemeDao
+    '        DataBo = New DistributionScheme
+    '    End Sub
+
+    'End Class
+
+    'Public Class ServiceDistributionSchemeItem
+    '    Inherits ServiceOpenInvoice
+    '    Implements IOpenInvoiceService
+
+    '    Protected Shared ReadOnly DistributionSchemeDao As IDaoChild(Of DistributionSchemeItem) = DaoFactoryAccountsFactory.DistributionSchemeItemDao
+
+    '    Public Sub New()
+    '        DataDao = DaoFactoryAccountsFactory.DistributionSchemeItemDao
+    '        DataBo = New DistributionSchemeItem
+    '    End Sub
+
+    'End Class
 
 End Namespace

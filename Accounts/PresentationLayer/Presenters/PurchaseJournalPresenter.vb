@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelPurchaseJournal()
+            ModelPresenter = New ModelPurchaseJournal()
             TableName = "PurchaseJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New PurchaseJournalModel()

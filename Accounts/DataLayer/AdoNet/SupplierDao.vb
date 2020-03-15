@@ -1,21 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Supplier
     ' ** DAO Pattern
 
     Public Class SupplierDao
-        Inherits CommonDaoOld
-        Implements ISupplierDao
+        Inherits CommonDao
+        Implements IDaoAll(Of Supplier)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
-        Public Function GetRecordById(idNo As Integer) As Supplier Implements ISupplierDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Supplier Implements IDaoAll(Of Supplier).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountStatus," &
@@ -63,15 +61,18 @@ Namespace DataLayer.AdoNet
             'Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "SupplierName ASC") As List(Of Supplier) _
-            Implements ISupplierDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Supplier) _
+            Implements IDaoAll(Of Supplier).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "SupplierName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, SupplierCode, SupplierName, SupplierNameAra " &
                     "   FROM [Supplier] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef supplier As Supplier) As Integer Implements ISupplierDao.UpdateRecord
+        Public Function UpdateRecord(ByRef supplier As Supplier) As Integer Implements IDaoAll(Of Supplier).UpdateRecord
             Dim sql As String =
                     "UPDATE [Supplier] " &
                     "SET " &
@@ -114,7 +115,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(supplier))
         End Function
 
-        Public Function AddRecord(ByRef supplier As Supplier) As Integer Implements ISupplierDao.AddRecord
+        Public Function AddRecord(ByRef supplier As Supplier) As Integer Implements IDaoAll(Of Supplier).AddRecord
             Dim sql As String =
                     "INSERT INTO [Supplier] " &
                     "AccountStatus," &

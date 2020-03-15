@@ -1,4 +1,5 @@
-﻿Imports AATM.Common.DataLayer
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer
 Imports AATM.DataLayer
 
 Namespace DataLayer
@@ -31,6 +32,12 @@ Namespace DataLayer
         Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
         Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+
+    End Interface
+
+    Public Interface IDaoChart
+
+        Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Chart)
 
     End Interface
 

@@ -5,18 +5,16 @@ Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class CadOiItemsPresenter
-        Inherits AccountsPresenter(Of ICadOiItemsView, CadOiItem, CadOiItemModel)
+        Inherits AccountsPresenter(Of ICadOiItemsView, CadOiItemModel)
 
         Public ParentViewList As List(Of CadOiItemModel)
 
         Public Sub New(view As ICadOiItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelCadOiItem()
+            ModelPresenter = New ModelCadOiItem()
             TableName = "CadOiItem"
             SortOrderKey = "Sequence"
-            BizObject = New CadOiItem
             DataModel = New CadOiItemModel
         End Sub
 
@@ -86,7 +84,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of CadOiItemModel)
-            Return CurrentModel.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
@@ -109,4 +107,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

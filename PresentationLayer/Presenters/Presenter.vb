@@ -196,7 +196,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Overloads Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
         Dim modelData
-        modelData = Model.GetRecordById(Of TM)(idNo)
+        modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
         If modelData IsNot Nothing And modelData.IdNo > 0 Then
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
         End If

@@ -1,16 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Chart
     ' ** DAO Pattern
 
     Public Class ChartDao
-        Implements IChartDao
+        Inherits CommonDao
+        Implements IDaoAll(Of Chart), IDaoChart
 
         Private Shared Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Chart Implements IChartDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Chart Implements IDaoAll(Of Chart).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountCode," &
@@ -35,8 +38,11 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetDetailAccounts(Optional sortExpression As String = "AccountName") As List(Of Chart) _
-            Implements IChartDao.GetDetailAccounts
+        Public Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Chart) _
+            Implements IDaoChart.GetDetailAccounts
+            If sortExpression Is Nothing Then
+                sortExpression = "AccountName"
+            End If
             Dim sql As String
             sql = "Select" &
                   "a.AccountCode," &
@@ -62,8 +68,11 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "AccountName ASC") As List(Of Chart) _
-            Implements IChartDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Chart) _
+            Implements IDaoAll(Of Chart).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "AccountName Asc"
+            End If
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, AccountCode, AccountName, AccountNameAra, AccountGroup, DetailAccount, NormalBalance, " &
                     " PayeeType, WithReconciliation, Active, Notes, LevelNumber, SortKey" &
@@ -71,7 +80,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef chart As Chart) As Integer Implements IChartDao.UpdateRecord
+        Public Function UpdateRecord(ByRef chart As Chart) As Integer Implements IDaoAll(Of Chart).UpdateRecord
             Dim sql As String =
                     "UPDATE [Chart] SET " &
                     "AccountCode = @AccountCode," &
@@ -90,7 +99,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(chart))
         End Function
 
-        Public Function AddRecord(ByRef chart As Chart) As Integer Implements IChartDao.AddRecord
+        Public Function AddRecord(ByRef chart As Chart) As Integer Implements IDaoAll(Of Chart).AddRecord
             Dim sql As String =
                     "INSERT INTO [Chart] (" &
                     "AccountCode," &

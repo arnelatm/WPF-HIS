@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelSalesJournalItem()
+            ModelPresenter = New ModelSalesJournalItem()
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
             BizObject = New JournalItem

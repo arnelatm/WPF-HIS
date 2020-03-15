@@ -5,18 +5,16 @@ Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class CsrOiItemsPresenter
-        Inherits AccountsPresenter(Of ICsrOiItemsView, CsrOiItem, CsrOiItemModel)
+        Inherits AccountsPresenter(Of ICsrOiItemsView, CsrOiItemModel)
 
         Public ParentViewList As List(Of CsrOiItemModel)
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelCsrOiItem()
+            ModelPresenter = New ModelCsrOiItem()
             TableName = "CsrOiItem"
             SortOrderKey = "Sequence"
-            BizObject = New CsrOiItem
             DataModel = New CsrOiItemModel
         End Sub
 
@@ -85,7 +83,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Integer) As List(Of CsrOiItemModel)
-            Return CurrentModel.GetCustomerOpenInvoices(customerIdNo)
+            Return ModelPresenter.GetCustomerOpenInvoices(customerIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
@@ -108,4 +106,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

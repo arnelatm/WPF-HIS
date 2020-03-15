@@ -11,12 +11,12 @@ Namespace PresentationLayer.Forms
     Public Class DistributionSchemeEntryTv
         Implements IDistributionSchemeView, IDistributionSchemeItemsView
 
-        Private ReadOnly _DistributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
+        Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _profitCentersByCode
         Private ReadOnly _profitCentersByName
-        Private _DistributionSchemeItems As List(Of DistributionSchemeItemModel)
+        Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Public Sub New()
@@ -36,9 +36,9 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DistributionSchemePresenter(Me)
 
-            _DistributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
+            _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 
-            PresenterObj.DistributionSchemeItemsPresenter = _DistributionSchemeItemsPresenter
+            PresenterObj.DistributionSchemeItemsPresenter = _distributionSchemeItemsPresenter
 
             DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Sequence", GetType(Int32))
@@ -159,10 +159,10 @@ Namespace PresentationLayer.Forms
 
         Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
             Get
-                Return _DistributionSchemeItems
+                Return _distributionSchemeItems
             End Get
             Set
-                _DistributionSchemeItems = Value
+                _distributionSchemeItems = Value
                 BindDistributionSchemeItem()
             End Set
         End Property
@@ -216,7 +216,7 @@ Namespace PresentationLayer.Forms
                                    MessageBoxDefaultButton.Button2) = DialogResult.No Then
                     CancelSave = True
                 End If
-            ElseIf Not _DistributionSchemeItemsPresenter.DataIsValid() Then
+            ElseIf Not _distributionSchemeItemsPresenter.DataIsValid() Then
                 CancelSave = True
             End If
         End Sub
@@ -268,7 +268,7 @@ Namespace PresentationLayer.Forms
                 End If
                 nRowCount += 1
             Next
-            _DistributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IDNo)
+            _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IDNo)
         End Sub
 
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit

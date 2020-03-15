@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationItemsPresenter
-        Inherits AccountsPresenter(Of IAccountReconciliationItemsView, AccountReconciliationItem, AccountReconciliationItemModel)
+        Inherits AccountsPresenter(Of IAccountReconciliationItemsView, AccountReconciliationItemModel)
 
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GetVatPercentage()
@@ -16,10 +16,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelAccountReconciliationItem()
+            ModelPresenter = New ModelAccountReconciliationItem()
             TableName = "AccountReconciliationItem"
             SortOrderKey = "Sequence"
-            BizObject = New AccountReconciliationItem
             DataModel = New AccountReconciliationItemModel
             _cashCodesModel = GetCashCodesModel()
             _modelReconciled = New ModelReconciled()
@@ -91,7 +90,7 @@ Namespace PresentationLayer.Presenters
                 Next
             Else 'If editMode Then
                 Dim oldReconciliationItems As New List(Of AccountReconciliationItemModel)
-                oldReconciliationItems = CurrentModel.GetRecordsWithIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+                oldReconciliationItems = ModelPresenter.GetRecordsWithIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 For Each acctReconItem In allAcctReconItems
                     Dim found As Boolean = False
                     For Each item As AccountReconciliationItemModel In oldReconciliationItems
@@ -232,4 +231,5 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
     End Class
-End NameSpace
+
+End Namespace

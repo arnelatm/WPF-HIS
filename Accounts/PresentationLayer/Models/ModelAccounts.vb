@@ -8,7 +8,7 @@ Namespace PresentationLayer.Models
         Inherits ModelCommon
         Implements IModelAccounts
 
-        Private Shared ReadOnly Service = New ServiceAccounts
+        'Private Shared ReadOnly Service = New ServiceAccounts
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
             Dim updateResult As Integer
@@ -40,6 +40,33 @@ Namespace PresentationLayer.Models
 
         Public Sub New()
             DataService = New ServiceEmployee()
+        End Sub
+
+    End Class
+
+    Public Class ModelChart
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServiceChart()
+        End Sub
+
+    End Class
+
+    Public Class ModelCustomer
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServiceCustomer()
+        End Sub
+
+    End Class
+
+    Public Class ModelSupplier
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServiceSupplier()
         End Sub
 
     End Class
@@ -144,5 +171,23 @@ Namespace PresentationLayer.Models
         End Sub
 
     End Class
+
+    'Public Class ModelDistributionScheme
+    '    Inherits ModelOpenInvoice
+
+    '    Public Sub New()
+    '        DataService = New ServiceDistributionScheme()
+    '    End Sub
+
+    'End Class
+
+    'Public Class ModelDistributionSchemeItem
+    '    Inherits ModelOpenInvoice
+
+    '    Public Sub New()
+    '        DataService = New ServiceDistributionSchemeItem()
+    '    End Sub
+
+    'End Class
 
 End Namespace

@@ -12,10 +12,12 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            AddRule(New ValidateRequired("CustomerName"))
-            AddRule(New ValidateRequired("CustomerNameAra"))
-            AddRule(New ValidateRequired("CustomerCode"))
-            AddRule(New ValidateEmail("Email"))
+	    If GetRules().Count() = 0 Then
+	       AddRule(New ValidateRequired("CustomerName"))
+	       AddRule(New ValidateRequired("CustomerNameAra"))
+	       AddRule(New ValidateRequired("CustomerCode"))
+	       AddRule(New ValidateEmail("Email"))
+	    end if
         End Sub
 
         Public Property IdNo As Integer

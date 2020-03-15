@@ -7,7 +7,7 @@ Imports AATM.Libraries.LocalizationUtilities
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CustomerEntryTv
-        Inherits BfTvEntry
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -138,6 +138,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'lblNotes
@@ -167,6 +168,7 @@ Namespace PresentationLayer.Forms
         Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
         Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
         Me.txtOpeningBalance.Name = "txtOpeningBalance"
+        Me.txtOpeningBalance.OldValue = Nothing
         '
         'lblOpeningBalance
         '
@@ -187,6 +189,7 @@ Namespace PresentationLayer.Forms
         Me.txtSettlementDiscount.IgnoreNullCheck = true
         Me.txtSettlementDiscount.LinkedLabel = Nothing
         Me.txtSettlementDiscount.Name = "txtSettlementDiscount"
+        Me.txtSettlementDiscount.OldValue = Nothing
         '
         'lblSettlementDiscount
         '
@@ -206,6 +209,7 @@ Namespace PresentationLayer.Forms
         Me.txtSettlementDueDays.IgnoreNullCheck = true
         Me.txtSettlementDueDays.LinkedLabel = Me.CLabel2
         Me.txtSettlementDueDays.Name = "txtSettlementDueDays"
+        Me.txtSettlementDueDays.OldValue = Nothing
         '
         'CLabel2
         '
@@ -230,6 +234,7 @@ Namespace PresentationLayer.Forms
         Me.txtPaymentDueDays.IgnoreNullCheck = true
         Me.txtPaymentDueDays.LinkedLabel = Me.lblPaymentDueDays
         Me.txtPaymentDueDays.Name = "txtPaymentDueDays"
+        Me.txtPaymentDueDays.OldValue = Nothing
         '
         'lblPaymentDueDays
         '
@@ -248,6 +253,7 @@ Namespace PresentationLayer.Forms
         Me.txtCreditLimit.ForeColor = System.Drawing.Color.Black
         Me.txtCreditLimit.LinkedLabel = Me.lblCreditLimit
         Me.txtCreditLimit.Name = "txtCreditLimit"
+        Me.txtCreditLimit.OldValue = Nothing
         '
         'lblCreditLimit
         '
@@ -277,6 +283,7 @@ Namespace PresentationLayer.Forms
         Me.txtIban.ForeColor = System.Drawing.Color.Black
         Me.txtIban.LinkedLabel = Me.lblIban
         Me.txtIban.Name = "txtIban"
+        Me.txtIban.OldValue = Nothing
         '
         'lblIban
         '
@@ -295,6 +302,7 @@ Namespace PresentationLayer.Forms
         Me.txtBankAccountNo.ForeColor = System.Drawing.Color.Black
         Me.txtBankAccountNo.LinkedLabel = Me.lblBankAccountNo
         Me.txtBankAccountNo.Name = "txtBankAccountNo"
+        Me.txtBankAccountNo.OldValue = Nothing
         '
         'lblBankAccountNo
         '
@@ -318,6 +326,7 @@ Namespace PresentationLayer.Forms
         Me.txtCrNumber.ForeColor = System.Drawing.Color.Black
         Me.txtCrNumber.LinkedLabel = Me.lblCrNumber
         Me.txtCrNumber.Name = "txtCrNumber"
+        Me.txtCrNumber.OldValue = Nothing
         '
         'lblCrNumber
         '
@@ -337,6 +346,7 @@ Namespace PresentationLayer.Forms
         Me.txtWebsite.ForeColor = System.Drawing.Color.Black
         Me.txtWebsite.LinkedLabel = Me.lblWebsite
         Me.txtWebsite.Name = "txtWebsite"
+        Me.txtWebsite.OldValue = Nothing
         '
         'lblWebsite
         '
@@ -355,6 +365,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmail.ForeColor = System.Drawing.Color.Black
         Me.txtEmail.LinkedLabel = Me.lblEmail
         Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.OldValue = Nothing
         '
         'lblEmail
         '
@@ -374,6 +385,7 @@ Namespace PresentationLayer.Forms
         Me.txtMobile.ForeColor = System.Drawing.Color.Black
         Me.txtMobile.LinkedLabel = Me.lblMobile
         Me.txtMobile.Name = "txtMobile"
+        Me.txtMobile.OldValue = Nothing
         '
         'lblMobile
         '
@@ -392,6 +404,7 @@ Namespace PresentationLayer.Forms
         Me.txtFax.ForeColor = System.Drawing.Color.Black
         Me.txtFax.LinkedLabel = Me.lblFax
         Me.txtFax.Name = "txtFax"
+        Me.txtFax.OldValue = Nothing
         '
         'lblFax
         '
@@ -411,6 +424,7 @@ Namespace PresentationLayer.Forms
         Me.txtPhone2.ForeColor = System.Drawing.Color.Black
         Me.txtPhone2.LinkedLabel = Me.lblPhone2
         Me.txtPhone2.Name = "txtPhone2"
+        Me.txtPhone2.OldValue = Nothing
         '
         'lblPhone2
         '
@@ -429,6 +443,7 @@ Namespace PresentationLayer.Forms
         Me.txtPhone1.ForeColor = System.Drawing.Color.Black
         Me.txtPhone1.LinkedLabel = Me.lblPhone1
         Me.txtPhone1.Name = "txtPhone1"
+        Me.txtPhone1.OldValue = Nothing
         '
         'lblPhone1
         '
@@ -452,6 +467,7 @@ Namespace PresentationLayer.Forms
         Me.txtZipCode.ForeColor = System.Drawing.Color.Black
         Me.txtZipCode.LinkedLabel = Me.lblZipCode
         Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.OldValue = Nothing
         '
         'lblZipCode
         '
@@ -470,6 +486,7 @@ Namespace PresentationLayer.Forms
         Me.txtPoBox.ForeColor = System.Drawing.Color.Black
         Me.txtPoBox.LinkedLabel = Me.lblPoBox
         Me.txtPoBox.Name = "txtPoBox"
+        Me.txtPoBox.OldValue = Nothing
         '
         'lblPoBox
         '
@@ -489,6 +506,7 @@ Namespace PresentationLayer.Forms
         Me.txtProvinceState.ForeColor = System.Drawing.Color.Black
         Me.txtProvinceState.LinkedLabel = Me.lblProvinceState
         Me.txtProvinceState.Name = "txtProvinceState"
+        Me.txtProvinceState.OldValue = Nothing
         '
         'lblProvinceState
         '
@@ -507,6 +525,7 @@ Namespace PresentationLayer.Forms
         Me.txtTownCity.ForeColor = System.Drawing.Color.Black
         Me.txtTownCity.LinkedLabel = Me.lblTownCity
         Me.txtTownCity.Name = "txtTownCity"
+        Me.txtTownCity.OldValue = Nothing
         '
         'lblTownCity
         '
@@ -526,6 +545,7 @@ Namespace PresentationLayer.Forms
         Me.txtDistrict.ForeColor = System.Drawing.Color.Black
         Me.txtDistrict.LinkedLabel = Me.lblDistrict
         Me.txtDistrict.Name = "txtDistrict"
+        Me.txtDistrict.OldValue = Nothing
         '
         'lblDistrict
         '
@@ -544,6 +564,7 @@ Namespace PresentationLayer.Forms
         Me.txtStreet.ForeColor = System.Drawing.Color.Black
         Me.txtStreet.LinkedLabel = Me.lblStreet
         Me.txtStreet.Name = "txtStreet"
+        Me.txtStreet.OldValue = Nothing
         '
         'lblStreet
         '
@@ -563,6 +584,7 @@ Namespace PresentationLayer.Forms
         Me.txtContactDesignation.ForeColor = System.Drawing.Color.Black
         Me.txtContactDesignation.LinkedLabel = Me.lblContactDesignation
         Me.txtContactDesignation.Name = "txtContactDesignation"
+        Me.txtContactDesignation.OldValue = Nothing
         '
         'lblContactDesignation
         '
@@ -581,6 +603,7 @@ Namespace PresentationLayer.Forms
         Me.txtContactPerson.ForeColor = System.Drawing.Color.Black
         Me.txtContactPerson.LinkedLabel = Me.lblContactPerson
         Me.txtContactPerson.Name = "txtContactPerson"
+        Me.txtContactPerson.OldValue = Nothing
         '
         'lblContactPerson
         '
@@ -601,6 +624,7 @@ Namespace PresentationLayer.Forms
         Me.txtCustomerNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtCustomerNameAra.LinkedLabel = Me.lblCustomerNameAra
         Me.txtCustomerNameAra.Name = "txtCustomerNameAra"
+        Me.txtCustomerNameAra.OldValue = Nothing
         Me.txtCustomerNameAra.ValueIsMandatory = true
         '
         'txtCustomerName
@@ -616,6 +640,7 @@ Namespace PresentationLayer.Forms
         Me.txtCustomerName.ForeColor = System.Drawing.Color.Black
         Me.txtCustomerName.LinkedLabel = Me.lblCustomerName
         Me.txtCustomerName.Name = "txtCustomerName"
+        Me.txtCustomerName.OldValue = Nothing
         Me.txtCustomerName.ValueIsMandatory = true
         '
         'lblCustomerName
@@ -645,6 +670,7 @@ Namespace PresentationLayer.Forms
         Me.txtCustomerCode.ForeColor = System.Drawing.Color.Black
         Me.txtCustomerCode.LinkedLabel = Me.lblCustomerCode
         Me.txtCustomerCode.Name = "txtCustomerCode"
+        Me.txtCustomerCode.OldValue = Nothing
         Me.txtCustomerCode.ValueIsMandatory = true
         '
         'lblCustomerCode
@@ -665,6 +691,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.TabStop = false
         '
@@ -766,6 +793,7 @@ Namespace PresentationLayer.Forms
         Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
         Me.txtVatNumber.LinkedLabel = Nothing
         Me.txtVatNumber.Name = "txtVatNumber"
+        Me.txtVatNumber.OldValue = Nothing
         '
         'cacCountryCode
         '
@@ -784,7 +812,7 @@ Namespace PresentationLayer.Forms
         Me.cacCountryCode.HideWhenNotEditingOrAdding = false
         Me.cacCountryCode.LinkedLabel = Me.lblCountryCode
         Me.cacCountryCode.Name = "cacCountryCode"
-        Me.cacCountryCode.OldValue = Nothing
+        Me.cacCountryCode.OldValue = 0
         Me.cacCountryCode.OriginalDataSource = Nothing
         Me.cacCountryCode.OriginalList = Nothing
         Me.cacCountryCode.OverrideDropDownStyleList = false
@@ -820,7 +848,7 @@ Namespace PresentationLayer.Forms
         Me.cacBankIdNo.HideWhenNotEditingOrAdding = false
         Me.cacBankIdNo.LinkedLabel = Nothing
         Me.cacBankIdNo.Name = "cacBankIdNo"
-        Me.cacBankIdNo.OldValue = Nothing
+        Me.cacBankIdNo.OldValue = 0
         Me.cacBankIdNo.OriginalDataSource = Nothing
         Me.cacBankIdNo.OriginalList = Nothing
         Me.cacBankIdNo.OverrideDropDownStyleList = false
@@ -854,7 +882,7 @@ Namespace PresentationLayer.Forms
         Me.cacRevAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cacRevAccountIdNo.LinkedLabel = Nothing
         Me.cacRevAccountIdNo.Name = "cacRevAccountIdNo"
-        Me.cacRevAccountIdNo.OldValue = Nothing
+        Me.cacRevAccountIdNo.OldValue = 0
         Me.cacRevAccountIdNo.OriginalDataSource = Nothing
         Me.cacRevAccountIdNo.OriginalList = Nothing
         Me.cacRevAccountIdNo.OverrideDropDownStyleList = false
@@ -888,7 +916,7 @@ Namespace PresentationLayer.Forms
         Me.cacArAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cacArAccountIdNo.LinkedLabel = Nothing
         Me.cacArAccountIdNo.Name = "cacArAccountIdNo"
-        Me.cacArAccountIdNo.OldValue = Nothing
+        Me.cacArAccountIdNo.OldValue = 0
         Me.cacArAccountIdNo.OriginalDataSource = Nothing
         Me.cacArAccountIdNo.OriginalList = Nothing
         Me.cacArAccountIdNo.OverrideDropDownStyleList = false
@@ -922,7 +950,7 @@ Namespace PresentationLayer.Forms
         Me.cacPaymentMethod.HideWhenNotEditingOrAdding = false
         Me.cacPaymentMethod.LinkedLabel = Nothing
         Me.cacPaymentMethod.Name = "cacPaymentMethod"
-        Me.cacPaymentMethod.OldValue = Nothing
+        Me.cacPaymentMethod.OldValue = 0
         Me.cacPaymentMethod.OriginalDataSource = Nothing
         Me.cacPaymentMethod.OriginalList = Nothing
         Me.cacPaymentMethod.OverrideDropDownStyleList = false
@@ -960,7 +988,7 @@ Namespace PresentationLayer.Forms
         Me.cacDiscountSchemeIdNo.HideWhenNotEditingOrAdding = false
         Me.cacDiscountSchemeIdNo.LinkedLabel = Nothing
         Me.cacDiscountSchemeIdNo.Name = "cacDiscountSchemeIdNo"
-        Me.cacDiscountSchemeIdNo.OldValue = Nothing
+        Me.cacDiscountSchemeIdNo.OldValue = 0
         Me.cacDiscountSchemeIdNo.OriginalDataSource = Nothing
         Me.cacDiscountSchemeIdNo.OriginalList = Nothing
         Me.cacDiscountSchemeIdNo.OverrideDropDownStyleList = false
@@ -1015,7 +1043,7 @@ Namespace PresentationLayer.Forms
         Me.cacAccountStatus.HideWhenNotEditingOrAdding = false
         Me.cacAccountStatus.LinkedLabel = Nothing
         Me.cacAccountStatus.Name = "cacAccountStatus"
-        Me.cacAccountStatus.OldValue = Nothing
+        Me.cacAccountStatus.OldValue = 0
         Me.cacAccountStatus.OriginalDataSource = Nothing
         Me.cacAccountStatus.OriginalList = Nothing
         Me.cacAccountStatus.OverrideDropDownStyleList = false

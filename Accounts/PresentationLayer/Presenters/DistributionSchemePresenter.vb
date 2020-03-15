@@ -7,9 +7,8 @@ Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class DistributionSchemePresenter
-        Inherits CommonPresenterOld(Of IDistributionSchemeView, DistributionScheme, DistributionSchemeModel)
+        Inherits AccountsPresenter(Of IDistributionSchemeView, DistributionSchemeModel)
 
         Public ParentViewList As List(Of DistributionSchemeModel)
 
@@ -17,30 +16,29 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
+            ModelPresenter = New ModelDistributionScheme()
             OriginalModel = New DistributionSchemeModel()
             TreeViewMainField = "DistributionSchemeName"
             TreeViewSecondaryField = "DistributionSchemeCode"
-            BizObject = New DistributionScheme
             DataModel = New DistributionSchemeModel
-            DbDataDao = New DistributionSchemeDao
-            Model.SetService(New DistributionSchemeService)
         End Sub
 
         Public Property DistributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
 
-        Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
-            Dim modelData As New DistributionSchemeModel
-            modelData = Model.GetRecordById(Of DistributionSchemeModel)(idNo)
-            DistributionSchemeItemsPresenter.Display(idNo)
-            With DistributionSchemeItemsPresenter.View
-                modelData.DistributionSchemeItems = .DistributionSchemeItems
-                modelData.TotalPercentage = .DistributionSchemeItems.Sum(Function(totals) totals.Percentage)
-            End With
-            If modelData IsNot Nothing Then
-                MapObject(modelData, View)
-                MapObject(modelData, OriginalModel)
-            End If
-        End Sub
+        'Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        '    MyBase.Display(idNo, undoMode)
+        '    DistributionSchemeItemsPresenter.Display(idNo, undoMode)
+        '    BindDistributionSchemeItem()
+        '    With DistributionSchemeItems
+        '        View.DistributionSchemeItems = .DistributionSchemeItems
+        '        modelData.TotalPercentage = .DistributionSchemeItems.Sum(Function(totals) totals.Percentage)
+        '    End With
+        '    If modelData IsNot Nothing Then
+        '        MapObject(modelData, View)
+        '        MapObject(modelData, OriginalModel)
+        '    End If
+        'End Sub
 
     End Class
-End NameSpace
+
+End Namespace
