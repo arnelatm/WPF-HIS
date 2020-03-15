@@ -71,6 +71,15 @@ Namespace PresentationLayer.Models
 
     End Class
 
+    Public Class ModelPurchaseItem
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServicePurchaseItem()
+        End Sub
+
+    End Class
+
     Public Class ModelApJournal
         Inherits ModelAccounts
 
@@ -168,15 +177,6 @@ Namespace PresentationLayer.Models
 
         Public Sub New()
             DataService = New ServiceArOpenInvoice()
-        End Sub
-
-    End Class
-
-    Public Class ModelPurchaseItems
-        Inherits ModelOpenInvoice
-
-        Public Sub New()
-            DataService = New ServicePurchaseItems()
         End Sub
 
     End Class

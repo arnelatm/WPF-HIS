@@ -41,4 +41,14 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IDaoAccountReconciliationItem(Of TM)
+
+        Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+
+        Function GetGlItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+
+        Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Integer, Optional sortExpression As String = Nothing) As List(Of TM)
+
+    End Interface
+
 End Namespace
