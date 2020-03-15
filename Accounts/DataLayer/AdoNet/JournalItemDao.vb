@@ -49,7 +49,7 @@ Namespace DataLayer.AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
             Implements IDaoJournalItems.InsertTvp
-            Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =

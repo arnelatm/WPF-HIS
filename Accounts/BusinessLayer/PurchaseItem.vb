@@ -9,10 +9,12 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
-            ' establish business rules
-            AddRule(New ValidateRequired("PurchaseItemName"))
-            AddRule(New ValidateRequired("PurchaseItemCode"))
-            AddRule(New ValidateRequired("GlAccountIdNo"))
+            If GetRules().Count() = 0 Then
+                ' establish business rules
+                AddRule(New ValidateRequired("PurchaseItemName"))
+                AddRule(New ValidateRequired("PurchaseItemCode"))
+                AddRule(New ValidateRequired("GlAccountIdNo"))
+            End If
         End Sub
 
         Public Property Active As Boolean
@@ -35,4 +37,5 @@ Namespace BusinessLayer
         Public Property VatAccountIdNo As Integer
 
     End Class
-End NameSpace
+
+End Namespace

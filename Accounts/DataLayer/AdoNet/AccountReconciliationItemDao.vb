@@ -1,5 +1,7 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
@@ -8,23 +10,15 @@ Namespace DataLayer.AdoNet
 
     Public Class AccountReconciliationItemDao
         Inherits CommonDao
-        Implements IAccountReconciliationItemDao
+        Implements IDaoChild(Of AccountReconciliationItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = "AccountReconciliationItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateAccountReconciliationItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertAccountReconciliationItemTVP"
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of AccountReconciliationItem) _
-            Implements IAccountReconciliationItemDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, Debit " &
-                    "   FROM [AccountReconciliationItem] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function GetRecordById(idNo As Integer) As AccountReconciliationItem _
-                        Implements IAccountReconciliationItemDao.GetRecordById
+                        Implements IDao(Of AccountReconciliationItem).GetRecordById
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
@@ -49,7 +43,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
-            As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetRecordsWithIdNo
+            As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -75,7 +69,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Integer, Optional sortExpression As String = Nothing) _
-            As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetReconciledRecordsWithIdNo
+            As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetReconciledRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -102,7 +96,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         'Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
-        '    As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetAcctReconItems
+        '    As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetAcctReconItems
         '    Dim sql As String =
         '            "SELECT " &
         '            "AccountIdNo," &
@@ -130,7 +124,7 @@ Namespace DataLayer.AdoNet
         'End Function
 
         'Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
-        '    As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetAcctReconItems
+        '    As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetAcctReconItems
         '    Dim sql As String =
         '            "SELECT " &
         '            "AccountIdNo," &
@@ -158,7 +152,7 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
-            As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetAcctReconItems
+            As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetAcctReconItems
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -205,7 +199,7 @@ Namespace DataLayer.AdoNet
         '    }
 
         Public Function GetGlItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
-            As List(Of AccountReconciliationItem) Implements IAccountReconciliationItemDao.GetGlItems
+            As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetGlItems
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -232,12 +226,12 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, accountReconciliationIdNo As Integer) As Integer _
-            Implements IAccountReconciliationItemDao.DelUpdateTvp
-            Return Db.TvpDelUpdate(DboTvpUpdateFileName, tvpTable, "@MParam", accountReconciliationIdNo)
+            Implements IDaoChild(Of AccountReconciliationItem).DelUpdateTvp
+            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", accountReconciliationIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IAccountReconciliationItemDao.InsertTvp
-            Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of AccountReconciliationItem).InsertTvp
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, AccountReconciliationItem) =

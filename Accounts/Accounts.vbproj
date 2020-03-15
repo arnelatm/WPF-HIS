@@ -120,6 +120,8 @@
     <Compile Include="BusinessLayer\SalesCashItem.vb" />
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountReconciliationItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
     <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
@@ -247,6 +249,8 @@
     <Compile Include="PresentationLayer\Models\SaleCashItemModel.vb" />
     <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountReconciliationItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
@@ -259,6 +263,7 @@
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />

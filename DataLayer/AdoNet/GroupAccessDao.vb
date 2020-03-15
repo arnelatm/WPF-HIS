@@ -63,7 +63,7 @@ Namespace AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of GroupAccess).InsertTvp
-            Return Db.TvpInsert("dbo.InsertGroupAccessTVP", tvpTable, "@MParam")
+            Return Db.InsertTvp("dbo.InsertGroupAccessTVP", tvpTable, "@MParam")
         End Function
 
         ' creates an GroupAccess object based on DataReader.

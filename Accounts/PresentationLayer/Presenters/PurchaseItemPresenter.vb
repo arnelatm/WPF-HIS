@@ -1,5 +1,4 @@
-﻿
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
@@ -7,9 +6,8 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class PurchaseItemPresenter
-        Inherits AccountsPresenter(Of IPurchaseItemView, PurchaseItem, PurchaseItemModel)
+        Inherits AccountsPresenter(Of IPurchaseItemView, PurchaseItemModel)
 
         Public ParentViewList As List(Of PurchaseItemModel)
 
@@ -27,7 +25,6 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "PurchaseItemCode"
             TreeViewList = New List(Of PurchaseItemModel)
             OriginalModel = New PurchaseItemModel()
-            BizObject = New PurchaseItem
             DataModel = New PurchaseItemModel
         End Sub
 
@@ -55,4 +52,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

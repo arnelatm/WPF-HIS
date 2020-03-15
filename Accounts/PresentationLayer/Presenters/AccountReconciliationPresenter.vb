@@ -10,13 +10,6 @@ Namespace PresentationLayer.Presenters
     Public Class AccountReconciliationPresenter
         Inherits AccountsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
 
-        Public ParentViewList As List(Of AccountReconciliationModel)
-
-        'Shared Sub New()
-        '    ModelTblColProp = New ModelTblColProp
-        '    ModelDefaultFieldValue = New ModelDefaultFieldValue
-        'End Sub
-
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
             ModelPresenter = New ModelAccountReconciliation()

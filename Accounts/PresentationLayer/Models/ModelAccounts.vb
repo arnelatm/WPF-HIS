@@ -172,6 +172,15 @@ Namespace PresentationLayer.Models
 
     End Class
 
+    Public Class ModelPurchaseItems
+        Inherits ModelOpenInvoice
+
+        Public Sub New()
+            DataService = New ServicePurchaseItems()
+        End Sub
+
+    End Class
+
     'Public Class ModelDistributionScheme
     '    Inherits ModelOpenInvoice
 
