@@ -87,7 +87,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetBizObjectRules()
     End Function
 
-    Public Function GetBizObjectErrors()
+    Public Function GetBizObjectErrors() As List(Of String)
         Return Model.GetBizObjectErrors()
     End Function
 
@@ -267,7 +267,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    Dim record As New TM
     '    GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
     '    result = Model.IsValid(Of TM)(record)
-    '    _errorList = Model.GetErrors()
+    '    _errorList = Model.GetBizObjectErrors()
     '    Return result
     'End Function
 
@@ -287,7 +287,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         If additionalMessage IsNot Nothing Then
             _errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In DataBizObject.Errors
+        For Each bizError In Model.GetBizObjectErrors()
             If _errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
@@ -297,9 +297,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
-    Public Function GetErrors() As List(Of String)
-        Return DataBizObject.GetErrors()
-    End Function
+    'Public Function GetBizObjectErrors() As List(Of String)
+    '    Return Model.GetBizObjectErrors()
+    'End Function
 
     'Public OverLoads Overridable Function DataIsValid()
     '    '' override this and enter any validation rules you want to add to the presenter.

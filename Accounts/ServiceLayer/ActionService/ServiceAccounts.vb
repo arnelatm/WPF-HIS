@@ -126,7 +126,7 @@ Namespace ServiceLayer.ActionService
 
     End Class
 
-    Public Class ServiceGeneralJournalItem
+    Public Class ServiceGeneralJournalItems
         Inherits ServiceAccounts
 
         Protected Shared ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccountsFactory.GeneralJournalItemDao

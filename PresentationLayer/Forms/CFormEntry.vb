@@ -808,7 +808,7 @@ Public Class CFormEntry
             End If
             If retValue < 1 Then
                 MyErrorProvider.ClearAllErrorMessages()
-                Dim lErrors = PresenterObj.GetErrors()
+                Dim lErrors = PresenterObj.GetBizObjectErrors()
                 For Each _err In lErrors
                     For Each ctrl In MyErrorProvider.Controls
                         If ctrl.errormessage = _err Then
