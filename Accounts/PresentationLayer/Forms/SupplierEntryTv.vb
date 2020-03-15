@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -121,10 +120,10 @@ Namespace PresentationLayer.Forms
 
         Public Property DateAccountOpen As Date? Implements ISupplierView.DateAccountOpen
             Get
-                Return Me.dtpDateAccountOpen.Value
+                Return dtpDateAccountOpen.Value
             End Get
             Set
-                Me.dtpDateAccountOpen.Value = Value
+                dtpDateAccountOpen.Value = Value
             End Set
         End Property
 

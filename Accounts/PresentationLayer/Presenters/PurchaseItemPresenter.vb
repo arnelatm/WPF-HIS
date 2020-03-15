@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseItemView)
             MyBase.New(view)
-            CurrentModel = New ModelPurchaseItem()
+            ModelPresenter = New ModelPurchaseItem()
             TableName = "PurchaseItem"
             SortOrderKey = "IdNo"
             TreeViewMainField = "PurchaseItemName"

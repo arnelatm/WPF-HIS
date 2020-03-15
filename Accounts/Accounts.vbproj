@@ -120,11 +120,16 @@
     <Compile Include="BusinessLayer\SalesCashItem.vb" />
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
+    <Compile Include="DataLayer\AdoNet\BankDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryAccounts.vb" />
+    <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
     <Compile Include="DataLayer\DaoFactoriesAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ArJournalItemDao.vb" />
@@ -171,6 +176,18 @@
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\ChartEntryTv.Designer.vb">
+      <DependentUpon>ChartEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ChartEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.Designer.vb">
+      <DependentUpon>CustomerEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.Designer.vb">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
@@ -187,6 +204,12 @@
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.Designer.vb">
+      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
@@ -227,10 +250,14 @@
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
@@ -289,6 +316,12 @@
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\ChartEntryTv.resx">
+      <DependentUpon>ChartEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\CustomerEntryTv.resx">
+      <DependentUpon>CustomerEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +334,12 @@
     <EmbeddedResource Include="PresentationLayer\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.ar-SA.resx">
+      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.resx">
+      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

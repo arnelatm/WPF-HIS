@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPcsOiItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelPcsOiItem()
+            ModelPresenter = New ModelPcsOiItem()
             TableName = "PcsOiItem"
             SortOrderKey = "Sequence"
             BizObject = New PcsOiItem
@@ -86,7 +86,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of PcsOiItemModel)
-            Return CurrentModel.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

@@ -7,9 +7,8 @@ Imports AATM.Libraries.Languages
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class AccountReconciliationPresenter
-        Inherits AccountsPresenter(Of IAccountReconciliationView, AccountReconciliation, AccountReconciliationModel)
+        Inherits AccountsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
 
         Public ParentViewList As List(Of AccountReconciliationModel)
 
@@ -20,11 +19,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
-            CurrentModel = New ModelAccountReconciliation()
+            ModelPresenter = New ModelAccountReconciliation()
             TableName = "AccountReconciliation"
             SortOrderKey = "IdNo"
             OriginalModel = New AccountReconciliationModel()
-            BizObject = New AccountReconciliation
             DataModel = New AccountReconciliationModel
         End Sub
 
@@ -76,4 +74,5 @@ Namespace PresentationLayer.Presenters
         End Sub
 
     End Class
+
 End Namespace

@@ -408,81 +408,6 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Public Sub SetupMapper()
-        '    Dim mapperConfiguration = New MapperConfiguration(Function(cfg)
-        '                                                          Return {cfg.CreateMap(Of PcsOiItem, PcsOiItemModel)(),
-        '                                                                  cfg.CreateMap(Of PcsOiItemModel, IPcsOiItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IPcsOiItemView, PcsOiItem)(),
-        '                                                                  cfg.CreateMap(Of PettyCashJournal, PettyCashJournalModel)(),
-        '                                                                  cfg.CreateMap(Of PettyCashJournalModel, IPettyCashJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IPettyCashJournalView, PettyCashJournal)(),
-        '                                                                  cfg.CreateMap(Of Supplier, SupplierModel)(),
-        '                                                                  cfg.CreateMap(Of SupplierModel, ISupplierView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ISupplierView, Supplier)(),
-        '                                                                  cfg.CreateMap(Of CashCode, CashCodeModel)(),
-        '                                                                  cfg.CreateMap(Of CashCodeModel, ICashCodeView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICashCodeView, CashCode)(),
-        '                                                                  cfg.CreateMap(Of SalesJournal, SalesJournalModel)(),
-        '                                                                  cfg.CreateMap(Of SalesJournalModel, ISalesJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ISalesJournalView, SalesJournal)(),
-        '                                                                  cfg.CreateMap(Of SalesCashItem, SalesCashItemModel)(),
-        '                                                                  cfg.CreateMap(Of SalesCashItemModel, ISalesCashItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ISalesCashItemView, SalesCashItem)(),
-        '                                                                  cfg.CreateMap(Of CashDisbursementJournalModel, CashDisbursementJournal)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CashDisbursementJournalModel, ICashDisbursementJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CashDisbursementJournal, ICashDisbursementJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of GeneralJournalModel, GeneralJournal)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of GeneralJournal, IGeneralJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of PurchaseJournal, PurchaseJournalModel)(),
-        '                                                                  cfg.CreateMap(Of PurchaseJournalModel, IPurchaseJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IPurchaseJournalView, PurchaseJournal)(),
-        '                                                                  cfg.CreateMap(Of CashReceiptJournal, CashReceiptJournalModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CashReceiptJournalModel, ICashReceiptJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICashReceiptJournalView, CashReceiptJournal)(),
-        '                                                                  cfg.CreateMap(Of ApJournal, ApJournalModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ApJournalModel, IApJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IApJournalView, ApJournal)(),
-        '                                                                  cfg.CreateMap(Of ArJournal, ArJournalModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ArJournalModel, IArJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IArJournalView, ArJournal)(),
-        '                                                                  cfg.CreateMap(Of ChequeDisbursementJournal, ChequeDisbursementJournalModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ChequeDisbursementJournalModel, IChequeDisbursementJournalView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IChequeDisbursementJournalView, ChequeDisbursementJournal)(),
-        '                                                                  cfg.CreateMap(Of Category, CategoryModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CategoryModel, ICategoryView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICategoryView, Category)(),
-        '                                                                  cfg.CreateMap(Of PurchaseItem, PurchaseItemModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of PurchaseItemModel, IPurchaseItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IPurchaseItemView, PurchaseItem)(),
-        '                                                                  cfg.CreateMap(Of Chart, ChartModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ChartModel, IChartView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IChartView, Chart)(),
-        '                                                                  cfg.CreateMap(Of CkdOiItem, CkdOiItemModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CkdOiItemModel, ICkdOiItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICkdOiItemView, CkdOiItem)(),
-        '                                                                  cfg.CreateMap(Of CadOiItem, CadOiItemModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CadOiItemModel, ICadOiItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICadOiItemView, CadOiItem)(),
-        '                                                                  cfg.CreateMap(Of CsrOiItem, CsrOiItemModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of CsrOiItemModel, ICsrOiItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of ICsrOiItemView, CsrOiItem)(),
-        '                                                                  cfg.CreateMap(Of JournalItem, JournalItemModel)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IJournalItemView, JournalItem)(),
-        '                                                                  cfg.CreateMap(Of BusinessLayer.AccountReconciliation, AccountReconciliationModel)(),
-        '                                                                  cfg.CreateMap(Of AccountReconciliationModel, IAccountReconciliationView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IAccountReconciliationView, BusinessLayer.AccountReconciliation)(),
-        '                                                                  cfg.CreateMap(Of AccountReconciliationItem, AccountReconciliationItemModel)(),
-        '                                                                  cfg.CreateMap(Of AccountReconciliationItemModel, IAccountReconciliationItemView)().ReverseMap(),
-        '                                                                  cfg.CreateMap(Of IAccountReconciliationItemView, AccountReconciliationItem)()
-        '                                                                 }
-        '                                                      End Function)
-        '    AccountsMapper = mapperConfiguration.CreateMapper()
-        '    mapperConfiguration.AssertConfigurationIsValid()
-        '    GlobalVariables.Mapper = AccountsMapper
-        'End Sub
-
         'Public Event FormCultureChanged()
 
         ''Enumerates login Menu: Logged In or Logged Out.
@@ -580,10 +505,10 @@ Namespace PresentationLayer.Forms
         '    ShowEntryForm(CashReceiptJournalEntry)
         'End Sub
 
-        'Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemChartOfAccounts.Click
-        '    ShowEntryForm(ChartEntryTv)
-        'End Sub
+        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemChartOfAccounts.Click
+            ShowEntryForm(ChartEntryTv)
+        End Sub
 
         Private Sub CostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCostCenters.Click
@@ -607,10 +532,10 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemCustomersClients.Click
-        '    ShowEntryForm(CustomerEntryTv)
-        'End Sub
+        Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCustomersClients.Click
+            ShowEntryForm(CustomerEntryTv)
+        End Sub
 
         Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemDepartments.Click
@@ -912,10 +837,10 @@ Namespace PresentationLayer.Forms
         '    ShowEntryForm(ArSummaryReport)
         'End Sub
 
-        'Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '            Handles ToolStripMenuItemSuppliersVendors.Click
-        '    ShowEntryForm(SupplierEntryTv)
-        'End Sub
+        Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+                    Handles ToolStripMenuItemSuppliersVendors.Click
+            ShowEntryForm(SupplierEntryTv)
+        End Sub
 
         'Private Sub ThreadExceptionHandler(sender As Object, e As ThreadExceptionEventArgs)
         '    ErrLogger.LogError(e.Exception)

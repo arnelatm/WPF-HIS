@@ -6,27 +6,20 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class ChartPresenter
-        Inherits AccountsPresenter(Of IChartView, Chart, ChartModel)
+        Inherits AccountsPresenter(Of IChartView, ChartModel)
 
         Public ParentViewList As List(Of ChartModel)
 
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
-
         Public Sub New(view As IChartView)
             MyBase.New(view)
-            CurrentModel = New ModelChart()
+            ModelPresenter = New ModelChart()
             TableName = "Chart_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
             TreeViewSecondaryField = "AccountCode"
             TreeViewParentIdField = "ParentIdNo"
             OriginalModel = New ChartModel()
-            BizObject = New Chart
             DataModel = New ChartModel
             TreeViewList = New List(Of ChartModel)
             ParentViewList = New List(Of ChartModel)
@@ -52,4 +45,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

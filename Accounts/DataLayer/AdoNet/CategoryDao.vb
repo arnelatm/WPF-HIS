@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Category) =
                                     Function(reader) _
-            New Category(False) With {
+            New Category() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
             .CategoryCode = Extensions.AsString(reader("CategoryCode")),
             .CategoryName = Extensions.AsString(reader("CategoryName")),

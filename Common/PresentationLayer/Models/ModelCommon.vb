@@ -7,13 +7,13 @@ Namespace PresentationLayer.Models
         Inherits Model
         Implements IModelCommon
 
-        Public Overrides Function GetDataService() Implements IModelCommon.GetDataService
-            Return GetCommonService()
-        End Function
+        'Public Overrides Function GetDataService() Implements IModelCommon.GetDataService
+        '    Return GetCommonService()
+        'End Function
 
-        Public Overridable Function GetCommonService() Implements IModelCommon.GetCommonService
-            Return New ServiceCommon()
-        End Function
+        'Public Overridable Function GetCommonService() Implements IModelCommon.GetCommonService
+        '    Return New ServiceCommon()
+        'End Function
 
     End Class
 
@@ -21,91 +21,90 @@ Namespace PresentationLayer.Models
         Inherits ModelCommon
 
         'Private ReadOnly _service As New ServiceBranch()
-
-        Public Overrides Function GetCommonService()
-            Return New ServiceBranch()
-        End Function
+        Public Sub New()
+            DataService = New ServiceBranch
+        End Sub
 
     End Class
 
     Public Class ModelCostCenter
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceCostCenter()
-        End Function
+        Public Sub New()
+            DataService = New ServiceCostCenter
+        End Sub
 
     End Class
 
     Public Class ModelCountry
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceCountry()
-        End Function
+        Public Sub New()
+            DataService = New ServiceCountry
+        End Sub
 
     End Class
 
     Public Class ModelDepartment
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceDepartment()
-        End Function
+        Public Sub New()
+            DataService = New ServiceDepartment
+        End Sub
 
     End Class
 
     Public Class ModelOriginalMessages
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceOriginalMessages()
-        End Function
+        Public Sub New()
+            DataService = New ServiceOriginalMessages
+        End Sub
 
     End Class
 
     Public Class ModelProfitCenter
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceProfitCenter()
-        End Function
+        Public Sub New()
+            DataService = New ServiceProfitCenter
+        End Sub
 
     End Class
 
     Public Class ModelReligion
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceReligion()
-        End Function
+        Public Sub New()
+            DataService = New ServiceReligion
+        End Sub
 
     End Class
 
     Public Class ModelRevenueGroup
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceRevenueGroup()
-        End Function
+        Public Sub New()
+            DataService = New ServiceRevenueGroup
+        End Sub
 
     End Class
 
     Public Class ModelTranslatedMessages
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServiceTranslatedMessages()
-        End Function
+        Public Sub New()
+            DataService = New ServiceTranslatedMessages
+        End Sub
 
     End Class
 
     Public Class ModelPhoneType
         Inherits ModelCommon
 
-        Public Overrides Function GetCommonService()
-            Return New ServicePhoneType()
-        End Function
+        Public Sub New()
+            DataService = New ServicePhoneType
+        End Sub
 
     End Class
 

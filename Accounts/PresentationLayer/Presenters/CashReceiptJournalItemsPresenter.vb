@@ -5,18 +5,16 @@ Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class CashReceiptJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItem, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            CurrentModel = New ModelCashReceiptJournalItem()
+            ModelPresenter = New ModelCashReceiptJournalItem()
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            BizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 
@@ -100,4 +98,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelPettyCashJournal()
+            ModelPresenter = New ModelPettyCashJournal()
             TableName = "PettyCashJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New PettyCashJournalModel()

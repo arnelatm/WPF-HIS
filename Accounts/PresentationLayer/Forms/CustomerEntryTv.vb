@@ -3,7 +3,6 @@ Imports System.Resources
 Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -11,6 +10,7 @@ Namespace PresentationLayer.Forms
         Implements ICustomerView
 
         Public Sub New()
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
 
@@ -23,7 +23,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CustomerPresenter(Me)
 
-            AddHandler MyBase.TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             'Assign comboboxes datasources
             CreateDataSources()
             'CreateEnumResourceFile()
@@ -448,6 +448,17 @@ Namespace PresentationLayer.Forms
                 MessageBox.Show(dict.Key.ToString() + dict.Value.ToString() + dict.Value.GetType().Name.ToString())
             Loop
             res.Close()
+        End Sub
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"CustomerCode", txtCustomerCode},
+                {"CustomerName", txtCustomerName},
+                {"CustomerNameAra", txtCustomerNameAra},
+                {"IDNo", TxtIDNo},
+                {"Notes", txtNotes}
+                }
         End Sub
 
     End Class

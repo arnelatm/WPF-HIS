@@ -1,14 +1,12 @@
-﻿
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class ChequeDisbursementJournalPresenter
-        Inherits AccountsPresenter(Of IChequeDisbursementJournalView, ChequeDisbursementJournal, ChequeDisbursementJournalModel)
+        Inherits AccountsPresenter(Of IChequeDisbursementJournalView, ChequeDisbursementJournalModel)
 
         Public ParentViewList As List(Of ChequeDisbursementJournalModel)
         Private _apOpenInvoiceBo As New ApOpenInvoice
@@ -16,11 +14,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IChequeDisbursementJournalView)
             MyBase.New(view)
-            CurrentModel = New ModelChequeDisbursementJournal()
+            ModelPresenter = New ModelChequeDisbursementJournal()
             TableName = "ChequeDisbursementJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ChequeDisbursementJournalModel()
-            BizObject = New ChequeDisbursementJournal
             DataModel = New ChequeDisbursementJournalModel
             _apOpenInvoiceModel = New ModelApOpenInvoice
         End Sub
@@ -78,4 +75,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

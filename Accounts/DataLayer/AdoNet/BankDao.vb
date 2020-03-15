@@ -1,21 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Bank
     ' ** DAO Pattern
 
     Public Class BankDao
-        Inherits CommonDaoOld
-        Implements IBankDao
+        Inherits CommonDao
+        Implements IDaoAll(Of Bank)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
-        Public Function GetRecordById(idNo As Integer) As Bank Implements IBankDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Bank Implements IDaoAll(Of Bank).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, BankCode, BankName, BankNameAra" &
                     "   FROM [Bank]" &
@@ -24,15 +22,18 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "BankName ASC") As List(Of Bank) _
-            Implements IBankDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Bank) _
+            Implements IDaoAll(Of Bank).GetAll
+            If sortExpression = Nothing Then
+                sortExpression = "BankName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, BankCode, BankName, BankNameAra" &
                     "   FROM [Bank] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef bank As Bank) As Integer Implements IBankDao.UpdateRecord
+        Public Function UpdateRecord(ByRef bank As Bank) As Integer Implements IDaoAll(Of Bank).UpdateRecord
             Dim sql As String =
                     " UPDATE [Bank]" &
                     "    SET BankCode = @BankCode," &
@@ -43,7 +44,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(bank))
         End Function
 
-        Public Function AddRecord(ByRef bank As Bank) As Integer Implements IBankDao.AddRecord
+        Public Function AddRecord(ByRef bank As Bank) As Integer Implements IDaoAll(Of Bank).AddRecord
             Dim sql As String =
                     " INSERT INTO [Bank] " &
                     " (BankCode,BankName,BankNameAra) " &

@@ -1,21 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Designation
     ' ** DAO Pattern
 
     Public Class DesignationDao
-        Inherits CommonDaoOld
-        Implements IDesignationDao
+        Inherits CommonDao
+        Implements IDaoAll(Of Designation)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
-        Public Function GetRecordById(idNo As Integer) As Designation Implements IDesignationDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Designation Implements IDaoAll(Of Designation).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
                     "   FROM [Designation]" &
@@ -24,14 +22,17 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "DesignationName ASC") As List(Of Designation) Implements IDesignationDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Designation) Implements IDaoAll(Of Designation).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "DesignationName ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
                     "   FROM [Designation] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef designation As Designation) As Integer Implements IDesignationDao.UpdateRecord
+        Public Function UpdateRecord(ByRef designation As Designation) As Integer Implements IDaoAll(Of Designation).UpdateRecord
             Dim sql As String =
                     " UPDATE [Designation]" &
                     "    SET DesignationCode = @DesignationCode," &
@@ -43,7 +44,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(designation))
         End Function
 
-        Public Function AddRecord(ByRef designation As Designation) As Integer Implements IDesignationDao.AddRecord
+        Public Function AddRecord(ByRef designation As Designation) As Integer Implements IDaoAll(Of Designation).AddRecord
             Dim sql As String =
                     " INSERT INTO [Designation] " &
                     " (DesignationCode,DesignationName,DesignationNameAra,Notes) " &

@@ -8,9 +8,8 @@ Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class DistributionSchemeItemsPresenter
-        Inherits PresenterOld(Of IDistributionSchemeItemsView, DistributionSchemeItem, DistributionSchemeItemModel)
+        Inherits AccountsPresenter(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
 
         Public ParentViewList As List(Of DistributionSchemeItemModel)
         Private Shared _ChangesMadeInDataGrid As Boolean = False
@@ -19,10 +18,8 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"
-            BizObject = New DistributionSchemeItem
+            ModelPresenter = New ModelDistributionSchemeItem()
             DataModel = New DistributionSchemeItemModel
-            DbDataDao = New DistributionSchemeItemDao
-            Model.SetService(New DistributionSchemeItemService)
 
         End Sub
 
@@ -89,4 +86,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace
