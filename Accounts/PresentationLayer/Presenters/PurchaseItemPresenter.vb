@@ -47,9 +47,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Protected Function GetInputVatAccounts()
-            Return Model.GetLookup
-        End Function
+        'Protected Function GetInputVatAccounts()
+        '    Return Model.GetLookup
+        'End Function
 
     End Class
 
