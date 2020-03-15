@@ -250,6 +250,8 @@ Namespace PresentationLayer.Forms
          {"Notes", txtNotes},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
+         {"TotalDebits", txtTotalDebits},
+         {"TotalCredits", txtTotalCredits},
          {"TransactionDate", dtpTransactionDate}
         }
         End Sub

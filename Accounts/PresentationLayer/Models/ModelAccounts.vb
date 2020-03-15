@@ -102,7 +102,7 @@ Namespace PresentationLayer.Models
         Inherits ModelAccounts
 
         Public Sub New()
-            DataService = New ServiceGeneralJournal
+            DataService = New ServiceGeneralJournalItems
         End Sub
 
     End Class
