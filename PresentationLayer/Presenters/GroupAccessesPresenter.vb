@@ -26,7 +26,6 @@ Public Class GroupAccessesPresenter
         TableName = "GroupAccess_View"
         SortOrderKey = "SecurityGroupIDNo"
         OriginalModel = New GroupAccessModel()
-        DataBizObject = New GroupAccess
         DataModel = New GroupAccessModel
         DbDataDao = New GroupAccessDao
         DataService = New ServiceGroupAccess

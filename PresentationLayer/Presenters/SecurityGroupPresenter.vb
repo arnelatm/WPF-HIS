@@ -13,7 +13,6 @@ Public Class SecurityGroupPresenter
         TreeViewMainField = "SecurityGroupName"
         TreeViewSecondaryField = "SecurityGroupCode"
         OriginalModel = New SecurityGroupModel()
-        DataBizObject = New SecurityGroup
         DataModel = New SecurityGroupModel
         TreeViewList = New List(Of SecurityGroupModel)
     End Sub

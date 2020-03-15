@@ -18,7 +18,6 @@ Namespace PresentationLayer.Presenters
             ModelPresenter = New ModelCategory()
             TreeViewList = New List(Of CategoryModel)
             OriginalModel = New CategoryModel()
-            DataBizObject = New Category(True)
             DataModel = New CategoryModel
         End Sub
 

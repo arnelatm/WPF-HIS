@@ -16,7 +16,6 @@ Public Class SecurityGroupsPresenter
         TableName = "SecurityGroup"
         SortOrderKey = "SecurityGroupName"
         OriginalModel = New List(Of SecurityGroupModel)
-        DataBizObject = New List(Of SecurityGroup)
         ViewObject = New List(Of SecurityGroupModel)
     End Sub
 

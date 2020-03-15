@@ -9,9 +9,9 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New(ByVal Optional validate As Boolean = False)
+        Public Sub New()
             ' establish business rules
-            If validate Then
+            If GetRules().Count() = 0 Then
                 ' establish business rules
                 AddRule(New ValidateRequired("ReligionName"))
             End If

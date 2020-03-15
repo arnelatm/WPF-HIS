@@ -19,7 +19,6 @@ Namespace PresentationLayer.Forms
             TvSecondaryFieldName = "CategoryCode"
             SortOrderKey = "CategoryName"
             FirstControl = txtCategoryCode
-            'PairFieldsToControls()
 
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CategoryPresenter(Me)

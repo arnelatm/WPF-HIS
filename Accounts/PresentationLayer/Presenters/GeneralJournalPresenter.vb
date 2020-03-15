@@ -17,7 +17,6 @@ Namespace PresentationLayer.Presenters
             TableName = "GeneralJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New GeneralJournalModel()
-            DataBizObject = New GeneralJournal
             DataModel = New GeneralJournalModel
         End Sub
 
@@ -63,7 +62,6 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            'GlobalVariables.Mapper.Map(DataModel, DataBizObject)
             retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
