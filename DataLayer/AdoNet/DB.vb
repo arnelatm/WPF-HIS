@@ -636,7 +636,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function TvpInsert(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
+        Public Function InsertTvp(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
             As Integer
             Dim returnValue As Integer
             Dim tryAgain As Boolean

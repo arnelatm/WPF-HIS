@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -6,12 +7,12 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class AccountReconciliationDao
-        Implements IAccountReconciliationDao
+        Implements IDao(Of AccountReconciliation)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As AccountReconciliation _
-            Implements IAccountReconciliationDao.GetRecordById
+            Implements IDao(Of AccountReconciliation).GetRecordById
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
@@ -26,16 +27,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of AccountReconciliation) _
-            Implements IAccountReconciliationDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [AccountReconciliation] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef accountReconciliation As AccountReconciliation) As Integer _
-            Implements IAccountReconciliationDao.UpdateRecord
+            Implements IDao(Of AccountReconciliation).UpdateRecord
             Dim sql As String =
                     "UPDATE [AccountReconciliation] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -47,7 +40,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef accountReconciliation As AccountReconciliation) As Integer _
-            Implements IAccountReconciliationDao.AddRecord
+            Implements IDao(Of AccountReconciliation).AddRecord
             Dim sql As String =
                     " INSERT INTO [AccountReconciliation] " &
                     "(" &

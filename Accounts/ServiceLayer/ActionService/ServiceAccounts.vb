@@ -82,6 +82,18 @@ Namespace ServiceLayer.ActionService
 
     End Class
 
+    Public Class ServicePurchaseItems
+        Inherits ServiceAccounts
+
+        Protected ReadOnly PurchaseItemsDao As IDaoChild(Of PurchaseItem) = DaoFactoryAccountsFactory.PurchaseItemsDao()
+
+        Public Sub New()
+            DataDao = PurchaseItemsDao
+            DataBo = New PurchaseItem
+        End Sub
+
+    End Class
+
     Public Class ServiceApJournal
         Inherits ServiceAccounts
 
