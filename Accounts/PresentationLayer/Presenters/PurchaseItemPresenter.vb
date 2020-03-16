@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseItemView)
             MyBase.New(view)
-            ModelPresenter = New ModelPurchaseItem()
+            ModelPresenter = New ModelAccounts("PurchaseItem")
             TableName = "PurchaseItem"
             SortOrderKey = "IdNo"
             TreeViewMainField = "PurchaseItemName"

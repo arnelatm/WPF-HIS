@@ -8,17 +8,17 @@ Namespace PresentationLayer.Presenters
     Public Class ArJournalPresenter
         Inherits AccountsPresenter(Of IArJournalView, ArJournalModel)
 
-        Private ReadOnly _arOpenInvoiceModel As ModelArOpenInvoice
+        Private ReadOnly _arOpenInvoiceModel As New ModelAccounts("ArOpenInvoice")
 
         Public Sub New(view As IArJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelArJournal()
+            ModelPresenter = New ModelAccounts("ArJournal")
             TableName = "ArJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ArJournalModel()
             DataModel = New ArJournalModel
-            _arOpenInvoiceModel = New ModelArOpenInvoice
-            ModelArOpenInvoice = New ModelArOpenInvoice
+            '_arOpenInvoiceModel = New ModelAccounts("ArOpenInvoice")
+            ModelArOpenInvoice = New ModelAccounts("ArOpenInvoice")
         End Sub
 
         Public Property JournalItemsPresenter As ArJournalItemsPresenter

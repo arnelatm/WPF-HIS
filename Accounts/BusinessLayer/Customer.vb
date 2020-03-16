@@ -2,9 +2,8 @@
 
 Namespace BusinessLayer
 
-
-' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
+    ' Category business object
+    ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
     Public Class Customer
         Inherits AATM.BusinessLayer.BusinessObject
@@ -12,12 +11,12 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-	    If GetRules().Count() = 0 Then
-	       AddRule(New ValidateRequired("CustomerName"))
-	       AddRule(New ValidateRequired("CustomerNameAra"))
-	       AddRule(New ValidateRequired("CustomerCode"))
-	       AddRule(New ValidateEmail("Email"))
-	    end if
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("CustomerName"))
+                AddRule(New ValidateRequired("CustomerNameAra"))
+                AddRule(New ValidateRequired("CustomerCode"))
+                AddRule(New ValidateEmail("Email"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -58,4 +57,5 @@ Namespace BusinessLayer
         Public Property DiscountSchemeIdNo As Int16
         Public Property Active As Boolean
     End Class
-End NameSpace
+
+End Namespace

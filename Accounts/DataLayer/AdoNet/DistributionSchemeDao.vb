@@ -1,21 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for DistributionScheme
     ' ** DAO Pattern
 
     Public Class DistributionSchemeDao
-        Inherits CommonDaoOld
-        Implements IDistributionSchemeDao
+        Inherits CommonDao
+        Implements IDaoAll(Of DistributionScheme)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Sub New()
-            DbCommon = Db
-        End Sub
-
-        Public Function GetRecordById(idNo As Integer) As DistributionScheme Implements IDistributionSchemeDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
                     "   FROM [DistributionScheme]" &
@@ -24,8 +22,11 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of DistributionScheme) _
-            Implements IDistributionSchemeDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of DistributionScheme) _
+            Implements IDaoAll(Of DistributionScheme).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeCode, DistributionSchemeName, DistributionSchemeNameAra " &
                     "   FROM [DistributionScheme] " & "order by " & sortExpression
@@ -33,7 +34,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(ByRef distributionScheme As DistributionScheme) As Integer _
-            Implements IDistributionSchemeDao.UpdateRecord
+            Implements IDaoAll(Of DistributionScheme).UpdateRecord
             Dim sql As String =
                     " UPDATE [DistributionScheme]" &
                     "    SET DistributionSchemeName = @DistributionSchemeName," &
@@ -47,7 +48,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef distributionScheme As DistributionScheme) As Integer _
-            Implements IDistributionSchemeDao.AddRecord
+            Implements IDaoAll(Of DistributionScheme).AddRecord
             Dim sql As String =
                     " INSERT INTO [DistributionScheme] " &
                     " (DistributionSchemeName,DistributionSchemeNameAra,DistributionSchemeCode,ValidityStartDate,ValidityEndDate,Notes) " &

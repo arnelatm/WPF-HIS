@@ -58,11 +58,19 @@ Namespace DataLayer.AdoNet
             End Get
         End Property
 
+        Public ReadOnly Property DistributionSchemeDao As IDao(Of DistributionScheme) Implements IDaoFactoryAccounts.DistributionSchemeDao
+            Get
+                Return New DistributionSchemeDao()
+            End Get
+        End Property
+
         Public ReadOnly Property ArJournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.ArJournalItemDao
             Get
                 Return New ArJournalItemDao()
             End Get
         End Property
+
+        Public ReadOnly Property DistributionSchemeItemDao As IDao(Of DistributionSchemeItem) Implements IDaoFactoryAccounts.DistributionSchemeItemDao
 
         Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) Implements IDaoFactoryAccounts.ArOpenInvoiceDao
             Get

@@ -17,4 +17,5 @@ Namespace BusinessLayer
         Public Property PaidAmount As Decimal
 
     End Class
-End NameSpace
+
+End Namespace

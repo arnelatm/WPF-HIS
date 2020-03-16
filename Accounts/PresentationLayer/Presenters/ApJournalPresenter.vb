@@ -2,22 +2,23 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
     Public Class ApJournalPresenter
         Inherits AccountsPresenter(Of IApJournalView, ApJournalModel)
 
-        Private ReadOnly _apOpenInvoiceModel As ModelApOpenInvoice
+        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelApJournal()
+            ModelPresenter = New ModelAccounts("ApJournal")
             TableName = "ApJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
-            _apOpenInvoiceModel = New ModelApOpenInvoice
+            '_apOpenInvoiceModel = New ModelAccounts("ApOpenInvoice")
         End Sub
 
         Public Property JournalItemsPresenter As ApJournalItemsPresenter

@@ -28,7 +28,8 @@ Namespace DataLayer
         'ReadOnly Property CashDisbursementJournalDao As IDao(Of CashDisbursementJournal)
         'ReadOnly Property CashReceiptJournalDao As IDao(Of CashReceiptJournal)
         'ReadOnly Property ChequeDisbursementJournalDao As IDao(Of ChequeDisbursementJournal)
-        'ReadOnly Property DistributionSchemeDao As IDao(Of DistributionScheme)
+        ReadOnly Property DistributionSchemeDao As IDao(Of DistributionScheme)
+
         ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
 
         'ReadOnly Property PettyCashJournalDao As IDao(Of PettyCashJournal)
@@ -37,6 +38,7 @@ Namespace DataLayer
 
         ReadOnly Property ApJournalItemDao As IDaoJournalItems
         ReadOnly Property ArJournalItemDao As IDaoJournalItems
+        ReadOnly Property DistributionSchemeItemDao As IDao(Of DistributionSchemeItem)
 
         'ReadOnly Property CashDisbursementJournalItemDao As IDaoJournalItems
         'ReadOnly Property CashReceiptJournalItemDao As IDaoJournalItems

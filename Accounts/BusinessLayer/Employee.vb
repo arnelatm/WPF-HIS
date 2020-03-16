@@ -2,17 +2,16 @@
 
 Namespace BusinessLayer
 
-
-' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
+    ' Category business object
+    ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
     Public Class Employee
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New(ByVal Optional validate As Boolean = False)
+        Public Sub New()
             ' establish business rules
-            If validate Then
+            If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("EmployeeName"))
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("EmployeeCode"))
@@ -21,7 +20,7 @@ Namespace BusinessLayer
                 'AddRule(New ValidateUnique("EmployeeName"))
             End If
         End Sub
-        
+
         Public Property IdNo As Integer
         Public Property EmployeeCode As String
         Public Title As String
@@ -87,4 +86,5 @@ Namespace BusinessLayer
         Public Property Active As Boolean
 
     End Class
-End NameSpace
+
+End Namespace

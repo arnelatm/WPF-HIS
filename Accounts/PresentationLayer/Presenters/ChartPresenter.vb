@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IChartView)
             MyBase.New(view)
-            ModelPresenter = New ModelChart()
+            ModelPresenter = New ModelAccounts("Chart")
             TableName = "Chart_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"

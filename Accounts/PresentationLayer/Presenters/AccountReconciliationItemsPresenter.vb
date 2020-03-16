@@ -16,13 +16,12 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccountReconciliationItem()
+            ModelPresenter = New ModelAccounts("AccountReconciliationItem")
             TableName = "AccountReconciliationItem"
             SortOrderKey = "Sequence"
             DataModel = New AccountReconciliationItemModel
             _cashCodesModel = GetCashCodesModel()
-            _modelReconciled = New ModelReconciled()
-
+            _modelReconciled = New ModelAccounts("Reconciled")
         End Sub
 
         Public Property ChangesMadeInAccountReconciliationItems As Boolean = False
@@ -83,7 +82,7 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If addMode Or editMode Then
-            Dim allAcctReconItems = Model.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = DataModel.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
             If addMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)

@@ -10,9 +10,9 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-	    If GetRules().Count() = 0 Then	
-	       AddRule(New ValidateRequired("BankName"))
-	    End If
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("BankName"))
+            End If
         End Sub
 
         Public Property IdNo As Integer
@@ -21,4 +21,5 @@ Namespace BusinessLayer
         Public Property BankNameAra As String
         Public Property Description As String
     End Class
-End NameSpace
+
+End Namespace
