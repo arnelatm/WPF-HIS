@@ -1,17 +1,18 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashDisbursementJournal
     ' ** DAO Pattern
 
     Public Class CashDisbursementJournalDao
-        Implements ICashDisbursementJournalDao
+        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As CashDisbursementJournal _
-            Implements ICashDisbursementJournalDao.GetRecordById
+            Implements IDao(Of CashDisbursementJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, PaymentType, PayeeIdNo, PayeeName, " &
                     " ORNumber, DiscountTaken, DiscountAccountIdNo, Applied, UnApplied, Notes, VatNumber, VatAmount, Posted, Cancelled, DateCreated" &
@@ -21,16 +22,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of CashDisbursementJournal) _
-            Implements ICashDisbursementJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [CashDisbursementJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
-            Implements ICashDisbursementJournalDao.UpdateRecord
+            Implements IDao(Of CashDisbursementJournal).UpdateRecord
             Dim sql As String =
                     " UPDATE [CashDisbursementJournal]" &
                     " SET TransactionDate = @TransactionDate," &
@@ -55,7 +48,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
-            Implements ICashDisbursementJournalDao.AddRecord
+            Implements IDao(Of CashDisbursementJournal).AddRecord
             Dim sql As String =
                     " INSERT INTO [CashDisbursementJournal] " &
                     " (TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayeeIdNo,PayeeName,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,Notes,VatNumber,VatAmount,Posted,Cancelled)" &
@@ -111,7 +104,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        'Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements ICashDisbursementJournalDao.UpdateGlReferenceNumber
+        'Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IDao(Of CashDisbursementJournal).UpdateGlReferenceNumber
         '    Dim retVal As Boolean
         '    Dim sql1 As String
         '    Dim sql2 As String
@@ -123,11 +116,11 @@ Namespace DataLayer.AdoNet
         '    Return retVal
         'End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements ICashDisbursementJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As CashDisbursementJournal) As Integer Implements IDaoJournals(Of CashDisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = model.TransactionDate
+            Dim transactionDate = bizObj.TransactionDate
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
@@ -152,10 +145,11 @@ Namespace DataLayer.AdoNet
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CashDisbursementJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & model.IdNo
+                   ")) where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
+
 
     End Class
 

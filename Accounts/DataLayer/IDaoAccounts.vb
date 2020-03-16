@@ -51,4 +51,12 @@ Namespace DataLayer
 
     End Interface
 
+    
+    Public Interface IDaoCadOiItem(Of TM)
+
+        Function GetSupplierOpenInvoices(idNo As Integer) As List(Of TM)
+
+    End Interface
+
+
 End Namespace

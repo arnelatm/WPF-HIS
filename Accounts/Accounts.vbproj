@@ -123,7 +123,12 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
