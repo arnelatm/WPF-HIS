@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Reflection
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.BusinessLayer
@@ -14,14 +15,16 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
-        'Protected ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
+        Private Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
+        Private Shared ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
 
-        'Public Sub New(bo As String, dao As Object)
-        '    Dim t As Type = Type.[GetType](bo)
-        '    DataBo = Activator.CreateInstance(t)
-        '    DataDao = dao
-        'End Sub
+        Public Sub New(bObject As String, dao As String)
+            Dim bizObject = $"AATM.Accounts.BusinessLayer." + bObject
+            Dim daoOName = $"AATM.Accounts.DataLayer." + dao
+            DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
+            DataDao = fldInfo.GetValue(Me)
+        End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
             GlobalVariables.Mapper.Map(model, DataBo)
@@ -33,7 +36,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCategory
         Inherits ServiceAccounts
 
-        Protected ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
+        Protected ReadOnly CategoryDao As IDaoAll(Of Category) = AdoNet.DaoFactoryAccounts.CategoryDao
 
         Public Sub New()
             DataBo = New Category()
@@ -45,7 +48,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceEmployee
         Inherits ServiceAccounts
 
-        Protected ReadOnly EmployeeDao As IDaoAll(Of Employee) = DaoFactoryAccounts.EmployeeDao
+        Protected ReadOnly EmployeeDao As IDaoAll(Of Employee) = AdoNet.DaoFactoryAccounts.EmployeeDao
 
         Public Sub New()
             DataBo = New Employee
@@ -57,7 +60,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceChart
         Inherits ServiceAccounts
 
-        Protected ReadOnly ChartDao As IDaoAll(Of Chart) = DaoFactoryAccounts.ChartDao
+        Protected ReadOnly ChartDao As IDaoAll(Of Chart) = AdoNet.DaoFactoryAccounts.ChartDao
 
         Public Sub New()
             DataBo = New Chart
@@ -69,7 +72,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCustomer
         Inherits ServiceAccounts
 
-        Protected ReadOnly CustomerDao As IDaoAll(Of Customer) = DaoFactoryAccounts.CustomerDao
+        Protected ReadOnly CustomerDao As IDaoAll(Of Customer) = AdoNet.DaoFactoryAccounts.CustomerDao
 
         Public Sub New()
             DataBo = New Customer
@@ -81,7 +84,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceSupplier
         Inherits ServiceAccounts
 
-        Protected ReadOnly SupplierDao As IDaoAll(Of Supplier) = DaoFactoryAccounts.SupplierDao
+        Protected ReadOnly SupplierDao As IDaoAll(Of Supplier) = AdoNet.DaoFactoryAccounts.SupplierDao
 
         Public Sub New()
             DataBo = New Supplier
@@ -93,7 +96,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceCashCode
         Inherits ServiceAccounts
 
-        Protected ReadOnly CashCodeDao As IDaoAll(Of CashCode) = DaoFactoryAccounts.CashCodeDao
+        Protected ReadOnly CashCodeDao As IDaoAll(Of CashCode) = AdoNet.DaoFactoryAccounts.CashCodeDao
 
         Public Sub New()
             DataBo = New CashCode
@@ -105,7 +108,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServicePurchaseItem
         Inherits ServiceAccounts
 
-        Protected ReadOnly PurchaseItemDao As IDaoChild(Of PurchaseItem) = DaoFactoryAccounts.PurchaseItemDao()
+        Protected ReadOnly PurchaseItemDao As IDaoChild(Of PurchaseItem) = AdoNet.DaoFactoryAccounts.PurchaseItemDao()
 
         Public Sub New()
             DataDao = PurchaseItemDao
@@ -117,7 +120,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournal
         Inherits ServiceAccounts
 
-        Protected ReadOnly ApJournalDao As IDao(Of ApJournal) = DaoFactoryAccounts.ApJournalDao
+        Protected ReadOnly ApJournalDao As IDao(Of ApJournal) = AdoNet.DaoFactoryAccounts.ApJournalDao
 
         Public Sub New()
             DataBo = New ApJournal
@@ -129,7 +132,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceArJournal
         Inherits ServiceAccounts
 
-        Protected ReadOnly ArJournalDao As IDao(Of ArJournal) = DaoFactoryAccounts.ArJournalDao
+        Protected ReadOnly ArJournalDao As IDao(Of ArJournal) = AdoNet.DaoFactoryAccounts.ArJournalDao
 
         Public Sub New()
             DataBo = New ArJournal
@@ -141,7 +144,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournal
         Inherits ServiceAccounts
 
-        Protected ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccounts.GeneralJournalDao
+        Protected ReadOnly GeneralJournalDao As IDao(Of GeneralJournal) = AdoNet.DaoFactoryAccounts.GeneralJournalDao
 
         Public Sub New()
             DataBo = New GeneralJournal
@@ -153,7 +156,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceJournalItem
         Inherits ServiceAccounts
 
-        Protected ReadOnly JournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
+        Protected ReadOnly JournalItemDao As IDaoJournalItems = AdoNet.DaoFactoryAccounts.ApJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -165,7 +168,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceApJournalItems
         Inherits ServiceAccounts
 
-        Protected ReadOnly ApJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
+        Protected ReadOnly ApJournalItemDao As IDaoJournalItems = AdoNet.DaoFactoryAccounts.ApJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -177,7 +180,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceArJournalItems
         Inherits ServiceAccounts
 
-        Protected ReadOnly ArJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
+        Protected ReadOnly ArJournalItemDao As IDaoJournalItems = AdoNet.DaoFactoryAccounts.ArJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -189,7 +192,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceAccountReconciliationItem
         Inherits ServiceAccounts
 
-        Protected ReadOnly AccountReconciliationItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
+        Protected ReadOnly AccountReconciliationItemDao As IDaoJournalItems = AdoNet.DaoFactoryAccounts.ArJournalItemDao
 
         Public Sub New()
             DataBo = New AccountReconciliationItem
@@ -201,7 +204,7 @@ Namespace ServiceLayer.ActionService
     Public Class ServiceGeneralJournalItems
         Inherits ServiceAccounts
 
-        Protected ReadOnly GeneralJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.GeneralJournalItemDao
+        Protected ReadOnly GeneralJournalItemDao As IDaoJournalItems = AdoNet.DaoFactoryAccounts.GeneralJournalItemDao
 
         Public Sub New()
             DataBo = New JournalItem
@@ -231,7 +234,7 @@ Namespace ServiceLayer.ActionService
         Implements IOpenInvoiceService
 
         Public Sub New()
-            DataDao = DaoFactoryAccounts.ApOpenInvoiceDao
+            DataDao = AdoNet.DaoFactoryAccounts.ApOpenInvoiceDao
             DataBo = New ApOpenInvoice
         End Sub
 
@@ -242,7 +245,7 @@ Namespace ServiceLayer.ActionService
         Implements IOpenInvoiceService
 
         Public Sub New()
-            DataDao = DaoFactoryAccounts.ArOpenInvoiceDao
+            DataDao = AdoNet.DaoFactoryAccounts.ArOpenInvoiceDao
             DataBo = New ArOpenInvoice
         End Sub
 
