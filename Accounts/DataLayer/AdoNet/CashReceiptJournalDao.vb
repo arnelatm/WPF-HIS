@@ -1,17 +1,18 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashReceiptJournal
     ' ** DAO Pattern
 
     Public Class CashReceiptJournalDao
-        Implements ICashReceiptJournalDao
+        Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As CashReceiptJournal _
-            Implements ICashReceiptJournalDao.GetRecordById
+            Implements IDao(Of CashReceiptJournal).GetRecordById
             Dim sql As String = " SELECT " &
                     "AccountIdNo," &
                     "Amount," &
@@ -38,16 +39,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of CashReceiptJournal) _
-            Implements ICashReceiptJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [CashReceiptJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef cashReceiptJournal As CashReceiptJournal) As Integer _
-            Implements ICashReceiptJournalDao.UpdateRecord
+            Implements IDao(Of CashReceiptJournal).UpdateRecord
             Dim sql As String =
                     " UPDATE [CashReceiptJournal] SET " &
                     "AccountIdNo   = @AccountIdNo," &
@@ -72,7 +65,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef cashReceiptJournal As CashReceiptJournal) As Integer _
-            Implements ICashReceiptJournalDao.AddRecord
+            Implements IDao(Of CashReceiptJournal).AddRecord
             Dim sql As String = "INSERT INTO [CashReceiptJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
@@ -161,11 +154,12 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements ICashReceiptJournalDao.UpdateGlReferenceNumber
+        
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As CashReceiptJournal) As Integer Implements IDaoJournals(Of CashReceiptJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = model.TransactionDate
+            Dim transactionDate = bizObj.TransactionDate
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
@@ -190,7 +184,7 @@ Namespace DataLayer.AdoNet
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CashReceiptJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & model.IdNo
+                   ")) where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
