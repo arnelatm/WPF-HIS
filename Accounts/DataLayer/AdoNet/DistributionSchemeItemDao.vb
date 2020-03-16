@@ -1,13 +1,15 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for DistributionSchemeItem
     ' ** DAO Pattern
 
     Public Class DistributionSchemeItemDao
-        Inherits CommonDaoOld
-        Implements IDistributionSchemeItemDao
+        Inherits CommonDao
+        Implements IDaoChild(Of DistributionSchemeItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String
@@ -15,20 +17,20 @@ Namespace DataLayer.AdoNet
         Protected DboTvpInsertFileName As String
 
         Public Sub New()
-            DbCommon = Db
+            'DbCommon = Db
             TableFileName = "DistributionSchemeItem"
             DboTvpUpdateFileName = "dbo.UpdateDistributionSchemeItemTVP"
             DboTvpInsertFileName = "dbo.InsertDistributionSchemeItemTVP"
         End Sub
 
-        Public Function GetRecordById(idNo As Integer) As DistributionSchemeItem Implements IDistributionSchemeItemDao.GetRecordById
-            Dim sql As String =
-                    " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
-                    "   FROM " & TableFileName &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-        End Function
+        'Public Function GetRecordById(idNo As Integer) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
+        '    Dim sql As String =
+        '            " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
+        '            "   FROM " & TableFileName &
+        '            " WHERE IDNo = @IDNo"
+        '    Dim params() As Object = {"@IDNo", idNo}
+        '    Return Db.Read(sql, Make, params).FirstOrDefault()
+        'End Function
 
         Public Function GetDistributionSchemeItems(distributionSchemeIdNo As Integer) As List(Of DistributionSchemeItem)
             Dim sql As String =
@@ -40,16 +42,16 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of DistributionSchemeItem) _
-            Implements IDistributionSchemeItemDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, DistributionSchemeIdNo,  " &
-                    "   FROM " & TableFileName & " order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of DistributionSchemeItem) _
+        '    Implements IDaoAll(Of DistributionSchemeItem)
+        '    Dim sql As String =
+        '            " SELECT IDNo, DistributionSchemeIdNo,  " &
+        '            "   FROM " & TableFileName & " order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = "Sequence") _
-            As List(Of DistributionSchemeItem)
+
+        Private Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
                     "   FROM " & TableFileName &
@@ -59,13 +61,14 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, distributionSchemeItemIdNo As Integer) As Integer _
-            Implements IDistributionSchemeItemDao.DelUpdateTvp
-            Return Db.TvpDelUpdate(DboTvpUpdateFileName, tvpTable, "@MParam", distributionSchemeItemIdNo)
+       
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, distributionSchemeItemIdNo As Integer) As Integer Implements IDaoChild(Of DistributionSchemeItem).DelUpdateTvp
+            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", distributionSchemeItemIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDistributionSchemeItemDao.InsertTvp
-            Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
+
+        Private Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DistributionSchemeItem).InsertTvp
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, DistributionSchemeItem) =
@@ -78,15 +81,15 @@ Namespace DataLayer.AdoNet
             .Percentage = Extensions.AsString(reader("Percentage"))
             }
 
-        Private Function Take(distributionSchemeItem As DistributionSchemeItem) As Object()
-            Return New Object() {
-                                    "@IDNo", distributionSchemeItem.IdNo,
-                                    "@DistributionSchemeIdNo", distributionSchemeItem.DistributionSchemeIdNo,
-                                    "@Sequence", distributionSchemeItem.Sequence,
-                                    "@ProfitCenterIdNo", distributionSchemeItem.ProfitCenterIdNo,
-                                    "@Percentage", distributionSchemeItem.Percentage
-                                }
-        End Function
+        'Private Function Take(distributionSchemeItem As DistributionSchemeItem) As Object()
+        '    Return New Object() {
+        '                            "@IDNo", distributionSchemeItem.IdNo,
+        '                            "@DistributionSchemeIdNo", distributionSchemeItem.DistributionSchemeIdNo,
+        '                            "@Sequence", distributionSchemeItem.Sequence,
+        '                            "@ProfitCenterIdNo", distributionSchemeItem.ProfitCenterIdNo,
+        '                            "@Percentage", distributionSchemeItem.Percentage
+        '                        }
+        'End Function
 
     End Class
 

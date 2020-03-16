@@ -589,8 +589,7 @@ Namespace AdoNet
         End Function
 
         Public Function DelUpdateTvp(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
-                                     groupIdNo As Integer) _
-            As Integer
+                                     groupIdNo As Integer) As Integer
             Dim retValue = 0
             Dim tryAgain = False
             '_waitForm.Show()

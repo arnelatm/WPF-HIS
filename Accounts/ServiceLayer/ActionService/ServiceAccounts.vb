@@ -16,23 +16,25 @@ Namespace ServiceLayer.ActionService
         Protected Service As Object
 
         Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
-        Private ReadOnly _categoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
-        Private ReadOnly _employeeDao As IDaoAll(Of Employee) = DaoFactoryAccounts.EmployeeDao
-        Private ReadOnly _chartDao As IDaoAll(Of Chart) = DaoFactoryAccounts.ChartDao
-        Private ReadOnly _customerDao As IDaoAll(Of Customer) = DaoFactoryAccounts.CustomerDao
-        Private ReadOnly _supplierDao As IDaoAll(Of Supplier) = DaoFactoryAccounts.SupplierDao
-        Private ReadOnly _cashCodeDao As IDaoAll(Of CashCode) = DaoFactoryAccounts.CashCodeDao
-        Private ReadOnly _purchaseItemDao As IDaoChild(Of PurchaseItem) = DaoFactoryAccounts.PurchaseItemDao()
-        Private ReadOnly _apJournalDao As IDao(Of ApJournal) = DaoFactoryAccounts.ApJournalDao
-        Private ReadOnly _arJournalDao As IDao(Of ArJournal) = DaoFactoryAccounts.ArJournalDao
-        Private ReadOnly _generalJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccounts.GeneralJournalDao
-        Private ReadOnly _journalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
-        Private ReadOnly _apJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
-        Private ReadOnly _arJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
         Private ReadOnly _accountReconciliationItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
-        Private ReadOnly _generalJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.GeneralJournalItemDao
+        Private ReadOnly _apJournalDao As IDao(Of ApJournal) = DaoFactoryAccounts.ApJournalDao
+        Private ReadOnly _apJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
+        Private ReadOnly _apOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) = DaoFactoryAccounts.ApOpenInvoiceDao
+        Private ReadOnly _arJournalDao As IDao(Of ArJournal) = DaoFactoryAccounts.ArJournalDao
+        Private ReadOnly _arJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
+        Private ReadOnly _arOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) = DaoFactoryAccounts.ArOpenInvoiceDao
+        Private ReadOnly _cashCodeDao As IDaoAll(Of CashCode) = DaoFactoryAccounts.CashCodeDao
+        Private ReadOnly _categoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
+        Private ReadOnly _chartDao    As IDaoAll(Of Chart) = DaoFactoryAccounts.ChartDao
+        Private ReadOnly _customerDao As IDaoAll(Of Customer) = DaoFactoryAccounts.CustomerDao
         Private ReadOnly _distributionSchemeDao As IDaoAll(Of DistributionScheme) = DaoFactoryAccounts.DistributionSchemeDao
         Private ReadOnly _distributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem) = DaoFactoryAccounts.DistributionSchemeItemDao
+        Private ReadOnly _employeeDao As IDaoAll(Of Employee) = DaoFactoryAccounts.EmployeeDao
+        Private ReadOnly _generalJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccounts.GeneralJournalDao
+        Private ReadOnly _generalJournalItemDao As IDaoJournalItems = DaoFactoryAccounts.GeneralJournalItemDao
+        Private ReadOnly _journalItemDao As IDaoJournalItems = DaoFactoryAccounts.ApJournalItemDao
+        Private ReadOnly _purchaseItemDao As IDaoAll(Of PurchaseItem) = DaoFactoryAccounts.PurchaseItemDao()
+        Private ReadOnly _supplierDao As IDaoAll(Of Supplier) = DaoFactoryAccounts.SupplierDao
 
         Public Sub New(accountName As String)
             Dim bizObject = $"AATM.Accounts.BusinessLayer." + accountName
