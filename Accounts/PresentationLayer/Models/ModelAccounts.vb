@@ -80,6 +80,15 @@ Namespace PresentationLayer.Models
 
     End Class
 
+    Public Class ModelCashCode
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServiceCashCode()
+        End Sub
+
+    End Class
+
     Public Class ModelApJournal
         Inherits ModelAccounts
 
@@ -139,6 +148,15 @@ Namespace PresentationLayer.Models
 
         Public Sub New()
             DataService = New ServiceGeneralJournalItems
+        End Sub
+
+    End Class
+
+    Public Class ModelAccountReconciliationItem
+        Inherits ModelAccounts
+
+        Public Sub New()
+            DataService = New ServiceAccountReconciliationItem
         End Sub
 
     End Class
