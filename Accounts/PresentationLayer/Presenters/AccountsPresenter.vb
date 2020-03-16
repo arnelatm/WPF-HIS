@@ -88,7 +88,7 @@ Namespace PresentationLayer.Presenters
             apOpenInvoiceBo.JournalCode = journalCode
             apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
             apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            ModelApOpenInvoice = New ModelApOpenInvoice()
+            ModelApOpenInvoice = New ModelAccounts("ApOpenInvoice")
             retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceBo)
             Return retVal
         End Function
@@ -130,7 +130,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetEndingGlBalance(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date) As Decimal
-            Return CommonModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
+            Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         End Function
 
     End Class

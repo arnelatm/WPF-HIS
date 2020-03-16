@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             TreeViewMainField = "CategoryName"
             TreeViewSecondaryField = "CategoryCode"
-            ModelPresenter = New ModelCategory()
+            ModelPresenter = New ModelAccounts("Category")
             TreeViewList = New List(Of CategoryModel)
             OriginalModel = New CategoryModel()
             DataModel = New CategoryModel

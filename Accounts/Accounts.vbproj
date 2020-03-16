@@ -132,6 +132,8 @@
     <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
     <Compile Include="DataLayer\DaoFactoriesAccounts.vb" />
@@ -449,9 +451,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PresentationLayer\Forms\Reports\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BusinessLayer\BoAccounts.vbproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccountReconciliation()
+            ModelPresenter = New ModelAccounts("AccountReconciliation")
             TableName = "AccountReconciliation"
             SortOrderKey = "IdNo"
             OriginalModel = New AccountReconciliationModel()
@@ -55,7 +55,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     _AccountReconciliationItemsPresenter.SaveReconciliation(dtInsertReconciledTable, idNo)
-                    CommonModel.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
+                    DataModel.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
                     scope.Complete()
                 End Using
             Catch ex As TransactionAbortedException

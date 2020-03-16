@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISupplierView)
             MyBase.New(view)
-            ModelPresenter = New ModelSupplier()
+            ModelPresenter = New ModelAccounts("Supplier")
             TableName = "Supplier"
             SortOrderKey = "SupplierName"
             TreeViewMainField = "SupplierName"
