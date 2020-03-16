@@ -18,4 +18,9 @@ Namespace PresentationLayer.Models
 
     End Interface
 
+    Public Interface IModelCashCode
+        Inherits IModelAccounts
+
+    End Interface
+
 End Namespace

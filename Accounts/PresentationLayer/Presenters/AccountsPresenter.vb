@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Shared Property ModelApOpenInvoice As IModelOpenInvoice
         Protected Shared Property ModelArOpenInvoice As IModelOpenInvoice
-        'Protected Shared Property ModelCashCode As IModelCashCode
+        Protected Shared Property ModelCashCode As IModelCashCode
 
         Public Sub New(view As T)
             MyBase.New(view)
@@ -119,19 +119,19 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Public Function GetCashCodesModel() As List(Of CashCodeModel)
-        '    Dim cashCodes As New List(Of CashCodeModel)
-        '    Return ModelCashCode.GetAll(Of CashCodeModel)("CashName")
-        'End Function
+        Public Function GetCashCodesModel() As List(Of CashCodeModel)
+            Dim cashCodes As New List(Of CashCodeModel)
+            Return ModelCashCode.GetAll(Of CashCodeModel)("CashName")
+        End Function
 
-        'Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
-        '    Return GetLookupData("CashName", "CashNameAra", "CashCode",
-        '                         "CashCode", sortKey, "")
-        'End Function
+        Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
+            Return GetLookupData("CashName", "CashNameAra", "CashCode",
+                                 "CashCode", sortKey, "")
+        End Function
 
-        'Public Function GetEndingGlBalance(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date) As Decimal
-        '    Return CommonModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
-        'End Function
+        Public Function GetEndingGlBalance(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date) As Decimal
+            Return CommonModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
+        End Function
 
     End Class
 

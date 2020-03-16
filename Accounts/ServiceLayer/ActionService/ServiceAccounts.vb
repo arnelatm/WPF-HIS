@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.BusinessLayer
 Imports AATM.Common.ServiceLayer
 Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
@@ -14,6 +15,13 @@ Namespace ServiceLayer.ActionService
         Protected Service As Object
 
         Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
+        'Protected ReadOnly CategoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CategoryDao
+
+        'Public Sub New(bo As String, dao As Object)
+        '    Dim t As Type = Type.[GetType](bo)
+        '    DataBo = Activator.CreateInstance(t)
+        '    DataDao = dao
+        'End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
             GlobalVariables.Mapper.Map(model, DataBo)
@@ -78,6 +86,18 @@ Namespace ServiceLayer.ActionService
         Public Sub New()
             DataBo = New Supplier
             DataDao = SupplierDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceCashCode
+        Inherits ServiceAccounts
+
+        Protected ReadOnly CashCodeDao As IDaoAll(Of CashCode) = DaoFactoryAccounts.CashCodeDao
+
+        Public Sub New()
+            DataBo = New CashCode
+            DataDao = CashCodeDao
         End Sub
 
     End Class
@@ -162,6 +182,18 @@ Namespace ServiceLayer.ActionService
         Public Sub New()
             DataBo = New JournalItem
             DataDao = ArJournalItemDao
+        End Sub
+
+    End Class
+
+    Public Class ServiceAccountReconciliationItem
+        Inherits ServiceAccounts
+
+        Protected ReadOnly AccountReconciliationItemDao As IDaoJournalItems = DaoFactoryAccounts.ArJournalItemDao
+
+        Public Sub New()
+            DataBo = New AccountReconciliationItem
+            DataDao = AccountReconciliationItemDao
         End Sub
 
     End Class
