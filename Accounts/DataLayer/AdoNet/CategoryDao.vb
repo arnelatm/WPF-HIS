@@ -13,6 +13,10 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Db As New Db()
 
+        Public Sub New()
+            
+        End Sub
+
         Public Function GetRecordById(idNo As Integer) As Category Implements IDaoAll(Of Category).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &

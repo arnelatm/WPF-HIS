@@ -9,15 +9,15 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoJournalItems
+    'Public Interface IDaoJournalItems
 
-        Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+    '    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
 
-        Function GetRecordsWithIdNo(idNo As Integer, ByRef Optional sortKey As String = Nothing) As Object
+    '    Function GetRecordsWithIdNo(idNo As Integer, ByRef Optional sortKey As String = Nothing) As Object
 
-        Function InsertTvp(ByRef tvpTable As DataTable) As Integer
+    '    Function InsertTvp(ByRef tvpTable As DataTable) As Integer
 
-    End Interface
+    'End Interface
 
     Public Interface IDaoJournals(Of TBiz)
 
