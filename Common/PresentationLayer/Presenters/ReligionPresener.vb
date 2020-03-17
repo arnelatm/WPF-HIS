@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -10,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
-            ModelPresenter = New ModelReligion
+            ModelPresenter = New ModelCommon("Religion")
             TableName = "Religion"
             SortOrderKey = "ReligionName"
             TreeViewMainField = "ReligionName"

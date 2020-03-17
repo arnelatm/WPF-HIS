@@ -548,15 +548,10 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesignationsToolStripMenuItem.Click
-        '    Dim childMdiForm As DesignationEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New DesignationEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesignationsToolStripMenuItem.Click
+            Dim myForm = New DesignationEntryTv
+            myForm.Show()
+        End Sub
 
         Private Sub DisableLogin()
             ToolStripButtonLogin.Enabled = False

@@ -10,14 +10,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDesignationView)
             MyBase.New(view)
-            TableName = "Designation"
-            SortOrderKey = "DesignationName"
-            TreeViewMainField = "DesignationName"
-            TreeViewSecondaryField = "DesignationCode"
-            OriginalModel = New DesignationModel()
-            DataModel = New DesignationModel
-            TreeViewList = New List(Of DesignationModel)
-            ParentViewList = New List(Of DesignationModel)
+            InitializerWithTv("Designation")
+            'TableName = "Designation"
+            'SortOrderKey = "DesignationName"
+            'TreeViewMainField = "DesignationName"
+            'TreeViewSecondaryField = "DesignationCode"
+            'OriginalModel = New DesignationModel()
+            'DataModel = New DesignationModel
+            'TreeViewList = New List(Of DesignationModel)
+            'ParentViewList = New List(Of DesignationModel)
         End Sub
 
     End Class

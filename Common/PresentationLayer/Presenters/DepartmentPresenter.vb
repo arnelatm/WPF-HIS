@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -12,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
-            ModelPresenter = New ModelDepartment
+            ModelPresenter = New ModelCommon("Department")
             TableName = "Department_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "DepartmentName"

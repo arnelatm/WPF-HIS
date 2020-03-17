@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -12,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IProfitCenterView)
             MyBase.New(view)
-            ModelPresenter = New ModelProfitCenter
+            ModelPresenter = New ModelCommon("ProfitCenter")
             TableName = "ProfitCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "ProfitCenterName"

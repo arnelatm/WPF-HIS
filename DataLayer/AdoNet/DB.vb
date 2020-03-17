@@ -29,6 +29,8 @@ Namespace AdoNet
                 ConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
             Else
                 ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
+                'Dim x = ConnectionString
+                'MessageBox.Show(x)
             End If
         End Sub
 

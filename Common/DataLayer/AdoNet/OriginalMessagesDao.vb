@@ -1,5 +1,4 @@
-﻿
-Imports AATM.DataLayer.AdoNet
+﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
@@ -10,7 +9,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IOriginalMessagesDao
 
-        Private Shared ReadOnly Db As New Db("TRANSLATIONS")
+        Private ReadOnly Db As New Db("TRANSLATIONS")
 
         Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IOriginalMessagesDao.GetRecordById
             Dim sql As String =
