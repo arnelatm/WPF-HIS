@@ -11,8 +11,10 @@ Namespace ServiceLayer
         Implements IServiceCommon
 
         Protected Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
-        Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CreateDao("Common")
+
+        'Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CreateDao("Common")
         Private ReadOnly _branchDao As IBranchDao = DaoFactoryCommonFactory.CreateDao("Branch")
+
         Private ReadOnly _costCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CreateDao("CostCenter")
         Private ReadOnly _countryDao As ICountryDao = DaoFactoryCommonFactory.CreateDao("Country")
         Private ReadOnly _departmentDao As IDepartmentDao = DaoFactoryCommonFactory.CreateDao("Department")
@@ -24,7 +26,7 @@ Namespace ServiceLayer
         Private ReadOnly _translatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.CreateDao("TranslatedMessages")
 
         Public Sub New(accountName As String)
-            Dim bizObject = $"AATM.BusinessLayer." + accountName
+            Dim bizObject = $"AATM.Common.BusinessLayer." + accountName
             Dim dao = "_" + Strings.Left(accountName, 1).ToLower() + Strings.Mid(accountName, 2) + "Dao"
             DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
@@ -42,7 +44,6 @@ Namespace ServiceLayer
         End Sub
 
     End Class
-
 
     'Public Class ServiceBranch
     '    Inherits ServiceCommon

@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -11,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICountryView)
             MyBase.New(view)
-            ModelPresenter = New ModelCountry
+            ModelPresenter = New ModelCommon("Country")
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"

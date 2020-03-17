@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -10,7 +9,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)
-            ModelPresenter = New ModelBranch
+
+            ModelPresenter = New ModelCommon("Branch")
             TableName = "Branch"
             SortOrderKey = "BranchName"
             TreeViewMainField = "BranchName"

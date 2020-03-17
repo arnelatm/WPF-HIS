@@ -24,6 +24,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of ChartModel, IChartView)().ReverseMap()
         CreateMap(Of Customer, CustomerModel)().ReverseMap()
         CreateMap(Of CustomerModel, ICustomerView)().ReverseMap()
+        CreateMap(Of Designation, DesignationModel)().ReverseMap()
+        CreateMap(Of DesignationModel, IDesignationView)().ReverseMap()
         CreateMap(Of Employee, EmployeeModel)().ReverseMap()
         CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()

@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
+﻿Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)
-            ModelPresenter = New ModelOriginalMessages
+            ModelPresenter = New ModelCommon("OriginalMessages")
             TableName = "OriginalMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
@@ -41,7 +40,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
             If idNo <> 0 Then
-                Dim modelData As New OriginalMessagesModel
+                Dim modelData As OriginalMessagesModel
                 modelData = Model.GetRecordById(Of OriginalMessagesModel)(idNo)
                 If modelData IsNot Nothing Then
                     'Dim fieldsDictionary As New Dictionary(Of String, String)

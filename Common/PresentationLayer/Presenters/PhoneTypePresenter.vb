@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -9,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPhoneTypeView)
             MyBase.New(view)
-            ModelPresenter = New ModelPhoneType
+            ModelPresenter = New ModelCommon("PhoneType")
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"

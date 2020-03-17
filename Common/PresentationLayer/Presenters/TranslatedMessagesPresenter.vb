@@ -1,8 +1,5 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -15,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedMessagesView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("TranslatedMessages")
+            ModelPresenter = New ModelCommon("TranslatedMessages")
             TableName = "TranslatedMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"

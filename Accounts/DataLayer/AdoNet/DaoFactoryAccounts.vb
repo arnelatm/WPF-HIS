@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.DataLayer
+﻿Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object factory
@@ -9,7 +7,6 @@ Namespace DataLayer.AdoNet
     Public Class DaoFactoryAccounts
         Inherits DaoFactoryCommon
         Implements IDaoFactoryAccounts
-
 
         Public Overrides Function CreateDao(classBaseName As String) As Object Implements IDaoFactoryAccounts.CreateDao
             Dim className = $"AATM.Accounts.DataLayer.AdoNet." + classBaseName + "Dao"
@@ -82,7 +79,6 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-
         'Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) Implements IDaoFactoryAccounts.ArOpenInvoiceDao
         '    Get
         '        Return New ArOpenInvoiceDao()
@@ -142,7 +138,7 @@ Namespace DataLayer.AdoNet
         '        Return New JournalItemDao()
         '    End Get
         'End Property
-        
+
         'Public ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem) Implements IDaoFactoryAccounts.DistributionSchemeItemDao
         '    Get
         '        Return New DistributionSchemeItemDao()
