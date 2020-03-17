@@ -11,14 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICategoryView)
             MyBase.New(view)
-            TableName = "Category"
-            SortOrderKey = "IdNo"
-            TreeViewMainField = "CategoryName"
-            TreeViewSecondaryField = "CategoryCode"
-            ModelPresenter = New ModelAccounts("Category")
-            TreeViewList = New List(Of CategoryModel)
-            OriginalModel = New CategoryModel()
-            DataModel = New CategoryModel
+            InitializerWithTv("Category")
         End Sub
 
     End Class

@@ -1,19 +1,15 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.Accounts.My.Resources
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
     Public Class PurchaseItemEntry
         Implements IPurchaseItemView
 
-        Private _glAccounts
-        Private _inputVatAccounts
+        'Private _glAccounts
+        'Private _inputVatAccounts
 
         Public Sub New()
             MyBase.New()
@@ -263,10 +259,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub PurchaseItemEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-        End Sub
-
-        Private Sub CTextBox2_TextChanged(sender As Object, e As EventArgs)
-
         End Sub
 
     End Class

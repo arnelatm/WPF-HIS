@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedMessagesView)
             MyBase.New(view)
-            ModelPresenter = New ModelTranslatedMessages
+            ModelPresenter = New ModelAccounts("TranslatedMessages")
             TableName = "TranslatedMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"

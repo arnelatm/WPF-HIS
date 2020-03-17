@@ -305,7 +305,8 @@ Namespace PresentationLayer.Forms
             End If
             Dim oldJournalItem As List(Of JournalItemModel)
             If Not AddMode Then
-                oldJournalItem = _journalItemsPresenter.GetJournalItems(IdNo)
+                'oldJournalItem = _journalItemsPresenter.GetRecordsWithIdNo(IdNo)
+                oldJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
             Else
                 oldJournalItem = Nothing
             End If
@@ -335,14 +336,14 @@ Namespace PresentationLayer.Forms
             _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
             Dim newJournalItem As List(Of JournalItemModel)
             If AddMode Then
-                newJournalItem = _journalItemsPresenter.GetJournalItems(IdNo)
+                newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
                 For Each item In newJournalItem
                     If _journalItemsPresenter.IsAccountsReceivableAccount(item.AccountIdNo) Then
                         PresenterObj.AddArOpenInvoice(item, "AR")
                     End If
                 Next
             Else
-                newJournalItem = _journalItemsPresenter.GetJournalItems(IdNo)
+                newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
                 Dim newItem
                 Dim oldItem
                 Dim newIsAr
@@ -470,8 +471,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub ArJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            JournalItems = New List(Of JournalItemModel)
-            BindJournalItem()
+            'JournalItems = New List(Of JournalItemModel)
+            'BindJournalItem()
         End Sub
 
         Private Sub BindJournalItem()

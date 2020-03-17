@@ -18,6 +18,14 @@ Namespace PresentationLayer.Models
             Return updateResult
         End Function
 
+        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+            Return DataService.AddInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+        Friend Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+            Return DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
     End Class
 
     'Public MustInherit Class ModelOpenInvoice

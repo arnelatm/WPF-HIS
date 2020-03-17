@@ -8,18 +8,17 @@ Namespace PresentationLayer.Presenters
     Public Class CashDisbursementJournalPresenter
         Inherits AccountsPresenter(Of ICashDisbursementJournalView, CashDisbursementJournalModel)
 
-        Public ParentViewList As List(Of CashDisbursementJournalModel)
-        Private _apOpenInvoiceBo As New ApOpenInvoice
-        Private ReadOnly _apOpenInvoiceModel As New ModelApOpenInvoice
+        Private _apOpenInvoiceBo As New ModelAccounts("ApOpenInvoice")
+        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Public Sub New(view As ICashDisbursementJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelCashDisbursementJournal()
+            ModelPresenter = New ModelAccounts("CashDisbursementJournal")
             TableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New CashDisbursementJournalModel()
             DataModel = New CashDisbursementJournalModel
-            _apOpenInvoiceModel = New ModelApOpenInvoice
+            '_apOpenInvoiceModel = New ModelApOpenInvoice
         End Sub
 
         Public Property JournalItemsPresenter As CashDisbursementJournalItemsPresenter
@@ -43,8 +42,8 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            DataModel = GlobalVariables.Mapper.Map(Of CashDisbursementJournalModel)(BizObject)
-            retValue = Model.UpdateGlReferenceNumber(DataModel)
+            GlobalVariables.Mapper.Map(View, DataModel)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -70,7 +69,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As String
             Dim retVal As String
-            retVal = Model.GetSupplierOpenInvoices(supplierIdNo)
+            retVal = ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
             Return retVal
         End Function
 

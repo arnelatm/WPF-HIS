@@ -15,7 +15,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As T)
             MyBase.New(view)
-
         End Sub
 
         Shared Sub New()
@@ -24,6 +23,27 @@ Namespace PresentationLayer.Presenters
             'ModelApOpenInvoice = New ModelApOpenInvoice
             'ModelArOpenInvoice = New ModelArOpenInvoice
             'ModelCashCode = New ModelCashCode
+        End Sub
+
+        Public Sub Initializer(baseClassName As String)
+            Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts" 
+            TableName = baseClassName
+            SortOrderKey = baseClassName + "Name"
+            Dim args As Object() = { baseClassName }
+            Dim t As Type = Type.GetType(presenterModelName)
+            ModelPresenter = Activator.CreateInstance( t, args ) 
+            OriginalModel = New TM
+            DataModel = New TM
+            'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
+            'OriginalModel = Activator.CreateInstance(Type.GetType(presenterModelName))
+            'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
+        End Sub
+
+        Public Sub InitializerWithTv(baseClassName As String)
+            TreeViewMainField = baseClassName + "Name"
+            TreeViewSecondaryField = baseClassName + "Code"
+            TreeViewList = New List(Of TM)
+            Initializer(baseClassName)
         End Sub
 
         Public Function GetSupplierVatNumber(idNo As String)

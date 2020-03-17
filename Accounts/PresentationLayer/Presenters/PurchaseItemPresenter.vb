@@ -9,23 +9,17 @@ Namespace PresentationLayer.Presenters
     Public Class PurchaseItemPresenter
         Inherits AccountsPresenter(Of IPurchaseItemView, PurchaseItemModel)
 
-        Public ParentViewList As List(Of PurchaseItemModel)
-
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
-
         Public Sub New(view As IPurchaseItemView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("PurchaseItem")
-            TableName = "PurchaseItem"
-            SortOrderKey = "IdNo"
-            TreeViewMainField = "PurchaseItemName"
-            TreeViewSecondaryField = "PurchaseItemCode"
-            TreeViewList = New List(Of PurchaseItemModel)
-            OriginalModel = New PurchaseItemModel()
-            DataModel = New PurchaseItemModel
+            Initializer("PurchaseItem")
+            'ModelPresenter = New ModelAccounts("PurchaseItem")
+            'TableName = "PurchaseItem"
+            'SortOrderKey = "IdNo"
+            'TreeViewMainField = "PurchaseItemName"
+            'TreeViewSecondaryField = "PurchaseItemCode"
+            'TreeViewList = New List(Of PurchaseItemModel)
+            'OriginalModel = New PurchaseItemModel()
+            'DataModel = New PurchaseItemModel
         End Sub
 
         Public Overrides Function ChangesMade() As Boolean
@@ -46,10 +40,6 @@ Namespace PresentationLayer.Presenters
                 GlobalVariables.Mapper.Map(modelData, View)
             End If
         End Sub
-
-        'Protected Function GetInputVatAccounts()
-        '    Return Model.GetLookup
-        'End Function
 
     End Class
 
