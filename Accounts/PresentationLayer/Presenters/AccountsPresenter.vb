@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
     Public Class AccountsPresenter(Of T As IView, TM As New)
         Inherits CommonPresenter(Of T, TM)
 
-        Protected Shared Property ModelApOpenInvoice As IModelOpenInvoice
+        'Protected Shared Property ModelApOpenInvoice As IModelOpenInvoice
         Protected Shared Property ModelArOpenInvoice As IModelOpenInvoice
         Protected Shared Property ModelCashCode As IModelCashCode
 
@@ -81,20 +81,20 @@ Namespace PresentationLayer.Presenters
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim retVal As Integer
-            Dim apOpenInvoiceBo As New ApOpenInvoiceModel
-
-            apOpenInvoiceBo.PaidAmount = 0
-            apOpenInvoiceBo.DiscountTaken = 0
-            apOpenInvoiceBo.JournalCode = journalCode
-            apOpenInvoiceBo.JournalIdNo = journalItem.JournalIdNo
-            apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            ModelApOpenInvoice = New ModelAccounts("ApOpenInvoice")
-            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceBo)
+            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            Dim apOpenInvoiceModel As New ApOpenInvoiceModel
+            apOpenInvoiceModel.PaidAmount = 0
+            apOpenInvoiceModel.DiscountTaken = 0
+            apOpenInvoiceModel.JournalCode = journalCode
+            apOpenInvoiceModel.JournalIdNo = journalItem.JournalIdNo
+            apOpenInvoiceModel.JournalItemIdNo = journalItem.IdNo
+            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
             Return retVal
         End Function
 
         Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
             Dim retValue As String
+            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
             retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
             Return retValue
         End Function

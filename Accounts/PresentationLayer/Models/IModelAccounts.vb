@@ -16,6 +16,7 @@ Namespace PresentationLayer.Models
 
         Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
+        Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
     End Interface
 
     Public Interface IModelCashCode
