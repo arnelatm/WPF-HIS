@@ -10,14 +10,16 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBankView)
             MyBase.New(view)
-            TableName = "Bank"
-            SortOrderKey = "BankName"
-            TreeViewMainField = "BankName"
-            TreeViewSecondaryField = "BankCode"
-            OriginalModel = New BankModel()
-            DataModel = New BankModel
-            TreeViewList = New List(Of BankModel)
-            ParentViewList = New List(Of BankModel)
+
+            InitializerWithTv("Bank")
+            'TableName = "Bank"
+            'SortOrderKey = "BankName"
+            'TreeViewMainField = "BankName"
+            'TreeViewSecondaryField = "BankCode"
+            'OriginalModel = New BankModel()
+            'DataModel = New BankModel
+            'TreeViewList = New List(Of BankModel)
+            'ParentViewList = New List(Of BankModel)
         End Sub
 
     End Class

@@ -7,6 +7,13 @@ Namespace PresentationLayer.Models
         Inherits Model
         Implements IModelCommon
 
+        Public Sub New(accountName As String)
+            DataService = New ServiceCommon(accountName)
+        End Sub
+
+        Public Sub New()
+
+        End Sub
         'Public Overrides Function GetDataService() Implements IModelCommon.GetDataService
         '    Return GetCommonService()
         'End Function
@@ -17,95 +24,95 @@ Namespace PresentationLayer.Models
 
     End Class
 
-    Public Class ModelBranch
-        Inherits ModelCommon
+    'Public Class ModelBranch
+    '    Inherits ModelCommon
 
-        'Private ReadOnly _service As New ServiceBranch()
-        Public Sub New()
-            DataService = New ServiceBranch
-        End Sub
+    '    'Private ReadOnly _service As New ServiceBranch()
+    '    Public Sub New()
+    '        DataService = New ServiceBranch
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelCostCenter
-        Inherits ModelCommon
+    'Public Class ModelCostCenter
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceCostCenter
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceCostCenter
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelCountry
-        Inherits ModelCommon
+    'Public Class ModelCountry
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceCountry
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceCountry
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelDepartment
-        Inherits ModelCommon
+    'Public Class ModelDepartment
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceDepartment
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceDepartment
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelOriginalMessages
-        Inherits ModelCommon
+    'Public Class ModelOriginalMessages
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceOriginalMessages
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceOriginalMessages
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelProfitCenter
-        Inherits ModelCommon
+    'Public Class ModelProfitCenter
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceProfitCenter
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceProfitCenter
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelReligion
-        Inherits ModelCommon
+    'Public Class ModelReligion
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceReligion
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceReligion
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelRevenueGroup
-        Inherits ModelCommon
+    'Public Class ModelRevenueGroup
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceRevenueGroup
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceRevenueGroup
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelTranslatedMessages
-        Inherits ModelCommon
+    'Public Class ModelTranslatedMessages
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServiceTranslatedMessages
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServiceTranslatedMessages
+    '    End Sub
 
-    End Class
+    'End Class
 
-    Public Class ModelPhoneType
-        Inherits ModelCommon
+    'Public Class ModelPhoneType
+    '    Inherits ModelCommon
 
-        Public Sub New()
-            DataService = New ServicePhoneType
-        End Sub
+    '    Public Sub New()
+    '        DataService = New ServicePhoneType
+    '    End Sub
 
-    End Class
+    'End Class
 
 End Namespace

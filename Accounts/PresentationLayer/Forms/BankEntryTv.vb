@@ -1,7 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -54,7 +53,7 @@ Namespace PresentationLayer.Forms
 
         Public Property IDNo As Integer Implements IBankView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)

@@ -269,6 +269,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Private _errorList As String = ""
 
+
     'Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
     '    If additionalMessage IsNot Nothing Then
     '        If Not errorList.Contains(additionalMessage) Then

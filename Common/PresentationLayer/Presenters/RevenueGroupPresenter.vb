@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IRevenueGroupView)
             MyBase.New(view)
-            ModelPresenter = New ModelRevenueGroup
+            ModelPresenter = New ModelCommon("RevenueGroup")
             TableName = "RevenueGroup_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"

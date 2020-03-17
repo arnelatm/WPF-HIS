@@ -84,6 +84,7 @@ Namespace PresentationLayer.Forms
         Me.txtPurchaseItemNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemNameAra.LinkedLabel = Me.lblPurchaseItemNameAra
         Me.txtPurchaseItemNameAra.Name = "txtPurchaseItemNameAra"
+        Me.txtPurchaseItemNameAra.OldValue = Nothing
         '
         'txtPurchaseItemName
         '
@@ -98,6 +99,7 @@ Namespace PresentationLayer.Forms
         Me.txtPurchaseItemName.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemName.LinkedLabel = Me.lblPurchaseItemName
         Me.txtPurchaseItemName.Name = "txtPurchaseItemName"
+        Me.txtPurchaseItemName.OldValue = Nothing
         Me.txtPurchaseItemName.ValueIsMandatory = true
         '
         'lblPurchaseItemName
@@ -123,6 +125,7 @@ Namespace PresentationLayer.Forms
         Me.txtPurchaseItemCode.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemCode.LinkedLabel = Me.lblPurchaseItemCode
         Me.txtPurchaseItemCode.Name = "txtPurchaseItemCode"
+        Me.txtPurchaseItemCode.OldValue = Nothing
         Me.txtPurchaseItemCode.ReadOnly = true
         Me.txtPurchaseItemCode.ValueIsMandatory = true
         '
@@ -144,6 +147,7 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
         Me.txtDateCreated.Name = "txtDateCreated"
+        Me.txtDateCreated.OldValue = Nothing
         Me.txtDateCreated.ValueIsMandatory = true
         '
         'lblDateCreated
@@ -212,6 +216,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         '
         'lblCategoryIdNo
@@ -363,6 +368,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit1.ForeColor = System.Drawing.Color.Black
         Me.txtUnit1.LinkedLabel = Me.lblUnit
         Me.txtUnit1.Name = "txtUnit1"
+        Me.txtUnit1.OldValue = Nothing
         Me.txtUnit1.ReadOnly = true
         Me.txtUnit1.ValueIsMandatory = true
         '
@@ -379,6 +385,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit1Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit1Ara.LinkedLabel = Me.lblPurchaseItemNameAra
         Me.txtUnit1Ara.Name = "txtUnit1Ara"
+        Me.txtUnit1Ara.OldValue = Nothing
         '
         'txtStdPrice1
         '
@@ -393,6 +400,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice1.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice1.LinkedLabel = Me.lblUnitStdPrice
         Me.txtStdPrice1.Name = "txtStdPrice1"
+        Me.txtStdPrice1.OldValue = Nothing
         Me.txtStdPrice1.ReadOnly = true
         Me.txtStdPrice1.ValueIsMandatory = true
         '
@@ -413,6 +421,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit2.ForeColor = System.Drawing.Color.Black
         Me.txtUnit2.LinkedLabel = Me.lblUnit
         Me.txtUnit2.Name = "txtUnit2"
+        Me.txtUnit2.OldValue = Nothing
         Me.txtUnit2.ReadOnly = true
         Me.txtUnit2.ValueIsMandatory = true
         '
@@ -429,6 +438,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit2Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit2Ara.LinkedLabel = Me.lblPurchaseItemNameAra
         Me.txtUnit2Ara.Name = "txtUnit2Ara"
+        Me.txtUnit2Ara.OldValue = Nothing
         '
         'txtStdPrice2
         '
@@ -443,6 +453,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice2.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice2.LinkedLabel = Me.lblUnitStdPrice
         Me.txtStdPrice2.Name = "txtStdPrice2"
+        Me.txtStdPrice2.OldValue = Nothing
         Me.txtStdPrice2.ReadOnly = true
         Me.txtStdPrice2.ValueIsMandatory = true
         '
@@ -463,6 +474,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit3.ForeColor = System.Drawing.Color.Black
         Me.txtUnit3.LinkedLabel = Me.lblUnit
         Me.txtUnit3.Name = "txtUnit3"
+        Me.txtUnit3.OldValue = Nothing
         Me.txtUnit3.ReadOnly = true
         Me.txtUnit3.ValueIsMandatory = true
         '
@@ -479,6 +491,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnit3Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit3Ara.LinkedLabel = Me.lblPurchaseItemNameAra
         Me.txtUnit3Ara.Name = "txtUnit3Ara"
+        Me.txtUnit3Ara.OldValue = Nothing
         '
         'txtStdPrice3
         '
@@ -493,6 +506,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice3.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice3.LinkedLabel = Me.lblUnitStdPrice
         Me.txtStdPrice3.Name = "txtStdPrice3"
+        Me.txtStdPrice3.OldValue = Nothing
         Me.txtStdPrice3.ReadOnly = true
         Me.txtStdPrice3.ValueIsMandatory = true
         '

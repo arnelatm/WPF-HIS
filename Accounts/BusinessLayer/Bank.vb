@@ -19,7 +19,7 @@ Namespace BusinessLayer
         Public Property BankCode As String
         Public Property BankName As String
         Public Property BankNameAra As String
-        Public Property Description As String
+        Public Property Notes As String
     End Class
 
 End Namespace

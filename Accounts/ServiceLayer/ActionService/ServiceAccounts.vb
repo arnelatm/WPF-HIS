@@ -22,6 +22,7 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _arJournalDao          As IDao(Of ArJournal) = DaoFactoryAccounts.CreateDao("ArJournal")
         Private ReadOnly _generalJournalDao     As IDao(Of GeneralJournal) = DaoFactoryAccounts.CreateDao("GeneralJournal")
 
+        Private ReadOnly _bankDao               As IDaoAll(Of Bank) = DaoFactoryAccounts.CreateDao("Bank")
         Private ReadOnly _cashCodeDao           As IDaoAll(Of CashCode) = DaoFactoryAccounts.CreateDao("CashCode")
         Private ReadOnly _categoryDao           As IDaoAll(Of Category) = DaoFactoryAccounts.CreateDao("Category")
         Private ReadOnly _chartDao              As IDaoAll(Of Chart) = DaoFactoryAccounts.CreateDao("Chart")
@@ -40,6 +41,8 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _apOpenInvoiceDao      As IDaoOpenInvoice(Of ApOpenInvoice) = DaoFactoryAccounts.CreateDao("ApOpenInvoice")
         Private ReadOnly _arOpenInvoiceDao      As IDaoOpenInvoice(Of ArOpenInvoice) = DaoFactoryAccounts.CreateDao("ArOpenInvoice")
         
+
+
         Public Sub New(accountName As String)
             Dim bizObject = $"AATM.Accounts.BusinessLayer." + accountName
             Dim dao = "_" + Strings.Left(accountName, 1).ToLower() + Strings.Mid(accountName, 2) + "Dao"
@@ -59,6 +62,21 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
+        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
+            Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+        Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem) Implements IServiceAccounts.GetAcctReconItems
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Integer, Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
+            Throw New NotImplementedException()
+        End Function
     End Class
 
     'Public MustInherit Class ServiceOpenInvoice

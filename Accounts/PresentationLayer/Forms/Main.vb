@@ -474,15 +474,15 @@ Namespace PresentationLayer.Forms
         '    ShowEntryForm(BalanceSheetMonthlyReport)
         'End Sub
 
-        'Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BanksToolStripMenuItem.Click
-        '    Dim childMdiForm As BankEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New BankEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BanksToolStripMenuItem.Click
+            Dim childMdiForm As BankEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New BankEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         Private Sub BranchesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemBranches.Click
@@ -605,7 +605,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
-            ShowEntryForm(GeneralJournalEntry)
+            Dim myForm = New GeneralJournalEntry
+            myForm.Show()
         End Sub
 
         'Private Sub IncomeStatementForAGivenMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) _
@@ -1018,15 +1019,15 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ItemsToolStripMenuItem.Click
-        '    Dim childMdiForm As PurchaseItemEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New PurchaseItemEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ItemsToolStripMenuItem.Click
+            Dim childMdiForm As PurchaseItemEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New PurchaseItemEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem.Click
         '    Dim childMdiForm As CategoryEntryTv

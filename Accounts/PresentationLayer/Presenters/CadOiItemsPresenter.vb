@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICadOiItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelCadOiItem()
+            ModelPresenter = New ModelAccounts("CadOiItem")
             TableName = "CadOiItem"
             SortOrderKey = "Sequence"
             DataModel = New CadOiItemModel

@@ -10,7 +10,7 @@ Namespace DataLayer
 
         'ReadOnly Property DaoAccounts As IDaoAccounts
 
-        Function CreateDao(classBaseName As String) 
+        'Function CreateDao(classBaseName As String) 
 
         'ReadOnly Property BankDao As IDaoAll(Of Bank)
         'ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
