@@ -10,127 +10,144 @@ Namespace DataLayer.AdoNet
         Inherits DaoFactoryCommon
         Implements IDaoFactoryAccounts
 
-        Public ReadOnly Property DaoAccounts As IDaoAccounts Implements IDaoFactoryAccounts.DaoAccounts
-            Get
-                Return New DaoAccounts()
-            End Get
-        End Property
 
-        Public ReadOnly Property BankDao As IDaoAll(Of Bank) Implements IDaoFactoryAccounts.BankDao
-            Get
-                Return New BankDao()
-            End Get
-        End Property
+        Public Function CreateDao(classBaseName As String) As Object Implements IDaoFactoryAccounts.CreateDao
+            Dim className = $"AATM.Accounts.DataLayer.AdoNet." + classBaseName + "Dao"
+            Dim dao As Object
+            Dim tType As Type = Type.GetType(className)
+            dao = Activator.CreateInstance(tType)
+            If dao Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + dao)
+            End If
+            Return dao
+        End Function
 
-        Public ReadOnly Property CashCodeDao As IDaoAll(Of CashCode) Implements IDaoFactoryAccounts.CashCodeDao
-            Get
-                Return New CashCodeDao()
-            End Get
-        End Property
+        'Public ReadOnly Property DaoAccounts As IDaoAccounts Implements IDaoFactoryAccounts.DaoAccounts
+        '    Get
+        '        Return New DaoAccounts()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property SupplierDao As IDaoAll(Of Supplier) Implements IDaoFactoryAccounts.SupplierDao
-            Get
-                Return New SupplierDao()
-            End Get
-        End Property
+        'Public ReadOnly Property BankDao As IDaoAll(Of Bank) Implements IDaoFactoryAccounts.BankDao
+        '    Get
+        '        Return New BankDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ApJournalDao As IDao(Of ApJournal) Implements IDaoFactoryAccounts.ApJournalDao
-            Get
-                Return New ApJournalDao()
-            End Get
-        End Property
+        'Public ReadOnly Property CashCodeDao As IDaoAll(Of CashCode) Implements IDaoFactoryAccounts.CashCodeDao
+        '    Get
+        '        Return New CashCodeDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ApJournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.ApJournalItemDao
-            Get
-                Return New ApJournalItemDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SupplierDao As IDaoAll(Of Supplier) Implements IDaoFactoryAccounts.SupplierDao
+        '    Get
+        '        Return New SupplierDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) Implements IDaoFactoryAccounts.ApOpenInvoiceDao
-            Get
-                Return New ApOpenInvoiceDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ApJournalDao As IDao(Of ApJournal) Implements IDaoFactoryAccounts.ApJournalDao
+        '    Get
+        '        Return New ApJournalDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ArJournalDao As IDao(Of ArJournal) Implements IDaoFactoryAccounts.ArJournalDao
-            Get
-                Return New ArJournalDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem) Implements IDaoFactoryAccounts.ApJournalItemDao
+        '    Get
+        '        Return New ApJournalItemDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property DistributionSchemeDao As IDao(Of DistributionScheme) Implements IDaoFactoryAccounts.DistributionSchemeDao
-            Get
-                Return New DistributionSchemeDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) Implements IDaoFactoryAccounts.ApOpenInvoiceDao
+        '    Get
+        '        Return New ApOpenInvoiceDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ArJournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.ArJournalItemDao
-            Get
-                Return New ArJournalItemDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ArJournalDao As IDao(Of ArJournal) Implements IDaoFactoryAccounts.ArJournalDao
+        '    Get
+        '        Return New ArJournalDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property DistributionSchemeItemDao As IDao(Of DistributionSchemeItem) Implements IDaoFactoryAccounts.DistributionSchemeItemDao
+        'Public ReadOnly Property DistributionSchemeDao As IDao(Of DistributionScheme) Implements IDaoFactoryAccounts.DistributionSchemeDao
+        '    Get
+        '        Return New DistributionSchemeDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) Implements IDaoFactoryAccounts.ArOpenInvoiceDao
-            Get
-                Return New ArOpenInvoiceDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ArJournalItemDao As IDaoChild(Of JournalItem) Implements IDaoFactoryAccounts.ArJournalItemDao
+        '    Get
+        '        Return New ArJournalItemDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal) Implements IDaoFactoryAccounts.GeneralJournalDao
-            Get
-                Return New GeneralJournalDao()
-            End Get
-        End Property
 
-        Public ReadOnly Property GeneralJournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.GeneralJournalItemDao
-            Get
-                Return New GeneralJournalItemDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) Implements IDaoFactoryAccounts.ArOpenInvoiceDao
+        '    Get
+        '        Return New ArOpenInvoiceDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property CategoryDao As IDaoAll(Of Category) Implements IDaoFactoryAccounts.CategoryDao
-            Get
-                Return New CategoryDao()
-            End Get
-        End Property
+        'Public ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal) Implements IDaoFactoryAccounts.GeneralJournalDao
+        '    Get
+        '        Return New GeneralJournalDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property ChartDao As IDaoAll(Of Chart) Implements IDaoFactoryAccounts.ChartDao
-            Get
-                Return New ChartDao()
-            End Get
-        End Property
+        'Public ReadOnly Property GeneralJournalItemDao As IDaoChild(Of JournalItem) Implements IDaoFactoryAccounts.GeneralJournalItemDao
+        '    Get
+        '        Return New GeneralJournalItemDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property CustomerDao As IDaoAll(Of Customer) Implements IDaoFactoryAccounts.CustomerDao
-            Get
-                Return New CustomerDao()
-            End Get
-        End Property
+        'Public ReadOnly Property CategoryDao As IDaoAll(Of Category) Implements IDaoFactoryAccounts.CategoryDao
+        '    Get
+        '        Return New CategoryDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property DesignationDao As IDaoAll(Of Designation) Implements IDaoFactoryAccounts.DesignationDao
-            Get
-                Return New DesignationDao()
-            End Get
-        End Property
+        'Public ReadOnly Property ChartDao As IDaoAll(Of Chart) Implements IDaoFactoryAccounts.ChartDao
+        '    Get
+        '        Return New ChartDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property EmployeeDao As IDaoAll(Of Employee) Implements IDaoFactoryAccounts.EmployeeDao
-            Get
-                Return New EmployeeDao()
-            End Get
-        End Property
+        'Public ReadOnly Property CustomerDao As IDaoAll(Of Customer) Implements IDaoFactoryAccounts.CustomerDao
+        '    Get
+        '        Return New CustomerDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem) Implements IDaoFactoryAccounts.PurchaseItemDao
-            Get
-                Return New PurchaseItemDao()
-            End Get
-        End Property
+        'Public ReadOnly Property DesignationDao As IDaoAll(Of Designation) Implements IDaoFactoryAccounts.DesignationDao
+        '    Get
+        '        Return New DesignationDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property JournalItemDao As IDaoJournalItems Implements IDaoFactoryAccounts.JournalItemDao
-            Get
-                Return New JournalItemDao()
-            End Get
-        End Property
+        'Public ReadOnly Property EmployeeDao As IDaoAll(Of Employee) Implements IDaoFactoryAccounts.EmployeeDao
+        '    Get
+        '        Return New EmployeeDao()
+        '    End Get
+        'End Property
+
+        'Public ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem) Implements IDaoFactoryAccounts.PurchaseItemDao
+        '    Get
+        '        Return New PurchaseItemDao()
+        '    End Get
+        'End Property
+
+        'Public ReadOnly Property JournalItemDao As IDaoChild(Of JournalItem) Implements IDaoFactoryAccounts.JournalItemDao
+        '    Get
+        '        Return New JournalItemDao()
+        '    End Get
+        'End Property
+        
+        'Public ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem) Implements IDaoFactoryAccounts.DistributionSchemeItemDao
+        '    Get
+        '        Return New DistributionSchemeItemDao()
+        '    End Get
+        'End Property
 
         'Public ReadOnly Property ArJournalDao As IArJournalDao Implements IDaoFactoryCommon.ArJournalDao
         '    Get

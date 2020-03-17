@@ -1,5 +1,6 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for JournalItem
@@ -7,14 +8,15 @@ Namespace DataLayer.AdoNet
 
     Public Class JournalItemDao
         Inherits DaoAccounts
-        Implements IDaoJournalItems
+        Implements IDaoChild(Of JournalItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
 
-        Public Function GetRecordsWithIdNo(journalIdNo As Integer, ByRef Optional sortKey As String = Nothing) As Object Implements IDaoJournalItems.GetRecordsWithIdNo
+
+        Public Function GetRecordsWithIdNo(journalIdNo As Integer, Optional sortKey As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -43,14 +45,16 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Integer) As Integer _
-            Implements IDaoJournalItems.DelUpdateTvp
+            Implements IDaoChild(Of JournalItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
-            Implements IDaoJournalItems.InsertTvp
+            Implements IDaoChild(Of JournalItem).InsertTvp
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
+
+
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =
                                     Function(reader) _

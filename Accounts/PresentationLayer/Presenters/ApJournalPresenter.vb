@@ -18,7 +18,6 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
-            '_apOpenInvoiceModel = New ModelAccounts("ApOpenInvoice")
         End Sub
 
         Public Property JournalItemsPresenter As ApJournalItemsPresenter
@@ -46,12 +45,12 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateOpenInvoice(ByRef journalItem As JournalItemModel, ByVal addBalance As Decimal) As String
             Dim retValue As String
-            Dim apOpenInvoiceBo As New ApOpenInvoice
-            apOpenInvoiceBo.DiscountTaken = journalItem.DiscountTaken
-            apOpenInvoiceBo.PaidAmount = journalItem.PaidAmount
-            apOpenInvoiceBo.IdNo = journalItem.IdNo
-            apOpenInvoiceBo.JournalItemIdNo = journalItem.IdNo
-            retValue = _apOpenInvoiceModel.UpdateRecord(Of ApOpenInvoice)(apOpenInvoiceBo)
+            Dim openInvoiceModel As New ApOpenInvoiceModel
+            openInvoiceModel.DiscountTaken = journalItem.DiscountTaken
+            openInvoiceModel.PaidAmount = journalItem.PaidAmount
+            openInvoiceModel.IdNo = journalItem.IdNo
+            openInvoiceModel.JournalItemIdNo = journalItem.IdNo
+            retValue = _apOpenInvoiceModel.UpdateRecord(Of ApOpenInvoiceModel)(openInvoiceModel)
             Return retValue
         End Function
 
