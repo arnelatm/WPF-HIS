@@ -4,12 +4,11 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntryTv
-        Implements IDistributionSchemeView, IDistributionSchemeItemsView
+        Implements IDistributionSchemeView, IDistributionSchemeItemView
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
@@ -25,7 +24,7 @@ Namespace PresentationLayer.Forms
 
             ' Set KeyPreview object to true to allow the form to process
             ' the key before the control with focus processes it.
-            Me.KeyPreview = True
+            KeyPreview = True
 
             MainTableName = "DistributionScheme"
             IdFieldName = "IdNo"
@@ -75,7 +74,7 @@ Namespace PresentationLayer.Forms
 
         Public Property IDNo As Integer Implements IDistributionSchemeView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)
@@ -157,7 +156,7 @@ Namespace PresentationLayer.Forms
 
 #Region "DistributionSchemeItemsView"
 
-        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
+        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get

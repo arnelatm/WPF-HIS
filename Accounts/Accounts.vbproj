@@ -249,6 +249,18 @@
     <Compile Include="PresentationLayer\Forms\DesignationEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.Designer.vb">
+      <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.Designer.vb">
+      <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.Designer.vb">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
@@ -393,11 +405,12 @@
     <Compile Include="PresentationLayer\Views\ICsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\ICustomerView.vb" />
     <Compile Include="PresentationLayer\Views\IDesignationView.vb" />
-    <Compile Include="PresentationLayer\Views\IDistributionSchemeItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeItemView.vb" />
     <Compile Include="PresentationLayer\Views\IDistributionSchemeView.vb" />
     <Compile Include="PresentationLayer\Views\IEmployeeView.vb" />
     <Compile Include="PresentationLayer\Views\IGeneralJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IJournalItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\IDistributionSchemeItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IJournalItemView.vb" />
     <Compile Include="PresentationLayer\Views\IPcsOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IPcsOiItemView.vb" />
@@ -458,6 +471,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\DesignationEntryTv.resx">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar-SA.resx">
+      <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar.resx">
+      <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.resx">
+      <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar-SA.resx">
+      <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar.resx">
+      <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.resx">
+      <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
