@@ -174,7 +174,7 @@
   <data name="ArJournalPrefix" xml:space="preserve">
     <value>AR</value>
   </data>
-  <data name="ChequeDisbursementJournalPrefix" xml:space="preserve">
+  <data name="CheckDisbursementJournalPrefix" xml:space="preserve">
     <value>CK</value>
   </data>
   <data name="CDEntry_OnBeforeSave_Empty_CkdOiItem_Ask_To_Save" xml:space="preserve">

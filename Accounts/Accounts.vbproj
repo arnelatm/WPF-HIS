@@ -101,7 +101,7 @@
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\Category.vb" />
     <Compile Include="BusinessLayer\Chart.vb" />
-    <Compile Include="BusinessLayer\ChequeDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CheckDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CkdOiItem.vb" />
     <Compile Include="BusinessLayer\CsrOiItem.vb" />
     <Compile Include="BusinessLayer\Customer.vb" />
@@ -130,8 +130,8 @@
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CsroiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
@@ -258,7 +258,7 @@
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CategoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ChartModel.vb" />
-    <Compile Include="PresentationLayer\Models\ChequeDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CheckDisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CkdOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
@@ -312,7 +312,7 @@
     <Compile Include="PresentationLayer\Views\ICashReceiptJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ICategoryView.vb" />
     <Compile Include="PresentationLayer\Views\IChartView.vb" />
-    <Compile Include="PresentationLayer\Views\IChequeDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\ICheckDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ICkdOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\ICkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\ICsrOiItemsView.vb" />
@@ -339,7 +339,9 @@
     <Compile Include="MappingProfileAccounts.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AccountStrings.resx" />
+    <EmbeddedResource Include="AccountStrings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

@@ -1,6 +1,6 @@
 ﻿Namespace DataLayer.AdoNet
 
-    Public Class ChequeDisbursementJournalItemDao
+    Public Class CheckDisbursementJournalItemDao
         Inherits JournalItemDao
 
         Public Sub New()

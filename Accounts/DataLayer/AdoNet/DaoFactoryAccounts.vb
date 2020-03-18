@@ -217,15 +217,15 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-        'Public ReadOnly Property ChequeDisbursementJournalDao As IChequeDisbursementJournalDao Implements IDaoFactoryCommon.ChequeDisbursementJournalDao
+        'Public ReadOnly Property CheckDisbursementJournalDao As IChevkDisbursementJournalDao Implements IDaoFactoryCommon.CheckDisbursementJournalDao
         '    Get
-        '        Return New ChequeDisbursementJournalDao()
+        '        Return New CheckDisbursementJournalDao()
         '    End Get
         'End Property
 
-        'Public ReadOnly Property ChequeDisbursementJournalItemDao As IJournalItemDao Implements IDaoFactoryCommon.ChequeDisbursementJournalItemDao
+        'Public ReadOnly Property CheckDisbursementJournalItemDao As IJournalItemDao Implements IDaoFactoryCommon.CheckDisbursementJournalItemDao
         '    Get
-        '        Return New ChequeDisbursementJournalItemDao()
+        '        Return New CheckDisbursementJournalItemDao()
         '    End Get
         'End Property
 

@@ -16,9 +16,9 @@ Namespace PresentationLayer.Models
     Public Interface IModelOpenInvoice
         Inherits IModelAccounts
 
-        Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        'Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
-        Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        'Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
         Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
     End Interface
