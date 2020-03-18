@@ -1,6 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.PresentationLayer.Models
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
@@ -8,18 +6,17 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class SalesCashItemsPresenter
-        Inherits AccountsPresenter(Of ISalesCashItemsView, SalesCashItem, SalesCashItemModel)
+        Inherits AccountsPresenter(Of ISalesCashItemsView, SalesCashItemModel)
 
         Public ParentViewList As List(Of SalesCashItemModel)
-        Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
-        Private _cashCodesModel As List(Of CashCodeModel)
+        Private ReadOnly _vatRate As Decimal = GetVatPercentage()
+        Private ReadOnly _cashCodesModel As New List(Of CashCodeModel)
 
         Public Sub New(view As ISalesCashItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelSalesCashItem()
+            ModelPresenter = New ModelAccounts("SalesCashItem")
             TableName = "SalesCashItem"
             SortOrderKey = "Sequence"
-            BizObject = New SalesCashItem
             DataModel = New SalesCashItemModel
             _cashCodesModel = GetCashCodesModel()
         End Sub

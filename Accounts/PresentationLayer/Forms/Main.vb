@@ -702,10 +702,11 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-        '    ShowEntryForm(PurchaseJournalEntry)
-        'End Sub
+        Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
+            Dim childMdiForm As PurchaseJournalEntry
+            childMdiForm = New PurchaseJournalEntry() With {.MdiParent = Me}
+            childMdiForm.Show()
+        End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemReligions.Click
@@ -1004,15 +1005,15 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem8.Click
-        '    Dim childMdiForm As CheckDisbursementJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New CheckDisbursementJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem8.Click
+            Dim childMdiForm As CheckDisbursementJournalEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New CheckDisbursementJournalEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ItemsToolStripMenuItem.Click
             Dim childMdiForm As PurchaseItemEntry
@@ -1044,15 +1045,15 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesJournalEntryToolStripMenuItem.Click
-        '    Dim childMdiForm As SalesJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New SalesJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesJournalEntryToolStripMenuItem.Click
+            Dim childMdiForm As SalesJournalEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New SalesJournalEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountReconciliationToolStripMenuItem.Click
         '    Dim childMdiForm As AccountReconciliationEntry
