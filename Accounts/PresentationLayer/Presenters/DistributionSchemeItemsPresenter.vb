@@ -1,10 +1,5 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -12,13 +7,13 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
 
         Public ParentViewList As List(Of DistributionSchemeItemModel)
-        Private Shared _ChangesMadeInDataGrid As Boolean = False
+        Private Shared _changesMadeInDataGrid As Boolean = False
 
         Public Sub New(view As IDistributionSchemeItemsView)
             MyBase.New(view)
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"
-            ModelPresenter = New ModelDistributionSchemeItem()
+            ModelPresenter = New ModelAccounts("DistributionSchemeItem")
             DataModel = New DistributionSchemeItemModel
 
         End Sub
@@ -27,11 +22,11 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of DistributionScheme Items.
         ''' </summary>
         ''' <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
-        Public Overrides Sub Display(DistributionSchemeIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Overrides Sub Display(distributionSchemeIdNo As Integer, Optional ByVal undoMode As Boolean = False)
             'If DistributionSchemeIdNo = 0 Then
             '    View.DistributionSchemeItems = Nothing
             'Else
-            View.DistributionSchemeItems = Model.GetRecordsWithIdNo(Of DistributionSchemeItemModel)(DistributionSchemeIdNo, "Sequence")
+            View.DistributionSchemeItems = Model.GetRecordsWithIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
             'End If
         End Sub
 
@@ -39,7 +34,7 @@ Namespace PresentationLayer.Presenters
         '    Return
         'End Function
 
-        Public Overrides Function DataIsValid()
+        Public Overrides Function DataIsValid() As Boolean
             If MyBase.DataIsValid() Then
                 Dim retVal = True
                 Dim totalPercentage As Decimal
@@ -55,7 +50,7 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         End If
                     Next
-                    If retVal And totalPercentage <> 100.0 Then
+                    If retVal And Math.Abs(totalPercentage - 100.0) > 0.001 Then
                         MessageBox.Show("Total Percentage must be 100.00%")
                         retVal = False
                     End If
@@ -67,11 +62,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       DistributionSchemeIdNo As Integer)
+                                       distributionSchemeIdNo As Integer)
             Dim insertReturnValue = 0
             Dim updateReturnValue = 0
             Dim retVal = 0
-            updateReturnValue = Model.DelUpdateTvp(dtUpdate, DistributionSchemeIdNo)
+            updateReturnValue = Model.DelUpdateTvp(dtUpdate, distributionSchemeIdNo)
             If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
                 insertReturnValue = Model.InsertTvp(dtInsert)
                 If insertReturnValue >= 0 Then

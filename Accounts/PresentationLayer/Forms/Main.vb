@@ -561,15 +561,15 @@ Namespace PresentationLayer.Forms
             SetLanguageChangeButtons()
         End Sub
 
-        'Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DistributionSchemesToolStripMenuItem.Click
-        '    Dim childMdiForm As DistributionSchemeEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New DistributionSchemeEntryTv() With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DistributionSchemesToolStripMenuItem.Click
+            Dim childMdiForm As DistributionSchemeEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New DistributionSchemeEntryTv() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
@@ -719,7 +719,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ReveneGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReveneGroupsToolStripMenuItem.Click
+        Private Sub RevenueGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RevenueGroupsToolStripMenuItem.Click
             Dim childMdiForm As RevenueGroupEntryTv
             'Set the Parent Form of the Child window.
             childMdiForm = New RevenueGroupEntryTv() With {
@@ -1055,15 +1055,15 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountReconciliationToolStripMenuItem.Click
-        '    Dim childMdiForm As AccountReconciliationEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New AccountReconciliationEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountReconciliationToolStripMenuItem.Click
+            Dim childMdiForm As AccountReconciliationEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New AccountReconciliationEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
             Dim childMdiForm As PettyCashJournalEntry

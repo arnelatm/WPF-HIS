@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class DistributionSchemeEntry
-        Inherits BfEntry
+        Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
