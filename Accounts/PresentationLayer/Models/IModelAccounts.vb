@@ -7,15 +7,20 @@ Namespace PresentationLayer.Models
         Inherits IModelCommon
 
         Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
+
         Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+
         Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
+
         Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
+
         Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
+        Function GetAcctReconItems(Of TM)(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
     End Interface
-
 
     'Public Interface IModelOpenInvoice
     '    Inherits IModelAccounts

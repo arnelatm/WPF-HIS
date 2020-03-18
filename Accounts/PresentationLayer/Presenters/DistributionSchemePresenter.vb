@@ -1,9 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -16,7 +12,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
-            ModelPresenter = New ModelDistributionScheme()
+            ModelPresenter = New ModelAccounts("DistributionScheme")
             OriginalModel = New DistributionSchemeModel()
             TreeViewMainField = "DistributionSchemeName"
             TreeViewSecondaryField = "DistributionSchemeCode"

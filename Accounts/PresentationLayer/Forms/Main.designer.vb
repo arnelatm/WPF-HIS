@@ -66,7 +66,7 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemProfitCenters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReveneGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RevenueGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DistributionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemCountries = New System.Windows.Forms.ToolStripMenuItem()
@@ -312,7 +312,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.ReveneGroupsToolStripMenuItem, Me.DistributionSchemesToolStripMenuItem, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.BanksToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.ItemsToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.RevenueGroupsToolStripMenuItem, Me.DistributionSchemesToolStripMenuItem, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.BanksToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.ItemsToolStripMenuItem})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -341,10 +341,10 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemProfitCenters.Name = "ToolStripMenuItemProfitCenters"
         resources.ApplyResources(Me.ToolStripMenuItemProfitCenters, "ToolStripMenuItemProfitCenters")
         '
-        'ReveneGroupsToolStripMenuItem
+        'RevenueGroupsToolStripMenuItem
         '
-        Me.ReveneGroupsToolStripMenuItem.Name = "ReveneGroupsToolStripMenuItem"
-        resources.ApplyResources(Me.ReveneGroupsToolStripMenuItem, "ReveneGroupsToolStripMenuItem")
+        Me.RevenueGroupsToolStripMenuItem.Name = "RevenueGroupsToolStripMenuItem"
+        resources.ApplyResources(Me.RevenueGroupsToolStripMenuItem, "RevenueGroupsToolStripMenuItem")
         '
         'DistributionSchemesToolStripMenuItem
         '
@@ -820,7 +820,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemCaptions As ToolStripMenuItem
         Private WithEvents ToolStripButtonTranslate As ToolStripButton
         Private WithEvents ToolStripButtonExit As ToolStripButton
-        Friend WithEvents ReveneGroupsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents RevenueGroupsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents DistributionSchemesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents DesignationsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents BanksToolStripMenuItem As ToolStripMenuItem

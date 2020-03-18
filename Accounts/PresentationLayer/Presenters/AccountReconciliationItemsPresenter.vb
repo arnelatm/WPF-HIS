@@ -82,12 +82,12 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If addMode Or editMode Then
-            Dim allAcctReconItems = DataModel.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
             If addMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
                 Next
-            Else 'If editMode Then
+            Else
                 Dim oldReconciliationItems As New List(Of AccountReconciliationItemModel)
                 oldReconciliationItems = ModelPresenter.GetRecordsWithIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 For Each acctReconItem In allAcctReconItems
@@ -104,42 +104,11 @@ Namespace PresentationLayer.Presenters
                         AddNewItem(acctReconItem, acctReconItems, nSeq)
                     End If
                 Next
-                'Dim oldUnreconciledAcctReconItems As New List(Of AccountReconciliationItemModel)
-                'Dim oldReconciledAcctReconItems As New List(Of AccountReconciliationItemModel)
                 For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
                     AddNewItem(reconciledItem, acctReconItems, nSeq)
                     nSeq = nSeq + 1
                 Next
-                'oldUnreconciledAcctReconItems = Model.GetReconciledRecordsWithIdNo(False, idNo, sortOrder)
-                'oldReconciledAcctReconItems = Model.GetReconciledRecordsWithIdNo(True, idNo, sortOrder)
-                'Dim newAcctReconItem As New AccountReconciliationItemModel
-                'Dim oldAcctReconItem As New AccountReconciliationItemModel
-                'For Each reconciledItem As AccountReconciliationItemModel In oldReconciledAcctReconItems
-                '    AddNewItem(reconciledItem, acctReconItems, nSeq)
-                '    nSeq = nSeq + 1
-                'Next
-                'oldReconciledAcctReconItems.Clear()
-                'For Each acctReconItem In allAcctReconItems
-                '    Dim found As Boolean = False
-                '    For Each item As AccountReconciliationItemModel In oldUnreconciledAcctReconItems
-                '        If item.JournalCode = acctReconItem.JournalCode And
-                '           item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
-                '            found = True
-                '            oldAcctReconItem = item
-                '            Exit For
-                '        End If
-                '    Next
-                '    nSeq = nSeq + 1
-                '    If found Then
-                '        AddNewItem(oldAcctReconItem, acctReconItems, nSeq)
-                '    Else
-                '        AddNewItem(acctReconItem, acctReconItems, nSeq)
-                '    End If
-                'Next
             End If
-            'Else
-            '    acctReconItems = Model.GetRecordsWithIdNo(Of AccountReconciliationItemModel)(idNo, sortOrder)
-            'End If
             Return acctReconItems
         End Function
 

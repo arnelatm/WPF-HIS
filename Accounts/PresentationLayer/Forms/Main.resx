@@ -3624,11 +3624,11 @@
   <data name="ToolStripMenuItemProfitCenters.Text" xml:space="preserve">
     <value>Profit Centers</value>
   </data>
-  <data name="ReveneGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="RevenueGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
-  <data name="ReveneGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Revene Groups</value>
+  <data name="RevenueGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Revenue Groups</value>
   </data>
   <data name="DistributionSchemesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -4618,10 +4618,10 @@
   <data name="&gt;&gt;ToolStripMenuItemProfitCenters.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ReveneGroupsToolStripMenuItem.Name" xml:space="preserve">
-    <value>ReveneGroupsToolStripMenuItem</value>
+  <data name="&gt;&gt;RevenueGroupsToolStripMenuItem.Name" xml:space="preserve">
+    <value>RevenueGroupsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;ReveneGroupsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;RevenueGroupsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DistributionSchemesToolStripMenuItem.Name" xml:space="preserve">

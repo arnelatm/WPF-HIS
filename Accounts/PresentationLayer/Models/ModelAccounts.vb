@@ -9,7 +9,7 @@ Namespace PresentationLayer.Models
         Implements IModelAccounts
 
         Public Sub New()
-            
+
         End Sub
 
         Public Sub New(accountName As String)
@@ -21,7 +21,6 @@ Namespace PresentationLayer.Models
             updateResult = DataService.UpdateGlReferenceNumber(model)
             Return updateResult
         End Function
-
 
         Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
             Dim updateResult As Integer
@@ -47,7 +46,11 @@ Namespace PresentationLayer.Models
             Return DataService.GetSupplierOpenInvoices(Of TM)(idNo)
         End Function
 
-   
+        Public Function GetAcctReconItems(Of TM)(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+            As List(Of TM) Implements IModelAccounts.GetAcctReconItems
+            Return DataService.GetAcctReconItems(Of TM)(accountIdNo, reconciliationDate, sortExpression)
+        End Function
+
     End Class
 
     'Public Class ModelOpenInvoice
@@ -56,7 +59,7 @@ Namespace PresentationLayer.Models
 
     '    'Protected Property ServiceOpenInvoice
     '    Public Sub New()
-            
+
     '    End Sub
 
     '    Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
