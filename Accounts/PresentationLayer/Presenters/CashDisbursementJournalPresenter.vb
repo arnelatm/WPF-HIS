@@ -41,10 +41,8 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function UpdateGlReferenceNumber() As String
-            Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-            Return retValue
+            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
         End Function
 
         Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer

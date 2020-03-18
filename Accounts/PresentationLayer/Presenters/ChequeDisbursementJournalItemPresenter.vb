@@ -1,18 +1,17 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ChequeDisbursementJournalItemsPresenter
+    Public Class CheckDisbursementJournalItemsPresenter
         Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelChequeDisbursementJournalItem()
+            ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
             DataModel = New JournalItemModel
@@ -69,7 +68,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         ''' <summary>
-        '''     Displays list of Cheque Disbursement Journal Items.
+        '''     Displays list of Check Disbursement Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
         Public Shadows Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)

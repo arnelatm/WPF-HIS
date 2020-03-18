@@ -22,9 +22,10 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _arJournalDao                  As IDao(Of ArJournal) = DaoFactoryAccounts.CreateDao("ArJournal")
         Private ReadOnly _cashDisbursementJournalDao    As IDao(Of CashDisbursementJournal) = DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
         Private ReadOnly _cashReceiptJournalDao         As IDao(Of CashReceiptJournal) = DaoFactoryAccounts.CreateDao("CashReceiptJournal")
+        Private ReadOnly _checkDisbursementJournalDao   As IDao(Of CheckDisbursementJournal) = DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
         Private ReadOnly _generalJournalDao             As IDao(Of GeneralJournal) = DaoFactoryAccounts.CreateDao("GeneralJournal")
         Private ReadOnly _pettyCashJournalDao           As IDao(Of PettyCashJournal) = DaoFactoryAccounts.CreateDao("PettyCashJournal")
-
+        Private ReadOnly _salesJournalDao               As IDao(Of SalesJournal) = DaoFactoryAccounts.CreateDao("SalesJournal")
 
         Private ReadOnly _bankDao               As IDaoAll(Of Bank) = DaoFactoryAccounts.CreateDao("Bank")
         Private ReadOnly _cashCodeDao           As IDaoAll(Of CashCode) = DaoFactoryAccounts.CreateDao("CashCode")
@@ -44,7 +45,9 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _journalItemDao            As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ApJournalItem")
         Private ReadOnly _cadOiItemDao              As IDaoChild(Of cadOiItem) = DaoFactoryAccounts.CreateDao("CadOiItem")
         Private ReadOnly _csrOiItemDao              As IDaoChild(Of csrOiItem) = DaoFactoryAccounts.CreateDao("CsrOiItem")
+        Private ReadOnly _ckdOiItemDao              As IDaoChild(Of ckdOiItem) = DaoFactoryAccounts.CreateDao("CkdOiItem")
         Private ReadOnly _pcsOiItemDao              As IDaoChild(Of PcsOiItem) = DaoFactoryAccounts.CreateDao("PcsOiItem")
+        Private ReadOnly _salesCashItemDao          As IDaoChild(Of SalesCashItem) = DaoFactoryAccounts.CreateDao("SalesCashItem")
 
 
         Private ReadOnly _apOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) = DaoFactoryAccounts.CreateDao("ApOpenInvoice")

@@ -1,17 +1,19 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for PurchaseJournal
     ' ** DAO Pattern
 
     Public Class PurchaseJournalDao
-        Implements IPurchaseJournalDao
+        Implements IDao(Of PurchaseJournal), IDaoJournals(Of PurchaseJournal)
 
-        Private Shared Db As New Db()
+' ReSharper disable once InconsistentNaming
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As PurchaseJournal _
-        Implements IPurchaseJournalDao.GetRecordById
+        Implements IDao(Of PurchaseJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, SupplierIdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, DueDate, " &
                     " InvoiceNo, InvoiceDate, SettlementDiscount, SettlementDueDate, VatNumber, VatAmount, Posted, " &
@@ -22,16 +24,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of PurchaseJournal) _
-            Implements IPurchaseJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, SupplierIdNo, TransactionDate " &
-                    "   FROM [PurchaseJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef purchaseJournal As PurchaseJournal) As Integer _
-            Implements IPurchaseJournalDao.UpdateRecord
+            Implements IDao(Of PurchaseJournal).UpdateRecord
             Dim sql As String =
                     " UPDATE [PurchaseJournal]" &
                     "   SET SupplierIdNo = @SupplierIdNo," &
@@ -54,7 +48,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef purchaseJournal As PurchaseJournal) As Integer _
-            Implements IPurchaseJournalDao.AddRecord
+            Implements IDao(Of PurchaseJournal).AddRecord
             Dim sql As String =
                     " INSERT INTO [PurchaseJournal] " &
                     " (SupplierIdNo,TransactionDate,ReferenceNo,Amount,AccountIdNo,DueDate,InvoiceNo,InvoiceDate,SettlementDiscount,SettlementDueDate,VatNumber,VatAmount,Posted,Cancelled,Notes)" &
@@ -106,11 +100,11 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IPurchaseJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As PurchaseJournal) As Integer Implements IDaoJournals(Of PurchaseJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = model.TransactionDate
+            Dim transactionDate = bizObj.TransactionDate
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
@@ -135,10 +129,11 @@ Namespace DataLayer.AdoNet
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [PurchaseJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & model.IdNo
+                   ")) where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
+
 
     End Class
 

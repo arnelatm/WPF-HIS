@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
@@ -7,16 +6,15 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class PurchaseJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItem, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelPurchaseJournalItem()
+            ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            BizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 

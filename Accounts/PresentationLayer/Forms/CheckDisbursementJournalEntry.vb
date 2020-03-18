@@ -5,19 +5,18 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
     Public Class CheckDisbursementJournalEntry
-        Implements IChequeDisbursementJournalView, IJournalItemsView, ICkdOiItemsView
+        Implements ICheckDisbursementJournalView, IJournalItemsView, ICkdOiItemsView
 
         Protected DtCkdOiInsertTable As New DataTable
         Protected DtCkdOiUpdateTable As New DataTable
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _ckdOiItemsPresenter As CkdOiItemsPresenter
-        Private ReadOnly _journalItemsPresenter As ChequeDisbursementJournalItemsPresenter
+        Private ReadOnly _journalItemsPresenter As CheckDisbursementJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private ReadOnly _payeeOrigWidth As Integer
@@ -34,17 +33,17 @@ Namespace PresentationLayer.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "ChequeDisbursementJournal"
+            MainTableName = "CheckDisbursementJournal"
             IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = cboPayeeIdNo
 
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New ChequeDisbursementJournalPresenter(Me)
+            PresenterObj = New CheckDisbursementJournalPresenter(Me)
 
             _advancesToSupplierAccountIdNo = PresenterObj.GetadvancesToSupplierAccountIdNo()
-            _journalItemsPresenter = New ChequeDisbursementJournalItemsPresenter(Me)
+            _journalItemsPresenter = New CheckDisbursementJournalItemsPresenter(Me)
             _ckdOiItemsPresenter = New CkdOiItemsPresenter(Me)
 
             PresenterObj.JournalItemsPresenter = _journalItemsPresenter
@@ -82,7 +81,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Public Property AccountIdNo As Integer Implements IChequeDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Integer Implements ICheckDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -91,7 +90,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Amount As Decimal Implements IChequeDisbursementJournalView.Amount
+        Public Property Amount As Decimal Implements ICheckDisbursementJournalView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
@@ -101,7 +100,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Applied As Decimal Implements IChequeDisbursementJournalView.Applied
+        Public Property Applied As Decimal Implements ICheckDisbursementJournalView.Applied
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtApplied.Text), _nfi)
             End Get
@@ -110,7 +109,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Cancelled As Boolean Implements IChequeDisbursementJournalView.Cancelled
+        Public Property Cancelled As Boolean Implements ICheckDisbursementJournalView.Cancelled
             Get
                 Return chkCancelled.Checked
             End Get
@@ -119,7 +118,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CheckDate As DateTime? Implements IChequeDisbursementJournalView.CheckDate
+        Public Property CheckDate As DateTime? Implements ICheckDisbursementJournalView.CheckDate
             Get
                 If String.IsNullOrEmpty(dtpCheckDate.Text) Then
                     Return Nothing
@@ -135,7 +134,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CheckNumber As String Implements IChequeDisbursementJournalView.CheckNumber
+        Public Property CheckNumber As String Implements ICheckDisbursementJournalView.CheckNumber
             Get
                 Return txtCheckNumber.Text
             End Get
@@ -154,7 +153,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IChequeDisbursementJournalView.DateCreated
+        Public Property DateCreated As DateTime? Implements ICheckDisbursementJournalView.DateCreated
             Get
                 If String.IsNullOrEmpty(txtDateCreated.Text) Then
                     Return Now()
@@ -170,7 +169,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Integer Implements IChequeDisbursementJournalView.DiscountAccountIdNo
+        Public Property DiscountAccountIdNo As Integer Implements ICheckDisbursementJournalView.DiscountAccountIdNo
             Get
                 Return cboDiscountAccountIdNo.GetValue()
             End Get
@@ -179,7 +178,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountTaken As Decimal Implements IChequeDisbursementJournalView.DiscountTaken
+        Public Property DiscountTaken As Decimal Implements ICheckDisbursementJournalView.DiscountTaken
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtDiscountTaken.Text), _nfi)
             End Get
@@ -188,7 +187,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IChequeDisbursementJournalView.IdNo
+        Public Property IdNo As Integer Implements ICheckDisbursementJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -211,7 +210,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Notes As String Implements IChequeDisbursementJournalView.Notes
+        Public Property Notes As String Implements ICheckDisbursementJournalView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -220,7 +219,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ORNumber As String Implements IChequeDisbursementJournalView.OrNumber
+        Public Property ORNumber As String Implements ICheckDisbursementJournalView.OrNumber
             Get
                 Return txtORNumber.Text
             End Get
@@ -229,7 +228,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeIdNo As Integer Implements IChequeDisbursementJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Integer Implements ICheckDisbursementJournalView.PayeeIdNo
             Get
                 Return cboPayeeIdNo.GetValue()
             End Get
@@ -238,7 +237,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeName As String Implements IChequeDisbursementJournalView.PayeeName
+        Public Property PayeeName As String Implements ICheckDisbursementJournalView.PayeeName
             Get
                 Return txtPayeeName.Text
             End Get
@@ -247,7 +246,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PaymentType As String Implements IChequeDisbursementJournalView.PaymentType
+        Public Property PaymentType As String Implements ICheckDisbursementJournalView.PaymentType
             Get
                 Return cboPaymentType.GetValue()
             End Get
@@ -257,7 +256,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Posted As Boolean Implements IChequeDisbursementJournalView.Posted
+        Public Property Posted As Boolean Implements ICheckDisbursementJournalView.Posted
             Get
                 Return chkPosted.Checked
             End Get
@@ -266,7 +265,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ReferenceNo As String Implements IChequeDisbursementJournalView.ReferenceNo
+        Public Property ReferenceNo As String Implements ICheckDisbursementJournalView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
             End Get
@@ -275,7 +274,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IChequeDisbursementJournalView.TotalCredits
+        Public Property TotalCredits As Decimal Implements ICheckDisbursementJournalView.TotalCredits
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCredits.Text), _nfi)
             End Get
@@ -284,7 +283,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IChequeDisbursementJournalView.TotalDebits
+        Public Property TotalDebits As Decimal Implements ICheckDisbursementJournalView.TotalDebits
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebits.Text), _nfi)
             End Get
@@ -293,7 +292,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TransactionDate As Date? Implements IChequeDisbursementJournalView.TransactionDate
+        Public Property TransactionDate As Date? Implements ICheckDisbursementJournalView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -306,7 +305,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property UnApplied As Decimal Implements IChequeDisbursementJournalView.UnApplied
+        Public Property UnApplied As Decimal Implements ICheckDisbursementJournalView.UnApplied
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnapplied.Text), _nfi)
             End Get
@@ -315,7 +314,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property VatAmount As Decimal Implements IChequeDisbursementJournalView.VatAmount
+        Public Property VatAmount As Decimal Implements ICheckDisbursementJournalView.VatAmount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
             End Get
@@ -324,7 +323,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property VatNumber As String Implements IChequeDisbursementJournalView.VatNumber
+        Public Property VatNumber As String Implements ICheckDisbursementJournalView.VatNumber
             Get
                 Return txtVatNumber.Text
             End Get
@@ -344,7 +343,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             SuspendLayout()
-            txtJournalCode.Text = AccountStrings.ChequeDisbursementJournalPrefix
+            txtJournalCode.Text = AccountStrings.CheckDisbursementJournalPrefix
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             Dim item As New JournalItemModel With {
@@ -367,7 +366,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If AddMode Then
-                txtJournalCode.Text = AccountStrings.ChequeDisbursementJournalPrefix
+                txtJournalCode.Text = AccountStrings.CheckDisbursementJournalPrefix
             End If
             If PaymentTypeToEnum(PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                 If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
@@ -803,7 +802,7 @@ Namespace PresentationLayer.Forms
             SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
-        Private Sub ChequeDisbursementJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub CheckDisbursementJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
             'JournalItems = New List(Of JournalItemModel)
             'CkdOiItems = New List(Of CkdOiItemModel)
@@ -847,7 +846,7 @@ Namespace PresentationLayer.Forms
                         _journalItemsPresenter.ChangesMadeInJournalItem = True
                         If EditMode OrElse AddMode Then
                             If .RowIndex() = 0 Then
-                                MessageBox.Show($"Sorry, insertion on first row not allowed for ChequeDisbursement journal.")
+                                MessageBox.Show($"Sorry, insertion on first row not allowed for CheckDisbursement journal.")
                             Else
                                 Dim newRow As New JournalItemModel
                                 bsJournalItems.Insert(.RowIndex(), newRow)
@@ -1351,10 +1350,10 @@ Namespace PresentationLayer.Forms
                                     ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow _
 
             ' Check if the starting balance row is included in the selected rows
-            Dim chequeDisbursementRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
+            Dim checkDisbursementRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
 
             ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(chequeDisbursementRowEntry) Then
+            If DataGridViewJournalItems.SelectedRows.Contains(checkDisbursementRowEntry) Then
                 ' Do not allow the user to delete the first row.
                 MessageBox.Show($"Deletion of the first row is not allowed!")
                 ' Cancel the deletion

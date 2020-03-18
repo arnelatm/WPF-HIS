@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICkdOiItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelCkdOiItem()
+            ModelPresenter = New ModelAccounts("CkdOiItem")
             TableName = "CkdOiItem"
             SortOrderKey = "Sequence"
             DataModel = New CkdOiItemModel
@@ -83,7 +83,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of CkdOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of CkdOiItemModel)(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

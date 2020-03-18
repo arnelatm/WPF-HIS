@@ -1,7 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
@@ -9,22 +6,16 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class PurchaseJournalPresenter
-        Inherits AccountsPresenter(Of IPurchaseJournalView, PurchaseJournal, PurchaseJournalModel)
+        Inherits AccountsPresenter(Of IPurchaseJournalView, PurchaseJournalModel)
 
         Public ParentViewList As List(Of PurchaseJournalModel)
 
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-        End Sub
-
         Public Sub New(view As IPurchaseJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelPurchaseJournal()
+            ModelPresenter = New ModelAccounts("PurchaseJournal")
             TableName = "PurchaseJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New PurchaseJournalModel()
-            BizObject = New PurchaseJournal
             DataModel = New PurchaseJournalModel
         End Sub
 
@@ -68,10 +59,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function UpdateGlReferenceNumber() As String
-            Dim retValue As String
-            'DataModel = GlobalVariables.Mapper.Map(Of PurchaseJournalModel)(BizObject)
-            retValue = Model.UpdateGlReferenceNumber(BizObject)
-            Return retValue
+            GlobalVariables.Mapper.Map(View, DataModel)
+            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
         End Function
 
     End Class

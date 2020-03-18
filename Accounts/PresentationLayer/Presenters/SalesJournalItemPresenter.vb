@@ -1,23 +1,20 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Common
 
 Namespace PresentationLayer.Presenters
 
 
     Public Class SalesJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItem, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelSalesJournalItem()
+            ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            BizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 
@@ -76,7 +73,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
         Public Shadows Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
-            View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
