@@ -3,16 +3,16 @@ Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
-    ' Data access object for ChequeDisbursementJournal
+    ' Data access object for CheckDisbursementJournal
     ' ** DAO Pattern
 
-    Public Class ChequeDisbursementJournalDao
-        Implements IDao(Of ChequeDisbursementJournal)
+    Public Class CheckDisbursementJournalDao
+        Implements IDao(Of CheckDisbursementJournal), IDaoJournals(Of CheckDisbursementJournal)
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As ChequeDisbursementJournal _
-            Implements IDao(Of ChequeDisbursementJournal).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As CheckDisbursementJournal _
+            Implements IDao(Of CheckDisbursementJournal).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -36,16 +36,16 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM [ChequeDisbursementJournal]" &
+                    " FROM [CheckDisbursementJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef chequeDisbursementJournal As ChequeDisbursementJournal) As Integer _
-            Implements IDao(Of ChequeDisbursementJournal).UpdateRecord
+        Public Function UpdateRecord(ByRef checkDisbursementJournal As CheckDisbursementJournal) As Integer _
+            Implements IDao(Of CheckDisbursementJournal).UpdateRecord
             Dim sql As String =
-                    "UPDATE [ChequeDisbursementJournal] SET " &
+                    "UPDATE [CheckDisbursementJournal] SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
@@ -66,12 +66,12 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(chequeDisbursementJournal))
+            Return Db.Update(sql, Take(checkDisbursementJournal))
         End Function
 
-        Public Function AddRecord(ByRef chequeDisbursementJournal As ChequeDisbursementJournal) As Integer _
-            Implements IDao(Of ChequeDisbursementJournal).AddRecord
-            Dim sql As String = "INSERT INTO [ChequeDisbursementJournal] (" &
+        Public Function AddRecord(ByRef checkDisbursementJournal As CheckDisbursementJournal) As Integer _
+            Implements IDao(Of CheckDisbursementJournal).AddRecord
+            Dim sql As String = "INSERT INTO [CheckDisbursementJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
                     "Applied," &
@@ -112,12 +112,12 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return Db.Insert(sql, Take(chequeDisbursementJournal))
+            Return Db.Insert(sql, Take(checkDisbursementJournal))
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, ChequeDisbursementJournal) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, CheckDisbursementJournal) =
                                     Function(reader) _
-            New ChequeDisbursementJournal() With {
+            New CheckDisbursementJournal() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
@@ -141,39 +141,39 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Function Take(chequeDisbursementJournal As ChequeDisbursementJournal) As Object()
+        Private Function Take(checkDisbursementJournal As CheckDisbursementJournal) As Object()
             Return New Object() {
-                                    "@AccountIdNo", chequeDisbursementJournal.AccountIdNo,
-                                    "@Amount", chequeDisbursementJournal.Amount,
-                                    "@Applied", chequeDisbursementJournal.Applied,
-                                    "@Cancelled", chequeDisbursementJournal.Cancelled,
-                                    "@CheckDate", chequeDisbursementJournal.CheckDate,
-                                    "@CheckNumber", chequeDisbursementJournal.CheckNumber,
-                                    "@DateCreated", chequeDisbursementJournal.DateCreated,
-                                    "@DiscountAccountIdNo", chequeDisbursementJournal.DiscountAccountIdNo,
-                                    "@DiscountTaken", chequeDisbursementJournal.DiscountTaken,
-                                    "@IdNo", chequeDisbursementJournal.IdNo,
-                                    "@Notes", chequeDisbursementJournal.Notes,
-                                    "@ORNumber", chequeDisbursementJournal.OrNumber,
-                                    "@PayeeIdNo", chequeDisbursementJournal.PayeeIdNo,
-                                    "@PayeeName", chequeDisbursementJournal.PayeeName,
-                                    "@PaymentType", chequeDisbursementJournal.PaymentType,
-                                    "@Posted", chequeDisbursementJournal.Posted,
-                                    "@ReferenceNo", chequeDisbursementJournal.ReferenceNo,
-                                    "@TransactionDate", chequeDisbursementJournal.TransactionDate,
-                                    "@UnApplied", chequeDisbursementJournal.UnApplied,
-                                    "@VatAmount", chequeDisbursementJournal.VatAmount,
-                                    "@VatNumber", chequeDisbursementJournal.VatNumber
+                                    "@AccountIdNo", checkDisbursementJournal.AccountIdNo,
+                                    "@Amount", checkDisbursementJournal.Amount,
+                                    "@Applied", checkDisbursementJournal.Applied,
+                                    "@Cancelled", checkDisbursementJournal.Cancelled,
+                                    "@CheckDate", checkDisbursementJournal.CheckDate,
+                                    "@CheckNumber", checkDisbursementJournal.CheckNumber,
+                                    "@DateCreated", checkDisbursementJournal.DateCreated,
+                                    "@DiscountAccountIdNo", checkDisbursementJournal.DiscountAccountIdNo,
+                                    "@DiscountTaken", checkDisbursementJournal.DiscountTaken,
+                                    "@IdNo", checkDisbursementJournal.IdNo,
+                                    "@Notes", checkDisbursementJournal.Notes,
+                                    "@ORNumber", checkDisbursementJournal.OrNumber,
+                                    "@PayeeIdNo", checkDisbursementJournal.PayeeIdNo,
+                                    "@PayeeName", checkDisbursementJournal.PayeeName,
+                                    "@PaymentType", checkDisbursementJournal.PaymentType,
+                                    "@Posted", checkDisbursementJournal.Posted,
+                                    "@ReferenceNo", checkDisbursementJournal.ReferenceNo,
+                                    "@TransactionDate", checkDisbursementJournal.TransactionDate,
+                                    "@UnApplied", checkDisbursementJournal.UnApplied,
+                                    "@VatAmount", checkDisbursementJournal.VatAmount,
+                                    "@VatNumber", checkDisbursementJournal.VatNumber
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IDao(Of ChequeDisbursementJournal).UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As CheckDisbursementJournal) As Integer Implements IDaoJournals(Of CheckDisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim series = "CDJOURNAL"
+            Const series As String = "CDJOURNAL"
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [ChequeDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & model.IdNo
+            sql2 = "Update [CheckDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function

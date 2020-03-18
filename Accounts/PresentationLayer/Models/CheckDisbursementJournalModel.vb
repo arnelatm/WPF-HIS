@@ -4,7 +4,7 @@ Namespace PresentationLayer.Models
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class ChequeDisbursementJournalModel
+    Public Class CheckDisbursementJournalModel
 
         Public Property AccountIdNo As Int32
         Public Property Amount As Decimal

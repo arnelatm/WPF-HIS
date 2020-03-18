@@ -157,9 +157,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to CK.
         '''</summary>
-        Friend Shared ReadOnly Property ChequeDisbursementJournalPrefix() As String
+        Friend Shared ReadOnly Property CheckDisbursementJournalPrefix() As String
             Get
-                Return ResourceManager.GetString("ChequeDisbursementJournalPrefix", resourceCulture)
+                Return ResourceManager.GetString("CheckDisbursementJournalPrefix", resourceCulture)
             End Get
         End Property
         

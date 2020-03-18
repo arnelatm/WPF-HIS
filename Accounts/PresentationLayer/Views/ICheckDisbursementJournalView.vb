@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views
 
-    Public Interface IChequeDisbursementJournalView
+    Public Interface ICheckDisbursementJournalView
         Inherits IView
         Property AccountIdNo As Int32
         Property Amount As Decimal
