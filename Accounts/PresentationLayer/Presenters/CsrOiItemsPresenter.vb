@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelCsrOiItem()
+            ModelPresenter = New ModelAccounts("CsrOiItem")
             TableName = "CsrOiItem"
             SortOrderKey = "Sequence"
             DataModel = New CsrOiItemModel

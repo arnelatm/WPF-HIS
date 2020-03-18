@@ -10,16 +10,16 @@ Namespace PresentationLayer.Presenters
 
         Public ParentViewList As List(Of CashReceiptJournalModel)
         Private _arOpenInvoiceBo As New ArOpenInvoice
-        Private ReadOnly _arOpenInvoiceModel As New ModelArOpenInvoice
+        Private ReadOnly _arOpenInvoiceModel As New ModelAccounts("ArOpenInvoice")
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelCashReceiptJournal()
+            ModelPresenter = New ModelAccounts("CashReceiptJournal")
             TableName = "CashReceiptJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New CashReceiptJournalModel()
             DataModel = New CashReceiptJournalModel
-            _arOpenInvoiceModel = New ModelArOpenInvoice
+            '_arOpenInvoiceModel = New ModelArOpenInvoice
         End Sub
 
         Public Property JournalItemsPresenter As CashReceiptJournalItemsPresenter
@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function ChangesMade() As Boolean
             Dim cashReceiptJournalChangesMade As Boolean
-            If GlobalFunctions.ObjectsCompare(OriginalModel, View) Then
+            If ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
                     cashReceiptJournalChangesMade = True
                 ElseIf CsrOiItemsPresenter.ChangesMadeInCsrOiItem Then
@@ -43,8 +43,8 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            DataModel = GlobalVariables.Mapper.Map(Of CashReceiptJournalModel)(BizObject)
-            retValue = Model.UpdateGlReferenceNumber(DataModel)
+            GlobalVariables.Mapper.Map(View, DataModel)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Integer) As String
             Dim retVal As String
-            retVal = Model.GetCustomerOpenInvoices(customerIdNo)
+            retVal = ModelPresenter.GetCustomerOpenInvoices(customerIdNo)
             Return retVal
         End Function
 

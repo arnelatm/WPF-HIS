@@ -197,6 +197,12 @@
     <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.Designer.vb">
+      <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
     </Compile>
@@ -295,8 +301,11 @@
     <Compile Include="PresentationLayer\Presenters\CadOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashReceiptJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DesignationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
@@ -368,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.resx">
       <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\CashReceiptJournalEntry.resx">
+      <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CategoryEntryTv.resx">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>

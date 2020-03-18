@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelCashReceiptJournalItem()
+            ModelPresenter = New ModelAccounts("CashReceiptJournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
             DataModel = New JournalItemModel
