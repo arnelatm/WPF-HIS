@@ -110,6 +110,7 @@ Namespace PresentationLayer.Forms
         Me.txtIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtIdNo.LinkedLabel = Me.lblIdNo
         Me.txtIdNo.Name = "txtIdNo"
+        Me.txtIdNo.OldValue = Nothing
         Me.txtIdNo.ReadOnly = true
         Me.txtIdNo.TabStop = false
         '
@@ -131,6 +132,7 @@ Namespace PresentationLayer.Forms
         Me.txtAccountCode.ForeColor = System.Drawing.Color.Black
         Me.txtAccountCode.LinkedLabel = Me.lblAccountCode
         Me.txtAccountCode.Name = "txtAccountCode"
+        Me.txtAccountCode.OldValue = Nothing
         Me.txtAccountCode.ReadOnly = true
         Me.txtAccountCode.ValueIsMandatory = true
         '
@@ -152,6 +154,7 @@ Namespace PresentationLayer.Forms
         Me.txtAccountName.ForeColor = System.Drawing.Color.Black
         Me.txtAccountName.LinkedLabel = Me.lblAccountName
         Me.txtAccountName.Name = "txtAccountName"
+        Me.txtAccountName.OldValue = Nothing
         Me.txtAccountName.ReadOnly = true
         Me.txtAccountName.ValueIsMandatory = true
         '
@@ -174,6 +177,7 @@ Namespace PresentationLayer.Forms
         Me.txtAccountNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtAccountNameAra.LinkedLabel = Me.lblAccountNameAra
         Me.txtAccountNameAra.Name = "txtAccountNameAra"
+        Me.txtAccountNameAra.OldValue = Nothing
         Me.txtAccountNameAra.ReadOnly = true
         '
         'lblAccountNameAra
@@ -194,6 +198,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
@@ -292,6 +297,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.IgnoreNullCheck = true
         Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
         Me.txtLevelNumber.Name = "txtLevelNumber"
+        Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
         Me.txtLevelNumber.ValueIsMandatory = true
         '
@@ -523,6 +529,7 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.ForeColor = System.Drawing.Color.Black
         Me.txtSortKey.LinkedLabel = Nothing
         Me.txtSortKey.Name = "txtSortKey"
+        Me.txtSortKey.OldValue = Nothing
         Me.txtSortKey.ReadOnly = true
         Me.txtSortKey.TabStop = false
         Me.txtSortKey.ValueIsMandatory = true
