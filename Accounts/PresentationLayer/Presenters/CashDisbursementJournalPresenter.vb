@@ -67,10 +67,8 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As String
-            Dim retVal As String
-            retVal = ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
-            Return retVal
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of CadOiItemModel)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of CadOiItemModel)(supplierIdNo)
         End Function
 
     End Class

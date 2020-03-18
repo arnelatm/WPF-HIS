@@ -163,7 +163,7 @@ Namespace PresentationLayer.Forms
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemindex.Click
-            MessageBox.Show(" Help is not implemented... ", "Help")
+            MessageBox.Show("Help is not implemented... ", "Help")
         End Sub
 
         ''' <summary>
@@ -500,10 +500,10 @@ Namespace PresentationLayer.Forms
             ShowEntryForm(CashDisbursementJournalEntry)
         End Sub
 
-        'Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemCashReceiptEntry.Click
-        '    ShowEntryForm(CashReceiptJournalEntry)
-        'End Sub
+        Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCashReceiptEntry.Click
+            ShowEntryForm(CashReceiptJournalEntry)
+        End Sub
 
         Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemChartOfAccounts.Click
@@ -1064,15 +1064,15 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        'Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
-        '    Dim childMdiForm As PettyCashJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New PettyCashJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
+        Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
+            Dim childMdiForm As PettyCashJournalEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New PettyCashJournalEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
 
     End Class
 

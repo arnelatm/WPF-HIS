@@ -2,15 +2,16 @@
 ' ** DAO Pattern
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     Public Class PettyCashJournalDao
-        Implements IPettyCashJournalDao
+        Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As PettyCashJournal _
-            Implements IPettyCashJournalDao.GetRecordById
+            Implements IDao(Of PettyCashJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, PaymentType, PayeeIdNo, PayeeName, " &
                     " ORNumber, DiscountTaken, DiscountAccountIdNo, Applied, UnApplied, Notes, VatNumber, VatAmount, Posted, Cancelled, DateCreated" &
@@ -20,16 +21,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of PettyCashJournal) _
-            Implements IPettyCashJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [PettyCashJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef pettyCashJournal As PettyCashJournal) As Integer _
-            Implements IPettyCashJournalDao.UpdateRecord
+            Implements IDao(Of PettyCashJournal).UpdateRecord
             Dim sql As String =
                     " UPDATE [PettyCashJournal]" &
                     " SET TransactionDate = @TransactionDate," &
@@ -54,7 +47,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef pettyCashJournal As PettyCashJournal) As Integer _
-            Implements IPettyCashJournalDao.AddRecord
+            Implements IDao(Of PettyCashJournal).AddRecord
             Dim sql As String =
                     " INSERT INTO [PettyCashJournal] " &
                     " (TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayeeIdNo,PayeeName,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,Notes,VatNumber,VatAmount,Posted,Cancelled)" &
@@ -110,7 +103,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        'Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IPettyCashJournalDao.UpdateGlReferenceNumber
+        'Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IDao(Of PettyCashJournal).UpdateGlReferenceNumber
         '    Dim retVal As Boolean
         '    Dim sql1 As String
         '    Dim sql2 As String
@@ -122,15 +115,14 @@ Namespace DataLayer.AdoNet
         '    Return retVal
         'End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IPettyCashJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As PettyCashJournal) As Integer Implements IDaoJournals(Of PettyCashJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
             Dim series = $"PCJOURNAL"
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [PettyCashJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & model.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-            Return retVal
+            sql2 = "Update [PettyCashJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
+            Return Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
         End Function
 
     End Class

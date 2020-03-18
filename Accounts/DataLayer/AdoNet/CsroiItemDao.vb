@@ -11,7 +11,8 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of CsrOiItem), IDaoOiItem(Of CsrOiItem)
 
-        Private Shared ReadOnly Db As New Db()
+' ReSharper disable once InconsistentNaming
+        Private ReadOnly Db As New Db()
         Protected TableFileName As String = "CsrOiItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCsrOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCsrOiItemTVP"
