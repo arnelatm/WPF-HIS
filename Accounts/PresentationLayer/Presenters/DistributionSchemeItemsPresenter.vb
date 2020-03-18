@@ -4,12 +4,12 @@ Imports AATM.Accounts.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class DistributionSchemeItemsPresenter
-        Inherits AccountsPresenter(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
+        Inherits AccountsPresenter(Of IDistributionSchemeItemView, DistributionSchemeItemModel)
 
         Public ParentViewList As List(Of DistributionSchemeItemModel)
         Private Shared _changesMadeInDataGrid As Boolean = False
 
-        Public Sub New(view As IDistributionSchemeItemsView)
+        Public Sub New(view As IDistributionSchemeItemView)
             MyBase.New(view)
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"

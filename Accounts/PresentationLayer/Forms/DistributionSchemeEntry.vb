@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntry
-        Implements IDistributionSchemeView, IDistributionSchemeItemsView
+        Implements IDistributionSchemeView, IDistributionSchemeItemView
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Forms
 
 #Region "DistributionSchemeItemsView"
 
-        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
+        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get

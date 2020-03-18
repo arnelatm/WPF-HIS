@@ -3,9 +3,8 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
-    Public Interface IDistributionSchemeItemsView
+    Public Interface IDistributionSchemeItemView
         Inherits IView
-
         Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel)
 
     End Interface
