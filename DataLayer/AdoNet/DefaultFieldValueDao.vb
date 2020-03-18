@@ -8,7 +8,7 @@ Namespace AdoNet
     Public Class DefaultFieldValueDao
         Implements IDefaultFieldValueDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As DefaultFieldValue _
             Implements IDefaultFieldValueDao.GetRecordById

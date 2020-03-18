@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class ArJournalDao
         Implements IDao(Of ArJournal), IDaoJournals(Of ArJournal)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As ArJournal _
         Implements IDao(Of ArJournal).GetRecordById

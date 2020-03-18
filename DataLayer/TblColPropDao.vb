@@ -6,7 +6,7 @@
 Public Class TblColPropDao
     Implements ITblColPropDao
 
-    Private Shared ReadOnly Db As New Db()
+    Private ReadOnly Db As New Db()
 
     Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) _
         Implements ITblColPropDao.GetMainTableColumnProperties

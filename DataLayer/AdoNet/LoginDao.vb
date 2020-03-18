@@ -7,7 +7,7 @@ Namespace AdoNet
     Public Class LoginDao
         Implements ILoginDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetLogin(idNo As Integer) As Login Implements ILoginDao.GetLogin
             Dim sql As String =

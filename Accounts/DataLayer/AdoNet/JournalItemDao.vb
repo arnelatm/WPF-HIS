@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
         Inherits DaoAccounts
         Implements IDaoChild(Of JournalItem)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
         Protected TableFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""

@@ -54,6 +54,7 @@ Namespace Services
             Dim dataModel As New List(Of TM)
             GlobalVariables.Mapper.Map(bizData, dataModel)
             'For Each bObject In bizData
+
             '    Dim model As TM
             '    model = GlobalVariables.Mapper.Map(Of TM)(bObject)
             '    viewObject.Add(model)

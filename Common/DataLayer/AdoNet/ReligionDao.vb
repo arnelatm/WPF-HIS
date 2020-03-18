@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IReligionDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As Religion Implements IReligionDao.GetRecordById
             Dim sql As String =

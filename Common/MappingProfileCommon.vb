@@ -26,8 +26,8 @@ Public Class MappingProfileCommon
         CreateMap(Of RevenueGroupModel, IRevenueGroupView).ReverseMap()
         CreateMap(Of TranslatedMessages, TranslatedMessagesModel).ReverseMap()
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView).ReverseMap()
-        'CreateMap(Of OriginalMessage, OriginalMessageModel).ReverseMap()
-        'CreateMap(Of OriginalMessageModel, IOriginalMessageView).ReverseMap()
+        CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
+        CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
     End Sub
 
 End Class

@@ -1,7 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -9,20 +7,13 @@ Namespace PresentationLayer.Presenters
     Public Class AccountsPresenter(Of T As IView, TM As New)
         Inherits CommonPresenter(Of T, TM)
 
-        'Protected Shared Property ModelApOpenInvoice As IModelOpenInvoice
-        Protected Shared Property ModelArOpenInvoice As IModelOpenInvoice
-        Protected Shared Property ModelCashCode As IModelCashCode
+        'Protected Shared Property ModelApOpenInvoice As
+        'IModelOpenInvoice
+        'Private Property ModelArOpenInvoice ' As IModelOpenInvoice
+        'Private Property ModelCashCode ' As IModelCashCode
 
         Public Sub New(view As T)
             MyBase.New(view)
-        End Sub
-
-        Shared Sub New()
-            ModelTblColProp = New ModelTblColProp
-            ModelDefaultFieldValue = New ModelDefaultFieldValue
-            'ModelApOpenInvoice = New ModelApOpenInvoice
-            'ModelArOpenInvoice = New ModelArOpenInvoice
-            'ModelCashCode = New ModelCashCode
         End Sub
 
         Public Sub Initializer(baseClassName As String)
@@ -100,48 +91,42 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim retVal As Integer
             Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            Dim apOpenInvoiceModel As New ApOpenInvoiceModel
-            apOpenInvoiceModel.PaidAmount = 0
-            apOpenInvoiceModel.DiscountTaken = 0
-            apOpenInvoiceModel.JournalCode = journalCode
-            apOpenInvoiceModel.JournalIdNo = journalItem.JournalIdNo
-            apOpenInvoiceModel.JournalItemIdNo = journalItem.IdNo
-            retVal = ModelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
-            Return retVal
+            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
+                .PaidAmount = 0,
+                .DiscountTaken = 0,
+                .JournalCode = journalCode,
+                .JournalIdNo = journalItem.JournalIdNo,
+                .JournalItemIdNo = journalItem.IdNo
+            }
+            Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
         End Function
 
         Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
-            Dim retValue As String
             Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            retValue = ModelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-            Return retValue
+            Return modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim retVal As Integer
-            Dim arOpenInvoiceModel As New ArOpenInvoiceModel
-
-            arOpenInvoiceModel.PaidAmount = 0
-            arOpenInvoiceModel.DiscountTaken = 0
-            arOpenInvoiceModel.JournalCode = journalCode
-            arOpenInvoiceModel.JournalIdNo = journalItem.JournalIdNo
-            arOpenInvoiceModel.JournalItemIdNo = journalItem.IdNo
-            'ModelArOpenInvoice = New ModelArOpenInvoice()
-            retVal = ModelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
-            Return retVal
+            Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
+                .PaidAmount = 0,
+                .DiscountTaken = 0,
+                .JournalCode = journalCode,
+                .JournalIdNo = journalItem.JournalIdNo,
+                .JournalItemIdNo = journalItem.IdNo
+            }
+            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
         End Function
 
         Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
-            Dim retValue As String
-            retValue = ModelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
-            Return retValue
+            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+            Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
         End Function
 
         Public Function GetCashCodesModel() As List(Of CashCodeModel)
-            Dim cashCodes As New List(Of CashCodeModel)
-            Return ModelCashCode.GetAll(Of CashCodeModel)("CashName")
+            Dim modelCashCode As New ModelAccounts("CashCode")
+            Return modelCashCode.GetAll(Of CashCodeModel)("CashName")
         End Function
 
         Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")

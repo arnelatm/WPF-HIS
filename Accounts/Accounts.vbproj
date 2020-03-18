@@ -130,6 +130,10 @@
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ChequeDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CsroiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
@@ -185,12 +189,6 @@
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\BankEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.Designer.vb">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb">
@@ -356,12 +354,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.ar-SA.resx">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.resx">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CategoryEntryTv.resx">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>

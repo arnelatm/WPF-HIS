@@ -5,7 +5,7 @@ Namespace AdoNet
     Public Class BaseDao
         Implements IBaseDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         'Public  Db As Db
         Private _lastFindQuery As String

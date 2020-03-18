@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     Public Class ApOpenInvoiceDao
         Implements IDaoOpenInvoice(Of ApOpenInvoice)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function AddRecord(ByRef apOpenInvoice As ApOpenInvoice) As Integer _
             Implements IDaoOpenInvoice(Of ApOpenInvoice).AddRecord

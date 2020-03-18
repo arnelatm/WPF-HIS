@@ -8,7 +8,7 @@ Namespace AdoNet
         Inherits BaseDao
         Implements IDaoAll(Of User)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         'Public Sub DeleteUser(user As User) Implements IDao(Of User).DeleteRecord
         '    Throw New NotImplementedException()

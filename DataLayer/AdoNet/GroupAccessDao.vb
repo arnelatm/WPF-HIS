@@ -8,7 +8,7 @@ Namespace AdoNet
         Inherits BaseDao
         Implements IDaoChild(Of GroupAccess)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         'Public Sub New()
         '    DbCommon = Db

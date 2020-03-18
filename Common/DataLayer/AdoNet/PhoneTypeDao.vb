@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IPhoneTypeDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
         
         Public Function GetRecordById(idNo As Integer) As PhoneType Implements IPhoneTypeDao.GetRecordById
             Dim sql As String =

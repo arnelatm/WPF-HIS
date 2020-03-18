@@ -8,7 +8,7 @@ Namespace PresentationLayer.Models
         Public Property Caption As String
         Public Property Notes As String
 
-        Public Property TranslatedMessages As TranslatedMessagesModel
+        'Public Property TranslatedMessages As TranslatedMessagesModel
 
     End Class
 End NameSpace

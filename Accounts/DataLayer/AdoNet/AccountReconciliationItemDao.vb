@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of AccountReconciliationItem), IDaoAccountReconciliationItem(Of AccountReconciliationItem)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
         Protected TableFileName As String = "AccountReconciliationItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateAccountReconciliationItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertAccountReconciliationItemTVP"

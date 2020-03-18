@@ -7,7 +7,7 @@ Namespace AdoNet
     Public Class SaltDao
         Implements ISaltDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetSalt(idNo As Integer) As Salt Implements ISaltDao.GetSalt
             Dim sql As String =

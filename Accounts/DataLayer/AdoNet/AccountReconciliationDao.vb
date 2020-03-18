@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class AccountReconciliationDao
         Implements IDao(Of AccountReconciliation)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As AccountReconciliation _
             Implements IDao(Of AccountReconciliation).GetRecordById
