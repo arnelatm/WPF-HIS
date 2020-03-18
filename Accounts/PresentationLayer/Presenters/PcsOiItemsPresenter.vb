@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
@@ -7,23 +6,20 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class PcsOiItemsPresenter
-        Inherits AccountsPresenter(Of IPcsOiItemsView, PcsOiItem, PcsOiItemModel)
-
-        Public ParentViewList As List(Of PcsOiItemModel)
+        Inherits AccountsPresenter(Of IPcsOiItemsView, PcsOiItemModel)
 
         Public Sub New(view As IPcsOiItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelPcsOiItem()
+            ModelPresenter = New ModelAccounts("PcsOiItem")
             TableName = "PcsOiItem"
             SortOrderKey = "Sequence"
-            BizObject = New PcsOiItem
             DataModel = New PcsOiItemModel
         End Sub
 
         Public Property ChangesMadeInPcsOiItem As Boolean = False
 
         'Public Overloads Function DataIsValid(ByRef PcsOiItems As List(Of PcsOiItemModel), ByRef dataGridView As DataGridView, ByVal appliedAmount As Decimal, ByVal unAppliedAmount As Decimal, ByVal totalBalance As Decimal)
-        Public Overloads Function DataIsValid(ByRef PcsOiItems As BindingSource, ByVal appliedAmount As Decimal, ByVal unAppliedAmount As Decimal, ByVal totalBalance As Decimal)
+        Public Overloads Function DataIsValid(ByRef pcsOiItems As BindingSource, ByVal appliedAmount As Decimal, ByVal unAppliedAmount As Decimal, ByVal totalBalance As Decimal)
             Dim retVal = True
             Dim index As Int16 = 0
             For Each item In PcsOiItems
@@ -86,7 +82,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of PcsOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

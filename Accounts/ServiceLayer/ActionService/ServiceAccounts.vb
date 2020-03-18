@@ -21,7 +21,10 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _apJournalDao                  As IDao(Of ApJournal) = DaoFactoryAccounts.CreateDao("ApJournal")
         Private ReadOnly _arJournalDao                  As IDao(Of ArJournal) = DaoFactoryAccounts.CreateDao("ArJournal")
         Private ReadOnly _cashDisbursementJournalDao    As IDao(Of CashDisbursementJournal) = DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
+        Private ReadOnly _cashReceiptJournalDao         As IDao(Of CashReceiptJournal) = DaoFactoryAccounts.CreateDao("CashReceiptJournal")
         Private ReadOnly _generalJournalDao             As IDao(Of GeneralJournal) = DaoFactoryAccounts.CreateDao("GeneralJournal")
+        Private ReadOnly _pettyCashJournalDao           As IDao(Of PettyCashJournal) = DaoFactoryAccounts.CreateDao("PettyCashJournal")
+
 
         Private ReadOnly _bankDao               As IDaoAll(Of Bank) = DaoFactoryAccounts.CreateDao("Bank")
         Private ReadOnly _cashCodeDao           As IDaoAll(Of CashCode) = DaoFactoryAccounts.CreateDao("CashCode")
@@ -39,7 +42,10 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly _arJournalItemDao          As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ArJournalItem")
         Private ReadOnly _generalJournalItemDao     As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("GeneralJournalItem")
         Private ReadOnly _journalItemDao            As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ApJournalItem")
-        Private ReadOnly _cadOiItemDao            As IDaoChild(Of cadOiItem) = DaoFactoryAccounts.CreateDao("CadOiItem")
+        Private ReadOnly _cadOiItemDao              As IDaoChild(Of cadOiItem) = DaoFactoryAccounts.CreateDao("CadOiItem")
+        Private ReadOnly _csrOiItemDao              As IDaoChild(Of csrOiItem) = DaoFactoryAccounts.CreateDao("CsrOiItem")
+        Private ReadOnly _pcsOiItemDao              As IDaoChild(Of PcsOiItem) = DaoFactoryAccounts.CreateDao("PcsOiItem")
+
 
         Private ReadOnly _apOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) = DaoFactoryAccounts.CreateDao("ApOpenInvoice")
         Private ReadOnly _arOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) = DaoFactoryAccounts.CreateDao("ArOpenInvoice")
@@ -50,10 +56,12 @@ Namespace ServiceLayer.ActionService
             DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
                 MessageBox.Show("Missing Business Object " + bizObject)
+                Debugger.Break
             End If
             Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
             If fldInfo Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + dao)
+                Debugger.Break
             End If
             DataDao = fldInfo.GetValue(Me)
         End Sub
@@ -65,6 +73,21 @@ Namespace ServiceLayer.ActionService
 
         Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
             Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+
+        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
+            Dim records = DataDao.GetCustomerOpenInvoices(idNo)
+            Dim bizObj as New List(Of TM)
+            GlobalVariables.Mapper.Map(records, bizObj)
+            Return bizObj
+        End Function
+
+        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
+            Dim records = DataDao.GetSupplierOpenInvoices(idNo)
+            Dim bizObj as New List(Of TM)
+            GlobalVariables.Mapper.Map(records, bizObj)
+            Return bizObj
         End Function
 
         Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem) Implements IServiceAccounts.GetAcctReconItems

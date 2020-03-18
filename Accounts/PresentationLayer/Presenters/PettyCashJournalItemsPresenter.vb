@@ -7,16 +7,15 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class PettyCashJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItem, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelPettyCashJournalItem()
+            ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            BizObject = New JournalItem
             DataModel = New JournalItemModel
         End Sub
 

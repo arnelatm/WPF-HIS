@@ -68,10 +68,8 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Integer) As String
-            Dim retVal As String
-            retVal = ModelPresenter.GetCustomerOpenInvoices(customerIdNo)
-            Return retVal
+        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Integer) As List(Of CsrOiItemModel)
+            Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 
         'Public Function AddOpenInvoice(ByVal journalItem As JournalItemModel) As Integer

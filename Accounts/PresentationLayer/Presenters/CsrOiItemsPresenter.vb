@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
@@ -7,8 +6,6 @@ Namespace PresentationLayer.Presenters
 
     Public Class CsrOiItemsPresenter
         Inherits AccountsPresenter(Of ICsrOiItemsView, CsrOiItemModel)
-
-        Public ParentViewList As List(Of CsrOiItemModel)
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)
@@ -83,7 +80,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Integer) As List(Of CsrOiItemModel)
-            Return ModelPresenter.GetCustomerOpenInvoices(customerIdNo)
+            Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

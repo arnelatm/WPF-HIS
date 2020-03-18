@@ -133,7 +133,7 @@
     <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CsroiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CsrOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
@@ -143,7 +143,12 @@
     <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PcsOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
     <Compile Include="DataLayer\DaoFactoriesAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
@@ -245,10 +250,22 @@
     <Compile Include="PresentationLayer\Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.Designer.vb">
+      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.Designer.vb">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.Designer.vb">
+      <DependentUpon>PurchaseJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SupplierEntryTv.Designer.vb">
@@ -311,6 +328,9 @@
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PcsOiItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashJournalItemsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
@@ -407,8 +427,17 @@
       <DependentUpon>Main.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.ar-SA.resx">
+      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.resx">
+      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\PurchaseItemEntry.resx">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\PurchaseJournalEntry.resx">
+      <DependentUpon>PurchaseJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.ar-SA.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>

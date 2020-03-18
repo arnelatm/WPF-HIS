@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -8,28 +6,25 @@ Namespace PresentationLayer.Presenters
 
 
     Public Class PettyCashJournalPresenter
-        Inherits AccountsPresenter(Of IPettyCashJournalView, PettyCashJournal, PettyCashJournalModel)
+        Inherits AccountsPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
 
         Public ParentViewList As List(Of PettyCashJournalModel)
-        Private _apOpenInvoiceBo As New ApOpenInvoice
-        Private ReadOnly _apOpenInvoiceModel As New ModelApOpenInvoice
+        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelPettyCashJournal()
+            ModelPresenter = New ModelAccounts("PettyCashJournal")
             TableName = "PettyCashJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New PettyCashJournalModel()
-            BizObject = New PettyCashJournal
             DataModel = New PettyCashJournalModel
-            _apOpenInvoiceModel = New ModelApOpenInvoice
         End Sub
 
         Public Property JournalItemsPresenter As PettyCashJournalItemsPresenter
         Public Property PcsOiItemsPresenter As PcsOiItemsPresenter
 
         Public Overrides Function ChangesMade() As Boolean
-            Dim PettyCashJournalChangesMade As Boolean
+            Dim pettyCashJournalChangesMade As Boolean
             If ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
                     PettyCashJournalChangesMade = True
@@ -46,8 +41,8 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            DataModel = GlobalVariables.Mapper.Map(Of PettyCashJournalModel)(BizObject)
-            retValue = Model.UpdateGlReferenceNumber(DataModel)
+            GlobalVariables.Mapper.Map(View, DataModel)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -71,10 +66,8 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As String
-            Dim retVal As String
-            retVal = Model.GetSupplierOpenInvoices(supplierIdNo)
-            Return retVal
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of PcsOiItemModel)
+            return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
 
     End Class

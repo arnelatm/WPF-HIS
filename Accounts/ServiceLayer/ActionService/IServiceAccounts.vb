@@ -16,7 +16,8 @@ Namespace ServiceLayer.ActionService
         Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal)
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
-
+        Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
+        Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
     End Interface
 
     'Friend Interface IOpenInvoiceService

@@ -108,7 +108,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
             Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
                 .PaidAmount = 0,
                 .DiscountTaken = 0,

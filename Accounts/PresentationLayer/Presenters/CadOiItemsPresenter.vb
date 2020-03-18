@@ -84,7 +84,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of CadOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of CadOiItemModel)(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
