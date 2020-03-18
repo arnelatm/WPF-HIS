@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IRevenueGroupDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As RevenueGroup Implements IRevenueGroupDao.GetRecordById
             Dim sql As String =

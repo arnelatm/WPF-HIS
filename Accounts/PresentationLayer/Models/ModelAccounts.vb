@@ -18,12 +18,16 @@ Namespace PresentationLayer.Models
             Return updateResult
         End Function
 
-        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
             Return DataService.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Friend Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+        Friend Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.RemoveInvoicePayment
             Return DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
+        Friend Function GetSupplierOpenInvoices(idNo As Integer) As List(Of CadOiItem) Implements IModelAccounts.GetSupplierOpenInvoices
+            Return DataService.GetSupplierOpenInvoices(idNo)
         End Function
 
     End Class

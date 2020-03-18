@@ -13,7 +13,7 @@ Namespace AdoNet
         'Private ReadOnly _waitForm As New Form
 
         'Protected ShowWaitForm As BackgroundWorker(Of DbCommand)
-        Private Shared ReadOnly Factory As DbProviderFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
+        Private ReadOnly Factory As DbProviderFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
 
         Private _exInfo As ExceptionDispatchInfo
         Private Property ConnectionString As String
@@ -28,6 +28,9 @@ Namespace AdoNet
             If conn Is Nothing Then
                 ConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
             Else
+                'if conn = "TRANSLATIONS" THEN
+                '    Debugger.Break()
+                'End If
                 ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
                 'Dim x = ConnectionString
                 'MessageBox.Show(x)

@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class CashReceiptJournalDao
         Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As CashReceiptJournal _
             Implements IDao(Of CashReceiptJournal).GetRecordById

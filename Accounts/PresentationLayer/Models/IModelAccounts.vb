@@ -1,4 +1,5 @@
-﻿Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
 
@@ -6,6 +7,9 @@ Namespace PresentationLayer.Models
         Inherits IModelCommon
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
+        Function GetSupplierOpenInvoices(idNo As Integer) As List(Of CadOiItem)
+        Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+        Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
 
     End Interface
 

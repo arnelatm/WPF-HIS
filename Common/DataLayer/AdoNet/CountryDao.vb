@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements ICountryDao
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
         
         'Public Function GetCountryByName(countryName As String) As Country Implements ICountryDao.GetCountryByName
         '    Throw New NotImplementedException

@@ -9,15 +9,16 @@ Namespace DataLayer.AdoNet
 
     Public Class CadOiItemDao
         Inherits CommonDao
-        Implements IDaoChild(Of CadOiItem), IDaoCadOiItem(Of CadOiItem)
+        Implements IDaoChild(Of CadOiItem), IDaoOiItem(Of CadOiItem)
 
-        Private Shared ReadOnly Db As New Db()
+' ReSharper disable once InconsistentNaming
+        Private ReadOnly Db As New Db()
         Protected TableFileName As String = "CadOiItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCadOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCadOiItemTVP"
 
 
-        Private Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -88,7 +89,7 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Public Function GetSupplierOpenInvoices(idNo As Integer) _
-            As List(Of CadOiItem) Implements IDaoCadOiItem(Of CadOiItem).GetSupplierOpenInvoices
+            As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
             Dim sql As String = 
                     "SELECT " &
                     "AccountIdNo," &

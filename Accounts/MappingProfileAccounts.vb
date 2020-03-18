@@ -18,6 +18,10 @@ Public Class MappingProfileAccounts
         'CreateMap(Of ArOpenInvoiceModel, IArOpenInvoiceView)().ReverseMap()
         CreateMap(Of Bank, BankModel)().ReverseMap()
         CreateMap(Of BankModel, IBankView)().ReverseMap()
+        CreateMap(Of CadOiItem, CadOiItemModel)().ReverseMap()
+        CreateMap(Of CadOiItemModel, ICadOiItemView)().ReverseMap()
+        CreateMap(Of CashDisbursementJournal, CashDisbursementJournalModel)().ReverseMap()
+        CreateMap(Of CashDisbursementJournalModel, ICashDisbursementJournalView)().ReverseMap()
         CreateMap(Of Category, CategoryModel)().ReverseMap()
         CreateMap(Of CategoryModel, ICategoryView)().ReverseMap()
         CreateMap(Of Chart, ChartModel)().ReverseMap()
@@ -36,6 +40,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of PurchaseItemModel, IPurchaseItemView)().ReverseMap()
         CreateMap(Of Supplier, SupplierModel)().ReverseMap()
         CreateMap(Of SupplierModel, ISupplierView)().ReverseMap()
+
     End Sub
 
 End Class

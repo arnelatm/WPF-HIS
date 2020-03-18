@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of DistributionSchemeItem)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
         Protected TableFileName As String
         Protected DboTvpUpdateFileName As String
         Protected DboTvpInsertFileName As String

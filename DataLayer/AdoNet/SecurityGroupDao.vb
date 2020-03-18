@@ -8,7 +8,7 @@ Namespace AdoNet
         Inherits BaseDao
         Implements IDaoAll(Of SecurityGroup)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As SecurityGroup Implements IDao(Of SecurityGroup).GetRecordById
             Dim sql As String =

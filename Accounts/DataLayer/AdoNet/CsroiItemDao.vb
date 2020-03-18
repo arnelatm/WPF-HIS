@@ -1,5 +1,7 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for CsrOiItem
@@ -7,47 +9,18 @@ Namespace DataLayer.AdoNet
 
     Public Class CsrOiItemDao
         Inherits CommonDao
-        Implements ICsrOiItemDao
+        Implements IDaoChild(Of CsrOiItem), IDaoOiItem(Of CsrOiItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = "CsrOiItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCsrOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCsrOiItemTVP"
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of CsrOiItem) _
-            Implements ICsrOiItemDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, Amount " &
-                    "   FROM [CsrOiItem] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function GetRecordById(idNo As Integer) As CsrOiItem _
-                        Implements ICsrOiItemDao.GetRecordById
-            Dim sql As String =
-                    " SELECT " &
-                    "AccountIdNo," &
-                    "Amount," &
-                    "Balance," &
-                    "CsrIdNo," &
-                    "DiscountTaken," &
-                    "IdNo," &
-                    "InvoiceNo," &
-                    "JournalCode," &
-                    "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "OpenInvoiceIdNo" &
-                    "PreviousBalance," &
-                    "Sequence," &
-                    "TransactionDate" &
-                    "   FROM " & TableFileName &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-        End Function
-
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = "Sequence") _
-            As List(Of CsrOiItem)
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+            As List(Of CsrOiItem) Implements IDaoChild(Of CsrOiItem).GetRecordsWithIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -72,12 +45,12 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, csrIdNo As Integer) As Integer _
-            Implements ICsrOiItemDao.DelUpdateTvp
-            Return Db.TvpDelUpdate(DboTvpUpdateFileName, tvpTable, "@MParam", csrIdNo)
+            Implements IDaoChild(Of CsrOiItem).DelUpdateTvp
+            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", csrIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements ICsrOiItemDao.InsertTvp
-            Return Db.TvpInsert(DboTvpInsertFileName, tvpTable, "@MParam")
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of CsrOiItem).InsertTvp
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CsrOiItem) =
@@ -118,7 +91,7 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Public Function GetCustomerOpenInvoices(idNo As Integer) _
-            As List(Of CsrOiItem) Implements ICsrOiItemDao.GetCustomerOpenInvoices
+            As List(Of CsrOiItem) Implements IDaoOiItem(Of CsrOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

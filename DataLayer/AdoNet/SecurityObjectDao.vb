@@ -8,9 +8,9 @@ Namespace AdoNet
         Inherits BaseDao
         Implements IDaoAll(Of SecurityObject)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, SecurityObject) =
+        Private ReadOnly Make As Func(Of IDataReader, SecurityObject) =
                                     Function(reader) _
             New SecurityObject() With {
             .IdNo = Extensions.AsId(reader("IDNo")),

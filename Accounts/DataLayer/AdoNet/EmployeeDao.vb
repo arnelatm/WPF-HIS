@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoAll(Of Employee)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =

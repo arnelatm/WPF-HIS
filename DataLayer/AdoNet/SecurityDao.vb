@@ -6,7 +6,7 @@
         Inherits BaseDao
         Implements ISecurityDao
 
-        Private Shared ReadOnly Db As New Db("ISPDATA")
+        Private ReadOnly Db As New Db("ISPDATA")
 
         Public Function GetControlSecurityIdNo(searchValue As String) As String _
             Implements ISecurityDao.GetControlSecurityIdNo

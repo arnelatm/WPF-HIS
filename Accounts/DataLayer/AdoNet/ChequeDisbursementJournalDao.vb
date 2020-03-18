@@ -1,17 +1,18 @@
 ﻿Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for ChequeDisbursementJournal
     ' ** DAO Pattern
 
     Public Class ChequeDisbursementJournalDao
-        Implements IChequeDisbursementJournalDao
+        Implements IDao(Of ChequeDisbursementJournal)
 
         Private Shared ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As ChequeDisbursementJournal _
-            Implements IChequeDisbursementJournalDao.GetRecordById
+            Implements IDao(Of ChequeDisbursementJournal).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -41,16 +42,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ChequeDisbursementJournal) _
-            Implements IChequeDisbursementJournalDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TransactionDate " &
-                    "   FROM [ChequeDisbursementJournal] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef chequeDisbursementJournal As ChequeDisbursementJournal) As Integer _
-            Implements IChequeDisbursementJournalDao.UpdateRecord
+            Implements IDao(Of ChequeDisbursementJournal).UpdateRecord
             Dim sql As String =
                     "UPDATE [ChequeDisbursementJournal] SET " &
                     "AccountIdNo   = @AccountIdNo," &
@@ -77,7 +70,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef chequeDisbursementJournal As ChequeDisbursementJournal) As Integer _
-            Implements IChequeDisbursementJournalDao.AddRecord
+            Implements IDao(Of ChequeDisbursementJournal).AddRecord
             Dim sql As String = "INSERT INTO [ChequeDisbursementJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
@@ -174,7 +167,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IChequeDisbursementJournalDao.UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IDao(Of ChequeDisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String

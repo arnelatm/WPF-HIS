@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoAll(Of Chart), IDaoChart
 
-        Private Shared Db As New Db()
+        Private Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As Chart Implements IDaoAll(Of Chart).GetRecordById
             Dim sql As String =

@@ -58,7 +58,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
-
     End Sub
 
     Public Sub New(view As T)
@@ -103,7 +102,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Shared Property RecordNumber As Integer
 
-    Private Shared Function GetRecordNumberValue(idNo As Integer) As Integer
+    Private Function GetRecordNumberValue(idNo As Integer) As Integer
         Try
             Return GetRecordPosition(idNo)
         Catch ex As Exception
@@ -148,7 +147,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Shared Function GetRecordPosition(idNo As Integer)
+    Public Function GetRecordPosition(idNo As Integer)
         Try
             Return Model.GetRecordPosition(TableName, idNo) + 1
         Catch ex As Exception
@@ -156,7 +155,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Shared Function GetTableProperties() As List(Of TblColPropModel)
+    Public Function GetTableProperties() As List(Of TblColPropModel)
         Return ModelTblColProp.GetMainTableColumnProperties(TableName)
     End Function
 

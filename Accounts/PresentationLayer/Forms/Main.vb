@@ -495,10 +495,10 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemCashDisbursementEntry.Click
-        '    ShowEntryForm(CashDisbursementJournalEntry)
-        'End Sub
+        Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCashDisbursementEntry.Click
+            ShowEntryForm(CashDisbursementJournalEntry)
+        End Sub
 
         'Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
         '    Handles ToolStripMenuItemCashReceiptEntry.Click

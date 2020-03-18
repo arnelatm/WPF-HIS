@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDepartmentDao
 
-        Private Shared db As New Db()
+        Private db As New Db()
         
         Public Function GetRecordById(idNo As Integer) As Department Implements IDepartmentDao.GetRecordById
             Dim sql As String =
