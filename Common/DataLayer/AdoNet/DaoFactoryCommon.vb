@@ -1,5 +1,4 @@
-﻿Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
+﻿Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object factory

@@ -45,4 +45,5 @@ Namespace BusinessLayer
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
     End Class
-End NameSpace
+
+End Namespace

@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CadOiItem
@@ -11,12 +11,12 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of CadOiItem), IDaoOiItem(Of CadOiItem)
 
-' ReSharper disable once InconsistentNaming
+        ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
+
         Protected TableFileName As String = "CadOiItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCadOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCadOiItemTVP"
-
 
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
             Dim sql As String =
@@ -90,7 +90,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetSupplierOpenInvoices(idNo As Integer) _
             As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
-            Dim sql As String = 
+            Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
                     "Balance," &
@@ -106,8 +106,6 @@ Namespace DataLayer.AdoNet
             Dim x = Db.Read(sql, MakeCadOiItem).ToList()
             Return x
         End Function
-
-
 
         Public Shared ReadOnly MakeCadOiItem As Func(Of IDataReader, CadOiItem) = Function(reader) New CadOiItem() With
             {

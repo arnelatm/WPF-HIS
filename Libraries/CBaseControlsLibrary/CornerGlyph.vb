@@ -26,6 +26,7 @@ Public Class CornerGlyph
         LowerLeft
         LowerRight
     End Enum
+
     Public Property WhatCorner As eCorner
 
 #End Region
@@ -35,28 +36,28 @@ Public Class CornerGlyph
     Public Sub New(
                    ByVal behaviorService As System.Windows.Forms.Design.Behavior.BehaviorService,
                    ByVal control As CButton,
-                   ByVal selectionService As ISelectionService, _
-                   ByVal relatedDesigner As IDesigner, _
+                   ByVal selectionService As ISelectionService,
+                   ByVal relatedDesigner As IDesigner,
                    ByVal myAdorner As Adorner,
                    ByVal whatCorner As eCorner)
 
         MyBase.New(New CornBehavior(relatedDesigner, whatCorner))
-        ' Cache references for convenience. 
+        ' Cache references for convenience.
         Me.behaviorSvc = behaviorService
         Me.selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
         Me.CornAdorner = myAdorner
         Me.WhatCorner = whatCorner
 
-        ' Cache a reference to the control being designed. 
+        ' Cache a reference to the control being designed.
         Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
         AddHandler Me.relatedControl.Resize, AddressOf relatedControl_Resize
 
     End Sub
 
-    Private Sub relatedControl_Resize( _
-                                      ByVal sender As Object, _
+    Private Sub relatedControl_Resize(
+                                      ByVal sender As Object,
                                       ByVal e As EventArgs)
 
         SizeCornerTrack()
@@ -127,7 +128,7 @@ Public Class CornerGlyph
                 Return relatedControl.Corners.LowerRight
 
         End Select
-        Return nothing
+        Return Nothing
     End Function
 
     Private Sub SetValue(val As Integer)
@@ -144,7 +145,6 @@ Public Class CornerGlyph
                 relatedControl.Corners.LowerRight = val
         End Select
     End Sub
-
 
 #End Region
 
@@ -174,7 +174,6 @@ Public Class CornerGlyph
 
     End Function
 
-
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
 
         If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
@@ -202,11 +201,10 @@ Public Class CornerGlyph
             Case eCorner.LowerLeft, eCorner.UpperLeft, eCorner.All
                 Return CInt((CornerTrack.Width - 10) * ((GetValue()) / maxCorner))
         End Select
-        Return nothing
+        Return Nothing
     End Function
+
 #End Region
-
-
 
     Class CornBehavior
         Inherits Behavior
@@ -309,7 +307,7 @@ Public Class CornerGlyph
             Return True
         End Function
 
-        Public Overrides Function OnMouseUp(ByVal g As Glyph, _
+        Public Overrides Function OnMouseUp(ByVal g As Glyph,
                                             ByVal button As MouseButtons) As Boolean
             _dragging = False
             SetCorners()

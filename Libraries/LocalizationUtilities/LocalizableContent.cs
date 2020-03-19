@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AATM.Libraries.LocalizationUtilities.Design;
+using System.Collections.Generic;
 using System.ComponentModel;
-using AATM.Libraries.LocalizationUtilities.Design;
 
 namespace AATM.Libraries.LocalizationUtilities
 {

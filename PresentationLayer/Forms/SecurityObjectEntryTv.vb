@@ -1,9 +1,7 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports AutoMapper
 
 Public Class SecurityObjectEntryTv
     Implements ISecurityObjectView
@@ -12,13 +10,11 @@ Public Class SecurityObjectEntryTv
         ' This call is required by the designer.
         InitializeComponent()
 
-
         'Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
         '    cfg.AddProfile(New MappingProfile)
         'End Sub)
         'mapperConfigurationAccounts.AssertConfigurationIsValid()
         'GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
-
 
         MainTableName = "SecurityObject"
         IdFieldName = "IdNo"

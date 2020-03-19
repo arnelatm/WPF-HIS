@@ -2,7 +2,6 @@
 Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CForm
@@ -56,11 +55,11 @@ Public Class CForm
                             btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
                             Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
                             If Not (resource Is Nothing) Then
-                                Dim i = CType(cCtrl,CButton)
+                                Dim i = CType(cCtrl, CButton)
                                 i.Image = DirectCast(resource, Image)
                             End If
-                        ElseIf TypeOf cCtrl Is CTabControl orElse TypeOf cCtrl Is TabControl Then
-                            Dim c = CType(cCtrl,CTabControl)
+                        ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
+                            Dim c = CType(cCtrl, CTabControl)
                             c.RightToLeftLayout = True
                             c.RightToLeft = RightToLeft.No
                         End If

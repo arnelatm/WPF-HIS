@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.BusinessLayer.BusinessRules
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace BusinessLayer.BusinessRules

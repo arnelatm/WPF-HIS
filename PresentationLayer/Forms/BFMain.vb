@@ -1,13 +1,12 @@
-﻿Imports System.Globalization
+﻿Imports System.Drawing
+Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports System.Drawing
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Translations
+Imports AATM.PresentationLayer.Views
 
 Public Class BfMain
     Implements IView

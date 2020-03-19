@@ -14,6 +14,7 @@ Namespace PresentationLayer.Models
         Public Sub New()
 
         End Sub
+
         'Public Overrides Function GetDataService() Implements IModelCommon.GetDataService
         '    Return GetCommonService()
         'End Function

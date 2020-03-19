@@ -15,4 +15,5 @@ Namespace PresentationLayer.Views
         Property Rate As Decimal
 
     End Interface
-End NameSpace
+
+End Namespace

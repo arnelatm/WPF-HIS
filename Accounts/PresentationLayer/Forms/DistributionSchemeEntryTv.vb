@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
@@ -163,7 +162,7 @@ Namespace PresentationLayer.Forms
                 Return _distributionSchemeItems
             End Get
             Set(value As IList(Of DistributionSchemeItemModel))
-                _distributionSchemeItems = Value
+                _distributionSchemeItems = value
             End Set
         End Property
 

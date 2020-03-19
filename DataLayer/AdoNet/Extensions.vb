@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports System.Runtime.CompilerServices
-Imports System.Windows.Forms
 
 Namespace AdoNet
     ' useful set of Extension methods for Data Access purposes
@@ -9,7 +8,7 @@ Namespace AdoNet
         ' transform object into Identity data type (integer).
 
         <Extension>
-        Public Function AsId(item As Object, Optional ByVal defaultId As Integer = - 1) As Integer
+        Public Function AsId(item As Object, Optional ByVal defaultId As Integer = -1) As Integer
             If item Is Nothing Then
                 Return defaultId
             End If
@@ -24,7 +23,7 @@ Namespace AdoNet
         ' transform object into integer data type.
 
         <Extension>
-        Public Function AsInt (Of T)(item As Object, Optional ByVal defaultInt As T = Nothing) As T
+        Public Function AsInt(Of T)(item As Object, Optional ByVal defaultInt As T = Nothing) As T
             Dim result As T
             Try
 
@@ -43,7 +42,7 @@ Namespace AdoNet
         End Function
 
         <Extension>
-        Public Function AsNumber (Of T)(item As Object, Optional ByVal defaultValue As T = Nothing) As T
+        Public Function AsNumber(Of T)(item As Object, Optional ByVal defaultValue As T = Nothing) As T
             Dim result As T = Convert.ChangeType(0, GetType(T))
             Try
 
@@ -61,7 +60,7 @@ Namespace AdoNet
         End Function
 
         <Extension>
-        Public Function AsNullableInt (Of T)(item As Object) As T
+        Public Function AsNullableInt(Of T)(item As Object) As T
             If item.Equals(DBNull.Value) Then
                 'Dim retVal As Integer?
                 'retVal = DirectCast(Nothing, Nullable(Of Integer))
@@ -118,7 +117,6 @@ Namespace AdoNet
             End If
             Return item.ToString().Trim()
         End Function
-
 
         ' transform object into char data type
 
@@ -294,8 +292,9 @@ Namespace AdoNet
         ' handy for building SQL Statements (for example with IN () statements) from object collections
 
         <Extension>
-        Public Function CommaSeparate (Of T, TU)(source As IEnumerable(Of T), func As Func(Of T, TU)) As String
+        Public Function CommaSeparate(Of T, TU)(source As IEnumerable(Of T), func As Func(Of T, TU)) As String
             Return String.Join(",", source.Select(Function(s) func(s).ToString()).ToArray())
         End Function
+
     End Module
 End Namespace

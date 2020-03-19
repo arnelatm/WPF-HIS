@@ -1,7 +1,6 @@
-﻿
-
-' Cash Receipt Business object as seen by the Service client.
+﻿' Cash Receipt Business object as seen by the Service client.
 Namespace PresentationLayer.Models
+
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
@@ -31,4 +30,5 @@ Namespace PresentationLayer.Models
         Public Property TransactionDate As Date?
         Public Property UnApplied As Decimal
     End Class
-End NameSpace
+
+End Namespace

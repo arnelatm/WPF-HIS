@@ -1,6 +1,6 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for JournalItem
@@ -14,7 +14,6 @@ Namespace DataLayer.AdoNet
         Protected TableFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
-
 
         Public Function GetRecordsWithIdNo(journalIdNo As Integer, Optional sortKey As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
@@ -53,8 +52,6 @@ Namespace DataLayer.AdoNet
             Implements IDaoChild(Of JournalItem).InsertTvp
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
-
-
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =
                                     Function(reader) _

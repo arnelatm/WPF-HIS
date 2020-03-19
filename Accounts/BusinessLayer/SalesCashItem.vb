@@ -22,4 +22,5 @@ Namespace BusinessLayer
         Public Property Sequence As Integer
 
     End Class
-End NameSpace
+
+End Namespace

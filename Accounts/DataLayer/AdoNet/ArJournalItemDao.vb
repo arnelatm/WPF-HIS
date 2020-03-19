@@ -10,7 +10,7 @@
             DboTvpUpdateFileName = "dbo.UpdateArJournalItemTVP"
             DboTvpInsertFileName = "dbo.InsertArJournalItemTVP"
         End Sub
- 
+
     End Class
 
 End Namespace

@@ -4,7 +4,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports System.Windows.Forms.Design
 
-<ToolboxItem(False), ToolboxItemFilter("Prevent", ToolboxItemFilterType.Prevent)> _
+<ToolboxItem(False), ToolboxItemFilter("Prevent", ToolboxItemFilterType.Prevent)>
 Public Class DropdownColorBlender
     Inherits UserControl
 
@@ -46,9 +46,9 @@ Public Class DropdownColorBlender
     End Sub
 
     Private Function SortColors(ByVal x As Color, ByVal y As Color) As Integer
-        'To use it first add all non-system colors to a List(Of Color), 
-        'sort it by calling colors.Sort(AddressOf SortColors), 
-        'then add all the list colors to the combo Items. 
+        'To use it first add all non-system colors to a List(Of Color),
+        'sort it by calling colors.Sort(AddressOf SortColors),
+        'then add all the list colors to the combo Items.
         Dim huecompare As Integer = x.GetHue.CompareTo(y.GetHue)
         Dim satcompare As Integer = x.GetSaturation.CompareTo(y.GetSaturation)
         Dim brightcompare As Integer = x.GetBrightness.CompareTo(y.GetBrightness)
@@ -76,8 +76,9 @@ Public Class DropdownColorBlender
 #Region "Properties"
 
     Private _BlendColors() As Color = New Color() {Color.White, Color.Black}
-    <Category("ColorBlender")> _
-    <Description("Array of Colors used in ColorBlend")> _
+
+    <Category("ColorBlender")>
+    <Description("Array of Colors used in ColorBlend")>
     Public Property BlendColors() As Color()
         Get
             Return _BlendColors
@@ -89,8 +90,9 @@ Public Class DropdownColorBlender
     End Property
 
     Private _BlendPositions() As Single = New Single() {0, 1}
-    <Category("ColorBlender")> _
-    <Description("Array of Color Positions used in ColorBlend")> _
+
+    <Category("ColorBlender")>
+    <Description("Array of Color Positions used in ColorBlend")>
     Public Property BlendPositions() As Single()
         Get
             Return _BlendPositions
@@ -102,8 +104,9 @@ Public Class DropdownColorBlender
     End Property
 
     Private _BarHeight As Integer = 20
-    <Category("ColorBlender")> _
-    <Description("Height of color blender bar")> _
+
+    <Category("ColorBlender")>
+    <Description("Height of color blender bar")>
     Public Property BarHeight() As Integer
         Get
             Return _BarHeight
@@ -153,7 +156,7 @@ Public Class DropdownColorBlender
                     'If the cursor is not over a cblPointer then Add One
                     If e.Button = Windows.Forms.MouseButtons.Left Then
                         ClearCurrPointer()
-                        MiddlePointers.Add(New cblPointer(CSng(((e.X - 10) / (Width - 20))), _
+                        MiddlePointers.Add(New cblPointer(CSng(((e.X - 10) / (Width - 20))),
                                                           Color.FromArgb(tbarAlpha.Value, CInt(nudRed.Value), CInt(nudGreen.Value), CInt(nudBlue.Value)), True))
                         SortCollection(MiddlePointers, "pPos", True)
                         CurrPointer = FindCurr()
@@ -231,6 +234,7 @@ Public Class DropdownColorBlender
         Next
         Return -1
     End Function
+
 #End Region 'Mouse Events
 
 #Region "Drawing"
@@ -267,7 +271,7 @@ Public Class DropdownColorBlender
     End Function
 
     Public Function LinearBrush(ByVal BaseRect As Rectangle, ByVal Mode As LinearGradientMode) As LinearGradientBrush
-        Dim br As LinearGradientBrush = New LinearGradientBrush(New Rectangle(BaseRect.X - 1, BaseRect.Y - 1, _
+        Dim br As LinearGradientBrush = New LinearGradientBrush(New Rectangle(BaseRect.X - 1, BaseRect.Y - 1,
                                                                               BaseRect.Width + 2, BaseRect.Height + 2), Color.AliceBlue, Color.Blue, Mode)
         Dim blend As ColorBlend = New ColorBlend()
         blend.Colors = BlendColors
@@ -343,6 +347,7 @@ Public Class DropdownColorBlender
         Return CStr(IIf(c.Name = "ff7f007f", "Transparent- ff7f007f", c.Name))
 
     End Function
+
 #End Region 'Drawing
 
 #Region "Painting"
@@ -379,7 +384,7 @@ Public Class DropdownColorBlender
 
             If MiddlePointers IsNot Nothing Then
                 For I As Integer = 1 To MiddlePointers.Count
-                    DrawPointer(g, CType(MiddlePointers(I), cblPointer).pColor, _
+                    DrawPointer(g, CType(MiddlePointers(I), cblPointer).pColor,
                                 CType(MiddlePointers(I), cblPointer).pPos, I = CurrPointer)
                 Next
             End If
@@ -397,12 +402,13 @@ Public Class DropdownColorBlender
         End If
 
     End Sub
+
 #End Region 'Painting
 
 #Region "SortCollection"
 
-    Private Shared Sub SortCollection(ByVal col As Collection, _
-                                      ByVal psSortPropertyName As String, ByVal pbAscending As Boolean, _
+    Private Shared Sub SortCollection(ByVal col As Collection,
+                                      ByVal psSortPropertyName As String, ByVal pbAscending As Boolean,
                                       Optional ByVal psKeyPropertyName As String = "")
 
         Dim obj As Object
@@ -443,7 +449,7 @@ Public Class DropdownColorBlender
 
                 col.Remove(iMinMaxIndex)
                 If (bUseKey) Then
-                    sKey = CStr(CallByName(obj, _
+                    sKey = CStr(CallByName(obj,
                                            psKeyPropertyName, vbGet))
                     col.Add(obj, sKey, i)
                 Else
@@ -468,19 +474,20 @@ Public Class DropdownColorBlender
     End Sub
 
     Private Sub Panel7_Click(ByVal sender As Object, ByVal e As System.EventArgs) _
-        Handles Panel22.Click, Panel7.Click, Panel8.Click, Panel9.Click, Panel10.Click, Panel11.Click, _
-                Panel12.Click, Panel13.Click, Panel20.Click, Panel19.Click, Panel14.Click, Panel15.Click, Panel16.Click, _
-                Panel17.Click, Panel21.Click, Panel18.Click, Panel28.Click, Panel27.Click, Panel26.Click, Panel25.Click, _
+        Handles Panel22.Click, Panel7.Click, Panel8.Click, Panel9.Click, Panel10.Click, Panel11.Click,
+                Panel12.Click, Panel13.Click, Panel20.Click, Panel19.Click, Panel14.Click, Panel15.Click, Panel16.Click,
+                Panel17.Click, Panel21.Click, Panel18.Click, Panel28.Click, Panel27.Click, Panel26.Click, Panel25.Click,
                 Panel24.Click, Panel23.Click, Panel6.Click, Panel29.Click
         UpdateRGBnuds(CType(sender, Panel).BackColor)
         Invalidate()
     End Sub
 
     Private CurrSwatch As Panel
+
     Private Sub Panel10_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) _
-        Handles Panel22.MouseEnter, Panel7.MouseEnter, Panel8.MouseEnter, Panel9.MouseEnter, Panel10.MouseEnter, Panel11.MouseEnter, _
-                Panel12.MouseEnter, Panel13.MouseEnter, Panel20.MouseEnter, Panel19.MouseEnter, Panel14.MouseEnter, Panel15.MouseEnter, Panel16.MouseEnter, _
-                Panel17.MouseEnter, Panel21.MouseEnter, Panel18.MouseEnter, Panel28.MouseEnter, Panel27.MouseEnter, Panel26.MouseEnter, Panel25.MouseEnter, _
+        Handles Panel22.MouseEnter, Panel7.MouseEnter, Panel8.MouseEnter, Panel9.MouseEnter, Panel10.MouseEnter, Panel11.MouseEnter,
+                Panel12.MouseEnter, Panel13.MouseEnter, Panel20.MouseEnter, Panel19.MouseEnter, Panel14.MouseEnter, Panel15.MouseEnter, Panel16.MouseEnter,
+                Panel17.MouseEnter, Panel21.MouseEnter, Panel18.MouseEnter, Panel28.MouseEnter, Panel27.MouseEnter, Panel26.MouseEnter, Panel25.MouseEnter,
                 Panel24.MouseEnter, Panel23.MouseEnter, Panel6.MouseEnter, Panel29.MouseEnter
         Try
             CurrSwatch.BorderStyle = Windows.Forms.BorderStyle.Fixed3D
@@ -507,7 +514,7 @@ Public Class DropdownColorBlender
     End Sub
 
     Private Sub nud_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles nudRed.ValueChanged, nudGreen.ValueChanged, nudBlue.ValueChanged, _
+        Handles nudRed.ValueChanged, nudGreen.ValueChanged, nudBlue.ValueChanged,
                 tbarAlpha.ValueChanged
         txbAlpha.Text = tbarAlpha.Value.ToString
         UpdatePointerColor()
@@ -535,11 +542,12 @@ Public Class DropdownColorBlender
         MiddlePointers.Clear()
         Invalidate()
     End Sub
+
 #End Region
 
 #Region "ColorBox"
 
-    Private Sub ColorList_DrawItem(ByVal sender As Object, _
+    Private Sub ColorList_DrawItem(ByVal sender As Object,
                                    ByVal e As DrawItemEventArgs)
         ' If the item is the edit box item, then draw the rectangle white
         ' If the item is the selected item, then draw the rectangle blue
@@ -571,8 +579,3 @@ Public Class DropdownColorBlender
 #End Region 'ColorBox
 
 End Class
-
-#Region "cblPointer Class"
-
-#End Region 'cblPointer Class
-

@@ -174,13 +174,12 @@ Namespace PresentationLayer.Forms
                 {"DepartmentNameAra", txtDepartmentNameAra},
                 {"IDNo", TxtIDNo},
                 {"ParentIdNo", cacParentIdNo},
-                {"CostCenterIdNo", cacCostCenterIdNo},
-                {"ProfitCenterIdNo", cacProfitCenterIdNo},
+                {"CostCenterIdNo", cacCostCenterIDNo},
+                {"ProfitCenterIdNo", cacProfitCenterIDNo},
                 {"ParentId", TxtIDNo},
                 {"Notes", txtNotes}
                 }
         End Sub
-
 
     End Class
 

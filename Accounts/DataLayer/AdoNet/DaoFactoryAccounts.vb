@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
             Dim dao As Object
             Dim tType As Type = Type.GetType(className)
             If tType Is Nothing Then
-                MessageBox.Show("Missing Data Access Object " + className )
+                MessageBox.Show("Missing Data Access Object " + className)
                 Debugger.Break()
             End If
             dao = Activator.CreateInstance(tType)

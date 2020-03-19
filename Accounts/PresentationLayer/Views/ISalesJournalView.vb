@@ -20,4 +20,5 @@ Namespace PresentationLayer.Views
         ReadOnly Property DateCreated As DateTime?
         ReadOnly Property Posted As Boolean
     End Interface
-End NameSpace
+
+End Namespace

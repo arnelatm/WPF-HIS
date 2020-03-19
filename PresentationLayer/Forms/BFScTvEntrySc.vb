@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports AATM.LIBRARIES.GlobalFuncNSub
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class BFScTvEntrySc
     Private _bypassSelectedChange As Boolean = False

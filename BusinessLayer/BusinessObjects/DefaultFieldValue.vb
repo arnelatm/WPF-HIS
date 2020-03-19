@@ -22,4 +22,5 @@ Namespace BusinessObjects
         Public Property DecimalPart As UInt16
         Public Property DefaultValue As String
     End Class
-End NameSpace
+
+End Namespace

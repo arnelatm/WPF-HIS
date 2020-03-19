@@ -1,4 +1,5 @@
 ﻿Namespace PresentationLayer.Models
+
     Public Class DistributionSchemeItemModel
 
         Public Property IdNo As Integer
@@ -10,4 +11,5 @@
         Public Property Percentage As Decimal
 
     End Class
-End NameSpace
+
+End Namespace

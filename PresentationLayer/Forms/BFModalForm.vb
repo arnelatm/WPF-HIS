@@ -1,4 +1,4 @@
-﻿Imports AATM.LIBRARIES.CBaseControlsLibrary
+﻿Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Class BfModalForm
     Inherits CForm

@@ -1,6 +1,6 @@
-﻿Imports AATM.PresentationLayer.Presenters
+﻿Imports AATM.Common.PresentationLayer.Models
+Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports AATM.Common.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -16,7 +16,6 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
         End Sub
-
 
         Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"

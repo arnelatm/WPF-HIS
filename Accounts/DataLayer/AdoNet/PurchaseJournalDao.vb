@@ -1,6 +1,6 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for PurchaseJournal
@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class PurchaseJournalDao
         Implements IDao(Of PurchaseJournal), IDaoJournals(Of PurchaseJournal)
 
-' ReSharper disable once InconsistentNaming
+        ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As PurchaseJournal _
@@ -133,7 +133,6 @@ Namespace DataLayer.AdoNet
             retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
-
 
     End Class
 

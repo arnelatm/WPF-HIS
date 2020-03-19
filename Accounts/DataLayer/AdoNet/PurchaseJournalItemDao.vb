@@ -10,7 +10,7 @@
             DboTvpUpdateFileName = "dbo.UpdatePurchaseJournalItemTVP"
             DboTvpInsertFileName = "dbo.InsertPurchaseJournalItemTVP"
         End Sub
- 
+
     End Class
 
 End Namespace

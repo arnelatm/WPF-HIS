@@ -1,4 +1,4 @@
-﻿Imports AATM.LIBRARIES.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
 
 ''' <summary>
@@ -36,4 +36,5 @@ Public Class ModelDefaultFieldValue
         Next
         Return result
     End Function
+
 End Class

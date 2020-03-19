@@ -1,6 +1,6 @@
-﻿
-' GeneralJournal business object as seen by the Service client.
+﻿' GeneralJournal business object as seen by the Service client.
 Namespace PresentationLayer.Models
+
     Public Class JournalItemModel
         Public Property AccountIdNo As Integer
         Public Property AccountName As String
@@ -21,4 +21,5 @@ Namespace PresentationLayer.Models
         Public Property SpecialAccount As String
 
     End Class
-End NameSpace
+
+End Namespace

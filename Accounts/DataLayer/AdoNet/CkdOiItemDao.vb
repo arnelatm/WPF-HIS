@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CkdOiItem
@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class CkdOiItemDao
         Inherits CommonDao
-        Implements IDaoChild(Of CkdOiItem), IDaoOiItem(of CkdOiItem)
+        Implements IDaoChild(Of CkdOiItem), IDaoOiItem(Of CkdOiItem)
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = "CkdOiItem_View"

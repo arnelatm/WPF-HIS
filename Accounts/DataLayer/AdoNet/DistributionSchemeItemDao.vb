@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for DistributionSchemeItem
@@ -50,7 +50,6 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
-
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
@@ -61,11 +60,9 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-       
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, distributionSchemeItemIdNo As Integer) As Integer Implements IDaoChild(Of DistributionSchemeItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", distributionSchemeItemIdNo)
         End Function
-
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DistributionSchemeItem).InsertTvp
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")

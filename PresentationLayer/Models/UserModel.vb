@@ -1,6 +1,4 @@
-﻿
-
-Public Class UserModel
+﻿Public Class UserModel
     Public Property IdNo As Integer
     Public Property UserName As String
     Public Property FullName As String
@@ -8,6 +6,8 @@ Public Class UserModel
     Public Property Password As String
     Public Property SecurityLevel As Int16
     Public Property SecurityGroupIdNo As Integer
+
     'Public Property SecurityGroupName As String
     Public Errors As List(Of String)
+
 End Class

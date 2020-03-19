@@ -12,4 +12,5 @@
 
     'Public Property GroupAccesses() As IList(Of GroupAccessModel)
     Public Property Errors As List(Of String)
+
 End Class

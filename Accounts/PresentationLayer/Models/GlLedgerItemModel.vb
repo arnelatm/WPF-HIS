@@ -1,6 +1,6 @@
-﻿
-' GeneralJournal business object as seen by the Service client.
+﻿' GeneralJournal business object as seen by the Service client.
 Namespace PresentationLayer.Models
+
     Public Class GlLedgerItemModel
         Public Property AccountIdNo As Integer
         Public Property Credit As Decimal
@@ -18,4 +18,5 @@ Namespace PresentationLayer.Models
         Public Property TransactionDate As Date?
 
     End Class
-End NameSpace
+
+End Namespace

@@ -7,7 +7,7 @@ Namespace DataLayer
     Public Interface IDaoFactoryCommon
         Inherits IDaoFactory
 
-        Function CreateDao(classBasename as String)
+        Function CreateDao(classBasename As String)
 
         'ReadOnly Property CommonDao As ICommonDao
         'ReadOnly Property CountryDao As ICountryDao

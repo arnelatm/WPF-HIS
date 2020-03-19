@@ -13,4 +13,5 @@ Namespace PresentationLayer.Views
         Property Notes As String
         Property TotalPercentage As Decimal
     End Interface
-End NameSpace
+
+End Namespace

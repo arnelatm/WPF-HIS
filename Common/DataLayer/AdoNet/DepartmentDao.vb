@@ -1,6 +1,5 @@
-﻿
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Department
@@ -11,7 +10,7 @@ Namespace DataLayer.AdoNet
         Implements IDepartmentDao
 
         Private db As New Db()
-        
+
         Public Function GetRecordById(idNo As Integer) As Department Implements IDepartmentDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &

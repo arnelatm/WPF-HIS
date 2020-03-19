@@ -1,5 +1,5 @@
-﻿
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
+
     Public Class OriginalMessagesModel
         Inherits CommonModel
 
@@ -11,4 +11,5 @@ Namespace PresentationLayer.Models
         'Public Property TranslatedMessages As TranslatedMessagesModel
 
     End Class
-End NameSpace
+
+End Namespace

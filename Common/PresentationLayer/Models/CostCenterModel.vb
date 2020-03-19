@@ -1,5 +1,5 @@
-﻿
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
+
     Public Class CostCenterModel
         Inherits CommonModel
 
@@ -12,4 +12,5 @@ Namespace PresentationLayer.Models
         Public Property Notes As String
         Public Property SortKey As String
     End Class
-End NameSpace
+
+End Namespace

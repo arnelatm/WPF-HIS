@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Globalization
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalResources
 
 Public Class CTabPage
@@ -9,7 +7,7 @@ Public Class CTabPage
     Public Sub New()
         BackgroundImage = Images.YellowGradientBackgroundLarge
         BackgroundImageLayout = ImageLayout.Stretch
-        RightToleft = RightToLeft.Inherit
+        RightToLeft = RightToLeft.Inherit
         DoubleBuffered = True
     End Sub
 

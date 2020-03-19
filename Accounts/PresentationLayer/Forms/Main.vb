@@ -1,13 +1,13 @@
 ﻿Imports System.Globalization
 Imports System.Threading
-Imports AATM.PresentationLayer.Forms
-Imports AATM.Libraries.ErrorsAndEvents
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
-Imports AutoMapper
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
 Imports AATM.Libraries.EnumLocalization
+Imports AATM.Libraries.ErrorsAndEvents
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Presenters
+Imports AutoMapper
 
 Namespace PresentationLayer.Forms
 
@@ -83,6 +83,7 @@ Namespace PresentationLayer.Forms
             ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
             ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
         End Sub
+
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)

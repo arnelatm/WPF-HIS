@@ -33,4 +33,5 @@ Namespace BusinessLayer
         Public Property SpecialAccount As String
         Public Property WithReconciliation As Boolean
     End Class
-End NameSpace
+
+End Namespace

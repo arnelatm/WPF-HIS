@@ -1,4 +1,5 @@
 ﻿Public Class atmButton
+
     Public Sub New()
 
         ' This call is required by the designer.

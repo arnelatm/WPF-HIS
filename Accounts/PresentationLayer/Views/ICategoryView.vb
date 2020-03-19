@@ -10,4 +10,5 @@ Namespace PresentationLayer.Views
         Property CategoryNameAra As String
         Property Notes As String
     End Interface
-End NameSpace
+
+End Namespace

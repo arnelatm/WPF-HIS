@@ -8,4 +8,5 @@
         [Decimal]
         [Date]
     End Enum
+
 End Namespace

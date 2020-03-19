@@ -1,6 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
 
-
 Namespace DataLayer
     ' defines methods to access CostCenter.
     ' this is a database-independent interface. Implementations are database specific

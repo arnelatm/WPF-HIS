@@ -696,7 +696,7 @@ Public Module GlobalFunctions
         Dim retValue As String
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        RetValue = Year(dateValue).ToString() &
+        retValue = Year(dateValue).ToString() &
                 Strings.Right("00" & Month(dateValue).ToString().TrimEnd().TrimStart(), 2) &
                 Strings.Right("00" & DateAndTime.Day(dateValue).ToString().TrimStart().TrimEnd(), 2)
         CultureInfo.CurrentCulture = curCulture

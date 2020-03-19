@@ -1,6 +1,4 @@
-﻿Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 

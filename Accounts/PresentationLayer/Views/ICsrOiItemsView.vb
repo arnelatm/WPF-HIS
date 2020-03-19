@@ -3,11 +3,11 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
-
     Public Interface ICsrOiItemsView
         Inherits IView
 
         Property CsrOiItems As IList(Of CsrOiItemModel)
 
     End Interface
-End NameSpace
+
+End Namespace

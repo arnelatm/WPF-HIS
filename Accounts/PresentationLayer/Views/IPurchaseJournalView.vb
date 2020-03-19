@@ -26,4 +26,5 @@ Namespace PresentationLayer.Views
         ReadOnly Property Posted As Boolean
 
     End Interface
-End NameSpace
+
+End Namespace

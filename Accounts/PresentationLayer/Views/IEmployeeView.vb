@@ -39,4 +39,5 @@ Namespace PresentationLayer.Views
         Property Active As Boolean
 
     End Interface
-End NameSpace
+
+End Namespace

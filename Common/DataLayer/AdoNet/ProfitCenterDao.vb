@@ -1,6 +1,5 @@
-﻿
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for ProfitCenter
@@ -11,7 +10,7 @@ Namespace DataLayer.AdoNet
         Implements IProfitCenterDao
 
         Private ReadOnly Db As New Db()
-        
+
         Public Function GetRecordById(idNo As Integer) As ProfitCenter Implements IProfitCenterDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &

@@ -1,9 +1,7 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
-
 
     Public Class PurchaseJournalItemsPresenter
         Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
@@ -74,4 +72,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
+
 End Namespace

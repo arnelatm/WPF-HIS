@@ -28,5 +28,4 @@ Public Class CTabControl
         End If
     End Sub
 
-
 End Class

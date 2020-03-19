@@ -20,4 +20,5 @@ Namespace PresentationLayer.Views
         Property Sequence As Integer
 
     End Interface
-End NameSpace
+
+End Namespace

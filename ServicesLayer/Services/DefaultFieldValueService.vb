@@ -15,4 +15,5 @@ Namespace Services
         End Sub
 
     End Class
-End NameSpace
+
+End Namespace

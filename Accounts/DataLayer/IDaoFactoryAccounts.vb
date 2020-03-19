@@ -1,7 +1,5 @@
 ﻿' ** GoF Design Pattern: Factory.
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer
-Imports AATM.DataLayer
 
 Namespace DataLayer
 
@@ -10,7 +8,7 @@ Namespace DataLayer
 
         'ReadOnly Property DaoAccounts As IDaoAccounts
 
-        'Function CreateDao(classBaseName As String) 
+        'Function CreateDao(classBaseName As String)
 
         'ReadOnly Property BankDao As IDaoAll(Of Bank)
         'ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
@@ -49,7 +47,6 @@ Namespace DataLayer
         ''ReadOnly Property PettyCashJournalItemDao As IDaoChild(Of JournalItem)
         ''ReadOnly Property PurchaseJournalItemDao As IDaoChild(Of JournalItem)
         ''ReadOnly Property SalesJournalItemDao As IDaoChild(Of JournalItem)
-
 
         'ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice)
         'ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice)

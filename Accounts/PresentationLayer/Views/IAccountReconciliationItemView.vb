@@ -2,7 +2,6 @@
 
 Namespace PresentationLayer.Views
 
-
     Interface IAccountReconciliationItemView
         Inherits IView
 
@@ -23,4 +22,5 @@ Namespace PresentationLayer.Views
         Property Sequence As Integer
 
     End Interface
-End NameSpace
+
+End Namespace

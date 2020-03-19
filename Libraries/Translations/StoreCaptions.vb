@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Globalization
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Class StoreCaptions
@@ -190,7 +188,7 @@ Public Class StoreCaptions
            TypeOf ctrl Is CCheckBox OrElse
            TypeOf ctrl Is CRadioButton OrElse
            TypeOf ctrl Is CDataGridView OrElse
-           TypeOf ctrl Is CGroupBox OrElse 
+           TypeOf ctrl Is CGroupBox OrElse
            TypeOf ctrl Is CTabControl OrElse
            TypeOf ctrl Is CTabPage OrElse
            TypeOf ctrl Is Label OrElse

@@ -16,4 +16,5 @@ Namespace BusinessLayer
         Public Property ProfitCenterName As String
         Public Property Percentage As Decimal
     End Class
-End NameSpace
+
+End Namespace

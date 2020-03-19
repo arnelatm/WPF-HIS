@@ -27,4 +27,5 @@ Namespace PresentationLayer.Views
         Property VatNumber As String
 
     End Interface
-End NameSpace
+
+End Namespace

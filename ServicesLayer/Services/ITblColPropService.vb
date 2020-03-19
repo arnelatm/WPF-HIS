@@ -1,4 +1,5 @@
 ﻿Namespace Services
+
     Public Interface ITblColPropService
 
         'Function GetControlTblColPropIdNo(searchValue As String) As String
@@ -6,4 +7,5 @@
         Function GetMainTableColumnProperties(tableName As String) As Object
 
     End Interface
-End NameSpace
+
+End Namespace

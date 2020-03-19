@@ -23,4 +23,3 @@ Public Class MyTabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
 End Class
-

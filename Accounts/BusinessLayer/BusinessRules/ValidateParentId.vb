@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer.BusinessRules
     ' length validation rule.
@@ -44,10 +43,10 @@ Namespace BusinessLayer.BusinessRules
         '    Return nCount = 0
         'End Function
 
-
         Public Overrides Function Validate(businessObject As AATM.BusinessLayer.BusinessObject) As Boolean
             Throw New NotImplementedException
         End Function
+
     End Class
 
 End Namespace

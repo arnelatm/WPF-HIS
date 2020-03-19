@@ -1,5 +1,6 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
 Namespace BusinessRules
+
     Public Class ValidateCompare
         Inherits BusinessRule
 
@@ -150,5 +151,7 @@ Namespace BusinessRules
                 Return False
             End Try
         End Function
+
     End Class
+
 End Namespace

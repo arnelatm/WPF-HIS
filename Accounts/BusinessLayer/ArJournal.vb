@@ -41,4 +41,5 @@ Namespace BusinessLayer
         Public Property TransactionType As String
 
     End Class
-End NameSpace
+
+End Namespace

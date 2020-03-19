@@ -20,4 +20,5 @@ Namespace PresentationLayer.Views
         Property SpecialAccount As String
         Property WithReconciliation As Boolean
     End Interface
-End NameSpace
+
+End Namespace

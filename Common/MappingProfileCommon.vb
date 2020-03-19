@@ -1,7 +1,6 @@
 ﻿Imports AATM.Common.BusinessLayer
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.PresentationLayer.Forms
 Imports AutoMapper
 
 Public Class MappingProfileCommon

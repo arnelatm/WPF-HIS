@@ -6,4 +6,5 @@ Namespace PresentationLayer.Views
     Public Interface IMainView
         Inherits IView
     End Interface
-End NameSpace
+
+End Namespace

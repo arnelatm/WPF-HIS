@@ -1,5 +1,5 @@
-﻿
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
+
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
@@ -22,4 +22,5 @@ Namespace PresentationLayer.Models
         Public Property TotalSales As Decimal
         Public Property TransactionDate As Date?
     End Class
-End NameSpace
+
+End Namespace

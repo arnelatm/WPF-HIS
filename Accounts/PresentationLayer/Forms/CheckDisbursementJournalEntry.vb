@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms
 Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters

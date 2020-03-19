@@ -9,4 +9,5 @@ Namespace PresentationLayer.Views
         Property CkdOiItems As IList(Of CkdOiItemModel)
 
     End Interface
-End NameSpace
+
+End Namespace

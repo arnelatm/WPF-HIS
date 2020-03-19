@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Resources
-Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 

@@ -1,6 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Namespace BusinessObjects
+
     Public Class Salt
         Inherits BusinessObject
 
@@ -10,4 +11,5 @@ Namespace BusinessObjects
         Public Property LoginIdNo As Integer
         Public Property Salt As String
     End Class
+
 End Namespace

@@ -1,6 +1,6 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for SalesJournal
@@ -9,9 +9,9 @@ Namespace DataLayer.AdoNet
     Public Class SalesJournalDao
         Implements IDao(Of SalesJournal), IDaoJournals(Of SalesJournal)
 
-' ReSharper disable once InconsistentNaming
+        ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
-        
+
         Public Function GetRecordById(idNo As Integer) As SalesJournal _
             Implements IDao(Of SalesJournal).GetRecordById
             Dim sql As String =
@@ -92,7 +92,6 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        
         Public Function UpdateGlReferenceNumber(ByRef bizObj As SalesJournal) As Integer Implements IDaoJournals(Of SalesJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql As String

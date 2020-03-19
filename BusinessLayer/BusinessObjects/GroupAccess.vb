@@ -20,4 +20,5 @@ Namespace BusinessObjects
         Public Property Editable As Boolean
         ' ** Enterprise Design Pattern: Foreign Key Mapping. SecurityGroup is the parent
     End Class
-End NameSpace
+
+End Namespace

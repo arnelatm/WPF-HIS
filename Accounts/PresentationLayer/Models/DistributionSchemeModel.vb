@@ -17,4 +17,5 @@
         Public Property TotalPercentage As Decimal
 
     End Class
+
 End Namespace

@@ -1,6 +1,6 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashReceiptJournal
@@ -154,7 +154,6 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        
         Public Function UpdateGlReferenceNumber(ByRef bizObj As CashReceiptJournal) As Integer Implements IDaoJournals(Of CashReceiptJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String

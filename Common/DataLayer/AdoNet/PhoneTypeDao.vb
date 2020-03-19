@@ -1,7 +1,5 @@
-﻿
-
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for PhoneType
@@ -12,7 +10,7 @@ Namespace DataLayer.AdoNet
         Implements IPhoneTypeDao
 
         Private ReadOnly Db As New Db()
-        
+
         Public Function GetRecordById(idNo As Integer) As PhoneType Implements IPhoneTypeDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &

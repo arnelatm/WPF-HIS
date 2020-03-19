@@ -17,4 +17,5 @@ Namespace BusinessLayer
         Public Property Rate As Decimal
 
     End Class
-End NameSpace
+
+End Namespace

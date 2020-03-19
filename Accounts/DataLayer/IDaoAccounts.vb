@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer
-Imports AATM.DataLayer
 
 Namespace DataLayer
 
@@ -51,12 +50,10 @@ Namespace DataLayer
 
     End Interface
 
-    
     Public Interface IDaoOiItem(Of TM)
 
         Function GetOpenInvoices(idNo As Integer) As List(Of TM)
 
     End Interface
-
 
 End Namespace

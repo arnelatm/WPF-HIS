@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
@@ -195,6 +194,7 @@ Namespace PresentationLayer.Forms
                 TxtIDNo.Text = Convert.ToString(Value)
             End Set
         End Property
+
         Public Property Notes As String Implements IDistributionSchemeView.Notes
             Get
                 Return txtNotes.Text
@@ -238,6 +238,7 @@ Namespace PresentationLayer.Forms
                 End If
             End Set
         End Property
+
 #End Region
 
 #Region "DistributionSchemeItemsView"
@@ -247,12 +248,13 @@ Namespace PresentationLayer.Forms
                 Return _distributionSchemeItems
             End Get
             Set(value As IList(Of DistributionSchemeItemModel))
-                _distributionSchemeItems = Value
+                _distributionSchemeItems = value
                 BindDistributionSchemeItem()
             End Set
         End Property
 
         Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
+
         Private Sub BindDistributionSchemeItem()
             SuspendLayout()
             bsDistributionSchemeItems.DataSource = DistributionSchemeItems
@@ -283,6 +285,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #End Region
+
         'Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
         '    If Not DataGridViewDistributionSchemeItems.DataBindings Is Nothing Then
         '        DataGridViewDistributionSchemeItems.DataInGridChanged = False
@@ -358,6 +361,7 @@ Namespace PresentationLayer.Forms
             'DataGridViewDistributionSchemeItems.AddDeleteColumn()
             DataGridViewDistributionSchemeItems.AddInsertColumn()
         End Sub
+
         Private Sub ReSequenceDgvAfterDelete()
             Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
             For Each item In DistributionSchemeItems
@@ -381,6 +385,7 @@ Namespace PresentationLayer.Forms
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewDistributionSchemeItems.Focus()
         End Sub
+
     End Class
 
 End Namespace

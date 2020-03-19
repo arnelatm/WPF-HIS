@@ -23,4 +23,5 @@ Namespace BusinessLayer
         Public Property TransactionDate As Date?
 
     End Class
-End NameSpace
+
+End Namespace

@@ -4,7 +4,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class SalesJournalPresenter
         Inherits AccountsPresenter(Of ISalesJournalView, SalesJournalModel)
 
@@ -44,4 +43,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace
