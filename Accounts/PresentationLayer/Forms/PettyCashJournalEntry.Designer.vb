@@ -272,13 +272,13 @@ Namespace PresentationLayer.Forms
         '
         'cboPaymentType
         '
+        Me.cboPaymentType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboPaymentType.BackColor = System.Drawing.Color.White
         Me.cboPaymentType.ChangingSearchValueOnly = false
         Me.cboPaymentType.CurrentSearchTerm = ""
         Me.cboPaymentType.DefaultValue = "0"
         Me.cboPaymentType.DisplayMember = "Name"
         Me.cboPaymentType.DropDownHeight = 200
-        Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPaymentType.EditingMode = false
         Me.cboPaymentType.FilterRule = Nothing
         resources.ApplyResources(Me.cboPaymentType, "cboPaymentType")
