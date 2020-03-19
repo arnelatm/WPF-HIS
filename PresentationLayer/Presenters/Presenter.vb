@@ -6,7 +6,6 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
@@ -268,7 +267,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'End Function
 
     Private _errorList As String = ""
-
 
     'Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
     '    If additionalMessage IsNot Nothing Then

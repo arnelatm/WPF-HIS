@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for Category
@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
         Private ReadOnly Db As New Db()
 
         Public Sub New()
-            
+
         End Sub
 
         Public Function GetRecordById(idNo As Integer) As Category Implements IDaoAll(Of Category).GetRecordById

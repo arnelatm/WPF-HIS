@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.ServiceLayer
-Imports AATM.ServicesLayer.Services
+﻿Imports AATM.Common.ServiceLayer
 
 Namespace ServiceLayer.ActionService
 

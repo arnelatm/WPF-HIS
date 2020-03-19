@@ -17,12 +17,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub Initializer(baseClassName As String)
-            Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts" 
+            Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = baseClassName
             SortOrderKey = baseClassName + "Name"
-            Dim args As Object() = { baseClassName }
+            Dim args As Object() = {baseClassName}
             Dim t As Type = Type.GetType(presenterModelName)
-            ModelPresenter = Activator.CreateInstance( t, args ) 
+            ModelPresenter = Activator.CreateInstance(t, args)
             OriginalModel = New TM
             DataModel = New TM
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"

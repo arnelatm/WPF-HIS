@@ -15,57 +15,240 @@ Namespace ServiceLayer.ActionService
 
         Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
 
-        Private ReadOnly _accountReconciliationDao As IDao(Of AccountReconciliation) = DaoFactoryAccounts.CreateDao("AccountReconciliation")
-        Private ReadOnly _apJournalDao As IDao(Of ApJournal) = DaoFactoryAccounts.CreateDao("ApJournal")
-        Private ReadOnly _arJournalDao As IDao(Of ArJournal) = DaoFactoryAccounts.CreateDao("ArJournal")
-        Private ReadOnly _cashDisbursementJournalDao As IDao(Of CashDisbursementJournal) = DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
-        Private ReadOnly _cashReceiptJournalDao As IDao(Of CashReceiptJournal) = DaoFactoryAccounts.CreateDao("CashReceiptJournal")
-        Private ReadOnly _checkDisbursementJournalDao As IDao(Of CheckDisbursementJournal) = DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
-        Private ReadOnly _generalJournalDao As IDao(Of GeneralJournal) = DaoFactoryAccounts.CreateDao("GeneralJournal")
-        Private ReadOnly _pettyCashJournalDao As IDao(Of PettyCashJournal) = DaoFactoryAccounts.CreateDao("PettyCashJournal")
-        Private ReadOnly _salesJournalDao As IDao(Of SalesJournal) = DaoFactoryAccounts.CreateDao("SalesJournal")
+        Private ReadOnly Property AccountReconciliationDao As IDao(Of AccountReconciliation)
+            Get
+                Return DaoFactoryAccounts.CreateDao("AccountReconciliation")
+            End Get
+        End Property
 
-        Private ReadOnly _bankDao As IDaoAll(Of Bank) = DaoFactoryAccounts.CreateDao("Bank")
-        Private ReadOnly _cashCodeDao As IDaoAll(Of CashCode) = DaoFactoryAccounts.CreateDao("CashCode")
-        Private ReadOnly _categoryDao As IDaoAll(Of Category) = DaoFactoryAccounts.CreateDao("Category")
-        Private ReadOnly _chartDao As IDaoAll(Of Chart) = DaoFactoryAccounts.CreateDao("Chart")
-        Private ReadOnly _customerDao As IDaoAll(Of Customer) = DaoFactoryAccounts.CreateDao("Customer")
-        Private ReadOnly _supplierDao As IDaoAll(Of Supplier) = DaoFactoryAccounts.CreateDao("Supplier")
-        Private ReadOnly _distributionSchemeDao As IDaoAll(Of DistributionScheme) = DaoFactoryAccounts.CreateDao("DistributionScheme")
-        Private ReadOnly _employeeDao As IDaoAll(Of Employee) = DaoFactoryAccounts.CreateDao("Employee")
-        Private ReadOnly _purchaseItemDao As IDaoAll(Of PurchaseItem) = DaoFactoryAccounts.CreateDao("PurchaseItem")
-        Private ReadOnly _designationDao As IDaoAll(Of Designation) = DaoFactoryAccounts.CreateDao("Designation")
+        Private ReadOnly Property ApJournalDao As IDao(Of ApJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournal")
+            End Get
+        End Property
 
-        Private ReadOnly _accountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem) = DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
-        Private ReadOnly _distributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem) = DaoFactoryAccounts.CreateDao("DistributionSchemeItem")
-        Private ReadOnly _apJournalItemDao As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ApJournalItem")
-        Private ReadOnly _arJournalItemDao As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ArJournalItem")
-        Private ReadOnly _generalJournalItemDao As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("GeneralJournalItem")
-        Private ReadOnly _journalItemDao As IDaoChild(Of JournalItem) = DaoFactoryAccounts.CreateDao("ApJournalItem")
-        Private ReadOnly _cadOiItemDao As IDaoChild(Of CadOiItem) = DaoFactoryAccounts.CreateDao("CadOiItem")
-        Private ReadOnly _csrOiItemDao As IDaoChild(Of CsrOiItem) = DaoFactoryAccounts.CreateDao("CsrOiItem")
-        Private ReadOnly _ckdOiItemDao As IDaoChild(Of CkdOiItem) = DaoFactoryAccounts.CreateDao("CkdOiItem")
-        Private ReadOnly _pcsOiItemDao As IDaoChild(Of PcsOiItem) = DaoFactoryAccounts.CreateDao("PcsOiItem")
-        Private ReadOnly _reconciledDao As IDaoChild(Of Reconciled) = DaoFactoryAccounts.CreateDao("Reconciled")
-        Private ReadOnly _salesCashItemDao As IDaoChild(Of SalesCashItem) = DaoFactoryAccounts.CreateDao("SalesCashItem")
+        Private ReadOnly Property ArJournalDao As IDao(Of ArJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArJournal")
+            End Get
+        End Property
 
-        Private ReadOnly _apOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice) = DaoFactoryAccounts.CreateDao("ApOpenInvoice")
-        Private ReadOnly _arOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice) = DaoFactoryAccounts.CreateDao("ArOpenInvoice")
+        Private ReadOnly Property CashDisbursementJournalDao As IDao(Of CashDisbursementJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashReceiptJournalDao As IDao(Of CashReceiptJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashReceiptJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CheckDisbursementJournalDao As IDao(Of CheckDisbursementJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("GeneralJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property PettyCashJournalDao As IDao(Of PettyCashJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PettyCashJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property SalesJournalDao As IDao(Of SalesJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("SalesJournal")
+
+            End Get
+        End Property
+
+        Private ReadOnly Property BankDao As IDaoAll(Of Bank)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Bank")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashCode")
+            End Get
+        End Property
+
+        Private ReadOnly Property CategoryDao As IDaoAll(Of Category)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Category")
+            End Get
+        End Property
+
+        Private ReadOnly Property ChartDao As IDaoAll(Of Chart)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Chart")
+            End Get
+        End Property
+
+        Private ReadOnly Property CustomerDao As IDaoAll(Of Customer)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Customer")
+            End Get
+        End Property
+
+        Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Supplier")
+            End Get
+        End Property
+
+        Private ReadOnly Property DistributionSchemeDao As IDaoAll(Of DistributionScheme)
+            Get
+                Return DaoFactoryAccounts.CreateDao("DistributionScheme")
+            End Get
+        End Property
+
+        Private ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Employee")
+            End Get
+        End Property
+
+        Private ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PurchaseItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property DesignationDao As IDaoAll(Of Designation)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Designation")
+            End Get
+        End Property
+
+        Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("DistributionSchemeItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ArJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property GeneralJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("GeneralJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property JournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CadOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CsrOiItemDao As IDaoChild(Of CsrOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CsrOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CkdOiItemDao As IDaoChild(Of CkdOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CkdOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property PcsOiItemDao As IDaoChild(Of PcsOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcsOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ReconciledDao As IDaoChild(Of Reconciled)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Reconciled")
+            End Get
+        End Property
+
+        Private ReadOnly Property SalesCashItemDao As IDaoChild(Of SalesCashItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("SalesCashItem")
+
+            End Get
+        End Property
+
+        Private ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApOpenInvoice")
+            End Get
+        End Property
+
+        Private ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArOpenInvoice")
+            End Get
+        End Property
 
         Public Sub New(accountName As String)
             Dim bizObject = $"AATM.Accounts.BusinessLayer." + accountName
-            Dim dao = "_" + Strings.Left(accountName, 1).ToLower() + Strings.Mid(accountName, 2) + "Dao"
+            Dim dao = accountName + "Dao"
+            DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
                 MessageBox.Show("Missing Business Object " + bizObject)
                 Debugger.Break()
             End If
-            Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
-            If fldInfo Is Nothing Then
+            'Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
+            'If fldInfo Is Nothing Then
+            '    MessageBox.Show("Missing Data Access Object " + dao)
+            '    Debugger.Break()
+            'End If
+            DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
+            If DataDao Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + dao)
                 Debugger.Break()
             End If
-            DataDao = fldInfo.GetValue(Me)
+            'DataDao = Me.GetType().GetProperty(dao).GetValue(me)
+            'Dim bizObject = $"AATM.Accounts.BusinessLayer." + accountName
+            'Dim dao = "_" + Strings.Left(accountName, 1).ToLower() + Strings.Mid(accountName, 2) + "Dao"
+            'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            'If DataBo Is Nothing Then
+            '    MessageBox.Show("Missing Business Object " + bizObject)
+            '    Debugger.Break()
+            'End If
+            'Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
+            'If fldInfo Is Nothing Then
+            '    MessageBox.Show("Missing Data Access Object " + dao)
+            '    Debugger.Break()
+            'End If
+            'DataDao = fldInfo.GetValue(Me)
         End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
