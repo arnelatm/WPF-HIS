@@ -4,10 +4,10 @@ Imports System.Threading
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.Libraries
-Imports AATM.LIBRARIES.CBaseControlsLibrary
-Imports AATM.LIBRARIES.CustomControlsLibrary
-Imports AATM.LIBRARIES.GlobalFuncNSub
-Imports AATM.LIBRARIES.Languages
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.CustomControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Languages
 
 Public Class BfEntryNew
     Inherits BfMain
@@ -1240,7 +1240,7 @@ Public Class BfEntryNew
         TargetIdNo = e.Argument
         GetAndSetRecordPositionNumber()
         GetAndDisplayRecordForGivenRecordPosition()
-        WinformUtils.DoPaintEvents()
+        WinFormUtils.DoPaintEvents()
     End Sub
 
     Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click

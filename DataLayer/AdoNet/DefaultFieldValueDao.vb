@@ -1,5 +1,4 @@
-﻿
-Imports AATM.BusinessLayer.BusinessObjects
+﻿Imports AATM.BusinessLayer.BusinessObjects
 
 Namespace AdoNet
     ' Data access object for DefaultFieldValue
@@ -83,5 +82,7 @@ Namespace AdoNet
                                     "@DefaultValue", defaultFieldValue.DefaultValue
                                 }
         End Function
+
     End Class
+
 End Namespace

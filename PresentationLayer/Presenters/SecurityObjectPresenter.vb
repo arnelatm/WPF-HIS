@@ -1,5 +1,4 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.PresentationLayer.Models
+﻿Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Public Class SecurityObjectPresenter

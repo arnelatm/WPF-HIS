@@ -51,5 +51,7 @@
             ' note: reflection is relatively slow
             Return businessObject.GetType().GetProperty(propertyName).GetValue(businessObject, Nothing)
         End Function
+
     End Class
+
 End Namespace

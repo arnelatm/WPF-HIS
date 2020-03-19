@@ -3,7 +3,7 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Text
 Imports System.Windows.Forms
-Imports AATM.LIBRARIES.CustomControlsLibrary
+Imports AATM.Libraries.CustomControlsLibrary
 
 Public Class HijriCalendarForm
     Private ReadOnly HijriDate As HijriDates = New HijriDates()

@@ -29,4 +29,5 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
     End Class
-End NameSpace
+
+End Namespace

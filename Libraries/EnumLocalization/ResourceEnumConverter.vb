@@ -157,7 +157,7 @@ Public Class ResourceEnumConverter
         End If
     End Function
 
-    Public Shared OverLoads Function ConvertToString(value As [Enum]) As String
+    Public Overloads Shared Function ConvertToString(value As [Enum]) As String
         Dim converter As TypeConverter = TypeDescriptor.GetConverter(value.[GetType]())
         Return converter.ConvertToString(value)
     End Function

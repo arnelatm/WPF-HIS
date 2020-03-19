@@ -1,6 +1,4 @@
-﻿
-
-Public Interface ISaltView
+﻿Public Interface ISaltView
     Inherits IView
     Property IdNo As Integer
     Property LoginIdNo As Integer

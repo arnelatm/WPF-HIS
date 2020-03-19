@@ -9,5 +9,5 @@
     Property Selectable As Boolean
     Property SecurityObjectName() As String
     Property Errors As List(Of String)
-    
+
 End Interface

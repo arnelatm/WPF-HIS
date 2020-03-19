@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-
-Namespace AdoNet
+﻿Namespace AdoNet
 
     Public Class BaseDao
         Implements IBaseDao

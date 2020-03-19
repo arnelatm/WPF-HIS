@@ -4,6 +4,7 @@
 Imports AATM.BusinessLayer.BusinessObjects
 
 Public Interface IDefaultFieldValueDao
+
     ' gets a specific DefaultFieldValue
     Function GetRecordById(idNo As Integer) As DefaultFieldValue
 
@@ -17,4 +18,5 @@ Public Interface IDefaultFieldValueDao
     Function UpdateRecord(ByRef defaultFieldValue As DefaultFieldValue) As Integer
 
     Function GetTableDefaultValues(tableName As String) As List(Of DefaultFieldValue)
+
 End Interface

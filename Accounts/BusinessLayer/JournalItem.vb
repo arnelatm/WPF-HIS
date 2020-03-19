@@ -26,4 +26,5 @@ Namespace BusinessLayer
         Public Property Sequence As Integer
         Public Property SpecialAccount As String
     End Class
-End NameSpace
+
+End Namespace

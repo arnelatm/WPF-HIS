@@ -1,6 +1,6 @@
+using AATM.Libraries.LocalizationUtilities.Design;
 using System.ComponentModel;
 using System.Drawing.Design;
-using AATM.Libraries.LocalizationUtilities.Design;
 
 namespace AATM.Libraries.LocalizationUtilities
 {

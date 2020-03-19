@@ -1,9 +1,7 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
-
 
     Public Class PcsOiItemsPresenter
         Inherits AccountsPresenter(Of IPcsOiItemsView, PcsOiItemModel)
@@ -22,21 +20,21 @@ Namespace PresentationLayer.Presenters
         Public Overloads Function DataIsValid(ByRef pcsOiItems As BindingSource, ByVal appliedAmount As Decimal, ByVal unAppliedAmount As Decimal, ByVal totalBalance As Decimal)
             Dim retVal = True
             Dim index As Int16 = 0
-            For Each item In PcsOiItems
+            For Each item In pcsOiItems
                 If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                     If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
                        (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
                         Dim errorMsg = String.Format("Error in line {0:N0}. Applied amount and discount exceeds balance.", item.Sequence.ToString())
                         MessageBox.Show(errorMsg)
-                        PcsOiItems(index).errors.Add(errorMsg)
+                        pcsOiItems(index).errors.Add(errorMsg)
                         'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
                         retVal = False
                         Exit For
                     Else
                         ' clear error message
                         'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
-                        If PcsOiItems(index).Errors IsNot Nothing Then
-                            PcsOiItems(index).errors.Clear()
+                        If pcsOiItems(index).Errors IsNot Nothing Then
+                            pcsOiItems(index).errors.Clear()
                         End If
                     End If
                 End If
@@ -105,4 +103,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

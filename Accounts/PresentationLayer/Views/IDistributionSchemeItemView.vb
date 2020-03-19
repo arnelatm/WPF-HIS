@@ -1,11 +1,10 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Interface IDistributionSchemeItemView
         Inherits IView
-        
+
         Property IdNo As Integer
         Property DistributionSchemeIdNo As Integer
         Property Sequence As Integer

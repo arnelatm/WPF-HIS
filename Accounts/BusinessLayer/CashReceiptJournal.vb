@@ -47,4 +47,5 @@ Namespace BusinessLayer
         Public Property TransactionDate As Date?
         Public Property UnApplied As Decimal
     End Class
-End NameSpace
+
+End Namespace

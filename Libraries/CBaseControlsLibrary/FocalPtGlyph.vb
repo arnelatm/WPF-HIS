@@ -22,6 +22,7 @@ Public Class FocalPtGlyph
         Center
         None
     End Enum
+
     Public Property AdjWhat As eAdjWhat
 
 #End Region
@@ -31,20 +32,20 @@ Public Class FocalPtGlyph
     Public Sub New(
                    ByVal behaviorService As System.Windows.Forms.Design.Behavior.BehaviorService,
                    ByVal control As CButton,
-                   ByVal selectionService As ISelectionService, _
-                   ByVal relatedDesigner As IDesigner, _
+                   ByVal selectionService As ISelectionService,
+                   ByVal relatedDesigner As IDesigner,
                    ByVal myAdorner As Adorner,
                    ByVal adjWhat As eAdjWhat)
 
         MyBase.New(New FocalPtBehavior(relatedDesigner, adjWhat))
-        ' Cache references for convenience. 
+        ' Cache references for convenience.
         Me.behaviorSvc = behaviorService
         Me.selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
         Me.FocalPtAdorner = myAdorner
         Me.AdjWhat = adjWhat
 
-        ' Cache a reference to the control being designed. 
+        ' Cache a reference to the control being designed.
         Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
     End Sub
@@ -113,8 +114,6 @@ Public Class FocalPtGlyph
 
                     End If
 
-
-
                     'pe.Graphics.DrawRectangle(New Pen(), Rectangle.Round(cRect))
 
                 End Using
@@ -162,7 +161,6 @@ Public Class FocalPtGlyph
                         relatedControl.FocalPoints.SetCenterPoint(New PointF(0.5, 0.5))
                     End If
                     relatedControl.Refresh()
-
                 Else
                     _dragStart = mouseLoc
                     _dragging = True
@@ -207,7 +205,7 @@ Public Class FocalPtGlyph
 
         End Function
 
-        Public Overrides Function OnMouseUp(ByVal g As Glyph, _
+        Public Overrides Function OnMouseUp(ByVal g As Glyph,
                                             ByVal button As MouseButtons) As Boolean
 
             _dragging = False
@@ -219,6 +217,4 @@ Public Class FocalPtGlyph
 
     End Class
 
-
 End Class
-

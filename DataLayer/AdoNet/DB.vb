@@ -3,7 +3,6 @@ Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.ExceptionServices
-Imports System.Windows.Forms
 
 Namespace AdoNet
     ' ADO.NET data access class.

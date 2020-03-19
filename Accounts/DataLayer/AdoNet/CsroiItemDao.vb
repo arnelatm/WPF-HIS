@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CsrOiItem
@@ -11,8 +11,9 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of CsrOiItem), IDaoOiItem(Of CsrOiItem)
 
-' ReSharper disable once InconsistentNaming
+        ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
+
         Protected TableFileName As String = "CsrOiItem_View"
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCsrOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCsrOiItemTVP"

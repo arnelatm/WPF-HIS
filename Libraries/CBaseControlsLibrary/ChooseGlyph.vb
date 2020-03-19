@@ -25,6 +25,7 @@ Public Class ChooseGlyph
         FocalPt
         None
     End Enum
+
     Public Property chooseWhat As eChooseWhat = eChooseWhat.None
     Public Property sendWhat As eChooseWhat = eChooseWhat.None
 
@@ -35,21 +36,21 @@ Public Class ChooseGlyph
     Public Sub New(
                    ByVal behaviorService As System.Windows.Forms.Design.Behavior.BehaviorService,
                    ByVal control As CButton,
-                   ByVal selectionService As ISelectionService, _
-                   ByVal relatedDesigner As IDesigner, _
+                   ByVal selectionService As ISelectionService,
+                   ByVal relatedDesigner As IDesigner,
                    ByVal myAdorner As Adorner)
 
         MyBase.New(New CornBehavior(relatedDesigner))
-        ' Cache references for convenience. 
+        ' Cache references for convenience.
         Me.behaviorSvc = behaviorService
         Me.selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
         Me.ChooseAdorner = myAdorner
 
-        ' Cache a reference to the control being designed. 
+        ' Cache a reference to the control being designed.
         Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
-        ' Hook the SelectionChanged event.  
+        ' Hook the SelectionChanged event.
         AddHandler Me.selectionSvc.SelectionChanged, AddressOf selectionService_SelectionChanged
 
         AddHandler Me.relatedControl.Move, AddressOf relatedControl_Move
@@ -70,8 +71,8 @@ Public Class ChooseGlyph
 
     End Sub
 
-    Private Sub relatedControl_Resize( _
-                                      ByVal sender As Object, _
+    Private Sub relatedControl_Resize(
+                                      ByVal sender As Object,
                                       ByVal e As EventArgs)
         If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
             SetBoxes()
@@ -79,8 +80,8 @@ Public Class ChooseGlyph
         End If
     End Sub
 
-    Private Sub selectionService_SelectionChanged( _
-                                                  ByVal sender As Object, _
+    Private Sub selectionService_SelectionChanged(
+                                                  ByVal sender As Object,
                                                   ByVal e As EventArgs)
 
         If Me.relatedControl.GetType = GetType(CButton) Then
@@ -88,7 +89,7 @@ Public Class ChooseGlyph
             If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
                 SetBoxes()
                 Me.ChooseAdorner.Enabled = True
-                relatedControl.DesignerSelected = true
+                relatedControl.DesignerSelected = True
             Else
                 If relatedControl.DesignerSelected Then
                     Me.ChooseAdorner.Enabled = False
@@ -173,7 +174,6 @@ Public Class ChooseGlyph
             padBox = New Rectangle(edge.X + relatedControl.Width + 8, edge.Y + relatedControl.Height \ 2 - 5, 10, 10)
             cornBox = New Rectangle(edge.X + relatedControl.Width + 21, edge.Y + relatedControl.Height \ 2 - 5, 10, 10)
             focalPtBox = New Rectangle(edge.X + relatedControl.Width + 34, edge.Y + relatedControl.Height \ 2 - 5, 10, 10)
-
         Else
 
             selectBox = New Rectangle(edge.X + relatedControl.Width + 5, edge.Y, 16, 42)
@@ -231,4 +231,3 @@ Public Class ChooseGlyph
     End Class
 
 End Class
-

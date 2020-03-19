@@ -3,7 +3,6 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 
 Namespace Services

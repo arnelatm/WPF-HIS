@@ -1,5 +1,5 @@
-﻿
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
+
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
@@ -24,4 +24,5 @@ Namespace PresentationLayer.Models
         Public Property Sequence As Integer
 
     End Class
-End NameSpace
+
+End Namespace

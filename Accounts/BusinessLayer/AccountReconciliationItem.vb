@@ -1,6 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Namespace BusinessLayer
+
     Public Class AccountReconciliationItem
         Inherits AATM.BusinessLayer.BusinessObject
 
@@ -23,4 +24,5 @@ Namespace BusinessLayer
         Public Property Sequence As Integer
 
     End Class
-End NameSpace
+
+End Namespace

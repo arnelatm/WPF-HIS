@@ -30,5 +30,7 @@ Namespace BusinessRules
             Return bok
             'Return Regex.Match(GetPropertyValue(businessObject).ToString(), Pattern).Success
         End Function
+
     End Class
+
 End Namespace

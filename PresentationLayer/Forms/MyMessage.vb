@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.LIBRARIES.GlobalFuncNSub
-Imports AATM.LIBRARIES.Translations
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Translations
 
 Public Class MyMessage
 

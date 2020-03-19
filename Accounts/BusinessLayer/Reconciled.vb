@@ -13,4 +13,5 @@ Namespace BusinessLayer
         Public Property ReconciliationIdNo As Integer
 
     End Class
-End NameSpace
+
+End Namespace

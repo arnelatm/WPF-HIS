@@ -4,7 +4,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-
     Public Class PettyCashJournalPresenter
         Inherits AccountsPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
 
@@ -27,16 +26,16 @@ Namespace PresentationLayer.Presenters
             Dim pettyCashJournalChangesMade As Boolean
             If ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
-                    PettyCashJournalChangesMade = True
+                    pettyCashJournalChangesMade = True
                 ElseIf PcsOiItemsPresenter.ChangesMadeInPcsOiItem Then
-                    PettyCashJournalChangesMade = True
+                    pettyCashJournalChangesMade = True
                 Else
-                    PettyCashJournalChangesMade = False
+                    pettyCashJournalChangesMade = False
                 End If
             Else
-                PettyCashJournalChangesMade = True
+                pettyCashJournalChangesMade = True
             End If
-            Return PettyCashJournalChangesMade
+            Return pettyCashJournalChangesMade
         End Function
 
         Public Function UpdateGlReferenceNumber() As String
@@ -67,8 +66,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of PcsOiItemModel)
-            return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

@@ -28,5 +28,7 @@
             Dim length As Integer = GetPropertyValue(businessObject).ToString().Length
             Return length >= _min AndAlso length <= _max
         End Function
+
     End Class
+
 End Namespace

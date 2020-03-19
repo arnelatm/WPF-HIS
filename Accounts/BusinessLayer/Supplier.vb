@@ -2,9 +2,8 @@
 
 Namespace BusinessLayer
 
-
-' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
+    ' Category business object
+    ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
     Public Class Supplier
         Inherits AATM.BusinessLayer.BusinessObject
@@ -58,4 +57,5 @@ Namespace BusinessLayer
         Public Property OpeningBalance As Single
         Public Property Active As Boolean
     End Class
-End NameSpace
+
+End Namespace

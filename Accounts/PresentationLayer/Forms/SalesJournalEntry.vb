@@ -1,12 +1,10 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 
@@ -553,7 +551,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                          pAccountIdNo As Integer, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String) 
+                                          pAccountIdNo As Integer, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
             If debitAmount <> 0 Or creditAmount <> 0 Then
                 counter = counter + 1
                 If counter <= oldJournalItems.Count() Then

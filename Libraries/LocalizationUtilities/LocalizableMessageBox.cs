@@ -1,7 +1,7 @@
+using AATM.Libraries.LocalizationUtilities.Design;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using AATM.Libraries.LocalizationUtilities.Design;
 
 namespace AATM.Libraries.LocalizationUtilities
 {

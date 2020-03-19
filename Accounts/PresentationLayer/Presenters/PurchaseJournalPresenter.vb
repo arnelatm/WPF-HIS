@@ -1,9 +1,8 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
-
 
     Public Class PurchaseJournalPresenter
         Inherits AccountsPresenter(Of IPurchaseJournalView, PurchaseJournalModel)
@@ -64,4 +63,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
-End NameSpace
+
+End Namespace

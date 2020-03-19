@@ -32,4 +32,5 @@ Public Class TblColPropDao
         .IsNullable = Extensions.AsBool(reader("IsNullable")),
         .IsIdentity = Extensions.AsBool(reader("IsIdentity"))
         }
+
 End Class

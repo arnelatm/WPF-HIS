@@ -1,6 +1,5 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
 
-
 Public Interface ISecurityObjectDao
 
     ' gets a specific SecurityObject

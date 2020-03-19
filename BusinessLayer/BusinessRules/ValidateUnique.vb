@@ -1,6 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Namespace BusinessRules
 
-Namespace BusinessRules
     Public Class ValidateUnique
         Inherits BusinessRule
 
@@ -34,5 +33,7 @@ Namespace BusinessRules
                 Return False
             End Try
         End Function
+
     End Class
+
 End Namespace

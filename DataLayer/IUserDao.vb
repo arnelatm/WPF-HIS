@@ -10,6 +10,7 @@ Public Interface IUserDao
 
     ' gets a specific User
     Function GetRecordById(idNo As Integer) As User
+
     Function GetUserByName(fullName As String) As User
 
     ' gets User given an order

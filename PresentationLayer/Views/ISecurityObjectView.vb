@@ -1,7 +1,4 @@
-﻿
-
-
-Public Interface ISecurityObjectView
+﻿Public Interface ISecurityObjectView
     Inherits IView
     Property IdNo As Integer
     Property SecurityObjectName As String

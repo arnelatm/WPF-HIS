@@ -1,5 +1,5 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CostCenter

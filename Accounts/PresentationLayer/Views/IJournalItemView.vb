@@ -23,4 +23,5 @@ Namespace PresentationLayer.Views
         Property SpecialAccount As String
 
     End Interface
-End NameSpace
+
+End Namespace

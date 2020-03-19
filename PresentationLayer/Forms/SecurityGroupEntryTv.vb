@@ -2,7 +2,6 @@
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class SecurityGroupEntryTv
     Implements ISecurityGroupView, IGroupAccessesView, ISecurityGroupsView

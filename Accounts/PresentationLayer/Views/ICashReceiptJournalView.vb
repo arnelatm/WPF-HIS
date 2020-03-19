@@ -26,4 +26,5 @@ Namespace PresentationLayer.Views
         Property TransactionDate As Date?
         Property UnApplied As Decimal
     End Interface
-End NameSpace
+
+End Namespace

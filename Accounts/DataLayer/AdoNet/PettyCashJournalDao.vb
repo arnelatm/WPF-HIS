@@ -1,10 +1,11 @@
 ﻿' Data access object for PettyCashJournal
 ' ** DAO Pattern
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
+
     Public Class PettyCashJournalDao
         Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal)
 
@@ -125,4 +126,5 @@ Namespace DataLayer.AdoNet
         End Function
 
     End Class
+
 End Namespace

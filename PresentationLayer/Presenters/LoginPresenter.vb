@@ -1,6 +1,4 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.DataLayer.AdoNet
-Imports AATM.PresentationLayer.Models
+﻿Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 ''' <summary>

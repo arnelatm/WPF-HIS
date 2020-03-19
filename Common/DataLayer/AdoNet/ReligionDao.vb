@@ -1,6 +1,5 @@
-﻿
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
 
 Namespace DataLayer.AdoNet
     ' Data access object for Religion

@@ -1,6 +1,7 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
+
     Public Interface ICustomerView
         Inherits IView
         Property IdNo As Integer
@@ -41,4 +42,5 @@ Namespace PresentationLayer.Views
         Property OpeningBalance As Single
         Property Active As Boolean
     End Interface
-End NameSpace
+
+End Namespace

@@ -22,4 +22,5 @@ Namespace BusinessLayer
         Public Property Sequence As Integer
         Public Property TransactionDate As Date
     End Class
-End NameSpace
+
+End Namespace

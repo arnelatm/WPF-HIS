@@ -43,4 +43,5 @@ Namespace PresentationLayer.Views
         Property ZipCode As String
 
     End Interface
-End NameSpace
+
+End Namespace

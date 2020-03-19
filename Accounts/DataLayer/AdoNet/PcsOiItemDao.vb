@@ -1,7 +1,7 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for PcsOiItem
@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpInsertFileName As String = "dbo.InsertPcsOiItemTVP"
 
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of PcsOiItem) Implements IDaoChild(Of PcsOiItem).GetRecordsWithIdNo
-            if sortExpression Is Nothing Then
+            If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
             Dim sql As String =

@@ -15,5 +15,7 @@
             Me.New(propertyName)
             [Error] = errorMessage
         End Sub
+
     End Class
+
 End Namespace

@@ -1,5 +1,4 @@
-﻿
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
@@ -22,4 +21,5 @@ Namespace PresentationLayer.Views
         Property TransactionDate As Date?
 
     End Interface
-End NameSpace
+
+End Namespace

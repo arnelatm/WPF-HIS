@@ -1,9 +1,7 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.My.Resources
+﻿Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Forms
 

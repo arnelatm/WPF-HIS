@@ -18,31 +18,33 @@ Public Class PadGlyph
         Right
         Bottom
     End Enum
+
     Private WhatBorder As eWhatBorder
 
     Enum eAdjWhat
         Button
         Text
     End Enum
+
     Public Property AdjWhat As eAdjWhat
 
     Public Sub New(
                    ByVal behaviorService As System.Windows.Forms.Design.Behavior.BehaviorService,
                    ByVal control As CButton,
-                   ByVal selectionService As ISelectionService, _
-                   ByVal relatedDesigner As IDesigner, _
+                   ByVal selectionService As ISelectionService,
+                   ByVal relatedDesigner As IDesigner,
                    ByVal myAdorner As Adorner,
                    ByVal adjWhat As eAdjWhat)
 
         MyBase.New(New PadBehavior(relatedDesigner, adjWhat))
-        ' Cache references for convenience. 
+        ' Cache references for convenience.
         Me.behaviorSvc = behaviorService
         Me.selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
         Me.PadAdorner = myAdorner
         Me.AdjWhat = adjWhat
 
-        ' Cache a reference to the control being designed. 
+        ' Cache a reference to the control being designed.
         Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
     End Sub
@@ -64,11 +66,12 @@ Public Class PadGlyph
     End Property
 
     Private isOver As Boolean = False
+
     Public Overrides Function GetHitTest(ByVal p As Point) As Cursor
 
         If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.Pad Then
-'			WhatBorder = eWhatBorder.None
+            '			WhatBorder = eWhatBorder.None
 
             Using gp As GraphicsPath = New GraphicsPath(),
                 pn As Pen = New Pen(Brushes.Black, 7)
@@ -78,7 +81,7 @@ Public Class PadGlyph
                     pn.Width = 3
                 End If
 
-                If Control.ModifierKeys = Keys.Shift and AdjWhat = eAdjWhat.Button then Return nothing
+                If Control.ModifierKeys = Keys.Shift And AdjWhat = eAdjWhat.Button Then Return Nothing
 
                 gp.AddLine(Bounds.X, Bounds.Y, Bounds.Right, Bounds.Y)
                 If gp.IsOutlineVisible(p, pn) Then
@@ -146,7 +149,6 @@ Public Class PadGlyph
 
     End Sub
 
-
     Class PadBehavior
         Inherits System.Windows.Forms.Design.Behavior.Behavior
         Private relatedDesigner As IDesigner = Nothing
@@ -158,7 +160,6 @@ Public Class PadGlyph
             Me.relatedControl = CType(relatedDesigner.Component, CButton)
             Me.AdjWhat = adjWhat
         End Sub
-
 
         Dim _dragStart As Point
         Public _dragging As Boolean
@@ -235,12 +236,12 @@ Public Class PadGlyph
 
         End Function
 
-        Public Overrides Function OnMouseUp(ByVal g As Glyph, _
+        Public Overrides Function OnMouseUp(ByVal g As Glyph,
                                             ByVal button As MouseButtons) As Boolean
             _dragging = False
             Return True
         End Function
-    End Class
 
+    End Class
 
 End Class

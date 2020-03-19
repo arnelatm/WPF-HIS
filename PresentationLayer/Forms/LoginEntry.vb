@@ -1,10 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-
 
 Public Class LoginEntry
     Implements ILoginView

@@ -1,5 +1,6 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
 Namespace BusinessRules
+
     Public Class ValidateIfRequired
         Inherits ValidateRequired
 
@@ -7,6 +8,7 @@ Namespace BusinessRules
         '        Private Property DataType As ValidationDataType
         '        Private Property [Operator] As ValidationOperator
         Private ReadOnly _conditionPropertyName As String
+
         Private ReadOnly _conditionValue As Object
         Private ReadOnly _conditionOperator As ValidationOperator
         Private ReadOnly _conditionDataType As ValidationDataType
@@ -32,5 +34,7 @@ Namespace BusinessRules
             End If
             Return retVal
         End Function
+
     End Class
+
 End Namespace

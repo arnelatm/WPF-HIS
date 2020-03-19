@@ -35,4 +35,5 @@ Namespace BusinessLayer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
     End Class
-End NameSpace
+
+End Namespace

@@ -26,16 +26,16 @@ Namespace PresentationLayer.Presenters
             Dim checkDisbursementJournalChangesMade As Boolean
             If ObjectsCompare(OriginalModel, View) Then
                 If JournalItemsPresenter.ChangesMadeInJournalItem Then
-                    CheckDisbursementJournalChangesMade = True
+                    checkDisbursementJournalChangesMade = True
                 ElseIf CkdOiItemsPresenter.ChangesMadeInCkdOiItem Then
-                    CheckDisbursementJournalChangesMade = True
+                    checkDisbursementJournalChangesMade = True
                 Else
-                    CheckDisbursementJournalChangesMade = False
+                    checkDisbursementJournalChangesMade = False
                 End If
             Else
-                CheckDisbursementJournalChangesMade = True
+                checkDisbursementJournalChangesMade = True
             End If
-            Return CheckDisbursementJournalChangesMade
+            Return checkDisbursementJournalChangesMade
         End Function
 
         Public Function UpdateGlReferenceNumber() As String

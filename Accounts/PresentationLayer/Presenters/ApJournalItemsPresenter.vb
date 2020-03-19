@@ -1,8 +1,5 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Common
 
 Namespace PresentationLayer.Presenters
 

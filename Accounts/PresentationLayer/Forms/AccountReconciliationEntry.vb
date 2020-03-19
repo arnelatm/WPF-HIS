@@ -1,13 +1,10 @@
-﻿Imports System.Drawing
-Imports System.Globalization
-Imports System.Windows.Forms
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 Imports CrystalDecisions.CrystalReports.Engine
 
 Namespace PresentationLayer.Forms

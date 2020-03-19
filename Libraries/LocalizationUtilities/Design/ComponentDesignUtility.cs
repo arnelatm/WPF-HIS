@@ -99,7 +99,7 @@ namespace AATM.Libraries.LocalizationUtilities.Design
         /// <returns>Form.</returns>
         public static Form CreateWrapperForm(Control control)
         {
-            var form = new Form {StartPosition = FormStartPosition.CenterParent, Size = new Size(400, 200)};
+            var form = new Form { StartPosition = FormStartPosition.CenterParent, Size = new Size(400, 200) };
             control.Dock = DockStyle.Fill;
             form.Controls.Add(control);
 

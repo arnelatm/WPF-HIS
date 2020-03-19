@@ -14,4 +14,5 @@ Namespace PresentationLayer.Views
         Property TotalDebits As Decimal
         Property TransactionDate As Date?
     End Interface
-End NameSpace
+
+End Namespace

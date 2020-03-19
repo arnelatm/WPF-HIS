@@ -23,4 +23,5 @@ Public Class DaoFactories
         '        Return New DaoFactory()
         'End Select
     End Function
+
 End Class

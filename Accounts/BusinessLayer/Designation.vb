@@ -19,4 +19,5 @@ Namespace BusinessLayer
         Public Property DesignationNameAra As String
         Public Property Notes As String
     End Class
-End NameSpace
+
+End Namespace

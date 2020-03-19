@@ -24,4 +24,5 @@ Namespace PresentationLayer.Views
         Property TransactionType As String
 
     End Interface
-End NameSpace
+
+End Namespace

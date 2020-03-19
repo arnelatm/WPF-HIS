@@ -121,17 +121,17 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"CountryCode", txtIsoa2},
+                {"CountryCode", txtIsoA2},
                 {"CountryName", txtCountryName},
                 {"CountryNameAra", txtCountryNameAra},
                 {"IDNo", TxtIDNo},
                 {"Nationality", txtNationality},
                 {"NationalityAra", txtNationalityAra},
-                {"Isoa3", txtIsoA3},
-                {"PhoneCode", txtPhoneCode},
-                {"Flag32", txtFlag32},
-                {"Flag128", txtFlag128},
-                {"IsoN", txtIsoN}
+                {"Isoa3", TxtISOA3},
+                {"PhoneCode", TxtPhoneCode},
+                {"Flag32", TxtFlag32},
+                {"Flag128", TxtFlag128},
+                {"IsoN", TxtISON}
                 }
         End Sub
 

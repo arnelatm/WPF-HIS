@@ -1,5 +1,4 @@
-﻿
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
@@ -10,4 +9,5 @@ Namespace PresentationLayer.Views
         Property SalesCashItems As IList(Of SalesCashItemModel)
 
     End Interface
-End NameSpace
+
+End Namespace

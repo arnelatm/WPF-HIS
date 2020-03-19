@@ -2,7 +2,6 @@
 
 Namespace PresentationLayer.Views
 
-
     Public Interface IAccountReconciliationView
         Inherits IView
 
@@ -24,4 +23,5 @@ Namespace PresentationLayer.Views
         Property UnreconciledDifference As Decimal
 
     End Interface
-End NameSpace
+
+End Namespace

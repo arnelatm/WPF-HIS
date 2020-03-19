@@ -1,5 +1,5 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for Country
@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
         Implements ICountryDao
 
         Private ReadOnly Db As New Db()
-        
+
         'Public Function GetCountryByName(countryName As String) As Country Implements ICountryDao.GetCountryByName
         '    Throw New NotImplementedException
         'End Function

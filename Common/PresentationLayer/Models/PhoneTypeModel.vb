@@ -1,5 +1,5 @@
-﻿
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
+
     Public Class PhoneTypeModel
         Inherits CommonModel
 
@@ -8,4 +8,5 @@ Namespace PresentationLayer.Models
         Public Property PhoneTypeNameAra As String
         Public Property Notes As String
     End Class
-End NameSpace
+
+End Namespace

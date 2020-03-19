@@ -23,4 +23,5 @@ Namespace PresentationLayer.Views
         Property Active As Boolean
         Property DateCreated As Date?
     End Interface
-End NameSpace
+
+End Namespace

@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -102,9 +101,7 @@ Public Class UserEntryTv
         End Set
     End Property
 
-
 End Class
-
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum SecurityLevelSelection
