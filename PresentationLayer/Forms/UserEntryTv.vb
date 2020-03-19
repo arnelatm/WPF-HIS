@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Presenters

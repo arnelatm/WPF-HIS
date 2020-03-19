@@ -7,6 +7,7 @@ Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
+Imports AATM.Libraries.EnumLocalization
 
 Namespace PresentationLayer.Forms
 
@@ -54,6 +55,7 @@ Namespace PresentationLayer.Forms
                 SetLanguageChangeButtons()
             End If
             SetupMapper()
+            'CreateEnums()
             '' Disable logout
             'Me.toolStripButtonLogout.Enabled = False
             'Me.logoutToolStripMenuItem.Enabled = False
@@ -63,6 +65,24 @@ Namespace PresentationLayer.Forms
             '_ordersPresenter = New OrdersPresenter(Me)
         End Sub
 
+        Private Sub CreateEnums()
+            ResourceEnumConverter.MakeResource("AccountGroupSelection", GetType(AccountGroupSelection))
+            ResourceEnumConverter.MakeResource("AccountStatusSelection", GetType(AccountStatusSelection))
+            ResourceEnumConverter.MakeResource("DebitCreditSelection", GetType(DebitCreditSelection))
+            ResourceEnumConverter.MakeResource("DocumentTypeSelection", GetType(DocumentTypeSelection))
+            ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
+            ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
+            ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
+            ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
+            ResourceEnumConverter.MakeResource("PaymentMethodSelection", GetType(PaymentMethodSelection))
+            ResourceEnumConverter.MakeResource("PaymentTypeSelection", GetType(PaymentTypeSelection))
+            ResourceEnumConverter.MakeResource("ProfitCenterTypeSelection", GetType(ProfitCenterTypeSelection))
+            ResourceEnumConverter.MakeResource("ReceiptTypeSelection", GetType(ReceiptTypeSelection))
+            ResourceEnumConverter.MakeResource("SecurityLevelSelection", GetType(SecurityLevelSelection))
+            ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))
+            ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
+            ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
+        End Sub
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)
@@ -562,9 +582,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DistributionSchemesToolStripMenuItem.Click
-            Dim childMdiForm As DistributionSchemeEntryTv
+            Dim childMdiForm As DistributionSchemeEntry
             'Set the Parent Form of the Child window.
-            childMdiForm = New DistributionSchemeEntryTv() With {
+            childMdiForm = New DistributionSchemeEntry() With {
                 .MdiParent = Me
                 }
             'Display the new form.

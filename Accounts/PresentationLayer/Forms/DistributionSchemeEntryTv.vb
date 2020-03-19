@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntryTv
-        Implements IDistributionSchemeView, IDistributionSchemeItemView
+        Implements IDistributionSchemeView, IDistributionSchemeItemsView
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
@@ -156,17 +156,16 @@ Namespace PresentationLayer.Forms
 
 #Region "DistributionSchemeItemsView"
 
-        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemView.DistributionSchemeItems
+        Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
+
+        Private Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get
-            Set
+            Set(value As IList(Of DistributionSchemeItemModel))
                 _distributionSchemeItems = Value
-                BindDistributionSchemeItem()
             End Set
         End Property
-
-        Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
 
         Private Sub BindDistributionSchemeItem()
             bsDistributionSchemeItems.DataSource = DistributionSchemeItems

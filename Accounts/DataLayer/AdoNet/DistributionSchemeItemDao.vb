@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
         'End Function
 
 
-        Private Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
                     "   FROM " & TableFileName &
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
         End Function
 
 
-        Private Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DistributionSchemeItem).InsertTvp
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DistributionSchemeItem).InsertTvp
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 

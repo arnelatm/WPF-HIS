@@ -4,6 +4,7 @@ Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Windows.Forms
 Imports AATM.Libraries
+Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Models
@@ -607,7 +608,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Property EnumConverter As ResourceEnumConverter
 
     Public Function GetEnumList(Of TE)()
-        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+        If EnumConverter Is Nothing Then
+            EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+        End If
         Dim dataList As New List(Of ClassesLibrary.LookupData)
         'Dim enumValues = [Enum].GetValues(GetType(TE))
         For Each c In [Enum].GetValues(GetType(TE))
@@ -636,7 +639,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'End Sub
 
     Public Function MakeEnumComboList(Of TE)()
-        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+        If EnumConverter Is Nothing Then
+            EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+        End If
         Dim dataList As New List(Of ClassesLibrary.LookupData)
         'Dim enumValues = [Enum].GetValues(GetType(TE))
         'Dim x As Object
