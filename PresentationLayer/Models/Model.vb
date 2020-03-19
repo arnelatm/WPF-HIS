@@ -1,8 +1,6 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Libraries
+﻿Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
-Imports AutoMapper
 
 ''' <summary>
 '''     The Model in MVP design pattern.

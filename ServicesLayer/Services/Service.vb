@@ -1,9 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Reflection
-Imports AATM.BusinessLayer
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace Services
