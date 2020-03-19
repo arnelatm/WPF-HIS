@@ -117,16 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>147, 17</value>
-  </metadata>
-  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>271, 17</value>
-  </metadata>
-  <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>406, 17</value>
-  </metadata>
+  <data name="MaleFemaleSelection_Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="MaritalStatusSelection_Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="MaritalStatusSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="MaleFemaleSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="MaritalStatusSelection_Widowed" xml:space="preserve">
+    <value>Widowed</value>
+  </data>
+  <data name="MaritalStatusSelection_Married" xml:space="preserve">
+    <value>Married</value>
+  </data>
+  <data name="MaleFemaleSelection_Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="MaritalStatusSelection_Divorced" xml:space="preserve">
+    <value>Divorced</value>
+  </data>
 </root>

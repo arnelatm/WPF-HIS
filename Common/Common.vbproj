@@ -313,6 +313,10 @@
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\EnumLocalization\EnumLocalization.vbproj">
+      <Project>{EFEC4547-2F73-4EAB-8ADC-AFAF596F8288}</Project>
+      <Name>EnumLocalization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
       <Name>GlobalFuncNSub</Name>

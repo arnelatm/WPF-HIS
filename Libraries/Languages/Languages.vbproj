@@ -87,7 +87,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ResourceEnumConverter.vb" />
     <Compile Include="StringWords.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

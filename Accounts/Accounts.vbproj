@@ -333,6 +333,7 @@
     <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
     <Compile Include="PresentationLayer\Models\DesignationModel.vb" />
+    <Compile Include="PresentationLayer\Models\DistributionSchemeItemModel.vb" />
     <Compile Include="PresentationLayer\Models\DistributionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeModel.vb" />
     <Compile Include="PresentationLayer\Models\GeneralJournalModel.vb" />
@@ -363,7 +364,7 @@
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ChequeDisbursementJournalItemPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CkdOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
@@ -429,6 +430,7 @@
     <EmbeddedResource Include="AccountStrings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.en-GB.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

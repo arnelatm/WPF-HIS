@@ -62,7 +62,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(reader("IDNo")),
             .DistributionSchemeName = Extensions.AsString(reader("DistributionSchemeName")),
             .DistributionSchemeNameAra = Extensions.AsString(reader("DistributionSchemeNameAra")),
-            .DistributionSchemeCode = Extensions.AsDecimal(reader("DistributionSchemeCode")),
+            .DistributionSchemeCode = Extensions.AsString(reader("DistributionSchemeCode")),
             .ValidityStartDate = Extensions.AsDate(reader("ValidityStartDate")),
             .ValidityEndDate = Extensions.AsDate(reader("ValidityEndDate")),
             .Notes = Extensions.AsString(reader("Notes"))

@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries.Languages
+﻿Imports AATM.Libraries.EnumLocalization
+Imports AATM.Libraries.Languages
 
 Class LocalizedEnumConverter
     Inherits ResourceEnumConverter

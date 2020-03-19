@@ -94,11 +94,10 @@ Namespace PresentationLayer.Forms
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = true
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.DisplayOnly = true
         Me.TxtIDNo.EditingMode = true
@@ -107,6 +106,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         '
         'lblDistributionSchemeCode
@@ -116,11 +116,10 @@ Namespace PresentationLayer.Forms
         '
         'txtDistributionSchemeCode
         '
-        Me.txtDistributionSchemeCode.AcceptsReturn = false
-        Me.txtDistributionSchemeCode.AcceptsTab = false
         Me.txtDistributionSchemeCode.BackColor = System.Drawing.Color.White
         Me.txtDistributionSchemeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDistributionSchemeCode.ComputedValue = false
+        Me.txtDistributionSchemeCode.CustomFormat = Nothing
         Me.txtDistributionSchemeCode.DataBoundControl = true
         Me.txtDistributionSchemeCode.EditingMode = false
         Me.floJournalHeader.SetFlowBreak(Me.txtDistributionSchemeCode, true)
@@ -128,6 +127,7 @@ Namespace PresentationLayer.Forms
         Me.txtDistributionSchemeCode.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeCode.LinkedLabel = Me.lblDistributionSchemeCode
         Me.txtDistributionSchemeCode.Name = "txtDistributionSchemeCode"
+        Me.txtDistributionSchemeCode.OldValue = Nothing
         Me.txtDistributionSchemeCode.ValueIsMandatory = true
         '
         'lblDistributionSchemeName
@@ -137,11 +137,10 @@ Namespace PresentationLayer.Forms
         '
         'txtDistributionSchemeName
         '
-        Me.txtDistributionSchemeName.AcceptsReturn = false
-        Me.txtDistributionSchemeName.AcceptsTab = false
         Me.txtDistributionSchemeName.BackColor = System.Drawing.Color.White
         Me.txtDistributionSchemeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDistributionSchemeName.ComputedValue = false
+        Me.txtDistributionSchemeName.CustomFormat = Nothing
         Me.txtDistributionSchemeName.DataBoundControl = true
         Me.txtDistributionSchemeName.EditingMode = false
         Me.floJournalHeader.SetFlowBreak(Me.txtDistributionSchemeName, true)
@@ -149,6 +148,7 @@ Namespace PresentationLayer.Forms
         Me.txtDistributionSchemeName.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeName.LinkedLabel = Me.lblDistributionSchemeName
         Me.txtDistributionSchemeName.Name = "txtDistributionSchemeName"
+        Me.txtDistributionSchemeName.OldValue = Nothing
         Me.txtDistributionSchemeName.ValueIsMandatory = true
         '
         'lblDistributionSchemeNameAra
@@ -158,11 +158,10 @@ Namespace PresentationLayer.Forms
         '
         'txtDistributionSchemeNameAra
         '
-        Me.txtDistributionSchemeNameAra.AcceptsReturn = false
-        Me.txtDistributionSchemeNameAra.AcceptsTab = false
         Me.txtDistributionSchemeNameAra.BackColor = System.Drawing.Color.White
         Me.txtDistributionSchemeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDistributionSchemeNameAra.ComputedValue = false
+        Me.txtDistributionSchemeNameAra.CustomFormat = Nothing
         Me.txtDistributionSchemeNameAra.DataBoundControl = true
         Me.txtDistributionSchemeNameAra.EditingMode = true
         Me.txtDistributionSchemeNameAra.EnglishControl = Me.txtDistributionSchemeName
@@ -171,6 +170,7 @@ Namespace PresentationLayer.Forms
         Me.txtDistributionSchemeNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeNameAra.LinkedLabel = Me.lblDistributionSchemeNameAra
         Me.txtDistributionSchemeNameAra.Name = "txtDistributionSchemeNameAra"
+        Me.txtDistributionSchemeNameAra.OldValue = Nothing
         Me.txtDistributionSchemeNameAra.ReadOnly = true
         '
         'lblValidityStartDate
@@ -232,17 +232,17 @@ Namespace PresentationLayer.Forms
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'lblAmount
@@ -271,6 +271,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewDistributionSchemeItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         resources.ApplyResources(Me.DataGridViewDistributionSchemeItems, "DataGridViewDistributionSchemeItems")
         Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
+        Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewDistributionSchemeItems.StartTrackingChanges = false
         '
         'dgvIdNo
@@ -343,11 +344,10 @@ Namespace PresentationLayer.Forms
         '
         'txtTotalPercentage
         '
-        Me.txtTotalPercentage.AcceptsReturn = false
-        Me.txtTotalPercentage.AcceptsTab = false
         Me.txtTotalPercentage.BackColor = System.Drawing.Color.White
         Me.txtTotalPercentage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTotalPercentage.ComputedValue = true
+        Me.txtTotalPercentage.CustomFormat = Nothing
         Me.txtTotalPercentage.DataBoundControl = true
         Me.txtTotalPercentage.DisplayOnly = true
         Me.txtTotalPercentage.EditingMode = true
@@ -355,6 +355,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalPercentage.ForeColor = System.Drawing.Color.Black
         Me.txtTotalPercentage.LinkedLabel = Nothing
         Me.txtTotalPercentage.Name = "txtTotalPercentage"
+        Me.txtTotalPercentage.OldValue = Nothing
         Me.txtTotalPercentage.ReadOnly = true
         Me.txtTotalPercentage.TabStop = false
         Me.txtTotalPercentage.ValueIsMandatory = true
