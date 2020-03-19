@@ -40,7 +40,7 @@ Public Class CComboBox
 
         DropDownStyle = ComboBoxStyle.DropDown
         AutoCompleteMode = AutoCompleteMode.Suggest
-
+        
     End Sub
 
     <Bindable(True)>

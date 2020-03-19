@@ -282,11 +282,11 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
-            Throw New NotImplementedException()
+            Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
         Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Integer, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
-            Throw New NotImplementedException()
+            Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder) 
         End Function
 
     End Class

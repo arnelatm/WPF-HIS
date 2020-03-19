@@ -263,9 +263,10 @@ Public Class CaComboBox
             e.SuppressKeyPress = True
         Else
             If e.KeyCode = Keys.Enter Then
-                e.SuppressKeyPress = True
-                e.Handled = True
-                SendKeys.SendWait("{TAB}")
+               SendKeys.SendWait("{TAB}")
+               e.SuppressKeyPress = True
+               e.Handled = True
+               'SendKeys.SendWait("{TAB}")
             End If
         End If
     End Sub
