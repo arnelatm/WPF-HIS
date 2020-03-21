@@ -1,4 +1,9 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
+Imports System.Linq.Expressions
+Imports System.Runtime.CompilerServices
+Imports System.Text.RegularExpressions
+Imports AATM.Libraries.GlobalFuncNSub
+
 Namespace BusinessRules
 
     Public Class ValidateCompare
@@ -11,17 +16,16 @@ Namespace BusinessRules
         Public Sub New(propertyName As String, otherPropertyName As String, [operator] As ValidationOperator,
                        dataType As ValidationDataType)
             MyBase.New(propertyName)
+            Dim strError As String = ""
 
             Me.OtherPropertyName = otherPropertyName
             Me.Operator = [operator]
             Me.DataType = dataType
             Select Case [operator]
                 Case ValidationOperator.Equal
-                    [Error] = Dac.TranslateMessage("MsgCompareEqual")
-                    If [Error] Is Nothing Then
-                        Dac.CreateMessage($"MsgCompareEqual", $"%1 must be equal to %2", "Error")
-                    End If
-                    'propertyName & " must be equal to " & otherPropertyName
+                    strError = "{propertyName} must be equal to {otherPropertyName}!"
+                    strError = Dac.GetMessage($"MsgCompareEqual", strError, "Validation Error")
+                    [Error] = strError.Interpolate(Function(x) propertyName, Function(x) otherPropertyName)
                 Case ValidationOperator.NotEqual
                     [Error] = propertyName & " must not be equal to " & otherPropertyName
                 Case ValidationOperator.GreaterThan

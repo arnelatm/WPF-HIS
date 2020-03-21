@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Translations
 
 Namespace PresentationLayer.Presenters
 
@@ -9,6 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Property FieldRetrievalMappingDictionary As Dictionary(Of String, String)
         Public Property FieldSavingMappingDictionary As Dictionary(Of String, String)
+        Private Property Dac
 
         Public Sub New(view As ITranslatedMessagesView)
             MyBase.New(view)
@@ -22,6 +24,7 @@ Namespace PresentationLayer.Presenters
             TreeViewList = New List(Of TranslatedMessagesModel)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
             FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}
+            Dac = New Dac
         End Sub
 
         Public Overrides Sub Display(originalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
@@ -53,6 +56,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
             Dim record As New TranslatedMessagesModel
+            record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
             GlobalVariables.Mapper.Map(Of ITranslatedMessagesView, TranslatedMessagesModel)(View, record)
             If addMode Then
                 NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)

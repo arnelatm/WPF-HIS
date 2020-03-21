@@ -23,6 +23,7 @@ Public Class BfMain
     Protected InitializationMode As Boolean = True
     Protected LtrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr
+    Protected DefaultMirroredLanguageIdNo As Int16
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
@@ -46,6 +47,10 @@ Public Class BfMain
 
         ' Add any initialization after the InitializeComponent() call.
         Me.DoubleBuffered = True
+        Dim dac As New Dac
+        Dim cmd As String
+        cmd = "Select IdNo from Languages where cultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+        DefaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
 
     End Sub
 
