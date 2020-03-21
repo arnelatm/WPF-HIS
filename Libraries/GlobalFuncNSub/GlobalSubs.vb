@@ -3,6 +3,8 @@ Imports System.Windows.Forms
 
 Public Module GlobalSubs
 
+#Region "Old Subs"
+
     Public Sub SetPropertyValue(obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
         Dim objType As Type = obj.GetType()
         Dim pInfo As PropertyInfo = objType.GetProperty(propName,
@@ -154,5 +156,7 @@ Public Module GlobalSubs
         '' Invoke the method on the instance we created above
         'methodInfo.Invoke(obj, methodParameter)
     End Sub
+
+#End Region
 
 End Module

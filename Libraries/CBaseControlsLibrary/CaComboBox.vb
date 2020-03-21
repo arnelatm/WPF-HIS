@@ -258,15 +258,26 @@ Public Class CaComboBox
 
     Private Property LimitToList As Boolean = False
 
+    'Private Shadows Sub OnKeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
+    '    If DisplayOnly Then
+    '        e.Handled = True
+    '    Else
+    '        If e.KeyChar = Chr(13) Then
+    '            e.Handled = True
+    '            SendKeys.Send("{TAB}")
+    '        End If
+    '    End If
+    'End Sub
+
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If DisplayOnly Then
             e.SuppressKeyPress = True
         Else
             If e.KeyCode = Keys.Enter Then
-               SendKeys.SendWait("{TAB}")
-               e.SuppressKeyPress = True
-               e.Handled = True
-               'SendKeys.SendWait("{TAB}")
+                SendKeys.SendWait("{TAB}")
+                e.SuppressKeyPress = True
+                e.Handled = True
+                'SendKeys.SendWait("{TAB}")
             End If
         End If
     End Sub

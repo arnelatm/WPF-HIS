@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
         Inherits BaseDao
         Implements ITranslatedMessagesDao
 
-        Private ReadOnly Db As New Db("TRANSLATIONS")
+        Private ReadOnly Db As New Db ' ("TRANSLATIONS")
 
         Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements ITranslatedMessagesDao.GetRecordById
             Dim sql As String =

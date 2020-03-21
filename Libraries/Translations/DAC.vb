@@ -3,6 +3,7 @@ Imports System.Configuration
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class Dac
     Inherits Component
@@ -22,8 +23,8 @@ Public Class Dac
     Public Dc As Object
 
     <Category("AATM")> Public Property DacAccessType As String = "SQL"
-    <Category("AATM")> Public Property DacFileName As String = "Translations"
-    <Category("AATM")> Public Property DacDatabase As String = "Translations"
+    <Category("AATM")> Public Property DacFileName As String = $"ISPDATA" '""Translations"
+    <Category("AATM")> Public Property DacDatabase As String = $"ISPDATA" '""Translations"
     <Category("AATM")> Public Property DacServer As String = ""
     <Category("AATM")> Public Property DacUid As String = ""
     <Category("AATM")> Public Property DacServerType As String = ""
@@ -366,6 +367,67 @@ Public Class Dac
         MessageBox.Show(s, $"Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
+
+    Sub CreateMessage(ByVal key As String, ByVal message As String, ByVal caption As String)
+        'Dim storeCaptions1 As New StoreCaptions
+        'Dim textDisplayLanguage As String
+        'Dim translatorDac As New Dac
+        Dim translatedMessage As String = message
+        Dim translatedCaption As String = caption
+        Dim cmd As String
+        Dim activeForm = Form.ActiveForm
+        'textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+        cmd = "SELECT COUNT(*) FROM OriginalMessages where MessageKey='" + key + "'"
+        'Dim howMany As Int32 = translatorDac.ExecScalar(Of Int32)(cmd)
+        Dim howMany As Int32 = Me.ExecScalar(Of Int32)(cmd)
+        If howMany = 0 Then
+            cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
+            Me.ExecCmd(cmd)
+        End If
+        'If NeedToTranslateText(textDisplayLanguage) Then
+        '    cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+        '    Dim items = translatorDac.ExecReader(cmd)
+        '    If items IsNot Nothing Then
+        '        translatedMessage = items(1)
+        '        translatedCaption = items(2)
+        '    Else
+        '        If translatedMessage Is Nothing Then
+        '            Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
+        '            cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+        '            items = translatorDac.ExecReader(cmd)
+        '            If items IsNot Nothing Then
+        '                translatedMessage = items(1)
+        '                translatedCaption = items(2)
+        '            End If
+        '        End If
+        '    End If
+        'Else
+        '    translatedMessage = message
+        '    translatedCaption = caption
+        'End If
+        ''        Return {translatedMessage, translatedCaption}
+    End Sub
+
+    Function TranslateMessage(ByVal key As String) As String
+        Dim translatedMessage As String
+        Dim textDisplayLanguage As String
+        Dim cmd As String
+        Dim activeForm = Form.ActiveForm
+        textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+        cmd = "SELECT TranslatedMessage FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+        Dim item = ExecReader(cmd)
+        If item IsNot Nothing Then
+            translatedMessage = item
+        Else
+            Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
+            cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+            item = ExecReader(cmd)
+            If item IsNot Nothing Then
+                translatedMessage = item
+            End If
+        End If
+        Return translatedMessage
+    End Function
 
 #End Region
 

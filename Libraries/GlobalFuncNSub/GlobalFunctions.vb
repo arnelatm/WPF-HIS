@@ -117,7 +117,9 @@ Public Module GlobalFunctions
                 'If s.Name.ToLower() = "payeetype" Then
                 '    Debugger.Break()
                 'End If
-                If t.Name.ToLower() = s.Name.ToLower() Then
+                If t.Name.ToLower() = "errors" Then
+                    ' skip checking this fields
+                ElseIf t.Name.ToLower() = s.Name.ToLower() Then
                     'If s.Name.ToLower() = "payeetype" Then
                     '    Debugger.Break()
                     'End If

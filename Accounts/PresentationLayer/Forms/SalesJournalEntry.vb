@@ -284,6 +284,7 @@ Namespace PresentationLayer.Forms
                 txtJournalCode.Text = AccountStrings.SalesJournalPrefix
             End If
             MakeJournalItems()
+            UpdateTotals()
         End Sub
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully

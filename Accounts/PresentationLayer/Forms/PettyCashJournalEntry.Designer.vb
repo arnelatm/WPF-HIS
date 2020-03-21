@@ -273,6 +273,7 @@ Namespace PresentationLayer.Forms
         'cboPaymentType
         '
         Me.cboPaymentType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboPaymentType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboPaymentType.BackColor = System.Drawing.Color.White
         Me.cboPaymentType.ChangingSearchValueOnly = false
         Me.cboPaymentType.CurrentSearchTerm = ""
@@ -371,6 +372,8 @@ Namespace PresentationLayer.Forms
         '
         'cboAccountIdNo
         '
+        Me.cboAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.cboAccountIdNo.CurrentSearchTerm = ""

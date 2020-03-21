@@ -340,7 +340,7 @@ Public Class BfEntry
 
     Public Overridable Function SaveDataEntry()
         Dim retValue As Int16
-        RaiseEvent BeforeSave()
+
         If CancelSave Then
             CancelSave = False
             retValue = -1

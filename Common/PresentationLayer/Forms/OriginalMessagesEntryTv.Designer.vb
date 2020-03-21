@@ -34,7 +34,7 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -174,6 +174,7 @@ Namespace PresentationLayer.Forms
         Me.txtTranslatedMessage.CustomFormat = Nothing
         Me.txtTranslatedMessage.DataBoundControl = true
         Me.txtTranslatedMessage.EditingMode = false
+        Me.txtTranslatedMessage.EnglishControl = Me.txtMessage
         Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedMessage, true)
         resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
         Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
@@ -313,12 +314,12 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtCaption As CTextBox
         Friend WithEvents lblTranslatedMessage As CLabel
-        Friend WithEvents txtTranslatedMessage As CTextBox
         Friend WithEvents lblTranslatedCaption As CLabel
         Friend WithEvents txtTranslatedCaption As CTextBox
         Friend WithEvents txtLanguageIdNo As CTextBox
         Friend WithEvents txtOriginalIdNo As CTextBox
         Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents Button1 As Windows.Forms.Button
+        Friend WithEvents txtTranslatedMessage As CTextBoxArabic
     End Class
 End NameSpace

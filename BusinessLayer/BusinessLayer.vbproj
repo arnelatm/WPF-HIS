@@ -79,6 +79,7 @@
     <Compile Include="BusinessObjects\SecurityObject.vb" />
     <Compile Include="BusinessObjects\User.vb" />
     <Compile Include="BusinessRules\BusinessRule.vb" />
+    <Compile Include="BusinessRules\ValidateCompareIfTrue.vb" />
     <Compile Include="BusinessRules\ValidateCompare.vb" />
     <Compile Include="BusinessRules\ValidateContent.vb" />
     <Compile Include="BusinessRules\ValidateCreditcard.vb" />
@@ -140,6 +141,10 @@
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Translations\Translations.vbproj">
+      <Project>{604677ED-411D-4F00-B151-F4D39BC9E670}</Project>
+      <Name>Translations</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

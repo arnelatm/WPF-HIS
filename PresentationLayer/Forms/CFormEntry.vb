@@ -359,7 +359,7 @@ Public Class CFormEntry
 
     Public Overridable Function SaveDataEntry()
         Dim retValue As Int16
-        RaiseEvent BeforeSave()
+        'RaiseEvent BeforeSave()
         If CancelSave Then
             CancelSave = False
             retValue = -1
@@ -375,9 +375,9 @@ Public Class CFormEntry
             '    End If
             'End If
         End If
-        If retValue > 0 Then
-            RaiseEvent AfterSave()
-        End If
+        'If retValue > 0 Then
+        '    RaiseEvent AfterSave()
+        'End If
         If retValue > 0 Then
             _MBRecordSuccessfullySaved.Show(Me)
         End If
@@ -756,6 +756,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.ClickButtonArea
+        Dim continueSave As Boolean = True
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -763,63 +764,49 @@ Public Class CFormEntry
     End Sub
 
     Public Sub Save()
-        If AddMode OrElse ChangesMade() Then
-            Dim errorList As String = ""
-            Dim retValue As Integer = -1
-            If AutomaticValidationsOk() AndAlso DataIsValid() Then
-                If AddMode Then
-                    retValue = SaveDataEntry()
-                Else
-                    If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                        MessageBox.Show("Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.")
-                        retValue = -1
-                    Else
-                        retValue = SaveDataEntry()
-                    End If
+        Dim retValue As Integer = -1
+        Dim continueSave As Boolean = True
+        If Not AddMode Then
+            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
+                MessageBox.Show("Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.")
+                continueSave = False
+            Else
+                If Not ChangesMade() Then
+                    _MBNoChangesMadeNothingToSave.Show(Me)
+                    continueSave = False
                 End If
-                If AddMode Then
-                    ' retValue will be the IDNo of the newly saved record
+            End If
+        End If
+        If continueSave Then
+            RaiseEvent BeforeSave()
+            If AutomaticValidationsOk() Then
+                Dim errorList As String = ""
+                If DataIsValid() Then
+                    retValue = SaveDataEntry()
                     If retValue > 0 Then
-                        '' redisplay the record, need to do this to get an updated record
-                        '' and to display the added record in the TreeView if one is present.
-                        '' retValue now holds the Identity Column of the added record
-                        AddMode = False
-                        TargetIdNo = retValue
+                        If AddMode Then
+                            ' retValue will be the IDNo of the newly saved record
+                            TargetIdNo = retValue
+                        Else
+                            EditMode = False
+                        End If
+                        ' redisplay the record, need to do this to get an updated record
+                        ' because if ever something was changed in the record that affects the TreeView
+                        ' redisplay the record, need to do this to get an updated record
+                        ' and to display the added record in the TreeView if one is present.
                         GetRecordInfoForIdNo()
-                        RaiseEvent AfterAdd()
-                        'DisplayView()
-                    End If
-                Else
-                    If retValue <= 0 Then
+                        If AddMode Then
+                            RaiseEvent AfterAdd()
+                            AddMode = False ' reset AddMode 
+                        End If
+                        RaiseEvent AfterSave()
+                    Else
                         '' Something went wrong during the saving since no record was/were updated
                         '' retValue = -1 , for unsuccessful save
-                        '_MBSaveRecordFailed.Show(Me)
-                    Else
-                        '' redisplay the record, need to do this to get an updated record
-                        '' and to re-display the added record in the TreeView if one is present.
-                        '' because if ever something was changed in the record that affects the TreeView
-                        '' display this next command will get an updated record and display the correct data
-                        'TargetIdNo = currentIdNo
-                        GetRecordInfoForIdNo()
-                        'DisplayView()
-                        EditMode = False
+                        _MBSaveRecordFailed.Show(Me)
                     End If
                 End If
             End If
-            If retValue < 1 Then
-                MyErrorProvider.ClearAllErrorMessages()
-                Dim lErrors = PresenterObj.GetBizObjectErrors()
-                For Each _err In lErrors
-                    For Each ctrl In MyErrorProvider.Controls
-                        If ctrl.errormessage = _err Then
-                            MyErrorProvider.SetError(ctrl.ControlObj, _err)
-                        End If
-                    Next
-                Next
-                PresenterObj.ShowErrors("Record not saved!")
-            End If
-        Else
-            _MBNoChangesMadeNothingToSave.Show(Me)
         End If
     End Sub
 
@@ -828,6 +815,17 @@ Public Class CFormEntry
         RaiseEvent BeforeValidate()
         If PresenterObj.DataIsValid() Then
             retValue = True
+        Else
+            MyErrorProvider.ClearAllErrorMessages()
+            Dim lErrors = PresenterObj.GetBizObjectErrors()
+            For Each _err In lErrors
+                For Each ctrl In MyErrorProvider.Controls
+                    If ctrl.errormessage = _err Then
+                        MyErrorProvider.SetError(ctrl.ControlObj, _err)
+                    End If
+                Next
+            Next
+            PresenterObj.ShowErrors("Record not saved!")
         End If
         Return retValue
     End Function
