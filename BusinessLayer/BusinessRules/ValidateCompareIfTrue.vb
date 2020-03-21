@@ -1,27 +1,25 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
 Namespace BusinessRules
 
-    Public Class ValidateCompare
+    Public Class ValidateCompareIfTrue
         Inherits BusinessRule
 
         Private Property OtherPropertyName As String
         Private Property DataType As ValidationDataType
         Private Property [Operator] As ValidationOperator
+        Private Property Condition As Boolean
 
-        Public Sub New(propertyName As String, otherPropertyName As String, [operator] As ValidationOperator,
+        Public Sub New(condition As Boolean, propertyName As String, otherPropertyName As String, [operator] As ValidationOperator,
                        dataType As ValidationDataType)
             MyBase.New(propertyName)
-
             Me.OtherPropertyName = otherPropertyName
             Me.Operator = [operator]
             Me.DataType = dataType
+            Me.Condition = condition
             Select Case [operator]
                 Case ValidationOperator.Equal
-                    [Error] = Dac.TranslateMessage("MsgCompareEqual")
-                    If [Error] Is Nothing Then
-                        Dac.CreateMessage($"MsgCompareEqual", $"%1 must be equal to %2", "Error")
-                    End If
-                    'propertyName & " must be equal to " & otherPropertyName
+
+                    [Error] = propertyName & " must be equal to " & otherPropertyName
                 Case ValidationOperator.NotEqual
                     [Error] = propertyName & " must not be equal to " & otherPropertyName
                 Case ValidationOperator.GreaterThan
@@ -35,14 +33,17 @@ Namespace BusinessRules
             End Select
         End Sub
 
-        Public Sub New(propertyName As String, otherPropertyName As String, errorMessage As String,
+        Public Sub New(condition As Boolean, propertyName As String, otherPropertyName As String, errorMessage As String,
                        [operator] As ValidationOperator, dataType As ValidationDataType)
-            Me.New(propertyName, otherPropertyName, [operator], dataType)
+            Me.New(condition, propertyName, otherPropertyName, [operator], dataType)
             [Error] = errorMessage
         End Sub
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
+                If Not Me.Condition Then
+                    Return True
+                End If
                 Dim propValue1 As String =
                         businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing).ToString()
                 Dim propValue2 As String =

@@ -318,13 +318,22 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter Then
+    Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+        If e.KeyChar = Chr(13) Then
             e.Handled = True
-            SendKeys.Send("{TAB}")
-            'SendWait("{TAB}")
+            SendKeys.SendWait("{TAB}")
         End If
     End Sub
+
+    'Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '            SendKeys.SendWait("{TAB}")
+    '        e.Handled = True
+    '        e.SuppressKeyPress = True
+    '        'SendKeys.Send("{TAB}")
+    '        'SendKeys.SendWait("{TAB}")
+    '    End If
+    'End Sub
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

@@ -50,29 +50,24 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
-        'Public Overrides Function Save(ByRef addMode As Boolean)
-        '    Dim retVal As Integer
-        '    MapObject(View, DataBizObject, FieldSavingMappingDictionary)
-        '    If Model.IsValid(DataBizObject) Then
-        '        'If DataIsValid() Then
-        '        '    If addMode Or Model.IdNo = 0 Then
-        '        '        NewlyAddedRecordIdNo = Model.AddRecord(Of TranslatedMessages)(DataBizObject)
-        '        '        retVal = NewlyAddedRecordIdNo
-        '        '    Else
-
-        '        '        retVal = Model.UpdateRecord(Model)
-
-        '        '    End If
-        '        'End If
-        '    Else
-        '        Dim errorList As String = ""
-        '        For Each bizError In Model.GetBizObjectErrors()
-        '            errorList = errorList & bizError & Environment.NewLine
-        '        Next
-        '        MessageBox.Show(errorList)
-        '    End If
-        '    Return retVal
-        'End Function
+        Public Overrides Function Save(ByRef addMode As Boolean)
+            Dim retVal As Integer
+            Dim record As New TranslatedMessagesModel
+            GlobalVariables.Mapper.Map(Of ITranslatedMessagesView, TranslatedMessagesModel)(View, record)
+            If addMode Then
+                NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+                retVal = NewlyAddedRecordIdNo
+                CallByName(View, "IdNo", CallType.Set, retVal)
+            Else
+                retVal = Model.UpdateRecord(record)
+                If retVal = 0 Then
+                    NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+                    retVal = NewlyAddedRecordIdNo
+                    CallByName(View, "IdNo", CallType.Set, retVal)
+                End If
+            End If
+            Return retVal
+        End Function
 
     End Class
 

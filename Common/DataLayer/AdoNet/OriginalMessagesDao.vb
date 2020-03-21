@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IOriginalMessagesDao
 
-        Private ReadOnly Db As New Db("TRANSLATIONS")
+        Private ReadOnly Db As New Db
 
         Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IOriginalMessagesDao.GetRecordById
             Dim sql As String =

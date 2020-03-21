@@ -388,6 +388,7 @@ Namespace PresentationLayer.Forms
                 'End If
                 'End If
                 MakeJournalItem()
+                UpdateTotals()
             End If
         End Sub
 

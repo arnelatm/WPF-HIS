@@ -85,10 +85,10 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey("AC", "Chart", "SpecialAccount", "IdNo")
         End Function
 
-        'Public Function GetChart(idNo As String)
-        '    Dim lModel As New ModelChart
-        '    Return lModel.GetRecordById(Of ChartModel)(idNo)
-        'End Function
+        Public Function GetChart(idNo As String)
+            Dim chartModel As New ModelAccounts("Chart")
+            Return chartModel.GetRecordById(Of ChartModel)(idNo)
+        End Function
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")

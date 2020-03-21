@@ -24,7 +24,6 @@ Namespace PresentationLayer.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -55,7 +54,7 @@ Namespace PresentationLayer.Forms
         Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource()
         Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -585,7 +584,7 @@ Namespace PresentationLayer.Forms
         '
         'cboSupplierIdNo
         '
-        Me.cboSupplierIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboSupplierIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboSupplierIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboSupplierIdNo.BackColor = System.Drawing.Color.White
         Me.cboSupplierIdNo.ChangingSearchValueOnly = false
@@ -638,13 +637,14 @@ Namespace PresentationLayer.Forms
         '
         'cboTransactionType
         '
+        Me.cboTransactionType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboTransactionType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboTransactionType.BackColor = System.Drawing.Color.White
         Me.cboTransactionType.ChangingSearchValueOnly = false
         Me.cboTransactionType.CurrentSearchTerm = ""
         Me.cboTransactionType.DefaultValue = "0"
         Me.cboTransactionType.DisplayMember = "Name"
         Me.cboTransactionType.DropDownHeight = 200
-        Me.cboTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTransactionType.EditingMode = false
         Me.cboTransactionType.FilterRule = Nothing
         Me.cboTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
@@ -826,6 +826,8 @@ Namespace PresentationLayer.Forms
         '
         'cboAccountIdNo
         '
+        Me.cboAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.cboAccountIdNo.CurrentSearchTerm = ""

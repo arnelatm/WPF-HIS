@@ -363,6 +363,7 @@ Namespace PresentationLayer.Forms
                 'End If
                 'End If
                 MakeJournalItem()
+                UpdateTotals()
             End If
         End Sub
 
@@ -1031,6 +1032,7 @@ Namespace PresentationLayer.Forms
             Else
                 bscadOiItems.Clear()
             End If
+            UpdateTotals()
         End Sub
 
         Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView

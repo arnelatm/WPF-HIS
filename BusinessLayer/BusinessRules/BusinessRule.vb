@@ -1,10 +1,13 @@
-﻿Namespace BusinessRules
+﻿Imports AATM.Libraries.Translations
+
+Namespace BusinessRules
     ' abstract base class for business rules.
     ' maintains property name to which rule applies and validation error message
 
     Public MustInherit Class BusinessRule
         Public Property [Property] As String
         Public Property [Error] As String
+        Protected Dac As New Dac
         'Public Property Control As Object
         'Protected Property Presenter As Object
         'Protected Property TargetIdNo As Int32

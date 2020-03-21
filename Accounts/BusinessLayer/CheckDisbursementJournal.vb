@@ -20,11 +20,11 @@ Namespace BusinessLayer
                 AddRule(New ValidateRange("CheckDate", Date.Today.AddDays(-366), Date.Today.AddDays(366), ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
-                AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateVatNumber("VatNumber"))
                 'AddRule(New ValidateValueIf("Applied", "Amount", ValidationOperator.Equal, ValidationDataType.String, $"PaymentType", ValidationDataType.String, "A", ValidationOperator.Equal))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
+                AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
             End If
         End Sub
 
