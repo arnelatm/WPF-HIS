@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Translations
+Imports AATM.PresentationLayer.Forms
 Imports CrystalDecisions.CrystalReports.Engine
 
 Namespace PresentationLayer.Forms
@@ -735,7 +736,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
             If Posted Then
-                MessageBox.Show($"This Reconciliation entry has already been posted. Edits not allowed!")
+                MyMessage.Show("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
                 CancelEdit = True
             End If
         End Sub
@@ -744,7 +745,7 @@ Namespace PresentationLayer.Forms
             If dtpReconciliationDate.DateChanged() Then
                 If dtpReconciliationDate.DateChanged() Then
                     If AccountReconciliationItems.Any() Then
-                        MessageBox.Show("Sorry you can't change the reconciliation when account reconciliation grid is not empty. Previous value restored.")
+                        MyMessage.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
                         dtpReconciliationDate.Undo()
                     End If
                 End If

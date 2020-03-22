@@ -4,12 +4,43 @@ Imports AATM.Libraries.Translations
 
 Public Class MyMessage
 
+    Public Shared Function Show(ByVal Key As String, ByVal message As String, ByVal Optional caption As String = "") As DialogResult
+        Dim p As MyMessageBox = New MyMessageBox()
+        CreateMessage(Key, message, caption)
+        p.txtMessage.Text = message
+        p.Visible = False
+        p.Text = caption
+        p.Ok()
+        p.btnOk.Focus()
+        p.SetInfoIcon()
+        Return p.ShowDialog()
+    End Function
+
+    Public Shared Function Show(ByVal key As String, ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        Dim p As MyMessageBox = New MyMessageBox()
+        CreateMessage(key, message, caption)
+        p.txtMessage.Text = message
+        p.Text = caption
+        SelectButton(p, buttons)
+        SelectIcon(p, icon)
+        SelectDefaultButton(p, defaultButton)
+        Return p.ShowDialog()
+    End Function
+
     Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
         Dim p As MyMessageBox = New MyMessageBox()
         p.txtMessage.Text = message
         p.Text = caption
+        SelectButton(p, buttons)
+        SelectIcon(p, icon)
+        SelectDefaultButton(p, defaultButton)
+        Return p.ShowDialog()
+    End Function
 
+    Private Shared Sub SelectButton(p As MyMessageBox, buttons As MessageBoxButtons)
         Select Case buttons
+            Case MessageBoxButtons.OK
+                p.Ok()
             Case MessageBoxButtons.YesNo
                 p.YesNo()
             Case MessageBoxButtons.OKCancel
@@ -19,6 +50,20 @@ Public Class MyMessage
             Case Else
                 p.Yes()
         End Select
+    End Sub
+
+    Private Shared Sub SelectDefaultButton(ByRef p As MyMessageBox, defaultButton As MessageBoxDefaultButton)
+        Select Case defaultButton
+            Case MessageBoxDefaultButton.Button1
+                p.btnYes.TabIndex = 0
+            Case MessageBoxDefaultButton.Button2
+                p.btnNo.TabIndex = 0
+            Case MessageBoxDefaultButton.Button3
+                p.btnCancel.TabIndex = 0
+        End Select
+    End Sub
+
+    Private Shared Sub SelectIcon(p As MyMessageBox, icon As MessageBoxIcon)
 
         Select Case icon
             Case MessageBoxIcon.Information
@@ -30,18 +75,7 @@ Public Class MyMessage
             Case MessageBoxIcon.[Error]
                 p.SetErrorIcon()
         End Select
-
-        Select Case defaultButton
-            Case MessageBoxDefaultButton.Button1
-                p.btnYes.TabIndex = 0
-            Case MessageBoxDefaultButton.Button2
-                p.btnNo.TabIndex = 0
-            Case MessageBoxDefaultButton.Button3
-                p.btnCancel.TabIndex = 0
-        End Select
-
-        Return p.ShowDialog()
-    End Function
+    End Sub
 
     Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon) As DialogResult
         Dim p As MyMessageBox = New MyMessageBox()
@@ -86,6 +120,8 @@ Public Class MyMessage
                 p.YesNo()
             Case MessageBoxButtons.YesNoCancel
                 p.YesNoCancel()
+            Case MessageBoxButtons.OK
+                p.Ok()
             Case Else
                 p.Yes()
         End Select
@@ -239,18 +275,6 @@ Public Class MyMessage
         Return p.ShowDialog()
     End Function
 
-    Public Shared Function Show(ByVal Key As String, ByVal message As String, ByVal Optional caption As String = "") As DialogResult
-        Dim p As MyMessageBox = New MyMessageBox()
-        CreateMessage(Key, message, caption)
-        p.txtMessage.Text = message
-        p.Visible = False
-        p.Text = caption
-        p.Ok()
-        p.btnOk.Focus()
-        p.SetInfoIcon()
-        Return p.ShowDialog()
-    End Function
-
     Public Shared Function CreateMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String()
         Dim storeCaptions1 As New StoreCaptions
         Dim textDisplayLanguage As String
@@ -310,5 +334,9 @@ Public Class MyMessage
     '    End If
     '    Return translatedText
     'End Function
+
+    Public Sub CreateAllMessages()
+
+    End Sub
 
 End Class

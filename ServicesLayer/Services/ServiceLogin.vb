@@ -56,7 +56,7 @@ Namespace Services
                         If DataDao.GetLoginByUserName(userName).Password = ePassword Then
                             ' MsgBox("Welcome to my Application!")
                         Else
-                            MsgBox("Invalid user name or password.")
+                            'MsgBox("Invalid user name or password.")
                             Return False
                         End If
 

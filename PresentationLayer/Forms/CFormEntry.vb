@@ -364,20 +364,8 @@ Public Class CFormEntry
             CancelSave = False
             retValue = -1
         Else
-            'If AddMode Then
             retValue = InitiateSave(retValue)
-            'Else
-            '    If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-            '        MessageBox.Show("Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.")
-            '        retValue = -1
-            '    Else
-            '        retValue = InitiateSave(retValue)
-            '    End If
-            'End If
         End If
-        'If retValue > 0 Then
-        '    RaiseEvent AfterSave()
-        'End If
         If retValue > 0 Then
             _MBRecordSuccessfullySaved.Show(Me)
         End If
@@ -564,7 +552,7 @@ Public Class CFormEntry
             If Not AddMode Then
                 BtnUndo.Enabled = False
                 BtnSave.Enabled = False
-                MessageBox.Show("No records found for this table!",
+                MyMessage.Show("MsgNoRecordsFound", "No records found for this table!",
                                 "Empty Table",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information)
@@ -768,7 +756,8 @@ Public Class CFormEntry
         Dim continueSave As Boolean = True
         If Not AddMode Then
             If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                MessageBox.Show("Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.")
+                MyMessage.Show("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information)
                 continueSave = False
             Else
                 If Not ChangesMade() Then
@@ -797,7 +786,7 @@ Public Class CFormEntry
                         GetRecordInfoForIdNo()
                         If AddMode Then
                             RaiseEvent AfterAdd()
-                            AddMode = False ' reset AddMode 
+                            AddMode = False ' reset AddMode
                         End If
                         RaiseEvent AfterSave()
                     Else

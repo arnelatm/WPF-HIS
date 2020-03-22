@@ -1049,7 +1049,7 @@ Namespace PresentationLayer.Forms
         Me.MinimumSize = New System.Drawing.Size(1059, 646)
         Me.Name = "ArJournalEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "AR Journal Entry"
+        Me.Text = "Accounts Receivable Journal Entry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floArJournalItems.ResumeLayout(false)

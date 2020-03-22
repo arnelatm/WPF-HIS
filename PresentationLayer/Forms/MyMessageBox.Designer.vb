@@ -25,122 +25,141 @@ Partial Class MyMessageBox
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As ComponentResourceManager = New ComponentResourceManager(GetType(MyMessageBox))
-        Me.btnCancel = New CButton()
-        Me.btnYes = New CButton()
-        Me.btnNo = New CButton()
-        Me.pctError = New PictureBox()
-        Me.pctInfo = New PictureBox()
-        Me.pctQuestion = New PictureBox()
-        Me.pctWarning = New PictureBox()
-        Me.btnOk = New CButton()
-        Me.txtMessage = New TextBox()
-        CType(Me.MyErrorProvider, ISupportInitialize).BeginInit()
-        CType(Me.pctError, ISupportInitialize).BeginInit()
-        CType(Me.pctInfo, ISupportInitialize).BeginInit()
-        CType(Me.pctQuestion, ISupportInitialize).BeginInit()
-        CType(Me.pctWarning, ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MyMessageBox))
+        Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnYes = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnNo = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.pctError = New System.Windows.Forms.PictureBox()
+        Me.pctInfo = New System.Windows.Forms.PictureBox()
+        Me.pctQuestion = New System.Windows.Forms.PictureBox()
+        Me.pctWarning = New System.Windows.Forms.PictureBox()
+        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.txtMessage = New System.Windows.Forms.TextBox()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.pctError,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.pctInfo,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.pctQuestion,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.pctWarning,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = AnchorStyles.Bottom
-        Me.btnCancel.AutoSize = True
-        Me.btnCancel.BackColor = Color.Lime
-        Me.btnCancel.Location = New Point(171, 60)
+        Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCancel.BackColor = System.Drawing.Color.Lime
+        Me.btnCancel.DesignerSelected = false
+        Me.btnCancel.DisplayOnly = true
+        Me.btnCancel.ImageIndex = 0
+        Me.btnCancel.Location = New System.Drawing.Point(171, 60)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New Size(80, 23)
+        Me.btnCancel.OriginalImageName = Nothing
+        Me.btnCancel.SecurityKey = ""
+        Me.btnCancel.Size = New System.Drawing.Size(80, 23)
         Me.btnCancel.TabIndex = 0
         Me.btnCancel.Text = "Cancel"
         '
         'btnYes
         '
-        Me.btnYes.Anchor = AnchorStyles.Bottom
-        Me.btnYes.AutoSize = True
-        Me.btnYes.BackColor = Color.Lime
-        Me.btnYes.Location = New Point(258, 60)
+        Me.btnYes.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnYes.BackColor = System.Drawing.Color.Lime
+        Me.btnYes.DesignerSelected = false
+        Me.btnYes.DisplayOnly = true
+        Me.btnYes.ImageIndex = 0
+        Me.btnYes.Location = New System.Drawing.Point(258, 60)
         Me.btnYes.Name = "btnYes"
-        Me.btnYes.Size = New Size(75, 23)
+        Me.btnYes.OriginalImageName = Nothing
+        Me.btnYes.SecurityKey = ""
+        Me.btnYes.Size = New System.Drawing.Size(75, 23)
         Me.btnYes.TabIndex = 1
         Me.btnYes.Text = "Yes"
         '
         'btnNo
         '
-        Me.btnNo.Anchor = AnchorStyles.Bottom
-        Me.btnNo.AutoSize = True
-        Me.btnNo.BackColor = Color.Lime
-        Me.btnNo.Location = New Point(340, 60)
+        Me.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnNo.BackColor = System.Drawing.Color.Lime
+        Me.btnNo.DesignerSelected = false
+        Me.btnNo.DisplayOnly = true
+        Me.btnNo.ImageIndex = 0
+        Me.btnNo.Location = New System.Drawing.Point(340, 60)
         Me.btnNo.Name = "btnNo"
-        Me.btnNo.Size = New Size(76, 23)
+        Me.btnNo.OriginalImageName = Nothing
+        Me.btnNo.SecurityKey = ""
+        Me.btnNo.Size = New System.Drawing.Size(76, 23)
         Me.btnNo.TabIndex = 2
         Me.btnNo.Text = "No"
         '
         'pctError
         '
-        Me.pctError.BackColor = SystemColors.Control
-        Me.pctError.Image = CType(resources.GetObject("pctError.Image"), Image)
-        Me.pctError.Location = New Point(2, 2)
+        Me.pctError.BackColor = System.Drawing.SystemColors.Control
+        Me.pctError.Image = CType(resources.GetObject("pctError.Image"),System.Drawing.Image)
+        Me.pctError.Location = New System.Drawing.Point(2, 2)
         Me.pctError.Name = "pctError"
-        Me.pctError.Size = New Size(45, 45)
-        Me.pctError.SizeMode = PictureBoxSizeMode.StretchImage
+        Me.pctError.Size = New System.Drawing.Size(45, 45)
+        Me.pctError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pctError.TabIndex = 9
-        Me.pctError.TabStop = False
-        Me.pctError.Visible = False
+        Me.pctError.TabStop = false
+        Me.pctError.Visible = false
         '
         'pctInfo
         '
-        Me.pctInfo.Image = CType(resources.GetObject("pctInfo.Image"), Image)
-        Me.pctInfo.Location = New Point(2, 2)
+        Me.pctInfo.Image = CType(resources.GetObject("pctInfo.Image"),System.Drawing.Image)
+        Me.pctInfo.Location = New System.Drawing.Point(2, 2)
         Me.pctInfo.Name = "pctInfo"
-        Me.pctInfo.Size = New Size(45, 45)
+        Me.pctInfo.Size = New System.Drawing.Size(45, 45)
         Me.pctInfo.TabIndex = 11
-        Me.pctInfo.TabStop = False
-        Me.pctInfo.Visible = False
+        Me.pctInfo.TabStop = false
+        Me.pctInfo.Visible = false
         '
         'pctQuestion
         '
-        Me.pctQuestion.Image = CType(resources.GetObject("pctQuestion.Image"), Image)
-        Me.pctQuestion.Location = New Point(2, 2)
+        Me.pctQuestion.Image = CType(resources.GetObject("pctQuestion.Image"),System.Drawing.Image)
+        Me.pctQuestion.Location = New System.Drawing.Point(2, 2)
         Me.pctQuestion.Name = "pctQuestion"
-        Me.pctQuestion.Size = New Size(45, 45)
+        Me.pctQuestion.Size = New System.Drawing.Size(45, 45)
         Me.pctQuestion.TabIndex = 12
-        Me.pctQuestion.TabStop = False
-        Me.pctQuestion.Visible = False
+        Me.pctQuestion.TabStop = false
+        Me.pctQuestion.Visible = false
         '
         'pctWarning
         '
-        Me.pctWarning.Image = CType(resources.GetObject("pctWarning.Image"), Image)
-        Me.pctWarning.Location = New Point(2, 2)
+        Me.pctWarning.Image = CType(resources.GetObject("pctWarning.Image"),System.Drawing.Image)
+        Me.pctWarning.Location = New System.Drawing.Point(2, 2)
         Me.pctWarning.Name = "pctWarning"
-        Me.pctWarning.Size = New Size(45, 45)
+        Me.pctWarning.Size = New System.Drawing.Size(45, 45)
         Me.pctWarning.TabIndex = 13
-        Me.pctWarning.TabStop = False
-        Me.pctWarning.Visible = False
+        Me.pctWarning.TabStop = false
+        Me.pctWarning.Visible = false
         '
         'btnOk
         '
-        Me.btnOk.Anchor = AnchorStyles.Bottom
-        Me.btnOk.AutoSize = True
-        Me.btnOk.BackColor = Color.Lime
-        Me.btnOk.Location = New Point(89, 60)
+        Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnOk.BackColor = System.Drawing.Color.Lime
+        Me.btnOk.DesignerSelected = false
+        Me.btnOk.DisplayOnly = true
+        Me.btnOk.ImageIndex = 0
+        Me.btnOk.Location = New System.Drawing.Point(89, 60)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New Size(76, 23)
+        Me.btnOk.OriginalImageName = Nothing
+        Me.btnOk.SecurityKey = ""
+        Me.btnOk.Size = New System.Drawing.Size(76, 23)
         Me.btnOk.TabIndex = 15
         Me.btnOk.Text = "Ok"
         '
         'txtMessage
         '
-        Me.txtMessage.BorderStyle = BorderStyle.None
-        Me.txtMessage.Location = New Point(53, 9)
-        Me.txtMessage.Multiline = True
+        Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMessage.Location = New System.Drawing.Point(53, 9)
+        Me.txtMessage.Multiline = true
         Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.Size = New Size(419, 45)
+        Me.txtMessage.Size = New System.Drawing.Size(419, 45)
         Me.txtMessage.TabIndex = 16
         '
         'MyMessageBox
         '
-        Me.AutoSizeMode = AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New Size(484, 86)
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.BackColor = System.Drawing.SystemColors.Info
+        Me.BackgroundImage = Nothing
+        Me.ClientSize = New System.Drawing.Size(484, 86)
         Me.Controls.Add(Me.txtMessage)
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.pctWarning)
@@ -150,18 +169,18 @@ Partial Class MyMessageBox
         Me.Controls.Add(Me.btnNo)
         Me.Controls.Add(Me.btnYes)
         Me.Controls.Add(Me.btnCancel)
-        Me.MinimumSize = New Size(500, 125)
+        Me.MinimumSize = New System.Drawing.Size(500, 125)
         Me.Name = "MyMessageBox"
         Me.Text = "Message"
-        CType(Me.MyErrorProvider, ISupportInitialize).EndInit()
-        CType(Me.pctError, ISupportInitialize).EndInit()
-        CType(Me.pctInfo, ISupportInitialize).EndInit()
-        CType(Me.pctQuestion, ISupportInitialize).EndInit()
-        CType(Me.pctWarning, ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.pctError,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.pctInfo,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.pctQuestion,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.pctWarning,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents btnCancel As CButton
     Friend WithEvents btnYes As CButton

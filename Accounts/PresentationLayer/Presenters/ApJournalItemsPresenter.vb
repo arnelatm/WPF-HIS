@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Presenters
 
@@ -26,7 +27,11 @@ Namespace PresentationLayer.Presenters
                     MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                     retVal = False
                     Exit For
-                Else
+                ElseIf item.SpecialAccount = SpecialAccountSelection.Cash OrElse
+                       SpecialAccountSelection.Bank OrElse SpecialAccountSelection.PettyCashAccount Then
+                    Dim lineNumber As Integer = 0
+                    MyMessage.Show("MsgCashAccountNotAllowed", $"Error on line <{lineNumber:N0}>. Cash accounts not allowed for AP Journal Entry.")
+
                     cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
                     If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Supplier/Vendor accounts allowed for this entry!", item.Sequence))

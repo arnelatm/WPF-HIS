@@ -24,6 +24,7 @@ Namespace PresentationLayer.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -54,7 +55,7 @@ Namespace PresentationLayer.Forms
         Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1162,7 +1163,7 @@ Namespace PresentationLayer.Forms
         Me.MinimumSize = New System.Drawing.Size(1059, 646)
         Me.Name = "ApJournalEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "Ap Journal Entry"
+        Me.Text = "Accounts Payable Journal Entry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floApJournalItems.ResumeLayout(false)
