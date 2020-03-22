@@ -36,6 +36,7 @@ Public Class MyMessageBox
 
     Public Sub Yes()
         btnYes.Visible = True
+        btnOk.Visible = False
         btnNo.Visible = False
         btnCancel.Visible = False
         btnYes.Left = (Me.Width - Me.btnYes.Width) / 2
@@ -45,15 +46,26 @@ Public Class MyMessageBox
         btnYes.Visible = True
         btnNo.Visible = True
         btnCancel.Visible = False
+        btnOk.Visible = False
         btnYes.Left = Me.Width / 2 - btnYes.Width - 5
         btnNo.Left = btnYes.Right + 5
+    End Sub
+
+    Public Sub OkCancel()
+        btnYes.Visible = False
+        btnNo.Visible = False
+        btnOk.Visible = True
+        btnCancel.Visible = True
+        btnOk.Left = Me.Width / 2 - btnOk.Width - 5
+        btnCancel.Left = btnOk.Right + 5
     End Sub
 
     Public Sub YesNoCancel()
         btnYes.Visible = True
         btnNo.Visible = True
         btnCancel.Visible = True
-        btnYes.Left = Me.Width / 2 - btnYes.Width - (btnYes.Width / 2) - 10
+        btnOk.Visible = False
+        btnYes.Left = Me.Width / 2 - btnYes.Width - (btnNo.Width / 2) - 10
         btnNo.Left = btnYes.Right + 5
         btnCancel.Left = btnNo.Right + 5
     End Sub
