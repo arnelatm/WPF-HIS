@@ -80,7 +80,9 @@ Namespace Services
         Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM Implements IService.GetRecordById
             Dim modelPresenter As New TM
             Dim record = DataDao.GetRecordById(Convert.ToInt32(idNo))
-            GlobalVariables.Mapper.Map(record, modelPresenter)
+            If record IsNot Nothing Then
+                GlobalVariables.Mapper.Map(record, modelPresenter)
+            End If
             Return modelPresenter
         End Function
 

@@ -208,18 +208,21 @@ Public Class Dac
         Try
             Using reader = Dc.ExecuteReader()
                 If reader.hasRows() Then
-
                     Do While reader.Read()
                         result.Add(reader.GetString(0))
                         result.Add(reader.GetString(1))
                     Loop
+                Else
+                    result = Nothing
                 End If
-
             End Using
         Catch ex As Exception
             'status = "Error"
-            ErrorMessage(ex, NonQueryError)
-            result = Nothing
+            If ex.HResult = &H80131931 Then
+                result = Nothing
+            Else
+                ErrorMessage(ex, NonQueryError)
+            End If
         Finally
             If Cn.state = ConnectionState.Open Then Cn.close()
         End Try
@@ -229,50 +232,51 @@ Public Class Dac
 
     Public Function ExecScalar(Of T)(ByVal cmd As String) As T
         Dim retVal As T
-        Cs = BuildConnString()
-        Select Case DacAccessType
-            Case "SQL"
-                Dim cn1 As SqlConnection = New SqlConnection(Cs)
-                Try
-                    cn1.Open()
-                Catch ex As Exception
-                    ErrorMessage(ex, SqlError)
-                End Try
-                Dim dc1 As New SqlCommand(cmd, cn1)
-                dc1.CommandType = CommandType.Text
-                Dc = dc1
-                Cn = cn1
-            Case "MDB"
-                Dim cn1 As OleDbConnection = New OleDbConnection(Cs)
-                Try
-                    cn1.Open()
-                Catch ex As Exception
-                    ErrorMessage(ex, MdbError)
-                End Try
-                Dim dc1 As OleDbCommand = New OleDbCommand(cmd, cn1)
-                dc1.CommandType = CommandType.Text
-                Dc = dc1
-                Cn = cn1
-            Case "DBF"
-                Dim cn1 As OleDbConnection = New OleDbConnection(Cs)
-                Try
-                    cn1.Open()
-                Catch ex As Exception
-                    ErrorMessage(ex, DbfError)
-                End Try
-                Dim dc1 As OleDbCommand = New OleDbCommand(cmd, cn1)
-                dc1.CommandType = CommandType.Text
-                Dc = dc1
-                Cn = cn1
-        End Select
-        Try
-            retVal = Dc.ExecuteScalar()
-        Catch ex As Exception
-            ErrorMessage(ex, Dc.commandtext)
-        Finally
-            If Cn.state = ConnectionState.Open Then Cn.close()
-        End Try
-
+        If Not DesignMode Then
+            Cs = BuildConnString()
+            Select Case DacAccessType
+                Case "SQL"
+                    Dim cn1 As SqlConnection = New SqlConnection(Cs)
+                    Try
+                        cn1.Open()
+                    Catch ex As Exception
+                        ErrorMessage(ex, SqlError)
+                    End Try
+                    Dim dc1 As New SqlCommand(cmd, cn1)
+                    dc1.CommandType = CommandType.Text
+                    Dc = dc1
+                    Cn = cn1
+                Case "MDB"
+                    Dim cn1 As OleDbConnection = New OleDbConnection(Cs)
+                    Try
+                        cn1.Open()
+                    Catch ex As Exception
+                        ErrorMessage(ex, MdbError)
+                    End Try
+                    Dim dc1 As OleDbCommand = New OleDbCommand(cmd, cn1)
+                    dc1.CommandType = CommandType.Text
+                    Dc = dc1
+                    Cn = cn1
+                Case "DBF"
+                    Dim cn1 As OleDbConnection = New OleDbConnection(Cs)
+                    Try
+                        cn1.Open()
+                    Catch ex As Exception
+                        ErrorMessage(ex, DbfError)
+                    End Try
+                    Dim dc1 As OleDbCommand = New OleDbCommand(cmd, cn1)
+                    dc1.CommandType = CommandType.Text
+                    Dc = dc1
+                    Cn = cn1
+            End Select
+            Try
+                retVal = Dc.ExecuteScalar()
+            Catch ex As Exception
+                ErrorMessage(ex, Dc.commandtext)
+            Finally
+                If Cn.state = ConnectionState.Open Then Cn.close()
+            End Try
+        End If
         Return retVal
 
     End Function
@@ -421,12 +425,11 @@ Public Class Dac
 
     Function GetMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String
         Dim translatedMessage As String = ""
-        Dim currentLanguageIdNo As Integer
         Dim cmd As String
-        If DefaultMirroredLanguageIdNo = 0 Then
-            cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
-            currentLanguageIdNo = ExecScalar(Of Int16)(cmd)
-        End If
+        'If DefaultMirroredLanguageIdNo = 0 Then
+        '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
+        '    currentLanguageIdNo = ExecScalar(Of Int16)(cmd)
+        'End If
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
         'cmd = cmd + key.Trim()
         'cmd = cmd + "' and LanguageIdNo = "
@@ -434,16 +437,25 @@ Public Class Dac
 
         Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
-            'translatedMessage =
-            cmd = "SELECT TranslatedMessage FROM TranslatedMessages where OriginalIdNo = " + idNo.ToString()
-            translatedMessage = ExecScalar(Of String)(cmd)
-            If translatedMessage Is Nothing Then
-                translatedMessage = message
+            Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+            cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+            Dim items As Collection = ExecReader(cmd)
+            If items IsNot Nothing Then
+                translatedMessage = items(0)
+            Else
+                Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
+                cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+                items = ExecReader(cmd)
+                If items Is Nothing Then
+                    translatedMessage = message
+                Else
+                    If items.Count() = 0 Then
+                        translatedMessage = message
+                    Else
+                        translatedMessage = items(0)
+                    End If
+                End If
             End If
-            'cmd = cmd + key.Trim()
-            'cmd = cmd + "' and LanguageIdNo = "
-            'cmd = cmd + DefaultMirroredLanguageIdNo.ToString()
-            'Dim Item = ExecReader(cmd)
         Else
             Me.CreateMessage(key, message, caption)
             'Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
