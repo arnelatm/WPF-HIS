@@ -99,24 +99,6 @@
     <Compile Include="atmButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BFEntry.Designer.vb">
-      <DependentUpon>BFEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BFEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BfEntryNew.Designer.vb">
-      <DependentUpon>BfEntryNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BfEntryNew.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BFScTvEntrySc.Designer.vb">
-      <DependentUpon>BFScTvEntrySc.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BFScTvEntrySc.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="BFMain.Designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
@@ -127,12 +109,6 @@
       <DependentUpon>BFModalForm.vb</DependentUpon>
     </Compile>
     <Compile Include="BFModalForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BfTvEntry.Designer.vb">
-      <DependentUpon>BfTvEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BfTvEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormEntry.designer.vb">
@@ -229,24 +205,12 @@
     <EmbeddedResource Include="atmButton.resx">
       <DependentUpon>atmButton.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFEntry.resx">
-      <DependentUpon>BFEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BfEntryNew.resx">
-      <DependentUpon>BfEntryNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BFScTvEntrySc.resx">
-      <DependentUpon>BFScTvEntrySc.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BFMain.resx">
       <DependentUpon>BFMain.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BFModalForm.resx">
       <DependentUpon>BFModalForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BfTvEntry.resx">
-      <DependentUpon>BfTvEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>

@@ -9,6 +9,7 @@ Namespace BusinessRules
     Public Class ValidateCompare
         Inherits BusinessRule
 
+        Private Property PropertyName As String
         Private Property OtherPropertyName As String
         Private Property DataType As ValidationDataType
         Private Property [Operator] As ValidationOperator
@@ -17,26 +18,30 @@ Namespace BusinessRules
                        dataType As ValidationDataType)
             MyBase.New(propertyName)
             Dim strError As String = ""
-
+            Me.PropertyName = propertyName
             Me.OtherPropertyName = otherPropertyName
             Me.Operator = [operator]
             Me.DataType = dataType
             Select Case [operator]
                 Case ValidationOperator.Equal
-                    strError = "{propertyName} must be equal to {otherPropertyName}!"
-                    strError = Dac.GetMessage($"MsgCompareEqual", strError, "Validation Error")
-                    [Error] = strError.Interpolate(Function(x) propertyName, Function(x) otherPropertyName)
+                    MakeError($"MsgValidationCompareEqual", "must be equal to")
                 Case ValidationOperator.NotEqual
-                    [Error] = propertyName & " must not be equal to " & otherPropertyName
+                    MakeError($"MsgValidationCompareNotEqual", "must not be equal to")
                 Case ValidationOperator.GreaterThan
-                    [Error] = propertyName & " must be greater than " & otherPropertyName
+                    MakeError($"MsgValidationCompareGreaterThan", "must be greater than")
                 Case ValidationOperator.GreaterThanOrEqual
-                    [Error] = propertyName & " must be greater than or equal to " & otherPropertyName
+                    MakeError($"MsgValidationCompareGreaterThanOrEqualTo", "must be greater than or equal to")
                 Case ValidationOperator.LessThan
-                    [Error] = propertyName & " must be less than " & otherPropertyName
+                    MakeError($"MsgValidationCompareLessThan", "must be less than")
                 Case ValidationOperator.LessThanOrEqual
-                    [Error] = propertyName & " must be less than or equal to " & otherPropertyName
+                    MakeError($"MsgValidationCompareLessThanOrEqualTo", "must be less than or equal to")
             End Select
+        End Sub
+
+        Private Sub MakeError(errMessageKey As String, errMessageText As String)
+            Dim strError = "{propertyName} " + errMessageText + " {otherPropertyName}"
+            strError = Dac.GetMessage(errMessageKey, strError, "Validation Error")
+            [Error] = strError.Interpolate(Function(x) PropertyName, Function(x) OtherPropertyName)
         End Sub
 
         Public Sub New(propertyName As String, otherPropertyName As String, errorMessage As String,

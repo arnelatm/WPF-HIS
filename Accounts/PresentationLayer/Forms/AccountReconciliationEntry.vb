@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Translations
 Imports CrystalDecisions.CrystalReports.Engine
 
 Namespace PresentationLayer.Forms

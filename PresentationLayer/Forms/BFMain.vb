@@ -50,8 +50,6 @@ Public Class BfMain
         Dim dac As New Dac
         Dim cmd As String
         cmd = "Select IdNo from Languages where cultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
-        DefaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
-
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -481,7 +479,7 @@ Public Class BfMain
             cmd = "SELECT IdNo FROM SystemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
-
+            DefaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         End If
 
     End Sub
