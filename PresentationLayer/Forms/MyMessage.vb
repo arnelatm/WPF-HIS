@@ -318,15 +318,15 @@ Public Class MyMessage
         If NeedToTranslateText(textDisplayLanguage) Then
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items = translatorDac.ExecReader(cmd)
-            If items IsNot Nothing Then
+            If Not (items Is Nothing OrElse items.Count() = 0) Then
                 translatedMessage = items(1)
                 translatedCaption = items(2)
             Else
-                If translatedMessage Is Nothing Then
+                If String.IsNullOrEmpty(translatedMessage) Then
                     Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                     cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
                     items = translatorDac.ExecReader(cmd)
-                    If items IsNot Nothing Then
+                    If Not (items Is Nothing OrElse items.Count() = 0) Then
                         translatedMessage = items(1)
                         translatedCaption = items(2)
                     End If

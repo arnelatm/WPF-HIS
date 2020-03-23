@@ -125,12 +125,14 @@ Namespace PresentationLayer.Forms
 
         Public Property InvoiceDate As Date? Implements IApJournalView.InvoiceDate
             Get
-                Dim retDate As Date
-                Date.TryParse(dtpInvoiceDate.Text, retDate)
-                Return retDate
+                Return dtpInvoiceDate.Value
             End Get
             Set
-                dtpInvoiceDate.Text = Value
+                If String.IsNullOrEmpty(Value) Then
+                    dtpInvoiceDate.Value = Date.Now()
+                Else
+                    dtpInvoiceDate.Value = Value
+                End If
             End Set
         End Property
 

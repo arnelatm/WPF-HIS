@@ -3,6 +3,7 @@ Imports System.Configuration
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class Dac
@@ -223,11 +224,25 @@ Public Class Dac
                 If reader.hasRows() Then
                     Dim i = 0
                     Do While reader.Read()
-                        result.Add(reader.GetString(0))
-                        result.Add(reader.GetString(1))
+                        Try
+                            result.Add(reader.GetString(0))
+                        Catch ex As Exception
+                            If ex.HResult = &H80131931 Then
+                                result.Add("")
+                            Else
+                                ErrorMessage(ex, NonQueryError)
+                            End If
+                        End Try
+                        Try
+                            result.Add(reader.GetString(1))
+                        Catch ex As Exception
+                            If ex.HResult = &H80131931 Then
+                                result.Add("")
+                            Else
+                                ErrorMessage(ex, NonQueryError)
+                            End If
+                        End Try
                     Loop
-                Else
-                    result = Nothing
                 End If
             End Using
         Catch ex As Exception
@@ -435,7 +450,8 @@ Public Class Dac
     End Sub
 
     Function GetMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String
-        Dim translatedMessage As String
+        Dim translatedMessage As String = message
+        Dim translatedCaption As String = caption
         Dim cmd As String
         'If DefaultMirroredLanguageIdNo = 0 Then
         '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
@@ -451,19 +467,21 @@ Public Class Dac
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items As Collection = ExecReader(cmd)
-            If items IsNot Nothing Then
-                translatedMessage = items(0)
+            If Not (items Is Nothing OrElse items.Count = 0) Then
+                translatedMessage = items(1)
+                translatedCaption = items(2)
             Else
                 Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                 cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
                 items = ExecReader(cmd)
-                If items Is Nothing Then
+                If Not (items Is Nothing OrElse items.Count = 0) Then
                     translatedMessage = message
                 Else
                     If items.Count() = 0 Then
                         translatedMessage = message
                     Else
-                        translatedMessage = items(0)
+                        translatedMessage = items(1)
+                        translatedCaption = items(2)
                     End If
                 End If
             End If
