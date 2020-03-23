@@ -24,12 +24,16 @@ Namespace PresentationLayer.Presenters
             Dim retVal = True
             Dim cPayeeType As String
             Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
+            Dim specialAccount As String
+            Dim chart As ChartModel
             For Each item In journalItems
+                chart = GetChart(item.AccountIdNo)
+                specialAccount = chart.SpecialAccount
                 If item.AccountIdNo = 0 Then
                     MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                     retVal = False
                     Exit For
-                ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccount.Contains(item.SpecialAccount) Then
+                ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                     Dim lineNumber As String = item.Sequence.ToString()
                     Dim message = MyMessage.GetMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry!")
                     message = message.Interpolate(Function(x) lineNumber)
