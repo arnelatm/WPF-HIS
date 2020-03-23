@@ -8,8 +8,10 @@ Public Class GlobalVariables
     Private Shared _appCultureInfo As CultureInfo
     Private Shared _appCurrentCultureInfo As CultureInfo
     Private Shared _defaultUnmirroredCultureInfoStr As String
-    Private Shared _defaultMirroredLanguageIdNo As Integer
+
+    'Private Shared _defaultMirroredLanguageIdNo As Integer
     Private Shared _defaultMirroredCultureInfoStr As String
+
     Private Shared _defaultCountryIsoa3 As String = ""
     Private Shared _originalCultureUiInfo As CultureInfo = CultureInfo.CurrentUICulture
     Private Shared _defaultFormBackgroundColor As Nullable(Of Color)

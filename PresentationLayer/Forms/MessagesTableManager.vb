@@ -45,10 +45,12 @@ Public Class MessagesTableManager
         If Not DesignMode Then
             StoreCaptions1.StoreCaptions(Me)
             LoadLanguages(cmbLanguage)
-            Dim defaultMirroredLanguageIdNo As Int16
-            Cmd = "Select IdNo from Languages where cultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
-            defaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-            cmbLanguage.SelectedValue = defaultMirroredLanguageIdNo
+
+            'Cmd = "Select IdNo from Languages where cultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+            'Dim defaultMirroredLanguageIdNo As Short = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+            ' defaultMirroredLanguageIdNo As Short
+            'defaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
+            cmbLanguage.SelectedValue = DefaultMirroredLanguageIdNo
 
             Dim dsLanguages As DataSet
             Cmd = "SELECT idNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages order by LanguageName"

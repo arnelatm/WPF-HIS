@@ -211,7 +211,7 @@ Public Class CFormEntry
                     End If
                     originalValue = PresenterObj.GetOriginalValue(thisControl.EnglishControl)
                     Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
-                    If String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+                    If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
                         thisControl.Text = englishText
                     End If
                 ElseIf TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then

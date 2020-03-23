@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Presenters
@@ -22,16 +23,19 @@ Namespace PresentationLayer.Presenters
         Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel))
             Dim retVal = True
             Dim cPayeeType As String
+            Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
             For Each item In journalItems
                 If item.AccountIdNo = 0 Then
                     MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                     retVal = False
                     Exit For
-                ElseIf item.SpecialAccount = SpecialAccountSelection.Cash OrElse
-                       SpecialAccountSelection.Bank OrElse SpecialAccountSelection.PettyCashAccount Then
-                    Dim lineNumber As Integer = 0
-                    MyMessage.Show("MsgCashAccountNotAllowed", $"Error on line <{lineNumber:N0}>. Cash accounts not allowed for AP Journal Entry.")
-
+                ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccount.Contains(item.SpecialAccount) Then
+                    Dim lineNumber As String = item.Sequence.ToString()
+                    Dim message = MyMessage.GetMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry!")
+                    message = message.Interpolate(Function(x) lineNumber)
+                    MyMessage.Show("MsgCashAccountsNotAllowed", message)
+                    retVal = False
+                Else
                     cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
                     If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Supplier/Vendor accounts allowed for this entry!", item.Sequence))

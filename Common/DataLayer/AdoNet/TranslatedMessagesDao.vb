@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, TranslatedMessage, TranslatedCaption, OriginalIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE OriginalIdNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function

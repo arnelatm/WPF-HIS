@@ -476,10 +476,10 @@ Public Class BfMain
             Dim cmd As String
             'Dim dac As New Dac
             'dac = TranslatorDAC
+            DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             cmd = "SELECT IdNo FROM SystemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
-            DefaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         End If
 
     End Sub

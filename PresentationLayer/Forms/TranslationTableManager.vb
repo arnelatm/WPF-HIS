@@ -45,13 +45,13 @@ Public Class TranslationTableManager
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not DesignMode Then
             StoreCaptions1.StoreCaptions(Me)
-            Cmd = "Select IdNo from systemForms where formname ='" + Name + "'"
+            Cmd = "Select IdNo from systemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
             LoadLanguages(cmbLanguage)
-            Dim defaultMirroredLanguageIdNo As Int16
-            Cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
-            defaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-            cmbLanguage.SelectedValue = defaultMirroredLanguageIdNo
+            'Dim defaultMirroredLanguageIdNo As Int16
+            'Cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+            'defaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+            cmbLanguage.SelectedValue = DefaultMirroredLanguageIdNo
 
             Dim dsLanguages As DataSet
             Cmd = "SELECT idNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages order by LanguageName"

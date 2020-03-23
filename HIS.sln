@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HIS", "HIS.vbproj", "{14099E6B-D6CB-49FD-AD2C-23FE433D2C0C}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Accounts", "Accounts\Accounts.vbproj", "{826EE6DC-954A-4C18-9108-EBD592FCB1E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A6C79BF6-2C34-4AEA-9845-360F48976962}"
@@ -60,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		CostCenter_View.sql = CostCenter_View.sql
 		InsertCheckDisbursementJournalItemTVP.sql = InsertCheckDisbursementJournalItemTVP.sql
 		ProfitCenter.sql = ProfitCenter.sql
+		TranslatedMessages_View.sql = TranslatedMessages_View.sql
 		UpdateCheckDisbursementJournalItemTVP.sql = UpdateCheckDisbursementJournalItemTVP.sql
 	EndProjectSection
 EndProject
@@ -68,16 +67,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{6FD945
 		CostCenter.sql = CostCenter.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AD3DFDF-C6F0-4B21-8A40-902BAAFF6682}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14099E6B-D6CB-49FD-AD2C-23FE433D2C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14099E6B-D6CB-49FD-AD2C-23FE433D2C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14099E6B-D6CB-49FD-AD2C-23FE433D2C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14099E6B-D6CB-49FD-AD2C-23FE433D2C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
