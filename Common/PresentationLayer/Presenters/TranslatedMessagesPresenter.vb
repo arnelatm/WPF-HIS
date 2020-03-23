@@ -34,8 +34,7 @@ Namespace PresentationLayer.Presenters
             If idNoTm <> 0 Then
                 modelData = Model.GetRecordById(Of TranslatedMessagesModel)(originalIdNo)
             End If
-            MapObject(modelData, View, FieldRetrievalMappingDictionary)
-            MapObject(modelData, OriginalModel)
+            GlobalVariables.Mapper.Map(modelData, View)
         End Sub
 
         Public Function GetTranslatedMessagesList(Optional ByVal sortKey As String = "") As List(Of TranslatedMessagesModel)
@@ -56,18 +55,30 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
             Dim record As New TranslatedMessagesModel
-            record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
+            'record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
             GlobalVariables.Mapper.Map(Of ITranslatedMessagesView, TranslatedMessagesModel)(View, record)
             If addMode Then
                 NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
                 retVal = NewlyAddedRecordIdNo
                 CallByName(View, "IdNo", CallType.Set, retVal)
             Else
-                retVal = Model.UpdateRecord(record)
-                If retVal = 0 Then
-                    NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
-                    retVal = NewlyAddedRecordIdNo
-                    CallByName(View, "IdNo", CallType.Set, retVal)
+                If String.IsNullOrEmpty(record.TranslatedMessage) And String.IsNullOrEmpty(record.TranslatedCaption) Then
+                    retVal = Model.DeleteRecord(record.IdNo, "TranslatedMessages")
+                Else
+                    If String.IsNullOrEmpty(record.TranslatedMessage) Then
+                        record.TranslatedMessage = ""
+                    ElseIf String.IsNullOrEmpty(record.TranslatedCaption) Then
+                        record.TranslatedCaption = ""
+                    End If
+                    retVal = Model.UpdateRecord(record)
+                    If retVal = 0 Then
+                        If Not (String.IsNullOrEmpty(record.TranslatedMessage) And String.IsNullOrEmpty(record.TranslatedCaption)) Then
+                            record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
+                            NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+                            retVal = NewlyAddedRecordIdNo
+                            CallByName(View, "IdNo", CallType.Set, retVal)
+                        End If
+                    End If
                 End If
             End If
             Return retVal

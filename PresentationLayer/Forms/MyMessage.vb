@@ -4,12 +4,14 @@ Imports AATM.Libraries.Translations
 
 Public Class MyMessage
 
-    Public Shared Function Show(ByVal Key As String, ByVal message As String, ByVal Optional caption As String = "") As DialogResult
+    Public Shared Function Show(ByVal key As String, ByVal message As String, ByVal Optional caption As String = "") As DialogResult
         Dim p As MyMessageBox = New MyMessageBox()
-        CreateMessage(Key, message, caption)
+        CreateMessage(key, message, caption)
         p.txtMessage.Text = message
         p.Visible = False
-        p.Text = caption
+        If caption Is Nothing Then
+            p.Text = GetCaption(key)
+        End If
         p.Ok()
         p.btnOk.Focus()
         p.SetInfoIcon()
@@ -20,12 +22,35 @@ Public Class MyMessage
         Dim p As MyMessageBox = New MyMessageBox()
         CreateMessage(key, message, caption)
         p.txtMessage.Text = message
+        If caption Is Nothing Then
+            p.Text = GetCaption(key)
+        End If
+        SelectButton(p, buttons)
+        SelectIcon(p, icon)
+        SelectDefaultButton(p, defaultButton)
+        Return p.ShowDialog()
+    End Function
+
+    Public Shared Function Show(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        Dim p As MyMessageBox = New MyMessageBox()
+        p.txtMessage.Text = message
         p.Text = caption
         SelectButton(p, buttons)
         SelectIcon(p, icon)
         SelectDefaultButton(p, defaultButton)
         Return p.ShowDialog()
     End Function
+
+    'Public Shared Function Show(ByVal interpolate As Boolean, ByVal key As String, ByVal message As String) As DialogResult
+    '    Dim p As MyMessageBox = New MyMessageBox()
+    '    p.txtMessage.Text = message.Interpolate(Function(x) )
+    '    p.Visible = False
+    '    p.Text = caption
+    '    p.Ok()
+    '    p.btnOk.Focus()
+    '    p.SetInfoIcon()
+    '    Return p.ShowDialog()
+    'End Function
 
     Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
         Dim p As MyMessageBox = New MyMessageBox()
@@ -312,6 +337,16 @@ Public Class MyMessage
             translatedCaption = caption
         End If
         Return {translatedMessage, translatedCaption}
+    End Function
+
+    Public Shared Function GetMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String
+        Dim translatorDac As New Dac
+        Return translatorDac.GetMessage(key, message, caption)
+    End Function
+
+    Public Shared Function GetCaption(ByVal key As String) As String
+        Dim translatorDac As New Dac
+        Return translatorDac.GetCaption(key)
     End Function
 
     'Protected Function GetTranslatedMessage(ByVal key As String, ByVal message As String, ByVal textDisplayLanguage As String) As String

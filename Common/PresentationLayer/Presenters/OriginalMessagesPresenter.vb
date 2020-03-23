@@ -48,8 +48,9 @@ Namespace PresentationLayer.Presenters
                     'fieldsDictionary.Add("IdNo","IdNo")
                     'fieldsDictionary.Add("Message","Message")
                     'fieldsDictionary.Add("Caption","Caption")
-                    MapObject(modelData, View)
-                    MapObject(modelData, OriginalModel)
+                    GlobalVariables.Mapper.Map(modelData, View)
+                    'MapObject(modelData, View)
+                    'MapObject(modelData, OriginalModel)
                 End If
                 TranslatedMessagesPresenter.Display(idNo)
             End If

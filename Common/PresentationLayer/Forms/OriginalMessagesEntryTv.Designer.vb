@@ -168,6 +168,7 @@ Namespace PresentationLayer.Forms
         '
         'txtTranslatedMessage
         '
+        Me.txtTranslatedMessage.AutoFill = false
         Me.txtTranslatedMessage.BackColor = System.Drawing.Color.White
         Me.txtTranslatedMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTranslatedMessage.ComputedValue = false

@@ -12,6 +12,7 @@ Public Class Dac
 
 #Region " Declarations and properties "
 
+    Private ReadOnly _defaultMirroredLanguageIdNo As Integer = 0
     Public Const SqlError = "Error connecting to server"
     Public Const MdbError = "Error opening MDB file"
     Public Const DbfError = "Error with DBF directory or DBC"
@@ -22,7 +23,7 @@ Public Class Dac
     Public Cn As Object
     Public Dc As Object
 
-    Public Shared DefaultMirroredLanguageIdNo As Integer
+    'Public Shared DefaultMirroredLanguageIdNo As Integer
 
     <Category("AATM")> Public Property DacAccessType As String = "SQL"
     <Category("AATM")> Public Property DacFileName As String = $"ISPDATA" '""Translations"
@@ -42,7 +43,6 @@ Public Class Dac
         Dim uid As String = ConfigurationManager.AppSettings.Get("UIDTranslator") ' SQL, MDB
         Dim pwd As String = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
         Dim fileName As String = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' DBF, MDB
-        Dim cmd As String
         DacAccessType = accessType
         DacServer = server
         DacServerType = serverType
@@ -62,6 +62,19 @@ Public Class Dac
         Set(ByVal value As String)
             _cs = value
         End Set
+    End Property
+
+    Public ReadOnly Property DefaultMirroredLanguageIdNo As Integer
+        Get
+            If _defaultMirroredLanguageIdNo = 0 Then
+                If Not DesignMode Then
+                    Dim cmd As String
+                    cmd = "Select IdNo from Languages where CultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+                    Return ExecScalar(Of Int16)(cmd)
+                End If
+            End If
+            Return _defaultMirroredLanguageIdNo
+        End Get
     End Property
 
 #End Region
@@ -208,6 +221,7 @@ Public Class Dac
         Try
             Using reader = Dc.ExecuteReader()
                 If reader.hasRows() Then
+                    Dim i = 0
                     Do While reader.Read()
                         result.Add(reader.GetString(0))
                         result.Add(reader.GetString(1))
@@ -378,19 +392,16 @@ Public Class Dac
         'Dim storeCaptions1 As New StoreCaptions
         'Dim textDisplayLanguage As String
         'Dim translatorDac As New Dac
-        Dim translatedMessage As String = message
-        Dim translatedCaption As String = caption
         Dim cmd As String
-        Dim activeForm = Form.ActiveForm
-        If DefaultMirroredLanguageIdNo = 0 Then
-            cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
-            DefaultMirroredLanguageIdNo = ExecScalar(Of Int16)(cmd)
-        End If
+        'If DefaultMirroredLanguageIdNo = 0 Then
+        '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+        '    DefaultMirroredLanguageIdNo = ExecScalar(Of Int16)(cmd)
+        'End If
 
         'textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey='" + key + "'"
-        Dim IdNo As Int32 = ExecScalar(Of Int32)(cmd)
-        If IdNo = 0 Then
+        Dim idNo As Int32 = ExecScalar(Of Int32)(cmd)
+        If idNo = 0 Then
             cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
             ExecCmd(cmd)
         End If
@@ -424,7 +435,7 @@ Public Class Dac
     End Sub
 
     Function GetMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String
-        Dim translatedMessage As String = ""
+        Dim translatedMessage As String
         Dim cmd As String
         'If DefaultMirroredLanguageIdNo = 0 Then
         '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
@@ -457,7 +468,7 @@ Public Class Dac
                 End If
             End If
         Else
-            Me.CreateMessage(key, message, caption)
+            CreateMessage(key, message, caption)
             'Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
             'cmd = "SELECT TranslatedMessage from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
             'item = ExecReader(cmd)
@@ -467,6 +478,23 @@ Public Class Dac
             translatedMessage = message
         End If
         Return translatedMessage
+    End Function
+
+    Function GetCaption(ByVal key As String) As String
+        Dim translatedCaption As String = ""
+        Dim cmd As String
+        cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
+        Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
+        If idNo <> 0 Then
+            Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+            cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+            translatedCaption = ExecScalar(Of String)(cmd)
+            If translatedCaption Is Nothing Then
+                cmd = "SELECT Caption FROM OriginalMessages where OriginalIdNo = " + idNo.ToString()
+                translatedCaption = ExecScalar(Of String)(cmd)
+            End If
+        End If
+        Return translatedCaption
     End Function
 
 #End Region
