@@ -71,7 +71,7 @@ Public Class LoginEntry
                     Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
                                                                           "SecurityGroupIDNo"))
             Else
-                Messaging.Show("MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
+                Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
             End If
         Catch ex As ApplicationException
             MessageBox.Show(ex.Message, "Login failed")

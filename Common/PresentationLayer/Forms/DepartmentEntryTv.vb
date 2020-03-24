@@ -80,7 +80,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
-                Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
+                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
                 CancelSave = True
                 Exit Sub
             End If
