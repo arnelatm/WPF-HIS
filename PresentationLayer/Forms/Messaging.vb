@@ -4,21 +4,22 @@ Imports AATM.Libraries.Translations
 
 Public Class Messaging
 
-    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
-        If translate Then
-            TranslateMessage(key)
-        End If
-        Return Show(key)
-    End Function
-
-    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
-        If translate Then
-            TranslateMessage(key, message, caption)
-        End If
-        Return Show(message, caption)
+    Public Overloads Shared Function Show(ByVal key As String) As DialogResult
+        ' show message with given key (no translation)
+        Dim message As String = ""
+        Dim caption As String = ""
+        Dim p As MessagingBox = New MessagingBox()
+        p.txtMessage.Text = GetMessage(key, message, caption)
+        p.Visible = False
+        p.Text = caption
+        p.Ok()
+        p.btnOk.Focus()
+        p.SetInfoIcon()
+        Return p.ShowDialog()
     End Function
 
     Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String) As DialogResult
+        ' show message and caption as is (no translation)
         Dim p As MessagingBox = New MessagingBox()
         p.txtMessage.Text = message
         p.Visible = False
@@ -27,6 +28,23 @@ Public Class Messaging
         p.btnOk.Focus()
         p.SetInfoIcon()
         Return p.ShowDialog()
+    End Function
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
+        ' show translated message and caption if present
+        Dim message As String = ""
+        Dim caption As String = ""
+        If translate Then
+            TranslateMessage(key, message, caption)
+        End If
+        Return Show(message, caption)
+    End Function
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
+        If translate Then
+            TranslateMessage(key, message, caption)
+        End If
+        Return Show(message, caption)
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
@@ -66,11 +84,13 @@ Public Class Messaging
             Case MessageBoxButtons.YesNo
                 p.YesNo()
             Case MessageBoxButtons.OKCancel
-                p.YesNo()
+                p.OkCancel()
             Case MessageBoxButtons.YesNoCancel
                 p.YesNoCancel()
-            Case Else
-                p.Yes()
+            Case MessageBoxButtons.AbortRetryIgnore
+                p.AbortRetryIgnore()
+            Case MessageBoxButtons.RetryCancel
+                p.RetryCancel()
         End Select
     End Sub
 
@@ -86,7 +106,6 @@ Public Class Messaging
     End Sub
 
     Private Shared Sub SelectIcon(p As MessagingBox, icon As MessageBoxIcon)
-
         Select Case icon
             Case MessageBoxIcon.Information
                 p.SetInfoIcon()
@@ -99,38 +118,6 @@ Public Class Messaging
         End Select
     End Sub
 
-    Public Overloads Shared Sub TranslateMessage(ByVal key As String)
-        Dim textDisplayLanguage As String = GlobalVariables.AppCurrentCultureInfo.Name
-        If NeedToTranslateText(textDisplayLanguage) Then
-            Dim storeCaptions1 As New StoreCaptions
-            Dim translatorDac As New Dac
-            Dim cmd As String
-            Dim activeForm = Form.ActiveForm
-            cmd = "SELECT COUNT(*) FROM OriginalMessages where MessageKey='" + key + "'"
-            Dim howMany As Int32 = translatorDac.ExecScalar(Of Int32)(cmd)
-            If howMany = 0 Then
-                cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + Message.Trim() + "','" + caption.Trim() + "')"
-                translatorDac.ExecCmd(cmd)
-            End If
-            cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
-            Dim items = translatorDac.ExecReader(cmd)
-            If Not (items Is Nothing OrElse items.Count() = 0) Then
-                Message = items(1)
-                caption = items(2)
-            Else
-                Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-                cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
-                items = translatorDac.ExecReader(cmd)
-                If Not (items Is Nothing OrElse items.Count() = 0) Then
-                    Message = items(1)
-                    If Not String.IsNullOrEmpty(items(2)) Then
-                        caption = items(2)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
     Public Overloads Shared Sub TranslateMessage(ByVal key As String, ByRef message As String, ByRef caption As String)
         Dim textDisplayLanguage As String = GlobalVariables.AppCurrentCultureInfo.Name
         If NeedToTranslateText(textDisplayLanguage) Then
@@ -138,12 +125,6 @@ Public Class Messaging
             Dim translatorDac As New Dac
             Dim cmd As String
             Dim activeForm = Form.ActiveForm
-            cmd = "SELECT COUNT(*) FROM OriginalMessages where MessageKey='" + key + "'"
-            Dim howMany As Int32 = translatorDac.ExecScalar(Of Int32)(cmd)
-            If howMany = 0 Then
-                cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
-                translatorDac.ExecCmd(cmd)
-            End If
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items = translatorDac.ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count() = 0) Then

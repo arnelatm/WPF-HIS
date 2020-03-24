@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Accounts", "Accounts\Accounts.vbproj", "{826EE6DC-954A-4C18-9108-EBD592FCB1E8}"
 EndProject
@@ -42,6 +42,9 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Views", "PresentationLayer\Views\Views.vbproj", "{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Forms", "PresentationLayer\Forms\Forms.vbproj", "{51DA927A-505F-49CF-9768-9E401219B91C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABBF2275-7DFF-4724-98F9-71A2FD10B471} = {ABBF2275-7DFF-4724-98F9-71A2FD10B471}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServicesLayer", "ServicesLayer\ServicesLayer.vbproj", "{4B7A1168-E9FA-4360-9607-A2C98255E4C0}"
 EndProject
@@ -72,9 +75,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MessagingLibrary", "Libraries\MessagingLibrary\MessagingLibrary.vbproj", "{538C1332-1BBB-4920-8A5D-D8AB30E72207}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxManager", "Libraries\MessageBoxManager\MessageBoxManager.csproj", "{0E9D874E-5354-465E-9EC3-F7A35C268A8A}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MessagingLibrary", "Libraries\MessagingLibrary\MessagingLibrary.vbproj", "{84437202-3E38-4F75-B8C1-4125852FC4FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,14 +169,14 @@ Global
 		{604677ED-411D-4F00-B151-F4D39BC9E670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{604677ED-411D-4F00-B151-F4D39BC9E670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{604677ED-411D-4F00-B151-F4D39BC9E670}.Release|Any CPU.Build.0 = Release|Any CPU
-		{538C1332-1BBB-4920-8A5D-D8AB30E72207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{538C1332-1BBB-4920-8A5D-D8AB30E72207}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{538C1332-1BBB-4920-8A5D-D8AB30E72207}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{538C1332-1BBB-4920-8A5D-D8AB30E72207}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,8 +200,8 @@ Global
 		{604677ED-411D-4F00-B151-F4D39BC9E670} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{5DC97E00-8C55-479E-94C2-19679791F55C} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{6FD94599-A0DF-448F-BF82-CAB5948D5F53} = {0598D101-4147-476C-98FF-8C78D96B971E}
-		{538C1332-1BBB-4920-8A5D-D8AB30E72207} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{84437202-3E38-4F75-B8C1-4125852FC4FF} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

@@ -15,9 +15,9 @@ Public Module Extensions
         Dim result As String = template
         values.ToList().ForEach(Function(x)
                                     Dim member As MemberExpression = TryCast(x.Body, MemberExpression)
-                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", Mid(member.Member.Name, 11), "}")
+                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", member.Member.Name, "}")
                                     Dim newValue As String = x.Compile().Invoke(Nothing).ToString()
-                                    result = result.Replace(oldValue, newValue)
+                                    result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
                                 End Function)
         Return result
     End Function

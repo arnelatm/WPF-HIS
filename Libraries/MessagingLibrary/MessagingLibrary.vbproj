@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{538C1332-1BBB-4920-8A5D-D8AB30E72207}</ProjectGuid>
+    <ProjectGuid>{84437202-3E38-4F75-B8C1-4125852FC4FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MessagingLibrary</RootNamespace>
     <AssemblyName>MessagingLibrary</AssemblyName>
@@ -20,6 +20,7 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>MessagingLibrary.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -29,6 +30,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>MessagingLibrary.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,6 +48,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -59,18 +62,26 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messaging.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="MessagingBox.Designer.vb">
+      <DependentUpon>MessagingBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MessagingBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +94,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MessagingBox.resx">
+      <DependentUpon>MessagingBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -102,17 +116,36 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PresentationLayer\Forms\Forms.vbproj">
-      <Project>{51DA927A-505F-49CF-9768-9E401219B91C}</Project>
-      <Name>Forms</Name>
-    </ProjectReference>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BaseControlsLibrary\BaseControlsLibrary.vbproj">
-      <Project>{58F5EC33-2974-4823-AB62-1D4E5B3EF152}</Project>
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
       <Name>BaseControlsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
-      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ErrorsAndEvents\ErrorsAndEvents.vbproj">
+      <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>
+      <Name>ErrorsAndEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Languages\Languages.vbproj">
+      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LocalizationUtilities\LocalizationUtilities.csproj">
+      <Project>{63aacd2c-a92e-4cf4-8f4d-49c774e2b1c6}</Project>
+      <Name>LocalizationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Translations\Translations.vbproj">
+      <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
+      <Name>Translations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
