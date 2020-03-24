@@ -1,16 +1,19 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Translations
 
 Public Class MessagingBox
 
     Private _newHeight As Int16
-
+    Private _textDisplayLanguage As String
     Private _close As Boolean
 
     Public Shared SelectedButtons As MessagingButtons
-
+    
+    Public Event TextDisplayLanguageChanged()
 
     Public Sub SetInfoIcon()
         Me.pctInfo.Visible = True
@@ -37,6 +40,19 @@ Public Class MessagingBox
         btnOk.Focus()
         SelectedButtons = MessagingButtons.Ok
     End Sub
+
+    Protected Property TextDisplayLanguage As String
+        Get
+            Return _textDisplayLanguage
+        End Get
+        Set(value As String)
+            If value <> _textDisplayLanguage Then
+                _textDisplayLanguage = value
+                SetCulture(_textDisplayLanguage)
+                RaiseEvent TextDisplayLanguageChanged()
+            End If
+        End Set
+    End Property
 
     Public Sub OkCancel()
         Dim spaceLength As Int16 = 0

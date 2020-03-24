@@ -6,8 +6,10 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports AATM.PresentationLayer.Forms
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Model and View classes.
@@ -289,6 +291,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 _errorList = _errorList & bizError & Environment.NewLine
             End If
         Next
+
+        Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 

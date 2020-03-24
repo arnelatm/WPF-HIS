@@ -306,7 +306,7 @@ Namespace PresentationLayer.Forms
             Dim parameter1 = 25
             Dim parameter2 = "$"
             Dim message As String()
-            message = Messaging.CreateMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
+            Messaging.CreateMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
             Messaging.Show(True, "MsgCurrentPriceDisplay", String.Format(message(0), parameter1, parameter2), message(1))
             Messaging.Show("MsgNewMessageKey", "Message Information")
             Messaging.Show(True, "MsgNewMessageKey", "Message Information", "With Caption")
