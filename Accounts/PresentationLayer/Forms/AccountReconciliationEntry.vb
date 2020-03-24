@@ -736,7 +736,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
             If Posted Then
-                Messaging.Show("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
+                Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
                 CancelEdit = True
             End If
         End Sub
