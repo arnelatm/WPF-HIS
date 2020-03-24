@@ -736,7 +736,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
             If Posted Then
-                MyMessage.Show("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
+                Messaging.Show("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
                 CancelEdit = True
             End If
         End Sub
@@ -745,7 +745,7 @@ Namespace PresentationLayer.Forms
             If dtpReconciliationDate.DateChanged() Then
                 If dtpReconciliationDate.DateChanged() Then
                     If AccountReconciliationItems.Any() Then
-                        MyMessage.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
+                        Messaging.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
                         dtpReconciliationDate.Undo()
                     End If
                 End If

@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Linq.Expressions
 Imports System.Net.Mail
 Imports System.Reflection
 Imports System.Text
@@ -8,12 +9,88 @@ Imports System.Windows.Forms
 
 Public Module GlobalFunctions
 
-    Public Function NeedToTranslateText(textDisplayLanguage)
-        If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
-            Return False
-        Else
-            Return True
+    Public Function CalendarDateToShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
+        If dateValue Is Nothing Then
+            Return Nothing
         End If
+        Dim givenDate As DateTime = dateValue
+        Dim shortDateString As String
+        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = targetCulture
+        Try
+            shortDateString = givenDate.ToShortDateString()
+        Catch ex As Exception
+            shortDateString = Nothing
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
+        Return shortDateString
+    End Function
+
+    Function CultureSupportHijri(targetCulture As CultureInfo)
+        Dim returnValue = False
+        For Each optionalCalendar In targetCulture.OptionalCalendars
+            If TypeOf optionalCalendar Is HijriCalendar Then
+                returnValue = True
+            End If
+        Next
+        Return returnValue
+    End Function
+
+    Function CultureSupportUmAlQura(targetCulture As CultureInfo)
+        Dim returnValue = False
+        For Each optionalCalendar In targetCulture.OptionalCalendars
+            If TypeOf optionalCalendar Is UmAlQuraCalendar Then
+                returnValue = True
+                Exit For
+            End If
+        Next
+        Return returnValue
+    End Function
+
+    Public Function DateStringSpecificCultureToDate(dateString As String, targetCultureInfo As CultureInfo) As Date?
+        Dim retDate As Date?
+        Dim curCulture = CultureInfo.CurrentCulture
+        Try
+            CultureInfo.CurrentCulture = targetCultureInfo
+            retDate = Convert.ToDateTime(dateString)
+        Catch ex As Exception
+            retDate = Nothing
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
+        Return retDate
+    End Function
+
+    Public Function DateToSpecificCultureShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
+        If dateValue Is Nothing Then
+            Return Nothing
+        End If
+        Dim givenDate As DateTime = dateValue
+        Dim shortDateString As String
+        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
+        If targetCulture IsNot Nothing Then
+            CultureInfo.CurrentCulture = targetCulture
+        End If
+        Try
+            shortDateString = givenDate.ToShortDateString()
+        Catch ex As Exception
+            shortDateString = Nothing
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
+        Return shortDateString
+    End Function
+
+    Public Function DtoS(ByVal dateValue As Date) As String
+        Dim retValue As String
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        retValue = Year(dateValue).ToString() &
+                Strings.Right("00" & Month(dateValue).ToString().TrimEnd().TrimStart(), 2) &
+                Strings.Right("00" & DateAndTime.Day(dateValue).ToString().TrimStart().TrimEnd(), 2)
+        CultureInfo.CurrentCulture = curCulture
+        Return retValue
     End Function
 
     Public Function FindControlRecursive(list As List(Of Control), parent As Control) As List(Of Control)
@@ -23,6 +100,75 @@ Public Module GlobalFunctions
             FindControlRecursive(list, child)
         Next
         Return list
+    End Function
+
+    Public Function FormatMoney(ByVal amount As Decimal) As String
+        Return String.Format(CultureInfo.CurrentCulture, "{0:N2}", amount)
+    End Function
+
+    Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
+        Dim value As Date?
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = DateSerial(year, month, day)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    Function GetCalendarName(cal As Calendar) As String
+        Return cal.ToString().Replace("System.Globalization.", "")
+    End Function
+
+    Public Function GetDescription(ByVal enumValue As Object, ByVal defDesc As String) As String
+        If enumValue Is Nothing Then
+            Return Nothing
+        End If
+        Dim fi As FieldInfo = enumValue.[GetType]().GetField(enumValue.ToString())
+
+        If fi IsNot Nothing Then
+            Dim attrs As Object() = fi.GetCustomAttributes(GetType(DescriptionAttribute), True)
+            If attrs IsNot Nothing AndAlso attrs.Length > 0 Then Return (CType(attrs(0), DescriptionAttribute)).Description
+        End If
+
+        Return defDesc
+    End Function
+
+    Public Function GetEnumCode(ByVal enumValue As Object) As String
+        If enumValue Is Nothing Then
+            Return Nothing
+        End If
+        Dim fi As FieldInfo = enumValue.[GetType]().GetField(enumValue.ToString())
+
+        If fi IsNot Nothing Then
+            Dim attrs As Object() = fi.GetCustomAttributes(True)
+            If attrs IsNot Nothing AndAlso attrs.Length > 0 Then Return (CType(attrs(0), EnumCode)).EnumCode
+        End If
+        Return Nothing
+    End Function
+
+    Function GetMonthNameInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
+                                   ByRef currentCulture As CultureInfo)
+        If Mid(currentCulture.Name, 1, 2).ToLower() = Mid(targetCulture.Name, 1, 2).ToLower() Then
+            Return targetCulture.DateTimeFormat.MonthGenitiveNames(monthNumber - 1)
+        Else
+            If _
+                Mid(currentCulture.Name, 1, 2).ToLower() = "en" And
+                TypeOf targetCulture.DateTimeFormat.Calendar Is HijriCalendar Or
+                TypeOf targetCulture.DateTimeFormat.Calendar Is UmAlQuraCalendar Then
+                Return HijriMonthInEnglish(monthNumber)
+            Else
+                Return targetCulture.DateTimeFormat.MonthGenitiveNames(monthNumber - 1)
+            End If
+        End If
+    End Function
+
+    Function GetMonthNamesInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
+                                    ByRef currentCulture As CultureInfo)
+        Return targetCulture.DateTimeFormat.MonthGenitiveNames()
+    End Function
+
+    Public Function GetPropertyName(Of T)(expression As Expression(Of Func(Of T))) As String
+        Return DirectCast(expression.Body, MemberExpression).Member.Name
     End Function
 
     Public Function GetPropertyValue(obj As Object, propName As String) As Object
@@ -42,24 +188,6 @@ Public Module GlobalFunctions
         Return propValue
     End Function
 
-    'Public Function GetPropertyValue(ByRef obj As Object, ByVal propName As String) As Object
-    '    Dim objType As Type = obj.GetType()
-    '    Dim pInfo As PropertyInfo = objType.GetProperty("MainTableName")
-    '    Dim pInfos As PropertyInfo() = objType.GetProperties()
-    '    Dim propValue As Object = pInfo.GetValue(obj, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
-    '    Return propValue
-    'End Function
-
-    Public Function PropertyExists(queriedObject As Object, propertyName As String) As Boolean
-        Dim objType As Type = queriedObject.GetType()
-        If _
-            objType.GetProperty(propertyName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase) Is
-            Nothing Then
-            Return False
-        End If
-        Return True
-    End Function
-
     Public Function GetTranslatedField(propertyName As String) As String
         If GlobalVariables.RightToLeftLayout Then
             Return propertyName + "Ara"
@@ -72,6 +200,174 @@ Public Module GlobalFunctions
         'end if
         'Return propertyName
     End Function
+
+    Public Function GetVatPercentage()
+        Return 0.05D
+    End Function
+
+    Public Function GregorianDay(ByVal pDate As Date?) As Int16
+        Dim value As Int16
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = Microsoft.VisualBasic.DateAndTime.Day(pDate)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    Public Function GregorianMonth(ByVal pDate As Date?) As Int16
+        Dim value As Int16
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = Month(pDate)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    Public Function GregorianMonthName(ByVal pMonthNumber As Int16) As String
+        Dim value As Int16
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    Public Function GregorianYear(ByVal pDate As Date?) As Int16
+        Dim value As Int16
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = Year(pDate)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    Public Function HijriMonthInEnglish(iMonth As Int16)
+        Dim strMonth As String
+        strMonth = ""
+        Select Case iMonth
+            Case 1
+                strMonth = "Muḥarram"
+            Case 2
+                strMonth = "Ṣafar"
+            Case 3
+                strMonth = "Rabī' I"
+            Case 4
+                strMonth = "Rabī' II"
+            Case 5
+                strMonth = "Jumādā I"
+            Case 6
+                strMonth = "Jumādā II"
+            Case 7
+                strMonth = "Rajab"
+            Case 8
+                strMonth = "Sha'aban"
+            Case 9
+                strMonth = "Ramadan"
+            Case 10
+                strMonth = "Shawwal"
+            Case 11
+                strMonth = "Dhu al-Qi'dah"
+            Case 12
+                strMonth = "Dhu al-Hijjah"
+            Case Else
+                strMonth = "Invalid Month"
+        End Select
+        Return strMonth
+    End Function
+
+    Public Function IsCultureOk(ByVal cultureCode As String) As Boolean
+        Dim cultures As CultureInfo() = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
+        Dim culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(cultureCode, StringComparison.OrdinalIgnoreCase))
+        If culture Is Nothing Then
+            Return False
+            'culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(DefaultCultureCode, StringComparison.OrdinalIgnoreCase))
+            'If culture Is Nothing Then culture = CultureInfo.CurrentCulture
+        End If
+        Return True
+    End Function
+
+    Public Function IsDateValidForTargetCulture(strDate As String, ByRef targetCulture As CultureInfo) As Boolean
+        ' checks if the strDate is a valid date in the
+        ' targetculture format
+        Dim curCulture = CultureInfo.CurrentCulture
+        Dim retVal As Boolean
+        CultureInfo.CurrentCulture = targetCulture
+        If IsDate(strDate) Then
+            retVal = True
+        Else
+            retVal = False
+        End If
+        CultureInfo.CurrentCulture = curCulture
+        Return retVal
+    End Function
+
+    Public Function IsEmpty(value) As Boolean
+        If value Is Nothing Then
+            Return True
+        End If
+        If TypeOf value Is String OrElse TypeOf value Is Char Then
+            If value = "" Or value = vbNullChar Or value = vbNullString Then
+                Return True
+            End If
+        ElseIf IsNumeric(value) Then
+            If value = 0 Then
+                Return True
+            End If
+            'ElseIf TypeOf value Is IntegerType OrElse TypeOf value Is SingleType OrElse value.DoubleType OrElse value.DecimalType OrElse
+            '        value.LongType OrElse value.ShortType OrElse value.UIntegerType OrElse value.ULongType OrElse value.UShortType) Then
+            '    If value = 0 Then
+            '        Return True
+            '    End If
+        ElseIf TypeOf value Is Boolean Then
+            If Not value Then
+                Return True
+            End If
+        ElseIf TypeOf value Is Date Then
+            If value = Date.MinValue Then
+                Return True
+            End If
+        End If
+        Return False
+    End Function
+
+    Public Function IsRightToLeft(ByVal pCultureInfoString As String) As Boolean
+        Dim isCultureRightToLeft As Boolean
+        Dim curCulture = CultureInfo.CurrentCulture
+        'If pCultureInfoString = GlobalVariables.OriginalAppTextLanguage THEN
+        '    pCultureInfoString = GlobalVariables.OriginalAppLanguage
+        'End If
+        Try
+            CultureInfo.CurrentCulture = New CultureInfo(pCultureInfoString, False)
+            isCultureRightToLeft = Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+            CultureInfo.CurrentCulture = curCulture
+            If isCultureRightToLeft Then
+                GlobalVariables.RightToLeftLayout = True
+            Else
+                GlobalVariables.RightToLeftLayout = False
+            End If
+        Catch ex As Exception
+            ' missing culture info string? therefore assume that it is not right to left
+            isCultureRightToLeft = False
+            GlobalVariables.RightToLeftLayout = False
+        End Try
+        Return isCultureRightToLeft
+    End Function
+
+    Public Function NeedToTranslateText(textDisplayLanguage)
+        If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
+    'Public Function GetPropertyValue(ByRef obj As Object, ByVal propName As String) As Object
+    '    Dim objType As Type = obj.GetType()
+    '    Dim pInfo As PropertyInfo = objType.GetProperty("MainTableName")
+    '    Dim pInfos As PropertyInfo() = objType.GetProperties()
+    '    Dim propValue As Object = pInfo.GetValue(obj, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+    '    Return propValue
+    'End Function
 
     ''' <summary>
     '''     handles null or blank values for string type
@@ -106,6 +402,14 @@ Public Module GlobalFunctions
         End If
 
         Return dblReturnDouble
+    End Function
+
+    Public Function NumParser(Of T As Structure)(ByRef numString As String) As T
+        Try
+            Return Parser(Of T).Parser(numString)
+        Catch ex As Exception
+            Return Parser(Of T).Parser(0)
+        End Try
     End Function
 
     Public Function ObjectsCompare(ByVal fromObject As Object, ByVal toObject As Object)
@@ -178,6 +482,27 @@ Public Module GlobalFunctions
         Return objectsCompareResult
     End Function
 
+    Public Function PadWithZeroSingleDigitDate(shortDate As String) As String
+        ' appends zero to single digit no. say 1/1/200 will be changed to 01/01/2000
+        Dim newShortDate As String
+        If shortDate Is Nothing OrElse shortDate = "" Then
+            newShortDate = Nothing
+        Else
+            newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
+        End If
+        Return newShortDate
+    End Function
+
+    Public Function PropertyExists(queriedObject As Object, propertyName As String) As Boolean
+        Dim objType As Type = queriedObject.GetType()
+        If _
+            objType.GetProperty(propertyName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase) Is
+            Nothing Then
+            Return False
+        End If
+        Return True
+    End Function
+
     'Public Function GetAppLanguage()
     '    Dim rWriter As IResourceWriter
     '    Dim DefaultLanguage As String = ""
@@ -225,6 +550,51 @@ Public Module GlobalFunctions
     '    End If
     'End Function
 
+    'Public Function DateICtoCurCulDateString(ByVal DateValue As Date?) As String
+    '    Dim retDateString As String
+    '    Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
+    '    Try
+    '        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture
+    '        retDateString = DateValue.ToString()
+    '    Catch ex As Exception
+    '        retDateString = Nothing
+    '    Finally
+    '        CultureInfo.CurrentCulture = curCulture
+    '    End Try
+    '    Return retDateString
+    'End Function
+    'Public Function PadWithZeroSingleDigitDate(ByVal shortDate As String) As String
+    '    ' appends zero to single digit no. say 1/1/200 will be changed to 01/01/2000
+    '    Dim newShortDate As String
+    '    If shortDate Is Nothing Or shortDate = "" Then
+    '        newShortDate = Nothing
+    '    Else
+    '        newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
+    '    End If
+    '    Return newShortDate
+    'End Function
+    Public Function SendMail(strFrom As String, strTo As String, strSubject As String, strMsg As String) _
+        As Boolean
+        Try
+            ' Create the mail message
+            Dim objMailMsg = New MailMessage(strFrom, strTo)
+
+            objMailMsg.BodyEncoding = Encoding.UTF8
+            objMailMsg.Subject = strSubject
+            objMailMsg.Body = strMsg
+            objMailMsg.Priority = MailPriority.High
+            objMailMsg.IsBodyHtml = True
+
+            'prepare to send mail via SMTP transport
+            Dim objSMTPClient = New SmtpClient()
+            objSMTPClient.DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis
+            objSMTPClient.Send(objMailMsg)
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     'Public Function DateStringCurrentCultureToDate(ByVal DateString As String) As Date
     '    If DateString Is Nothing Then
     '        Return Nothing
@@ -238,18 +608,6 @@ Public Module GlobalFunctions
     '        End Try
     '    End If
     'End Function
-
-    Public Function IsCultureOk(ByVal cultureCode As String) As Boolean
-        Dim cultures As CultureInfo() = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
-        Dim culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(cultureCode, StringComparison.OrdinalIgnoreCase))
-        If culture Is Nothing Then
-            Return False
-            'culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(DefaultCultureCode, StringComparison.OrdinalIgnoreCase))
-            'If culture Is Nothing Then culture = CultureInfo.CurrentCulture
-        End If
-        Return True
-    End Function
-
     Public Sub SetCulture(ByVal cultureCode As String)
         If IsCultureOk(cultureCode) Then
             CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
@@ -268,141 +626,6 @@ Public Module GlobalFunctions
         End If
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
-
-    Public Function IsRightToLeft(ByVal pCultureInfoString As String) As Boolean
-        Dim isCultureRightToLeft As Boolean
-        Dim curCulture = CultureInfo.CurrentCulture
-        'If pCultureInfoString = GlobalVariables.OriginalAppTextLanguage THEN
-        '    pCultureInfoString = GlobalVariables.OriginalAppLanguage
-        'End If
-        Try
-            CultureInfo.CurrentCulture = New CultureInfo(pCultureInfoString, False)
-            isCultureRightToLeft = Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-            CultureInfo.CurrentCulture = curCulture
-            If isCultureRightToLeft Then
-                GlobalVariables.RightToLeftLayout = True
-            Else
-                GlobalVariables.RightToLeftLayout = False
-            End If
-        Catch ex As Exception
-            ' missing culture info string? therefore assume that it is not right to left
-            isCultureRightToLeft = False
-            GlobalVariables.RightToLeftLayout = False
-        End Try
-        Return isCultureRightToLeft
-    End Function
-
-    Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
-        Dim value As Date?
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(year, month, day)
-        CultureInfo.CurrentCulture = curCulture
-        Return value
-    End Function
-
-    Public Function GregorianYear(ByVal pDate As Date?) As Int16
-        Dim value As Int16
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Year(pDate)
-        CultureInfo.CurrentCulture = curCulture
-        Return value
-    End Function
-
-    Public Function GregorianMonth(ByVal pDate As Date?) As Int16
-        Dim value As Int16
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Month(pDate)
-        CultureInfo.CurrentCulture = curCulture
-        Return value
-    End Function
-
-    Public Function GregorianDay(ByVal pDate As Date?) As Int16
-        Dim value As Int16
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Microsoft.VisualBasic.DateAndTime.Day(pDate)
-        CultureInfo.CurrentCulture = curCulture
-        Return value
-    End Function
-
-    Public Function GregorianMonthName(ByVal pMonthNumber As Int16) As String
-        Dim value As Int16
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
-        CultureInfo.CurrentCulture = curCulture
-        Return value
-    End Function
-
-    Public Function CalendarDateToShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
-        If dateValue Is Nothing Then
-            Return Nothing
-        End If
-        Dim givenDate As DateTime = dateValue
-        Dim shortDateString As String
-        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = targetCulture
-        Try
-            shortDateString = givenDate.ToShortDateString()
-        Catch ex As Exception
-            shortDateString = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
-        End Try
-        Return shortDateString
-    End Function
-
-    Public Function DateToSpecificCultureShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
-        If dateValue Is Nothing Then
-            Return Nothing
-        End If
-        Dim givenDate As DateTime = dateValue
-        Dim shortDateString As String
-        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-        If targetCulture IsNot Nothing Then
-            CultureInfo.CurrentCulture = targetCulture
-        End If
-        Try
-            shortDateString = givenDate.ToShortDateString()
-        Catch ex As Exception
-            shortDateString = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
-        End Try
-        Return shortDateString
-    End Function
-
-    Public Function DateStringSpecificCultureToDate(dateString As String, targetCultureInfo As CultureInfo) As Date?
-        Dim retDate As Date?
-        Dim curCulture = CultureInfo.CurrentCulture
-        Try
-            CultureInfo.CurrentCulture = targetCultureInfo
-            retDate = Convert.ToDateTime(dateString)
-        Catch ex As Exception
-            retDate = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
-        End Try
-        Return retDate
-    End Function
-
-    Public Function IsDateValidForTargetCulture(strDate As String, ByRef targetCulture As CultureInfo) As Boolean
-        ' checks if the strDate is a valid date in the
-        ' targetculture format
-        Dim curCulture = CultureInfo.CurrentCulture
-        Dim retVal As Boolean
-        CultureInfo.CurrentCulture = targetCulture
-        If IsDate(strDate) Then
-            retVal = True
-        Else
-            retVal = False
-        End If
-        CultureInfo.CurrentCulture = curCulture
-        Return retVal
-    End Function
 
     'Public Function CalendarDateStringSpecificCultureToDate(ByVal DateString As String, ByVal TargetCultureInfo As CultureInfo) As Date?
     '    Dim retDate As Date?
@@ -434,172 +657,6 @@ Public Module GlobalFunctions
     '    End Try
     '    Return retDate
     'End Function
-
-    'Public Function DateICtoCurCulDateString(ByVal DateValue As Date?) As String
-    '    Dim retDateString As String
-    '    Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-    '    Try
-    '        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture
-    '        retDateString = DateValue.ToString()
-    '    Catch ex As Exception
-    '        retDateString = Nothing
-    '    Finally
-    '        CultureInfo.CurrentCulture = curCulture
-    '    End Try
-    '    Return retDateString
-    'End Function
-
-    Public Function PadWithZeroSingleDigitDate(shortDate As String) As String
-        ' appends zero to single digit no. say 1/1/200 will be changed to 01/01/2000
-        Dim newShortDate As String
-        If shortDate Is Nothing OrElse shortDate = "" Then
-            newShortDate = Nothing
-        Else
-            newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
-        End If
-        Return newShortDate
-    End Function
-
-    'Public Function PadWithZeroSingleDigitDate(ByVal shortDate As String) As String
-    '    ' appends zero to single digit no. say 1/1/200 will be changed to 01/01/2000
-    '    Dim newShortDate As String
-    '    If shortDate Is Nothing Or shortDate = "" Then
-    '        newShortDate = Nothing
-    '    Else
-    '        newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
-    '    End If
-    '    Return newShortDate
-    'End Function
-
-    Public Function HijriMonthInEnglish(iMonth As Int16)
-        Dim strMonth As String
-        strMonth = ""
-        Select Case iMonth
-            Case 1
-                strMonth = "Muḥarram"
-            Case 2
-                strMonth = "Ṣafar"
-            Case 3
-                strMonth = "Rabī' I"
-            Case 4
-                strMonth = "Rabī' II"
-            Case 5
-                strMonth = "Jumādā I"
-            Case 6
-                strMonth = "Jumādā II"
-            Case 7
-                strMonth = "Rajab"
-            Case 8
-                strMonth = "Sha'aban"
-            Case 9
-                strMonth = "Ramadan"
-            Case 10
-                strMonth = "Shawwal"
-            Case 11
-                strMonth = "Dhu al-Qi'dah"
-            Case 12
-                strMonth = "Dhu al-Hijjah"
-            Case Else
-                strMonth = "Invalid Month"
-        End Select
-        Return strMonth
-    End Function
-
-    Function CultureSupportUmAlQura(targetCulture As CultureInfo)
-        Dim returnValue = False
-        For Each optionalCalendar In targetCulture.OptionalCalendars
-            If TypeOf optionalCalendar Is UmAlQuraCalendar Then
-                returnValue = True
-                Exit For
-            End If
-        Next
-        Return returnValue
-    End Function
-
-    Function CultureSupportHijri(targetCulture As CultureInfo)
-        Dim returnValue = False
-        For Each optionalCalendar In targetCulture.OptionalCalendars
-            If TypeOf optionalCalendar Is HijriCalendar Then
-                returnValue = True
-            End If
-        Next
-        Return returnValue
-    End Function
-
-    Function GetMonthNameInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
-                                   ByRef currentCulture As CultureInfo)
-        If Mid(currentCulture.Name, 1, 2).ToLower() = Mid(targetCulture.Name, 1, 2).ToLower() Then
-            Return targetCulture.DateTimeFormat.MonthGenitiveNames(monthNumber - 1)
-        Else
-            If _
-                Mid(currentCulture.Name, 1, 2).ToLower() = "en" And
-                TypeOf targetCulture.DateTimeFormat.Calendar Is HijriCalendar Or
-                TypeOf targetCulture.DateTimeFormat.Calendar Is UmAlQuraCalendar Then
-                Return HijriMonthInEnglish(monthNumber)
-            Else
-                Return targetCulture.DateTimeFormat.MonthGenitiveNames(monthNumber - 1)
-            End If
-        End If
-    End Function
-
-    Function GetMonthNamesInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
-                                    ByRef currentCulture As CultureInfo)
-        Return targetCulture.DateTimeFormat.MonthGenitiveNames()
-    End Function
-
-    Function GetCalendarName(cal As Calendar) As String
-        Return cal.ToString().Replace("System.Globalization.", "")
-    End Function
-
-    Public Function SendMail(strFrom As String, strTo As String, strSubject As String, strMsg As String) _
-        As Boolean
-        Try
-            ' Create the mail message
-            Dim objMailMsg = New MailMessage(strFrom, strTo)
-
-            objMailMsg.BodyEncoding = Encoding.UTF8
-            objMailMsg.Subject = strSubject
-            objMailMsg.Body = strMsg
-            objMailMsg.Priority = MailPriority.High
-            objMailMsg.IsBodyHtml = True
-
-            'prepare to send mail via SMTP transport
-            Dim objSMTPClient = New SmtpClient()
-            objSMTPClient.DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis
-            objSMTPClient.Send(objMailMsg)
-            Return True
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Function GetDescription(ByVal enumValue As Object, ByVal defDesc As String) As String
-        If enumValue Is Nothing Then
-            Return Nothing
-        End If
-        Dim fi As FieldInfo = enumValue.[GetType]().GetField(enumValue.ToString())
-
-        If fi IsNot Nothing Then
-            Dim attrs As Object() = fi.GetCustomAttributes(GetType(DescriptionAttribute), True)
-            If attrs IsNot Nothing AndAlso attrs.Length > 0 Then Return (CType(attrs(0), DescriptionAttribute)).Description
-        End If
-
-        Return defDesc
-    End Function
-
-    Public Function GetEnumCode(ByVal enumValue As Object) As String
-        If enumValue Is Nothing Then
-            Return Nothing
-        End If
-        Dim fi As FieldInfo = enumValue.[GetType]().GetField(enumValue.ToString())
-
-        If fi IsNot Nothing Then
-            Dim attrs As Object() = fi.GetCustomAttributes(True)
-            If attrs IsNot Nothing AndAlso attrs.Length > 0 Then Return (CType(attrs(0), EnumCode)).EnumCode
-        End If
-        Return Nothing
-    End Function
-
     'Public Function GetEnumCode(ByVal enumValue As Type) As EnumCode
     '    If enumValue Is Nothing Then
     '        Return Nothing
@@ -648,61 +705,4 @@ Public Module GlobalFunctions
 
     '    Return defDesc
     'End Function
-
-    Public Function NumParser(Of T As Structure)(ByRef numString As String) As T
-        Try
-            Return Parser(Of T).Parser(numString)
-        Catch ex As Exception
-            Return Parser(Of T).Parser(0)
-        End Try
-    End Function
-
-    Public Function FormatMoney(ByVal amount As Decimal) As String
-        Return String.Format(CultureInfo.CurrentCulture, "{0:N2}", amount)
-    End Function
-
-    Public Function IsEmpty(value) As Boolean
-        If value Is Nothing Then
-            Return True
-        End If
-        If TypeOf value Is String OrElse TypeOf value Is Char Then
-            If value = "" Or value = vbNullChar Or value = vbNullString Then
-                Return True
-            End If
-        ElseIf IsNumeric(value) Then
-            If value = 0 Then
-                Return True
-            End If
-            'ElseIf TypeOf value Is IntegerType OrElse TypeOf value Is SingleType OrElse value.DoubleType OrElse value.DecimalType OrElse
-            '        value.LongType OrElse value.ShortType OrElse value.UIntegerType OrElse value.ULongType OrElse value.UShortType) Then
-            '    If value = 0 Then
-            '        Return True
-            '    End If
-        ElseIf TypeOf value Is Boolean Then
-            If Not value Then
-                Return True
-            End If
-        ElseIf TypeOf value Is Date Then
-            If value = Date.MinValue Then
-                Return True
-            End If
-        End If
-        Return False
-    End Function
-
-    Public Function GetVatPercentage()
-        Return 0.05D
-    End Function
-
-    Public Function DtoS(ByVal dateValue As Date) As String
-        Dim retValue As String
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        retValue = Year(dateValue).ToString() &
-                Strings.Right("00" & Month(dateValue).ToString().TrimEnd().TrimStart(), 2) &
-                Strings.Right("00" & DateAndTime.Day(dateValue).ToString().TrimStart().TrimEnd(), 2)
-        CultureInfo.CurrentCulture = curCulture
-        Return retValue
-    End Function
-
 End Module

@@ -80,7 +80,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
-                MyMessage.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
+                Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
                 CancelSave = True
                 Exit Sub
             End If

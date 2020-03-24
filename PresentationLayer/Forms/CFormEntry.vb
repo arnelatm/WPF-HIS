@@ -552,7 +552,7 @@ Public Class CFormEntry
             If Not AddMode Then
                 BtnUndo.Enabled = False
                 BtnSave.Enabled = False
-                MyMessage.Show("MsgNoRecordsFound", "No records found for this table!",
+                Messaging.Show("MsgNoRecordsFound", "No records found for this table!",
                                 "Empty Table",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information)
@@ -756,7 +756,7 @@ Public Class CFormEntry
         Dim continueSave As Boolean = True
         If Not AddMode Then
             If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                MyMessage.Show("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!",
+                Messaging.Show("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!",
                                MessageBoxButtons.OK, MessageBoxIcon.Information)
                 continueSave = False
             Else
