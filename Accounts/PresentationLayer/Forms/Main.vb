@@ -8,6 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
+Imports MessagingLibrary
 
 Namespace PresentationLayer.Forms
 

@@ -129,12 +129,6 @@
     <Compile Include="CModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessagingBox.Designer.vb">
-      <DependentUpon>MessagingBox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MessagingBox.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="CrReportViewer.Designer.vb">
       <DependentUpon>CrReportViewer.vb</DependentUpon>
@@ -155,7 +149,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MappingProfile.vb" />
-    <Compile Include="Messaging.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -238,9 +231,6 @@
     <EmbeddedResource Include="MessagesTableManager.resx">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessagingBox.resx">
-      <DependentUpon>MessagingBox.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SecurityGroupEntryTv.resx">
       <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
@@ -310,6 +300,10 @@
     <ProjectReference Include="..\..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
       <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
       <Name>LocalizationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
+      <Name>MessagingLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PresentationLayer\Presenters\Presenters.vbproj">
       <Project>{021A8A1A-B69A-4254-9081-12357F20C01B}</Project>
