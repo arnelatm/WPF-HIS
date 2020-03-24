@@ -135,6 +135,10 @@
       <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
       <Name>Languages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
       <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
       <Name>ServicesLayer</Name>

@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
+Imports MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 

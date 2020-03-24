@@ -3,6 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
+Imports MessagingLibrary
 
 Public Class LoginEntry
     Implements ILoginView

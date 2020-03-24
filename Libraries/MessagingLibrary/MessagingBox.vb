@@ -12,7 +12,7 @@ Public Class MessagingBox
     Private _close As Boolean
 
     Public Shared SelectedButtons As MessagingButtons
-    
+
     Public Event TextDisplayLanguageChanged()
 
     Public Sub SetInfoIcon()
@@ -69,7 +69,6 @@ Public Class MessagingBox
         btnCancel.Left = btnCancel.Right + spaceLength
         SelectedButtons = MessagingButtons.OkCancel
     End Sub
-
 
     Public Sub AbortRetryIgnore()
         Dim spaceLength As Int16 = 0
@@ -169,7 +168,6 @@ Public Class MessagingBox
         SelectedButtons = MessagingButtons.CustomTwoButtons
     End Sub
 
-
     Public Sub CustomThreeButtons(caption1 As String, caption2 As String, caption3 As String)
         Dim spaceLength As Int16 = 0
         btnOk.Visible = True
@@ -212,7 +210,6 @@ Public Class MessagingBox
         btnYes.Left = btnCancel.Right + spaceLength
         SelectedButtons = MessagingButtons.CustomFourButtons
     End Sub
-
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         If SelectedButtons = MessagingButtons.Ok Or SelectedButtons = MessagingButtons.OkCancel Then
@@ -273,10 +270,24 @@ Public Class MessagingBox
         Hide()
         AutoSize = False
         Me.Height = _newHeight
+        CenterForm(Me)
         Refresh()
         Show()
     End Sub
 
+    Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
+        '' Note: call this from frm's Load event!
+        Dim r As Rectangle
+        If parent IsNot Nothing Then
+            r = parent.RectangleToScreen(parent.ClientRectangle)
+        Else
+            r = Screen.FromPoint(frm.Location).WorkingArea
+        End If
+
+        Dim x = r.Left + (r.Width - frm.Width) \ 2
+        Dim y = r.Top + (r.Height - frm.Height) \ 2
+        frm.Location = New Point(x, y)
+    End Sub
 
     Public Function CreateMessage(key, message)
         StoreCaptions1.InsertMessage(key, message)
@@ -288,11 +299,11 @@ Public Class MessagingBox
         Dim cmd As String
         If NeedToTranslateText(TextDisplayLanguage) Then
             cmd = "SELECT Translated FROM TranslatedMessages_View where CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
-            translatedText = TranslatorDAC.ExecScalar(Of String)(cmd)
+            translatedText = TranslatorDac.ExecScalar(Of String)(cmd)
             If translatedText Is Nothing Then
                 Dim languageBaseCode = Strings.Left(TextDisplayLanguage, TextDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                 cmd = "SELECT Translated from TranslatedMessages_View where RTrim(MessageKey) = '" + RTrim(key) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
-                translatedText = TranslatorDAC.ExecScalar(Of String)(cmd)
+                translatedText = TranslatorDac.ExecScalar(Of String)(cmd)
                 If translatedText IsNot Nothing Then
                     translatedText = message
                 End If

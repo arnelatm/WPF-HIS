@@ -333,6 +333,10 @@
       <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
       <Name>LocalizationUtilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
       <Project>{51DA927A-505F-49CF-9768-9E401219B91C}</Project>
       <Name>Forms</Name>

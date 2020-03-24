@@ -8,6 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Translations
 Imports AATM.PresentationLayer.Forms
 Imports CrystalDecisions.CrystalReports.Engine
+Imports MessagingLibrary
 
 Namespace PresentationLayer.Forms
 

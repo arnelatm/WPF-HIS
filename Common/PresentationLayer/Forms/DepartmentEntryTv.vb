@@ -3,6 +3,7 @@ Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
+Imports MessagingLibrary
 
 Namespace PresentationLayer.Forms
 

@@ -8,6 +8,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
+Imports MessagingLibrary
 
 Public Class CFormEntry
     Inherits BfMain

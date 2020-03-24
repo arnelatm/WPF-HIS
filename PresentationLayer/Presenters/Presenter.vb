@@ -10,6 +10,7 @@ Imports AATM.Libraries.Languages
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Forms
+Imports MessagingLibrary
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Model and View classes.
@@ -293,7 +294,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Next
 
         Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
     'Public Function GetBizObjectErrors() As List(Of String)
