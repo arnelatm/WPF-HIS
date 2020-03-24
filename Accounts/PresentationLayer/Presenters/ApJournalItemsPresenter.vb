@@ -35,9 +35,10 @@ Namespace PresentationLayer.Presenters
                     Exit For
                 ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                     Dim lineNumber As String = item.Sequence.ToString()
-                    Dim message = MyMessage.GetMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry!")
+                    Dim caption = "Invalid Entry!"
+                    Dim message = Messaging.GetMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry")
                     message = message.Interpolate(Function(x) lineNumber)
-                    MyMessage.Show("MsgCashAccountsNotAllowed", message)
+                    Messaging.Show(message, caption)
                     retVal = False
                 Else
                     cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")

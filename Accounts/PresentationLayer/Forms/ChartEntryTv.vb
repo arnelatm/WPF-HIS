@@ -192,7 +192,7 @@ Namespace PresentationLayer.Forms
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If EditMode And ParentIdNo = IDNo Then
                 MessageBox.Show(Languages.Messages.SorryAMemberCannotBeAParentToItself)
-                'AATM.PresentationLayer.Forms.MyMessage.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
+                'AATM.PresentationLayer.Forms.Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
                 CancelSave = True
                 Exit Sub
             End If

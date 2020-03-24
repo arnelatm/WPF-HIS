@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
 
@@ -310,12 +311,11 @@ Namespace PresentationLayer.Forms
 
             End If
             If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
-
-                If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
-                                   AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
-                                   MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                If Messaging.Show(True, "AskEmptyJournalSave", "Journal Entry is Empty, do you still want to save this entry?", "Empty Journal", ) Then
+                    'AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
+                    'MessageBoxButtons.YesNo,
+                    'MessageBoxIcon.Question,
+                    'MessageBoxDefaultButton.Button2) = DialogResult.No Then
                     CancelSave = True
                 End If
             End If
@@ -703,7 +703,9 @@ Namespace PresentationLayer.Forms
         Private Function PaymentOrDiscountMade()
             Dim retVal As Boolean = False
             If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-                MessageBox.Show("Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.")
+                Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed",
+                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.",
+                               "Modification Error")
                 retVal = True
             End If
             Return retVal
@@ -829,13 +831,13 @@ Namespace PresentationLayer.Forms
             ' Check if the starting balance row is included in the selected rows
             If DataGridViewJournalItems.SelectedRows.Contains(apJournalRow) Then
                 ' Do not allow the user to delete the first row.
-                MessageBox.Show("Deletion of the first row Is Not allowed!")
+                Messaging.Show("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             ElseIf DataGridViewJournalItems.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or
                    DataGridViewJournalItems.CurrentRow.Cells("dgvDiscountTaken").Value <> 0 Then
                 ' Do not allow the user to delete the first row.
-                MessageBox.Show($"You can't delete this row because this entry has an existing payment and/or discount!")
+                Messaging.Show("MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             End If

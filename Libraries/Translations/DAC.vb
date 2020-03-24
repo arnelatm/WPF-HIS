@@ -449,9 +449,9 @@ Public Class Dac
         ''        Return {translatedMessage, translatedCaption}
     End Sub
 
-    Function GetMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As String
+    Function GetMessage(ByVal key As String, ByVal message As String, ByRef caption As String) As String
         Dim translatedMessage As String = message
-        Dim translatedCaption As String = caption
+        'Dim translatedCaption As String = caption
         Dim cmd As String
         'If DefaultMirroredLanguageIdNo = 0 Then
         '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
@@ -469,7 +469,10 @@ Public Class Dac
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
                 translatedMessage = items(1)
-                translatedCaption = items(2)
+                If Not String.IsNullOrEmpty(items(2)) Then
+                    caption = items(2)
+                End If
+                'translatedCaption = items(2)
             Else
                 Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                 cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
@@ -477,11 +480,10 @@ Public Class Dac
                 If Not (items Is Nothing OrElse items.Count = 0) Then
                     translatedMessage = message
                 Else
-                    If items.Count() = 0 Then
-                        translatedMessage = message
-                    Else
+                    If items.Count() <> 0 Then
                         translatedMessage = items(1)
-                        translatedCaption = items(2)
+                        caption = items(2)
+                        'translatedCaption = items(2)
                     End If
                 End If
             End If

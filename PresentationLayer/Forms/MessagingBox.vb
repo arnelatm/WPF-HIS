@@ -3,7 +3,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class MyMessageBox
+Public Class MessagingBox
 
     Private _newHeight As Int16
 

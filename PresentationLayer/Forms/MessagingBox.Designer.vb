@@ -5,7 +5,7 @@ Imports AATM.LIBRARIES.CBaseControlsLibrary
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
-Partial Class MyMessageBox
+Partial Class MessagingBox
     Inherits BfMain
 
     'Form overrides dispose to clean up the component list.
@@ -26,7 +26,7 @@ Partial Class MyMessageBox
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MyMessageBox))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MessagingBox))
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnYes = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnNo = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -154,7 +154,7 @@ Partial Class MyMessageBox
         Me.txtMessage.Size = New System.Drawing.Size(419, 45)
         Me.txtMessage.TabIndex = 16
         '
-        'MyMessageBox
+        'MessagingBox
         '
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.Info
@@ -170,7 +170,7 @@ Partial Class MyMessageBox
         Me.Controls.Add(Me.btnYes)
         Me.Controls.Add(Me.btnCancel)
         Me.MinimumSize = New System.Drawing.Size(500, 125)
-        Me.Name = "MyMessageBox"
+        Me.Name = "MessagingBox"
         Me.Text = "Message"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.pctError,System.ComponentModel.ISupportInitialize).EndInit
@@ -189,6 +189,6 @@ End Sub
     Public WithEvents pctInfo As PictureBox
     Public WithEvents pctQuestion As PictureBox
     Public WithEvents pctWarning As PictureBox
-    Friend WithEvents btnOk As CButton
-    Friend WithEvents txtMessage As TextBox
+    Public WithEvents btnOk As CButton
+    Public WithEvents txtMessage As TextBox
 End Class
