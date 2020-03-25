@@ -85,7 +85,7 @@ Namespace PresentationLayer.Forms
         Me.txtMessageKey.LinkedLabel = Me.lblMessageKey
         Me.txtMessageKey.Name = "txtMessageKey"
         Me.txtMessageKey.OldValue = Nothing
-        Me.txtMessageKey.SecurityKey = "_DeveloperOnly"
+        Me.txtMessageKey.SecurityKey = "Translators_Developer"
         Me.txtMessageKey.TabStop = false
         Me.txtMessageKey.ValueIsMandatory = true
         '
@@ -108,7 +108,7 @@ Namespace PresentationLayer.Forms
         Me.txtMessage.LinkedLabel = Nothing
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.OldValue = Nothing
-        Me.txtMessage.SecurityKey = "_DeveloperOnly"
+        Me.txtMessage.SecurityKey = "Translators_Developer"
         Me.txtMessage.ValueIsMandatory = true
         '
         'txtNotes
@@ -203,7 +203,7 @@ Namespace PresentationLayer.Forms
         Me.txtCaption.LinkedLabel = Nothing
         Me.txtCaption.Name = "txtCaption"
         Me.txtCaption.OldValue = Nothing
-        Me.txtCaption.SecurityKey = "_DeveloperOnly"
+        Me.txtCaption.SecurityKey = "Translators_Developer"
         Me.txtCaption.ValueIsMandatory = true
         '
         'lblTranslatedCaption

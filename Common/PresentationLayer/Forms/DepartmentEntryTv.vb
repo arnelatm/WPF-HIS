@@ -1,9 +1,7 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
-Imports MessagingLibrary
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -24,7 +22,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DepartmentPresenter(Me)
 
-            AddHandler MyBase.TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             CreateDataSources()
             'CreateEnumResourceFile()
 
@@ -54,7 +52,7 @@ Namespace PresentationLayer.Forms
 
         Public Property IDNo As Integer Implements IDepartmentView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)

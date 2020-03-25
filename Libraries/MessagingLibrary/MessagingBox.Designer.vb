@@ -190,6 +190,7 @@ Partial Class MessagingBox
         Me.MinimumSize = New System.Drawing.Size(500, 125)
         Me.Name = "MessagingBox"
         Me.Text = "Message"
+        Me.TopMost = true
         CType(Me.pctError,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.pctInfo,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.pctQuestion,System.ComponentModel.ISupportInitialize).EndInit

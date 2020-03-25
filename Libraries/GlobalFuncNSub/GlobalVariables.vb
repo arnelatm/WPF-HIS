@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
+Imports AutoMapper
 
 Public Class GlobalVariables
     Private Shared _useOriginalAppTextLanguageForEnglish As Nullable(Of Boolean)
@@ -191,7 +192,7 @@ Public Class GlobalVariables
 
 #End Region
 
-    Public Shared Property Mapper
+    Public Shared Property Mapper as AutoMapper.Mapper
     'Public Shared Property Mapper As IMapper
     'Public Shared Property Mapper As MapperConfiguration
 

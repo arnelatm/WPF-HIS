@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New OriginalMessagesModel
-                GlobalVariables.Mapper.MapObject(modData, modelTb)
+                GlobalVariables.Mapper.Map(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

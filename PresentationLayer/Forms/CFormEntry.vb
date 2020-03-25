@@ -8,7 +8,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
-Imports MessagingLibrary
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class CFormEntry
     Inherits BfMain
@@ -553,10 +553,7 @@ Public Class CFormEntry
             If Not AddMode Then
                 BtnUndo.Enabled = False
                 BtnSave.Enabled = False
-                Messaging.Show("MsgNoRecordsFound", "No records found for this table!",
-                                "Empty Table",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information)
+                Messaging.Show(True,"MsgNoRecordsFound", "No records found for this table!","Empty Table")
             Else
                 BtnSave.Enabled = True
                 BtnUndo.Enabled = True
@@ -745,7 +742,6 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.ClickButtonArea
-        Dim continueSave As Boolean = True
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -757,8 +753,7 @@ Public Class CFormEntry
         Dim continueSave As Boolean = True
         If Not AddMode Then
             If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                Messaging.Show("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!",
-                               MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Messaging.Show(True,"MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
                 continueSave = False
             Else
                 If Not ChangesMade() Then
@@ -770,7 +765,6 @@ Public Class CFormEntry
         If continueSave Then
             RaiseEvent BeforeSave()
             If AutomaticValidationsOk() Then
-                Dim errorList As String = ""
                 If DataIsValid() Then
                     retValue = SaveDataEntry()
                     If retValue > 0 Then
@@ -815,6 +809,7 @@ Public Class CFormEntry
                     End If
                 Next
             Next
+            Beep()
             PresenterObj.ShowErrors("Record not saved!")
         End If
         Return retValue

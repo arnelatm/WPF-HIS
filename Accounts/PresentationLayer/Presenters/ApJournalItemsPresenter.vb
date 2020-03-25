@@ -1,8 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
-Imports MessagingLibrary
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -37,7 +36,7 @@ Namespace PresentationLayer.Presenters
                 ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                     Dim lineNumber As String = item.Sequence.ToString()
                     Dim caption = "Invalid Entry!"
-                    Dim message = Messaging.GetMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry")
+                    Dim message = Messaging.GetMessage(True,"MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry")
                     message = message.Interpolate(Function(x) lineNumber)
                     Messaging.Show(message, caption)
                     retVal = False

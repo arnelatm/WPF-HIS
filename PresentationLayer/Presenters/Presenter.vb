@@ -6,11 +6,9 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
-Imports AATM.PresentationLayer.Forms
-Imports MessagingLibrary
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Model and View classes.

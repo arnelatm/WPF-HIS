@@ -1,9 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Translations
 
 Public Class MessagingBox
 
@@ -16,19 +14,19 @@ Public Class MessagingBox
     Public Event TextDisplayLanguageChanged()
 
     Public Sub SetInfoIcon()
-        Me.pctInfo.Visible = True
+        pctInfo.Visible = True
     End Sub
 
     Public Sub SetQuestionIcon()
-        Me.pctQuestion.Visible = True
+        pctQuestion.Visible = True
     End Sub
 
     Public Sub SetErrorIcon()
-        Me.pctError.Visible = True
+        pctError.Visible = True
     End Sub
 
     Public Sub SetWarningIcon()
-        Me.pctWarning.Visible = True
+        pctWarning.Visible = True
     End Sub
 
     Public Sub Ok()
@@ -36,7 +34,7 @@ Public Class MessagingBox
         btnCancel.Visible = False
         btnYes.Visible = False
         btnNo.Visible = False
-        btnOk.Left = (Me.Width - Me.btnOk.Width) / 2
+        btnOk.Left = (Width - btnOk.Width) / 2
         btnOk.Focus()
         SelectedButtons = MessagingButtons.Ok
     End Sub
@@ -55,12 +53,12 @@ Public Class MessagingBox
     End Property
 
     Public Sub OkCancel()
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnYes.Visible = False
         btnNo.Visible = False
         btnOk.Visible = True
         btnCancel.Visible = True
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -71,7 +69,7 @@ Public Class MessagingBox
     End Sub
 
     Public Sub AbortRetryIgnore()
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = True
         btnOk.Text = "&Abort"
         btnCancel.Visible = True
@@ -79,7 +77,7 @@ Public Class MessagingBox
         btnYes.Visible = True
         btnYes.Text = "&Ignore"
         btnNo.Visible = False
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 3
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -92,12 +90,12 @@ Public Class MessagingBox
     End Sub
 
     Public Sub YesNoCancel()
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnYes.Visible = True
         btnNo.Visible = True
         btnCancel.Visible = True
         btnOk.Visible = False
-        spaceLength = (Me.Width - btnYes.Width - btnNo.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnYes.Width - btnNo.Width - btnCancel.Width) / 3
         If spaceLength > 0 Then
             btnYes.Left = spaceLength
         Else
@@ -109,12 +107,12 @@ Public Class MessagingBox
     End Sub
 
     Public Sub YesNo()
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = False
         btnCancel.Visible = False
         btnYes.Visible = True
         btnNo.Visible = True
-        spaceLength = (Me.Width - btnYes.Width - btnNo.Width) / 3
+        spaceLength = (Width - btnYes.Width - btnNo.Width) / 3
         If spaceLength > 0 Then
             btnYes.Left = spaceLength
         Else
@@ -125,12 +123,12 @@ Public Class MessagingBox
     End Sub
 
     Public Sub RetryCancel()
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = True
         btnCancel.Visible = True
         btnYes.Visible = False
         btnNo.Visible = False
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -146,19 +144,19 @@ Public Class MessagingBox
         btnCancel.Visible = False
         btnYes.Visible = False
         btnNo.Visible = False
-        btnOk.Left = (Me.Width - Me.btnOk.Width) / 2
+        btnOk.Left = (Width - btnOk.Width) / 2
         SelectedButtons = MessagingButtons.CustomOneButton
     End Sub
 
     Public Sub CustomTwoButtons(caption1 As String, caption2 As String)
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = True
         btnOk.Text = caption1
         btnCancel.Visible = True
         btnCancel.Text = caption2
         btnYes.Visible = False
         btnNo.Visible = False
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -169,7 +167,7 @@ Public Class MessagingBox
     End Sub
 
     Public Sub CustomThreeButtons(caption1 As String, caption2 As String, caption3 As String)
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = True
         btnOk.Text = caption1
         btnCancel.Visible = True
@@ -177,7 +175,7 @@ Public Class MessagingBox
         btnYes.Visible = True
         btnYes.Text = caption3
         btnNo.Visible = False
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 4
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 4
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -190,7 +188,7 @@ Public Class MessagingBox
     End Sub
 
     Public Sub CustomFourButtons(caption1 As String, caption2 As String, caption3 As String, caption4 As String)
-        Dim spaceLength As Int16 = 0
+        Dim spaceLength As Int16
         btnOk.Visible = True
         btnOk.Text = caption1
         btnCancel.Visible = True
@@ -199,7 +197,7 @@ Public Class MessagingBox
         btnYes.Text = caption3
         btnNo.Visible = True
         btnNo.Text = caption4
-        spaceLength = (Me.Width - btnOk.Width - btnCancel.Width - btnYes.Width - btnNo.Width) / 5
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width - btnNo.Width) / 5
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
@@ -214,40 +212,40 @@ Public Class MessagingBox
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         If SelectedButtons = MessagingButtons.Ok Or SelectedButtons = MessagingButtons.OkCancel Then
             Close()
-            Me.DialogResult = DialogResult.OK
+            DialogResult = DialogResult.OK
         ElseIf SelectedButtons = MessagingButtons.AbortRetryIgnore Then
             Close()
-            Me.DialogResult = DialogResult.Abort
+            DialogResult = DialogResult.Abort
         ElseIf SelectedButtons = MessagingButtons.RetryCancel Then
             Close()
-            Me.DialogResult = DialogResult.Retry
+            DialogResult = DialogResult.Retry
         End If
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs)
         If SelectedButtons = MessagingButtons.OkCancel Or SelectedButtons = MessagingButtons.YesNoCancel Or MessagingButtons.RetryCancel Then
             _close = True
-            Me.DialogResult = DialogResult.Cancel
+            DialogResult = DialogResult.Cancel
         ElseIf SelectedButtons = MessagingButtons.AbortRetryIgnore Then
             _close = True
-            Me.DialogResult = DialogResult.Retry
+            DialogResult = DialogResult.Retry
         End If
     End Sub
 
     Private Sub btnYes_Click(ByVal sender As Object, ByVal e As EventArgs)
         If SelectedButtons = MessagingButtons.YesNo Or SelectedButtons = MessagingButtons.YesNoCancel Then
             _close = True
-            Me.DialogResult = DialogResult.Yes
+            DialogResult = DialogResult.Yes
         ElseIf SelectedButtons = MessagingButtons.AbortRetryIgnore Then
             _close = True
-            Me.DialogResult = DialogResult.Ignore
+            DialogResult = DialogResult.Ignore
         End If
     End Sub
 
     Private Sub btnNo_Click(ByVal sender As Object, ByVal e As EventArgs)
         If SelectedButtons = MessagingButtons.YesNo Or SelectedButtons = MessagingButtons.YesNoCancel Then
             _close = True
-            Me.DialogResult = DialogResult.No
+            DialogResult = DialogResult.No
         End If
     End Sub
 
@@ -256,7 +254,7 @@ Public Class MessagingBox
     End Sub
 
     Private Sub MyMessageBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtMessage.BackColor = Me.BackColor
+        txtMessage.BackColor = BackColor
         Dim tSize = TextRenderer.MeasureText(
             txtMessage.Text,
             txtMessage.Font,
@@ -265,14 +263,11 @@ Public Class MessagingBox
             )
         txtMessage.Height = tSize.Height + 10
         _newHeight = tSize.Height + 85
-        Me.Height = _newHeight
-        Refresh()
-        Hide()
-        AutoSize = False
-        Me.Height = _newHeight
+        Height = _newHeight
         CenterForm(Me)
+        AutoSize = False
+        Height = _newHeight
         Refresh()
-        Show()
     End Sub
 
     Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
