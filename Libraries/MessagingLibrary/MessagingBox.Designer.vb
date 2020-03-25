@@ -137,7 +137,7 @@ Partial Class MessagingBox
         '
         Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnOk.BackColor = System.Drawing.Color.Lime
-        Me.btnOk.DesignerSelected = false
+        Me.btnOk.DesignerSelected = true
         Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(89, 60)
