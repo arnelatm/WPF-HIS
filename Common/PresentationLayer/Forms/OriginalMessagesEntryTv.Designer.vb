@@ -93,6 +93,7 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me.lblMessageKey, "lblMessageKey")
         Me.lblMessageKey.Name = "lblMessageKey"
+        Me.lblMessageKey.SecurityKey = "Translators_Developer"
         '
         'txtMessage
         '
@@ -160,6 +161,7 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me.lblMessage, "lblMessage")
         Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.SecurityKey = "Translators_Developer"
         '
         'lblTranslatedMessage
         '
@@ -188,6 +190,7 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me.lblCaption, "lblCaption")
         Me.lblCaption.Name = "lblCaption"
+        Me.lblCaption.SecurityKey = "Translators_Developer"
         '
         'txtCaption
         '
