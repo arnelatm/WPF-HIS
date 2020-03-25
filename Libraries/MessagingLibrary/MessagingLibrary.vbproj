@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{84437202-3E38-4F75-B8C1-4125852FC4FF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MessagingLibrary</RootNamespace>
+    <RootNamespace>AATM.Libraries.MessagingLibrary</RootNamespace>
     <AssemblyName>MessagingLibrary</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

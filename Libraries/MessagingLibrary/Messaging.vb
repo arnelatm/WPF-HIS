@@ -4,22 +4,46 @@ Imports AATM.Libraries.Translations
 
 Public Class Messaging
 
-    Public Overloads Shared Function Show(ByVal key As String) As DialogResult
-        ' show message with given key (no translation)
+    Private Shared _dataAccessControl 
+
+    Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String) As String
         Dim message As String = ""
         Dim caption As String = ""
-        Dim p As MessagingBox = New MessagingBox()
-        p.txtMessage.Text = GetMessage(key, message, caption)
-        p.Visible = False
-        p.Text = caption
-        p.Ok()
-        p.btnOk.Focus()
-        p.SetInfoIcon()
-        Return p.ShowDialog()
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
+        Return message
     End Function
 
-    Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String) As DialogResult
-        ' show message and caption as is (no translation)
+    Private Shared Sub CreateDataAccessControl()
+        if _dataAccessControl Is Nothing Then
+            _dataAccessControl = New Dac
+        End If
+    End Sub
+
+    Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
+        Return message
+    End Function
+
+    Public Overloads Shared Function AddMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        CreateDataAccessControl()
+        _dataAccessControl.AddMessage(key, message, caption)
+        Return message
+    End Function
+
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
+        Dim message As String = ""
+        Dim caption As String = ""
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
+        Return Show(message, caption)
+    End Function
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
         Dim p As MessagingBox = New MessagingBox()
         p.txtMessage.Text = message
         p.Visible = False
@@ -27,30 +51,33 @@ Public Class Messaging
         p.Ok()
         p.btnOk.Focus()
         p.SetInfoIcon()
+        SetLayout(p)
         Return p.ShowDialog()
     End Function
 
-    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
-        ' show translated message and caption if present
-        Dim message As String = ""
-        Dim caption As String = ""
-        If translate Then
-            TranslateMessage(key, message, caption)
-        End If
-        Return Show(message, caption)
-    End Function
-
-    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
-        If translate Then
-            TranslateMessage(key, message, caption)
-        End If
-        Return Show(message, caption)
+    Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String) As DialogResult
+        Dim p As MessagingBox = New MessagingBox()
+        p.txtMessage.Text = message
+        p.Visible = False
+        p.Text = caption
+        p.Ok()
+        p.btnOk.Focus()
+        p.SetInfoIcon()
+        SetLayout(p)
+        Return p.ShowDialog()
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
-        If translate Then
-            TranslateMessage(key, message, caption)
-        End If
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
+        Return Show(message, caption, buttons, icon, defaultButton)
+    End Function
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        Dim message As String = ""
+        Dim caption As String = ""
+        CreateDataAccessControl()
+        _dataAccessControl.GetMessage(translate, key, message, caption)
         Return Show(message, caption, buttons, icon, defaultButton)
     End Function
 
@@ -61,36 +88,36 @@ Public Class Messaging
         SelectButton(p, buttons)
         SelectIcon(p, icon)
         SelectDefaultButton(p, defaultButton)
+        SetLayout(p)
         Return p.ShowDialog()
     End Function
 
-    Public Overloads Shared Function Show(ByVal key As String, ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
-        Dim p As MessagingBox = New MessagingBox()
-        CreateMessage(key, message, caption)
-        p.txtMessage.Text = message
-        If caption Is Nothing Then
-            p.Text = GetCaption(key)
+    Private Shared Sub SetLayout(p As MessagingBox)
+        If GlobalVariables.RightToLeftLayout Then
+            p.RightToLeftLayout = True
+            p.RightToLeft = RightToLeft.Yes
+        Else
+            p.RightToLeftLayout = False
+            p.RightToLeft = RightToLeft.No
         End If
-        SelectButton(p, buttons)
-        SelectIcon(p, icon)
-        SelectDefaultButton(p, defaultButton)
-        Return p.ShowDialog()
-    End Function
+    End Sub
 
     Private Shared Sub SelectButton(p As MessagingBox, buttons As MessageBoxButtons)
         Select Case buttons
             Case MessageBoxButtons.OK
                 p.Ok()
-            Case MessageBoxButtons.YesNo
-                p.YesNo()
             Case MessageBoxButtons.OKCancel
                 p.OkCancel()
-            Case MessageBoxButtons.YesNoCancel
-                p.YesNoCancel()
             Case MessageBoxButtons.AbortRetryIgnore
                 p.AbortRetryIgnore()
+            Case MessageBoxButtons.YesNo
+                p.YesNo()
+            Case MessageBoxButtons.YesNoCancel
+                p.YesNoCancel()
             Case MessageBoxButtons.RetryCancel
                 p.RetryCancel()
+            Case Else
+                p.Ok()
         End Select
     End Sub
 
@@ -117,277 +144,5 @@ Public Class Messaging
                 p.SetErrorIcon()
         End Select
     End Sub
-
-    Public Overloads Shared Sub TranslateMessage(ByVal key As String, ByRef message As String, ByRef caption As String)
-        Dim textDisplayLanguage As String = GlobalVariables.AppCurrentCultureInfo.Name
-        If NeedToTranslateText(textDisplayLanguage) Then
-            Dim translatorDac As New Dac
-            Dim cmd As String
-            cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
-            Dim items = translatorDac.ExecReader(cmd)
-            If Not (items Is Nothing OrElse items.Count() = 0) Then
-                message = items(1)
-                caption = items(2)
-            Else
-                Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-                cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
-                items = translatorDac.ExecReader(cmd)
-                If Not (items Is Nothing OrElse items.Count() = 0) Then
-                    message = items(1)
-                    If Not String.IsNullOrEmpty(items(2)) Then
-                        caption = items(2)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
-    Public Shared Sub CreateMessage(ByVal key As String, ByVal message As String, ByVal caption As String)
-        Dim translatorDac As New Dac
-        Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM OriginalMessages where MessageKey='" + key + "'"
-        Dim howMany As Int32 = translatorDac.ExecScalar(Of Int32)(cmd)
-        If howMany = 0 Then
-            cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
-            translatorDac.ExecCmd(cmd)
-        End If
-    End Sub
-
-    Public Shared Function GetMessage(ByVal key As String, ByVal message As String, ByRef caption As String) As String
-        Dim translatorDac As New Dac
-        Return translatorDac.GetMessage(key, message, caption)
-    End Function
-
-    Public Shared Function GetCaption(ByVal key As String) As String
-        Dim translatorDac As New Dac
-        Return translatorDac.GetCaption(key)
-    End Function
-
-    Private Shared Function NeedToTranslateText(textDisplayLanguage)
-        If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
-            Return False
-        Else
-            Return True
-        End If
-    End Function
-
-    'Public Shared Function Show(ByVal interpolate As Boolean, ByVal key As String, ByVal message As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message.Interpolate(Function(x) )
-    '    p.Visible = False
-    '    p.Text = caption
-    '    p.Ok()
-    '    p.btnOk.Focus()
-    '    p.SetInfoIcon()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-    '    SelectButton(p, buttons)
-    '    SelectIcon(p, icon)
-    '    SelectDefaultButton(p, defaultButton)
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-
-    '    Select Case buttons
-    '        Case MessageBoxButtons.YesNo
-    '            p.YesNo()
-    '        Case MessageBoxButtons.OKCancel
-    '            p.YesNo()
-    '        Case MessageBoxButtons.YesNoCancel
-    '            p.YesNoCancel()
-    '        Case Else
-    '            p.Yes()
-    '    End Select
-
-    '    Select Case icon
-    '        Case MessageBoxIcon.Information
-    '            p.SetInfoIcon()
-    '        Case MessageBoxIcon.Question
-    '            p.SetQuestionIcon()
-    '        Case MessageBoxIcon.Exclamation
-    '            p.SetWarningIcon()
-    '        Case MessageBoxIcon.[Error]
-    '            p.SetErrorIcon()
-    '    End Select
-
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function Display(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-
-    '    Select Case buttons
-    '        Case MessageBoxButtons.YesNo
-    '            p.YesNo()
-    '        Case MessageBoxButtons.OKCancel
-    '            p.YesNo()
-    '        Case MessageBoxButtons.YesNoCancel
-    '            p.YesNoCancel()
-    '        Case MessageBoxButtons.OK
-    '            p.Ok()
-    '        Case Else
-    '            p.Yes()
-    '    End Select
-
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function Display(ByVal message As String, ByVal caption As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-    '    p.Yes()
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function Display(ByVal message As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Ok()
-    '    p.btnOk.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton, ByVal yesButtonText As String, ByVal noButtonText As String, ByVal abortButtonText As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.btnYes.Text = yesButtonText
-    '    p.btnNo.Text = noButtonText
-    '    p.btnCancel.Text = abortButtonText
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-
-    '    Select Case buttons
-    '        Case MessageBoxButtons.YesNo
-    '            p.YesNo()
-    '        Case MessageBoxButtons.OKCancel
-    '            p.YesNo()
-    '        Case MessageBoxButtons.YesNoCancel
-    '            p.YesNoCancel()
-    '        Case Else
-    '            p.Yes()
-    '    End Select
-
-    '    Select Case icon
-    '        Case MessageBoxIcon.Information
-    '            p.SetInfoIcon()
-    '        Case MessageBoxIcon.Question
-    '            p.SetQuestionIcon()
-    '        Case MessageBoxIcon.Exclamation
-    '            p.SetWarningIcon()
-    '        Case MessageBoxIcon.[Error]
-    '            p.SetErrorIcon()
-    '    End Select
-
-    '    Select Case defaultButton
-    '        Case MessageBoxDefaultButton.Button1
-    '            p.btnYes.TabIndex = 0
-    '        Case MessageBoxDefaultButton.Button2
-    '            p.btnNo.TabIndex = 0
-    '        Case MessageBoxDefaultButton.Button3
-    '            p.btnCancel.TabIndex = 0
-    '    End Select
-
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal yesButtonText As String, ByVal noButtonText As String, ByVal abortButtonText As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.btnYes.Text = yesButtonText
-    '    p.btnNo.Text = noButtonText
-    '    p.btnCancel.Text = abortButtonText
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-
-    '    Select Case buttons
-    '        Case MessageBoxButtons.YesNo
-    '            p.YesNo()
-    '        Case MessageBoxButtons.OKCancel
-    '            p.YesNo()
-    '        Case MessageBoxButtons.YesNoCancel
-    '            p.YesNoCancel()
-    '        Case Else
-    '            p.Yes()
-    '    End Select
-
-    '    Select Case icon
-    '        Case MessageBoxIcon.Information
-    '            p.SetInfoIcon()
-    '        Case MessageBoxIcon.Question
-    '            p.SetQuestionIcon()
-    '        Case MessageBoxIcon.Exclamation
-    '            p.SetWarningIcon()
-    '        Case MessageBoxIcon.[Error]
-    '            p.SetErrorIcon()
-    '    End Select
-
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal yesButtonText As String, ByVal noButtonText As String, ByVal abortButtonText As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.btnYes.Text = yesButtonText
-    '    p.btnNo.Text = noButtonText
-    '    p.btnCancel.Text = abortButtonText
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-
-    '    Select Case buttons
-    '        Case MessageBoxButtons.YesNo
-    '            p.YesNo()
-    '        Case MessageBoxButtons.OKCancel
-    '            p.YesNo()
-    '        Case MessageBoxButtons.YesNoCancel
-    '            p.YesNoCancel()
-    '        Case Else
-    '            p.Yes()
-    '    End Select
-
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String, ByVal caption As String, ByVal yesButtonText As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.btnYes.Text = yesButtonText
-    '    p.txtMessage.Text = message
-    '    p.Text = caption
-    '    p.Yes()
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String, ByVal yesButtonText As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.btnYes.Text = yesButtonText
-    '    p.txtMessage.Text = message
-    '    p.Yes()
-    '    p.btnYes.Focus()
-    '    Return p.ShowDialog()
-    'End Function
-
-    'Public Shared Function DisplayLocal(ByVal message As String) As DialogResult
-    '    Dim p As MessagingBox = New MessagingBox()
-    '    p.txtMessage.Text = message
-    '    p.Visible = False
-    '    p.Ok()
-    '    p.btnOk.Focus()
-    '    p.SetInfoIcon()
-    '    Return p.ShowDialog()
-    'End Function
 
 End Class

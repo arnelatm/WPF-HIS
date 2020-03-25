@@ -44,13 +44,10 @@ Namespace AdoNet
 
         Public Function AddRecord(ByRef recordData As SecurityObject) As Integer Implements IDao(Of SecurityObject).AddRecord
             Dim sql As String =
-                    " UPDATE [SecurityObject]" &
-                    "    SET SecurityObjectName = @SecurityObjectName," &
-                    "        SecurityObjectNameAra = @SecurityObjectNameAra," &
-                    "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
-
-            Return Db.Update(sql, Take(recordData))
+                    " INSERT INTO [SecurityObject] " &
+                    " (SecurityObjectName,SecurityObjectNameAra,Notes) " &
+                    " VALUES (@SecurityObjectName, @SecurityObjectNameAra,@Notes) "
+            Return Db.Insert(sql, Take(recordData))
         End Function
 
         Public Function UpdateRecord(ByRef recordData As SecurityObject) As Integer Implements IDao(Of SecurityObject).UpdateRecord

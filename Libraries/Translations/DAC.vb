@@ -68,7 +68,7 @@ Public Class Dac
     Public ReadOnly Property DefaultMirroredLanguageIdNo As Integer
         Get
             If _defaultMirroredLanguageIdNo = 0 Then
-                If Not DesignMode Then
+                If Not (System.ComponentModel.LicenseManager.CurrentContext.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime)
                     Dim cmd As String
                     cmd = "Select IdNo from Languages where CultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
                     Return ExecScalar(Of Int16)(cmd)
@@ -403,101 +403,101 @@ Public Class Dac
                         MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
-    Sub CreateMessage(ByVal key As String, ByVal message As String, ByVal caption As String)
-        'Dim storeCaptions1 As New StoreCaptions
-        'Dim textDisplayLanguage As String
-        'Dim translatorDac As New Dac
+    Sub AddMessage(ByVal key As String, ByVal message As String, ByVal caption As String)
         Dim cmd As String
-        'If DefaultMirroredLanguageIdNo = 0 Then
-        '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
-        '    DefaultMirroredLanguageIdNo = ExecScalar(Of Int16)(cmd)
-        'End If
-
-        'textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey='" + key + "'"
         Dim idNo As Int32 = ExecScalar(Of Int32)(cmd)
         If idNo = 0 Then
             cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
             ExecCmd(cmd)
         End If
-        'IdNo = ExecScalar(Of Int32)(cmd)
-        'if IdNo = 0 then
-        '    cmd = "INSERT INTO TranslatedMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
-        '    Me.ExecCmd(cmd)
-        'End If
-        'If NeedToTranslateText(textDisplayLanguage) Then
-        '    cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
-        '    Dim items = translatorDac.ExecReader(cmd)
-        '    If items IsNot Nothing Then
-        '        translatedMessage = items(1)
-        '        translatedCaption = items(2)
-        '    Else
-        '        If translatedMessage Is Nothing Then
-        '            Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-        '            cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
-        '            items = translatorDac.ExecReader(cmd)
-        '            If items IsNot Nothing Then
-        '                translatedMessage = items(1)
-        '                translatedCaption = items(2)
-        '            End If
-        '        End If
-        '    End If
-        'Else
-        '    translatedMessage = message
-        '    translatedCaption = caption
-        'End If
-        ''        Return {translatedMessage, translatedCaption}
     End Sub
 
-    Function GetMessage(ByVal key As String, ByVal message As String, ByRef caption As String) As String
-        Dim translatedMessage As String = message
-        'Dim translatedCaption As String = caption
+    Function GetMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        'Dim translatedMessage As String = message
         Dim cmd As String
-        'If DefaultMirroredLanguageIdNo = 0 Then
-        '    cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.OriginalCultureInfo.Name + "'"
-        '    currentLanguageIdNo = ExecScalar(Of Int16)(cmd)
-        'End If
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
-        'cmd = cmd + key.Trim()
-        'cmd = cmd + "' and LanguageIdNo = "
-        'cmd = cmd + DefaultMirroredLanguageIdNo.ToString()
+        Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
+        If idNo <> 0 Then
+            Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+            If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
+                ' no need to translate
+            Else
+                cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+                Dim items As Collection = ExecReader(cmd)
+                If Not (items Is Nothing OrElse items.Count = 0) Then
+                    message = items(1)
+                    If Not String.IsNullOrEmpty(items(2)) Then
+                        caption = items(2)
+                    End If
+                Else
+                    Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
+                    cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+                    items = ExecReader(cmd)
+                    If Not (items Is Nothing OrElse items.Count = 0) Then
+                        message = message
+                    Else
+                        If items.Count() <> 0 Then
+                            message = items(1)
+                            caption = items(2)
+                        End If
+                    End If
+                End If
+            End If
+        Else
+            AddMessage(key, message, caption)
+        End If
+        Return message
+    End Function
 
+    Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByRef caption As String) As String
+        If Not translate Then
+            Return GetOriginalMessage(key, message, caption)
+        End If
+        'Dim translatedMessage As String = message
+        Dim cmd As String
+        cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
         Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
-                translatedMessage = items(1)
+                message = items(1)
                 If Not String.IsNullOrEmpty(items(2)) Then
                     caption = items(2)
                 End If
-                'translatedCaption = items(2)
             Else
                 Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                 cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
                 items = ExecReader(cmd)
                 If Not (items Is Nothing OrElse items.Count = 0) Then
-                    translatedMessage = message
+                    message = message
                 Else
                     If items.Count() <> 0 Then
-                        translatedMessage = items(1)
+                        message = items(1)
                         caption = items(2)
-                        'translatedCaption = items(2)
                     End If
                 End If
             End If
         Else
-            CreateMessage(key, message, caption)
-            'Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-            'cmd = "SELECT TranslatedMessage from TranslatedMessages_View where LTrim(RTrim(MessageKey)) = '" + key.Trim() + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
-            'item = ExecReader(cmd)
-            'If item IsNot Nothing Then
-            '    translatedMessage = item
-            'End If
-            translatedMessage = message
+            AddMessage(key, message, caption)
         End If
-        Return translatedMessage
+        Return message
+    End Function
+
+    Function GetOriginalMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        Dim cmd As String
+        Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+        cmd = "SELECT Message, Caption FROM OriginalMessages where MessageKey = '" + key + "'"
+        Dim items As Collection = ExecReader(cmd)
+        If Not (items Is Nothing OrElse items.Count = 0) Then
+            message = items(1)
+            If Not String.IsNullOrEmpty(items(2)) Then
+                caption = items(2)
+            End If
+        End If
+        Return message
     End Function
 
     Function GetCaption(ByVal key As String) As String

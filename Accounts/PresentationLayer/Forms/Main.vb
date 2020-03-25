@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
-Imports MessagingLibrary
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -298,20 +298,20 @@ Namespace PresentationLayer.Forms
             Close()
         End Sub
 
-        ''' <summary>
-        '''     Help toolbutton clicked event handler.
-        ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
-        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click
-            Dim parameter1 = 25
-            Dim parameter2 = "$"
-            Dim message As String()
-            Messaging.CreateMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
-            Messaging.Show(True, "MsgCurrentPriceDisplay", String.Format(message(0), parameter1, parameter2), message(1))
-            Messaging.Show("MsgNewMessageKey", "Message Information")
-            Messaging.Show(True, "MsgNewMessageKey", "Message Information", "With Caption")
-        End Sub
+        '''' <summary>
+        ''''     Help toolbutton clicked event handler.
+        '''' </summary>
+        '''' <param name="sender"></param>
+        '''' <param name="e"></param>
+        'Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click
+        '    Dim parameter1 = 25
+        '    Dim parameter2 = "$"
+        '    Dim message As String()
+        '    message = Messaging.CreateMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
+        '    Messaging.Show(True, "MsgCurrentPriceDisplay", String.Format(message(0), parameter1, parameter2), message(1))
+        '    Messaging.Show("MsgNewMessageKey", "Message Information")
+        '    Messaging.Show(True, "MsgNewMessageKey", "Message Information", "With Caption")
+        'End Sub
 
         '    ' Apply them to the Data Access Component
         '    With AppDataDAC
@@ -878,7 +878,7 @@ Namespace PresentationLayer.Forms
         '    Dim parameter1 = 25
         '    Dim parameter2 = "$"
         '    Dim message As String()
-        '    message = Messaging.CreateMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
+        '    message = Messaging.AddMessage("MsgCurrentPriceDisplay", "The current price is {0}{1:C2} per ounce.", "none")
         '    Messaging.Show("MsgCurrentPriceDisplay", String.Format(message(0), parameter1, parameter2), message(1))
         '    Messaging.Show("MsgNewMessageKey", "Message Information")
         '    Messaging.Show("MsgNewMessageKey", "Message Information", "With Caption")

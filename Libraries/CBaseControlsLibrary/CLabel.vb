@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class CLabel
@@ -12,5 +13,11 @@ Public Class CLabel
         Font = myFont
         Margin = New Padding(1, 1, 1, 1)
     End Sub
+
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String
 
 End Class
