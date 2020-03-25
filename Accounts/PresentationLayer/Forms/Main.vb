@@ -1097,6 +1097,12 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateAllMessagesToolStripMenuItem.Click
+            Dim x = New OneTimeRun
+            Debugger.Break()
+            OneTimeRun.CreateAllMessages()
+        End Sub
+
     End Class
 
 End Namespace

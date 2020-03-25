@@ -15,7 +15,19 @@ Public Module Extensions
         Dim result As String = template
         values.ToList().ForEach(Function(x)
                                     Dim member As MemberExpression = TryCast(x.Body, MemberExpression)
-                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", member.Member.Name, "}")
+                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", If(Strings.Left(member.Member.Name, 10) = "$VB$Local_", Mid(member.Member.Name, 11), member.Member.Name), "}")
+                                    Dim newValue As String = x.Compile().Invoke(Nothing).ToString()
+                                    result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
+                                End Function)
+        Return result
+    End Function
+
+    <Extension()>
+    Public Function Interpolate2(ByVal template As String, ParamArray values As Expression(Of Func(Of Object, String))()) As String
+        Dim result As String = template
+        values.ToList().ForEach(Function(x)
+                                    Dim member As MemberExpression = TryCast(x.Body, MemberExpression)
+                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", Mid(member.Member.Name, 11), "}")
                                     Dim newValue As String = x.Compile().Invoke(Nothing).ToString()
                                     result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
                                 End Function)

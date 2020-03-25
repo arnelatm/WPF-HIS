@@ -68,7 +68,7 @@ Public Class Dac
     Public ReadOnly Property DefaultMirroredLanguageIdNo As Integer
         Get
             If _defaultMirroredLanguageIdNo = 0 Then
-                If Not (System.ComponentModel.LicenseManager.CurrentContext.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime)
+                If Not (System.ComponentModel.LicenseManager.CurrentContext.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                     Dim cmd As String
                     cmd = "Select IdNo from Languages where CultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
                     Return ExecScalar(Of Int16)(cmd)
@@ -403,15 +403,31 @@ Public Class Dac
                         MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
-    Sub AddMessage(ByVal key As String, ByVal message As String, ByVal caption As String)
+    Function AddMessage(ByVal key As String, ByVal message As String, ByVal caption As String) As Boolean
         Dim cmd As String
+        Dim status As Boolean = True
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey='" + key + "'"
         Dim idNo As Int32 = ExecScalar(Of Int32)(cmd)
         If idNo = 0 Then
-            cmd = "INSERT INTO OriginalMessages (messageKey,message,caption) values ( '" + key.Trim() + "','" + message.Trim() + "','" + caption.Trim() + "')"
-            ExecCmd(cmd)
+            Cs = BuildConnString()
+            Dim conn As SqlConnection = New SqlConnection(Cs)
+            Dim sqlCommand As New SqlCommand("INSERT INTO OriginalMessages (messageKey, message, caption) values (@key,  @message, @caption)", conn)
+            Try
+                conn.Open()
+                sqlCommand.Parameters.Add("@key", SqlDbType.VarChar).Value = key
+                sqlCommand.Parameters.Add("@message", SqlDbType.VarChar).Value = message
+                sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption
+                sqlCommand.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                ErrorMessage(ex, SqlError)
+                status = False
+            Finally
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End Try
         End If
-    End Sub
+        Return status
+    End Function
 
     Function GetMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
         'Dim translatedMessage As String = message

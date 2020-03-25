@@ -209,7 +209,7 @@ Public Class MessagingBox
         SelectedButtons = MessagingButtons.CustomFourButtons
     End Sub
 
-    Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+    Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         If SelectedButtons = MessagingButtons.Ok Or SelectedButtons = MessagingButtons.OkCancel Then
             Close()
             DialogResult = DialogResult.OK
@@ -222,7 +222,7 @@ Public Class MessagingBox
         End If
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub btnCancel_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
         If SelectedButtons = MessagingButtons.OkCancel Or SelectedButtons = MessagingButtons.YesNoCancel Or MessagingButtons.RetryCancel Then
             _close = True
             DialogResult = DialogResult.Cancel
@@ -232,7 +232,7 @@ Public Class MessagingBox
         End If
     End Sub
 
-    Private Sub btnYes_Click(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub btnYes_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnYes.ClickButtonArea
         If SelectedButtons = MessagingButtons.YesNo Or SelectedButtons = MessagingButtons.YesNoCancel Then
             _close = True
             DialogResult = DialogResult.Yes
@@ -242,7 +242,7 @@ Public Class MessagingBox
         End If
     End Sub
 
-    Private Sub btnNo_Click(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub btnNo_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnNo.ClickButtonArea
         If SelectedButtons = MessagingButtons.YesNo Or SelectedButtons = MessagingButtons.YesNoCancel Then
             _close = True
             DialogResult = DialogResult.No

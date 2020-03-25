@@ -136,6 +136,7 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateAllMessagesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.MainMenu.SuspendLayout
@@ -425,7 +426,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemTranslations
         '
-        Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.TranslationsToolStripMenuItem})
+        Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.TranslationsToolStripMenuItem, Me.CreateAllMessagesToolStripMenuItem})
         Me.ToolStripMenuItemTranslations.Name = "ToolStripMenuItemTranslations"
         resources.ApplyResources(Me.ToolStripMenuItemTranslations, "ToolStripMenuItemTranslations")
         '
@@ -703,6 +704,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'CreateAllMessagesToolStripMenuItem
+        '
+        Me.CreateAllMessagesToolStripMenuItem.Name = "CreateAllMessagesToolStripMenuItem"
+        resources.ApplyResources(Me.CreateAllMessagesToolStripMenuItem, "CreateAllMessagesToolStripMenuItem")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -833,5 +839,6 @@ End Sub
         Friend WithEvents SalesJournalEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AccountReconciliationToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents CreateAllMessagesToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

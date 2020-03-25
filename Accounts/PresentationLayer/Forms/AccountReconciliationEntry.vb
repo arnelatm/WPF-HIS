@@ -760,7 +760,7 @@ Namespace PresentationLayer.Forms
             If cboAccountIdNo.ValueChanged() Then
                 If cboAccountIdNo.SelectedIndex > -1 Then
                     If AccountReconciliationItems.Any() Then
-                        MessageBox.Show("Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.")
+                        Messaging.Show(True, "MsgEmptyReconciliationEntryChangeAccountDisallowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
                         cboAccountIdNo.RevertValue()
                     End If
                 End If
@@ -775,9 +775,15 @@ Namespace PresentationLayer.Forms
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             If UnreconciledDifference = 0 And Not Posted Then
                 If BtnSave.Enabled Then
-                    MessageBox.Show("Please save first your reconciliation before posting!")
+                    Messaging.Show(True, "MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
                 Else
-                    If MessageBox.Show("Are you sure you want to post this reconciliation entry?", "Post Reconciliation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                    Dim message = "Are you sure you want to {action} this {itemName} entry?"
+                    Dim caption = "Please confirm."
+                    Dim action = "post"
+                    Dim itemName = "account reconciliation"
+                    Messaging.GetMessage(True, "AskIfContinueAction", message, caption)
+                    message = message.Interpolate(Function(x) action, Function(x) itemName)
+                    If Messaging.Show(True, "AskIfContinueAction", message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                         PresenterObj.PostReconciliation(IdNo, AccountReconciliationItems)
                     Else
                         MyErrorProvider.ClearAllErrorMessages()
