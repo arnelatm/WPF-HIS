@@ -490,7 +490,7 @@ Public Class Dac
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
                 message = items(1)
-                If String.IsNullOrEmpty(items(2)) Then
+                If Not String.IsNullOrEmpty(items(2)) Then
                     caption = TranslateCaption(items(2))
                 Else
                     caption = items(2)
