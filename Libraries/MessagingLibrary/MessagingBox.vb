@@ -1,17 +1,27 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Translations
 
 Public Class MessagingBox
 
+    Public Const SqlError = "Error connecting to server"
     Private _newHeight As Int16
     Private _textDisplayLanguage As String
     Private _close As Boolean
-    
+    Private Shared _dataAccessControl
+
     Public Shared SelectedButtons As MessagingButtons
 
     Public Event TextDisplayLanguageChanged()
+
+    Private Shared Sub CreateDataAccessControl()
+        If _dataAccessControl Is Nothing Then
+            _dataAccessControl = New Dac
+        End If
+    End Sub
 
     Public Sub SetInfoIcon()
         pctInfo.Visible = True
@@ -30,7 +40,7 @@ Public Class MessagingBox
     End Sub
 
     Public Property MessageKey As String
-        
+
     Public Sub Ok()
         btnOk.Visible = True
         btnCancel.Visible = False
@@ -43,6 +53,9 @@ Public Class MessagingBox
 
     Protected Property TextDisplayLanguage As String
         Get
+            If _textDisplayLanguage Is Nothing Then
+                _textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+            End If
             Return _textDisplayLanguage
         End Get
         Set(value As String)
@@ -296,8 +309,9 @@ Public Class MessagingBox
         Dim cmd As String
         MessageKey = key
         If NeedToTranslateText(TextDisplayLanguage) Then
+            CreateDataAccessControl()
             cmd = "SELECT Translated FROM TranslatedMessages_View where CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
-            translatedText = TranslatorDac.ExecScalar(Of String)(cmd)
+            translatedText = _dataAccessControl.ExecScalar(Of String)(cmd)
             If translatedText Is Nothing Then
                 Dim languageBaseCode = Strings.Left(TextDisplayLanguage, TextDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
                 cmd = "SELECT Translated from TranslatedMessages_View where RTrim(MessageKey) = '" + RTrim(key) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
@@ -327,5 +341,63 @@ Public Class MessagingBox
 
     Private Sub MessagingBox_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         Me.Text = Me.Text.Trim() & $" [{MessageKey}]"
+        btnOk.Text = TranslateCaptions(btnOk.Text)
+        btnCancel.Text = TranslateCaptions(btnCancel.Text)
+        btnYes.Text = TranslateCaptions(btnYes.Text)
+        btnNo.Text = TranslateCaptions(btnNo.Text)
     End Sub
+
+    Private Function TranslateCaptions(textToTranslate As String)
+        Dim translatedText = textToTranslate
+        If NeedToTranslateText(TextDisplayLanguage) Then
+            Dim cmd As String
+            CreateDataAccessControl()
+            cmd = "SELECT Concat(COALESCE(TRANSLATED,'') ,'~',ORIGINAL) FROM Captions_View where Original = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
+            translatedText = _dataAccessControl.ExecScalar(Of String)(cmd)
+            If translatedText IsNot Nothing AndAlso Strings.Left(translatedText, 1) <> "~" Then
+                translatedText = Strings.Mid(translatedText, 2)
+            Else
+                AddCaption(textToTranslate)
+                translatedText = textToTranslate
+            End If
+        End If
+        Return translatedText
+    End Function
+
+    Sub ErrorMessage(ByVal e As Exception,
+                     Optional ByVal s2 As String = "")
+        Dim s As String = e.Message
+        If Not e.InnerException Is Nothing Then _
+            s += ControlChars.CrLf + e.InnerException.Message
+        MessageBox.Show(s, $"Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Sub
+
+    Private Function AddCaption(ByVal caption As String) As Boolean
+        Dim cmd As String
+        Dim status As Boolean = True
+        Dim cs 
+        CreateDataAccessControl()
+        cmd = "SELECT IdNo FROM Original where Original = '" + caption + "'"
+        Dim idNo As Int32 = _dataAccessControl.ExecScalar(Of Int32)(cmd)
+        If idNo = 0 Then
+            Cs = _dataAccessControl.BuildConnString()
+            Dim conn As SqlConnection = New SqlConnection(Cs)
+            Dim sqlCommand As New SqlCommand("INSERT INTO Original (original) values (@caption)", conn)
+            Try
+                conn.Open()
+                sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption
+                sqlCommand.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                ErrorMessage(ex, SqlError)
+                status = False
+            Finally
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End Try
+        End If
+        Return status
+    End Function
+
+
 End Class

@@ -443,7 +443,9 @@ Public Class Dac
                 Dim items As Collection = ExecReader(cmd)
                 If Not (items Is Nothing OrElse items.Count = 0) Then
                     message = items(1)
-                    If Not String.IsNullOrEmpty(items(2)) Then
+                    If String.IsNullOrEmpty(items(2)) Then
+                        caption = TranslateCaption(caption)
+                    Else
                         caption = items(2)
                     End If
                 Else
@@ -452,12 +454,20 @@ Public Class Dac
                     items = ExecReader(cmd)
                     If Not (items Is Nothing OrElse items.Count = 0) Then
                         message = message
+                        If String.IsNullOrEmpty(caption) Then
+                            caption = TranslateCaption(caption)
+                        End If
                     Else
                         If items.Count() <> 0 Then
                             message = items(1)
-                            caption = items(2)
+                            If String.IsNullOrEmpty(items(2)) Then
+                                caption = TranslateCaption(caption)
+                            Else
+                                caption = items(2)
+                            End If
                         End If
                     End If
+
                 End If
             End If
         Else
@@ -480,7 +490,9 @@ Public Class Dac
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
                 message = items(1)
-                If Not String.IsNullOrEmpty(items(2)) Then
+                If String.IsNullOrEmpty(items(2)) Then
+                    caption = TranslateCaption(items(2))
+                Else
                     caption = items(2)
                 End If
             Else
@@ -489,10 +501,17 @@ Public Class Dac
                 items = ExecReader(cmd)
                 If Not (items Is Nothing OrElse items.Count = 0) Then
                     message = message
+                    If String.IsNullOrEmpty(caption) Then
+                        caption = TranslateCaption(caption)
+                    End If
                 Else
                     If items.Count() <> 0 Then
                         message = items(1)
-                        caption = items(2)
+                        If String.IsNullOrEmpty(items(2)) Then
+                            caption = TranslateCaption(caption)
+                        Else
+                            caption = items(2)
+                        End If
                     End If
                 End If
             End If
@@ -531,6 +550,20 @@ Public Class Dac
             End If
         End If
         Return translatedCaption
+    End Function
+
+    Public Function TranslateCaption(textToTranslate As String)
+        Dim translatedText = textToTranslate
+        Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+        If NeedToTranslateText(textDisplayLanguage) Then
+            Dim cmd As String
+            cmd = "SELECT Concat(COALESCE(TRANSLATED,'') ,'~',ORIGINAL) FROM Captions_View where Original = '" & textToTranslate.Trim() & "' CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+            translatedText = ExecScalar(Of String)(cmd)
+            If Strings.Left(translatedText, 1) <> "~" Then
+                translatedText = Strings.Mid(translatedText, 2)
+            End If
+        End If
+        Return translatedText
     End Function
 
 #End Region
