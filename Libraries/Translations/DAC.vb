@@ -466,7 +466,7 @@ Public Class Dac
         Return message
     End Function
 
-    Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByRef caption As String) As String
+    Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
         If Not translate Then
             Return GetOriginalMessage(key, message, caption)
         End If

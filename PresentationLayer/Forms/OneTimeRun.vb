@@ -12,6 +12,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgEmptyReconciliationEntryChangeAccountDisallowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.","Account change not allowed")
 		Messaging.AddMessage("MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
 		Messaging.AddMessage("AskIfContinueAction","Are you sure you want to {action} this {itemName} entry?", "Please confirm!")
+		Messaging.AddMessage("MsgCannotPostUnreconciledEntry","Sorry you can't post an un-reconciled entry!","")
+		Messaging.AddMessage("MsgAlreadyPosted","Sorry this record has already been posted!","Disallowed operation")
+		Messaging.AddMessage("MsgCannotPostUnreconciledEntry","Sorry you can't post an un-reconciled entry!","Disallowed operation")
+        Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time." ,"Too many forms open")		
     End Sub
 
 End Class

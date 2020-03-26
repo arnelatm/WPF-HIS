@@ -791,26 +791,31 @@ Namespace PresentationLayer.Forms
                 End If
             Else
                 If Posted Then
-                    Dim _err = "Sorry you can't post an un-reconciled entry!"
-                    MessageBox.Show("Sorry this record has already been posted!")
-                    MyErrorProvider.SetError(txtUnreconciledDifference, _err)
+                    Messaging.Show(True, "MsgAlreadyPosted", "Sorry this record has already been posted!", "Invalid Request")
                 Else
-                    Dim _err = "Sorry you can't post an un-reconciled entry!"
-                    MessageBox.Show(_err)
+                    Dim _err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
+                    Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
                     MyErrorProvider.SetError(txtUnreconciledDifference, _err)
                 End If
             End If
         End Sub
 
         Private Sub btnPrint_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrint.ClickButtonArea
-            If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
-                MessageBox.Show("Too Many Forms Open. You can only open up to " + GlobalVariables.MaximumOpenForms.ToString() + " forms at the same time.")
-            Else
-                Dim cForm As New AccountReconciliationReport(IdNo)
-                cForm.Show()
-            End If
-
+            Dim cForm As New AccountReconciliationReport(IdNo)
+            cForm.Show()
         End Sub
+
+        Private Function ShowError(translate As Boolean, key As String, message As String, caption As String, ParamArray variables As String())
+            Dim oldValue As String = ""
+            Dim newValue As String = ""
+            message = Messaging.GetMessage(True, key, message, caption)
+            For i = 0 To variables.Count - 1 Step 2
+                oldValue = variables(i)
+                newValue = variables(i + 1)
+                message = Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
+            Next
+            Return Messaging.Show(message, caption)
+        End Function
 
     End Class
 
