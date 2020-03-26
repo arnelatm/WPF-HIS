@@ -282,8 +282,8 @@ Namespace PresentationLayer.Forms
         Private Sub ShowEntryForm(Of T As New)(ByRef formEntry As T)
             Dim childMdiForm = formEntry
             If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
-                Dim maxOpenForms as String = GlobalVariables.MaximumOpenForms.ToString()
-                Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})           
+                Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
+                Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
                 CallByName(formEntry, "MdiParent", CallType.Set, Me)
                 CallByName(formEntry, "Show", CallType.Method)
@@ -1105,29 +1105,30 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click
-            Dim maxOpenForms as String = GlobalVariables.MaximumOpenForms.ToString()
+            Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
             Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
         End Sub
 
-        Private Function ShowError(translate As Boolean, key As String,  message As String, caption As String, ParamArray variables As String() )
-            dim oldValue as String = ""
-            Dim newValue as String = ""
+        Private Function ShowError(translate As Boolean, key As String, message As String, caption As String, ParamArray variables As String())
+            Dim oldValue As String = ""
+            Dim newValue As String = ""
             message = Messaging.GetMessage(True, key, message, caption)
-            For i = 0 To variables.Count - 1 step 2
+            For i = 0 To variables.Count - 1 Step 2
                 oldValue = "{" & variables(i) & "}"
-                newValue = variables(i+1)
-                message =  Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
+                newValue = variables(i + 1)
+                message = Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
             Next
-            return Messaging.Show(message,caption)
+            Return Messaging.Show(message, caption)
         End Function
 
         Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TranslationsToolStripMenuItem.Click
             Dim frm As New TranslationTableManager()
-            frm.FormIdNoToTranslate = FormIdNo
+            'frm.FormIdNoToTranslate = 0
             frm.AppDataDAC = AppDataDAC
             frm.TranslatorDAC = TranslatorDAC
             frm.Show()
         End Sub
+
     End Class
 
 End Namespace
