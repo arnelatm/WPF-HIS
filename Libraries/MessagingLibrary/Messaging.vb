@@ -5,8 +5,12 @@ Imports AATM.Libraries.Translations
 Public Class Messaging
 
     Private Shared _dataAccessControl 
+    Private Shared _key As String = ""
+
+    Public Shared Property MessageKey As String
 
     Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String) As String
+        MessageKey = key
         Dim message As String = ""
         Dim caption As String = ""
         CreateDataAccessControl()
@@ -21,12 +25,14 @@ Public Class Messaging
     End Sub
 
     Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        MessageKey = key
         CreateDataAccessControl()
         _dataAccessControl.GetMessage(translate, key, message, caption)
         Return message
     End Function
 
     Public Overloads Shared Function AddMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
+        MessageKey = key
         CreateDataAccessControl()
         _dataAccessControl.AddMessage(key, message, caption)
         Return message
@@ -34,6 +40,7 @@ Public Class Messaging
 
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
+        MessageKey = key
         Dim message As String = ""
         Dim caption As String = ""
         CreateDataAccessControl()
@@ -42,6 +49,7 @@ Public Class Messaging
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
+        MessageKey = key
         CreateDataAccessControl()
         _dataAccessControl.GetMessage(translate, key, message, caption)
         Dim p As MessagingBox = New MessagingBox()
@@ -51,6 +59,7 @@ Public Class Messaging
         p.Ok()
         p.btnOk.Focus()
         p.SetInfoIcon()
+        p.MessageKey = MessageKey
         SetLayout(p)
         Return p.ShowDialog()
     End Function
@@ -63,17 +72,20 @@ Public Class Messaging
         p.Ok()
         p.btnOk.Focus()
         p.SetInfoIcon()
+        p.MessageKey = MessageKey
         SetLayout(p)
         Return p.ShowDialog()
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        MessageKey = key
         CreateDataAccessControl()
         _dataAccessControl.GetMessage(translate, key, message, caption)
         Return Show(message, caption, buttons, icon, defaultButton)
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        MessageKey = key
         Dim message As String = ""
         Dim caption As String = ""
         CreateDataAccessControl()
@@ -85,10 +97,42 @@ Public Class Messaging
         Dim p As MessagingBox = New MessagingBox()
         p.txtMessage.Text = message
         p.Text = caption
+        p.MessageKey = MessageKey
         SelectButton(p, buttons)
         SelectIcon(p, icon)
         SelectDefaultButton(p, defaultButton)
         SetLayout(p)
+        Return p.ShowDialog()
+    End Function
+    
+    Public Overloads Shared Function Show(translate As Boolean, key As String,  message As String, caption As String, variables As String() )
+        MessageKey = key
+        dim oldValue as String = ""
+        Dim newValue as String = ""
+        message = GetMessage(translate, key, message, caption)
+        message = message.ReplaceValues(variables)
+        return Show(message,caption)
+    End Function
+
+    Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, variables As String(), ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        MessageKey = key
+        Dim message As String = ""
+        Dim caption As String = ""
+        message = GetMessage(translate, key, message, caption)
+        message = message.ReplaceValues(variables)
+        Return Show(message, caption, buttons, icon, defaultButton)
+    End Function
+
+    Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String, variables As String(), ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        Dim p As MessagingBox = New MessagingBox()
+        message = message.ReplaceValues(variables)
+        p.txtMessage.Text = message
+        p.Text = caption
+        SelectButton(p, buttons)
+        SelectIcon(p, icon)
+        SelectDefaultButton(p, defaultButton)
+        SetLayout(p)
+        p.MessageKey = MessageKey
         Return p.ShowDialog()
     End Function
 

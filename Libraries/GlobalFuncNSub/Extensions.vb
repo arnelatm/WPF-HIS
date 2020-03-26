@@ -23,14 +23,15 @@ Public Module Extensions
     End Function
 
     <Extension()>
-    Public Function Interpolate2(ByVal template As String, ParamArray values As Expression(Of Func(Of Object, String))()) As String
+    Public Function ReplaceValues(ByVal template As String, variables As String() ) As String
         Dim result As String = template
-        values.ToList().ForEach(Function(x)
-                                    Dim member As MemberExpression = TryCast(x.Body, MemberExpression)
-                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", Mid(member.Member.Name, 11), "}")
-                                    Dim newValue As String = x.Compile().Invoke(Nothing).ToString()
-                                    result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
-                                End Function)
+        Dim oldValue As String = ""
+        Dim newValue As String = ""
+        For i = 0 To variables.Count - 1 step 2
+            oldValue = "{" & variables(i) & "}"
+            newValue = variables(i+1)
+            result =  Replace(template, oldValue, newValue, 1, -1, CompareMethod.Text)
+        Next
         Return result
     End Function
 

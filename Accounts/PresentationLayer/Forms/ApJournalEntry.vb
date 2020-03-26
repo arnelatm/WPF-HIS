@@ -570,7 +570,8 @@ Namespace PresentationLayer.Forms
                         _journalItemsPresenter.ChangesMadeInJournalItem = True
                         If EditMode OrElse AddMode Then
                             If .RowIndex() = 0 Then
-                                MessageBox.Show("Sorry, insertion on first row not allowed for AP journal.")
+                                Messaging.Show(True,"MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
+                                               "Invalid Insertion",{"transactionName","A.P. Journal Entry"})
                             Else
                                 Dim newRow As New JournalItemModel
                                 bsJournalItems.Insert(.RowIndex(), newRow)
@@ -579,7 +580,8 @@ Namespace PresentationLayer.Forms
                                 SendKeys.Send("{UP}")
                             End If
                         Else
-                            MessageBox.Show($"Row insertion not allowed while in view mode. Press edit button to enable insertion.")
+                            Messaging.Show(True, "MsgInvalidInsertOnViewMode","Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+                                           "Invalid Insertion")
                         End If
                 End Select
             End With
@@ -611,6 +613,9 @@ Namespace PresentationLayer.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
+                Messaging.Show(True,"MsgPaymentDiscountExistChangeDisallowed", 
+                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.", 
+                               "Modification Error")
                 Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed")
             End If
         End Sub

@@ -8,7 +8,7 @@ Public Class MessagingBox
     Private _newHeight As Int16
     Private _textDisplayLanguage As String
     Private _close As Boolean
-
+    
     Public Shared SelectedButtons As MessagingButtons
 
     Public Event TextDisplayLanguageChanged()
@@ -29,6 +29,8 @@ Public Class MessagingBox
         pctWarning.Visible = True
     End Sub
 
+    Public Property MessageKey As String
+        
     Public Sub Ok()
         btnOk.Visible = True
         btnCancel.Visible = False
@@ -278,13 +280,13 @@ Public Class MessagingBox
         Else
             r = Screen.FromPoint(frm.Location).WorkingArea
         End If
-
         Dim x = r.Left + (r.Width - frm.Width) \ 2
         Dim y = r.Top + (r.Height - frm.Height) \ 2
         frm.Location = New Point(x, y)
     End Sub
 
     Public Function CreateMessage(key, message)
+        MessageKey = key
         StoreCaptions1.InsertMessage(key, message)
         Return GetTranslatedMessage(key, message)
     End Function
@@ -292,6 +294,7 @@ Public Class MessagingBox
     Protected Function GetTranslatedMessage(ByVal key As String, ByVal message As String)
         Dim translatedText As String
         Dim cmd As String
+        MessageKey = key
         If NeedToTranslateText(TextDisplayLanguage) Then
             cmd = "SELECT Translated FROM TranslatedMessages_View where CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
             translatedText = TranslatorDac.ExecScalar(Of String)(cmd)
@@ -322,4 +325,7 @@ Public Class MessagingBox
         CustomFourButtons
     End Enum
 
+    Private Sub MessagingBox_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Me.Text = Me.Text.Trim() & $" [{MessageKey}]"
+    End Sub
 End Class

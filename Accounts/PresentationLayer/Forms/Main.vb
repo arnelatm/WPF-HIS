@@ -280,9 +280,10 @@ Namespace PresentationLayer.Forms
         '    fileName = ConfigurationManager.AppSettings.Get("FileNameAppData") ' DBF, MDB
 
         Private Sub ShowEntryForm(Of T As New)(ByRef formEntry As T)
-            'Dim childMdiForm = formEntry
+            Dim childMdiForm = formEntry
             If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
-                MessageBox.Show("Too Many Forms Open. You can only open up to " + GlobalVariables.MaximumOpenForms.ToString() + " forms at the same time.")
+                Dim maxOpenForms as String = GlobalVariables.MaximumOpenForms.ToString()
+                Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})           
             Else
                 CallByName(formEntry, "MdiParent", CallType.Set, Me)
                 CallByName(formEntry, "Show", CallType.Method)
@@ -1103,6 +1104,30 @@ Namespace PresentationLayer.Forms
             OneTimeRun.CreateAllMessages()
         End Sub
 
+        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click
+            Dim maxOpenForms as String = GlobalVariables.MaximumOpenForms.ToString()
+            Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
+        End Sub
+
+        Private Function ShowError(translate As Boolean, key As String,  message As String, caption As String, ParamArray variables As String() )
+            dim oldValue as String = ""
+            Dim newValue as String = ""
+            message = Messaging.GetMessage(True, key, message, caption)
+            For i = 0 To variables.Count - 1 step 2
+                oldValue = "{" & variables(i) & "}"
+                newValue = variables(i+1)
+                message =  Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
+            Next
+            return Messaging.Show(message,caption)
+        End Function
+
+        Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TranslationsToolStripMenuItem.Click
+            Dim frm As New TranslationTableManager()
+            frm.FormIdNoToTranslate = FormIdNo
+            frm.AppDataDAC = AppDataDAC
+            frm.TranslatorDAC = TranslatorDAC
+            frm.Show()
+        End Sub
     End Class
 
 End Namespace

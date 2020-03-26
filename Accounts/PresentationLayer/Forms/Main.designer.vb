@@ -86,6 +86,7 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemMessages = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCaptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.TranslationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateAllMessagesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSuppliersVendors = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCustomersClients = New System.Windows.Forms.ToolStripMenuItem()
@@ -136,7 +137,6 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateAllMessagesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.MainMenu.SuspendLayout
@@ -445,6 +445,11 @@ Namespace PresentationLayer.Forms
         Me.TranslationsToolStripMenuItem.Name = "TranslationsToolStripMenuItem"
         resources.ApplyResources(Me.TranslationsToolStripMenuItem, "TranslationsToolStripMenuItem")
         '
+        'CreateAllMessagesToolStripMenuItem
+        '
+        Me.CreateAllMessagesToolStripMenuItem.Name = "CreateAllMessagesToolStripMenuItem"
+        resources.ApplyResources(Me.CreateAllMessagesToolStripMenuItem, "CreateAllMessagesToolStripMenuItem")
+        '
         'ToolStripMenuItemPayroll
         '
         Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
@@ -703,11 +708,6 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-        '
-        'CreateAllMessagesToolStripMenuItem
-        '
-        Me.CreateAllMessagesToolStripMenuItem.Name = "CreateAllMessagesToolStripMenuItem"
-        resources.ApplyResources(Me.CreateAllMessagesToolStripMenuItem, "CreateAllMessagesToolStripMenuItem")
         '
         'Main
         '
