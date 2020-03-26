@@ -378,11 +378,6 @@ Public Class BfMain
                 End If
             Next
         End If
-        'If IsRightToLeft(targetLanguage) Then
-        '    ChangeToRtlDisplay()
-        'Else
-        '    ChangeToLtrDisplay()
-        'End If
     End Sub
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
