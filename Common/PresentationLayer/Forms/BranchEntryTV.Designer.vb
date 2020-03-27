@@ -145,26 +145,36 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblBranchCode
         '
+        Me.lblBranchCode.DisplayOnly = true
+        Me.lblBranchCode.EditingMode = false
         resources.ApplyResources(Me.lblBranchCode, "lblBranchCode")
         Me.lblBranchCode.Name = "lblBranchCode"
         '
         'lblBranchName
         '
+        Me.lblBranchName.DisplayOnly = true
+        Me.lblBranchName.EditingMode = false
         resources.ApplyResources(Me.lblBranchName, "lblBranchName")
         Me.lblBranchName.Name = "lblBranchName"
         '
         'lblBranchNameAra
         '
+        Me.lblBranchNameAra.DisplayOnly = true
+        Me.lblBranchNameAra.EditingMode = false
         resources.ApplyResources(Me.lblBranchNameAra, "lblBranchNameAra")
         Me.lblBranchNameAra.Name = "lblBranchNameAra"
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '

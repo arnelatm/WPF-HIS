@@ -17,7 +17,7 @@
     End Class
 
     Public Class LookupData
-        Public Property IdNo As Nullable(Of Int32)
+        Public Property IdNo As Int32
         Public Property Name As String
         Public Property Code As String
         Public Property Index As Nullable(Of Int32)

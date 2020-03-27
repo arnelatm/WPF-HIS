@@ -44,9 +44,12 @@ Partial Class UserEntryTv
         '
         'TreeViewTableName
         '
+        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 195)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 198)
         '
         'CFlowLayout1
         '
@@ -66,13 +69,16 @@ Partial Class UserEntryTv
         Me.CFlowLayout1.Controls.Add(Me.TxtPassword)
         Me.CFlowLayout1.Controls.Add(Me.lblSecurityGroupID)
         Me.CFlowLayout1.Controls.Add(Me.cacSecurityGroupIdNo)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(306, 12)
+        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CFlowLayout1.Location = New System.Drawing.Point(307, 25)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(494, 183)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(494, 198)
         Me.CFlowLayout1.TabIndex = 125
         '
         'lblIDNo
         '
+        Me.lblIDNo.DisplayOnly = true
+        Me.lblIDNo.EditingMode = false
         Me.lblIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIDNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIDNo.Location = New System.Drawing.Point(1, 1)
@@ -85,11 +91,10 @@ Partial Class UserEntryTv
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.TxtIDNo, true)
@@ -99,12 +104,15 @@ Partial Class UserEntryTv
         Me.TxtIDNo.Location = New System.Drawing.Point(155, 1)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.Size = New System.Drawing.Size(77, 23)
         Me.TxtIDNo.TabIndex = 0
         Me.TxtIDNo.TabStop = false
         '
         'lblUserName
         '
+        Me.lblUserName.DisplayOnly = true
+        Me.lblUserName.EditingMode = false
         Me.lblUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblUserName.Location = New System.Drawing.Point(1, 26)
@@ -117,11 +125,10 @@ Partial Class UserEntryTv
         '
         'TxtUserName
         '
-        Me.TxtUserName.AcceptsReturn = false
-        Me.TxtUserName.AcceptsTab = false
         Me.TxtUserName.BackColor = System.Drawing.Color.White
         Me.TxtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtUserName.ComputedValue = false
+        Me.TxtUserName.CustomFormat = Nothing
         Me.TxtUserName.DataBoundControl = true
         Me.TxtUserName.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.TxtUserName, true)
@@ -131,11 +138,14 @@ Partial Class UserEntryTv
         Me.TxtUserName.Location = New System.Drawing.Point(155, 26)
         Me.TxtUserName.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtUserName.Name = "TxtUserName"
+        Me.TxtUserName.OldValue = Nothing
         Me.TxtUserName.Size = New System.Drawing.Size(200, 23)
         Me.TxtUserName.TabIndex = 1
         '
         'lblFullName
         '
+        Me.lblFullName.DisplayOnly = true
+        Me.lblFullName.EditingMode = false
         Me.lblFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblFullName.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFullName.Location = New System.Drawing.Point(1, 51)
@@ -148,11 +158,10 @@ Partial Class UserEntryTv
         '
         'TxtFullName
         '
-        Me.TxtFullName.AcceptsReturn = false
-        Me.TxtFullName.AcceptsTab = false
         Me.TxtFullName.BackColor = System.Drawing.Color.White
         Me.TxtFullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtFullName.ComputedValue = false
+        Me.TxtFullName.CustomFormat = Nothing
         Me.TxtFullName.DataBoundControl = true
         Me.TxtFullName.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.TxtFullName, true)
@@ -162,11 +171,14 @@ Partial Class UserEntryTv
         Me.TxtFullName.Location = New System.Drawing.Point(155, 51)
         Me.TxtFullName.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtFullName.Name = "TxtFullName"
+        Me.TxtFullName.OldValue = Nothing
         Me.TxtFullName.Size = New System.Drawing.Size(320, 23)
         Me.TxtFullName.TabIndex = 2
         '
         'lblFullNameAra
         '
+        Me.lblFullNameAra.DisplayOnly = true
+        Me.lblFullNameAra.EditingMode = false
         Me.lblFullNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblFullNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFullNameAra.Location = New System.Drawing.Point(1, 76)
@@ -179,11 +191,10 @@ Partial Class UserEntryTv
         '
         'txtFullNameAra
         '
-        Me.txtFullNameAra.AcceptsReturn = false
-        Me.txtFullNameAra.AcceptsTab = false
         Me.txtFullNameAra.BackColor = System.Drawing.Color.White
         Me.txtFullNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFullNameAra.ComputedValue = false
+        Me.txtFullNameAra.CustomFormat = Nothing
         Me.txtFullNameAra.DataBoundControl = true
         Me.txtFullNameAra.EditingMode = false
         Me.txtFullNameAra.EnglishControl = Me.TxtFullName
@@ -193,6 +204,7 @@ Partial Class UserEntryTv
         Me.txtFullNameAra.Location = New System.Drawing.Point(155, 76)
         Me.txtFullNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtFullNameAra.Name = "txtFullNameAra"
+        Me.txtFullNameAra.OldValue = Nothing
         Me.txtFullNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtFullNameAra.Size = New System.Drawing.Size(320, 23)
         Me.txtFullNameAra.TabIndex = 3
@@ -200,6 +212,8 @@ Partial Class UserEntryTv
         '
         'CLabel1
         '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel1.Location = New System.Drawing.Point(1, 101)
@@ -229,7 +243,7 @@ Partial Class UserEntryTv
         Me.cacSecurityLevel.Location = New System.Drawing.Point(155, 101)
         Me.cacSecurityLevel.Margin = New System.Windows.Forms.Padding(1)
         Me.cacSecurityLevel.Name = "cacSecurityLevel"
-        Me.cacSecurityLevel.OldValue = Nothing
+        Me.cacSecurityLevel.OldValue = 0
         Me.cacSecurityLevel.OriginalDataSource = Nothing
         Me.cacSecurityLevel.OriginalList = Nothing
         Me.cacSecurityLevel.OverrideDropDownStyleList = false
@@ -250,6 +264,8 @@ Partial Class UserEntryTv
         '
         'lblPassword
         '
+        Me.lblPassword.DisplayOnly = true
+        Me.lblPassword.EditingMode = false
         Me.lblPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPassword.Location = New System.Drawing.Point(1, 127)
@@ -262,11 +278,10 @@ Partial Class UserEntryTv
         '
         'TxtPassword
         '
-        Me.TxtPassword.AcceptsReturn = false
-        Me.TxtPassword.AcceptsTab = false
         Me.TxtPassword.BackColor = System.Drawing.Color.White
         Me.TxtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtPassword.ComputedValue = false
+        Me.TxtPassword.CustomFormat = Nothing
         Me.TxtPassword.DataBoundControl = true
         Me.TxtPassword.EditingMode = false
         Me.CFlowLayout1.SetFlowBreak(Me.TxtPassword, true)
@@ -276,6 +291,7 @@ Partial Class UserEntryTv
         Me.TxtPassword.Location = New System.Drawing.Point(155, 127)
         Me.TxtPassword.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtPassword.Name = "TxtPassword"
+        Me.TxtPassword.OldValue = Nothing
         Me.TxtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtPassword.SecurityKey = ""
         Me.TxtPassword.Size = New System.Drawing.Size(320, 23)
@@ -283,6 +299,8 @@ Partial Class UserEntryTv
         '
         'lblSecurityGroupID
         '
+        Me.lblSecurityGroupID.DisplayOnly = true
+        Me.lblSecurityGroupID.EditingMode = false
         Me.lblSecurityGroupID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSecurityGroupID.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSecurityGroupID.Location = New System.Drawing.Point(1, 152)
@@ -312,7 +330,7 @@ Partial Class UserEntryTv
         Me.cacSecurityGroupIdNo.Location = New System.Drawing.Point(155, 152)
         Me.cacSecurityGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cacSecurityGroupIdNo.Name = "cacSecurityGroupIdNo"
-        Me.cacSecurityGroupIdNo.OldValue = Nothing
+        Me.cacSecurityGroupIdNo.OldValue = 0
         Me.cacSecurityGroupIdNo.OriginalDataSource = Nothing
         Me.cacSecurityGroupIdNo.OriginalList = Nothing
         Me.cacSecurityGroupIdNo.OverrideDropDownStyleList = false
@@ -333,8 +351,9 @@ Partial Class UserEntryTv
         '
         'UserEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(833, 282)
+        Me.ClientSize = New System.Drawing.Size(801, 223)
         Me.Controls.Add(Me.CFlowLayout1)
+        Me.MinimumSize = New System.Drawing.Size(817, 262)
         Me.Name = "UserEntryTv"
         Me.Text = "User Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
@@ -345,7 +364,7 @@ Partial Class UserEntryTv
         Me.ResumeLayout(false)
         Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Friend WithEvents lblIDNo As CLabel

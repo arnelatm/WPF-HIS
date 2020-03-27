@@ -143,16 +143,22 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
         'lblAccountStatus
         '
+        Me.lblAccountStatus.DisplayOnly = true
+        Me.lblAccountStatus.EditingMode = false
         resources.ApplyResources(Me.lblAccountStatus, "lblAccountStatus")
         Me.lblAccountStatus.Name = "lblAccountStatus"
         '
         'lblDateAccountOpen
         '
+        Me.lblDateAccountOpen.DisplayOnly = true
+        Me.lblDateAccountOpen.EditingMode = false
         resources.ApplyResources(Me.lblDateAccountOpen, "lblDateAccountOpen")
         Me.lblDateAccountOpen.Name = "lblDateAccountOpen"
         '
@@ -172,6 +178,8 @@ Namespace PresentationLayer.Forms
         '
         'lblOpeningBalance
         '
+        Me.lblOpeningBalance.DisplayOnly = true
+        Me.lblOpeningBalance.EditingMode = false
         resources.ApplyResources(Me.lblOpeningBalance, "lblOpeningBalance")
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
         '
@@ -193,6 +201,8 @@ Namespace PresentationLayer.Forms
         '
         'lblSettlementDiscount
         '
+        Me.lblSettlementDiscount.DisplayOnly = true
+        Me.lblSettlementDiscount.EditingMode = false
         resources.ApplyResources(Me.lblSettlementDiscount, "lblSettlementDiscount")
         Me.lblSettlementDiscount.Name = "lblSettlementDiscount"
         '
@@ -213,11 +223,15 @@ Namespace PresentationLayer.Forms
         '
         'CLabel2
         '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
         resources.ApplyResources(Me.CLabel2, "CLabel2")
         Me.CLabel2.Name = "CLabel2"
         '
         'lblPaymentMethod
         '
+        Me.lblPaymentMethod.DisplayOnly = true
+        Me.lblPaymentMethod.EditingMode = false
         resources.ApplyResources(Me.lblPaymentMethod, "lblPaymentMethod")
         Me.lblPaymentMethod.Name = "lblPaymentMethod"
         '
@@ -238,6 +252,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPaymentDueDays
         '
+        Me.lblPaymentDueDays.DisplayOnly = true
+        Me.lblPaymentDueDays.EditingMode = false
         resources.ApplyResources(Me.lblPaymentDueDays, "lblPaymentDueDays")
         Me.lblPaymentDueDays.Name = "lblPaymentDueDays"
         '
@@ -257,16 +273,22 @@ Namespace PresentationLayer.Forms
         '
         'lblCreditLimit
         '
+        Me.lblCreditLimit.DisplayOnly = true
+        Me.lblCreditLimit.EditingMode = false
         resources.ApplyResources(Me.lblCreditLimit, "lblCreditLimit")
         Me.lblCreditLimit.Name = "lblCreditLimit"
         '
         'lblArAccountIdNo
         '
+        Me.lblArAccountIdNo.DisplayOnly = true
+        Me.lblArAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblArAccountIdNo, "lblArAccountIdNo")
         Me.lblArAccountIdNo.Name = "lblArAccountIdNo"
         '
         'lblRevAccountIdNo
         '
+        Me.lblRevAccountIdNo.DisplayOnly = true
+        Me.lblRevAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblRevAccountIdNo, "lblRevAccountIdNo")
         Me.lblRevAccountIdNo.Name = "lblRevAccountIdNo"
         '
@@ -287,6 +309,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIban
         '
+        Me.lblIban.DisplayOnly = true
+        Me.lblIban.EditingMode = false
         resources.ApplyResources(Me.lblIban, "lblIban")
         Me.lblIban.Name = "lblIban"
         '
@@ -306,11 +330,15 @@ Namespace PresentationLayer.Forms
         '
         'lblBankAccountNo
         '
+        Me.lblBankAccountNo.DisplayOnly = true
+        Me.lblBankAccountNo.EditingMode = false
         resources.ApplyResources(Me.lblBankAccountNo, "lblBankAccountNo")
         Me.lblBankAccountNo.Name = "lblBankAccountNo"
         '
         'lblBankIdNo
         '
+        Me.lblBankIdNo.DisplayOnly = true
+        Me.lblBankIdNo.EditingMode = false
         resources.ApplyResources(Me.lblBankIdNo, "lblBankIdNo")
         Me.lblBankIdNo.Name = "lblBankIdNo"
         '
@@ -330,6 +358,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCrNumber
         '
+        Me.lblCrNumber.DisplayOnly = true
+        Me.lblCrNumber.EditingMode = false
         resources.ApplyResources(Me.lblCrNumber, "lblCrNumber")
         Me.lblCrNumber.Name = "lblCrNumber"
         '
@@ -350,6 +380,8 @@ Namespace PresentationLayer.Forms
         '
         'lblWebsite
         '
+        Me.lblWebsite.DisplayOnly = true
+        Me.lblWebsite.EditingMode = false
         resources.ApplyResources(Me.lblWebsite, "lblWebsite")
         Me.lblWebsite.Name = "lblWebsite"
         '
@@ -369,6 +401,8 @@ Namespace PresentationLayer.Forms
         '
         'lblEmail
         '
+        Me.lblEmail.DisplayOnly = true
+        Me.lblEmail.EditingMode = false
         resources.ApplyResources(Me.lblEmail, "lblEmail")
         Me.lblEmail.Name = "lblEmail"
         '
@@ -389,6 +423,8 @@ Namespace PresentationLayer.Forms
         '
         'lblMobile
         '
+        Me.lblMobile.DisplayOnly = true
+        Me.lblMobile.EditingMode = false
         resources.ApplyResources(Me.lblMobile, "lblMobile")
         Me.lblMobile.Name = "lblMobile"
         '
@@ -408,6 +444,8 @@ Namespace PresentationLayer.Forms
         '
         'lblFax
         '
+        Me.lblFax.DisplayOnly = true
+        Me.lblFax.EditingMode = false
         resources.ApplyResources(Me.lblFax, "lblFax")
         Me.lblFax.Name = "lblFax"
         '
@@ -428,6 +466,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPhone2
         '
+        Me.lblPhone2.DisplayOnly = true
+        Me.lblPhone2.EditingMode = false
         resources.ApplyResources(Me.lblPhone2, "lblPhone2")
         Me.lblPhone2.Name = "lblPhone2"
         '
@@ -447,11 +487,15 @@ Namespace PresentationLayer.Forms
         '
         'lblPhone1
         '
+        Me.lblPhone1.DisplayOnly = true
+        Me.lblPhone1.EditingMode = false
         resources.ApplyResources(Me.lblPhone1, "lblPhone1")
         Me.lblPhone1.Name = "lblPhone1"
         '
         'lblCountryCode
         '
+        Me.lblCountryCode.DisplayOnly = true
+        Me.lblCountryCode.EditingMode = false
         resources.ApplyResources(Me.lblCountryCode, "lblCountryCode")
         Me.lblCountryCode.Name = "lblCountryCode"
         '
@@ -471,6 +515,8 @@ Namespace PresentationLayer.Forms
         '
         'lblZipCode
         '
+        Me.lblZipCode.DisplayOnly = true
+        Me.lblZipCode.EditingMode = false
         resources.ApplyResources(Me.lblZipCode, "lblZipCode")
         Me.lblZipCode.Name = "lblZipCode"
         '
@@ -490,6 +536,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPoBox
         '
+        Me.lblPoBox.DisplayOnly = true
+        Me.lblPoBox.EditingMode = false
         resources.ApplyResources(Me.lblPoBox, "lblPoBox")
         Me.lblPoBox.Name = "lblPoBox"
         '
@@ -510,6 +558,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProvinceState
         '
+        Me.lblProvinceState.DisplayOnly = true
+        Me.lblProvinceState.EditingMode = false
         resources.ApplyResources(Me.lblProvinceState, "lblProvinceState")
         Me.lblProvinceState.Name = "lblProvinceState"
         '
@@ -529,6 +579,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTownCity
         '
+        Me.lblTownCity.DisplayOnly = true
+        Me.lblTownCity.EditingMode = false
         resources.ApplyResources(Me.lblTownCity, "lblTownCity")
         Me.lblTownCity.Name = "lblTownCity"
         '
@@ -549,6 +601,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDistrict
         '
+        Me.lblDistrict.DisplayOnly = true
+        Me.lblDistrict.EditingMode = false
         resources.ApplyResources(Me.lblDistrict, "lblDistrict")
         Me.lblDistrict.Name = "lblDistrict"
         '
@@ -568,6 +622,8 @@ Namespace PresentationLayer.Forms
         '
         'lblStreet
         '
+        Me.lblStreet.DisplayOnly = true
+        Me.lblStreet.EditingMode = false
         resources.ApplyResources(Me.lblStreet, "lblStreet")
         Me.lblStreet.Name = "lblStreet"
         '
@@ -588,6 +644,8 @@ Namespace PresentationLayer.Forms
         '
         'lblContactDesignation
         '
+        Me.lblContactDesignation.DisplayOnly = true
+        Me.lblContactDesignation.EditingMode = false
         resources.ApplyResources(Me.lblContactDesignation, "lblContactDesignation")
         Me.lblContactDesignation.Name = "lblContactDesignation"
         '
@@ -607,6 +665,8 @@ Namespace PresentationLayer.Forms
         '
         'lblContactPerson
         '
+        Me.lblContactPerson.DisplayOnly = true
+        Me.lblContactPerson.EditingMode = false
         resources.ApplyResources(Me.lblContactPerson, "lblContactPerson")
         Me.lblContactPerson.Name = "lblContactPerson"
         '
@@ -645,16 +705,22 @@ Namespace PresentationLayer.Forms
         '
         'lblCustomerName
         '
+        Me.lblCustomerName.DisplayOnly = true
+        Me.lblCustomerName.EditingMode = false
         resources.ApplyResources(Me.lblCustomerName, "lblCustomerName")
         Me.lblCustomerName.Name = "lblCustomerName"
         '
         'lblCustomerNameAra
         '
+        Me.lblCustomerNameAra.DisplayOnly = true
+        Me.lblCustomerNameAra.EditingMode = false
         resources.ApplyResources(Me.lblCustomerNameAra, "lblCustomerNameAra")
         Me.lblCustomerNameAra.Name = "lblCustomerNameAra"
         '
         'lblVatNumber
         '
+        Me.lblVatNumber.DisplayOnly = true
+        Me.lblVatNumber.EditingMode = false
         resources.ApplyResources(Me.lblVatNumber, "lblVatNumber")
         Me.lblVatNumber.Name = "lblVatNumber"
         '
@@ -675,6 +741,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCustomerCode
         '
+        Me.lblCustomerCode.DisplayOnly = true
+        Me.lblCustomerCode.EditingMode = false
         resources.ApplyResources(Me.lblCustomerCode, "lblCustomerCode")
         Me.lblCustomerCode.Name = "lblCustomerCode"
         '
@@ -697,6 +765,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -969,6 +1039,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel1
         '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
         resources.ApplyResources(Me.CLabel1, "CLabel1")
         Me.CLabel1.Name = "CLabel1"
         '
@@ -1062,6 +1134,8 @@ Namespace PresentationLayer.Forms
         '
         'lblActive
         '
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
         resources.ApplyResources(Me.lblActive, "lblActive")
         Me.lblActive.Name = "lblActive"
         '

@@ -134,6 +134,15 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByName()
         End Function
 
+        Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
+            TableToGet = "Department"
+            SortExpression = sortKey
+            DisplayName = "DepartmentName"
+            DisplayNameArabic = "DepartmentNameAra"
+            DisplayCode = "DepartmentCode"
+            Return GetLookupDataByName()
+        End Function
+
         Public Function GetSupplierListByCode(Optional ByVal sortKey As String = "SupplierCode")
             TableToGet = "Supplier"
             SortExpression = sortKey

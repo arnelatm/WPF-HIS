@@ -89,6 +89,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -111,6 +113,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDistributionSchemeCode
         '
+        Me.lblDistributionSchemeCode.DisplayOnly = true
+        Me.lblDistributionSchemeCode.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeCode, "lblDistributionSchemeCode")
         Me.lblDistributionSchemeCode.Name = "lblDistributionSchemeCode"
         '
@@ -132,6 +136,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDistributionSchemeName
         '
+        Me.lblDistributionSchemeName.DisplayOnly = true
+        Me.lblDistributionSchemeName.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeName, "lblDistributionSchemeName")
         Me.lblDistributionSchemeName.Name = "lblDistributionSchemeName"
         '
@@ -153,6 +159,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDistributionSchemeNameAra
         '
+        Me.lblDistributionSchemeNameAra.DisplayOnly = true
+        Me.lblDistributionSchemeNameAra.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeNameAra, "lblDistributionSchemeNameAra")
         Me.lblDistributionSchemeNameAra.Name = "lblDistributionSchemeNameAra"
         '
@@ -175,6 +183,8 @@ Namespace PresentationLayer.Forms
         '
         'lblValidityStartDate
         '
+        Me.lblValidityStartDate.DisplayOnly = true
+        Me.lblValidityStartDate.EditingMode = false
         resources.ApplyResources(Me.lblValidityStartDate, "lblValidityStartDate")
         Me.lblValidityStartDate.Name = "lblValidityStartDate"
         '
@@ -201,6 +211,8 @@ Namespace PresentationLayer.Forms
         '
         'lblValidityEndDate
         '
+        Me.lblValidityEndDate.DisplayOnly = true
+        Me.lblValidityEndDate.EditingMode = false
         resources.ApplyResources(Me.lblValidityEndDate, "lblValidityEndDate")
         Me.lblValidityEndDate.Name = "lblValidityEndDate"
         '
@@ -212,6 +224,7 @@ Namespace PresentationLayer.Forms
         Me.dtpValidityEndDate.DtpDefaultValue = Nothing
         Me.dtpValidityEndDate.EditingMode = false
         Me.dtpValidityEndDate.EditsAllowed = false
+        Me.floJournalHeader.SetFlowBreak(Me.dtpValidityEndDate, true)
         resources.ApplyResources(Me.dtpValidityEndDate, "dtpValidityEndDate")
         Me.dtpValidityEndDate.ForeColor = System.Drawing.Color.Black
         Me.dtpValidityEndDate.LinkedLabel = Me.lblValidityEndDate
@@ -227,6 +240,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -247,6 +262,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAmount
         '
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         resources.ApplyResources(Me.lblAmount, "lblAmount")
         Me.lblAmount.Name = "lblAmount"
         '
@@ -260,7 +277,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewDistributionSchemeItems.DataInGridChanged = false
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Tahoma", 8!)
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText

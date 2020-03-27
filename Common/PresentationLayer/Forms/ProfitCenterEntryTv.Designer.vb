@@ -54,9 +54,12 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
+        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 240)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 248)
         '
         'LocalizableContent1
         '
@@ -102,6 +105,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -133,6 +138,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProfitCenterCode
         '
+        Me.lblProfitCenterCode.DisplayOnly = true
+        Me.lblProfitCenterCode.EditingMode = false
         Me.lblProfitCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblProfitCenterCode.Location = New System.Drawing.Point(1, 26)
         Me.lblProfitCenterCode.Margin = New System.Windows.Forms.Padding(1)
@@ -164,6 +171,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProfitCenterName
         '
+        Me.lblProfitCenterName.DisplayOnly = true
+        Me.lblProfitCenterName.EditingMode = false
         Me.lblProfitCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblProfitCenterName.Location = New System.Drawing.Point(1, 51)
         Me.lblProfitCenterName.Margin = New System.Windows.Forms.Padding(1)
@@ -196,6 +205,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProfitCenterNameAra
         '
+        Me.lblProfitCenterNameAra.DisplayOnly = true
+        Me.lblProfitCenterNameAra.EditingMode = false
         Me.lblProfitCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblProfitCenterNameAra.Location = New System.Drawing.Point(1, 76)
         Me.lblProfitCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
@@ -247,7 +258,8 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtSortKey)
-        Me.floDataDisplay.Location = New System.Drawing.Point(309, 3)
+        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
+        Me.floDataDisplay.Location = New System.Drawing.Point(309, 25)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Size = New System.Drawing.Size(677, 248)
@@ -255,6 +267,8 @@ Namespace PresentationLayer.Forms
         '
         'lblParentIdNo
         '
+        Me.lblParentIdNo.DisplayOnly = true
+        Me.lblParentIdNo.EditingMode = false
         Me.lblParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblParentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblParentIdNo.Location = New System.Drawing.Point(1, 101)
@@ -305,6 +319,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProfitCenterType
         '
+        Me.lblProfitCenterType.DisplayOnly = true
+        Me.lblProfitCenterType.EditingMode = false
         Me.lblProfitCenterType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblProfitCenterType.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblProfitCenterType.Location = New System.Drawing.Point(1, 127)
@@ -355,6 +371,8 @@ Namespace PresentationLayer.Forms
         '
         'lblLevelNumber
         '
+        Me.lblLevelNumber.DisplayOnly = true
+        Me.lblLevelNumber.EditingMode = false
         Me.lblLevelNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblLevelNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblLevelNumber.Location = New System.Drawing.Point(1, 153)
@@ -390,6 +408,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.Location = New System.Drawing.Point(1, 181)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
@@ -422,7 +442,7 @@ Namespace PresentationLayer.Forms
         '
         'ProfitCenterEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(986, 323)
+        Me.ClientSize = New System.Drawing.Size(986, 273)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "ProfitCenterEntryTv"
         Me.Text = "ProfitCenters Maintenance Form"

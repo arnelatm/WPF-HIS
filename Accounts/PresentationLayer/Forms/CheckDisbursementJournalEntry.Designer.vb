@@ -194,6 +194,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -234,6 +236,8 @@ Namespace PresentationLayer.Forms
         '
         'lblReferenceNo
         '
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
         resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
         Me.lblReferenceNo.Name = "lblReferenceNo"
         '
@@ -254,6 +258,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTransactionDate
         '
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
         resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
         Me.lblTransactionDate.Name = "lblTransactionDate"
         '
@@ -280,6 +286,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPaymentType
         '
+        Me.lblPaymentType.DisplayOnly = true
+        Me.lblPaymentType.EditingMode = false
         resources.ApplyResources(Me.lblPaymentType, "lblPaymentType")
         Me.lblPaymentType.Name = "lblPaymentType"
         '
@@ -318,6 +326,8 @@ Namespace PresentationLayer.Forms
         '
         'lblSupplierIdNo
         '
+        Me.lblSupplierIdNo.DisplayOnly = true
+        Me.lblSupplierIdNo.EditingMode = false
         resources.ApplyResources(Me.lblSupplierIdNo, "lblSupplierIdNo")
         Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
         '
@@ -374,11 +384,15 @@ Namespace PresentationLayer.Forms
         '
         'lblAmount
         '
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         resources.ApplyResources(Me.lblAmount, "lblAmount")
         Me.lblAmount.Name = "lblAmount"
         '
         'lblAccountIdNo
         '
+        Me.lblAccountIdNo.DisplayOnly = true
+        Me.lblAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
         Me.lblAccountIdNo.Name = "lblAccountIdNo"
         '
@@ -432,6 +446,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCheckNumber
         '
+        Me.lblCheckNumber.DisplayOnly = true
+        Me.lblCheckNumber.EditingMode = false
         resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
         Me.lblCheckNumber.Name = "lblCheckNumber"
         '
@@ -452,6 +468,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCheckDate
         '
+        Me.lblCheckDate.DisplayOnly = true
+        Me.lblCheckDate.EditingMode = false
         resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
         Me.lblCheckDate.Name = "lblCheckDate"
         '
@@ -478,6 +496,8 @@ Namespace PresentationLayer.Forms
         '
         'lblInvoiceNo
         '
+        Me.lblInvoiceNo.DisplayOnly = true
+        Me.lblInvoiceNo.EditingMode = false
         resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
         Me.lblInvoiceNo.Name = "lblInvoiceNo"
         '
@@ -498,6 +518,8 @@ Namespace PresentationLayer.Forms
         '
         'lblVatNo
         '
+        Me.lblVatNo.DisplayOnly = true
+        Me.lblVatNo.EditingMode = false
         resources.ApplyResources(Me.lblVatNo, "lblVatNo")
         Me.lblVatNo.Name = "lblVatNo"
         '
@@ -519,11 +541,15 @@ Namespace PresentationLayer.Forms
         '
         'lblApplied
         '
+        Me.lblApplied.DisplayOnly = true
+        Me.lblApplied.EditingMode = false
         resources.ApplyResources(Me.lblApplied, "lblApplied")
         Me.lblApplied.Name = "lblApplied"
         '
         'lblDiscountAccountIdNo
         '
+        Me.lblDiscountAccountIdNo.DisplayOnly = true
+        Me.lblDiscountAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblDiscountAccountIdNo, "lblDiscountAccountIdNo")
         Me.lblDiscountAccountIdNo.Name = "lblDiscountAccountIdNo"
         '
@@ -564,6 +590,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -606,6 +634,8 @@ Namespace PresentationLayer.Forms
         '
         'lblVatAmount
         '
+        Me.lblVatAmount.DisplayOnly = true
+        Me.lblVatAmount.EditingMode = false
         resources.ApplyResources(Me.lblVatAmount, "lblVatAmount")
         Me.lblVatAmount.Name = "lblVatAmount"
         '
@@ -645,6 +675,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel2
         '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
         resources.ApplyResources(Me.CLabel2, "CLabel2")
         Me.CLabel2.Name = "CLabel2"
         '
@@ -668,6 +700,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDiscountTaken
         '
+        Me.lblDiscountTaken.DisplayOnly = true
+        Me.lblDiscountTaken.EditingMode = false
         resources.ApplyResources(Me.lblDiscountTaken, "lblDiscountTaken")
         Me.lblDiscountTaken.Name = "lblDiscountTaken"
         '
@@ -690,6 +724,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCancelled
         '
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         resources.ApplyResources(Me.lblCancelled, "lblCancelled")
         Me.lblCancelled.Name = "lblCancelled"
         '
@@ -708,6 +744,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPosted
         '
+        Me.lblPosted.DisplayOnly = true
+        Me.lblPosted.EditingMode = false
         resources.ApplyResources(Me.lblPosted, "lblPosted")
         Me.lblPosted.Name = "lblPosted"
         '
@@ -726,6 +764,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDateCreated
         '
+        Me.lblDateCreated.DisplayOnly = true
+        Me.lblDateCreated.EditingMode = false
         resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
         Me.lblDateCreated.Name = "lblDateCreated"
         '
@@ -765,7 +805,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -878,7 +918,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewCkdOiItems.DataSource = Me.bsCkdOiItems
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -1059,6 +1099,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTotals
         '
+        Me.lblTotals.DisplayOnly = true
+        Me.lblTotals.EditingMode = false
         resources.ApplyResources(Me.lblTotals, "lblTotals")
         Me.lblTotals.Name = "lblTotals"
         '

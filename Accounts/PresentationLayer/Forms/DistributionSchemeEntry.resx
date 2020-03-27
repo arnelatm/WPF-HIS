@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>124, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>152, 17</value>
+    <value>259, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>282, 17</value>
+    <value>389, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>406, 17</value>
+    <value>513, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -602,14 +602,17 @@
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="floJournalHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="floJournalHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 12</value>
+    <value>0, 25</value>
   </data>
   <data name="floJournalHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 10, 5, 5</value>
   </data>
   <data name="floJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>718, 216</value>
+    <value>707, 216</value>
   </data>
   <data name="floJournalHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -633,7 +636,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>521, 519</value>
+    <value>511, 532</value>
   </data>
   <data name="lblAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -729,13 +732,13 @@
     <value>85</value>
   </data>
   <data name="DataGridViewDistributionSchemeItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 232</value>
+    <value>11, 245</value>
   </data>
   <data name="DataGridViewDistributionSchemeItems.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewDistributionSchemeItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>691, 285</value>
+    <value>680, 285</value>
   </data>
   <data name="DataGridViewDistributionSchemeItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -756,7 +759,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>611, 519</value>
+    <value>601, 532</value>
   </data>
   <data name="txtTotalPercentage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -783,13 +786,16 @@
     <value>2</value>
   </data>
   <metadata name="bsDistributionSchemeItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>546, 17</value>
+    <value>653, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>829, 627</value>
+    <value>707, 561</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>723, 600</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Distribution Scheme Entry</value>

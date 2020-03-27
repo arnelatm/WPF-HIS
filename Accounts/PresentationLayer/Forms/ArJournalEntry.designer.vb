@@ -132,6 +132,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTotals
         '
+        Me.lblTotals.DisplayOnly = true
+        Me.lblTotals.EditingMode = false
         Me.lblTotals.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTotals.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTotals.Location = New System.Drawing.Point(1, 1)
@@ -188,7 +190,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -355,6 +357,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCancelled
         '
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCancelled.Location = New System.Drawing.Point(1, 51)
@@ -389,6 +393,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPosted
         '
+        Me.lblPosted.DisplayOnly = true
+        Me.lblPosted.EditingMode = false
         Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPosted.Location = New System.Drawing.Point(1, 76)
@@ -444,6 +450,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
@@ -499,6 +507,8 @@ Namespace PresentationLayer.Forms
         '
         'lblReferenceNo
         '
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
         Me.lblReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReferenceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblReferenceNo.Location = New System.Drawing.Point(250, 11)
@@ -530,6 +540,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTransactionDate
         '
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
         Me.lblTransactionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTransactionDate.Location = New System.Drawing.Point(472, 11)
@@ -568,6 +580,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCustomerIdNo
         '
+        Me.lblCustomerIdNo.DisplayOnly = true
+        Me.lblCustomerIdNo.EditingMode = false
         Me.lblCustomerIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblCustomerIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCustomerIdNo.Location = New System.Drawing.Point(11, 36)
@@ -621,6 +635,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTransactionType
         '
+        Me.lblTransactionType.DisplayOnly = true
+        Me.lblTransactionType.EditingMode = false
         Me.lblTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionType.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTransactionType.Location = New System.Drawing.Point(11, 62)
@@ -670,6 +686,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAmount
         '
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAmount.Location = New System.Drawing.Point(282, 62)
@@ -704,6 +722,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDueDate
         '
+        Me.lblDueDate.DisplayOnly = true
+        Me.lblDueDate.EditingMode = false
         Me.lblDueDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDueDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDueDate.Location = New System.Drawing.Point(11, 88)
@@ -741,6 +761,8 @@ Namespace PresentationLayer.Forms
         '
         'lblInvoiceNo
         '
+        Me.lblInvoiceNo.DisplayOnly = true
+        Me.lblInvoiceNo.EditingMode = false
         Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblInvoiceNo.Location = New System.Drawing.Point(281, 88)
@@ -773,6 +795,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAccountIdNo
         '
+        Me.lblAccountIdNo.DisplayOnly = true
+        Me.lblAccountIdNo.EditingMode = false
         Me.lblAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAccountIdNo.Location = New System.Drawing.Point(11, 113)
@@ -822,6 +846,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNotes.Location = New System.Drawing.Point(11, 139)
@@ -874,6 +900,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel2
         '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
         Me.CFlowLayout2.SetFlowBreak(Me.CLabel2, true)
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -887,6 +915,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel1
         '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel1.Location = New System.Drawing.Point(0, 25)
@@ -924,6 +954,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel5
         '
+        Me.CLabel5.DisplayOnly = true
+        Me.CLabel5.EditingMode = false
         Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel5.Location = New System.Drawing.Point(140, 25)
@@ -955,6 +987,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPercent
         '
+        Me.lblPercent.DisplayOnly = true
+        Me.lblPercent.EditingMode = false
         Me.CFlowLayout2.SetFlowBreak(Me.lblPercent, true)
         Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -990,6 +1024,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDateAdded
         '
+        Me.lblDateAdded.DisplayOnly = true
+        Me.lblDateAdded.EditingMode = false
         Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDateAdded.Location = New System.Drawing.Point(1, 101)
@@ -1026,9 +1062,10 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floArJournalHeader)
         Me.floFullEntryArea.Controls.Add(Me.floArJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
-        Me.floFullEntryArea.Location = New System.Drawing.Point(6, 12)
+        Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 25)
         Me.floFullEntryArea.Name = "floFullEntryArea"
-        Me.floFullEntryArea.Size = New System.Drawing.Size(1028, 509)
+        Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 514)
         Me.floFullEntryArea.TabIndex = 0
         '
         'CFlowLayout1
@@ -1044,9 +1081,9 @@ Namespace PresentationLayer.Forms
         '
         'ArJournalEntry
         '
-        Me.ClientSize = New System.Drawing.Size(1043, 607)
+        Me.ClientSize = New System.Drawing.Size(1043, 541)
         Me.Controls.Add(Me.floFullEntryArea)
-        Me.MinimumSize = New System.Drawing.Size(1059, 646)
+        Me.MinimumSize = New System.Drawing.Size(1059, 580)
         Me.Name = "ArJournalEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
         Me.Text = "Accounts Receivable Journal Entry"

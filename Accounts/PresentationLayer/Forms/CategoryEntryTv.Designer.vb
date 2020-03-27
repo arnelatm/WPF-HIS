@@ -60,6 +60,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.TabStop = false
         '
@@ -76,6 +77,7 @@ Namespace PresentationLayer.Forms
         Me.txtCategoryCode.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryCode.LinkedLabel = Nothing
         Me.txtCategoryCode.Name = "txtCategoryCode"
+        Me.txtCategoryCode.OldValue = Nothing
         Me.txtCategoryCode.ReadOnly = true
         Me.txtCategoryCode.ValueIsMandatory = true
         '
@@ -92,6 +94,7 @@ Namespace PresentationLayer.Forms
         Me.txtCategoryName.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryName.LinkedLabel = Nothing
         Me.txtCategoryName.Name = "txtCategoryName"
+        Me.txtCategoryName.OldValue = Nothing
         Me.txtCategoryName.ValueIsMandatory = true
         '
         'txtCategoryNameAra
@@ -108,6 +111,7 @@ Namespace PresentationLayer.Forms
         Me.txtCategoryNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryNameAra.LinkedLabel = Nothing
         Me.txtCategoryNameAra.Name = "txtCategoryNameAra"
+        Me.txtCategoryNameAra.OldValue = Nothing
         '
         'txtNotes
         '
@@ -121,6 +125,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
@@ -141,26 +146,36 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblCategoryCode
         '
+        Me.lblCategoryCode.DisplayOnly = true
+        Me.lblCategoryCode.EditingMode = false
         resources.ApplyResources(Me.lblCategoryCode, "lblCategoryCode")
         Me.lblCategoryCode.Name = "lblCategoryCode"
         '
         'lblCategoryName
         '
+        Me.lblCategoryName.DisplayOnly = true
+        Me.lblCategoryName.EditingMode = false
         resources.ApplyResources(Me.lblCategoryName, "lblCategoryName")
         Me.lblCategoryName.Name = "lblCategoryName"
         '
         'lblCategoryNameAra
         '
+        Me.lblCategoryNameAra.DisplayOnly = true
+        Me.lblCategoryNameAra.EditingMode = false
         resources.ApplyResources(Me.lblCategoryNameAra, "lblCategoryNameAra")
         Me.lblCategoryNameAra.Name = "lblCategoryNameAra"
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '

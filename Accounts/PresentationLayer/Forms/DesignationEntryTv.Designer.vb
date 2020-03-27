@@ -47,11 +47,10 @@ Namespace PresentationLayer.Forms
         '
         'TxtIDNo
         '
-        Me.TxtIDNo.AcceptsReturn = false
-        Me.TxtIDNo.AcceptsTab = false
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIDNo.ComputedValue = false
+        Me.TxtIDNo.CustomFormat = Nothing
         Me.TxtIDNo.DataBoundControl = true
         Me.TxtIDNo.DisplayOnly = true
         Me.TxtIDNo.EditingMode = true
@@ -60,16 +59,16 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.TabStop = false
         '
         'txtDesignationCode
         '
-        Me.txtDesignationCode.AcceptsReturn = false
-        Me.txtDesignationCode.AcceptsTab = false
         Me.txtDesignationCode.BackColor = System.Drawing.Color.White
         Me.txtDesignationCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDesignationCode.ComputedValue = false
+        Me.txtDesignationCode.CustomFormat = Nothing
         Me.txtDesignationCode.DataBoundControl = true
         Me.txtDesignationCode.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtDesignationCode, true)
@@ -77,16 +76,16 @@ Namespace PresentationLayer.Forms
         Me.txtDesignationCode.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationCode.LinkedLabel = Nothing
         Me.txtDesignationCode.Name = "txtDesignationCode"
+        Me.txtDesignationCode.OldValue = Nothing
         Me.txtDesignationCode.ReadOnly = true
         Me.txtDesignationCode.ValueIsMandatory = true
         '
         'txtDesignationName
         '
-        Me.txtDesignationName.AcceptsReturn = false
-        Me.txtDesignationName.AcceptsTab = false
         Me.txtDesignationName.BackColor = System.Drawing.Color.White
         Me.txtDesignationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDesignationName.ComputedValue = false
+        Me.txtDesignationName.CustomFormat = Nothing
         Me.txtDesignationName.DataBoundControl = true
         Me.txtDesignationName.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.txtDesignationName, true)
@@ -94,15 +93,15 @@ Namespace PresentationLayer.Forms
         Me.txtDesignationName.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationName.LinkedLabel = Nothing
         Me.txtDesignationName.Name = "txtDesignationName"
+        Me.txtDesignationName.OldValue = Nothing
         Me.txtDesignationName.ValueIsMandatory = true
         '
         'txtDesignationNameAra
         '
-        Me.txtDesignationNameAra.AcceptsReturn = false
-        Me.txtDesignationNameAra.AcceptsTab = false
         Me.txtDesignationNameAra.BackColor = System.Drawing.Color.White
         Me.txtDesignationNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDesignationNameAra.ComputedValue = false
+        Me.txtDesignationNameAra.CustomFormat = Nothing
         Me.txtDesignationNameAra.DataBoundControl = true
         Me.txtDesignationNameAra.EditingMode = false
         Me.txtDesignationNameAra.EnglishControl = Me.txtDesignationName
@@ -111,25 +110,27 @@ Namespace PresentationLayer.Forms
         Me.txtDesignationNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationNameAra.LinkedLabel = Nothing
         Me.txtDesignationNameAra.Name = "txtDesignationNameAra"
+        Me.txtDesignationNameAra.OldValue = Nothing
         '
         'txtNotes
         '
-        Me.txtNotes.AcceptsReturn = false
-        Me.txtNotes.AcceptsTab = false
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
         '
         resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
         Me.floDataDisplay.Controls.Add(Me.lblDesignationCode)
@@ -144,26 +145,36 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblDesignationCode
         '
+        Me.lblDesignationCode.DisplayOnly = true
+        Me.lblDesignationCode.EditingMode = false
         resources.ApplyResources(Me.lblDesignationCode, "lblDesignationCode")
         Me.lblDesignationCode.Name = "lblDesignationCode"
         '
         'lblDesignationName
         '
+        Me.lblDesignationName.DisplayOnly = true
+        Me.lblDesignationName.EditingMode = false
         resources.ApplyResources(Me.lblDesignationName, "lblDesignationName")
         Me.lblDesignationName.Name = "lblDesignationName"
         '
         'lblDesignationNameAra
         '
+        Me.lblDesignationNameAra.DisplayOnly = true
+        Me.lblDesignationNameAra.EditingMode = false
         resources.ApplyResources(Me.lblDesignationNameAra, "lblDesignationNameAra")
         Me.lblDesignationNameAra.Name = "lblDesignationNameAra"
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
