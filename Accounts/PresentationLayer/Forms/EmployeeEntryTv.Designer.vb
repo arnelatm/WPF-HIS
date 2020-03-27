@@ -100,6 +100,19 @@ Namespace PresentationLayer.Forms
         Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.tbpOthers = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.BindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floMainDisplay.SuspendLayout
         Me.groupBoxContactInfo.SuspendLayout
@@ -112,13 +125,16 @@ Namespace PresentationLayer.Forms
         Me.tbpContact.SuspendLayout
         Me.tbpOthers.SuspendLayout
         Me.CFlowLayout2.SuspendLayout
+        CType(Me.BindingNavigator,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.BindingNavigator.SuspendLayout
+        CType(Me.BindingSource1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TreeViewTableName
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 383)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 358)
         '
         'floMainDisplay
         '
@@ -159,6 +175,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDepartmentIdNo
         '
+        Me.lblDepartmentIdNo.DisplayOnly = true
+        Me.lblDepartmentIdNo.EditingMode = false
         Me.lblDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDepartmentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDepartmentIdNo.Location = New System.Drawing.Point(1, 1)
@@ -188,7 +206,7 @@ Namespace PresentationLayer.Forms
         Me.cacDepartmentIdNo.Location = New System.Drawing.Point(176, 1)
         Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
-        Me.cacDepartmentIdNo.OldValue = Nothing
+        Me.cacDepartmentIdNo.OldValue = 0
         Me.cacDepartmentIdNo.OriginalDataSource = Nothing
         Me.cacDepartmentIdNo.OriginalList = Nothing
         Me.cacDepartmentIdNo.OverrideDropDownStyleList = false
@@ -209,6 +227,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDesignationIdNo
         '
+        Me.lblDesignationIdNo.DisplayOnly = true
+        Me.lblDesignationIdNo.EditingMode = false
         Me.lblDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDesignationIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDesignationIdNo.Location = New System.Drawing.Point(456, 1)
@@ -239,7 +259,7 @@ Namespace PresentationLayer.Forms
         Me.cacDesignationIdNo.Location = New System.Drawing.Point(573, 1)
         Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
-        Me.cacDesignationIdNo.OldValue = Nothing
+        Me.cacDesignationIdNo.OldValue = 0
         Me.cacDesignationIdNo.OriginalDataSource = Nothing
         Me.cacDesignationIdNo.OriginalList = Nothing
         Me.cacDesignationIdNo.OverrideDropDownStyleList = false
@@ -260,6 +280,8 @@ Namespace PresentationLayer.Forms
         '
         'lblHiredDate
         '
+        Me.lblHiredDate.DisplayOnly = true
+        Me.lblHiredDate.EditingMode = false
         Me.lblHiredDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblHiredDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblHiredDate.Location = New System.Drawing.Point(1, 27)
@@ -297,6 +319,8 @@ Namespace PresentationLayer.Forms
         '
         'lblReleasedDate
         '
+        Me.lblReleasedDate.DisplayOnly = true
+        Me.lblReleasedDate.EditingMode = false
         Me.lblReleasedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReleasedDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblReleasedDate.Location = New System.Drawing.Point(300, 27)
@@ -335,6 +359,8 @@ Namespace PresentationLayer.Forms
         '
         'lblArAccountIdNo
         '
+        Me.lblArAccountIdNo.DisplayOnly = true
+        Me.lblArAccountIdNo.EditingMode = false
         Me.lblArAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblArAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblArAccountIdNo.Location = New System.Drawing.Point(1, 53)
@@ -365,7 +391,7 @@ Namespace PresentationLayer.Forms
         Me.cacArAccountIdNo.Location = New System.Drawing.Point(176, 53)
         Me.cacArAccountIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacArAccountIdNo.Name = "cacArAccountIdNo"
-        Me.cacArAccountIdNo.OldValue = Nothing
+        Me.cacArAccountIdNo.OldValue = 0
         Me.cacArAccountIdNo.OriginalDataSource = Nothing
         Me.cacArAccountIdNo.OriginalList = Nothing
         Me.cacArAccountIdNo.OverrideDropDownStyleList = false
@@ -386,9 +412,11 @@ Namespace PresentationLayer.Forms
         '
         'lblBankIdNo
         '
+        Me.lblBankIdNo.DisplayOnly = true
+        Me.lblBankIdNo.EditingMode = false
         Me.lblBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblBankIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBankIdNo.Location = New System.Drawing.Point(1, 79)
+        Me.lblBankIdNo.Location = New System.Drawing.Point(1, 80)
         Me.lblBankIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBankIdNo.Name = "lblBankIdNo"
         Me.lblBankIdNo.Size = New System.Drawing.Size(174, 23)
@@ -412,10 +440,10 @@ Namespace PresentationLayer.Forms
         Me.cacBankIdNo.FormattingEnabled = true
         Me.cacBankIdNo.HideWhenNotEditingOrAdding = false
         Me.cacBankIdNo.LinkedLabel = Me.lblBankIdNo
-        Me.cacBankIdNo.Location = New System.Drawing.Point(176, 79)
+        Me.cacBankIdNo.Location = New System.Drawing.Point(176, 80)
         Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacBankIdNo.Name = "cacBankIdNo"
-        Me.cacBankIdNo.OldValue = Nothing
+        Me.cacBankIdNo.OldValue = 0
         Me.cacBankIdNo.OriginalDataSource = Nothing
         Me.cacBankIdNo.OriginalList = Nothing
         Me.cacBankIdNo.OverrideDropDownStyleList = false
@@ -436,9 +464,11 @@ Namespace PresentationLayer.Forms
         '
         'lblBankAccountNo
         '
+        Me.lblBankAccountNo.DisplayOnly = true
+        Me.lblBankAccountNo.EditingMode = false
         Me.lblBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblBankAccountNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBankAccountNo.Location = New System.Drawing.Point(456, 79)
+        Me.lblBankAccountNo.Location = New System.Drawing.Point(456, 80)
         Me.lblBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBankAccountNo.Name = "lblBankAccountNo"
         Me.lblBankAccountNo.Size = New System.Drawing.Size(116, 23)
@@ -458,17 +488,20 @@ Namespace PresentationLayer.Forms
         Me.txtBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtBankAccountNo.ForeColor = System.Drawing.Color.Black
         Me.txtBankAccountNo.LinkedLabel = Me.lblBankAccountNo
-        Me.txtBankAccountNo.Location = New System.Drawing.Point(574, 79)
+        Me.txtBankAccountNo.Location = New System.Drawing.Point(574, 80)
         Me.txtBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtBankAccountNo.Name = "txtBankAccountNo"
+        Me.txtBankAccountNo.OldValue = Nothing
         Me.txtBankAccountNo.Size = New System.Drawing.Size(222, 23)
         Me.txtBankAccountNo.TabIndex = 25
         '
         'lblIban
         '
+        Me.lblIban.DisplayOnly = true
+        Me.lblIban.EditingMode = false
         Me.lblIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIban.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIban.Location = New System.Drawing.Point(1, 105)
+        Me.lblIban.Location = New System.Drawing.Point(1, 107)
         Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIban.Name = "lblIban"
         Me.lblIban.Size = New System.Drawing.Size(174, 23)
@@ -488,17 +521,20 @@ Namespace PresentationLayer.Forms
         Me.txtIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtIban.ForeColor = System.Drawing.Color.Black
         Me.txtIban.LinkedLabel = Me.lblIban
-        Me.txtIban.Location = New System.Drawing.Point(177, 105)
+        Me.txtIban.Location = New System.Drawing.Point(177, 107)
         Me.txtIban.Margin = New System.Windows.Forms.Padding(1)
         Me.txtIban.Name = "txtIban"
+        Me.txtIban.OldValue = Nothing
         Me.txtIban.Size = New System.Drawing.Size(200, 23)
         Me.txtIban.TabIndex = 26
         '
         'lblOpeningBalance
         '
+        Me.lblOpeningBalance.DisplayOnly = true
+        Me.lblOpeningBalance.EditingMode = false
         Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 130)
+        Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 132)
         Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
         Me.lblOpeningBalance.Size = New System.Drawing.Size(174, 23)
@@ -517,17 +553,20 @@ Namespace PresentationLayer.Forms
         Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
         Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-        Me.txtOpeningBalance.Location = New System.Drawing.Point(177, 130)
+        Me.txtOpeningBalance.Location = New System.Drawing.Point(177, 132)
         Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtOpeningBalance.Name = "txtOpeningBalance"
+        Me.txtOpeningBalance.OldValue = Nothing
         Me.txtOpeningBalance.Size = New System.Drawing.Size(200, 23)
         Me.txtOpeningBalance.TabIndex = 27
         '
         'lblBalance
         '
+        Me.lblBalance.DisplayOnly = true
+        Me.lblBalance.EditingMode = false
         Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBalance.Location = New System.Drawing.Point(379, 130)
+        Me.lblBalance.Location = New System.Drawing.Point(379, 132)
         Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBalance.Name = "lblBalance"
         Me.lblBalance.Size = New System.Drawing.Size(194, 23)
@@ -547,17 +586,20 @@ Namespace PresentationLayer.Forms
         Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtBalance.ForeColor = System.Drawing.Color.Black
         Me.txtBalance.LinkedLabel = Me.lblBalance
-        Me.txtBalance.Location = New System.Drawing.Point(575, 130)
+        Me.txtBalance.Location = New System.Drawing.Point(575, 132)
         Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtBalance.Name = "txtBalance"
+        Me.txtBalance.OldValue = Nothing
         Me.txtBalance.Size = New System.Drawing.Size(222, 23)
         Me.txtBalance.TabIndex = 28
         '
         'lblNationalIdNo
         '
+        Me.lblNationalIdNo.DisplayOnly = true
+        Me.lblNationalIdNo.EditingMode = false
         Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 155)
+        Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 157)
         Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNationalIdNo.Name = "lblNationalIdNo"
         Me.lblNationalIdNo.Size = New System.Drawing.Size(174, 23)
@@ -576,17 +618,20 @@ Namespace PresentationLayer.Forms
         Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
-        Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 155)
+        Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 157)
         Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNationalIdNo.Name = "txtNationalIdNo"
+        Me.txtNationalIdNo.OldValue = Nothing
         Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
         Me.txtNationalIdNo.TabIndex = 29
         '
         'lblActive
         '
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
         Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblActive.Location = New System.Drawing.Point(379, 155)
+        Me.lblActive.Location = New System.Drawing.Point(379, 157)
         Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
         Me.lblActive.Name = "lblActive"
         Me.lblActive.Size = New System.Drawing.Size(194, 24)
@@ -606,7 +651,7 @@ Namespace PresentationLayer.Forms
         Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.LinkedLabel = Me.lblActive
-        Me.chkActive.Location = New System.Drawing.Point(575, 155)
+        Me.chkActive.Location = New System.Drawing.Point(575, 157)
         Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(25, 21)
@@ -616,9 +661,11 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(1, 181)
+        Me.lblNotes.Location = New System.Drawing.Point(1, 183)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(174, 23)
@@ -637,16 +684,19 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
-        Me.txtNotes.Location = New System.Drawing.Point(177, 181)
+        Me.txtNotes.Location = New System.Drawing.Point(177, 183)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.Size = New System.Drawing.Size(620, 60)
         Me.txtNotes.TabIndex = 35
         Me.txtNotes.ValueIsMandatory = true
         '
         'lblEmployeeName
         '
+        Me.lblEmployeeName.DisplayOnly = true
+        Me.lblEmployeeName.EditingMode = false
         Me.lblEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblEmployeeName.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEmployeeName.Location = New System.Drawing.Point(1, 51)
@@ -672,12 +722,15 @@ Namespace PresentationLayer.Forms
         Me.txtEmployeeName.Location = New System.Drawing.Point(177, 51)
         Me.txtEmployeeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeName.Name = "txtEmployeeName"
+        Me.txtEmployeeName.OldValue = Nothing
         Me.txtEmployeeName.Size = New System.Drawing.Size(620, 23)
         Me.txtEmployeeName.TabIndex = 2
         Me.txtEmployeeName.ValueIsMandatory = true
         '
         'lblEmployeeNameAra
         '
+        Me.lblEmployeeNameAra.DisplayOnly = true
+        Me.lblEmployeeNameAra.EditingMode = false
         Me.lblEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblEmployeeNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEmployeeNameAra.Location = New System.Drawing.Point(1, 76)
@@ -704,6 +757,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmployeeNameAra.Location = New System.Drawing.Point(177, 76)
         Me.txtEmployeeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeNameAra.Name = "txtEmployeeNameAra"
+        Me.txtEmployeeNameAra.OldValue = Nothing
         Me.txtEmployeeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtEmployeeNameAra.Size = New System.Drawing.Size(620, 23)
         Me.txtEmployeeNameAra.TabIndex = 3
@@ -711,6 +765,8 @@ Namespace PresentationLayer.Forms
         '
         'lblGender
         '
+        Me.lblGender.DisplayOnly = true
+        Me.lblGender.EditingMode = false
         Me.lblGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblGender.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblGender.Location = New System.Drawing.Point(1, 101)
@@ -723,6 +779,8 @@ Namespace PresentationLayer.Forms
         '
         'lblBirthDate
         '
+        Me.lblBirthDate.DisplayOnly = true
+        Me.lblBirthDate.EditingMode = false
         Me.lblBirthDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblBirthDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblBirthDate.Location = New System.Drawing.Point(1, 205)
@@ -761,6 +819,8 @@ Namespace PresentationLayer.Forms
         '
         'lblMaritalStatus
         '
+        Me.lblMaritalStatus.DisplayOnly = true
+        Me.lblMaritalStatus.EditingMode = false
         Me.lblMaritalStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblMaritalStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblMaritalStatus.Location = New System.Drawing.Point(1, 127)
@@ -791,7 +851,7 @@ Namespace PresentationLayer.Forms
         Me.cacMaritalStatus.Location = New System.Drawing.Point(177, 127)
         Me.cacMaritalStatus.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacMaritalStatus.Name = "cacMaritalStatus"
-        Me.cacMaritalStatus.OldValue = Nothing
+        Me.cacMaritalStatus.OldValue = 0
         Me.cacMaritalStatus.OriginalDataSource = Nothing
         Me.cacMaritalStatus.OriginalList = Nothing
         Me.cacMaritalStatus.OverrideDropDownStyleList = false
@@ -812,6 +872,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNationalityCode
         '
+        Me.lblNationalityCode.DisplayOnly = true
+        Me.lblNationalityCode.EditingMode = false
         Me.lblNationalityCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNationalityCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNationalityCode.Location = New System.Drawing.Point(1, 153)
@@ -842,7 +904,7 @@ Namespace PresentationLayer.Forms
         Me.cacNationalityCode.Location = New System.Drawing.Point(176, 153)
         Me.cacNationalityCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacNationalityCode.Name = "cacNationalityCode"
-        Me.cacNationalityCode.OldValue = Nothing
+        Me.cacNationalityCode.OldValue = 0
         Me.cacNationalityCode.OriginalDataSource = Nothing
         Me.cacNationalityCode.OriginalList = Nothing
         Me.cacNationalityCode.OverrideDropDownStyleList = false
@@ -863,6 +925,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel5
         '
+        Me.CLabel5.DisplayOnly = true
+        Me.CLabel5.EditingMode = false
         Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel5.Location = New System.Drawing.Point(1, 179)
@@ -892,7 +956,7 @@ Namespace PresentationLayer.Forms
         Me.cacReligionIdNo.Location = New System.Drawing.Point(177, 179)
         Me.cacReligionIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacReligionIdNo.Name = "cacReligionIdNo"
-        Me.cacReligionIdNo.OldValue = Nothing
+        Me.cacReligionIdNo.OldValue = 0
         Me.cacReligionIdNo.OriginalDataSource = Nothing
         Me.cacReligionIdNo.OriginalList = Nothing
         Me.cacReligionIdNo.OverrideDropDownStyleList = false
@@ -941,6 +1005,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPhone1
         '
+        Me.lblPhone1.DisplayOnly = true
+        Me.lblPhone1.EditingMode = false
         Me.lblPhone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPhone1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPhone1.Location = New System.Drawing.Point(1, 1)
@@ -965,11 +1031,14 @@ Namespace PresentationLayer.Forms
         Me.txtPhone1.Location = New System.Drawing.Point(168, 1)
         Me.txtPhone1.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhone1.Name = "txtPhone1"
+        Me.txtPhone1.OldValue = Nothing
         Me.txtPhone1.Size = New System.Drawing.Size(194, 23)
         Me.txtPhone1.TabIndex = 16
         '
         'lblPhone2
         '
+        Me.lblPhone2.DisplayOnly = true
+        Me.lblPhone2.EditingMode = false
         Me.lblPhone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPhone2.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPhone2.Location = New System.Drawing.Point(364, 1)
@@ -995,11 +1064,14 @@ Namespace PresentationLayer.Forms
         Me.txtPhone2.Location = New System.Drawing.Point(565, 1)
         Me.txtPhone2.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhone2.Name = "txtPhone2"
+        Me.txtPhone2.OldValue = Nothing
         Me.txtPhone2.Size = New System.Drawing.Size(222, 23)
         Me.txtPhone2.TabIndex = 17
         '
         'lblEmail
         '
+        Me.lblEmail.DisplayOnly = true
+        Me.lblEmail.EditingMode = false
         Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblEmail.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEmail.Location = New System.Drawing.Point(1, 26)
@@ -1025,6 +1097,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmail.Location = New System.Drawing.Point(168, 26)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.OldValue = Nothing
         Me.txtEmail.Size = New System.Drawing.Size(619, 23)
         Me.txtEmail.TabIndex = 18
         '
@@ -1066,6 +1139,8 @@ Namespace PresentationLayer.Forms
         '
         'lblStreet
         '
+        Me.lblStreet.DisplayOnly = true
+        Me.lblStreet.EditingMode = false
         Me.lblStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblStreet.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblStreet.Location = New System.Drawing.Point(1, 1)
@@ -1090,11 +1165,14 @@ Namespace PresentationLayer.Forms
         Me.txtStreet.Location = New System.Drawing.Point(168, 1)
         Me.txtStreet.Margin = New System.Windows.Forms.Padding(1)
         Me.txtStreet.Name = "txtStreet"
+        Me.txtStreet.OldValue = Nothing
         Me.txtStreet.Size = New System.Drawing.Size(278, 23)
         Me.txtStreet.TabIndex = 9
         '
         'lblDistrict
         '
+        Me.lblDistrict.DisplayOnly = true
+        Me.lblDistrict.EditingMode = false
         Me.lblDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDistrict.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDistrict.Location = New System.Drawing.Point(448, 1)
@@ -1120,11 +1198,14 @@ Namespace PresentationLayer.Forms
         Me.txtDistrict.Location = New System.Drawing.Point(566, 1)
         Me.txtDistrict.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDistrict.Name = "txtDistrict"
+        Me.txtDistrict.OldValue = Nothing
         Me.txtDistrict.Size = New System.Drawing.Size(221, 23)
         Me.txtDistrict.TabIndex = 10
         '
         'lblTownCity
         '
+        Me.lblTownCity.DisplayOnly = true
+        Me.lblTownCity.EditingMode = false
         Me.lblTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTownCity.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTownCity.Location = New System.Drawing.Point(1, 26)
@@ -1149,11 +1230,14 @@ Namespace PresentationLayer.Forms
         Me.txtTownCity.Location = New System.Drawing.Point(168, 26)
         Me.txtTownCity.Margin = New System.Windows.Forms.Padding(1)
         Me.txtTownCity.Name = "txtTownCity"
+        Me.txtTownCity.OldValue = Nothing
         Me.txtTownCity.Size = New System.Drawing.Size(278, 23)
         Me.txtTownCity.TabIndex = 11
         '
         'lblProvinceState
         '
+        Me.lblProvinceState.DisplayOnly = true
+        Me.lblProvinceState.EditingMode = false
         Me.lblProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblProvinceState.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblProvinceState.Location = New System.Drawing.Point(448, 26)
@@ -1178,11 +1262,14 @@ Namespace PresentationLayer.Forms
         Me.txtProvinceState.Location = New System.Drawing.Point(566, 26)
         Me.txtProvinceState.Margin = New System.Windows.Forms.Padding(1)
         Me.txtProvinceState.Name = "txtProvinceState"
+        Me.txtProvinceState.OldValue = Nothing
         Me.txtProvinceState.Size = New System.Drawing.Size(221, 23)
         Me.txtProvinceState.TabIndex = 12
         '
         'lblCountryCode
         '
+        Me.lblCountryCode.DisplayOnly = true
+        Me.lblCountryCode.EditingMode = false
         Me.lblCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblCountryCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCountryCode.Location = New System.Drawing.Point(1, 51)
@@ -1212,7 +1299,7 @@ Namespace PresentationLayer.Forms
         Me.cacCountryCode.Location = New System.Drawing.Point(167, 51)
         Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacCountryCode.Name = "cacCountryCode"
-        Me.cacCountryCode.OldValue = Nothing
+        Me.cacCountryCode.OldValue = 0
         Me.cacCountryCode.OriginalDataSource = Nothing
         Me.cacCountryCode.OriginalList = Nothing
         Me.cacCountryCode.OverrideDropDownStyleList = false
@@ -1233,6 +1320,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPoBox
         '
+        Me.lblPoBox.DisplayOnly = true
+        Me.lblPoBox.EditingMode = false
         Me.lblPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPoBox.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPoBox.Location = New System.Drawing.Point(447, 51)
@@ -1257,11 +1346,14 @@ Namespace PresentationLayer.Forms
         Me.txtPoBox.Location = New System.Drawing.Point(565, 51)
         Me.txtPoBox.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPoBox.Name = "txtPoBox"
+        Me.txtPoBox.OldValue = Nothing
         Me.txtPoBox.Size = New System.Drawing.Size(72, 23)
         Me.txtPoBox.TabIndex = 14
         '
         'lblZipCode
         '
+        Me.lblZipCode.DisplayOnly = true
+        Me.lblZipCode.EditingMode = false
         Me.lblZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblZipCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblZipCode.Location = New System.Drawing.Point(1, 77)
@@ -1286,6 +1378,7 @@ Namespace PresentationLayer.Forms
         Me.txtZipCode.Location = New System.Drawing.Point(168, 77)
         Me.txtZipCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.OldValue = Nothing
         Me.txtZipCode.Size = New System.Drawing.Size(138, 23)
         Me.txtZipCode.TabIndex = 15
         '
@@ -1345,6 +1438,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
@@ -1371,6 +1466,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Location = New System.Drawing.Point(177, 1)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIDNo.TabIndex = 151
@@ -1378,6 +1474,8 @@ Namespace PresentationLayer.Forms
         '
         'lblEmployeeCode
         '
+        Me.lblEmployeeCode.DisplayOnly = true
+        Me.lblEmployeeCode.EditingMode = false
         Me.lblEmployeeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblEmployeeCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEmployeeCode.Location = New System.Drawing.Point(1, 26)
@@ -1403,6 +1501,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmployeeCode.Location = New System.Drawing.Point(177, 26)
         Me.txtEmployeeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeCode.Name = "txtEmployeeCode"
+        Me.txtEmployeeCode.OldValue = Nothing
         Me.txtEmployeeCode.Size = New System.Drawing.Size(62, 23)
         Me.txtEmployeeCode.TabIndex = 153
         Me.txtEmployeeCode.ValueIsMandatory = true
@@ -1427,7 +1526,7 @@ Namespace PresentationLayer.Forms
         Me.cacGender.Location = New System.Drawing.Point(176, 101)
         Me.cacGender.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacGender.Name = "cacGender"
-        Me.cacGender.OldValue = Nothing
+        Me.cacGender.OldValue = 0
         Me.cacGender.OriginalDataSource = Nothing
         Me.cacGender.OriginalList = Nothing
         Me.cacGender.OverrideDropDownStyleList = false
@@ -1479,19 +1578,129 @@ Namespace PresentationLayer.Forms
         '
         Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout2.Controls.Add(Me.EmployeeTabControl)
-        Me.CFlowLayout2.Location = New System.Drawing.Point(306, 12)
+        Me.CFlowLayout2.Location = New System.Drawing.Point(298, 28)
         Me.CFlowLayout2.Name = "CFlowLayout2"
         Me.CFlowLayout2.Size = New System.Drawing.Size(839, 296)
         Me.CFlowLayout2.TabIndex = 6
         '
+        'BindingNavigator
+        '
+        Me.BindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
+        Me.BindingNavigator.BindingSource = Me.BindingSource1
+        Me.BindingNavigator.CountItem = Me.BindingNavigatorCountItem
+        Me.BindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.BindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
+        Me.BindingNavigator.Location = New System.Drawing.Point(0, 0)
+        Me.BindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+        Me.BindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
+        Me.BindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
+        Me.BindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+        Me.BindingNavigator.Name = "BindingNavigator"
+        Me.BindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
+        Me.BindingNavigator.Size = New System.Drawing.Size(1149, 25)
+        Me.BindingNavigator.TabIndex = 7
+        Me.BindingNavigator.Text = "BindingNavigator1"
+        '
+        'BindingNavigatorAddNewItem
+        '
+        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
+        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorAddNewItem.Text = "Add new"
+        '
+        'BindingSource1
+        '
+        Me.BindingSource1.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeModel)
+        '
+        'BindingNavigatorCountItem
+        '
+        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
+        Me.BindingNavigatorCountItem.Text = "of {0}"
+        Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
+        '
+        'BindingNavigatorDeleteItem
+        '
+        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
+        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorDeleteItem.Text = "Delete"
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveFirstItem.Text = "Move first"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
+        '
+        'BindingNavigatorSeparator
+        '
+        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
+        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorPositionItem
+        '
+        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
+        Me.BindingNavigatorPositionItem.AutoSize = false
+        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
+        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
+        Me.BindingNavigatorPositionItem.Text = "0"
+        Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
+        '
+        'BindingNavigatorSeparator1
+        '
+        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
+        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveNextItem.Text = "Move next"
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"),System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveLastItem.Text = "Move last"
+        '
+        'BindingNavigatorSeparator2
+        '
+        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
+        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'EmployeeEntryTv
         '
         Me.ClientSize = New System.Drawing.Size(1149, 469)
+        Me.Controls.Add(Me.BindingNavigator)
         Me.Controls.Add(Me.CFlowLayout2)
         Me.Name = "EmployeeEntryTv"
         Me.SecurityPresenterObj = SecurityPresenter1
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
+        Me.Controls.SetChildIndex(Me.BindingNavigator, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floMainDisplay.ResumeLayout(false)
         Me.floMainDisplay.PerformLayout
@@ -1509,6 +1718,10 @@ Namespace PresentationLayer.Forms
         Me.tbpContact.PerformLayout
         Me.tbpOthers.ResumeLayout(false)
         Me.CFlowLayout2.ResumeLayout(false)
+        CType(Me.BindingNavigator,System.ComponentModel.ISupportInitialize).EndInit
+        Me.BindingNavigator.ResumeLayout(false)
+        Me.BindingNavigator.PerformLayout
+        CType(Me.BindingSource1,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -1589,6 +1802,19 @@ End Sub
         Friend WithEvents CFlowLayout3 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents BindingNavigator As BindingNavigator
+        Friend WithEvents BindingNavigatorAddNewItem As ToolStripButton
+        Friend WithEvents BindingNavigatorCountItem As ToolStripLabel
+        Friend WithEvents BindingNavigatorDeleteItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMoveFirstItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMovePreviousItem As ToolStripButton
+        Friend WithEvents BindingNavigatorSeparator As ToolStripSeparator
+        Friend WithEvents BindingNavigatorPositionItem As ToolStripTextBox
+        Friend WithEvents BindingNavigatorSeparator1 As ToolStripSeparator
+        Friend WithEvents BindingNavigatorMoveNextItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
+        Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
+        Friend WithEvents BindingSource1 As BindingSource
     End Class
 
 End Namespace

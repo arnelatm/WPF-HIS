@@ -439,7 +439,7 @@ Public Class Dac
             If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
                 ' no need to translate
             Else
-                cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+                cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
                 Dim items As Collection = ExecReader(cmd)
                 If Not (items Is Nothing OrElse items.Count = 0) Then
                     message = items(1)
@@ -450,7 +450,7 @@ Public Class Dac
                     End If
                 Else
                     Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-                    cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+                    cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
                     items = ExecReader(cmd)
                     If Not (items Is Nothing OrElse items.Count = 0) Then
                         message = message
@@ -486,18 +486,18 @@ Public Class Dac
         Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
-            cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
                 message = items(1)
                 If Not String.IsNullOrEmpty(items(2)) Then
-                    caption = TranslateCaption(items(2))
+                    caption = Strings.Trim(items(2))
                 Else
-                    caption = items(2)
+                    caption = TranslateCaption(items(2))
                 End If
             Else
                 Dim languageBaseCode = Left(textDisplayLanguage, textDisplayLanguage.IndexOf("-", StringComparison.Ordinal))
-                cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+                cmd = "SELECT TranslatedMessage, TranslatedCaption from TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
                 items = ExecReader(cmd)
                 If Not (items Is Nothing OrElse items.Count = 0) Then
                     message = message
@@ -542,10 +542,10 @@ Public Class Dac
         Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
-            cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where OriginalIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             translatedCaption = ExecScalar(Of String)(cmd)
             If translatedCaption Is Nothing Then
-                cmd = "SELECT Caption FROM OriginalMessages where OriginalIdNo = " + idNo.ToString()
+                cmd = "SELECT Caption FROM OriginalMessages where MessageIdNo = " + idNo.ToString()
                 translatedCaption = ExecScalar(Of String)(cmd)
             End If
         End If
@@ -557,7 +557,7 @@ Public Class Dac
         Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
         If NeedToTranslateText(textDisplayLanguage) Then
             Dim cmd As String
-            cmd = "SELECT Concat(COALESCE(TRANSLATED,'') ,'~',ORIGINAL) FROM Captions_View where Original = '" & textToTranslate.Trim() & "' CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT Concat(Coalesce(Translated,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
             translatedText = ExecScalar(Of String)(cmd)
             If Strings.Left(translatedText, 1) <> "~" Then
                 translatedText = Strings.Mid(translatedText, 2)

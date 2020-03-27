@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class OriginalCaptionEntryTv
+    Partial Class OriginalCaptionsEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionEntryTv))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionsEntryTv))
         Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -35,8 +35,6 @@ Namespace PresentationLayer.Forms
         Me.lblMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -140,8 +138,6 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtMessage)
         Me.floDataDisplay.Controls.Add(Me.lblTranslatedMessage)
         Me.floDataDisplay.Controls.Add(Me.txtTranslatedMessage)
-        Me.floDataDisplay.Controls.Add(Me.lblCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtCaption)
         Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
@@ -185,29 +181,6 @@ Namespace PresentationLayer.Forms
         Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
         Me.txtTranslatedMessage.OldValue = Nothing
         Me.txtTranslatedMessage.ValueIsMandatory = true
-        '
-        'lblCaption
-        '
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
-        Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.SecurityKey = "Translators_Developer"
-        '
-        'txtCaption
-        '
-        Me.txtCaption.BackColor = System.Drawing.Color.White
-        Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCaption.ComputedValue = false
-        Me.txtCaption.CustomFormat = Nothing
-        Me.txtCaption.DataBoundControl = true
-        Me.txtCaption.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtCaption, true)
-        resources.ApplyResources(Me.txtCaption, "txtCaption")
-        Me.txtCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtCaption.LinkedLabel = Nothing
-        Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.OldValue = Nothing
-        Me.txtCaption.SecurityKey = "Translators_Developer"
-        Me.txtCaption.ValueIsMandatory = true
         '
         'lblTranslatedCaption
         '
@@ -314,9 +287,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblCaption As CLabel
         Friend WithEvents lblMessage As CLabel
-        Friend WithEvents lblCaption As CLabel
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents txtCaption As CTextBox
         Friend WithEvents lblTranslatedMessage As CLabel
         Friend WithEvents lblTranslatedCaption As CLabel
         Friend WithEvents txtTranslatedCaption As CTextBox

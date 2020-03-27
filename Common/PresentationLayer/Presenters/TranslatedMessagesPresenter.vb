@@ -27,12 +27,12 @@ Namespace PresentationLayer.Presenters
             Dac = New Dac
         End Sub
 
-        Public Overrides Sub Display(originalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Overrides Sub Display(messageIdNo As Integer, Optional ByVal undoMode As Boolean = False)
             Dim idNoTm As Int16
-            idNoTm = GetRecordFieldWithKey(originalIdNo, "TranslatedMessages", "originalIdNo", "IdNo")
+            idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedMessages", "messageIdNo", "IdNo")
             Dim modelData As New TranslatedMessagesModel
             If idNoTm <> 0 Then
-                modelData = Model.GetRecordById(Of TranslatedMessagesModel)(originalIdNo)
+                modelData = Model.GetRecordById(Of TranslatedMessagesModel)(messageIdNo)
             End If
             GlobalVariables.Mapper.Map(modelData, View)
         End Sub

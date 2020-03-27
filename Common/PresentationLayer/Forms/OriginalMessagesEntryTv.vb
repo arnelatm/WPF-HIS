@@ -37,7 +37,7 @@ Namespace PresentationLayer.Forms
 
         Public Property IDNo As Integer Implements IOriginalMessagesView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)
@@ -94,19 +94,19 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNoTranslated As Integer Implements ITranslatedMessagesView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Integer)(txtIdNoTranslated.Text)
+                Return NumParser(Of Integer)(txtIdNoTranslated.Text)
             End Get
             Set(value As Integer)
                 txtIdNoTranslated.Text = value
             End Set
         End Property
 
-        Public Property OriginalIdNo As Integer Implements ITranslatedMessagesView.OriginalIdNo
+        Public Property MessageIdNo As Integer Implements ITranslatedMessagesView.MessageIdNo
             Get
-                Return GlobalFunctions.NumParser(Of Integer)(TxtIDNo.Text)
+                Return NumParser(Of Integer)(TxtIDNo.Text)
             End Get
             Set(value As Integer)
-                txtOriginalIdNo.Text = value
+                txtMessageIdNo.Text = value
             End Set
         End Property
 

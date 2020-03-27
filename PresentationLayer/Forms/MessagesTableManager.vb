@@ -86,10 +86,10 @@ Public Class MessagesTableManager
         Editing = False
         Dim nIndex = DataGrid1.CurrentRow.Index
         Dim originalValue As String
-        Dim originalIdNo As Int16
+        Dim MessageIdNo As Int16
         originalValue = DataGrid1.Rows(nIndex).Cells(0).Value.TrimEnd
-        Cmd = "Select IdNo from originalMessages where original ='" + originalValue + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
+        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
         Select Case cmbLanguage.SelectedValue
             Case 1
                 Msg = String.Format(StringWords.Delete0ForAllLanguages, originalValue)
@@ -98,9 +98,9 @@ Public Class MessagesTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedMessages WHERE originalIdNo =" + originalIdNo.ToString()
+                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo =" + MessageIdNo.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
-                    Cmd = "DELETE from originalMessages WHERE original='" + originalValue + "'"
+                    Cmd = "DELETE from OriginalMessages WHERE message = '" + originalValue + "'"
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
                     LoadColumn("translated")
@@ -117,7 +117,7 @@ Public Class MessagesTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedMessages WHERE originalIdNo ='" + originalIdNo.ToString + "'" +
+                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo ='" + MessageIdNo.ToString + "'" +
                           " AND LanguageIdNo = " + cmbLanguage.SelectedValue.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
@@ -200,7 +200,7 @@ Public Class MessagesTableManager
             SuspendLayout()
             If language.ToLower = "original" Then
                 Dim dsColumn As DataSet
-                dsColumn = TranslatorDAC.ReturnDs("SELECT original FROM originalMessages")
+                dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM originalMessages")
                 If dsColumn.Tables(0).Rows.Count = 0 Then
                     MessageBox.Show(Messages.NoDataFound)
                     Return
@@ -219,7 +219,7 @@ Public Class MessagesTableManager
                 DataGrid1.Columns(1).ReadOnly = True
             Else
                 Dim dsColumn As DataSet
-                dsColumn = TranslatorDAC.ReturnDs("SELECT original, translated FROM TranslatedMessages_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
+                dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedMessages_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Dv = TransTable.DefaultView
                 Dv.Sort = "original"
                 ' Clear the second column
@@ -245,17 +245,17 @@ Public Class MessagesTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.TrimEnd
         Dim translatedValue As String = txtTranslation.Text.TrimEnd
-        Dim originalIdNo As Int16
-        Cmd = "Select IdNo from originalMessages where original ='" + originalValue + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Dim messageIdNo As Int16
+        Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
+        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
 
-        Cmd = "DELETE from TranslatedMessages WHERE originalIdNo = " + originalIdNo.ToString() +
+        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + MessageIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" Then
-            Cmd = "INSERT INTO TranslatedMessages ( originalIdNo , Translated, LanguageIdNo) VALUES ( " _
-                  + originalIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , Translated, LanguageIdNo) VALUES ( " _
+                  + MessageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
@@ -282,16 +282,16 @@ Public Class MessagesTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.TrimEnd
         Dim translatedValue As String = DataGrid1.CurrentRow.Cells(1).Value.TrimEnd
-        Dim originalIdNo As Int16
-        Cmd = "Select IdNo from originalMessages where original ='" + originalValue + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-        Cmd = "DELETE from TranslatedMessages WHERE originalIdNo = " + originalIdNo.ToString() +
+        Dim MessageIdNo As Int16
+        Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
+        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + MessageIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" Then
-            Cmd = "INSERT INTO TranslatedMessages ( originalIdNo , Translated, LanguageIdNo) VALUES ( " _
-                  + originalIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , Translated, LanguageIdNo) VALUES ( " _
+                  + MessageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 

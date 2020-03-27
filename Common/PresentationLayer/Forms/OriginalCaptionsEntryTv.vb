@@ -4,38 +4,38 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
-    Public Class OriginalEntryTv
-        Implements IOriginalView, ITranslatedMessagesView
+    Public Class OriginalCaptionsEntryTv
+        Implements IOriginalCaptionsView, ITranslatedMessagesView
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "Original"
+            MainTableName = "OriginalMessages"
             IdFieldName = "IdNo"
             TvMainFieldName = "Message"
-            TvSecondaryFieldName = "Original"
+            TvSecondaryFieldName = "MessageKey"
             SortOrderKey = "Message"
-            FirstControl = txtOriginal
+            FirstControl = txtMessageKey
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New OriginalPresenter(Me)
+            PresenterObj = New OriginalMessagesPresenter(Me)
 
             PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
 
             'CreateEnumResourceFile()
 
-            'ResourceEnumConverter.MakeResource("OriginalTypeSelection", GetType(OriginalTypeSelection))
+            'ResourceEnumConverter.MakeResource("OriginalMessagesTypeSelection", GetType(OriginalMessagesTypeSelection))
         End Sub
 
         Public Sub CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("OriginalTypeSelection", GetType(OriginalTypeSelection))
+            'ResourceEnumConverter.MakeResource("OriginalMessagesTypeSelection", GetType(OriginalMessagesTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
 #Region "OriginalMessageFields"
 
-        Public Property IDNo As Integer Implements IOriginalView.IdNo
+        Public Property IDNo As Integer Implements IOriginalCaptionsView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -44,16 +44,16 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Original As String Implements IOriginalView.Original
+        Public Property MessageKey As String Implements IOriginalCaptionsView.MessageKey
             Get
-                Return txtOriginal.Text
+                Return txtMessageKey.Text
             End Get
             Set
-                txtOriginal.Text = Value
+                txtMessageKey.Text = Value
             End Set
         End Property
 
-        Public Property Message As String Implements IOriginalView.Message
+        Public Property Message As String Implements IOriginalCaptionsView.Message
             Get
                 Return txtMessage.Text
             End Get
@@ -62,7 +62,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Caption As String Implements IOriginalView.Caption
+        Public Property Caption As String Implements IOriginalCaptionsView.Caption
             Get
                 Return txtCaption.Text
             End Get
@@ -71,7 +71,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Notes As String Implements IOriginalView.Notes
+        Public Property Notes As String Implements IOriginalCaptionsView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub AddMandatoryFieldCheck()
             'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtOriginal, "Message Key")
+            MyErrorProvider.Controls.AddMandatory(txtMessageKey, "Message Key")
             MyErrorProvider.Controls.AddMandatory(txtMessage, "Original Message")
             'Set summary error message
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
@@ -144,10 +144,10 @@ Namespace PresentationLayer.Forms
         End Sub
 
         'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        '    MessageBox.Show(txtOriginal.Enabled.ToString())
+        '    MessageBox.Show(txtMessageKey.Enabled.ToString())
         'End Sub
 
-        'Private Sub txtOriginal_EnabledChanged(sender As Object, e As EventArgs) Handles txtOriginal.EnabledChanged
+        'Private Sub txtMessageKey_EnabledChanged(sender As Object, e As EventArgs) Handles txtMessageKey.EnabledChanged
         '    'Debugger.Break()
         'End Sub
     End Class

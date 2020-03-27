@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
         Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLanguageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtOriginalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtMessageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -91,6 +91,8 @@ Namespace PresentationLayer.Forms
         '
         'lblMessageKey
         '
+        Me.lblMessageKey.DisplayOnly = true
+        Me.lblMessageKey.EditingMode = false
         resources.ApplyResources(Me.lblMessageKey, "lblMessageKey")
         Me.lblMessageKey.Name = "lblMessageKey"
         Me.lblMessageKey.SecurityKey = "Translators_Developer"
@@ -125,7 +127,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.SecurityKey = "_DeveloperOnly"
+        Me.txtNotes.SecurityKey = "Translators_Developer"
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
@@ -147,24 +149,30 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtOriginalIdNo)
+        Me.floDataDisplay.Controls.Add(Me.txtMessageIdNo)
         Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
         Me.floDataDisplay.Controls.Add(Me.Button1)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblMessage
         '
+        Me.lblMessage.DisplayOnly = true
+        Me.lblMessage.EditingMode = false
         resources.ApplyResources(Me.lblMessage, "lblMessage")
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.SecurityKey = "Translators_Developer"
         '
         'lblTranslatedMessage
         '
+        Me.lblTranslatedMessage.DisplayOnly = true
+        Me.lblTranslatedMessage.EditingMode = false
         resources.ApplyResources(Me.lblTranslatedMessage, "lblTranslatedMessage")
         Me.lblTranslatedMessage.Name = "lblTranslatedMessage"
         '
@@ -188,6 +196,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCaption
         '
+        Me.lblCaption.DisplayOnly = true
+        Me.lblCaption.EditingMode = false
         resources.ApplyResources(Me.lblCaption, "lblCaption")
         Me.lblCaption.Name = "lblCaption"
         Me.lblCaption.SecurityKey = "Translators_Developer"
@@ -211,6 +221,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTranslatedCaption
         '
+        Me.lblTranslatedCaption.DisplayOnly = true
+        Me.lblTranslatedCaption.EditingMode = false
         resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
         Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
         '
@@ -233,6 +245,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -253,22 +267,22 @@ Namespace PresentationLayer.Forms
         Me.txtLanguageIdNo.ReadOnly = true
         Me.txtLanguageIdNo.TabStop = false
         '
-        'txtOriginalIdNo
+        'txtMessageIdNo
         '
-        Me.txtOriginalIdNo.BackColor = System.Drawing.Color.White
-        Me.txtOriginalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtOriginalIdNo.ComputedValue = false
-        Me.txtOriginalIdNo.CustomFormat = Nothing
-        Me.txtOriginalIdNo.DataBoundControl = true
-        Me.txtOriginalIdNo.DisplayOnly = true
-        Me.txtOriginalIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtOriginalIdNo, "txtOriginalIdNo")
-        Me.txtOriginalIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtOriginalIdNo.LinkedLabel = Nothing
-        Me.txtOriginalIdNo.Name = "txtOriginalIdNo"
-        Me.txtOriginalIdNo.OldValue = Nothing
-        Me.txtOriginalIdNo.ReadOnly = true
-        Me.txtOriginalIdNo.TabStop = false
+        Me.txtMessageIdNo.BackColor = System.Drawing.Color.White
+        Me.txtMessageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMessageIdNo.ComputedValue = false
+        Me.txtMessageIdNo.CustomFormat = Nothing
+        Me.txtMessageIdNo.DataBoundControl = true
+        Me.txtMessageIdNo.DisplayOnly = true
+        Me.txtMessageIdNo.EditingMode = true
+        resources.ApplyResources(Me.txtMessageIdNo, "txtMessageIdNo")
+        Me.txtMessageIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtMessageIdNo.LinkedLabel = Nothing
+        Me.txtMessageIdNo.Name = "txtMessageIdNo"
+        Me.txtMessageIdNo.OldValue = Nothing
+        Me.txtMessageIdNo.ReadOnly = true
+        Me.txtMessageIdNo.TabStop = false
         '
         'txtIdNoTranslated
         '
@@ -321,7 +335,7 @@ End Sub
         Friend WithEvents lblTranslatedCaption As CLabel
         Friend WithEvents txtTranslatedCaption As CTextBox
         Friend WithEvents txtLanguageIdNo As CTextBox
-        Friend WithEvents txtOriginalIdNo As CTextBox
+        Friend WithEvents txtMessageIdNo As CTextBox
         Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents Button1 As Windows.Forms.Button
         Friend WithEvents txtTranslatedMessage As CTextBoxArabic

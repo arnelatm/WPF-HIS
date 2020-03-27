@@ -26,14 +26,14 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ApJournalEntry))
-        Dim SecurityPresenter4 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
+        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
         Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -137,6 +137,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTotals
         '
+        Me.lblTotals.DisplayOnly = true
+        Me.lblTotals.EditingMode = false
         Me.lblTotals.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTotals.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTotals.Location = New System.Drawing.Point(1, 1)
@@ -184,21 +186,21 @@ Namespace PresentationLayer.Forms
         '
         'DataGridViewJournalItems
         '
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.dgvPaidAmount, Me.dgvDiscountTaken, Me.ItemVatAmount, Me.OpenInvoiceIdNo})
         Me.DataGridViewJournalItems.DataInGridChanged = false
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewJournalItems.DisplayOnly = false
         Me.DataGridViewJournalItems.Dock = System.Windows.Forms.DockStyle.Left
         Me.DataGridViewJournalItems.EditingMode = false
@@ -213,9 +215,9 @@ Namespace PresentationLayer.Forms
         'dgvSequence
         '
         Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvSequence.EditingMode = false
         Me.dgvSequence.HeaderText = "Seq."
         Me.dgvSequence.MinimumWidth = 50
@@ -235,11 +237,11 @@ Namespace PresentationLayer.Forms
         'dgvDebit
         '
         Me.dgvDebit.DataPropertyName = "Debit"
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle21.Format = "###,##0.00"
-        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.Format = "###,##0.00"
+        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvDebit.EditingMode = false
         Me.dgvDebit.FillWeight = 90!
         Me.dgvDebit.HeaderText = "Debit"
@@ -250,11 +252,11 @@ Namespace PresentationLayer.Forms
         'dgvCredit
         '
         Me.dgvCredit.DataPropertyName = "Credit"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle22.Format = "###,##0.00"
-        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.Format = "###,##0.00"
+        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvCredit.EditingMode = false
         Me.dgvCredit.HeaderText = "Credit"
         Me.dgvCredit.Name = "dgvCredit"
@@ -275,9 +277,9 @@ Namespace PresentationLayer.Forms
         '
         Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvNotes.DataPropertyName = "Notes"
-        DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
-        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvNotes.EditingMode = false
         Me.dgvNotes.HeaderText = "Notes"
         Me.dgvNotes.Name = "dgvNotes"
@@ -358,6 +360,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCancelled
         '
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCancelled.Location = New System.Drawing.Point(1, 101)
@@ -392,6 +396,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPosted
         '
+        Me.lblPosted.DisplayOnly = true
+        Me.lblPosted.EditingMode = false
         Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPosted.Location = New System.Drawing.Point(1, 126)
@@ -449,6 +455,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
@@ -504,6 +512,8 @@ Namespace PresentationLayer.Forms
         '
         'lblReferenceNo
         '
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
         Me.lblReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReferenceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblReferenceNo.Location = New System.Drawing.Point(250, 11)
@@ -535,6 +545,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTransactionDate
         '
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
         Me.lblTransactionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTransactionDate.Location = New System.Drawing.Point(472, 11)
@@ -573,6 +585,8 @@ Namespace PresentationLayer.Forms
         '
         'lblSupplierIdNo
         '
+        Me.lblSupplierIdNo.DisplayOnly = true
+        Me.lblSupplierIdNo.EditingMode = false
         Me.lblSupplierIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSupplierIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSupplierIdNo.Location = New System.Drawing.Point(11, 36)
@@ -626,6 +640,8 @@ Namespace PresentationLayer.Forms
         '
         'lblTransactionType
         '
+        Me.lblTransactionType.DisplayOnly = true
+        Me.lblTransactionType.EditingMode = false
         Me.lblTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionType.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTransactionType.Location = New System.Drawing.Point(11, 62)
@@ -676,6 +692,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAmount
         '
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAmount.Location = New System.Drawing.Point(282, 62)
@@ -709,6 +727,8 @@ Namespace PresentationLayer.Forms
         '
         'lblInvoiceDate
         '
+        Me.lblInvoiceDate.DisplayOnly = true
+        Me.lblInvoiceDate.EditingMode = false
         Me.lblInvoiceDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblInvoiceDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblInvoiceDate.Location = New System.Drawing.Point(472, 62)
@@ -746,6 +766,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDueDate
         '
+        Me.lblDueDate.DisplayOnly = true
+        Me.lblDueDate.EditingMode = false
         Me.lblDueDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDueDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDueDate.Location = New System.Drawing.Point(11, 88)
@@ -783,6 +805,8 @@ Namespace PresentationLayer.Forms
         '
         'lblInvoiceNo
         '
+        Me.lblInvoiceNo.DisplayOnly = true
+        Me.lblInvoiceNo.EditingMode = false
         Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblInvoiceNo.Location = New System.Drawing.Point(281, 88)
@@ -815,6 +839,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAccountIdNo
         '
+        Me.lblAccountIdNo.DisplayOnly = true
+        Me.lblAccountIdNo.EditingMode = false
         Me.lblAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAccountIdNo.Location = New System.Drawing.Point(11, 113)
@@ -866,6 +892,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNotes.Location = New System.Drawing.Point(11, 139)
@@ -922,6 +950,8 @@ Namespace PresentationLayer.Forms
         '
         'lblVatNumber
         '
+        Me.lblVatNumber.DisplayOnly = true
+        Me.lblVatNumber.EditingMode = false
         Me.lblVatNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblVatNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblVatNumber.Location = New System.Drawing.Point(1, 1)
@@ -955,6 +985,8 @@ Namespace PresentationLayer.Forms
         '
         'lblVatAmount
         '
+        Me.lblVatAmount.DisplayOnly = true
+        Me.lblVatAmount.EditingMode = false
         Me.lblVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblVatAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblVatAmount.Location = New System.Drawing.Point(1, 26)
@@ -988,6 +1020,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel2
         '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
         Me.CFlowLayout2.SetFlowBreak(Me.CLabel2, true)
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1001,6 +1035,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel1
         '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel1.Location = New System.Drawing.Point(0, 75)
@@ -1038,6 +1074,8 @@ Namespace PresentationLayer.Forms
         '
         'CLabel5
         '
+        Me.CLabel5.DisplayOnly = true
+        Me.CLabel5.EditingMode = false
         Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.CLabel5.Location = New System.Drawing.Point(140, 75)
@@ -1069,6 +1107,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPercent
         '
+        Me.lblPercent.DisplayOnly = true
+        Me.lblPercent.EditingMode = false
         Me.CFlowLayout2.SetFlowBreak(Me.lblPercent, true)
         Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1104,6 +1144,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDateAdded
         '
+        Me.lblDateAdded.DisplayOnly = true
+        Me.lblDateAdded.EditingMode = false
         Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDateAdded.Location = New System.Drawing.Point(1, 151)
@@ -1162,7 +1204,7 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MinimumSize = New System.Drawing.Size(1059, 646)
         Me.Name = "ApJournalEntry"
-        Me.SecurityPresenterObj = SecurityPresenter4
+        Me.SecurityPresenterObj = SecurityPresenter1
         Me.Text = "Accounts Payable Journal Entry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

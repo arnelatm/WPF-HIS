@@ -3,7 +3,7 @@
     Public Class TranslatedMessagesModel
         Inherits CommonModel
 
-        Public Property OriginalIdNo As Integer
+        Public Property MessageIdNo As Integer
         Public Property LanguageIdNo As Integer
         Public Property TranslatedMessage As String
         Public Property TranslatedCaption As String

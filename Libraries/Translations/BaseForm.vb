@@ -55,7 +55,7 @@ Public Class BaseForm
 
         If Not DesignMode Then
             Dim cmd As String
-            cmd = "select original, translated from TranslatedCaptions where lang = '" + cmbLanguagePicker.Text + "'"
+            cmd = "Select Caption, translated from TranslatedCaptions where lang = '" + cmbLanguagePicker.Text + "'"
             Dim translations As DataSet
             translations = TranslatorDAC.ReturnDs(cmd)
             Dv = translations.Tables(0).DefaultView

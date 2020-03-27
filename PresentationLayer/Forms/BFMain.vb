@@ -219,7 +219,7 @@ Public Class BfMain
     '    cmd = "Select  IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
     '    desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of String)(cmd)
     '    If desiredLanguageIdNo = "_Original" Or desiredLanguage = GlobalVariables.OriginalAppLanguage Then
-    '        Return 1 ' the userIdLanguageIdNo for original
+    '        Return 1 ' the userIdLanguageIdNo for originalcaption
     '    Else
     '        If Not TranslationExist(desiredLanguage) Then
     '            If allowFallBack Then
@@ -254,7 +254,7 @@ Public Class BfMain
     Protected Function GetFallBackMessage(ByVal message As String, ByVal desiredLanguage As String) As String
         Dim cmd As String
         Dim languageBaseCode = Strings.Left(desiredLanguage, desiredLanguage.IndexOf("-", StringComparison.Ordinal))
-        cmd = "SELECT TranslatedCaptions from TranslatedMessages_View where Original = '" + RTrim(message) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+        cmd = "SELECT TranslatedCaptions from TranslatedMessages_View where Caption = '" + RTrim(message) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
         Return TranslatorDAC.ExecScalar(Of String)(cmd)
     End Function
 
@@ -291,11 +291,11 @@ Public Class BfMain
             UserOriginalCaptions()
             targetLanguageIdNo = 0
         Else
-            cmd = "select original, translated from formItemsOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and formIdNo = " + FormIdNo.ToString()
+            cmd = "Select Caption, translated from formItemsOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and formIdNo = " + FormIdNo.ToString()
             Dim translations As DataSet
             translations = TranslatorDAC.ReturnDs(cmd)
             Dv = translations.Tables(0).DefaultView
-            Dv.Sort = "Original"
+            Dv.Sort = "Caption"
             Dim r As Integer
             If Tag Is Nothing Then
                 r = 0

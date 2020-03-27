@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 340</value>
+    <value>300, 338</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -606,37 +606,37 @@
   <data name="&gt;&gt;txtLanguageIdNo.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="txtOriginalIdNo.Enabled" type="System.Boolean, mscorlib">
+  <data name="txtMessageIdNo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="txtOriginalIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtMessageIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtOriginalIdNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtMessageIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 343</value>
   </data>
-  <data name="txtOriginalIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtMessageIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtOriginalIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtMessageIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="txtOriginalIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtMessageIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>165</value>
   </data>
-  <data name="txtOriginalIdNo.Visible" type="System.Boolean, mscorlib">
+  <data name="txtMessageIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;txtOriginalIdNo.Name" xml:space="preserve">
-    <value>txtOriginalIdNo</value>
+  <data name="&gt;&gt;txtMessageIdNo.Name" xml:space="preserve">
+    <value>txtMessageIdNo</value>
   </data>
-  <data name="&gt;&gt;txtOriginalIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtMessageIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtOriginalIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtMessageIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtOriginalIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtMessageIdNo.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="txtIdNoTranslated.Enabled" type="System.Boolean, mscorlib">
@@ -683,6 +683,9 @@
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Button1</value>
+  </data>
+  <data name="Button1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
@@ -751,7 +754,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>925, 429</value>
+    <value>925, 427</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>System Messages Maintenance Form</value>
