@@ -13,9 +13,9 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements ITranslatedMessagesDao.GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, TranslatedMessage, TranslatedCaption, OriginalIdNo, LanguageIdNo " &
+                    " SELECT IdNo, TranslatedMessage, TranslatedCaption, MessageIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &
-                    " WHERE OriginalIdNo = @IDNo"
+                    " WHERE MessageIdNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
@@ -33,7 +33,7 @@ Namespace DataLayer.AdoNet
                     "    SET TranslatedMessage = @TranslatedMessage," &
                     "        TranslatedCaption = @TranslatedCaption," &
                     "        LanguageIdNo = @LanguageIdNo," &
-                    "        OriginalIdNo = @OriginalIdNo" &
+                    "        MessageIdNo = @MessageIdNo" &
                     "  WHERE IDNo = @IDNo"
             Return Db.Update(sql, Take(translatedMessages))
         End Function
@@ -41,8 +41,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements ITranslatedMessagesDao.AddRecord
             Dim sql As String =
                     " INSERT INTO [TranslatedMessages] " &
-                    " (TranslatedMessage,TranslatedCaption,OriginalIdNo,LanguageIdNo) " &
-                    " VALUES (@TranslatedMessage,@TranslatedCaption,@OriginalIdNo,@LanguageIdNo) "
+                    " (TranslatedMessage,TranslatedCaption,MessageIdNo,LanguageIdNo) " &
+                    " VALUES (@TranslatedMessage,@TranslatedCaption,@MessageIdNo,@LanguageIdNo) "
             Return Db.Insert(sql, Take(translatedMessages))
         End Function
 
@@ -50,7 +50,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New TranslatedMessages() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
-            .OriginalIdNo = Extensions.AsInt(Of Integer)(reader("OriginalIdNo")),
+            .MessageIdNo = Extensions.AsInt(Of Integer)(reader("MessageIdNo")),
             .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
             .TranslatedMessage = Extensions.AsString(reader("TranslatedMessage")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
@@ -58,7 +58,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(translatedMessages As TranslatedMessages) As Object()
             Return New Object() {"@IDNo", translatedMessages.IdNo,
-                                  "@OriginalIdNo", translatedMessages.OriginalIdNo,
+                                  "@MessageIdNo", translatedMessages.MessageIdNo,
                                   "@LanguageIdNo", translatedMessages.LanguageIdNo,
                                   "@TranslatedMessage", translatedMessages.TranslatedMessage,
                                   "@TranslatedCaption", translatedMessages.TranslatedCaption}

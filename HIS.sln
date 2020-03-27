@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Accounts", "Accounts\Accounts.vbproj", "{826EE6DC-954A-4C18-9108-EBD592FCB1E8}"
 EndProject
@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		ApDetails_View.sql = ApDetails_View.sql
 		CheckDisbursementJournalItem_View.sql = CheckDisbursementJournalItem_View.sql
 		CostCenter_View.sql = CostCenter_View.sql
+		CreateAllViews.sql = CreateAllViews.sql
+		CreateAllViews.txt = CreateAllViews.txt
 		InsertCheckDisbursementJournalItemTVP.sql = InsertCheckDisbursementJournalItemTVP.sql
 		ProfitCenter.sql = ProfitCenter.sql
 		TranslatedMessages_View.sql = TranslatedMessages_View.sql

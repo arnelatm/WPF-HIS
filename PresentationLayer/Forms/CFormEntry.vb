@@ -664,7 +664,7 @@ Public Class CFormEntry
         GoFirstRecord()
     End Sub
 
-    Private Sub GoFirstRecord()
+    Protected Sub GoFirstRecord()
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -1328,4 +1328,7 @@ Public Class CFormEntry
         End If
     End Sub
 
+    Private Sub BtnDelete_Click(Sender As Object, e As MouseEventArgs) Handles BtnDelete.ClickButtonArea
+
+    End Sub
 End Class

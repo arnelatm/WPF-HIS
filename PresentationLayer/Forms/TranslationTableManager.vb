@@ -77,9 +77,9 @@ Public Class TranslationTableManager
 #Region " Miscellaneous event handlers "
 
     Private Sub Form1_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Resize
-        txtTranslation.Size = txtOriginal.Size
-        Dim p As Point = txtOriginal.Location
-        p.X = txtOriginal.Location.X + txtOriginal.Width + 3
+        txtTranslation.Size = txtCaption.Size
+        Dim p As Point = txtCaption.Location
+        p.X = txtCaption.Location.X + txtCaption.Width + 3
         txtTranslation.Location = p
     End Sub
 
@@ -121,10 +121,10 @@ Public Class TranslationTableManager
         Editing = False
         Dim nIndex = DataGrid1.CurrentRow.Index
         Dim originalValue As String
-        Dim originalIdNo As Int16
+        Dim captionIdNo As Int16
         originalValue = DataGrid1.Rows(nIndex).Cells(0).Value.TrimEnd
-        Cmd = "Select IdNo from original where original ='" + originalValue + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue + "'"
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
         Select Case cmbLanguage.SelectedValue
             Case 1
                 Msg = String.Format(StringWords.Delete0ForAllLanguages, originalValue)
@@ -133,9 +133,9 @@ Public Class TranslationTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedCaptions WHERE originalIdNo =" + originalIdNo.ToString()
+                    Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo =" + captionIdNo.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
-                    Cmd = "DELETE from original WHERE original='" + originalValue + "'"
+                    Cmd = "DELETE From OriginalCaptions WHERE Caption = '" + originalValue + "'"
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
                     LoadColumn("translated")
@@ -152,7 +152,7 @@ Public Class TranslationTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedCaptions WHERE originalIdNo ='" + originalIdNo.ToString + "'" +
+                    Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo ='" + captionIdNo.ToString + "'" +
                           " AND LanguageIdNo = " + cmbLanguage.SelectedValue.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
@@ -168,7 +168,7 @@ Public Class TranslationTableManager
     Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdCancel.Click
         Editing = False
         txtTranslation.Visible = False
-        txtOriginal.Visible = False
+        txtCaption.Visible = False
         Buttons(TurnOff)
     End Sub
 
@@ -176,12 +176,12 @@ Public Class TranslationTableManager
         Editing = True
         With DataGrid1
             Dim nIndex = .CurrentRow.Index
-            txtOriginal.Text = .Rows(nIndex).Cells(0).Value
+            txtCaption.Text = .Rows(nIndex).Cells(0).Value
             txtTranslation.Text = .Rows(nIndex).Cells(1).Value
         End With
         Buttons(TurnOn)
         txtTranslation.Visible = True
-        txtOriginal.Visible = True
+        txtCaption.Visible = True
         txtTranslation.Focus()
         cmdSave.Enabled = True
     End Sub
@@ -191,7 +191,7 @@ Public Class TranslationTableManager
         SaveCurrent()
         Buttons(TurnOff)
         txtTranslation.Visible = False
-        txtOriginal.Visible = False
+        txtCaption.Visible = False
         DataGrid1.Columns(1).ReadOnly = True
     End Sub
 
@@ -203,7 +203,7 @@ Public Class TranslationTableManager
         'If cmbLanguagePicker.SelectedValue <> "_Original" Then
         TranslateCaptions(cmbLanguagePicker.SelectedValue)
         'End If
-        'Cmd = "select original, translated from TranslatedCaptions" _
+        'Cmd = "Select Caption, translated from TranslatedCaptions" _
         '  + " where CultureInfoCode = '" + cmbLanguagePicker.Text + "'"
         'Dim translations As DataSet
         'translations = TranslatorDAC.ReturnDs(Cmd)
@@ -245,9 +245,9 @@ Public Class TranslationTableManager
     Sub LoadLanguages(ByRef cmb As ComboBox)
         If Not DesignMode Then
             Dim dsLanguages As DataSet
-            Dim cmd As String
-            cmd = "SELECT IdNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages where CultureInfoCode<>'_Original' order by LanguageName"
-            dsLanguages = TranslatorDAC.ReturnDs(cmd)
+            Dim sql As String
+            sql = "SELECT IdNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages where CultureInfoCode<>'_Original' order by LanguageName"
+            dsLanguages = TranslatorDAC.ReturnDs(sql)
             cmb.DisplayMember = "LanguageName"
             cmb.ValueMember = "IdNo"
             cmb.DataSource = dsLanguages.Tables("Table")
@@ -271,9 +271,9 @@ Public Class TranslationTableManager
             If language.ToLower = "original" Then
                 Dim dsColumn As DataSet
                 If FormIdNoToTranslate = 0 Then
-                    dsColumn = TranslatorDAC.ReturnDs("SELECT original FROM original")
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM OriginalCaptions")
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("SELECT original FROM FormItemsOriginal_View where FormIdNo = " + FormIdNoToTranslate.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM FormItemsOriginal_View where FormIdNo = " + FormIdNoToTranslate.ToString())
                 End If
                 If dsColumn.Tables(0).Rows.Count = 0 Then
                     MessageBox.Show(Messages.NoDataFound)
@@ -295,9 +295,9 @@ Public Class TranslationTableManager
                 Dim dsColumn As DataSet
                 If FormIdNoToTranslate = 0 Then
 
-                    dsColumn = TranslatorDAC.ReturnDs("SELECT original, translated FROM TranslatedCaptions_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedCaptions_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("SELECT original, translated FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
                                                       " and FormIdNo = " + FormIdNoToTranslate.ToString())
                 End If
                 Dv = TransTable.DefaultView
@@ -325,24 +325,24 @@ Public Class TranslationTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.TrimEnd()
         Dim translatedValue As String = txtTranslation.Text.TrimEnd()
-        Dim originalIdNo As Int16
-        Cmd = "Select IdNo from original where original ='" + originalValue + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Dim captionIdNo As Int16
+        Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue + "'"
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
 
-        Cmd = "DELETE from TranslatedCaptions WHERE originalIdNo = " + originalIdNo.ToString() +
+        Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaptions ( originalIdNo , Translated, LanguageIdNo) VALUES ( " _
-                  + originalIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+            Cmd = "INSERT INTO TranslatedCaptions ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+                  + captionIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
         LoadColumn("Original")
         LoadColumn("Translation")
 
-        SetFocusToRowWithText(txtOriginal.Text.TrimEnd(), DataGrid1)
+        SetFocusToRowWithText(txtCaption.Text.TrimEnd(), DataGrid1)
 
     End Sub
 
@@ -362,21 +362,21 @@ Public Class TranslationTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.ToString().Trim()
         Dim translatedValue As String = DataGrid1.CurrentRow.Cells(1).Value.ToString().Trim()
-        Dim originalIdNo As Int16
-        Cmd = "Select IdNo from original where original ='" + originalValue.Trim() + "'"
-        originalIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-        Cmd = "DELETE from TranslatedCaptions WHERE originalIdNo = " + originalIdNo.ToString() +
+        Dim captionIdNo As Int16
+        Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue.Trim() + "'"
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaptions ( originalIdNo , Translated, LanguageIdNo) VALUES ( " _
-                  + originalIdNo.ToString() + ", '" + translatedValue.Trim() + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+            Cmd = "INSERT INTO TranslatedCaptions ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+                  + captionIdNo.ToString() + ", '" + translatedValue.Trim() + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
         ' If the original entry doesn't already exist, add it now
-        'Cmd = "SELECT count(*) FROM original WHERE original = '" _
+        'Cmd = "SELECT count(*) From OriginalCaptions where Caption = '" _
         '      + originalValue + "'"
         'Dim howMany As Integer = TranslatorDAC.ExecScalar(Cmd)
         'If howMany = 0 Then
@@ -427,11 +427,11 @@ Public Class TranslationTableManager
     Private Sub OnGridClick()
         With DataGrid1
             Dim nIndex = .CurrentRow.Index
-            txtOriginal.Text = .Rows(nIndex).Cells(0).Value.ToString()
+            txtCaption.Text = .Rows(nIndex).Cells(0).Value.ToString()
             txtTranslation.Text = .Rows(nIndex).Cells(1).Value.ToString()
         End With
         txtTranslation.Visible = True
-        txtOriginal.Visible = True
+        txtCaption.Visible = True
         txtTranslation.Enabled = False
     End Sub
 

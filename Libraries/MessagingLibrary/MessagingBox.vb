@@ -352,10 +352,14 @@ Public Class MessagingBox
         If NeedToTranslateText(TextDisplayLanguage) Then
             Dim cmd As String
             CreateDataAccessControl()
-            cmd = "SELECT Concat(COALESCE(TRANSLATED,'') ,'~',ORIGINAL) FROM Captions_View where Original = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT Concat(Coalesce(Translated,'') ,'~',Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + TextDisplayLanguage.TrimEnd + "'"
             translatedText = _dataAccessControl.ExecScalar(Of String)(cmd)
             If translatedText IsNot Nothing AndAlso Strings.Left(translatedText, 1) <> "~" Then
-                translatedText = Strings.Mid(translatedText, 2)
+                If GlobalVariables.RightToLeftLayout Then
+                    translatedText = Strings.Left(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture))
+                Else
+                    translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture)+1)
+                End If
             Else
                 AddCaption(textToTranslate)
                 translatedText = textToTranslate
@@ -376,14 +380,14 @@ Public Class MessagingBox
     Private Function AddCaption(ByVal caption As String) As Boolean
         Dim cmd As String
         Dim status As Boolean = True
-        Dim cs 
+        Dim cs
         CreateDataAccessControl()
-        cmd = "SELECT IdNo FROM Original where Original = '" + caption + "'"
+        cmd = "SELECT IdNo From OriginalCaptions where Caption = '" + caption + "'"
         Dim idNo As Int32 = _dataAccessControl.ExecScalar(Of Int32)(cmd)
         If idNo = 0 Then
-            Cs = _dataAccessControl.BuildConnString()
-            Dim conn As SqlConnection = New SqlConnection(Cs)
-            Dim sqlCommand As New SqlCommand("INSERT INTO Original (original) values (@caption)", conn)
+            cs = _dataAccessControl.BuildConnString()
+            Dim conn As SqlConnection = New SqlConnection(cs)
+            Dim sqlCommand As New SqlCommand("INSERT INTO OriginalCaption (caption) values (@caption)", conn)
             Try
                 conn.Open()
                 sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption

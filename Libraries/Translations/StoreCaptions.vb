@@ -130,10 +130,10 @@ Public Class StoreCaptions
 
     Friend Sub InsertWord(ByVal t As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM Original where original='" + t + "'"
+        cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = '" + t + "'"
         Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO Original (original) values ( '" + t + "')"
+            cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + t + "')"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub
@@ -145,23 +145,23 @@ Public Class StoreCaptions
 
     Public Sub InsertMessage(ByVal key As String, ByVal message As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM OriginalMessage where Key='" + key + "'"
+        cmd = "SELECT COUNT(*) FROM OriginalMessage where Key = '" + key + "'"
         Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO OriginalMessage (key,original) values ( '" + message + "','" + key + "')"
+            cmd = "INSERT INTO OriginalMessage (key, message) values ( '" + key + "','" + message + "')"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub
 
     Friend Sub InsertFormItem(ByVal formIdNo As Int16, ByVal item As String)
         Dim cmd As String
-        Dim originalIdNo As Int16
-        cmd = "Select IdNo from Original where Original = '" + item.ToString().TrimEnd() + "'"
-        originalIdNo = _dAc1.ExecScalar(Of Int16)(cmd)
-        cmd = "SELECT COUNT(*) FROM FormItems where originalIdNo = " + originalIdNo.ToString() + " and formidno = " + formIdNo.ToString()
+        Dim captionIdNo As Int16
+        cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
+        captionIdNo = _dAc1.ExecScalar(Of Int16)(cmd)
+        cmd = "SELECT COUNT(*) FROM FormItems where CaptionIdNo = " + captionIdNo.ToString() + " and FormIdNo = " + formIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO FormItems (FormIdNo, originalIdNo) values ( " + formIdNo.ToString() + "," + originalIdNo.ToString() + ")"
+            cmd = "INSERT INTO FormItems (FormIdNo, CaptionIdNO) values ( " + formIdNo.ToString() + "," + captionIdNo.ToString() + ")"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub

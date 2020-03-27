@@ -411,6 +411,9 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
+        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
+            GoFirstRecord()
+        End Sub
     End Class
 
 End Namespace
