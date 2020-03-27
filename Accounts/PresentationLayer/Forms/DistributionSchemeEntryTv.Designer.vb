@@ -48,6 +48,7 @@ Namespace PresentationLayer.Forms
         Me.dtpValidityEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsDistributionSchemeItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvDistributionSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -55,7 +56,6 @@ Namespace PresentationLayer.Forms
         Me.dgvPercentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtTotalPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.bsDistributionSchemeItems = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         CType(Me.DataGridViewDistributionSchemeItems,System.ComponentModel.ISupportInitialize).BeginInit
@@ -64,8 +64,8 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'TxtIDNo
         '
@@ -170,26 +170,36 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblDistributionSchemeCode
         '
+        Me.lblDistributionSchemeCode.DisplayOnly = true
+        Me.lblDistributionSchemeCode.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeCode, "lblDistributionSchemeCode")
         Me.lblDistributionSchemeCode.Name = "lblDistributionSchemeCode"
         '
         'lblDistributionSchemeName
         '
+        Me.lblDistributionSchemeName.DisplayOnly = true
+        Me.lblDistributionSchemeName.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeName, "lblDistributionSchemeName")
         Me.lblDistributionSchemeName.Name = "lblDistributionSchemeName"
         '
         'lblDistributionSchemeNameAra
         '
+        Me.lblDistributionSchemeNameAra.DisplayOnly = true
+        Me.lblDistributionSchemeNameAra.EditingMode = false
         resources.ApplyResources(Me.lblDistributionSchemeNameAra, "lblDistributionSchemeNameAra")
         Me.lblDistributionSchemeNameAra.Name = "lblDistributionSchemeNameAra"
         '
         'lblValidityStartDate
         '
+        Me.lblValidityStartDate.DisplayOnly = true
+        Me.lblValidityStartDate.EditingMode = false
         resources.ApplyResources(Me.lblValidityStartDate, "lblValidityStartDate")
         Me.lblValidityStartDate.Name = "lblValidityStartDate"
         '
@@ -216,6 +226,8 @@ Namespace PresentationLayer.Forms
         '
         'lblValidityEndDate
         '
+        Me.lblValidityEndDate.DisplayOnly = true
+        Me.lblValidityEndDate.EditingMode = false
         resources.ApplyResources(Me.lblValidityEndDate, "lblValidityEndDate")
         Me.lblValidityEndDate.Name = "lblValidityEndDate"
         '
@@ -242,6 +254,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.floDataDisplay.SetFlowBreak(Me.lblNotes, true)
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
@@ -256,7 +270,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewDistributionSchemeItems.DataSource = Me.bsDistributionSchemeItems
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Tahoma", 8!)
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -349,6 +363,8 @@ Namespace PresentationLayer.Forms
         '
         'lblAmount
         '
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         resources.ApplyResources(Me.lblAmount, "lblAmount")
         Me.lblAmount.Name = "lblAmount"
         '

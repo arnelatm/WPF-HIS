@@ -109,6 +109,8 @@ Namespace PresentationLayer.Forms
         'lblIdNo
         '
         Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -149,6 +151,8 @@ Namespace PresentationLayer.Forms
         'lblReferenceNo
         '
         Me.lblReferenceNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
         resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
         Me.lblReferenceNo.Name = "lblReferenceNo"
         '
@@ -171,6 +175,8 @@ Namespace PresentationLayer.Forms
         'lblTransactionDate
         '
         Me.lblTransactionDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
         resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
         Me.lblTransactionDate.Name = "lblTransactionDate"
         '
@@ -199,6 +205,8 @@ Namespace PresentationLayer.Forms
         'lblNotes
         '
         Me.lblNotes.BackColor = System.Drawing.Color.Transparent
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -232,6 +240,8 @@ Namespace PresentationLayer.Forms
         'lblActive
         '
         Me.lblActive.BackColor = System.Drawing.Color.Transparent
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
         resources.ApplyResources(Me.lblActive, "lblActive")
         Me.lblActive.Name = "lblActive"
         '
@@ -251,6 +261,8 @@ Namespace PresentationLayer.Forms
         'lblCancelled
         '
         Me.lblCancelled.BackColor = System.Drawing.Color.Transparent
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         resources.ApplyResources(Me.lblCancelled, "lblCancelled")
         Me.lblCancelled.Name = "lblCancelled"
         '
@@ -270,6 +282,8 @@ Namespace PresentationLayer.Forms
         'lblDateCreated
         '
         Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
+        Me.lblDateCreated.DisplayOnly = true
+        Me.lblDateCreated.EditingMode = false
         resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
         Me.lblDateCreated.Name = "lblDateCreated"
         '
@@ -292,6 +306,8 @@ Namespace PresentationLayer.Forms
         'lblAmount
         '
         Me.lblAmount.BackColor = System.Drawing.Color.Transparent
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
         resources.ApplyResources(Me.lblAmount, "lblAmount")
         Me.lblAmount.Name = "lblAmount"
         '
@@ -305,7 +321,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.DataInGridChanged = false
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Tahoma", 8!)
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText

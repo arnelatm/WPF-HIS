@@ -83,6 +83,19 @@ Namespace PresentationLayer.Forms
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewSalesCashItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvCashCode = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvBankChargeDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -97,19 +110,6 @@ Namespace PresentationLayer.Forms
         Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvCashCode = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvBankChargeDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFullEntryArea.SuspendLayout
         Me.floPurchaseJournalHeader.SuspendLayout
@@ -166,6 +166,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -182,6 +184,7 @@ Namespace PresentationLayer.Forms
         Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
         Me.txtJournalCode.LinkedLabel = Nothing
         Me.txtJournalCode.Name = "txtJournalCode"
+        Me.txtJournalCode.OldValue = Nothing
         Me.txtJournalCode.ReadOnly = true
         Me.txtJournalCode.TabStop = false
         Me.txtJournalCode.ValueIsMandatory = true
@@ -199,11 +202,14 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
         Me.TxtIDNo.Name = "TxtIDNo"
+        Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
         Me.TxtIDNo.Selectable = true
         '
         'lblReferenceNo
         '
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
         resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
         Me.lblReferenceNo.Name = "lblReferenceNo"
         '
@@ -219,10 +225,13 @@ Namespace PresentationLayer.Forms
         Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
         Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
         Me.txtReferenceNo.Name = "txtReferenceNo"
+        Me.txtReferenceNo.OldValue = Nothing
         Me.txtReferenceNo.ValueIsMandatory = true
         '
         'lblTransactionDate
         '
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
         resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
         Me.lblTransactionDate.Name = "lblTransactionDate"
         '
@@ -260,10 +269,13 @@ Namespace PresentationLayer.Forms
         Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
         Me.txtPayeeName.LinkedLabel = Nothing
         Me.txtPayeeName.Name = "txtPayeeName"
+        Me.txtPayeeName.OldValue = Nothing
         Me.txtPayeeName.ValueIsMandatory = true
         '
         'lblAccountIdNo
         '
+        Me.lblAccountIdNo.DisplayOnly = true
+        Me.lblAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
         Me.lblAccountIdNo.Name = "lblAccountIdNo"
         '
@@ -302,6 +314,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -317,6 +331,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ValueIsMandatory = true
         '
         'floHeader2
@@ -335,6 +350,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCancelled
         '
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         resources.ApplyResources(Me.lblCancelled, "lblCancelled")
         Me.lblCancelled.Name = "lblCancelled"
         '
@@ -353,6 +370,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPosted
         '
+        Me.lblPosted.DisplayOnly = true
+        Me.lblPosted.EditingMode = false
         resources.ApplyResources(Me.lblPosted, "lblPosted")
         Me.lblPosted.Name = "lblPosted"
         '
@@ -371,6 +390,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDateCreated
         '
+        Me.lblDateCreated.DisplayOnly = true
+        Me.lblDateCreated.EditingMode = false
         resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
         Me.lblDateCreated.Name = "lblDateCreated"
         '
@@ -386,6 +407,7 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Nothing
         Me.txtDateCreated.Name = "txtDateCreated"
+        Me.txtDateCreated.OldValue = Nothing
         '
         'floPurchaseJournalItems
         '
@@ -409,7 +431,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -536,7 +558,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewSalesCashItems.DataSource = Me.bsSalesCashItems
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -550,166 +572,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewSalesCashItems.SequenceColumn = "dgvSequenceSc"
         Me.DataGridViewSalesCashItems.StartTrackingChanges = false
         '
-        'bsSalesCashItems
-        '
-        Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesCashItem)
-        '
-        'floJournalItemsFooter
-        '
-        Me.floJournalItemsFooter.BackColor = System.Drawing.Color.Transparent
-        Me.floJournalItemsFooter.Controls.Add(Me.lblTotals)
-        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalSales)
-        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalDeposits)
-        Me.floJournalItemsFooter.Controls.Add(Me.CLabel2)
-        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalBankCharges)
-        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalBankChargesVat)
-        Me.floJournalItemsFooter.Controls.Add(Me.btnViewGL)
-        resources.ApplyResources(Me.floJournalItemsFooter, "floJournalItemsFooter")
-        Me.floJournalItemsFooter.Name = "floJournalItemsFooter"
-        '
-        'lblTotals
-        '
-        resources.ApplyResources(Me.lblTotals, "lblTotals")
-        Me.lblTotals.Name = "lblTotals"
-        '
-        'txtTotalSales
-        '
-        Me.txtTotalSales.BackColor = System.Drawing.Color.White
-        Me.txtTotalSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalSales.ComputedValue = false
-        Me.txtTotalSales.CustomFormat = "N2"
-        Me.txtTotalSales.DataBoundControl = true
-        Me.txtTotalSales.DisplayOnly = true
-        Me.txtTotalSales.EditingMode = true
-        resources.ApplyResources(Me.txtTotalSales, "txtTotalSales")
-        Me.txtTotalSales.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalSales.LinkedLabel = Nothing
-        Me.txtTotalSales.Name = "txtTotalSales"
-        Me.txtTotalSales.ReadOnly = true
-        Me.txtTotalSales.ValueIsMandatory = true
-        '
-        'txtTotalDeposits
-        '
-        Me.txtTotalDeposits.BackColor = System.Drawing.Color.White
-        Me.txtTotalDeposits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDeposits.ComputedValue = false
-        Me.txtTotalDeposits.CustomFormat = "N2"
-        Me.txtTotalDeposits.DataBoundControl = true
-        Me.txtTotalDeposits.DisplayOnly = true
-        Me.txtTotalDeposits.EditingMode = true
-        resources.ApplyResources(Me.txtTotalDeposits, "txtTotalDeposits")
-        Me.txtTotalDeposits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalDeposits.LinkedLabel = Nothing
-        Me.txtTotalDeposits.Name = "txtTotalDeposits"
-        Me.txtTotalDeposits.ReadOnly = true
-        Me.txtTotalDeposits.ValueIsMandatory = true
-        '
-        'CLabel2
-        '
-        resources.ApplyResources(Me.CLabel2, "CLabel2")
-        Me.CLabel2.Name = "CLabel2"
-        '
-        'txtTotalBankCharges
-        '
-        Me.txtTotalBankCharges.BackColor = System.Drawing.Color.White
-        Me.txtTotalBankCharges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalBankCharges.ComputedValue = false
-        Me.txtTotalBankCharges.CustomFormat = "N2"
-        Me.txtTotalBankCharges.DataBoundControl = true
-        Me.txtTotalBankCharges.DisplayOnly = true
-        Me.txtTotalBankCharges.EditingMode = true
-        resources.ApplyResources(Me.txtTotalBankCharges, "txtTotalBankCharges")
-        Me.txtTotalBankCharges.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalBankCharges.LinkedLabel = Nothing
-        Me.txtTotalBankCharges.Name = "txtTotalBankCharges"
-        Me.txtTotalBankCharges.ReadOnly = true
-        Me.txtTotalBankCharges.ValueIsMandatory = true
-        '
-        'txtTotalBankChargesVat
-        '
-        Me.txtTotalBankChargesVat.BackColor = System.Drawing.Color.White
-        Me.txtTotalBankChargesVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalBankChargesVat.ComputedValue = false
-        Me.txtTotalBankChargesVat.CustomFormat = "N2"
-        Me.txtTotalBankChargesVat.DataBoundControl = true
-        Me.txtTotalBankChargesVat.DisplayOnly = true
-        Me.txtTotalBankChargesVat.EditingMode = true
-        resources.ApplyResources(Me.txtTotalBankChargesVat, "txtTotalBankChargesVat")
-        Me.txtTotalBankChargesVat.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalBankChargesVat.LinkedLabel = Nothing
-        Me.txtTotalBankChargesVat.Name = "txtTotalBankChargesVat"
-        Me.txtTotalBankChargesVat.ReadOnly = true
-        Me.txtTotalBankChargesVat.ValueIsMandatory = true
-        '
-        'btnViewGL
-        '
-        Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
-        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-        Me.btnViewGL.ImageIndex = 0
-        Me.btnViewGL.Name = "btnViewGL"
-        Me.btnViewGL.OriginalImageName = Nothing
-        Me.btnViewGL.SecurityKey = ""
-        '
-        'floSalesCashItemsFooter
-        '
-        Me.floSalesCashItemsFooter.BackColor = System.Drawing.Color.Transparent
-        Me.floSalesCashItemsFooter.Controls.Add(Me.CLabel1)
-        Me.floSalesCashItemsFooter.Controls.Add(Me.txtTotalDebits)
-        Me.floSalesCashItemsFooter.Controls.Add(Me.txtTotalCredits)
-        Me.floSalesCashItemsFooter.Controls.Add(Me.btnHideJournalEntries)
-        resources.ApplyResources(Me.floSalesCashItemsFooter, "floSalesCashItemsFooter")
-        Me.floSalesCashItemsFooter.Name = "floSalesCashItemsFooter"
-        '
-        'CLabel1
-        '
-        resources.ApplyResources(Me.CLabel1, "CLabel1")
-        Me.CLabel1.Name = "CLabel1"
-        '
-        'txtTotalDebits
-        '
-        Me.txtTotalDebits.BackColor = System.Drawing.Color.White
-        Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDebits.ComputedValue = true
-        Me.txtTotalDebits.CustomFormat = "N2"
-        Me.txtTotalDebits.DataBoundControl = true
-        Me.txtTotalDebits.DisplayOnly = true
-        Me.txtTotalDebits.EditingMode = true
-        resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
-        Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalDebits.LinkedLabel = Me.lblTotals
-        Me.txtTotalDebits.Name = "txtTotalDebits"
-        Me.txtTotalDebits.ReadOnly = true
-        Me.txtTotalDebits.TabStop = false
-        Me.txtTotalDebits.ValueIsMandatory = true
-        '
-        'txtTotalCredits
-        '
-        Me.txtTotalCredits.BackColor = System.Drawing.Color.White
-        Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalCredits.ComputedValue = true
-        Me.txtTotalCredits.CustomFormat = "N2"
-        Me.txtTotalCredits.DataBoundControl = true
-        Me.txtTotalCredits.DisplayOnly = true
-        Me.txtTotalCredits.EditingMode = true
-        resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
-        Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalCredits.LinkedLabel = Me.lblTotals
-        Me.txtTotalCredits.Name = "txtTotalCredits"
-        Me.txtTotalCredits.ReadOnly = true
-        Me.txtTotalCredits.TabStop = false
-        Me.txtTotalCredits.ValueIsMandatory = true
-        '
-        'btnHideJournalEntries
-        '
-        Me.btnHideJournalEntries.DesignerSelected = false
-        Me.btnHideJournalEntries.DisplayOnly = true
-        resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
-        Me.btnHideJournalEntries.ImageIndex = 0
-        Me.btnHideJournalEntries.Name = "btnHideJournalEntries"
-        Me.btnHideJournalEntries.OriginalImageName = Nothing
-        Me.btnHideJournalEntries.SecurityKey = ""
-        '
         'dgvSequenceSc
         '
         Me.dgvSequenceSc.DataPropertyName = "Sequence"
@@ -717,9 +579,10 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
         Me.dgvSequenceSc.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvSequenceSc.DisplayOnly = true
-        Me.dgvSequenceSc.EditingMode = true
+        Me.dgvSequenceSc.EditingMode = false
         resources.ApplyResources(Me.dgvSequenceSc, "dgvSequenceSc")
         Me.dgvSequenceSc.Name = "dgvSequenceSc"
+        Me.dgvSequenceSc.ReadOnly = true
         Me.dgvSequenceSc.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvCashCode
@@ -867,6 +730,178 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewTextBoxColumn2.DataPropertyName = "SalesJournalIdNo"
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'bsSalesCashItems
+        '
+        Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesCashItem)
+        '
+        'floJournalItemsFooter
+        '
+        Me.floJournalItemsFooter.BackColor = System.Drawing.Color.Transparent
+        Me.floJournalItemsFooter.Controls.Add(Me.lblTotals)
+        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalSales)
+        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalDeposits)
+        Me.floJournalItemsFooter.Controls.Add(Me.CLabel2)
+        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalBankCharges)
+        Me.floJournalItemsFooter.Controls.Add(Me.txtTotalBankChargesVat)
+        Me.floJournalItemsFooter.Controls.Add(Me.btnViewGL)
+        resources.ApplyResources(Me.floJournalItemsFooter, "floJournalItemsFooter")
+        Me.floJournalItemsFooter.Name = "floJournalItemsFooter"
+        '
+        'lblTotals
+        '
+        Me.lblTotals.DisplayOnly = true
+        Me.lblTotals.EditingMode = false
+        resources.ApplyResources(Me.lblTotals, "lblTotals")
+        Me.lblTotals.Name = "lblTotals"
+        '
+        'txtTotalSales
+        '
+        Me.txtTotalSales.BackColor = System.Drawing.Color.White
+        Me.txtTotalSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalSales.ComputedValue = false
+        Me.txtTotalSales.CustomFormat = "N2"
+        Me.txtTotalSales.DataBoundControl = true
+        Me.txtTotalSales.DisplayOnly = true
+        Me.txtTotalSales.EditingMode = true
+        resources.ApplyResources(Me.txtTotalSales, "txtTotalSales")
+        Me.txtTotalSales.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalSales.LinkedLabel = Nothing
+        Me.txtTotalSales.Name = "txtTotalSales"
+        Me.txtTotalSales.OldValue = Nothing
+        Me.txtTotalSales.ReadOnly = true
+        Me.txtTotalSales.ValueIsMandatory = true
+        '
+        'txtTotalDeposits
+        '
+        Me.txtTotalDeposits.BackColor = System.Drawing.Color.White
+        Me.txtTotalDeposits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalDeposits.ComputedValue = false
+        Me.txtTotalDeposits.CustomFormat = "N2"
+        Me.txtTotalDeposits.DataBoundControl = true
+        Me.txtTotalDeposits.DisplayOnly = true
+        Me.txtTotalDeposits.EditingMode = true
+        resources.ApplyResources(Me.txtTotalDeposits, "txtTotalDeposits")
+        Me.txtTotalDeposits.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalDeposits.LinkedLabel = Nothing
+        Me.txtTotalDeposits.Name = "txtTotalDeposits"
+        Me.txtTotalDeposits.OldValue = Nothing
+        Me.txtTotalDeposits.ReadOnly = true
+        Me.txtTotalDeposits.ValueIsMandatory = true
+        '
+        'CLabel2
+        '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.Name = "CLabel2"
+        '
+        'txtTotalBankCharges
+        '
+        Me.txtTotalBankCharges.BackColor = System.Drawing.Color.White
+        Me.txtTotalBankCharges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalBankCharges.ComputedValue = false
+        Me.txtTotalBankCharges.CustomFormat = "N2"
+        Me.txtTotalBankCharges.DataBoundControl = true
+        Me.txtTotalBankCharges.DisplayOnly = true
+        Me.txtTotalBankCharges.EditingMode = true
+        resources.ApplyResources(Me.txtTotalBankCharges, "txtTotalBankCharges")
+        Me.txtTotalBankCharges.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalBankCharges.LinkedLabel = Nothing
+        Me.txtTotalBankCharges.Name = "txtTotalBankCharges"
+        Me.txtTotalBankCharges.OldValue = Nothing
+        Me.txtTotalBankCharges.ReadOnly = true
+        Me.txtTotalBankCharges.ValueIsMandatory = true
+        '
+        'txtTotalBankChargesVat
+        '
+        Me.txtTotalBankChargesVat.BackColor = System.Drawing.Color.White
+        Me.txtTotalBankChargesVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalBankChargesVat.ComputedValue = false
+        Me.txtTotalBankChargesVat.CustomFormat = "N2"
+        Me.txtTotalBankChargesVat.DataBoundControl = true
+        Me.txtTotalBankChargesVat.DisplayOnly = true
+        Me.txtTotalBankChargesVat.EditingMode = true
+        resources.ApplyResources(Me.txtTotalBankChargesVat, "txtTotalBankChargesVat")
+        Me.txtTotalBankChargesVat.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalBankChargesVat.LinkedLabel = Nothing
+        Me.txtTotalBankChargesVat.Name = "txtTotalBankChargesVat"
+        Me.txtTotalBankChargesVat.OldValue = Nothing
+        Me.txtTotalBankChargesVat.ReadOnly = true
+        Me.txtTotalBankChargesVat.ValueIsMandatory = true
+        '
+        'btnViewGL
+        '
+        Me.btnViewGL.DesignerSelected = false
+        Me.btnViewGL.DisplayOnly = true
+        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+        Me.btnViewGL.ImageIndex = 0
+        Me.btnViewGL.Name = "btnViewGL"
+        Me.btnViewGL.OriginalImageName = Nothing
+        Me.btnViewGL.SecurityKey = ""
+        '
+        'floSalesCashItemsFooter
+        '
+        Me.floSalesCashItemsFooter.BackColor = System.Drawing.Color.Transparent
+        Me.floSalesCashItemsFooter.Controls.Add(Me.CLabel1)
+        Me.floSalesCashItemsFooter.Controls.Add(Me.txtTotalDebits)
+        Me.floSalesCashItemsFooter.Controls.Add(Me.txtTotalCredits)
+        Me.floSalesCashItemsFooter.Controls.Add(Me.btnHideJournalEntries)
+        resources.ApplyResources(Me.floSalesCashItemsFooter, "floSalesCashItemsFooter")
+        Me.floSalesCashItemsFooter.Name = "floSalesCashItemsFooter"
+        '
+        'CLabel1
+        '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        resources.ApplyResources(Me.CLabel1, "CLabel1")
+        Me.CLabel1.Name = "CLabel1"
+        '
+        'txtTotalDebits
+        '
+        Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+        Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalDebits.ComputedValue = true
+        Me.txtTotalDebits.CustomFormat = "N2"
+        Me.txtTotalDebits.DataBoundControl = true
+        Me.txtTotalDebits.DisplayOnly = true
+        Me.txtTotalDebits.EditingMode = true
+        resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+        Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalDebits.LinkedLabel = Me.lblTotals
+        Me.txtTotalDebits.Name = "txtTotalDebits"
+        Me.txtTotalDebits.OldValue = Nothing
+        Me.txtTotalDebits.ReadOnly = true
+        Me.txtTotalDebits.TabStop = false
+        Me.txtTotalDebits.ValueIsMandatory = true
+        '
+        'txtTotalCredits
+        '
+        Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+        Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalCredits.ComputedValue = true
+        Me.txtTotalCredits.CustomFormat = "N2"
+        Me.txtTotalCredits.DataBoundControl = true
+        Me.txtTotalCredits.DisplayOnly = true
+        Me.txtTotalCredits.EditingMode = true
+        resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+        Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalCredits.LinkedLabel = Me.lblTotals
+        Me.txtTotalCredits.Name = "txtTotalCredits"
+        Me.txtTotalCredits.OldValue = Nothing
+        Me.txtTotalCredits.ReadOnly = true
+        Me.txtTotalCredits.TabStop = false
+        Me.txtTotalCredits.ValueIsMandatory = true
+        '
+        'btnHideJournalEntries
+        '
+        Me.btnHideJournalEntries.DesignerSelected = false
+        Me.btnHideJournalEntries.DisplayOnly = true
+        resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
+        Me.btnHideJournalEntries.ImageIndex = 0
+        Me.btnHideJournalEntries.Name = "btnHideJournalEntries"
+        Me.btnHideJournalEntries.OriginalImageName = Nothing
+        Me.btnHideJournalEntries.SecurityKey = ""
         '
         'SalesJournalEntry
         '

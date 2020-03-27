@@ -33,59 +33,59 @@ Partial Class SecurityObjectEntryTv
         Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.floDataDisplay.SuspendLayout()
-        Me.SuspendLayout()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.floDataDisplay.SuspendLayout
+        Me.SuspendLayout
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'TxtIDNo
         '
         Me.TxtIDNo.BackColor = System.Drawing.Color.White
         Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = False
+        Me.TxtIDNo.ComputedValue = false
         Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = True
-        Me.TxtIDNo.DisplayOnly = True
-        Me.TxtIDNo.EditingMode = True
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, True)
+        Me.TxtIDNo.DataBoundControl = true
+        Me.TxtIDNo.DisplayOnly = true
+        Me.TxtIDNo.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
         resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = True
-        Me.TxtIDNo.TabStop = False
+        Me.TxtIDNo.ReadOnly = true
+        Me.TxtIDNo.TabStop = false
         '
         'txtSecurityObjectName
         '
         Me.txtSecurityObjectName.BackColor = System.Drawing.Color.White
         Me.txtSecurityObjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSecurityObjectName.ComputedValue = False
+        Me.txtSecurityObjectName.ComputedValue = false
         Me.txtSecurityObjectName.CustomFormat = Nothing
-        Me.txtSecurityObjectName.DataBoundControl = True
-        Me.txtSecurityObjectName.EditingMode = False
-        Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectName, True)
+        Me.txtSecurityObjectName.DataBoundControl = true
+        Me.txtSecurityObjectName.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectName, true)
         resources.ApplyResources(Me.txtSecurityObjectName, "txtSecurityObjectName")
         Me.txtSecurityObjectName.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityObjectName.LinkedLabel = Nothing
         Me.txtSecurityObjectName.Name = "txtSecurityObjectName"
         Me.txtSecurityObjectName.OldValue = Nothing
-        Me.txtSecurityObjectName.ValueIsMandatory = True
+        Me.txtSecurityObjectName.ValueIsMandatory = true
         '
         'txtSecurityObjectNameAra
         '
         Me.txtSecurityObjectNameAra.BackColor = System.Drawing.Color.White
         Me.txtSecurityObjectNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSecurityObjectNameAra.ComputedValue = False
+        Me.txtSecurityObjectNameAra.ComputedValue = false
         Me.txtSecurityObjectNameAra.CustomFormat = Nothing
-        Me.txtSecurityObjectNameAra.DataBoundControl = True
-        Me.txtSecurityObjectNameAra.EditingMode = False
+        Me.txtSecurityObjectNameAra.DataBoundControl = true
+        Me.txtSecurityObjectNameAra.EditingMode = false
         Me.txtSecurityObjectNameAra.EnglishControl = Me.txtSecurityObjectName
-        Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectNameAra, True)
+        Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectNameAra, true)
         resources.ApplyResources(Me.txtSecurityObjectNameAra, "txtSecurityObjectNameAra")
         Me.txtSecurityObjectNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityObjectNameAra.LinkedLabel = Nothing
@@ -96,16 +96,16 @@ Partial Class SecurityObjectEntryTv
         '
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = False
+        Me.txtNotes.ComputedValue = false
         Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = True
-        Me.txtNotes.EditingMode = False
+        Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ValueIsMandatory = True
+        Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
         '
@@ -123,21 +123,29 @@ Partial Class SecurityObjectEntryTv
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblSecurityObjectName
         '
+        Me.lblSecurityObjectName.DisplayOnly = true
+        Me.lblSecurityObjectName.EditingMode = false
         resources.ApplyResources(Me.lblSecurityObjectName, "lblSecurityObjectName")
         Me.lblSecurityObjectName.Name = "lblSecurityObjectName"
         '
         'lblSecurityObjectNameAra
         '
+        Me.lblSecurityObjectNameAra.DisplayOnly = true
+        Me.lblSecurityObjectNameAra.EditingMode = false
         resources.ApplyResources(Me.lblSecurityObjectNameAra, "lblSecurityObjectNameAra")
         Me.lblSecurityObjectNameAra.Name = "lblSecurityObjectNameAra"
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -148,13 +156,13 @@ Partial Class SecurityObjectEntryTv
         Me.Name = "SecurityObjectEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.floDataDisplay.ResumeLayout(False)
-        Me.floDataDisplay.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        Me.floDataDisplay.ResumeLayout(false)
+        Me.floDataDisplay.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents TxtIDNo As CTextBox
     Friend WithEvents txtSecurityObjectName As CTextBox
     Friend WithEvents txtSecurityObjectNameAra As CTextBoxArabic

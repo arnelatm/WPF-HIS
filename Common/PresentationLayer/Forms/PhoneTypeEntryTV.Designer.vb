@@ -41,9 +41,12 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
+        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 180)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 186)
         '
         'TxtIDNo
         '
@@ -162,14 +165,17 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtPhoneTypeNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Location = New System.Drawing.Point(309, 3)
+        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
+        Me.floDataDisplay.Location = New System.Drawing.Point(309, 25)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(598, 180)
+        Me.floDataDisplay.Size = New System.Drawing.Size(598, 186)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -181,6 +187,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPhoneTypeCode
         '
+        Me.lblPhoneTypeCode.DisplayOnly = true
+        Me.lblPhoneTypeCode.EditingMode = false
         Me.lblPhoneTypeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPhoneTypeCode.Location = New System.Drawing.Point(1, 26)
         Me.lblPhoneTypeCode.Margin = New System.Windows.Forms.Padding(1)
@@ -192,6 +200,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPhoneTypeName
         '
+        Me.lblPhoneTypeName.DisplayOnly = true
+        Me.lblPhoneTypeName.EditingMode = false
         Me.lblPhoneTypeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPhoneTypeName.Location = New System.Drawing.Point(1, 51)
         Me.lblPhoneTypeName.Margin = New System.Windows.Forms.Padding(1)
@@ -203,6 +213,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPhoneTypeNameAra
         '
+        Me.lblPhoneTypeNameAra.DisplayOnly = true
+        Me.lblPhoneTypeNameAra.EditingMode = false
         Me.lblPhoneTypeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPhoneTypeNameAra.Location = New System.Drawing.Point(1, 76)
         Me.lblPhoneTypeNameAra.Margin = New System.Windows.Forms.Padding(1)
@@ -214,6 +226,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.Location = New System.Drawing.Point(1, 101)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
@@ -225,7 +239,7 @@ Namespace PresentationLayer.Forms
         '
         'PhoneTypeEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(907, 268)
+        Me.ClientSize = New System.Drawing.Size(907, 211)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "PhoneTypeEntryTv"
         Me.Text = "Phone Type Maintenance Form"

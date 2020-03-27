@@ -24,409 +24,251 @@ Partial Class CFormEntry
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntry))
         Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
         Me._localizableMessage1 = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
-        Me.floNavigationButtons = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.LblRecordCount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnArabic = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnOriginal = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnAdd = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnEdit = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnDelete = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnSave = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnFind = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnFirst = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnPrev = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnNext = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnLast = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnUndo = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.BtnQuit = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnDebugSwitch = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.floNavigationAndRecordCounter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnFirst = New System.Windows.Forms.ToolStripButton()
+        Me.btnPrev = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
+        Me.tsbTotalRecords = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnNext = New System.Windows.Forms.ToolStripButton()
+        Me.btnLast = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnAdd = New System.Windows.Forms.ToolStripButton()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
+        Me.btnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnSave = New System.Windows.Forms.ToolStripButton()
+        Me.btnFind = New System.Windows.Forms.ToolStripButton()
+        Me.btnUndo = New System.Windows.Forms.ToolStripButton()
+        Me.btnQuit = New System.Windows.Forms.ToolStripButton()
+        Me.btnDebug = New System.Windows.Forms.ToolStripButton()
+        Me.btnArabic = New System.Windows.Forms.ToolStripButton()
+        Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
+        Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floNavigationButtons.SuspendLayout
-        Me.floNavigationAndRecordCounter.SuspendLayout
+        Me.ToolStrip1.SuspendLayout
         Me.SuspendLayout
         '
-        'floNavigationButtons
+        'ToolStrip1
         '
-        Me.floNavigationButtons.AutoSize = true
-        Me.floNavigationButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.floNavigationButtons.BackColor = System.Drawing.Color.Transparent
-        Me.floNavigationButtons.Controls.Add(Me.LblRecordCount)
-        Me.floNavigationButtons.Controls.Add(Me.btnArabic)
-        Me.floNavigationButtons.Controls.Add(Me.btnOriginal)
-        Me.floNavigationButtons.Controls.Add(Me.CButton1)
-        Me.floNavigationButtons.Controls.Add(Me.BtnAdd)
-        Me.floNavigationButtons.Controls.Add(Me.BtnEdit)
-        Me.floNavigationButtons.Controls.Add(Me.BtnDelete)
-        Me.floNavigationButtons.Controls.Add(Me.BtnSave)
-        Me.floNavigationButtons.Controls.Add(Me.BtnFind)
-        Me.floNavigationButtons.Controls.Add(Me.BtnFirst)
-        Me.floNavigationButtons.Controls.Add(Me.BtnPrev)
-        Me.floNavigationButtons.Controls.Add(Me.BtnNext)
-        Me.floNavigationButtons.Controls.Add(Me.BtnLast)
-        Me.floNavigationButtons.Controls.Add(Me.BtnUndo)
-        Me.floNavigationButtons.Controls.Add(Me.BtnQuit)
-        Me.floNavigationButtons.Controls.Add(Me.btnDebugSwitch)
-        Me.floNavigationButtons.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.floNavigationAndRecordCounter.SetFlowBreak(Me.floNavigationButtons, true)
-        Me.floNavigationButtons.Location = New System.Drawing.Point(3, 3)
-        Me.floNavigationButtons.Name = "floNavigationButtons"
-        Me.floNavigationButtons.Size = New System.Drawing.Size(797, 77)
-        Me.floNavigationButtons.TabIndex = 12
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnAdd, Me.btnDelete, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnQuit, Me.btnDebug, Me.btnArabic, Me.btnOriginal, Me.btnTranslate})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(865, 25)
+        Me.ToolStrip1.TabIndex = 1
+        Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'LblRecordCount
+        'btnFirst
         '
-        Me.LblRecordCount.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LblRecordCount.AutoSize = true
-        Me.LblRecordCount.DisplayOnly = true
-        Me.LblRecordCount.EditingMode = false
-        Me.LblRecordCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.LblRecordCount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblRecordCount.Location = New System.Drawing.Point(1, 6)
-        Me.LblRecordCount.Margin = New System.Windows.Forms.Padding(1)
-        Me.LblRecordCount.Name = "LblRecordCount"
-        Me.LblRecordCount.Size = New System.Drawing.Size(122, 17)
-        Me.LblRecordCount.TabIndex = 16
-        Me.LblRecordCount.Text = "Record <x> of <x>"
-        Me.LblRecordCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnFirst.Image = CType(resources.GetObject("btnFirst.Image"),System.Drawing.Image)
+        Me.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnFirst.Name = "btnFirst"
+        Me.btnFirst.Size = New System.Drawing.Size(23, 22)
+        Me.btnFirst.Text = "ToolStripButton1"
+        '
+        'btnPrev
+        '
+        Me.btnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnPrev.Image = CType(resources.GetObject("btnPrev.Image"),System.Drawing.Image)
+        Me.btnPrev.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnPrev.Name = "btnPrev"
+        Me.btnPrev.Size = New System.Drawing.Size(23, 22)
+        Me.btnPrev.Text = "ToolStripButton2"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbCurrentRecord
+        '
+        Me.tsbCurrentRecord.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.tsbCurrentRecord.Name = "tsbCurrentRecord"
+        Me.tsbCurrentRecord.Size = New System.Drawing.Size(50, 25)
+        '
+        'tsbTotalRecords
+        '
+        Me.tsbTotalRecords.Name = "tsbTotalRecords"
+        Me.tsbTotalRecords.Size = New System.Drawing.Size(35, 22)
+        Me.tsbTotalRecords.Text = "of {0}"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnNext
+        '
+        Me.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnNext.Image = CType(resources.GetObject("btnNext.Image"),System.Drawing.Image)
+        Me.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnNext.Name = "btnNext"
+        Me.btnNext.Size = New System.Drawing.Size(23, 22)
+        Me.btnNext.Text = "tsbNext"
+        '
+        'btnLast
+        '
+        Me.btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnLast.Image = CType(resources.GetObject("btnLast.Image"),System.Drawing.Image)
+        Me.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLast.Name = "btnLast"
+        Me.btnLast.Size = New System.Drawing.Size(23, 22)
+        Me.btnLast.Text = "ToolStripButton4"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnAdd
+        '
+        Me.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"),System.Drawing.Image)
+        Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(23, 22)
+        Me.btnAdd.Text = "ToolStripButton5"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"),System.Drawing.Image)
+        Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(23, 22)
+        Me.btnDelete.Text = "ToolStripButton6"
+        '
+        'btnEdit
+        '
+        Me.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"),System.Drawing.Image)
+        Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(23, 22)
+        Me.btnEdit.Text = "ToolStripButton1"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnSave
+        '
+        Me.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"),System.Drawing.Image)
+        Me.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(23, 22)
+        Me.btnSave.Text = "ToolStripButton11"
+        '
+        'btnFind
+        '
+        Me.btnFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"),System.Drawing.Image)
+        Me.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnFind.Name = "btnFind"
+        Me.btnFind.Size = New System.Drawing.Size(23, 22)
+        Me.btnFind.Text = "ToolStripButton7"
+        '
+        'btnUndo
+        '
+        Me.btnUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnUndo.Image = CType(resources.GetObject("btnUndo.Image"),System.Drawing.Image)
+        Me.btnUndo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnUndo.Name = "btnUndo"
+        Me.btnUndo.Size = New System.Drawing.Size(23, 22)
+        Me.btnUndo.Text = "ToolStripButton8"
+        '
+        'btnQuit
+        '
+        Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"),System.Drawing.Image)
+        Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnQuit.Name = "btnQuit"
+        Me.btnQuit.Size = New System.Drawing.Size(23, 22)
+        Me.btnQuit.Text = "ToolStripButton9"
+        '
+        'btnDebug
+        '
+        Me.btnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnDebug.Image = CType(resources.GetObject("btnDebug.Image"),System.Drawing.Image)
+        Me.btnDebug.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDebug.Name = "btnDebug"
+        Me.btnDebug.Size = New System.Drawing.Size(23, 22)
+        Me.btnDebug.Text = "ToolStripButton10"
         '
         'btnArabic
         '
-        Me.btnArabic.BackColor = System.Drawing.Color.Transparent
-        Me.btnArabic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnArabic.DesignerSelected = false
-        Me.btnArabic.DisplayOnly = true
-        Me.btnArabic.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnArabic.ImageIndex = 0
-        Me.btnArabic.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnArabic.Location = New System.Drawing.Point(127, 3)
+        Me.btnArabic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnArabic.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnArabic.ForeColor = System.Drawing.Color.Green
         Me.btnArabic.Name = "btnArabic"
-        Me.btnArabic.OriginalImageName = Nothing
-        Me.btnArabic.SecurityKey = ""
-        Me.btnArabic.Size = New System.Drawing.Size(32, 23)
-        Me.btnArabic.TabIndex = 14
-        Me.btnArabic.Tag = "Arabic"
+        Me.btnArabic.Size = New System.Drawing.Size(23, 22)
         Me.btnArabic.Text = "ع"
-        Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnArabic.ToolTipText = "Arabic"
         '
         'btnOriginal
         '
-        Me.btnOriginal.BackColor = System.Drawing.Color.Transparent
-        Me.btnOriginal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnOriginal.DesignerSelected = false
-        Me.btnOriginal.DisplayOnly = true
-        Me.btnOriginal.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnOriginal.ImageIndex = 0
-        Me.btnOriginal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnOriginal.Location = New System.Drawing.Point(165, 3)
+        Me.btnOriginal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnOriginal.ForeColor = System.Drawing.Color.Green
+        Me.btnOriginal.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnOriginal.Name = "btnOriginal"
-        Me.btnOriginal.OriginalImageName = ""
-        Me.btnOriginal.SecurityKey = ""
-        Me.btnOriginal.Size = New System.Drawing.Size(39, 23)
-        Me.btnOriginal.TabIndex = 13
-        Me.btnOriginal.Text = "Eng"
-        Me.btnOriginal.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnOriginal.Size = New System.Drawing.Size(24, 22)
+        Me.btnOriginal.Text = "En"
         '
-        'CButton1
+        'btnTranslate
         '
-        Me.CButton1.BackColor = System.Drawing.Color.Lime
-        Me.CButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.CButton1.DesignerSelected = false
-        Me.CButton1.DisplayOnly = true
-        Me.floNavigationButtons.SetFlowBreak(Me.CButton1, true)
-        Me.CButton1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.CButton1.ImageIndex = 0
-        Me.CButton1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CButton1.Location = New System.Drawing.Point(210, 3)
-        Me.CButton1.Name = "CButton1"
-        Me.CButton1.OriginalImageName = ""
-        Me.CButton1.SecurityKey = ""
-        Me.CButton1.Size = New System.Drawing.Size(110, 23)
-        Me.CButton1.TabIndex = 17
-        Me.CButton1.Text = "Translate This Form"
-        Me.CButton1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnAdd
-        '
-        Me.BtnAdd.BackColor = System.Drawing.Color.Lime
-        Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnAdd.DesignerSelected = false
-        Me.BtnAdd.DisplayOnly = true
-        Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"),System.Drawing.Image)
-        Me.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnAdd.ImageIndex = 0
-        Me.BtnAdd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnAdd.Location = New System.Drawing.Point(3, 32)
-        Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.OriginalImageName = "Add"
-        Me.BtnAdd.SecurityKey = ""
-        Me.BtnAdd.Size = New System.Drawing.Size(61, 42)
-        Me.BtnAdd.TabIndex = 1
-        Me.BtnAdd.Text = "&Add"
-        Me.BtnAdd.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnEdit
-        '
-        Me.BtnEdit.BackColor = System.Drawing.Color.Lime
-        Me.BtnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnEdit.DesignerSelected = false
-        Me.BtnEdit.DisplayOnly = true
-        Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"),System.Drawing.Image)
-        Me.BtnEdit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnEdit.ImageIndex = 0
-        Me.BtnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnEdit.Location = New System.Drawing.Point(70, 32)
-        Me.BtnEdit.Name = "BtnEdit"
-        Me.BtnEdit.OriginalImageName = "Edit"
-        Me.BtnEdit.SecurityKey = ""
-        Me.BtnEdit.Size = New System.Drawing.Size(53, 42)
-        Me.BtnEdit.TabIndex = 2
-        Me.BtnEdit.Text = "&Edit"
-        Me.BtnEdit.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnDelete
-        '
-        Me.BtnDelete.BackColor = System.Drawing.Color.Lime
-        Me.BtnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnDelete.DesignerSelected = false
-        Me.BtnDelete.DisplayOnly = true
-        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"),System.Drawing.Image)
-        Me.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnDelete.ImageIndex = 0
-        Me.BtnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnDelete.Location = New System.Drawing.Point(129, 32)
-        Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.OriginalImageName = "Delete"
-        Me.BtnDelete.SecurityKey = ""
-        Me.BtnDelete.Size = New System.Drawing.Size(59, 42)
-        Me.BtnDelete.TabIndex = 6
-        Me.BtnDelete.Text = "&Delete"
-        Me.BtnDelete.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnSave
-        '
-        Me.BtnSave.BackColor = System.Drawing.Color.Lime
-        Me.BtnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnSave.DesignerSelected = false
-        Me.BtnSave.DisplayOnly = true
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"),System.Drawing.Image)
-        Me.BtnSave.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnSave.ImageIndex = 0
-        Me.BtnSave.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnSave.Location = New System.Drawing.Point(194, 32)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.OriginalImageName = "Save"
-        Me.BtnSave.SecurityKey = ""
-        Me.BtnSave.Size = New System.Drawing.Size(53, 42)
-        Me.BtnSave.TabIndex = 7
-        Me.BtnSave.Text = "&Save"
-        Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnFind
-        '
-        Me.BtnFind.BackColor = System.Drawing.Color.Lime
-        Me.BtnFind.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnFind.DesignerSelected = false
-        Me.BtnFind.DisplayOnly = true
-        Me.BtnFind.Image = CType(resources.GetObject("BtnFind.Image"),System.Drawing.Image)
-        Me.BtnFind.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnFind.ImageIndex = 0
-        Me.BtnFind.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnFind.Location = New System.Drawing.Point(253, 32)
-        Me.BtnFind.Name = "BtnFind"
-        Me.BtnFind.OriginalImageName = "Find"
-        Me.BtnFind.SecurityKey = ""
-        Me.BtnFind.Size = New System.Drawing.Size(79, 42)
-        Me.BtnFind.TabIndex = 8
-        Me.BtnFind.Text = "&Find Next"
-        Me.BtnFind.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnFirst
-        '
-        Me.BtnFirst.BackColor = System.Drawing.Color.Lime
-        Me.BtnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnFirst.DesignerSelected = false
-        Me.BtnFirst.DisplayOnly = true
-        Me.BtnFirst.Image = CType(resources.GetObject("BtnFirst.Image"),System.Drawing.Image)
-        Me.BtnFirst.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnFirst.ImageIndex = 0
-        Me.BtnFirst.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnFirst.Location = New System.Drawing.Point(338, 32)
-        Me.BtnFirst.Name = "BtnFirst"
-        Me.BtnFirst.OriginalImageName = "First"
-        Me.BtnFirst.SecurityKey = ""
-        Me.BtnFirst.Size = New System.Drawing.Size(53, 42)
-        Me.BtnFirst.TabIndex = 9
-        Me.BtnFirst.Text = "F&irst"
-        Me.BtnFirst.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnPrev
-        '
-        Me.BtnPrev.BackColor = System.Drawing.Color.Lime
-        Me.BtnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnPrev.DesignerSelected = false
-        Me.BtnPrev.DisplayOnly = true
-        Me.BtnPrev.Image = CType(resources.GetObject("BtnPrev.Image"),System.Drawing.Image)
-        Me.BtnPrev.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnPrev.ImageIndex = 0
-        Me.BtnPrev.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnPrev.Location = New System.Drawing.Point(397, 32)
-        Me.BtnPrev.Name = "BtnPrev"
-        Me.BtnPrev.OriginalImageName = "Previous"
-        Me.BtnPrev.SecurityKey = ""
-        Me.BtnPrev.Size = New System.Drawing.Size(69, 42)
-        Me.BtnPrev.TabIndex = 10
-        Me.BtnPrev.Text = "&Previous"
-        Me.BtnPrev.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnNext
-        '
-        Me.BtnNext.BackColor = System.Drawing.Color.Lime
-        Me.BtnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnNext.DesignerSelected = false
-        Me.BtnNext.DisplayOnly = true
-        Me.BtnNext.Image = CType(resources.GetObject("BtnNext.Image"),System.Drawing.Image)
-        Me.BtnNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnNext.ImageIndex = 0
-        Me.BtnNext.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnNext.Location = New System.Drawing.Point(472, 32)
-        Me.BtnNext.Name = "BtnNext"
-        Me.BtnNext.OriginalImageName = "Next"
-        Me.BtnNext.SecurityKey = ""
-        Me.BtnNext.Size = New System.Drawing.Size(53, 42)
-        Me.BtnNext.TabIndex = 11
-        Me.BtnNext.Text = "&Next"
-        Me.BtnNext.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnLast
-        '
-        Me.BtnLast.BackColor = System.Drawing.Color.Lime
-        Me.BtnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnLast.DesignerSelected = false
-        Me.BtnLast.DisplayOnly = true
-        Me.BtnLast.Image = CType(resources.GetObject("BtnLast.Image"),System.Drawing.Image)
-        Me.BtnLast.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnLast.ImageIndex = 0
-        Me.BtnLast.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnLast.Location = New System.Drawing.Point(531, 32)
-        Me.BtnLast.Name = "BtnLast"
-        Me.BtnLast.OriginalImageName = "Last"
-        Me.BtnLast.SecurityKey = ""
-        Me.BtnLast.Size = New System.Drawing.Size(53, 42)
-        Me.BtnLast.TabIndex = 12
-        Me.BtnLast.Text = "&Last"
-        Me.BtnLast.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnUndo
-        '
-        Me.BtnUndo.BackColor = System.Drawing.Color.Lime
-        Me.BtnUndo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnUndo.CausesValidation = false
-        Me.BtnUndo.DesignerSelected = false
-        Me.BtnUndo.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.BtnUndo.DisplayOnly = true
-        Me.BtnUndo.Image = CType(resources.GetObject("BtnUndo.Image"),System.Drawing.Image)
-        Me.BtnUndo.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnUndo.ImageIndex = 0
-        Me.BtnUndo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnUndo.Location = New System.Drawing.Point(590, 32)
-        Me.BtnUndo.Name = "BtnUndo"
-        Me.BtnUndo.OriginalImageName = "Undo"
-        Me.BtnUndo.SecurityKey = ""
-        Me.BtnUndo.Size = New System.Drawing.Size(54, 42)
-        Me.BtnUndo.TabIndex = 13
-        Me.BtnUndo.Text = "&Undo"
-        Me.BtnUndo.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'BtnQuit
-        '
-        Me.BtnQuit.BackColor = System.Drawing.Color.Lime
-        Me.BtnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnQuit.DesignerSelected = false
-        Me.BtnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnQuit.DisplayOnly = true
-        Me.BtnQuit.Image = CType(resources.GetObject("BtnQuit.Image"),System.Drawing.Image)
-        Me.BtnQuit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnQuit.ImageIndex = 0
-        Me.BtnQuit.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.BtnQuit.Location = New System.Drawing.Point(650, 32)
-        Me.BtnQuit.Name = "BtnQuit"
-        Me.BtnQuit.OriginalImageName = "Quit"
-        Me.BtnQuit.SecurityKey = ""
-        Me.BtnQuit.Size = New System.Drawing.Size(53, 42)
-        Me.BtnQuit.TabIndex = 14
-        Me.BtnQuit.Text = "&Quit"
-        Me.BtnQuit.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'btnDebugSwitch
-        '
-        Me.btnDebugSwitch.BackColor = System.Drawing.Color.Lime
-        Me.btnDebugSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDebugSwitch.DesignerSelected = false
-        Me.btnDebugSwitch.DisplayOnly = true
-        Me.btnDebugSwitch.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnDebugSwitch.ImageIndex = 0
-        Me.btnDebugSwitch.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDebugSwitch.Location = New System.Drawing.Point(709, 32)
-        Me.btnDebugSwitch.Name = "btnDebugSwitch"
-        Me.btnDebugSwitch.OriginalImageName = "Save"
-        Me.btnDebugSwitch.SecurityKey = ""
-        Me.btnDebugSwitch.Size = New System.Drawing.Size(85, 42)
-        Me.btnDebugSwitch.TabIndex = 18
-        Me.btnDebugSwitch.Text = "Turn On Debugger"
-        Me.btnDebugSwitch.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'floNavigationAndRecordCounter
-        '
-        Me.floNavigationAndRecordCounter.AutoSize = true
-        Me.floNavigationAndRecordCounter.BackColor = System.Drawing.Color.Transparent
-        Me.floNavigationAndRecordCounter.Controls.Add(Me.floNavigationButtons)
-        Me.floNavigationAndRecordCounter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.floNavigationAndRecordCounter.Location = New System.Drawing.Point(0, 488)
-        Me.floNavigationAndRecordCounter.Name = "floNavigationAndRecordCounter"
-        Me.floNavigationAndRecordCounter.Size = New System.Drawing.Size(865, 83)
-        Me.floNavigationAndRecordCounter.TabIndex = 0
+        Me.btnTranslate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnTranslate.Font = New System.Drawing.Font("Arial Narrow", 8!, System.Drawing.FontStyle.Bold)
+        Me.btnTranslate.ForeColor = System.Drawing.Color.Green
+        Me.btnTranslate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnTranslate.Name = "btnTranslate"
+        Me.btnTranslate.Size = New System.Drawing.Size(52, 22)
+        Me.btnTranslate.Text = "Translate"
         '
         'CFormEntry
         '
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(865, 571)
-        Me.Controls.Add(Me.floNavigationAndRecordCounter)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.MinimumSize = New System.Drawing.Size(320, 250)
         Me.Name = "CFormEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floNavigationButtons.ResumeLayout(false)
-        Me.floNavigationButtons.PerformLayout
-        Me.floNavigationAndRecordCounter.ResumeLayout(false)
-        Me.floNavigationAndRecordCounter.PerformLayout
+        Me.ToolStrip1.ResumeLayout(false)
+        Me.ToolStrip1.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 
 End Sub
-    Public WithEvents BtnAdd As CButton
-    Public WithEvents BtnEdit As CButton
-    Public WithEvents BtnDelete As CButton
-    Public WithEvents BtnFind As CButton
-    Public WithEvents BtnFirst As CButton
-    Public WithEvents BtnPrev As CButton
-    Public WithEvents BtnNext As CButton
-    Public WithEvents BtnLast As CButton
-    Public WithEvents BtnUndo As CButton
-    Public WithEvents BtnQuit As CButton
-    Public WithEvents BtnSave As CButton
-    Friend WithEvents floNavigationAndRecordCounter As CFlowLayout
-    Public WithEvents floNavigationButtons As CFlowLayout
-    Friend WithEvents LblRecordCount As CLabel
     Friend WithEvents _localizableMessage1 As LocalizableMessage
-    Friend WithEvents btnOriginal As CButton
-    Friend WithEvents btnArabic As CButton
-    Friend WithEvents CButton1 As CButton
-
-    Private WithEvents btnDebugSwitch As CButton
+    Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
+    Friend WithEvents btnFirst As Windows.Forms.ToolStripButton
+    Friend WithEvents btnPrev As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsbCurrentRecord As Windows.Forms.ToolStripTextBox
+    Friend WithEvents tsbTotalRecords As Windows.Forms.ToolStripLabel
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnNext As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnDelete As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnFind As Windows.Forms.ToolStripButton
+    Friend WithEvents btnUndo As Windows.Forms.ToolStripButton
+    Friend WithEvents btnDebug As Windows.Forms.ToolStripButton
+    Friend WithEvents btnAdd As Windows.Forms.ToolStripButton
+    Friend WithEvents btnQuit As Windows.Forms.ToolStripButton
+    Friend WithEvents btnEdit As Windows.Forms.ToolStripButton
+    Friend WithEvents btnArabic As Windows.Forms.ToolStripButton
+    Friend WithEvents btnOriginal As Windows.Forms.ToolStripButton
+    Friend WithEvents btnTranslate As Windows.Forms.ToolStripButton
+    Public WithEvents btnSave As Windows.Forms.ToolStripButton
+    Protected WithEvents btnLast As Windows.Forms.ToolStripButton
 End Class

@@ -401,7 +401,7 @@ Namespace PresentationLayer.Forms
             cacArAccountIdNo.DataSource = PresenterObj.GetChartList()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
-            cacDepartmentIdNo.DataSource = PresenterObj.GetProfitCenterListByName()
+            cacDepartmentIdNo.DataSource = PresenterObj.GetDepartmentListByName()
             cacDesignationIdNo.DataSource = PresenterObj.GetDesignationList()
             cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
             cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
@@ -411,8 +411,28 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
-        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
+
+        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) 
+            GoNextRecord()
+        End Sub
+
+        Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) 
             GoFirstRecord()
+        End Sub
+
+        Private Sub EmployeeEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            'dim ds = PresenterObj.GetTreeViewDataNew()
+            'BindingSource1.DataSource = ds
+            'txtEmployeeName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeModelBindingSource, "EmployeeName", true))
+
+        End Sub
+
+        Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) 
+            GoPreviousRecord()
+        End Sub
+
+        Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) 
+            GoLastRecord()
         End Sub
     End Class
 

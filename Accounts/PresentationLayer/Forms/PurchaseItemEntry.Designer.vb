@@ -104,11 +104,15 @@ Namespace PresentationLayer.Forms
         '
         'lblPurchaseItemName
         '
+        Me.lblPurchaseItemName.DisplayOnly = true
+        Me.lblPurchaseItemName.EditingMode = false
         resources.ApplyResources(Me.lblPurchaseItemName, "lblPurchaseItemName")
         Me.lblPurchaseItemName.Name = "lblPurchaseItemName"
         '
         'lblPurchaseItemNameAra
         '
+        Me.lblPurchaseItemNameAra.DisplayOnly = true
+        Me.lblPurchaseItemNameAra.EditingMode = false
         resources.ApplyResources(Me.lblPurchaseItemNameAra, "lblPurchaseItemNameAra")
         Me.lblPurchaseItemNameAra.Name = "lblPurchaseItemNameAra"
         '
@@ -131,6 +135,8 @@ Namespace PresentationLayer.Forms
         '
         'lblPurchaseItemCode
         '
+        Me.lblPurchaseItemCode.DisplayOnly = true
+        Me.lblPurchaseItemCode.EditingMode = false
         resources.ApplyResources(Me.lblPurchaseItemCode, "lblPurchaseItemCode")
         Me.lblPurchaseItemCode.Name = "lblPurchaseItemCode"
         '
@@ -153,6 +159,8 @@ Namespace PresentationLayer.Forms
         'lblDateCreated
         '
         Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
+        Me.lblDateCreated.DisplayOnly = true
+        Me.lblDateCreated.EditingMode = false
         resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
         Me.lblDateCreated.Name = "lblDateCreated"
         '
@@ -199,6 +207,8 @@ Namespace PresentationLayer.Forms
         'lblIdNo
         '
         Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -221,6 +231,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCategoryIdNo
         '
+        Me.lblCategoryIdNo.DisplayOnly = true
+        Me.lblCategoryIdNo.EditingMode = false
         resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
         Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
         '
@@ -258,6 +270,8 @@ Namespace PresentationLayer.Forms
         '
         'lblGlAccountIdNo
         '
+        Me.lblGlAccountIdNo.DisplayOnly = true
+        Me.lblGlAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblGlAccountIdNo, "lblGlAccountIdNo")
         Me.lblGlAccountIdNo.Name = "lblGlAccountIdNo"
         '
@@ -295,6 +309,8 @@ Namespace PresentationLayer.Forms
         '
         'lblVatAccountIdNo
         '
+        Me.lblVatAccountIdNo.DisplayOnly = true
+        Me.lblVatAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblVatAccountIdNo, "lblVatAccountIdNo")
         Me.lblVatAccountIdNo.Name = "lblVatAccountIdNo"
         '
@@ -332,27 +348,37 @@ Namespace PresentationLayer.Forms
         '
         'CLabel4
         '
+        Me.CLabel4.DisplayOnly = true
+        Me.CLabel4.EditingMode = false
         resources.ApplyResources(Me.CLabel4, "CLabel4")
         Me.CLabel4.Name = "CLabel4"
         '
         'lblUnit
         '
+        Me.lblUnit.DisplayOnly = true
+        Me.lblUnit.EditingMode = false
         resources.ApplyResources(Me.lblUnit, "lblUnit")
         Me.lblUnit.Name = "lblUnit"
         '
         'lblUnitArabic
         '
+        Me.lblUnitArabic.DisplayOnly = true
+        Me.lblUnitArabic.EditingMode = false
         resources.ApplyResources(Me.lblUnitArabic, "lblUnitArabic")
         Me.lblUnitArabic.Name = "lblUnitArabic"
         '
         'lblUnitStdPrice
         '
+        Me.lblUnitStdPrice.DisplayOnly = true
+        Me.lblUnitStdPrice.EditingMode = false
         Me.CFlowLayout4.SetFlowBreak(Me.lblUnitStdPrice, true)
         resources.ApplyResources(Me.lblUnitStdPrice, "lblUnitStdPrice")
         Me.lblUnitStdPrice.Name = "lblUnitStdPrice"
         '
         'lblUnit1
         '
+        Me.lblUnit1.DisplayOnly = true
+        Me.lblUnit1.EditingMode = false
         resources.ApplyResources(Me.lblUnit1, "lblUnit1")
         Me.lblUnit1.Name = "lblUnit1"
         '
@@ -406,6 +432,8 @@ Namespace PresentationLayer.Forms
         '
         'lblUnit2
         '
+        Me.lblUnit2.DisplayOnly = true
+        Me.lblUnit2.EditingMode = false
         resources.ApplyResources(Me.lblUnit2, "lblUnit2")
         Me.lblUnit2.Name = "lblUnit2"
         '
@@ -459,6 +487,8 @@ Namespace PresentationLayer.Forms
         '
         'lblUnit3
         '
+        Me.lblUnit3.DisplayOnly = true
+        Me.lblUnit3.EditingMode = false
         resources.ApplyResources(Me.lblUnit3, "lblUnit3")
         Me.lblUnit3.Name = "lblUnit3"
         '
@@ -512,6 +542,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCancelled
         '
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
         resources.ApplyResources(Me.lblCancelled, "lblCancelled")
         Me.lblCancelled.Name = "lblCancelled"
         '

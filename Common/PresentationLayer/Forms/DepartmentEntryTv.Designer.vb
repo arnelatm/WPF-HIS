@@ -49,8 +49,8 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'CFlowLayout1
         '
@@ -77,6 +77,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
@@ -100,6 +102,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDepartmentCode
         '
+        Me.lblDepartmentCode.DisplayOnly = true
+        Me.lblDepartmentCode.EditingMode = false
         resources.ApplyResources(Me.lblDepartmentCode, "lblDepartmentCode")
         Me.lblDepartmentCode.Name = "lblDepartmentCode"
         '
@@ -121,6 +125,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDepartmentName
         '
+        Me.lblDepartmentName.DisplayOnly = true
+        Me.lblDepartmentName.EditingMode = false
         resources.ApplyResources(Me.lblDepartmentName, "lblDepartmentName")
         Me.lblDepartmentName.Name = "lblDepartmentName"
         '
@@ -142,6 +148,8 @@ Namespace PresentationLayer.Forms
         '
         'lblDepartmentNameAra
         '
+        Me.lblDepartmentNameAra.DisplayOnly = true
+        Me.lblDepartmentNameAra.EditingMode = false
         resources.ApplyResources(Me.lblDepartmentNameAra, "lblDepartmentNameAra")
         Me.lblDepartmentNameAra.Name = "lblDepartmentNameAra"
         '
@@ -163,6 +171,8 @@ Namespace PresentationLayer.Forms
         '
         'lblParentIdNo
         '
+        Me.lblParentIdNo.DisplayOnly = true
+        Me.lblParentIdNo.EditingMode = false
         resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
         Me.lblParentIdNo.Name = "lblParentIdNo"
         '
@@ -203,6 +213,8 @@ Namespace PresentationLayer.Forms
         '
         'lblProfitCenterIdNo
         '
+        Me.lblProfitCenterIdNo.DisplayOnly = true
+        Me.lblProfitCenterIdNo.EditingMode = false
         resources.ApplyResources(Me.lblProfitCenterIdNo, "lblProfitCenterIdNo")
         Me.lblProfitCenterIdNo.Name = "lblProfitCenterIdNo"
         '
@@ -243,6 +255,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCostCenterIdNo
         '
+        Me.lblCostCenterIdNo.DisplayOnly = true
+        Me.lblCostCenterIdNo.EditingMode = false
         resources.ApplyResources(Me.lblCostCenterIdNo, "lblCostCenterIdNo")
         Me.lblCostCenterIdNo.Name = "lblCostCenterIdNo"
         '
@@ -283,6 +297,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '

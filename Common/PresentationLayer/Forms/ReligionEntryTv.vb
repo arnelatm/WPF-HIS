@@ -85,6 +85,9 @@ Namespace PresentationLayer.Forms
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
         End Sub
 
+        Private Sub CFlowLayout1_Paint(sender As Object, e As PaintEventArgs) Handles CFlowLayout1.Paint
+
+        End Sub
     End Class
 
 End Namespace

@@ -54,8 +54,9 @@ Namespace PresentationLayer.Forms
         'TreeViewTableName
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 313)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 286)
         '
         'floDataDisplay
         '
@@ -83,13 +84,16 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.TxtFlag32)
         Me.floDataDisplay.Controls.Add(Me.LblFlag128)
         Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
-        Me.floDataDisplay.Location = New System.Drawing.Point(306, 12)
+        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
+        Me.floDataDisplay.Location = New System.Drawing.Point(302, 25)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(403, 301)
+        Me.floDataDisplay.Size = New System.Drawing.Size(406, 289)
         Me.floDataDisplay.TabIndex = 148
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
@@ -124,6 +128,8 @@ Namespace PresentationLayer.Forms
         '
         'lblIsoA2
         '
+        Me.lblIsoA2.DisplayOnly = true
+        Me.lblIsoA2.EditingMode = false
         Me.lblIsoA2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblIsoA2, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblIsoA2.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -159,6 +165,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCountryName
         '
+        Me.lblCountryName.DisplayOnly = true
+        Me.lblCountryName.EditingMode = false
         Me.lblCountryName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblCountryName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblCountryName.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -194,6 +202,8 @@ Namespace PresentationLayer.Forms
         '
         'lblCountryNameAra
         '
+        Me.lblCountryNameAra.DisplayOnly = true
+        Me.lblCountryNameAra.EditingMode = false
         Me.lblCountryNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblCountryNameAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblCountryNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -229,6 +239,8 @@ Namespace PresentationLayer.Forms
         '
         'LblNationality
         '
+        Me.LblNationality.DisplayOnly = true
+        Me.LblNationality.EditingMode = false
         Me.LblNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblNationality, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblNationality.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -264,6 +276,8 @@ Namespace PresentationLayer.Forms
         '
         'lblNationalityAra
         '
+        Me.lblNationalityAra.DisplayOnly = true
+        Me.lblNationalityAra.EditingMode = false
         Me.lblNationalityAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblNationalityAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblNationalityAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -299,6 +313,8 @@ Namespace PresentationLayer.Forms
         '
         'lblISOA3
         '
+        Me.lblISOA3.DisplayOnly = true
+        Me.lblISOA3.EditingMode = false
         Me.lblISOA3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblISOA3, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblISOA3.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -334,6 +350,8 @@ Namespace PresentationLayer.Forms
         '
         'LblISON
         '
+        Me.LblISON.DisplayOnly = true
+        Me.LblISON.EditingMode = false
         Me.LblISON.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblISON.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.LblISON.Location = New System.Drawing.Point(1, 176)
@@ -366,6 +384,8 @@ Namespace PresentationLayer.Forms
         '
         'LblPhoneCode
         '
+        Me.LblPhoneCode.DisplayOnly = true
+        Me.LblPhoneCode.EditingMode = false
         Me.LblPhoneCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblPhoneCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.LblPhoneCode.Location = New System.Drawing.Point(1, 201)
@@ -399,6 +419,8 @@ Namespace PresentationLayer.Forms
         '
         'LblFlag32
         '
+        Me.LblFlag32.DisplayOnly = true
+        Me.LblFlag32.EditingMode = false
         Me.LblFlag32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblFlag32.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.LblFlag32.Location = New System.Drawing.Point(1, 226)
@@ -431,6 +453,8 @@ Namespace PresentationLayer.Forms
         '
         'LblFlag128
         '
+        Me.LblFlag128.DisplayOnly = true
+        Me.LblFlag128.EditingMode = false
         Me.LblFlag128.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblFlag128.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.LblFlag128.Location = New System.Drawing.Point(1, 251)
@@ -463,7 +487,7 @@ Namespace PresentationLayer.Forms
         '
         'CountryEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(815, 398)
+        Me.ClientSize = New System.Drawing.Size(708, 314)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CountryEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

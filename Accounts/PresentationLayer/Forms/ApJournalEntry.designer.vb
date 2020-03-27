@@ -195,7 +195,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -1182,9 +1182,10 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floApJournalHeader)
         Me.floFullEntryArea.Controls.Add(Me.floApJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
-        Me.floFullEntryArea.Location = New System.Drawing.Point(6, 12)
+        Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 25)
         Me.floFullEntryArea.Name = "floFullEntryArea"
-        Me.floFullEntryArea.Size = New System.Drawing.Size(1028, 512)
+        Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 512)
         Me.floFullEntryArea.TabIndex = 0
         '
         'CFlowLayout1
@@ -1200,9 +1201,9 @@ Namespace PresentationLayer.Forms
         '
         'ApJournalEntry
         '
-        Me.ClientSize = New System.Drawing.Size(1043, 607)
+        Me.ClientSize = New System.Drawing.Size(1043, 541)
         Me.Controls.Add(Me.floFullEntryArea)
-        Me.MinimumSize = New System.Drawing.Size(1059, 646)
+        Me.MinimumSize = New System.Drawing.Size(1059, 580)
         Me.Name = "ApJournalEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
         Me.Text = "Accounts Payable Journal Entry"

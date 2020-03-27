@@ -252,7 +252,7 @@ Public Class CFormEntry
         Return validationsPassed
     End Function
 
-    Public Overridable Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.ClickButtonArea
+    Public Sub GoDeleteRecord()
         EditData()
         Dim currentIdNo = GetPropertyValue(Me, IdFieldName)
         If _MBDeleteRecordAsk.Show(Me) = DialogResult.Yes Then
@@ -266,10 +266,6 @@ Public Class CFormEntry
                 GetRecordInfoForIdNo()
             End If
         End If
-    End Sub
-
-    Public Overridable Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.ClickButtonArea
-        EditData()
     End Sub
 
     Public Sub EditData()
@@ -373,6 +369,7 @@ Public Class CFormEntry
         Return retValue
     End Function
 
+
     Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
         'Dim IdNoTarget as Int32 = 0
@@ -453,9 +450,7 @@ Public Class CFormEntry
     Protected Sub GetRecordInfoForIdNo()
         Dim tmpUndoMode As Boolean = UndoMode
         UndoMode = tmpUndoMode
-        RecordCount = PresenterObj.GetRecordCount()
-        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
-        LblRecordCount.Text = $"{_MsgRecordNo.Value} {RecordPositionNumber} {_MsgOf.Value}{RecordCount}"
+        UpdateRecordCounter()
         EditMode = False
         AddMode = False
         UndoMode = False
@@ -466,6 +461,14 @@ Public Class CFormEntry
         PresenterObj.SaveOriginalValues()
         TurnOffInputs()
         Refresh()
+    End Sub
+
+    Private Sub UpdateRecordCounter()
+
+        RecordCount = PresenterObj.GetRecordCount()
+        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
+        tsbCurrentRecord.Text = RecordPositionNumber
+        tsbTotalRecords.Text = $"{_MsgOf.Value} {RecordCount}"
     End Sub
 
     Protected Overridable Function OkToMove(ByVal Optional buttonName As String = "")
@@ -546,17 +549,17 @@ Public Class CFormEntry
             BtnLast.Enabled = False
             BtnEdit.Enabled = False
             BtnDelete.Enabled = False
-            BtnUndo.Enabled = False
+            btnUndo.Enabled = False
             BtnSave.Enabled = False
             BtnFind.Enabled = False
             RecordPositionNumber = 0
             If Not AddMode Then
-                BtnUndo.Enabled = False
+                btnUndo.Enabled = False
                 BtnSave.Enabled = False
                 Messaging.Show(True,"MsgNoRecordsFound", "No records found for this table!","Empty Table")
             Else
                 BtnSave.Enabled = True
-                BtnUndo.Enabled = True
+                btnUndo.Enabled = True
             End If
         Else
             If RecordPositionNumber = 1 Then
@@ -583,17 +586,18 @@ Public Class CFormEntry
                 BtnEdit.Enabled = False
                 BtnAdd.Enabled = False
                 BtnDelete.Enabled = False
-                BtnUndo.Enabled = True
+                btnUndo.Enabled = True
                 BtnSave.Enabled = True
             Else
                 BtnEdit.Enabled = True
                 BtnDelete.Enabled = True
                 BtnAdd.Enabled = True
-                BtnUndo.Enabled = False
+                btnUndo.Enabled = False
                 BtnSave.Enabled = False
             End If
         End If
-        LblRecordCount.Text = $"{_MsgRecordNo.Value} {RecordPositionNumber} {_MsgOf.Value} {RecordCount}"
+        UpdateRecordCounter()
+        'LblRecordCount.Text = $"{_MsgRecordNo.Value} {RecordPositionNumber} {_MsgOf.Value} {RecordCount}"
     End Sub
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
@@ -603,7 +607,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.ClickButtonArea
+    Private Sub GoAddRecord()
         LastIdNo = GetPropertyValue(Me, IdFieldName)
         Try
             If _debugSwitch Then
@@ -620,17 +624,6 @@ Public Class CFormEntry
             MsgBox("Error:   " + oEx.Message)
             AddMode = False
         End Try
-    End Sub
-
-    Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.ClickButtonArea
-        TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-        TranslateForm()
-        btnArabic.Visible = False
-        btnOriginal.Visible = True
-    End Sub
-
-    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.ClickButtonArea
-        FindRecord()
     End Sub
 
     Private Sub FindRecord()
@@ -657,13 +650,6 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles BtnFirst.ClickButtonArea
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        GoFirstRecord()
-    End Sub
-
     Protected Sub GoFirstRecord()
         If _debugSwitch Then
             Debugger.Break()
@@ -673,8 +659,8 @@ Public Class CFormEntry
             GetAndDisplayRecordForGivenRecordPosition()
         End If
     End Sub
-
-    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles BtnLast.ClickButtonArea
+    
+    Protected Sub GoLastRecord()
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -682,13 +668,11 @@ Public Class CFormEntry
             If OkToMove("Last") Then
                 RecordPositionNumber = PresenterObj.GetRecordCount()
                 GetAndDisplayRecordForGivenRecordPosition()
-                'DisplayView()
-                'RaiseEvent DisplayedRecordChanged()
             End If
         End If
     End Sub
 
-    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.ClickButtonArea
+    Protected Sub GoNextRecord()
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -702,14 +686,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.ClickButtonArea
-        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-        TranslateForm()
-        btnArabic.Visible = True
-        btnOriginal.Visible = False
-    End Sub
-
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles BtnPrev.Click
+    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) 
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -725,27 +702,18 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles BtnQuit.ClickButtonArea
+    Protected Sub GoPreviousRecord()
         If _debugSwitch Then
             Debugger.Break()
         End If
-        If OkToMove("Quit") Then
-            CancelClose = False
-            Close()
-            GC.Collect()
-            GC.WaitForPendingFinalizers()
-            If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+        If OkToMove("Previous") Then
+            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
+                _MBFirstRecordAlready.Show(Me)
+            Else
+                RecordPositionNumber -= 1
+                GetAndDisplayRecordForGivenRecordPosition()
             End If
-            Dispose()
         End If
-    End Sub
-
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.ClickButtonArea
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        Save()
     End Sub
 
     Public Sub Save()
@@ -814,33 +782,6 @@ Public Class CFormEntry
         End If
         Return retValue
     End Function
-
-    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles BtnUndo.ClickButtonArea
-        If OkToMove("Undo") Then
-            'RaiseEvent UndoEdits(True)
-            UndoMode = True
-            If AddMode Then
-                AddMode = False
-                TargetIdNo = LastIdNo
-                GetRecordInfoForIdNo()
-                'DisplayView()
-            Else
-                EditMode = False
-                GetRecordInfoForIdNo()
-                'DisplayView()
-            End If
-        End If
-        UndoMode = False
-        CancelClose = True
-    End Sub
-
-    Private Sub CButton1_Click(sender As Object, e As EventArgs) Handles CButton1.ClickButtonArea
-        Dim frm As New TranslationTableManager()
-        frm.FormIdNoToTranslate = FormIdNo
-        frm.AppDataDAC = AppDataDAC
-        frm.TranslatorDAC = TranslatorDAC
-        frm.Show()
-    End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         If CancelClose Then
@@ -1318,17 +1259,126 @@ Public Class CFormEntry
     '    sender.PerformClick()
     'End Sub
 
-    Private Sub btnDebugSave_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnDebugSwitch.ClickButtonArea
+    'Private Sub btnDebugSave_ClickButtonArea(sender As Object, e As MouseEventArgs) 
+    '    If _debugSwitch = 0 Then
+    '        _debugSwitch = 1
+    '        btnDebugSwitch.Text = "Turn Off Debugger"
+    '    Else
+    '        _debugSwitch = 0
+    '        btnDebugSwitch.Text = "Turn On Debugger"
+    '    End If
+    'End Sub
+
+    Private Sub BtnDelete_Click(Sender As Object, e As MouseEventArgs) 
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
+        GoFirstRecord()
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        GoPreviousRecord()
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        GoNextRecord()
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles btnLast.Click
+        GoLastRecord()
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles  btnAdd.Click
+        GoAddRecord()
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        GoDeleteRecord()
+    End Sub
+
+    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles  btnSave.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        Save()
+    End Sub
+
+    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        FindRecord()
+    End Sub
+
+    Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
         If _debugSwitch = 0 Then
             _debugSwitch = 1
-            btnDebugSwitch.Text = "Turn Off Debugger"
+            btnDebug.Checked = False
         Else
             _debugSwitch = 0
-            btnDebugSwitch.Text = "Turn On Debugger"
+            btnDebug.Checked = True
         End If
     End Sub
 
-    Private Sub BtnDelete_Click(Sender As Object, e As MouseEventArgs) Handles BtnDelete.ClickButtonArea
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        EditData()
+    End Sub
 
+    Private Sub btnArabic_Click_1(sender As Object, e As EventArgs) Handles btnArabic.Click
+        TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+        TranslateForm()
+        btnArabic.Visible = False
+        btnOriginal.Visible = True
+    End Sub
+
+    Private Sub btnOriginal_Click_1(sender As Object, e As EventArgs) Handles btnOriginal.Click
+        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+        TranslateForm()
+        btnArabic.Visible = True
+        btnOriginal.Visible = False
+    End Sub
+
+    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        If OkToMove("Quit") Then
+            CancelClose = False
+            Close()
+            GC.Collect()
+            GC.WaitForPendingFinalizers()
+            If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+            End If
+            Dispose()
+        End If
+    End Sub
+
+    Private Sub btnUndo_Click_1(sender As Object, e As EventArgs) Handles btnUndo.Click
+        If OkToMove("Undo") Then
+            'RaiseEvent UndoEdits(True)
+            UndoMode = True
+            If AddMode Then
+                AddMode = False
+                TargetIdNo = LastIdNo
+                GetRecordInfoForIdNo()
+                'DisplayView()
+            Else
+                EditMode = False
+                GetRecordInfoForIdNo()
+                'DisplayView()
+            End If
+        End If
+        UndoMode = False
+        CancelClose = True
+    End Sub
+
+    Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
+        Dim frm As New TranslationTableManager()
+        frm.FormIdNoToTranslate = FormIdNo
+        frm.AppDataDAC = AppDataDAC
+        frm.TranslatorDAC = TranslatorDAC
+        frm.Show()
     End Sub
 End Class

@@ -58,8 +58,8 @@ Partial Class SecurityGroupEntryTv
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'TxtIDNo
         '
@@ -163,26 +163,36 @@ Partial Class SecurityGroupEntryTv
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
         'lblSecurityGroupCode
         '
+        Me.lblSecurityGroupCode.DisplayOnly = true
+        Me.lblSecurityGroupCode.EditingMode = false
         resources.ApplyResources(Me.lblSecurityGroupCode, "lblSecurityGroupCode")
         Me.lblSecurityGroupCode.Name = "lblSecurityGroupCode"
         '
         'lblSecurityGroupName
         '
+        Me.lblSecurityGroupName.DisplayOnly = true
+        Me.lblSecurityGroupName.EditingMode = false
         resources.ApplyResources(Me.lblSecurityGroupName, "lblSecurityGroupName")
         Me.lblSecurityGroupName.Name = "lblSecurityGroupName"
         '
         'lblSecurityGroupNameAra
         '
+        Me.lblSecurityGroupNameAra.DisplayOnly = true
+        Me.lblSecurityGroupNameAra.EditingMode = false
         resources.ApplyResources(Me.lblSecurityGroupNameAra, "lblSecurityGroupNameAra")
         Me.lblSecurityGroupNameAra.Name = "lblSecurityGroupNameAra"
         '
         'lblNotes
         '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
@@ -204,7 +214,7 @@ Partial Class SecurityGroupEntryTv
         Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Tahoma", 8!)
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText

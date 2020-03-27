@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>124, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>152, 17</value>
+    <value>259, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>282, 17</value>
+    <value>389, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>406, 17</value>
+    <value>513, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -1522,7 +1522,7 @@
     <value>False</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>546, 17</value>
+    <value>653, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -1615,7 +1615,7 @@
     <value>False</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>679, 17</value>
+    <value>786, 17</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>968, 3</value>
@@ -1806,11 +1806,17 @@
   <data name="&gt;&gt;floFooter.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="floFullEntryArea.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="floFullEntryArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 12</value>
+    <value>0, 25</value>
+  </data>
+  <data name="floFullEntryArea.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1000, 530</value>
   </data>
   <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
-    <value>984, 529</value>
+    <value>1000, 530</value>
   </data>
   <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -90042,7 +90048,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 624</value>
+    <value>986, 561</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1000, 600</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cash Receipt Journal </value>

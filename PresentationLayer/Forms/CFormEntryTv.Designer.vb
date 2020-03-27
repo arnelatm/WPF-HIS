@@ -42,12 +42,12 @@ Partial Class CFormEntryTv
         TreeNode1.Text = "TableName"
         Me.TreeViewTableName.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeViewTableName.SelectedImageKey = "openbriefcase.png"
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 355)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 278)
         Me.TreeViewTableName.TabIndex = 2
         '
         'CFormEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(852, 466)
+        Me.ClientSize = New System.Drawing.Size(852, 308)
         Me.Controls.Add(Me.TreeViewTableName)
         Me.Name = "CFormEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
