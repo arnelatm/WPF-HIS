@@ -25,14 +25,14 @@ Public Class CTextBox
 
     Public Sub New()
         MyBase.New()
-        Dim myfont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
+        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
         DataBoundControl = True
         BorderStyle = BorderStyle.FixedSingle
         ContextMenuStrip = _contextMenuStrip1
         AcceptsTab = False
         AcceptsReturn = False
         Margin = New Padding(1)
-        Font = myfont
+        Font = myFont
     End Sub
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode

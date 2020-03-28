@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
@@ -27,6 +28,8 @@ Public Class BfMain
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
+
+    Public Event AfterTranslateForm()
 
     Public Sub New()
 
@@ -135,7 +138,7 @@ Public Class BfMain
         End If
     End Sub
 
-    Function IsTranslatable(ByVal ctrl As Control) As Boolean
+    Function IsTranslatable(ByVal ctrl As Component) As Boolean
         If TypeOf ctrl Is IEntryControl Then
             'Dim x As IEntryControl
             'x = ctrl
@@ -158,8 +161,8 @@ Public Class BfMain
                TypeOf ctrl Is RadioButton OrElse
                TypeOf ctrl Is TabControl OrElse
                TypeOf ctrl Is TreeView OrElse
-               TypeOf ctrl Is DataGrid Then
-
+               TypeOf ctrl Is DataGrid OrElse
+               TypeOf ctrl Is ToolStripItem Then
                 'If TypeOf ctrl Is CButton Then
                 '    Debugger.Break()
                 'End If
@@ -201,6 +204,7 @@ Public Class BfMain
         TranslateCaptions(TextDisplayLanguage)
         BackgroundImage = myImage
         ResumeLayout()
+        RaiseEvent AfterTranslateForm()
     End Sub
 
     Protected Overridable Sub ChangeToLtrDisplay()
@@ -332,6 +336,9 @@ Public Class BfMain
                                 Else
                                     obj.Text = obj.Tag
                                 End If
+                                if TypeOf obj Is ToolStripButton then
+                                    TranslateToolStripButton(obj)
+                                End If
                             Catch ex As Exception
 
                             End Try
@@ -347,21 +354,7 @@ Public Class BfMain
                         cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                     Else
                         If TypeOf cCtrl Is CButton Then
-                            Dim o = CType(cCtrl, CButton)
-                            Dim cButton = CType(cCtrl, CButton)
-                            Dim cFileName = "btn" + o.OriginalImageName
-                            If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
-                                If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                                    Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
-                                    cFileName = "btn" + o.OriginalImageName.ToLower() + "_" + cCurrentCulture.ToLower()
-                                Else
-                                    cFileName = "btn" + o.OriginalImageName.ToLower()
-                                End If
-                            End If
-                            If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
-                                cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
-                            End If
-                            'cButton.Image = AATM.LIBRARIES.GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
+                            TranslateButton(cCtrl)
                         ElseIf TypeOf cCtrl Is CTabControl Then
                             Dim tc = CType(cCtrl, CTabControl)
                             tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
@@ -379,6 +372,40 @@ Public Class BfMain
             Next
         End If
     End Sub
+
+    Private Sub TranslateButton(cCtrl As Control)
+        Dim o = CType(cCtrl, CButton)
+        Dim cButton = CType(cCtrl, CButton)
+        Dim cFileName = "btn" + o.OriginalImageName
+        If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
+            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+                Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
+                cFileName = "btn" + o.OriginalImageName.ToLower() + "_" + cCurrentCulture.ToLower()
+            Else
+                cFileName = "btn" + o.OriginalImageName.ToLower()
+            End If
+        End If
+        If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
+            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
+        End If
+    End Sub
+
+    Private Sub TranslateToolStripButton(cButton As ToolStripButton)
+        Dim cResourceName = cButton.Name.ToLower()
+        If cButton.Image IsNot Nothing And cButton.Image.Tag Is Nothing Then
+            cButton.Image.Tag = cResourceName
+        End if
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+           Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
+           cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
+        else
+           cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
+        End If
+        If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
+            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
+        End If
+    End Sub
+
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
         Dim cmd As String

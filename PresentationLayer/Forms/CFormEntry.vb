@@ -1325,14 +1325,14 @@ Public Class CFormEntry
         EditData()
     End Sub
 
-    Private Sub btnArabic_Click_1(sender As Object, e As EventArgs) Handles btnArabic.Click
+    Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
         TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         TranslateForm()
         btnArabic.Visible = False
         btnOriginal.Visible = True
     End Sub
 
-    Private Sub btnOriginal_Click_1(sender As Object, e As EventArgs) Handles btnOriginal.Click
+    Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
         TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
         TranslateForm()
         btnArabic.Visible = True
@@ -1381,4 +1381,10 @@ Public Class CFormEntry
         frm.TranslatorDAC = TranslatorDAC
         frm.Show()
     End Sub
+
+    Public Sub HideButton(button As ToolStripButton)
+        button.Visible = False
+    End Sub
+
+
 End Class

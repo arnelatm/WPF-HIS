@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -163,9 +163,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Public ReadOnly Property btnprevious() As System.Drawing.Bitmap
+        Public ReadOnly Property btnprev() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("btnprevious", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("btnprev", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -173,19 +173,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Public ReadOnly Property btnprevious_ar() As System.Drawing.Bitmap
+        Public ReadOnly Property btnprev_ar_sa() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("btnprevious_ar", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Public ReadOnly Property btnprevious_ar_sa() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("btnprevious_ar_sa", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("btnprev_ar_sa", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
