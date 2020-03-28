@@ -82,7 +82,7 @@ Public Class CDgvCaComboBox
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
-            Return False
+            Return True
         End Get
     End Property
 

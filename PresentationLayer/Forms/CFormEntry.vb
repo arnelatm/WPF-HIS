@@ -312,9 +312,9 @@ Public Class CFormEntry
             idNoOfFoundRecord = PresenterObj.FindField(txtControl)
             If idNoOfFoundRecord = 0 Then
                 _MBTextToFindNotFound.Show(Me, GetPropertyValue(txtControl, "GetTextToSearch"))
-                BtnFind.Enabled = False
+                btnFind.Enabled = False
             Else
-                BtnFind.Enabled = True
+                btnFind.Enabled = True
                 TargetIdNo = idNoOfFoundRecord
                 GetAndSetRecordPositionNumber()
                 GetAndDisplayRecordForGivenRecordPosition()
@@ -368,7 +368,6 @@ Public Class CFormEntry
         End If
         Return retValue
     End Function
-
 
     Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
@@ -464,11 +463,11 @@ Public Class CFormEntry
     End Sub
 
     Private Sub UpdateRecordCounter()
-
         RecordCount = PresenterObj.GetRecordCount()
         RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
         tsbCurrentRecord.Text = RecordPositionNumber
-        tsbTotalRecords.Text = $"{_MsgOf.Value} {RecordCount}"
+        Dim cText = Messaging.TranslateCaption("of")
+        tsbTotalRecords.Text = $"{cText} {RecordCount}"
     End Sub
 
     Protected Overridable Function OkToMove(ByVal Optional buttonName As String = "")
@@ -525,7 +524,7 @@ Public Class CFormEntry
             retValue = False
         ElseIf result = DialogResult.Yes Then
             If MyErrorProvider.CheckAndShowSummaryErrorMessage() = True Then
-                BtnSave.PerformClick()
+                btnSave.PerformClick()
                 retValue = True
             Else
                 retValue = False
@@ -543,57 +542,57 @@ Public Class CFormEntry
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
         If RecordCount = 0 Then
-            BtnFirst.Enabled = False
-            BtnPrev.Enabled = False
-            BtnNext.Enabled = False
-            BtnLast.Enabled = False
-            BtnEdit.Enabled = False
-            BtnDelete.Enabled = False
+            btnFirst.Enabled = False
+            btnPrev.Enabled = False
+            btnNext.Enabled = False
+            btnLast.Enabled = False
+            btnEdit.Enabled = False
+            btnDelete.Enabled = False
             btnUndo.Enabled = False
-            BtnSave.Enabled = False
-            BtnFind.Enabled = False
+            btnSave.Enabled = False
+            btnFind.Enabled = False
             RecordPositionNumber = 0
             If Not AddMode Then
                 btnUndo.Enabled = False
-                BtnSave.Enabled = False
-                Messaging.Show(True,"MsgNoRecordsFound", "No records found for this table!","Empty Table")
+                btnSave.Enabled = False
+                Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
             Else
-                BtnSave.Enabled = True
+                btnSave.Enabled = True
                 btnUndo.Enabled = True
             End If
         Else
             If RecordPositionNumber = 1 Then
-                BtnFirst.Enabled = False
-                BtnPrev.Enabled = False
-                BtnLast.Enabled = True
-                BtnNext.Enabled = True
+                btnFirst.Enabled = False
+                btnPrev.Enabled = False
+                btnLast.Enabled = True
+                btnNext.Enabled = True
             Else
-                BtnFirst.Enabled = True
-                BtnPrev.Enabled = True
-                BtnLast.Enabled = True
-                BtnNext.Enabled = True
+                btnFirst.Enabled = True
+                btnPrev.Enabled = True
+                btnLast.Enabled = True
+                btnNext.Enabled = True
             End If
             If RecordPositionNumber = RecordCount Then
-                BtnLast.Enabled = False
-                BtnNext.Enabled = False
-                BtnFirst.Enabled = True
-                BtnPrev.Enabled = True
+                btnLast.Enabled = False
+                btnNext.Enabled = False
+                btnFirst.Enabled = True
+                btnPrev.Enabled = True
             Else
-                BtnLast.Enabled = True
-                BtnNext.Enabled = True
+                btnLast.Enabled = True
+                btnNext.Enabled = True
             End If
             If editing OrElse adding Then
-                BtnEdit.Enabled = False
-                BtnAdd.Enabled = False
-                BtnDelete.Enabled = False
+                btnEdit.Enabled = False
+                btnAdd.Enabled = False
+                btnDelete.Enabled = False
                 btnUndo.Enabled = True
-                BtnSave.Enabled = True
+                btnSave.Enabled = True
             Else
-                BtnEdit.Enabled = True
-                BtnDelete.Enabled = True
-                BtnAdd.Enabled = True
+                btnEdit.Enabled = True
+                btnDelete.Enabled = True
+                btnAdd.Enabled = True
                 btnUndo.Enabled = False
-                BtnSave.Enabled = False
+                btnSave.Enabled = False
             End If
         End If
         UpdateRecordCounter()
@@ -632,8 +631,8 @@ Public Class CFormEntry
             idNoOfFoundRecord = PresenterObj.FindFieldContinue(TargetIdNo)
             If idNoOfFoundRecord = 0 Then
                 If _MBLastRecordReachedStartFromBeginning.Show(Me) = DialogResult.Yes Then
-                    BtnFirst.PerformClick()
-                    BtnFind.PerformClick()
+                    btnFirst.PerformClick()
+                    btnFind.PerformClick()
                 Else
                     '' stay on the current record
                 End If
@@ -659,7 +658,7 @@ Public Class CFormEntry
             GetAndDisplayRecordForGivenRecordPosition()
         End If
     End Sub
-    
+
     Protected Sub GoLastRecord()
         If _debugSwitch Then
             Debugger.Break()
@@ -686,7 +685,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) 
+    Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -721,7 +720,7 @@ Public Class CFormEntry
         Dim continueSave As Boolean = True
         If Not AddMode Then
             If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                Messaging.Show(True,"MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
                 continueSave = False
             Else
                 If Not ChangesMade() Then
@@ -804,7 +803,7 @@ Public Class CFormEntry
                 RecordPositionNumber = PresenterObj.GetRecordCount()
                 If RecordPositionNumber <> 0 Then
                     GetAndDisplayRecordForGivenRecordPosition()
-                    BtnFind.Enabled = False
+                    btnFind.Enabled = False
                 Else
                     UpdateButtonDisplays(False, False)
                 End If
@@ -1259,7 +1258,7 @@ Public Class CFormEntry
     '    sender.PerformClick()
     'End Sub
 
-    'Private Sub btnDebugSave_ClickButtonArea(sender As Object, e As MouseEventArgs) 
+    'Private Sub btnDebugSave_ClickButtonArea(sender As Object, e As MouseEventArgs)
     '    If _debugSwitch = 0 Then
     '        _debugSwitch = 1
     '        btnDebugSwitch.Text = "Turn Off Debugger"
@@ -1269,7 +1268,7 @@ Public Class CFormEntry
     '    End If
     'End Sub
 
-    Private Sub BtnDelete_Click(Sender As Object, e As MouseEventArgs) 
+    Private Sub BtnDelete_Click(Sender As Object, e As MouseEventArgs)
 
     End Sub
 
@@ -1289,7 +1288,7 @@ Public Class CFormEntry
         GoLastRecord()
     End Sub
 
-    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles  btnAdd.Click
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         GoAddRecord()
     End Sub
 
@@ -1297,7 +1296,7 @@ Public Class CFormEntry
         GoDeleteRecord()
     End Sub
 
-    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles  btnSave.Click
+    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -1326,6 +1325,9 @@ Public Class CFormEntry
     End Sub
 
     Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         TranslateForm()
         btnArabic.Visible = False
@@ -1333,6 +1335,9 @@ Public Class CFormEntry
     End Sub
 
     Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
         TranslateForm()
         btnArabic.Visible = True
@@ -1375,6 +1380,9 @@ Public Class CFormEntry
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         Dim frm As New TranslationTableManager()
         frm.FormIdNoToTranslate = FormIdNo
         frm.AppDataDAC = AppDataDAC
@@ -1385,6 +1393,5 @@ Public Class CFormEntry
     Public Sub HideButton(button As ToolStripButton)
         button.Visible = False
     End Sub
-
 
 End Class

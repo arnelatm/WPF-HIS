@@ -47,7 +47,7 @@ Public Class CLabel
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
-            Return False
+            Return True
         End Get
     End Property
 
@@ -71,5 +71,9 @@ Public Class CLabel
             Refresh()
         End Set
     End Property
+
+    Public Sub SetText(cText As String)
+        Text = cText
+    End Sub
 
 End Class

@@ -87,15 +87,13 @@ Partial Class CFormEntry
         '
         'tsbCurrentRecord
         '
-        Me.tsbCurrentRecord.Font = New System.Drawing.Font("Segoe UI", 9!)
         Me.tsbCurrentRecord.Name = "tsbCurrentRecord"
         Me.tsbCurrentRecord.Size = New System.Drawing.Size(50, 25)
         '
         'tsbTotalRecords
         '
         Me.tsbTotalRecords.Name = "tsbTotalRecords"
-        Me.tsbTotalRecords.Size = New System.Drawing.Size(35, 22)
-        Me.tsbTotalRecords.Text = "of {0}"
+        Me.tsbTotalRecords.Size = New System.Drawing.Size(0, 22)
         '
         'ToolStripSeparator2
         '
