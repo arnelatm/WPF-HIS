@@ -33,6 +33,7 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
+
 #Region "OriginalMessageFields"
 
         Public Property IDNo As Integer Implements IOriginalMessagesView.IdNo
@@ -142,6 +143,21 @@ Namespace PresentationLayer.Forms
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
             PresenterObj.TranslatedMessagesPresenter.Save(AddMode)
         End Sub
+
+        Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            MyBase.Show()
+            HideButton(btnDelete)
+        End Sub
+
+
+        Private Sub OnAfterTranslateForm Handles MyBase.AfterTranslateForm
+            txtMessage.RightToLeft = RightToLeft.No
+        End Sub
+
+
+        'Private Sub txtMessage_TextAlignChanged(sender As Object, e As EventArgs) Handles txtMessage.TextAlignChanged
+        '    txtMessage.TextAlign = HorizontalAlignment.Left
+        'End Sub
 
         'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '    MessageBox.Show(txtMessageKey.Enabled.ToString())

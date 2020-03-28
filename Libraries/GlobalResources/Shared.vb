@@ -62,7 +62,7 @@ Public Class Images
 
     Public Shared ReadOnly Property PreviousImage() As Image
         Get
-            Return My.Resources.btnprevious
+            Return My.Resources.btnprev
         End Get
     End Property
 

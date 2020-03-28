@@ -53,6 +53,10 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Translations", "Libraries\Translations\Translations.vbproj", "{604677ED-411D-4F00-B151-F4D39BC9E670}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0598D101-4147-476C-98FF-8C78D96B971E}"
+	ProjectSection(SolutionItems) = preProject
+		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
+		HomeSqlIspdata.sql = HomeSqlIspdata.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00-8C55-479E-94C2-19679791F55C}"
 	ProjectSection(SolutionItems) = preProject
@@ -61,6 +65,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		CostCenter_View.sql = CostCenter_View.sql
 		CreateAllViews.sql = CreateAllViews.sql
 		CreateAllViews.txt = CreateAllViews.txt
+		HomeSqlIspdata.sql = HomeSqlIspdata.sql
 		InsertCheckDisbursementJournalItemTVP.sql = InsertCheckDisbursementJournalItemTVP.sql
 		ProfitCenter.sql = ProfitCenter.sql
 		TranslatedMessages_View.sql = TranslatedMessages_View.sql
