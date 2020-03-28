@@ -219,5 +219,14 @@
   <ItemGroup>
     <None Include="Resources\btnnext_ar-sa.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arabic.png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\english.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Translate.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

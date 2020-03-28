@@ -66,25 +66,6 @@ Namespace PresentationLayer.Forms
             '_ordersPresenter = New OrdersPresenter(Me)
         End Sub
 
-        Private Sub CreateEnums()
-            ResourceEnumConverter.MakeResource("AccountGroupSelection", GetType(AccountGroupSelection))
-            ResourceEnumConverter.MakeResource("AccountStatusSelection", GetType(AccountStatusSelection))
-            ResourceEnumConverter.MakeResource("DebitCreditSelection", GetType(DebitCreditSelection))
-            ResourceEnumConverter.MakeResource("DocumentTypeSelection", GetType(DocumentTypeSelection))
-            ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-            ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
-            ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
-            ResourceEnumConverter.MakeResource("PaymentMethodSelection", GetType(PaymentMethodSelection))
-            ResourceEnumConverter.MakeResource("PaymentTypeSelection", GetType(PaymentTypeSelection))
-            ResourceEnumConverter.MakeResource("ProfitCenterTypeSelection", GetType(ProfitCenterTypeSelection))
-            ResourceEnumConverter.MakeResource("ReceiptTypeSelection", GetType(ReceiptTypeSelection))
-            ResourceEnumConverter.MakeResource("SecurityLevelSelection", GetType(SecurityLevelSelection))
-            ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))
-            ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
-            ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
-        End Sub
-
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)
@@ -1102,6 +1083,7 @@ Namespace PresentationLayer.Forms
             Dim x = New OneTimeRun
             Debugger.Break()
             OneTimeRun.CreateAllMessages()
+            OneTimeRun.CreateEnums()
         End Sub
 
         Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click

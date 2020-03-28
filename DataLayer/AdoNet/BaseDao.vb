@@ -154,6 +154,9 @@
 
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Int16 _
             Implements IBaseDao.DeleteRecord
+            if Strings.Right(tableName,5).ToLower() = "_view" Then
+                tableName = strings.Left(tableName,Strings.Len(tableName)-5)
+            End If
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
                     " Where IdNo = " & idNo

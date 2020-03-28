@@ -183,6 +183,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
     </Compile>

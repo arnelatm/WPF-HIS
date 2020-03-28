@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Public ReadOnly Property arabic_png() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("arabic_png", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Public ReadOnly Property btnadd() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("btnadd", resourceCulture)
@@ -252,6 +262,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Public ReadOnly Property english() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("english", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Public ReadOnly Property GreenGradientBackgroundLarge() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("GreenGradientBackgroundLarge", resourceCulture)
@@ -333,6 +353,16 @@ Namespace My.Resources
         Public ReadOnly Property openbriefcase() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("openbriefcase", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Public ReadOnly Property Translate() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Translate", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
