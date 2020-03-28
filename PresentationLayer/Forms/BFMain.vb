@@ -6,6 +6,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.Libraries.Translations
 Imports AATM.PresentationLayer.Views
 
@@ -321,28 +322,11 @@ Public Class BfMain
                         Else
                             CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
                         End If
-                    ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.ToolStrip" Then
-                        Dim c As ToolStrip
-                        c = cCtrl
-                        For Each obj As Object In c.Items
-                            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                            'If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                            Try
-                                _originalText = CaptionCollection.Item(c.Name + "." + obj.Name)
-                                r = Dv.Find(_originalText)
-                                If r > 0 Then
-                                    obj.Text = Dv(r).Item("translated")
-                                Else
-                                    obj.Text = obj.Tag
-                                End If
-                                If TypeOf obj Is ToolStripButton Then
-                                    TranslateToolStripButton(obj)
-                                End If
-                            Catch ex As Exception
-
-                            End Try
-                        Next
-                    ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
+                    ElseIf TypeOf cCtrl Is ToolStrip Then
+                        'Dim c As ToolStrip
+                        'c = cCtrl
+                        TranslateToolStripItems(cCtrl)
+                    ElseIf TypeOf cCtrl Is MenuStrip Then
                         Dim subMenuName = ""
                         Dim menuStrip As MenuStrip = cCtrl
                         TranslateMenuStripItems(menuStrip.Items, subMenuName)
@@ -358,29 +342,46 @@ Public Class BfMain
                             Dim tc = CType(cCtrl, CTabControl)
                             tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                             tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                        ElseIf TypeOf cCtrl Is CLabel Then
-                            Dim tc = CType(cCtrl, CLabel)
-                            _originalText = CaptionCollection.Item(cCtrl.Name)
-                            r = Dv.Find(_originalText)
-                            If r >= 0 Then
-                                tc.SetText(Dv(r).Item("translated"))
-                            Else
-                                tc.SetText(cCtrl.Tag)
-                            End If
                         End If
-                        If TypeOf cCtrl IsNot CLabel Then
-                            _originalText = CaptionCollection.Item(cCtrl.Name)
-                            r = Dv.Find(_originalText)
-                            If r >= 0 Then
-                                cCtrl.Text = Dv(r).Item("translated")
-                            Else
-                                cCtrl.Text = cCtrl.Tag
-                            End If
+                        _originalText = CaptionCollection.Item(cCtrl.Name)
+                        r = Dv.Find(_originalText)
+                        If r >= 0 Then
+                            cCtrl.Text = Dv(r).Item("translated")
+                        Else
+                            cCtrl.Text = cCtrl.Tag
                         End If
                     End If
                 End If
             Next
         End If
+    End Sub
+
+    Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
+        Dim r As Integer
+        For Each obj As Object In cToolStrip.Items
+            Try
+                _originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name)
+                r = Dv.Find(_originalText)
+                If r > 0 Then
+                    obj.Text = Dv(r).Item("translated")
+                Else
+                    obj.Text = obj.Tag
+                End If
+                If TypeOf obj Is ToolStripButton Then
+                    TranslateToolStripButton(obj)
+                ElseIf TypeOf obj Is TextBox Then
+                    Dim c = CType(obj, TextBox)
+                    If GlobalVariables.RightToLeftLayout Then
+                        c.Text = Messaging.TranslateCaption(c.Text)
+                        c.RightToLeft = RightToLeft.Yes
+                    Else
+                        c.RightToLeft = RightToLeft.No
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
+        Next
     End Sub
 
     Private Sub TranslateButton(cCtrl As Control)
@@ -757,13 +758,13 @@ Public Class BfMain
     '                ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.ToolStrip" Then
     '                    Dim subMenuName = ""
     '                    Dim toolStrip As ToolStrip = cCtrl
-    '                    Dim c As ToolStrip
-    '                    c = cCtrl
-    '                    For Each obj As Object In c.Items
+    '                    Dim cToolStrip As ToolStrip
+    '                    cToolStrip = cCtrl
+    '                    For Each obj As Object In cToolStrip.Items
     '                        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
     '                        'If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
     '                        Try
-    '                            _originalText = CaptionCollection.Item(c.Name + "." + obj.Name)
+    '                            _originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name)
     '                            r = Dv.Find(_originalText)
     '                            If r > 0 Then
     '                                obj.Text = Dv(r).Item("translated")

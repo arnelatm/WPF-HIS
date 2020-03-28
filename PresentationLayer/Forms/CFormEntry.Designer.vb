@@ -31,7 +31,6 @@ Partial Class CFormEntry
         Me.btnFirst = New System.Windows.Forms.ToolStripButton()
         Me.btnPrev = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
         Me.tsbTotalRecords = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnNext = New System.Windows.Forms.ToolStripButton()
@@ -49,18 +48,21 @@ Partial Class CFormEntry
         Me.btnArabic = New System.Windows.Forms.ToolStripButton()
         Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
         Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.tsbCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.FormToolStrip.SuspendLayout
         Me.SuspendLayout
         '
         'FormToolStrip
         '
-        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnAdd, Me.btnDelete, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnQuit, Me.btnDebug, Me.btnArabic, Me.btnOriginal, Me.btnTranslate})
+        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.ToolStripButton1, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnAdd, Me.btnDelete, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnQuit, Me.btnDebug, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.ToolStripButton2})
         Me.FormToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.FormToolStrip.Name = "FormToolStrip"
-        Me.FormToolStrip.Size = New System.Drawing.Size(865, 25)
+        Me.FormToolStrip.Size = New System.Drawing.Size(865, 26)
         Me.FormToolStrip.TabIndex = 1
-        Me.FormToolStrip.Text = "ToolStrip1"
+        Me.FormToolStrip.Text = "English"
         '
         'btnFirst
         '
@@ -68,7 +70,7 @@ Partial Class CFormEntry
         Me.btnFirst.Image = CType(resources.GetObject("btnFirst.Image"),System.Drawing.Image)
         Me.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnFirst.Name = "btnFirst"
-        Me.btnFirst.Size = New System.Drawing.Size(23, 22)
+        Me.btnFirst.Size = New System.Drawing.Size(23, 23)
         Me.btnFirst.Text = "Go to first record"
         '
         'btnPrev
@@ -77,28 +79,23 @@ Partial Class CFormEntry
         Me.btnPrev.Image = CType(resources.GetObject("btnPrev.Image"),System.Drawing.Image)
         Me.btnPrev.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnPrev.Name = "btnPrev"
-        Me.btnPrev.Size = New System.Drawing.Size(23, 22)
+        Me.btnPrev.Size = New System.Drawing.Size(23, 23)
         Me.btnPrev.Text = "Go to previous record"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbCurrentRecord
-        '
-        Me.tsbCurrentRecord.Name = "tsbCurrentRecord"
-        Me.tsbCurrentRecord.Size = New System.Drawing.Size(50, 25)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 26)
         '
         'tsbTotalRecords
         '
         Me.tsbTotalRecords.Name = "tsbTotalRecords"
-        Me.tsbTotalRecords.Size = New System.Drawing.Size(0, 22)
+        Me.tsbTotalRecords.Size = New System.Drawing.Size(0, 23)
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 26)
         '
         'btnNext
         '
@@ -106,7 +103,7 @@ Partial Class CFormEntry
         Me.btnNext.Image = CType(resources.GetObject("btnNext.Image"),System.Drawing.Image)
         Me.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnNext.Name = "btnNext"
-        Me.btnNext.Size = New System.Drawing.Size(23, 22)
+        Me.btnNext.Size = New System.Drawing.Size(23, 23)
         Me.btnNext.Text = "Go to next record"
         '
         'btnLast
@@ -115,13 +112,13 @@ Partial Class CFormEntry
         Me.btnLast.Image = CType(resources.GetObject("btnLast.Image"),System.Drawing.Image)
         Me.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnLast.Name = "btnLast"
-        Me.btnLast.Size = New System.Drawing.Size(23, 22)
+        Me.btnLast.Size = New System.Drawing.Size(23, 23)
         Me.btnLast.Text = "Go to last record"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 26)
         '
         'btnAdd
         '
@@ -129,7 +126,7 @@ Partial Class CFormEntry
         Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"),System.Drawing.Image)
         Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(23, 22)
+        Me.btnAdd.Size = New System.Drawing.Size(23, 23)
         Me.btnAdd.Text = "Add a new record"
         '
         'btnDelete
@@ -138,7 +135,7 @@ Partial Class CFormEntry
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"),System.Drawing.Image)
         Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(23, 22)
+        Me.btnDelete.Size = New System.Drawing.Size(23, 23)
         Me.btnDelete.Text = "Delete current record"
         '
         'btnEdit
@@ -147,13 +144,13 @@ Partial Class CFormEntry
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"),System.Drawing.Image)
         Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(23, 22)
+        Me.btnEdit.Size = New System.Drawing.Size(23, 23)
         Me.btnEdit.Text = "Edit current record"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 26)
         '
         'btnSave
         '
@@ -161,7 +158,7 @@ Partial Class CFormEntry
         Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"),System.Drawing.Image)
         Me.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(23, 22)
+        Me.btnSave.Size = New System.Drawing.Size(23, 23)
         Me.btnSave.Text = "Save changes to current record"
         '
         'btnFind
@@ -170,7 +167,7 @@ Partial Class CFormEntry
         Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"),System.Drawing.Image)
         Me.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(23, 22)
+        Me.btnFind.Size = New System.Drawing.Size(23, 23)
         Me.btnFind.Text = "Find a record"
         '
         'btnUndo
@@ -179,7 +176,7 @@ Partial Class CFormEntry
         Me.btnUndo.Image = CType(resources.GetObject("btnUndo.Image"),System.Drawing.Image)
         Me.btnUndo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnUndo.Name = "btnUndo"
-        Me.btnUndo.Size = New System.Drawing.Size(23, 22)
+        Me.btnUndo.Size = New System.Drawing.Size(23, 23)
         Me.btnUndo.Text = "Undo changes and revert to previous values"
         '
         'btnQuit
@@ -188,7 +185,7 @@ Partial Class CFormEntry
         Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"),System.Drawing.Image)
         Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnQuit.Name = "btnQuit"
-        Me.btnQuit.Size = New System.Drawing.Size(23, 22)
+        Me.btnQuit.Size = New System.Drawing.Size(23, 23)
         Me.btnQuit.Text = "Exit and close this form"
         '
         'btnDebug
@@ -197,38 +194,63 @@ Partial Class CFormEntry
         Me.btnDebug.Image = CType(resources.GetObject("btnDebug.Image"),System.Drawing.Image)
         Me.btnDebug.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnDebug.Name = "btnDebug"
-        Me.btnDebug.Size = New System.Drawing.Size(23, 22)
+        Me.btnDebug.Size = New System.Drawing.Size(23, 23)
         Me.btnDebug.Text = "Set debugger on."
         '
         'btnArabic
         '
-        Me.btnArabic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnArabic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnArabic.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnArabic.ForeColor = System.Drawing.Color.Green
+        Me.btnArabic.Image = CType(resources.GetObject("btnArabic.Image"),System.Drawing.Image)
         Me.btnArabic.Name = "btnArabic"
-        Me.btnArabic.Size = New System.Drawing.Size(23, 22)
-        Me.btnArabic.Text = "ع"
+        Me.btnArabic.Size = New System.Drawing.Size(23, 23)
+        Me.btnArabic.Text = "Arabic"
         Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnArabic.ToolTipText = "Arabic"
         '
         'btnOriginal
         '
-        Me.btnOriginal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnOriginal.ForeColor = System.Drawing.Color.Green
+        Me.btnOriginal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnOriginal.Image = CType(resources.GetObject("btnOriginal.Image"),System.Drawing.Image)
         Me.btnOriginal.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnOriginal.Name = "btnOriginal"
-        Me.btnOriginal.Size = New System.Drawing.Size(24, 22)
-        Me.btnOriginal.Text = "En"
+        Me.btnOriginal.Size = New System.Drawing.Size(23, 23)
+        Me.btnOriginal.Text = "English"
         '
         'btnTranslate
         '
-        Me.btnTranslate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnTranslate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnTranslate.Font = New System.Drawing.Font("Arial Narrow", 8!, System.Drawing.FontStyle.Bold)
-        Me.btnTranslate.ForeColor = System.Drawing.Color.Green
+        Me.btnTranslate.Image = CType(resources.GetObject("btnTranslate.Image"),System.Drawing.Image)
+        Me.btnTranslate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.btnTranslate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnTranslate.Name = "btnTranslate"
-        Me.btnTranslate.Size = New System.Drawing.Size(52, 22)
+        Me.btnTranslate.Size = New System.Drawing.Size(53, 23)
         Me.btnTranslate.Text = "Translate"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"),System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 23)
+        Me.ToolStripButton1.Text = "of"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"),System.Drawing.Image)
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(23, 23)
+        Me.ToolStripButton2.Text = "ToolStripButton2"
+        '
+        'tsbCurrentRecord
+        '
+        Me.tsbCurrentRecord.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.tsbCurrentRecord.Name = "tsbCurrentRecord"
+        Me.tsbCurrentRecord.Size = New System.Drawing.Size(50, 26)
         '
         'CFormEntry
         '
@@ -250,7 +272,6 @@ End Sub
     Friend WithEvents btnFirst As Windows.Forms.ToolStripButton
     Friend WithEvents btnPrev As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbCurrentRecord As Windows.Forms.ToolStripTextBox
     Friend WithEvents tsbTotalRecords As Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents btnNext As Windows.Forms.ToolStripButton
@@ -269,4 +290,7 @@ End Sub
     Protected WithEvents btnTranslate As Windows.Forms.ToolStripButton
     Public WithEvents btnDelete As Windows.Forms.ToolStripButton
     Public WithEvents FormToolStrip As Windows.Forms.ToolStrip
+    Friend WithEvents ToolStripButton1 As Windows.Forms.ToolStripButton
+    Friend WithEvents tsbCurrentRecord As Windows.Forms.ToolStripTextBox
+    Friend WithEvents ToolStripButton2 As Windows.Forms.ToolStripButton
 End Class

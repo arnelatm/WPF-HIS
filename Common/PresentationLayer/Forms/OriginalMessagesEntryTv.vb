@@ -151,21 +151,10 @@ Namespace PresentationLayer.Forms
 
 
         Private Sub OnAfterTranslateForm Handles MyBase.AfterTranslateForm
-            txtMessage.RightToLeft = RightToLeft.No
+                        txtMessage.RightToLeft = RightToLeft.No
+            txtTranslatedCaption.RightToLeft = RightToLeft.Yes
         End Sub
 
-
-        'Private Sub txtMessage_TextAlignChanged(sender As Object, e As EventArgs) Handles txtMessage.TextAlignChanged
-        '    txtMessage.TextAlign = HorizontalAlignment.Left
-        'End Sub
-
-        'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        '    MessageBox.Show(txtMessageKey.Enabled.ToString())
-        'End Sub
-
-        'Private Sub txtMessageKey_EnabledChanged(sender As Object, e As EventArgs) Handles txtMessageKey.EnabledChanged
-        '    'Debugger.Break()
-        'End Sub
     End Class
 
 End Namespace
