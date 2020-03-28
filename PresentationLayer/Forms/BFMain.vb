@@ -138,7 +138,7 @@ Public Class BfMain
         End If
     End Sub
 
-    Function IsTranslatable(ByVal ctrl As Component) As Boolean
+    Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
             'Dim x As IEntryControl
             'x = ctrl
@@ -161,8 +161,7 @@ Public Class BfMain
                TypeOf ctrl Is RadioButton OrElse
                TypeOf ctrl Is TabControl OrElse
                TypeOf ctrl Is TreeView OrElse
-               TypeOf ctrl Is DataGrid OrElse
-               TypeOf ctrl Is ToolStripItem Then
+               TypeOf ctrl Is DataGrid Then
                 'If TypeOf ctrl Is CButton Then
                 '    Debugger.Break()
                 'End If
@@ -336,7 +335,7 @@ Public Class BfMain
                                 Else
                                     obj.Text = obj.Tag
                                 End If
-                                if TypeOf obj Is ToolStripButton then
+                                If TypeOf obj Is ToolStripButton Then
                                     TranslateToolStripButton(obj)
                                 End If
                             Catch ex As Exception
@@ -359,13 +358,24 @@ Public Class BfMain
                             Dim tc = CType(cCtrl, CTabControl)
                             tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                             tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                        ElseIf TypeOf cCtrl Is CLabel Then
+                            Dim tc = CType(cCtrl, CLabel)
+                            _originalText = CaptionCollection.Item(cCtrl.Name)
+                            r = Dv.Find(_originalText)
+                            If r >= 0 Then
+                                tc.SetText(Dv(r).Item("translated"))
+                            Else
+                                tc.SetText(cCtrl.Tag)
+                            End If
                         End If
-                        _originalText = CaptionCollection.Item(cCtrl.Name)
-                        r = Dv.Find(_originalText)
-                        If r >= 0 Then
-                            cCtrl.Text = Dv(r).Item("translated")
-                        Else
-                            cCtrl.Text = cCtrl.Tag
+                        If TypeOf cCtrl IsNot CLabel Then
+                            _originalText = CaptionCollection.Item(cCtrl.Name)
+                            r = Dv.Find(_originalText)
+                            If r >= 0 Then
+                                cCtrl.Text = Dv(r).Item("translated")
+                            Else
+                                cCtrl.Text = cCtrl.Tag
+                            End If
                         End If
                     End If
                 End If
@@ -394,18 +404,17 @@ Public Class BfMain
         Dim cResourceName = cButton.Name.ToLower()
         If cButton.Image IsNot Nothing And cButton.Image.Tag Is Nothing Then
             cButton.Image.Tag = cResourceName
-        End if
+        End If
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-           Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
-           cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
-        else
-           cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
+            Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
+            cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
+        Else
+            cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
         End If
         If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
             cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
         End If
     End Sub
-
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
         Dim cmd As String

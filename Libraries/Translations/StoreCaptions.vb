@@ -46,32 +46,21 @@ Public Class StoreCaptions
                     Dim c As ToolStrip
                     c = cCtrl
                     For Each obj As Object In c.Items
-                        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                        If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                            Try
-                                If Not String.IsNullOrEmpty(obj.Text) Then
-                                    t = obj.Text
-                                    obj.Tag = t
-                                    Captions.Add(t, c.Name + "." + obj.Name)
-                                    InsertWord(t)
-                                    InsertFormItem(FormIdNo, t)
-                                End If
-                            Catch ex As Exception
+                        TranslateToolStrip(FormIdNo, c, obj)
+                        'If TypeOf(obj) Is ToolStripButton Then
+                        'Else
+                        '    Try
+                        '        If Not String.IsNullOrEmpty(obj.Text) Then
+                        '            t = obj.Text
+                        '            obj.Tag = t
+                        '            Captions.Add(t, c.Name + "." + obj.Name)
+                        '            InsertWord(t)
+                        '            InsertFormItem(FormIdNo, t)
+                        '        End If
+                        '    Catch ex As Exception
 
-                            End Try
-                        Else
-                            Try
-                                If Not String.IsNullOrEmpty(obj.Text) Then
-                                    t = obj.Text
-                                    obj.Tag = t
-                                    Captions.Add(t, c.Name + "." + obj.Name)
-                                    InsertWord(t)
-                                    InsertFormItem(FormIdNo, t)
-                                End If
-                            Catch ex As Exception
-
-                            End Try
-                        End If
+                        '    End Try
+                        'End If
                     Next
                 ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
                     Dim subMenuName = cCtrl.Name
@@ -90,11 +79,23 @@ Public Class StoreCaptions
                 End If
             End If
         Next
-        'Dim mLevel As String = ""
-        'If Not frm.Menu Is Nothing Then _
-        '    StoreMenuItems(frm.Menu.MenuItems, mLevel)
         Return Captions
     End Function
+
+    Private Sub TranslateToolStrip(formIdNo As Short, c As ToolStrip, obj As Object)
+        Dim t As String
+        Try
+            If Not String.IsNullOrEmpty(obj.Text) Then
+                t = obj.Text
+                obj.Tag = t
+                Captions.Add(t, c.Name + "." + obj.Name)
+                InsertWord(t)
+                InsertFormItem(formIdNo, t)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     'Public Sub StoreMessage(ByVal message As Object)
     '    InsertMessage(message)

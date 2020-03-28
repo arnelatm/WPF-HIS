@@ -429,6 +429,30 @@ Public Class Dac
         Return status
     End Function
 
+    Function AddCaption(ByVal caption As String) As Boolean
+        Dim cmd As String
+        Dim status As Boolean = True
+        cmd = "SELECT IdNo FROM OriginalCaptions where Caption ='" + caption + "'"
+        Dim idNo As Int32 = ExecScalar(Of Int32)(cmd)
+        If idNo = 0 Then
+            Cs = BuildConnString()
+            Dim conn As SqlConnection = New SqlConnection(Cs)
+            Dim sqlCommand As New SqlCommand("INSERT INTO OriginalCaptions (caption) values (@caption)", conn)
+            Try
+                conn.Open()
+                sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption
+                sqlCommand.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                ErrorMessage(ex, SqlError)
+                status = False
+            Finally
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End Try
+        End If
+        Return status
+    End Function
+
     Function GetMessage(ByVal key As String, ByRef message As String, ByRef caption As String) As String
         'Dim translatedMessage As String = message
         Dim cmd As String
@@ -559,9 +583,25 @@ Public Class Dac
             Dim cmd As String
             cmd = "SELECT Concat(Coalesce(Translated,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
             translatedText = ExecScalar(Of String)(cmd)
-            If Strings.Left(translatedText, 1) <> "~" Then
-                translatedText = Strings.Mid(translatedText, 2)
+            'If Strings.Left(translatedText, 1) <> "~" Then
+            '    translatedText = Strings.Mid(translatedText, 2)
+            'End If
+
+            If translatedText IsNot Nothing AndAlso Strings.Left(translatedText, 1) <> "~" Then
+                If GlobalVariables.RightToLeftLayout Then
+                    translatedText = Strings.Left(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture))
+                Else
+                    translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture) + 1)
+                End If
+            Else
+                AddCaption(textToTranslate)
+                translatedText = textToTranslate
             End If
+
+        End If
+        If translatedText Is Nothing Then
+            AddCaption(textToTranslate)
+            translatedText = textToTranslate
         End If
         Return translatedText
     End Function
