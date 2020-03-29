@@ -127,6 +127,36 @@ Public Class CForm
         End Try
     End Sub
 
+    ' The form will handle all key events before the control with
+    ' focus handles them
+    Private Sub CForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.SuppressKeyPress = True
+            e.Handled = True
+            'Me.SelectNextControl(Me, True, True, true, true)
+            SendKeys.Send("{TAB}")
+            'SendWait("{TAB}")
+            'ElseIf (e.KeyCode And Not Keys.Modifiers) = Keys.X AndAlso e.Modifiers = Keys.Control Then
+        ElseIf e.KeyCode = Keys.X And e.Modifiers = Keys.Control Then
+
+            If Me.ActiveControl.[GetType]() = GetType(TextBox) Then
+                Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+                textBox.Cut()
+            End If
+            e.SuppressKeyPress = True
+
+        ElseIf e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+
+            e.Handled = False
+        ElseIf e.KeyCode = Keys.Z And e.Modifiers = Keys.Control Then
+
+            e.Handled = False
+        ElseIf e.KeyCode = Keys.A And e.Modifiers = Keys.Control Then
+
+            e.Handled = False
+        End If
+    End Sub
+
     'Private Sub CForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
     '    'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
     '    '    If GlobalVariables.RightToLeftLayout Then

@@ -36,7 +36,7 @@ Public Class BfMain
 
         ' This call is required by the designer.
         InitializeComponent()
-        KeyPreview = True
+
         If Not DesignMode Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
 
@@ -359,7 +359,7 @@ Public Class BfMain
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         Dim r As Integer
         Dim originalText As String
-        Dim OriginalToolTipText as String
+        Dim OriginalToolTipText As String
         For Each obj As Object In cToolStrip.Items
             Try
                 originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".Text")
@@ -369,8 +369,8 @@ Public Class BfMain
                 Else
                     obj.Text = obj.Tag(0)
                 End If
-                originalToolTipText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".ToolTipText")
-                r = Dv.Find(originalToolTipText)
+                OriginalToolTipText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".ToolTipText")
+                r = Dv.Find(OriginalToolTipText)
                 If r > 0 Then
                     obj.ToolTipText = Dv(r).Item("translated")
                 Else
@@ -429,7 +429,6 @@ Public Class BfMain
     '    Dim cResourceName = cLabel.Name.ToLower()
     '    cLabel.ToolTipText = Messaging.TranslateCaption(cLabel.Tag(1))
     'End Sub
-
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
         Dim cmd As String

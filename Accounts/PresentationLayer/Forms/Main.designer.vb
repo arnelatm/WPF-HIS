@@ -137,6 +137,8 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.MainMenu.SuspendLayout
@@ -709,11 +711,32 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'CTextBox1
+        '
+        Me.CTextBox1.BackColor = System.Drawing.Color.White
+        Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CTextBox1.ComputedValue = false
+        Me.CTextBox1.CustomFormat = Nothing
+        Me.CTextBox1.DataBoundControl = true
+        Me.CTextBox1.EditingMode = false
+        resources.ApplyResources(Me.CTextBox1, "CTextBox1")
+        Me.CTextBox1.ForeColor = System.Drawing.Color.Black
+        Me.CTextBox1.LinkedLabel = Nothing
+        Me.CTextBox1.Name = "CTextBox1"
+        Me.CTextBox1.OldValue = Nothing
+        '
+        'TextBox1
+        '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.Name = "TextBox1"
+        '
         'Main
         '
         Me.AllowDrop = true
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.CTextBox1)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MainMenu)
         Me.IsMdiContainer = true
@@ -840,5 +863,7 @@ End Sub
         Friend WithEvents AccountReconciliationToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents CreateAllMessagesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents TextBox1 As TextBox
     End Class
 End NameSpace
