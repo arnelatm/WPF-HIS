@@ -47,6 +47,14 @@ Public Class CFormEntry
 
     End Sub
 
+    'Private Declare Auto Function SendMessage Lib "user32" ( ByVal hwnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr ) As IntPtr
+
+    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+    '    SendMessage(Me.Handle, msg.Msg, msg.WParam, msg.LParam)
+    '    Return MyBase.ProcessCmdKey(msg, keyData)
+    'End Function
+
+
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Public Event AddingRecordChanged(adding As Boolean)
@@ -727,6 +735,7 @@ Public Class CFormEntry
         TranslateForm()
         btnArabic.Visible = False
         btnOriginal.Visible = True
+        btnUndo.PerformClick()
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
@@ -773,9 +782,17 @@ Public Class CFormEntry
         If _debugSwitch Then
             Debugger.Break()
         End If
+        CloseForm()
+    End Sub
+
+    Private Sub CloseForm()
+
         If OkToMove("Quit") Then
             CancelClose = False
             Close()
+            if GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage then
+                TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+            End If
             GC.Collect()
             GC.WaitForPendingFinalizers()
             If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
@@ -855,7 +872,6 @@ Public Class CFormEntry
             SetAllControlsDynamicProperties()
             RaiseEvent AfterLoad()
             AddMandatoryFieldCHeck()
-            FirstControl.Focus()
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True
@@ -864,6 +880,7 @@ Public Class CFormEntry
                 btnOriginal.Visible = False
             End If
             DisplayView()
+            FirstControl.Focus()
             'AddHandler BtnNext.DoubleClick, AddressOf BtnNext.MyDoubleClick
             'AddHandler BtnNext.DoubleClick, AddressOf TurnOnDebugger
         End If
@@ -1330,7 +1347,7 @@ Public Class CFormEntry
         GoFirstRecord()
     End Sub
 
-    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) 
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -1383,11 +1400,11 @@ Public Class CFormEntry
         RecordCount = PresenterObj.GetRecordCount()
         RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
         tsbCurrentRecord.Text = RecordPositionNumber
-        Dim cText = Messaging.TranslateCaption("of")
-        tsbTotalRecords.Text = $"{cText} {RecordCount}"
+        tsbTotalRecords.Text = RecordCount
     End Sub
 
-    Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+    Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
 
     End Sub
+
 End Class

@@ -358,14 +358,23 @@ Public Class BfMain
 
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         Dim r As Integer
+        Dim originalText As String
+        Dim OriginalToolTipText as String
         For Each obj As Object In cToolStrip.Items
             Try
-                _originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name)
-                r = Dv.Find(_originalText)
+                originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".Text")
+                r = Dv.Find(originalText)
                 If r > 0 Then
                     obj.Text = Dv(r).Item("translated")
                 Else
-                    obj.Text = obj.Tag
+                    obj.Text = obj.Tag(0)
+                End If
+                originalToolTipText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".ToolTipText")
+                r = Dv.Find(originalToolTipText)
+                If r > 0 Then
+                    obj.ToolTipText = Dv(r).Item("translated")
+                Else
+                    obj.ToolTipText = obj.Tag(1)
                 End If
                 If TypeOf obj Is ToolStripButton Then
                     TranslateToolStripButton(obj)
@@ -403,19 +412,24 @@ Public Class BfMain
 
     Private Sub TranslateToolStripButton(cButton As ToolStripButton)
         Dim cResourceName = cButton.Name.ToLower()
-        If cButton.Image IsNot Nothing And cButton.Image.Tag Is Nothing Then
-            cButton.Image.Tag = cResourceName
-        End If
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
             cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
+            'cButton.ToolTipText = Messaging.TranslateCaption(cButton.Tag(1))
         Else
             cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
+            'cButton.ToolTipText = If(cButton.Tag IsNot Nothing, cButton.Tag(1), cButton.ToolTipText)
         End If
         If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
             cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
         End If
     End Sub
+
+    'Private Sub TranslateToolStripLabel(cLabel As ToolStripLabel)
+    '    Dim cResourceName = cLabel.Name.ToLower()
+    '    cLabel.ToolTipText = Messaging.TranslateCaption(cLabel.Tag(1))
+    'End Sub
+
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
         Dim cmd As String

@@ -44,6 +44,7 @@ Namespace PresentationLayer.Forms
         Me.txtMessageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
@@ -152,6 +153,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtMessageIdNo)
         Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
         Me.floDataDisplay.Controls.Add(Me.Button1)
+        Me.floDataDisplay.Controls.Add(Me.TextBox1)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
         'lblIdNo
@@ -306,6 +308,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
         '
+        'TextBox1
+        '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.Name = "TextBox1"
+        '
         'OriginalMessagesEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -339,5 +346,6 @@ End Sub
         Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents Button1 As Windows.Forms.Button
         Friend WithEvents txtTranslatedMessage As CTextBoxArabic
+        Friend WithEvents TextBox1 As TextBox
     End Class
 End NameSpace
