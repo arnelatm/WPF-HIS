@@ -40,7 +40,7 @@ Public Class StoreCaptions
                     t = CType(cCtrl, DataGrid).CaptionText
                     cCtrl.Tag = t
                     Captions.Add(cCtrl.Text, cCtrl.Name)
-                ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.ToolStrip" Then
+                ElseIf TypeOf cCtrl Is ToolStrip Then
                     Dim subMenuName = ""
                     Dim toolStrip As ToolStrip = cCtrl
                     Dim c As ToolStrip
@@ -85,10 +85,16 @@ Public Class StoreCaptions
     Private Sub TranslateToolStrip(formIdNo As Short, c As ToolStrip, obj As Object)
         Dim t As String
         Try
+            obj.Tag = {obj.Text, obj.ToolTipText}
             If Not String.IsNullOrEmpty(obj.Text) Then
                 t = obj.Text
-                obj.Tag = t
-                Captions.Add(t, c.Name + "." + obj.Name)
+                Captions.Add(t, c.Name + "." + obj.Name + ".Text")
+                InsertWord(t)
+                InsertFormItem(formIdNo, t)
+            End If
+            if Not String.IsNullOrEmpty(obj.ToolTipText) then
+                t = obj.ToolTipText
+                Captions.Add(t, c.Name + "." + obj.Name + ".ToolTipText")
                 InsertWord(t)
                 InsertFormItem(formIdNo, t)
             End If

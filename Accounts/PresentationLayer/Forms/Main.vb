@@ -158,6 +158,7 @@ Namespace PresentationLayer.Forms
             ToolStripButtonLogin.Enabled = True
             ToolStripButtonLogin.PerformClick()
             ToolStripButtonExit.Enabled = True
+
         End Sub
 
         ''' <summary>
