@@ -133,27 +133,67 @@ Public Class CForm
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
             e.Handled = True
-            'Me.SelectNextControl(Me, True, True, true, true)
             SendKeys.Send("{TAB}")
-            'SendWait("{TAB}")
-            'ElseIf (e.KeyCode And Not Keys.Modifiers) = Keys.X AndAlso e.Modifiers = Keys.Control Then
-        ElseIf e.KeyCode = Keys.X And e.Modifiers = Keys.Control Then
+        Else
+            e.Handled = False
+        End If
+    End Sub
 
-            If Me.ActiveControl.[GetType]() = GetType(TextBox) Then
-                Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
-                textBox.Cut()
+
+    Private Sub CForm_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
+        If e.Modifiers = Keys.Control Then
+            Select Case e.KeyCode
+                Case Keys.V
+                    'paste already working (builtin) no need to Paste Text again.
+                    'PasteText(e)
+                    e.SuppressKeyPress = True
+                Case Keys.C
+                    CopyText()
+                    e.SuppressKeyPress = True
+                Case Keys.X
+                    CutText()
+                    e.SuppressKeyPress = True
+                Case Keys.A
+                    SelectAllText()
+                    e.SuppressKeyPress = True
+                Case Else
+                    e.SuppressKeyPress = False
+            End Select
+        Else
+            e.SuppressKeyPress = False
+        End If
+    End Sub
+
+    Protected Sub SelectAllText()
+        If Me.ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+            textBox.SelectAll()
+        End If
+    End Sub
+
+    Protected Sub CutText()
+        If Me.ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+            textBox.Cut()
+        End If
+    End Sub
+
+    Protected Sub CopyText()
+        Dim textBox = TryCast(Me.ActiveControl, TextBox)
+        If textBox IsNot Nothing Then
+            textBox.Copy()
+        Else
+            Dim comboBox = TryCast(Me.ActiveControl, ComboBox)
+            If comboBox IsNot Nothing Then
+                Clipboard.SetText(comboBox.Text)
             End If
-            e.SuppressKeyPress = True
+        End If
+    End Sub
 
-        ElseIf e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
-
-            e.Handled = False
-        ElseIf e.KeyCode = Keys.Z And e.Modifiers = Keys.Control Then
-
-            e.Handled = False
-        ElseIf e.KeyCode = Keys.A And e.Modifiers = Keys.Control Then
-
-            e.Handled = False
+    Protected Sub PasteText()
+        If ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+            textBox.Paste()
         End If
     End Sub
 

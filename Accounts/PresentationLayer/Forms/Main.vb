@@ -1087,7 +1087,7 @@ Namespace PresentationLayer.Forms
             OneTimeRun.CreateEnums()
         End Sub
 
-        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) Handles ToolStripButtonHelp.Click
+        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) 
             Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
             Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
         End Sub

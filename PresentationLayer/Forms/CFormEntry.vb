@@ -789,8 +789,8 @@ Public Class CFormEntry
 
         If OkToMove("Quit") Then
             CancelClose = False
-            Close()
-            if GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage then
+            'Close()
+            If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
                 TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
             End If
             GC.Collect()
@@ -799,6 +799,8 @@ Public Class CFormEntry
                 SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
             End If
             Dispose()
+        Else
+            CancelClose = True
         End If
     End Sub
 
@@ -1403,8 +1405,25 @@ Public Class CFormEntry
         tsbTotalRecords.Text = RecordCount
     End Sub
 
-    Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
 
+    Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
+        CutText()
     End Sub
 
+    Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
+        CopyText()
+    End Sub
+
+    Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
+        PasteText()
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Save()
+    End Sub
+
+
+    Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        CloseForm()
+    End Sub
 End Class
