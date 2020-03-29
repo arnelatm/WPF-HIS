@@ -37,15 +37,6 @@ Namespace PresentationLayer.Forms
         Me.ToolStripButtonLogout = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonExit = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonCut = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonCopy = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonPaste = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonAdd = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonEdit = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonDelete = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonHelp = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
@@ -137,8 +128,6 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.MainMenu.SuspendLayout
@@ -157,7 +146,7 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me.ToolStrip, "ToolStrip")
         Me.ToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonCut, Me.ToolStripButtonCopy, Me.ToolStripButtonPaste, Me.toolStripSeparator3, Me.ToolStripButtonAdd, Me.ToolStripButtonEdit, Me.ToolStripButtonDelete, Me.toolStripSeparator2, Me.ToolStripButtonHelp, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate})
         Me.ToolStrip.Name = "ToolStrip"
         '
         'ToolStripButtonLogin
@@ -182,58 +171,6 @@ Namespace PresentationLayer.Forms
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         resources.ApplyResources(Me.toolStripSeparator1, "toolStripSeparator1")
-        '
-        'ToolStripButtonCut
-        '
-        resources.ApplyResources(Me.ToolStripButtonCut, "ToolStripButtonCut")
-        Me.ToolStripButtonCut.Name = "ToolStripButtonCut"
-        Me.ToolStripButtonCut.Padding = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        '
-        'ToolStripButtonCopy
-        '
-        resources.ApplyResources(Me.ToolStripButtonCopy, "ToolStripButtonCopy")
-        Me.ToolStripButtonCopy.Name = "ToolStripButtonCopy"
-        Me.ToolStripButtonCopy.Padding = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        '
-        'ToolStripButtonPaste
-        '
-        resources.ApplyResources(Me.ToolStripButtonPaste, "ToolStripButtonPaste")
-        Me.ToolStripButtonPaste.Name = "ToolStripButtonPaste"
-        Me.ToolStripButtonPaste.Padding = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        '
-        'toolStripSeparator3
-        '
-        Me.toolStripSeparator3.Name = "toolStripSeparator3"
-        resources.ApplyResources(Me.toolStripSeparator3, "toolStripSeparator3")
-        '
-        'ToolStripButtonAdd
-        '
-        resources.ApplyResources(Me.ToolStripButtonAdd, "ToolStripButtonAdd")
-        Me.ToolStripButtonAdd.Name = "ToolStripButtonAdd"
-        Me.ToolStripButtonAdd.Padding = New System.Windows.Forms.Padding(7, 0, 7, 0)
-        '
-        'ToolStripButtonEdit
-        '
-        resources.ApplyResources(Me.ToolStripButtonEdit, "ToolStripButtonEdit")
-        Me.ToolStripButtonEdit.Name = "ToolStripButtonEdit"
-        Me.ToolStripButtonEdit.Padding = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        '
-        'ToolStripButtonDelete
-        '
-        resources.ApplyResources(Me.ToolStripButtonDelete, "ToolStripButtonDelete")
-        Me.ToolStripButtonDelete.Name = "ToolStripButtonDelete"
-        Me.ToolStripButtonDelete.Padding = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        '
-        'toolStripSeparator2
-        '
-        Me.toolStripSeparator2.Name = "toolStripSeparator2"
-        resources.ApplyResources(Me.toolStripSeparator2, "toolStripSeparator2")
-        '
-        'ToolStripButtonHelp
-        '
-        resources.ApplyResources(Me.ToolStripButtonHelp, "ToolStripButtonHelp")
-        Me.ToolStripButtonHelp.Name = "ToolStripButtonHelp"
-        Me.ToolStripButtonHelp.Padding = New System.Windows.Forms.Padding(5, 0, 5, 0)
         '
         'ToolStripButtonArabic
         '
@@ -711,32 +648,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'CTextBox1
-        '
-        Me.CTextBox1.BackColor = System.Drawing.Color.White
-        Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CTextBox1.ComputedValue = false
-        Me.CTextBox1.CustomFormat = Nothing
-        Me.CTextBox1.DataBoundControl = true
-        Me.CTextBox1.EditingMode = false
-        resources.ApplyResources(Me.CTextBox1, "CTextBox1")
-        Me.CTextBox1.ForeColor = System.Drawing.Color.Black
-        Me.CTextBox1.LinkedLabel = Nothing
-        Me.CTextBox1.Name = "CTextBox1"
-        Me.CTextBox1.OldValue = Nothing
-        '
-        'TextBox1
-        '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.Name = "TextBox1"
-        '
         'Main
         '
         Me.AllowDrop = true
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.CTextBox1)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MainMenu)
         Me.IsMdiContainer = true
@@ -762,15 +678,6 @@ End Sub
         Private WithEvents ToolStripButtonLogin As ToolStripButton
         Private WithEvents ToolStripButtonLogout As ToolStripButton
         Private toolStripSeparator1 As ToolStripSeparator
-        Private ToolStripButtonCut As ToolStripButton
-        Private ToolStripButtonCopy As ToolStripButton
-        Private ToolStripButtonPaste As ToolStripButton
-        Private toolStripSeparator3 As ToolStripSeparator
-        Private WithEvents ToolStripButtonAdd As ToolStripButton
-        Private WithEvents ToolStripButtonEdit As ToolStripButton
-        Private WithEvents ToolStripButtonDelete As ToolStripButton
-        Private toolStripSeparator2 As ToolStripSeparator
-        Private WithEvents ToolStripButtonHelp As ToolStripButton
         Private MainMenu As MenuStrip
         Private ToolStripMenuItemFile As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogin As ToolStripMenuItem
@@ -863,7 +770,5 @@ End Sub
         Friend WithEvents AccountReconciliationToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents CreateAllMessagesToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents TextBox1 As TextBox
     End Class
 End NameSpace

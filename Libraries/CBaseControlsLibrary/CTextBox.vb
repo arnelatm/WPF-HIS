@@ -456,40 +456,40 @@ Public Class CTextBox
         End If
     End Sub
 
-    Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            e.Handled = True
-            'Me.SelectNextControl(Me, True, True, true, true)
-            SendKeys.Send("{TAB}")
-            'SendWait("{TAB}")
-        ElseIf e.KeyCode = Keys.X And e.Modifiers = Keys.Control Then
-            Cut()
-            e.Handled = True
-        ElseIf e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
-            Paste()
-            e.Handled = True
-        ElseIf e.KeyCode = Keys.Z And e.Modifiers = Keys.Control Then
-            Undo()
-            e.Handled = True
-        ElseIf e.KeyCode = Keys.A And e.Modifiers = Keys.Control Then
-            SelectAll()
-            e.Handled = True
-        ElseIf ValueIsNumeric Then
-            If ((e.KeyCode >= Keys.D0 And e.KeyCode <= Keys.D9) Or
-                (e.KeyCode >= Keys.NumPad0 And e.KeyCode <= Keys.NumPad9) Or
-                (e.KeyCode >= Keys.F1 And e.KeyCode <= Keys.F24) Or
-                e.KeyCode = Keys.Decimal Or e.KeyCode = Keys.Subtract Or e.KeyCode = Keys.Delete Or
-                e.KeyCode = Keys.Insert Or e.KeyCode = Keys.Back Or e.KeyCode = Keys.OemPeriod Or e.KeyCode = Keys.OemMinus Or
-                e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right) Then
-            Else
-                e.SuppressKeyPress = True
-                e.Handled = True
-                Beep()
-            End If
+    'Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        e.SuppressKeyPress = True
+    '        e.Handled = True
+    '        'Me.SelectNextControl(Me, True, True, true, true)
+    '        SendKeys.Send("{TAB}")
+    '        'SendWait("{TAB}")
+    '    ElseIf e.KeyCode = Keys.X And e.Modifiers = Keys.Control Then
+    '        Cut()
+    '        e.Handled = True
+    '    ElseIf e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+    '        Paste()
+    '        e.Handled = True
+    '    ElseIf e.KeyCode = Keys.Z And e.Modifiers = Keys.Control Then
+    '        Undo()
+    '        e.Handled = True
+    '    ElseIf e.KeyCode = Keys.A And e.Modifiers = Keys.Control Then
+    '        SelectAll()
+    '        e.Handled = True
+    '    ElseIf ValueIsNumeric Then
+    '        If ((e.KeyCode >= Keys.D0 And e.KeyCode <= Keys.D9) Or
+    '            (e.KeyCode >= Keys.NumPad0 And e.KeyCode <= Keys.NumPad9) Or
+    '            (e.KeyCode >= Keys.F1 And e.KeyCode <= Keys.F24) Or
+    '            e.KeyCode = Keys.Decimal Or e.KeyCode = Keys.Subtract Or e.KeyCode = Keys.Delete Or
+    '            e.KeyCode = Keys.Insert Or e.KeyCode = Keys.Back Or e.KeyCode = Keys.OemPeriod Or e.KeyCode = Keys.OemMinus Or
+    '            e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right) Then
+    '        Else
+    '            e.SuppressKeyPress = True
+    '            e.Handled = True
+    '            Beep()
+    '        End If
 
-        End If
-    End Sub
+    '    End If
+    'End Sub
 
     Private Sub CTextBox_LostFocus(ByVal sender As Object,
         ByVal e As EventArgs) Handles MyBase.LostFocus
