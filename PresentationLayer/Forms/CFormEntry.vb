@@ -54,7 +54,6 @@ Public Class CFormEntry
     '    Return MyBase.ProcessCmdKey(msg, keyData)
     'End Function
 
-
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Public Event AddingRecordChanged(adding As Boolean)
@@ -104,6 +103,7 @@ Public Class CFormEntry
     Public Event TextDisplayChanged()
 
     Public Event UndoEdits(addingRec As Boolean)
+
     '    Private _waitProcessFinished As Boolean = False
     Public Property AddMode As Boolean
         Set
@@ -342,6 +342,7 @@ Public Class CFormEntry
             End If
         End If
     End Sub
+
     Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         If GotoTargetRecordWorker.CancellationPending Then
             e.Cancel = True
@@ -599,11 +600,15 @@ Public Class CFormEntry
             retValue = True
         Else
             If ChangesMade() Then
-                If SaveOrAbandonChanges(buttonName) Then
+                Dim result = SaveOrAbandonChanges()
+                If result = DialogResult.Yes Then
                     Save()
                     retValue = True
-                Else
+                ElseIf result = DialogResult.No Then
                     Undo()
+                    retValue = True
+                Else
+                    retValue = False
                 End If
             Else
                 retValue = True
@@ -622,10 +627,11 @@ Public Class CFormEntry
         CreateDataSources()
     End Sub
 
-    Protected Function SaveOrAbandonChanges(buttonName As String) As DialogResult
+    Protected Function SaveOrAbandonChanges() As DialogResult
         Dim result As DialogResult
         result = Messaging.Show(True, "AskIfUserWantsToSaveOrContinueEdits",
                                 "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
+                                "Please Confirm.",
                                 MessageBoxButtons.YesNoCancel,
                                 MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3)
@@ -796,22 +802,32 @@ Public Class CFormEntry
 
     Protected Sub Undo()
         If ChangesMade() Then
-            If SaveOrAbandonChanges() Then
+            Dim result As DialogResult
+            result = SaveOrAbandonChanges()
+            If result = DialogResult.Yes Then
                 Save()
-            End If
-        Else
-            UndoMode = True
-            If AddMode Then
                 AddMode = False
-                TargetIdNo = LastIdNo
-                GetRecordInfoForIdNo()
-            Else
                 EditMode = False
                 GetRecordInfoForIdNo()
+            ElseIf result = DialogResult.No Then
+                ' undo changes retrieve the last record
+                If AddMode Then
+                    AddMode = False
+                    TargetIdNo = LastIdNo
+                    GetRecordInfoForIdNo()
+                Else
+                    EditMode = False
+                    GetRecordInfoForIdNo()
+                End If
+            Else
+                ' DialogResult.Cancel
+                ' don't do anything just continue edits
             End If
+        Else
+            AddMode = False
+            EditMode = False
+            GetRecordInfoForIdNo()
         End If
-        UndoMode = False
-        CancelClose = True
     End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
@@ -1385,7 +1401,6 @@ Public Class CFormEntry
         tsbTotalRecords.Text = RecordCount
     End Sub
 
-
     Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
         CutText()
     End Sub
@@ -1402,8 +1417,8 @@ Public Class CFormEntry
         Save()
     End Sub
 
-
     Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         CloseForm()
     End Sub
+
 End Class

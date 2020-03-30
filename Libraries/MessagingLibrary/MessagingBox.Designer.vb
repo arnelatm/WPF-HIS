@@ -53,11 +53,11 @@ Partial Class MessagingBox
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.DisplayOnly = true
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(171, 60)
+        Me.btnCancel.Location = New System.Drawing.Point(306, 168)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
-        Me.btnCancel.Size = New System.Drawing.Size(80, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(80, 35)
         Me.btnCancel.TabIndex = 0
         Me.btnCancel.Text = "Cancel"
         '
@@ -68,11 +68,11 @@ Partial Class MessagingBox
         Me.btnYes.DesignerSelected = false
         Me.btnYes.DisplayOnly = true
         Me.btnYes.ImageIndex = 0
-        Me.btnYes.Location = New System.Drawing.Point(258, 60)
+        Me.btnYes.Location = New System.Drawing.Point(393, 168)
         Me.btnYes.Name = "btnYes"
         Me.btnYes.OriginalImageName = Nothing
         Me.btnYes.SecurityKey = ""
-        Me.btnYes.Size = New System.Drawing.Size(75, 23)
+        Me.btnYes.Size = New System.Drawing.Size(75, 35)
         Me.btnYes.TabIndex = 1
         Me.btnYes.Text = "Yes"
         '
@@ -83,11 +83,11 @@ Partial Class MessagingBox
         Me.btnNo.DesignerSelected = false
         Me.btnNo.DisplayOnly = true
         Me.btnNo.ImageIndex = 0
-        Me.btnNo.Location = New System.Drawing.Point(340, 60)
+        Me.btnNo.Location = New System.Drawing.Point(475, 168)
         Me.btnNo.Name = "btnNo"
         Me.btnNo.OriginalImageName = Nothing
         Me.btnNo.SecurityKey = ""
-        Me.btnNo.Size = New System.Drawing.Size(76, 23)
+        Me.btnNo.Size = New System.Drawing.Size(76, 35)
         Me.btnNo.TabIndex = 2
         Me.btnNo.Text = "No"
         '
@@ -140,21 +140,22 @@ Partial Class MessagingBox
         Me.btnOk.DesignerSelected = false
         Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(89, 60)
+        Me.btnOk.Location = New System.Drawing.Point(224, 168)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
-        Me.btnOk.Size = New System.Drawing.Size(76, 23)
+        Me.btnOk.Size = New System.Drawing.Size(76, 35)
         Me.btnOk.TabIndex = 15
         Me.btnOk.Text = "Ok"
         '
         'txtMessage
         '
         Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMessage.Font = New System.Drawing.Font("Tahoma", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtMessage.Location = New System.Drawing.Point(53, 9)
         Me.txtMessage.Multiline = true
         Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.Size = New System.Drawing.Size(419, 45)
+        Me.txtMessage.Size = New System.Drawing.Size(676, 142)
         Me.txtMessage.TabIndex = 16
         '
         'TranslatorDac
@@ -177,7 +178,7 @@ Partial Class MessagingBox
         '
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.Info
-        Me.ClientSize = New System.Drawing.Size(484, 86)
+        Me.ClientSize = New System.Drawing.Size(751, 215)
         Me.Controls.Add(Me.txtMessage)
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.pctWarning)
