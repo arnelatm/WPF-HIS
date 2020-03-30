@@ -187,15 +187,6 @@ Public Class CFormEntry
     <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
     Protected Property TargetIdNo As Integer
 
-    'Public Property KeyField() As String
-    '    Get
-    '        Return _keyfield
-    '    End Get
-    '    Set(ByVal Value As String)
-    '        _keyfield = Value
-    '    End Set
-    'End Property
-
     Private Property RecordCount As Integer
 
     Public Function AutomaticValidationsOk() As Boolean
@@ -367,65 +358,73 @@ Public Class CFormEntry
     End Sub
 
     Public Sub Save()
-        Dim retValue As Integer = -1
-        Dim continueSave As Boolean = True
-        If Not AddMode Then
-            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
-                continueSave = False
-            Else
-                If Not ChangesMade() Then
-                    _MBNoChangesMadeNothingToSave.Show(Me)
-                    continueSave = False
-                End If
-            End If
-        End If
-        If continueSave Then
+        If OkToSaveRecord() Then
             RaiseEvent BeforeSave()
-            If AutomaticValidationsOk() Then
-                If DataIsValid() Then
-                    retValue = SaveDataEntry()
+            Dim retValue As Short
+            Try
+                Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
+                    retValue = PresenterObj.Save(AddMode)
                     If retValue > 0 Then
                         If AddMode Then
-                            ' retValue will be the IDNo of the newly saved record
+                            RaiseEvent ParentRecordAddedSuccessfully(retValue)
                             TargetIdNo = retValue
+                            RaiseEvent SuccessfulAdd(retValue)
                         Else
-                            EditMode = False
+                            RaiseEvent ParentRecordUpdatedSuccessfully(retValue)
+                            RaiseEvent SuccessfulUpdate(retValue)
                         End If
-                        ' redisplay the record, need to do this to get an updated record
-                        ' because if ever something was changed in the record that affects the TreeView
-                        ' redisplay the record, need to do this to get an updated record
-                        ' and to display the added record in the TreeView if one is present.
-                        GetRecordInfoForIdNo()
-                        If AddMode Then
-                            RaiseEvent AfterAdd()
-                            AddMode = False ' reset AddMode
-                        End If
-                        RaiseEvent AfterSave()
-                    Else
-                        '' Something went wrong during the saving since no record was/were updated
-                        '' retValue = -1 , for unsuccessful save
-                        _MBSaveRecordFailed.Show(Me)
                     End If
+                    scope.Complete()
+                End Using
+            Catch ex As TransactionAbortedException
+                MessageBox.Show(ex.Message, StringWords.Transaction_Aborted)
+            Catch oEx As Exception
+                If oEx.Message.Contains("Timeout Expired") Then
+                    retValue = -1
+                Else
+                    MsgBox("Error:   " + oEx.Message)
+                    retValue = -1
                 End If
+                Debugger.Break()
+            End Try
+            If retValue > 0 Then
+                _MBRecordSuccessfullySaved.Show(Me)
             End If
         End If
     End Sub
 
-    Public Overridable Function SaveDataEntry()
-        Dim retValue As Int16
-        'RaiseEvent BeforeSave()
-        If CancelSave Then
-            CancelSave = False
-            retValue = -1
-        Else
-            retValue = InitiateSave(retValue)
+    Protected Function OkToSaveRecord() As Boolean
+        Dim retValue As Boolean = False
+        If Not AddMode Then
+            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
+                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+                Return False
+            Else
+                If Not ChangesMade() Then
+                    _MBNoChangesMadeNothingToSave.Show(Me)
+                    Return False
+                End If
+            End If
         End If
-        If retValue > 0 Then
-            _MBRecordSuccessfullySaved.Show(Me)
+        If DataIsValid() Then
+            retValue = True
         End If
         Return retValue
     End Function
+
+    'Public Overridable Function SaveDataEntry()
+    '    Dim retValue As Int16
+    '    If CancelSave Then
+    '        CancelSave = False
+    '        retValue = -1
+    '    Else
+    '        retValue = InitiateSave(retValue)
+    '    End If
+    '    If retValue > 0 Then
+    '        _MBRecordSuccessfullySaved.Show(Me)
+    '    End If
+    '    Return retValue
+    'End Function
 
     Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
@@ -483,20 +482,23 @@ Public Class CFormEntry
     Protected Overridable Function DataIsValid() As Boolean
         Dim retValue As Boolean = False
         RaiseEvent BeforeValidate()
-        If PresenterObj.DataIsValid() Then
-            retValue = True
-        Else
-            MyErrorProvider.ClearAllErrorMessages()
-            Dim lErrors = PresenterObj.GetBizObjectErrors()
-            For Each _err In lErrors
-                For Each ctrl In MyErrorProvider.Controls
-                    If ctrl.errormessage = _err Then
-                        MyErrorProvider.SetError(ctrl.ControlObj, _err)
-                    End If
+        ' check first if automatic rules are valid
+        If AutomaticValidationsOk() Then
+            If PresenterObj.DataIsValid() Then
+                retValue = True
+            Else
+                MyErrorProvider.ClearAllErrorMessages()
+                Dim lErrors = PresenterObj.GetBizObjectErrors()
+                For Each _err In lErrors
+                    For Each ctrl In MyErrorProvider.Controls
+                        If ctrl.errormessage = _err Then
+                            MyErrorProvider.SetError(ctrl.ControlObj, _err)
+                        End If
+                    Next
                 Next
-            Next
-            Beep()
-            PresenterObj.ShowErrors("Record not saved!")
+                Beep()
+                PresenterObj.ShowErrors("Record not saved!")
+            End If
         End If
         Return retValue
     End Function
@@ -591,26 +593,21 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Protected Overridable Function OkToMove(ByVal Optional buttonName As String = "")
+    Protected Overridable Function OkToMove(ByVal Optional buttonName As String = "") As Boolean
         Dim retValue As Boolean
         If Not (EditMode OrElse AddMode) Then
             retValue = True
         Else
-            Try
-                If AddMode Then
+            If ChangesMade() Then
+                If SaveOrAbandonChanges(buttonName) Then
+                    Save()
                     retValue = True
                 Else
-                    If ChangesMade() Then
-                        retValue = SaveOrAbandonChanges(buttonName)
-                    Else
-                        retValue = True
-                    End If
+                    Undo()
                 End If
-            Catch ex As Exception
-                '' need to do this to catch error in design mode (No idea why error is appearing)
+            Else
                 retValue = True
-            End Try
-
+            End If
         End If
         Return retValue
     End Function
@@ -625,40 +622,14 @@ Public Class CFormEntry
         CreateDataSources()
     End Sub
 
-    Protected Function SaveOrAbandonChanges(buttonName As String)
-        Dim retValue As Boolean
+    Protected Function SaveOrAbandonChanges(buttonName As String) As DialogResult
         Dim result As DialogResult
-        If buttonName = "Undo" Then
-            result = _MBUndoEdits.Show(Me)
-            If result = DialogResult.Yes Then
-                'TargetIdNo = CurrentIdNo
-                RaiseEvent UndoEdits(False)
-                DataChangesMade = False
-                EditMode = False
-            End If
-        Else
-            result = _MBSaveChangesBeforeMoving.Show(Me)
-        End If
-        If result = DialogResult.Yes And buttonName = "Undo" Then
-            retValue = True
-        ElseIf result = DialogResult.No And buttonName = "Undo" Then
-            retValue = False
-        ElseIf result = DialogResult.Yes Then
-            If MyErrorProvider.CheckAndShowSummaryErrorMessage() = True Then
-                btnSave.PerformClick()
-                retValue = True
-            Else
-                retValue = False
-            End If
-        ElseIf result = DialogResult.No Then
-            retValue = True
-            RaiseEvent CancelChanges()
-        ElseIf result = DialogResult.Cancel Then
-            retValue = False
-        Else
-            retValue = False
-        End If
-        Return retValue
+        result = Messaging.Show(True, "AskIfUserWantsToSaveOrContinueEdits",
+                                "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
+                                MessageBoxButtons.YesNoCancel,
+                                MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button3)
+        Return result
     End Function
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
@@ -733,6 +704,8 @@ Public Class CFormEntry
         End If
         TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         TranslateForm()
+        UpdateRecordCounter()
+        Undo()
         btnArabic.Visible = False
         btnOriginal.Visible = True
         btnUndo.PerformClick()
@@ -758,6 +731,8 @@ Public Class CFormEntry
         End If
         TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
         TranslateForm()
+        UpdateRecordCounter()
+        Undo()
         btnArabic.Visible = True
         btnOriginal.Visible = False
     End Sub
@@ -815,19 +790,24 @@ Public Class CFormEntry
         frm.Show()
     End Sub
 
-    Private Sub btnUndo_Click_1(sender As Object, e As EventArgs) Handles btnUndo.Click
-        If OkToMove("Undo") Then
-            'RaiseEvent UndoEdits(True)
+    Private Sub btnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+        Undo()
+    End Sub
+
+    Protected Sub Undo()
+        If ChangesMade() Then
+            If SaveOrAbandonChanges() Then
+                Save()
+            End If
+        Else
             UndoMode = True
             If AddMode Then
                 AddMode = False
                 TargetIdNo = LastIdNo
                 GetRecordInfoForIdNo()
-                'DisplayView()
             Else
                 EditMode = False
                 GetRecordInfoForIdNo()
-                'DisplayView()
             End If
         End If
         UndoMode = False
@@ -1349,7 +1329,7 @@ Public Class CFormEntry
         GoFirstRecord()
     End Sub
 
-    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) 
+    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs)
         If _debugSwitch Then
             Debugger.Break()
         End If

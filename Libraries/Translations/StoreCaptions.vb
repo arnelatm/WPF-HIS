@@ -47,20 +47,6 @@ Public Class StoreCaptions
                     c = cCtrl
                     For Each obj As Object In c.Items
                         TranslateToolStrip(FormIdNo, c, obj)
-                        'If TypeOf(obj) Is ToolStripButton Then
-                        'Else
-                        '    Try
-                        '        If Not String.IsNullOrEmpty(obj.Text) Then
-                        '            t = obj.Text
-                        '            obj.Tag = t
-                        '            Captions.Add(t, c.Name + "." + obj.Name)
-                        '            InsertWord(t)
-                        '            InsertFormItem(FormIdNo, t)
-                        '        End If
-                        '    Catch ex As Exception
-
-                        '    End Try
-                        'End If
                     Next
                 ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
                     Dim subMenuName = cCtrl.Name
@@ -91,12 +77,17 @@ Public Class StoreCaptions
                 Captions.Add(t, c.Name + "." + obj.Name + ".Text")
                 InsertWord(t)
                 InsertFormItem(formIdNo, t)
+            Else
+                ' add an empty place holder
+                Captions.Add("", c.Name + "." + obj.Name + ".Text")
             End If
-            if Not String.IsNullOrEmpty(obj.ToolTipText) then
+            If Not String.IsNullOrEmpty(obj.ToolTipText) Then
                 t = obj.ToolTipText
                 Captions.Add(t, c.Name + "." + obj.Name + ".ToolTipText")
                 InsertWord(t)
                 InsertFormItem(formIdNo, t)
+            Else
+                Captions.Add("", c.Name + "." + obj.Name + ".ToolTipText")
             End If
         Catch ex As Exception
 

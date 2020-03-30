@@ -133,13 +133,7 @@
     <None Include="Resources\btnnext.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\btnnext_ar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\btnprev.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\btnprev_ar.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btnprevious_ar.png" />
@@ -211,22 +205,19 @@
     <None Include="Resources\YellowButtonBackGround1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\btnprev_ar-sa.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\btnprev_ar-sa.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btnnext_ar-sa.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arabic.png.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\english.PNG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Translate.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arabic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
