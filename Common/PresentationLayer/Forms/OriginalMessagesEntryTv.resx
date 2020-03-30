@@ -360,6 +360,9 @@
   <data name="txtTranslatedMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="txtTranslatedMessage.MaxLength" type="System.Int32, mscorlib">
+    <value>1024</value>
+  </data>
   <data name="txtTranslatedMessage.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -491,6 +494,9 @@
   </data>
   <data name="txtTranslatedCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTranslatedCaption.MaxLength" type="System.Int32, mscorlib">
+    <value>256</value>
   </data>
   <data name="txtTranslatedCaption.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>

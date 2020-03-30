@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,27 +8,30 @@ Namespace DataLayer.AdoNet
 
     Public Class PhoneTypeDao
         Inherits CommonDao
-        Implements IPhoneTypeDao
+        Implements IDaoAll(Of PhoneType)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As PhoneType Implements IPhoneTypeDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "PhoneTypeName") As List(Of PhoneType) Implements IPhoneTypeDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PhoneType) Implements IDaoAll(Of PhoneType).GetAll
+            if sortExpression Is Nothing Then
+                sortExpression = "PhoneTypeName"
+            End If
             Dim sql As String =
                     " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef phoneType As PhoneType) As Integer Implements IPhoneTypeDao.UpdateRecord
+        Public Function UpdateRecord(ByRef phoneType As PhoneType) As Integer Implements IDaoAll(Of PhoneType).UpdateRecord
             Dim sql As String =
                     " UPDATE [PhoneType]" &
                     "    SET PhoneTypeCode = @PhoneTypeCode," &
@@ -36,15 +40,15 @@ Namespace DataLayer.AdoNet
                     "        Notes = @Notes" &
                     "  WHERE IDNo = @IDNo"
 
-            Return Db.Update(sql, Take(phoneType))
+            Return _db.Update(sql, Take(phoneType))
         End Function
 
-        Public Function AddRecord(ByRef phoneType As PhoneType) As Integer Implements IPhoneTypeDao.AddRecord
+        Public Function AddRecord(ByRef phoneType As PhoneType) As Integer Implements IDaoAll(Of PhoneType).AddRecord
             Dim sql As String =
                     " INSERT INTO [PhoneType] " &
                     " (PhoneTypeCode,PhoneTypeName,PhoneTypeNameAra,Notes) " &
                     " VALUES (@PhoneTypeCode,@PhoneTypeName,@PhoneTypeNameAra,@Notes) "
-            Return Db.Insert(sql, Take(phoneType))
+            Return _db.Insert(sql, Take(phoneType))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PhoneType) =

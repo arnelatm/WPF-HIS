@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,28 +8,31 @@ Namespace DataLayer.AdoNet
 
     Public Class CostCenterDao
         Inherits CommonDao
-        Implements ICostCenterDao
+        Implements IDaoAll(Of CostCenter)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CostCenter Implements ICostCenterDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As CostCenter Implements IDaoAll(Of CostCenter).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, CostCenterCode, CostCenterName, CostCenterNameAra, ProfitCenterIdNo, LevelNumber, Notes, SortKey" &
                     "   FROM [CostCenter_View]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "SortKey") As List(Of CostCenter) _
-            Implements ICostCenterDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of CostCenter) _
+            Implements IDaoAll(Of CostCenter).GetAll
+            If sortExpression = Nothing Then
+                sortExpression = "SortKey ASC"
+            End If
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, CostCenterCode, CostCenterName, CostCenterNameAra, ProfitCenterIdNo, LevelNumber, Notes, SortKey" &
                     "   FROM [CostCenter_View] order by sortKey"
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef costCenter As CostCenter) As Integer Implements ICostCenterDao.UpdateRecord
+        Public Function UpdateRecord(ByRef costCenter As CostCenter) As Integer Implements IDaoAll(Of CostCenter).UpdateRecord
             Dim sql As String =
                     " UPDATE [CostCenter]" &
                     "    SET ParentIdNo = @ParentIdNo," &
@@ -39,15 +43,15 @@ Namespace DataLayer.AdoNet
                     "        Notes = @Notes" &
                     "  WHERE IDNo = @IDNo"
 
-            Return Db.Update(sql, Take(costCenter))
+            Return _db.Update(sql, Take(costCenter))
         End Function
 
-        Public Function AddRecord(ByRef costCenter As CostCenter) As Integer Implements ICostCenterDao.AddRecord
+        Public Function AddRecord(ByRef costCenter As CostCenter) As Integer Implements IDaoAll(Of CostCenter).AddRecord
             Dim sql As String =
                     " INSERT INTO [CostCenter] " &
                     " (ParentIdNo,CostCenterCode,CostCenterName,CostCenterNameAra,ProfitCenterIdNo,Notes) " &
                     " VALUES (@ParentIdNo,@CostCenterCode,@CostCenterName,@CostCenterNameAra,@ProfitCenterIdNo,@Notes)"
-            Return Db.Insert(sql, Take(costCenter))
+            Return _db.Insert(sql, Take(costCenter))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CostCenter) =

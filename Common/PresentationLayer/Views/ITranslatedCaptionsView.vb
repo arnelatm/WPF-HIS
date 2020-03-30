@@ -2,18 +2,13 @@
 
 Namespace PresentationLayer.Views
 
-    Public Interface ITranslatedMessagesView1
+    Public Interface ITranslatedCaptionsView
         Inherits IView
         Property IdNo As Integer
-        Property OriginalIdNo As Integer
-        Property LanguageIdNo As Integer
-        Property TranslatedMessage As String
-        Property TranslatedCaption As String
-        Property MessageKey As String
-        Property Message As String
         Property Caption As String
-        Property IdNoOrig
-        Property Notes As String
+        Property LanguageIdNo As Integer
+        Property TranslatedCaption As String
+        Property OriginalCaptionIdNo
         Property CultureInfoCode As String
         Property LanguageCode2 As String
     End Interface

@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,27 +8,30 @@ Namespace DataLayer.AdoNet
 
     Public Class OriginalMessagesDao
         Inherits CommonDao
-        Implements IOriginalMessagesDao
+        Implements IDaoAll(Of OriginalMessages)
 
-        Private ReadOnly Db As New Db
+        Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IOriginalMessagesDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IDaoAll(Of OriginalMessages).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, MessageKey, Message, Caption, Notes" &
                     "   FROM [OriginalMessages]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "MessageKey") As List(Of OriginalMessages) Implements IOriginalMessagesDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalMessages) Implements IDaoAll(Of OriginalMessages).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "MessageKey"
+            End If
             Dim sql As String =
                     " SELECT IDNo, MessageKey, Message, Caption, Notes" &
                     "   FROM [OriginalMessages] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IOriginalMessagesDao.UpdateRecord
+        Public Function UpdateRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IDaoAll(Of OriginalMessages).UpdateRecord
             Dim sql As String =
                     " UPDATE [OriginalMessages]" &
                     "    SET MessageKey = @MessageKey," &
@@ -36,15 +40,15 @@ Namespace DataLayer.AdoNet
                     "        Notes = @Notes" &
                     "  WHERE IDNo = @IDNo"
 
-            Return Db.Update(sql, Take(originalMessages))
+            Return _db.Update(sql, Take(originalMessages))
         End Function
 
-        Public Function AddRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IOriginalMessagesDao.AddRecord
+        Public Function AddRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IDaoAll(Of OriginalMessages).AddRecord
             Dim sql As String =
                     " INSERT INTO [OriginalMessages] " &
                     " (MessageKey,Message,Caption,Notes) " &
                     " VALUES (@MessageKey,@Message,@Caption,@Notes) "
-            Return Db.Insert(sql, Take(originalMessages))
+            Return _db.Insert(sql, Take(originalMessages))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, OriginalMessages) =

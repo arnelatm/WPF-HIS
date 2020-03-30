@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,27 +8,20 @@ Namespace DataLayer.AdoNet
 
     Public Class TranslatedMessagesDao
         Inherits BaseDao
-        Implements ITranslatedMessagesDao
+        Implements IDao(Of TranslatedMessages)
 
-        Private ReadOnly Db As New Db ' ("TRANSLATIONS")
+        Private ReadOnly _db As New Db ' ("TRANSLATIONS")
 
-        Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements ITranslatedMessagesDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements IDao(Of TranslatedMessages).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TranslatedMessage, TranslatedCaption, MessageIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &
                     " WHERE MessageIdNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of TranslatedMessages) Implements ITranslatedMessagesDao.GetAll
-            Dim sql As String =
-                    " SELECT IDNo, TranslatedMessage" &
-                    "   FROM [TranslatedMessages] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements ITranslatedMessagesDao.UpdateRecord
+        Public Function UpdateRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements IDao(Of TranslatedMessages).UpdateRecord
             Dim sql As String =
                     " UPDATE [TranslatedMessages]" &
                     "    SET TranslatedMessage = @TranslatedMessage," &
@@ -35,15 +29,15 @@ Namespace DataLayer.AdoNet
                     "        LanguageIdNo = @LanguageIdNo," &
                     "        MessageIdNo = @MessageIdNo" &
                     "  WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(translatedMessages))
+            Return _db.Update(sql, Take(translatedMessages))
         End Function
 
-        Public Function AddRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements ITranslatedMessagesDao.AddRecord
+        Public Function AddRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements IDao(Of TranslatedMessages).AddRecord
             Dim sql As String =
                     " INSERT INTO [TranslatedMessages] " &
                     " (TranslatedMessage,TranslatedCaption,MessageIdNo,LanguageIdNo) " &
                     " VALUES (@TranslatedMessage,@TranslatedCaption,@MessageIdNo,@LanguageIdNo) "
-            Return Db.Insert(sql, Take(translatedMessages))
+            Return _db.Insert(sql, Take(translatedMessages))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, TranslatedMessages) =
