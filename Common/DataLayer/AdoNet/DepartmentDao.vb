@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class DepartmentDao
         Inherits CommonDao
-        Implements IDepartmentDao
+        Implements IDaoAll(Of Department)
 
         Private db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Department Implements IDepartmentDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Department Implements IDaoAll(Of Department).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &
@@ -21,21 +22,24 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "DepartmentName ASC") As List(Of Department) Implements IDepartmentDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Department) Implements IDaoAll(Of Department).GetAll
+            If sortExpression = Nothing Then
+                sortExpression = "SortKey ASC"
+            End If
             Dim sql As String =
                 " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
-                "   FROM [Department_View] order by sortKey"
+                "   FROM [Department_View] order by '" + SortExpression + "'"
             Return db.Read(sql, _make).ToList()
         End Function
 
-        'Public Function GetAll(Optional ByVal sortExpression As String = "DepartmentName ASC") As List(Of Department) Implements IDepartmentDao.GetAll
+        'Public Function GetAll(Optional ByVal sortExpression As String = "DepartmentName ASC") As List(Of Department) Implements IDaoAll(Of Department).GetAll
         '    Dim sql As String =
         '        " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo" &
         '        "   FROM [Department_View] " & "order by sortKey"
         '    Return _db.Read(sql, _make).ToList()
         'End Function
 
-        Public Function AddRecord(ByRef department As Department) As Integer Implements IDepartmentDao.AddRecord
+        Public Function AddRecord(ByRef department As Department) As Integer Implements IDaoAll(Of Department).AddRecord
             Dim sql As String =
                     " INSERT INTO [Department] " &
                     " (DepartmentCode,DepartmentName,DepartmentNameAra,ParentIdNo,Notes,ProfitCenterIdNo,CostCenterIdNo) " &
@@ -43,7 +47,7 @@ Namespace DataLayer.AdoNet
             Return db.Insert(sql, Take(department))
         End Function
 
-        Public Function UpdateRecord(ByRef department As Department) As Integer Implements IDepartmentDao.UpdateRecord
+        Public Function UpdateRecord(ByRef department As Department) As Integer Implements IDaoAll(Of Department).UpdateRecord
             Dim sql As String =
                 " UPDATE [Department]" &
                 "    SET DepartmentCode = @DepartmentCode," &

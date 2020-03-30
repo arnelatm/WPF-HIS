@@ -605,7 +605,14 @@ Public Class CFormEntry
                     Save()
                     retValue = True
                 ElseIf result = DialogResult.No Then
-                    Undo()
+                    If AddMode Then
+                        AddMode = False
+                        TargetIdNo = LastIdNo
+                        GetRecordInfoForIdNo()
+                    Else
+                        EditMode = False
+                        GetRecordInfoForIdNo()
+                    End If
                     retValue = True
                 Else
                     retValue = False

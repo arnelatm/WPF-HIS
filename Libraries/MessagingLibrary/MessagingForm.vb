@@ -5,8 +5,9 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Linq
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class FlexibleMessageBox
+Public Class MessagingForm
 
     '<summary>
     '    Defines the maximum width for all FlexibleMessageBox instances in percent of the working area.
@@ -162,152 +163,161 @@ Public Class FlexibleMessageBox
 
         Private components As IContainer = Nothing
 
-        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso (components IsNot Nothing) Then
+        Protected Overrides Sub Dispose(ByVal lDisposing As Boolean)
+            If lDisposing AndAlso (components IsNot Nothing) Then
                 components.Dispose()
             End If
 
-            MyBase.Dispose(disposing)
+            MyBase.Dispose(lDisposing)
         End Sub
 
         Private Sub InitializeComponent()
             components = New Container()
-            button1 = New Button()
-            Me.richTextBoxMessage = New RichTextBox()
-            Me.FlexibleMessageBoxFormBindingSource = New BindingSource(Me.components)
-            Me.panel1 = New Panel()
-            Me.pictureBoxForIcon = New PictureBox()
-            Me.button2 = New Button()
-            Me.button3 = New Button()
-            CType((Me.FlexibleMessageBoxFormBindingSource), ISupportInitialize).BeginInit()
-            Me.panel1.SuspendLayout()
-            CType((Me.pictureBoxForIcon), ISupportInitialize).BeginInit()
-            Me.SuspendLayout()
-            Me.button1.Anchor = (CType(((AnchorStyles.Bottom Or AnchorStyles.Right)), AnchorStyles))
-            Me.button1.AutoSize = True
-            Me.button1.DialogResult = DialogResult.OK
-            Me.button1.Location = New Point(11, 67)
-            Me.button1.MinimumSize = New Size(0, 24)
-            Me.button1.Name = "button1"
-            Me.button1.Size = New Size(75, 24)
-            Me.button1.TabIndex = 2
-            Me.button1.Text = "OK"
-            Me.button1.UseVisualStyleBackColor = True
-            Me.button1.Visible = False
-            Me.richTextBoxMessage.Anchor = (CType(((((AnchorStyles.Top Or AnchorStyles.Bottom) Or AnchorStyles.Left) Or AnchorStyles.Right)), AnchorStyles))
-            Me.richTextBoxMessage.BackColor = Color.White
-            Me.richTextBoxMessage.BorderStyle = BorderStyle.None
-            Me.richTextBoxMessage.DataBindings.Add(New Binding("Text", Me.FlexibleMessageBoxFormBindingSource, "MessageText", True, DataSourceUpdateMode.OnPropertyChanged))
-            Me.richTextBoxMessage.Font = New Font("Microsoft Sans Serif", 9.0F, FontStyle.Regular, GraphicsUnit.Point, (CByte((0))))
-            Me.richTextBoxMessage.Location = New Point(50, 26)
-            Me.richTextBoxMessage.Margin = New Padding(0)
-            Me.richTextBoxMessage.Name = "richTextBoxMessage"
-            Me.richTextBoxMessage.[ReadOnly] = True
-            Me.richTextBoxMessage.ScrollBars = RichTextBoxScrollBars.Vertical
-            Me.richTextBoxMessage.Size = New Size(200, 20)
-            Me.richTextBoxMessage.TabIndex = 0
-            Me.richTextBoxMessage.TabStop = False
-            Me.richTextBoxMessage.Text = "<Message>"
-            AddHandler Me.richTextBoxMessage.LinkClicked, AddressOf Me.richTextBoxMessage_LinkClicked
-            Me.panel1.Anchor = (CType(((((AnchorStyles.Top Or AnchorStyles.Bottom) Or AnchorStyles.Left) Or AnchorStyles.Right)), AnchorStyles))
-            Me.panel1.BackColor = Color.White
-            Me.panel1.Controls.Add(Me.pictureBoxForIcon)
-            Me.panel1.Controls.Add(Me.richTextBoxMessage)
-            Me.panel1.Location = New Point(-3, -4)
-            Me.panel1.Name = "panel1"
-            Me.panel1.Size = New Size(268, 59)
-            Me.panel1.TabIndex = 1
-            Me.pictureBoxForIcon.BackColor = Color.Transparent
-            Me.pictureBoxForIcon.Location = New Point(15, 19)
-            Me.pictureBoxForIcon.Name = "pictureBoxForIcon"
-            Me.pictureBoxForIcon.Size = New Size(32, 32)
-            Me.pictureBoxForIcon.TabIndex = 8
-            Me.pictureBoxForIcon.TabStop = False
-            Me.button2.Anchor = (CType(((AnchorStyles.Bottom Or AnchorStyles.Right)), AnchorStyles))
-            Me.button2.DialogResult = DialogResult.OK
-            Me.button2.Location = New Point(92, 67)
-            Me.button2.MinimumSize = New Size(0, 24)
-            Me.button2.Name = "button2"
-            Me.button2.Size = New Size(75, 24)
-            Me.button2.TabIndex = 3
-            Me.button2.Text = "OK"
-            Me.button2.UseVisualStyleBackColor = True
-            Me.button2.Visible = False
-            Me.button3.Anchor = (CType(((AnchorStyles.Bottom Or AnchorStyles.Right)), AnchorStyles))
-            Me.button3.AutoSize = True
-            Me.button3.DialogResult = DialogResult.OK
-            Me.button3.Location = New Point(173, 67)
-            Me.button3.MinimumSize = New Size(0, 24)
-            Me.button3.Name = "button3"
-            Me.button3.Size = New Size(75, 24)
-            Me.button3.TabIndex = 0
-            Me.button3.Text = "OK"
-            Me.button3.UseVisualStyleBackColor = True
-            Me.button3.Visible = False
-            Me.AutoScaleDimensions = New SizeF(6.0F, 13.0F)
-            Me.AutoScaleMode = AutoScaleMode.Font
-            Me.ClientSize = New Size(260, 102)
-            Me.Controls.Add(Me.button3)
-            Me.Controls.Add(Me.button2)
-            Me.Controls.Add(Me.panel1)
-            Me.Controls.Add(Me.button1)
-            Me.DataBindings.Add(New Binding("Text", Me.FlexibleMessageBoxFormBindingSource, "CaptionText", True))
-            Me.MaximizeBox = False
-            Me.MinimizeBox = False
-            Me.MinimumSize = New Size(276, 140)
-            Me.Name = "FlexibleMessageBoxForm"
-            Me.ShowIcon = False
-            Me.SizeGripStyle = SizeGripStyle.Show
-            Me.StartPosition = FormStartPosition.CenterParent
-            Me.Text = "<Caption>"
-            AddHandler Me.Shown, New EventHandler(AddressOf Me.FlexibleMessageBoxForm_Shown)
-            CType((Me.FlexibleMessageBoxFormBindingSource), ISupportInitialize).EndInit()
-            Me.panel1.ResumeLayout(False)
-            CType((Me.pictureBoxForIcon), ISupportInitialize).EndInit()
-            Me.ResumeLayout(False)
-            Me.PerformLayout()
+            _button1 = New Button()
+            _richTextBoxMessage = New RichTextBox()
+            _flexibleMessageBoxFormBindingSource = New BindingSource(components)
+            _panel1 = New Panel()
+            _pictureBoxForIcon = New PictureBox()
+            _button2 = New Button()
+            _button3 = New Button()
+            CType((_flexibleMessageBoxFormBindingSource), ISupportInitialize).BeginInit()
+            _panel1.SuspendLayout()
+            CType((_pictureBoxForIcon), ISupportInitialize).BeginInit()
+            SuspendLayout()
+            _button1.Anchor = (((AnchorStyles.Bottom Or AnchorStyles.Right)))
+            _button1.AutoSize = True
+            _button1.DialogResult = DialogResult.OK
+            _button1.Location = New Point(11, 67)
+            _button1.MinimumSize = New Size(0, 24)
+            _button1.Name = "_button1"
+            _button1.Size = New Size(75, 24)
+            _button1.TabIndex = 2
+            _button1.Text = $"OK"
+            _button1.UseVisualStyleBackColor = True
+            _button1.Visible = False
+            _richTextBoxMessage.Anchor = ((AnchorStyles.Top Or AnchorStyles.Bottom) Or AnchorStyles.Left) Or AnchorStyles.Right
+            _richTextBoxMessage.BackColor = Color.White
+            _richTextBoxMessage.BorderStyle = BorderStyle.None
+            _richTextBoxMessage.DataBindings.Add(New Binding("Text", _flexibleMessageBoxFormBindingSource, "MessageText", True, DataSourceUpdateMode.OnPropertyChanged))
+            _richTextBoxMessage.Font = New Font("Microsoft Sans Serif", 9.0F, FontStyle.Regular, GraphicsUnit.Point, (CByte((0))))
+            _richTextBoxMessage.Location = New Point(50, 26)
+            _richTextBoxMessage.Margin = New Padding(0)
+            _richTextBoxMessage.Name = "_richTextBoxMessage"
+            _richTextBoxMessage.[ReadOnly] = True
+            _richTextBoxMessage.ScrollBars = RichTextBoxScrollBars.Vertical
+            _richTextBoxMessage.Size = New Size(200, 20)
+            _richTextBoxMessage.TabIndex = 0
+            _richTextBoxMessage.TabStop = False
+            _richTextBoxMessage.Text = $"<Message>"
+            AddHandler _richTextBoxMessage.LinkClicked, AddressOf richTextBoxMessage_LinkClicked
+            _panel1.Anchor = ((AnchorStyles.Top Or AnchorStyles.Bottom) Or AnchorStyles.Left) Or AnchorStyles.Right
+            _panel1.BackColor = Color.White
+            _panel1.Controls.Add(_pictureBoxForIcon)
+            _panel1.Controls.Add(_richTextBoxMessage)
+            _panel1.Location = New Point(-3, -4)
+            _panel1.Name = "_panel1"
+            _panel1.Size = New Size(268, 59)
+            _panel1.TabIndex = 1
+            _pictureBoxForIcon.BackColor = Color.Transparent
+            _pictureBoxForIcon.Location = New Point(15, 19)
+            _pictureBoxForIcon.Name = "_pictureBoxForIcon"
+            _pictureBoxForIcon.Size = New Size(32, 32)
+            _pictureBoxForIcon.TabIndex = 8
+            _pictureBoxForIcon.TabStop = False
+            _button2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            _button2.DialogResult = DialogResult.OK
+            _button2.Location = New Point(92, 67)
+            _button2.MinimumSize = New Size(0, 24)
+            _button2.Name = "_button2"
+            _button2.Size = New Size(75, 24)
+            _button2.TabIndex = 3
+            _button2.Text = $"OK"
+            _button2.UseVisualStyleBackColor = True
+            _button2.Visible = False
+            _button3.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            _button3.AutoSize = True
+            _button3.DialogResult = DialogResult.OK
+            _button3.Location = New Point(173, 67)
+            _button3.MinimumSize = New Size(0, 24)
+            _button3.Name = "_button3"
+            _button3.Size = New Size(75, 24)
+            _button3.TabIndex = 0
+            _button3.Text = $"OK"
+            _button3.UseVisualStyleBackColor = True
+            _button3.Visible = False
+            AutoScaleDimensions = New SizeF(6.0F, 13.0F)
+            AutoScaleMode = AutoScaleMode.Font
+            ClientSize = New Size(260, 102)
+            Controls.Add(_button3)
+            Controls.Add(_button2)
+            Controls.Add(_panel1)
+            Controls.Add(_button1)
+            DataBindings.Add(New Binding("Text", _flexibleMessageBoxFormBindingSource, "CaptionText", True))
+            MaximizeBox = False
+            MinimizeBox = False
+            MinimumSize = New Size(276, 140)
+            Name = "FlexibleMessageBoxForm"
+            ShowIcon = False
+            SizeGripStyle = SizeGripStyle.Show
+            StartPosition = FormStartPosition.CenterParent
+            Text = $"<Caption>"
+            AddHandler Shown, New EventHandler(AddressOf FlexibleMessageBoxForm_Shown)
+            CType((_flexibleMessageBoxFormBindingSource), ISupportInitialize).EndInit()
+            _panel1.ResumeLayout(False)
+            CType((_pictureBoxForIcon), ISupportInitialize).EndInit()
+            ResumeLayout(False)
+            PerformLayout()
         End Sub
 
-        Private button1 As Button
-        Private FlexibleMessageBoxFormBindingSource As BindingSource
-        Private richTextBoxMessage As RichTextBox
-        Private panel1 As Panel
-        Private pictureBoxForIcon As PictureBox
-        Private button2 As Button
-        Private button3 As Button
+        Private _button1 As Button
+        Private _flexibleMessageBoxFormBindingSource As BindingSource
+        Private _richTextBoxMessage As RichTextBox
+        Private _panel1 As Panel
+        Private _pictureBoxForIcon As PictureBox
+        Private _button2 As Button
+        Private _button3 As Button
         Private Shared ReadOnly STANDARD_MESSAGEBOX_SEPARATOR_LINES As String = "---------------------------" & vbLf
         Private Shared ReadOnly STANDARD_MESSAGEBOX_SEPARATOR_SPACES As String = "   "
 
-        Private Enum ButtonID
-            OK = 0
-            CANCEL
-            YES
-            NO
-            ABORT
-            RETRY
-            IGNORE
+        Private Enum ButtonId
+            Ok = 0
+            Cancel
+            Yes
+            No
+            Abort
+            Retry
+            Ignore
         End Enum
 
-        Private Enum TwoLetterISOLanguageID
-            en
-            de
-            es
-            it
+        Private Enum TwoLetterIsoLanguageId
+            En
+            De
+            Es
+            It
         End Enum
 
-        Private Shared ReadOnly BUTTON_TEXTS_ENGLISH_EN As String() = {"OK", "Cancel", "&Yes", "&No", "&Abort", "&Retry", "&Ignore"}
-        Private Shared ReadOnly BUTTON_TEXTS_GERMAN_DE As String() = {"OK", "Abbrechen", "&Ja", "&Nein", "&Abbrechen", "&Wiederholen", "&Ignorieren"}
-        Private Shared ReadOnly BUTTON_TEXTS_SPANISH_ES As String() = {"Aceptar", "Cancelar", "&Sí", "&No", "&Abortar", "&Reintentar", "&Ignorar"}
-        Private Shared ReadOnly BUTTON_TEXTS_ITALIAN_IT As String() = {"OK", "Annulla", "&Sì", "&No", "&Interrompi", "&Riprova", "&Ignora"}
-        Private defaultButton As MessageBoxDefaultButton
-        Private visibleButtonsCount As Integer
-        Private languageID As TwoLetterISOLanguageID = TwoLetterISOLanguageID.en
+        Private Shared ReadOnly ButtonTextsEnglishEn As String() = {"Ok", "Cancel", "&Yes", "&No", "&Abort", "&Retry", "&Ignore"}
+        Private Shared ReadOnly ButtonTextsGermanDe As String() = {"OK", "Abbrechen", "&Ja", "&Nein", "&Abbrechen", "&Wiederholen", "&Ignorieren"}
+        Private Shared ReadOnly ButtonTextsSpanishEs As String() = {"Aceptar", "Cancelar", "&Sí", "&No", "&Abortar", "&Reintentar", "&Ignorar"}
+        Private Shared ReadOnly ButtonTextsItalianIt As String() = {"OK", "Annulla", "&Sì", "&No", "&Interrompi", "&Riprova", "&Ignora"}
+        Private _defaultButton As MessageBoxDefaultButton
+        Private _visibleButtonsCount As Integer
+        Private ReadOnly languageID As TwoLetterIsoLanguageId = TwoLetterIsoLanguageId.En
 
         Private Sub New()
             InitializeComponent()
-            [Enum].TryParse(Of TwoLetterISOLanguageID)(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, Me.languageID)
-            Me.KeyPreview = True
-            AddHandler Me.KeyUp, AddressOf FlexibleMessageBoxForm_KeyUp
+
+            If GlobalVariables.RightToLeftLayout Then
+                RightToLeftLayout = True
+                RightToLeft = RightToLeft.Yes
+            Else
+                RightToLeftLayout = False
+                RightToLeft = RightToLeft.No
+            End If
+
+            [Enum].TryParse(Of TwoLetterIsoLanguageId)(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, languageID)
+            KeyPreview = True
+            AddHandler KeyUp, AddressOf FlexibleMessageBoxForm_KeyUp
         End Sub
 
         Private Shared Function GetStringRows(ByVal message As String) As String()
@@ -316,32 +326,37 @@ Public Class FlexibleMessageBox
             Return messageRows
         End Function
 
-        Private Function GetButtonText(ByVal buttonID As ButtonID) As String
-            Dim buttonTextArrayIndex = Convert.ToInt32(buttonID)
-
-            Select Case Me.languageID
-                Case TwoLetterISOLanguageID.de
-                    Return BUTTON_TEXTS_GERMAN_DE(buttonTextArrayIndex)
-                Case TwoLetterISOLanguageID.es
-                    Return BUTTON_TEXTS_SPANISH_ES(buttonTextArrayIndex)
-                Case TwoLetterISOLanguageID.it
-                    Return BUTTON_TEXTS_ITALIAN_IT(buttonTextArrayIndex)
-                Case Else
-                    Return BUTTON_TEXTS_ENGLISH_EN(buttonTextArrayIndex)
-            End Select
+        Private Function GetButtonText(ByVal buttonId As ButtonId) As String
+            Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
+            return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
         End Function
 
+        'Private Function GetButtonText(ByVal buttonId As ButtonId) As String
+        '    Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
+
+        '    Select Case languageID
+        '        Case TwoLetterIsoLanguageId.De
+        '            Return ButtonTextsGermanDe(buttonTextArrayIndex)
+        '        Case TwoLetterIsoLanguageId.Es
+        '            Return ButtonTextsSpanishEs(buttonTextArrayIndex)
+        '        Case TwoLetterIsoLanguageId.It
+        '            Return ButtonTextsItalianIt(buttonTextArrayIndex)
+        '        Case Else
+        '            Return ButtonTextsEnglishEn(buttonTextArrayIndex)
+        '    End Select
+        'End Function
+
         Private Shared Function GetCorrectedWorkingAreaFactor(ByVal workingAreaFactor As Double) As Double
-            Const MIN_FACTOR As Double = 0.2
-            Const MAX_FACTOR As Double = 1.0
-            If workingAreaFactor < MIN_FACTOR Then Return MIN_FACTOR
-            If workingAreaFactor > MAX_FACTOR Then Return MAX_FACTOR
+            Const minFactor As Double = 0.2
+            Const maxFactor As Double = 1.0
+            If workingAreaFactor < minFactor Then Return minFactor
+            If workingAreaFactor > maxFactor Then Return maxFactor
             Return workingAreaFactor
         End Function
 
         Private Shared Sub SetDialogStartPosition(ByVal flexibleMessageBoxForm As FlexibleMessageBoxForm, ByVal owner As IWin32Window)
             If owner Is Nothing Then
-                Dim screen = System.Windows.Forms.Screen.FromPoint(Cursor.Position)
+                Dim screen = Windows.Forms.Screen.FromPoint(Cursor.Position)
                 flexibleMessageBoxForm.StartPosition = FormStartPosition.Manual
                 flexibleMessageBoxForm.Left = screen.Bounds.Left + screen.Bounds.Width / 2 - flexibleMessageBoxForm.Width / 2
                 flexibleMessageBoxForm.Top = screen.Bounds.Top + screen.Bounds.Height / 2 - flexibleMessageBoxForm.Height / 2
@@ -353,101 +368,101 @@ Public Class FlexibleMessageBox
             Dim stringRows = GetStringRows(text)
             If stringRows Is Nothing Then Return
             Dim textHeight = TextRenderer.MeasureText(text, DesiredFont).Height
-            Const SCROLLBAR_WIDTH_OFFSET As Integer = 15
+            Const scrollbarWidthOffset As Integer = 15
             Dim longestTextRowWidth = stringRows.Max(Function(textForRow) TextRenderer.MeasureText(textForRow, DesiredFont).Width)
             Dim captionWidth = TextRenderer.MeasureText(caption, SystemFonts.CaptionFont).Width
-            Dim textWidth = Math.Max(longestTextRowWidth + SCROLLBAR_WIDTH_OFFSET, captionWidth)
-            Dim marginWidth = flexibleMessageBoxForm.Width - flexibleMessageBoxForm.richTextBoxMessage.Width
-            Dim marginHeight = flexibleMessageBoxForm.Height - flexibleMessageBoxForm.richTextBoxMessage.Height
+            Dim textWidth = Math.Max(longestTextRowWidth + scrollbarWidthOffset, captionWidth)
+            Dim marginWidth = flexibleMessageBoxForm.Width - flexibleMessageBoxForm._richTextBoxMessage.Width
+            Dim marginHeight = flexibleMessageBoxForm.Height - flexibleMessageBoxForm._richTextBoxMessage.Height
             flexibleMessageBoxForm.Size = New Size(textWidth + marginWidth, textHeight + marginHeight)
         End Sub
 
         Private Shared Sub SetDialogIcon(ByVal flexibleMessageBoxForm As FlexibleMessageBoxForm, ByVal icon As MessageBoxIcon)
             Select Case icon
                 Case MessageBoxIcon.Information
-                    flexibleMessageBoxForm.pictureBoxForIcon.Image = SystemIcons.Information.ToBitmap()
+                    flexibleMessageBoxForm._pictureBoxForIcon.Image = SystemIcons.Information.ToBitmap()
                 Case MessageBoxIcon.Warning
-                    flexibleMessageBoxForm.pictureBoxForIcon.Image = SystemIcons.Warning.ToBitmap()
+                    flexibleMessageBoxForm._pictureBoxForIcon.Image = SystemIcons.Warning.ToBitmap()
                 Case MessageBoxIcon.[Error]
-                    flexibleMessageBoxForm.pictureBoxForIcon.Image = SystemIcons.[Error].ToBitmap()
+                    flexibleMessageBoxForm._pictureBoxForIcon.Image = SystemIcons.[Error].ToBitmap()
                 Case MessageBoxIcon.Question
-                    flexibleMessageBoxForm.pictureBoxForIcon.Image = SystemIcons.Question.ToBitmap()
+                    flexibleMessageBoxForm._pictureBoxForIcon.Image = SystemIcons.Question.ToBitmap()
                 Case Else
-                    flexibleMessageBoxForm.pictureBoxForIcon.Visible = False
-                    flexibleMessageBoxForm.richTextBoxMessage.Left -= flexibleMessageBoxForm.pictureBoxForIcon.Width
-                    flexibleMessageBoxForm.richTextBoxMessage.Width += flexibleMessageBoxForm.pictureBoxForIcon.Width
+                    flexibleMessageBoxForm._pictureBoxForIcon.Visible = False
+                    flexibleMessageBoxForm._richTextBoxMessage.Left -= flexibleMessageBoxForm._pictureBoxForIcon.Width
+                    flexibleMessageBoxForm._richTextBoxMessage.Width += flexibleMessageBoxForm._pictureBoxForIcon.Width
             End Select
         End Sub
 
         Private Shared Sub SetDialogButtons(ByVal flexibleMessageBoxForm As FlexibleMessageBoxForm, ByVal buttons As MessageBoxButtons, ByVal defaultButton As MessageBoxDefaultButton)
             Select Case buttons
                 Case MessageBoxButtons.AbortRetryIgnore
-                    flexibleMessageBoxForm.visibleButtonsCount = 3
-                    flexibleMessageBoxForm.button1.Visible = True
-                    flexibleMessageBoxForm.button1.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.ABORT)
-                    flexibleMessageBoxForm.button1.DialogResult = DialogResult.Abort
-                    flexibleMessageBoxForm.button2.Visible = True
-                    flexibleMessageBoxForm.button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.RETRY)
-                    flexibleMessageBoxForm.button2.DialogResult = DialogResult.Retry
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.IGNORE)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.Ignore
+                    flexibleMessageBoxForm._visibleButtonsCount = 3
+                    flexibleMessageBoxForm._button1.Visible = True
+                    flexibleMessageBoxForm._button1.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Abort)
+                    flexibleMessageBoxForm._button1.DialogResult = DialogResult.Abort
+                    flexibleMessageBoxForm._button2.Visible = True
+                    flexibleMessageBoxForm._button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Retry)
+                    flexibleMessageBoxForm._button2.DialogResult = DialogResult.Retry
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Ignore)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.Ignore
                     flexibleMessageBoxForm.ControlBox = False
                 Case MessageBoxButtons.OKCancel
-                    flexibleMessageBoxForm.visibleButtonsCount = 2
-                    flexibleMessageBoxForm.button2.Visible = True
-                    flexibleMessageBoxForm.button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.OK)
-                    flexibleMessageBoxForm.button2.DialogResult = DialogResult.OK
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.CANCEL)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.Cancel
-                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm.button3
+                    flexibleMessageBoxForm._visibleButtonsCount = 2
+                    flexibleMessageBoxForm._button2.Visible = True
+                    flexibleMessageBoxForm._button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Ok)
+                    flexibleMessageBoxForm._button2.DialogResult = DialogResult.OK
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Cancel)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.Cancel
+                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm._button3
                 Case MessageBoxButtons.RetryCancel
-                    flexibleMessageBoxForm.visibleButtonsCount = 2
-                    flexibleMessageBoxForm.button2.Visible = True
-                    flexibleMessageBoxForm.button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.RETRY)
-                    flexibleMessageBoxForm.button2.DialogResult = DialogResult.Retry
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.CANCEL)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.Cancel
-                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm.button3
+                    flexibleMessageBoxForm._visibleButtonsCount = 2
+                    flexibleMessageBoxForm._button2.Visible = True
+                    flexibleMessageBoxForm._button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Retry)
+                    flexibleMessageBoxForm._button2.DialogResult = DialogResult.Retry
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Cancel)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.Cancel
+                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm._button3
                 Case MessageBoxButtons.YesNo
-                    flexibleMessageBoxForm.visibleButtonsCount = 2
-                    flexibleMessageBoxForm.button2.Visible = True
-                    flexibleMessageBoxForm.button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.YES)
-                    flexibleMessageBoxForm.button2.DialogResult = DialogResult.Yes
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.NO)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.No
+                    flexibleMessageBoxForm._visibleButtonsCount = 2
+                    flexibleMessageBoxForm._button2.Visible = True
+                    flexibleMessageBoxForm._button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Yes)
+                    flexibleMessageBoxForm._button2.DialogResult = DialogResult.Yes
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.No)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.No
                     flexibleMessageBoxForm.ControlBox = False
                 Case MessageBoxButtons.YesNoCancel
-                    flexibleMessageBoxForm.visibleButtonsCount = 3
-                    flexibleMessageBoxForm.button1.Visible = True
-                    flexibleMessageBoxForm.button1.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.YES)
-                    flexibleMessageBoxForm.button1.DialogResult = DialogResult.Yes
-                    flexibleMessageBoxForm.button2.Visible = True
-                    flexibleMessageBoxForm.button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.NO)
-                    flexibleMessageBoxForm.button2.DialogResult = DialogResult.No
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.CANCEL)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.Cancel
-                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm.button3
+                    flexibleMessageBoxForm._visibleButtonsCount = 3
+                    flexibleMessageBoxForm._button1.Visible = True
+                    flexibleMessageBoxForm._button1.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Yes)
+                    flexibleMessageBoxForm._button1.DialogResult = DialogResult.Yes
+                    flexibleMessageBoxForm._button2.Visible = True
+                    flexibleMessageBoxForm._button2.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.No)
+                    flexibleMessageBoxForm._button2.DialogResult = DialogResult.No
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Cancel)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.Cancel
+                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm._button3
                 Case Else
-                    flexibleMessageBoxForm.visibleButtonsCount = 1
-                    flexibleMessageBoxForm.button3.Visible = True
-                    flexibleMessageBoxForm.button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonID.OK)
-                    flexibleMessageBoxForm.button3.DialogResult = DialogResult.OK
-                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm.button3
+                    flexibleMessageBoxForm._visibleButtonsCount = 1
+                    flexibleMessageBoxForm._button3.Visible = True
+                    flexibleMessageBoxForm._button3.Text = flexibleMessageBoxForm.GetButtonText(ButtonId.Ok)
+                    flexibleMessageBoxForm._button3.DialogResult = DialogResult.OK
+                    flexibleMessageBoxForm.CancelButton = flexibleMessageBoxForm._button3
             End Select
 
-            flexibleMessageBoxForm.defaultButton = defaultButton
+            flexibleMessageBoxForm._defaultButton = defaultButton
         End Sub
 
         Private Sub FlexibleMessageBoxForm_Shown(ByVal sender As Object, ByVal e As EventArgs)
-            Dim buttonIndexToFocus As Integer = 1
+            Dim buttonIndexToFocus As Integer
             Dim buttonToFocus As Button
 
-            Select Case Me.defaultButton
+            Select Case _defaultButton
                 Case MessageBoxDefaultButton.Button2
                     buttonIndexToFocus = 2
                 Case MessageBoxDefaultButton.Button3
@@ -456,14 +471,14 @@ Public Class FlexibleMessageBox
                     buttonIndexToFocus = 1
             End Select
 
-            If buttonIndexToFocus > Me.visibleButtonsCount Then buttonIndexToFocus = Me.visibleButtonsCount
+            If buttonIndexToFocus > _visibleButtonsCount Then buttonIndexToFocus = _visibleButtonsCount
 
             If buttonIndexToFocus = 3 Then
-                buttonToFocus = Me.button3
+                buttonToFocus = _button3
             ElseIf buttonIndexToFocus = 2 Then
-                buttonToFocus = Me.button2
+                buttonToFocus = _button2
             Else
-                buttonToFocus = Me.button1
+                buttonToFocus = _button1
             End If
 
             buttonToFocus.Focus()
@@ -473,7 +488,7 @@ Public Class FlexibleMessageBox
             Try
                 Cursor.Current = Cursors.WaitCursor
                 Process.Start(e.LinkText)
-            Catch __unusedException1__ As Exception
+            Catch unusedException1 As Exception
                 Throw
             Finally
                 Cursor.Current = Cursors.[Default]
@@ -482,8 +497,8 @@ Public Class FlexibleMessageBox
 
         Private Sub FlexibleMessageBoxForm_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs)
             If e.Control AndAlso (e.KeyCode = Keys.C OrElse e.KeyCode = Keys.Insert) Then
-                Dim buttonsTextLine = (If(Me.button1.Visible, Me.button1.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty)) + (If(Me.button2.Visible, Me.button2.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty)) + (If(Me.button3.Visible, Me.button3.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty))
-                Dim textForClipboard = STANDARD_MESSAGEBOX_SEPARATOR_LINES & Me.Text & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES + Me.richTextBoxMessage.Text & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES + buttonsTextLine.Replace("&", String.Empty) & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES
+                Dim buttonsTextLine = (If(_button1.Visible, _button1.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty)) + (If(_button2.Visible, _button2.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty)) + (If(_button3.Visible, _button3.Text & STANDARD_MESSAGEBOX_SEPARATOR_SPACES, String.Empty))
+                Dim textForClipboard = STANDARD_MESSAGEBOX_SEPARATOR_LINES & Text & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES + _richTextBoxMessage.Text & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES + buttonsTextLine.Replace("&", String.Empty) & Environment.NewLine & STANDARD_MESSAGEBOX_SEPARATOR_LINES
                 Clipboard.SetText(textForClipboard)
             End If
         End Sub
@@ -491,16 +506,16 @@ Public Class FlexibleMessageBox
         Public Property CaptionText As String
         Public Property MessageText As String
 
-        Public Shared Function Show(ByVal owner As IWin32Window, ByVal text As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
+        Public Shared Overloads Function Show(ByVal owner As IWin32Window, ByVal text As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
             Dim flexibleMessageBoxForm = New FlexibleMessageBoxForm()
             flexibleMessageBoxForm.ShowInTaskbar = False
             flexibleMessageBoxForm.CaptionText = caption
             flexibleMessageBoxForm.MessageText = text
-            flexibleMessageBoxForm.FlexibleMessageBoxFormBindingSource.DataSource = flexibleMessageBoxForm
+            flexibleMessageBoxForm._flexibleMessageBoxFormBindingSource.DataSource = flexibleMessageBoxForm
             SetDialogButtons(flexibleMessageBoxForm, buttons, defaultButton)
             SetDialogIcon(flexibleMessageBoxForm, icon)
             flexibleMessageBoxForm.Font = DesiredFont
-            flexibleMessageBoxForm.richTextBoxMessage.Font = DesiredFont
+            flexibleMessageBoxForm._richTextBoxMessage.Font = DesiredFont
             SetDialogSizes(flexibleMessageBoxForm, text, caption)
             SetDialogStartPosition(flexibleMessageBoxForm, owner)
             Return flexibleMessageBoxForm.ShowDialog(owner)

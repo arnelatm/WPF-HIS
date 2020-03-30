@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,27 +8,30 @@ Namespace DataLayer.AdoNet
 
     Public Class ReligionDao
         Inherits CommonDao
-        Implements IReligionDao
+        Implements IDaoAll(Of Religion)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Religion Implements IReligionDao.GetRecordById
+        Public Function GetRecordById(idNo As Integer) As Religion Implements IDaoAll(Of Religion).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "ReligionName") As List(Of Religion) Implements IReligionDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Religion) Implements IDaoAll(Of Religion).GetAll
+            If sortExpression Is Nothing Then
+                sortExpression = "ReligionName"
+            End If
             Dim sql As String =
                     " SELECT IDNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef religion As Religion) As Integer Implements IReligionDao.UpdateRecord
+        Public Function UpdateRecord(ByRef religion As Religion) As Integer Implements IDaoAll(Of Religion).UpdateRecord
             Dim sql As String =
                     " UPDATE [Religion]" &
                     "    SET ReligionCode = @ReligionCode," &
@@ -36,15 +40,15 @@ Namespace DataLayer.AdoNet
                     "        Notes = @Notes" &
                     "  WHERE IDNo = @IDNo"
 
-            Return Db.Update(sql, Take(religion))
+            Return _db.Update(sql, Take(religion))
         End Function
 
-        Public Function AddRecord(ByRef religion As Religion) As Integer Implements IReligionDao.AddRecord
+        Public Function AddRecord(ByRef religion As Religion) As Integer Implements IDaoAll(Of Religion).AddRecord
             Dim sql As String =
                     " INSERT INTO [Religion] " &
                     " (ReligionCode,ReligionName,ReligionNameAra,Notes) " &
                     " VALUES (@ReligionCode,@ReligionName,@ReligionNameAra,@Notes) "
-            Return Db.Insert(sql, Take(religion))
+            Return _db.Insert(sql, Take(religion))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Religion) =

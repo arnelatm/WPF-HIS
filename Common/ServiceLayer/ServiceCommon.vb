@@ -1,5 +1,7 @@
 ﻿Imports System.Reflection
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer
+Imports AATM.DataLayer
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer
@@ -11,17 +13,16 @@ Namespace ServiceLayer
         Protected Shared ReadOnly DaoFactoryCommonFactory As IDaoFactoryCommon = DaoFactoriesCommon.GetCommonFactory(Provider)
 
         'Protected Shared ReadOnly CommonDao As ICommonDao = DaoFactoryCommonFactory.CreateDao("Common")
-        Private ReadOnly _branchDao As IBranchDao = DaoFactoryCommonFactory.CreateDao("Branch")
-
-        Private ReadOnly _costCenterDao As ICostCenterDao = DaoFactoryCommonFactory.CreateDao("CostCenter")
-        Private ReadOnly _countryDao As ICountryDao = DaoFactoryCommonFactory.CreateDao("Country")
-        Private ReadOnly _departmentDao As IDepartmentDao = DaoFactoryCommonFactory.CreateDao("Department")
-        Private ReadOnly _originalMessagesDao As IOriginalMessagesDao = DaoFactoryCommonFactory.CreateDao("OriginalMessages")
-        Private ReadOnly _phoneTypeDao As IPhoneTypeDao = DaoFactoryCommonFactory.CreateDao("PhoneType")
-        Private ReadOnly _profitCenterDao As IProfitCenterDao = DaoFactoryCommonFactory.CreateDao("ProfitCenter")
-        Private ReadOnly _religionDao As IReligionDao = DaoFactoryCommonFactory.CreateDao("Religion")
-        Private ReadOnly _revenueGroupDao As IRevenueGroupDao = DaoFactoryCommonFactory.CreateDao("RevenueGroup")
-        Private ReadOnly _translatedMessagesDao As ITranslatedMessagesDao = DaoFactoryCommonFactory.CreateDao("TranslatedMessages")
+        Private ReadOnly _branchDao As IDaoAll(of Branch) = DaoFactoryCommonFactory.CreateDao("Branch")
+        Private ReadOnly _costCenterDao As IDaoAll(Of CostCenter) = DaoFactoryCommonFactory.CreateDao("CostCenter")
+        Private ReadOnly _countryDao As IDaoAll(Of Country) = DaoFactoryCommonFactory.CreateDao("Country")
+        Private ReadOnly _departmentDao As IDaoAll(Of Department) = DaoFactoryCommonFactory.CreateDao("Department")
+        Private ReadOnly _originalMessagesDao As IDaoAll(Of OriginalMessages) = DaoFactoryCommonFactory.CreateDao("OriginalMessages")
+        Private ReadOnly _phoneTypeDao As IDaoAll(Of PhoneType) = DaoFactoryCommonFactory.CreateDao("PhoneType")
+        Private ReadOnly _profitCenterDao As IDaoAll(Of ProfitCenter) = DaoFactoryCommonFactory.CreateDao("ProfitCenter")
+        Private ReadOnly _religionDao As IDaoAll(Of Religion) = DaoFactoryCommonFactory.CreateDao("Religion")
+        Private ReadOnly _revenueGroupDao As IDaoAll(Of RevenueGroup) = DaoFactoryCommonFactory.CreateDao("RevenueGroup")
+        Private ReadOnly _translatedMessagesDao As IDao(Of TranslatedMessages) = DaoFactoryCommonFactory.CreateDao("TranslatedMessages")
 
         Public Sub New(accountName As String)
             Dim bizObject = $"AATM.Common.BusinessLayer." + accountName

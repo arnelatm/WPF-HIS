@@ -1,0 +1,17 @@
+﻿SMsgDlgWarning = 'تحذير';
+SMsgDlgError = 'خطأ';
+SMsgDlgInformation = 'إعلام';
+SMsgDlgConfirm = 'تأكيد';
+SMsgDlgYes = 'نعم';
+SMsgDlgNo = 'لا';
+SMsgDlgOK = 'موافق';
+SMsgDlgCancel = 'إلغاء الأمر';
+SMsgDlgHelp = 'تعليمات';
+SMsgDlgHelpNone = 'لا تتوفر تعليمات';
+SMsgDlgHelpHelp = 'تعليمات';
+SMsgDlgAbort = 'إحباط';
+SMsgDlgRetry = 'إعادة المحاولة';
+SMsgDlgIgnore = 'تجاهل';
+SMsgDlgAll = 'الكل';
+SMsgDlgNoToAll = 'لا للكل';
+SMsgDlgYesToAll = 'نعم للكل'

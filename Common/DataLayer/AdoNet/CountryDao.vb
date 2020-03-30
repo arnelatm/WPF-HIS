@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.BusinessLayer
+Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -7,30 +8,33 @@ Namespace DataLayer.AdoNet
 
     Public Class CountryDao
         Inherits CommonDao
-        Implements ICountryDao
+        Implements IDaoAll(Of Country)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        'Public Function GetCountryByName(countryName As String) As Country Implements ICountryDao.GetCountryByName
+        'Public Function GetCountryByName(countryName As String) As Country Implements IDaoAll(Of Country).GetCountryByName
         '    Throw New NotImplementedException
         'End Function
 
-        Public Function GetRecordById(ByVal idNo As Integer) As Country Implements ICountryDao.GetRecordById
+        Public Function GetRecordById(ByVal idNo As Integer) As Country Implements IDaoAll(Of Country).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
                     "   FROM [Country]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "CountryName") As List(Of Country) Implements ICountryDao.GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Country) Implements IDaoAll(Of Country).GetAll
+            If sortExpression = Nothing Then
+                sortExpression = "CountryName ASC"
+            End If
             Dim sql As String = " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
                                 "   FROM [Country] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef country As Country) As Integer Implements ICountryDao.UpdateRecord
+        Public Function UpdateRecord(ByRef country As Country) As Integer Implements IDaoAll(Of Country).UpdateRecord
             Dim sql As String =
                     " UPDATE [Country]" &
                     "    SET CountryName = @CountryName," &
@@ -45,15 +49,15 @@ Namespace DataLayer.AdoNet
                     "        PhoneCode = @PhoneCode" &
                     "  WHERE IDNo = @IDNo"
 
-            Return Db.Update(sql, Take(country))
+            Return _db.Update(sql, Take(country))
         End Function
 
-        Public Function AddRecord(ByRef country As Country) As Integer Implements ICountryDao.AddRecord
+        Public Function AddRecord(ByRef country As Country) As Integer Implements IDaoAll(Of Country).AddRecord
             Dim sql As String =
                     " INSERT INTO [Country] " &
                     " (CountryName,CountryNameAra,Nationality,NationalityAra,Flag32,Flag128,ISOA2,ISOA3,ISON,PhoneCode) " &
                     " VALUES (@CountryName,@CountryNameAra,@Nationality,@NationalityAra,@Flag32,@Flag128,@ISOA2,@ISOA3,@ISON,@PhoneCode)"
-            Return Db.Insert(sql, Take(country))
+            Return _db.Insert(sql, Take(country))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Country) =
