@@ -46,8 +46,6 @@ Partial Class CFormEntry
         Me.btnFind = New System.Windows.Forms.ToolStripButton()
         Me.btnUndo = New System.Windows.Forms.ToolStripButton()
         Me.btnDebug = New System.Windows.Forms.ToolStripButton()
-        Me.btnArabic = New System.Windows.Forms.ToolStripButton()
-        Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
         Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -57,10 +55,15 @@ Partial Class CFormEntry
         Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.btnArabic = New System.Windows.Forms.ToolStripButton()
         Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
+        Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
         Me.btnQuit = New System.Windows.Forms.ToolStripButton()
+        Me.floFormTitle = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblFormDescription = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.FormToolStrip.SuspendLayout
+        Me.floFormTitle.SuspendLayout
         Me.SuspendLayout
         '
         'FormToolStrip
@@ -69,6 +72,7 @@ Partial Class CFormEntry
         Me.FormToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.FormToolStrip.Name = "FormToolStrip"
         Me.FormToolStrip.Size = New System.Drawing.Size(865, 25)
+        Me.FormToolStrip.Stretch = true
         Me.FormToolStrip.TabIndex = 1
         Me.FormToolStrip.Text = "English"
         '
@@ -212,26 +216,6 @@ Partial Class CFormEntry
         Me.btnDebug.Size = New System.Drawing.Size(23, 22)
         Me.btnDebug.Text = "Set debugger on."
         '
-        'btnArabic
-        '
-        Me.btnArabic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnArabic.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnArabic.Image = CType(resources.GetObject("btnArabic.Image"),System.Drawing.Image)
-        Me.btnArabic.Name = "btnArabic"
-        Me.btnArabic.Size = New System.Drawing.Size(23, 22)
-        Me.btnArabic.Text = "Arabic"
-        Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnArabic.ToolTipText = "Arabic"
-        '
-        'btnOriginal
-        '
-        Me.btnOriginal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnOriginal.Image = CType(resources.GetObject("btnOriginal.Image"),System.Drawing.Image)
-        Me.btnOriginal.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnOriginal.Name = "btnOriginal"
-        Me.btnOriginal.Size = New System.Drawing.Size(23, 22)
-        Me.btnOriginal.Text = "English"
-        '
         'CutToolStripButton
         '
         Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -305,6 +289,17 @@ Partial Class CFormEntry
         Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.HelpToolStripButton.Text = "He&lp"
         '
+        'btnArabic
+        '
+        Me.btnArabic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnArabic.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnArabic.Image = CType(resources.GetObject("btnArabic.Image"),System.Drawing.Image)
+        Me.btnArabic.Name = "btnArabic"
+        Me.btnArabic.Size = New System.Drawing.Size(23, 22)
+        Me.btnArabic.Text = "Arabic"
+        Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnArabic.ToolTipText = "Arabic"
+        '
         'btnTranslate
         '
         Me.btnTranslate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -317,6 +312,15 @@ Partial Class CFormEntry
         Me.btnTranslate.Size = New System.Drawing.Size(54, 23)
         Me.btnTranslate.Text = "Translate"
         '
+        'btnOriginal
+        '
+        Me.btnOriginal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnOriginal.Image = CType(resources.GetObject("btnOriginal.Image"),System.Drawing.Image)
+        Me.btnOriginal.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnOriginal.Name = "btnOriginal"
+        Me.btnOriginal.Size = New System.Drawing.Size(23, 22)
+        Me.btnOriginal.Text = "English"
+        '
         'btnQuit
         '
         Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -326,10 +330,36 @@ Partial Class CFormEntry
         Me.btnQuit.Size = New System.Drawing.Size(23, 22)
         Me.btnQuit.Text = "Exit and close this form"
         '
+        'floFormTitle
+        '
+        Me.floFormTitle.BackColor = System.Drawing.Color.Green
+        Me.floFormTitle.Controls.Add(Me.lblFormDescription)
+        Me.floFormTitle.Dock = System.Windows.Forms.DockStyle.Top
+        Me.floFormTitle.Location = New System.Drawing.Point(0, 25)
+        Me.floFormTitle.Name = "floFormTitle"
+        Me.floFormTitle.Size = New System.Drawing.Size(865, 32)
+        Me.floFormTitle.TabIndex = 2
+        '
+        'lblFormDescription
+        '
+        Me.lblFormDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblFormDescription.DisplayOnly = true
+        Me.lblFormDescription.EditingMode = false
+        Me.lblFormDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFormDescription.ForeColor = System.Drawing.Color.White
+        Me.lblFormDescription.Location = New System.Drawing.Point(1, 1)
+        Me.lblFormDescription.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblFormDescription.Name = "lblFormDescription"
+        Me.lblFormDescription.Size = New System.Drawing.Size(864, 28)
+        Me.lblFormDescription.TabIndex = 0
+        Me.lblFormDescription.Text = "Base Form"
+        Me.lblFormDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CFormEntry
         '
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(865, 571)
+        Me.Controls.Add(Me.floFormTitle)
         Me.Controls.Add(Me.FormToolStrip)
         Me.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.MinimumSize = New System.Drawing.Size(320, 250)
@@ -338,6 +368,7 @@ Partial Class CFormEntry
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.FormToolStrip.ResumeLayout(false)
         Me.FormToolStrip.PerformLayout
+        Me.floFormTitle.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -375,4 +406,6 @@ End Sub
     Friend WithEvents toolStripSeparator5 As Windows.Forms.ToolStripSeparator
     Friend WithEvents HelpToolStripButton As Windows.Forms.ToolStripButton
     Public WithEvents btnSave As Windows.Forms.ToolStripButton
+    Friend WithEvents lblFormDescription As CLabel
+    Public WithEvents floFormTitle As CFlowLayout
 End Class

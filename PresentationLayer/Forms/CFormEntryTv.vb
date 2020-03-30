@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -9,6 +10,8 @@ Public Class CFormEntryTv
     Protected TvSecondaryFieldName As String
     Protected TvSortKey As String
 
+
+    
     Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             TreeViewTableName.Nodes(0).Text = MainTableName

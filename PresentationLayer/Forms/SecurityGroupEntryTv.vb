@@ -18,7 +18,7 @@ Public Class SecurityGroupEntryTv
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-
+        FormTitleCaption = "Security Group Maintenance Form"
         MainTableName = "SecurityGroup"
         IdFieldName = "IdNo"
         TvMainFieldName = "SecurityGroupName"

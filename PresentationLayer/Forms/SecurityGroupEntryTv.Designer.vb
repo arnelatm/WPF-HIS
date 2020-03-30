@@ -159,6 +159,7 @@ Partial Class SecurityGroupEntryTv
         Me.floDataDisplay.Controls.Add(Me.txtSecurityGroupNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
+        Me.floDataDisplay.Controls.Add(Me.CFlowLayout1)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
         'lblIdNo
@@ -303,12 +304,10 @@ Partial Class SecurityGroupEntryTv
         'SecurityGroupEntryTv
         '
         resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "SecurityGroupEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
