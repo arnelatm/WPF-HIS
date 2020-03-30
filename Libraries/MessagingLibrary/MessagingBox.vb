@@ -12,6 +12,7 @@ Public Class MessagingBox
     Private _textDisplayLanguage As String
     Private _close As Boolean
     Private Shared _dataAccessControl
+    Private _buttonsGap As Byte = 10
 
     Public Shared SelectedButtons As MessagingButtons
 
@@ -73,13 +74,13 @@ Public Class MessagingBox
         btnNo.Visible = False
         btnOk.Visible = True
         btnCancel.Visible = True
-        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - _buttonsGap) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
-        btnCancel.Left = btnCancel.Right + spaceLength
+        btnCancel.Left = btnCancel.Right + _buttonsGap
         SelectedButtons = MessagingButtons.OkCancel
     End Sub
 
@@ -92,15 +93,15 @@ Public Class MessagingBox
         btnYes.Visible = True
         btnYes.Text = "&Ignore"
         btnNo.Visible = False
-        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width - _buttonsGap * 2) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
         btnOk.Left = spaceLength
-        btnCancel.Left = btnOk.Left + spaceLength
-        btnYes.Left = btnCancel.Right + spaceLength
+        btnCancel.Left = btnOk.Left + _buttonsGap
+        btnYes.Left = btnCancel.Right + _buttonsGap
         SelectedButtons = MessagingButtons.AbortRetryIgnore
     End Sub
 
@@ -110,14 +111,14 @@ Public Class MessagingBox
         btnNo.Visible = True
         btnCancel.Visible = True
         btnOk.Visible = False
-        spaceLength = (Width - btnYes.Width - btnNo.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnYes.Width - btnNo.Width - btnCancel.Width - _buttonsGap * 2) / 2
         If spaceLength > 0 Then
             btnYes.Left = spaceLength
         Else
             btnYes.Left = 1
         End If
-        btnNo.Left = btnYes.Right + spaceLength
-        btnCancel.Left = btnNo.Right + spaceLength
+        btnNo.Left = btnYes.Right + _buttonsGap
+        btnCancel.Left = btnNo.Right + _buttonsGap
         SelectedButtons = MessagingButtons.YesNoCancel
     End Sub
 
@@ -127,13 +128,13 @@ Public Class MessagingBox
         btnCancel.Visible = False
         btnYes.Visible = True
         btnNo.Visible = True
-        spaceLength = (Width - btnYes.Width - btnNo.Width) / 3
+        spaceLength = (Width - btnYes.Width - btnNo.Width - _buttonsGap) / 2
         If spaceLength > 0 Then
             btnYes.Left = spaceLength
         Else
             btnYes.Left = 1
         End If
-        btnNo.Left = btnYes.Right + spaceLength
+        btnNo.Left = btnYes.Right + _buttonsGap
         SelectedButtons = MessagingButtons.YesNo
     End Sub
 
@@ -143,13 +144,13 @@ Public Class MessagingBox
         btnCancel.Visible = True
         btnYes.Visible = False
         btnNo.Visible = False
-        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - _buttonsGap) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
-        btnCancel.Left = btnOk.Right + spaceLength
+        btnCancel.Left = btnOk.Right + _buttonsGap
         SelectedButtons = MessagingButtons.RetryCancel
     End Sub
 
@@ -171,13 +172,13 @@ Public Class MessagingBox
         btnCancel.Text = caption2
         btnYes.Visible = False
         btnNo.Visible = False
-        spaceLength = (Width - btnOk.Width - btnCancel.Width) / 3
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - _buttonsGap) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
-        btnCancel.Left = btnCancel.Right + spaceLength
+        btnCancel.Left = btnCancel.Right + _buttonsGap
         SelectedButtons = MessagingButtons.CustomTwoButtons
     End Sub
 
@@ -190,15 +191,15 @@ Public Class MessagingBox
         btnYes.Visible = True
         btnYes.Text = caption3
         btnNo.Visible = False
-        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width) / 4
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width - _buttonsGap * 2) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
         btnOk.Left = spaceLength
-        btnCancel.Left = btnOk.Left + spaceLength
-        btnYes.Left = btnCancel.Right + spaceLength
+        btnCancel.Left = btnOk.Left + _buttonsGap
+        btnYes.Left = btnCancel.Right + _buttonsGap
         SelectedButtons = MessagingButtons.CustomThreeButtons
     End Sub
 
@@ -212,15 +213,15 @@ Public Class MessagingBox
         btnYes.Text = caption3
         btnNo.Visible = True
         btnNo.Text = caption4
-        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width - btnNo.Width) / 5
+        spaceLength = (Width - btnOk.Width - btnCancel.Width - btnYes.Width - btnNo.Width - _buttonsGap * 3) / 2
         If spaceLength > 0 Then
             btnOk.Left = spaceLength
         Else
             btnOk.Left = 1
         End If
         btnOk.Left = spaceLength
-        btnCancel.Left = btnOk.Left + spaceLength
-        btnYes.Left = btnCancel.Right + spaceLength
+        btnCancel.Left = btnOk.Left + _buttonsGap
+        btnYes.Left = btnCancel.Right + _buttonsGap
         SelectedButtons = MessagingButtons.CustomFourButtons
     End Sub
 
@@ -358,7 +359,7 @@ Public Class MessagingBox
                 If GlobalVariables.RightToLeftLayout Then
                     translatedText = Strings.Left(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture))
                 Else
-                    translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture)+1)
+                    translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture) + 1)
                 End If
             Else
                 AddCaption(textToTranslate)
@@ -402,6 +403,5 @@ Public Class MessagingBox
         End If
         Return status
     End Function
-
 
 End Class

@@ -57,15 +57,15 @@ Partial Class CFormEntry
         Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.btnQuit = New System.Windows.Forms.ToolStripButton()
         Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
+        Me.btnQuit = New System.Windows.Forms.ToolStripButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.FormToolStrip.SuspendLayout
         Me.SuspendLayout
         '
         'FormToolStrip
         '
-        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.btnOf, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnAdd, Me.btnDelete, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnDebug, Me.btnArabic, Me.btnOriginal, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.toolStripSeparator5, Me.OpenToolStripButton, Me.NewToolStripButton, Me.HelpToolStripButton, Me.btnTranslate, Me.btnQuit})
+        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.btnOf, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnAdd, Me.btnDelete, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnDebug, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.toolStripSeparator5, Me.OpenToolStripButton, Me.NewToolStripButton, Me.HelpToolStripButton, Me.btnArabic, Me.btnTranslate, Me.btnOriginal, Me.btnQuit})
         Me.FormToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.FormToolStrip.Name = "FormToolStrip"
         Me.FormToolStrip.Size = New System.Drawing.Size(865, 25)
@@ -305,15 +305,6 @@ Partial Class CFormEntry
         Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.HelpToolStripButton.Text = "He&lp"
         '
-        'btnQuit
-        '
-        Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"),System.Drawing.Image)
-        Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnQuit.Name = "btnQuit"
-        Me.btnQuit.Size = New System.Drawing.Size(23, 22)
-        Me.btnQuit.Text = "Exit and close this form"
-        '
         'btnTranslate
         '
         Me.btnTranslate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -325,6 +316,15 @@ Partial Class CFormEntry
         Me.btnTranslate.Name = "btnTranslate"
         Me.btnTranslate.Size = New System.Drawing.Size(54, 23)
         Me.btnTranslate.Text = "Translate"
+        '
+        'btnQuit
+        '
+        Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"),System.Drawing.Image)
+        Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnQuit.Name = "btnQuit"
+        Me.btnQuit.Size = New System.Drawing.Size(23, 22)
+        Me.btnQuit.Text = "Exit and close this form"
         '
         'CFormEntry
         '
