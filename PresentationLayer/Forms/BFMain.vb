@@ -205,6 +205,7 @@ Public Class BfMain
         BackgroundImage = myImage
         ResumeLayout()
         RaiseEvent AfterTranslateForm()
+
     End Sub
 
     Protected Overridable Sub ChangeToLtrDisplay()
@@ -323,8 +324,6 @@ Public Class BfMain
                             CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
                         End If
                     ElseIf TypeOf cCtrl Is ToolStrip Then
-                        'Dim c As ToolStrip
-                        'c = cCtrl
                         TranslateToolStripItems(cCtrl)
                     ElseIf TypeOf cCtrl Is MenuStrip Then
                         Dim subMenuName = ""
@@ -357,41 +356,36 @@ Public Class BfMain
     End Sub
 
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
-        Dim r As Integer
-        Dim originalText As String
-        Dim OriginalToolTipText As String
         For Each obj As Object In cToolStrip.Items
-            Try
-                originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".Text")
-                r = Dv.Find(originalText)
-                If r > 0 Then
-                    obj.Text = Dv(r).Item("translated")
+            obj.Text = GetToolStripText(cToolStrip, obj, "Text")
+            obj.ToolTipText = GetToolStripText(cToolStrip, obj, "ToolTipText")
+            If TypeOf obj Is ToolStripButton Then
+                TranslateToolStripButtonImage(obj)
+            ElseIf TypeOf obj Is TextBox Then
+                Dim c = CType(obj, TextBox)
+                If GlobalVariables.RightToLeftLayout Then
+                    c.Text = Messaging.TranslateCaption(c.Text)
+                    c.RightToLeft = RightToLeft.Yes
                 Else
-                    obj.Text = obj.Tag(0)
+                    c.RightToLeft = RightToLeft.No
                 End If
-                OriginalToolTipText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + ".ToolTipText")
-                r = Dv.Find(OriginalToolTipText)
-                If r > 0 Then
-                    obj.ToolTipText = Dv(r).Item("translated")
-                Else
-                    obj.ToolTipText = obj.Tag(1)
-                End If
-                If TypeOf obj Is ToolStripButton Then
-                    TranslateToolStripButton(obj)
-                ElseIf TypeOf obj Is TextBox Then
-                    Dim c = CType(obj, TextBox)
-                    If GlobalVariables.RightToLeftLayout Then
-                        c.Text = Messaging.TranslateCaption(c.Text)
-                        c.RightToLeft = RightToLeft.Yes
-                    Else
-                        c.RightToLeft = RightToLeft.No
-                    End If
-                End If
-            Catch ex As Exception
-
-            End Try
+            End If
         Next
     End Sub
+
+    Private Function GetToolStripText(cToolStrip As ToolStrip, obj As Object, propName As String) As String
+        Dim translatedText As String = ""
+        Dim r As Integer
+        If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
+            r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
+            If r > 0 Then
+                translatedText = Dv(r).Item("translated")
+            Else
+                translatedText = obj.Tag(If(propName = "Text", 0, 1))
+            End If
+        End If
+        Return translatedText
+    End Function
 
     Private Sub TranslateButton(cCtrl As Control)
         Dim o = CType(cCtrl, CButton)
@@ -410,12 +404,11 @@ Public Class BfMain
         End If
     End Sub
 
-    Private Sub TranslateToolStripButton(cButton As ToolStripButton)
+    Private Sub TranslateToolStripButtonImage(cButton As ToolStripButton)
         Dim cResourceName = cButton.Name.ToLower()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
             cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
-            'cButton.ToolTipText = Messaging.TranslateCaption(cButton.Tag(1))
         Else
             cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
             'cButton.ToolTipText = If(cButton.Tag IsNot Nothing, cButton.Tag(1), cButton.ToolTipText)
@@ -542,11 +535,11 @@ Public Class BfMain
 
     Public Sub SetControlSecurity(ByRef cCtrl As Control)
         Dim controlSecurityKey As String
-        If cCtrl.GetType().ToString() = "System.Windows.Forms.ToolStrip" Then
+        If TypeOf cCtrl Is ToolStrip Then
             Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
             Dim toolStrip As ToolStrip = cCtrl
             SetToolStripItems(toolStrip.Items, subMenuName)
-        ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
+        ElseIf TypeOf cCtrl Is MenuStrip Then
             Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
             Dim menuStrip As MenuStrip = cCtrl
             SetMenuStripItems(menuStrip.Items, subMenuName)
@@ -840,27 +833,16 @@ Public Class BfMain
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is DataGrid Then
                     CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-                ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.ToolStrip" Then
+                ElseIf TypeOf cCtrl Is ToolStrip Then
                     Dim c As ToolStrip
                     c = cCtrl
                     For Each obj As Object In c.Items
                         ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                        If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                            Try
-                                If Not String.IsNullOrEmpty(obj.Tag) Then
-                                    obj.Text = obj.Tag
-                                End If
-                            Catch ex As Exception
-
-                            End Try
-                        Else
-                            Try
-                                If Not String.IsNullOrEmpty(obj.Tag) Then
-                                    obj.Text = obj.Tag
-                                End If
-                            Catch ex As Exception
-
-                            End Try
+                        obj.Text = obj.Tag(0)
+                        obj.ToolTipText = obj.Tag(1)
+                        Dim button As ToolStripButton = TryCast(obj, ToolStripButton)
+                        If (button IsNot Nothing)
+                            button.Image = button.Image.Tag
                         End If
                     Next
                 ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
