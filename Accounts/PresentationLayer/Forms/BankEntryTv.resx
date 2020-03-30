@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 61</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 183</value>
+    <value>300, 191</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -138,16 +141,16 @@
     <value>1</value>
   </data>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>124, 17</value>
+    <value>146, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>259, 17</value>
+    <value>281, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>389, 17</value>
+    <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>513, 17</value>
+    <value>535, 17</value>
   </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TxtIDNo.Enabled" type="System.Boolean, mscorlib">
@@ -160,7 +163,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>1, 16</value>
   </data>
   <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -193,7 +196,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBankCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>1, 41</value>
   </data>
   <data name="lblBankCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -226,7 +229,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBankCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 26</value>
+    <value>158, 41</value>
   </data>
   <data name="txtBankCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -253,7 +256,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBankName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 66</value>
   </data>
   <data name="lblBankName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -286,7 +289,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBankName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 51</value>
+    <value>158, 66</value>
   </data>
   <data name="txtBankName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -313,7 +316,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBankNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 76</value>
+    <value>1, 91</value>
   </data>
   <data name="lblBankNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -346,7 +349,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBankNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 76</value>
+    <value>158, 91</value>
   </data>
   <data name="txtBankNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -376,7 +379,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 101</value>
+    <value>1, 116</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -409,7 +412,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 101</value>
+    <value>158, 116</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -439,13 +442,16 @@
     <value>Right</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 25</value>
+    <value>306, 61</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>430, 180</value>
   </data>
+  <data name="floDataDisplay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 15, 0, 0</value>
+  </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 186</value>
+    <value>596, 191</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -466,7 +472,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 1</value>
+    <value>158, 16</value>
   </data>
   <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -493,7 +499,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>902, 211</value>
+    <value>902, 252</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Banks Maintenance Form</value>

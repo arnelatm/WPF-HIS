@@ -27,23 +27,20 @@ Namespace PresentationLayer.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionsEntryTv))
         Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtLanguageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtOriginalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtCaptionIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
+        Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
         'TreeViewTableName
@@ -80,134 +77,72 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.SetFlowBreak(Me.txtCaption, true)
         resources.ApplyResources(Me.txtCaption, "txtCaption")
         Me.txtCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtCaption.LinkedLabel = Me.lblCaption
+        Me.txtCaption.LinkedLabel = Nothing
         Me.txtCaption.Name = "txtCaption"
         Me.txtCaption.OldValue = Nothing
         Me.txtCaption.SecurityKey = "Translators_Developer"
-        Me.txtCaption.TabStop = false
         Me.txtCaption.ValueIsMandatory = true
-        '
-        'lblCaption
-        '
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
-        Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.SecurityKey = "Translators_Developer"
-        '
-        'txtMessage
-        '
-        Me.txtMessage.BackColor = System.Drawing.Color.White
-        Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMessage.ComputedValue = false
-        Me.txtMessage.CustomFormat = Nothing
-        Me.txtMessage.DataBoundControl = true
-        Me.txtMessage.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtMessage, true)
-        resources.ApplyResources(Me.txtMessage, "txtMessage")
-        Me.txtMessage.ForeColor = System.Drawing.Color.Black
-        Me.txtMessage.LinkedLabel = Nothing
-        Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.OldValue = Nothing
-        Me.txtMessage.SecurityKey = "Translators_Developer"
-        Me.txtMessage.ValueIsMandatory = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.SecurityKey = "_DeveloperOnly"
-        Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
         '
         resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+        Me.floDataDisplay.Controls.Add(Me.Label1)
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
         Me.floDataDisplay.Controls.Add(Me.lblCaption)
         Me.floDataDisplay.Controls.Add(Me.txtCaption)
-        Me.floDataDisplay.Controls.Add(Me.lblMessage)
-        Me.floDataDisplay.Controls.Add(Me.txtMessage)
-        Me.floDataDisplay.Controls.Add(Me.lblTranslatedMessage)
-        Me.floDataDisplay.Controls.Add(Me.txtTranslatedMessage)
         Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
-        Me.floDataDisplay.Controls.Add(Me.lblNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtOriginalIdNo)
+        Me.floDataDisplay.Controls.Add(Me.txtCaptionIdNo)
         Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
-        Me.floDataDisplay.Controls.Add(Me.Button1)
         Me.floDataDisplay.Name = "floDataDisplay"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
         'lblIdNo
         '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'lblMessage
+        'lblCaption
         '
-        resources.ApplyResources(Me.lblMessage, "lblMessage")
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.SecurityKey = "Translators_Developer"
-        '
-        'lblTranslatedMessage
-        '
-        resources.ApplyResources(Me.lblTranslatedMessage, "lblTranslatedMessage")
-        Me.lblTranslatedMessage.Name = "lblTranslatedMessage"
-        '
-        'txtTranslatedMessage
-        '
-        Me.txtTranslatedMessage.AutoFill = false
-        Me.txtTranslatedMessage.BackColor = System.Drawing.Color.White
-        Me.txtTranslatedMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTranslatedMessage.ComputedValue = false
-        Me.txtTranslatedMessage.CustomFormat = Nothing
-        Me.txtTranslatedMessage.DataBoundControl = true
-        Me.txtTranslatedMessage.EditingMode = false
-        Me.txtTranslatedMessage.EnglishControl = Me.txtMessage
-        Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedMessage, true)
-        resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
-        Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
-        Me.txtTranslatedMessage.LinkedLabel = Me.lblTranslatedMessage
-        Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
-        Me.txtTranslatedMessage.OldValue = Nothing
-        Me.txtTranslatedMessage.ValueIsMandatory = true
+        Me.lblCaption.DisplayOnly = true
+        Me.lblCaption.EditingMode = false
+        resources.ApplyResources(Me.lblCaption, "lblCaption")
+        Me.lblCaption.Name = "lblCaption"
+        Me.lblCaption.SecurityKey = "Translators_Developer"
         '
         'lblTranslatedCaption
         '
+        Me.lblTranslatedCaption.DisplayOnly = true
+        Me.lblTranslatedCaption.EditingMode = false
         resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
         Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
         '
         'txtTranslatedCaption
         '
+        Me.txtTranslatedCaption.AutoFill = false
         Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
         Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTranslatedCaption.ComputedValue = false
         Me.txtTranslatedCaption.CustomFormat = Nothing
         Me.txtTranslatedCaption.DataBoundControl = true
         Me.txtTranslatedCaption.EditingMode = false
+        Me.txtTranslatedCaption.EnglishControl = Me.txtCaption
         Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, true)
         resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
         Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtTranslatedCaption.LinkedLabel = Nothing
+        Me.txtTranslatedCaption.LinkedLabel = Me.lblTranslatedCaption
         Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
         Me.txtTranslatedCaption.OldValue = Nothing
-        Me.txtTranslatedCaption.TabStop = false
         Me.txtTranslatedCaption.ValueIsMandatory = true
-        '
-        'lblNotes
-        '
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
         '
         'txtLanguageIdNo
         '
@@ -226,22 +161,22 @@ Namespace PresentationLayer.Forms
         Me.txtLanguageIdNo.ReadOnly = true
         Me.txtLanguageIdNo.TabStop = false
         '
-        'txtOriginalIdNo
+        'txtCaptionIdNo
         '
-        Me.txtOriginalIdNo.BackColor = System.Drawing.Color.White
-        Me.txtOriginalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtOriginalIdNo.ComputedValue = false
-        Me.txtOriginalIdNo.CustomFormat = Nothing
-        Me.txtOriginalIdNo.DataBoundControl = true
-        Me.txtOriginalIdNo.DisplayOnly = true
-        Me.txtOriginalIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtOriginalIdNo, "txtOriginalIdNo")
-        Me.txtOriginalIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtOriginalIdNo.LinkedLabel = Nothing
-        Me.txtOriginalIdNo.Name = "txtOriginalIdNo"
-        Me.txtOriginalIdNo.OldValue = Nothing
-        Me.txtOriginalIdNo.ReadOnly = true
-        Me.txtOriginalIdNo.TabStop = false
+        Me.txtCaptionIdNo.BackColor = System.Drawing.Color.White
+        Me.txtCaptionIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCaptionIdNo.ComputedValue = false
+        Me.txtCaptionIdNo.CustomFormat = Nothing
+        Me.txtCaptionIdNo.DataBoundControl = true
+        Me.txtCaptionIdNo.DisplayOnly = true
+        Me.txtCaptionIdNo.EditingMode = true
+        resources.ApplyResources(Me.txtCaptionIdNo, "txtCaptionIdNo")
+        Me.txtCaptionIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtCaptionIdNo.LinkedLabel = Nothing
+        Me.txtCaptionIdNo.Name = "txtCaptionIdNo"
+        Me.txtCaptionIdNo.OldValue = Nothing
+        Me.txtCaptionIdNo.ReadOnly = true
+        Me.txtCaptionIdNo.TabStop = false
         '
         'txtIdNoTranslated
         '
@@ -260,41 +195,50 @@ Namespace PresentationLayer.Forms
         Me.txtIdNoTranslated.ReadOnly = true
         Me.txtIdNoTranslated.TabStop = false
         '
-        'Button1
+        'CFlowLayout1
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.SeaGreen
+        Me.CFlowLayout1.Controls.Add(Me.CLabel1)
+        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+        Me.CFlowLayout1.Name = "CFlowLayout1"
         '
-        'OriginalCaptionEntryTv
+        'CLabel1
+        '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        resources.ApplyResources(Me.CLabel1, "CLabel1")
+        Me.CLabel1.ForeColor = System.Drawing.Color.White
+        Me.CLabel1.Name = "CLabel1"
+        '
+        'OriginalCaptionsEntryTv
         '
         resources.ApplyResources(Me, "$this")
+        Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "OriginalCaptionEntryTv"
+        Me.Name = "OriginalCaptionsEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
+        Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
 End Sub
         Friend WithEvents TxtIDNo As CTextBox
         Friend WithEvents txtCaption As CTextBox
-        Friend WithEvents txtMessage As CTextBox
-        Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblCaption As CLabel
-        Friend WithEvents lblMessage As CLabel
-        Friend WithEvents lblNotes As CLabel
-        Friend WithEvents lblTranslatedMessage As CLabel
         Friend WithEvents lblTranslatedCaption As CLabel
-        Friend WithEvents txtTranslatedCaption As CTextBox
         Friend WithEvents txtLanguageIdNo As CTextBox
-        Friend WithEvents txtOriginalIdNo As CTextBox
+        Friend WithEvents txtCaptionIdNo As CTextBox
         Friend WithEvents txtIdNoTranslated As CTextBox
-        Friend WithEvents Button1 As Windows.Forms.Button
-        Friend WithEvents txtTranslatedMessage As CTextBoxArabic
+        Friend WithEvents txtTranslatedCaption As CTextBoxArabic
+        Friend WithEvents Label1 As Label
+        Friend WithEvents CFlowLayout1 As CFlowLayout
+        Friend WithEvents CLabel1 As CLabel
     End Class
 End NameSpace

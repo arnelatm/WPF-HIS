@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Globalization
+Imports System.Runtime.Remoting
 Imports System.Threading
 Imports System.Transactions
 Imports System.Windows.Forms
@@ -123,6 +125,8 @@ Public Class CFormEntry
 
     Public Property CancelSave As Boolean = False
 
+    Protected Property FormTitleCaption As String = ""
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -159,6 +163,13 @@ Public Class CFormEntry
             Return _editMode
         End Get
     End Property
+
+    Public Sub SetFormTitleCaption()
+        lblFormDescription.Text = FormTitleCaption
+        lblFormDescription.Left = 0
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
 
     'Protected Property _recordNumber() As Integer
     '    Get
@@ -248,6 +259,13 @@ Public Class CFormEntry
         Next
         Return validationsPassed
     End Function
+
+    Public Sub ShowFormTitle
+        lblFormDescription.Text = FormTitleCaption
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.Left = 0
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
 
     Public Sub CheckDataChanges()
     End Sub
@@ -885,6 +903,7 @@ Public Class CFormEntry
                 btnOriginal.Visible = False
             End If
             DisplayView()
+            SetFormTitleCaption()
             FirstControl.Focus()
             'AddHandler BtnNext.DoubleClick, AddressOf BtnNext.MyDoubleClick
             'AddHandler BtnNext.DoubleClick, AddressOf TurnOnDebugger

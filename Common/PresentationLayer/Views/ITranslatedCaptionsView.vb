@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property Caption As String
         Property LanguageIdNo As Integer
         Property TranslatedCaption As String
-        Property OriginalCaptionIdNo
+        Property CaptionIdNo as Integer
         Property CultureInfoCode As String
         Property LanguageCode2 As String
     End Interface

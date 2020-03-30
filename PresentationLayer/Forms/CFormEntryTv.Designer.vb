@@ -35,14 +35,14 @@ Partial Class CFormEntryTv
             Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.BackColor = System.Drawing.Color.Honeydew
         Me.TreeViewTableName.ImageKey = "TreeNode.ico"
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 28)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 61)
         Me.TreeViewTableName.Name = "TreeViewTableName"
         TreeNode1.Name = "Node0"
         TreeNode1.Tag = "root"
         TreeNode1.Text = "TableName"
         Me.TreeViewTableName.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeViewTableName.SelectedImageKey = "openbriefcase.png"
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 278)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 245)
         Me.TreeViewTableName.TabIndex = 2
         '
         'CFormEntryTv
