@@ -124,12 +124,15 @@
   <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 57</value>
+  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 591</value>
+    <value>300, 595</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -559,7 +562,7 @@
     <value>Right</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 61</value>
+    <value>311, 57</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>430, 180</value>
@@ -568,7 +571,7 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 591</value>
+    <value>681, 595</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -622,7 +625,7 @@
     <value>994, 691</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>SecurityGroups Maintenance Form</value>
+    <value>Security Groups Maintenance Form</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>

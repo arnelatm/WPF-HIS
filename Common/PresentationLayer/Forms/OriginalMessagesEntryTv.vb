@@ -21,7 +21,7 @@ Namespace PresentationLayer.Forms
             PresenterObj = New OriginalMessagesPresenter(Me)
 
             PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
-
+            PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
             'CreateEnumResourceFile()
 
             'ResourceEnumConverter.MakeResource("OriginalMessagesTypeSelection", GetType(OriginalMessagesTypeSelection))

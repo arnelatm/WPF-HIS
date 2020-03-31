@@ -21,6 +21,7 @@ Imports AATM.PresentationLayer.Views
 Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
+    Public ChildPresenters as New List(Of Object)
 
     Protected DataService
 
@@ -30,6 +31,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected TreeViewSecondaryField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewList
+
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected DbDataDao
@@ -103,6 +105,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Shared Property RecordNumber As Integer
 
+
+    Public Sub AddChildPresenter(obj As Object)
+        ChildPresenters.Add(obj)
+    End Sub
     Private Function GetRecordNumberValue(idNo As Integer) As Integer
         Try
             Return GetRecordPosition(idNo)
@@ -203,7 +209,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(Of T, TM)(View, OriginalModel)
+        GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
+        for each item In ChildPresenters
+            item.SaveOriginalValues()
+        Next
         'GlobalVariables.Mapper.Map(Of TM)(View, Origin'alModel)
         'GlobalVariables.Mapper.Map(View,OriginalModel)
     End Sub
