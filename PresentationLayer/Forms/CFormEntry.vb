@@ -165,7 +165,7 @@ Public Class CFormEntry
     End Property
 
     Public Sub SetFormTitleCaption()
-        lblFormDescription.Text = FormTitleCaption
+        lblFormDescription.Text = Text
         lblFormDescription.Left = 0
         lblFormDescription.Width = Me.Width
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
@@ -739,7 +739,6 @@ Public Class CFormEntry
         Undo()
         btnArabic.Visible = False
         btnOriginal.Visible = True
-        btnUndo.PerformClick()
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click

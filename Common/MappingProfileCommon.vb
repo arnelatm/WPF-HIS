@@ -27,6 +27,7 @@ Public Class MappingProfileCommon
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView).ReverseMap()
         CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
         CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
+
     End Sub
 
 End Class

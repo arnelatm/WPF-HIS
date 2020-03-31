@@ -10,7 +10,7 @@ Namespace PresentationLayer.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
+            FormTitleCaption = "Branches Maintenance Form"
             MainTableName = "Branch"
             IdFieldName = "IdNo"
             TvMainFieldName = "BranchName"

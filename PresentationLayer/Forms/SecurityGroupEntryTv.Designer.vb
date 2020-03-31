@@ -38,6 +38,7 @@ Partial Class SecurityGroupEntryTv
         Me.lblSecurityGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblSecurityGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.DGVIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DGVSecurityGroupIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,12 +49,11 @@ Partial Class SecurityGroupEntryTv
         Me.Viewable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DGVEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
+        Me.CFlowLayout1.SuspendLayout
         CType(Me.DataGridViewGroupAccesses,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsGroupAccesses,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
         'TreeViewTableName
@@ -197,6 +197,13 @@ Partial Class SecurityGroupEntryTv
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
+        'CFlowLayout1
+        '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Controls.Add(Me.DataGridViewGroupAccesses)
+        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        '
         'DataGridViewGroupAccesses
         '
         Me.DataGridViewGroupAccesses.AllowUserToAddRows = false
@@ -294,13 +301,6 @@ Partial Class SecurityGroupEntryTv
         Me.DGVEditable.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVEditable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.DataGridViewGroupAccesses)
-        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        '
         'SecurityGroupEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -311,9 +311,9 @@ Partial Class SecurityGroupEntryTv
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
+        Me.CFlowLayout1.ResumeLayout(false)
         CType(Me.DataGridViewGroupAccesses,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsGroupAccesses,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 

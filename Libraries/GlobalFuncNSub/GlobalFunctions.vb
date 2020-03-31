@@ -466,7 +466,7 @@ Public Module GlobalFunctions
                         '    Next
                         'ElseIf target <> source Then
                     ElseIf Not target.Equals(source) Then
-                        If t.Name.ToLower() = "datecreated" Then
+                        If t.Name.ToLower() = $"datecreated" Then
                             ' ignore these fields
                         Else
                             objectsCompareResult = False
