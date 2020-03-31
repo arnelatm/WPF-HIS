@@ -125,8 +125,6 @@ Public Class CFormEntry
 
     Public Property CancelSave As Boolean = False
 
-    Protected Property FormTitleCaption As String = ""
-
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -164,13 +162,6 @@ Public Class CFormEntry
         End Get
     End Property
 
-    Public Sub SetFormTitleCaption()
-        lblFormDescription.Text = Text
-        lblFormDescription.Left = 0
-        lblFormDescription.Width = Me.Width
-        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
-    End Sub
-
     'Protected Property _recordNumber() As Integer
     '    Get
     '        Return _RecordNumber
@@ -191,8 +182,8 @@ Public Class CFormEntry
     Public Property MainTableName As String = ""
 
     Public Property TableProperties As Array
-
     Public Property UndoMode As Boolean = False
+    Protected Property FormTitleCaption As String = ""
 
     'Public Property TableDefaultFieldValues
     <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
@@ -260,38 +251,46 @@ Public Class CFormEntry
         Return validationsPassed
     End Function
 
-    Public Sub ShowFormTitle
-        lblFormDescription.Text = FormTitleCaption
-        lblFormDescription.Width = Me.Width
-        lblFormDescription.Left = 0
-        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
-    End Sub
-
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Overridable Function DeleteRecord(idNo As Integer) As Integer
+    Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
+        Dim retValue As Boolean = False
+        If Not DependentRecordsExist(idNo) Then
+            retValue = True
+        End If
+        Return retValue
+    End Function
+
+    Public Overridable Function DeleteRecord() As Integer
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         Dim retValue = 0
-        RaiseEvent BeforeDelete()
-        If CancelDelete Then
-            CancelDelete = False
-        Else
-            If Not DependentRecordsExist(idNo) Then
-                retValue = PresenterObj.DeleteRecord(idNo)
+        Dim currentIdNo = GetPropertyValue(Me, IdFieldName)
+        If IsOkToDeleteRecord(currentIdNo) Then
+            If _MBDeleteRecordAsk.Show(Me) = DialogResult.Yes Then
+                RaiseEvent BeforeDelete()
+                retValue = PresenterObj.DeleteRecord(currentIdNo)
                 If retValue <= 0 Then
                     _MBDeleteRecordFailed.Show(Me)
                 Else
-                    RaiseEvent SuccessfulDelete(idNo)
+                    RaiseEvent SuccessfulDelete(currentIdNo)
                     _MBRecordSuccessfullyDeleted.Show(Me)
                     GetAndDisplayRecordForGivenRecordPosition()
+                    TargetIdNo = PresenterObj.GetSortedRecordNumber(RecordPositionNumber)
+                    GetRecordInfoForIdNo()
                 End If
+                RaiseEvent AfterDelete()
             End If
         End If
-        RaiseEvent AfterDelete()
         Return retValue
     End Function
 
     Public Sub EditData()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         RaiseEvent BeforeEdit()
         If CancelEdit Then
             CancelEdit = False
@@ -306,6 +305,9 @@ Public Class CFormEntry
     End Sub
 
     Public Function FindField(txtControl As Control) As Integer
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         If OkToMove("FindField") Then
             Dim idNoOfFoundRecord As Integer
             idNoOfFoundRecord = PresenterObj.FindField(txtControl)
@@ -328,6 +330,9 @@ Public Class CFormEntry
     End Function
 
     Public Sub FindFieldContinue(recIdKey As Integer)
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         If OkToMove("Continue Find") Then
             TargetIdNo = PresenterObj.FindFieldContinue(TargetIdNo)
             If TargetIdNo <> 0 Then
@@ -341,25 +346,6 @@ Public Class CFormEntry
     Public Function GetFieldsDictionary()
         Return FieldsDictionary
     End Function
-
-    Public Sub GoDeleteRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        'EditData()
-        Dim currentIdNo = GetPropertyValue(Me, IdFieldName)
-        If _MBDeleteRecordAsk.Show(Me) = DialogResult.Yes Then
-            Dim retValue As Integer
-            retValue = DeleteRecord(currentIdNo)
-            If retValue <= 0 Then
-                '' Something went wrong during the deletion since no record was/were deleted
-                '' retValue = -1 , for unsuccessful delete
-            Else
-                TargetIdNo = PresenterObj.GetSortedRecordNumber(RecordPositionNumber)
-                GetRecordInfoForIdNo()
-            End If
-        End If
-    End Sub
 
     Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         If GotoTargetRecordWorker.CancellationPending Then
@@ -377,6 +363,9 @@ Public Class CFormEntry
     End Sub
 
     Public Sub Save()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         If OkToSaveRecord() Then
             RaiseEvent BeforeSave()
             Dim retValue As Short
@@ -412,38 +401,19 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Protected Function OkToSaveRecord() As Boolean
-        Dim retValue As Boolean = False
-        If Not AddMode Then
-            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
-                Return False
-            Else
-                If Not ChangesMade() Then
-                    _MBNoChangesMadeNothingToSave.Show(Me)
-                    Return False
-                End If
-            End If
-        End If
-        If DataIsValid() Then
-            retValue = True
-        End If
-        Return retValue
-    End Function
+    Public Sub SetFormTitleCaption()
+        lblFormDescription.Text = Text
+        lblFormDescription.Left = 0
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
 
-    'Public Overridable Function SaveDataEntry()
-    '    Dim retValue As Int16
-    '    If CancelSave Then
-    '        CancelSave = False
-    '        retValue = -1
-    '    Else
-    '        retValue = InitiateSave(retValue)
-    '    End If
-    '    If retValue > 0 Then
-    '        _MBRecordSuccessfullySaved.Show(Me)
-    '    End If
-    '    Return retValue
-    'End Function
+    Public Sub ShowFormTitle()
+        lblFormDescription.Text = FormTitleCaption
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.Left = 0
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
 
     Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
@@ -465,6 +435,19 @@ Public Class CFormEntry
         'showWaitForm.ReportProgress(progress)
     End Sub
 
+    'Public Overridable Function SaveDataEntry()
+    '    Dim retValue As Int16
+    '    If CancelSave Then
+    '        CancelSave = False
+    '        retValue = -1
+    '    Else
+    '        retValue = InitiateSave(retValue)
+    '    End If
+    '    If retValue > 0 Then
+    '        _MBRecordSuccessfullySaved.Show(Me)
+    '    End If
+    '    Return retValue
+    'End Function
     Public Sub TurnOffInputs()
         Inputs(False)
         RaiseEvent InputsTurnedOff()
@@ -642,6 +625,25 @@ Public Class CFormEntry
         Return retValue
     End Function
 
+    Protected Function OkToSaveRecord() As Boolean
+        Dim retValue As Boolean = False
+        If Not AddMode Then
+            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
+                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+                Return False
+            Else
+                If Not ChangesMade() Then
+                    _MBNoChangesMadeNothingToSave.Show(Me)
+                    Return False
+                End If
+            End If
+        End If
+        If DataIsValid() Then
+            retValue = True
+        End If
+        Return retValue
+    End Function
+
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -662,6 +664,36 @@ Public Class CFormEntry
                                 MessageBoxDefaultButton.Button3)
         Return result
     End Function
+
+    Protected Sub Undo()
+        If ChangesMade() Then
+            Dim result As DialogResult
+            result = SaveOrAbandonChanges()
+            If result = DialogResult.Yes Then
+                Save()
+                AddMode = False
+                EditMode = False
+                GetRecordInfoForIdNo()
+            ElseIf result = DialogResult.No Then
+                ' undo changes retrieve the last record
+                If AddMode Then
+                    AddMode = False
+                    TargetIdNo = LastIdNo
+                    GetRecordInfoForIdNo()
+                Else
+                    EditMode = False
+                    GetRecordInfoForIdNo()
+                End If
+            Else
+                ' DialogResult.Cancel
+                ' don't do anything just continue edits
+            End If
+        Else
+            AddMode = False
+            EditMode = False
+            GetRecordInfoForIdNo()
+        End If
+    End Sub
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
         If RecordCount = 0 Then
@@ -790,23 +822,8 @@ Public Class CFormEntry
         CloseForm()
     End Sub
 
-    Private Sub CloseForm()
-
-        If OkToMove("Quit") Then
-            CancelClose = False
-            'Close()
-            If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
-                TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-            End If
-            GC.Collect()
-            GC.WaitForPendingFinalizers()
-            If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
-            End If
-            Dispose()
-        Else
-            CancelClose = True
-        End If
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Save()
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
@@ -824,41 +841,37 @@ Public Class CFormEntry
         Undo()
     End Sub
 
-    Protected Sub Undo()
-        If ChangesMade() Then
-            Dim result As DialogResult
-            result = SaveOrAbandonChanges()
-            If result = DialogResult.Yes Then
-                Save()
-                AddMode = False
-                EditMode = False
-                GetRecordInfoForIdNo()
-            ElseIf result = DialogResult.No Then
-                ' undo changes retrieve the last record
-                If AddMode Then
-                    AddMode = False
-                    TargetIdNo = LastIdNo
-                    GetRecordInfoForIdNo()
-                Else
-                    EditMode = False
-                    GetRecordInfoForIdNo()
-                End If
-            Else
-                ' DialogResult.Cancel
-                ' don't do anything just continue edits
-            End If
-        Else
-            AddMode = False
-            EditMode = False
-            GetRecordInfoForIdNo()
-        End If
-    End Sub
-
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         If CancelClose Then
             e.Cancel = True
         Else
             CancelClose = False
+        End If
+    End Sub
+
+    Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        CloseForm()
+    End Sub
+
+    Private Sub CFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F10 Then
+            If btnSave.Enabled Then
+                e.SuppressKeyPress = True
+                e.Handled = True
+                Save()
+            Else
+                Beep()
+            End If
+        ElseIf e.KeyCode = Keys.F2 Then
+            If btnSave.Enabled Then
+                e.SuppressKeyPress = True
+                e.Handled = True
+                EditData()
+            Else
+                Beep()
+            End If
+        Else
+            e.Handled = False
         End If
     End Sub
 
@@ -937,6 +950,33 @@ Public Class CFormEntry
                 ''
             End Try
         Next
+    End Sub
+
+    Private Sub CloseForm()
+
+        If OkToMove("Quit") Then
+            CancelClose = False
+            'Close()
+            If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+                TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+            End If
+            GC.Collect()
+            GC.WaitForPendingFinalizers()
+            If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+            End If
+            Dispose()
+        Else
+            CancelClose = True
+        End If
+    End Sub
+
+    Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
+        CopyText()
+    End Sub
+
+    Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
+        CutText()
     End Sub
 
     Private Sub FindRecord()
@@ -1245,6 +1285,10 @@ Public Class CFormEntry
         PresenterObj.MakeDefaultValues()
     End Sub
 
+    Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
+        PasteText()
+    End Sub
+
     Private Sub SetAllControlsDynamicProperties()
         If Not DesignMode Then
             Dim allControls As New List(Of Control)
@@ -1409,7 +1453,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        GoDeleteRecord()
+        DeleteRecord()
     End Sub
 
     Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles btnFind.Click
@@ -1424,26 +1468,6 @@ Public Class CFormEntry
         RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
         tsbCurrentRecord.Text = RecordPositionNumber
         tsbTotalRecords.Text = RecordCount
-    End Sub
-
-    Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
-        CutText()
-    End Sub
-
-    Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
-        CopyText()
-    End Sub
-
-    Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
-        PasteText()
-    End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Save()
-    End Sub
-
-    Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        CloseForm()
     End Sub
 
 End Class

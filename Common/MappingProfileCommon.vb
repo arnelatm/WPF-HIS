@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.BusinessLayer
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.DataLayer.AdoNet
 Imports AutoMapper
 
 Public Class MappingProfileCommon
@@ -27,6 +28,23 @@ Public Class MappingProfileCommon
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView).ReverseMap()
         CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
         CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
+
+        CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.MessageIdNo))
+
+        '    .ForMember(Function(dest) dest.TelephoneNumber, sub(opt) opt.MapFrom(function(src) src.TelephoneNo1)) _
+        '    .ForMember(Function(dest) dest.MobileNumber, Sub(opt) opt.MapFrom(function(src) src.MobilePhoneNo)) _
+        '    .ForMember(Function(dest) dest.NationalInsuranceNumber, sub(opt) opt.MapFrom(function(src) src.NINo)) _
+        '    .ForMember(Function(dest) dest.DateOfBirth, Sub(opt) opt.MapFrom(function(src) src.BirthDate))
+
+        'Mapper.CreateMap<IDataReader, Contact>().ForMember(c=>c.Addresses, opt=>opt.Ignore());
+        'Mapper.CreateMap(Of IDataReader, Contact)().ForMember(Function(c) c.Addresses, Function(opt) opt.Ignore())
+        'CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(c) c.TranslatedMessagesModel, Function(opt) opt.Ignore())
+
+        'AutoMapper.Mapper.CreateMap<Transit, BusViewModel>().ForMember(dest => dest.NextArrivalInMinutes, opt => opt.MapFrom(src => src.NextBusArrival.Minute));
+
+        'CreateMap(Of ITranslatedMessagesView , TranslatedMessagesModel )().ForMember(Function(c) c.MessagesIdNo, Function(opt) opt.MapFrom( Function(src) src.IdNo))
+
+        'CreateMap(Of ITranslatedMessagesView , TranslatedMessagesModel )().ForMember(Function(c) c.MessagesIdNo, Function(opt) opt.Ignore())
 
     End Sub
 
