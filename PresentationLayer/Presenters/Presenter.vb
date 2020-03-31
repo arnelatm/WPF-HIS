@@ -117,9 +117,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetSortedRecordNumber(recordNo As Integer) As Integer
+    Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Return Model.GetSortedRecordNumber(recordNo, TableName, SortOrderKey)
+            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey)
         Catch ex As Exception
             Return 0
         End Try
@@ -200,7 +200,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    Next
     'End Sub
 
-    Public Overridable Overloads Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+    Public Overridable Sub Display(idNo As Integer)
         Dim modelData
         modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
         If modelData IsNot Nothing And modelData.IdNo > 0 Then
@@ -213,7 +213,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         for each item In ChildPresenters
             item.SaveOriginalValues()
         Next
-        'GlobalVariables.Mapper.Map(Of TM)(View, Origin'alModel)
+        'GlobalVariables.Mapper.Map(Of TM)(View, OriginalModel)
         'GlobalVariables.Mapper.Map(View,OriginalModel)
     End Sub
 

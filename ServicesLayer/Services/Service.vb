@@ -197,9 +197,9 @@ Namespace Services
             Return BaseDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
-        Public Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
-            Implements IService.GetSortedRecordNumber
-            Return BaseDao.GetSortedRecordNumber(recordNo, tableName, sortOrder)
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+            Implements IService.GetIdNoOfSortedPositionNumber
+            Return BaseDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
         End Function
 
         Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer _

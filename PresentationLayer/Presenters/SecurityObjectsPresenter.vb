@@ -31,7 +31,7 @@ Public Class SecurityObjectsPresenter
     '''     Displays list of General Journal Items.
     ''' </summary>
     ''' <param name="securityGroupIdNo">SecurityGroupIdNo id to display.</param>
-    Public Overrides Sub Display(securityGroupIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+    Public Overrides Sub Display(securityGroupIdNo As Integer)
         View.SecurityObjects = Model.GetRecordsWithIdNo(Of SecurityObjectModel)(securityGroupIdNo, "Sequence")
     End Sub
 

@@ -72,7 +72,7 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap CkdOi Items.
         '''' </summary>
         '''' <param name="ckdOiIdNo">CkdOiIDNo id to display.</param>
-        Public Shadows Sub Display(ckdOiIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(ckdOiIdNo As Integer)
             View.CkdOiItems = Model.GetRecordsWithIdNo(Of CkdOiItemModel)(ckdOiIdNo, "Sequence")
         End Sub
 

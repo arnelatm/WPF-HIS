@@ -300,9 +300,9 @@ Namespace PresentationLayer.Forms
             Return retValue
         End Function
 
-        Protected Overrides Sub DisplayView()
-            MyBase.DisplayView()
-            _distributionSchemeItemsPresenter.Display(TargetIdNo, UndoMode)
+        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+            MyBase.DisplayView(idNoOfRecord)
+            _distributionSchemeItemsPresenter.Display(idNoOfRecord)
             BindDistributionSchemeItem()
             With DistributionSchemeItems
                 TotalPercentage = .Sum(Function(totals) totals.Percentage)

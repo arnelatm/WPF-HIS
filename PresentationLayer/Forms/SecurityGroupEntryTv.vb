@@ -127,9 +127,9 @@ Public Class SecurityGroupEntryTv
         End Set
     End Property
 
-    Protected Overrides Sub DisplayView()
-        MyBase.DisplayView()
-        _groupAccessPresenter.Display(TargetIdNo, UndoMode)
+    Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+        MyBase.DisplayView(idNoOfRecord)
+        _groupAccessPresenter.Display(idNoOfRecord)
         DataGridViewGroupAccesses.DataSource = Nothing
         DataGridViewGroupAccesses.DataSource = GroupAccesses
         DataGridViewGroupAccesses.Refresh()

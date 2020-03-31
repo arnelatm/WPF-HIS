@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of  Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Overloads Sub Display(journalIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Overloads Sub Display(journalIdNo As Integer)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 

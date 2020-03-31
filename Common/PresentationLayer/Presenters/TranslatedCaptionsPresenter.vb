@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             Dac = New Dac
         End Sub
 
-        Public Overrides Sub Display(messageIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Overrides Sub Display(messageIdNo As Integer)
             Dim idNoTm As Int16
             idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "messageIdNo", "IdNo")
             Dim modelData As New TranslatedCaptionsModel

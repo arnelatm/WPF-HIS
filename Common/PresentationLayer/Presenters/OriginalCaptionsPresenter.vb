@@ -38,7 +38,7 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
-        Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Overrides Sub Display(idNo As Integer)
             If idNo <> 0 Then
                 Dim modelData As OriginalCaptionsModel
                 modelData = Model.GetRecordById(Of OriginalCaptionsModel)(idNo)

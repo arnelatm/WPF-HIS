@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap SalesCash Items.
         '''' </summary>
         '''' <param name="salesCashIdNo">SalesCashIDNo id to display.</param>
-        Public Shadows Sub Display(salesCashIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(salesCashIdNo As Integer)
             View.SalesCashItems = Model.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
             For Each salesCashItem In View.SalesCashItems
                 Dim cashCode As CashCodeModel

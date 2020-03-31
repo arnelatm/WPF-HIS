@@ -315,9 +315,9 @@ Namespace PresentationLayer.Forms
         '    Return retValue
         'End Function
 
-        Protected Overrides Sub DisplayView()
-            MyBase.DisplayView()
-            _accountReconciliationItemsPresenter.Display(AccountIdNo, ReconciliationDate, AddMode, EditMode, IdNo, "TransactionDate")
+        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+            MyBase.DisplayView(idNoOfRecord)
+            _accountReconciliationItemsPresenter.Display(AccountIdNo, ReconciliationDate, AddMode, EditMode, idNoOfRecord, "TransactionDate")
             DisplayTotals()
         End Sub
 

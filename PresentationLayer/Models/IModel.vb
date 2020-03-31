@@ -82,7 +82,7 @@ Public Interface IModel
 
     Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String
 
-    Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
+    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
     Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer
 

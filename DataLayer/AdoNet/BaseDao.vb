@@ -51,8 +51,8 @@
         '    Return retVal
         'End Function
 
-        Public Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
-            Implements IBaseDao.GetSortedRecordNumber
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+            Implements IBaseDao.GetIdNoOfSortedPositionNumber
             If recordNo = 0 Then
                 Return 0
             Else

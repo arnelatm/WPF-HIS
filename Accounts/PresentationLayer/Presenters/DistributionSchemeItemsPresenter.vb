@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of DistributionScheme Items.
         ''' </summary>
         ''' <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
-        Public Shadows Sub Display(distributionSchemeIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(distributionSchemeIdNo As Integer)
             View.DistributionSchemeItems = Model.GetRecordsWithIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
         End Sub
 

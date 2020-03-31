@@ -46,7 +46,7 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Function
 
-        Public Shadows Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(idNo As Integer)
             Dim modelData As PurchaseJournalModel
             modelData = Model.GetRecordById(Of PurchaseJournalModel)(idNo)
             If modelData IsNot Nothing Then

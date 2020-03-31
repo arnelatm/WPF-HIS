@@ -277,9 +277,11 @@ Public Class CFormEntry
                 Else
                     RaiseEvent SuccessfulDelete(currentIdNo)
                     _MBRecordSuccessfullyDeleted.Show(Me)
-                    GetAndDisplayRecordForGivenRecordPosition()
-                    TargetIdNo = PresenterObj.GetSortedRecordNumber(RecordPositionNumber)
-                    GetRecordInfoForIdNo()
+                    ' if deleted stay on that given RecordPositionNumber
+                    ' which in this case will be the next record after the deleted record
+                    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                    DisplayView(TargetIdNo)
+                    RaiseEvent DisplayedRecordChanged()
                 End If
                 RaiseEvent AfterDelete()
             End If
@@ -317,12 +319,9 @@ Public Class CFormEntry
             Else
                 btnFind.Enabled = True
                 TargetIdNo = idNoOfFoundRecord
-                GetAndSetRecordPositionNumber()
-                GetAndDisplayRecordForGivenRecordPosition()
-                If EditMode Then
-                    '' in editing mode but no changes found so reset the EditMode to false
-                    EditMode = False
-                End If
+                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
             CancelClose = True
         End If
@@ -336,8 +335,9 @@ Public Class CFormEntry
         If OkToMove("Continue Find") Then
             TargetIdNo = PresenterObj.FindFieldContinue(TargetIdNo)
             If TargetIdNo <> 0 Then
-                GetAndSetRecordPositionNumber()
-                GetAndDisplayRecordForGivenRecordPosition()
+                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
             CancelClose = True
         End If
@@ -353,8 +353,10 @@ Public Class CFormEntry
             Return
         End If
         TargetIdNo = e.Argument
-        GetAndSetRecordPositionNumber()
-        GetAndDisplayRecordForGivenRecordPosition()
+        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+        TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+        DisplayView(TargetIdNo)
+        RaiseEvent DisplayedRecordChanged()
         DoPaintEvents()
     End Sub
 
@@ -396,9 +398,12 @@ Public Class CFormEntry
                 Debugger.Break()
             End Try
             If retValue > 0 Then
+                ' redisplay the updated record to reflect changes and to put record in viewmode
+                DisplayView(TargetIdNo)
                 _MBRecordSuccessfullySaved.Show(Me)
             End If
         End If
+
     End Sub
 
     Public Sub SetFormTitleCaption()
@@ -428,7 +433,7 @@ Public Class CFormEntry
         'Thread.Sleep(10)
         'showWaitForm.ReportProgress(progress)
         'Debugger.Break()
-        e.Result = PresenterObj.GetSortedRecordNumber(RecordPositionNumber)
+        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
         '_resetEvent.Set()
         'Thread.Sleep(10)
         'loop
@@ -509,29 +514,7 @@ Public Class CFormEntry
         Return 0
     End Function
 
-    Protected Overridable Sub DisplayView()
-        RaiseEvent BeforeDisplayView()
-        PresenterObj.Display(TargetIdNo, UndoMode)
-    End Sub
-
-    Protected Sub GetAndDisplayRecordForGivenRecordPosition()
-        Dim savedTargetIdNo As Integer = TargetIdNo
-        ' RecordPositionNumber is the position no. of the record in the sorted order
-        TargetIdNo = PresenterObj.GetSortedRecordNumber(RecordPositionNumber)
-        GetRecordInfoForIdNo()
-        DataChangesMade = False
-        If TargetIdNo <> savedTargetIdNo Then
-            RaiseEvent DisplayedRecordChanged()
-        End If
-    End Sub
-
-    Protected Sub GetAndSetRecordPositionNumber()
-        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-    End Sub
-
-    Protected Sub GetRecordInfoForIdNo()
-        Dim tmpUndoMode As Boolean = UndoMode
-        UndoMode = tmpUndoMode
+    Protected Overridable Sub DisplayView(ByVal idNoOfRecord As Integer)
         UpdateRecordCounter()
         EditMode = False
         AddMode = False
@@ -539,11 +522,37 @@ Public Class CFormEntry
         UpdateButtonDisplays(False, False)
         MyErrorProvider.ClearAllErrorMessages()
         MyErrorProvider.Clear()
-        DisplayView()
+        RaiseEvent BeforeDisplayView()
+        PresenterObj.Display(idNoOfRecord)
         PresenterObj.SaveOriginalValues()
         TurnOffInputs()
+        DataChangesMade = False
         Refresh()
     End Sub
+
+    'Protected Sub DisplayRecordPositionNumber()
+    '    Dim savedTargetIdNo As Integer = TargetIdNo
+    '    ' RecordPositionNumber is the position no. of the record in the sorted order
+    '    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+    '    DisplayView(TargetIdNo)
+    '    DataChangesMade = False
+    '    If TargetIdNo <> savedTargetIdNo Then
+    '        RaiseEvent DisplayedRecordChanged()
+    '    End If
+    'End Sub
+
+    'Protected Sub DisplaySortedPositionNumber(ByVal desiredSortedPositionNumber As Integer)
+    '    Dim savedTargetIdNo As Integer = TargetIdNo
+    '    ' RecordPositionNumber is the position no. of the record in the sorted order.
+    '    ' To display that record get first the actual IdNo of the record on that given sorted position
+    '    ' which will be stored in the TargetIdNo
+    '    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(desiredSortedPositionNumber)
+    '    DisplayView(TargetIdNo)
+    '    DataChangesMade = False
+    '    If TargetIdNo <> savedTargetIdNo Then
+    '        RaiseEvent DisplayedRecordChanged()
+    '    End If
+    'End Sub
 
     Protected Sub GoFirstRecord()
         If _debugSwitch Then
@@ -551,7 +560,9 @@ Public Class CFormEntry
         End If
         If OkToMove("First") Then
             RecordPositionNumber = 1
-            GetAndDisplayRecordForGivenRecordPosition()
+            TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+            DisplayView(TargetIdNo)
+            RaiseEvent DisplayedRecordChanged()
         End If
     End Sub
 
@@ -562,7 +573,9 @@ Public Class CFormEntry
         If Not PresenterObj Is Nothing Then
             If OkToMove("Last") Then
                 RecordPositionNumber = PresenterObj.GetRecordCount()
-                GetAndDisplayRecordForGivenRecordPosition()
+                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
         End If
     End Sub
@@ -576,7 +589,9 @@ Public Class CFormEntry
                 _MBLastRecordAlready.Show(Me)
             Else
                 RecordPositionNumber += 1
-                GetAndDisplayRecordForGivenRecordPosition()
+                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
         End If
     End Sub
@@ -590,7 +605,9 @@ Public Class CFormEntry
                 _MBFirstRecordAlready.Show(Me)
             Else
                 RecordPositionNumber -= 1
-                GetAndDisplayRecordForGivenRecordPosition()
+                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
         End If
     End Sub
@@ -609,11 +626,10 @@ Public Class CFormEntry
                     If AddMode Then
                         AddMode = False
                         TargetIdNo = LastIdNo
-                        GetRecordInfoForIdNo()
                     Else
                         EditMode = False
-                        GetRecordInfoForIdNo()
                     End If
+                    DisplayView(TargetIdNo)
                     retValue = True
                 Else
                     retValue = False
@@ -673,17 +689,16 @@ Public Class CFormEntry
                 Save()
                 AddMode = False
                 EditMode = False
-                GetRecordInfoForIdNo()
+                DisplayView(TargetIdNo)
             ElseIf result = DialogResult.No Then
                 ' undo changes retrieve the last record
                 If AddMode Then
                     AddMode = False
                     TargetIdNo = LastIdNo
-                    GetRecordInfoForIdNo()
                 Else
                     EditMode = False
-                    GetRecordInfoForIdNo()
                 End If
+                DisplayView(TargetIdNo)
             Else
                 ' DialogResult.Cancel
                 ' don't do anything just continue edits
@@ -691,7 +706,7 @@ Public Class CFormEntry
         Else
             AddMode = False
             EditMode = False
-            GetRecordInfoForIdNo()
+            DisplayView(TargetIdNo)
         End If
     End Sub
 
@@ -800,19 +815,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        If OkToMove("Previous") Then
-            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
-                _MBFirstRecordAlready.Show(Me)
-            Else
-                RecordPositionNumber -= 1
-                GetAndDisplayRecordForGivenRecordPosition()
-                'DisplayView()
-                'RaiseEvent DisplayedRecordChanged()
-            End If
-        End If
+        GoPreviousRecord()
     End Sub
 
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
@@ -887,8 +890,9 @@ Public Class CFormEntry
             Try
                 RecordPositionNumber = PresenterObj.GetRecordCount()
                 If RecordPositionNumber <> 0 Then
-                    GetAndDisplayRecordForGivenRecordPosition()
-                    btnFind.Enabled = False
+                    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                    DisplayView(TargetIdNo)
+                    RaiseEvent DisplayedRecordChanged()
                 Else
                     UpdateButtonDisplays(False, False)
                 End If
@@ -914,7 +918,6 @@ Public Class CFormEntry
                 btnArabic.Visible = True
                 btnOriginal.Visible = False
             End If
-            DisplayView()
             SetFormTitleCaption()
             FirstControl.Focus()
             'AddHandler BtnNext.DoubleClick, AddressOf BtnNext.MyDoubleClick
@@ -992,14 +995,14 @@ Public Class CFormEntry
                 End If
             Else
                 TargetIdNo = idNoOfFoundRecord
-                GetAndSetRecordPositionNumber()
-                GetAndDisplayRecordForGivenRecordPosition()
+                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+                DisplayView(TargetIdNo)
+                RaiseEvent DisplayedRecordChanged()
             End If
             If EditMode Then
                 EditMode = False
             End If
-            GetRecordInfoForIdNo()
-            'DisplayView()
+            DisplayView(TargetIdNo)
         End If
     End Sub
 

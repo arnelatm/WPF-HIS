@@ -447,9 +447,9 @@ Namespace PresentationLayer.Forms
             Return retValue
         End Function
 
-        Protected Overrides Sub DisplayView()
-            MyBase.DisplayView()
-            _journalItemsPresenter.Display(TargetIdNo, UndoMode)
+        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+            MyBase.DisplayView(idNoOfRecord)
+            _journalItemsPresenter.Display(idNoOfRecord)
             TotalDebits = 0
             TotalCredits = 0
             For Each item In bsJournalItems
