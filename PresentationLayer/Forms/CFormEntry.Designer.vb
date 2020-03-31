@@ -352,7 +352,6 @@ Partial Class CFormEntry
         Me.lblFormDescription.Name = "lblFormDescription"
         Me.lblFormDescription.Size = New System.Drawing.Size(864, 28)
         Me.lblFormDescription.TabIndex = 0
-        Me.lblFormDescription.Text = "Base Form"
         Me.lblFormDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CFormEntry

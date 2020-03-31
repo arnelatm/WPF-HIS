@@ -69,24 +69,21 @@ Public Class MappingProfileAccounts
         CreateMap(Of SalesJournalModel, ISalesJournalView)().ReverseMap()
         CreateMap(Of Supplier, SupplierModel)().ReverseMap()
         CreateMap(Of SupplierModel, ISupplierView)().ReverseMap()
-
     End Sub
 
-    Public Interface IValueResolver(Of In TSource, In TDestination, TDestMember)
-        Function Resolve(ByVal source As TSource, ByVal destination As TDestination, ByVal destMember As TDestMember, ByVal context As ResolutionContext) As TDestMember
-    End Interface
-    Public Class CustomResolver
-        Implements IValueResolver(Of ITranslatedMessagesView, OriginalMessagesModel, OriginalMessagesModel.IdNo)
+    'Public Interface IValueResolver(Of In TSource, In TDestination, TDestMember)
+    '    Function Resolve(ByVal source As TSource, ByVal destination As TDestination, ByVal destMember As TDestMember, ByVal context As ResolutionContext) As TDestMember
+    'End Interface
+    'Public Class CustomResolver
+    '    Implements IValueResolver(Of ITranslatedMessagesView, OriginalMessagesModel, OriginalMessagesModel.IdNo)
 
-        'Public Function Resolve(ByVal source As Source, ByVal destination As Destination, ByVal member As Integer, ByVal context As ResolutionContext) As Integer
-        '    Return (source.Value1 + source.Value2)
-        'End Function
+    '    'Public Function Resolve(ByVal source As Source, ByVal destination As Destination, ByVal member As Integer, ByVal context As ResolutionContext) As Integer
+    '    '    Return (source.Value1 + source.Value2)
+    '    'End Function
 
-        Private Function IValueResolver_Resolve(source As IOriginalMessagesView, destination As OriginalMessagesModel, destMember As Integer, context As ResolutionContext) As Integer Implements IValueResolver(Of IOriginalMessagesView, OriginalMessagesModel, Integer).Resolve
-            Throw New NotImplementedException()
-        End Function
-    End Class
-
-
+    '    Private Function IValueResolver_Resolve(source As IOriginalMessagesView, destination As OriginalMessagesModel, destMember As Integer, context As ResolutionContext) As Integer Implements IValueResolver(Of IOriginalMessagesView, OriginalMessagesModel, Integer).Resolve
+    '        Throw New NotImplementedException()
+    '    End Function
+    'End Class
 
 End Class
