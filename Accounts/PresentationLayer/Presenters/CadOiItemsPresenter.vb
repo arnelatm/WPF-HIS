@@ -73,7 +73,7 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap CadOi Items.
         '''' </summary>
         '''' <param name="cadOiIdNo">CadOiIDNo id to display.</param>
-        Public Shadows Sub Display(cadOiIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(cadOiIdNo As Integer)
             View.CadOiItems = Model.GetRecordsWithIdNo(Of CadOiItemModel)(cadOiIdNo, "Sequence")
         End Sub
 

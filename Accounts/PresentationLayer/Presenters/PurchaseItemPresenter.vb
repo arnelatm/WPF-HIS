@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
             Return purchaseItemChangesMade
         End Function
 
-        Public Shadows Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(idNo As Integer)
             Dim modelData As PurchaseItemModel
             modelData = Model.GetRecordById(Of PurchaseItemModel)(idNo)
             If modelData IsNot Nothing Then

@@ -33,7 +33,7 @@ Public Class GroupAccessesPresenter
     '''     Displays list of GroupAccesses.
     ''' </summary>
     ''' <param name="securityGroupIdNo">SecurityGroup id to display.</param>
-    Public Overrides Sub Display(securityGroupIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+    Public Overrides Sub Display(securityGroupIdNo As Integer)
         View.GroupAccesses = Model.GetRecordsWithIdNo(Of GroupAccessModel)(securityGroupIdNo, "SecurityObjectName")
     End Sub
 

@@ -71,7 +71,7 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap PcsOi Items.
         '''' </summary>
         '''' <param name="pcsOiIdNo">pcsOiIdNo id to display.</param>
-        Public Shadows Sub Display(pcsOiIdNo As Integer, Optional ByVal undoMode As Boolean = False)
+        Public Shadows Sub Display(pcsOiIdNo As Integer)
             View.PcsOiItems = Model.GetRecordsWithIdNo(Of PcsOiItemModel)(pcsOiIdNo, "Sequence")
         End Sub
 

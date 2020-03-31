@@ -47,10 +47,11 @@ Public Class CFormEntryTv
             Else
                 nTag = TreeViewTableName.SelectedNode.Tag
                 TargetIdNo = nTag
-                'CurrentIDNo = nTag
-                GetAndSetRecordPositionNumber()
+                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
             End If
-            GetAndDisplayRecordForGivenRecordPosition()
+
+            TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+            DisplayView(TargetIdNo)
             If Not TreeViewTableName.SelectedNode.IsVisible Then
                 TreeViewTableName.SelectedNode.EnsureVisible()
             End If
@@ -174,18 +175,21 @@ Public Class CFormEntryTv
     End Function
 
     Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-        GetAndSetRecordPositionNumber()
+        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+        'GetAndSetRecordPositionNumber()
         DisplayTreeViewData()
+        GotoRecordInTreeView()
     End Sub
 
     Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
+        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
         DisplayTreeViewData()
         GotoRecordInTreeView()
-        GetAndSetRecordPositionNumber()
+        'GetAndSetRecordPositionNumber()
     End Sub
 
-    Protected Overrides Sub DisplayView()
-        MyBase.DisplayView()
+    Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+        MyBase.DisplayView(idNoOfRecord)
         GotoRecordInTreeView()
     End Sub
 

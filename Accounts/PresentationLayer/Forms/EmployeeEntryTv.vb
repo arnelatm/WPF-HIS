@@ -427,13 +427,14 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) 
-            GoPreviousRecord()
-        End Sub
+        'Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) 
+        '    GoPreviousRecord()
+        'End Sub
 
-        Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) 
-            GoLastRecord()
-        End Sub
+        'Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) 
+        '    GoLastRecord()
+        'End Sub
+
     End Class
 
 End Namespace

@@ -253,9 +253,9 @@ Public Class Model
         Throw New NotImplementedException
     End Sub
 
-    Public Function GetSortedRecordNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
-        Implements IModel.GetSortedRecordNumber
-        Return Service.GetSortedRecordNumber(recordNo, tableName, sortOrder)
+    Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+        Implements IModel.GetIdNoOfSortedPositionNumber
+        Return Service.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
     End Function
 
     Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrderKey As String) As Integer _

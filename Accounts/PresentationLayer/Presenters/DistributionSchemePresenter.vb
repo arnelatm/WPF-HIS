@@ -21,9 +21,9 @@ Namespace PresentationLayer.Presenters
 
         Public Property DistributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
 
-        'Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+        'Public Overrides Sub Display(idNo As Integer)
         '    MyBase.Display(idNo, undoMode)
-        '    DistributionSchemeItemsPresenter.Display(idNo, undoMode)
+        '    DistributionSchemeItemsPresenter.Display(idNo)
         '    BindDistributionSchemeItem()
         '    With DistributionSchemeItems
         '        View.DistributionSchemeItems = .DistributionSchemeItems

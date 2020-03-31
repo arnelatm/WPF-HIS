@@ -262,9 +262,9 @@ Namespace PresentationLayer.Forms
             Return retValue
         End Function
 
-        Protected Overrides Sub DisplayView()
-            MyBase.DisplayView()
-            _journalItemsPresenter.Display(TargetIdNo, UndoMode)
+        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+            MyBase.DisplayView(idNoOfRecord)
+            _journalItemsPresenter.Display(idNoOfRecord)
             BindJournalItem()
             With JournalItems
                 TotalDebits = .Sum(Function(totals) totals.Debit)

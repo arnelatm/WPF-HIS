@@ -18,7 +18,7 @@ Public Class SecurityGroupPresenter
 
     Public Property GroupAccessesPresenter As GroupAccessesPresenter
 
-    'Public Overrides Sub Display(idNo As Integer, Optional ByVal undoMode As Boolean = False)
+    'Public Overrides Sub Display(idNo As Integer)
     '    If idNo <> 0 Then
     '        Dim modelData As New SecurityGroupModel
     '        modelData = Model.GetRecordById(Of SecurityGroupModel)(idNo)
