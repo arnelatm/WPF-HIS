@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class OriginalCaptionsEntryTv
+    Partial Class OriginalCaptionEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionsEntryTv))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionEntryTv))
         Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -196,7 +196,7 @@ Namespace PresentationLayer.Forms
         '
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "OriginalCaptionsEntryTv"
+        Me.Name = "OriginalCaptionEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

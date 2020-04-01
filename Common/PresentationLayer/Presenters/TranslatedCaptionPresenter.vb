@@ -5,23 +5,23 @@ Imports AATM.Libraries.Translations
 
 Namespace PresentationLayer.Presenters
 
-    Public Class TranslatedCaptionsPresenter
-        Inherits CommonPresenter(Of ITranslatedCaptionsView, TranslatedCaptionsModel)
+    Public Class TranslatedCaptionPresenter
+        Inherits CommonPresenter(Of ITranslatedCaptionView, TranslatedCaptionModel)
 
         Public Property FieldRetrievalMappingDictionary As Dictionary(Of String, String)
         Public Property FieldSavingMappingDictionary As Dictionary(Of String, String)
         Private Property Dac
 
-        Public Sub New(view As ITranslatedCaptionsView)
+        Public Sub New(view As ITranslatedCaptionView)
             MyBase.New(view)
             ModelPresenter = New ModelCommon("TranslatedCaption")
             TableName = "TranslatedCaption"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
-            OriginalModel = New TranslatedCaptionsModel()
-            DataModel = New TranslatedCaptionsModel
-            TreeViewList = New List(Of TranslatedCaptionsModel)
+            OriginalModel = New TranslatedCaptionModel()
+            DataModel = New TranslatedCaptionModel
+            TreeViewList = New List(Of TranslatedCaptionModel)
             FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
             FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}
             Dac = New Dac
@@ -29,23 +29,23 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub Display(messageIdNo As Integer)
             Dim idNoTm As Int16
-            idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "messageIdNo", "IdNo")
-            Dim modelData As New TranslatedCaptionsModel
+            idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
+            Dim modelData As New TranslatedCaptionModel
             If idNoTm <> 0 Then
-                modelData = Model.GetRecordById(Of TranslatedCaptionsModel)(messageIdNo)
+                modelData = Model.GetRecordById(Of TranslatedCaptionModel)(messageIdNo)
             End If
             GlobalVariables.Mapper.Map(modelData, View)
         End Sub
 
-        Public Function GetTranslatedCaptionList(Optional ByVal sortKey As String = "") As List(Of TranslatedCaptionsModel)
-            Dim xModel As New TranslatedCaptionsModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TranslatedCaptionsModel)(sortKey, xModel)
-            Dim modelData = Model.GetAll(Of TranslatedCaptionsModel)(newSortOrderKey)
+        Public Function GetTranslatedCaptionList(Optional ByVal sortKey As String = "") As List(Of TranslatedCaptionModel)
+            Dim xModel As New TranslatedCaptionModel
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TranslatedCaptionModel)(sortKey, xModel)
+            Dim modelData = Model.GetAll(Of TranslatedCaptionModel)(newSortOrderKey)
             If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
                 TreeViewList.Clear()
             End If
             For Each modData In modelData
-                Dim modelTb As New TranslatedCaptionsModel
+                Dim modelTb As New TranslatedCaptionModel
                 MapObject(modData, modelTb, FieldSavingMappingDictionary)
                 TreeViewList.Add(modelTb)
             Next
@@ -54,9 +54,9 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function Save(ByRef addMode As Boolean)
             Dim retVal As Integer
-            Dim record As New TranslatedCaptionsModel
+            Dim record As New TranslatedCaptionModel
             'record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-            GlobalVariables.Mapper.Map(Of ITranslatedCaptionsView, TranslatedCaptionsModel)(View, record)
+            GlobalVariables.Mapper.Map(Of ITranslatedCaptionView, TranslatedCaptionModel)(View, record)
             If addMode Then
                 NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
                 retVal = NewlyAddedRecordIdNo

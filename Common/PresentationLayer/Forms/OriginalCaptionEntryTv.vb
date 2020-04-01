@@ -4,8 +4,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
-    Public Class OriginalCaptionsEntryTv
-        Implements IOriginalCaptionsView, ITranslatedCaptionsView
+    Public Class OriginalCaptionEntryTv
+        Implements IOriginalCaptionsView, ITranslatedCaptionView
 
         Public Sub New()
             ' This call is required by the designer.
@@ -20,7 +20,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New OriginalCaptionsPresenter(Me)
 
-            PresenterObj.TranslatedCaptionsPresenter = New TranslatedCaptionsPresenter(Me)
+            PresenterObj.TranslatedCaptionPresenter = New TranslatedCaptionPresenter(Me)
 
             'CreateEnumResourceFile()
 
@@ -33,7 +33,6 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
-
 #Region "OriginalCaptionFields"
 
         Public Property IDNo As Integer Implements IOriginalCaptionsView.IdNo
@@ -45,7 +44,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ITranslatedCaptionsView_Caption As String Implements ITranslatedCaptionsView.Caption
+        Public Property ITranslatedCaptionView_Caption As String Implements ITranslatedCaptionView.Caption
 
         Public Property Caption As String Implements IOriginalCaptionsView.Caption
             Get
@@ -58,9 +57,9 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-#Region "TranslatedCaptionsFields"
+#Region "TranslatedCaptionFields"
 
-        Public Property IdNoTranslated As Integer Implements ITranslatedCaptionsView.IdNo
+        Public Property IdNoTranslated As Integer Implements ITranslatedCaptionView.IdNo
             Get
                 Return NumParser(Of Integer)(txtIdNoTranslated.Text)
             End Get
@@ -69,7 +68,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CaptionIdNo As Integer Implements ITranslatedCaptionsView.CaptionIdNo
+        Public Property CaptionIdNo As Integer Implements ITranslatedCaptionView.CaptionIdNo
             Get
                 Return NumParser(Of Integer)(TxtIDNo.Text)
             End Get
@@ -78,9 +77,9 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property LanguageIdNo As Integer Implements ITranslatedCaptionsView.LanguageIdNo
+        Public Property LanguageIdNo As Integer Implements ITranslatedCaptionView.LanguageIdNo
 
-        Public Property TranslatedCaption As String Implements ITranslatedCaptionsView.TranslatedCaption
+        Public Property TranslatedCaption As String Implements ITranslatedCaptionView.TranslatedCaption
             Get
                 Return txtTranslatedCaption.Text
             End Get
@@ -89,22 +88,17 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CultureInfoCode As String Implements ITranslatedCaptionsView.CultureInfoCode
-        Public Property LanguageCode2 As String Implements ITranslatedCaptionsView.LanguageCode2
-
-
-
 #End Region
 
         Protected Overrides Function ChangesMade()
             If PresenterObj.ChangesMade() Then
                 Return True
             End If
-            Return PresenterObj.TranslatedCaptionsPresenter.ChangesMade()
+            Return PresenterObj.TranslatedCaptionPresenter.ChangesMade()
         End Function
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-            PresenterObj.TranslatedCaptionsPresenter.Save(AddMode)
+            PresenterObj.TranslatedCaptionPresenter.Save(AddMode)
         End Sub
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -112,8 +106,7 @@ Namespace PresentationLayer.Forms
             HideButton(btnDelete)
         End Sub
 
-
-        Private Sub OnAfterTranslateForm Handles MyBase.AfterTranslateForm
+        Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm
             txtCaption.RightToLeft = RightToLeft.No
             txtTranslatedCaption.RightToLeft = RightToLeft.Yes
         End Sub

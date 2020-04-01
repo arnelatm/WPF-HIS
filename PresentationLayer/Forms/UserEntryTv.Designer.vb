@@ -47,9 +47,9 @@ Partial Class UserEntryTv
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 198)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 201)
         '
         'CFlowLayout1
         '
@@ -69,10 +69,11 @@ Partial Class UserEntryTv
         Me.CFlowLayout1.Controls.Add(Me.TxtPassword)
         Me.CFlowLayout1.Controls.Add(Me.lblSecurityGroupID)
         Me.CFlowLayout1.Controls.Add(Me.cacSecurityGroupIdNo)
-        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CFlowLayout1.Location = New System.Drawing.Point(307, 25)
+        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.CFlowLayout1.Location = New System.Drawing.Point(300, 57)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(494, 198)
+        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(501, 201)
         Me.CFlowLayout1.TabIndex = 125
         '
         'lblIDNo
@@ -81,7 +82,7 @@ Partial Class UserEntryTv
         Me.lblIDNo.EditingMode = false
         Me.lblIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIDNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIDNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblIDNo.Location = New System.Drawing.Point(11, 11)
         Me.lblIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIDNo.Name = "lblIDNo"
         Me.lblIDNo.Size = New System.Drawing.Size(152, 23)
@@ -101,7 +102,7 @@ Partial Class UserEntryTv
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIDNo
-        Me.TxtIDNo.Location = New System.Drawing.Point(155, 1)
+        Me.TxtIDNo.Location = New System.Drawing.Point(165, 11)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
@@ -115,7 +116,7 @@ Partial Class UserEntryTv
         Me.lblUserName.EditingMode = false
         Me.lblUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUserName.Location = New System.Drawing.Point(1, 26)
+        Me.lblUserName.Location = New System.Drawing.Point(11, 36)
         Me.lblUserName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(152, 23)
@@ -135,7 +136,7 @@ Partial Class UserEntryTv
         Me.TxtUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtUserName.ForeColor = System.Drawing.Color.Black
         Me.TxtUserName.LinkedLabel = Me.lblUserName
-        Me.TxtUserName.Location = New System.Drawing.Point(155, 26)
+        Me.TxtUserName.Location = New System.Drawing.Point(165, 36)
         Me.TxtUserName.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtUserName.Name = "TxtUserName"
         Me.TxtUserName.OldValue = Nothing
@@ -148,7 +149,7 @@ Partial Class UserEntryTv
         Me.lblFullName.EditingMode = false
         Me.lblFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblFullName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFullName.Location = New System.Drawing.Point(1, 51)
+        Me.lblFullName.Location = New System.Drawing.Point(11, 61)
         Me.lblFullName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblFullName.Name = "lblFullName"
         Me.lblFullName.Size = New System.Drawing.Size(152, 23)
@@ -168,7 +169,7 @@ Partial Class UserEntryTv
         Me.TxtFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtFullName.ForeColor = System.Drawing.Color.Black
         Me.TxtFullName.LinkedLabel = Me.lblFullName
-        Me.TxtFullName.Location = New System.Drawing.Point(155, 51)
+        Me.TxtFullName.Location = New System.Drawing.Point(165, 61)
         Me.TxtFullName.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtFullName.Name = "TxtFullName"
         Me.TxtFullName.OldValue = Nothing
@@ -181,7 +182,7 @@ Partial Class UserEntryTv
         Me.lblFullNameAra.EditingMode = false
         Me.lblFullNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblFullNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFullNameAra.Location = New System.Drawing.Point(1, 76)
+        Me.lblFullNameAra.Location = New System.Drawing.Point(11, 86)
         Me.lblFullNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblFullNameAra.Name = "lblFullNameAra"
         Me.lblFullNameAra.Size = New System.Drawing.Size(152, 23)
@@ -201,7 +202,7 @@ Partial Class UserEntryTv
         Me.txtFullNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtFullNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtFullNameAra.LinkedLabel = Me.lblFullNameAra
-        Me.txtFullNameAra.Location = New System.Drawing.Point(155, 76)
+        Me.txtFullNameAra.Location = New System.Drawing.Point(165, 86)
         Me.txtFullNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtFullNameAra.Name = "txtFullNameAra"
         Me.txtFullNameAra.OldValue = Nothing
@@ -216,7 +217,7 @@ Partial Class UserEntryTv
         Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel1.Location = New System.Drawing.Point(1, 101)
+        Me.CLabel1.Location = New System.Drawing.Point(11, 111)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
         Me.CLabel1.Size = New System.Drawing.Size(152, 23)
@@ -240,7 +241,7 @@ Partial Class UserEntryTv
         Me.cacSecurityLevel.FormattingEnabled = true
         Me.cacSecurityLevel.HideWhenNotEditingOrAdding = false
         Me.cacSecurityLevel.LinkedLabel = Nothing
-        Me.cacSecurityLevel.Location = New System.Drawing.Point(155, 101)
+        Me.cacSecurityLevel.Location = New System.Drawing.Point(165, 111)
         Me.cacSecurityLevel.Margin = New System.Windows.Forms.Padding(1)
         Me.cacSecurityLevel.Name = "cacSecurityLevel"
         Me.cacSecurityLevel.OldValue = 0
@@ -268,7 +269,7 @@ Partial Class UserEntryTv
         Me.lblPassword.EditingMode = false
         Me.lblPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPassword.Location = New System.Drawing.Point(1, 127)
+        Me.lblPassword.Location = New System.Drawing.Point(11, 137)
         Me.lblPassword.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(152, 23)
@@ -288,7 +289,7 @@ Partial Class UserEntryTv
         Me.TxtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtPassword.ForeColor = System.Drawing.Color.Black
         Me.TxtPassword.LinkedLabel = Me.lblPassword
-        Me.TxtPassword.Location = New System.Drawing.Point(155, 127)
+        Me.TxtPassword.Location = New System.Drawing.Point(165, 137)
         Me.TxtPassword.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtPassword.Name = "TxtPassword"
         Me.TxtPassword.OldValue = Nothing
@@ -303,7 +304,7 @@ Partial Class UserEntryTv
         Me.lblSecurityGroupID.EditingMode = false
         Me.lblSecurityGroupID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSecurityGroupID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecurityGroupID.Location = New System.Drawing.Point(1, 152)
+        Me.lblSecurityGroupID.Location = New System.Drawing.Point(11, 162)
         Me.lblSecurityGroupID.Margin = New System.Windows.Forms.Padding(1)
         Me.lblSecurityGroupID.Name = "lblSecurityGroupID"
         Me.lblSecurityGroupID.Size = New System.Drawing.Size(152, 23)
@@ -327,7 +328,7 @@ Partial Class UserEntryTv
         Me.cacSecurityGroupIdNo.FormattingEnabled = true
         Me.cacSecurityGroupIdNo.HideWhenNotEditingOrAdding = false
         Me.cacSecurityGroupIdNo.LinkedLabel = Nothing
-        Me.cacSecurityGroupIdNo.Location = New System.Drawing.Point(155, 152)
+        Me.cacSecurityGroupIdNo.Location = New System.Drawing.Point(165, 162)
         Me.cacSecurityGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cacSecurityGroupIdNo.Name = "cacSecurityGroupIdNo"
         Me.cacSecurityGroupIdNo.OldValue = 0
@@ -351,7 +352,7 @@ Partial Class UserEntryTv
         '
         'UserEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(801, 223)
+        Me.ClientSize = New System.Drawing.Size(801, 258)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.MinimumSize = New System.Drawing.Size(817, 262)
         Me.Name = "UserEntryTv"

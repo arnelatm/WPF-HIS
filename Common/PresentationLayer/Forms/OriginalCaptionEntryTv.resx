@@ -547,7 +547,7 @@
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>OriginalCaptionsEntryTv</value>
+    <value>OriginalCaptionEntryTv</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>

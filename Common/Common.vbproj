@@ -90,6 +90,7 @@
     <Compile Include="BusinessLayer\ProfitCenter.vb" />
     <Compile Include="BusinessLayer\Religion.vb" />
     <Compile Include="BusinessLayer\RevenueGroup.vb" />
+    <Compile Include="BusinessLayer\TranslatedCaption.vb" />
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
@@ -103,6 +104,7 @@
     <Compile Include="DataLayer\AdoNet\ProfitCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReligionDao.vb" />
     <Compile Include="DataLayer\AdoNet\RevenueGroupDao.vb" />
+    <Compile Include="DataLayer\AdoNet\TranslatedCaptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\TranslatedMessagesDao.vb" />
     <Compile Include="DataLayer\DaoFactoriesCommon.vb" />
     <Compile Include="DataLayer\ICommonDao.vb" />
@@ -144,10 +146,10 @@
     <Compile Include="PresentationLayer\Forms\FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalCaptionsEntryTv.Designer.vb">
-      <DependentUpon>OriginalCaptionsEntryTv.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Forms\OriginalCaptionEntryTv.Designer.vb">
+      <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalCaptionsEntryTv.vb">
+    <Compile Include="PresentationLayer\Forms\OriginalCaptionEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\OriginalMessagesEntryTv.Designer.vb">
@@ -204,7 +206,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PresentationLayer\Models\TranslatedCaptionsModel.vb" />
+    <Compile Include="PresentationLayer\Models\TranslatedCaptionModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
     <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
@@ -215,9 +217,9 @@
     <Compile Include="PresentationLayer\Presenters\OriginalMessagesPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PhoneTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProfitCenterPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ReligionPresener.vb" />
+    <Compile Include="PresentationLayer\Presenters\ReligionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\TranslatedCaptionsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\TranslatedCaptionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
     <Compile Include="PresentationLayer\Views\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\ICostCenterView.vb" />
@@ -230,7 +232,7 @@
     <Compile Include="PresentationLayer\Views\IProfitCenterView.vb" />
     <Compile Include="PresentationLayer\Views\IReligionView.vb" />
     <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\ITranslatedCaptionsView.vb" />
+    <Compile Include="PresentationLayer\Views\ITranslatedCaptionView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
@@ -266,8 +268,8 @@
     <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\OriginalCaptionsEntryTv.resx">
-      <DependentUpon>OriginalCaptionsEntryTv.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Forms\OriginalCaptionEntryTv.resx">
+      <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\OriginalMessagesEntryTv.resx">

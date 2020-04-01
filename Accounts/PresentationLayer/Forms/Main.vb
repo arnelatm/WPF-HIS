@@ -1112,6 +1112,15 @@ Namespace PresentationLayer.Forms
             frm.Show()
         End Sub
 
+        Private Sub ToolStripMenuItemCaptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptions.Click
+            Dim childMdiForm As OriginalCaptionEntryTv
+            'Set the Parent Form of the Child window.
+            childMdiForm = New OriginalCaptionEntryTv With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
+        End Sub
     End Class
 
 End Namespace
