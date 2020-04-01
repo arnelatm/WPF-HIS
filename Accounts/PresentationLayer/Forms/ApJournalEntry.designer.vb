@@ -1183,7 +1183,8 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floApJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
         Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 25)
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 57)
+        Me.floFullEntryArea.MinimumSize = New System.Drawing.Size(1043, 512)
         Me.floFullEntryArea.Name = "floFullEntryArea"
         Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 512)
         Me.floFullEntryArea.TabIndex = 0
@@ -1201,7 +1202,7 @@ Namespace PresentationLayer.Forms
         '
         'ApJournalEntry
         '
-        Me.ClientSize = New System.Drawing.Size(1043, 541)
+        Me.ClientSize = New System.Drawing.Size(1043, 571)
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MinimumSize = New System.Drawing.Size(1059, 580)
         Me.Name = "ApJournalEntry"

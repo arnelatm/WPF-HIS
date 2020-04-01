@@ -31,7 +31,8 @@ Public Class BfMain
     Public MyErrorProvider As New ErrorProviderExtended
 
     Public Event AfterTranslateForm()
-
+    Public Event BeforeLoad()
+    
     Public Sub New()
 
         ' This call is required by the designer.
@@ -510,6 +511,7 @@ Public Class BfMain
             '    cmbLanguagePicker.Items.Add(dr("lang"))
             'Next
             'ds = Nothing
+            RaiseEvent BeforeLoad()
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             Dim cmd As String
             'Dim dac As New Dac

@@ -53,10 +53,13 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
+        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 286)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 287)
         '
         'floDataDisplay
         '
@@ -85,9 +88,9 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.LblFlag128)
         Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
-        Me.floDataDisplay.Location = New System.Drawing.Point(302, 25)
+        Me.floDataDisplay.Location = New System.Drawing.Point(302, 57)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(406, 289)
+        Me.floDataDisplay.Size = New System.Drawing.Size(406, 287)
         Me.floDataDisplay.TabIndex = 148
         '
         'lblIdNo
@@ -487,7 +490,7 @@ Namespace PresentationLayer.Forms
         '
         'CountryEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(708, 314)
+        Me.ClientSize = New System.Drawing.Size(708, 344)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CountryEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

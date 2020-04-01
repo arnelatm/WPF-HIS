@@ -120,9 +120,12 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
+        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 420)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 414)
         '
         'floMainDisplay
         '
@@ -489,7 +492,7 @@ Namespace PresentationLayer.Forms
         Me.lblIban.EditingMode = false
         Me.lblIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIban.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIban.Location = New System.Drawing.Point(1, 106)
+        Me.lblIban.Location = New System.Drawing.Point(1, 105)
         Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIban.Name = "lblIban"
         Me.lblIban.Size = New System.Drawing.Size(174, 23)
@@ -509,7 +512,7 @@ Namespace PresentationLayer.Forms
         Me.txtIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtIban.ForeColor = System.Drawing.Color.Black
         Me.txtIban.LinkedLabel = Me.lblIban
-        Me.txtIban.Location = New System.Drawing.Point(177, 106)
+        Me.txtIban.Location = New System.Drawing.Point(177, 105)
         Me.txtIban.Margin = New System.Windows.Forms.Padding(1)
         Me.txtIban.Name = "txtIban"
         Me.txtIban.OldValue = Nothing
@@ -522,7 +525,7 @@ Namespace PresentationLayer.Forms
         Me.lblOpeningBalance.EditingMode = false
         Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 131)
+        Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 130)
         Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
         Me.lblOpeningBalance.Size = New System.Drawing.Size(174, 23)
@@ -541,7 +544,7 @@ Namespace PresentationLayer.Forms
         Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
         Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-        Me.txtOpeningBalance.Location = New System.Drawing.Point(177, 131)
+        Me.txtOpeningBalance.Location = New System.Drawing.Point(177, 130)
         Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtOpeningBalance.Name = "txtOpeningBalance"
         Me.txtOpeningBalance.OldValue = Nothing
@@ -554,7 +557,7 @@ Namespace PresentationLayer.Forms
         Me.lblBalance.EditingMode = false
         Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBalance.Location = New System.Drawing.Point(379, 131)
+        Me.lblBalance.Location = New System.Drawing.Point(379, 130)
         Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBalance.Name = "lblBalance"
         Me.lblBalance.Size = New System.Drawing.Size(194, 23)
@@ -574,7 +577,7 @@ Namespace PresentationLayer.Forms
         Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtBalance.ForeColor = System.Drawing.Color.Black
         Me.txtBalance.LinkedLabel = Me.lblBalance
-        Me.txtBalance.Location = New System.Drawing.Point(575, 131)
+        Me.txtBalance.Location = New System.Drawing.Point(575, 130)
         Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtBalance.Name = "txtBalance"
         Me.txtBalance.OldValue = Nothing
@@ -587,7 +590,7 @@ Namespace PresentationLayer.Forms
         Me.lblNationalIdNo.EditingMode = false
         Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 156)
+        Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 155)
         Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNationalIdNo.Name = "lblNationalIdNo"
         Me.lblNationalIdNo.Size = New System.Drawing.Size(174, 23)
@@ -606,7 +609,7 @@ Namespace PresentationLayer.Forms
         Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
-        Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 156)
+        Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 155)
         Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNationalIdNo.Name = "txtNationalIdNo"
         Me.txtNationalIdNo.OldValue = Nothing
@@ -619,7 +622,7 @@ Namespace PresentationLayer.Forms
         Me.lblActive.EditingMode = false
         Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblActive.Location = New System.Drawing.Point(379, 156)
+        Me.lblActive.Location = New System.Drawing.Point(379, 155)
         Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
         Me.lblActive.Name = "lblActive"
         Me.lblActive.Size = New System.Drawing.Size(194, 24)
@@ -639,7 +642,7 @@ Namespace PresentationLayer.Forms
         Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.LinkedLabel = Me.lblActive
-        Me.chkActive.Location = New System.Drawing.Point(575, 156)
+        Me.chkActive.Location = New System.Drawing.Point(575, 155)
         Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(25, 21)
@@ -653,7 +656,7 @@ Namespace PresentationLayer.Forms
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(1, 182)
+        Me.lblNotes.Location = New System.Drawing.Point(1, 181)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(174, 23)
@@ -672,7 +675,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
-        Me.txtNotes.Location = New System.Drawing.Point(177, 182)
+        Me.txtNotes.Location = New System.Drawing.Point(177, 181)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
@@ -707,7 +710,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtEmployeeName.ForeColor = System.Drawing.Color.Black
         Me.txtEmployeeName.LinkedLabel = Me.lblEmployeeName
-        Me.txtEmployeeName.Location = New System.Drawing.Point(186, 51)
+        Me.txtEmployeeName.Location = New System.Drawing.Point(186, 26)
         Me.txtEmployeeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeName.Name = "txtEmployeeName"
         Me.txtEmployeeName.OldValue = Nothing
@@ -742,7 +745,7 @@ Namespace PresentationLayer.Forms
         Me.txtEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtEmployeeNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtEmployeeNameAra.LinkedLabel = Me.lblEmployeeNameAra
-        Me.txtEmployeeNameAra.Location = New System.Drawing.Point(186, 26)
+        Me.txtEmployeeNameAra.Location = New System.Drawing.Point(186, 51)
         Me.txtEmployeeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeNameAra.Name = "txtEmployeeNameAra"
         Me.txtEmployeeNameAra.OldValue = Nothing
@@ -1409,11 +1412,12 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout3.Controls.Add(Me.cacReligionIdNo)
         Me.CFlowLayout3.Controls.Add(Me.lblBirthDate)
         Me.CFlowLayout3.Controls.Add(Me.dtpBirthDate)
-        Me.CFlowLayout3.Location = New System.Drawing.Point(2, 3)
+        Me.CFlowLayout3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CFlowLayout3.Location = New System.Drawing.Point(3, 3)
         Me.CFlowLayout3.Margin = New System.Windows.Forms.Padding(0)
         Me.CFlowLayout3.MinimumSize = New System.Drawing.Size(430, 180)
         Me.CFlowLayout3.Name = "CFlowLayout3"
-        Me.CFlowLayout3.Size = New System.Drawing.Size(812, 180)
+        Me.CFlowLayout3.Size = New System.Drawing.Size(811, 277)
         Me.CFlowLayout3.TabIndex = 4
         '
         'cacGender
@@ -1487,6 +1491,7 @@ Namespace PresentationLayer.Forms
         'lblIdNo
         '
         Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.Dock = System.Windows.Forms.DockStyle.Left
         Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1562,9 +1567,10 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout2.Controls.Add(Me.CFlowLayout4)
         Me.CFlowLayout2.Controls.Add(Me.EmployeeTabControl)
-        Me.CFlowLayout2.Location = New System.Drawing.Point(298, 28)
+        Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.CFlowLayout2.Location = New System.Drawing.Point(300, 57)
         Me.CFlowLayout2.Name = "CFlowLayout2"
-        Me.CFlowLayout2.Size = New System.Drawing.Size(839, 411)
+        Me.CFlowLayout2.Size = New System.Drawing.Size(839, 414)
         Me.CFlowLayout2.TabIndex = 6
         '
         'CFlowLayout4
@@ -1575,9 +1581,9 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout4.Controls.Add(Me.lblEmployeeCode)
         Me.CFlowLayout4.Controls.Add(Me.txtEmployeeCode)
         Me.CFlowLayout4.Controls.Add(Me.lblEmployeeName)
-        Me.CFlowLayout4.Controls.Add(Me.txtEmployeeNameAra)
-        Me.CFlowLayout4.Controls.Add(Me.lblEmployeeNameAra)
         Me.CFlowLayout4.Controls.Add(Me.txtEmployeeName)
+        Me.CFlowLayout4.Controls.Add(Me.lblEmployeeNameAra)
+        Me.CFlowLayout4.Controls.Add(Me.txtEmployeeNameAra)
         Me.CFlowLayout4.Location = New System.Drawing.Point(3, 3)
         Me.CFlowLayout4.Name = "CFlowLayout4"
         Me.CFlowLayout4.Size = New System.Drawing.Size(829, 82)
@@ -1585,11 +1591,12 @@ Namespace PresentationLayer.Forms
         '
         'EmployeeEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(1149, 441)
+        Me.ClientSize = New System.Drawing.Size(1149, 471)
         Me.Controls.Add(Me.CFlowLayout2)
         Me.MinimumSize = New System.Drawing.Size(1165, 480)
         Me.Name = "EmployeeEntryTv"
         Me.SecurityPresenterObj = SecurityPresenter1
+        Me.Text = "Employee Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

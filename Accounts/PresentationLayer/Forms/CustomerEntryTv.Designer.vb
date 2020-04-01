@@ -114,8 +114,8 @@ Namespace PresentationLayer.Forms
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'LocalizableContent1
         '
@@ -1157,8 +1157,8 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CustomerEntryTv"
         Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
