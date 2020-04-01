@@ -25440,51 +25440,51 @@ INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (6012, N'MessagingBox')
 GO
 SET IDENTITY_INSERT [dbo].[SystemForms] OFF
 GO
-SET IDENTITY_INSERT [dbo].[TranslatedCaptions] ON 
+SET IDENTITY_INSERT [dbo].[TranslatedCaption] ON 
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1, 114, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1, 114, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (2, 72, 16, N'لبسب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (2, 72, 16, N'لبسب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (4, 73, 16, N'لب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (4, 73, 16, N'لب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (5, 20, 16, N'نسخ')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (5, 20, 16, N'نسخ')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (6, 18, 16, N'تعديل')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (6, 18, 16, N'تعديل')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (7, 7, 16, N'إضافة')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (7, 7, 16, N'إضافة')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (8, 5, 16, N'نسخ')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (8, 5, 16, N'نسخ')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (9, 19, 16, N'يقطع')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (9, 19, 16, N'يقطع')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (10, 4, 16, N'يقطع')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (10, 4, 16, N'يقطع')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (11, 9, 16, N'حذف')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (11, 9, 16, N'حذف')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (12, 8, 16, N'تعديل')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (12, 8, 16, N'تعديل')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (13, 17, 16, N'خروج')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (13, 17, 16, N'خروج')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1002, 116, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1002, 116, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1003, 120, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1003, 120, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1004, 119, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1004, 119, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1005, 118, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1005, 118, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1006, 122, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1006, 122, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1007, 115, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1007, 115, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1008, 121, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1008, 121, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1009, 161, 16, N'لسيبلب')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1009, 161, 16, N'لسيبلب')
 GO
-INSERT [dbo].[TranslatedCaptions] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1011, 66, 16, N'موافق')
+INSERT [dbo].[TranslatedCaption] ([idno], [CaptionIdNo], [LanguageIdNo], [Translated]) VALUES (1011, 66, 16, N'موافق')
 GO
-SET IDENTITY_INSERT [dbo].[TranslatedCaptions] OFF
+SET IDENTITY_INSERT [dbo].[TranslatedCaption] OFF
 GO
 SET IDENTITY_INSERT [dbo].[TranslatedMessages] ON 
 GO

@@ -31,8 +31,9 @@ Public Class BfMain
     Public MyErrorProvider As New ErrorProviderExtended
 
     Public Event AfterTranslateForm()
+
     Public Event BeforeLoad()
-    
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -248,7 +249,7 @@ Public Class BfMain
         Dim cmd As String
         Dim fallBackLanguageIdNo As Int16
         Dim languageBaseCode = Strings.Left(desiredLanguage, desiredLanguage.IndexOf("-", StringComparison.Ordinal))
-        cmd = "SELECT TOP 1 LanguageIdNo,COUNT(LanguageIdNo) AS value_occurrence FROM TranslatedCaptions_View where RTrim(LanguageCode2) = '" + languageBaseCode + "' " +
+        cmd = "SELECT TOP 1 LanguageIdNo,COUNT(LanguageIdNo) AS value_occurrence FROM TranslatedCaption_View where RTrim(LanguageCode2) = '" + languageBaseCode + "' " +
               "GROUP BY LanguageIdNo ORDER BY value_occurrence DESC"
         fallBackLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         'If fallBackLanguageIdNo = 0 Then
@@ -260,7 +261,7 @@ Public Class BfMain
     Protected Function GetFallBackMessage(ByVal message As String, ByVal desiredLanguage As String) As String
         Dim cmd As String
         Dim languageBaseCode = Strings.Left(desiredLanguage, desiredLanguage.IndexOf("-", StringComparison.Ordinal))
-        cmd = "SELECT TranslatedCaptions from TranslatedMessages_View where Caption = '" + RTrim(message) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
+        cmd = "SELECT TranslatedCaption from TranslatedMessages_View where Caption = '" + RTrim(message) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
         Return TranslatorDAC.ExecScalar(Of String)(cmd)
     End Function
 
@@ -426,7 +427,7 @@ Public Class BfMain
 
     Protected Function TranslationLanguageExist(ByVal desiredLanguage As String)
         Dim cmd As String
-        cmd = "SELECT count(*) FROM TranslatedCaptions_View WHERE CultureInfoCode = '" _
+        cmd = "SELECT count(*) FROM TranslatedCaption_View WHERE CultureInfoCode = '" _
               + desiredLanguage.TrimEnd + "'"
         Dim howMany As Integer = TranslatorDAC.ExecScalar(Of Integer)(cmd)
         If howMany > 0 Then
@@ -843,7 +844,7 @@ Public Class BfMain
                         obj.Text = obj.Tag(0)
                         obj.ToolTipText = obj.Tag(1)
                         Dim button As ToolStripButton = TryCast(obj, ToolStripButton)
-                        If (button IsNot Nothing)
+                        If (button IsNot Nothing) Then
                             button.Image = button.Image.Tag
                         End If
                     Next

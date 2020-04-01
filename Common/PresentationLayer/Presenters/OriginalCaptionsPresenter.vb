@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
             TreeViewList = New List(Of OriginalCaptionsModel)
         End Sub
 
-        Public Property TranslatedCaptionsPresenter As TranslatedCaptionsPresenter
+        Public Property TranslatedCaptionPresenter As TranslatedCaptionPresenter
 
         Public Function GetOriginalCaptionsList(Optional ByVal sortKey As String = "") As List(Of OriginalCaptionsModel)
             Dim xModel As New OriginalCaptionsModel
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Presenters
                     'MapObject(modelData, View)
                     'MapObject(modelData, OriginalModel)
                 End If
-                TranslatedCaptionsPresenter.Display(idNo)
+                TranslatedCaptionPresenter.Display(idNo)
             End If
         End Sub
 

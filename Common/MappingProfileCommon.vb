@@ -24,10 +24,14 @@ Public Class MappingProfileCommon
         CreateMap(Of ReligionModel, IReligionView).ReverseMap()
         CreateMap(Of RevenueGroup, RevenueGroupModel).ReverseMap()
         CreateMap(Of RevenueGroupModel, IRevenueGroupView).ReverseMap()
+        CreateMap(Of TranslatedCaption, TranslatedCaptionModel).ReverseMap()
+        CreateMap(Of TranslatedCaptionModel, ITranslatedCaptionView).ReverseMap()
         CreateMap(Of TranslatedMessages, TranslatedMessagesModel).ReverseMap()
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView).ReverseMap()
         CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
         CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
+        CreateMap(Of OriginalCaptions, OriginalCaptionsModel).ReverseMap()
+        CreateMap(Of OriginalCaptionsModel, IOriginalCaptionsView).ReverseMap()
 
         CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.MessageIdNo))
 

@@ -1517,12 +1517,12 @@ CREATE TABLE [dbo].[OriginalCaptions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TranslatedCaptions]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[TranslatedCaption]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[TranslatedCaptions](
+CREATE TABLE [dbo].[TranslatedCaption](
 	[idno] [int] IDENTITY(1,1) NOT NULL,
 	[CaptionIdNo] [int] NOT NULL,
 	[LanguageIdNo] [smallint] NOT NULL,
@@ -1533,19 +1533,19 @@ CREATE TABLE [dbo].[TranslatedCaptions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[TranslatedCaptions_View]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  View [dbo].[TranslatedCaption_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [dbo].[TranslatedCaptions_View]
+CREATE VIEW [dbo].[TranslatedCaption_View]
 AS
-SELECT        dbo.TranslatedCaptions.idno, dbo.TranslatedCaptions.CaptionIdNo, dbo.TranslatedCaptions.LanguageIdNo, dbo.TranslatedCaptions.Translated, dbo.Languages.CultureInfoCode, dbo.OriginalCaptions.Caption, dbo.Languages.LanguageCode2
-FROM            dbo.TranslatedCaptions INNER JOIN
-                         dbo.Languages ON dbo.TranslatedCaptions.LanguageIdNo = dbo.Languages.IdNo INNER JOIN
-                         dbo.OriginalCaptions ON dbo.TranslatedCaptions.CaptionIdNo = dbo.OriginalCaptions.idno
+SELECT        dbo.TranslatedCaption.idno, dbo.TranslatedCaption.CaptionIdNo, dbo.TranslatedCaption.LanguageIdNo, dbo.TranslatedCaption.Translated, dbo.Languages.CultureInfoCode, dbo.OriginalCaptions.Caption, dbo.Languages.LanguageCode2
+FROM            dbo.TranslatedCaption INNER JOIN
+                         dbo.Languages ON dbo.TranslatedCaption.LanguageIdNo = dbo.Languages.IdNo INNER JOIN
+                         dbo.OriginalCaptions ON dbo.TranslatedCaption.CaptionIdNo = dbo.OriginalCaptions.idno
 GO
 /****** Object:  Table [dbo].[SystemForms]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -1586,11 +1586,11 @@ GO
 CREATE VIEW [dbo].[FormItemsOriginal_View]
 AS
 SELECT        dbo.FormItems.idno, dbo.FormItems.formIdNo, dbo.FormItems.CaptionIdNo, dbo.OriginalCaptions.Caption, dbo.FormItems.idno AS Expr1, dbo.FormItems.formIdNo AS Expr2, dbo.FormItems.CaptionIdNo AS Expr3, 
-                         dbo.SystemForms.FormName, dbo.TranslatedCaptions.Translated, dbo.Languages.LanguageCode2, dbo.Languages.CultureInfoCode, dbo.Languages.Language, dbo.TranslatedCaptions.LanguageIdNo
+                         dbo.SystemForms.FormName, dbo.TranslatedCaption.Translated, dbo.Languages.LanguageCode2, dbo.Languages.CultureInfoCode, dbo.Languages.Language, dbo.TranslatedCaption.LanguageIdNo
 FROM            dbo.Languages RIGHT OUTER JOIN
-                         dbo.TranslatedCaptions ON dbo.Languages.IdNo = dbo.TranslatedCaptions.LanguageIdNo RIGHT OUTER JOIN
+                         dbo.TranslatedCaption ON dbo.Languages.IdNo = dbo.TranslatedCaption.LanguageIdNo RIGHT OUTER JOIN
                          dbo.FormItems LEFT OUTER JOIN
-                         dbo.SystemForms ON dbo.FormItems.formIdNo = dbo.SystemForms.IdNo ON dbo.TranslatedCaptions.CaptionIdNo = dbo.FormItems.CaptionIdNo LEFT OUTER JOIN
+                         dbo.SystemForms ON dbo.FormItems.formIdNo = dbo.SystemForms.IdNo ON dbo.TranslatedCaption.CaptionIdNo = dbo.FormItems.CaptionIdNo LEFT OUTER JOIN
                          dbo.OriginalCaptions ON dbo.FormItems.CaptionIdNo = dbo.OriginalCaptions.idno
 GO
 /****** Object:  Table [dbo].[ApJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -2106,12 +2106,12 @@ GO
 
 CREATE VIEW [dbo].[Captions_View]
 AS
-SELECT        dbo.TranslatedCaptions.idno, dbo.TranslatedCaptions.CaptionIdNo, dbo.TranslatedCaptions.LanguageIdNo, dbo.TranslatedCaptions.Translated, dbo.Languages.CultureInfoCode, dbo.OriginalCaptions.Caption, dbo.Languages.LanguageCode2
-FROM            dbo.TranslatedCaptions 
+SELECT        dbo.TranslatedCaption.idno, dbo.TranslatedCaption.CaptionIdNo, dbo.TranslatedCaption.LanguageIdNo, dbo.TranslatedCaption.Translated, dbo.Languages.CultureInfoCode, dbo.OriginalCaptions.Caption, dbo.Languages.LanguageCode2
+FROM            dbo.TranslatedCaption 
 				INNER JOIN dbo.Languages 
-				ON dbo.TranslatedCaptions.LanguageIdNo = dbo.Languages.IdNo 
+				ON dbo.TranslatedCaption.LanguageIdNo = dbo.Languages.IdNo 
 				RIGHT OUTER JOIN dbo.OriginalCaptions
-				ON dbo.TranslatedCaptions.CaptionIdNo = dbo.OriginalCaptions.idno
+				ON dbo.TranslatedCaption.CaptionIdNo = dbo.OriginalCaptions.idno
 GO
 /****** Object:  Table [dbo].[Supplier]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -7773,9 +7773,9 @@ Begin DesignProperties =
       End
    End
 End
-' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'TranslatedCaptions_View'
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'TranslatedCaption_View'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'TranslatedCaptions_View'
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'TranslatedCaption_View'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 

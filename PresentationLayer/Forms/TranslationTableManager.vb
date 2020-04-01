@@ -96,7 +96,7 @@ Public Class TranslationTableManager
     '      MessageBoxButtons.OKCancel,
     '      MessageBoxIcon.Warning,
     '      MessageBoxDefaultButton.Button2) = DialogResult.OK Then
-    '        Cmd = "DELETE from TranslatedCaptions" _
+    '        Cmd = "DELETE from TranslatedCaption" _
     '      + " WHERE CultureInfoCode='" + cmbLanguage.Text.TrimEnd + "'"
     '        Result = TranslatorDAC.ExecCmd(Cmd)
     '        If cmbLanguage.Text.TrimEnd <> "Arabic" Then
@@ -133,7 +133,7 @@ Public Class TranslationTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo =" + captionIdNo.ToString()
+                    Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo =" + captionIdNo.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     Cmd = "DELETE From OriginalCaptions WHERE Caption = '" + originalValue + "'"
                     Result = TranslatorDAC.ExecCmd(Cmd)
@@ -152,7 +152,7 @@ Public Class TranslationTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo ='" + captionIdNo.ToString + "'" +
+                    Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo ='" + captionIdNo.ToString + "'" +
                           " AND LanguageIdNo = " + cmbLanguage.SelectedValue.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
@@ -203,7 +203,7 @@ Public Class TranslationTableManager
         'If cmbLanguagePicker.SelectedValue <> "_Original" Then
         TranslateCaptions(cmbLanguagePicker.SelectedValue)
         'End If
-        'Cmd = "Select Caption, translated from TranslatedCaptions" _
+        'Cmd = "Select Caption, translated from TranslatedCaption" _
         '  + " where CultureInfoCode = '" + cmbLanguagePicker.Text + "'"
         'Dim translations As DataSet
         'translations = TranslatorDAC.ReturnDs(Cmd)
@@ -295,7 +295,7 @@ Public Class TranslationTableManager
                 Dim dsColumn As DataSet
                 If FormIdNoToTranslate = 0 Then
 
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedCaptions_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedCaption_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Else
                     dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
                                                       " and FormIdNo = " + FormIdNoToTranslate.ToString())
@@ -329,12 +329,12 @@ Public Class TranslationTableManager
         Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue + "'"
         captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
 
-        Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo = " + captionIdNo.ToString() +
+        Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaptions ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
                   + captionIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
@@ -365,12 +365,12 @@ Public Class TranslationTableManager
         Dim captionIdNo As Int16
         Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue.Trim() + "'"
         captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-        Cmd = "DELETE from TranslatedCaptions WHERE CaptionIdNo = " + captionIdNo.ToString() +
+        Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaptions ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
                   + captionIdNo.ToString() + ", '" + translatedValue.Trim() + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If

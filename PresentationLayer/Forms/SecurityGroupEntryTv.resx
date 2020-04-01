@@ -165,7 +165,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 11</value>
+    <value>11, 11</value>
   </data>
   <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -199,7 +199,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSecurityGroupCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 36</value>
+    <value>11, 36</value>
   </data>
   <data name="lblSecurityGroupCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -232,7 +232,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityGroupCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 36</value>
+    <value>232, 36</value>
   </data>
   <data name="txtSecurityGroupCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -259,7 +259,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSecurityGroupName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 61</value>
+    <value>11, 61</value>
   </data>
   <data name="lblSecurityGroupName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -292,7 +292,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityGroupName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 61</value>
+    <value>232, 61</value>
   </data>
   <data name="txtSecurityGroupName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -319,7 +319,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSecurityGroupNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 86</value>
+    <value>11, 86</value>
   </data>
   <data name="lblSecurityGroupNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -352,7 +352,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityGroupNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 86</value>
+    <value>232, 86</value>
   </data>
   <data name="txtSecurityGroupNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -382,7 +382,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 111</value>
+    <value>11, 111</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -415,7 +415,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 111</value>
+    <value>232, 111</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -538,7 +538,7 @@
     <value>0</value>
   </data>
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 175</value>
+    <value>13, 175</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
     <value>667, 416</value>
@@ -559,19 +559,19 @@
     <value>10</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+    <value>Left</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 57</value>
+    <value>300, 57</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>430, 180</value>
   </data>
   <data name="floDataDisplay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 10, 0, 0</value>
+    <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 595</value>
+    <value>692, 595</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -592,7 +592,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 11</value>
+    <value>232, 11</value>
   </data>
   <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
