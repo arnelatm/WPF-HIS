@@ -44,9 +44,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 186)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 179)
         '
         'TxtIDNo
         '
@@ -61,7 +61,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Location = New System.Drawing.Point(189, 1)
+        Me.TxtIDNo.Location = New System.Drawing.Point(189, 11)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPhoneTypeCode.ForeColor = System.Drawing.Color.Black
         Me.txtPhoneTypeCode.LinkedLabel = Nothing
-        Me.txtPhoneTypeCode.Location = New System.Drawing.Point(189, 26)
+        Me.txtPhoneTypeCode.Location = New System.Drawing.Point(189, 36)
         Me.txtPhoneTypeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeCode.Name = "txtPhoneTypeCode"
         Me.txtPhoneTypeCode.OldValue = Nothing
@@ -102,7 +102,7 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPhoneTypeName.ForeColor = System.Drawing.Color.Black
         Me.txtPhoneTypeName.LinkedLabel = Nothing
-        Me.txtPhoneTypeName.Location = New System.Drawing.Point(189, 51)
+        Me.txtPhoneTypeName.Location = New System.Drawing.Point(189, 61)
         Me.txtPhoneTypeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeName.Name = "txtPhoneTypeName"
         Me.txtPhoneTypeName.OldValue = Nothing
@@ -123,7 +123,7 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPhoneTypeNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtPhoneTypeNameAra.LinkedLabel = Nothing
-        Me.txtPhoneTypeNameAra.Location = New System.Drawing.Point(189, 76)
+        Me.txtPhoneTypeNameAra.Location = New System.Drawing.Point(189, 86)
         Me.txtPhoneTypeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPhoneTypeNameAra.Name = "txtPhoneTypeNameAra"
         Me.txtPhoneTypeNameAra.OldValue = Nothing
@@ -142,7 +142,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(189, 101)
+        Me.txtNotes.Location = New System.Drawing.Point(189, 111)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
@@ -165,11 +165,12 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtPhoneTypeNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
-        Me.floDataDisplay.Location = New System.Drawing.Point(309, 25)
-        Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
+        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.MinimumSize = New System.Drawing.Size(598, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(598, 186)
+        Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(0, 10, 0, 0)
+        Me.floDataDisplay.Size = New System.Drawing.Size(598, 180)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -177,7 +178,7 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo.DisplayOnly = true
         Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblIdNo.Location = New System.Drawing.Point(1, 11)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
         Me.lblIdNo.Size = New System.Drawing.Size(186, 23)
@@ -190,7 +191,7 @@ Namespace PresentationLayer.Forms
         Me.lblPhoneTypeCode.DisplayOnly = true
         Me.lblPhoneTypeCode.EditingMode = false
         Me.lblPhoneTypeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPhoneTypeCode.Location = New System.Drawing.Point(1, 26)
+        Me.lblPhoneTypeCode.Location = New System.Drawing.Point(1, 36)
         Me.lblPhoneTypeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPhoneTypeCode.Name = "lblPhoneTypeCode"
         Me.lblPhoneTypeCode.Size = New System.Drawing.Size(186, 23)
@@ -203,7 +204,7 @@ Namespace PresentationLayer.Forms
         Me.lblPhoneTypeName.DisplayOnly = true
         Me.lblPhoneTypeName.EditingMode = false
         Me.lblPhoneTypeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPhoneTypeName.Location = New System.Drawing.Point(1, 51)
+        Me.lblPhoneTypeName.Location = New System.Drawing.Point(1, 61)
         Me.lblPhoneTypeName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPhoneTypeName.Name = "lblPhoneTypeName"
         Me.lblPhoneTypeName.Size = New System.Drawing.Size(186, 23)
@@ -216,7 +217,7 @@ Namespace PresentationLayer.Forms
         Me.lblPhoneTypeNameAra.DisplayOnly = true
         Me.lblPhoneTypeNameAra.EditingMode = false
         Me.lblPhoneTypeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPhoneTypeNameAra.Location = New System.Drawing.Point(1, 76)
+        Me.lblPhoneTypeNameAra.Location = New System.Drawing.Point(1, 86)
         Me.lblPhoneTypeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPhoneTypeNameAra.Name = "lblPhoneTypeNameAra"
         Me.lblPhoneTypeNameAra.Size = New System.Drawing.Size(186, 23)
@@ -229,7 +230,7 @@ Namespace PresentationLayer.Forms
         Me.lblNotes.DisplayOnly = true
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblNotes.Location = New System.Drawing.Point(1, 101)
+        Me.lblNotes.Location = New System.Drawing.Point(1, 111)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(186, 23)
@@ -239,8 +240,9 @@ Namespace PresentationLayer.Forms
         '
         'PhoneTypeEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(907, 211)
+        Me.ClientSize = New System.Drawing.Size(898, 236)
         Me.Controls.Add(Me.floDataDisplay)
+        Me.MinimumSize = New System.Drawing.Size(914, 265)
         Me.Name = "PhoneTypeEntryTv"
         Me.Text = "Phone Type Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

@@ -86,6 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountStrings.Designer.vb" />
+    <Compile Include="AccountStrings1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer\AccountReconciliation.vb" />
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
@@ -430,6 +435,8 @@
   <ItemGroup>
     <EmbeddedResource Include="AccountStrings.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountStrings1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.en-GB.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">

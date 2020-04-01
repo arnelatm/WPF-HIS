@@ -43,9 +43,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 25)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 186)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 163)
         '
         'lblIDNo
         '
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Forms
         Me.lblIDNo.EditingMode = false
         Me.lblIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIDNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIDNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblIDNo.Location = New System.Drawing.Point(11, 11)
         Me.lblIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIDNo.Name = "lblIDNo"
         Me.lblIDNo.Size = New System.Drawing.Size(171, 23)
@@ -74,7 +74,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Location = New System.Drawing.Point(174, 1)
+        Me.TxtIDNo.Location = New System.Drawing.Point(184, 11)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
@@ -89,7 +89,7 @@ Namespace PresentationLayer.Forms
         Me.lblReligionCode.EditingMode = false
         Me.lblReligionCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReligionCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReligionCode.Location = New System.Drawing.Point(1, 26)
+        Me.lblReligionCode.Location = New System.Drawing.Point(11, 36)
         Me.lblReligionCode.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReligionCode.Name = "lblReligionCode"
         Me.lblReligionCode.Size = New System.Drawing.Size(171, 17)
@@ -103,7 +103,7 @@ Namespace PresentationLayer.Forms
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(1, 101)
+        Me.lblNotes.Location = New System.Drawing.Point(11, 111)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(171, 23)
@@ -117,7 +117,7 @@ Namespace PresentationLayer.Forms
         Me.lblReligionNameAra.EditingMode = false
         Me.lblReligionNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReligionNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReligionNameAra.Location = New System.Drawing.Point(1, 76)
+        Me.lblReligionNameAra.Location = New System.Drawing.Point(11, 86)
         Me.lblReligionNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReligionNameAra.Name = "lblReligionNameAra"
         Me.lblReligionNameAra.Size = New System.Drawing.Size(171, 17)
@@ -131,7 +131,7 @@ Namespace PresentationLayer.Forms
         Me.lblReligionName.EditingMode = false
         Me.lblReligionName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReligionName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReligionName.Location = New System.Drawing.Point(1, 51)
+        Me.lblReligionName.Location = New System.Drawing.Point(11, 61)
         Me.lblReligionName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReligionName.Name = "lblReligionName"
         Me.lblReligionName.Size = New System.Drawing.Size(171, 17)
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Forms
         Me.txtReligionCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionCode.ForeColor = System.Drawing.Color.Black
         Me.txtReligionCode.LinkedLabel = Nothing
-        Me.txtReligionCode.Location = New System.Drawing.Point(174, 26)
+        Me.txtReligionCode.Location = New System.Drawing.Point(184, 36)
         Me.txtReligionCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionCode.Name = "txtReligionCode"
         Me.txtReligionCode.OldValue = Nothing
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(174, 101)
+        Me.txtNotes.Location = New System.Drawing.Point(184, 111)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
@@ -192,7 +192,7 @@ Namespace PresentationLayer.Forms
         Me.txtReligionNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtReligionNameAra.LinkedLabel = Nothing
-        Me.txtReligionNameAra.Location = New System.Drawing.Point(174, 76)
+        Me.txtReligionNameAra.Location = New System.Drawing.Point(184, 86)
         Me.txtReligionNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionNameAra.Name = "txtReligionNameAra"
         Me.txtReligionNameAra.OldValue = Nothing
@@ -212,7 +212,7 @@ Namespace PresentationLayer.Forms
         Me.txtReligionName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReligionName.ForeColor = System.Drawing.Color.Black
         Me.txtReligionName.LinkedLabel = Nothing
-        Me.txtReligionName.Location = New System.Drawing.Point(174, 51)
+        Me.txtReligionName.Location = New System.Drawing.Point(184, 61)
         Me.txtReligionName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReligionName.Name = "txtReligionName"
         Me.txtReligionName.OldValue = Nothing
@@ -233,16 +233,18 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout1.Controls.Add(Me.txtReligionNameAra)
         Me.CFlowLayout1.Controls.Add(Me.lblNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtNotes)
-        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CFlowLayout1.Location = New System.Drawing.Point(308, 25)
+        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.CFlowLayout1.Location = New System.Drawing.Point(300, 57)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(419, 186)
+        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(428, 163)
         Me.CFlowLayout1.TabIndex = 127
         '
         'ReligionEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(727, 211)
+        Me.ClientSize = New System.Drawing.Size(729, 220)
         Me.Controls.Add(Me.CFlowLayout1)
+        Me.MinimumSize = New System.Drawing.Size(745, 259)
         Me.Name = "ReligionEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)

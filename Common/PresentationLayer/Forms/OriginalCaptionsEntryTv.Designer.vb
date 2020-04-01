@@ -36,17 +36,14 @@ Namespace PresentationLayer.Forms
         Me.txtLanguageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCaptionIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
-        Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
         'TxtIDNo
         '
@@ -195,34 +192,16 @@ Namespace PresentationLayer.Forms
         Me.txtIdNoTranslated.ReadOnly = true
         Me.txtIdNoTranslated.TabStop = false
         '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.SeaGreen
-        Me.CFlowLayout1.Controls.Add(Me.CLabel1)
-        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        resources.ApplyResources(Me.CLabel1, "CLabel1")
-        Me.CLabel1.ForeColor = System.Drawing.Color.White
-        Me.CLabel1.Name = "CLabel1"
-        '
         'OriginalCaptionsEntryTv
         '
         resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "OriginalCaptionsEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
-        Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -238,7 +217,5 @@ End Sub
         Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents txtTranslatedCaption As CTextBoxArabic
         Friend WithEvents Label1 As Label
-        Friend WithEvents CFlowLayout1 As CFlowLayout
-        Friend WithEvents CLabel1 As CLabel
     End Class
 End NameSpace

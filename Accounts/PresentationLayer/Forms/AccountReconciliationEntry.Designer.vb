@@ -26,8 +26,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountReconciliationEntry))
-        Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
         Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
+        Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -73,8 +73,8 @@ Namespace PresentationLayer.Forms
         Me.lblTotalDebitsNotCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTotalDebitsNotCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout7 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnPrint = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnPost = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnPrint = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblEndingBankBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBalance2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -567,19 +567,6 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.CFlowLayout7, "CFlowLayout7")
         Me.CFlowLayout7.Name = "CFlowLayout7"
         '
-        'btnPrint
-        '
-        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(192,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(128,Byte),Integer), CType(CType(0,Byte),Integer)), System.Drawing.Color.White}
-        CBlendItems2.iPoint = New Single() {0!, 1.006211!, 1!}
-        Me.btnPrint.ColorFillBlend = CBlendItems2
-        Me.btnPrint.DesignerSelected = false
-        Me.btnPrint.DisplayOnly = true
-        resources.ApplyResources(Me.btnPrint, "btnPrint")
-        Me.btnPrint.ImageIndex = 0
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.OriginalImageName = Nothing
-        Me.btnPrint.SecurityKey = ""
-        '
         'btnPost
         '
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(192,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(128,Byte),Integer), CType(CType(0,Byte),Integer)), System.Drawing.Color.White}
@@ -592,6 +579,19 @@ Namespace PresentationLayer.Forms
         Me.btnPost.Name = "btnPost"
         Me.btnPost.OriginalImageName = Nothing
         Me.btnPost.SecurityKey = ""
+        '
+        'btnPrint
+        '
+        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(192,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(128,Byte),Integer), CType(CType(0,Byte),Integer)), System.Drawing.Color.White}
+        CBlendItems2.iPoint = New Single() {0!, 1.006211!, 1!}
+        Me.btnPrint.ColorFillBlend = CBlendItems2
+        Me.btnPrint.DesignerSelected = false
+        Me.btnPrint.DisplayOnly = true
+        resources.ApplyResources(Me.btnPrint, "btnPrint")
+        Me.btnPrint.ImageIndex = 0
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.OriginalImageName = Nothing
+        Me.btnPrint.SecurityKey = ""
         '
         'CFlowLayout6
         '

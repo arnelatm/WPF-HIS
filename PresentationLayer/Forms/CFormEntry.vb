@@ -777,15 +777,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-        TranslateForm()
-        UpdateRecordCounter()
-        Undo()
-        btnArabic.Visible = False
-        btnOriginal.Visible = True
+        SwitchUiLanguage(False)
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
@@ -803,15 +795,25 @@ Public Class CFormEntry
     End Sub
 
     Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
+        SwitchUiLanguage(True)
+    End Sub
+
+    Private Sub SwitchUiLanguage(originalUi As Boolean)
         If _debugSwitch Then
             Debugger.Break()
         End If
-        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+        If originalUi Then
+            TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+        Else
+            TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+        End If
         TranslateForm()
         UpdateRecordCounter()
-        Undo()
-        btnArabic.Visible = True
-        btnOriginal.Visible = False
+        If EditMode Or AddMode Then
+            Undo()
+        End If
+        btnArabic.Visible = originalUi
+        btnOriginal.Visible = Not originalUi
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
@@ -881,6 +883,7 @@ Public Class CFormEntry
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If Not DesignMode Then
+
             AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
@@ -918,11 +921,12 @@ Public Class CFormEntry
                 btnArabic.Visible = True
                 btnOriginal.Visible = False
             End If
-            SetFormTitleCaption()
             FirstControl.Focus()
-            'AddHandler BtnNext.DoubleClick, AddressOf BtnNext.MyDoubleClick
-            'AddHandler BtnNext.DoubleClick, AddressOf TurnOnDebugger
         End If
+    End Sub
+
+    Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
+        SetFormTitleCaption()
     End Sub
 
     Private Sub ClearData()

@@ -1063,7 +1063,7 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floArJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
         Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 25)
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 57)
         Me.floFullEntryArea.Name = "floFullEntryArea"
         Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 514)
         Me.floFullEntryArea.TabIndex = 0
@@ -1081,9 +1081,9 @@ Namespace PresentationLayer.Forms
         '
         'ArJournalEntry
         '
-        Me.ClientSize = New System.Drawing.Size(1043, 541)
+        Me.ClientSize = New System.Drawing.Size(1043, 572)
         Me.Controls.Add(Me.floFullEntryArea)
-        Me.MinimumSize = New System.Drawing.Size(1059, 580)
+        Me.MinimumSize = New System.Drawing.Size(1059, 611)
         Me.Name = "ArJournalEntry"
         Me.SecurityPresenterObj = SecurityPresenter1
         Me.Text = "Accounts Receivable Journal Entry"
