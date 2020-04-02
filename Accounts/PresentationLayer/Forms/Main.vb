@@ -403,7 +403,7 @@ Namespace PresentationLayer.Forms
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
-        Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem.Click
+        Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
             Dim childMdiForm As CategoryEntryTv
             'Set the Parent Form of the Child window.
             childMdiForm = New CategoryEntryTv With {
@@ -479,7 +479,7 @@ Namespace PresentationLayer.Forms
         '    ShowEntryForm(BalanceSheetMonthlyReport)
         'End Sub
 
-        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BanksToolStripMenuItem.Click
+        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
             Dim childMdiForm As BankEntryTv
             'Set the Parent Form of the Child window.
             childMdiForm = New BankEntryTv() With {
@@ -538,7 +538,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemCustomersClients.Click
+            Handles ToolStripMenuItemCustomerClients.Click
             ShowEntryForm(CustomerEntryTv)
         End Sub
 
@@ -553,7 +553,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesignationsToolStripMenuItem.Click
+        Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDesignations.Click
             Dim myForm = New DesignationEntryTv
             myForm.Show()
         End Sub
@@ -566,7 +566,7 @@ Namespace PresentationLayer.Forms
             SetLanguageChangeButtons()
         End Sub
 
-        Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DistributionSchemesToolStripMenuItem.Click
+        Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDistributionSchemes.Click
             Dim childMdiForm As DistributionSchemeEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New DistributionSchemeEntry() With {
@@ -724,7 +724,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub RevenueGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RevenueGroupsToolStripMenuItem.Click
+        Private Sub RevenueGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevenueGroups.Click
             Dim childMdiForm As RevenueGroupEntryTv
             'Set the Parent Form of the Child window.
             childMdiForm = New RevenueGroupEntryTv() With {
@@ -840,7 +840,7 @@ Namespace PresentationLayer.Forms
         'End Sub
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-                    Handles ToolStripMenuItemSuppliersVendors.Click
+                    Handles ToolStripMenuItemSupplierVendors.Click
             ShowEntryForm(SupplierEntryTv)
         End Sub
 
@@ -1020,7 +1020,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ItemsToolStripMenuItem.Click
+        Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItems.Click
             Dim childMdiForm As PurchaseItemEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New PurchaseItemEntry With {
@@ -1080,7 +1080,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateAllMessagesToolStripMenuItem.Click
+        Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
             Dim x = New OneTimeRun
             Debugger.Break()
             OneTimeRun.CreateAllMessages()
@@ -1104,7 +1104,7 @@ Namespace PresentationLayer.Forms
             Return Messaging.Show(message, caption)
         End Function
 
-        Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TranslationsToolStripMenuItem.Click
+        Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptionsBatchEdit.Click
             Dim frm As New TranslationTableManager()
             'frm.FormIdNoToTranslate = 0
             frm.AppDataDAC = AppDataDAC
@@ -1121,6 +1121,8 @@ Namespace PresentationLayer.Forms
             'Display the new form.
             childMdiForm.Show()
         End Sub
+
+
     End Class
 
 End Namespace

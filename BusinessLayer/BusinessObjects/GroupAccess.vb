@@ -15,8 +15,8 @@ Namespace BusinessObjects
         Public Property SecurityObjectIdNo As Nullable(Of Integer)
         Public Property SecurityObjectName As String
         Public Property Visible As Boolean
-        Public Property Selectable As Boolean
-        Public Property Viewable As Boolean
+        'Public Property Selectable As Boolean
+        'Public Property Viewable As Boolean
         Public Property Editable As Boolean
         ' ** Enterprise Design Pattern: Foreign Key Mapping. SecurityGroup is the parent
     End Class

@@ -103,7 +103,7 @@ Public Class Model
                 Dim tData As New ClassesLibrary.LookupData
                 tData.IdNo = If(data(i * 3 - 3).Equals(DBNull.Value), 0, CInt(data(i * 3 - 3)))
                 tData.Name = data(i * 3 - 2) & " | " & data(i * 3 - 3)
-                tData.Code = data(i * 3 - 1)
+                tData.Code = If(data(i * 3 - 1).Equals(DbNull.Value),"",data(i*3-1))
                 tlData.Add(tData)
             Next
         Else

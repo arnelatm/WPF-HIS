@@ -6,4 +6,6 @@ Public Interface IModelSecurity
 
     Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
 
+    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList
+
 End Interface

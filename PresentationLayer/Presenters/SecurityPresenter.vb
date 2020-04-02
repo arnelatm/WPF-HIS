@@ -19,4 +19,8 @@ Public Class SecurityPresenter
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList
+        Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+    End Function
+
 End Class

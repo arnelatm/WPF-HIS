@@ -762,6 +762,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return GetLookupDataByCode()
     End Function
 
+    
+    Public Function GetSecurityObjectList(Optional ByVal sortKey As String = "SecurityObjectName")
+        TableToGet = "SecurityObject"
+        SortExpression = sortKey
+        DisplayName = "SecurityObjectName"
+        DisplayNameArabic = "SecurityObjectNameAra"
+        DisplayCode = "IdNo"
+        Return GetLookupDataByCode()
+    End Function
+
     Protected Function GetLookupDataByCode()
         FormatFields()
         Return Model.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)

@@ -418,6 +418,9 @@
         Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) _
             Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
+            If Strings.Right(fields,1)="," Then
+                fields = Strings.Left(fields,Len(fields)-1)
+            End If
             Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
             Return Db.SqlRead(sql)
         End Function

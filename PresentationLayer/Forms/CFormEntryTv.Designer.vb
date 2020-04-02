@@ -24,8 +24,11 @@ Partial Class CFormEntryTv
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("TableName")
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTv))
         Me.TreeViewTableName = New System.Windows.Forms.TreeView()
+        Me.ImageListTreeView = New System.Windows.Forms.ImageList(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
@@ -35,6 +38,7 @@ Partial Class CFormEntryTv
             Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.BackColor = System.Drawing.Color.Honeydew
         Me.TreeViewTableName.ImageKey = "TreeNode.ico"
+        Me.TreeViewTableName.ImageList = Me.ImageListTreeView
         Me.TreeViewTableName.Location = New System.Drawing.Point(0, 61)
         Me.TreeViewTableName.Name = "TreeViewTableName"
         TreeNode1.Name = "Node0"
@@ -44,6 +48,13 @@ Partial Class CFormEntryTv
         Me.TreeViewTableName.SelectedImageKey = "openbriefcase.png"
         Me.TreeViewTableName.Size = New System.Drawing.Size(300, 245)
         Me.TreeViewTableName.TabIndex = 2
+        '
+        'ImageListTreeView
+        '
+        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTreeView.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+        Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
         '
         'CFormEntryTv
         '
@@ -58,4 +69,5 @@ Partial Class CFormEntryTv
 End Sub
 
     Public WithEvents TreeViewTableName As TreeView
+    Friend WithEvents ImageListTreeView As ImageList
 End Class

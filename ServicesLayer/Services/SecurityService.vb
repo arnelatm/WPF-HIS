@@ -36,6 +36,15 @@ Namespace Services
             Return SecurityDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
 
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurityForKey
+            If Provider Is Nothing Then
+                Provider = ConfigurationManager.AppSettings.Get("DataProvider")
+                Factory = DaoFactories.GetFactory(Provider)
+                SecurityDao = Factory.SecurityDao
+            End If
+            Return SecurityDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+        End Function
+
     End Class
 
 End Namespace

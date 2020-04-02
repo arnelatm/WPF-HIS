@@ -16,8 +16,8 @@ Public Class CTextBox
     Private _searchAnywhere As Boolean
     Private _oldValue As String
     Private _editingMode As Boolean
-    Private _viewable As Boolean
-    Private _selectable As Boolean
+    'Private _viewable As Boolean
+    'Private _selectable As Boolean
     Private _editable As Boolean
     Private _isUnique As Boolean = False
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
@@ -64,23 +64,23 @@ Public Class CTextBox
         End Get
     End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will be shown but masked by <*> .")>
-    <Browsable(True)>
-    Public Property Viewable As Boolean
-        Get
-            Return _viewable
-        End Get
-        Set
-            _viewable = Value
-            If Not Value Then
-                If PasswordChar = vbNullChar Or PasswordChar = "" Then
-                    PasswordChar = Convert.ToChar(" ")
-                End If
-            End If
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control value will be shown but masked by <*> .")>
+    '<Browsable(True)>
+    'Public Property Viewable As Boolean
+    '    Get
+    '        Return _viewable
+    '    End Get
+    '    Set
+    '        _viewable = Value
+    '        If Not Value Then
+    '            If PasswordChar = vbNullChar Or PasswordChar = "" Then
+    '                PasswordChar = Convert.ToChar(" ")
+    '            End If
+    '        End If
+    '    End Set
+    'End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -88,20 +88,20 @@ Public Class CTextBox
     <Browsable(True)>
     Public Property CustomFormat As String
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control can be selected.")>
-    <Browsable(True)>
-    Public Property Selectable As Boolean
-        Get
-            Return _selectable
-        End Get
-        Set
-            _selectable = Value
-            Enabled = Value
-            Refresh()
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control can be selected.")>
+    '<Browsable(True)>
+    'Public Property Selectable As Boolean
+    '    Get
+    '        Return _selectable
+    '    End Get
+    '    Set
+    '        _selectable = Value
+    '        Enabled = Value
+    '        Refresh()
+    '    End Set
+    'End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>

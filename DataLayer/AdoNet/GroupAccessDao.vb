@@ -50,7 +50,7 @@ Namespace AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
             End If
-            Dim sql As String = "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Selectable, GroupAccess.Viewable, GroupAccess.Editable from SecurityObject  " &
+            Dim sql As String = "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
                                 "left join groupAccess " &
                                 "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
                                 "Order By " & sortExpression & " ASC "
@@ -75,8 +75,6 @@ Namespace AdoNet
             .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIDNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
-            .Selectable = Extensions.AsBool(reader("Selectable")),
-            .Viewable = Extensions.AsBool(reader("Viewable")),
             .Editable = Extensions.AsBool(reader("Editable"))
             }
 
@@ -90,8 +88,6 @@ Namespace AdoNet
                                     "@SecurityObjectIDNo", groupAccess.SecurityObjectIdNo,
                                     "@SecurityObjectName", groupAccess.SecurityObjectName,
                                     "@Visible", groupAccess.Visible,
-                                    "@Selectable", groupAccess.Selectable,
-                                    "@Viewable", groupAccess.Viewable,
                                     "@Editable", groupAccess.Editable
                                 }
         End Function

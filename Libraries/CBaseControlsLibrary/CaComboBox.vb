@@ -28,10 +28,10 @@ Public Class CaComboBox
     Private _previousSelectedIndex As Integer = -1
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
     Private _readOnlyCombo As Boolean
-    Private _selectable As Boolean
+    'Private _selectable As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
-    Private _viewable As Boolean
+    'Private _viewable As Boolean
     '<Bindable(True)>
     '<Category("Properties")>
     '<DefaultValue("Name")>
@@ -175,19 +175,19 @@ Public Class CaComboBox
 
     Public Property SearchAnywhere As Boolean
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control can be selected.")>
-    <Browsable(True)>
-    Public Property Selectable As Boolean
-        Get
-            Return _selectable
-        End Get
-        Set
-            _selectable = Value
-            Enabled = Value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control can be selected.")>
+    '<Browsable(True)>
+    'Public Property Selectable As Boolean
+    '    Get
+    '        Return _selectable
+    '    End Get
+    '    Set
+    '        _selectable = Value
+    '        Enabled = Value
+    '    End Set
+    'End Property
 
     Public Property SuggestBoxHeight As Integer
         Get
@@ -238,21 +238,21 @@ Public Class CaComboBox
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will not be shown.")>
-    <Browsable(True)>
-    Public Property Viewable As Boolean
-        Get
-            Return _viewable
-        End Get
-        Set
-            _viewable = Value
-            If Not Value Then
-                Width = 0
-            End If
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control value will not be shown.")>
+    '<Browsable(True)>
+    'Public Property Viewable As Boolean
+    '    Get
+    '        Return _viewable
+    '    End Get
+    '    Set
+    '        _viewable = Value
+    '        If Not Value Then
+    '            Width = 0
+    '        End If
+    '    End Set
+    'End Property
 
     Public Shared Property WmPaint1 As Integer = &HF
 
@@ -362,13 +362,13 @@ Public Class CaComboBox
         MyBase.OnPreviewKeyDown(e)
     End Sub
 
-    Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
-        MyBase.OnSizeChanged(e)
-        If Viewable Then
-            'SuggestListForm.Width = Width - 10
-            'SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
-        End If
-    End Sub
+    'Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
+    '    MyBase.OnSizeChanged(e)
+    '    If Viewable Then
+    '        'SuggestListForm.Width = Width - 10
+    '        'SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
+    '    End If
+    'End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)

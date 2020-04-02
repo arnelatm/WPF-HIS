@@ -140,6 +140,10 @@
       <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

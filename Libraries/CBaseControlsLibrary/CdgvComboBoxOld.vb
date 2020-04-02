@@ -17,8 +17,8 @@ Public Class CDgvComboBoxOld
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
 
     Private _editingMode As Boolean = True
-    Private _viewable As Boolean
-    Private _selectable As Boolean
+    'Private _viewable As Boolean
+    'Private _selectable As Boolean
     Private _editable As Boolean
 
     Private _previousSelectedIndex As Integer = -1
@@ -93,35 +93,35 @@ Public Class CDgvComboBoxOld
         End Get
     End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will not be shown.")>
-    <Browsable(True)>
-    Public Property Viewable As Boolean
-        Get
-            Return _viewable
-        End Get
-        Set
-            _viewable = Value
-            If Not Value Then
-                Me.Width = 0
-            End If
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control value will not be shown.")>
+    '<Browsable(True)>
+    'Public Property Viewable As Boolean
+    '    Get
+    '        Return _viewable
+    '    End Get
+    '    Set
+    '        _viewable = Value
+    '        If Not Value Then
+    '            Me.Width = 0
+    '        End If
+    '    End Set
+    'End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control can be selected.")>
-    <Browsable(True)>
-    Public Property Selectable As Boolean
-        Get
-            Return _selectable
-        End Get
-        Set
-            _selectable = Value
-            Enabled = Value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control can be selected.")>
+    '<Browsable(True)>
+    'Public Property Selectable As Boolean
+    '    Get
+    '        Return _selectable
+    '    End Get
+    '    Set
+    '        _selectable = Value
+    '        Enabled = Value
+    '    End Set
+    'End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -382,13 +382,13 @@ Public Class CDgvComboBoxOld
         SetListBoxFormLocation(SuggestListForm)
     End Sub
 
-    Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
-        MyBase.OnSizeChanged(e)
-        If Viewable Then
-            'SuggestListForm.Width = Width - 10
-            'SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
-        End If
-    End Sub
+    'Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
+    '    MyBase.OnSizeChanged(e)
+    '    If Viewable Then
+    '        'SuggestListForm.Width = Width - 10
+    '        'SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
+    '    End If
+    'End Sub
 
     Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
         If Not SuggestListForm.SuggestListBox.Focused Then
