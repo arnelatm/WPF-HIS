@@ -1,4 +1,6 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -18,9 +20,10 @@ Public Class SecurityGroupEntryTv
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-        FormTitleCaption = "Security Group Maintenance Form"
-        MainTableName = "SecurityGroup"
+
+        MainTableName = "SecurityGroup_View"
         IdFieldName = "IdNo"
+        ParentFieldName = "ParentIdNo"
         TvMainFieldName = "SecurityGroupName"
         TvSecondaryFieldName = "SecurityGroupCode"
         SortOrderKey = "SecurityGroupName"
@@ -37,27 +40,41 @@ Public Class SecurityGroupEntryTv
         DtInsertTable.Columns.Add("SecurityGroupIDNo", GetType(Int32))
         DtInsertTable.Columns.Add("SecurityObjectIDNo", GetType(Int32))
         DtInsertTable.Columns.Add("Visible", GetType(Boolean))
-        DtInsertTable.Columns.Add("Selectable", GetType(Boolean))
-        DtInsertTable.Columns.Add("Viewable", GetType(Boolean))
+        'DtInsertTable.Columns.Add("Selectable", GetType(Boolean))
+        'DtInsertTable.Columns.Add("Viewable", GetType(Boolean))
         DtInsertTable.Columns.Add("Editable", GetType(Boolean))
 
         DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
         DtUpdateTable.Columns.Add("SecurityGroupIDNo", GetType(Int32))
         DtUpdateTable.Columns.Add("SecurityObjectIDNo", GetType(Int32))
         DtUpdateTable.Columns.Add("Visible", GetType(Boolean))
-        DtUpdateTable.Columns.Add("Selectable", GetType(Boolean))
-        DtUpdateTable.Columns.Add("Viewable", GetType(Boolean))
+        'DtUpdateTable.Columns.Add("Selectable", GetType(Boolean))
+        'DtUpdateTable.Columns.Add("Viewable", GetType(Boolean))
         DtUpdateTable.Columns.Add("Editable", GetType(Boolean))
 
         'CreateEnumResourceFile()
         'ResourceEnumConverter.MakeResource("SecurityGroupTypeSelection", GetType(SecurityGroupTypeSelection))
     End Sub
 
+    Private Shadows Sub OnTextDisplayLanguageChanged()
+        CreateDataSources()
+    End Sub
+
+    Protected Overrides Sub CreateDataSources()
+        UpdateParentIdData()
+    End Sub
+    Private Sub UpdateParentIdData()
+        cacParentIdNo.DataSource = PresenterObj.GetSecurityGroupList()
+    End Sub
+
+
     Public Sub CreateEnumResourceFile()
         'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
         'ResourceEnumConverter.MakeResource("SecurityGroupTypeSelection", GetType(SecurityGroupTypeSelection))
         'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
     End Sub
+
+
 
 #Region "SecurityGroupFields"
 
@@ -97,6 +114,25 @@ Public Class SecurityGroupEntryTv
         End Set
     End Property
 
+
+    Public Property ParentIdNo As Integer? Implements ISecurityGroupView.ParentIdNo
+        Get
+            Return cacParentIdNo.GetValue()
+        End Get
+        Set
+            cacParentIdNo.SetValue(Value)
+        End Set
+    End Property
+
+    'Public Property ParentIdNo As Integer? Implements ISecurityGroupView.ParentIdNo
+    '    Get
+    '        Return cacParentIdNo.GetValue()
+    '    End Get
+    '    Set
+    '        cacParentIdNo.SetValue(Value)
+    '    End Set
+    'End Property
+
     Public Property Notes As String Implements ISecurityGroupView.Notes
         Get
             Return txtNotes.Text
@@ -130,9 +166,10 @@ Public Class SecurityGroupEntryTv
     Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
         MyBase.DisplayView(idNoOfRecord)
         _groupAccessPresenter.Display(idNoOfRecord)
-        DataGridViewGroupAccesses.DataSource = Nothing
-        DataGridViewGroupAccesses.DataSource = GroupAccesses
-        DataGridViewGroupAccesses.Refresh()
+        BindGroupAccess()
+        'DataGridViewGroupAccesses.DataSource = Nothing
+        'DataGridViewGroupAccesses.DataSource = GroupAccesses
+        'DataGridViewGroupAccesses.Refresh()
         GroupAccessChanged = False
     End Sub
 
@@ -150,6 +187,26 @@ Public Class SecurityGroupEntryTv
             .Refresh()
         End With
         ResumeLayout()
+    End Sub
+
+    'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
+    'Handles DataGridViewGroupAccesses.CellEndEdit
+    '    DataGridViewGroupAccesses.CommitEdit( DataGridViewDataErrorContexts.Commit)
+    'End Sub
+    
+    Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+        If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
+            Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
+            CancelSave = True
+            Exit Sub
+        End If
+        ' need to do this since last change on the dataGrid will not be saved unless that cell lose focus.
+        ' so focusing to this field will force the lost focus on the cell and save that last entry.
+        me.txtNotes.Focus()
+    End Sub
+    Public Sub OnAfterSave() Handles MyBase.AfterSave
+        UpdateParentIdData()
+        cacParentIdNo.Refresh()
     End Sub
 
     Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
@@ -181,6 +238,7 @@ Public Class SecurityGroupEntryTv
 
     Public Property GroupAccessChanged As Boolean
 
+
 #End Region
 
 #Region "Event Handlers"
@@ -204,19 +262,32 @@ Public Class SecurityGroupEntryTv
         Handles MyBase.ParentRecordUpdatedSuccessfully
         DtInsertTable.Clear()
         DtUpdateTable.Clear()
-        For Each groupAccess In GroupAccesses
+        For Each groupAccess In bsGroupAccesses
             If groupAccess.IdNo <= 0 Then
-                If groupAccess.Visible OrElse groupAccess.Editable OrElse groupAccess.Selectable OrElse groupAccess.Editable Then
-                    DtInsertTable.Rows.Add(IDNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible, groupAccess.Selectable, groupAccess.Viewable,
-                                           groupAccess.Editable)
+                If groupAccess.Visible OrElse groupAccess.Editable Then
+                    DtInsertTable.Rows.Add(IDNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible, groupAccess.Editable)
                 End If
             Else
                 DtUpdateTable.Rows.Add(groupAccess.IdNo, IDNo, groupAccess.SecurityObjectIdNo,
-                                       groupAccess.Visible, groupAccess.Selectable, groupAccess.Viewable, groupAccess.Editable)
+                                       groupAccess.Visible, groupAccess.Editable)
             End If
         Next
         PresenterObj.GroupAccessesPresenter.Save(DtInsertTable, DtUpdateTable, IDNo)
     End Sub
+
+    Protected Overrides Sub CreateFieldsDictionary()
+        FieldsDictionary = New Dictionary(Of String, Object) From
+            {
+            {"IDNo", TxtIDNo},
+            {"Notes", txtNotes},
+            {"ParentId", TxtIDNo},
+            {"ParentIdNo", cacParentIdNo},
+            {"SecurityGroupCode", txtSecurityGroupCode},
+            {"SecurityGroupName", txtSecurityGroupName},
+            {"SecurityGroupNameAra", txtSecurityGroupNameAra}
+            }
+    End Sub
+
 
 #End Region
 

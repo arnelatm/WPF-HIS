@@ -378,11 +378,74 @@
   <data name="&gt;&gt;txtSecurityGroupNameAra.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="lblParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblParentIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 110</value>
+  </data>
+  <data name="lblParentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblParentIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 24</value>
+  </data>
+  <data name="lblParentIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="lblParentIdNo.Text" xml:space="preserve">
+    <value>Parent Account</value>
+  </data>
+  <data name="lblParentIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblParentIdNo.Name" xml:space="preserve">
+    <value>lblParentIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblParentIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblParentIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblParentIdNo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cacParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cacParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 111</value>
+  </data>
+  <data name="cacParentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cacParentIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 24</value>
+  </data>
+  <data name="cacParentIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="&gt;&gt;cacParentIdNo.Name" xml:space="preserve">
+    <value>cacParentIdNo</value>
+  </data>
+  <data name="&gt;&gt;cacParentIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cacParentIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cacParentIdNo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 111</value>
+    <value>11, 137</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -409,13 +472,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 111</value>
+    <value>232, 137</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -439,7 +502,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <metadata name="DGVIDNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -483,24 +546,6 @@
   <data name="DGVVisible.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="Selectable.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Selectable.HeaderText" xml:space="preserve">
-    <value>Selectable</value>
-  </data>
-  <data name="Selectable.MinimumWidth" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <metadata name="Viewable.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Viewable.HeaderText" xml:space="preserve">
-    <value>Viewable</value>
-  </data>
-  <data name="Viewable.MinimumWidth" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
   <metadata name="DGVEditable.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -538,10 +583,10 @@
     <value>0</value>
   </data>
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 175</value>
+    <value>13, 201</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 416</value>
+    <value>667, 378</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>149</value>
@@ -556,7 +601,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -679,18 +724,6 @@
     <value>DGVVisible</value>
   </data>
   <data name="&gt;&gt;DGVVisible.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Selectable.Name" xml:space="preserve">
-    <value>Selectable</value>
-  </data>
-  <data name="&gt;&gt;Selectable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Viewable.Name" xml:space="preserve">
-    <value>Viewable</value>
-  </data>
-  <data name="&gt;&gt;Viewable.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DGVEditable.Name" xml:space="preserve">

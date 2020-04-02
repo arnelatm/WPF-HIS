@@ -40,7 +40,7 @@ Namespace PresentationLayer.Forms
         Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
-        Me.MainMenu = New System.Windows.Forms.MenuStrip()
+        Me.Menu = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,30 +57,30 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemProfitCenters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RevenueGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DistributionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDistributionSchemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemCountries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPhoneTypes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReligions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BanksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ItemsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemBanks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCategories = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurity = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemUsers = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployee = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployees = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesignationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDesignations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTranslations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemMessages = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCaptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TranslationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateAllMessagesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSuppliersVendors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCustomersClients = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
         Me.PettyCashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -130,7 +130,7 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
-        Me.MainMenu.SuspendLayout
+        Me.Menu.SuspendLayout
         Me.contextMenuStripMember.SuspendLayout
         Me.contextMenuStrip1.SuspendLayout
         Me.SuspendLayout
@@ -190,12 +190,12 @@ Namespace PresentationLayer.Forms
         Me.ToolStripButtonTranslate.Name = "ToolStripButtonTranslate"
         Me.ToolStripButtonTranslate.Padding = New System.Windows.Forms.Padding(2, 0, 2, 0)
         '
-        'MainMenu
+        'Menu
         '
-        Me.MainMenu.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
-        resources.ApplyResources(Me.MainMenu, "MainMenu")
-        Me.MainMenu.Name = "MainMenu"
+        Me.Menu.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.Menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
+        resources.ApplyResources(Me.Menu, "Menu")
+        Me.Menu.Name = "Menu"
         '
         'ToolStripMenuItemFile
         '
@@ -246,13 +246,13 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemMasters
         '
-        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemSuppliersVendors, Me.ToolStripMenuItemCustomersClients})
+        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients})
         Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
         resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.RevenueGroupsToolStripMenuItem, Me.DistributionSchemesToolStripMenuItem, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.BanksToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.ItemsToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -281,15 +281,15 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemProfitCenters.Name = "ToolStripMenuItemProfitCenters"
         resources.ApplyResources(Me.ToolStripMenuItemProfitCenters, "ToolStripMenuItemProfitCenters")
         '
-        'RevenueGroupsToolStripMenuItem
+        'ToolStripMenuItemRevenueGroups
         '
-        Me.RevenueGroupsToolStripMenuItem.Name = "RevenueGroupsToolStripMenuItem"
-        resources.ApplyResources(Me.RevenueGroupsToolStripMenuItem, "RevenueGroupsToolStripMenuItem")
+        Me.ToolStripMenuItemRevenueGroups.Name = "ToolStripMenuItemRevenueGroups"
+        resources.ApplyResources(Me.ToolStripMenuItemRevenueGroups, "ToolStripMenuItemRevenueGroups")
         '
-        'DistributionSchemesToolStripMenuItem
+        'ToolStripMenuItemDistributionSchemes
         '
-        Me.DistributionSchemesToolStripMenuItem.Name = "DistributionSchemesToolStripMenuItem"
-        resources.ApplyResources(Me.DistributionSchemesToolStripMenuItem, "DistributionSchemesToolStripMenuItem")
+        Me.ToolStripMenuItemDistributionSchemes.Name = "ToolStripMenuItemDistributionSchemes"
+        resources.ApplyResources(Me.ToolStripMenuItemDistributionSchemes, "ToolStripMenuItemDistributionSchemes")
         '
         'ToolStripSeparator4
         '
@@ -311,20 +311,20 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemReligions.Name = "ToolStripMenuItemReligions"
         resources.ApplyResources(Me.ToolStripMenuItemReligions, "ToolStripMenuItemReligions")
         '
-        'BanksToolStripMenuItem
+        'ToolStripMenuItemBanks
         '
-        Me.BanksToolStripMenuItem.Name = "BanksToolStripMenuItem"
-        resources.ApplyResources(Me.BanksToolStripMenuItem, "BanksToolStripMenuItem")
+        Me.ToolStripMenuItemBanks.Name = "ToolStripMenuItemBanks"
+        resources.ApplyResources(Me.ToolStripMenuItemBanks, "ToolStripMenuItemBanks")
         '
-        'CategoriesToolStripMenuItem
+        'ToolStripMenuItemCategories
         '
-        Me.CategoriesToolStripMenuItem.Name = "CategoriesToolStripMenuItem"
-        resources.ApplyResources(Me.CategoriesToolStripMenuItem, "CategoriesToolStripMenuItem")
+        Me.ToolStripMenuItemCategories.Name = "ToolStripMenuItemCategories"
+        resources.ApplyResources(Me.ToolStripMenuItemCategories, "ToolStripMenuItemCategories")
         '
-        'ItemsToolStripMenuItem
+        'ToolStripMenuItemItems
         '
-        Me.ItemsToolStripMenuItem.Name = "ItemsToolStripMenuItem"
-        resources.ApplyResources(Me.ItemsToolStripMenuItem, "ItemsToolStripMenuItem")
+        Me.ToolStripMenuItemItems.Name = "ToolStripMenuItemItems"
+        resources.ApplyResources(Me.ToolStripMenuItemItems, "ToolStripMenuItemItems")
         '
         'ToolStripMenuItemSecurity
         '
@@ -349,7 +349,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemEmployee
         '
-        Me.ToolStripMenuItemEmployee.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployees, Me.DesignationsToolStripMenuItem})
+        Me.ToolStripMenuItemEmployee.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployees, Me.ToolStripMenuItemDesignations})
         Me.ToolStripMenuItemEmployee.Name = "ToolStripMenuItemEmployee"
         resources.ApplyResources(Me.ToolStripMenuItemEmployee, "ToolStripMenuItemEmployee")
         '
@@ -358,14 +358,14 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemEmployees.Name = "ToolStripMenuItemEmployees"
         resources.ApplyResources(Me.ToolStripMenuItemEmployees, "ToolStripMenuItemEmployees")
         '
-        'DesignationsToolStripMenuItem
+        'ToolStripMenuItemDesignations
         '
-        Me.DesignationsToolStripMenuItem.Name = "DesignationsToolStripMenuItem"
-        resources.ApplyResources(Me.DesignationsToolStripMenuItem, "DesignationsToolStripMenuItem")
+        Me.ToolStripMenuItemDesignations.Name = "ToolStripMenuItemDesignations"
+        resources.ApplyResources(Me.ToolStripMenuItemDesignations, "ToolStripMenuItemDesignations")
         '
         'ToolStripMenuItemTranslations
         '
-        Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.TranslationsToolStripMenuItem, Me.CreateAllMessagesToolStripMenuItem})
+        Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.ToolStripMenuItemCaptionsBatchEdit, Me.ToolStripMenuItemCreateAllMessages})
         Me.ToolStripMenuItemTranslations.Name = "ToolStripMenuItemTranslations"
         resources.ApplyResources(Me.ToolStripMenuItemTranslations, "ToolStripMenuItemTranslations")
         '
@@ -379,30 +379,30 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemCaptions.Name = "ToolStripMenuItemCaptions"
         resources.ApplyResources(Me.ToolStripMenuItemCaptions, "ToolStripMenuItemCaptions")
         '
-        'TranslationsToolStripMenuItem
+        'ToolStripMenuItemCaptionsBatchEdit
         '
-        Me.TranslationsToolStripMenuItem.Name = "TranslationsToolStripMenuItem"
-        resources.ApplyResources(Me.TranslationsToolStripMenuItem, "TranslationsToolStripMenuItem")
+        Me.ToolStripMenuItemCaptionsBatchEdit.Name = "ToolStripMenuItemCaptionsBatchEdit"
+        resources.ApplyResources(Me.ToolStripMenuItemCaptionsBatchEdit, "ToolStripMenuItemCaptionsBatchEdit")
         '
-        'CreateAllMessagesToolStripMenuItem
+        'ToolStripMenuItemCreateAllMessages
         '
-        Me.CreateAllMessagesToolStripMenuItem.Name = "CreateAllMessagesToolStripMenuItem"
-        resources.ApplyResources(Me.CreateAllMessagesToolStripMenuItem, "CreateAllMessagesToolStripMenuItem")
+        Me.ToolStripMenuItemCreateAllMessages.Name = "ToolStripMenuItemCreateAllMessages"
+        resources.ApplyResources(Me.ToolStripMenuItemCreateAllMessages, "ToolStripMenuItemCreateAllMessages")
         '
         'ToolStripMenuItemPayroll
         '
         Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
         resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
         '
-        'ToolStripMenuItemSuppliersVendors
+        'ToolStripMenuItemSupplierVendors
         '
-        Me.ToolStripMenuItemSuppliersVendors.Name = "ToolStripMenuItemSuppliersVendors"
-        resources.ApplyResources(Me.ToolStripMenuItemSuppliersVendors, "ToolStripMenuItemSuppliersVendors")
+        Me.ToolStripMenuItemSupplierVendors.Name = "ToolStripMenuItemSupplierVendors"
+        resources.ApplyResources(Me.ToolStripMenuItemSupplierVendors, "ToolStripMenuItemSupplierVendors")
         '
-        'ToolStripMenuItemCustomersClients
+        'ToolStripMenuItemCustomerClients
         '
-        Me.ToolStripMenuItemCustomersClients.Name = "ToolStripMenuItemCustomersClients"
-        resources.ApplyResources(Me.ToolStripMenuItemCustomersClients, "ToolStripMenuItemCustomersClients")
+        Me.ToolStripMenuItemCustomerClients.Name = "ToolStripMenuItemCustomerClients"
+        resources.ApplyResources(Me.ToolStripMenuItemCustomerClients, "ToolStripMenuItemCustomerClients")
         '
         'ToolStripMenuItemTransactions
         '
@@ -654,7 +654,7 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.MainMenu)
+        Me.Controls.Add(Me.Menu)
         Me.IsMdiContainer = true
         Me.Name = "Main"
         Me.SecurityPresenterObj = SecurityPresenter1
@@ -662,8 +662,8 @@ Namespace PresentationLayer.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
-        Me.MainMenu.ResumeLayout(false)
-        Me.MainMenu.PerformLayout
+        Me.Menu.ResumeLayout(false)
+        Me.Menu.PerformLayout
         Me.contextMenuStripMember.ResumeLayout(false)
         Me.contextMenuStrip1.ResumeLayout(false)
         Me.ResumeLayout(false)
@@ -678,7 +678,7 @@ End Sub
         Private WithEvents ToolStripButtonLogin As ToolStripButton
         Private WithEvents ToolStripButtonLogout As ToolStripButton
         Private toolStripSeparator1 As ToolStripSeparator
-        Private MainMenu As MenuStrip
+        Private Menu As MenuStrip
         Private ToolStripMenuItemFile As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogin As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogout As ToolStripMenuItem
@@ -735,8 +735,8 @@ End Sub
         Friend WithEvents ToolStripMenuItemCostCenters As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemProfitCenters As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemChartOfAccounts As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemSuppliersVendors As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemCustomersClients As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemSupplierVendors As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCustomerClients As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneralJournalEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCashDisbursementEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCashReceiptEntry As ToolStripMenuItem
@@ -756,19 +756,19 @@ End Sub
         Friend WithEvents ToolStripMenuItemCaptions As ToolStripMenuItem
         Private WithEvents ToolStripButtonTranslate As ToolStripButton
         Private WithEvents ToolStripButtonExit As ToolStripButton
-        Friend WithEvents RevenueGroupsToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents DistributionSchemesToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents DesignationsToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents BanksToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemRevenueGroups As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDistributionSchemes As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDesignations As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemBanks As ToolStripMenuItem
         Friend WithEvents AccountsPayableEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AccountsReceivableEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItem8 As ToolStripMenuItem
-        Friend WithEvents ItemsToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents CategoriesToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents TranslationsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemItems As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCategories As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCaptionsBatchEdit As ToolStripMenuItem
         Friend WithEvents SalesJournalEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AccountReconciliationToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents CreateAllMessagesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCreateAllMessages As ToolStripMenuItem
     End Class
 End NameSpace

@@ -298,7 +298,7 @@ Public Class BfMain
             UserOriginalCaptions()
             targetLanguageIdNo = 0
         Else
-            cmd = "Select Caption, translated from formItemsOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and formIdNo = " + FormIdNo.ToString()
+            cmd = "Select Caption, translatedCaption from formItemsOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and formIdNo = " + FormIdNo.ToString()
             Dim translations As DataSet
             translations = TranslatorDAC.ReturnDs(cmd)
             Dv = translations.Tables(0).DefaultView
@@ -347,7 +347,7 @@ Public Class BfMain
                         _originalText = CaptionCollection.Item(cCtrl.Name)
                         r = Dv.Find(_originalText)
                         If r >= 0 Then
-                            cCtrl.Text = Dv(r).Item("translated")
+                            cCtrl.Text = Dv(r).Item("TranslatedCaption")
                         Else
                             cCtrl.Text = cCtrl.Tag
                         End If
@@ -437,20 +437,20 @@ Public Class BfMain
         End If
     End Function
 
-    Private Shared Sub SetControlMaskability(ByRef cCtrl As Control, controlViewable As Boolean)
-        ' if Viewable is false, Don't show the controls content by masking content with '*' asterisk
-        If Not controlViewable Then
-            SetPropertyValue(cCtrl, "Viewable", controlViewable)
-            'SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
-        End If
-    End Sub
+    'Private Shared Sub SetControlMaskability(ByRef cCtrl As Control, controlViewable As Boolean)
+    '    ' if Viewable is false, Don't show the controls content by masking content with '*' asterisk
+    '    If Not controlViewable Then
+    '        SetPropertyValue(cCtrl, "Viewable", controlViewable)
+    '        'SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+    '    End If
+    'End Sub
 
-    Private Shared Sub SetControlSelectability(ByRef cCtrl As Control, controlSelectable As Boolean)
-        ' if Selectable is false, Don't let the user select the data so set enabled to False
-        If Not controlSelectable Then
-            SetPropertyValue(cCtrl, "Selectable", controlSelectable)
-        End If
-    End Sub
+    ''Private Shared Sub SetControlSelectability(ByRef cCtrl As Control, controlSelectable As Boolean)
+    '    ' if Selectable is false, Don't let the user select the data so set enabled to False
+    '    If Not controlSelectable Then
+    '        SetPropertyValue(cCtrl, "Selectable", controlSelectable)
+    '    End If
+    'End Sub
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
@@ -468,6 +468,9 @@ Public Class BfMain
         Dim securityIdNo As String
         'Dim service As New Service
         If GlobalVariables.IsUserLoggedIn Then
+            ''if controlSecurityKey = "Main.Menu.Masters.Security" then
+            ''    Debugger.Break()
+            ''End If
             securityIdNo = SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
             If securityIdNo IsNot Nothing Then
                 'securityIdNo = Service.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
@@ -538,14 +541,15 @@ Public Class BfMain
 
     Public Sub SetControlSecurity(ByRef cCtrl As Control)
         Dim controlSecurityKey As String
-        If TypeOf cCtrl Is ToolStrip Then
-            Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
-            Dim toolStrip As ToolStrip = cCtrl
-            SetToolStripItems(toolStrip.Items, subMenuName)
-        ElseIf TypeOf cCtrl Is MenuStrip Then
+        If TypeOf cCtrl Is MenuStrip Then
+            ' check for MenuStrip first because MenuStrip is also a ToolStrip
             Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
             Dim menuStrip As MenuStrip = cCtrl
             SetMenuStripItems(menuStrip.Items, subMenuName)
+        ElseIf TypeOf cCtrl Is ToolStrip Then
+            Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
+            Dim toolStrip As ToolStrip = cCtrl
+            SetToolStripItems(toolStrip.Items, subMenuName)
         Else
             controlSecurityKey = GetControlSecurityKey(cCtrl)
             If controlSecurityKey Is Nothing Or controlSecurityKey = "" Then
@@ -553,29 +557,29 @@ Public Class BfMain
             Else
                 Dim controlSecurityValues As ArrayList
                 Dim isEditable As Boolean
-                Dim isSelectable As Boolean
+                'Dim isSelectable As Boolean
                 Dim isVisible As Boolean
-                Dim isViewable As Boolean
+                'Dim isViewable As Boolean
                 controlSecurityValues = GetControlSecurityValues(controlSecurityKey)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
                     isVisible = controlSecurityValues(0)
                     ' Selectable property stored in second element of the array
-                    isSelectable = controlSecurityValues(1)
+                    'isSelectable = controlSecurityValues(1)
                     ' Viewable property stored in third element of the array
-                    isViewable = controlSecurityValues(2)
+                    'isViewable = controlSecurityValues(2)
                     ' Editable property stored in fourth element of the array
-                    isEditable = controlSecurityValues(3)
+                    isEditable = controlSecurityValues(1)
                 Else
                     isVisible = False
-                    isSelectable = False
+                    'isSelectable = False
                     isEditable = False
-                    isViewable = False
+                    'isViewable = False
                 End If
                 SetControlVisibility(cCtrl, isVisible)
-                SetControlMaskability(cCtrl, isViewable)
+                'SetControlMaskability(cCtrl, isViewable)
                 SetControlEditability(cCtrl, isEditable)
-                SetControlSelectability(cCtrl, isSelectable)
+                'SetControlSelectability(cCtrl, isSelectable)
             End If
         End If
     End Sub
@@ -605,16 +609,16 @@ Public Class BfMain
         Try
             Dim parentMenu As String
             parentMenu = subMenuName
+            'IF parentMenu = "Main.Menu.Masters" then
+            '    debugger.Break()
+            'End If
             For Each obj As Object In dropDownItems
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
                 If subMenu IsNot Nothing Then
-                    ApplyMenuSecurity(obj, subMenuName)
+                    ApplyMenuSecurity(obj, parentMenu)
                     If subMenu.HasDropDownItems Then
                         subMenuName = parentMenu + "." + Mid(obj.Name, 18)
-                        'ApplyMenuSecurity(obj, subMenuName)
                         SetMenuStripItems(subMenu.DropDownItems, subMenuName)
-                    Else
-                        'ApplyMenuSecurity(obj, subMenuName)
                     End If
                 End If
             Next
@@ -644,9 +648,8 @@ Public Class BfMain
                                 If controlSecurityValues.Count > 0 Then
                                     ' Visible property stored in first element of the array
                                     isVisible = controlSecurityValues(0)
-                                    ' Selectable property stored in second element of the array
-                                    isSelectable = controlSecurityValues(1)
                                     ' Editable property stored in third element of the array
+                                    isSelectable = controlSecurityValues(1)
                                 Else
                                     isVisible = False
                                     isSelectable = False

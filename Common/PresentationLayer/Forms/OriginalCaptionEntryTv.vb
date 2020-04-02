@@ -103,7 +103,11 @@ Namespace PresentationLayer.Forms
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
-            HideButton(btnDelete)
+            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
+            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
+                ' Visible property stored in first element of the array
+                HideButton(btnDelete)
+            End If
         End Sub
 
         Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm

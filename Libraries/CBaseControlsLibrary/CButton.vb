@@ -63,13 +63,10 @@ Public Class CButton
     Inherits Control
     Implements IButtonControl
 
-    Private _viewable As Boolean
-    Private _selectable As Boolean
-    Private _editable As Boolean
-    Private _displayOnly As Boolean = True
-    Private _securityKey As String = ""
+    'Private _viewable As Boolean
+    'Private _selectable As Boolean
 
-#Region " IButtonControl Implementation "
+    #Region " IButtonControl Implementation "
 
     Private m_DialogResult As DialogResult
     Private m_IsDefault As Boolean
@@ -81,8 +78,7 @@ Public Class CButton
         End Get
     End Property
 
-    <Category("Behavior"), DefaultValue(GetType(DialogResult), "None"),
-        Description("The dialog result produced in a modal form by clicking the button.")>
+    <Category("Behavior"), DefaultValue(GetType(DialogResult), "None"), Description("The dialog result produced in a modal form by clicking the button.")>
     Public Property DialogResult() As DialogResult Implements IButtonControl.DialogResult
         Get
             Return m_DialogResult
@@ -103,9 +99,7 @@ Public Class CButton
 
     Public Sub PerformClick() Implements IButtonControl.PerformClick
         If CanSelect Then
-            PerformClickButtonArea(Me, New MouseEventArgs(
-                Windows.Forms.MouseButtons.Left, 1,
-                CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
+            PerformClickButtonArea(Me, New MouseEventArgs(Windows.Forms.MouseButtons.Left, 1, CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
         End If
     End Sub
 
@@ -160,9 +154,8 @@ Public Class CButton
     Private Const WM_RBUTTONDOWN As Integer = 516
     Private Const WM_RBUTTONUP As Integer = 517
 
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger,
-                                        ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+    <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+    Private Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     End Function
 
 #End Region
@@ -176,14 +169,7 @@ Public Class CButton
 
         ' Add any initialization after the InitializeComponent() call.
 
-        SetStyle(ControlStyles.StandardClick Or
-                 ControlStyles.StandardDoubleClick Or
-                 ControlStyles.AllPaintingInWmPaint Or
-                 ControlStyles.Selectable Or
-                 ControlStyles.DoubleBuffer Or
-                 ControlStyles.ResizeRedraw Or
-                 ControlStyles.SupportsTransparentBackColor Or
-                 ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.StandardClick Or ControlStyles.StandardDoubleClick Or ControlStyles.AllPaintingInWmPaint Or ControlStyles.Selectable Or ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.UserPaint, True)
 
         Size = New Size(90, 25)
         ForeColor = Color.White
@@ -193,7 +179,6 @@ Public Class CButton
         UpdateDimBlends()
 
         'AddHandler DoubleClick, AddressOf ButtonDoubleClick
-
     End Sub
 
     'Public Sub ButtonDoubleClick(sender As Object, e As EventArgs)
@@ -209,18 +194,12 @@ Public Class CButton
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        SetStyle(ControlStyles.AllPaintingInWmPaint Or
-                 ControlStyles.Selectable Or
-                 ControlStyles.DoubleBuffer Or
-                 ControlStyles.ResizeRedraw Or
-                 ControlStyles.SupportsTransparentBackColor Or
-                 ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.Selectable Or ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.UserPaint, True)
         Size = New Size(90, 25)
         ForeColor = Color.White
         Font = New Font("Arial", 10, FontStyle.Bold)
         UpdateDimColors()
         UpdateDimBlends()
-
     End Sub
 
     Public Sub New(ByVal text As String, ByVal left As Integer, ByVal top As Integer, ByVal width As Integer, ByVal height As Integer)
@@ -228,18 +207,12 @@ Public Class CButton
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        SetStyle(ControlStyles.AllPaintingInWmPaint Or
-                 ControlStyles.Selectable Or
-                 ControlStyles.DoubleBuffer Or
-                 ControlStyles.ResizeRedraw Or
-                 ControlStyles.SupportsTransparentBackColor Or
-                 ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.Selectable Or ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.UserPaint, True)
         Size = New Size(90, 25)
         ForeColor = Color.White
         Font = New Font("Arial", 10, FontStyle.Bold)
         UpdateDimColors()
         UpdateDimBlends()
-
     End Sub
 
     Public Sub New(ByVal parent As Control, ByVal text As String)
@@ -247,18 +220,12 @@ Public Class CButton
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        SetStyle(ControlStyles.AllPaintingInWmPaint Or
-                 ControlStyles.Selectable Or
-                 ControlStyles.DoubleBuffer Or
-                 ControlStyles.ResizeRedraw Or
-                 ControlStyles.SupportsTransparentBackColor Or
-                 ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.Selectable Or ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.UserPaint, True)
         Size = New Size(90, 25)
         ForeColor = Color.White
         Font = New Font("Arial", 10, FontStyle.Bold)
         UpdateDimColors()
         UpdateDimBlends()
-
     End Sub
 
     Public Sub New(ByVal parent As Control, ByVal text As String, ByVal left As Integer, ByVal top As Integer, ByVal width As Integer, ByVal height As Integer)
@@ -266,18 +233,12 @@ Public Class CButton
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        SetStyle(ControlStyles.AllPaintingInWmPaint Or
-                 ControlStyles.Selectable Or
-                 ControlStyles.DoubleBuffer Or
-                 ControlStyles.ResizeRedraw Or
-                 ControlStyles.SupportsTransparentBackColor Or
-                 ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.Selectable Or ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.UserPaint, True)
         Size = New Size(90, 25)
         ForeColor = Color.White
         Font = New Font("Arial", 10, FontStyle.Bold)
         UpdateDimColors()
         UpdateDimBlends()
-
     End Sub
 
     <DefaultValue(GetType(Font), "Arial, 10pt, style=Bold")>
@@ -312,59 +273,45 @@ Public Class CButton
 
     Public Property OriginalImageName As String
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this button cannot be selected or executed.")>
-    <Browsable(True)>
-    Public Property Selectable As Boolean
-        Get
-            Return _selectable
-        End Get
-        Set
-            _selectable = Value
-            Enabled = Value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this button cannot be selected or executed.")>
+    '<Browsable(True)>
+    'Public Property Selectable As Boolean
+    '    Get
+    '        Return _selectable
+    '    End Get
+    '    Set
+    '        _selectable = Value
+    '        Enabled = Value
+    '    End Set
+    'End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control value will be shown.")>
     <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set
-            _displayOnly = Value
-        End Set
-    End Property
+    Public Property DisplayOnly As Boolean = True
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will be shown.")>
-    <Browsable(True)>
-    Public Property Viewable As Boolean
-        Get
-            Return _viewable
-        End Get
-        Set
-            _viewable = Value
-            Visible = Value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control value will be shown.")>
+    '<Browsable(True)>
+    'Public Property Viewable As Boolean
+    '    Get
+    '        Return _viewable
+    '    End Get
+    '    Set
+    '        _viewable = Value
+    '        Visible = Value
+    '    End Set
+    'End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control value will be shown.")>
     <Browsable(True)>
     Public Property Editable As Boolean
-        Get
-            Return _editable
-        End Get
-        Set
-            _editable = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -372,14 +319,7 @@ Public Class CButton
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     <Description("Security Key to use for this control.")>
     <Browsable(True)>
-    Public Property SecurityKey As String
-        Get
-            Return _securityKey
-        End Get
-        Set
-            _securityKey = Value
-        End Set
-    End Property
+    Public Property SecurityKey As String = ""
 
 #Region "Designer"
 
@@ -398,8 +338,7 @@ Public Class CButton
     Private _Corners As CornersProperty = DefaultCorners()
 
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Content)>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Corner Radii")>
+    <Category("Appearance CButton"), Description("Get or Set the Corner Radii")>
     Public Property Corners() As CornersProperty
         Get
             Return _Corners
@@ -479,14 +418,14 @@ Public Class CButton
         End Set
     End Property
 
-    Private _DimFactorClick As Integer = -25
+    Private _DimFactorClick As Integer = - 25
 
     ''' <summary>
     ''' Get or Set how much to dim the color on mouse down. Positive to Lighten and negative to Darken
     ''' </summary>
     <Category("Appearance CButton")>
     <Description("Get or Set how much to dim the color on mouse down. Positive to Lighten and negative to Darken")>
-    <DefaultValue(-25)>
+    <DefaultValue(- 25)>
     Public Property DimFactorClick() As Integer
         Get
             Return _DimFactorClick
@@ -600,8 +539,7 @@ Public Class CButton
     ''' <summary>
     ''' The Linear Blend type
     ''' </summary>
-    <Description("The Linear Blend type"),
-        Category("Appearance CButton")>
+    <Description("The Linear Blend type"), Category("Appearance CButton")>
     <DefaultValue(GetType(LinearGradientMode), "Vertical")>
     Public Property FillTypeLinear() As LinearGradientMode
         Get
@@ -618,8 +556,7 @@ Public Class CButton
     ''' <summary>
     ''' The Solid Color to fill the CButton
     ''' </summary>
-    <Description("The Solid Color to fill the CButton"),
-        Category("Appearance CButton")>
+    <Description("The Solid Color to fill the CButton"), Category("Appearance CButton")>
     <DefaultValue(GetType(Color), "Control")>
     Public Property ColorFillSolid() As Color
         Get
@@ -637,10 +574,7 @@ Public Class CButton
     ''' <summary>
     ''' The ColorBlend used to fill the CButton
     ''' </summary>
-    <Description("The ColorBlend used to fill the CButton"),
-        Category("Appearance CButton"),
-        RefreshProperties(RefreshProperties.All),
-        Editor(GetType(BlendTypeEditor), GetType(UITypeEditor))>
+    <Description("The ColorBlend used to fill the CButton"), Category("Appearance CButton"), RefreshProperties(RefreshProperties.All), Editor(GetType(BlendTypeEditor), GetType(UITypeEditor))>
     Public Property ColorFillBlend() As cBlendItems
         Get
             Return _ColorFillBlend
@@ -684,9 +618,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Button Text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Button Text"),
-        DefaultValue("CButton")>
+    <Category("Appearance CButton"), Description("Get or Set the Button Text"), DefaultValue("CButton")>
     Overrides Property Text() As String
         Get
             Return _Text
@@ -702,9 +634,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the TextrenderingHint fot the button text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set if the text is rendered with a Smoothing technique"),
-        DefaultValue(GetType(Drawing.Text.TextRenderingHint), "ClearTypeGridFit")>
+    <Category("Appearance CButton"), Description("Get or Set if the text is rendered with a Smoothing technique"), DefaultValue(GetType(Drawing.Text.TextRenderingHint), "ClearTypeGridFit")>
     Public Property TextSmoothingMode() As Drawing.Text.TextRenderingHint
         Get
             Return _TextSmoothingMode
@@ -720,9 +650,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the alignment for the text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the alignment for the text"),
-        DefaultValue(GetType(ContentAlignment), "MiddleCenter")>
+    <Category("Appearance CButton"), Description("Get or Set the alignment for the text"), DefaultValue(GetType(ContentAlignment), "MiddleCenter")>
     Public Property TextAlign() As ContentAlignment
         Get
             Return _TextAlign
@@ -738,9 +666,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the margion between the text and the button edge
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the margion between the text and the button edge"),
-        DefaultValue(GetType(Padding), "2,2,2,2")>
+    <Category("Appearance CButton"), Description("Get or Set the margion between the text and the button edge"), DefaultValue(GetType(Padding), "2,2,2,2")>
     Public Property TextMargin() As Padding
         Get
             Return _TextMargin
@@ -756,9 +682,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Relationship of the Text to the Image
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Relationship of the Text to the Image"),
-        DefaultValue(GetType(TextImageRelation), "Overlay")>
+    <Category("Appearance CButton"), Description("Get or Set the Relationship of the Text to the Image"), DefaultValue(GetType(TextImageRelation), "Overlay")>
     Public Property TextImageRelation() As TextImageRelation
         Get
             Return _TextImageRelation
@@ -774,9 +698,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set if the Text has a shadow
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set if the Text has a shadow"),
-        DefaultValue(True)>
+    <Category("Appearance CButton"), Description("Get or Set if the Text has a shadow"), DefaultValue(True)>
     Public Property TextShadowShow() As Boolean
         Get
             Return _TextShadowShow
@@ -792,9 +714,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the color of the Shadow Text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the color of the Shadow Text"),
-        DefaultValue(GetType(Color), "MidnightBlue")>
+    <Category("Appearance CButton"), Description("Get or Set the color of the Shadow Text"), DefaultValue(GetType(Color), "MidnightBlue")>
     Public Property TextShadow() As Color
         Get
             Return _TextShadow
@@ -814,8 +734,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the small Image next to text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the small Image next to text")>
+    <Category("Appearance CButton"), Description("Get or Set the small Image next to text")>
     <DefaultValue(GetType(Image), "none")>
     Public Property Image() As Image
         Get
@@ -832,9 +751,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the placement of the Image
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the placement of the Image"),
-        DefaultValue(GetType(ContentAlignment), "MiddleCenter")>
+    <Category("Appearance CButton"), Description("Get or Set the placement of the Image"), DefaultValue(GetType(ContentAlignment), "MiddleCenter")>
     Public Property ImageAlign() As ContentAlignment
         Get
             Return _ImageAlign
@@ -850,9 +767,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Size of the Image
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Size of the Image"),
-        DefaultValue(GetType(Size), "16, 16")>
+    <Category("Appearance CButton"), Description("Get or Set the Size of the Image"), DefaultValue(GetType(Size), "16, 16")>
     Public Property ImageSize() As Size
         Get
             Return _ImageSize
@@ -868,8 +783,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the ImageList control
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the ImageList control")>
+    <Category("Appearance CButton"), Description("Get or Set the ImageList control")>
     Public Property Imagelist() As ImageList
         Get
             Return _Imagelist
@@ -885,8 +799,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the ImageList control
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the ImageList control")>
+    <Category("Appearance CButton"), Description("Get or Set the ImageList control")>
     Public Property ImageIndex() As Integer
         Get
             Return _ImageIndex
@@ -911,8 +824,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Side Image
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Side Image")>
+    <Category("Appearance CButton"), Description("Get or Set the Side Image")>
     <DefaultValue(GetType(Image), "none")>
     Public Property SideImage() As Image
         Get
@@ -932,9 +844,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Size of the Side Image
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Size of the Side Image"),
-        DefaultValue(GetType(Size), "48, 48")>
+    <Category("Appearance CButton"), Description("Get or Set the Size of the Side Image"), DefaultValue(GetType(Size), "48, 48")>
     Public Property SideImageSize() As Size
         Get
             Return _SideImageSize
@@ -950,9 +860,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set if the Side Image raises its own click event
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set if the Side Image raises its own click event"),
-        DefaultValue(False)>
+    <Category("Appearance CButton"), Description("Get or Set if the Side Image raises its own click event"), DefaultValue(False)>
     Public Property SideImageIsClickable() As Boolean
         Get
             Return _SideImageIsClickable
@@ -967,9 +875,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set if the Side Image is in front or behind the Text
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set if the Side Image is in front or behind the Text"),
-        DefaultValue(True)>
+    <Category("Appearance CButton"), Description("Get or Set if the Side Image is in front or behind the Text"), DefaultValue(True)>
     Public Property SideImageBehindText() As Boolean
         Get
             Return _SideImageBehindText
@@ -985,9 +891,7 @@ Public Class CButton
     ''' <summary>
     ''' Get or Set the Side Image Alignment
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("Get or Set the Side Image Alignment"),
-        DefaultValue(GetType(ContentAlignment), "MiddleLeft")>
+    <Category("Appearance CButton"), Description("Get or Set the Side Image Alignment"), DefaultValue(GetType(ContentAlignment), "MiddleLeft")>
     Public Property SideImageAlign() As ContentAlignment
         Get
             Return _SideImageAlign
@@ -1008,8 +912,7 @@ Public Class CButton
     ''' The CenterPoint and FocusScales for the ColorBlend
     ''' </summary>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Content)>
-    <Description("The CenterPoint and FocusScales for the ColorBlend"),
-        Category("Appearance CButton")>
+    <Description("The CenterPoint and FocusScales for the ColorBlend"), Category("Appearance CButton")>
     Public Property FocalPoints() As cFocalPoints
         Get
             Return _FocalPoints
@@ -1045,9 +948,7 @@ Public Class CButton
     ''' <summary>
     ''' If true, the first character proceeded by an ampersand will be used as the button's mnemonic key.
     ''' </summary>
-    <Category("Appearance CButton"),
-        Description("If true, the first character proceeded by an ampersand (&) will be used as the button's mnemonic key."),
-        DefaultValue(True)>
+    <Category("Appearance CButton"), Description("If true, the first character proceeded by an ampersand (&) will be used as the button's mnemonic key."), DefaultValue(True)>
     Public Property UseMnemonic() As System.Boolean
         Get
             Return _UseMnemonic
@@ -1064,8 +965,7 @@ Public Class CButton
 
 #Region "Drawing"
 
-    Protected Overrides Sub _
-        OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
+    Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias
         e.Graphics.TextRenderingHint = _TextSmoothingMode
         'Gray the Text and Border Colors if Disabled
@@ -1085,8 +985,7 @@ Public Class CButton
 
             'Shrink the Area so the Border draws correctly, _
             'then trim off the Padding to get the button surface area
-            ButtonArea = AdjustRect(New RectangleF(0, 0,
-                                                   Size.Width - 1, Size.Height - 1), Padding)
+            ButtonArea = AdjustRect(New RectangleF(0, 0, Size.Width - 1, Size.Height - 1), Padding)
 
             'Create the ButtonArea Path
             Using gp As GraphicsPath = GetPath()
@@ -1107,17 +1006,14 @@ Public Class CButton
                                 cb.Positions = ColorFillBlend.iPoint
 
                                 br.FocusScales = FocalPoints.FocusScales
-                                br.CenterPoint = New PointF(
-                                    Padding.Left + ButtonArea.Width * FocalPoints.CenterPoint.X,
-                                    Padding.Top + ButtonArea.Height * FocalPoints.CenterPoint.Y)
+                                br.CenterPoint = New PointF(Padding.Left + ButtonArea.Width*FocalPoints.CenterPoint.X, Padding.Top + ButtonArea.Height*FocalPoints.CenterPoint.Y)
                                 br.InterpolationColors = cb
 
                                 e.Graphics.FillPath(br, gp)
                             End Using
 
                         Case eFillType.GradientLinear
-                            Using br As LinearGradientBrush = New LinearGradientBrush(
-                                ButtonArea, Color.White, Color.White, FillTypeLinear)
+                            Using br As LinearGradientBrush = New LinearGradientBrush(ButtonArea, Color.White, Color.White, FillTypeLinear)
                                 Dim cb As New ColorBlend
                                 cb.Colors = GetFillBlend()
                                 cb.Positions = ColorFillBlend.iPoint
@@ -1132,7 +1028,7 @@ Public Class CButton
 
                 If MyBase.Focused AndAlso ShowFocus = eFocus.Dot Then
                     Using focusPen As Pen = New Pen(Brushes.Black, 1) With {.DashStyle = DashStyle.Dot}
-                        e.Graphics.DrawPath(focusPen, GetPath(-1, -1))
+                        e.Graphics.DrawPath(focusPen, GetPath(- 1, - 1))
                     End Using
                 End If
 
@@ -1142,23 +1038,17 @@ Public Class CButton
 
             End Using
 
-            Dim ipt As PointF = ImageLocation(GetStringFormat(SideImageAlign),
-                                              Size, SideImageSize)
+            Dim ipt As PointF = ImageLocation(GetStringFormat(SideImageAlign), Size, SideImageSize)
 
-            rectSideImage = New Rectangle(CInt(ipt.X), CInt(ipt.Y),
-                                          SideImageSize.Width, SideImageSize.Height)
+            rectSideImage = New Rectangle(CInt(ipt.X), CInt(ipt.Y), SideImageSize.Width, SideImageSize.Height)
 
             'Put the SideImage behind the Text
             If SideImageBehindText AndAlso SideImage IsNot Nothing Then
                 If Enabled Then
                     e.Graphics.SmoothingMode = SmoothingMode.None
-                    e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y,
-                                         SideImageSize.Width, SideImageSize.Height)
+                    e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y, SideImageSize.Width, SideImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics,
-                                                   New Bitmap(SideImage, SideImageSize.Width,
-                                                              SideImageSize.Height),
-                                                   CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height), CInt(ipt.X), CInt(ipt.Y), BackColor)
                 End If
             End If
 
@@ -1167,36 +1057,27 @@ Public Class CButton
 
             If Not Image Is Nothing Then
                 If Enabled Then
-                    e.Graphics.DrawImage(Image, Imagept.X, Imagept.Y,
-                                         ImageSize.Width, ImageSize.Height)
+                    e.Graphics.DrawImage(Image, Imagept.X, Imagept.Y, ImageSize.Width, ImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics,
-                                                   New Bitmap(Image, ImageSize.Width, ImageSize.Height),
-                                                   CInt(Imagept.X), CInt(Imagept.Y), BackColor)
+                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(Image, ImageSize.Width, ImageSize.Height), CInt(Imagept.X), CInt(Imagept.Y), BackColor)
                 End If
             End If
 
             'Draw the Text and Shadow
             If TextShadowShow Then
                 TextArea.Offset(1, 1)
-                e.Graphics.DrawString(Text, Font,
-                                      New SolidBrush(tsColor), TextArea, GetStringFormat(TextAlign))
-                TextArea.Offset(-1, -1)
+                e.Graphics.DrawString(Text, Font, New SolidBrush(tsColor), TextArea, GetStringFormat(TextAlign))
+                TextArea.Offset(- 1, - 1)
             End If
-            e.Graphics.DrawString(Text, Font,
-                                  New SolidBrush(tColor), TextArea, GetStringFormat(TextAlign))
+            e.Graphics.DrawString(Text, Font, New SolidBrush(tColor), TextArea, GetStringFormat(TextAlign))
 
             'Put the SideImage in front of the Text
             If Not SideImageBehindText AndAlso Not SideImage Is Nothing Then
                 If Enabled Then
                     e.Graphics.SmoothingMode = SmoothingMode.None
-                    e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y,
-                                         SideImageSize.Width, SideImageSize.Height)
+                    e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y, SideImageSize.Width, SideImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics,
-                                                   New Bitmap(SideImage,
-                                                              SideImageSize.Width, SideImageSize.Height),
-                                                   CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height), CInt(ipt.X), CInt(ipt.Y), BackColor)
                 End If
             End If
 
@@ -1220,31 +1101,19 @@ Public Class CButton
                 gp = GetRoundedRectPath(rect)
 
             Case eShape.TriangleUp
-                Dim pts() As PointF = New PointF() {
-                                                       New PointF(CSng(rect.Width / 2), rect.Y),
-                                                       New PointF(rect.Width, rect.Y + rect.Height),
-                                                       New PointF(rect.X, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(CSng(rect.Width/2), rect.Y), New PointF(rect.Width, rect.Y + rect.Height), New PointF(rect.X, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleDown
-                Dim pts() As PointF = New PointF() {
-                                                       New PointF(rect.X, rect.Y),
-                                                       New PointF(CSng(rect.Width / 2), rect.Y + rect.Height),
-                                                       New PointF(rect.X + rect.Width, rect.Y)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(CSng(rect.Width/2), rect.Y + rect.Height), New PointF(rect.X + rect.Width, rect.Y)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleLeft
-                Dim pts() As PointF = New PointF() {
-                                                       New PointF(rect.X, CSng(rect.Y + (rect.Height / 2))),
-                                                       New PointF(rect.Width, rect.Y),
-                                                       New PointF(rect.Width, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, CSng(rect.Y + (rect.Height/2))), New PointF(rect.Width, rect.Y), New PointF(rect.Width, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleRight
-                Dim pts() As PointF = New PointF() {
-                                                       New PointF(rect.X, rect.Y),
-                                                       New PointF(rect.Width, CSng(rect.Y + (rect.Height / 2))),
-                                                       New PointF(rect.X, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(rect.Width, CSng(rect.Y + (rect.Height/2))), New PointF(rect.X, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
         End Select
@@ -1321,7 +1190,7 @@ Public Class CButton
 
                 Select Case GetStringFormat(TextAlign).Alignment
                     Case StringAlignment.Center
-                        Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width) / 2)
+                        Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width)/2)
                         TextArea.X = ButtonArea.X + ImageSizeUse.Width
                     Case StringAlignment.Near
                         Imagept.X = ButtonArea.X + 4
@@ -1341,26 +1210,25 @@ Public Class CButton
 
                 Select Case GetStringFormat(TextAlign).Alignment
                     Case StringAlignment.Center
-                        Imagept.X = ((TextArea.Width - TextSize.Width) / 2) + TextSize.Width
-                        TextArea.X = -4
+                        Imagept.X = ((TextArea.Width - TextSize.Width)/2) + TextSize.Width
+                        TextArea.X = - 4
                     Case StringAlignment.Near
                         Imagept.X = TextSize.Width + 8
                         TextArea.X = 4
                     Case StringAlignment.Far
                         Imagept.X = TextArea.Width - 12
-                        TextArea.X = -16
+                        TextArea.X = - 16
                 End Select
 
         End Select
         Imagept.Y += PressedOffset + ButtonArea.Y
-
     End Sub
 
     Private Shared Function ImageLocation(ByVal sf As StringFormat, ByVal Area As SizeF, ByVal ImageArea As SizeF) As PointF
         Dim pt As PointF
         Select Case sf.Alignment
             Case StringAlignment.Center
-                pt.X = CSng((Area.Width - ImageArea.Width) / 2)
+                pt.X = CSng((Area.Width - ImageArea.Width)/2)
             Case StringAlignment.Near
                 pt.X = 2
             Case StringAlignment.Far
@@ -1370,7 +1238,7 @@ Public Class CButton
 
         Select Case sf.LineAlignment
             Case StringAlignment.Center
-                pt.Y = CSng((Area.Height - ImageArea.Height) / 2)
+                pt.Y = CSng((Area.Height - ImageArea.Height)/2)
             Case StringAlignment.Near
                 pt.Y = 2
             Case StringAlignment.Far
@@ -1398,7 +1266,6 @@ Public Class CButton
         _ClickColorSolid = DimTheColor(_ColorFillSolid, _DimFactorClick)
         _HoverColorSolid = DimTheColor(_ColorFillSolid, _DimFactorHover)
         _DisabledSolid = GrayTheColor(_ColorFillSolid)
-
     End Sub
 
     ''' <summary>
@@ -1420,7 +1287,6 @@ Public Class CButton
         If ColorB < 0 Then ColorB = 0
 
         Return Color.FromArgb(ColorR, ColorG, ColorB)
-
     End Function
 
     ''' <summary>
@@ -1428,7 +1294,7 @@ Public Class CButton
     ''' </summary>
     ''' <param name="GrayColor">Color object to be grayed</param>
     Public Shared Function GrayTheColor(ByVal GrayColor As Color) As Color
-        Dim gray As Integer = CInt(GrayColor.R * 0.3 + GrayColor.G * 0.59 + GrayColor.B * 0.11)
+        Dim gray As Integer = CInt(GrayColor.R*0.3 + GrayColor.G*0.59 + GrayColor.B*0.11)
         Return Color.FromArgb(GrayColor.A, gray, gray, gray)
     End Function
 
@@ -1445,7 +1311,6 @@ Public Class CButton
         Else
             Return _DisabledBlend
         End If
-
     End Function
 
     Private Function GetFill() As Color
@@ -1461,7 +1326,6 @@ Public Class CButton
         Else
             Return _DisabledSolid
         End If
-
     End Function
 
     Private Shared Function AdjustRect(ByVal BaseRect As RectangleF, ByVal Pad As Padding) As RectangleF
@@ -1484,14 +1348,13 @@ Public Class CButton
 
         Dim ArcRect As RectangleF
         Dim MyPath As New Drawing2D.GraphicsPath()
-        If Corners.All = -1 Then
+        If Corners.All = - 1 Then
             With MyPath
                 ' top left arc
                 If Corners.UpperLeft = 0 Then
                     .AddLine(BaseRect.X, BaseRect.Y, BaseRect.X, BaseRect.Y)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location,
-                                             New SizeF(Corners.UpperLeft * 2, Corners.UpperLeft * 2))
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperLeft*2, Corners.UpperLeft*2))
                     .AddArc(ArcRect, 180, 90)
                 End If
 
@@ -1499,9 +1362,8 @@ Public Class CButton
                 If Corners.UpperRight = 0 Then
                     .AddLine(BaseRect.X + (Corners.UpperLeft), BaseRect.Y, BaseRect.Right - (Corners.UpperRight), BaseRect.Top)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location,
-                                             New SizeF(Corners.UpperRight * 2, Corners.UpperRight * 2))
-                    ArcRect.X = BaseRect.Right - (Corners.UpperRight * 2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperRight*2, Corners.UpperRight*2))
+                    ArcRect.X = BaseRect.Right - (Corners.UpperRight*2)
                     .AddArc(ArcRect, 270, 90)
                 End If
 
@@ -1509,10 +1371,9 @@ Public Class CButton
                 If Corners.LowerRight = 0 Then
                     .AddLine(BaseRect.Right, BaseRect.Top + (Corners.UpperRight), BaseRect.Right, BaseRect.Bottom - (Corners.LowerRight))
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location,
-                                             New SizeF(Corners.LowerRight * 2, Corners.LowerRight * 2))
-                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerRight * 2)
-                    ArcRect.X = BaseRect.Right - (Corners.LowerRight * 2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerRight*2, Corners.LowerRight*2))
+                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerRight*2)
+                    ArcRect.X = BaseRect.Right - (Corners.LowerRight*2)
                     .AddArc(ArcRect, 0, 90)
                 End If
 
@@ -1520,9 +1381,8 @@ Public Class CButton
                 If Corners.LowerLeft = 0 Then
                     .AddLine(BaseRect.Right - (Corners.LowerRight), BaseRect.Bottom, BaseRect.X - (Corners.LowerLeft), BaseRect.Bottom)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location,
-                                             New SizeF(Corners.LowerLeft * 2, Corners.LowerLeft * 2))
-                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerLeft * 2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerLeft*2, Corners.LowerLeft*2))
+                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerLeft*2)
                     .AddArc(ArcRect, 90, 90)
                 End If
 
@@ -1534,17 +1394,16 @@ Public Class CButton
                     .AddRectangle(BaseRect)
                 Else
 
-                    ArcRect = New RectangleF(BaseRect.Location,
-                                             New SizeF(Corners.All * 2, Corners.All * 2))
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.All*2, Corners.All*2))
                     ' top left arc
                     .AddArc(ArcRect, 180, 90)
 
                     ' top right arc
-                    ArcRect.X = BaseRect.Right - (Corners.All * 2)
+                    ArcRect.X = BaseRect.Right - (Corners.All*2)
                     .AddArc(ArcRect, 270, 90)
 
                     ' bottom right arc
-                    ArcRect.Y = BaseRect.Bottom - (Corners.All * 2)
+                    ArcRect.Y = BaseRect.Bottom - (Corners.All*2)
                     .AddArc(ArcRect, 0, 90)
 
                     ' bottom left arc
@@ -1566,8 +1425,7 @@ Public Class CButton
         MyBase.OnMouseDown(e)
 
         If Enabled Then
-            If _SideImageIsClickable AndAlso
-               rectSideImage.Contains(e.Location) Then
+            If _SideImageIsClickable AndAlso rectSideImage.Contains(e.Location) Then
                 'Create and add additional SideImageDown Event here if needed
                 'RaiseEvent SideImageDown(Me, e)
 
@@ -1597,10 +1455,8 @@ Public Class CButton
         End If
     End Sub
 
-    Private Sub CButton_MouseMove(ByVal sender As Object,
-                                  ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
-        If _SideImageIsClickable AndAlso
-           rectSideImage.Contains(e.Location) Then
+    Private Sub CButton_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
+        If _SideImageIsClickable AndAlso rectSideImage.Contains(e.Location) Then
             MouseDrawState = eMouseDrawState.Up
 
             Invalidate(Rectangle.Round(ButtonArea))
@@ -1619,8 +1475,7 @@ Public Class CButton
         End If
     End Sub
 
-    Private Sub CButton_MouseLeave(ByVal sender As Object,
-                                   ByVal e As System.EventArgs) Handles Me.MouseLeave
+    Private Sub CButton_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseLeave
         If Not MouseDrawState = eMouseDrawState.Up Then
             MouseDrawState = eMouseDrawState.Up
             Invalidate(Rectangle.Round(ButtonArea))
@@ -1629,8 +1484,7 @@ Public Class CButton
 
     Protected Overrides Sub OnMouseClick(e As MouseEventArgs)
         MyBase.OnMouseClick(e)
-        If _SideImageIsClickable AndAlso
-           rectSideImage.Contains(e.Location) Then
+        If _SideImageIsClickable AndAlso rectSideImage.Contains(e.Location) Then
             RaiseEvent SideImageClicked(Me, e)
 
         ElseIf GetPath.IsVisible(e.X, e.Y) Then
@@ -1640,8 +1494,7 @@ Public Class CButton
 
     Protected Overrides Sub OnMouseUp(e As MouseEventArgs)
         MyBase.OnMouseUp(e)
-        If _SideImageIsClickable AndAlso
-           rectSideImage.Contains(e.Location) Then
+        If _SideImageIsClickable AndAlso rectSideImage.Contains(e.Location) Then
             'Create and add additional SideImageUp Event here if needed
             'RaiseEvent SideImageUp(Me, e)
 
@@ -1696,9 +1549,7 @@ Public Class CButton
                         MouseDrawState = eMouseDrawState.Up
                     End If
                     Invalidate(Rectangle.Round(ButtonArea))
-                    PerformClickButtonArea(Me,
-                                           New MouseEventArgs(Windows.Forms.MouseButtons.Left, 1,
-                                                              CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
+                    PerformClickButtonArea(Me, New MouseEventArgs(Windows.Forms.MouseButtons.Left, 1, CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
                 End If
         End Select
     End Sub
@@ -1710,9 +1561,7 @@ Public Class CButton
     Protected Overrides Function ProcessMnemonic(ByVal charCode As Char) As Boolean
         If (CanSelect And IsMnemonic(charCode, Text)) Then
             Me.Select()
-            PerformClickButtonArea(Me, New MouseEventArgs(
-                Windows.Forms.MouseButtons.Left, 1,
-                CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
+            PerformClickButtonArea(Me, New MouseEventArgs(Windows.Forms.MouseButtons.Left, 1, CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
             Return True
         End If
         Return False
@@ -1722,9 +1571,7 @@ Public Class CButton
 
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
-
     End Sub
-
 End Class
 
 #End Region    'CButton Class

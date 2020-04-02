@@ -1403,19 +1403,19 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub SetControlMaskability(ByRef cCtrl As Control, ByRef viewable As Boolean)
-        ' if Editable is False, make the control readonly property so that it can't be edited
-        If Not viewable Then
-            SetPropertyValue(cCtrl, "Viewable", True)
-        End If
-    End Sub
+    'Private Sub SetControlMaskability(ByRef cCtrl As Control, ByRef viewable As Boolean)
+    '    ' if Editable is False, make the control readonly property so that it can't be edited
+    '    If Not viewable Then
+    '        SetPropertyValue(cCtrl, "Viewable", True)
+    '    End If
+    'End Sub
 
-    Private Sub SetControlSelectability(ByRef cCtrl As Control, ByRef selectable As Boolean)
-        ' if Editable is False, make the control readonly property so that it can't be edited
-        If Not selectable Then
-            SetPropertyValue(cCtrl, "Enabled", selectable)
-        End If
-    End Sub
+    'Private Sub SetControlSelectability(ByRef cCtrl As Control, ByRef selectable As Boolean)
+    '    ' if Editable is False, make the control readonly property so that it can't be edited
+    '    If Not selectable Then
+    '        SetPropertyValue(cCtrl, "Enabled", selectable)
+    '    End If
+    'End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
         GoFirstRecord()

@@ -232,7 +232,6 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
         Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.Selectable = true
         '
         'lblReferenceNo
         '

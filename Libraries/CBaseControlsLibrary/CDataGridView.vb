@@ -125,6 +125,7 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
 
+
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
@@ -141,6 +142,7 @@ Public Class CDataGridView
     '        End If
     '    End With
     'End Sub
+
 
     Public Sub AddInsertColumn()
         With Columns

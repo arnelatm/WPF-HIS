@@ -19,4 +19,9 @@ Public Class ModelSecurity
         Return _service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+        Implements IModelSecurity.GetUserSecurityForKey
+        Return _service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+    End Function
+
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -16,20 +17,34 @@ Public Class SecurityObjectEntryTv
         'mapperConfigurationAccounts.AssertConfigurationIsValid()
         'GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
 
-        MainTableName = "SecurityObject"
+        MainTableName = "SecurityObject_View"
         IdFieldName = "IdNo"
         TvMainFieldName = "SecurityObjectName"
         TvSecondaryFieldName = ""
         SortOrderKey = "SecurityObjectName"
+        ParentFieldName = "ParentIdNo"
         FirstControl = txtSecurityObjectName
         ' Add any initialization after the InitializeComponent() call.
         Dim model = New SecurityObjectModel
         PresenterObj = New SecurityObjectPresenter(Me)
-
+        AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+        CreateDataSources()
         '_SecurityObjectsPresenter = New SecurityObjectsPresenter(Me)
         'CreateEnumResourceFile()
 
         'ResourceEnumConverter.MakeResource("SecurityObjectTypeSelection", GetType(SecurityObjectTypeSelection))
+    End Sub
+
+    Protected Overrides Sub CreateDataSources()
+        UpdateParentIdData()
+    End Sub
+
+    Private Shadows Sub OnTextDisplayLanguageChanged()
+        CreateDataSources()
+    End Sub
+
+    Private Sub UpdateParentIdData()
+        cacParentIdNo.DataSource = PresenterObj.GetSecurityObjectList()
     End Sub
 
     Public Sub CreateEnumResourceFile()
@@ -44,6 +59,15 @@ Public Class SecurityObjectEntryTv
         End Get
         Set
             TxtIDNo.Text = Convert.ToString(Value)
+        End Set
+    End Property
+
+    Public Property ParentIdNo As Integer? Implements ISecurityObjectView.ParentIdNo
+        Get
+            Return cacParentIdNo.GetValue()
+        End Get
+        Set
+            cacParentIdNo.SetValue(Value)
         End Set
     End Property
 
@@ -74,11 +98,37 @@ Public Class SecurityObjectEntryTv
         End Set
     End Property
 
+    Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+        If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
+            Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
+            CancelSave = True
+            Exit Sub
+        End If
+    End Sub
+
     Protected Overrides Sub AddMandatoryFieldCheck()
         'Add controls one by one in error provider.
         MyErrorProvider.Controls.AddMandatory(txtSecurityObjectName, "SecurityObject Name in English")
         'Set summary error message
         MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+    End Sub
+
+    
+    Public Sub OnAfterSave() Handles MyBase.AfterSave
+        UpdateParentIdData()
+        cacParentIdNo.Refresh()
+    End Sub
+
+    Protected Overrides Sub CreateFieldsDictionary()
+        FieldsDictionary = New Dictionary(Of String, Object) From
+            {
+            {"SecurityObjectName", txtSecurityObjectName},
+            {"SecurityObjectNameAra", txtSecurityObjectNameAra},
+            {"IDNo", TxtIDNo},
+            {"ParentIdNo", cacParentIdNo},
+            {"ParentId", TxtIDNo},
+            {"Notes", txtNotes}
+            }
     End Sub
 
 End Class

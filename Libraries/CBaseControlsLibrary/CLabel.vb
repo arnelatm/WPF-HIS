@@ -51,26 +51,26 @@ Public Class CLabel
         End Get
     End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will be shown but masked by <*> .")>
-    <Browsable(True)>
-    Public Property Viewable As Boolean
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control value will be shown but masked by <*> .")>
+    '<Browsable(True)>
+    'Public Property Viewable As Boolean
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control can be selected.")>
-    <Browsable(True)>
-    Public Property Selectable As Boolean
-        Get
-            Return _selectable
-        End Get
-        Set
-            _selectable = Value
-            Enabled = Value
-            Refresh()
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<Description("Set to True to specify that this control can be selected.")>
+    '<Browsable(True)>
+    'Public Property Selectable As Boolean
+    '    Get
+    '        Return _selectable
+    '    End Get
+    '    Set
+    '        _selectable = Value
+    '        Enabled = Value
+    '        Refresh()
+    '    End Set
+    'End Property
 
     Public Sub SetText(cText As String)
         Text = cText

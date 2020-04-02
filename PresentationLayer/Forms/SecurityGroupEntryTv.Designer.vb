@@ -45,10 +45,10 @@ Partial Class SecurityGroupEntryTv
         Me.DGVSecurityObjectIDNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DGVSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.DGVVisible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Selectable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Viewable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DGVEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
+        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -157,6 +157,8 @@ Partial Class SecurityGroupEntryTv
         Me.floDataDisplay.Controls.Add(Me.txtSecurityGroupName)
         Me.floDataDisplay.Controls.Add(Me.lblSecurityGroupNameAra)
         Me.floDataDisplay.Controls.Add(Me.txtSecurityGroupNameAra)
+        Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
+        Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.CFlowLayout1)
@@ -217,7 +219,7 @@ Partial Class SecurityGroupEntryTv
         Me.DataGridViewGroupAccesses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridViewGroupAccesses.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DGVIDNo, Me.DGVSecurityGroupIDNo, Me.DGVSecurityObjectIDNo, Me.DGVSecurityObjectName, Me.DGVVisible, Me.Selectable, Me.Viewable, Me.DGVEditable})
+        Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DGVIDNo, Me.DGVSecurityGroupIDNo, Me.DGVSecurityObjectIDNo, Me.DGVSecurityObjectName, Me.DGVVisible, Me.DGVEditable})
         Me.DataGridViewGroupAccesses.DataInGridChanged = false
         Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -276,22 +278,6 @@ Partial Class SecurityGroupEntryTv
         Me.DGVVisible.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVVisible.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'Selectable
-        '
-        Me.Selectable.DataPropertyName = "Selectable"
-        Me.Selectable.FillWeight = 10!
-        resources.ApplyResources(Me.Selectable, "Selectable")
-        Me.Selectable.Name = "Selectable"
-        Me.Selectable.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Selectable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'Viewable
-        '
-        Me.Viewable.DataPropertyName = "Viewable"
-        Me.Viewable.FillWeight = 10!
-        resources.ApplyResources(Me.Viewable, "Viewable")
-        Me.Viewable.Name = "Viewable"
-        '
         'DGVEditable
         '
         Me.DGVEditable.DataPropertyName = "Editable"
@@ -300,6 +286,48 @@ Partial Class SecurityGroupEntryTv
         Me.DGVEditable.Name = "DGVEditable"
         Me.DGVEditable.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVEditable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'lblParentIdNo
+        '
+        Me.lblParentIdNo.DisplayOnly = true
+        Me.lblParentIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
+        Me.lblParentIdNo.Name = "lblParentIdNo"
+        '
+        'cacParentIdNo
+        '
+        Me.cacParentIdNo.BackColor = System.Drawing.Color.White
+        Me.cacParentIdNo.ChangingSearchValueOnly = false
+        Me.cacParentIdNo.CurrentSearchTerm = ""
+        Me.cacParentIdNo.DefaultValue = Nothing
+        Me.cacParentIdNo.DisplayMember = "Name"
+        Me.cacParentIdNo.DropDownHeight = 200
+        Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cacParentIdNo.EditingMode = false
+        Me.cacParentIdNo.FilterRule = Nothing
+        Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, true)
+        resources.ApplyResources(Me.cacParentIdNo, "cacParentIdNo")
+        Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacParentIdNo.FormattingEnabled = true
+        Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacParentIdNo.LinkedLabel = Nothing
+        Me.cacParentIdNo.Name = "cacParentIdNo"
+        Me.cacParentIdNo.OldValue = 0
+        Me.cacParentIdNo.OriginalDataSource = Nothing
+        Me.cacParentIdNo.OriginalList = Nothing
+        Me.cacParentIdNo.OverrideDropDownStyleList = false
+        Me.cacParentIdNo.PreviousSearchTerm = Nothing
+        Me.cacParentIdNo.PreviousSelectedIndex = -1
+        Me.cacParentIdNo.PropertySelector = Nothing
+        Me.cacParentIdNo.ReadOnlyCombo = false
+        Me.cacParentIdNo.SearchAnywhere = false
+        Me.cacParentIdNo.SuggestBoxHeight = 200
+        Me.cacParentIdNo.SuggestListOrderRule = Nothing
+        Me.cacParentIdNo.TextToSearch = Nothing
+        Me.cacParentIdNo.ValueIsMandatory = false
+        Me.cacParentIdNo.ValueIsNullable = false
+        Me.cacParentIdNo.ValueIsNumeric = false
+        Me.cacParentIdNo.ValueMember = "IdNo"
         '
         'SecurityGroupEntryTv
         '
@@ -337,7 +365,7 @@ End Sub
     Friend WithEvents DGVSecurityObjectIDNo As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DGVSecurityObjectName As CdgvColumnText
     Friend WithEvents DGVVisible As Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Selectable As Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Viewable As Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents DGVEditable As Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents lblParentIdNo As CLabel
+    Friend WithEvents cacParentIdNo As CaComboBox
 End Class
