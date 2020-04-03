@@ -728,7 +728,7 @@ Public Class CDgvEcbComboBox
     End Sub
 
     Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             If DropDownStyle = ComboBoxStyle.DropDown Then
                 ''
             Else

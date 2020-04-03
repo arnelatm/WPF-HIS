@@ -21,7 +21,7 @@ Imports AATM.PresentationLayer.Views
 Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected OriginalModel
-    Public ChildPresenters as New List(Of Object)
+    Public ChildPresenters As New List(Of Object)
 
     Protected DataService
 
@@ -105,10 +105,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Shared Property RecordNumber As Integer
 
-
     Public Sub AddChildPresenter(obj As Object)
         ChildPresenters.Add(obj)
     End Sub
+
     Private Function GetRecordNumberValue(idNo As Integer) As Integer
         Try
             Return GetRecordPosition(idNo)
@@ -210,7 +210,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub SaveOriginalValues()
         GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
-        for each item In ChildPresenters
+        For Each item In ChildPresenters
             item.SaveOriginalValues()
         Next
         'GlobalVariables.Mapper.Map(Of TM)(View, OriginalModel)
@@ -762,7 +762,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return GetLookupDataByCode()
     End Function
 
-    
     Public Function GetSecurityObjectList(Optional ByVal sortKey As String = "SecurityObjectName")
         TableToGet = "SecurityObject"
         SortExpression = sortKey

@@ -33,7 +33,7 @@ Public Class BaseForm
      ByVal e As EventArgs) _
     Handles MyBase.Load
 
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim ds As DataSet
             ds = TranslatorDAC.ReturnDs(
                  "Select lang from languages")
@@ -53,7 +53,7 @@ Public Class BaseForm
       ByVal e As EventArgs) _
      Handles cmbLanguagePicker.SelectedIndexChanged
 
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim cmd As String
             cmd = "Select Caption, translated from TranslatedCaption where lang = '" + cmbLanguagePicker.Text + "'"
             Dim translations As DataSet

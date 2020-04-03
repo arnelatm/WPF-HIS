@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
@@ -18,40 +17,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemModel)
         Private _profitCentersByCode
 
-        Public Sub New()
-            MyBase.New()
-            ' This call is required by the designer.
-            InitializeComponent()
-            ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "GeneralJournal"
-            IdFieldName = "IdNo"
-            SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
-            _nfi.NumberDecimalDigits = 2
-            PresenterObj = New GeneralJournalPresenter(Me)
-
-            _journalItemsPresenter = New GeneralJournalItemsPresenter(Me)
-
-            PresenterObj.JournalItemsPresenter = _journalItemsPresenter
-
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
-            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
-            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
-
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
-
-        End Sub
+#Region "Fields"
 
         Public Property Cancelled As Boolean Implements IGeneralJournalView.Cancelled
             Get
@@ -160,12 +126,51 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+#End Region
+
+#Region "Methods"
+
+        Public Sub New()
+            MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            ' Add any initialization after the InitializeComponent() call.
+            MainTableName = "GeneralJournal"
+            IdFieldName = "IdNo"
+            SortOrderKey = "IdNo"
+            FirstControl = txtReferenceNo
+            _nfi.NumberDecimalDigits = 2
+            PresenterObj = New GeneralJournalPresenter(Me)
+
+            _journalItemsPresenter = New GeneralJournalItemsPresenter(Me)
+
+            PresenterObj.JournalItemsPresenter = _journalItemsPresenter
+
+            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
+            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
+            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Notes", GetType(String))
+            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+
+            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
+            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
+            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Notes", GetType(String))
+            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+
+        End Sub
+
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 
@@ -500,6 +505,8 @@ Namespace PresentationLayer.Forms
         '    Handles DataGridViewJournalItems.UserDeletingRow
 
         'End Sub
+
+#End Region
 
     End Class
 

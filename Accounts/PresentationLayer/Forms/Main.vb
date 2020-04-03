@@ -42,7 +42,7 @@ Namespace PresentationLayer.Forms
 
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
-            If Not DesignMode Then
+            If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 MenuFormName = "Main"
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture

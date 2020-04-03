@@ -33,7 +33,6 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
-
 #Region "OriginalMessageFields"
 
         Public Property IDNo As Integer Implements IOriginalMessagesView.IdNo
@@ -93,7 +92,7 @@ Namespace PresentationLayer.Forms
 
 #Region "TranslatedMessagesFields"
 
-        Public Property IdNoTranslated As Integer Implements ITranslatedMessagesView.IdNo
+        Public Property TranslatedMessageIdNo As Integer Implements ITranslatedMessagesView.TranslatedMessageIdNo
             Get
                 Return NumParser(Of Integer)(txtIdNoTranslated.Text)
             End Get
@@ -149,9 +148,8 @@ Namespace PresentationLayer.Forms
             HideButton(btnDelete)
         End Sub
 
-
-        Private Sub OnAfterTranslateForm Handles MyBase.AfterTranslateForm
-                        txtMessage.RightToLeft = RightToLeft.No
+        Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm
+            txtMessage.RightToLeft = RightToLeft.No
             txtTranslatedCaption.RightToLeft = RightToLeft.Yes
         End Sub
 
