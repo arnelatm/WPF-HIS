@@ -814,6 +814,7 @@ Public Class CFormEntry
         End If
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
+        DisplayView(TargetIdNo)
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
@@ -882,7 +883,7 @@ Public Class CFormEntry
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
 
             AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
@@ -1034,7 +1035,7 @@ Public Class CFormEntry
     End Function
 
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
                 Return GetPropertyValue(cCtrl, "SecurityKey")
             End If
@@ -1297,7 +1298,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub SetAllControlsDynamicProperties()
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim allControls As New List(Of Control)
             Dim resources = New ComponentResourceManager(Me.GetType())
             TableProperties = PresenterObj.TableProperties

@@ -26,7 +26,7 @@ Public Class DropdownColorBlender
         ColorBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         ColorBox.DropDownStyle = ComboBoxStyle.DropDownList
         AddHandler ColorBox.DrawItem, AddressOf Me.ColorList_DrawItem
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ColorBox.Items.Clear()
             Dim cList As New List(Of Color)
             For Each s As String In [Enum].GetNames(GetType(KnownColor))

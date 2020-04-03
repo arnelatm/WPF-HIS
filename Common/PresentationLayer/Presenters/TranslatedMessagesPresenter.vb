@@ -22,8 +22,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New TranslatedMessagesModel()
             DataModel = New TranslatedMessagesModel
             TreeViewList = New List(Of TranslatedMessagesModel)
-            FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
-            FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}
+            FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "TranslatedMessageIdNo"}}
+            FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"TranslatedMessageIdNo", "IdNo"}}
             Dac = New Dac
         End Sub
 
@@ -70,6 +70,7 @@ Namespace PresentationLayer.Presenters
                     ElseIf String.IsNullOrEmpty(record.TranslatedCaption) Then
                         record.TranslatedCaption = ""
                     End If
+
                     retVal = Model.UpdateRecord(record)
                     If retVal = 0 Then
                         If Not (String.IsNullOrEmpty(record.TranslatedMessage) And String.IsNullOrEmpty(record.TranslatedCaption)) Then

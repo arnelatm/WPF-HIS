@@ -135,7 +135,7 @@
     <value>No</value>
   </data>
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 361</value>
+    <value>300, 498</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -730,7 +730,7 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 361</value>
+    <value>625, 498</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -778,7 +778,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>927, 418</value>
+    <value>927, 555</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>System Messages Maintenance Form</value>

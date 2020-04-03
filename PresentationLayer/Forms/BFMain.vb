@@ -39,7 +39,7 @@ Public Class BfMain
         ' This call is required by the designer.
         InitializeComponent()
 
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
 
             'If IsRightToLeft(TextDisplayLanguage) Then
@@ -62,7 +62,7 @@ Public Class BfMain
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TranslatorDAC = transDac
             AppDataDAC = appDac
         End If
@@ -182,7 +182,7 @@ Public Class BfMain
             Dim localMLevel As String = mLevel + i.ToString
             _originalText = CaptionCollection.Item(localMLevel)
             Dim r As Integer = Dv.Find(_originalText)
-            If r >= 0 Then mi.Text = Dv(r).Item("translated") _
+            If r >= 0 Then mi.Text = Dv(r).Item($"TranslatedCaption") _
                    Else mi.Text = _originalText
             If mi.MenuItems.Count > 0 Then _
             ProcessMenuItems(mi.MenuItems, localMLevel)
@@ -310,7 +310,7 @@ Public Class BfMain
                 r = Dv.Find(Tag.ToString.TrimEnd)
             End If
             If r > 0 Then
-                Text = Dv(r).Item("translated")
+                Text = Dv(r).Item("translatedCaption")
             Else
                 Text = Tag
             End If
@@ -381,7 +381,7 @@ Public Class BfMain
         If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
             r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
             If r > 0 Then
-                translatedText = Dv(r).Item("translated")
+                translatedText = Dv(r).Item("translatedCaption")
             Else
                 translatedText = obj.Tag(If(propName = "Text", 0, 1))
             End If
@@ -506,7 +506,7 @@ Public Class BfMain
     'End Sub
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             'Dim ds As New DataSet
             'ds = TranslatorDAC.ReturnDs(
             '     "Select lang from languages")
@@ -691,7 +691,7 @@ Public Class BfMain
                     Dim r As Int16 = 0
                     r = Dv.Find(obj.Tag)
                     If r > 0 Then
-                        obj.Text = Dv(r).Item("translated")
+                        obj.Text = Dv(r).Item("translatedCaption")
                     Else
                         obj.Text = obj.Tag
                     End If
@@ -779,7 +779,7 @@ Public Class BfMain
     '                            _originalText = CaptionCollection.Item(cToolStrip.Name + "." + obj.Name)
     '                            r = Dv.Find(_originalText)
     '                            If r > 0 Then
-    '                                obj.Text = Dv(r).Item("translated")
+    '                                obj.Text = Dv(r).Item("translatedCaption")
     '                            Else
     '                                obj.Text = obj.Tag
     '                            End If
@@ -796,7 +796,7 @@ Public Class BfMain
     '                    _originalText = CaptionCollection.Item(cCtrl.Name)
     '                    r = Dv.Find(_originalText)
     '                    If r > 0 Then
-    '                        cCtrl.Text = Dv(r).Item("translated")
+    '                        cCtrl.Text = Dv(r).Item("translatedCaption")
     '                    Else
     '                        cCtrl.Text = cCtrl.Tag
     '                    End If

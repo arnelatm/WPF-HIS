@@ -261,7 +261,7 @@ Public Class Dac
 
     Public Function ExecScalar(Of T)(ByVal cmd As String) As T
         Dim retVal As T
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Cs = BuildConnString()
             Select Case DacAccessType
                 Case "SQL"

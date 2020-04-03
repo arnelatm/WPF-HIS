@@ -120,7 +120,7 @@ namespace AATM.Libraries.CustomComboBox
         /// </summary>
         public void showDropDown()
         {
-            if (DesignMode)
+            if ((System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime))
             {
                 return;
             }

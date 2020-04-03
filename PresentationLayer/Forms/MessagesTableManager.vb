@@ -29,7 +29,7 @@ Public Class MessagesTableManager
 
         ' This call is required by the designer.
         InitializeComponent()
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Add any initialization after the InitializeComponent() call.
             TransTable.Columns.Add("Original")
             TransTable.Columns.Add("Translated")
@@ -42,7 +42,7 @@ Public Class MessagesTableManager
 #Region " Form Load event code "
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             StoreCaptions1.StoreCaptions(Me)
             LoadLanguages(cmbLanguage)
 
@@ -173,7 +173,7 @@ Public Class MessagesTableManager
 #Region " Auxiliary routines "
 
     Sub LoadLanguages(ByRef cmb As ComboBox)
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim dsLanguages As DataSet
             Dim cmd As String
             cmd = "SELECT IdNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages where CultureInfoCode<>'_Original' order by LanguageName"
@@ -185,7 +185,7 @@ Public Class MessagesTableManager
     End Sub
 
     Sub LoadFormDesiredLanguage(ByRef cmb As ComboBox)
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim dsLanguages As DataSet
             dsLanguages = TranslatorDAC.ReturnDs(
                 "SELECT IdNo,Concat(Language,'-',RTrim(LTrim(Country))) as LanguageName FROM languages order by LanguageName")
@@ -196,7 +196,7 @@ Public Class MessagesTableManager
     End Sub
 
     Public Sub LoadColumn(Optional ByVal language As String = "Original")
-        If Not DesignMode Then
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             SuspendLayout()
             If language.ToLower = "original" Then
                 Dim dsColumn As DataSet
