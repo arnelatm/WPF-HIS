@@ -1122,7 +1122,6 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-
     End Class
 
 End Namespace

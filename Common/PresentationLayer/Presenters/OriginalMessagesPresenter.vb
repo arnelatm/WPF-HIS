@@ -38,23 +38,16 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
-        Public Overrides Sub Display(idNo As Integer)
-            If idNo <> 0 Then
-                Dim modelData As OriginalMessagesModel
-                modelData = Model.GetRecordById(Of OriginalMessagesModel)(idNo)
-                If modelData IsNot Nothing Then
-                    'Dim fieldsDictionary As New Dictionary(Of String, String)
-                    '' Add two keys.
-                    'fieldsDictionary.Add("IdNo","IdNo")
-                    'fieldsDictionary.Add("Message","Message")
-                    'fieldsDictionary.Add("Caption","Caption")
-                    GlobalVariables.Mapper.Map(modelData, View)
-                    'MapObject(modelData, View)
-                    'MapObject(modelData, OriginalModel)
-                End If
-                TranslatedMessagesPresenter.Display(idNo)
-            End If
-        End Sub
+        'Public Overrides Sub Display(idNo As Integer)
+        '    If idNo <> 0 Then
+        '        Dim modelData As OriginalMessagesModel
+        '        modelData = Model.GetRecordById(Of OriginalMessagesModel)(idNo)
+        '        If modelData IsNot Nothing Then
+        '            GlobalVariables.Mapper.Map(modelData, View)
+        '        End If
+        '        TranslatedMessagesPresenter.Display(idNo)
+        '    End If
+        'End Sub
 
     End Class
 

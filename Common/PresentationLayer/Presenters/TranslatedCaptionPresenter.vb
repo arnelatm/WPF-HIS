@@ -8,8 +8,6 @@ Namespace PresentationLayer.Presenters
     Public Class TranslatedCaptionPresenter
         Inherits CommonPresenter(Of ITranslatedCaptionView, TranslatedCaptionModel)
 
-        Public Property FieldRetrievalMappingDictionary As Dictionary(Of String, String)
-        Public Property FieldSavingMappingDictionary As Dictionary(Of String, String)
         Private Property Dac
 
         Public Sub New(view As ITranslatedCaptionView)
@@ -22,62 +20,55 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New TranslatedCaptionModel()
             DataModel = New TranslatedCaptionModel
             TreeViewList = New List(Of TranslatedCaptionModel)
-            FieldRetrievalMappingDictionary = New Dictionary(Of String, String) From {{"IdNo", "IdNoTranslated"}}
-            FieldSavingMappingDictionary = New Dictionary(Of String, String) From {{"IdNoTranslated", "IdNo"}}
             Dac = New Dac
         End Sub
 
-        Public Overrides Sub Display(messageIdNo As Integer)
-            Dim idNoTm As Int16
-            idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
-            Dim modelData As New TranslatedCaptionModel
-            If idNoTm <> 0 Then
-                modelData = Model.GetRecordById(Of TranslatedCaptionModel)(messageIdNo)
-            End If
-            GlobalVariables.Mapper.Map(modelData, View)
-        End Sub
+        'Public Overrides Sub Display(messageIdNo As Integer)
+        '    Dim idNoTm As Int16
+        '    idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
+        '    Dim modelData As New TranslatedCaptionModel
+        '    If idNoTm <> 0 Then
+        '        modelData = Model.GetRecordById(Of TranslatedCaptionModel)(messageIdNo)
+        '    End If
+        '    GlobalVariables.Mapper.Map(modelData, View)
+        'End Sub
 
-        Public Function GetTranslatedCaptionList(Optional ByVal sortKey As String = "") As List(Of TranslatedCaptionModel)
-            Dim xModel As New TranslatedCaptionModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TranslatedCaptionModel)(sortKey, xModel)
-            Dim modelData = Model.GetAll(Of TranslatedCaptionModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
+        Public Overrides Function ChangesMade() As Boolean
+            ' need to do a non-standard compare because Using the ObjectsCompare method
+            ' can only compare items with same name.  However in this case 'IdNo' is
+            ' mapped differently between the view and the Model in the model it is named
+            ' 'IdNo' and in the View it is named 'translatedMessageIdNo'
+            ' we need to compare only the translatedCaption field
+            If OriginalModel.TranslatedCaption = view.TranslatedCaption Then
+                Return False
             End If
-            For Each modData In modelData
-                Dim modelTb As New TranslatedCaptionModel
-                MapObject(modData, modelTb, FieldSavingMappingDictionary)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
+            Return True
+            'If OriginalModel is Nothing Then
+            '    If String.IsNullOrEmpty(View.TranslatedCaption) Then
+            '        Return True
+            '    End If
+            'End If
+            'If Not GlobalFunctions.CompareValues(OriginalModel.TranslatedCaption, View.TranslatedCaption) Then
+            '    Return True
+            'End If
+            'Return False
         End Function
 
-        Public Overrides Function Save(ByRef addMode As Boolean)
+        Protected Overrides Function UpDateRecord(record As TranslatedCaptionModel) As Integer
             Dim retVal As Integer
-            Dim record As New TranslatedCaptionModel
-            'record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-            GlobalVariables.Mapper.Map(Of ITranslatedCaptionView, TranslatedCaptionModel)(View, record)
-            If addMode Then
-                NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
-                retVal = NewlyAddedRecordIdNo
-                CallByName(View, "IdNo", CallType.Set, retVal)
+            If String.IsNullOrEmpty(record.TranslatedCaption) Then
+                retVal = Model.DeleteRecord(record.IdNo, "TranslatedCaption")
             Else
-                If String.IsNullOrEmpty(record.TranslatedCaption) And String.IsNullOrEmpty(record.TranslatedCaption) Then
-                    retVal = Model.DeleteRecord(record.IdNo, "TranslatedCaption")
-                Else
-                    If String.IsNullOrEmpty(record.TranslatedCaption) Then
-                        record.TranslatedCaption = ""
-                    ElseIf String.IsNullOrEmpty(record.TranslatedCaption) Then
-                        record.TranslatedCaption = ""
-                    End If
-                    retVal = Model.UpdateRecord(record)
-                    If retVal = 0 Then
-                        If Not (String.IsNullOrEmpty(record.TranslatedCaption) And String.IsNullOrEmpty(record.TranslatedCaption)) Then
-                            record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-                            NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
-                            retVal = NewlyAddedRecordIdNo
-                            CallByName(View, "IdNo", CallType.Set, retVal)
-                        End If
+                If String.IsNullOrEmpty(record.TranslatedCaption) Then
+                    record.TranslatedCaption = ""
+                End If
+                retVal = Model.UpdateRecord(record)
+                If retVal = 0 Then
+                    If Not (String.IsNullOrEmpty(record.TranslatedCaption)) Then
+                        record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
+                        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+                        retVal = NewlyAddedRecordIdNo
+                        CallByName(View, "IdNo", CallType.Set, retVal)
                     End If
                 End If
             End If

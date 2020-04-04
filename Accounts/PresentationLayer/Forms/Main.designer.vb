@@ -40,7 +40,7 @@ Namespace PresentationLayer.Forms
         Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
-        Me.Menu = New System.Windows.Forms.MenuStrip()
+        Me.Account = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
@@ -130,7 +130,7 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
-        Me.Menu.SuspendLayout
+        Me.Account.SuspendLayout
         Me.contextMenuStripMember.SuspendLayout
         Me.contextMenuStrip1.SuspendLayout
         Me.SuspendLayout
@@ -190,12 +190,12 @@ Namespace PresentationLayer.Forms
         Me.ToolStripButtonTranslate.Name = "ToolStripButtonTranslate"
         Me.ToolStripButtonTranslate.Padding = New System.Windows.Forms.Padding(2, 0, 2, 0)
         '
-        'Menu
+        'Account
         '
-        Me.Menu.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.Menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
-        resources.ApplyResources(Me.Menu, "Menu")
-        Me.Menu.Name = "Menu"
+        Me.Account.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.Account.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
+        resources.ApplyResources(Me.Account, "Account")
+        Me.Account.Name = "Account"
         '
         'ToolStripMenuItemFile
         '
@@ -654,7 +654,7 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.Menu)
+        Me.Controls.Add(Me.Account)
         Me.IsMdiContainer = true
         Me.Name = "Main"
         Me.SecurityPresenterObj = SecurityPresenter1
@@ -662,8 +662,8 @@ Namespace PresentationLayer.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
-        Me.Menu.ResumeLayout(false)
-        Me.Menu.PerformLayout
+        Me.Account.ResumeLayout(false)
+        Me.Account.PerformLayout
         Me.contextMenuStripMember.ResumeLayout(false)
         Me.contextMenuStrip1.ResumeLayout(false)
         Me.ResumeLayout(false)
@@ -678,7 +678,7 @@ End Sub
         Private WithEvents ToolStripButtonLogin As ToolStripButton
         Private WithEvents ToolStripButtonLogout As ToolStripButton
         Private toolStripSeparator1 As ToolStripSeparator
-        Private Menu As MenuStrip
+        Private Account As MenuStrip
         Private ToolStripMenuItemFile As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogin As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogout As ToolStripMenuItem

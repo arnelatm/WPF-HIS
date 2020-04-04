@@ -30,7 +30,7 @@ Public Module Extensions
         For i = 0 To variables.Count - 1 step 2
             oldValue = "{" & variables(i) & "}"
             newValue = variables(i+1)
-            result =  Replace(template, oldValue, newValue, 1, -1, CompareMethod.Text)
+            result =  Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
         Next
         Return result
     End Function

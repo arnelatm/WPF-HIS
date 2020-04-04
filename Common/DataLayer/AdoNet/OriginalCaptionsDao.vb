@@ -34,7 +34,7 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef originalCaptions As OriginalCaptions) As Integer Implements IDaoAll(Of OriginalCaptions).UpdateRecord
             Dim sql As String =
                     " UPDATE [OriginalCaptions]" &
-                    "        Caption = @Caption" &
+                    " Set Caption = @Caption" &
                     " WHERE IDNo = @IDNo"
             Return _db.Update(sql, Take(originalCaptions))
         End Function
@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " INSERT INTO [OriginalCaptions] " &
                     " (Caption) " &
-                    " VALUES (@@Caption) "
+                    " VALUES (@Caption) "
             Return _db.Insert(sql, Take(originalCaptions))
         End Function
 

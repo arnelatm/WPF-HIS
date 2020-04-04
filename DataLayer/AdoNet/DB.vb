@@ -3,6 +3,8 @@ Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.ExceptionServices
+Imports System.Text.RegularExpressions
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace AdoNet
     ' ADO.NET data access class.
@@ -413,7 +415,16 @@ Namespace AdoNet
                         Catch ex As SqlException
                             If ex.Number = 2627 OrElse ex.Number = 2601 Then
                                 'Violation of UNIQUE KEY constraint <constraint name>. Cannot insert duplicate key in object <Table>. The duplicate key value is (<duplicate entry text>). The statement has been terminated.
-                                MessageBox.Show(ex.Message & " Record not added.")
+                                Dim test As String = ex.Message
+                                Dim reg = New Regex("'.*?'")
+                                Dim matches = reg.Matches(test)
+                                Dim tableName = matches(0).ToString()
+                                Dim indexName = matches(1).ToString()
+                                reg = New Regex("\(.*?\)")
+                                matches = reg.Matches(test)
+                                Dim duplicateValue = matches(0).ToString()
+                                Dim variables = {"tableName", tableName, "indexName", indexName, "duplicateValue", duplicateValue} 
+                                Messaging.Show(True, "MsgDuplicateKeyValueViolation", "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!", "Unique Key Violation", variables, MessageBoxButtons.OK, MessageBoxIcon.Error,MessageBoxDefaultButton.Button1 )
                                 retValue = -1  '' to indicate Unique Key Violation for now.
                             ElseIf ex.Number = 515 Then
                                 MessageBox.Show(ex.Message & " Record not added ")
