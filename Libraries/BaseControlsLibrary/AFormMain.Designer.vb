@@ -22,9 +22,16 @@ Partial Class AFormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.SuspendLayout
+        '
+        'AFormMain
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Name = "AFormMain"
         Me.Text = "AFormMain"
-    End Sub
+        Me.ResumeLayout(false)
+
+End Sub
 End Class

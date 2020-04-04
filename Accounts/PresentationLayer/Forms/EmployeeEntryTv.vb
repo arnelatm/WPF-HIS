@@ -35,6 +35,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+#Region "Fields"
         Public Property ArAccountIdNo As Integer Implements IEmployeeView.ArAccountIdNo
             Get
                 Return cacArAccountIdNo.GetValue()
@@ -358,6 +359,7 @@ Namespace PresentationLayer.Forms
                 txtZipCode.Text = Value
             End Set
         End Property
+#End Region
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -410,30 +412,6 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
             'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
-
-
-        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) 
-            GoNextRecord()
-        End Sub
-
-        Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) 
-            GoFirstRecord()
-        End Sub
-
-        Private Sub EmployeeEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'dim ds = PresenterObj.GetTreeViewDataNew()
-            'BindingSource1.DataSource = ds
-            'txtEmployeeName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeModelBindingSource, "EmployeeName", true))
-
-        End Sub
-
-        'Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) 
-        '    GoPreviousRecord()
-        'End Sub
-
-        'Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) 
-        '    GoLastRecord()
-        'End Sub
 
     End Class
 

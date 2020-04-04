@@ -13,6 +13,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 ' establish business rules
                 AddRule(New ValidateRequired("CostCenterName"))
+                AddRule(New ValidateCompare("ParentIdNo","IdNo",ValidationOperator.NotEqual, ValidationDataType.Integer))
             End If
         End Sub
 

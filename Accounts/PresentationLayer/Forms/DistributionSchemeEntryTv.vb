@@ -57,11 +57,11 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("DistributionSchemeTypeSelection", GetType(DistributionSchemeTypeSelection))
         End Sub
 
-        ' The form will handle all key events before the control with
-        ' focus handles them
-        Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-            e.Handled = False
-        End Sub
+        '' The form will handle all key events before the control with
+        '' focus handles them
+        'Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        '    e.Handled = False
+        'End Sub
 
         Public Sub CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))

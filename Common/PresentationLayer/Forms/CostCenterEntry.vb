@@ -21,17 +21,6 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CostCenterPresenter(Me)
 
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            CreateDataSources()
-
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("CostCenterTypeSelection", GetType(CostCenterTypeSelection))
-        End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("CostCenterTypeSelection", GetType(CostCenterTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -39,10 +28,7 @@ Namespace PresentationLayer.Forms
             cacProfitCenterIdNo.DataSource = PresenterObj.GetProfitCenterList()
         End Sub
 
-        Protected Overrides Sub OnTextDisplayLanguageChanged()
-            CreateDataSources()
-        End Sub
-
+#Region "Fields"
         Public Property IDNo As Integer Implements ICostCenterView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -124,27 +110,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtCostCenterCode, "CostCenter Code")
-            MyErrorProvider.Controls.AddMandatory(txtCostCenterName, "CostCenter Name in English")
-            MyErrorProvider.Controls.AddMandatory(cacProfitCenterIdNo, "Profit Center Link")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If EditMode And cacParentIdNo.GetValue() = NumParser(Of Int16)(TxtIDNo.Text) Then
-                _MBCostCenterCannotBeParentToItself.Show(Me)
-                CancelSave = True
-                Exit Sub
-            End If
-        End Sub
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            cacParentIdNo.DataSource = PresenterObj.GetCostCenterList()
-            cacParentIdNo.Refresh()
-        End Sub
+#End Region
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

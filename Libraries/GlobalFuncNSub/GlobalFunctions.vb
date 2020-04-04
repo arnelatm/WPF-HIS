@@ -668,7 +668,6 @@ Public Module GlobalFunctions
     '    Return retVal
     'End Function
 
-
     'Public Function CalendarDateStringSpecificCultureToDate(ByVal DateString As String, ByVal TargetCultureInfo As CultureInfo) As Date?
     '    Dim retDate As Date?
     '    Try
