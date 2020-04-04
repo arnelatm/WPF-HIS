@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
@@ -52,10 +51,7 @@ Public Class BfMain
         End If
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.DoubleBuffered = True
-        Dim dac As New Dac
-        Dim cmd As String
-        cmd = "Select IdNo from Languages where cultureInfoCode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
+
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -515,17 +511,16 @@ Public Class BfMain
             '    cmbLanguagePicker.Items.Add(dr("lang"))
             'Next
             'ds = Nothing
+            Me.DoubleBuffered = True
+            Dim dac As New Dac
+            Dim cmd As String
             RaiseEvent BeforeLoad()
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
-            Dim cmd As String
-            'Dim dac As New Dac
-            'dac = TranslatorDAC
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             cmd = "SELECT IdNo FROM SystemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
         End If
-
     End Sub
 
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64

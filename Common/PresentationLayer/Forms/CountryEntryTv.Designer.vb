@@ -59,7 +59,7 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
         Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 287)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 297)
         '
         'floDataDisplay
         '
@@ -87,10 +87,11 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.TxtFlag32)
         Me.floDataDisplay.Controls.Add(Me.LblFlag128)
         Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
-        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Right
-        Me.floDataDisplay.Location = New System.Drawing.Point(302, 57)
+        Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
         Me.floDataDisplay.Name = "floDataDisplay"
-        Me.floDataDisplay.Size = New System.Drawing.Size(406, 287)
+        Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
+        Me.floDataDisplay.Size = New System.Drawing.Size(415, 297)
         Me.floDataDisplay.TabIndex = 148
         '
         'lblIdNo
@@ -99,7 +100,7 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
         Me.lblIdNo.Size = New System.Drawing.Size(161, 23)
@@ -120,7 +121,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Location = New System.Drawing.Point(164, 1)
+        Me.TxtIDNo.Location = New System.Drawing.Point(174, 11)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
@@ -136,7 +137,7 @@ Namespace PresentationLayer.Forms
         Me.lblIsoA2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblIsoA2, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblIsoA2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIsoA2.Location = New System.Drawing.Point(1, 26)
+        Me.lblIsoA2.Location = New System.Drawing.Point(11, 36)
         Me.lblIsoA2.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIsoA2.Name = "lblIsoA2"
         Me.lblIsoA2.Size = New System.Drawing.Size(161, 23)
@@ -157,13 +158,13 @@ Namespace PresentationLayer.Forms
         Me.txtIsoA2.ForeColor = System.Drawing.Color.Gray
         Me.MyErrorProvider.SetIconAlignment(Me.txtIsoA2, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.txtIsoA2.LinkedLabel = Nothing
-        Me.txtIsoA2.Location = New System.Drawing.Point(164, 26)
+        Me.txtIsoA2.Location = New System.Drawing.Point(174, 36)
         Me.txtIsoA2.Margin = New System.Windows.Forms.Padding(1)
         Me.txtIsoA2.Name = "txtIsoA2"
         Me.txtIsoA2.OldValue = Nothing
         Me.txtIsoA2.ReadOnly = true
         Me.txtIsoA2.Size = New System.Drawing.Size(62, 23)
-        Me.txtIsoA2.TabIndex = 152
+        Me.txtIsoA2.TabIndex = 1
         Me.txtIsoA2.ValueIsMandatory = true
         '
         'lblCountryName
@@ -173,7 +174,7 @@ Namespace PresentationLayer.Forms
         Me.lblCountryName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblCountryName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblCountryName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCountryName.Location = New System.Drawing.Point(1, 51)
+        Me.lblCountryName.Location = New System.Drawing.Point(11, 61)
         Me.lblCountryName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblCountryName.Name = "lblCountryName"
         Me.lblCountryName.Size = New System.Drawing.Size(161, 23)
@@ -194,13 +195,13 @@ Namespace PresentationLayer.Forms
         Me.txtCountryName.ForeColor = System.Drawing.Color.Gray
         Me.MyErrorProvider.SetIconAlignment(Me.txtCountryName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.txtCountryName.LinkedLabel = Nothing
-        Me.txtCountryName.Location = New System.Drawing.Point(164, 51)
+        Me.txtCountryName.Location = New System.Drawing.Point(174, 61)
         Me.txtCountryName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtCountryName.Name = "txtCountryName"
         Me.txtCountryName.OldValue = Nothing
         Me.txtCountryName.ReadOnly = true
         Me.txtCountryName.Size = New System.Drawing.Size(221, 23)
-        Me.txtCountryName.TabIndex = 154
+        Me.txtCountryName.TabIndex = 2
         Me.txtCountryName.ValueIsMandatory = true
         '
         'lblCountryNameAra
@@ -210,7 +211,7 @@ Namespace PresentationLayer.Forms
         Me.lblCountryNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblCountryNameAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblCountryNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCountryNameAra.Location = New System.Drawing.Point(1, 76)
+        Me.lblCountryNameAra.Location = New System.Drawing.Point(11, 86)
         Me.lblCountryNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblCountryNameAra.Name = "lblCountryNameAra"
         Me.lblCountryNameAra.Size = New System.Drawing.Size(161, 23)
@@ -232,13 +233,13 @@ Namespace PresentationLayer.Forms
         Me.txtCountryNameAra.ForeColor = System.Drawing.Color.Black
         Me.MyErrorProvider.SetIconAlignment(Me.txtCountryNameAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.txtCountryNameAra.LinkedLabel = Nothing
-        Me.txtCountryNameAra.Location = New System.Drawing.Point(164, 76)
+        Me.txtCountryNameAra.Location = New System.Drawing.Point(174, 86)
         Me.txtCountryNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtCountryNameAra.Name = "txtCountryNameAra"
         Me.txtCountryNameAra.OldValue = Nothing
         Me.txtCountryNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtCountryNameAra.Size = New System.Drawing.Size(221, 23)
-        Me.txtCountryNameAra.TabIndex = 156
+        Me.txtCountryNameAra.TabIndex = 3
         '
         'LblNationality
         '
@@ -247,7 +248,7 @@ Namespace PresentationLayer.Forms
         Me.LblNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblNationality, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblNationality.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblNationality.Location = New System.Drawing.Point(1, 101)
+        Me.LblNationality.Location = New System.Drawing.Point(11, 111)
         Me.LblNationality.Margin = New System.Windows.Forms.Padding(1)
         Me.LblNationality.Name = "LblNationality"
         Me.LblNationality.Size = New System.Drawing.Size(161, 23)
@@ -269,13 +270,13 @@ Namespace PresentationLayer.Forms
         Me.txtNationality.ForeColor = System.Drawing.Color.Black
         Me.MyErrorProvider.SetIconAlignment(Me.txtNationality, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.txtNationality.LinkedLabel = Nothing
-        Me.txtNationality.Location = New System.Drawing.Point(164, 101)
+        Me.txtNationality.Location = New System.Drawing.Point(174, 111)
         Me.txtNationality.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.OldValue = Nothing
         Me.txtNationality.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtNationality.Size = New System.Drawing.Size(221, 23)
-        Me.txtNationality.TabIndex = 159
+        Me.txtNationality.TabIndex = 4
         '
         'lblNationalityAra
         '
@@ -284,7 +285,7 @@ Namespace PresentationLayer.Forms
         Me.lblNationalityAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblNationalityAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblNationalityAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNationalityAra.Location = New System.Drawing.Point(1, 126)
+        Me.lblNationalityAra.Location = New System.Drawing.Point(11, 136)
         Me.lblNationalityAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNationalityAra.Name = "lblNationalityAra"
         Me.lblNationalityAra.Size = New System.Drawing.Size(161, 23)
@@ -306,13 +307,13 @@ Namespace PresentationLayer.Forms
         Me.txtNationalityAra.ForeColor = System.Drawing.Color.Black
         Me.MyErrorProvider.SetIconAlignment(Me.txtNationalityAra, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.txtNationalityAra.LinkedLabel = Nothing
-        Me.txtNationalityAra.Location = New System.Drawing.Point(164, 126)
+        Me.txtNationalityAra.Location = New System.Drawing.Point(174, 136)
         Me.txtNationalityAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNationalityAra.Name = "txtNationalityAra"
         Me.txtNationalityAra.OldValue = Nothing
         Me.txtNationalityAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtNationalityAra.Size = New System.Drawing.Size(221, 23)
-        Me.txtNationalityAra.TabIndex = 161
+        Me.txtNationalityAra.TabIndex = 5
         '
         'lblISOA3
         '
@@ -321,7 +322,7 @@ Namespace PresentationLayer.Forms
         Me.lblISOA3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblISOA3, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblISOA3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblISOA3.Location = New System.Drawing.Point(1, 151)
+        Me.lblISOA3.Location = New System.Drawing.Point(11, 161)
         Me.lblISOA3.Margin = New System.Windows.Forms.Padding(1)
         Me.lblISOA3.Name = "lblISOA3"
         Me.lblISOA3.Size = New System.Drawing.Size(161, 23)
@@ -342,13 +343,13 @@ Namespace PresentationLayer.Forms
         Me.TxtISOA3.ForeColor = System.Drawing.Color.Gray
         Me.MyErrorProvider.SetIconAlignment(Me.TxtISOA3, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.TxtISOA3.LinkedLabel = Nothing
-        Me.TxtISOA3.Location = New System.Drawing.Point(164, 151)
+        Me.TxtISOA3.Location = New System.Drawing.Point(174, 161)
         Me.TxtISOA3.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtISOA3.Name = "TxtISOA3"
         Me.TxtISOA3.OldValue = Nothing
         Me.TxtISOA3.ReadOnly = true
         Me.TxtISOA3.Size = New System.Drawing.Size(62, 23)
-        Me.TxtISOA3.TabIndex = 163
+        Me.TxtISOA3.TabIndex = 6
         Me.TxtISOA3.ValueIsMandatory = true
         '
         'LblISON
@@ -357,7 +358,7 @@ Namespace PresentationLayer.Forms
         Me.LblISON.EditingMode = false
         Me.LblISON.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblISON.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblISON.Location = New System.Drawing.Point(1, 176)
+        Me.LblISON.Location = New System.Drawing.Point(11, 186)
         Me.LblISON.Margin = New System.Windows.Forms.Padding(1)
         Me.LblISON.Name = "LblISON"
         Me.LblISON.Size = New System.Drawing.Size(161, 23)
@@ -377,13 +378,13 @@ Namespace PresentationLayer.Forms
         Me.TxtISON.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtISON.ForeColor = System.Drawing.Color.Gray
         Me.TxtISON.LinkedLabel = Me.LblISON
-        Me.TxtISON.Location = New System.Drawing.Point(164, 176)
+        Me.TxtISON.Location = New System.Drawing.Point(174, 186)
         Me.TxtISON.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtISON.Name = "TxtISON"
         Me.TxtISON.OldValue = Nothing
         Me.TxtISON.ReadOnly = true
         Me.TxtISON.Size = New System.Drawing.Size(62, 23)
-        Me.TxtISON.TabIndex = 164
+        Me.TxtISON.TabIndex = 7
         '
         'LblPhoneCode
         '
@@ -391,7 +392,7 @@ Namespace PresentationLayer.Forms
         Me.LblPhoneCode.EditingMode = false
         Me.LblPhoneCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblPhoneCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblPhoneCode.Location = New System.Drawing.Point(1, 201)
+        Me.LblPhoneCode.Location = New System.Drawing.Point(11, 211)
         Me.LblPhoneCode.Margin = New System.Windows.Forms.Padding(1)
         Me.LblPhoneCode.Name = "LblPhoneCode"
         Me.LblPhoneCode.Size = New System.Drawing.Size(161, 23)
@@ -411,13 +412,13 @@ Namespace PresentationLayer.Forms
         Me.TxtPhoneCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtPhoneCode.ForeColor = System.Drawing.Color.Gray
         Me.TxtPhoneCode.LinkedLabel = Me.LblPhoneCode
-        Me.TxtPhoneCode.Location = New System.Drawing.Point(164, 201)
+        Me.TxtPhoneCode.Location = New System.Drawing.Point(174, 211)
         Me.TxtPhoneCode.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtPhoneCode.Name = "TxtPhoneCode"
         Me.TxtPhoneCode.OldValue = Nothing
         Me.TxtPhoneCode.ReadOnly = true
         Me.TxtPhoneCode.Size = New System.Drawing.Size(62, 23)
-        Me.TxtPhoneCode.TabIndex = 165
+        Me.TxtPhoneCode.TabIndex = 8
         Me.TxtPhoneCode.ValueIsNumeric = true
         '
         'LblFlag32
@@ -426,7 +427,7 @@ Namespace PresentationLayer.Forms
         Me.LblFlag32.EditingMode = false
         Me.LblFlag32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblFlag32.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblFlag32.Location = New System.Drawing.Point(1, 226)
+        Me.LblFlag32.Location = New System.Drawing.Point(11, 236)
         Me.LblFlag32.Margin = New System.Windows.Forms.Padding(1)
         Me.LblFlag32.Name = "LblFlag32"
         Me.LblFlag32.Size = New System.Drawing.Size(161, 23)
@@ -446,13 +447,13 @@ Namespace PresentationLayer.Forms
         Me.TxtFlag32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtFlag32.ForeColor = System.Drawing.Color.Gray
         Me.TxtFlag32.LinkedLabel = Me.LblFlag32
-        Me.TxtFlag32.Location = New System.Drawing.Point(164, 226)
+        Me.TxtFlag32.Location = New System.Drawing.Point(174, 236)
         Me.TxtFlag32.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtFlag32.Name = "TxtFlag32"
         Me.TxtFlag32.OldValue = Nothing
         Me.TxtFlag32.ReadOnly = true
         Me.TxtFlag32.Size = New System.Drawing.Size(62, 23)
-        Me.TxtFlag32.TabIndex = 166
+        Me.TxtFlag32.TabIndex = 9
         '
         'LblFlag128
         '
@@ -460,7 +461,7 @@ Namespace PresentationLayer.Forms
         Me.LblFlag128.EditingMode = false
         Me.LblFlag128.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.LblFlag128.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblFlag128.Location = New System.Drawing.Point(1, 251)
+        Me.LblFlag128.Location = New System.Drawing.Point(11, 261)
         Me.LblFlag128.Margin = New System.Windows.Forms.Padding(1)
         Me.LblFlag128.Name = "LblFlag128"
         Me.LblFlag128.Size = New System.Drawing.Size(161, 23)
@@ -480,17 +481,17 @@ Namespace PresentationLayer.Forms
         Me.TxtFlag128.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtFlag128.ForeColor = System.Drawing.Color.Gray
         Me.TxtFlag128.LinkedLabel = Me.LblFlag128
-        Me.TxtFlag128.Location = New System.Drawing.Point(164, 251)
+        Me.TxtFlag128.Location = New System.Drawing.Point(174, 261)
         Me.TxtFlag128.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtFlag128.Name = "TxtFlag128"
         Me.TxtFlag128.OldValue = Nothing
         Me.TxtFlag128.ReadOnly = true
         Me.TxtFlag128.Size = New System.Drawing.Size(62, 23)
-        Me.TxtFlag128.TabIndex = 167
+        Me.TxtFlag128.TabIndex = 10
         '
         'CountryEntryTv
         '
-        Me.ClientSize = New System.Drawing.Size(708, 344)
+        Me.ClientSize = New System.Drawing.Size(712, 354)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CountryEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

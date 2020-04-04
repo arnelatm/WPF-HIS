@@ -128,6 +128,7 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.Account.SuspendLayout
@@ -225,7 +226,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemEdit
         '
-        Me.ToolStripMenuItemEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCut, Me.ToolStripMenuItemCopy, Me.ToolStripMenuItemPaste})
+        Me.ToolStripMenuItemEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCut, Me.ToolStripMenuItemCopy, Me.ToolStripMenuItemPaste, Me.TestToolStripMenuItem})
         Me.ToolStripMenuItemEdit.Name = "ToolStripMenuItemEdit"
         resources.ApplyResources(Me.ToolStripMenuItemEdit, "ToolStripMenuItemEdit")
         '
@@ -648,6 +649,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'TestToolStripMenuItem
+        '
+        Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
+        resources.ApplyResources(Me.TestToolStripMenuItem, "TestToolStripMenuItem")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -770,5 +776,6 @@ End Sub
         Friend WithEvents AccountReconciliationToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCreateAllMessages As ToolStripMenuItem
+        Friend WithEvents TestToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

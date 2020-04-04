@@ -276,7 +276,7 @@ Public Class CDataGridView
                     End If
 
                 Case Else
-                    e.Handled = False
+                    'e.Handled = False
                     'Case Keys.Delete
                     '    Dim parentForm = FindForm()
                     '    If Not GetPropertyValue(parentForm, "EditMode") Or GetPropertyValue(parentForm, "AddMode") Then

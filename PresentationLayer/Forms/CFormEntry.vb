@@ -879,8 +879,8 @@ Public Class CFormEntry
             Else
                 Beep()
             End If
-        Else
-            e.Handled = False
+        'Else
+        '    e.Handled = False
         End If
     End Sub
 

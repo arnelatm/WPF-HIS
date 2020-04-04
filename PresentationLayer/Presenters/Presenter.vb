@@ -179,12 +179,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Overridable Sub Display(idNo As Integer)
         Dim modelData
         modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
-        'If modelData IsNot Nothing And modelData.IdNo > 0 Then
-            GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
-            For Each child In ChildPresenters
-                child.Display(idNo)
-            Next
-        'End If
+        GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
+        For Each child In ChildPresenters
+            child.Display(idNo)
+        Next
     End Sub
 
     Public Sub SaveOriginalValues()

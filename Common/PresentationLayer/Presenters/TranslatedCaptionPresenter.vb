@@ -1,6 +1,5 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Translations
 
 Namespace PresentationLayer.Presenters
@@ -39,7 +38,7 @@ Namespace PresentationLayer.Presenters
             ' mapped differently between the view and the Model in the model it is named
             ' 'IdNo' and in the View it is named 'translatedMessageIdNo'
             ' we need to compare only the translatedCaption field
-            If OriginalModel.TranslatedCaption = view.TranslatedCaption Then
+            If OriginalModel.TranslatedCaption = View.TranslatedCaption Then
                 Return False
             End If
             Return True

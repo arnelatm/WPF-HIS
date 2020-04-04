@@ -2,13 +2,12 @@
 Imports System.Threading
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
-Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
 Imports AutoMapper
-Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -1087,7 +1086,7 @@ Namespace PresentationLayer.Forms
             OneTimeRun.CreateEnums()
         End Sub
 
-        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs) 
+        Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs)
             Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
             Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
         End Sub
@@ -1120,6 +1119,16 @@ Namespace PresentationLayer.Forms
                 }
             'Display the new form.
             childMdiForm.Show()
+        End Sub
+
+        Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
+            Dim x, y As Integer?
+            x = Nothing
+            y = Nothing
+
+            MessageBox.Show(x = y)
+            MessageBox.Show(EqualityComparer(Of String).[Default].Equals(x, y))
+            x = 5
         End Sub
 
     End Class

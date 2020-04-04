@@ -130,12 +130,10 @@ Public Class CForm
     ' The form will handle all key events before the control with
     ' focus handles them
     Private Sub CForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter Then
+       If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
             e.Handled = True
             SendKeys.Send("{TAB}")
-        Else
-            e.Handled = False
         End If
     End Sub
 

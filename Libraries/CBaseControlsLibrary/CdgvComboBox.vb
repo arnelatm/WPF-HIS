@@ -139,16 +139,10 @@ Public Class CDgvComboBox
     'End Property
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        'If DisplayOnly Then
-        '    e.SuppressKeyPress = True
-        'Else
         If e.KeyCode = Keys.Enter Then
             e.Handled = True
             SendKeys.SendWait("{TAB}")
-        Else
-            e.Handled = False
         End If
-        'End If
     End Sub
 
     <Category("Custom Properties")>

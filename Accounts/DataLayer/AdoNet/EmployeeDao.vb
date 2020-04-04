@@ -41,40 +41,39 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).UpdateRecord
             Dim sql As String =
                     " UPDATE [Employee]" &
-                    "   SET EmployeeCode = @EmployeeCode," &
-                    "       Title = @Title," &
-                    "       EmployeeName = @EmployeeName," &
-                    "       EmployeeNameAra = @EmployeeNameAra," &
-                    "       Gender = @Gender," &
-                    "       BirthDate = @BirthDate," &
-                    "       MaritalStatus = @MaritalStatus," &
-                    "       NationalityCode = @NationalityCode," &
-                    "       ReligionIdNo = @ReligionIdNo," &
-                    "       NationalIdNo = @NationalIdNo," &
-                    "       Street = @Street," &
-                    "       District = @District," &
-                    "       TownCity = @TownCity," &
-                    "       ProvinceState = @ProvinceState," &
-                    "       CountryCode = @CountryCode," &
-                    "       PoBox = @PoBox," &
-                    "       ZipCode = @ZipCode," &
-                    "       Phone1 = @Phone1," &
-                    "       Phone2 = @Phone2," &
-                    "       Email = @Email," &
-                    "       DepartmentIdNo = @DepartmentIdNo," &
-                    "       DesignationIdNo = @DesignationIdNo," &
-                    "       HiredDate = @HiredDate," &
-                    "       ReleasedDate = @ReleasedDate," &
-                    "       ArAccountIdNo = @ArAccountIdNo," &
-                    "       BankIdNo = @BankIdNo," &
-                    "       BankAccountNo = @BankAccountNo," &
-                    "       Iban = @Iban," &
-                    "       Notes = @Notes," &
-                    "       OpeningBalance = @OpeningBalance," &
-                    "       Balance = @Balance," &
-                    "       Active = @Active" &
-                    "  WHERE IDNo = @IDNo"
-
+                    " SET EmployeeCode = @EmployeeCode," &
+                    " Title = @Title," &
+                    " EmployeeName = @EmployeeName," &
+                    " EmployeeNameAra = @EmployeeNameAra," &
+                    " Gender = @Gender," &
+                    " BirthDate = @BirthDate," &
+                    " MaritalStatus = @MaritalStatus," &
+                    " NationalityCode = @NationalityCode," &
+                    " ReligionIdNo = @ReligionIdNo," &
+                    " NationalIdNo = @NationalIdNo," &
+                    " Street = @Street," &
+                    " District = @District," &
+                    " TownCity = @TownCity," &
+                    " ProvinceState = @ProvinceState," &
+                    " CountryCode = @CountryCode," &
+                    " PoBox = @PoBox," &
+                    " ZipCode = @ZipCode," &
+                    " Phone1 = @Phone1," &
+                    " Phone2 = @Phone2," &
+                    " Email = @Email," &
+                    " DepartmentIdNo = @DepartmentIdNo," &
+                    " DesignationIdNo = @DesignationIdNo," &
+                    " HiredDate = @HiredDate," &
+                    " ReleasedDate = @ReleasedDate," &
+                    " ArAccountIdNo= @ArAccountIdNo," &
+                    " BankIdNo = @BankIdNo," &
+                    " BankAccountNo = @BankAccountNo," &
+                    " Iban = @Iban," &
+                    " Notes = @Notes," &
+                    " OpeningBalance = @OpeningBalance," &
+                    " Balance = @Balance," &
+                    " Active = @Active" &
+                    " WHERE IDNo = @IDNo"
             Return Db.Update(sql, Take(employee))
         End Function
 
@@ -84,9 +83,9 @@ Namespace DataLayer.AdoNet
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
                     "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active)" &
-                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, @" &
-                    "         ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, @" &
-                    "         ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @Active)"
+                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
+                    "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
+                    "         @ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @Active)"
             Return Db.Insert(sql, Take(employee))
         End Function
 

@@ -66,18 +66,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AFormMain.Designer.vb">
-      <DependentUpon>AFormMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AFormMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AFormModal.Designer.vb">
-      <DependentUpon>AFormModal.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AFormModal.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="BCombobox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -90,7 +78,6 @@
     <Compile Include="BTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Class1.vb" />
     <Compile Include="CToolStripButton.Designer.vb">
       <DependentUpon>CToolStripButton.vb</DependentUpon>
     </Compile>

@@ -52,31 +52,31 @@ Namespace BusinessRules
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
-                Dim propValue1 As String =
-                        businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing).ToString()
-                Dim propValue2 As String =
-                        businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject, Nothing).
-                        ToString()
+                Dim propValue1 = businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
+                Dim propValue2 = businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject, Nothing)
 
                 Select Case DataType
                     Case ValidationDataType.Integer
 
-                        Dim ival1 As Integer = Integer.Parse(propValue1)
-                        Dim ival2 As Integer = Integer.Parse(propValue2)
+                        Dim iVal1 As Integer? = If(propValue1 Is Nothing, nothing, Integer.Parse(propValue1))
+                        Dim iVal2 As Integer? = If(propValue2 Is Nothing, Nothing, Integer.Parse(propValue2))
 
                         Select Case [Operator]
                             Case ValidationOperator.Equal
-                                Return ival1 = ival2
+                                Return iVal1 = iVal2
+                                'Return EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)
                             Case ValidationOperator.NotEqual
-                                Return ival1 <> ival2
+                                return iVal1 <> iVal2
+                                'Return Not EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)
                             Case ValidationOperator.GreaterThan
-                                Return ival1 > ival2
+                                'EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)
+                                Return iVal1 > iVal2
                             Case ValidationOperator.GreaterThanOrEqual
-                                Return ival1 >= ival2
+                                Return iVal1 >= iVal2
                             Case ValidationOperator.LessThan
-                                Return ival1 < ival2
+                                Return iVal1 < iVal2
                             Case ValidationOperator.LessThanOrEqual
-                                Return ival1 <= ival2
+                                Return iVal1 <= iVal2
                         End Select
 
                     Case ValidationDataType.Double
@@ -101,42 +101,42 @@ Namespace BusinessRules
 
                     Case ValidationDataType.Decimal
 
-                        Dim cval1 As Decimal = Decimal.Parse(propValue1)
-                        Dim cval2 As Decimal = Decimal.Parse(propValue2)
+                        Dim cVal1 As Decimal = Decimal.Parse(propValue1)
+                        Dim cVal2 As Decimal = Decimal.Parse(propValue2)
 
                         Select Case [Operator]
                             Case ValidationOperator.Equal
-                                Return cval1 = cval2
+                                Return cVal1 = cVal2
                             Case ValidationOperator.NotEqual
-                                Return cval1 <> cval2
+                                Return cVal1 <> cVal2
                             Case ValidationOperator.GreaterThan
-                                Return cval1 > cval2
+                                Return cVal1 > cVal2
                             Case ValidationOperator.GreaterThanOrEqual
-                                Return cval1 >= cval2
+                                Return cVal1 >= cVal2
                             Case ValidationOperator.LessThan
-                                Return cval1 < cval2
+                                Return cVal1 < cVal2
                             Case ValidationOperator.LessThanOrEqual
-                                Return cval1 <= cval2
+                                Return cVal1 <= cVal2
                         End Select
 
                     Case ValidationDataType.Date
 
-                        Dim tval1 As Date = Date.Parse(propValue1)
-                        Dim tval2 As Date = Date.Parse(propValue2)
+                        Dim tVal1 As Date? = If(propValue1 Is Nothing, Nothing, Date.Parse(propValue1))
+                        Dim tVal2 As Date? = If(propValue2 Is Nothing, Nothing, Date.Parse(propValue2))
 
                         Select Case [Operator]
                             Case ValidationOperator.Equal
-                                Return tval1 = tval2
+                                Return tVal1 = tVal2
                             Case ValidationOperator.NotEqual
-                                Return tval1 <> tval2
+                                Return tVal1 <> tVal2
                             Case ValidationOperator.GreaterThan
-                                Return tval1 > tval2
+                                Return tVal1 > tVal2
                             Case ValidationOperator.GreaterThanOrEqual
-                                Return tval1 >= tval2
+                                Return tVal1 >= tVal2
                             Case ValidationOperator.LessThan
-                                Return tval1 < tval2
+                                Return tVal1 < tVal2
                             Case ValidationOperator.LessThanOrEqual
-                                Return tval1 <= tval2
+                                Return tVal1 <= tVal2
                         End Select
 
                     Case ValidationDataType.String
