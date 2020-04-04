@@ -132,20 +132,24 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Protected Overrides Function ChangesMade()
-            If PresenterObj.ChangesMade() Then
-                Return True
-            End If
-            Return PresenterObj.TranslatedMessagesPresenter.ChangesMade()
-        End Function
+        'Protected Overrides Function ChangesMade()
+        '    If PresenterObj.ChangesMade() Then
+        '        Return True
+        '    End If
+        '    Return PresenterObj.TranslatedMessagesPresenter.ChangesMade()
+        'End Function
 
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-            PresenterObj.TranslatedMessagesPresenter.Save(AddMode)
-        End Sub
+        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
+        '    PresenterObj.TranslatedMessagesPresenter.Save(AddMode)
+        'End Sub
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            MyBase.Show()
-            HideButton(btnDelete)
+            Show()
+            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
+            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
+                ' Visible property stored in first element of the array
+                HideButton(btnDelete)
+            End If
         End Sub
 
         Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm

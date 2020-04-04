@@ -11,7 +11,6 @@ Namespace PresentationLayer.Forms
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _journalItemsPresenter As GeneralJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _journalItems As List(Of JournalItemModel)
@@ -142,9 +141,9 @@ Namespace PresentationLayer.Forms
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New GeneralJournalPresenter(Me)
 
-            _journalItemsPresenter = New GeneralJournalItemsPresenter(Me)
+            PresenterObj.JournalItemsPresenter = New GeneralJournalItemsPresenter(Me)
 
-            PresenterObj.JournalItemsPresenter = _journalItemsPresenter
+            PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
@@ -234,7 +233,7 @@ Namespace PresentationLayer.Forms
                 End If
                 nRowCount = nRowCount + 1
             Next
-            _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
+            PresenterObj.JournalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -262,21 +261,21 @@ Namespace PresentationLayer.Forms
         Protected Overrides Function DataIsValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.DataIsValid() Then
-                retValue = _journalItemsPresenter.DataIsValid(JournalItems)
+                retValue = PresenterObj.JournalItemsPresenter.DataIsValid(JournalItems)
             End If
             Return retValue
         End Function
 
-        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-            MyBase.DisplayView(idNoOfRecord)
-            _journalItemsPresenter.Display(idNoOfRecord)
-            BindJournalItem()
-            With JournalItems
-                TotalDebits = .Sum(Function(totals) totals.Debit)
-                TotalCredits = .Sum(Function(totals) totals.Credit)
-            End With
-            Refresh()
-        End Sub
+        'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+        '    MyBase.DisplayView(idNoOfRecord)
+        '    _journalItemsPresenter.Display(idNoOfRecord)
+        '    BindJournalItem()
+        '    With JournalItems
+        '        TotalDebits = .Sum(Function(totals) totals.Debit)
+        '        TotalCredits = .Sum(Function(totals) totals.Credit)
+        '    End With
+        '    Refresh()
+        'End Sub
 
         Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
             If keyData = Keys.F10 Then
@@ -320,11 +319,11 @@ Namespace PresentationLayer.Forms
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
-                        _journalItemsPresenter.ChangesMadeInJournalItem = True
+                        PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If EditMode OrElse AddMode Then
                             Dim newRow As New JournalItemModel
                             bsJournalItems.Insert(.RowIndex(), newRow)
-                            _journalItemsPresenter.ChangesMadeInJournalItem = True
+                            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                             ReSequenceDgvAfterInsert()
                             SendKeys.Send("{UP}")
                         Else
@@ -337,7 +336,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub DataGridViewJournalItems_ChangesMade(sender As Object, e As EventArgs) _
             Handles DataGridViewJournalItems.ChangesMade
-            _journalItemsPresenter.ChangesMadeInJournalItem = True
+            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -424,13 +423,13 @@ Namespace PresentationLayer.Forms
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
             DataGridViewJournalItems.StartTrackingChanges = False
             DataGridViewJournalItems.RemoveInsertColumn()
-            _journalItemsPresenter.ChangesMadeInJournalItem = False
+            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             DataGridViewJournalItems.StartTrackingChanges = True
             DataGridViewJournalItems.AddInsertColumn()
-            _journalItemsPresenter.ChangesMadeInJournalItem = False
+            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
         End Sub
 
         'Private Sub DataGridViewJournalItems_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles DataGridViewJournalItems.PreviewKeyDown

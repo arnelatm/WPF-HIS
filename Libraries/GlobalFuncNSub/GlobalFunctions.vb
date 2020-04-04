@@ -412,6 +412,13 @@ Public Module GlobalFunctions
         End Try
     End Function
 
+    Public Function ChangesMade(ByVal fromObject As Object, ByVal toObject As Object)
+        If ObjectsCompare(fromObject, toObject) Then
+            Return False
+        End If
+        Return True
+    End Function
+
     Public Function ObjectsCompare(ByVal fromObject As Object, ByVal toObject As Object)
         Dim objectsCompareResult = True
         Dim propList = fromObject.GetType().GetProperties()
@@ -626,6 +633,41 @@ Public Module GlobalFunctions
         End If
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
+
+    'Public Function CompareValues(source, Target) As Boolean
+    '    Dim retVal As Boolean = False
+    '    Dim source1 As New List(Of String)
+    '    Dim target1 = ""
+    '    If source1 = target1 Then
+    '        retVal = true
+    '    End If
+    '    'If Target.Equals(source) Then
+    '    '    retVal = True
+    '    'End If
+    '    'If Target Is Nothing And source Is Nothing Then
+    '    '    retVal = True
+    '    'ElseIf Target Is Nothing And TypeOf source Is String Then
+    '    '    If String.IsNullOrWhiteSpace(source) Then
+    '    '        retVal = True
+    '    '    End If
+    '    'ElseIf Target Is Nothing And TypeOf source Is IEnumerable Then
+    '    '    if source.Count() = 0 Then
+    '    '        retVal = true
+    '    '    End If
+    '    'ElseIf Target Is Nothing And source IsNot Nothing Then
+    '    '    If String.IsNullOrWhiteSpace(source) Then
+    '    '        retVal = True
+    '    '    End If
+    '    'ElseIf source Is Nothing And Target IsNot Nothing Then
+    '    '    If String.IsNullOrWhiteSpace(Target) Then
+    '    '        retVal = True
+    '    '    End If
+    '    'ElseIf Target.Equals(source) Then
+    '    '    retVal = True
+    '    'End If
+    '    Return retVal
+    'End Function
+
 
     'Public Function CalendarDateStringSpecificCultureToDate(ByVal DateString As String, ByVal TargetCultureInfo As CultureInfo) As Date?
     '    Dim retDate As Date?

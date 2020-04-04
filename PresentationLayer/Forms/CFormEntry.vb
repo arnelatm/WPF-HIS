@@ -64,6 +64,8 @@ Public Class CFormEntry
 
     Public Event AfterDelete()
 
+    Public Event AfterDisplayView()
+
     Public Event AfterEdit()
 
     Public Event AfterLoad()
@@ -526,6 +528,7 @@ Public Class CFormEntry
         PresenterObj.Display(idNoOfRecord)
         PresenterObj.SaveOriginalValues()
         TurnOffInputs()
+        RaiseEvent AfterDisplayView()
         DataChangesMade = False
         Refresh()
     End Sub

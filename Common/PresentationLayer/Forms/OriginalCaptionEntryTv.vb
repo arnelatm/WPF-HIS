@@ -21,6 +21,7 @@ Namespace PresentationLayer.Forms
             PresenterObj = New OriginalCaptionsPresenter(Me)
 
             PresenterObj.TranslatedCaptionPresenter = New TranslatedCaptionPresenter(Me)
+            PresenterObj.AddChildPresenter(PresenterObj.TranslatedCaptionPresenter)
 
             'CreateEnumResourceFile()
 
@@ -90,16 +91,16 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Protected Overrides Function ChangesMade()
-            If PresenterObj.ChangesMade() Then
-                Return True
-            End If
-            Return PresenterObj.TranslatedCaptionPresenter.ChangesMade()
-        End Function
+        'Protected Overrides Function ChangesMade()
+        '    If PresenterObj.ChangesMade() Then
+        '        Return True
+        '    End If
+        '    Return PresenterObj.TranslatedCaptionPresenter.ChangesMade()
+        'End Function
 
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-            PresenterObj.TranslatedCaptionPresenter.Save(AddMode)
-        End Sub
+        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
+        '    PresenterObj.TranslatedCaptionPresenter.Save(AddMode)
+        'End Sub
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()

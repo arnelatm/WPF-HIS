@@ -176,36 +176,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    'Public Overridable Overloads Sub MakeView(ByRef viewObject As List(Of TM), ByVal dataSortOrder As String)
-    '    Dim xModel As New TM
-    '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(dataSortOrder, xModel)
-    '    'Dim newSortOrderKey As String = dataSortOrder
-    '    'newSortOrderKey = GetTranslatedField(newSortOrderKey)
-    '    Dim modelData = Model.GetAll(Of TM)(newSortOrderKey)
-    '    viewObject.Clear()
-    '    For Each modData In modelData
-    '        viewObject.Add(modData)
-    '    Next
-    'End Sub
-
-    'Public Overridable Overloads Sub MakeView(ByRef viewObject As List(Of TM), ByVal dataSortOrder As String)
-    '    Dim sortExpression As String = dataSortOrder
-    '    sortExpression = GetTranslatedField(dataSortOrder)
-    '    Dim modData = Model.GetAll(Of TM)(sortExpression)
-    '    viewObject.Clear()
-    '    For Each mData In modData
-    '        Dim modelTm As TM
-    '        MapObject(modData, modelTb)
-    '        viewObject.Add(modData)
-    '    Next
-    'End Sub
-
     Public Overridable Sub Display(idNo As Integer)
         Dim modelData
         modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
-        If modelData IsNot Nothing And modelData.IdNo > 0 Then
+        'If modelData IsNot Nothing And modelData.IdNo > 0 Then
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
-        End If
+            For Each child In ChildPresenters
+                child.Display(idNo)
+            Next
+        'End If
     End Sub
 
     Public Sub SaveOriginalValues()
@@ -213,24 +192,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         For Each item In ChildPresenters
             item.SaveOriginalValues()
         Next
-        'GlobalVariables.Mapper.Map(Of TM)(View, OriginalModel)
-        'GlobalVariables.Mapper.Map(View,OriginalModel)
     End Sub
-
-    'Public Function GetTreeViewData(ByVal sortKey As String) As Object
-    '    Dim xModel As New TM
-    '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(sortKey, xModel)
-    '    Dim modelData = Model.GetAll(Of TM)(newSortOrderKey)
-    '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-    '        TreeViewList.Clear()
-    '    End If
-    '    For Each modData In modelData
-    '        Dim modelTb As New TM
-    '        MapObject(modData, modelTb)
-    '        TreeViewList.Add(modelTb)
-    '    Next
-    '    Return TreeViewList
-    'End Function
 
     Public Function GetTreeViewDataNew()
         Dim cModel As New TM
@@ -258,35 +220,43 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         If addMode Then
-            NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
-            retVal = NewlyAddedRecordIdNo
-            CallByName(View, "IdNo", CallType.Set, retVal)
+            retVal = AddRecord(record)
         Else
-            retVal = Model.UpdateRecord(record)
+            retVal = UpdateRecord(record)
+        End If
+        If retVal > 0 Then
+            Dim lRetVal As Integer
+            lRetVal = SaveChildren(addMode, retVal)
+            If lRetVal < 0 Then
+                retVal = lRetVal
+            End If
         End If
         Return retVal
     End Function
 
-    'Public Function IsValid(ByRef pErrorList As String) As Boolean
-    '    Dim result As Boolean
-    '    Dim record As New TM
-    '    GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-    '    result = Model.IsValid(Of TM)(record)
-    '    _errorList = Model.GetBizObjectErrors()
-    '    Return result
-    'End Function
+    Protected Overridable Function SaveChildren(addMode As Boolean, retVal As Integer) As Integer
+        For Each child In ChildPresenters
+            retVal = child.Save(addMode)
+            If retVal <= 0 Then
+                Exit For
+            End If
+        Next
+        Return retVal
+    End Function
+
+    Protected Overridable Function UpdateRecord(record As TM) As Integer
+        Return Model.UpdateRecord(record)
+    End Function
+
+    Protected Overridable Function AddRecord(record As TM) As Integer
+        Dim retVal As Integer
+        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+        retVal = NewlyAddedRecordIdNo
+        CallByName(View, "IdNo", CallType.Set, retVal)
+        Return retVal
+    End Function
 
     Private _errorList As String = ""
-
-    'Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
-    '    If additionalMessage IsNot Nothing Then
-    '        If Not errorList.Contains(additionalMessage) Then
-    '            errorList = additionalMessage + Environment.NewLine + errorList
-    '        End If
-    '    End If
-    '    System.Media.SystemSounds.Exclamation.Play()
-    '    MessageBox.Show(errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    'End Sub
 
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
         If additionalMessage IsNot Nothing Then
@@ -303,15 +273,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
-
-    'Public Function GetBizObjectErrors() As List(Of String)
-    '    Return Model.GetBizObjectErrors()
-    'End Function
-
-    'Public OverLoads Overridable Function DataIsValid()
-    '    '' override this and enter any validation rules you want to add to the presenter.
-    '    Return True
-    'End Function
 
     Public Overridable Function DataIsValid() As Boolean
         Dim retVal = False
@@ -373,14 +334,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
-    '    Try
-    '        Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-    '    Catch ex As Exception
-    '        Return Nothing
-    '    End Try
-    'End Function
-
     Public Function GetOriginalValue(ByRef control As Object) As String
         Dim retVal = ""
         Dim type As Type = OriginalModel.GetType()
@@ -406,119 +359,20 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Overridable Function ChangesMade() As Boolean
-        Return Not ObjectsCompare(OriginalModel, View)
+        Dim retVal As Boolean = False
+        If Not ObjectsCompare(OriginalModel, View) Then
+            retVal = True
+        Else
+            ' if object compare equal check the children
+            For Each child In ChildPresenters
+                If child.ChangesMade() Then
+                    retVal = True
+                    Exit For
+                End If
+            Next
+        End If
+        Return retVal
     End Function
-
-    'Public Sub MapObject(Of TS, TT)(ByRef source As TS, ByRef target As TT, Optional ByVal fieldsDictionary As Dictionary(Of String, String) = Nothing)
-    '    Dim tPropertyInfos = target.GetType().GetProperties()
-    '    Dim sPropertyInfos = source.GetType().GetProperties()
-    '    Dim comparer = StringComparer.OrdinalIgnoreCase
-    '    Dim tDictionary = New Dictionary(Of String, Int16)(comparer)
-    '    Dim sDictionary = New Dictionary(Of String, Int16)(comparer)
-    '    Dim i As Int16 = 1
-    '    For Each propertyInfo As PropertyInfo In tPropertyInfos
-    '        Dim pName = propertyInfo.Name
-    '        tDictionary.Add(pName, i)
-    '        i = i + 1
-    '    Next
-    '    i = 1
-    '    For Each propertyInfo As PropertyInfo In sPropertyInfos
-    '        Dim pName = propertyInfo.Name
-    '        sDictionary.Add(pName, i)
-    '        i = i + 1
-    '    Next
-    '    Dim sourcePropertyName As String
-    '    Dim targetPropertyName As String = ""
-    '    For Each s As PropertyInfo In sPropertyInfos
-    '        sourcePropertyName = s.Name
-    '        If fieldsDictionary IsNot Nothing Then
-    '            fieldsDictionary.TryGetValue(s.Name, targetPropertyName)
-    '            If targetPropertyName Is Nothing Then
-    '                targetPropertyName = sourcePropertyName
-    '            End If
-    '        Else
-    '            targetPropertyName = sourcePropertyName
-    '        End If
-    '        Dim iIndex As Int16
-    '        Dim t As PropertyInfo
-    '        tDictionary.TryGetValue(targetPropertyName, iIndex)
-    '        'If s.Name.ToLower() = "distributionschemeitems" Then
-    '        '    Debugger.Break()
-    '        'End If
-    '        ' the above procedure will give a iIndex of zero if "targetPropertyName" is not found
-    '        ' but 0 is also a valid return value for array
-    '        ' so to avoid this I used 1 as the base value for index and just subtract 1 when gettning the desired value
-    '        If iIndex <> 0 Then
-    '            t = tPropertyInfos(iIndex - 1)  ' subtract 1 since base value started with 1
-    '            'MessageBox.Show(t.GetIndexParameters().ToString())
-    '            'If Not TypeOf s.GetValue(source) Is ICollection Then
-    '                t.SetValue(target, s.GetValue(source))
-    '            'End If
-    '        End If
-    '    Next
-    'End Sub
-
-    'Public Sub MapObject(Of TS, TT)(ByRef source As TS, ByRef target As TT, ByVal Optional fieldsDictionary As Dictionary(Of String, String) = nothing)
-    '    Dim tPropertyInfos = target.GetType().GetProperties()
-    '    Dim comparer = StringComparer.OrdinalIgnoreCase
-    '    Dim tDictionary = New Dictionary(Of String, Int16)(comparer)
-    '    Dim i As Int16 = 0
-    '    For Each propertyInfo As PropertyInfo In tPropertyInfos
-    '        Dim pName = propertyInfo.Name
-    '        tDictionary.Add(pName, i)
-    '        i = i + 1
-    '    Next
-    '    If source IsNot Nothing Then
-    '        Dim sPropertyInfos = source.GetType().GetProperties()
-    '        Dim sDictionary = New Dictionary(Of String, Int16)(comparer)
-    '        i = 0
-    '        For Each propertyInfo As PropertyInfo In sPropertyInfos
-    '            Dim pName = propertyInfo.Name
-    '            sDictionary.Add(pName, i)
-    '            i = i + 1
-    '        Next
-    '        Dim propertyName As String
-    '        Dim j As Int16 = 0
-    '        For Each s As PropertyInfo In sPropertyInfos
-    '            propertyName = s.Name
-    '            If tDictionary.ContainsKey(propertyName) Then
-    '                Dim x = tDictionary(propertyName)
-    '                Dim t = tPropertyInfos(x)
-    '                t.SetValue(target, s.GetValue(source))
-    '            End If
-    '            'For Each s As PropertyInfo In source.GetType().GetProperties()
-    '            '    If propertyInfo.Name.ToLower().Trim() = s.Name.ToLower().Trim() Then
-    '            '        If propertyInfo.CanWrite Then
-    '            '            'If propertyInfo.Name.ToLower() = "MessageKey" Then
-    '            '            '    Debugger.Break()
-    '            '            'END IF
-    '            '            If Not TypeOf s.GetValue(source) Is ICollection Then
-    '            '                propertyInfo.SetValue(target, s.GetValue(source))
-    '            '            End If
-    '            '        End If
-    '            '        Exit For
-    '            '    End If
-    '            'Next
-    '        Next
-
-    '        'Dim propertyInfos = target.GetType().GetProperties()
-    '        'For Each propertyInfo As PropertyInfo In propertyInfos
-    '        '    For Each s As PropertyInfo In source.GetType().GetProperties()
-    '        '        If propertyInfo.Name.ToLower().Trim() = s.Name.ToLower().Trim() Then
-    '        '            If propertyInfo.CanWrite Then
-    '        '                'If propertyInfo.Name.ToLower() = "MessageKey" Then
-    '        '                '    Debugger.Break()
-    '        '                'END IF
-    '        '                If Not TypeOf s.GetValue(source) Is ICollection Then
-    '        '                    propertyInfo.SetValue(target, s.GetValue(source))
-    '        '                End If
-    '        '            End If
-    '        '            Exit For
-    '        '        End If
-    '        '    Next
-    '        'Next
-    '    End If
-    'End Sub
 
     Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
@@ -632,21 +486,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Next
         Return dataList
     End Function
-
-    'Public Sub MakeEnumList(Of TE)(ByRef tcbComboBox As TxtComboBox)
-    '    EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-    '    'Dim enumValues = [Enum].GetValues(GetType(TE))
-    '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData
-    '        data.IdNo = CInt(c)
-    '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-    '        dataList.Add(data)
-    '    Next
-    '    tcbComboBox.ValueMember = "IDNo"
-    '    tcbComboBox.DisplayMember = "Name"
-    '    tcbComboBox.DataSource = dataList
-    'End Sub
 
     Public Function MakeEnumComboList(Of TE)()
         If EnumConverter Is Nothing Then
