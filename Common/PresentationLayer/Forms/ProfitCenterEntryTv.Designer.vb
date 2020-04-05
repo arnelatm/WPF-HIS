@@ -288,6 +288,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
         Me.cacParentIdNo.DropDownHeight = 200
+        Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = false
         Me.cacParentIdNo.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, true)
@@ -340,6 +341,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterType.DefaultValue = Nothing
         Me.cacProfitCenterType.DisplayMember = "Name"
         Me.cacProfitCenterType.DropDownHeight = 200
+        Me.cacProfitCenterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacProfitCenterType.EditingMode = false
         Me.cacProfitCenterType.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacProfitCenterType, true)

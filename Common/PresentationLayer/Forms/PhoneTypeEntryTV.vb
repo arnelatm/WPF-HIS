@@ -19,18 +19,10 @@ Namespace PresentationLayer.Forms
             FirstControl = txtPhoneTypeCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PhoneTypePresenter(Me)
-            '_PhoneTypeesPresenter = New PhoneTypesPresenter(Me)
-            'CreateEnumResourceFile()
 
-            'ResourceEnumConverter.MakeResource("PhoneTypeTypeSelection", GetType(PhoneTypeTypeSelection))
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("PhoneTypeTypeSelection", GetType(PhoneTypeTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
+#Region "Fields"
         Public Property IDNo As Integer Implements IPhoneTypeView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -76,13 +68,8 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtPhoneTypeCode, "PhoneType Code")
-            MyErrorProvider.Controls.AddMandatory(txtPhoneTypeName, "PhoneType Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
+#End Region
+
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

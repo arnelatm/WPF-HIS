@@ -23,21 +23,6 @@ Namespace PresentationLayer.Presenters
             ParentViewList = New List(Of DepartmentModel)
         End Sub
 
-        'Public Function GetDepartmentList(Optional ByVal sortKey As String = "") As List(Of DepartmentModel)
-        '    Dim xModel As New DepartmentModel
-        '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepartmentModel)(sortKey, xModel)
-        '    Dim modelData = Model.GetAll(Of DepartmentModel)(newSortOrderKey)
-        '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-        '        TreeViewList.Clear()
-        '    End If
-        '    For Each modData In modelData
-        '        Dim modelTb As New DepartmentModel
-        '        MapObject(modData, modelTb)
-        '        TreeViewList.Add(modelTb)
-        '    Next
-        '    Return TreeViewList
-        'End Function
-
         Public Function GetParentList() As List(Of DepartmentModel)
             Dim xModel As New DepartmentModel
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepartmentModel)(SortOrderKey, xModel)

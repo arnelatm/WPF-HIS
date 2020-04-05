@@ -118,12 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 57</value>
+  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 184</value>
+    <value>300, 188</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -160,7 +169,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 11</value>
+    <value>11, 11</value>
   </data>
   <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -193,7 +202,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 36</value>
+    <value>11, 36</value>
   </data>
   <data name="lblBranchCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -226,7 +235,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 36</value>
+    <value>168, 36</value>
   </data>
   <data name="txtBranchCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -253,7 +262,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 61</value>
+    <value>11, 61</value>
   </data>
   <data name="lblBranchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -286,7 +295,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 61</value>
+    <value>168, 61</value>
   </data>
   <data name="txtBranchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -313,7 +322,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 86</value>
+    <value>11, 86</value>
   </data>
   <data name="lblBranchNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -346,7 +355,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 86</value>
+    <value>168, 86</value>
   </data>
   <data name="txtBranchNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -376,7 +385,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 111</value>
+    <value>11, 111</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -409,7 +418,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 111</value>
+    <value>168, 111</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -436,19 +445,19 @@
     <value>9</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+    <value>Left</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 57</value>
+    <value>300, 57</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>596, 180</value>
   </data>
   <data name="floDataDisplay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 10, 0, 0</value>
+    <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 188</value>
+    <value>605, 188</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -469,7 +478,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 11</value>
+    <value>168, 11</value>
   </data>
   <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

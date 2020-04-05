@@ -39,5 +39,7 @@ Public Class OneTimeRun
         ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))
         ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
         ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
+        ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
+
     End Sub
 End Class

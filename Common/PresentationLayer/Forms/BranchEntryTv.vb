@@ -22,6 +22,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
+#Region "Fields"
         Public Property IDNo As Integer Implements IBranchView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -66,6 +67,7 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+#End Region
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

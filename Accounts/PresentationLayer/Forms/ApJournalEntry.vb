@@ -56,6 +56,8 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
+#Region "Fields"
+
         Public Property AccountIdNo As Integer Implements IApJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
@@ -277,6 +279,7 @@ Namespace PresentationLayer.Forms
                 txtVatNumber.Text = Value
             End Set
         End Property
+#End Region
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             If IsEmpty(ReferenceNo) Then

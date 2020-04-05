@@ -22,28 +22,9 @@ Namespace PresentationLayer.Forms
             'Dim model = New ProfitCenterModel
             PresenterObj = New ProfitCenterPresenter(Me)
 
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            CreateDataSources()
-
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("ProfitCenterTypeSelection", GetType(ProfitCenterTypeSelection))
         End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("ProfitCenterTypeSelection", GetType(ProfitCenterTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetProfitCenterList()
-            cacProfitCenterType.DataSource = PresenterObj.MakeEnumComboList(Of ProfitCenterTypeSelection)
-        End Sub
-
-        Private Shadows Sub OnTextDisplayLanguageChanged()
-            CreateDataSources()
-        End Sub
-
+        
+#Region "Fields"        
         Public Property IDNo As Integer Implements IProfitCenterView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -116,12 +97,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        'Public WriteOnly Property ProfitCentersParent As IList(Of ProfitCenterModel)
-        '    Set(value As IList(Of ProfitCenterModel))
-        '        _profitCentersList = value
-        '    End Set
-        'End Property
-
         Public Property LevelNumber As Int16 Implements IProfitCenterView.LevelNumber
             Get
                 Return GlobalFunctions.NumParser(Of Int16)(TxtIDNo.Text)
@@ -131,25 +106,25 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtProfitCenterCode, "ProfitCenter Code")
-            MyErrorProvider.Controls.AddMandatory(txtProfitCenterName, "ProfitCenter Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If EditMode And cacParentIdNo.GetValue() = NumParser(Of Int16)(TxtIDNo.Text) Then
-                _MBProfitCenterCannotBeParentToItself.Show(Me)
-                CancelSave = True
-                Exit Sub
-            End If
-        End Sub
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
+#End Region
+        Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetProfitCenterList()
-            cacParentIdNo.Refresh()
+            cacProfitCenterType.DataSource = PresenterObj.MakeEnumComboList(Of ProfitCenterTypeSelection)
+        End Sub
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IDNo", TxtIDNo},
+                {"LevelNumber", txtLevelNumber},
+                {"Notes", txtNotes},
+                {"ParentIdNo", cacParentIdNo},
+                {"ProfitCenterCode", txtProfitCenterCode},
+                {"ProfitCenterName", txtProfitCenterName},
+                {"ProfitCenterNameAra", txtProfitCenterNameAra},
+                {"ProfitCenterType", cacProfitCenterType},
+                {"SortKey", txtSortKey}
+                }
         End Sub
 
     End Class
