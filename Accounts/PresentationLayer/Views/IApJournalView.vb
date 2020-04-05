@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
@@ -25,7 +26,7 @@ Namespace PresentationLayer.Views
         Property TransactionType As String
         Property VatAmount As Decimal
         Property VatNumber As String
-
+        Property JournalItems As IList(Of IJournalItemView)
     End Interface
 
 End Namespace

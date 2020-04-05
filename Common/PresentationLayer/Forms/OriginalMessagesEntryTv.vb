@@ -22,15 +22,6 @@ Namespace PresentationLayer.Forms
 
             PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
             PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
-            'CreateEnumResourceFile()
-
-            'ResourceEnumConverter.MakeResource("OriginalMessagesTypeSelection", GetType(OriginalMessagesTypeSelection))
-        End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("OriginalMessagesTypeSelection", GetType(OriginalMessagesTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
 #Region "OriginalMessageFields"
@@ -131,17 +122,6 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
-
-        'Protected Overrides Function ChangesMade()
-        '    If PresenterObj.ChangesMade() Then
-        '        Return True
-        '    End If
-        '    Return PresenterObj.TranslatedMessagesPresenter.ChangesMade()
-        'End Function
-
-        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-        '    PresenterObj.TranslatedMessagesPresenter.Save(AddMode)
-        'End Sub
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()

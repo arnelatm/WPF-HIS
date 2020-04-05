@@ -20,19 +20,19 @@ Namespace PresentationLayer.Presenters
 
         Public Property JournalItemsPresenter As ApJournalItemsPresenter
 
-        Public Overrides Function ChangesMade() As Boolean
-            Dim apJournalChangesMade As Boolean
-            If ObjectsCompare(OriginalModel, View) Then
-                If JournalItemsPresenter.ChangesMadeInJournalItem Then
-                    apJournalChangesMade = True
-                Else
-                    apJournalChangesMade = False
-                End If
-            Else
-                apJournalChangesMade = True
-            End If
-            Return apJournalChangesMade
-        End Function
+        'Public Overrides Function ChangesMade() As Boolean
+        '    Dim apJournalChangesMade As Boolean
+        '    If ObjectsCompare(OriginalModel, View) Then
+        '        If JournalItemsPresenter.ChangesMadeInJournalItem Then
+        '            apJournalChangesMade = True
+        '        Else
+        '            apJournalChangesMade = False
+        '        End If
+        '    Else
+        '        apJournalChangesMade = True
+        '    End If
+        '    Return apJournalChangesMade
+        'End Function
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String

@@ -9,6 +9,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Model and View classes.
@@ -358,17 +359,30 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function ChangesMade() As Boolean
         Dim retVal As Boolean = False
-        If Not ObjectsCompare(OriginalModel, View) Then
-            retVal = True
-        Else
-            ' if object compare equal check the children
-            For Each child In ChildPresenters
-                If child.ChangesMade() Then
-                    retVal = True
-                    Exit For
-                End If
-            Next
+        Dim compareLogic As New CompareLogic()
+        compareLogic.Config.IgnoreObjectTypes = true
+        compareLogic.Config.MaxDifferences = 100
+        compareLogic.Config.MembersToIgnore.Add("TotalCredits")
+        compareLogic.Config.MembersToIgnore.Add("TotalDebits")
+        Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
+
+
+        'These will be different, write out the differences
+        If Not result.AreEqual Then
+            Messaging.Show(result.DifferencesString,"Differences")
         End If
+
+        'If Not ObjectsCompare(OriginalModel, View) Then
+        '    retVal = True
+        'Else
+        '    ' if object compare equal check the children
+        '    For Each child In ChildPresenters
+        '        If child.ChangesMade() Then
+        '            retVal = True
+        '            Exit For
+        '        End If
+        '    Next
+        'End If
         Return retVal
     End Function
 
