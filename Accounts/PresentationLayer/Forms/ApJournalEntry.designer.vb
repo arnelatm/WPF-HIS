@@ -599,7 +599,6 @@ Namespace PresentationLayer.Forms
         '
         'cboSupplierIdNo
         '
-        Me.cboSupplierIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboSupplierIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboSupplierIdNo.BackColor = System.Drawing.Color.White
         Me.cboSupplierIdNo.ChangingSearchValueOnly = false
@@ -607,6 +606,7 @@ Namespace PresentationLayer.Forms
         Me.cboSupplierIdNo.DefaultValue = Nothing
         Me.cboSupplierIdNo.DisplayMember = "Name"
         Me.cboSupplierIdNo.DropDownHeight = 200
+        Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSupplierIdNo.EditingMode = false
         Me.cboSupplierIdNo.FilterRule = Nothing
         Me.cboSupplierIdNo.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -654,7 +654,6 @@ Namespace PresentationLayer.Forms
         '
         'cboTransactionType
         '
-        Me.cboTransactionType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboTransactionType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboTransactionType.BackColor = System.Drawing.Color.White
         Me.cboTransactionType.ChangingSearchValueOnly = false
@@ -662,6 +661,7 @@ Namespace PresentationLayer.Forms
         Me.cboTransactionType.DefaultValue = "0"
         Me.cboTransactionType.DisplayMember = "Name"
         Me.cboTransactionType.DropDownHeight = 200
+        Me.cboTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTransactionType.EditingMode = false
         Me.cboTransactionType.FilterRule = Nothing
         Me.cboTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
@@ -853,7 +853,6 @@ Namespace PresentationLayer.Forms
         '
         'cboAccountIdNo
         '
-        Me.cboAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
@@ -861,6 +860,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.CFlowLayout3.SetFlowBreak(Me.cboAccountIdNo, true)

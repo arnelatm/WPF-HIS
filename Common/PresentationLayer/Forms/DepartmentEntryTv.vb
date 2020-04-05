@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -22,34 +23,16 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DepartmentPresenter(Me)
 
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            CreateDataSources()
-            'CreateEnumResourceFile()
-
-            'ResourceEnumConverter.MakeResource("DepartmentTypeSelection", GetType(DepartmentTypeSelection))
-
-        End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("DepartmentTypeSelection", GetType(DepartmentTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            UpdateParentIdData()
+            cacParentIdNo.DataSource = PresenterObj.GetDepartmentList()
             cacProfitCenterIDNo.DataSource = PresenterObj.GetProfitCenterList()
             cacCostCenterIDNo.DataSource = PresenterObj.GetCostCenterList()
         End Sub
 
-        Private Shadows Sub OnTextDisplayLanguageChanged()
-            CreateDataSources()
-        End Sub
-
-        Private Sub UpdateParentIdData()
-            cacParentIdNo.DataSource = PresenterObj.GetDepartmentList()
-        End Sub
-
+       
+#Region "Fields"
         Public Property IDNo As Integer Implements IDepartmentView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -77,26 +60,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-                CancelSave = True
-                Exit Sub
-            End If
-            'If EditMode then
-            '    Dim cOldParentId As String = PresenterObj.GetOriginalValue(tcbParentIdNo)
-            '    If cOldParentId <> tcbParentIdNo.Text Then
-            '        ' ParentID is changed by the user so
-            '        ' check for records which have this record as parent.
-            '        ' check for matching children entries
-            '        If CommonDaoOld.CountRecordWithKey(TxtIDNo.Text, MainTableName, "ParentIdNo") > 0 Then
-            '            _MBParentWithChildrenChangedDisallowed.Show(Me)
-            '            CancelSave = True
-            '            Exit Sub
-            '        End If
-            '    End If
-            'End If
-        End Sub
 
         Public Property DepartmentName As String Implements IDepartmentView.DepartmentName
             Get
@@ -151,19 +114,7 @@ Namespace PresentationLayer.Forms
                 txtSortKey.Text = Value
             End Set
         End Property
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            UpdateParentIdData()
-            cacParentIdNo.Refresh()
-        End Sub
-
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtDepartmentCode, "Department Code")
-            MyErrorProvider.Controls.AddMandatory(txtDepartmentName, "Department Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
+#End Region
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

@@ -19,30 +19,11 @@ Namespace PresentationLayer.Forms
             ParentFieldName = "ParentIdNo"
             FirstControl = txtRevenueGroupCode
             ' Add any initialization after the InitializeComponent() call.
-            'Dim model = New RevenueGroupModel
             PresenterObj = New RevenueGroupPresenter(Me)
 
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            CreateDataSources()
-
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("RevenueGroupTypeSelection", GetType(RevenueGroupTypeSelection))
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("RevenueGroupTypeSelection", GetType(RevenueGroupTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetRevenueGroupList()
-        End Sub
-
-        Private Shadows Sub OnTextDisplayLanguageChanged()
-            CreateDataSources()
-        End Sub
-
+#Region "Fields"
         Public Property IDNo As Integer Implements IRevenueGroupView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -106,12 +87,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        'Public WriteOnly Property RevenueGroupsParent As IList(Of RevenueGroupModel)
-        '    Set(value As IList(Of RevenueGroupModel))
-        '        _RevenueGroupsList = value
-        '    End Set
-        'End Property
-
         Public Property LevelNumber As Int16 Implements IRevenueGroupView.LevelNumber
             Get
                 Return GlobalFunctions.NumParser(Of Int16)(TxtIDNo.Text)
@@ -120,32 +95,24 @@ Namespace PresentationLayer.Forms
                 txtLevelNumber.Text = value
             End Set
         End Property
-
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtRevenueGroupCode, "RevenueGroup Code")
-            MyErrorProvider.Controls.AddMandatory(txtRevenueGroupName, "RevenueGroup Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+#End Region
+        Protected Overrides Sub CreateDataSources()
+            cacParentIdNo.DataSource = PresenterObj.GetProfitCenterList()
         End Sub
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If EditMode And cacParentIdNo.GetValue() = NumParser(Of Int16)(TxtIDNo.Text) Then
-                _MBRevenueGroupCannotBeParentToItself.Show(Me)
-                CancelSave = True
-                Exit Sub
-            End If
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IDNo", TxtIDNo},
+                {"LevelNumber", txtLevelNumber},
+                {"Notes", txtNotes},
+                {"ParentIdNo", cacParentIdNo},
+                {"RevenueGroupCode", txtRevenueGroupCode},
+                {"RevenueGroupName", txtRevenueGroupName},
+                {"RevenueGroupNameAra", txtRevenueGroupNameAra},
+                {"SortKey", txtSortKey}
+                }
         End Sub
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            cacParentIdNo.DataSource = PresenterObj.GetRevenueGroupList()
-            cacParentIdNo.Refresh()
-        End Sub
-
-        Private Sub RevenueGroupEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        End Sub
-
     End Class
 
 End Namespace

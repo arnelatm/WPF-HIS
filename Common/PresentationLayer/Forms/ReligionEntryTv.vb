@@ -18,20 +18,11 @@ Namespace PresentationLayer.Forms
             SortOrderKey = "ReligionName"
             FirstControl = txtReligionCode
             ' Add any initialization after the InitializeComponent() call.
-            'Dim model = New ReligionModel
             PresenterObj = New ReligionPresenter(Me)
-            '_ReligionsPresenter = New ReligionsPresenter(Me)
-            'CreateEnumResourceFile()
 
-            'ResourceEnumConverter.MakeResource("ReligionTypeSelection", GetType(ReligionTypeSelection))
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("ReligionTypeSelection", GetType(ReligionTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
+#Region "Fields"
         Public Property IDNo As Integer Implements IReligionView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -77,17 +68,20 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtReligionCode, "Religion Code")
-            MyErrorProvider.Controls.AddMandatory(txtReligionName, "Religion Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+#End Region
+
+        
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"ReligionCode", txtReligionCode},
+                {"ReligionName", txtReligionName},
+                {"ReligionNameAra", txtReligionNameAra},
+                {"IDNo", TxtIDNo},
+                {"Notes", txtNotes}
+                }
         End Sub
 
-        Private Sub CFlowLayout1_Paint(sender As Object, e As PaintEventArgs) Handles CFlowLayout1.Paint
-
-        End Sub
     End Class
 
 End Namespace
