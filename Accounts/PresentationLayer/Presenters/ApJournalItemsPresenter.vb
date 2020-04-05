@@ -15,6 +15,7 @@ Namespace PresentationLayer.Presenters
             ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
+            OriginalModel =  New List(Of JournalItemModel())
             DataModel = New JournalItemModel
         End Sub
 

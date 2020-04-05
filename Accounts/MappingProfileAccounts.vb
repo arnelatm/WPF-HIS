@@ -69,6 +69,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of SalesJournalModel, ISalesJournalView)().ReverseMap()
         CreateMap(Of Supplier, SupplierModel)().ReverseMap()
         CreateMap(Of SupplierModel, ISupplierView)().ReverseMap()
+        'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()
+        'CreateMap(Of List(Of JournalItemModel), IJournalItemsView)().ReverseMap()
+
     End Sub
 
     'Public Interface IValueResolver(Of In TSource, In TDestination, TDestMember)

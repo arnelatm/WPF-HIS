@@ -6,18 +6,18 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Accounts.BusinessLayer
 
 Namespace PresentationLayer.Forms
 
     Public Class ApJournalEntry
-        Implements IApJournalView, IJournalItemsView
+        Implements IApJournalView ', IJournalItemsView
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _journalItemsPresenter As ApJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
-        Private _journalItems As List(Of JournalItemModel)
+        Private _journalItems As IList(Of IJournalItemView)
         Private _profitCentersByCode
 
         Public Sub New()
@@ -32,11 +32,11 @@ Namespace PresentationLayer.Forms
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New ApJournalPresenter(Me)
+            JournalItems = New List(Of IJournalItemView)
 
-            _journalItemsPresenter = New ApJournalItemsPresenter(Me)
-
-            PresenterObj.JournalItemsPresenter = _journalItemsPresenter
-
+            'PresenterObj.JournalItemsPresenter = New ApJournalItemsPresenter(Me)
+            'PresenterObj.AddChildPresenter(PresenterObj.JournalItemsPresenter)
+            
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property JournalItems As IList(Of JournalItemModel) Implements IJournalItemsView.JournalItems
+        Private Property JournalItems As IList(Of IJournalItemView) Implements IApJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -279,6 +279,7 @@ Namespace PresentationLayer.Forms
                 txtVatNumber.Text = Value
             End Set
         End Property
+
 #End Region
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
@@ -286,7 +287,7 @@ Namespace PresentationLayer.Forms
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If AddMode Then
-                BtnLast.PerformClick()
+                GoLastRecord()
             End If
         End Sub
 
@@ -312,7 +313,6 @@ Namespace PresentationLayer.Forms
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If AddMode Then
                 txtJournalCode.Text = AccountStrings.ApJournalPrefix
-
             End If
             If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
                 If Messaging.Show(True, "AskIfSaveEmptyJournal",
@@ -340,8 +340,7 @@ Namespace PresentationLayer.Forms
             End If
             Dim oldJournalItem As List(Of JournalItemModel)
             If Not AddMode Then
-                'oldJournalItem = _journalItemsPresenter.GetRecordsWithIdNo(IdNo)
-                oldJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+                oldJournalItem = PresenterObj.JournalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
             Else
                 oldJournalItem = Nothing
             End If
@@ -368,17 +367,17 @@ Namespace PresentationLayer.Forms
                 End If
                 nRowCount = nRowCount + 1
             Next
-            _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
+            PresenterObj.JournalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
             Dim newJournalItem As List(Of JournalItemModel)
             If AddMode Then
-                newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+                newJournalItem = PresenterObj.JournalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
                 For Each item In newJournalItem
-                    If _journalItemsPresenter.IsAccountsPayableAccount(item.AccountIdNo) Then
+                    If PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(item.AccountIdNo) Then
                         PresenterObj.AddApOpenInvoice(item, "AP")
                     End If
                 Next
             Else
-                newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+                newJournalItem = PresenterObj.JournalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
                 Dim newItem
                 Dim oldItem
                 Dim newIsAp
@@ -386,7 +385,7 @@ Namespace PresentationLayer.Forms
                 For Each oldItem In oldJournalItem
                     ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
                     ' so no problem on deletion
-                    oldIsAp = _journalItemsPresenter.IsAccountsPayableAccount(oldItem.AccountIdNo)
+                    oldIsAp = PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(oldItem.AccountIdNo)
                     If oldIsAp Then
                         ' this item is AP
                         newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
@@ -395,7 +394,7 @@ Namespace PresentationLayer.Forms
                             PresenterObj.DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
                         Else
                             ' item is found
-                            newIsAp = _journalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
+                            newIsAp = PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
                             If newIsAp Then
                                 ' nothing to do
                             Else
@@ -410,7 +409,7 @@ Namespace PresentationLayer.Forms
                             ' item is deleted just ignore Non-AP
                         Else
                             ' old item still in new
-                            newIsAp = _journalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
+                            newIsAp = PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
                             If newIsAp Then
                                 PresenterObj.AddApOpenInvoice(newItem, "AP")
                             Else
@@ -421,7 +420,7 @@ Namespace PresentationLayer.Forms
                     End If
                 Next
                 For Each newItem In newJournalItem
-                    newIsAp = _journalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
+                    newIsAp = PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(newItem.AccountIdNo)
                     oldItem = oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo)
                     If oldItem Is Nothing Then
                         ' this item is new
@@ -450,8 +449,6 @@ Namespace PresentationLayer.Forms
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable))
             cboAccountIdNo.EndUpdate()
-            'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -479,17 +476,9 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Function DataIsValid() As Boolean
-            Dim retValue As Boolean = False
-            If MyBase.DataIsValid() Then
-                retValue = _journalItemsPresenter.DataIsValid(JournalItems)
-            End If
-            Return retValue
-        End Function
-
         Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
             MyBase.DisplayView(idNoOfRecord)
-            _journalItemsPresenter.Display(idNoOfRecord)
+            'PresenterObj.JournalItemsPresenter.Display(idNoOfRecord)
             TotalDebits = 0
             TotalCredits = 0
             For Each item In bsJournalItems
@@ -505,12 +494,6 @@ Namespace PresentationLayer.Forms
             End If
             Return MyBase.ProcessCmdKey(msg, keyData)
         End Function
-
-        Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
-            'JournalItems = New List(Of JournalItemModel)
-            'BindJournalItem()
-        End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
@@ -570,7 +553,7 @@ Namespace PresentationLayer.Forms
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
-                        _journalItemsPresenter.ChangesMadeInJournalItem = True
+                        PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If EditMode OrElse AddMode Then
                             If .RowIndex() = 0 Then
                                 Messaging.Show(True,"MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
@@ -578,7 +561,7 @@ Namespace PresentationLayer.Forms
                             Else
                                 Dim newRow As New JournalItemModel
                                 bsJournalItems.Insert(.RowIndex(), newRow)
-                                _journalItemsPresenter.ChangesMadeInJournalItem = True
+                                PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                                 ReSequenceDgvAfterInsert()
                                 SendKeys.Send("{UP}")
                             End If
@@ -590,9 +573,9 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub DataGridViewJournalItems_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewJournalItems.ChangesMade
-            _journalItemsPresenter.ChangesMadeInJournalItem = True
-        End Sub
+        'Private Sub DataGridViewJournalItems_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewJournalItems.ChangesMade
+        '    PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
+        'End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             ReSequenceDgvAfterDelete()
@@ -641,7 +624,7 @@ Namespace PresentationLayer.Forms
                                 selectedRow.Debit = 0
                             End If
                         End If
-                        If _journalItemsPresenter.IsInputVatAccount(selectedRow.AccountIdNo) Then
+                        If PresenterObj.JournalItemsPresenter.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
                         End If
                         UpdateTotals()
@@ -662,7 +645,7 @@ Namespace PresentationLayer.Forms
                             End If
                             DataGridViewJournalItems.Refresh()
                         End If
-                        If _journalItemsPresenter.IsInputVatAccount(selectedRow.AccountIdNo) Then
+                        If PresenterObj.JournalItemsPresenter.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
                         End If
                         UpdateTotals()
@@ -673,7 +656,7 @@ Namespace PresentationLayer.Forms
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.GetValue()
                         With DataGridViewJournalItems.CurrentRow
                             Dim currentVatAmount As Decimal
-                            If _journalItemsPresenter.IsInputVatAccount(newValue) Then
+                            If PresenterObj.JournalItemsPresenter.IsInputVatAccount(newValue) Then
                                 currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
                             Else
                                 currentVatAmount = 0
@@ -694,16 +677,16 @@ Namespace PresentationLayer.Forms
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
             DataGridViewJournalItems.StartTrackingChanges = False
             DataGridViewJournalItems.RemoveInsertColumn()
-            _journalItemsPresenter.ChangesMadeInJournalItem = False
+            'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
-            DataGridViewJournalItems.StartTrackingChanges = True
-            DataGridViewJournalItems.AddInsertColumn()
-            UpdateRowVatAmounts()
-            UpdateTotalVatAmount()
-            _journalItemsPresenter.ChangesMadeInJournalItem = False
-        End Sub
+        'Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+        '    DataGridViewJournalItems.StartTrackingChanges = True
+        '    DataGridViewJournalItems.AddInsertColumn()
+        '    UpdateRowVatAmounts()
+        '    UpdateTotalVatAmount()
+        '    PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
+        'End Sub
 
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
             UpdateDueDate()
@@ -800,13 +783,13 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateRowVatAmounts()
             Dim vatAmt As Integer
             For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If _journalItemsPresenter.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
+                If PresenterObj.JournalItemsPresenter.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
                     vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
                     glRow.Cells("ItemVatAmount").Value = vatAmt
                 End If
             Next
         End Sub
-
+  
         Private Sub UpdateTotals()
             TotalDebits = 0
             TotalCredits = 0
