@@ -223,13 +223,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Else
             retVal = UpdateRecord(record)
         End If
-        If retVal > 0 Then
-            Dim lRetVal As Integer
-            lRetVal = SaveChildren(addMode, retVal)
-            If lRetVal < 0 Then
-                retVal = lRetVal
-            End If
-        End If
+        'If retVal > 0 Then
+        '    Dim lRetVal As Integer
+        '    lRetVal = SaveChildren(addMode, retVal)
+        '    If lRetVal < 0 Then
+        '        retVal = lRetVal
+        '    End If
+        'End If
         Return retVal
     End Function
 
@@ -362,27 +362,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim compareLogic As New CompareLogic()
         compareLogic.Config.IgnoreObjectTypes = true
         compareLogic.Config.MaxDifferences = 100
-        compareLogic.Config.MembersToIgnore.Add("TotalCredits")
-        compareLogic.Config.MembersToIgnore.Add("TotalDebits")
+        compareLogic.Config.CompareChildren  = true
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
-
-
-        'These will be different, write out the differences
         If Not result.AreEqual Then
             Messaging.Show(result.DifferencesString,"Differences")
+            retVal = True
         End If
-
-        'If Not ObjectsCompare(OriginalModel, View) Then
-        '    retVal = True
-        'Else
-        '    ' if object compare equal check the children
-        '    For Each child In ChildPresenters
-        '        If child.ChangesMade() Then
-        '            retVal = True
-        '            Exit For
-        '        End If
-        '    Next
-        'End If
         Return retVal
     End Function
 

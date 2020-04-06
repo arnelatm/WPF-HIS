@@ -34,6 +34,7 @@ Public Class EventAggregator
 
     Public Sub SubscribeEvent(ByVal subscriber As Object) Implements IEventAggregator.SubscribeEvent
         SyncLock _lockSubscriberDictionary
+' ReSharper disable once VBPossibleMistakenCallToGetType.2
             Dim subscriberTypes = subscriber.[GetType]().GetInterfaces().Where(Function(i) i.IsGenericType AndAlso i.GetGenericTypeDefinition() = GetType(ISubscriber(Of)))
             Dim weakReference As WeakReference = New WeakReference(subscriber)
 

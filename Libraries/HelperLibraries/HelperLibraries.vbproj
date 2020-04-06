@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="BackgroundWorker.vb" />
     <Compile Include="ClassesLibrary.vb" />
+    <Compile Include="Consultant.vb" />
     <Compile Include="Delegates.vb" />
     <Compile Include="DownloadForm.vb">
       <SubType>Form</SubType>

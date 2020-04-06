@@ -366,12 +366,18 @@ Public Class CFormEntry
         button.Visible = False
     End Sub
 
+    Public Event NewUserRequested As EventHandler
+
+    Protected Overridable Sub OnNewUserRequested(sender, eventArgs)
+        RaiseEvent NewUserRequested(sender, eventArgs)
+    End Sub
+
     Public Sub Save()
         If _debugSwitch Then
             Debugger.Break()
         End If
         If OkToSaveRecord() Then
-            RaiseEvent BeforeSave()
+            GlobalVariables.EventAggregator.PublishEvent(Of EventHandler)(NewUserRequestedEvent)
             Dim retValue As Short
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
@@ -651,10 +657,10 @@ Public Class CFormEntry
                 Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
                 Return False
             Else
-                If Not ChangesMade() Then
-                    _MBNoChangesMadeNothingToSave.Show(Me)
-                    Return False
-                End If
+                'If Not ChangesMade() Then
+                '    _MBNoChangesMadeNothingToSave.Show(Me)
+                '    Return False
+                'End If
             End If
         End If
         If DataIsValid() Then
@@ -879,8 +885,8 @@ Public Class CFormEntry
             Else
                 Beep()
             End If
-        'Else
-        '    e.Handled = False
+            'Else
+            '    e.Handled = False
         End If
     End Sub
 
@@ -1291,7 +1297,7 @@ Public Class CFormEntry
     End Function
 
     Private Sub MakeDefaultValues()
-        'Dim allCtrl As New List(Of Control)
+        'Dim allCtrl As New List(Of Control)be
         'Dim initValue = ""
         PresenterObj.MakeDefaultValues()
     End Sub
@@ -1482,3 +1488,14 @@ Public Class CFormEntry
     End Sub
 
 End Class
+Public Class Item
+    Public Property ItemNumber As Integer
+    Public Property ItemDescription As String
+End Class
+
+
+Public Class ItemCreated
+    Public Property Item As Item
+
+End Class
+
