@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
+Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -55,6 +56,7 @@ Namespace PresentationLayer.Forms
                 SetLanguageChangeButtons()
             End If
             SetupMapper()
+            GlobalVariables.EventAggregator = New EventAggregator
             'CreateEnums()
             '' Disable logout
             'Me.toolStripButtonLogout.Enabled = False
