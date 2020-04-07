@@ -635,7 +635,7 @@ Namespace PresentationLayer.Forms
                     _totalBalance += item.Balance
                 Next
             End If
-            'PresenterObj.Display(TargetIdNo)
+            'PresenterObj.Display(PresenterObj.TargetIdNo)
         End Sub
 
         Private Function TotalBalance() As Decimal
@@ -1027,7 +1027,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-            Dim cPayorType = PresenterObj.GetReceiptType(TargetIdNo)
+            Dim cPayorType = PresenterObj.GetReceiptType(PresenterObj.TargetIdNo)
             SetPayorProperty(cPayorType)
         End Sub
 

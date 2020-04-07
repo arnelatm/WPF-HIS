@@ -43,15 +43,16 @@ Public Class CFormEntryTv
             Dim nTag As Integer
             TreeViewTableName.ImageIndex = 1
             If TreeViewTableName.SelectedNode.Tag.ToString = "root" Then
-                RecordPositionNumber = 1
+                PresenterObj.RecordPositionNumber = 1
             Else
                 nTag = TreeViewTableName.SelectedNode.Tag
-                TargetIdNo = nTag
-                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+                PresenterObj.TargetIdNo = nTag
+                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
             End If
 
-            TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-            DisplayView(TargetIdNo)
+            PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+            PresenterObj.displ(PresenterObj.TargetIdNo)
+            GotoRecordInTreeView()
             If Not TreeViewTableName.SelectedNode.IsVisible Then
                 TreeViewTableName.SelectedNode.EnsureVisible()
             End If
@@ -64,7 +65,7 @@ Public Class CFormEntryTv
     End Sub
 
     Private Sub GotoRecordInTreeView()
-        Dim found As TreeNode() = TreeViewTableName.Nodes.Find(TargetIdNo, True)
+        Dim found As TreeNode() = TreeViewTableName.Nodes.Find(PresenterObj.TargetIdNo, True)
         If found.Length <> 0 Then
             With TreeViewTableName
                 _bypassSelectedChange = True
@@ -147,8 +148,8 @@ Public Class CFormEntryTv
             }
     End Function
 
-    'Protected Overrides Sub GotoTargetIdNo()
-    '    MyBase.GotoTargetIDNo()
+    'Protected Overrides Sub GotoPresenterObj.TargetIdNo()
+    '    MyBase.GotoPresenterObj.TargetIdNo()
     '    GotoRecordInTreeView()
     'End Sub
 
@@ -175,21 +176,22 @@ Public Class CFormEntryTv
     End Function
 
     Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-        'GetAndSetRecordPositionNumber()
+        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+        'GetAndSetPresenterObj.RecordPositionNumber()
         DisplayTreeViewData()
         GotoRecordInTreeView()
     End Sub
 
     Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
+        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
         DisplayTreeViewData()
         GotoRecordInTreeView()
-        'GetAndSetRecordPositionNumber()
+        'GetAndSetPresenterObj.RecordPositionNumber()
     End Sub
 
     Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-        MyBase.DisplayView(idNoOfRecord)
+        Debugger.Break()
+        PresenterObj.RefreshView(idNoOfRecord)
         GotoRecordInTreeView()
     End Sub
 
@@ -254,60 +256,5 @@ Public Class CFormEntryTv
             End If
         End If
     End Sub
-
-    ''Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, mainFieldName As String,
-    ''                                                    parentChanged As Boolean)
-    ''    Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
-    ''    If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-    ''        AddRecordToTree(dataNode, mainFieldName)
-    ''    Else
-    ''        Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
-    ''        Dim mainValue As String = GetPropertyValue(dataNode, mainFieldName)
-    ''        Dim secondaryValue As String = GetPropertyValue(dataNode, TvSecondaryFieldName)
-    ''        Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-    ''        If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-    ''            If parentChanged Then
-    ''                TreeViewTableName.Nodes(TreeViewTableName.Nodes.Count - 1).Nodes.Add(treeNode)
-    ''            Else
-    ''                TreeViewTableName.Nodes(0).Nodes.Add(treeNode)
-    ''            End If
-    ''        Else
-    ''            If parentChanged Then
-    ''                Dim foundNode As TreeNode() = TreeViewTableName.Nodes.Find(parentIdValue.ToString(), True)
-    ''                If foundNode.Count() <> 0 Then
-    ''                    foundNode(0).Nodes.Add(treeNode)
-    ''                End If
-    ''            End If
-    ''        End If
-    ''    End If
-    ''End Sub
-
-    'Protected Overrides Sub ChangeToRtlDisplay()
-    '    Dim ltrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
-    '    GlobalVariables.RightToLeftLayout = False
-    '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-    '        Dim currentCultureInfo As New CultureInfo(ltrCultureInfoStr)
-    '        If CultureInfo.CurrentCulture.Name <> currentCultureInfo.Name Then
-    '            CultureInfo.CurrentCulture = currentCultureInfo
-    '        End If
-    '        If CultureInfo.CurrentUICulture.Name <> currentCultureInfo.Name Then
-    '            CultureInfo.CurrentUICulture = currentCultureInfo
-    '        End If
-    '        CultureInfo.DefaultThreadCurrentCulture = currentCultureInfo
-    '        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-    '            GlobalVariables.RightToLeftLayout = True
-    '        Else
-    '            GlobalVariables.RightToLeftLayout = False
-    '        End If
-    '    Else
-    '        '' you're ok you're using RightToLeft culture
-    '    End If
-    '    TreeViewTableName.RightToLeftLayout = True
-    '    TreeViewTableName.RightToLeft = RightToLeft.Inherit
-    '    RightToLeftLayout = True
-    '    RightToLeft = System.Windows.Forms.RightToLeft.Inherit
-    '    'TreeViewTableName.Visible = True
-
-    'End Sub
 
 End Class

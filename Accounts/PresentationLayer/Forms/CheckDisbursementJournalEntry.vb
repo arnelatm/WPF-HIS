@@ -1059,7 +1059,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-            Dim cPaymentType = PresenterObj.GetPaymentType(TargetIdNo)
+            Dim cPaymentType = PresenterObj.GetPaymentType(PresenterObj.TargetIdNo)
             SetPayeeProperty(cPaymentType)
         End Sub
 

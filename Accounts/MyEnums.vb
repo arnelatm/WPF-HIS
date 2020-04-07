@@ -745,6 +745,13 @@ Public Module Adapter
         Return retValue
     End Function
 
+    Public Enum MoveDirection
+        [First]
+        [Previous]
+        [Next]
+        [Last]
+    End Enum
+
     'Public Function PayeeTypeToEnum(value As String) As String
     '    Dim retValue As String
     '    Select Case value
