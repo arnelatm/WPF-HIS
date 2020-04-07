@@ -1,13 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class ApJournalPresenter
         Inherits AccountsPresenter(Of IApJournalView, ApJournalModel)
-        Implements ISubscriber(Of ItemCreated)
 
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
@@ -19,6 +17,7 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
             GlobalVariables.EventAggregator.SubscribeEvent(Me)
+
         End Sub
 
         Public Property JournalItemsPresenter As ApJournalItemsPresenter
@@ -41,10 +40,6 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Public Sub OnEventHandler(e As ItemCreated) Implements ISubscriber(Of ItemCreated).OnEventHandler
-            MessageBox.Show("Passed Here")
-        End Sub
-        
 
 
         'Public Sub OnBeforeSave() Handles NewUserRequested

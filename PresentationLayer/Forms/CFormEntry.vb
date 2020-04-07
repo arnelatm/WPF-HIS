@@ -11,16 +11,18 @@ Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Public Class CFormEntry
     Inherits BfMain
+    Implements ISubscriber(Of RecordPositionChanged)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
-    Protected DataChangesMade As Boolean = False
     Protected DtInsert As DataTable
     Protected DtTable As DataTable
     Protected DtUpdate As DataTable
@@ -28,7 +30,7 @@ Public Class CFormEntry
     Protected IdFieldName As String = "IdNo"
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
-    Protected RecordPositionNumber As Integer = 0
+    'Protected PresenterObj.RecordPositionNumber As Integer = 0
     Protected SortOrderKey As String = "IdNo"
     Private Const TurnOn As Boolean = True
     Private ReadOnly _currentCulture As CultureInfo = GlobalVariables.AppCurrentCultureInfo
@@ -44,6 +46,7 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
+        GlobalVariables.EventAggregator.SubscribeEvent(Me)
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -63,7 +66,7 @@ Public Class CFormEntry
     Public Event AfterAdd()
 
     Public Event AfterDelete()
-
+    
     Public Event AfterDisplayView()
 
     Public Event AfterEdit()
@@ -152,6 +155,7 @@ Public Class CFormEntry
     '        _searchfield = Value
     '    End Set
     'End Property
+
     Public Property EditMode As Boolean
         Set
             If _editMode <> Value Then
@@ -187,9 +191,9 @@ Public Class CFormEntry
     Public Property UndoMode As Boolean = False
     Protected Property FormTitleCaption As String = ""
 
-    'Public Property TableDefaultFieldValues
-    <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
-    Protected Property TargetIdNo As Integer
+    ''Public Property TableDefaultFieldValues
+    '<Description("This is the value of the current IDNo in the TxtIDNo Field ")>
+    'Protected Property PresenterObj.TargetIdNo As Integer
 
     Private Property RecordCount As Integer
 
@@ -256,6 +260,10 @@ Public Class CFormEntry
     Public Sub CheckDataChanges()
     End Sub
 
+    Protected Overridable Sub DisplayView(idNo As Integer)
+        Debugger.Break()
+    End Sub
+
     Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
         Dim retValue As Boolean = False
         If Not DependentRecordsExist(idNo) Then
@@ -279,10 +287,10 @@ Public Class CFormEntry
                 Else
                     RaiseEvent SuccessfulDelete(currentIdNo)
                     _MBRecordSuccessfullyDeleted.Show(Me)
-                    ' if deleted stay on that given RecordPositionNumber
+                    ' if deleted stay on that given PresenterObj.RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
-                    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                    DisplayView(TargetIdNo)
+                    PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+                    PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                     RaiseEvent DisplayedRecordChanged()
                 End If
                 RaiseEvent AfterDelete()
@@ -320,14 +328,14 @@ Public Class CFormEntry
                 btnFind.Enabled = False
             Else
                 btnFind.Enabled = True
-                TargetIdNo = idNoOfFoundRecord
-                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-                DisplayView(TargetIdNo)
+                PresenterObj.TargetIdNo = idNoOfFoundRecord
+                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                 RaiseEvent DisplayedRecordChanged()
             End If
             CancelClose = True
         End If
-        Return TargetIdNo
+        Return PresenterObj.TargetIdNo
     End Function
 
     Public Sub FindFieldContinue(recIdKey As Integer)
@@ -335,10 +343,10 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         If OkToMove("Continue Find") Then
-            TargetIdNo = PresenterObj.FindFieldContinue(TargetIdNo)
-            If TargetIdNo <> 0 Then
-                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-                DisplayView(TargetIdNo)
+            PresenterObj.TargetIdNo = PresenterObj.FindFieldContinue(PresenterObj.TargetIdNo)
+            If PresenterObj.TargetIdNo <> 0 Then
+                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                 RaiseEvent DisplayedRecordChanged()
             End If
             CancelClose = True
@@ -354,10 +362,10 @@ Public Class CFormEntry
             e.Cancel = True
             Return
         End If
-        TargetIdNo = e.Argument
-        RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-        TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-        DisplayView(TargetIdNo)
+        PresenterObj.TargetIdNo = e.Argument
+        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+        PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+        PresenterObj.RefreshView(PresenterObj.TargetIdNo)
         RaiseEvent DisplayedRecordChanged()
         DoPaintEvents()
     End Sub
@@ -377,7 +385,7 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         If OkToSaveRecord() Then
-            GlobalVariables.EventAggregator.PublishEvent(Of EventHandler)(NewUserRequestedEvent)
+            RaiseEvent BeforeSave()
             Dim retValue As Short
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
@@ -385,9 +393,11 @@ Public Class CFormEntry
                     If retValue > 0 Then
                         If AddMode Then
                             RaiseEvent ParentRecordAddedSuccessfully(retValue)
-                            TargetIdNo = retValue
+                            PresenterObj.AddChildren()
+                            PresenterObj.TargetIdNo = retValue
                             RaiseEvent SuccessfulAdd(retValue)
                         Else
+                            PresenterObj.UpdateChildren(retValue)
                             RaiseEvent ParentRecordUpdatedSuccessfully(retValue)
                             RaiseEvent SuccessfulUpdate(retValue)
                         End If
@@ -406,13 +416,21 @@ Public Class CFormEntry
                 Debugger.Break()
             End Try
             If retValue > 0 Then
+                RaiseEvent AfterSave()
                 ' redisplay the updated record to reflect changes and to put record in viewmode
-                DisplayView(TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                 _MBRecordSuccessfullySaved.Show(Me)
             End If
         End If
-
     End Sub
+
+    'Public Sub OnParentRecordUpdatedSuccessFully(passedValue As Integer)
+    '    PresenterObj.OnParentRecordUpdatedSuccessFully(passedValue)
+    'End Sub
+
+    'Public Sub OnParentRecordUpdatedSuccessFully(passedValue As Integer)
+    '    PresenterObj.OnParentRecordUpdatedSuccessFully(passedValue)
+    'End Sub
 
     Public Sub SetFormTitleCaption()
         lblFormDescription.Text = Text
@@ -441,7 +459,7 @@ Public Class CFormEntry
         'Thread.Sleep(10)
         'showWaitForm.ReportProgress(progress)
         'Debugger.Break()
-        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
         '_resetEvent.Set()
         'Thread.Sleep(10)
         'loop
@@ -479,11 +497,7 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Function ChangesMade()
-        If DataChangesMade Then
-            Return True
-        Else
-            Return PresenterObj.ChangesMade()
-        End If
+        Return PresenterObj.ChangesMade()
     End Function
 
     Protected Overridable Sub CreateDataSources()
@@ -522,55 +536,15 @@ Public Class CFormEntry
         Return 0
     End Function
 
-    Protected Overridable Sub DisplayView(ByVal idNoOfRecord As Integer)
-        UpdateRecordCounter()
-        EditMode = False
-        AddMode = False
-        UndoMode = False
-        UpdateButtonDisplays(False, False)
-        MyErrorProvider.ClearAllErrorMessages()
-        MyErrorProvider.Clear()
-        RaiseEvent BeforeDisplayView()
-        PresenterObj.Display(idNoOfRecord)
-        PresenterObj.SaveOriginalValues()
-        TurnOffInputs()
-        RaiseEvent AfterDisplayView()
-        DataChangesMade = False
-        Refresh()
-    End Sub
-
-    'Protected Sub DisplayRecordPositionNumber()
-    '    Dim savedTargetIdNo As Integer = TargetIdNo
-    '    ' RecordPositionNumber is the position no. of the record in the sorted order
-    '    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-    '    DisplayView(TargetIdNo)
-    '    DataChangesMade = False
-    '    If TargetIdNo <> savedTargetIdNo Then
-    '        RaiseEvent DisplayedRecordChanged()
-    '    End If
-    'End Sub
-
-    'Protected Sub DisplaySortedPositionNumber(ByVal desiredSortedPositionNumber As Integer)
-    '    Dim savedTargetIdNo As Integer = TargetIdNo
-    '    ' RecordPositionNumber is the position no. of the record in the sorted order.
-    '    ' To display that record get first the actual IdNo of the record on that given sorted position
-    '    ' which will be stored in the TargetIdNo
-    '    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(desiredSortedPositionNumber)
-    '    DisplayView(TargetIdNo)
-    '    DataChangesMade = False
-    '    If TargetIdNo <> savedTargetIdNo Then
-    '        RaiseEvent DisplayedRecordChanged()
-    '    End If
-    'End Sub
-
+ 
     Protected Sub GoFirstRecord()
         If _debugSwitch Then
             Debugger.Break()
         End If
         If OkToMove("First") Then
-            RecordPositionNumber = 1
-            TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-            DisplayView(TargetIdNo)
+            PresenterObj.RecordPositionNumber = 1
+            PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+            PresenterObj.RefreshView(PresenterObj.TargetIdNo)
             RaiseEvent DisplayedRecordChanged()
         End If
     End Sub
@@ -581,45 +555,15 @@ Public Class CFormEntry
         End If
         If Not PresenterObj Is Nothing Then
             If OkToMove("Last") Then
-                RecordPositionNumber = PresenterObj.GetRecordCount()
-                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                DisplayView(TargetIdNo)
+                PresenterObj.RecordPositionNumber = PresenterObj.GetRecordCount()
+                PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                 RaiseEvent DisplayedRecordChanged()
             End If
         End If
     End Sub
 
-    Protected Sub GoNextRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        If OkToMove("Next") Then
-            If RecordPositionNumber = RecordCount Then
-                _MBLastRecordAlready.Show(Me)
-            Else
-                RecordPositionNumber += 1
-                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                DisplayView(TargetIdNo)
-                RaiseEvent DisplayedRecordChanged()
-            End If
-        End If
-    End Sub
 
-    Protected Sub GoPreviousRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
-        If OkToMove("Previous") Then
-            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
-                _MBFirstRecordAlready.Show(Me)
-            Else
-                RecordPositionNumber -= 1
-                TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                DisplayView(TargetIdNo)
-                RaiseEvent DisplayedRecordChanged()
-            End If
-        End If
-    End Sub
 
     Protected Overridable Function OkToMove(ByVal Optional buttonName As String = "") As Boolean
         Dim retValue As Boolean
@@ -634,11 +578,11 @@ Public Class CFormEntry
                 ElseIf result = DialogResult.No Then
                     If AddMode Then
                         AddMode = False
-                        TargetIdNo = LastIdNo
+                        PresenterObj.TargetIdNo = LastIdNo
                     Else
                         EditMode = False
                     End If
-                    DisplayView(TargetIdNo)
+                    PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                     retValue = True
                 Else
                     retValue = False
@@ -653,7 +597,7 @@ Public Class CFormEntry
     Protected Function OkToSaveRecord() As Boolean
         Dim retValue As Boolean = False
         If Not AddMode Then
-            If PresenterObj.HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
+            If PresenterObj.HasRecordChanged(PresenterObj.TargetIdNo, RecordDateTimeStampValue) Then
                 Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
                 Return False
             Else
@@ -698,16 +642,16 @@ Public Class CFormEntry
                 Save()
                 AddMode = False
                 EditMode = False
-                DisplayView(TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
             ElseIf result = DialogResult.No Then
                 ' undo changes retrieve the last record
                 If AddMode Then
                     AddMode = False
-                    TargetIdNo = LastIdNo
+                    PresenterObj.TargetIdNo = LastIdNo
                 Else
                     EditMode = False
                 End If
-                DisplayView(TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
             Else
                 ' DialogResult.Cancel
                 ' don't do anything just continue edits
@@ -715,7 +659,7 @@ Public Class CFormEntry
         Else
             AddMode = False
             EditMode = False
-            DisplayView(TargetIdNo)
+            PresenterObj.RefreshView(PresenterObj.TargetIdNo)
         End If
     End Sub
 
@@ -730,7 +674,7 @@ Public Class CFormEntry
             btnUndo.Enabled = False
             btnSave.Enabled = False
             btnFind.Enabled = False
-            RecordPositionNumber = 0
+            PresenterObj.RecordPositionNumber = 0
             If Not AddMode Then
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
@@ -740,7 +684,7 @@ Public Class CFormEntry
                 btnUndo.Enabled = True
             End If
         Else
-            If RecordPositionNumber = 1 Then
+            If PresenterObj.RecordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
                 btnLast.Enabled = True
@@ -751,7 +695,7 @@ Public Class CFormEntry
                 btnLast.Enabled = True
                 btnNext.Enabled = True
             End If
-            If RecordPositionNumber = RecordCount Then
+            If PresenterObj.RecordPositionNumber = RecordCount Then
                 btnLast.Enabled = False
                 btnNext.Enabled = False
                 btnFirst.Enabled = True
@@ -774,8 +718,8 @@ Public Class CFormEntry
                 btnSave.Enabled = False
             End If
         End If
-        UpdateRecordCounter()
-        'LblRecordCount.Text = $"{_MsgRecordNo.Value} {RecordPositionNumber} {_MsgOf.Value} {RecordCount}"
+        'UpdateRecordCounter()
+        'LblRecordCount.Text = $"{_MsgRecordNo.Value} {PresenterObj.RecordPositionNumber} {_MsgOf.Value} {RecordCount}"
     End Sub
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
@@ -823,11 +767,7 @@ Public Class CFormEntry
         End If
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
-        DisplayView(TargetIdNo)
-    End Sub
-
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
-        GoPreviousRecord()
+        PresenterObj.RefreshView(PresenterObj.TargetIdNo)
     End Sub
 
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
@@ -901,14 +841,14 @@ Public Class CFormEntry
             TurnOffInputs()
 
             Try
-                RecordPositionNumber = PresenterObj.GetRecordCount()
-                If RecordPositionNumber <> 0 Then
-                    TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                    DisplayView(TargetIdNo)
-                    RaiseEvent DisplayedRecordChanged()
-                Else
-                    UpdateButtonDisplays(False, False)
-                End If
+                PresenterObj.RecordPositionNumber = PresenterObj.GetRecordCount()
+                'If PresenterObj.RecordPositionNumber <> 0 Then
+                '    'PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+                '    'PresenterObj.RefreshView(PresenterObj.TargetIdNo)
+                '    'RaiseEvent DisplayedRecordChanged()
+                'Else
+                '    UpdateButtonDisplays(False, False)
+                'End If
             Catch ex As Exception
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
@@ -999,7 +939,7 @@ Public Class CFormEntry
     Private Sub FindRecord()
         If OkToMove() Then
             Dim idNoOfFoundRecord As Integer
-            idNoOfFoundRecord = PresenterObj.FindFieldContinue(TargetIdNo)
+            idNoOfFoundRecord = PresenterObj.FindFieldContinue(PresenterObj.TargetIdNo)
             If idNoOfFoundRecord = 0 Then
                 If _MBLastRecordReachedStartFromBeginning.Show(Me) = DialogResult.Yes Then
                     btnFirst.PerformClick()
@@ -1008,15 +948,15 @@ Public Class CFormEntry
                     '' stay on the current record
                 End If
             Else
-                TargetIdNo = idNoOfFoundRecord
-                RecordPositionNumber = PresenterObj.GetSortedRecordPosition(TargetIdNo)
-                DisplayView(TargetIdNo)
+                PresenterObj.TargetIdNo = idNoOfFoundRecord
+                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+                PresenterObj.RefreshView(PresenterObj.TargetIdNo)
                 RaiseEvent DisplayedRecordChanged()
             End If
             If EditMode Then
                 EditMode = False
             End If
-            DisplayView(TargetIdNo)
+            PresenterObj.RefreshView(PresenterObj.TargetIdNo)
         End If
     End Sub
 
@@ -1033,10 +973,10 @@ Public Class CFormEntry
     '    UndoMode = tmpUndoMode
     '    RecordCount = Await taskRecordCount
     '    RecordDateTimeStampValue = Await taskRecordDateTimeStampValue
-    '    LblRecordCount.Text = $"{_MsgRecordNo.Value} {RecordPositionNumber} {_MsgOf.Value}{RecordCount}"
+    '    LblRecordCount.Text = $"{_MsgRecordNo.Value} {PresenterObj.RecordPositionNumber} {_MsgOf.Value}{RecordCount}"
     '    MyErrorProvider.ClearAllErrorMessages()
     '    EnableAddOrEditMode(TurnOff, TurnOff)
-    '    DisplayView()
+    '    PresenterObj.RefreshView()
     '    UndoMode = False
     'End Sub
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
@@ -1087,7 +1027,7 @@ Public Class CFormEntry
                 Else
                     If AddMode Then
                         RaiseEvent ParentRecordAddedSuccessfully(retValue)
-                        TargetIdNo = retValue
+                        PresenterObj.TargetIdNo = retValue
                         RaiseEvent SuccessfulAdd(retValue)
                         'AddMode = False
                     Else
@@ -1290,7 +1230,7 @@ Public Class CFormEntry
     End Sub
 
     Private Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
-        If PresenterObj.CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
+        If PresenterObj.CheckIfUnique(cCtrl.Text, fldName, PresenterObj.TargetIdNo) Then
             Return False
         End If
         Return True
@@ -1427,10 +1367,6 @@ Public Class CFormEntry
     '    End If
     'End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
-        GoFirstRecord()
-    End Sub
-
     Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs)
         If _debugSwitch Then
             Debugger.Break()
@@ -1438,31 +1374,26 @@ Public Class CFormEntry
         Save()
     End Sub
 
-    'Private Sub btnDebugSave_ClickButtonArea(sender As Object, e As MouseEventArgs)
-    '    If _debugSwitch = 0 Then
-    '        _debugSwitch = 1
-    '        btnDebugSwitch.Text = "Turn Off Debugger"
-    '    Else
-    '        _debugSwitch = 0
-    '        btnDebugSwitch.Text = "Turn On Debugger"
-    '    End If
-    'End Sub
-    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
-        GoPreviousRecord()
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
+        GoToRecord(MoveDirection.First)
     End Sub
 
-    'Private Sub OnButtonDoubleCLick(sender As Object, e As EventArgs) Handles BtnFirst.DoubleClick, BtnNext.DoubleClick,
-    '            BtnPrev.DoubleClick, BtnLast.DoubleClick, BtnDelete.DoubleClick, BtnAdd.DoubleClick, BtnEdit.DoubleClick,
-    '            BtnSave.DoubleClick, BtnUndo.DoubleClick
-    '    Debugger.Break()
-    '    sender.PerformClick()
-    'End Sub
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        GoToRecord(MoveDirection.Previous)
+    End Sub
+
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        GoNextRecord()
+        GoToRecord(MoveDirection.Next)
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles btnLast.Click
-        GoLastRecord()
+        GoToRecord(MoveDirection.Last)
+    End Sub
+
+    Private Sub GoToRecord(ByVal direction As MoveDirection)
+        If GlobalVariables.EventAggregator IsNot Nothing Then
+            GlobalVariables.EventAggregator.PublishEvent(New MoveToRecord(direction))
+        End If
     End Sub
 
     Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -1482,20 +1413,22 @@ Public Class CFormEntry
 
     Private Sub UpdateRecordCounter()
         RecordCount = PresenterObj.GetRecordCount()
-        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(TargetIdNo)
-        tsbCurrentRecord.Text = RecordPositionNumber
+        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
+        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
         tsbTotalRecords.Text = RecordCount
     End Sub
 
-End Class
-Public Class Item
-    Public Property ItemNumber As Integer
-    Public Property ItemDescription As String
+    Public Sub OnEventHandler(e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+        UpdateRecordCounter()
+        EditMode = False
+        AddMode = False
+        UndoMode = False
+        UpdateButtonDisplays(False, False)
+        MyErrorProvider.ClearAllErrorMessages()
+        MyErrorProvider.Clear()
+        TurnOffInputs()
+        Refresh()
+    End Sub
 End Class
 
-
-Public Class ItemCreated
-    Public Property Item As Item
-
-End Class
 

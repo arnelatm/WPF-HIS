@@ -225,7 +225,7 @@ Public Class SecurityGroupEntryTv
         Catch ex As Exception
             Return
         End Try
-        PresenterObj.GroupAccessesPresenter.Display(TargetIdNo)
+        PresenterObj.GroupAccessesPresenter.Display(PresenterObj.TargetIdNo)
     End Sub
 
     Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn

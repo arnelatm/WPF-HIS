@@ -220,19 +220,12 @@ Namespace PresentationLayer.Forms
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             DataGridViewDistributionSchemeItems.StartTrackingChanges = True
-            DataChangesMade = False
-            'DataGridViewDistributionSchemeItems.AddDeleteColumn()
             DataGridViewDistributionSchemeItems.AddInsertColumn()
         End Sub
 
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
             DataGridViewDistributionSchemeItems.StartTrackingChanges = False
-            'DataGridViewDistributionSchemeItems.RemoveDeleteColumn()
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
-        End Sub
-
-        Private Sub DataGridViewDistributionSchemeItems_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewDistributionSchemeItems.ChangesMade
-            DataChangesMade = True
         End Sub
 
         Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
@@ -311,7 +304,6 @@ Namespace PresentationLayer.Forms
                         If EditMode OrElse AddMode Then
                             Dim row = .OwningRow
                             Dim selectedRow As New DistributionSchemeItemModel
-                            DataChangesMade = True
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             bsDistributionSchemeItems.Remove(selectedRow)
                             ReSequenceDgvAfterDelete()
@@ -320,7 +312,6 @@ Namespace PresentationLayer.Forms
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
                         End If
                     Case "dgvinsertcolumn"
-                        DataChangesMade = True
                         If EditMode OrElse AddMode Then
                             Dim row = .OwningRow
                             Dim newRow As New DistributionSchemeItemModel

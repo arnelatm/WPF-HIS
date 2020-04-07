@@ -661,7 +661,7 @@ Namespace PresentationLayer.Forms
 
         'Private Sub DtpReconciliationDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, cboAccountIdNo.Validated
         '    If (EditMode Or AddMode) And AccountIdNo <> 0 And dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
-        '        AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, TargetIdNo, "TransactionDate")
+        '        AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, PresenterObj.TargetIdNo, "TransactionDate")
         '        DisplayTotals()
         '        DataGridViewReconciliationItems.Refresh()
         '    End If
@@ -749,7 +749,7 @@ Namespace PresentationLayer.Forms
                     End If
                 End If
                 If AccountIdNo <> 0 And dtpReconciliationDate.Text IsNot Nothing Then
-                    AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, TargetIdNo, "TransactionDate")
+                    AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, PresenterObj.TargetIdNo, "TransactionDate")
                     DisplayTotals()
                     DataGridViewReconciliationItems.Refresh()
                 End If
@@ -766,7 +766,7 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             If dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
-                AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, TargetIdNo, "TransactionDate")
+                AccountReconciliationItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, AddMode, EditMode, PresenterObj.TargetIdNo, "TransactionDate")
                 DisplayTotals()
                 DataGridViewReconciliationItems.Refresh()
             End If

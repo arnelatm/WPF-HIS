@@ -120,7 +120,6 @@ Namespace PresentationLayer.Forms
                     Case "dgvdeletecolumn"
                         If EditMode OrElse AddMode Then
                             Dim selectedRow As New DistributionSchemeItemModel
-                            DataChangesMade = True
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             bsDistributionSchemeItems.Remove(selectedRow)
                             ReSequenceDgvAfterDelete()
@@ -129,7 +128,6 @@ Namespace PresentationLayer.Forms
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
                         End If
                     Case "dgvinsertcolumn"
-                        DataChangesMade = True
                         If EditMode OrElse AddMode Then
                             Dim newRow As New DistributionSchemeItemModel
                             bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
@@ -140,10 +138,6 @@ Namespace PresentationLayer.Forms
                         End If
                 End Select
             End With
-        End Sub
-
-        Private Sub DataGridViewDistributionSchemeItems_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewDistributionSchemeItems.ChangesMade
-            DataChangesMade = True
         End Sub
 
         ' The form will handle all key events before the control with
@@ -357,8 +351,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             DataGridViewDistributionSchemeItems.StartTrackingChanges = True
-            DataChangesMade = False
-            'DataGridViewDistributionSchemeItems.AddDeleteColumn()
             DataGridViewDistributionSchemeItems.AddInsertColumn()
         End Sub
 

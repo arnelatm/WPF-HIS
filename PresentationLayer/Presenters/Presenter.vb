@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Linq.Expressions
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Windows.Forms
@@ -20,34 +21,62 @@ Imports KellermanSoftware.CompareNetObjects
 ''' </remarks>
 ''' <typeparam name="T">Type of view.</typeparam>
 Public MustInherit Class Presenter(Of T As IView, TM As New)
-
-    Protected OriginalModel
-    Public ChildPresenters As New List(Of Object)
-
-    Protected DataService
-
-    Protected DataModel
-
-    Protected TreeViewMainField As String
-    Protected TreeViewSecondaryField As String
-    Protected TreeViewParentIdField As String
-    Protected TreeViewList
+    Implements ISubscriber(Of MoveToRecord)
 
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
-    Protected DbDataDao
+    Private _addMode As Boolean = False
+    Private _debugSwitch As Byte = 0
+    Private _editMode As Boolean = False
     Private _tableColumnPropertyList As List(Of TblColPropModel)
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+    Private _recordPositionNumber As Integer = 0
+    Private _targetIdNo As Integer = 0
+    Protected DataModel
+    Protected DataService
+    Protected DbDataDao
+    Protected OriginalModel
+
+    'Protected RecordPositionNumber As Integer = 0
 
     Protected Shared Property Model As New Model()
-    Protected Shared Property ModelTblColProp As IModelTblColProp
     Protected Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
+    Protected Shared Property ModelTblColProp As IModelTblColProp
 
-    Public Shared Property TableProperties As Array
-    Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
+    Protected TreeViewList
+    Protected TreeViewMainField As String
+    Protected TreeViewParentIdField As String
+    Protected TreeViewSecondaryField As String
+
+    Public ChildPresenters As New List(Of Object)
     Public Shared Property SortOrderKey As String = "IDNo"
+    Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
+    Public Shared Property TableProperties As Array
+    'Public Shared SecurityModel As New Model
 
-    Public Shared SecurityModel As New Model
+    'Public Property TableDefaultFieldValues
+    <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
+    Public Property TargetIdNo As Integer
+        Get 
+            return _targetIdNo
+        End Get
+        Set(value As Integer)
+            _targetIdNo = value
+            RefreshView(value)
+            GlobalVariables.EventAggregator.PublishEvent(New RecordPositionChanged(value))
+        End Set
+    End Property
+
+    Public Property RecordPositionNumber As Integer
+        Get
+            Return _recordPositionNumber
+        End Get
+        Set(value As Integer)
+            _recordPositionNumber = value
+            TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+        End Set
+    End Property
+
 
     Public Property ModelPresenter
         Get
@@ -62,9 +91,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
         ModelDefaultFieldValue = New ModelDefaultFieldValue
+
     End Sub
 
     Public Sub New(view As T)
+        GlobalVariables.EventAggregator.SubscribeEvent(Me)
         If view Is Nothing Then
             ''
         Else
@@ -177,13 +208,18 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Overridable Sub Display(idNo As Integer)
-        Dim modelData
-        modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
-        GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
-        For Each child In ChildPresenters
-            child.Display(idNo)
-        Next
+    Public Overridable Sub RefreshView(idNo As Integer)
+        If idNo <> 0 Then
+            Dim modelData
+            RecordCount = GetRecordCount()
+            RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
+            modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
+            GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
+            For Each child In ChildPresenters
+                child.Display(idNo)
+            Next
+            SaveOriginalValues()
+        End If
     End Sub
 
     Public Sub SaveOriginalValues()
@@ -195,6 +231,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function GetTreeViewDataNew()
         Dim cModel As New TM
+
         Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
@@ -207,8 +244,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 Return Model.GetHRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName, TreeViewParentIdField})
             Else
-                Return _
-                    Model.GetHRecords(TableName, newSortOrderKey,
+                Return Model.GetHRecords(TableName, newSortOrderKey,
                                       {"IdNo", treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
@@ -231,6 +267,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         '    End If
         'End If
         Return retVal
+    End Function
+
+    Protected Overridable Function BeforeSave()
+
     End Function
 
     Protected Overridable Function SaveChildren(addMode As Boolean, retVal As Integer) As Integer
@@ -360,12 +400,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Overridable Function ChangesMade() As Boolean
         Dim retVal As Boolean = False
         Dim compareLogic As New CompareLogic()
-        compareLogic.Config.IgnoreObjectTypes = true
+        compareLogic.Config.IgnoreObjectTypes = True
         compareLogic.Config.MaxDifferences = 100
-        compareLogic.Config.CompareChildren  = true
+        compareLogic.Config.CompareChildren = True
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
-            Messaging.Show(result.DifferencesString,"Differences")
+            Messaging.Show(result.DifferencesString, "Differences")
             retVal = True
         End If
         Return retVal
@@ -579,6 +619,116 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    Public Property AddMode As Boolean
+        Set
+            If _addMode <> Value Then
+                _addMode = Value
+            End If
+        End Set
+        Get
+            Return _addMode
+        End Get
+    End Property
+
+    Public Property EditMode As Boolean
+        Set
+            If _editMode <> Value Then
+                _editMode = Value
+            End If
+        End Set
+        Get
+            Return _editMode
+        End Get
+    End Property
+
+
+    'Protected Property _recordNumber() As Integer
+    '    Get
+    '        Return _RecordNumber
+    '    End Get
+    '    Set(ByVal Value As Integer)
+    '        _RecordNumber = Value
+    '    End Set
+    'End Property
+    '<Description("This is the last IDNo of the Displayed record before moving to a different record.")>
+    'Public Property CurrentIdNo As Integer
+    Public Property LastIdNo As Integer
+
+
+
+    Public Sub GoFirstRecord()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        If OkToMove() Then
+            RecordPositionNumber = 1
+        End If
+    End Sub
+
+    Protected Sub GoLastRecord()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        If OkToMove() Then
+            RecordPositionNumber = GetRecordCount()
+        End If
+    End Sub
+
+    Protected Sub GoNextRecord()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        If OkToMove() Then
+            If RecordPositionNumber = RecordCount Then
+                Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
+            Else
+                RecordPositionNumber += 1
+            End If
+        End If
+    End Sub
+
+    Protected Sub GoPreviousRecord()
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+        If OkToMove() Then
+            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
+                Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
+            Else
+                RecordPositionNumber -= 1
+            End If
+        End If
+    End Sub
+
+    Protected Overridable Function OkToMove() As Boolean
+        Dim retValue As Boolean
+        If Not (EditMode OrElse AddMode) Then
+            retValue = True
+        Else
+            If ChangesMade() Then
+                Dim result = SaveOrAbandonChanges()
+                If result = DialogResult.Yes Then
+                    'Save()
+                    retValue = True
+                ElseIf result = DialogResult.No Then
+                    If AddMode Then
+                        AddMode = False
+                        TargetIdNo = LastIdNo
+                    Else
+                        EditMode = False
+                    End If
+                    RefreshView(TargetIdNo)
+                    retValue = True
+                Else
+                    retValue = False
+                End If
+            Else
+                retValue = True
+            End If
+        End If
+        Return retValue
+    End Function
+
 #Region "GetLookupTable"
 
     Protected Property TableToGet As String
@@ -674,6 +824,128 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
     End Function
 
+    'Public Sub Save()
+    '    If _debugSwitch Then
+    '        Debugger.Break()
+    '    End If
+    '    If OkToSaveRecord() Then
+    '        BeforeSave()
+    '        Dim retValue As Short
+    '        Try
+    '            Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
+    '                retValue = Save(AddMode)
+    '                If retValue > 0 Then
+    '                    If AddMode Then
+    '                        RaiseEvent ParentRecordAddedSuccessfully(retValue)
+    '                        AddChildren()
+    '                        TargetIdNo = retValue
+    '                        RaiseEvent SuccessfulAdd(retValue)
+    '                    Else
+    '                        UpdateChildren(retValue)
+    '                        RaiseEvent ParentRecordUpdatedSuccessfully(retValue)
+    '                        RaiseEvent SuccessfulUpdate(retValue)
+    '                    End If
+    '                End If
+    '                scope.Complete()
+    '            End Using
+    '        Catch ex As TransactionAbortedException
+    '            MessageBox.Show(ex.Message, StringWords.Transaction_Aborted)
+    '        Catch oEx As Exception
+    '            If oEx.Message.Contains("Timeout Expired") Then
+    '                retValue = -1
+    '            Else
+    '                MsgBox("Error:   " + oEx.Message)
+    '                retValue = -1
+    '            End If
+    '            Debugger.Break()
+    '        End Try
+    '        If retValue > 0 Then
+    '            AfterSave()
+    '            ' redisplay the updated record to reflect changes and to put record in viewmode
+    '            sRefreshView(TargetIdNo)
+    '            _MBRecordSuccessfullySaved.Show(Me)
+    '        End If
+    '    End If
+    'End Sub
+
+    Protected Function SaveOrAbandonChanges() As DialogResult
+        Dim result As DialogResult
+        result = Messaging.Show(True, "AskIfUserWantsToSaveOrContinueEdits",
+                                "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
+                                "Please Confirm.",
+                                MessageBoxButtons.YesNoCancel,
+                                MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button3)
+        Return result
+    End Function
+
+    Protected Function OkToSaveRecord() As Boolean
+        Dim retValue As Boolean = False
+        If Not AddMode Then
+            If HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
+                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+                Return False
+            Else
+                'If Not ChangesMade() Then
+                '    _MBNoChangesMadeNothingToSave.Show(Me)
+                '    Return False
+                'End If
+            End If
+        End If
+        If DataIsValid() Then
+            retValue = True
+        End If
+        Return retValue
+    End Function
+
+    Public Sub OnEventHandler(e As MoveToRecord) Implements ISubscriber(Of MoveToRecord).OnEventHandler
+        Select Case e.Direction
+            Case MoveDirection.First
+                GoFirstRecord()
+            Case MoveDirection.Next
+                GoNextRecord()
+            Case MoveDirection.Previous
+                GoPreviousRecord()
+            Case MoveDirection.Last
+                GoLastRecord()
+        End Select
+    End Sub
+
 #End Region
 
+#Region "Temporary"
+    Public Overridable Sub Display(idNo As Integer)
+        '
+    End Sub
+#End Region
+
+
 End Class
+
+Public Class MoveToRecord
+
+    Public Sub New(ByVal direction As MoveDirection)
+        Me.Direction = direction
+    End Sub
+
+    Public Property Direction As MoveDirection
+
+End Class
+
+Public Class RecordPositionChanged
+
+    Public Sub New(ByRef recPos)
+        RecordPosition = recPos
+    End Sub
+
+    Public Property RecordPosition
+
+End Class
+
+
+Public Enum MoveDirection
+    [First]
+    [Previous]
+    [Next]
+    [Last]
+End Enum

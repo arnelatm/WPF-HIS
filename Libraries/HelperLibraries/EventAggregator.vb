@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports System.Windows.Forms
 
 Public Class EventAggregator
     Implements IEventAggregator
@@ -34,7 +35,7 @@ Public Class EventAggregator
 
     Public Sub SubscribeEvent(ByVal subscriber As Object) Implements IEventAggregator.SubscribeEvent
         SyncLock _lockSubscriberDictionary
-' ReSharper disable once VBPossibleMistakenCallToGetType.2
+            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
             Dim subscriberTypes = subscriber.[GetType]().GetInterfaces().Where(Function(i) i.IsGenericType AndAlso i.GetGenericTypeDefinition() = GetType(ISubscriber(Of)))
             Dim weakReference As WeakReference = New WeakReference(subscriber)
 
@@ -71,3 +72,46 @@ Public Class EventAggregator
     End Function
 
 End Class
+
+''Step 1 : Identify Events and their arguments in your application
+'Public Class SampleEvent
+
+'End Class
+
+''Step 2 : Create a single global instance of Event Aggregator
+'' Visible from Subscribers and Publishers
+'Public Class Main(Of)
+'    Public Sub New()
+'        GlobalVariables.EventAggregator = New EventAggregator
+'    End Sub
+
+'End Class
+
+
+
+''Step 3 : A Subscriber to subscribe to Events
+'Public Class SampleSubscriber
+'    Implements ISubscriber(Of SampleEvent)
+
+'    Public Sub New()
+'        GlobalVariables.EventAggregator.SubscribeEvent(Me)
+'    End Sub
+
+'    Public Sub OnEventHandler(e As SampleEvent) Implements ISubscriber(Of SampleEvent).OnEventHandler
+'        MessageBox.Show("Passed Here")
+'    End Sub
+
+'End Class
+
+
+''Step 4 : Publisher to publish the Events
+
+'Public Class SamplePublisher()
+
+'    Public Sub Test()
+'        If GlobalVariables.EventAggregator IsNot Nothing Then
+'            GlobalVariables.EventAggregator.PublishEvent(New SampleEvent())
+'        End If
+'    End Sub
+
+'End Class
