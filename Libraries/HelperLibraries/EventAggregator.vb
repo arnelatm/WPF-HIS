@@ -1,5 +1,4 @@
 ﻿Imports System.Threading
-Imports System.Windows.Forms
 
 Public Class EventAggregator
     Implements IEventAggregator
@@ -8,6 +7,15 @@ Public Class EventAggregator
     Private ReadOnly _lockSubscriberDictionary As Object = New Object()
 
     Public Sub PublishEvent(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEvent
+        PublishTheEvent(eventToPublish, False)
+    End Sub
+
+    Public Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEventAsync
+        PublishTheEvent(eventToPublish, True)
+    End Sub
+
+    Private Sub PublishTheEvent(Of TEventType)(eventToPublish As TEventType, asynchronous As Boolean)
+
         Dim subscriberType = GetType(ISubscriber(Of)).MakeGenericType(GetType(TEventType))
         Dim subscribers = GetSubscriberList(subscriberType)
         Dim subscribersToBeRemoved As List(Of WeakReference) = New List(Of WeakReference)()
@@ -16,7 +24,7 @@ Public Class EventAggregator
 
             If weaksubscriber.IsAlive Then
                 Dim subscriber = CType(weaksubscriber.Target, ISubscriber(Of TEventType))
-                InvokeSubscriberEvent(Of TEventType)(eventToPublish, subscriber)
+                InvokeSubscriberEvent(Of TEventType)(eventToPublish, subscriber, asynchronous)
             Else
                 subscribersToBeRemoved.Add(weaksubscriber)
             End If
@@ -37,24 +45,6 @@ Public Class EventAggregator
         End If
     End Sub
 
-    Public Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEventAsync
-        Dim subscriberType = GetType(ISubscriber(Of)).MakeGenericType(GetType(TEventType))
-        Dim subscribers = GetSubscriberList(subscriberType)
-        Dim subscribersToBeRemoved As List(Of WeakReference) = New List(Of WeakReference)()
-
-        For Each weaksubscriber In subscribers
-
-            If weaksubscriber.IsAlive Then
-                Dim subscriber = CType(weaksubscriber.Target, ISubscriber(Of TEventType))
-                InvokeSubscriberEventAsync(Of TEventType)(eventToPublish, subscriber)
-            Else
-                subscribersToBeRemoved.Add(weaksubscriber)
-            End If
-        Next
-
-        CheckSubscribersToBeRemoved(subscribers, subscribersToBeRemoved)
-    End Sub
-
     Public Sub SubscribeEvent(ByVal subscriber As Object) Implements IEventAggregator.SubscribeEvent
         SyncLock _lockSubscriberDictionary
             ' ReSharper disable once VBPossibleMistakenCallToGetType.2
@@ -68,23 +58,16 @@ Public Class EventAggregator
         End SyncLock
     End Sub
 
-    Private Sub InvokeSubscriberEvent(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType))
+    Private Sub InvokeSubscriberEvent(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType), ByVal asynchronous As Boolean)
         Dim syncContext As SynchronizationContext = SynchronizationContext.Current
-
         If syncContext Is Nothing Then
             syncContext = New SynchronizationContext()
         End If
-        syncContext.Send(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
-        'syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
-    End Sub
-
-    Private Sub InvokeSubscriberEventAsync(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType))
-        Dim syncContext As SynchronizationContext = SynchronizationContext.Current
-
-        If syncContext Is Nothing Then
-            syncContext = New SynchronizationContext()
+        If Not asynchronous Then
+            syncContext.Send(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+        Else
+            syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
         End If
-        syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
     End Sub
 
     Private Function GetSubscriberList(ByVal subscriberType As Type) As List(Of WeakReference)
