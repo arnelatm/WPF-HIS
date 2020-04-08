@@ -13,7 +13,6 @@ Public Class UserEntryTv
 
         ' Add any initialization after the InitializeComponent() call.
         MainTableName = "User"
-        IdFieldName = "IdNo"
         TvMainFieldName = "FullName"
         TvSecondaryFieldName = "UserName"
         SortOrderKey = "FullName"

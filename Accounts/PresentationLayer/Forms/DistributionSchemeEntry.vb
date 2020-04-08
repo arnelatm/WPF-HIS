@@ -27,7 +27,6 @@ Namespace PresentationLayer.Forms
 
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "DistributionScheme"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = txtDistributionSchemeCode
             _nfi.NumberDecimalDigits = 2
@@ -53,7 +52,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 BtnLast.PerformClick()
             End If
         End Sub
@@ -81,7 +80,7 @@ Namespace PresentationLayer.Forms
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
                     Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
 
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 IdNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
@@ -118,7 +117,7 @@ Namespace PresentationLayer.Forms
             With DataGridViewDistributionSchemeItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case "dgvdeletecolumn"
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim selectedRow As New DistributionSchemeItemModel
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             bsDistributionSchemeItems.Remove(selectedRow)
@@ -128,7 +127,7 @@ Namespace PresentationLayer.Forms
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
                         End If
                     Case "dgvinsertcolumn"
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New DistributionSchemeItemModel
                             bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
                             ReSequenceDgvAfterInsert()

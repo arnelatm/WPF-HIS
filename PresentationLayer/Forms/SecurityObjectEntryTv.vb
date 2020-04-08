@@ -18,7 +18,6 @@ Public Class SecurityObjectEntryTv
         'GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
 
         MainTableName = "SecurityObject_View"
-        IdFieldName = "IdNo"
         TvMainFieldName = "SecurityObjectName"
         TvSecondaryFieldName = ""
         SortOrderKey = "SecurityObjectName"
@@ -99,7 +98,7 @@ Public Class SecurityObjectEntryTv
     End Property
 
     Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-        If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
+        If PresenterObj.EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
             Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
             CancelSave = True
             Exit Sub

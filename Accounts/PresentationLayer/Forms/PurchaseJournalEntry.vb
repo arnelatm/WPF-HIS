@@ -26,7 +26,6 @@ Namespace PresentationLayer.Forms
 
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PurchaseJournal"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
@@ -297,7 +296,7 @@ Namespace PresentationLayer.Forms
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 BtnLast.PerformClick()
             End If
         End Sub
@@ -322,7 +321,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 txtJournalCode.Text = AccountStrings.PurchaseJournalPrefix
             End If
             If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
@@ -339,7 +338,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
             Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 IdNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
@@ -477,7 +476,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
                         _journalItemsPresenter.ChangesMadeInJournalItem = True
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             If .RowIndex() = 0 Then
                                 MessageBox.Show("Sorry, insertion on first row not allowed for purchase journal.")
                             Else
@@ -656,7 +655,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
+            If PresenterObj.EditMode Or PresenterObj.AddMode Then
                 If JournalItems IsNot Nothing Then
                     For Each item In JournalItems
                         item.JournalIdNo = IdNo

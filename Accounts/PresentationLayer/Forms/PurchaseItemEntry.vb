@@ -16,7 +16,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PurchaseItem"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = cboCategoryIdNo
             PresenterObj = New PurchaseItemPresenter(Me)

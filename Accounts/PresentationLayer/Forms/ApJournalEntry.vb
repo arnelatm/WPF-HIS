@@ -31,7 +31,6 @@ Namespace PresentationLayer.Forms
 
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ApJournal"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
@@ -298,8 +297,8 @@ Namespace PresentationLayer.Forms
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
-            If AddMode Then
-                GoLastRecord()
+            If PresenterObj.AddMode Then
+                PresenterObj.GoLastRecord()
             End If
         End Sub
 
@@ -323,7 +322,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 txtJournalCode.Text = AccountStrings.ApJournalPrefix
             End If
             If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
@@ -351,7 +350,7 @@ Namespace PresentationLayer.Forms
         'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
         '    Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
 
-        '    If AddMode Then
+        '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If
         '    If DtInsertTable IsNot Nothing Then
@@ -361,7 +360,7 @@ Namespace PresentationLayer.Forms
         '        DtUpdateTable.Clear()
         '    End If
         '    Dim oldJournalItem As List(Of JournalItemModel)
-        '    If Not AddMode Then
+        '    If Not PresenterObj.AddMode Then
         '        oldJournalItem = PresenterObj.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
         '    Else
         '        oldJournalItem = Nothing
@@ -391,7 +390,7 @@ Namespace PresentationLayer.Forms
         '    Next
         '    PresenterObj.JournalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
         '    Dim newJournalItem As List(Of JournalItemModel)
-        '    If AddMode Then
+        '    If PresenterObj.AddMode Then
         '        newJournalItem = PresenterObj.JournalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
         '        For Each item In newJournalItem
         '            If PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(item.AccountIdNo) Then
@@ -574,7 +573,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
                         'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             If .RowIndex() = 0 Then
                                 Messaging.Show(True,"MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
                                                "Invalid Insertion",{"transactionName","A.P. Journal Entry"})
@@ -773,7 +772,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
+            If PresenterObj.EditMode Or PresenterObj.AddMode Then
                 If bsJournalItems IsNot Nothing Then
                     For Each item In bsJournalItems
                         item.JournalIdNo = IdNo

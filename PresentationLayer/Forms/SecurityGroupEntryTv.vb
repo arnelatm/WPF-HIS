@@ -22,7 +22,6 @@ Public Class SecurityGroupEntryTv
         InitializeComponent()
 
         MainTableName = "SecurityGroup_View"
-        IdFieldName = "IdNo"
         ParentFieldName = "ParentIdNo"
         TvMainFieldName = "SecurityGroupName"
         TvSecondaryFieldName = "SecurityGroupCode"
@@ -195,7 +194,7 @@ Public Class SecurityGroupEntryTv
     'End Sub
     
     Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-        If EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
+        If PresenterObj.EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
             Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
             CancelSave = True
             Exit Sub

@@ -129,7 +129,7 @@ Public Class CDataGridView
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
-    '        If GetPropertyValue(parentForm, "EditMode") Or GetPropertyValue(parentForm, "AddMode") Then
+    '        If GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
     '            Dim dgvDelColumn As New DataGridViewImageColumn
     '            .Insert(.Count, dgvDelColumn)
     '            dgvDelColumn.Name = "dgvDeleteColumn"
@@ -147,7 +147,7 @@ Public Class CDataGridView
     Public Sub AddInsertColumn()
         With Columns
             Dim parentForm = FindForm()
-            If GetPropertyValue(parentForm, "EditMode") Or GetPropertyValue(parentForm, "AddMode") Then
+            If GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
                 Dim dgvInsColumn As New DataGridViewImageColumn
                 .Insert(.Count, dgvInsColumn)
                 dgvInsColumn.Image = Images.InsertRowImage
@@ -279,7 +279,7 @@ Public Class CDataGridView
                     'e.Handled = False
                     'Case Keys.Delete
                     '    Dim parentForm = FindForm()
-                    '    If Not GetPropertyValue(parentForm, "EditMode") Or GetPropertyValue(parentForm, "AddMode") Then
+                    '    If Not GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
                     '        MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
                     '        e.Handled = True
                     '    Else
@@ -567,7 +567,7 @@ Public Class CDataGridView
 
     Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         Dim myForm = FindForm()
-        If Not (GlobalFunctions.GetPropertyValue(myForm, "EditMode") Or GetPropertyValue(myForm, "AddMode")) Then
+        If Not (GlobalFunctions.GetPropertyValue(myForm, "PresenterObj.EditMode") Or GetPropertyValue(myForm, "PresenterObj.AddMode")) Then
             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
             e.Cancel = True
         End If

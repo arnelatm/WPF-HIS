@@ -14,7 +14,6 @@ Namespace PresentationLayer.Forms
 
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "Employee"
-            IdFieldName = "IdNo"
             TvMainFieldName = "EmployeeName"
             TvSecondaryFieldName = "EmployeeCode"
             SortOrderKey = "EmployeeName"

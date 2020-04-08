@@ -33,7 +33,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "CashReceiptJournal"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _payorOrigWidth = cboPayorIdNo.Width
@@ -316,7 +315,7 @@ Namespace PresentationLayer.Forms
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 BtnLast.PerformClick()
             End If
         End Sub
@@ -345,7 +344,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 txtJournalCode.Text = AccountStrings.CashReceiptJournalPrefix
             End If
             If ReceiptTypeToEnum(PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
@@ -375,7 +374,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
              Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 IdNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
@@ -417,7 +416,7 @@ Namespace PresentationLayer.Forms
             _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
             ' save old Open Invoices entry
             Dim oldCsrOiItem As List(Of CsrOiItemModel)
-            If Not AddMode Then
+            If Not PresenterObj.AddMode Then
                 oldCsrOiItem = _csrOiItemsPresenter.GetCsrOiItems(IdNo)
             Else
                 oldCsrOiItem = Nothing
@@ -457,7 +456,7 @@ Namespace PresentationLayer.Forms
                 _csrOiItemsPresenter.Save(DtCsrOiInsertTable, DtCsrOiUpdateTable, IdNo)
                 ' after saving open invoices apply the paid amount
                 Dim newCsrOiItem As List(Of CsrOiItemModel)
-                If AddMode Then
+                If PresenterObj.AddMode Then
                     ' add Mode so just add the payment
                     newCsrOiItem = _csrOiItemsPresenter.GetCsrOiItems(IdNo)
                     For Each item In newCsrOiItem
@@ -658,7 +657,7 @@ Namespace PresentationLayer.Forms
         Private Sub AddCustomerOpenInvoices()
             Dim unpaidInvoices = _csrOiItemsPresenter.GetCustomerOpenInvoices(PayorIdNo)
             Dim nSeq As Integer
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 bsCsrOiItems.Clear()
             End If
             If _csrOiItems Is Nothing Then
@@ -813,7 +812,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
                         _journalItemsPresenter.ChangesMadeInJournalItem = True
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             If .RowIndex() = 0 Then
                                 MessageBox.Show($"Sorry, insertion on first row not allowed for CashReceipt journal.")
                             Else
@@ -836,7 +835,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     'Case $"dgvinsertcolumn"
                     '    _CsrOiItemsPresenter.ChangesMadeInCsrOiItem = True
-                    '    If EditMode OrElse AddMode Then
+                    '    If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                     '        Dim newRow As New CsrOiItemModel
                     '        bsCsrOiItems.Insert(.RowIndex(), newRow)
                     '        _CsrOiItemsPresenter.ChangesMadeInCsrOiItem = True
@@ -1230,7 +1229,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
+            If PresenterObj.EditMode Or PresenterObj.AddMode Then
                 If bsJournalItems IsNot Nothing Then
                     For Each item In bsJournalItems
                         item.JournalIdNo = IdNo

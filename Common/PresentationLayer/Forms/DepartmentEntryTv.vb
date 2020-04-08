@@ -14,7 +14,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             MainTableName = "Department"
-            IdFieldName = "IdNo"
             TvMainFieldName = "DepartmentName"
             TvSecondaryFieldName = "DepartmentCode"
             SortOrderKey = "SortKey"

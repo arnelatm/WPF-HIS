@@ -33,7 +33,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "SalesJournal"
-            IdFieldName = "IdNo"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
 
@@ -255,7 +254,7 @@ Namespace PresentationLayer.Forms
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
             End If
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 BtnLast.PerformClick()
             End If
         End Sub
@@ -280,7 +279,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 txtJournalCode.Text = AccountStrings.SalesJournalPrefix
             End If
             MakeJournalItems()
@@ -288,7 +287,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 IdNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
@@ -490,7 +489,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
                         _salesCashItemsPresenter.ChangesMadeInSalesCashItem = True
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New SalesCashItemModel
                             bsSalesCashItems.Insert(.RowIndex(), newRow)
                             _salesCashItemsPresenter.ChangesMadeInSalesCashItem = True

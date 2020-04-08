@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
             FormTitleCaption = "Branches Maintenance Form"
             MainTableName = "Branch"
-            IdFieldName = "IdNo"
             TvMainFieldName = "BranchName"
             TvSecondaryFieldName = "BranchCode"
             SortOrderKey = "BranchName"
