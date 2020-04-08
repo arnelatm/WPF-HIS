@@ -10,8 +10,6 @@ Public Class CFormEntryTv
     Protected TvSecondaryFieldName As String
     Protected TvSortKey As String
 
-
-    
     Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             TreeViewTableName.Nodes(0).Text = MainTableName
@@ -37,7 +35,7 @@ Public Class CFormEntryTv
                     ' first record will be the one to be shown.
                     Exit Sub
             End Select
-            If Not OkToMove() Then
+            If Not PresenterObj.OkToMove() Then
                 Exit Sub
             End If
             Dim nTag As Integer
@@ -189,11 +187,11 @@ Public Class CFormEntryTv
         'GetAndSetPresenterObj.RecordPositionNumber()
     End Sub
 
-    Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-        Debugger.Break()
-        PresenterObj.RefreshView(idNoOfRecord)
-        GotoRecordInTreeView()
-    End Sub
+    'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+    '    Debugger.Break()
+    '    PresenterObj.UpdateViewDisplay(idNoOfRecord)
+    '    GotoRecordInTreeView()
+    'End Sub
 
     Protected Sub DisplayTreeViewData()
         Dim treeViewData = PresenterObj.GetTreeViewDataNew()
@@ -224,7 +222,7 @@ Public Class CFormEntryTv
     End Sub
 
     Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
-        Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
+        Dim idNo As Int32 = GetPropertyValue(dataNode, PresenterObj.IdFieldName)
         Dim mainValue As String = GetPropertyValue(dataNode, "Name")
         Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
         Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)

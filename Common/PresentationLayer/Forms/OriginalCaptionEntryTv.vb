@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             MainTableName = "OriginalCaptions"
-            IdFieldName = "IdNo"
             TvMainFieldName = "Caption"
             TvSecondaryFieldName = "Caption"
             SortOrderKey = "Caption"
@@ -99,7 +98,7 @@ Namespace PresentationLayer.Forms
         'End Function
 
         'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-        '    PresenterObj.TranslatedCaptionPresenter.Save(AddMode)
+        '    PresenterObj.TranslatedCaptionPresenter.Save(PresenterObj.AddMode)
         'End Sub
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown

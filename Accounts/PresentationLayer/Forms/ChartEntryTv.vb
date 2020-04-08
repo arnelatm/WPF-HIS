@@ -13,7 +13,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             MainTableName = "Chart_View"
-            IdFieldName = "IdNo"
             TvMainFieldName = "AccountName"
             TvSecondaryFieldName = "AccountCode"
             SortOrderKey = "SortKey"
@@ -190,13 +189,13 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If EditMode And ParentIdNo = IDNo Then
+            If PresenterObj.EditMode And ParentIdNo = IDNo Then
                 MessageBox.Show(Languages.Messages.SorryAMemberCannotBeAParentToItself)
                 'AATM.PresentationLayer.Forms.Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
                 CancelSave = True
                 Exit Sub
             End If
-            If EditMode And chkDetailAccount.Checked Then
+            If PresenterObj.EditMode And chkDetailAccount.Checked Then
                 Dim acctName = PresenterObj.GetAccountNameOfChild(IDNo)
                 If Not (acctName Is Nothing Or acctName = "") Then
                     Dim foundAccount = " (" & acctName & ")"
@@ -207,7 +206,7 @@ Namespace PresentationLayer.Forms
                     CancelSave = True
                 End If
             End If
-            'If EditMode then
+            'If PresenterObj.EditMode then
             '    Dim cOldParentId As String = PresenterObj.GetOriginalValue(cacParentIdNo)
             '    If cOldParentId <> cacParentIdNo.Text Then
             '        ' ParentID is changed by the user so

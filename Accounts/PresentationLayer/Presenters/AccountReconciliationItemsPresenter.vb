@@ -72,16 +72,16 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap AccountReconciliation Items.
         '''' </summary>
         '''' <param name="accountIdNo">Account Id to display.</param>
-        Public Overloads Sub Display(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date, ByVal addMode As Boolean, ByVal editMode As Boolean, ByVal idNo As Integer, Optional ByVal sortOrder As String = Nothing)
-            View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, addMode, editMode, idNo, "TransactionDate")
+        Public Overloads Sub Display(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date, ByVal idNo As Integer, Optional ByVal sortOrder As String = Nothing)
+            View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, idNo, "TransactionDate")
         End Sub
 
-        Public Function GetAcctReconItems(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date, ByVal addMode As Boolean, ByVal editMode As Boolean, ByVal idNo As Integer, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
+        Public Function GetAcctReconItems(ByVal accountIdNo As Integer, ByVal reconciliationDate As Date, ByVal idNo As Integer, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
-            'If addMode Or editMode Then
+            'If PresenterObj.AddMode Or PresenterObj.EditMode Then
             Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
-            If addMode Then
+            If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
                 Next

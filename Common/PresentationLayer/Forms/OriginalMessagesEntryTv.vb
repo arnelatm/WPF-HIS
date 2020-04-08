@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
             FormTitleCaption = "System Messages Maintenance Form"
             MainTableName = "OriginalMessages"
-            IdFieldName = "IdNo"
             TvMainFieldName = "Message"
             TvSecondaryFieldName = "MessageKey"
             SortOrderKey = "Message"

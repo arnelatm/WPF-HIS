@@ -62,7 +62,21 @@
                 Dim x As Object
                 x = Db.Scalar(sql)
                 If x Is DBNull.Value Then
-                    Return 0
+                    If recordNo > 0 Then
+                        ' return the last record
+                        If sortOrder.Trim().IndexOf(" DESC", StringComparison.OrdinalIgnoreCase) Then
+                            sortOrder = Replace(sortOrder, " DESC", " ASC")
+                        ElseIf sortOrder.Trim().IndexOf(" ASC", StringComparison.OrdinalIgnoreCase) Then
+                            sortOrder = Replace(sortOrder, " DESC", " ASC")
+                        Else
+                            sortOrder = sortOrder.Trim() + " DESC"
+                        End If
+                        sortOrder = Replace(sortOrder, " DESC", " ASC",)
+                        sql = "Select TOP 1 IDNo FROM [" & tableName & "] order by " & sortOrder
+                        x = Db.Scalar(sql)
+                    Else
+                        Return 0
+                    End If
                 End If
                 If TypeOf x Is Integer Then
                     Return DirectCast(x, Integer)
@@ -154,8 +168,8 @@
 
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Int16 _
             Implements IBaseDao.DeleteRecord
-            if Strings.Right(tableName,5).ToLower() = "_view" Then
-                tableName = strings.Left(tableName,Strings.Len(tableName)-5)
+            If Strings.Right(tableName, 5).ToLower() = "_view" Then
+                tableName = Strings.Left(tableName, Strings.Len(tableName) - 5)
             End If
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
@@ -418,8 +432,8 @@
         Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) _
             Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
-            If Strings.Right(fields,1)="," Then
-                fields = Strings.Left(fields,Len(fields)-1)
+            If Strings.Right(fields, 1) = "," Then
+                fields = Strings.Left(fields, Len(fields) - 1)
             End If
             Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
             Return Db.SqlRead(sql)

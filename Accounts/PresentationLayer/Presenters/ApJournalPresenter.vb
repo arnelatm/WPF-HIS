@@ -43,7 +43,7 @@ Namespace PresentationLayer.Presenters
 
 
         'Public Sub OnBeforeSave() Handles NewUserRequested
-        '    If AddMode Then
+        '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If
         '    If DtInsertTable IsNot Nothing Then
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Presenters
         '        DtUpdateTable.Clear()
         '    End If
         '    Dim oldJournalItem As List(Of JournalItemModel)
-        '    If Not AddMode Then
+        '    If Not PresenterObj.AddMode Then
         '        oldJournalItem = PresenterObj.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
         '    Else
         '        oldJournalItem = Nothing
@@ -83,7 +83,7 @@ Namespace PresentationLayer.Presenters
         '    Next
         '    PresenterObj.JournalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
         '    Dim newJournalItem As List(Of JournalItemModel)
-        '    If AddMode Then
+        '    If PresenterObj.AddMode Then
         '        newJournalItem = PresenterObj.JournalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
         '        For Each item In newJournalItem
         '            If PresenterObj.JournalItemsPresenter.IsAccountsPayableAccount(item.AccountIdNo) Then

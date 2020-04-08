@@ -26,7 +26,6 @@ Namespace PresentationLayer.Forms
             KeyPreview = True
 
             MainTableName = "DistributionScheme"
-            IdFieldName = "IdNo"
             TvMainFieldName = "DistributionSchemeName"
             TvSecondaryFieldName = "DistributionSchemeCode"
             SortOrderKey = "DistributionSchemeName"
@@ -229,7 +228,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 IDNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
@@ -301,7 +300,7 @@ Namespace PresentationLayer.Forms
             With DataGridViewDistributionSchemeItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case "dgvdeletecolumn"
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim row = .OwningRow
                             Dim selectedRow As New DistributionSchemeItemModel
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
@@ -312,7 +311,7 @@ Namespace PresentationLayer.Forms
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
                         End If
                     Case "dgvinsertcolumn"
-                        If EditMode OrElse AddMode Then
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim row = .OwningRow
                             Dim newRow As New DistributionSchemeItemModel
                             bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
@@ -373,7 +372,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If AddMode Then
+            If PresenterObj.AddMode Then
                 BtnLast.PerformClick()
             End If
         End Sub

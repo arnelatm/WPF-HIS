@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             MainTableName = "RevenueGroup_View"
-            IdFieldName = "IdNo"
             TvMainFieldName = "RevenueGroupName"
             TvSecondaryFieldName = "RevenueGroupCode"
             SortOrderKey = "SortKey"
