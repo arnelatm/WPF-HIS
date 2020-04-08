@@ -1,7 +1,9 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryTv
 
@@ -9,6 +11,15 @@ Public Class CFormEntryTv
     Protected TvMainFieldName As String
     Protected TvSecondaryFieldName As String
     Protected TvSortKey As String
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+        ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
 
     Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
@@ -44,13 +55,8 @@ Public Class CFormEntryTv
                 PresenterObj.RecordPositionNumber = 1
             Else
                 nTag = TreeViewTableName.SelectedNode.Tag
-                PresenterObj.TargetIdNo = nTag
-                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+                PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(nTag)
             End If
-
-            PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-            PresenterObj.displ(PresenterObj.TargetIdNo)
-            GotoRecordInTreeView()
             If Not TreeViewTableName.SelectedNode.IsVisible Then
                 TreeViewTableName.SelectedNode.EnsureVisible()
             End If
@@ -73,9 +79,9 @@ Public Class CFormEntryTv
                 .Select()
             End With
         End If
-        ' dupdate treeview text if ever name is changed
+        ' update treeview text if ever name is changed
         'If Not TreeViewTableName.SelectedNode Is Nothing Then
-        '    'TreeViewTableName.SelectedNode.Text = TreeNodeText
+        'TreeViewTableName.SelectedNode.Text = TreeNodeText
         'End If
         If TreeViewTableName.SelectedNode IsNot Nothing AndAlso TreeViewTableName.SelectedNode.IsVisible Then
             TreeViewTableName.SelectedNode.EnsureVisible()
@@ -97,43 +103,10 @@ Public Class CFormEntryTv
         _bypassSelectedChange = False
     End Sub
 
-    '    Try
-    '        If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-    '            If GlobalVariables.RightToLeftLayout Then
-    '                TreeViewTableName.RightToLeftLayout = True
-    '                TreeViewTableName.RightToLeft = RightToLeft.Yes
-    '            Else
-    '                TreeViewTableName.RightToLeftLayout = False
-    '                TreeViewTableName.RightToLeft = RightToLeft.No
-    '            End If
-    '        End If
-    '        Dim myNode As TreeNode = TreeViewTableName.Nodes(0)
-    '        myNode.Expand()
-    '        myNode.EnsureVisible()
-    '    Catch ex As Exception
-    '        ' need to do this because derived forms would not open in designer. don't know why?
-    '    End Try
-    'End Sub
-
-    'Protected Overridable ReadOnly Property TreeNodeText As String
-    '    Get
-    '        Return ""
-    '    End Get
-    'End Property
-
     Protected Overridable Function TreeNodeTextDisplay(tvName As String, ByVal Optional tvAdditionalText As String = "") _
         As String
         Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
     End Function
-
-    'Protected Overridable Sub AddRecordToTree(tvText As String, tvTag As Integer)
-    '    Dim treeNode As New TreeNode With {
-    '            .Text = TVText,
-    '            .Tag = TVTag,
-    '            .Name = TVTag
-    '            }
-    '    TreeViewTableName.Nodes(0).Nodes.Add(TreeNode)
-    'End Sub
 
     Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Integer) _
         As TreeNode
@@ -145,11 +118,6 @@ Public Class CFormEntryTv
             .Name = idNo
             }
     End Function
-
-    'Protected Overrides Sub GotoPresenterObj.TargetIdNo()
-    '    MyBase.GotoPresenterObj.TargetIdNo()
-    '    GotoRecordInTreeView()
-    'End Sub
 
     Protected Sub RemoveCurrentNode(bypassChange As Boolean)
         If bypassChange Then
@@ -173,19 +141,19 @@ Public Class CFormEntryTv
         Return mainFieldName
     End Function
 
-    Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-        'GetAndSetPresenterObj.RecordPositionNumber()
-        DisplayTreeViewData()
-        GotoRecordInTreeView()
-    End Sub
+    'Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
+    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+    '    'GetAndSetPresenterObj.RecordPositionNumber()
+    '    DisplayTreeViewData()
+    '    GotoRecordInTreeView()
+    'End Sub
 
-    Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-        DisplayTreeViewData()
-        GotoRecordInTreeView()
-        'GetAndSetPresenterObj.RecordPositionNumber()
-    End Sub
+    'Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
+    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+    '    DisplayTreeViewData()
+    '    GotoRecordInTreeView()
+    '    'GetAndSetPresenterObj.RecordPositionNumber()
+    'End Sub
 
     'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
     '    Debugger.Break()
@@ -253,6 +221,18 @@ Public Class CFormEntryTv
                 End If
             End If
         End If
+    End Sub
+
+    Protected Overrides Sub RecordPositionChanged()
+        MyBase.RecordPositionChanged()
+        GotoRecordInTreeView()
+        If TreeViewTableName.SelectedNode IsNot Nothing Then
+            TreeViewTableName.SelectedNode.[Text] = PresenterObj.GetTreeNodeText()
+        End If
+    End Sub
+
+    Protected Overrides Sub RecordSaved()
+        TreeViewTableName.SelectedNode.Text = PresenterObj.GetTreeNodeText()
     End Sub
 
 End Class

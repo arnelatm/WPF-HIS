@@ -52,8 +52,8 @@ Public Class EventAggregator
         If syncContext Is Nothing Then
             syncContext = New SynchronizationContext()
         End If
-
-        syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+        syncContext.Send(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+        'syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
     End Sub
 
     Private Function GetSubscriberList(ByVal subscriberType As Type) As List(Of WeakReference)
@@ -87,8 +87,6 @@ End Class
 
 'End Class
 
-
-
 ''Step 3 : A Subscriber to subscribe to Events
 'Public Class SampleSubscriber
 '    Implements ISubscriber(Of SampleEvent)
@@ -102,7 +100,6 @@ End Class
 '    End Sub
 
 'End Class
-
 
 ''Step 4 : Publisher to publish the Events
 

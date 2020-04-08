@@ -316,7 +316,7 @@ Namespace PresentationLayer.Forms
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If PresenterObj.AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 

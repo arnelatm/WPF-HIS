@@ -53,7 +53,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             If PresenterObj.AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 
@@ -72,7 +72,7 @@ Namespace PresentationLayer.Forms
                                    MessageBoxDefaultButton.Button2) = DialogResult.No Then
                     CancelSave = True
                 End If
-            ElseIf Not _distributionSchemeItemsPresenter.DataIsValid() Then
+            ElseIf Not DataIsValid() Then
                 CancelSave = True
             End If
         End Sub
