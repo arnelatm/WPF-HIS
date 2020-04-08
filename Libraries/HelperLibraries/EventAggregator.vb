@@ -21,6 +21,10 @@ Public Class EventAggregator
                 subscribersToBeRemoved.Add(weaksubscriber)
             End If
         Next
+        CheckSubscribersToBeRemoved(subscribers, subscribersToBeRemoved)
+    End Sub
+
+    Private Sub CheckSubscribersToBeRemoved(subscribers As List(Of WeakReference), subscribersToBeRemoved As List(Of WeakReference))
 
         If subscribersToBeRemoved.Any() Then
 
@@ -31,6 +35,24 @@ Public Class EventAggregator
                 Next
             End SyncLock
         End If
+    End Sub
+
+    Public Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEventAsync
+        Dim subscriberType = GetType(ISubscriber(Of)).MakeGenericType(GetType(TEventType))
+        Dim subscribers = GetSubscriberList(subscriberType)
+        Dim subscribersToBeRemoved As List(Of WeakReference) = New List(Of WeakReference)()
+
+        For Each weaksubscriber In subscribers
+
+            If weaksubscriber.IsAlive Then
+                Dim subscriber = CType(weaksubscriber.Target, ISubscriber(Of TEventType))
+                InvokeSubscriberEventAsync(Of TEventType)(eventToPublish, subscriber)
+            Else
+                subscribersToBeRemoved.Add(weaksubscriber)
+            End If
+        Next
+
+        CheckSubscribersToBeRemoved(subscribers, subscribersToBeRemoved)
     End Sub
 
     Public Sub SubscribeEvent(ByVal subscriber As Object) Implements IEventAggregator.SubscribeEvent
@@ -54,6 +76,15 @@ Public Class EventAggregator
         End If
         syncContext.Send(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
         'syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+    End Sub
+
+    Private Sub InvokeSubscriberEventAsync(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType))
+        Dim syncContext As SynchronizationContext = SynchronizationContext.Current
+
+        If syncContext Is Nothing Then
+            syncContext = New SynchronizationContext()
+        End If
+        syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
     End Sub
 
     Private Function GetSubscriberList(ByVal subscriberType As Type) As List(Of WeakReference)
