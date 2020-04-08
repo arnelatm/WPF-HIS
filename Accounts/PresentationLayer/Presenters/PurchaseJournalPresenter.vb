@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             Return purchaseJournalChangesMade
         End Function
 
-        'Public Overrides Function DataIsValid() As Boolean
+        'Protected Overrides Function DataIsValid() As Boolean
         '    If MyBase.DataIsValid() Then
         '        DataModel = GlobalVariables.Mapper.Map(Of PurchaseJournalModel)(View)
         '        With JournalItemsPresenter.View

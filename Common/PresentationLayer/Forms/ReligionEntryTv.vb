@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             MainTableName = "Religion"
-            IdFieldName = "IdNo"
             TvMainFieldName = "ReligionName"
             TvSecondaryFieldName = "ReligionCode"
             SortOrderKey = "ReligionName"
@@ -23,6 +22,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IDNo As Integer Implements IReligionView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -70,7 +70,6 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {

@@ -176,3 +176,6 @@ GO
 
 --------------------------------------------------------------------------------------------------------------
 8.  Re-design GroupAccess table and remove Viewable and Selectable
+
+
+9. cHANGE eMPLOYEE STRUCTURE, MAKE NAME NOT NULLABLE AND ID NO

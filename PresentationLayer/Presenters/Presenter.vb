@@ -31,13 +31,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected DataModel
     Protected DataService
     Protected DbDataDao
-    Protected IdFieldName As String = "IdNo"
+    Public IdFieldName As String = "IdNo"
     Protected OriginalModel
     Protected SortOrderKey As String = "IdNo"
     Protected TreeViewList
     Protected TreeViewMainField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
+    Protected CompareDifferences As String
     Private _addMode As Boolean = False
     Private _debugSwitch As Byte = 0
     Private _editMode As Boolean = False
@@ -46,6 +47,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _tableColumnPropertyList As List(Of TblColPropModel)
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Integer = 0
+    Private _undoMode As Boolean = False
 
     Public Enum DataTypeSelection
         BooleanType = 0
@@ -126,11 +128,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event ParentRecordUpdatedSuccessfully(idNoOfRecord As Integer)
 
-    Public Event SuccessfulAdd(idNoOfSavedRecord As Integer)
+    Public Event SuccessfulAdd(idNoOfRecord As Integer)
 
-    Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
+    Public Event SuccessfulDelete(idNoOfRecord As Integer)
 
-    Public Event SuccessfulUpdate(idNoOfAddedRecord As Integer)
+    Public Event SuccessfulUpdate(idNoOfRecord As Integer)
 
     Public Event TextDisplayChanged()
 
@@ -140,11 +142,24 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Set
             If _addMode <> Value Then
                 _addMode = Value
+                If GlobalVariables.EventAggregator IsNot Nothing Then
+                    GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
+                End If
             End If
-            GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
         End Set
         Get
             Return _addMode
+        End Get
+    End Property
+
+    Public Property UndoMode As Boolean
+        Set
+            If _undoMode <> Value Then
+                _undoMode = Value
+            End If
+        End Set
+        Get
+            Return _undoMode
         End Get
     End Property
 
@@ -158,8 +173,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Set
             If _editMode <> Value Then
                 _editMode = Value
+                If GlobalVariables.EventAggregator IsNot Nothing Then
+                    GlobalVariables.EventAggregator.PublishEvent(New EditModeChanged(Value))
+                End If
             End If
-            GlobalVariables.EventAggregator.PublishEvent(New EditModeChanged(Value))
         End Set
         Get
             Return _editMode
@@ -205,21 +222,29 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Return _targetIdNo
         End Get
         Set(value As Integer)
+            'If _targetIdNo <> value Then
             _targetIdNo = value
             UpdateViewDisplay(value)
-            GlobalVariables.EventAggregator.PublishEvent(New RecordPositionChanged(value))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New RecordPositionChanged(value))
+            End If
+            'Else
+            '   If UndoMode Then
+            '       UpdateViewDisplay(value)
+            '   End If
+            'End If
         End Set
     End Property
 
     Private Sub GoUndoChanges()
         If OkToMove() Then
-            'RaiseEvent UndoEdits(True)
             UndoMode = True
             If AddMode Then
                 AddMode = False
                 RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
             Else
                 EditMode = False
+                RecordPositionNumber = RecordPositionNumber
             End If
         End If
         UndoMode = False
@@ -285,7 +310,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         compareLogic.Config.CompareChildren = True
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
-            Messaging.Show(result.DifferencesString, "Differences")
+            CompareDifferences = result.DifferencesString
+            'Messaging.Show(result.DifferencesString, "Differences")
             retVal = True
         End If
         Return retVal
@@ -306,18 +332,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function DeleteRecord(idNo As Integer) As Integer
-        Try
-            Return Model.DeleteRecord(idNo, TableName)
-        Catch ex As Exception
-            Return 0
-        End Try
-    End Function
-
-    Public Overridable Function DeleteRecord() As Integer
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
+    Public Overridable Function GoDeleteRecord() As Integer
         Dim retValue = 0
         Dim currentIdNo = GetPropertyValue(Me, IdFieldName)
         If IsOkToDeleteRecord(currentIdNo) Then
@@ -341,10 +356,23 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Sub EditRecord()
-        If _debugSwitch Then
-            Debugger.Break()
+    Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
+        Dim retValue As Boolean = False
+        If Not DependentRecordsExist(idNo) Then
+            retValue = True
         End If
+        Return retValue
+    End Function
+
+    Public Function DeleteRecord(idNo As Integer) As Integer
+        Try
+            Return Model.DeleteRecord(idNo, TableName)
+        Catch ex As Exception
+            Return 0
+        End Try
+    End Function
+
+    Public Sub GoEditRecord()
         RaiseEvent BeforeEdit()
         If CancelEdit Then
             CancelEdit = False
@@ -352,7 +380,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             EditMode = True
             AddMode = False
         End If
-        RaiseEvent AfterEdit()
+        'RaiseEvent AfterEdit()
     End Sub
 
     Public Sub FindField(fieldName, searchString, searchAnywhere)
@@ -518,12 +546,34 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Sub GoFirstRecord()
-        If _debugSwitch Then
-            Debugger.Break()
+    Public Function GetTreeNodeText()
+        Dim cModel As New TM
+        Dim cText As String = ""
+        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String)
+            'Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
+            'Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName})
+        Else
+            Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
+            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String) +
+                    If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString() + ")")
+            'Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName, TreeViewSecondaryField})
         End If
+        Return cText
+    End Function
+
+    Public Sub GoFirstRecord()
         If OkToMove() Then
             RecordPositionNumber = 1
+        End If
+    End Sub
+
+    Public Sub GoQuit()
+        If OkToMove() Then
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New QuitView(True))
+            End If
         End If
     End Sub
 
@@ -541,14 +591,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Catch ex As Exception
             Return Nothing
         End Try
-        Return retValue
-    End Function
-
-    Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
-        Dim retValue As Boolean = False
-        If Not DependentRecordsExist(idNo) Then
-            retValue = True
-        End If
         Return retValue
     End Function
 
@@ -627,7 +669,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If ChangesMade() Then
                 Dim result = SaveOrAbandonChanges()
                 If result = DialogResult.Yes Then
-                    'Save()
+                    Save()
                     retValue = True
                 ElseIf result = DialogResult.No Then
                     If AddMode Then
@@ -668,9 +710,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 GoDeleteRecord()
             Case ButtonClicked.Edit
                 GoEditRecord()
-            Case ButtonClicked.Q
-                'UndoChanges()
+            Case ButtonClicked.Save
+                Save()
+            Case ButtonClicked.Quit
+                GoQuit()
         End Select
+    End Sub
+
+    Public Overridable Sub GoSaveRecord()
+        Save()
     End Sub
 
     Public Overridable Function Save()
@@ -682,13 +730,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Else
             retVal = UpdateRecord(record)
         End If
-        'If retVal > 0 Then
-        '    Dim lRetVal As Integer
-        '    lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
-        '    If lRetVal < 0 Then
-        '        retVal = lRetVal
-        '    End If
-        'End If
+        If retVal > 0 Then
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New SavedRecord(DataModel))
+            End If
+            EditMode = False
+            AddMode = False
+            RecordPositionNumber = RecordPositionNumber
+            'Dim lRetVal As Integer
+            'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
+            'If lRetVal < 0 Then
+            '    retVal = lRetVal
+            'End If
+        End If
         Return retVal
     End Function
 
@@ -758,13 +812,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim validated As Boolean = False
         RaiseEvent BeforeValidate()
         ' check first if automatic rules are valid
-        GlobalVariables.EventAggregator.PublishEvent(New ValidatingData(validated))
+        If GlobalVariables.EventAggregator IsNot Nothing Then
+            GlobalVariables.EventAggregator.PublishEvent(New ValidatingData(validated))
+        End If
         If validated Then
             If DataIsValid() Then
                 retValue = True
             Else
                 Dim lErrors = GetBizObjectErrors()
-                GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
+                If GlobalVariables.EventAggregator IsNot Nothing Then
+                    GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
+                End If
                 Beep()
                 ShowErrors("Record not saved!")
             End If
@@ -818,18 +876,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Protected Sub GoLastRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
         If OkToMove() Then
             RecordPositionNumber = GetRecordCount()
         End If
     End Sub
 
     Protected Sub GoNextRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
         If OkToMove() Then
             If RecordPositionNumber = RecordCount Then
                 Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
@@ -840,9 +892,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Protected Sub GoPreviousRecord()
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
         If OkToMove() Then
             If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
                 Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
@@ -938,9 +987,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Private Function FindRecord() As Integer
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
         Dim idNoOfFoundRecord As Integer = 0
         If OkToMove() Then
             idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
@@ -959,9 +1005,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private Sub GoAddRecord()
         LastIdNo = GetPropertyValue(Me, IdFieldName)
         Try
-            If _debugSwitch Then
-                Debugger.Break()
-            End If
             MakeDefaultValues()
             AddMode = True
             EditMode = False
@@ -974,7 +1017,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Private Sub GoFindRecord()
         Dim idNoOfFoundRecord = FindRecord()
-        If FindRecord() = 0 Then
+        If idNoOfFoundRecord = 0 Then
             If Messaging.Show(True, "AskLastRecordReachedStartFromBeginning", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 idNoOfFoundRecord = FindFieldContinue(1)
@@ -1032,6 +1075,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
         Return retValue
     End Function
+
+    'Public Sub OnSuccessfulUpdate(idNo) Handles Me.SuccessfulUpdate
+    '    RecordPositionNumber = GetSortedRecordPosition(idNo)
+    '    DisplayTreeViewData()
+    '    GotoRecordInTreeView()
+    'End Sub
+
+    'Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
+    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+    '    DisplayTreeViewData()
+    '    GotoRecordInTreeView()
+    '    'GetAndSetPresenterObj.RecordPositionNumber()
+    'End Sub
 
     Private Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
         If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
@@ -1241,6 +1297,16 @@ Public Class EditModeChanged
 
 End Class
 
+Public Class SavedRecord
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
+
+End Class
+
 Public Class RecordPositionChanged
 
     Public Sub New(ByRef recPos)
@@ -1278,6 +1344,16 @@ Public Class PassErrorList
     End Sub
 
     Public Property Errors As List(Of String)
+
+End Class
+
+Public Class QuitView
+
+    Public Sub New(ByRef quitView As Boolean)
+        Me.QuitView = quitView
+    End Sub
+
+    Public Property QuitView As Boolean
 
 End Class
 

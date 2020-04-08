@@ -1,21 +1,23 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
-Imports System.Runtime.Remoting
 Imports System.Threading
-Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntry
-    Inherits BfMain
-    Implements ISubscriber(Of RecordPositionChanged), ISubscriber(Of EditModeChanged), ISubscriber(Of AddModeChanged), ISubscriber(Of ValidatingData), ISubscriber(Of PassErrorList)
+    Implements ISubscriber(Of RecordPositionChanged),
+               ISubscriber(Of EditModeChanged),
+               ISubscriber(Of AddModeChanged),
+               ISubscriber(Of ValidatingData),
+               ISubscriber(Of PassErrorList),
+               ISubscriber(Of QuitView),
+               ISubscriber(Of SavedRecord)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -29,6 +31,10 @@ Public Class CFormEntry
     Private Const TurnOn As Boolean = True
     Private ReadOnly _currentCulture As CultureInfo = GlobalVariables.AppCurrentCultureInfo
     Private _debugSwitch As Byte = 0
+    Protected SortOrderKey As String = "IdNo"
+    Public Property CancelDelete As Boolean = False
+    Public Property CancelEdit As Boolean = False
+    Public Property CancelSave As Boolean = False
 
     Public Sub New()
 
@@ -574,6 +580,7 @@ Public Class CFormEntry
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
         If _debugSwitch = 0 Then
             _debugSwitch = 1
+            Debugger.Break()
             btnDebug.Checked = False
         Else
             _debugSwitch = 0
@@ -667,12 +674,16 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        RunButtonRoutine(ButtonClicked.Add)
+    End Sub
+
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         RunButtonRoutine(ButtonClicked.Save)
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
-        RunButtonRoutine(ButtonClicked.Quit)
+        RunButtonRoutine(ButtonClicked.Undo)
     End Sub
 
     Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
@@ -685,14 +696,14 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub UpdateRecordCounter()
+    Protected Sub UpdateRecordCounter()
         RecordCount = PresenterObj.GetRecordCount()
         RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
         tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
         tsbTotalRecords.Text = RecordCount
     End Sub
 
-    Public Sub OnEventHandler(e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+    Protected Overridable Sub RecordPositionChanged()
         UpdateRecordCounter()
         UpdateButtonDisplays(False, False)
         MyErrorProvider.ClearAllErrorMessages()
@@ -701,7 +712,15 @@ Public Class CFormEntry
         Refresh()
     End Sub
 
-    Public Sub OnEventHandler(e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+    Public Sub OnEventHandlerRecordPositionChanged(e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+        RecordPositionChanged()
+    End Sub
+
+    Public Sub OnEventHandlerSavedRecord(e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
+        RecordSaved()
+    End Sub
+
+    Public Sub OnEventHandlerEditModeChanged(e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
         If e.EditMode Then
             TurnOnInputs()
             UpdateButtonDisplays(True, False)
@@ -711,7 +730,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandler(e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+    Public Sub OnEventHandlerAddModeChanged(e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
         If e.AddMode Then
             TurnOnInputs()
             ClearData()
@@ -722,7 +741,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandler(e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+    Public Sub OnEventHandlerValidatingData(e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
         If ValidateView() Then
             e.Validated = True
         Else
@@ -730,7 +749,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandler(e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
+    Public Sub OnEventHandlerPassErrorList(e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
         MyErrorProvider.ClearAllErrorMessages()
         For Each _err In e.Errors
             For Each ctrl In MyErrorProvider.Controls
@@ -739,8 +758,61 @@ Public Class CFormEntry
                 End If
             Next
         Next
-
     End Sub
+
+    Public Sub OnEventHandlerQuitView(e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
+        CancelClose = False
+        Close()
+        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+        End If
+        GC.Collect()
+        GC.WaitForPendingFinalizers()
+        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+        End If
+        Dispose()
+    End Sub
+
+    Protected Overridable Sub RecordSaved()
+        '
+    End Sub
+
+#End Region
+
+#Region "Temporary"
+
+    Protected Overridable Function DataIsValid() As Boolean
+        Debugger.Break()
+        Return False
+    End Function
+
+    Public Event DisplayedRecordChanged()
+
+    Public Event BeforeDisplayView()
+
+    Public Overridable Function Save()
+        Debugger.Break()
+        Return False
+    End Function
+
+    Public Event SuccessfulUpdate()
+
+    Public Event SuccessfulAdd()
+
+    Public Event BeforeAdd()
+
+    Public Event BeforeSave()
+
+    Public Event AfterSave()
+
+    Public Event BeforeEdit()
+
+    Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
+
+    Public Event ParentRecordUpdatedSuccessfully(passedValue As Integer)
+
+    Public Event ParentRecordAddedSuccessfully(passedValue As Integer)
 
 #End Region
 
