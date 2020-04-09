@@ -1,5 +1,5 @@
 ﻿Public Interface ISubscriber(Of TEventType)
 
-    Sub OnEventHandler(e As TEventType)
+    Sub OnEventHandler(ByRef eventType As TEventType)
 
 End Interface
