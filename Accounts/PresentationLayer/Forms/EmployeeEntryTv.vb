@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -22,7 +23,7 @@ Namespace PresentationLayer.Forms
             EmployeeTabControl.RightToLeftLayout = GlobalVariables.RightToLeftLayout
             EmployeeTabControl.RightToLeft = RightToLeft.Inherit
             PresenterObj = New EmployeePresenter(Me)
-
+            FormEa = New EventAggregator()
         End Sub
 
         Public Property Active As Boolean Implements IEmployeeView.Active
@@ -35,6 +36,7 @@ Namespace PresentationLayer.Forms
         End Property
 
 #Region "Fields"
+
         Public Property ArAccountIdNo As Integer Implements IEmployeeView.ArAccountIdNo
             Get
                 Return cacArAccountIdNo.GetValue()
@@ -358,6 +360,7 @@ Namespace PresentationLayer.Forms
                 txtZipCode.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()

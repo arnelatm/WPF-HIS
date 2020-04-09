@@ -28,10 +28,10 @@ Public Class CFormEntry
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
+    Protected SortOrderKey As String = "IdNo"
     Private Const TurnOn As Boolean = True
     Private ReadOnly _currentCulture As CultureInfo = GlobalVariables.AppCurrentCultureInfo
     Private _debugSwitch As Byte = 0
-    Protected SortOrderKey As String = "IdNo"
 
     Public Sub New()
 
@@ -81,6 +81,43 @@ Public Class CFormEntry
     Protected Property FormTitleCaption As String = ""
 
     Private Property RecordCount As Integer
+
+    Public Property FormEa As EventAggregator
+
+    Public Sub CheckDataChanges()
+    End Sub
+
+    Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+        If GotoTargetRecordWorker.CancellationPending Then
+            e.Cancel = True
+            Return
+        End If
+        PresenterObj.TargetIdNo = e.Argument
+        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+        PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+        PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
+        DoPaintEvents()
+    End Sub
+
+    Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+        'Dim progress As Int32 = 0
+        'Dim IdNoTarget as Int32 = 0
+        'waitMessageSetter.RunWorkerAsync(e.Argument)
+        'Debugger.Break()
+        'Do While IdNoTarget = 0
+        If ShowWaitForm.CancellationPending Then
+            e.Cancel = True
+            Return
+        End If
+        'Thread.Sleep(10)
+        'showWaitForm.ReportProgress(progress)
+        'Debugger.Break()
+        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+        '_resetEvent.Set()
+        'Thread.Sleep(10)
+        'loop
+        'showWaitForm.ReportProgress(progress)
+    End Sub
 
     Public Function ValidateView()
         Dim validationsPassed As Boolean
@@ -142,41 +179,6 @@ Public Class CFormEntry
         PresenterObj.AutoValidationsPassed = validationsPassed
         Return validationsPassed
     End Function
-
-    Public Sub CheckDataChanges()
-    End Sub
-
-    Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-        If GotoTargetRecordWorker.CancellationPending Then
-            e.Cancel = True
-            Return
-        End If
-        PresenterObj.TargetIdNo = e.Argument
-        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-        PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-        PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
-        DoPaintEvents()
-    End Sub
-
-    Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-        'Dim progress As Int32 = 0
-        'Dim IdNoTarget as Int32 = 0
-        'waitMessageSetter.RunWorkerAsync(e.Argument)
-        'Debugger.Break()
-        'Do While IdNoTarget = 0
-        If ShowWaitForm.CancellationPending Then
-            e.Cancel = True
-            Return
-        End If
-        'Thread.Sleep(10)
-        'showWaitForm.ReportProgress(progress)
-        'Debugger.Break()
-        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-        '_resetEvent.Set()
-        'Thread.Sleep(10)
-        'loop
-        'showWaitForm.ReportProgress(progress)
-    End Sub
 
     Protected Overridable Sub AddMandatoryFieldCHeck()
     End Sub
@@ -532,6 +534,68 @@ Public Class CFormEntry
         button.Visible = False
     End Sub
 
+    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+        If e.AddMode Then
+            TurnOnInputs()
+            ClearData()
+            UpdateButtonDisplays(False, True)
+        Else
+            TurnOffInputs()
+            UpdateButtonDisplays(False, False)
+        End If
+    End Sub
+
+    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+        If e.EditMode Then
+            TurnOnInputs()
+            UpdateButtonDisplays(True, False)
+        Else
+            TurnOffInputs()
+            UpdateButtonDisplays(False, False)
+        End If
+    End Sub
+
+    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
+        MyErrorProvider.ClearAllErrorMessages()
+        For Each _err In e.Errors
+            For Each ctrl In MyErrorProvider.Controls
+                If ctrl.errormessage = _err Then
+                    MyErrorProvider.SetError(ctrl.ControlObj, _err)
+                End If
+            Next
+        Next
+    End Sub
+
+    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
+        CancelClose = False
+        Close()
+        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+        End If
+        GC.Collect()
+        GC.WaitForPendingFinalizers()
+        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+        End If
+        Dispose()
+    End Sub
+
+    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+        RecordPositionChanged()
+    End Sub
+
+    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
+        RecordSaved()
+    End Sub
+
+    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+        If ValidateView() Then
+            e.Validated = True
+        Else
+            e.Validated = False
+        End If
+    End Sub
+
     Public Sub SetFormTitleCaption()
         lblFormDescription.Text = Text
         lblFormDescription.Left = 0
@@ -574,6 +638,30 @@ Public Class CFormEntry
         CreateDataSources()
     End Sub
 
+    Protected Overridable Sub RecordPositionChanged()
+        UpdateRecordCounter()
+        UpdateButtonDisplays(False, False)
+        MyErrorProvider.ClearAllErrorMessages()
+        MyErrorProvider.Clear()
+        TurnOffInputs()
+        Refresh()
+    End Sub
+
+    Protected Overridable Sub RecordSaved()
+        '
+    End Sub
+
+    Protected Sub UpdateRecordCounter()
+        RecordCount = PresenterObj.GetRecordCount()
+        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
+        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
+        tsbTotalRecords.Text = RecordCount
+    End Sub
+
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        RunButtonRoutine(ButtonClicked.Add)
+    End Sub
+
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
         If _debugSwitch = 0 Then
             _debugSwitch = 1
@@ -583,6 +671,46 @@ Public Class CFormEntry
             _debugSwitch = 0
             btnDebug.Checked = True
         End If
+    End Sub
+
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        RunButtonRoutine(ButtonClicked.Delete)
+    End Sub
+
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        RunButtonRoutine(ButtonClicked.Edit)
+    End Sub
+
+    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        RunButtonRoutine(ButtonClicked.Find)
+    End Sub
+
+    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
+        RunButtonRoutine(ButtonClicked.First)
+    End Sub
+
+    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
+        RunButtonRoutine(ButtonClicked.Last)
+    End Sub
+
+    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        RunButtonRoutine(ButtonClicked.Next)
+    End Sub
+
+    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        RunButtonRoutine(ButtonClicked.Previous)
+    End Sub
+
+    Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+        RunButtonRoutine(ButtonClicked.Quit)
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        RunButtonRoutine(ButtonClicked.Save)
+    End Sub
+
+    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+        RunButtonRoutine(ButtonClicked.Undo)
     End Sub
 
     Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
@@ -631,6 +759,12 @@ Public Class CFormEntry
         PasteText()
     End Sub
 
+    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
+        If GlobalVariables.EventAggregator IsNot Nothing Then
+            GlobalVariables.EventAggregator.PublishEvent(New SelectedButton(clickedButton))
+        End If
+    End Sub
+
     Private Sub SetAllControlsDynamicProperties()
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim allControls As New List(Of Control)
@@ -643,173 +777,36 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
-        RunButtonRoutine(ButtonClicked.First)
-    End Sub
-
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
-        RunButtonRoutine(ButtonClicked.Previous)
-    End Sub
-
-    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        RunButtonRoutine(ButtonClicked.Next)
-    End Sub
-
-    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
-        RunButtonRoutine(ButtonClicked.Last)
-    End Sub
-
-    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
-        RunButtonRoutine(ButtonClicked.Find)
-    End Sub
-
-    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        RunButtonRoutine(ButtonClicked.Delete)
-    End Sub
-
-    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        RunButtonRoutine(ButtonClicked.Edit)
-    End Sub
-
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        RunButtonRoutine(ButtonClicked.Add)
-    End Sub
-
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        RunButtonRoutine(ButtonClicked.Save)
-    End Sub
-
-    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
-        RunButtonRoutine(ButtonClicked.Undo)
-    End Sub
-
-    Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        RunButtonRoutine(ButtonClicked.Quit)
-    End Sub
-
-    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
-        If GlobalVariables.EventAggregator IsNot Nothing Then
-            GlobalVariables.EventAggregator.PublishEvent(New SelectedButton(clickedButton))
-        End If
-    End Sub
-
-    Protected Sub UpdateRecordCounter()
-        RecordCount = PresenterObj.GetRecordCount()
-        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
-        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
-        tsbTotalRecords.Text = RecordCount
-    End Sub
-
-    Protected Overridable Sub RecordPositionChanged()
-        UpdateRecordCounter()
-        UpdateButtonDisplays(False, False)
-        MyErrorProvider.ClearAllErrorMessages()
-        MyErrorProvider.Clear()
-        TurnOffInputs()
-        Refresh()
-    End Sub
-
-    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        RecordPositionChanged()
-    End Sub
-
-    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
-        RecordSaved()
-    End Sub
-
-    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
-        If e.EditMode Then
-            TurnOnInputs()
-            UpdateButtonDisplays(True, False)
-        Else
-            TurnOffInputs()
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-        If e.AddMode Then
-            TurnOnInputs()
-            ClearData()
-            UpdateButtonDisplays(False, True)
-        Else
-            TurnOffInputs()
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
-        If ValidateView() Then
-            e.Validated = True
-        Else
-            e.Validated = False
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
-        MyErrorProvider.ClearAllErrorMessages()
-        For Each _err In e.Errors
-            For Each ctrl In MyErrorProvider.Controls
-                If ctrl.errormessage = _err Then
-                    MyErrorProvider.SetError(ctrl.ControlObj, _err)
-                End If
-            Next
-        Next
-    End Sub
-
-    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
-        CancelClose = False
-        Close()
-        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
-            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-        End If
-        GC.Collect()
-        GC.WaitForPendingFinalizers()
-        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
-        End If
-        Dispose()
-    End Sub
-
-    Protected Overridable Sub RecordSaved()
-        '
-    End Sub
-
 #End Region
 
 #Region "Temporary"
+
+    Public Event AfterSave()
+
+    Public Event BeforeAdd()
+
+    Public Event BeforeDisplayView()
+
+    Public Event BeforeEdit()
+
+    Public Event BeforeSave()
+
+    Public Event DisplayedRecordChanged()
+
+    Public Event ParentRecordAddedSuccessfully(passedValue As Integer)
+
+    Public Event ParentRecordUpdatedSuccessfully(passedValue As Integer)
+
+    Public Event SuccessfulAdd()
+
+    Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
+
+    Public Event SuccessfulUpdate()
 
     Protected Overridable Function DataIsValid() As Boolean
         Debugger.Break()
         Return False
     End Function
-
-    Public Event DisplayedRecordChanged()
-
-    Public Event BeforeDisplayView()
-
-    Public Overridable Function Save()
-        Debugger.Break()
-        Return False
-    End Function
-
-    Public Event SuccessfulUpdate()
-
-    Public Event SuccessfulAdd()
-
-    Public Event BeforeAdd()
-
-    Public Event BeforeSave()
-
-    Public Event AfterSave()
-
-    Public Event BeforeEdit()
-
-    Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
-
-    Public Event ParentRecordUpdatedSuccessfully(passedValue As Integer)
-
-    Public Event ParentRecordAddedSuccessfully(passedValue As Integer)
 
 #End Region
 
