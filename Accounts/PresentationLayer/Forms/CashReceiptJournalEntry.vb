@@ -38,6 +38,8 @@ Namespace PresentationLayer.Forms
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New CashReceiptJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             _advancesToCustomerAccountIdNo = PresenterObj.getCustomerAdvancesAccountIdNo()
             _journalItemsPresenter = New CashReceiptJournalItemsPresenter(Me)

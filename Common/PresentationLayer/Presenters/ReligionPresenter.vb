@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -17,6 +18,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New ReligionModel()
             DataModel = New ReligionModel
             TreeViewList = New List(Of ReligionModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Shadows Function GetReligionList(Optional ByVal sortKey As String = "") As List(Of ReligionModel)

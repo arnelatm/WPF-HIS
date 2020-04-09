@@ -594,7 +594,6 @@ Namespace PresentationLayer.Forms
         '
         'cboCustomerIdNo
         '
-        Me.cboCustomerIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboCustomerIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboCustomerIdNo.BackColor = System.Drawing.Color.White
         Me.cboCustomerIdNo.ChangingSearchValueOnly = false
@@ -602,6 +601,7 @@ Namespace PresentationLayer.Forms
         Me.cboCustomerIdNo.DefaultValue = Nothing
         Me.cboCustomerIdNo.DisplayMember = "Name"
         Me.cboCustomerIdNo.DropDownHeight = 200
+        Me.cboCustomerIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCustomerIdNo.EditingMode = false
         Me.cboCustomerIdNo.FilterRule = Nothing
         Me.cboCustomerIdNo.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -815,6 +815,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.CFlowLayout3.SetFlowBreak(Me.cboAccountIdNo, true)

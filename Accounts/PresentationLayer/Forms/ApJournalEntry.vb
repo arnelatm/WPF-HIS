@@ -33,6 +33,9 @@ Namespace PresentationLayer.Forms
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New ApJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
+
             'JournalItems = New List(Of IJournalItemView)
 
             ' PresenterObj.JournalItemsPresenter = New ApJournalItemsPresenter(Me)

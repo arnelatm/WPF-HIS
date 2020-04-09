@@ -244,6 +244,7 @@ Namespace PresentationLayer.Forms
         Me.cboCategoryIdNo.DefaultValue = ""
         Me.cboCategoryIdNo.DisplayMember = "Name"
         Me.cboCategoryIdNo.DropDownHeight = 200
+        Me.cboCategoryIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCategoryIdNo.EditingMode = false
         Me.cboCategoryIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
@@ -283,6 +284,7 @@ Namespace PresentationLayer.Forms
         Me.cboGlAccountIdNo.DefaultValue = ""
         Me.cboGlAccountIdNo.DisplayMember = "Name"
         Me.cboGlAccountIdNo.DropDownHeight = 200
+        Me.cboGlAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboGlAccountIdNo.EditingMode = false
         Me.cboGlAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboGlAccountIdNo, "cboGlAccountIdNo")
@@ -322,6 +324,7 @@ Namespace PresentationLayer.Forms
         Me.cboVatAccountIdNo.DefaultValue = ""
         Me.cboVatAccountIdNo.DisplayMember = "Name"
         Me.cboVatAccountIdNo.DropDownHeight = 200
+        Me.cboVatAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboVatAccountIdNo.EditingMode = false
         Me.cboVatAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboVatAccountIdNo, "cboVatAccountIdNo")

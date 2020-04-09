@@ -18,7 +18,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtSupplierCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New SupplierPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus

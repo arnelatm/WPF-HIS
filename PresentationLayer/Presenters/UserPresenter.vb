@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Public Class UserPresenter
@@ -17,6 +18,8 @@ Public Class UserPresenter
         DataModel = New UserModel
         TreeViewList = New List(Of UserModel)
         ParentViewList = New List(Of UserModel)
+        Ea = New EventAggregator()
+        Ea.SubscribeEvent(Me)
 
     End Sub
 

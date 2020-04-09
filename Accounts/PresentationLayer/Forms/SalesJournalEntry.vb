@@ -38,6 +38,8 @@ Namespace PresentationLayer.Forms
 
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New SalesJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             _journalItemsPresenter = New SalesJournalItemsPresenter(Me)
             _salesCashItemsPresenter = New SalesCashItemsPresenter(Me)

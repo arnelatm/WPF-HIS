@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -18,7 +19,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtIsoA2
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CountryPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

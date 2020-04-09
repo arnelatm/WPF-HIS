@@ -30,6 +30,9 @@ Namespace PresentationLayer.Forms
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New PurchaseJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
+
             'Assign comboboxes datasources
 
             _journalItemsPresenter = New PurchaseJournalItemsPresenter(Me)

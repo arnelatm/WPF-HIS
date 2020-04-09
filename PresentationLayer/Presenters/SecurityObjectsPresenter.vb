@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 ''' <summary>
@@ -25,6 +26,8 @@ Public Class SecurityObjectsPresenter
         TreeViewSecondaryField = ""
         OriginalModel = New SecurityObjectModel()
         DataModel = New SecurityObjectModel
+        Ea = New EventAggregator()
+        Ea.SubscribeEvent(Me)
     End Sub
 
     ''' <summary>

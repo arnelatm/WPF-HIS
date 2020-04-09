@@ -332,7 +332,6 @@ Namespace PresentationLayer.Forms
         '
         'cboPayeeIdNo
         '
-        Me.cboPayeeIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboPayeeIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboPayeeIdNo.BackColor = System.Drawing.Color.White
         Me.cboPayeeIdNo.ChangingSearchValueOnly = false
@@ -340,6 +339,7 @@ Namespace PresentationLayer.Forms
         Me.cboPayeeIdNo.DefaultValue = Nothing
         Me.cboPayeeIdNo.DisplayMember = "Name"
         Me.cboPayeeIdNo.DropDownHeight = 200
+        Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPayeeIdNo.EditingMode = false
         Me.cboPayeeIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboPayeeIdNo, "cboPayeeIdNo")
@@ -403,6 +403,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
@@ -554,7 +555,6 @@ Namespace PresentationLayer.Forms
         '
         'cboDiscountAccountIdNo
         '
-        Me.cboDiscountAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = false
@@ -562,6 +562,7 @@ Namespace PresentationLayer.Forms
         Me.cboDiscountAccountIdNo.DefaultValue = Nothing
         Me.cboDiscountAccountIdNo.DisplayMember = "Name"
         Me.cboDiscountAccountIdNo.DropDownHeight = 200
+        Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboDiscountAccountIdNo.EditingMode = false
         Me.cboDiscountAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")

@@ -19,10 +19,12 @@ Namespace PresentationLayer.Forms
             FirstControl = txtRevenueGroupCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New RevenueGroupPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
+
         Public Property IDNo As Integer Implements IRevenueGroupView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -94,7 +96,9 @@ Namespace PresentationLayer.Forms
                 txtLevelNumber.Text = value
             End Set
         End Property
+
 #End Region
+
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetProfitCenterList()
         End Sub
@@ -112,6 +116,7 @@ Namespace PresentationLayer.Forms
                 {"SortKey", txtSortKey}
                 }
         End Sub
+
     End Class
 
 End Namespace

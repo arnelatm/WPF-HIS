@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -19,6 +20,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New OriginalCaptionsModel
             DbDataDao = New OriginalCaptionsDao
             TreeViewList = New List(Of OriginalCaptionsModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property TranslatedCaptionPresenter As TranslatedCaptionPresenter

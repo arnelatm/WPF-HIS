@@ -42,7 +42,11 @@ Namespace BusinessRules
 
         Protected Function GetPropertyValue(businessObject As BusinessObject) As Object
             ' note: reflection is relatively slow
-            Return businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
+            If businessObject.GetType().GetProperty([Property]) Is Nothing Then
+                Return Nothing
+            Else
+                Return businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
+            End If
         End Function
 
         Protected Function GetPropertyValue(cProperty As String, businessObject As BusinessObject) As Object

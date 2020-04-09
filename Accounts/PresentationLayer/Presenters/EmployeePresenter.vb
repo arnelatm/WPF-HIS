@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -16,6 +17,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New EmployeeModel()
             DataModel = New EmployeeModel
             TreeViewList = New List(Of EmployeeModel)
+            ea = New EventAggregator()
+            ea.SubscribeEvent(Me)
         End Sub
 
     End Class

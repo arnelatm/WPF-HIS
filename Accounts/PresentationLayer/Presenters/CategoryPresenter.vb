@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -9,6 +10,8 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As ICategoryView)
             MyBase.New(view)
             InitializerWithTv("Category")
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
     End Class

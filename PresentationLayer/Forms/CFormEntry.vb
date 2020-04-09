@@ -38,7 +38,7 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
-        GlobalVariables.EventAggregator.SubscribeEvent(Me)
+        'FormEa.SubscribeEvent(Me)
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -82,7 +82,7 @@ Public Class CFormEntry
 
     Private Property RecordCount As Integer
 
-    Public Property FormEa As EventAggregator
+    Public Property Ea As EventAggregator
 
     Public Sub CheckDataChanges()
     End Sub
@@ -760,8 +760,8 @@ Public Class CFormEntry
     End Sub
 
     Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
-        If GlobalVariables.EventAggregator IsNot Nothing Then
-            GlobalVariables.EventAggregator.PublishEvent(New SelectedButton(clickedButton))
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New SelectedButton(clickedButton))
         End If
     End Sub
 

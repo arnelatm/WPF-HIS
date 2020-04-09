@@ -21,6 +21,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtDepartmentCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DepartmentPresenter(Me)
+            ea = PresenterObj.Ea
+            ea.SubscribeEvent(Me)
 
         End Sub
 

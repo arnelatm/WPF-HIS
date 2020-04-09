@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -19,6 +20,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New SupplierModel()
             DataModel = New SupplierModel
             ParentViewList = New List(Of SupplierModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
 
         End Sub
 

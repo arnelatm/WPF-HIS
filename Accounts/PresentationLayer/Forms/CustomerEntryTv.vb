@@ -20,14 +20,10 @@ Namespace PresentationLayer.Forms
             FirstControl = txtCustomerCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CustomerPresenter(Me)
-
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            'Assign comboboxes datasources
-            CreateDataSources()
-            'CreateEnumResourceFile()
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             'ResourceEnumConverter.MakeResource("DepartmentTypeSelection", GetType(DepartmentTypeSelection))
-
         End Sub
 
         Public Sub CreateEnumResourceFile()

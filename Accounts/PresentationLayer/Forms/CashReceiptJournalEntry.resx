@@ -703,7 +703,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 106</value>
+    <value>1, 107</value>
   </data>
   <data name="lblCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -736,7 +736,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 106</value>
+    <value>151, 107</value>
   </data>
   <data name="txtCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -766,7 +766,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 106</value>
+    <value>263, 107</value>
   </data>
   <data name="lblCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -796,7 +796,7 @@
     <value>20</value>
   </data>
   <data name="dtpCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 106</value>
+    <value>352, 107</value>
   </data>
   <data name="dtpCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -826,7 +826,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 106</value>
+    <value>461, 107</value>
   </data>
   <data name="lblInvoiceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -859,7 +859,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtORNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 106</value>
+    <value>553, 107</value>
   </data>
   <data name="txtORNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -889,7 +889,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 133</value>
+    <value>1, 134</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -922,7 +922,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 133</value>
+    <value>151, 134</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

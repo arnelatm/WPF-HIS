@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -17,7 +18,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
             GlobalVariables.EventAggregator.SubscribeEvent(Me)
-
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property JournalItemsPresenter As ApJournalItemsPresenter
@@ -39,8 +41,6 @@ Namespace PresentationLayer.Presenters
             retValue = _apOpenInvoiceModel.UpdateRecord(Of ApOpenInvoiceModel)(openInvoiceModel)
             Return retValue
         End Function
-
-
 
         'Public Sub OnBeforeSave() Handles NewUserRequested
         '    If PresenterObj.AddMode Then

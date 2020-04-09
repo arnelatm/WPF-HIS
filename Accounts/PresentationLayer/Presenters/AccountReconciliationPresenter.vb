@@ -1,6 +1,7 @@
 ﻿Imports System.Transactions
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Languages
 
@@ -16,6 +17,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New AccountReconciliationModel()
             DataModel = New AccountReconciliationModel
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property AccountReconciliationItemsPresenter As AccountReconciliationItemsPresenter

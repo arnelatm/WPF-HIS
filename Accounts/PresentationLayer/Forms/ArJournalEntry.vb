@@ -249,7 +249,7 @@ Namespace PresentationLayer.Forms
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If PresenterObj.AddMode Then
-                btnLast.PerformClick()
+                PresenterObj.GoLastRecord()
             End If
         End Sub
 

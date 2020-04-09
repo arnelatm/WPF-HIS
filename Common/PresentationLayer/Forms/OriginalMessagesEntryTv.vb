@@ -21,6 +21,8 @@ Namespace PresentationLayer.Forms
 
             PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
             PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
+            ea = PresenterObj.Ea
+            ea.SubscribeEvent(Me)
         End Sub
 
 #Region "OriginalMessageFields"

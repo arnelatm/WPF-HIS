@@ -18,7 +18,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtReligionCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New ReligionPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

@@ -76,11 +76,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub New(view As T)
-        GlobalVariables.EventAggregator.SubscribeEvent(Me)
         If view Is Nothing Then
             ''
         Else
             Me.View = view
+
             TableName = GetPropertyValue(Me.View, "MainTableName")
             'GetPropertyValue(view,"MainTableName")
             If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
@@ -140,12 +140,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event UndoEdits(addingRec As Boolean)
 
+    Public Property Ea As EventAggregator
+
     Public Property AddMode As Boolean
         Set
             If _addMode <> Value Then
                 _addMode = Value
-                If GlobalVariables.EventAggregator IsNot Nothing Then
-                    GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New AddModeChanged(Value))
                 End If
             End If
         End Set
@@ -175,8 +177,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Set
             If _editMode <> Value Then
                 _editMode = Value
-                If GlobalVariables.EventAggregator IsNot Nothing Then
-                    GlobalVariables.EventAggregator.PublishEvent(New EditModeChanged(Value))
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New EditModeChanged(Value))
                 End If
             End If
         End Set
@@ -227,8 +229,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             'If _targetIdNo <> value Then
             _targetIdNo = value
             UpdateViewDisplay(value)
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New RecordPositionChanged(value))
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New RecordPositionChanged(value))
             End If
             'Else
             '   If UndoMode Then
@@ -352,8 +354,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     ' which in this case will be the next record after the deleted record
                     TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
                     UpdateViewDisplay(TargetIdNo)
-                    If GlobalVariables.EventAggregator IsNot Nothing Then
-                        GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New RecordSaved(DataModel))
                     End If
                     RaiseEvent DisplayedRecordChanged()
                 End If
@@ -575,8 +577,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub GoQuit()
         If OkToMove() Then
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New QuitView(True))
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New QuitView(True))
             End If
         End If
     End Sub
@@ -743,8 +745,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 ' because if ever something was changed in the record that affects the TreeView
                 ' redisplay the record, need to do this to get an updated record
                 ' and to display the added record in the TreeView if one is present.
-                If GlobalVariables.EventAggregator IsNot Nothing Then
-                    GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New RecordSaved(DataModel))
                 End If
                 'Dim lRetVal As Integer
                 'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
@@ -844,8 +846,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim validated As Boolean = False
         Dim lValidatingData = New ValidatingData(False)
         RaiseEvent BeforeValidate()
-        If GlobalVariables.EventAggregator IsNot Nothing Then
-            GlobalVariables.EventAggregator.PublishEvent(lValidatingData)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(lValidatingData)
         End If
         If lValidatingData.Validated Then
             GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
@@ -853,8 +855,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 retValue = True
             Else
                 Dim lErrors = GetBizObjectErrors()
-                If GlobalVariables.EventAggregator IsNot Nothing Then
-                    GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New PassErrorList(lErrors))
                 End If
                 Beep()
                 ShowErrors("Record not saved!")

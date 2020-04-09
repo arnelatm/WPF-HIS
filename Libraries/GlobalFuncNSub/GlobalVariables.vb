@@ -28,7 +28,8 @@ Public Class GlobalVariables
 
     Public Shared ReadOnly Property OriginalAppTextLanguageIdNo As Int16 = 0
 
-    Public Shared EventAggregator as New EventAggregator()
+    Public Shared EventAggregator As New EventAggregator()
+    Public Shared EaEmployee As New EventAggregator()
 
     'Private _ltrCultureInfo As CultureInfo
     'Private _rtlCultureINfo As CultureInfo
@@ -192,7 +193,7 @@ Public Class GlobalVariables
 
 #End Region
 
-    Public Shared Property Mapper as AutoMapper.Mapper
+    Public Shared Property Mapper As AutoMapper.Mapper
     'Public Shared Property Mapper As IMapper
     'Public Shared Property Mapper As MapperConfiguration
 

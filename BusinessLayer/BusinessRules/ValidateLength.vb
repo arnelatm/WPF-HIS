@@ -25,7 +25,9 @@
         End Sub
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
-            Dim length As Integer = GetPropertyValue(businessObject).ToString().Length
+            Dim length As Integer
+            length = GetPropertyValue(businessObject).ToString().Length
+            'Dim length As Integer = GetPropertyValue(businessObject).ToString().Length
             Return length >= _min AndAlso length <= _max
         End Function
 

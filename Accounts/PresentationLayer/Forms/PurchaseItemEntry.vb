@@ -19,6 +19,8 @@ Namespace PresentationLayer.Forms
             SortOrderKey = "IdNo"
             FirstControl = cboCategoryIdNo
             PresenterObj = New PurchaseItemPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
         End Sub
 

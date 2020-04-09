@@ -18,6 +18,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtDesignationCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DesignationPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
             'CreateEnumResourceFile()
 
             'ResourceEnumConverter.MakeResource("DesignationTypeSelection", GetType(DesignationTypeSelection))

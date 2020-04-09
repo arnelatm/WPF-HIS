@@ -39,6 +39,9 @@ Namespace PresentationLayer.Forms
             FirstControl = cboAccountIdNo
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New AccountReconciliationPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
+
 
             _accountReconciliationItemsPresenter = New AccountReconciliationItemsPresenter(Me)
 
