@@ -335,7 +335,7 @@ Namespace PresentationLayer.Forms
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If PresenterObj.AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 
@@ -373,7 +373,7 @@ Namespace PresentationLayer.Forms
                                        MessageBoxButtons.YesNo,
                                        MessageBoxIcon.Question,
                                        MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                        CancelSave = True
+                        PresenterObj.CancelSave = True
                     End If
                 End If
             Else

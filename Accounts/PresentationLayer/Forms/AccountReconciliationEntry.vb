@@ -236,7 +236,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             If PresenterObj.AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 
@@ -735,7 +735,7 @@ Namespace PresentationLayer.Forms
         Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
             If Posted Then
                 Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-                CancelEdit = True
+                PresenterObj.CancelEdit = True
             End If
         End Sub
 
@@ -773,7 +773,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             If UnreconciledDifference = 0 And Not Posted Then
-                If BtnSave.Enabled Then
+                If btnSave.Enabled Then
                     Messaging.Show(True, "MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
                 Else
                     Dim message = "Are you sure you want to {action} this {itemName} entry?"

@@ -173,7 +173,7 @@ Namespace PresentationLayer.Forms
         Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
             If String.IsNullOrEmpty(txtLevelNumber.Text) OrElse CInt(txtLevelNumber.Text) = 0 Then
                 _MBMainAccountNotEditable.Show(Me)
-                CancelEdit = True
+                PresenterObj.CancelEdit = True
             End If
         End Sub
 
@@ -192,7 +192,7 @@ Namespace PresentationLayer.Forms
             If PresenterObj.EditMode And ParentIdNo = IDNo Then
                 MessageBox.Show(Languages.Messages.SorryAMemberCannotBeAParentToItself)
                 'AATM.PresentationLayer.Forms.Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
-                CancelSave = True
+                PresenterObj.CancelSave = True
                 Exit Sub
             End If
             If PresenterObj.EditMode And chkDetailAccount.Checked Then
@@ -203,7 +203,7 @@ Namespace PresentationLayer.Forms
                                     AccountStrings.ChartEntryTv_OnBeforeSave_Child_Account_Found_Message & foundAccount,
                                     AccountStrings.ChartEntryTv_OnBeforeSave_Child_Account_Found, MessageBoxButtons.OK,
                                     MessageBoxIcon.Error)
-                    CancelSave = True
+                    PresenterObj.CancelSave = True
                 End If
             End If
             'If PresenterObj.EditMode then

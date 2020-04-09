@@ -100,7 +100,7 @@ Public Class SecurityObjectEntryTv
     Public Sub OnBeforeSave() Handles MyBase.BeforeSave
         If PresenterObj.EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
             Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-            CancelSave = True
+            PresenterObj.CancelSave = True
             Exit Sub
         End If
     End Sub
@@ -112,7 +112,6 @@ Public Class SecurityObjectEntryTv
         MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
     End Sub
 
-    
     Public Sub OnAfterSave() Handles MyBase.AfterSave
         UpdateParentIdData()
         cacParentIdNo.Refresh()
