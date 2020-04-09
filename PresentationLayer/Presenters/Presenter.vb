@@ -335,8 +335,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Overridable Function GoDeleteRecord() As Integer
+        Dim record As New TM
+        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
-        Dim currentIdNo = GetPropertyValue(Me, IdFieldName)
+        Dim currentIdNo = CallByName(View, IdFieldName, CallType.Get)
         If IsOkToDeleteRecord(currentIdNo) Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
@@ -350,6 +352,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     ' which in this case will be the next record after the deleted record
                     TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
                     UpdateViewDisplay(TargetIdNo)
+                    If GlobalVariables.EventAggregator IsNot Nothing Then
+                        GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
+                    End If
                     RaiseEvent DisplayedRecordChanged()
                 End If
                 RaiseEvent AfterDelete()
@@ -739,7 +744,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 ' redisplay the record, need to do this to get an updated record
                 ' and to display the added record in the TreeView if one is present.
                 If GlobalVariables.EventAggregator IsNot Nothing Then
-                    GlobalVariables.EventAggregator.PublishEvent(New SavedRecord(DataModel))
+                    GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
                 End If
                 'Dim lRetVal As Integer
                 'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
@@ -1035,7 +1040,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'End Function
 
     Private Sub GoAddRecord()
-        LastIdNo = GetPropertyValue(Me, IdFieldName)
+        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
         Try
             MakeDefaultValues()
             AddMode = True
@@ -1329,7 +1334,7 @@ Public Class EditModeChanged
 
 End Class
 
-Public Class SavedRecord
+Public Class RecordSaved
 
     Public Sub New(ByRef model)
         Me.Model = model
@@ -1337,6 +1342,15 @@ Public Class SavedRecord
 
     Public Property Model
 
+End Class
+
+Public Class RecordAdded
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
 End Class
 
 Public Class RecordPositionChanged

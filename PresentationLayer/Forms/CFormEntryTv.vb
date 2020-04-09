@@ -12,7 +12,7 @@ Public Class CFormEntryTv
                ISubscriber(Of ValidatingData),
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
-               ISubscriber(Of SavedRecord)
+               ISubscriber(Of RecordSaved)
 
     Private _bypassSelectedChange As Boolean = False
     Protected TvMainFieldName As String
@@ -33,7 +33,6 @@ Public Class CFormEntryTv
             TreeViewTableName.Nodes(0).Text = MainTableName
             TreeViewTableName.ExpandAll()
             DisplayTreeViewData()
-            GotoRecordInTreeView()
         End If
     End Sub
 
@@ -172,6 +171,7 @@ Public Class CFormEntryTv
         Dim treeViewData = PresenterObj.GetTreeViewDataNew()
         DisplayTree(treeViewData)
         TreeViewTableName.ExpandAll()
+        GotoRecordInTreeView()
     End Sub
 
     Public Sub DisplayTree(ByRef treeViewData As Object)
@@ -233,18 +233,18 @@ Public Class CFormEntryTv
     Protected Overrides Sub RecordPositionChanged()
         MyBase.RecordPositionChanged()
         GotoRecordInTreeView()
-        If TreeViewTableName.SelectedNode IsNot Nothing Then
-            TreeViewTableName.SelectedNode.[Text] = PresenterObj.GetTreeNodeText()
-        End If
+        'If TreeViewTableName.SelectedNode IsNot Nothing Then
+        '    TreeViewTableName.SelectedNode.[Text] = PresenterObj.GetTreeNodeText()
+        'End If
     End Sub
 
-    Public Sub OnEventHandlerSavedRecordTv(ByRef e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
+    Public Sub OeHCfTvSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
         DisplayTreeViewData()
-        GotoRecordInTreeView()
     End Sub
 
-    'Protected Overrides Sub RecordSaved()
-    '    TreeViewTableName.SelectedNode.Text = PresenterObj.GetTreeNodeText()
+    'Public Sub OeHCfTvRecordAdded(ByRef eventType As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
+    '    DisplayTreeViewData()
+    '    GotoRecordInTreeView()
     'End Sub
 
 End Class
