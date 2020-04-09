@@ -354,7 +354,7 @@ Namespace PresentationLayer.Forms
                                        MessageBoxButtons.YesNo,
                                        MessageBoxIcon.Question,
                                        MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                        CancelSave = True
+                        PresenterObj.CancelSave = True
                     End If
                 End If
             Else

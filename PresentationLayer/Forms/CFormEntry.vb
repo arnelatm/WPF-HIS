@@ -32,9 +32,6 @@ Public Class CFormEntry
     Private ReadOnly _currentCulture As CultureInfo = GlobalVariables.AppCurrentCultureInfo
     Private _debugSwitch As Byte = 0
     Protected SortOrderKey As String = "IdNo"
-    Public Property CancelDelete As Boolean = False
-    Public Property CancelEdit As Boolean = False
-    Public Property CancelSave As Boolean = False
 
     Public Sub New()
 

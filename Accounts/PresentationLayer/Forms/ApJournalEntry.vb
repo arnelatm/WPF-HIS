@@ -12,7 +12,7 @@ Imports AATM.Libraries
 Namespace PresentationLayer.Forms
 
     Public Class ApJournalEntry
-        Implements IApJournalView 
+        Implements IApJournalView
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -21,8 +21,6 @@ Namespace PresentationLayer.Forms
         Private _journalItems As IList(Of IJournalItemView)
         Private _profitCentersByCode
         'Public Property EventAggregator As IEventAggregator
-
-
 
         Public Sub New()
             MyBase.New()
@@ -37,9 +35,9 @@ Namespace PresentationLayer.Forms
             PresenterObj = New ApJournalPresenter(Me)
             'JournalItems = New List(Of IJournalItemView)
 
-           ' PresenterObj.JournalItemsPresenter = New ApJournalItemsPresenter(Me)
+            ' PresenterObj.JournalItemsPresenter = New ApJournalItemsPresenter(Me)
             'PresenterObj.AddChildPresenter(PresenterObj.JournalItemsPresenter)
-            
+
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
@@ -59,8 +57,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        
-        Public Sub OnButtonClick2 Handles btnLast.Click
+        Public Sub OnButtonClick2() Handles btnLast.Click
             If GlobalVariables.EventAggregator IsNot Nothing Then
                 GlobalVariables.EventAggregator.PublishEvent(New ItemCreated())
             End If
@@ -292,7 +289,6 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-
         Public Sub OnAfterSave() Handles MyBase.AfterSave
             If IsEmpty(ReferenceNo) Then
                 PresenterObj.UpdateGlReferenceNumber()
@@ -332,12 +328,11 @@ Namespace PresentationLayer.Forms
                                   MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question,
                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    CancelSave = True
+                    PresenterObj.CancelSave = True
                 End If
             End If
 
         End Sub
-
 
         'Public Sub OnParentRecordUpdatedSuccessFully(passedValue As Integer)
         '    PresenterObj.OnParentRecordUpdatedSuccessFully(passedValue)
@@ -575,8 +570,8 @@ Namespace PresentationLayer.Forms
                         'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             If .RowIndex() = 0 Then
-                                Messaging.Show(True,"MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
-                                               "Invalid Insertion",{"transactionName","A.P. Journal Entry"})
+                                Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
+                                               "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
                             Else
                                 Dim newRow As New JournalItemModel
                                 bsJournalItems.Insert(.RowIndex(), newRow)
@@ -585,7 +580,7 @@ Namespace PresentationLayer.Forms
                                 SendKeys.Send("{UP}")
                             End If
                         Else
-                            Messaging.Show(True, "MsgInvalidInsertOnViewMode","Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+                            Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
                                            "Invalid Insertion")
                         End If
                 End Select
@@ -618,8 +613,8 @@ Namespace PresentationLayer.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True,"MsgPaymentDiscountExistChangeDisallowed", 
-                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.", 
+                Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed",
+                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.",
                                "Modification Error")
                 Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed")
             End If
@@ -808,7 +803,7 @@ Namespace PresentationLayer.Forms
                 End If
             Next
         End Sub
-  
+
         Private Sub UpdateTotals()
             TotalDebits = 0
             TotalCredits = 0

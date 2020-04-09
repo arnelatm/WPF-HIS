@@ -62,18 +62,16 @@ Public Class SecurityGroupEntryTv
     Protected Overrides Sub CreateDataSources()
         UpdateParentIdData()
     End Sub
+
     Private Sub UpdateParentIdData()
         cacParentIdNo.DataSource = PresenterObj.GetSecurityGroupList()
     End Sub
-
 
     Public Sub CreateEnumResourceFile()
         'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
         'ResourceEnumConverter.MakeResource("SecurityGroupTypeSelection", GetType(SecurityGroupTypeSelection))
         'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
     End Sub
-
-
 
 #Region "SecurityGroupFields"
 
@@ -112,7 +110,6 @@ Public Class SecurityGroupEntryTv
             txtSecurityGroupNameAra.Text = Value
         End Set
     End Property
-
 
     Public Property ParentIdNo As Integer? Implements ISecurityGroupView.ParentIdNo
         Get
@@ -192,17 +189,18 @@ Public Class SecurityGroupEntryTv
     'Handles DataGridViewGroupAccesses.CellEndEdit
     '    DataGridViewGroupAccesses.CommitEdit( DataGridViewDataErrorContexts.Commit)
     'End Sub
-    
+
     Public Sub OnBeforeSave() Handles MyBase.BeforeSave
         If PresenterObj.EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
             Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-            CancelSave = True
+            PresenterObj.CancelSave = True
             Exit Sub
         End If
         ' need to do this since last change on the dataGrid will not be saved unless that cell lose focus.
         ' so focusing to this field will force the lost focus on the cell and save that last entry.
-        me.txtNotes.Focus()
+        Me.txtNotes.Focus()
     End Sub
+
     Public Sub OnAfterSave() Handles MyBase.AfterSave
         UpdateParentIdData()
         cacParentIdNo.Refresh()
@@ -236,7 +234,6 @@ Public Class SecurityGroupEntryTv
     End Sub
 
     Public Property GroupAccessChanged As Boolean
-
 
 #End Region
 
@@ -286,7 +283,6 @@ Public Class SecurityGroupEntryTv
             {"SecurityGroupNameAra", txtSecurityGroupNameAra}
             }
     End Sub
-
 
 #End Region
 
