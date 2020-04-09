@@ -6,6 +6,13 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryTv
+    Implements ISubscriber(Of RecordPositionChanged),
+               ISubscriber(Of EditModeChanged),
+               ISubscriber(Of AddModeChanged),
+               ISubscriber(Of ValidatingData),
+               ISubscriber(Of PassErrorList),
+               ISubscriber(Of QuitView),
+               ISubscriber(Of SavedRecord)
 
     Private _bypassSelectedChange As Boolean = False
     Protected TvMainFieldName As String
@@ -231,8 +238,13 @@ Public Class CFormEntryTv
         End If
     End Sub
 
-    Protected Overrides Sub RecordSaved()
-        TreeViewTableName.SelectedNode.Text = PresenterObj.GetTreeNodeText()
+    Public Sub OnEventHandlerSavedRecordTv(ByRef e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
+        DisplayTreeViewData()
+        GotoRecordInTreeView()
     End Sub
+
+    'Protected Overrides Sub RecordSaved()
+    '    TreeViewTableName.SelectedNode.Text = PresenterObj.GetTreeNodeText()
+    'End Sub
 
 End Class

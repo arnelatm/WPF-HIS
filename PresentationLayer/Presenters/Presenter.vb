@@ -96,15 +96,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event AddingRecordChanged(adding As Boolean)
 
-    Public Event AfterAdd()
+    Public Event AfterAdd(retVal As Integer)
 
     Public Event AfterDelete()
 
     Public Event AfterDisplayView()
 
-    Public Event AfterEdit()
+    Public Event AfterEdit(retVal As Integer)
 
-    Public Event AfterSave()
+    Public Event AfterSave(retVal As Integer)
 
     Public Event BeforeAdd()
 
@@ -129,6 +129,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Event ParentRecordUpdatedSuccessfully(idNoOfRecord As Integer)
 
     Public Event SuccessfulAdd(idNoOfRecord As Integer)
+
+    Public Event SuccessfulEdit(idNoOfRecord As Integer)
 
     Public Event SuccessfulDelete(idNoOfRecord As Integer)
 
@@ -532,16 +534,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName})
+                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName})
             Else
-                Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName, TreeViewSecondaryField})
+                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
             End If
         Else
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetHRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName, TreeViewParentIdField})
+                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
             Else
                 Return Model.GetHRecords(TableName, newSortOrderKey,
-                                      {"IdNo", treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+                                      {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
     End Function
@@ -552,13 +554,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
             cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String)
-            'Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
-            'Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName})
         Else
             Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
             cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String) +
                     If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString() + ")")
-            'Return Model.GetRecords(TableName, newSortOrderKey, {"IdNo", treeMainFieldName, TreeViewSecondaryField})
         End If
         Return cText
     End Function
@@ -690,7 +689,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Sub OnEventHandler(e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
+    Public Sub OnEventHandler(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
         Select Case e.ClickedButton
             Case ButtonClicked.First
                 GoFirstRecord()
@@ -722,6 +721,47 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Overridable Function Save()
+        Dim retVal As Integer = -1
+        If IsOkToSaveRecord() Then
+            RaiseEvent BeforeSave()
+            retVal = SaveDataEntry()
+            If retVal > 0 Then
+                If AddMode Then
+                    RecordPositionNumber = GetSortedRecordPosition(retVal)
+                    RaiseEvent ParentRecordAddedSuccessfully(retVal)
+                    ' retValue will be the IDNo of the newly saved record
+                Else
+                    RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
+                    RaiseEvent ParentRecordUpdatedSuccessfully(retVal)
+                End If
+                ' redisplay the record, need to do this to get an updated record
+                ' because if ever something was changed in the record that affects the TreeView
+                ' redisplay the record, need to do this to get an updated record
+                ' and to display the added record in the TreeView if one is present.
+                If GlobalVariables.EventAggregator IsNot Nothing Then
+                    GlobalVariables.EventAggregator.PublishEvent(New SavedRecord(DataModel))
+                End If
+                'Dim lRetVal As Integer
+                'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
+                'If lRetVal < 0 Then
+                '    retVal = lRetVal
+                'End If
+            Else
+                '' Something went wrong during the saving since no record was/were updated
+                '' retValue = -1 , for unsuccessful save
+                Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            RaiseEvent AfterSave(retVal)
+            If AddMode Then
+                AddMode = False
+            Else
+                EditMode = False
+            End If
+        End If
+        Return retVal
+    End Function
+
+    Private Function SaveDataEntry() As Integer
         Dim retVal As Integer
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
@@ -729,19 +769,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             retVal = AddRecord(record)
         Else
             retVal = UpdateRecord(record)
-        End If
-        If retVal > 0 Then
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New SavedRecord(DataModel))
-            End If
-            EditMode = False
-            AddMode = False
-            RecordPositionNumber = RecordPositionNumber
-            'Dim lRetVal As Integer
-            'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
-            'If lRetVal < 0 Then
-            '    retVal = lRetVal
-            'End If
         End If
         Return retVal
     End Function
@@ -803,20 +830,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retVal As Integer
         NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
-        CallByName(View, "IdNo", CallType.Set, retVal)
+        CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
     End Function
 
     Protected Overridable Function DataIsValid() As Boolean
         Dim retValue As Boolean = False
         Dim validated As Boolean = False
+        Dim lValidatingData = New ValidatingData(False)
         RaiseEvent BeforeValidate()
-        ' check first if automatic rules are valid
         If GlobalVariables.EventAggregator IsNot Nothing Then
-            GlobalVariables.EventAggregator.PublishEvent(New ValidatingData(validated))
+            GlobalVariables.EventAggregator.PublishEvent(lValidatingData)
         End If
-        If validated Then
-            If DataIsValid() Then
+        If lValidatingData.Validated Then
+            GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+            If Model.IsValid(DataModel) Then
                 retValue = True
             Else
                 Dim lErrors = GetBizObjectErrors()
@@ -901,23 +929,27 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Protected Function OkToSaveRecord() As Boolean
-        Dim retValue As Boolean = False
+    Protected Function IsOkToSaveRecord() As Boolean
+        Dim okToSaveRecord As Boolean = False
         If Not AddMode Then
             If HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
                 Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
-                Return False
             Else
-                'If Not ChangesMade() Then
-                '    _MBNoChangesMadeNothingToSave.Show(Me)
-                '    Return False
-                'End If
+                If Not ChangesMade() Then
+                    Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+                Else
+                    okToSaveRecord = True
+                End If
             End If
+        Else
+            okToSaveRecord = True
         End If
-        If DataIsValid() Then
-            retValue = True
+        If okToSaveRecord And DataIsValid() Then
+            okToSaveRecord = True
+        Else
+            okToSaveRecord = False
         End If
-        Return retValue
+        Return okToSaveRecord
     End Function
 
     'Protected Overridable Function SaveChildren(addMode As Boolean, retVal As Integer) As Integer
@@ -1211,7 +1243,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    If _debugSwitch Then
     '        Debugger.Break()
     '    End If
-    '    If OkToSaveRecord() Then
+    '    If IsOkToSaveRecord() Then
     '        BeforeSave()
     '        Dim retValue As Short
     '        Try

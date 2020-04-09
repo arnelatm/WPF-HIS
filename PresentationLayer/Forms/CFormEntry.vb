@@ -712,15 +712,15 @@ Public Class CFormEntry
         Refresh()
     End Sub
 
-    Public Sub OnEventHandlerRecordPositionChanged(e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
         RecordPositionChanged()
     End Sub
 
-    Public Sub OnEventHandlerSavedRecord(e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
+    Public Sub OnEventHandlerSavedRecord(ByRef e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
         RecordSaved()
     End Sub
 
-    Public Sub OnEventHandlerEditModeChanged(e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
         If e.EditMode Then
             TurnOnInputs()
             UpdateButtonDisplays(True, False)
@@ -730,7 +730,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandlerAddModeChanged(e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
         If e.AddMode Then
             TurnOnInputs()
             ClearData()
@@ -741,7 +741,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandlerValidatingData(e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
         If ValidateView() Then
             e.Validated = True
         Else
@@ -749,7 +749,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandlerPassErrorList(e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
+    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
         MyErrorProvider.ClearAllErrorMessages()
         For Each _err In e.Errors
             For Each ctrl In MyErrorProvider.Controls
@@ -760,7 +760,7 @@ Public Class CFormEntry
         Next
     End Sub
 
-    Public Sub OnEventHandlerQuitView(e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
+    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
         CancelClose = False
         Close()
         If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
