@@ -17,7 +17,7 @@ Public Class CFormEntry
                ISubscriber(Of ValidatingData),
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
-               ISubscriber(Of SavedRecord)
+               ISubscriber(Of RecordSaved)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -716,7 +716,7 @@ Public Class CFormEntry
         RecordPositionChanged()
     End Sub
 
-    Public Sub OnEventHandlerSavedRecord(ByRef e As SavedRecord) Implements ISubscriber(Of SavedRecord).OnEventHandler
+    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
         RecordSaved()
     End Sub
 
