@@ -457,14 +457,6 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
-            If keyData = Keys.F10 Then
-                Save()
-                Return True
-            End If
-            Return MyBase.ProcessCmdKey(msg, keyData)
-        End Function
-
         Private Sub ArJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
             'JournalItems = New List(Of JournalItemModel)

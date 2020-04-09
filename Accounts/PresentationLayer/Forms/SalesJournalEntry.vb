@@ -255,7 +255,7 @@ Namespace PresentationLayer.Forms
                 PresenterObj.UpdateGlReferenceNumber()
             End If
             If PresenterObj.AddMode Then
-                BtnLast.PerformClick()
+                btnLast.PerformClick()
             End If
         End Sub
 
@@ -404,14 +404,6 @@ Namespace PresentationLayer.Forms
             _salesCashItemsPresenter.Display(idNoOfRecord)
             UpdateSalesDepositsTotal()
         End Sub
-
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
-            If keyData = Keys.F10 Then
-                Save()
-                Return True
-            End If
-            Return MyBase.ProcessCmdKey(msg, keyData)
-        End Function
 
         Private Sub BindJournalItem()
             SuspendLayout()

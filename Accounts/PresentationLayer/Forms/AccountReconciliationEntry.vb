@@ -360,14 +360,6 @@ Namespace PresentationLayer.Forms
             ReComputeDifference()
         End Sub
 
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
-            If keyData = Keys.F10 Then
-                Save()
-                Return True
-            End If
-            Return MyBase.ProcessCmdKey(msg, keyData)
-        End Function
-
         Private Sub BindAccountReconciliation()
             SuspendLayout()
             bsAccountReconciliationItems.DataSource = AccountReconciliationItems

@@ -276,14 +276,6 @@ Namespace PresentationLayer.Forms
         '    Refresh()
         'End Sub
 
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
-            If keyData = Keys.F10 Then
-                Save()
-                Return True
-            End If
-            Return MyBase.ProcessCmdKey(msg, keyData)
-        End Function
-
         Private Sub BindJournalItem()
             SuspendLayout()
             bsJournalItems.DataSource = JournalItems

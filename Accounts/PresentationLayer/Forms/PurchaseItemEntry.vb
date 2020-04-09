@@ -247,14 +247,6 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
-            If keyData = Keys.F10 Then
-                Save()
-                Return True
-            End If
-            Return MyBase.ProcessCmdKey(msg, keyData)
-        End Function
-
         Private Sub PurchaseItemEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
         End Sub
