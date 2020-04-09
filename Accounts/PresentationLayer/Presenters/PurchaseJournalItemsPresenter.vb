@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -14,6 +15,8 @@ Namespace PresentationLayer.Presenters
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
             DataModel = New JournalItemModel
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property ChangesMadeInJournalItem As Boolean = False

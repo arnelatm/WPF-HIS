@@ -890,6 +890,7 @@ Namespace PresentationLayer.Forms
         Me.cacCountryCode.DefaultValue = Nothing
         Me.cacCountryCode.DisplayMember = "Name"
         Me.cacCountryCode.DropDownHeight = 200
+        Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacCountryCode.EditingMode = false
         Me.cacCountryCode.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, true)
@@ -924,6 +925,7 @@ Namespace PresentationLayer.Forms
         Me.cacBankIdNo.DefaultValue = Nothing
         Me.cacBankIdNo.DisplayMember = "Name"
         Me.cacBankIdNo.DropDownHeight = 200
+        Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacBankIdNo.EditingMode = false
         Me.cacBankIdNo.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacBankIdNo, true)
@@ -958,6 +960,7 @@ Namespace PresentationLayer.Forms
         Me.cacExpAccountIdNo.DefaultValue = Nothing
         Me.cacExpAccountIdNo.DisplayMember = "Name"
         Me.cacExpAccountIdNo.DropDownHeight = 200
+        Me.cacExpAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacExpAccountIdNo.EditingMode = false
         Me.cacExpAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cacExpAccountIdNo, "cacExpAccountIdNo")
@@ -992,6 +995,7 @@ Namespace PresentationLayer.Forms
         Me.cacApAccountIdNo.DefaultValue = Nothing
         Me.cacApAccountIdNo.DisplayMember = "Name"
         Me.cacApAccountIdNo.DropDownHeight = 200
+        Me.cacApAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacApAccountIdNo.EditingMode = false
         Me.cacApAccountIdNo.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacApAccountIdNo, true)
@@ -1026,6 +1030,7 @@ Namespace PresentationLayer.Forms
         Me.cacPaymentMethod.DefaultValue = Nothing
         Me.cacPaymentMethod.DisplayMember = "Name"
         Me.cacPaymentMethod.DropDownHeight = 200
+        Me.cacPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacPaymentMethod.EditingMode = false
         Me.cacPaymentMethod.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, true)
@@ -1100,6 +1105,7 @@ Namespace PresentationLayer.Forms
         Me.cacAccountStatus.DefaultValue = Nothing
         Me.cacAccountStatus.DisplayMember = "Name"
         Me.cacAccountStatus.DropDownHeight = 200
+        Me.cacAccountStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacAccountStatus.EditingMode = false
         Me.cacAccountStatus.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacAccountStatus, true)

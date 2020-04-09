@@ -18,10 +18,12 @@ Namespace PresentationLayer.Forms
             FirstControl = txtBranchCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New BranchPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
+
         Public Property IDNo As Integer Implements IBranchView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -66,6 +68,7 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()

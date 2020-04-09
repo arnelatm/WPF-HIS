@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -18,6 +19,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "Sequence"
             DataModel = New SalesCashItemModel
             _cashCodesModel = GetCashCodesModel()
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property ChangesMadeInSalesCashItem As Boolean = False

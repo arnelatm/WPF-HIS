@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -15,8 +16,10 @@ Namespace PresentationLayer.Presenters
             ModelPresenter = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            OriginalModel =  New List(Of JournalItemModel())
+            OriginalModel = New List(Of JournalItemModel())
             DataModel = New JournalItemModel
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property ChangesMadeInJournalItem As Boolean = False
@@ -37,7 +40,7 @@ Namespace PresentationLayer.Presenters
                 ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                     Dim lineNumber As String = item.Sequence.ToString()
                     Dim caption = "Invalid Entry!"
-                    Dim message = Messaging.GetMessage(True,"MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry")
+                    Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for AP Journal Entry.", "Invalid Entry")
                     message = message.Interpolate(Function(x) lineNumber)
                     Messaging.Show(message, caption)
                     retVal = False

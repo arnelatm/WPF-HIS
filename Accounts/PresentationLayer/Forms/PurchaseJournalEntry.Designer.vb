@@ -547,7 +547,6 @@ Namespace PresentationLayer.Forms
         '
         'cboSupplierIdNo
         '
-        Me.cboSupplierIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboSupplierIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboSupplierIdNo.BackColor = System.Drawing.Color.White
         Me.cboSupplierIdNo.ChangingSearchValueOnly = false
@@ -555,6 +554,7 @@ Namespace PresentationLayer.Forms
         Me.cboSupplierIdNo.DefaultValue = Nothing
         Me.cboSupplierIdNo.DisplayMember = "Name"
         Me.cboSupplierIdNo.DropDownHeight = 200
+        Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSupplierIdNo.EditingMode = false
         Me.cboSupplierIdNo.FilterRule = Nothing
         Me.cboSupplierIdNo.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -842,6 +842,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.CFlowLayout3.SetFlowBreak(Me.cboAccountIdNo, true)
@@ -1056,7 +1057,7 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
         Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 25)
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 57)
         Me.floFullEntryArea.Name = "floFullEntryArea"
         Me.floFullEntryArea.Size = New System.Drawing.Size(1034, 509)
         Me.floFullEntryArea.TabIndex = 0

@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -17,6 +18,8 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "DistributionSchemeName"
             TreeViewSecondaryField = "DistributionSchemeCode"
             DataModel = New DistributionSchemeModel
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property DistributionSchemeItemsPresenter As DistributionSchemeItemsPresenter

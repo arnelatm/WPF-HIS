@@ -31,6 +31,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtDistributionSchemeCode
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New DistributionSchemePresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 

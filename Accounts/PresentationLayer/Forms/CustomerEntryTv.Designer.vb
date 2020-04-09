@@ -873,6 +873,7 @@ Namespace PresentationLayer.Forms
         Me.cacCountryCode.DefaultValue = Nothing
         Me.cacCountryCode.DisplayMember = "Name"
         Me.cacCountryCode.DropDownHeight = 200
+        Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacCountryCode.EditingMode = false
         Me.cacCountryCode.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, true)
@@ -1052,6 +1053,7 @@ Namespace PresentationLayer.Forms
         Me.cacDiscountSchemeIdNo.DefaultValue = Nothing
         Me.cacDiscountSchemeIdNo.DisplayMember = "Name"
         Me.cacDiscountSchemeIdNo.DropDownHeight = 200
+        Me.cacDiscountSchemeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacDiscountSchemeIdNo.EditingMode = false
         Me.cacDiscountSchemeIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cacDiscountSchemeIdNo, "cacDiscountSchemeIdNo")

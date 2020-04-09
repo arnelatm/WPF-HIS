@@ -23,7 +23,8 @@ Namespace PresentationLayer.Forms
             EmployeeTabControl.RightToLeftLayout = GlobalVariables.RightToLeftLayout
             EmployeeTabControl.RightToLeft = RightToLeft.Inherit
             PresenterObj = New EmployeePresenter(Me)
-            FormEa = New EventAggregator()
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property Active As Boolean Implements IEmployeeView.Active

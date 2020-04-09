@@ -20,6 +20,8 @@ Namespace PresentationLayer.Forms
 
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New BankPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
             'CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("BankTypeSelection", GetType(BankTypeSelection))
         End Sub

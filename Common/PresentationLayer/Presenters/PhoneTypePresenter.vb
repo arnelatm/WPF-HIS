@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -16,6 +17,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New PhoneTypeModel
             DataModel = New PhoneTypeModel
             TreeViewList = New List(Of PhoneTypeModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
     End Class

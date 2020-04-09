@@ -139,6 +139,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New GeneralJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             PresenterObj.JournalItemsPresenter = New GeneralJournalItemsPresenter(Me)
 

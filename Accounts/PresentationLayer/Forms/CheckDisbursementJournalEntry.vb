@@ -39,6 +39,8 @@ Namespace PresentationLayer.Forms
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New CheckDisbursementJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             _advancesToSupplierAccountIdNo = PresenterObj.GetadvancesToSupplierAccountIdNo()
             _journalItemsPresenter = New CheckDisbursementJournalItemsPresenter(Me)

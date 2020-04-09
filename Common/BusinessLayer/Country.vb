@@ -21,15 +21,15 @@ Namespace BusinessLayer
         End Sub
 
         Public Property IdNo As Integer
-        Public Property Isoa2 As String
+        Public Property ISOA2 As String
         Public Property CountryName As String
         Public Property CountryNameAra As String
         Public Property Nationality As String
         Public Property NationalityAra As String
         Public Property Flag32 As String
         Public Property Flag128 As String
-        Public Property Isoa3 As String
-        Public Property Ison As String
+        Public Property ISOA3 As String
+        Public Property ISON As String
         Public Property PhoneCode As String
     End Class
 

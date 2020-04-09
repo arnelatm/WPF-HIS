@@ -334,7 +334,6 @@ Namespace PresentationLayer.Forms
         '
         'cboPayorIdNo
         '
-        Me.cboPayorIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboPayorIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboPayorIdNo.BackColor = System.Drawing.Color.White
         Me.cboPayorIdNo.ChangingSearchValueOnly = false
@@ -406,6 +405,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
@@ -455,7 +455,6 @@ Namespace PresentationLayer.Forms
         '
         'cboDiscountAccountIdNo
         '
-        Me.cboDiscountAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = false
@@ -463,6 +462,7 @@ Namespace PresentationLayer.Forms
         Me.cboDiscountAccountIdNo.DefaultValue = Nothing
         Me.cboDiscountAccountIdNo.DisplayMember = "Name"
         Me.cboDiscountAccountIdNo.DropDownHeight = 200
+        Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboDiscountAccountIdNo.EditingMode = false
         Me.cboDiscountAccountIdNo.FilterRule = Nothing
         Me.floHeader1.SetFlowBreak(Me.cboDiscountAccountIdNo, true)

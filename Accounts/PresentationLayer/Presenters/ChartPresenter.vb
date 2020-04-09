@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Models
 
@@ -22,6 +23,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New ChartModel
             TreeViewList = New List(Of ChartModel)
             ParentViewList = New List(Of ChartModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Function GetParentList() As List(Of ChartModel)

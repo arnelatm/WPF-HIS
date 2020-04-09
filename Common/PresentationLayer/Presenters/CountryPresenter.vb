@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
@@ -19,6 +20,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New CountryModel
             TreeViewList = New List(Of CountryModel)
             ParentViewList = New List(Of CountryModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
     End Class

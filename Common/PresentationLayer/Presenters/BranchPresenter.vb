@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -18,6 +19,8 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New BranchModel()
             DataModel = New BranchModel
             TreeViewList = New List(Of BranchModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Function GetBranchList(Optional ByVal sortKey As String = "") As List(Of BranchModel)

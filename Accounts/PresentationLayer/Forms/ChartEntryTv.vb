@@ -20,6 +20,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtAccountCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New ChartPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
 
             'CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("ActiveSelection", GetType(ActiveSelection))

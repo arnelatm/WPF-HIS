@@ -19,6 +19,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtCostCenterCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CostCenterPresenter(Me)
+            ea = PresenterObj.Ea
+            ea.SubscribeEvent(Me)
 
         End Sub
 

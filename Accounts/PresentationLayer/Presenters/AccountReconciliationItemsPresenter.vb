@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -20,6 +21,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New AccountReconciliationItemModel
             _cashCodesModel = GetCashCodesModel()
             _modelReconciled = New ModelAccounts("Reconciled")
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Property ChangesMadeInAccountReconciliationItems As Boolean = False

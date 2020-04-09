@@ -20,10 +20,12 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             'Dim model = New ProfitCenterModel
             PresenterObj = New ProfitCenterPresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
-        
-#Region "Fields"        
+
+#Region "Fields"
+
         Public Property IDNo As Integer Implements IProfitCenterView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -106,6 +108,7 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
+
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetProfitCenterList()
             cacProfitCenterType.DataSource = PresenterObj.MakeEnumComboList(Of ProfitCenterTypeSelection)

@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Public Class SecurityGroupPresenter
@@ -14,6 +15,9 @@ Public Class SecurityGroupPresenter
         OriginalModel = New SecurityGroupModel()
         DataModel = New SecurityGroupModel
         TreeViewList = New List(Of SecurityGroupModel)
+        Ea = New EventAggregator()
+        Ea.SubscribeEvent(Me)
+
     End Sub
 
     Public Property GroupAccessesPresenter As GroupAccessesPresenter

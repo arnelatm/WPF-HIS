@@ -21,7 +21,8 @@ Namespace PresentationLayer.Forms
 
             PresenterObj.TranslatedCaptionPresenter = New TranslatedCaptionPresenter(Me)
             PresenterObj.AddChildPresenter(PresenterObj.TranslatedCaptionPresenter)
-
+            ea = PresenterObj.Ea
+            ea.SubscribeEvent(Me)
             'CreateEnumResourceFile()
 
             'ResourceEnumConverter.MakeResource("OriginalCaptionsTypeSelection", GetType(OriginalCaptionsTypeSelection))

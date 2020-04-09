@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -19,6 +20,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New CashReceiptJournalModel()
             DataModel = New CashReceiptJournalModel
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
             '_arOpenInvoiceModel = New ModelArOpenInvoice
         End Sub
 

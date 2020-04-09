@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -21,6 +22,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New RevenueGroupModel
             TreeViewList = New List(Of RevenueGroupModel)
             ParentViewList = New List(Of RevenueGroupModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Function GetParentList() As List(Of RevenueGroupModel)

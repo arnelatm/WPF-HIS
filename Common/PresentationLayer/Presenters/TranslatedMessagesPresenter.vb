@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Translations
 
@@ -21,6 +22,8 @@ Namespace PresentationLayer.Presenters
             DataModel = New TranslatedMessagesModel
             TreeViewList = New List(Of TranslatedMessagesModel)
             Dac = New Dac
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         'Public Overrides Sub Display(messageIdNo As Integer)

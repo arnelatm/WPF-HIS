@@ -18,10 +18,12 @@ Namespace PresentationLayer.Forms
             FirstControl = txtPhoneTypeCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PhoneTypePresenter(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
+
         Public Property IDNo As Integer Implements IPhoneTypeView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -68,7 +70,6 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
-
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

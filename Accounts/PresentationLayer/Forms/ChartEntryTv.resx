@@ -949,7 +949,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPayeeType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 253</value>
+    <value>0, 254</value>
   </data>
   <data name="lblPayeeType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -982,7 +982,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboPayeeType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 254</value>
+    <value>197, 255</value>
   </data>
   <data name="cboPayeeType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1009,7 +1009,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 279</value>
+    <value>0, 281</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1042,7 +1042,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 279</value>
+    <value>196, 281</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1075,7 +1075,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSortKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 339</value>
+    <value>0, 341</value>
   </data>
   <data name="txtSortKey.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
