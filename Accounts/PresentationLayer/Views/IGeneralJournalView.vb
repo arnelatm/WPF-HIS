@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
@@ -13,6 +14,7 @@ Namespace PresentationLayer.Views
         Property TotalCredits As Decimal
         Property TotalDebits As Decimal
         Property TransactionDate As Date?
+        Property JournalItems As List(Of JournalItemView)
     End Interface
 
 End Namespace

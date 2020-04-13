@@ -27,6 +27,7 @@
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
         Public Property JournalItems As IList(Of JournalItemModel)
+
     End Class
 
 End Namespace

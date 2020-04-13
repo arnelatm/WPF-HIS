@@ -42,7 +42,7 @@ Namespace PresentationLayer.Forms
         Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -57,7 +57,6 @@ Namespace PresentationLayer.Forms
         Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -72,6 +71,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -95,7 +95,7 @@ Namespace PresentationLayer.Forms
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.txtJournalCode)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Controls.Add(Me.TxtIDNo)
         Me.CFlowLayout1.Controls.Add(Me.lblReferenceNo)
         Me.CFlowLayout1.Controls.Add(Me.txtReferenceNo)
@@ -114,23 +114,13 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'txtJournalCode
+        'CLabel1
         '
-        Me.txtJournalCode.BackColor = System.Drawing.Color.White
-        Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtJournalCode.ComputedValue = true
-        Me.txtJournalCode.CustomFormat = Nothing
-        Me.txtJournalCode.DataBoundControl = true
-        Me.txtJournalCode.DisplayOnly = true
-        Me.txtJournalCode.EditingMode = true
-        resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
-        Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
-        Me.txtJournalCode.LinkedLabel = Nothing
-        Me.txtJournalCode.Name = "txtJournalCode"
-        Me.txtJournalCode.OldValue = Nothing
-        Me.txtJournalCode.ReadOnly = true
-        Me.txtJournalCode.TabStop = false
-        Me.txtJournalCode.ValueIsMandatory = true
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        resources.ApplyResources(Me.CLabel1, "CLabel1")
+        Me.CLabel1.Name = "CLabel1"
         '
         'TxtIDNo
         '
@@ -302,14 +292,6 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.Name = "txtDateCreated"
         Me.txtDateCreated.OldValue = Nothing
         Me.txtDateCreated.ValueIsMandatory = true
-        '
-        'lblAmount
-        '
-        Me.lblAmount.BackColor = System.Drawing.Color.Transparent
-        Me.lblAmount.DisplayOnly = true
-        Me.lblAmount.EditingMode = false
-        resources.ApplyResources(Me.lblAmount, "lblAmount")
-        Me.lblAmount.Name = "lblAmount"
         '
         'DataGridViewJournalItems
         '
@@ -491,6 +473,14 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
         Me.CFlowLayout4.Name = "CFlowLayout4"
         '
+        'lblAmount
+        '
+        Me.lblAmount.BackColor = System.Drawing.Color.Transparent
+        Me.lblAmount.DisplayOnly = true
+        Me.lblAmount.EditingMode = false
+        resources.ApplyResources(Me.lblAmount, "lblAmount")
+        Me.lblAmount.Name = "lblAmount"
+        '
         'GeneralJournalEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -521,9 +511,7 @@ End Sub
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents txtJournalCode As CTextBox
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblAmount As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkCancelled As CCheckBox
         Friend WithEvents DataGridViewJournalItems As CDataGridView
@@ -547,5 +535,7 @@ End Sub
         Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents dgvJournalIdNo As CdgvColumnText
         Friend WithEvents dgvIdNo As CdgvColumnText
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents lblAmount As CLabel
     End Class
 End NameSpace

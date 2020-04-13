@@ -216,10 +216,15 @@ Namespace ServiceLayer.ActionService
         End Property
 
         Public Sub New(accountName As String)
-            Dim bizObject = $"AATM.Accounts.BusinessLayer." + accountName
+            Dim bizObject
+            If accountName.Length > 11 AndAlso accountName.Right(11) = "JournalItem" Then
+                bizObject = $"AATM.Accounts.BusinessLayer.JournalItem"
+            Else
+                bizObject = $"AATM.Accounts.BusinessLayer." + accountName
+            End If
             Dim dao = accountName + "Dao"
             DataBo = Activator.CreateInstance(Type.GetType(bizObject))
-            DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
                 MessageBox.Show("Missing Business Object " + bizObject)
                 Debugger.Break()
@@ -286,7 +291,7 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Integer, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
-            Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder) 
+            Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder)
         End Function
 
     End Class

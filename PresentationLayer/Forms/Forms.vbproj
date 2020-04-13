@@ -316,6 +316,10 @@
       <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
       <Name>Translations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Events\Events.vbproj">
+      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.vbproj">
       <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
       <Name>Models</Name>

@@ -8,6 +8,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntry
@@ -46,12 +47,6 @@ Public Class CFormEntry
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
-    Public Event AfterLoad()
-
-    Public Event InputsTurnedOff()
-
-    Public Event InputsTurnedOn()
-
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
                                                                           dwMinimumWorkingSetSize As Int32,
                                                                           dwMaximumWorkingSetSize As Int32) As Int32
@@ -69,6 +64,8 @@ Public Class CFormEntry
     <Browsable(True)>
     Public Property ChildTableName As String = ""
 
+    Public Property Ea As EventAggregator
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -82,10 +79,21 @@ Public Class CFormEntry
 
     Private Property RecordCount As Integer
 
-    Public Property Ea As EventAggregator
-
     Public Sub CheckDataChanges()
     End Sub
+
+    Public Sub FindField(txtControl As Control)
+        Dim fieldName As String = txtControl.Name.Substring(3)
+        Dim searchString As String
+        Dim searchAnywhere As Boolean
+        searchString = CallByName(txtControl, "GetTextToSearch", CallType.Get)
+        searchAnywhere = CallByName(txtControl, "GetSearchAnywhere", CallType.Get)
+        PresenterObj.FindField(fieldName, searchString, searchAnywhere)
+    End Sub
+
+    Public Function GetFieldsDictionary()
+        Return FieldsDictionary
+    End Function
 
     Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         If GotoTargetRecordWorker.CancellationPending Then
@@ -97,6 +105,85 @@ Public Class CFormEntry
         PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
         PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
         DoPaintEvents()
+    End Sub
+
+    Public Sub HideButton(button As ToolStripButton)
+        button.Visible = False
+    End Sub
+
+    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+        If e.AddMode Then
+            TurnOnInputs()
+            UpdateButtonDisplays(False, True)
+        Else
+            TurnOffInputs()
+            UpdateButtonDisplays(False, False)
+        End If
+    End Sub
+
+    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+        If e.EditMode Then
+            TurnOnInputs()
+            UpdateButtonDisplays(True, False)
+        Else
+            TurnOffInputs()
+            UpdateButtonDisplays(False, False)
+        End If
+    End Sub
+
+    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
+        MyErrorProvider.ClearAllErrorMessages()
+        For Each _err In e.Errors
+            For Each ctrl In MyErrorProvider.Controls
+                If ctrl.errormessage = _err Then
+                    MyErrorProvider.SetError(ctrl.ControlObj, _err)
+                End If
+            Next
+        Next
+    End Sub
+
+    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
+        CancelClose = False
+        Close()
+        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+        End If
+        GC.Collect()
+        GC.WaitForPendingFinalizers()
+        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+        End If
+        Dispose()
+    End Sub
+
+    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+        RecordPositionChanged()
+    End Sub
+
+    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
+        RecordSaved()
+    End Sub
+
+    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+        If ValidateView() Then
+            e.Validated = True
+        Else
+            e.Validated = False
+        End If
+    End Sub
+
+    Public Sub SetFormTitleCaption()
+        lblFormDescription.Text = Text
+        lblFormDescription.Left = 0
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
+
+    Public Sub ShowFormTitle()
+        lblFormDescription.Text = FormTitleCaption
+        lblFormDescription.Width = Me.Width
+        lblFormDescription.Left = 0
+        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
     Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
@@ -117,6 +204,17 @@ Public Class CFormEntry
         'Thread.Sleep(10)
         'loop
         'showWaitForm.ReportProgress(progress)
+    End Sub
+
+    Public Sub TurnOffInputs()
+        Inputs(False)
+        RaiseEvent InputsTurnedOff()
+    End Sub
+
+    Public Sub TurnOnInputs()
+        Inputs(True)
+        RaiseEvent InputsTurnedOn()
+        FirstControl.Focus()
     End Sub
 
     Public Function ValidateView()
@@ -187,8 +285,39 @@ Public Class CFormEntry
         Return PresenterObj.ChangesMade()
     End Function
 
+    Protected Overridable Sub CreateDataSources()
+        '
+    End Sub
+
+    Protected Overridable Sub CreateFieldsDictionary()
+        '
+    End Sub
+
     Protected Overridable Sub DisplayView(idNo As Integer)
         Debugger.Break()
+    End Sub
+
+    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
+        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            GlobalVariables.RightToLeftLayout = True
+        Else
+            GlobalVariables.RightToLeftLayout = False
+        End If
+        CreateDataSources()
+    End Sub
+
+    Protected Overridable Sub RecordPositionChanged()
+        UpdateRecordCounter()
+        UpdateButtonDisplays(False, False)
+        MyErrorProvider.ClearAllErrorMessages()
+        MyErrorProvider.Clear()
+        TurnOffInputs()
+        Refresh()
+    End Sub
+
+    Protected Overridable Sub RecordSaved()
+        '
     End Sub
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
@@ -248,6 +377,13 @@ Public Class CFormEntry
         End If
     End Sub
 
+    Protected Sub UpdateRecordCounter()
+        RecordCount = PresenterObj.GetRecordCount()
+        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
+        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
+        tsbTotalRecords.Text = RecordCount
+    End Sub
+
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
         If Not controlVisible Then
@@ -255,12 +391,65 @@ Public Class CFormEntry
         End If
     End Sub
 
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+
+        RunButtonRoutine(ButtonClicked.Add)
+    End Sub
+
     Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
         SwitchUiLanguage(False)
     End Sub
 
+    Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
+        If _debugSwitch = 0 Then
+            _debugSwitch = 1
+            Debugger.Break()
+            btnDebug.Checked = False
+        Else
+            _debugSwitch = 0
+            btnDebug.Checked = True
+        End If
+    End Sub
+
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        RunButtonRoutine(ButtonClicked.Delete)
+    End Sub
+
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        RunButtonRoutine(ButtonClicked.Edit)
+    End Sub
+
+    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        RunButtonRoutine(ButtonClicked.Find)
+    End Sub
+
+    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
+        RunButtonRoutine(ButtonClicked.First)
+    End Sub
+
+    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
+        RunButtonRoutine(ButtonClicked.Last)
+    End Sub
+
+    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        RunButtonRoutine(ButtonClicked.Next)
+    End Sub
+
     Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
         SwitchUiLanguage(True)
+    End Sub
+
+    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        RunButtonRoutine(ButtonClicked.Previous)
+    End Sub
+
+    Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+        RunButtonRoutine(ButtonClicked.Quit)
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        FirstControl.Focus()
+        RunButtonRoutine(ButtonClicked.Save)
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
@@ -272,6 +461,10 @@ Public Class CFormEntry
         frm.AppDataDAC = AppDataDAC
         frm.TranslatorDAC = TranslatorDAC
         frm.Show()
+    End Sub
+
+    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+        RunButtonRoutine(ButtonClicked.Undo)
     End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
@@ -291,7 +484,7 @@ Public Class CFormEntry
             If btnSave.Enabled Then
                 e.SuppressKeyPress = True
                 e.Handled = True
-                PresenterObj.Save()
+                PresenterObj.GoSaveRecord()
             Else
                 Beep()
             End If
@@ -299,7 +492,7 @@ Public Class CFormEntry
             If btnSave.Enabled Then
                 e.SuppressKeyPress = True
                 e.Handled = True
-                PresenterObj.EditData()
+                PresenterObj.GoEditRecord()
             Else
                 Beep()
             End If
@@ -372,9 +565,10 @@ Public Class CFormEntry
                     SetPropertyValue(cCtrl, "SelectedItem", Nothing)
                     SetPropertyValue(cCtrl, "SelectedIndex", -1)
                     SetPropertyValue(cCtrl, "Text", "")
-                ElseIf _
-                    TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDTPHijriDate OrElse
-                    TypeOf cCtrl Is tdpGregorian OrElse TypeOf cCtrl Is CDtpGregorianDate Then
+                ElseIf TypeOf cCtrl Is CDataGridView Then
+                    'CType(cCtrl, CDataGridView).Rows.Clear()
+                ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDTPHijriDate OrElse
+                TypeOf cCtrl Is tdpGregorian OrElse TypeOf cCtrl Is CDtpGregorianDate Then
                     SetPropertyValue(cCtrl, "Value", Nothing)
                 End If
             Catch ' ignore fields that don't have a column to bind to
@@ -399,6 +593,70 @@ Public Class CFormEntry
             Dispose()
         Else
             CancelClose = True
+        End If
+    End Sub
+
+    Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
+        CopyText()
+    End Sub
+
+    Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
+        CutText()
+    End Sub
+
+    Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
+        Return SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+    End Function
+
+    Private Function GetControlSecurityKey(ByRef cCtrl As Control)
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
+                Return GetPropertyValue(cCtrl, "SecurityKey")
+            End If
+        End If
+        Return ""
+    End Function
+
+    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey)
+        Return SecurityPresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+    End Function
+
+    Private Sub Inputs(onOff As Boolean)
+        Dim allCtrl As New List(Of Control)
+        Dim ctrl As Control
+        For Each ctrl In FindControlRecursive(allCtrl, Me)
+            If TypeOf ctrl Is IEntryControl Then
+                SetPropertyValue(ctrl, "EditingMode", Not onOff)
+            End If
+        Next
+        FirstControl.Focus()
+    End Sub
+
+    Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
+        SetFormTitleCaption()
+    End Sub
+
+    Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
+        PasteText()
+    End Sub
+
+    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New SelectedButton(clickedButton))
+        End If
+    End Sub
+
+    Private Sub SetAllControlsDynamicProperties()
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            Dim allControls As New List(Of Control)
+            Dim resources = New ComponentResourceManager(Me.GetType())
+            TableProperties = PresenterObj.TableProperties
+            For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                SetControlDynamicProperties(cCtrl)
+                SetControlSecurity(cCtrl)
+            Next
         End If
     End Sub
 
@@ -515,275 +773,30 @@ Public Class CFormEntry
         PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
     End Sub
 
-#Region "OK PubsSubs"
-
-    Public Sub FindField(txtControl As Control)
-        Dim fieldName As String = txtControl.Name.Substring(3)
-        Dim searchString As String
-        Dim searchAnywhere As Boolean
-        searchString = CallByName(txtControl, "GetTextToSearch", CallType.Get)
-        searchAnywhere = CallByName(txtControl, "GetSearchAnywhere", CallType.Get)
-        PresenterObj.FindField(fieldName, searchString, searchAnywhere)
-    End Sub
-
-    Public Function GetFieldsDictionary()
-        Return FieldsDictionary
+    Protected Overridable Function DataIsValid() As Boolean
+        Debugger.Break()
+        Return False
     End Function
 
-    Public Sub HideButton(button As ToolStripButton)
-        button.Visible = False
-    End Sub
+#Region "Temporary Events"
 
-    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-        If e.AddMode Then
-            TurnOnInputs()
-            ClearData()
-            UpdateButtonDisplays(False, True)
-        Else
-            TurnOffInputs()
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
+    'Public Event AddingRecordChanged(adding As Boolean)
 
-    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
-        If e.EditMode Then
-            TurnOnInputs()
-            UpdateButtonDisplays(True, False)
-        Else
-            TurnOffInputs()
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
+    'Public Event AfterAdd(retVal As Integer)
 
-    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
-        MyErrorProvider.ClearAllErrorMessages()
-        For Each _err In e.Errors
-            For Each ctrl In MyErrorProvider.Controls
-                If ctrl.errormessage = _err Then
-                    MyErrorProvider.SetError(ctrl.ControlObj, _err)
-                End If
-            Next
-        Next
-    End Sub
+    'Public Event AfterDelete()
 
-    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
-        CancelClose = False
-        Close()
-        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
-            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-        End If
-        GC.Collect()
-        GC.WaitForPendingFinalizers()
-        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
-        End If
-        Dispose()
-    End Sub
+    'Public Event AfterDisplayView()
 
-    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        RecordPositionChanged()
-    End Sub
+    'Public Event AfterEdit(retVal As Integer)
 
-    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
-        RecordSaved()
-    End Sub
+    Public Event AfterLoad()
 
-    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
-        If ValidateView() Then
-            e.Validated = True
-        Else
-            e.Validated = False
-        End If
-    End Sub
-
-    Public Sub SetFormTitleCaption()
-        lblFormDescription.Text = Text
-        lblFormDescription.Left = 0
-        lblFormDescription.Width = Me.Width
-        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
-    End Sub
-
-    Public Sub ShowFormTitle()
-        lblFormDescription.Text = FormTitleCaption
-        lblFormDescription.Width = Me.Width
-        lblFormDescription.Left = 0
-        lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
-    End Sub
-
-    Public Sub TurnOffInputs()
-        Inputs(False)
-        RaiseEvent InputsTurnedOff()
-    End Sub
-
-    Public Sub TurnOnInputs()
-        Inputs(True)
-        RaiseEvent InputsTurnedOn()
-    End Sub
-
-    Protected Overridable Sub CreateDataSources()
-        '
-    End Sub
-
-    Protected Overridable Sub CreateFieldsDictionary()
-        '
-    End Sub
-
-    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-        Else
-            GlobalVariables.RightToLeftLayout = False
-        End If
-        CreateDataSources()
-    End Sub
-
-    Protected Overridable Sub RecordPositionChanged()
-        UpdateRecordCounter()
-        UpdateButtonDisplays(False, False)
-        MyErrorProvider.ClearAllErrorMessages()
-        MyErrorProvider.Clear()
-        TurnOffInputs()
-        Refresh()
-    End Sub
-
-    Protected Overridable Sub RecordSaved()
-        '
-    End Sub
-
-    Protected Sub UpdateRecordCounter()
-        RecordCount = PresenterObj.GetRecordCount()
-        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
-        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
-        tsbTotalRecords.Text = RecordCount
-    End Sub
-
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        RunButtonRoutine(ButtonClicked.Add)
-    End Sub
-
-    Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
-        If _debugSwitch = 0 Then
-            _debugSwitch = 1
-            Debugger.Break()
-            btnDebug.Checked = False
-        Else
-            _debugSwitch = 0
-            btnDebug.Checked = True
-        End If
-    End Sub
-
-    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        RunButtonRoutine(ButtonClicked.Delete)
-    End Sub
-
-    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        RunButtonRoutine(ButtonClicked.Edit)
-    End Sub
-
-    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
-        RunButtonRoutine(ButtonClicked.Find)
-    End Sub
-
-    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
-        RunButtonRoutine(ButtonClicked.First)
-    End Sub
-
-    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
-        RunButtonRoutine(ButtonClicked.Last)
-    End Sub
-
-    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        RunButtonRoutine(ButtonClicked.Next)
-    End Sub
-
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
-        RunButtonRoutine(ButtonClicked.Previous)
-    End Sub
-
-    Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        RunButtonRoutine(ButtonClicked.Quit)
-    End Sub
-
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        RunButtonRoutine(ButtonClicked.Save)
-    End Sub
-
-    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
-        RunButtonRoutine(ButtonClicked.Undo)
-    End Sub
-
-    Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
-        CopyText()
-    End Sub
-
-    Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
-        CutText()
-    End Sub
-
-    Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
-        Return SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-    End Function
-
-    Private Function GetControlSecurityKey(ByRef cCtrl As Control)
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
-                Return GetPropertyValue(cCtrl, "SecurityKey")
-            End If
-        End If
-        Return ""
-    End Function
-
-    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
-        Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey)
-        Return SecurityPresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-    End Function
-
-    Private Sub Inputs(onOff As Boolean)
-        Dim allCtrl As New List(Of Control)
-        Dim ctrl As Control
-        For Each ctrl In FindControlRecursive(allCtrl, Me)
-            If TypeOf ctrl Is IEntryControl Then
-                SetPropertyValue(ctrl, "EditingMode", Not onOff)
-            End If
-        Next
-        FirstControl.Focus()
-    End Sub
-
-    Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
-        SetFormTitleCaption()
-    End Sub
-
-    Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
-        PasteText()
-    End Sub
-
-    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New SelectedButton(clickedButton))
-        End If
-    End Sub
-
-    Private Sub SetAllControlsDynamicProperties()
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            Dim allControls As New List(Of Control)
-            Dim resources = New ComponentResourceManager(Me.GetType())
-            TableProperties = PresenterObj.TableProperties
-            For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                SetControlDynamicProperties(cCtrl)
-                SetControlSecurity(cCtrl)
-            Next
-        End If
-    End Sub
-
-#End Region
-
-#Region "Temporary"
-
-    Public Event AfterSave()
+    Public Event AfterSave(retVal As Integer)
 
     Public Event BeforeAdd()
+
+    'Public Event BeforeDelete()
 
     Public Event BeforeDisplayView()
 
@@ -791,22 +804,33 @@ Public Class CFormEntry
 
     Public Event BeforeSave()
 
+    'Public Event BeforeValidate()
+
+    'Public Event CancelChanges()
+
     Public Event DisplayedRecordChanged()
+
+    'Public Event EditingRecordChanged(editing As Boolean)
+
+    Public Event InputsTurnedOff()
+
+    Public Event InputsTurnedOn()
 
     Public Event ParentRecordAddedSuccessfully(passedValue As Integer)
 
     Public Event ParentRecordUpdatedSuccessfully(passedValue As Integer)
 
-    Public Event SuccessfulAdd()
+    'Public Event SuccessfulAdd(idNoOfRecord As Integer)
 
     Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
 
-    Public Event SuccessfulUpdate()
+    'Public Event SuccessfulEdit(idNoOfRecord As Integer)
 
-    Protected Overridable Function DataIsValid() As Boolean
-        Debugger.Break()
-        Return False
-    End Function
+    'Public Event SuccessfulUpdate(idNoOfRecord As Integer)
+
+    'Public Event TextDisplayChanged()
+
+    'Public Event UndoEdits(addingRec As Boolean)
 
 #End Region
 

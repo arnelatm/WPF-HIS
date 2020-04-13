@@ -1,0 +1,2 @@
+﻿Public Interface IApplicationEvent
+End Interface

@@ -46,6 +46,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,6 +66,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormToolBarButtons.Designer.vb">
+      <DependentUpon>FormToolBarButtons.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormToolBarButtons.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="IGroupAccessView.vb" />
     <Compile Include="IGroupAccessesView.vb" />
     <Compile Include="ILoginView.vb" />
@@ -94,6 +102,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormToolBarButtons.resx">
+      <DependentUpon>FormToolBarButtons.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -118,6 +129,9 @@
       <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

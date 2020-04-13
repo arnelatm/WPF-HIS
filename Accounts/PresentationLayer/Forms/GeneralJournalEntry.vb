@@ -2,19 +2,36 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
+Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Forms
 
     Public Class GeneralJournalEntry
-        Implements IGeneralJournalView, IJournalItemsView
+        Implements IGeneralJournalView
 
-        Protected DtInsertTable As New DataTable
-        Protected DtUpdateTable As New DataTable
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
-        Private _journalItems As List(Of JournalItemModel)
+        Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
+        Private _footer As DgvFooter
+
+        Public Sub New()
+            MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            ' Add any initialization after the InitializeComponent() call.
+            MainTableName = "GeneralJournal"
+            SortOrderKey = "IdNo"
+            FirstControl = txtReferenceNo
+            _nfi.NumberDecimalDigits = 2
+            PresenterObj = New GeneralJournalPresenter(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
+
+        End Sub
 
 #Region "Fields"
 
@@ -58,12 +75,13 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property JournalItems As IList(Of JournalItemModel) Implements IJournalItemsView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IGeneralJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
             Set
                 _journalItems = Value
+                BindJournalItem()
             End Set
         End Property
 
@@ -129,119 +147,17 @@ Namespace PresentationLayer.Forms
 
 #Region "Methods"
 
-        Public Sub New()
-            MyBase.New()
-            ' This call is required by the designer.
-            InitializeComponent()
-            ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "GeneralJournal"
-            SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
-            _nfi.NumberDecimalDigits = 2
-            PresenterObj = New GeneralJournalPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
-            PresenterObj.JournalItemsPresenter = New GeneralJournalItemsPresenter(Me)
-
-            PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
-
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
-            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
-            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
-
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
-
-        End Sub
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(ReferenceNo) Then
-                PresenterObj.UpdateGlReferenceNumber()
-            End If
-            If PresenterObj.AddMode Then
-                btnLast.PerformClick()
-            End If
-        End Sub
-
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             SuspendLayout()
-            txtJournalCode.Text = AccountStrings.CashDisbursementJournalPrefix
             dtpTransactionDate.Value = Date.Now()
             bsJournalItems.Clear()
             DataGridViewJournalItems.Refresh()
             ResumeLayout()
         End Sub
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.AddMode Then
-                txtJournalCode.Text = AccountStrings.GeneralJournalPrefix
-            End If
-            If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
-
-                If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
-                                   AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
-                                   MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    PresenterObj.CancelSave = True
-                End If
-            End If
-        End Sub
-
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-            Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-
-            If PresenterObj.AddMode Then
-                IdNo = passedValue
-            End If
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In bsJournalItems
-                Dim workRow As DataRow
-                If ji.IdNo <= 0 Then
-                    workRow = DtInsertTable.NewRow()
-                Else
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("IdNo") = ji.IdNo
-                End If
-                workRow("JournalIdNo") = IdNo
-                workRow("Sequence") = nRowCount
-                workRow("AccountIdNo") = ji.AccountIdNo
-                workRow("Debit") = ji.Debit
-                workRow("Credit") = ji.Credit
-                workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
-                workRow("Notes") = If(ji.Notes, "")
-                If ji.IdNo <= 0 Then
-                    DtInsertTable.Rows.Add(workRow)
-                Else
-                    DtUpdateTable.Rows.Add(workRow)
-                End If
-                nRowCount = nRowCount + 1
-            Next
-            PresenterObj.JournalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
-            'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -258,25 +174,6 @@ Namespace PresentationLayer.Forms
          {"TransactionDate", dtpTransactionDate}
         }
         End Sub
-
-        Protected Overrides Function DataIsValid() As Boolean
-            Dim retValue As Boolean = False
-            If MyBase.DataIsValid() Then
-                retValue = PresenterObj.JournalItemsPresenter.DataIsValid(JournalItems)
-            End If
-            Return retValue
-        End Function
-
-        'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-        '    MyBase.DisplayView(idNoOfRecord)
-        '    _journalItemsPresenter.Display(idNoOfRecord)
-        '    BindJournalItem()
-        '    With JournalItems
-        '        TotalDebits = .Sum(Function(totals) totals.Debit)
-        '        TotalCredits = .Sum(Function(totals) totals.Credit)
-        '    End With
-        '    Refresh()
-        'End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
@@ -312,11 +209,11 @@ Namespace PresentationLayer.Forms
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
-                        PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
+                        'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New JournalItemModel
                             bsJournalItems.Insert(.RowIndex(), newRow)
-                            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
+                            'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                             ReSequenceDgvAfterInsert()
                             SendKeys.Send("{UP}")
                         Else
@@ -329,131 +226,50 @@ Namespace PresentationLayer.Forms
 
         Private Sub DataGridViewJournalItems_ChangesMade(sender As Object, e As EventArgs) _
             Handles DataGridViewJournalItems.ChangesMade
-            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             ReSequenceDgvAfterDelete()
-            UpdateTotals()
+            'UpdateTotals()
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            JournalItems = New List(Of JournalItemModel)
-        End Sub
-
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
-            Handles DataGridViewJournalItems.CellBeginEdit
-            'If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
-            '    With DataGridViewJournalItems.CurrentCell
-            '        Dim cColumnName = .OwningColumn.Name.ToLower()
-            '        If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
-            '            Beep()
-            '            e.Cancel = True
-            '            DataGridViewJournalItems.EndEdit()
-            '        End If
-            '    End With
-            'End If
+            'Dim dgvFooter As New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            'dgvFooter.AutoCalc = False
+            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer.AutoCalc = True
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
+            UpdateTotals()
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
                     Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
-                    'Case $"dgvaccountidno"
-                    '    If Text Is Nothing Then
-                    '        Dim selectedRow As JournalItemModel
-                    '        selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
-                    '        selectedRow.AccountIdNo = 0
-                    '    End If
-                    '    'dgvAccountIdNo.DisplayMember = "Code"
-                    '    'SendKeys.Send("{TAB}")
+                    Case $"dgvaccountidno"
+                        'SendKeys.Send("{TAB}")
                     Case $"dgvdebit"
-                        Dim selectedRow As JournalItemModel
-                        Dim amt = .Value
-                        selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
-                        If amt <> 0 Then
-                            ' must zero out the credit if any value is entered in this cell
-                            ' or if negative enter the absolute value on the credit and zero on this cell
-                            If amt > 0 Then
-                                selectedRow.Credit = 0
-                            Else
-                                selectedRow.Credit = Math.Abs(amt)
-                                selectedRow.Debit = 0
-                            End If
-                        End If
                         UpdateTotals()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        Dim selectedRow As JournalItemModel
-                        Dim amt = .Value
-                        selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
-                        If amt <> 0 Then
-                            ' must zero out the debit if any value is entered in this cell
-                            ' or if negative enter the absolute value on the debit and zero on this cell
-                            If amt > 0 Then
-                                selectedRow.Debit = 0
-                            Else
-                                selectedRow.Debit = Math.Abs(amt)
-                                selectedRow.Credit = 0
-                            End If
-                            DataGridViewJournalItems.Refresh()
-                        End If
                         UpdateTotals()
-
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                 End Select
+                DataGridViewJournalItems.Refresh()
             End With
         End Sub
 
-        Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
-            If Not DataGridViewJournalItems.DataBindings Is Nothing Then
-                DataGridViewJournalItems.DataInGridChanged = False
-            End If
-        End Sub
-
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
-            DataGridViewJournalItems.StartTrackingChanges = False
             DataGridViewJournalItems.RemoveInsertColumn()
-            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
-            DataGridViewJournalItems.StartTrackingChanges = True
             DataGridViewJournalItems.AddInsertColumn()
-            PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = False
         End Sub
-
-        'Private Sub DataGridViewJournalItems_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles DataGridViewJournalItems.PreviewKeyDown
-
-        'End Sub
-
-        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
-        '    Handles DataGridViewJournalItems.CellBeginEdit
-        '    With DataGridViewJournalItems.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvaccountidno"
-        '                dgvAccountIdNo.DisplayMember = "Name"
-        '            Case "dgvprofitcenteridno"
-        '                dgvProfitCenterIdNo.DisplayMember = "Name"
-        '        End Select
-        '    End With
-        'End Sub
-
-        'Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        '    If ActiveControl.Name = "DataGridViewJournalItems" Then
-        '        With DataGridViewJournalItems.CurrentCell
-        '            Select Case .OwningColumn.Name.ToLower()
-        '                Case "dgvaccountidno"
-        '                    dgvAccountIdNo.DisplayMember = "Code"
-        '                    SendKeys.SendWait("{TAB}")
-        '                        e.Handled = True
-        '                Case Else
-        '                    e.Handled = False
-        '            End Select
-        '        End With
-        '    End If
 
         Private Sub ReSequenceDgvAfterDelete()
             Dim i = DataGridViewJournalItems.CurrentCell.RowIndex()
@@ -475,9 +291,10 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        'End Sub
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            DataGridViewJournalItems.Focus()
+            If DataGridViewJournalItems IsNot Nothing Then
+                DataGridViewJournalItems.Focus()
+            End If
         End Sub
 
         Private Sub UpdateTotals()
@@ -487,16 +304,16 @@ Namespace PresentationLayer.Forms
                 TotalDebits += item.Debit
                 TotalCredits += item.Credit
             Next
-            'TotalDebits = JournalItems.Sum(Function(totals) totals.Debit)
-            'TotalCredits = JournalItems.Sum(Function(totals) totals.Credit)
-            'TotalCredits = bsJournalItems.DataSource.Sum(Function(totals) totals.Credit)
+            'If _footer IsNot Nothing Then
+            '    _footer.SumColumn("DgvDebit")
+            '    _footer.SumColumn("DgvCredit")
+            'End If
         End Sub
 
-        'Private Sub UserDeletingRow(ByVal sender As Object,
-        '                            ByVal e As DataGridViewRowCancelEventArgs) _
-        '    Handles DataGridViewJournalItems.UserDeletingRow
-
-        'End Sub
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            UpdateTotals()
+        End Sub
 
 #End Region
 

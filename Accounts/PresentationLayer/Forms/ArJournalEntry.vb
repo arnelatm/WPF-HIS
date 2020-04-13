@@ -438,14 +438,6 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Function DataIsValid() As Boolean
-            Dim retValue As Boolean = False
-            If MyBase.DataIsValid() Then
-                retValue = _journalItemsPresenter.DataIsValid(JournalItems)
-            End If
-            Return retValue
-        End Function
-
         Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
             MyBase.DisplayView(idNoOfRecord)
             _journalItemsPresenter.Display(idNoOfRecord)

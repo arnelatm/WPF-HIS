@@ -168,34 +168,40 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txtJournalCode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
-  <data name="txtJournalCode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 1</value>
   </data>
-  <data name="txtJournalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtJournalCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 23</value>
   </data>
-  <data name="txtJournalCode.TabIndex" type="System.Int32, mscorlib">
-    <value>163</value>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
   </data>
-  <data name="txtJournalCode.Text" xml:space="preserve">
-    <value>GJ</value>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>GJ-</value>
   </data>
-  <data name="&gt;&gt;txtJournalCode.Name" xml:space="preserve">
-    <value>txtJournalCode</value>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;txtJournalCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
   </data>
-  <data name="&gt;&gt;txtJournalCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;txtJournalCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="TxtIDNo.Enabled" type="System.Boolean, mscorlib">
@@ -205,7 +211,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 1</value>
+    <value>190, 1</value>
   </data>
   <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -235,13 +241,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 1</value>
+    <value>266, 1</value>
   </data>
   <data name="lblReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 23</value>
+    <value>392, 23</value>
   </data>
   <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -268,13 +274,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>667, 1</value>
+    <value>660, 1</value>
   </data>
   <data name="txtReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
+    <value>96, 23</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -413,7 +419,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 49</value>
+    <value>613, 49</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -715,42 +721,6 @@
   <data name="&gt;&gt;floJournalHeader.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblAmount.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAmount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 23</value>
-  </data>
-  <data name="lblAmount.TabIndex" type="System.Int32, mscorlib">
-    <value>165</value>
-  </data>
-  <data name="lblAmount.Text" xml:space="preserve">
-    <value>Totals:</value>
-  </data>
-  <data name="lblAmount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Name" xml:space="preserve">
-    <value>lblAmount</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -918,6 +888,42 @@
   </data>
   <data name="&gt;&gt;txtTotalCredits.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="lblAmount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblAmount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
+  </data>
+  <data name="lblAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblAmount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 23</value>
+  </data>
+  <data name="lblAmount.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="lblAmount.Text" xml:space="preserve">
+    <value>Totals:</value>
+  </data>
+  <data name="lblAmount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblAmount.Name" xml:space="preserve">
+    <value>lblAmount</value>
+  </data>
+  <data name="&gt;&gt;lblAmount.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblAmount.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;lblAmount.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 347</value>
@@ -2128,7 +2134,7 @@
     <value>995, 483</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>General GeneralJournal Entry</value>
+    <value>General Journal Entry</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>

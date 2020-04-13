@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Views
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -18,6 +20,7 @@
         Public Property TotalCredits As Decimal
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
+        Public Property JournalItems As IList(Of JournalItemModel)
     End Class
 
 End Namespace
