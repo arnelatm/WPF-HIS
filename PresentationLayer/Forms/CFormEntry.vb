@@ -448,7 +448,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        FirstControl.Focus()
+        RaiseEvent BeforeSave()
         RunButtonRoutine(ButtonClicked.Save)
     End Sub
 
@@ -643,6 +643,9 @@ Public Class CFormEntry
     End Sub
 
     Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New SelectedButton(clickedButton))
         End If

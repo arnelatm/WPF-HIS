@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Forms
@@ -16,7 +17,11 @@ Namespace PresentationLayer.Forms
         Private _accountsByCode
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
-        Private _footer As DgvFooter
+
+        'Private _footer As DgvFooter
+        Public TxtTotalDebits As Decimal
+
+        Public TxtTotalCredits As Decimal
 
         Public Sub New()
             MyBase.New()
@@ -112,23 +117,35 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
+        Public Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCredits.Text), _nfi)
+                Return TxtTotalDebits
             End Get
-            Set
-                txtTotalCredits.Text = FormatMoney(Value)
+            Set(value As Decimal)
+                TxtTotalDebits = value
             End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
+        Public Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebits.Text), _nfi)
+                Return TxtTotalCredits
             End Get
-            Set
-                txtTotalDebits.Text = FormatMoney(Value)
+            Set(value As Decimal)
+                TxtTotalCredits = value
             End Set
         End Property
+
+        'Public TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
+        '    Get
+        '        Return _footer.Value("dgvCredit")
+        '    End Get
+        'End Property
+
+        'Public ReadOnly TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
+        '    Get
+        '        Return _footer.Value("dgvDebit")
+        '    End Get
+        'End Property
 
         Public Property TransactionDate As Date? Implements IGeneralJournalView.TransactionDate
             Get
@@ -146,6 +163,12 @@ Namespace PresentationLayer.Forms
 #End Region
 
 #Region "Methods"
+
+        Private Sub UpdateTotals()
+            'If _footer IsNot Nothing Then
+            '    _footer.SumAllColumns()
+            'End If
+        End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             SuspendLayout()
@@ -169,14 +192,14 @@ Namespace PresentationLayer.Forms
          {"Notes", txtNotes},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
-         {"TotalDebits", txtTotalDebits},
-         {"TotalCredits", txtTotalCredits},
          {"TransactionDate", dtpTransactionDate}
         }
         End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
+            bsJournalItems.DataSource = Nothing
+            DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
@@ -234,15 +257,16 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
-            'Dim dgvFooter As New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
-            'dgvFooter.AutoCalc = False
-            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
-            _footer.AutoCalc = True
-            _footer.ColumnToSum("dgvDebit") = True
-            _footer.ColumnToSum("dgvCredit") = True
-            _footer.SetText("DgvAccountIdNo", "Totals ->")
-            UpdateTotals()
+            'KeyPreview = True
+            ''Dim dgvFooter As New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            ''dgvFooter.AutoCalc = False
+            '_footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            '_footer.AutoCalc = True
+            '_footer.ColumnToSum("dgvDebit") = True
+            '_footer.ColumnToSum("dgvCredit") = True
+            '_footer.SetText("DgvAccountIdNo", "Totals ->")
+            ''UpdateTotals()
+            BindJournalItem()
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
@@ -252,10 +276,10 @@ Namespace PresentationLayer.Forms
                     Case $"dgvaccountidno"
                         'SendKeys.Send("{TAB}")
                     Case $"dgvdebit"
-                        UpdateTotals()
+                        'UpdateTotals()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        UpdateTotals()
+                        'UpdateTotals()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                 End Select
@@ -297,18 +321,18 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub UpdateTotals()
-            TotalDebits = 0
-            TotalCredits = 0
-            For Each item In bsJournalItems
-                TotalDebits += item.Debit
-                TotalCredits += item.Credit
-            Next
-            'If _footer IsNot Nothing Then
-            '    _footer.SumColumn("DgvDebit")
-            '    _footer.SumColumn("DgvCredit")
-            'End If
-        End Sub
+        'Private Sub UpdateTotals()
+        '    TotalDebits = 0
+        '    TotalCredits = 0
+        '    For Each item In bsJournalItems
+        '        TotalDebits += item.Debit
+        '        TotalCredits += item.Credit
+        '    Next
+        '    'If _footer IsNot Nothing Then
+        '    '    _footer.SumColumn("DgvDebit")
+        '    '    _footer.SumColumn("DgvCredit")
+        '    'End If
+        'End Sub
 
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()

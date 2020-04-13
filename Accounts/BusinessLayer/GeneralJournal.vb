@@ -25,10 +25,11 @@ Namespace BusinessLayer
         Public Property Notes As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
-        Public Property TotalCredits As Decimal
         Public Property TotalDebits As Decimal
+        Public Property TotalCredits As Decimal
         Public Property TransactionDate As Date?
         Public Property JournalItems As List(Of JournalItem)
+
     End Class
 
 End Namespace

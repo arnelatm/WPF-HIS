@@ -778,30 +778,27 @@
   <data name="dgvNotes.HeaderText" xml:space="preserve">
     <value>Notes / Description</value>
   </data>
-  <metadata name="dgvJournalIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvJournalIdNo.HeaderText" xml:space="preserve">
-    <value>GeneralJournal Id No.</value>
-  </data>
-  <data name="dgvJournalIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <metadata name="dgvIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvIdNo.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
-  <data name="dgvIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
   <data name="dgvIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="dgvIdNo.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+  <metadata name="SpecialAccount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="SpecialAccount.HeaderText" xml:space="preserve">
+    <value>SpecialAccount</value>
   </data>
+  <data name="SpecialAccount.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>675, 17</value>
+  </metadata>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 143</value>
   </data>
@@ -809,7 +806,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>960, 200</value>
+    <value>960, 239</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -825,126 +822,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
-  </metadata>
-  <data name="txtTotalDebits.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalDebits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 1</value>
-  </data>
-  <data name="txtTotalDebits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
-    <value>243</value>
-  </data>
-  <data name="txtTotalDebits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Name" xml:space="preserve">
-    <value>txtTotalDebits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtTotalCredits.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtTotalCredits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 1</value>
-  </data>
-  <data name="txtTotalCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
-    <value>244</value>
-  </data>
-  <data name="txtTotalCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Name" xml:space="preserve">
-    <value>txtTotalCredits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblAmount.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAmount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 23</value>
-  </data>
-  <data name="lblAmount.TabIndex" type="System.Int32, mscorlib">
-    <value>165</value>
-  </data>
-  <data name="lblAmount.Text" xml:space="preserve">
-    <value>Totals:</value>
-  </data>
-  <data name="lblAmount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Name" xml:space="preserve">
-    <value>lblAmount</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;lblAmount.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 347</value>
-  </data>
-  <data name="CFlowLayout3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 29</value>
-  </data>
-  <data name="CFlowLayout3.TabIndex" type="System.Int32, mscorlib">
-    <value>245</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Name" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Parent" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2160,6 +2037,12 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
+    <value>bsJournalItems</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
@@ -2196,23 +2079,17 @@
   <data name="&gt;&gt;dgvNotes.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvJournalIdNo.Name" xml:space="preserve">
-    <value>dgvJournalIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvIdNo.Name" xml:space="preserve">
     <value>dgvIdNo</value>
   </data>
   <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
+  <data name="&gt;&gt;SpecialAccount.Name" xml:space="preserve">
+    <value>SpecialAccount</value>
   </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SpecialAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralJournalEntry</value>

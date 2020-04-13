@@ -90,6 +90,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event BeforeDelete()
 
+    Public Event AfterRecordRetrieval(values As TM)
+
     Public Event BeforeDisplayView()
 
     Public Event BeforeEdit()
@@ -732,6 +734,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                         result = Save()
                         If result > 0 Then
                             'UpdateViewDisplay(TargetIdNo)
+                            Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                            message = message + Environment.NewLine & CompareDifferences
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
@@ -835,9 +839,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub SaveOriginalValues()
         GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
-        'For Each item In ChildPresenters
-        '    item.SaveOriginalValues()
-        'Next
     End Sub
 
     'Private Function SaveDataEntry() As Integer
@@ -875,15 +876,18 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Sub UpdateViewDisplay(idNo As Integer)
         If idNo <> 0 Then
-            Dim modelData
+            Dim modelData As TM
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
+            'RaiseEvent AfterRecordRetrieval(modelData)
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
+            'View = GlobalVariables.Mapper.Map(Of T)(modelData)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
             Next
             SaveOriginalValues()
+
             'EditMode = False
             'AddMode = False
             'UndoMode = False
@@ -1097,10 +1101,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function SaveOrAbandonChanges() As DialogResult
         Dim result As DialogResult
-        result = Messaging.Show(True, "AskIfUserWantsToSaveOrContinueEdits",
-                                "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
-                                "Please Confirm.",
-                                MessageBoxButtons.YesNoCancel,
+        Dim msg As String
+        msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
+                                 "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
+                                 "Please Confirm.")
+        result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
                                 MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3)
         Return result
