@@ -126,10 +126,6 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Languages\Languages.vbproj">
-      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
-      <Name>Languages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Translations\Translations.vbproj">
       <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
       <Name>Translations</Name>

@@ -1194,7 +1194,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Sub GoFindRecord()
         Dim idNoOfFoundRecord = FindRecord()
         If idNoOfFoundRecord = 0 Then
-            If Messaging.Show(True, "AskLastRecordReachedStartFromBeginning", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
+            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 idNoOfFoundRecord = FindFieldContinue(1)
                 RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)

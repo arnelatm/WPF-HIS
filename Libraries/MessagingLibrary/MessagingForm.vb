@@ -290,12 +290,14 @@ Public Class MessagingForm
             De
             Es
             It
+            Ar
         End Enum
 
         Private Shared ReadOnly ButtonTextsEnglishEn As String() = {"Ok", "Cancel", "&Yes", "&No", "&Abort", "&Retry", "&Ignore"}
         Private Shared ReadOnly ButtonTextsGermanDe As String() = {"OK", "Abbrechen", "&Ja", "&Nein", "&Abbrechen", "&Wiederholen", "&Ignorieren"}
         Private Shared ReadOnly ButtonTextsSpanishEs As String() = {"Aceptar", "Cancelar", "&Sí", "&No", "&Abortar", "&Reintentar", "&Ignorar"}
         Private Shared ReadOnly ButtonTextsItalianIt As String() = {"OK", "Annulla", "&Sì", "&No", "&Interrompi", "&Riprova", "&Ignora"}
+        Private Shared ReadOnly ButtonTextsArabicAr As String() = {"موافق", "إلغاء", "نعم", "لا", "إجهاض", " حاول مجدداً", "تجاهل"}
         Private _defaultButton As MessageBoxDefaultButton
         Private _visibleButtonsCount As Integer
         Private ReadOnly languageID As TwoLetterIsoLanguageId = TwoLetterIsoLanguageId.En
@@ -323,25 +325,27 @@ Public Class MessagingForm
             Return messageRows
         End Function
 
-        Private Function GetButtonText(ByVal buttonId As ButtonId) As String
-            Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
-            Return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
-        End Function
-
         'Private Function GetButtonText(ByVal buttonId As ButtonId) As String
         '    Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
-
-        '    Select Case languageID
-        '        Case TwoLetterIsoLanguageId.De
-        '            Return ButtonTextsGermanDe(buttonTextArrayIndex)
-        '        Case TwoLetterIsoLanguageId.Es
-        '            Return ButtonTextsSpanishEs(buttonTextArrayIndex)
-        '        Case TwoLetterIsoLanguageId.It
-        '            Return ButtonTextsItalianIt(buttonTextArrayIndex)
-        '        Case Else
-        '            Return ButtonTextsEnglishEn(buttonTextArrayIndex)
-        '    End Select
+        '    Return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
         'End Function
+
+        Private Function GetButtonText(ByVal buttonId As ButtonId) As String
+            Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
+
+            Select Case languageID
+                Case TwoLetterIsoLanguageId.De
+                    Return ButtonTextsGermanDe(buttonTextArrayIndex)
+                Case TwoLetterIsoLanguageId.Es
+                    Return ButtonTextsSpanishEs(buttonTextArrayIndex)
+                Case TwoLetterIsoLanguageId.It
+                    Return ButtonTextsItalianIt(buttonTextArrayIndex)
+                Case TwoLetterIsoLanguageId.Ar
+                    Return ButtonTextsArabicAr(buttonTextArrayIndex)
+                Case Else
+                    Return ButtonTextsEnglishEn(buttonTextArrayIndex)
+            End Select
+        End Function
 
         Private Shared Function GetCorrectedWorkingAreaFactor(ByVal workingAreaFactor As Double) As Double
             Const minFactor As Double = 0.2

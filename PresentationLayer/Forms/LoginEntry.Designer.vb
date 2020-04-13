@@ -44,7 +44,7 @@ Partial Class LoginEntry
         Me.btn_Login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Login.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btn_Login.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btn_Login.ForeColor = System.Drawing.Color.DarkBlue
+        Me.btn_Login.ForeColor = System.Drawing.Color.White
         Me.btn_Login.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btn_Login.ImageIndex = 0
         Me.btn_Login.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -62,7 +62,7 @@ Partial Class LoginEntry
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.DarkBlue
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl

@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
+Imports AATM.Libraries.MessagingLibrary.Messaging
 
 Public Class CDataGridView
     Inherits DataGridView
@@ -567,7 +568,7 @@ Public Class CDataGridView
         Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
         Dim adding As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
         If Not (editing Or adding) Then
-            'Messaging.Show(True, "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
+            MessagingLibrary.Messaging.Show(True, "MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
             e.Cancel = True
         End If
     End Sub

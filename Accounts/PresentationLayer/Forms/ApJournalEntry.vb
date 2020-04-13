@@ -582,10 +582,7 @@ Namespace PresentationLayer.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed",
-                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.",
-                               "Modification Error")
-                Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed")
+                Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed", "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.", "Modification Error")
             End If
         End Sub
 
@@ -693,9 +690,7 @@ Namespace PresentationLayer.Forms
         Private Function PaymentOrDiscountMade()
             Dim retVal As Boolean = False
             If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-                Messaging.Show(True, "MsgPaymentDiscountExistChangeDisallowed",
-                               "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.",
-                               "Modification Error")
+                Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
                 retVal = True
             End If
             Return retVal

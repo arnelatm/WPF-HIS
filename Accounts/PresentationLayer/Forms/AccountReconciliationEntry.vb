@@ -42,7 +42,6 @@ Namespace PresentationLayer.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
-
             _accountReconciliationItemsPresenter = New AccountReconciliationItemsPresenter(Me)
 
             PresenterObj.AccountReconciliationItemsPresenter = _accountReconciliationItemsPresenter
@@ -754,7 +753,7 @@ Namespace PresentationLayer.Forms
             If cboAccountIdNo.ValueChanged() Then
                 If cboAccountIdNo.SelectedIndex > -1 Then
                     If AccountReconciliationItems.Any() Then
-                        Messaging.Show(True, "MsgEmptyReconciliationEntryChangeAccountDisallowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
+                        Messaging.Show(True, "MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
                         cboAccountIdNo.RevertValue()
                     End If
                 End If
@@ -769,7 +768,7 @@ Namespace PresentationLayer.Forms
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             If UnreconciledDifference = 0 And Not Posted Then
                 If btnSave.Enabled Then
-                    Messaging.Show(True, "MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
+                    Messaging.Show(True, "MsgSaveReconFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
                 Else
                     Dim message = "Are you sure you want to {action} this {itemName} entry?"
                     Dim caption = "Please confirm."

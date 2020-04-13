@@ -295,9 +295,9 @@ Public Class TranslationTableManager
                 Dim dsColumn As DataSet
                 If FormIdNoToTranslate = 0 Then
 
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedCaption_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translatedCaption FROM TranslatedCaption_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translatedCaption FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
                                                       " and FormIdNo = " + FormIdNoToTranslate.ToString())
                 End If
                 Dv = TransTable.DefaultView
@@ -306,12 +306,14 @@ Public Class TranslationTableManager
                 For Each dr As DataRow In TransTable.Rows
                     dr.Item(1) = ""
                 Next
-                For Each dr As DataRow In dsColumn.Tables(0).Rows
-                    Dim rowNum As Integer = Dv.Find(dr(0))
-                    If rowNum >= 0 Then _
-                        Dv(rowNum).Item(1) =
-                            IIf(rowNum >= 0, dr(1), "Not found")
-                Next
+                If dsColumn.Tables.Count() <> 0 Then
+                    For Each dr As DataRow In dsColumn.Tables(0).Rows
+                        Dim rowNum As Integer = Dv.Find(dr(0))
+                        If rowNum >= 0 Then _
+                            Dv(rowNum).Item(1) =
+                                IIf(rowNum >= 0, dr(1), "Not found")
+                    Next
+                End If
             End If
 
             DataGrid1.Refresh()
@@ -334,7 +336,7 @@ Public Class TranslationTableManager
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , TranslatedCaption, LanguageIdNo) VALUES ( " _
                   + captionIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
@@ -370,7 +372,7 @@ Public Class TranslationTableManager
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" AndAlso Not String.IsNullOrEmpty(translatedValue) Then
-            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , Translated, LanguageIdNo) VALUES ( " _
+            Cmd = "INSERT INTO TranslatedCaption ( CaptionIdNo , TranslatedCaption, LanguageIdNo) VALUES ( " _
                   + captionIdNo.ToString() + ", '" + translatedValue.Trim() + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
