@@ -1,9 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Accounts.Commands
-Imports AATM.Libraries.Events
-Imports AATM.PresentationLayer.Events
-
-Namespace BusinessLayer.Commands
+﻿Namespace BusinessLayer.Commands
 
     'Friend Class EditCommand
     '    Inherits CommandBase

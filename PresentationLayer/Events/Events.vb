@@ -1,6 +1,4 @@
-﻿Imports AATM.PresentationLayer.Presenters
-
-Public Enum ButtonClicked
+﻿Public Enum ButtonClicked
     [Add]
     [Delete]
     [Edit]

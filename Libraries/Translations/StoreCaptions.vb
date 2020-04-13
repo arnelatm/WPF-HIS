@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Libraries.CBaseControlsLibrary
+
+'Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Class StoreCaptions
     Inherits System.ComponentModel.Component
@@ -180,29 +181,53 @@ Public Class StoreCaptions
         Return _dAc1.ExecScalar(Of Int16)(cmd)
     End Function
 
+    'Friend Function IsTranslatable(ByVal ctrl As Control)
+    '    Dim retVal As Boolean = False
+    '    If o.GetType().GetInterfaces().Contains(GetType(ISomething)) Then
+    '        ' The interface is implemented
+    '    End If
+    '    Return retVal
+    'End Function
+
     Friend Function IsTranslatable(ByVal ctrl As Control)
-        If TypeOf ctrl Is CButton OrElse
-           TypeOf ctrl Is CLabel OrElse
-           TypeOf ctrl Is CCheckBox OrElse
-           TypeOf ctrl Is CRadioButton OrElse
-           TypeOf ctrl Is CDataGridView OrElse
-           TypeOf ctrl Is CGroupBox OrElse
-           TypeOf ctrl Is CTabControl OrElse
-           TypeOf ctrl Is CTabPage OrElse
-           TypeOf ctrl Is Label OrElse
-           TypeOf ctrl Is Button OrElse
-           TypeOf ctrl Is CheckBox OrElse
-           TypeOf ctrl Is RadioButton OrElse
-           TypeOf ctrl Is DataGrid OrElse
-           TypeOf ctrl Is ToolStrip OrElse
-           TypeOf ctrl Is TabControl OrElse
-           TypeOf ctrl Is TabPage OrElse
-           TypeOf ctrl Is GroupBox Then
+        If TypeOf ctrl Is Label OrElse
+                   TypeOf ctrl Is Button OrElse
+                   TypeOf ctrl Is CheckBox OrElse
+                   TypeOf ctrl Is RadioButton OrElse
+                   TypeOf ctrl Is DataGrid OrElse
+                   TypeOf ctrl Is ToolStrip OrElse
+                   TypeOf ctrl Is TabControl OrElse
+                   TypeOf ctrl Is TabPage OrElse
+                   TypeOf ctrl Is GroupBox Then
             Return True
         Else
             Return False
         End If
     End Function
+
+    'Friend Function IsTranslatable(ByVal ctrl As Control)
+    '    If TypeOf ctrl Is CButton OrElse
+    '       TypeOf ctrl Is CLabel OrElse
+    '       TypeOf ctrl Is CCheckBox OrElse
+    '       TypeOf ctrl Is CRadioButton OrElse
+    '       TypeOf ctrl Is CDataGridView OrElse
+    '       TypeOf ctrl Is CGroupBox OrElse
+    '       TypeOf ctrl Is CTabControl OrElse
+    '       TypeOf ctrl Is CTabPage OrElse
+    '       TypeOf ctrl Is Label OrElse
+    '       TypeOf ctrl Is Button OrElse
+    '       TypeOf ctrl Is CheckBox OrElse
+    '       TypeOf ctrl Is RadioButton OrElse
+    '       TypeOf ctrl Is DataGrid OrElse
+    '       TypeOf ctrl Is ToolStrip OrElse
+    '       TypeOf ctrl Is TabControl OrElse
+    '       TypeOf ctrl Is TabPage OrElse
+    '       TypeOf ctrl Is GroupBox Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
 
     'Friend Sub StoreMenuItems(
     '                          ByVal micoll As MenuItem.MenuItemCollection,

@@ -1,11 +1,7 @@
-﻿Imports System
-Imports System.ComponentModel
-Imports System.Diagnostics
-Imports System.Drawing
+﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports System.Linq
-Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
+
+'Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class MessagingForm
 
@@ -306,8 +302,9 @@ Public Class MessagingForm
 
         Private Sub New()
             InitializeComponent()
+            Dim textInformation As TextInfo = CultureInfo.CurrentCulture.TextInfo
 
-            If GlobalVariables.RightToLeftLayout Then
+            If textInformation.IsRightToLeft Then
                 RightToLeftLayout = True
                 RightToLeft = RightToLeft.Yes
             Else

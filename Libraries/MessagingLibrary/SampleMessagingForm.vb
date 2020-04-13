@@ -1,11 +1,4 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.ComponentModel
-Imports System.Data
-Imports System.Drawing
-Imports System.Linq
-Imports System.Text
-Imports System.Windows.Forms
+﻿Imports System.Text
 
 Public Class SampleMessagingForm
 
@@ -17,7 +10,6 @@ Public Class SampleMessagingForm
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs)
         trackBarMaxWidth.Value = Convert.ToInt32(MessagingForm.MaxWidthFactor * 10)
@@ -40,7 +32,7 @@ Public Class SampleMessagingForm
         Dim result = MessageBox.Show(batchOperationResults, "Batch Operation")
     End Sub
 
-    Private Sub button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles button4.Click 
+    Private Sub button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles button4.Click
         Dim batchOperationResults = GetBatchOperationResults()
         Dim result = MessagingForm.Show(batchOperationResults, "Batch Operation")
     End Sub
