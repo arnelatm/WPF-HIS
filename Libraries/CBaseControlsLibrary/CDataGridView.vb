@@ -125,7 +125,6 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
 
-
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
@@ -142,7 +141,6 @@ Public Class CDataGridView
     '        End If
     '    End With
     'End Sub
-
 
     Public Sub AddInsertColumn()
         With Columns
@@ -251,6 +249,7 @@ Public Class CDataGridView
                         If iColumn = ColumnCount() Then
                             iColumn = FirstVisibleColumn
                         End If
+                        iRow = Math.Min(iRow, RowCount() - 1)
                         CurrentCell = Me(iColumn, iRow)
                     End If
                     SendKeys.Send("{TAB}")
@@ -259,11 +258,13 @@ Public Class CDataGridView
                     If iRow = RowCount() Then
                         Dim newRow As Integer = iRow - 1
                         Dim newColumn As Integer = FirstVisibleColumn
+                        newRow = Math.Min(newRow, RowCount() - 1)
                         CurrentCell = Me(newColumn, newRow)
                     Else
                         If iRow = RowCount() - 1 Then
                             iRow = iRow - 1
                         End If
+                        iRow = Math.Min(iRow, RowCount() - 1)
                         CurrentCell = Me(iColumn, iRow + 1)
                     End If
                     e.Handled = True

@@ -12,7 +12,9 @@ Public Class OneTimeRun
         Messaging.AddMessage("AskIfSaveEmptyJournal", "Journal Entry is Empty, do you still want to save this entry?", "Empty Journal")
         Messaging.AddMessage("AskLastRecordReachedStartFromBeginning", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.")
         Messaging.AddMessage("MsgAlreadyPosted", "Sorry this record has already been posted!", "Disallowed operation")
+        Messaging.AddMessage("MsgApArEmAccountsNotAllowed", "Error on line <{lineNumber}>. Supplier (A.P.)/Customer (A.R.)/Employee accounts not allowed for this transaction.", "Invalid Account Entry")
         Messaging.AddMessage("MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "Disallowed operation")
+        Messaging.AddMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
         Messaging.AddMessage("MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")
         Messaging.AddMessage("MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error")
         Messaging.AddMessage("MsgDuplicateKeyValueViolation", "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!", "Unique Key Violation")
@@ -25,6 +27,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
         Messaging.AddMessage("MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
+
     End Sub
 
     Public Shared Sub CreateEnums()

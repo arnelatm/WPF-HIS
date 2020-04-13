@@ -44,7 +44,7 @@ Namespace BusinessLayer
         Public Property TransactionType As String
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
-        Public Property JournalItems As IList(Of JournalItem)
+        Public Property JournalItems As List(Of JournalItem)
     End Class
 
 End Namespace

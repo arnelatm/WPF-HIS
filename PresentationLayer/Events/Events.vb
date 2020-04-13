@@ -1,0 +1,104 @@
+﻿Imports AATM.PresentationLayer.Presenters
+
+Public Enum ButtonClicked
+    [Add]
+    [Delete]
+    [Edit]
+    [Find]
+    [First]
+    [Last]
+    [Next]
+    [Previous]
+    [Quit]
+    [Save]
+    [Undo]
+End Enum
+
+Public Class AddModeChanged
+
+    Public Sub New(ByVal addMode As Boolean)
+        Me.AddMode = addMode
+    End Sub
+
+    Public Property AddMode As Boolean
+
+End Class
+
+Public Class EditModeChanged
+
+    Public Sub New(ByVal editMode As Boolean)
+        Me.EditMode = editMode
+    End Sub
+
+    Public Property EditMode As Boolean
+
+End Class
+
+Public Class PassErrorList
+
+    Public Sub New(ByRef errors As List(Of String))
+        Me.Errors = errors
+    End Sub
+
+    Public Property Errors As List(Of String)
+
+End Class
+
+Public Class QuitView
+
+    Public Sub New(ByRef quitView As Boolean)
+        Me.QuitView = quitView
+    End Sub
+
+    Public Property QuitView As Boolean
+
+End Class
+
+Public Class RecordAdded
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
+End Class
+
+Public Class RecordPositionChanged
+
+    Public Sub New(ByRef recPos As Integer)
+        RecordPosition = recPos
+    End Sub
+
+    Public Property RecordPosition As Integer
+
+End Class
+
+Public Class RecordSaved
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
+
+End Class
+
+Public Class SelectedButton
+
+    Public Sub New(ByVal clickedButton As ButtonClicked)
+        Me.ClickedButton = clickedButton
+    End Sub
+
+    Public Property ClickedButton As ButtonClicked
+
+End Class
+
+Public Class ValidatingData
+
+    Public Sub New(ByRef validated As Boolean)
+        Me.Validated = validated
+    End Sub
+
+    Public Property Validated
+
+End Class

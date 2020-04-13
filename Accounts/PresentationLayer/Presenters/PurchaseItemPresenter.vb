@@ -20,24 +20,24 @@ Namespace PresentationLayer.Presenters
             'DataModel = New PurchaseItemModel
         End Sub
 
-        Public Overrides Function ChangesMade() As Boolean
-            Dim purchaseItemChangesMade As Boolean
-            If ObjectsCompare(OriginalModel, View) Then
-                purchaseItemChangesMade = False
-            Else
-                purchaseItemChangesMade = True
-            End If
-            Return purchaseItemChangesMade
-        End Function
+        'Public Overrides Function ChangesMade() As Boolean
+        '    Dim purchaseItemChangesMade As Boolean
+        '    If ObjectsCompare(OriginalModel, View) Then
+        '        purchaseItemChangesMade = False
+        '    Else
+        '        purchaseItemChangesMade = True
+        '    End If
+        '    Return purchaseItemChangesMade
+        'End Function
 
-        Public Shadows Sub Display(idNo As Integer)
-            Dim modelData As PurchaseItemModel
-            modelData = Model.GetRecordById(Of PurchaseItemModel)(idNo)
-            If modelData IsNot Nothing Then
-                OriginalModel = GlobalVariables.Mapper.Map(Of PurchaseItemModel)(modelData)
-                GlobalVariables.Mapper.Map(modelData, View)
-            End If
-        End Sub
+        'Public Shadows Sub Display(idNo As Integer)
+        '    Dim modelData As PurchaseItemModel
+        '    modelData = Model.GetRecordById(Of PurchaseItemModel)(idNo)
+        '    If modelData IsNot Nothing Then
+        '        OriginalModel = GlobalVariables.Mapper.Map(Of PurchaseItemModel)(modelData)
+        '        GlobalVariables.Mapper.Map(modelData, View)
+        '    End If
+        'End Sub
 
     End Class
 

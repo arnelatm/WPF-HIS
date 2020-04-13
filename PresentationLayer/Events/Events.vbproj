@@ -4,31 +4,36 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{021A8A1A-B69A-4254-9081-12357F20C01B}</ProjectGuid>
+    <ProjectGuid>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.PresentationLayer.Presenters</RootNamespace>
-    <AssemblyName>Presenters</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>AATM.PresentationLayer.Events</RootNamespace>
+    <AssemblyName>Events</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Presenters.xml</DocumentationFile>
+    <DocumentationFile>Events.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Presenters.xml</DocumentationFile>
+    <DocumentationFile>Events.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -44,16 +49,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.65.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CompareNETObjects.4.65.0\lib\net472\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Transactions" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -67,14 +66,15 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GroupAccessesPresenter.vb" />
-    <Compile Include="LoginPresenter.vb" />
+    <Compile Include="Events.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -90,13 +90,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Presenter.vb" />
-    <Compile Include="SecurityGroupPresenter.vb" />
-    <Compile Include="SecurityGroupsPresenter.vb" />
-    <Compile Include="SecurityObjectPresenter.vb" />
-    <Compile Include="SecurityObjectsPresenter.vb" />
-    <Compile Include="SecurityPresenter.vb" />
-    <Compile Include="UserPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -116,52 +109,12 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DataLayer\DataLayer.vbproj">
-      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
-      <Name>DataLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\EnumLocalization\EnumLocalization.vbproj">
-      <Project>{EFEC4547-2F73-4EAB-8ADC-AFAF596F8288}</Project>
-      <Name>EnumLocalization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\HelperLibraries\HelperLibraries.vbproj">
       <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
       <Name>HelperLibraries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Languages\Languages.vbproj">
-      <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
-      <Name>Languages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
-      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
-      <Name>MessagingLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
-      <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
-      <Name>ServicesLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Events\Events.vbproj">
-      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
-      <Name>Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.vbproj">
-      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Views\Views.vbproj">
-      <Project>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</Project>
-      <Name>Views</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

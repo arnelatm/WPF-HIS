@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Forms
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common.PresentationLayer.Models
@@ -14,13 +15,11 @@ Public Class MappingProfileAccounts
         CreateMap(Of AccountReconciliationItemModel, IAccountReconciliationItemView)().ReverseMap()
         CreateMap(Of AccountReconciliationModel, IAccountReconciliationView)().ReverseMap()
         CreateMap(Of ApJournal, ApJournalModel)().ReverseMap()
-        CreateMap(Of ApJournalModel, IApJournalView)().ReverseMap()
+        CreateMap(Of IApJournalView, ApJournalModel)()
         CreateMap(Of ApOpenInvoice, ApOpenInvoiceModel)().ReverseMap()
-        'CreateMap(Of ApOpenInvoiceModel, IApOpenInvoiceView)().ReverseMap()
         CreateMap(Of ArJournal, ArJournalModel)().ReverseMap()
         CreateMap(Of ArJournalModel, IArJournalView)().ReverseMap()
         CreateMap(Of ArOpenInvoice, ArOpenInvoiceModel)().ReverseMap()
-        'CreateMap(Of ArOpenInvoiceModel, IArOpenInvoiceView)().ReverseMap()
         CreateMap(Of Bank, BankModel)().ReverseMap()
         CreateMap(Of BankModel, IBankView)().ReverseMap()
         CreateMap(Of CadOiItem, CadOiItemModel)().ReverseMap()
@@ -54,7 +53,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
         CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap()
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()
-        CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
+        CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap() '.ForMember(Function(dest) dest.CreateJournalItemView, Sub(opt) opt.Ignore())
+        CreateMap(Of JournalItemModel, JournalItemView)().ReverseMap() ' .ForMember(Function(dest) dest.Ea, Sub(opt) opt.Ignore()).ReverseMap()
         CreateMap(Of PcsOiItem, PcsOiItemModel)().ReverseMap()
         CreateMap(Of PcsOiItemModel, IPcsOiItemView)().ReverseMap()
         CreateMap(Of PettyCashJournal, PettyCashJournalModel)().ReverseMap()
@@ -71,6 +71,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of SupplierModel, ISupplierView)().ReverseMap()
         'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()
         'CreateMap(Of List(Of JournalItemModel), IJournalItemsView)().ReverseMap()
+        'CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap() '.ForMember(Function(dest) dest.CreateJournalItemView, Sub(opt) opt.Ignore())
 
     End Sub
 

@@ -77,6 +77,7 @@
     <Compile Include="DoWorkEventArgs.vb" />
     <Compile Include="EventAggregator.vb" />
     <Compile Include="GifFOrm.vb" />
+    <Compile Include="IApplicationEvent.vb" />
     <Compile Include="IEventAggregator.vb" />
     <Compile Include="ISubscriber.vb" />
     <Compile Include="LoadingForm.Designer.vb">
@@ -169,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Events\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

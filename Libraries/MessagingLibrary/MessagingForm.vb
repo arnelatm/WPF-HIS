@@ -64,7 +64,7 @@ Public Class MessagingForm
     ' <param name="caption">The caption.</param>
     ' <returns>The dialog result.</returns>
     Public Shared Function Show(ByVal text As String, ByVal caption As String) As DialogResult
-        Return FlexibleMessageBoxForm.Show(Nothing, text, caption, MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1)
+        Return FlexibleMessageBoxForm.Show(Nothing, text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
     End Function
 
     ' <summary>
@@ -328,7 +328,7 @@ Public Class MessagingForm
 
         Private Function GetButtonText(ByVal buttonId As ButtonId) As String
             Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
-            return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
+            Return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
         End Function
 
         'Private Function GetButtonText(ByVal buttonId As ButtonId) As String
@@ -506,7 +506,7 @@ Public Class MessagingForm
         Public Property CaptionText As String
         Public Property MessageText As String
 
-        Public Shared Overloads Function Show(ByVal owner As IWin32Window, ByVal text As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
+        Public Overloads Shared Function Show(ByVal owner As IWin32Window, ByVal text As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal defaultButton As MessageBoxDefaultButton) As DialogResult
             Dim flexibleMessageBoxForm = New FlexibleMessageBoxForm()
             flexibleMessageBoxForm.ShowInTaskbar = False
             flexibleMessageBoxForm.CaptionText = caption

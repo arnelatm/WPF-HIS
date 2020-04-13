@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class ApJournalDao
-        Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal)
+        Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal), IDaoChild(Of JournalItem)
 
         Private ReadOnly Db As New Db()
 
@@ -39,17 +39,9 @@ Namespace DataLayer.AdoNet
             'Return Db.Read(sql, Make, params).FirstOrDefault()
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New ApJournalItemDao()
-            Data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
-            return Data
+            data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
+            Return data
         End Function
-
-        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of ApJournal) _
-        '    Implements IApJournalDao.GetAll
-        '    Dim sql As String =
-        '            " SELECT IDNo, SupplierIdNo, TransactionDate " &
-        '            "   FROM [ApJournal] " & "order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
 
         Public Function UpdateRecord(ByRef apJournal As ApJournal) As Integer _
             Implements IDao(Of ApJournal).UpdateRecord
@@ -195,9 +187,21 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        'Public Function UpdateGlReferenceNumber(ByRef model As ApJournal) As Integer Implements IJournalsDao(Of ApJournal).UpdateGlReferenceNumber
-        '    Throw New NotImplementedException
-        'End Function
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+            Dim jiDao = New ApJournalItemDao()
+            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Dim jiDao = New ApJournalItemDao()
+            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+            Dim jiDao = New ApJournalItemDao()
+            Return jiDao.InsertTvp(tvpTable)
+        End Function
+
     End Class
 
 End Namespace

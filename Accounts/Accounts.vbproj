@@ -108,6 +108,9 @@
     <Compile Include="BusinessLayer\Chart.vb" />
     <Compile Include="BusinessLayer\CheckDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CkdOiItem.vb" />
+    <Compile Include="BusinessLayer\Commands\CommandBase.vb" />
+    <Compile Include="BusinessLayer\Commands\EditCommand.vb" />
+    <Compile Include="BusinessLayer\Commands\IToolBarCommand.vb" />
     <Compile Include="BusinessLayer\CsrOiItem.vb" />
     <Compile Include="BusinessLayer\Customer.vb" />
     <Compile Include="BusinessLayer\Designation.vb" />
@@ -428,6 +431,7 @@
     <Compile Include="PresentationLayer\Views\ISalesCashItemView.vb" />
     <Compile Include="PresentationLayer\Views\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
+    <Compile Include="PresentationLayer\Forms\JournalItemView.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
@@ -624,6 +628,10 @@
       <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
       <Name>Translations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Events\Events.vbproj">
+      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
       <Project>{51da927a-505f-49cf-9768-9e401219b91c}</Project>
       <Name>Forms</Name>
@@ -648,5 +656,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
