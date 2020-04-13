@@ -42,22 +42,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Property JournalItemsPresenter As GeneralJournalItemsPresenter
-
-        'Public Overrides Function ChangesMade() As Boolean
-        '    Dim generalJournalChangesMade As Boolean
-        '    If ObjectsCompare(OriginalModel, View) Then
-        '        If JournalItemsPresenter.ChangesMadeInJournalItem Then
-        '            generalJournalChangesMade = True
-        '        Else
-        '            generalJournalChangesMade = False
-        '        End If
-        '    Else
-        '        generalJournalChangesMade = True
-        '    End If
-        '    Return generalJournalChangesMade
-        'End Function
-
         Protected Overrides Function DataIsValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.DataIsValid() Then
@@ -87,21 +71,7 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Public Shadows Sub Display(idNo As Integer)
-        '    Dim modelData As GeneralJournalModel
-        '    modelData = Model.GetRecordById(Of GeneralJournalModel)(idNo)
-        '    If modelData IsNot Nothing Then
-        '        OriginalModel = modelData
-        '        If idNo <> 0 Then
-        '            GlobalVariables.Mapper.Map(modelData, View)
-        '        End If
-        '    End If
-        'End Sub
-
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            'If AddMode Then
-            '    txtJournalCode.Text = AccountStrings.GeneralJournalPrefix
-            'End If
             If DataModel.JournalItems Is Nothing OrElse DataModel.JournalItems.Count() = 0 Then
 
                 If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
@@ -148,15 +118,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    'If IsEmpty(DataModel.ReferenceNo) Then
-        '    '    UpdateGlReferenceNumber()
-        '    'End If
-        '    'If AddMode Then
-        '    '    GoLastRecord()
-        '    'End If
-        'End Sub
-
         Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
@@ -182,28 +143,9 @@ Namespace PresentationLayer.Presenters
                 If IsEmpty(DataModel.ReferenceNo) Then
                     UpdateGlReferenceNumber()
                 End If
-                'If AddMode Then
-                '    GoLastRecord()
-                'End If
             End If
             Return retVal
         End Function
-
-        'Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-        '    'txtJournalCode.Text = AccountStrings.CashDisbursementJournalPrefix
-        '    DataModel.TransactionDate = Date.Now()
-        '    DataModel.JournalItems.Clear()
-        'End Sub
-        Public Sub OnAfterRecordRetrieval(model As GeneralJournalModel) Handles MyBase.AfterRecordRetrieval
-            model.TotalDebits = 0
-            model.TotalCredits = 0
-            If model.JournalItems IsNot Nothing Then
-                For Each item In model.JournalItems
-                    model.TotalDebits += item.Debit
-                    model.TotalCredits += item.Credit
-                Next
-            End If
-        End Sub
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String

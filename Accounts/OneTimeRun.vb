@@ -27,6 +27,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
         Messaging.AddMessage("MsgSaveReconciliationFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
+        Messaging.AddMessage("MsgRowDeletionDisallowedViewMode", "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
 
     End Sub
 

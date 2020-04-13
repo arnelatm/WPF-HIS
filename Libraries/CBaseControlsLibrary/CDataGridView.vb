@@ -145,7 +145,10 @@ Public Class CDataGridView
     Public Sub AddInsertColumn()
         With Columns
             Dim parentForm = FindForm()
-            If GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
+            Dim presenterObj = CallByName(parentForm, "PresenterObj", CallType.Get)
+            Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+            Dim adding As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+            If editing Or adding Then
                 Dim dgvInsColumn As New DataGridViewImageColumn
                 .Insert(.Count, dgvInsColumn)
                 dgvInsColumn.Image = Images.InsertRowImage
@@ -277,15 +280,7 @@ Public Class CDataGridView
                     End If
 
                 Case Else
-                    'e.Handled = False
-                    'Case Keys.Delete
-                    '    Dim parentForm = FindForm()
-                    '    If Not GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
-                    '        MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
-                    '        e.Handled = True
-                    '    Else
-                    '        e.Handled = False
-                    '    End If
+                    e.Handled = False
             End Select
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -568,7 +563,10 @@ Public Class CDataGridView
 
     Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         Dim myForm = FindForm()
-        If Not (GlobalFunctions.GetPropertyValue(myForm, "PresenterObj.EditMode") Or GetPropertyValue(myForm, "PresenterObj.AddMode")) Then
+        Dim presenterObj = CallByName(myForm, "PresenterObj", CallType.Get)
+        Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+        Dim adding As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+        If Not (editing Or adding) Then
             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
             e.Cancel = True
         End If
