@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports AATM.Libraries.CBaseControlsLibrary
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class BaseForm
     Inherits System.Windows.Forms.Form
 
@@ -31,8 +33,8 @@ Partial Class BaseForm
         '
         'cmbLanguagePicker
         '
-        Me.cmbLanguagePicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.cmbLanguagePicker.FormattingEnabled = true
+        Me.cmbLanguagePicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmbLanguagePicker.FormattingEnabled = True
         Me.cmbLanguagePicker.Location = New System.Drawing.Point(677, 1)
         Me.cmbLanguagePicker.Name = "cmbLanguagePicker"
         Me.cmbLanguagePicker.Size = New System.Drawing.Size(121, 21)
@@ -62,7 +64,7 @@ Partial Class BaseForm
         '
         'CLabel2
         '
-        Me.CLabel2.AutoSize = true
+        Me.CLabel2.AutoSize = True
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel2.Location = New System.Drawing.Point(507, 2)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
@@ -81,14 +83,14 @@ Partial Class BaseForm
         Me.Controls.Add(Me.cmbLanguagePicker)
         Me.Name = "BaseForm"
         Me.Text = "BaseForm"
-        Me.ResumeLayout(false)
+        Me.ResumeLayout(False)
         Me.PerformLayout
 
-End Sub
+    End Sub
 
     Friend WithEvents cmbLanguagePicker As Windows.Forms.ComboBox
     Friend WithEvents TranslatorDAC As Dac
     Friend WithEvents AppdataDAC As Dac
     Friend WithEvents StoreCaptions1 As StoreCaptions
-    Friend WithEvents CLabel2 As CBaseControlsLibrary.CLabel
+    Friend WithEvents CLabel2 As CLabel
 End Class

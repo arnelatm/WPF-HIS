@@ -567,7 +567,7 @@ Public Class CDataGridView
         Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
         Dim adding As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
         If Not (editing Or adding) Then
-            MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
+            'Messaging.Show(True, "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
             e.Cancel = True
         End If
     End Sub

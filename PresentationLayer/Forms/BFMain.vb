@@ -341,6 +341,7 @@ Public Class BfMain
                             tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                         End If
                         _originalText = CaptionCollection.Item(cCtrl.Name)
+
                         r = Dv.Find(_originalText)
                         If r >= 0 Then
                             cCtrl.Text = Dv(r).Item("TranslatedCaption")
@@ -511,7 +512,7 @@ Public Class BfMain
             '    cmbLanguagePicker.Items.Add(dr("lang"))
             'Next
             'ds = Nothing
-            Me.DoubleBuffered = True
+            DoubleBuffered = True
             Dim dac As New Dac
             Dim cmd As String
             RaiseEvent BeforeLoad()
