@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
 
@@ -18,7 +19,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
 
-        'Private _footer As DgvFooter
+        Private _footer As DgvFooter
         Public TxtTotalDebits As Decimal
 
         Public TxtTotalCredits As Decimal
@@ -165,17 +166,11 @@ Namespace PresentationLayer.Forms
 #Region "Methods"
 
         Private Sub UpdateTotals()
-            'If _footer IsNot Nothing Then
-            '    _footer.SumAllColumns()
-            'End If
-        End Sub
-
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            SuspendLayout()
-            dtpTransactionDate.Value = Date.Now()
-            bsJournalItems.Clear()
-            DataGridViewJournalItems.Refresh()
-            ResumeLayout()
+            If _footer IsNot Nothing Then
+                _footer.SumAllColumns()
+                TotalDebits = _footer.Value("dgvDebit")
+                TotalCredits = _footer.Value("dgvCredit")
+            End If
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -234,7 +229,7 @@ Namespace PresentationLayer.Forms
                     Case $"dgvinsertcolumn"
                         'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim newRow As New JournalItemModel
+                            Dim newRow As New JournalItemView
                             bsJournalItems.Insert(.RowIndex(), newRow)
                             'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                             ReSequenceDgvAfterInsert()
@@ -247,26 +242,19 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub DataGridViewJournalItems_ChangesMade(sender As Object, e As EventArgs) _
-            Handles DataGridViewJournalItems.ChangesMade
-        End Sub
-
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             ReSequenceDgvAfterDelete()
-            'UpdateTotals()
+            UpdateTotals()
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'KeyPreview = True
-            ''Dim dgvFooter As New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
-            ''dgvFooter.AutoCalc = False
-            '_footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
-            '_footer.AutoCalc = True
-            '_footer.ColumnToSum("dgvDebit") = True
-            '_footer.ColumnToSum("dgvCredit") = True
-            '_footer.SetText("DgvAccountIdNo", "Totals ->")
-            ''UpdateTotals()
-            BindJournalItem()
+            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer.AutoCalc = True
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
@@ -276,10 +264,10 @@ Namespace PresentationLayer.Forms
                     Case $"dgvaccountidno"
                         'SendKeys.Send("{TAB}")
                     Case $"dgvdebit"
-                        'UpdateTotals()
+                        UpdateTotals()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        'UpdateTotals()
+                        UpdateTotals()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                 End Select
@@ -321,22 +309,13 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        'Private Sub UpdateTotals()
-        '    TotalDebits = 0
-        '    TotalCredits = 0
-        '    For Each item In bsJournalItems
-        '        TotalDebits += item.Debit
-        '        TotalCredits += item.Credit
-        '    Next
-        '    'If _footer IsNot Nothing Then
-        '    '    _footer.SumColumn("DgvDebit")
-        '    '    _footer.SumColumn("DgvCredit")
-        '    'End If
-        'End Sub
-
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
             UpdateTotals()
+        End Sub
+
+        Private Overloads Sub Dispose()
+            _footer.Dispose()
         End Sub
 
 #End Region

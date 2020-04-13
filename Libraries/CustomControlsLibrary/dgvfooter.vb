@@ -421,19 +421,23 @@ Public Class DgvFooter
     ''' <param name="columnName">Name of column in parent which to try and sum all cell values of.</param>
     ''' <remarks>If a cell value cannot be parsed to double, no error will be thrown. That cell will be skipped.</remarks>
     Public Sub SumColumn(ByVal columnName As String)
-        Dim tally As Double = 0.0
-        Dim nfi As Globalization.NumberFormatInfo = New Globalization.CultureInfo("en-US", False).NumberFormat
-        Dim cVal As String
+        If Not String.IsNullOrEmpty(columnName) Then
+            Dim tally As Double = 0.0
+            Dim nfi As Globalization.NumberFormatInfo = New Globalization.CultureInfo("en-US", False).NumberFormat
+            Dim cVal As String
 
-        For Each r As DataGridViewRow In _parentDGV.Rows
-            cVal = CStr(r.Cells(columnName).Value)
-            tally += If(Double.TryParse(cVal, Nothing), CDbl(cVal), 0)
-        Next
+            For Each r As DataGridViewRow In _parentDGV.Rows
+                If Not String.IsNullOrEmpty(columnName) Then
+                    cVal = CStr(r.Cells(columnName).Value)
+                    tally += If(Double.TryParse(cVal, Nothing), CDbl(cVal), 0)
+                End If
+            Next
 
-        nfi.NumberDecimalDigits = _decimalPlaces
-        tally = If(_roundSum, Math.Round(tally, _decimalPlaces, If(_bankersRounding, MidpointRounding.ToEven, MidpointRounding.AwayFromZero)), TruncateToDecimalPlace(tally, _decimalPlaces))
+            nfi.NumberDecimalDigits = _decimalPlaces
+            tally = If(_roundSum, Math.Round(tally, _decimalPlaces, If(_bankersRounding, MidpointRounding.ToEven, MidpointRounding.AwayFromZero)), TruncateToDecimalPlace(tally, _decimalPlaces))
 
-        MyClass.Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
+            MyClass.Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
+        End If
     End Sub
 
     ''' <summary>
@@ -448,6 +452,10 @@ Public Class DgvFooter
 
     Public Sub SetText(columnName As String, columnText As String)
         MyClass.Rows(0).Cells(columnName & "_footer").Value = columnText
+    End Sub
+
+    Public Sub SetAlignment(columnName As String, colAlignment As ContentAlignment)
+        MyClass.Columns(columnName & "_footer").DefaultCellStyle.Alignment = colAlignment
     End Sub
 
     ''' <summary>
