@@ -194,6 +194,16 @@ Namespace PresentationLayer.Presenters
         '    DataModel.TransactionDate = Date.Now()
         '    DataModel.JournalItems.Clear()
         'End Sub
+        Public Sub OnAfterRecordRetrieval(model As GeneralJournalModel) Handles MyBase.AfterRecordRetrieval
+            model.TotalDebits = 0
+            model.TotalCredits = 0
+            If model.JournalItems IsNot Nothing Then
+                For Each item In model.JournalItems
+                    model.TotalDebits += item.Debit
+                    model.TotalCredits += item.Credit
+                Next
+            End If
+        End Sub
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String

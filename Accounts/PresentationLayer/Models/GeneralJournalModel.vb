@@ -17,8 +17,8 @@ Namespace PresentationLayer.Models
         Public Property Notes As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
-        Public Property TotalCredits As Decimal
         Public Property TotalDebits As Decimal
+        Public Property TotalCredits As Decimal
         Public Property TransactionDate As Date?
         Public Property JournalItems As IList(Of JournalItemModel)
     End Class

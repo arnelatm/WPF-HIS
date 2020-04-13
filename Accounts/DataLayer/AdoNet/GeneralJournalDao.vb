@@ -25,7 +25,6 @@ Namespace DataLayer.AdoNet
                     " FROM [GeneralJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            'Return Db.Read(sql, Make, params).FirstOrDefault()
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New GeneralJournalItemDao()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
