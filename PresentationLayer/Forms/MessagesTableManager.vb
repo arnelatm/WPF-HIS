@@ -219,7 +219,7 @@ Public Class MessagesTableManager
                 DataGrid1.Columns(1).ReadOnly = True
             Else
                 Dim dsColumn As DataSet
-                dsColumn = TranslatorDAC.ReturnDs("Select Caption, translated FROM TranslatedMessages_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
+                dsColumn = TranslatorDAC.ReturnDs("Select Caption, TranslatedCaption FROM TranslatedMessages_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Dv = TransTable.DefaultView
                 Dv.Sort = "original"
                 ' Clear the second column
@@ -247,15 +247,15 @@ Public Class MessagesTableManager
         Dim translatedValue As String = txtTranslation.Text.TrimEnd
         Dim messageIdNo As Int16
         Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
-        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        messageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
 
-        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + MessageIdNo.ToString() +
+        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + messageIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" Then
-            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , Translated, LanguageIdNo) VALUES ( " _
-                  + MessageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , TranslatedCaption, LanguageIdNo) VALUES ( " _
+                  + messageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
@@ -290,7 +290,7 @@ Public Class MessagesTableManager
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
         If cmbLanguage.Text <> "_Original" Then
-            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , Translated, LanguageIdNo) VALUES ( " _
+            Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , TranslatedCaption, LanguageIdNo) VALUES ( " _
                   + MessageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If

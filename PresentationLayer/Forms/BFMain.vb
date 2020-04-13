@@ -340,14 +340,19 @@ Public Class BfMain
                             tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                             tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                         End If
-                        _originalText = CaptionCollection.Item(cCtrl.Name)
+                        Try
+                            _originalText = CaptionCollection.Item(cCtrl.Name)
 
-                        r = Dv.Find(_originalText)
-                        If r >= 0 Then
-                            cCtrl.Text = Dv(r).Item("TranslatedCaption")
-                        Else
+                            r = Dv.Find(_originalText)
+                            If r >= 0 Then
+                                cCtrl.Text = Dv(r).Item("TranslatedCaption")
+                            Else
+                                cCtrl.Text = cCtrl.Tag
+                            End If
+                        Catch ex As Exception
                             cCtrl.Text = cCtrl.Tag
-                        End If
+                        End Try
+
                     End If
                 End If
             Next

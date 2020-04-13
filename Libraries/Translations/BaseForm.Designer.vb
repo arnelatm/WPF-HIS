@@ -1,4 +1,4 @@
-﻿Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class BaseForm
@@ -28,7 +28,7 @@ Partial Class BaseForm
         Me.TranslatorDAC = New AATM.Libraries.Translations.Dac()
         Me.AppdataDAC = New AATM.Libraries.Translations.Dac()
         Me.StoreCaptions1 = New AATM.Libraries.Translations.StoreCaptions()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CLabel2 = New Label
         Me.SuspendLayout
         '
         'cmbLanguagePicker
@@ -92,5 +92,5 @@ Partial Class BaseForm
     Friend WithEvents TranslatorDAC As Dac
     Friend WithEvents AppdataDAC As Dac
     Friend WithEvents StoreCaptions1 As StoreCaptions
-    Friend WithEvents CLabel2 As CLabel
+    Friend WithEvents CLabel2 As Label
 End Class

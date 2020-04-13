@@ -125,14 +125,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseControlsLibrary\BaseControlsLibrary.vbproj">
-      <Project>{58F5EC33-2974-4823-AB62-1D4E5B3EF152}</Project>
-      <Name>BaseControlsLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
-      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
-      <Name>CBaseControlsLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
       <Name>GlobalFuncNSub</Name>
