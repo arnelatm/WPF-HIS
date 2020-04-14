@@ -142,6 +142,10 @@
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\Translations\Translations.vbproj">
       <Project>{604677ED-411D-4F00-B151-F4D39BC9E670}</Project>
       <Name>Translations</Name>
