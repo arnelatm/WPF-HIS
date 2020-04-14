@@ -36,35 +36,35 @@ Public Class StoreCaptions
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
-            If IsTranslatable(cCtrl) Then
-                If TypeOf cCtrl Is DataGrid Then
-                    t = CType(cCtrl, DataGrid).CaptionText
+            'If IsTranslatable(cCtrl) Then
+            If TypeOf cCtrl Is DataGrid Then
+                t = CType(cCtrl, DataGrid).CaptionText
+                cCtrl.Tag = t
+                Captions.Add(cCtrl.Text, cCtrl.Name)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim subMenuName = ""
+                Dim toolStrip As ToolStrip = cCtrl
+                Dim c As ToolStrip
+                c = cCtrl
+                For Each obj As Object In c.Items
+                    TranslateToolStrip(FormIdNo, c, obj)
+                Next
+            ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
+                Dim subMenuName = cCtrl.Name
+                Dim menuStrip As MenuStrip = cCtrl
+                SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
+            Else
+                Try
+                    t = cCtrl.Text
                     cCtrl.Tag = t
                     Captions.Add(cCtrl.Text, cCtrl.Name)
-                ElseIf TypeOf cCtrl Is ToolStrip Then
-                    Dim subMenuName = ""
-                    Dim toolStrip As ToolStrip = cCtrl
-                    Dim c As ToolStrip
-                    c = cCtrl
-                    For Each obj As Object In c.Items
-                        TranslateToolStrip(FormIdNo, c, obj)
-                    Next
-                ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
-                    Dim subMenuName = cCtrl.Name
-                    Dim menuStrip As MenuStrip = cCtrl
-                    SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
-                Else
-                    Try
-                        t = cCtrl.Text
-                        cCtrl.Tag = t
-                        Captions.Add(cCtrl.Text, cCtrl.Name)
-                        InsertWord(t)
-                        InsertFormItem(FormIdNo, t)
-                    Catch ex As Exception
+                    InsertWord(t)
+                    InsertFormItem(FormIdNo, t)
+                Catch ex As Exception
 
-                    End Try
-                End If
+                End Try
             End If
+            'End If
         Next
         Return Captions
     End Function
@@ -189,21 +189,21 @@ Public Class StoreCaptions
     '    Return retVal
     'End Function
 
-    Friend Function IsTranslatable(ByVal ctrl As Control)
-        If TypeOf ctrl Is Label OrElse
-                   TypeOf ctrl Is Button OrElse
-                   TypeOf ctrl Is CheckBox OrElse
-                   TypeOf ctrl Is RadioButton OrElse
-                   TypeOf ctrl Is DataGrid OrElse
-                   TypeOf ctrl Is ToolStrip OrElse
-                   TypeOf ctrl Is TabControl OrElse
-                   TypeOf ctrl Is TabPage OrElse
-                   TypeOf ctrl Is GroupBox Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
+    'Friend Function IsTranslatable(ByVal ctrl As Control)
+    '    If TypeOf ctrl Is Label OrElse
+    '               TypeOf ctrl Is Button OrElse
+    '               TypeOf ctrl Is CheckBox OrElse
+    '               TypeOf ctrl Is RadioButton OrElse
+    '               TypeOf ctrl Is DataGrid OrElse
+    '               TypeOf ctrl Is ToolStrip OrElse
+    '               TypeOf ctrl Is TabControl OrElse
+    '               TypeOf ctrl Is TabPage OrElse
+    '               TypeOf ctrl Is GroupBox Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
 
     'Friend Function IsTranslatable(ByVal ctrl As Control)
     '    If TypeOf ctrl Is CButton OrElse

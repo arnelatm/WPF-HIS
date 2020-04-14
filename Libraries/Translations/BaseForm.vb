@@ -72,24 +72,24 @@ Public Class BaseForm
                 Text = Tag
             End If
             For Each ctrl As Control In Controls
-                If IsTranslatable(ctrl) Then
-                    _originalText = _captionCollection.Item(ctrl.Name)
-                    r = Dv.Find(_originalText)
-                    If TypeOf ctrl Is DataGrid Then
-                        If r >= 0 Then
-                            CType(ctrl, DataGrid).CaptionText = Dv(r).Item(1)
-                        Else
-                            CType(ctrl, DataGrid).CaptionText = ctrl.Tag
-                        End If
+                'If IsTranslatable(ctrl) Then
+                _originalText = _captionCollection.Item(ctrl.Name)
+                r = Dv.Find(_originalText)
+                If TypeOf ctrl Is DataGrid Then
+                    If r >= 0 Then
+                        CType(ctrl, DataGrid).CaptionText = Dv(r).Item(1)
                     Else
-                        If r >= 0 Then
-                            ctrl.Text = Dv(r).Item("translated")
-                        Else
-                            ctrl.Text = ctrl.Tag
-                        End If
-
+                        CType(ctrl, DataGrid).CaptionText = ctrl.Tag
                     End If
+                Else
+                    If r >= 0 Then
+                        ctrl.Text = Dv(r).Item("translated")
+                    Else
+                        ctrl.Text = ctrl.Tag
+                    End If
+
                 End If
+                'End If
             Next
             If Not Menu Is Nothing Then
                 ProcessMenuItems(Menu.MenuItems, MenuLevel)
@@ -98,18 +98,18 @@ Public Class BaseForm
 
     End Sub
 
-    Function IsTranslatable(ByVal ctrl As Control) As Boolean
-        If TypeOf ctrl Is Label _
-            Or TypeOf ctrl Is Button _
-            Or TypeOf ctrl Is CheckBox _
-            Or TypeOf ctrl Is RadioButton _
-            Or TypeOf ctrl Is DataGrid _
-            Or TypeOf ctrl Is GroupBox Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
+    'Function IsTranslatable(ByVal ctrl As Control) As Boolean
+    '    If TypeOf ctrl Is Label _
+    '        Or TypeOf ctrl Is Button _
+    '        Or TypeOf ctrl Is CheckBox _
+    '        Or TypeOf ctrl Is RadioButton _
+    '        Or TypeOf ctrl Is DataGrid _
+    '        Or TypeOf ctrl Is GroupBox Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
 
     Public Sub ProcessMenuItems(ByVal menuItems As Menu.MenuItemCollection, ByVal mLevel As String)
         Dim i As Int16

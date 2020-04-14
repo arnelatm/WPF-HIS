@@ -67,12 +67,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseForm.Designer.vb">
-      <DependentUpon>BaseForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BaseForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DAC.Designer.vb">
       <DependentUpon>DAC.vb</DependentUpon>
     </Compile>
@@ -102,9 +96,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BaseForm.resx">
-      <DependentUpon>BaseForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
