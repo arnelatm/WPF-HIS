@@ -9,6 +9,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Libraries
 Imports System.ComponentModel
+Imports AATM.Libraries.CustomControlsLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -19,8 +20,8 @@ Namespace PresentationLayer.Forms
         Private _accountsByCode
         Private _journalItems As List(Of IJournalItemView)
         Private _profitCentersByCode
+        Private _footer As DgvFooter
         Protected JournalItem As IJournalItemView
-        'Public Property EventAggregator As IEventAggregator
 
         Public Sub New()
             MyBase.New()
@@ -274,6 +275,24 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
+        Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer.AutoCalc = True
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
+        End Sub
+
+        Private Sub UpdateTotals()
+            If _footer IsNot Nothing Then
+                _footer.SumAllColumns()
+                TotalDebits = _footer.Value("dgvDebit")
+                TotalCredits = _footer.Value("dgvCredit")
+            End If
+        End Sub
+
 
         'Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
         '    SuspendLayout()
@@ -781,16 +800,6 @@ Namespace PresentationLayer.Forms
                 End If
             Next
         End Sub
-
-        Private Sub UpdateTotals()
-            TotalDebits = 0
-            TotalCredits = 0
-            For Each item In bsJournalItems
-                TotalDebits += item.Debit
-                TotalCredits += item.Credit
-            Next
-        End Sub
-
         Private Sub UpdateTotalVatAmount()
             Dim tVatAmount As Decimal = 0
             For Each row In DataGridViewJournalItems.Rows

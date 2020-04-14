@@ -21,9 +21,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtDepartmentCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DepartmentPresenter(Me)
-            ea = PresenterObj.Ea
-            ea.SubscribeEvent(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -32,8 +31,8 @@ Namespace PresentationLayer.Forms
             cacCostCenterIDNo.DataSource = PresenterObj.GetCostCenterList()
         End Sub
 
-       
 #Region "Fields"
+
         Public Property IDNo As Integer Implements IDepartmentView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -60,7 +59,6 @@ Namespace PresentationLayer.Forms
                 txtDepartmentCode.Text = Value
             End Set
         End Property
-
 
         Public Property DepartmentName As String Implements IDepartmentView.DepartmentName
             Get
@@ -115,6 +113,7 @@ Namespace PresentationLayer.Forms
                 txtSortKey.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()

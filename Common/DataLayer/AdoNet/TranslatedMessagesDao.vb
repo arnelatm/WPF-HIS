@@ -12,7 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db ' ("TRANSLATIONS")
 
-        Public Function GetRecordById(idNo As Integer) As TranslatedMessages Implements IDao(Of TranslatedMessages).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As TranslatedMessages _
+            Implements IDao(Of TranslatedMessages).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TranslatedMessage, TranslatedCaption, MessageIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &
@@ -21,7 +22,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements IDao(Of TranslatedMessages).UpdateRecord
+        Public Function UpdateRecord(ByRef translatedMessages As TranslatedMessages) As Integer _
+            Implements IDao(Of TranslatedMessages).UpdateRecord
             Dim sql As String =
                     " UPDATE [TranslatedMessages]" &
                     "    SET TranslatedMessage = @TranslatedMessage," &
@@ -32,7 +34,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(translatedMessages))
         End Function
 
-        Public Function AddRecord(ByRef translatedMessages As TranslatedMessages) As Integer Implements IDao(Of TranslatedMessages).AddRecord
+        Public Function AddRecord(ByRef translatedMessages As TranslatedMessages) As Integer _
+            Implements IDao(Of TranslatedMessages).AddRecord
             Dim sql As String =
                     " INSERT INTO [TranslatedMessages] " &
                     " (TranslatedMessage,TranslatedCaption,MessageIdNo,LanguageIdNo) " &
@@ -48,14 +51,14 @@ Namespace DataLayer.AdoNet
             .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
             .TranslatedMessage = Extensions.AsString(reader("TranslatedMessage")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
-                                          }
+            }
 
         Private Function Take(translatedMessages As TranslatedMessages) As Object()
             Return New Object() {"@IDNo", translatedMessages.IdNo,
-                                  "@MessageIdNo", translatedMessages.MessageIdNo,
-                                  "@LanguageIdNo", translatedMessages.LanguageIdNo,
-                                  "@TranslatedMessage", translatedMessages.TranslatedMessage,
-                                  "@TranslatedCaption", translatedMessages.TranslatedCaption}
+                                 "@MessageIdNo", translatedMessages.MessageIdNo,
+                                 "@LanguageIdNo", translatedMessages.LanguageIdNo,
+                                 "@TranslatedMessage", translatedMessages.TranslatedMessage,
+                                 "@TranslatedCaption", translatedMessages.TranslatedCaption}
         End Function
 
     End Class

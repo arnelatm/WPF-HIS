@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.MessagingLibrary
-Imports AATM.Libraries.Translations
 
 Namespace BusinessRules
     ' abstract base class for business rules.

@@ -51,7 +51,8 @@
         '    Return retVal
         'End Function
 
-        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) _
+            As Integer _
             Implements IBaseDao.GetIdNoOfSortedPositionNumber
             If recordNo = 0 Then
                 Return 0
@@ -71,7 +72,7 @@
                         Else
                             sortOrder = sortOrder.Trim() + " DESC"
                         End If
-                        sortOrder = Replace(sortOrder, " DESC", " ASC",)
+                        sortOrder = Replace(sortOrder, " DESC", " ASC", )
                         sql = "Select TOP 1 IDNo FROM [" & tableName & "] order by " & sortOrder
                         x = Db.Scalar(sql)
                     Else

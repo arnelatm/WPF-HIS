@@ -12,7 +12,6 @@ Namespace PresentationLayer.Models
         End Sub
 
         Public Sub New()
-
         End Sub
 
         'Public Overrides Function GetDataService() Implements IModelCommon.GetDataService
@@ -22,7 +21,6 @@ Namespace PresentationLayer.Models
         'Public Overridable Function GetCommonService() Implements IModelCommon.GetCommonService
         '    Return New ServiceCommon()
         'End Function
-
     End Class
 
     'Public Class ModelBranch
@@ -115,5 +113,4 @@ Namespace PresentationLayer.Models
     '    End Sub
 
     'End Class
-
 End Namespace

@@ -3,7 +3,6 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 
 Namespace PresentationLayer.Presenters
 
@@ -61,7 +60,7 @@ Namespace PresentationLayer.Presenters
                     scope.Complete()
                 End Using
             Catch ex As TransactionAbortedException
-                MessageBox.Show(ex.Message, StringWords.Transaction_Aborted)
+                MessageBox.Show(ex.Message, "Transaction Aborted")
             Catch oEx As Exception
                 Debugger.Break()
             End Try

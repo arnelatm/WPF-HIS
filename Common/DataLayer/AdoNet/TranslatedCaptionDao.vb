@@ -12,7 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db ' ("TRANSLATIONS")
 
-        Public Function GetRecordById(idNo As Integer) As TranslatedCaption Implements IDao(Of TranslatedCaption).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As TranslatedCaption _
+            Implements IDao(Of TranslatedCaption).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TranslatedCaption, CaptionIdNo, LanguageIdNo " &
                     "   FROM [TranslatedCaption]" &
@@ -21,7 +22,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef TranslatedCaption As TranslatedCaption) As Integer Implements IDao(Of TranslatedCaption).UpdateRecord
+        Public Function UpdateRecord(ByRef TranslatedCaption As TranslatedCaption) As Integer _
+            Implements IDao(Of TranslatedCaption).UpdateRecord
             Dim sql As String =
                     " UPDATE [TranslatedCaption]" &
                     "    SET TranslatedCaption = @TranslatedCaption," &
@@ -31,7 +33,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(TranslatedCaption))
         End Function
 
-        Public Function AddRecord(ByRef TranslatedCaption As TranslatedCaption) As Integer Implements IDao(Of TranslatedCaption).AddRecord
+        Public Function AddRecord(ByRef TranslatedCaption As TranslatedCaption) As Integer _
+            Implements IDao(Of TranslatedCaption).AddRecord
             Dim sql As String =
                     " INSERT INTO [TranslatedCaption] " &
                     " (TranslatedCaption,CaptionIdNo,LanguageIdNo) " &
@@ -46,13 +49,13 @@ Namespace DataLayer.AdoNet
             .CaptionIdNo = Extensions.AsInt(Of Integer)(reader("CaptionIdNo")),
             .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
-                                          }
+            }
 
         Private Function Take(TranslatedCaption As TranslatedCaption) As Object()
             Return New Object() {"@IDNo", TranslatedCaption.IdNo,
-                                  "@CaptionIdNo", TranslatedCaption.CaptionIdNo,
-                                  "@LanguageIdNo", TranslatedCaption.LanguageIdNo,
-                                  "@TranslatedCaption", TranslatedCaption.TranslatedCaption}
+                                 "@CaptionIdNo", TranslatedCaption.CaptionIdNo,
+                                 "@LanguageIdNo", TranslatedCaption.LanguageIdNo,
+                                 "@TranslatedCaption", TranslatedCaption.TranslatedCaption}
         End Function
 
     End Class

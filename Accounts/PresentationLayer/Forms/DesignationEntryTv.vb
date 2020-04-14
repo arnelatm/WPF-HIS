@@ -6,7 +6,6 @@ Namespace PresentationLayer.Forms
 
     Public Class DesignationEntryTv
         Implements IDesignationView
-
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
@@ -20,17 +19,9 @@ Namespace PresentationLayer.Forms
             PresenterObj = New DesignationPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            'CreateEnumResourceFile()
-
-            'ResourceEnumConverter.MakeResource("DesignationTypeSelection", GetType(DesignationTypeSelection))
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("DesignationTypeSelection", GetType(DesignationTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
+#Region "Fields"
         Public Property IDNo As Integer Implements IDesignationView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
@@ -75,14 +66,7 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
-
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtDesignationCode, "Designation Code")
-            MyErrorProvider.Controls.AddMandatory(txtDesignationName, "Designation Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
+#End Region
 
     End Class
 

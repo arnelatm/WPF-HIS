@@ -12,7 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo As Integer) As OriginalCaptions Implements IDaoAll(Of OriginalCaptions).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As OriginalCaptions _
+            Implements IDaoAll(Of OriginalCaptions).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, Caption " &
                     "   FROM [OriginalCaptions]" &
@@ -21,7 +22,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalCaptions) Implements IDaoAll(Of OriginalCaptions).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalCaptions) _
+            Implements IDaoAll(Of OriginalCaptions).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "Caption"
             End If
@@ -31,7 +33,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef originalCaptions As OriginalCaptions) As Integer Implements IDaoAll(Of OriginalCaptions).UpdateRecord
+        Public Function UpdateRecord(ByRef originalCaptions As OriginalCaptions) As Integer _
+            Implements IDaoAll(Of OriginalCaptions).UpdateRecord
             Dim sql As String =
                     " UPDATE [OriginalCaptions]" &
                     " Set Caption = @Caption" &
@@ -39,7 +42,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(originalCaptions))
         End Function
 
-        Public Function AddRecord(ByRef originalCaptions As OriginalCaptions) As Integer Implements IDaoAll(Of OriginalCaptions).AddRecord
+        Public Function AddRecord(ByRef originalCaptions As OriginalCaptions) As Integer _
+            Implements IDaoAll(Of OriginalCaptions).AddRecord
             Dim sql As String =
                     " INSERT INTO [OriginalCaptions] " &
                     " (Caption) " &
@@ -58,7 +62,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@IDNo", originalCaptions.IdNo,
                                     "@Caption", originalCaptions.Caption
-                                    }
+                                }
         End Function
 
     End Class

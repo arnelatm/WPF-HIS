@@ -12,6 +12,7 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("BankName"))
+                AddRule(New ValidateRequired("BankCode"))
             End If
         End Sub
 

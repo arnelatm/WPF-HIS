@@ -37,15 +37,17 @@ Namespace AdoNet
             Dim params() As Object =
                     {"@SecurityObjectName", securityObjectName, "@SecurityGroupIDNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &
-                        "Left Join SecurityObject " &
-                        "on GroupAccess.SecurityObjectIDNo = SecurityObject.IdNo " &
-                        "where SecurityObject.SecurityObjectName = @securityObjectName and GroupAccess.SecurityGroupIdNo = @SecurityGroupIdNo"
+                      "Left Join SecurityObject " &
+                      "on GroupAccess.SecurityObjectIDNo = SecurityObject.IdNo " &
+                      "where SecurityObject.SecurityObjectName = @securityObjectName and GroupAccess.SecurityGroupIdNo = @SecurityGroupIdNo"
             Return Db.SqlRead(sql, params)
         End Function
 
         Public Function IsUserDeveloper()
             Dim controlSecurityValues = GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
-            If controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0) Then
+            If _
+                controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso
+                controlSecurityValues(0) Then
                 ' Visible property stored in first element of the array
                 Return True
             End If

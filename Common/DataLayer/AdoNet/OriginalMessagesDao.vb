@@ -12,7 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo As Integer) As OriginalMessages Implements IDaoAll(Of OriginalMessages).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As OriginalMessages _
+            Implements IDaoAll(Of OriginalMessages).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, MessageKey, Message, Caption, Notes" &
                     "   FROM [OriginalMessages]" &
@@ -21,7 +22,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalMessages) Implements IDaoAll(Of OriginalMessages).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalMessages) _
+            Implements IDaoAll(Of OriginalMessages).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "MessageKey"
             End If
@@ -31,7 +33,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IDaoAll(Of OriginalMessages).UpdateRecord
+        Public Function UpdateRecord(ByRef originalMessages As OriginalMessages) As Integer _
+            Implements IDaoAll(Of OriginalMessages).UpdateRecord
             Dim sql As String =
                     " UPDATE [OriginalMessages]" &
                     "    SET MessageKey = @MessageKey," &
@@ -43,7 +46,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(originalMessages))
         End Function
 
-        Public Function AddRecord(ByRef originalMessages As OriginalMessages) As Integer Implements IDaoAll(Of OriginalMessages).AddRecord
+        Public Function AddRecord(ByRef originalMessages As OriginalMessages) As Integer _
+            Implements IDaoAll(Of OriginalMessages).AddRecord
             Dim sql As String =
                     " INSERT INTO [OriginalMessages] " &
                     " (MessageKey,Message,Caption,Notes) " &

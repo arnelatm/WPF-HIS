@@ -22,13 +22,14 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Department) Implements IDaoAll(Of Department).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Department) _
+            Implements IDaoAll(Of Department).GetAll
             If sortExpression = Nothing Then
                 sortExpression = "SortKey ASC"
             End If
             Dim sql As String =
-                " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
-                "   FROM [Department_View] order by '" + SortExpression + "'"
+                    " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
+                    "   FROM [Department_View] order by '" + sortExpression + "'"
             Return db.Read(sql, _make).ToList()
         End Function
 
@@ -47,45 +48,46 @@ Namespace DataLayer.AdoNet
             Return db.Insert(sql, Take(department))
         End Function
 
-        Public Function UpdateRecord(ByRef department As Department) As Integer Implements IDaoAll(Of Department).UpdateRecord
+        Public Function UpdateRecord(ByRef department As Department) As Integer _
+            Implements IDaoAll(Of Department).UpdateRecord
             Dim sql As String =
-                " UPDATE [Department]" &
-                "    SET DepartmentCode = @DepartmentCode," &
-                "        DepartmentName = @DepartmentName," &
-                "        DepartmentNameAra = @DepartmentNameAra," &
-                "        ParentIdNo = @ParentIdNo," &
-                "        Notes = @Notes," &
-                "        ProfitCenterIdNo = @ProfitCenterIdNo," &
-                "        CostCenterIdNo = @CostCenterIdNo" &
-                "  WHERE IDNo = @IDNo"
+                    " UPDATE [Department]" &
+                    "    SET DepartmentCode = @DepartmentCode," &
+                    "        DepartmentName = @DepartmentName," &
+                    "        DepartmentNameAra = @DepartmentNameAra," &
+                    "        ParentIdNo = @ParentIdNo," &
+                    "        Notes = @Notes," &
+                    "        ProfitCenterIdNo = @ProfitCenterIdNo," &
+                    "        CostCenterIdNo = @CostCenterIdNo" &
+                    "  WHERE IDNo = @IDNo"
 
             Return db.Update(sql, Take(department))
         End Function
 
         Private Shared _make As Func(Of IDataReader, Department) =
-            Function(reader) _
-                New Department() With {
-                    .IdNo = Extensions.AsId(reader("IDNo")),
-                    .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
-                    .DepartmentName = Extensions.AsString(reader("DepartmentName")),
-                    .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),
-                    .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
-                    .Notes = Extensions.AsString(reader("Notes")),
-                    .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
-                    .CostCenterIdNo = Extensions.AsInt(Of Integer)(reader("CostCenterIdNo")),
-                    .SortKey = Extensions.AsString(reader("SortKey"))}
+                           Function(reader) _
+            New Department() With {
+            .IdNo = Extensions.AsId(reader("IDNo")),
+            .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
+            .DepartmentName = Extensions.AsString(reader("DepartmentName")),
+            .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),
+            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
+            .CostCenterIdNo = Extensions.AsInt(Of Integer)(reader("CostCenterIdNo")),
+            .SortKey = Extensions.AsString(reader("SortKey"))}
 
         Private Function Take(ByVal department As Department) As Object()
             Return New Object() {
-                "@IDNo", department.IdNo,
-                "@DepartmentCode", department.DepartmentCode,
-                "@DepartmentName", department.DepartmentName,
-                "@DepartmentNameAra", department.DepartmentNameAra,
-                "@ParentIdNo", department.ParentIdNo,
-                "@Notes", department.Notes,
-                "@ProfitCenterIdNo", department.ProfitCenterIdNo,
-                "@CostCenterIdNo", department.CostCenterIdNo,
-                "@SortKey", department.SortKey}
+                                    "@IDNo", department.IdNo,
+                                    "@DepartmentCode", department.DepartmentCode,
+                                    "@DepartmentName", department.DepartmentName,
+                                    "@DepartmentNameAra", department.DepartmentNameAra,
+                                    "@ParentIdNo", department.ParentIdNo,
+                                    "@Notes", department.Notes,
+                                    "@ProfitCenterIdNo", department.ProfitCenterIdNo,
+                                    "@CostCenterIdNo", department.CostCenterIdNo,
+                                    "@SortKey", department.SortKey}
         End Function
 
     End Class

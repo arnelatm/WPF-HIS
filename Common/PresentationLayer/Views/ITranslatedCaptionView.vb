@@ -10,7 +10,6 @@ Namespace PresentationLayer.Views
         Property CaptionIdNo As Integer
         Property LanguageIdNo As Integer
         Property TranslatedCaption As String
-
     End Interface
 
 End Namespace

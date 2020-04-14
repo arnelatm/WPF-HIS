@@ -423,8 +423,13 @@ Namespace AdoNet
                                 reg = New Regex("\(.*?\)")
                                 matches = reg.Matches(test)
                                 Dim duplicateValue = matches(0).ToString()
-                                Dim variables = {"tableName", tableName, "indexName", indexName, "duplicateValue", duplicateValue} 
-                                Messaging.Show(True, "MsgDuplicateKeyValueViolation", "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!", "Unique Key Violation", variables, MessageBoxButtons.OK, MessageBoxIcon.Error,MessageBoxDefaultButton.Button1 )
+                                Dim variables =
+                                        {"tableName", tableName, "indexName", indexName, "duplicateValue",
+                                         duplicateValue}
+                                Messaging.Show(True, "MsgDuplicateKeyValueViolation",
+                                               "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
+                                               "Unique Key Violation", variables, MessageBoxButtons.OK,
+                                               MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                                 retValue = -1  '' to indicate Unique Key Violation for now.
                             ElseIf ex.Number = 515 Then
                                 MessageBox.Show(ex.Message & " Record not added ")

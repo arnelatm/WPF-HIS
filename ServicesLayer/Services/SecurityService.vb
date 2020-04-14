@@ -18,7 +18,8 @@ Namespace Services
         'Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         'Protected Shared ReadOnly SecurityDao As ISecurityDao = Factory.SecurityDao
 
-        Public Function GetControlSecurityIdNo(searchValue As String) As String Implements ISecurityService.GetControlSecurityIdNo
+        Public Function GetControlSecurityIdNo(searchValue As String) As String _
+            Implements ISecurityService.GetControlSecurityIdNo
             If Provider Is Nothing Then
                 Provider = ConfigurationManager.AppSettings.Get("DataProvider")
                 Factory = DaoFactories.GetFactory(Provider)
@@ -27,7 +28,8 @@ Namespace Services
             Return SecurityDao.GetControlSecurityIdNo(searchValue)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurity
+        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+            Implements ISecurityService.GetUserSecurity
             If Provider Is Nothing Then
                 Provider = ConfigurationManager.AppSettings.Get("DataProvider")
                 Factory = DaoFactories.GetFactory(Provider)
@@ -36,7 +38,8 @@ Namespace Services
             Return SecurityDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
 
-        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList Implements ISecurityService.GetUserSecurityForKey
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+            Implements ISecurityService.GetUserSecurityForKey
             If Provider Is Nothing Then
                 Provider = ConfigurationManager.AppSettings.Get("DataProvider")
                 Factory = DaoFactories.GetFactory(Provider)

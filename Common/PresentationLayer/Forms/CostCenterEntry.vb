@@ -19,9 +19,8 @@ Namespace PresentationLayer.Forms
             FirstControl = txtCostCenterCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CostCenterPresenter(Me)
-            ea = PresenterObj.Ea
-            ea.SubscribeEvent(Me)
-
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -30,6 +29,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IDNo As Integer Implements ICostCenterView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)

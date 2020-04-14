@@ -20,7 +20,6 @@ Namespace DataLayer
         'ReadOnly Property PhoneTypeDao As IPhoneTypeDao
         'ReadOnly Property OriginalMessagesDao As IOriginalMessagesDao
         'ReadOnly Property TranslatedMessagesDao As ITranslatedMessagesDao
-
     End Interface
 
 End Namespace

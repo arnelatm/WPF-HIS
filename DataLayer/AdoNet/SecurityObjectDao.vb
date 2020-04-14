@@ -11,7 +11,7 @@ Namespace AdoNet
         Private ReadOnly Db As New Db()
 
         Private ReadOnly Make As Func(Of IDataReader, SecurityObject) =
-                                    Function(reader) _
+                             Function(reader) _
             New SecurityObject() With {
             .IdNo = Extensions.AsId(reader("IdNo")),
             .ParentIdNo = Extensions.AsInt(Of Integer)(reader("ParentIdNo")),
@@ -28,7 +28,8 @@ Namespace AdoNet
                                     "@Notes", securityObject.Notes}
         End Function
 
-        Public Function GetRecordById(idNo As Integer) As SecurityObject Implements IDaoAll(Of SecurityObject).GetRecordById
+        Public Function GetRecordById(idNo As Integer) As SecurityObject _
+            Implements IDaoAll(Of SecurityObject).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &
@@ -37,14 +38,16 @@ Namespace AdoNet
             Return Db.Read(sql, Make, parms).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) Implements IDaoAll(Of SecurityObject).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) _
+            Implements IDaoAll(Of SecurityObject).GetAll
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function AddRecord(ByRef recordData As SecurityObject) As Integer Implements IDao(Of SecurityObject).AddRecord
+        Public Function AddRecord(ByRef recordData As SecurityObject) As Integer _
+            Implements IDao(Of SecurityObject).AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityObject] " &
                     " (ParentIdNo,SecurityObjectName,SecurityObjectNameAra,Notes) " &
@@ -52,7 +55,8 @@ Namespace AdoNet
             Return Db.Insert(sql, Take(recordData))
         End Function
 
-        Public Function UpdateRecord(ByRef recordData As SecurityObject) As Integer Implements IDao(Of SecurityObject).UpdateRecord
+        Public Function UpdateRecord(ByRef recordData As SecurityObject) As Integer _
+            Implements IDao(Of SecurityObject).UpdateRecord
             Dim sql As String =
                     " UPDATE [SecurityObject]" &
                     "    SET SecurityObjectName = @SecurityObjectName," &

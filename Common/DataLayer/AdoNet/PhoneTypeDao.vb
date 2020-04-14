@@ -21,8 +21,9 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PhoneType) Implements IDaoAll(Of PhoneType).GetAll
-            if sortExpression Is Nothing Then
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PhoneType) _
+            Implements IDaoAll(Of PhoneType).GetAll
+            If sortExpression Is Nothing Then
                 sortExpression = "PhoneTypeName"
             End If
             Dim sql As String =
@@ -31,7 +32,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef phoneType As PhoneType) As Integer Implements IDaoAll(Of PhoneType).UpdateRecord
+        Public Function UpdateRecord(ByRef phoneType As PhoneType) As Integer _
+            Implements IDaoAll(Of PhoneType).UpdateRecord
             Dim sql As String =
                     " UPDATE [PhoneType]" &
                     "    SET PhoneTypeCode = @PhoneTypeCode," &

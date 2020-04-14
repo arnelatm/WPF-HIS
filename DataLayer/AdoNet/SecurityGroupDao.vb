@@ -19,7 +19,8 @@ Namespace AdoNet
             Return Db.Read(sql, Make, parms).FirstOrDefault()
         End Function
 
-        Private Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityGroup) Implements IDaoAll(Of SecurityGroup).GetAll
+        Private Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityGroup) _
+            Implements IDaoAll(Of SecurityGroup).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "SecurityGroupName ASC"
             End If
@@ -29,7 +30,8 @@ Namespace AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef securityGroup As SecurityGroup) As Integer Implements IDao(Of SecurityGroup).UpdateRecord
+        Public Function UpdateRecord(ByRef securityGroup As SecurityGroup) As Integer _
+            Implements IDao(Of SecurityGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [SecurityGroup]" &
                     "    SET SecurityGroupName = @SecurityGroupName," &
@@ -41,7 +43,8 @@ Namespace AdoNet
             Return Db.Update(sql, Take(securityGroup))
         End Function
 
-        Public Function AddRecord(ByRef securityGroup As SecurityGroup) As Integer Implements IDao(Of SecurityGroup).AddRecord
+        Public Function AddRecord(ByRef securityGroup As SecurityGroup) As Integer _
+            Implements IDao(Of SecurityGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityGroup] " &
                     " (ParentIdNo,SecurityGroupName,SecurityGroupNameAra,SecurityGroupCode,Notes) " &

@@ -56,7 +56,8 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject) Implements IDaoFactory.SecurityObjectDao
+        Public ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject) _
+            Implements IDaoFactory.SecurityObjectDao
             Get
                 Return New SecurityObjectDao()
             End Get

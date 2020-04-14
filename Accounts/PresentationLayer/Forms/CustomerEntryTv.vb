@@ -41,10 +41,6 @@ Namespace PresentationLayer.Forms
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
         End Sub
 
-        Private Shadows Sub OnTextDisplayLanguageChanged()
-            CreateDataSources()
-        End Sub
-
 #Region "Field Displays"
 
         Public Property IDNo As Integer Implements ICustomerView.IdNo
@@ -414,15 +410,6 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
-
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtCustomerCode, "Customer Code")
-            MyErrorProvider.Controls.AddMandatory(txtCustomerName, "Customer Name")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
-
         Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
             ' Create a resource writer.
             ' just a test program nothing to do with this program

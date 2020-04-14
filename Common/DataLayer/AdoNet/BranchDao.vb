@@ -21,8 +21,9 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Branch) Implements IDaoAll(Of Branch).GetAll
-            if sortExpression Is Nothing Then
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Branch) _
+            Implements IDaoAll(Of Branch).GetAll
+            If sortExpression Is Nothing Then
                 sortExpression = "BranchName"
             End If
             Dim sql As String =
