@@ -52,6 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -76,6 +77,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAC.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Messaging.vb" />
     <Compile Include="MessagingForm.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -98,6 +102,12 @@
     </Compile>
     <Compile Include="SampleMessagingForm.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreCaptions.Designer.vb">
+      <DependentUpon>StoreCaptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StoreCaptions.vb">
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +136,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Translations\Translations.vbproj">
       <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
       <Name>Translations</Name>

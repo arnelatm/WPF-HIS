@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Imports AATM.LIBRARIES.CBaseControlsLibrary
 Imports AATM.LIBRARIES.Translations
 Imports AATM.LIBRARIES.LocalizationUtilities
+Imports AATM.Libraries.MessagingLibrary
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
@@ -53,8 +54,8 @@ Partial Class BfMain
         Me._MBDataEntryIsNotUnique = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.TranslatorDAC = New AATM.Libraries.Translations.Dac()
-        Me.AppDataDAC = New AATM.Libraries.Translations.Dac()
+        Me.TranslatorDAC = New Dac()
+        Me.AppDataDAC = New Dac()
         Me.StoreCaptions1 = New StoreCaptions()
         Me.SuspendLayout()
         '

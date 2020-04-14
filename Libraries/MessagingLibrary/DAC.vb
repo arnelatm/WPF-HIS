@@ -2,7 +2,6 @@
 Imports System.Configuration
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
-Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class Dac
@@ -369,7 +368,7 @@ Public Class Dac
                 '+ ";PWD=" + DacPassword
                 If DacServerType = "server" Then
                     BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Persist Security Info=True; User ID=" +
-                                       DacUid + ";Password=" + DacPassword
+                                      DacUid + ";Password=" + DacPassword
                 Else
                     'BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Persist Security Info=True;User ID=MARCELO-DELL\Arnel;Password=JaSi5214@"
                     BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Integrated Security=True;Connection Timeout=5"
