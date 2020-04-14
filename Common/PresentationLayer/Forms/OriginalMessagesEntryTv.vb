@@ -21,8 +21,8 @@ Namespace PresentationLayer.Forms
 
             PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
             PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
-            ea = PresenterObj.Ea
-            ea.SubscribeEvent(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "OriginalMessageFields"
@@ -126,8 +126,12 @@ Namespace PresentationLayer.Forms
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
-            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
-            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
+            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer",
+                                                                                   GlobalVariables.SecurityGroupIdNo)
+            If _
+                Not _
+                (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso
+                 controlSecurityValues(0)) Then
                 ' Visible property stored in first element of the array
                 HideButton(btnDelete)
             End If

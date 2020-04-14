@@ -7,7 +7,6 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
@@ -1246,7 +1245,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 scope.Complete()
             End Using
         Catch ex As TransactionAbortedException
-            MessageBox.Show(ex.Message, StringWords.Transaction_Aborted)
+            MessageBox.Show(ex.Message, "Transaction Aborted")
         Catch oEx As Exception
 
             If oEx.Message.Contains("Timeout Expired") Then

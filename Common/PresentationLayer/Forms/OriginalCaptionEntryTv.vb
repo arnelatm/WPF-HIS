@@ -21,8 +21,8 @@ Namespace PresentationLayer.Forms
 
             PresenterObj.TranslatedCaptionPresenter = New TranslatedCaptionPresenter(Me)
             PresenterObj.AddChildPresenter(PresenterObj.TranslatedCaptionPresenter)
-            ea = PresenterObj.Ea
-            ea.SubscribeEvent(Me)
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
             'CreateEnumResourceFile()
 
             'ResourceEnumConverter.MakeResource("OriginalCaptionsTypeSelection", GetType(OriginalCaptionsTypeSelection))
@@ -91,21 +91,14 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        'Protected Overrides Function ChangesMade()
-        '    If PresenterObj.ChangesMade() Then
-        '        Return True
-        '    End If
-        '    Return PresenterObj.TranslatedCaptionPresenter.ChangesMade()
-        'End Function
-
-        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
-        '    PresenterObj.TranslatedCaptionPresenter.Save(PresenterObj.AddMode)
-        'End Sub
-
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
-            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
-            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
+            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer",
+                                                                                   GlobalVariables.SecurityGroupIdNo)
+            If _
+                Not _
+                (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso
+                 controlSecurityValues(0)) Then
                 ' Visible property stored in first element of the array
                 HideButton(btnDelete)
             End If

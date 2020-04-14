@@ -529,4 +529,5 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
+
 End Module

@@ -1,7 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 
 Public Class MessagesTableManager
 
@@ -92,8 +91,8 @@ Public Class MessagesTableManager
         MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
         Select Case cmbLanguage.SelectedValue
             Case 1
-                Msg = String.Format(StringWords.Delete0ForAllLanguages, originalValue)
-                If MessageBox.Show(Msg, StringWords.Permanent,
+                Msg = String.Format("Delete {0} for all languages?", originalValue)
+                If MessageBox.Show(Msg, "Permanent",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
@@ -108,11 +107,11 @@ Public Class MessagesTableManager
             Case Else
                 Dim transVal As String = DataGrid1.Rows(nIndex).Cells(1).Value
                 If transVal.TrimEnd.Length = 0 Then
-                    MessageBox.Show(Messages.NothingToDelete)
+                    MessageBox.Show("Nothing to delete!")
                     Return
                 End If
-                Msg = String.Format(Messages.Delete0TranslationFor1, cmbLanguage.Text.ToString(), originalValue)
-                If MessageBox.Show(Msg, StringWords.Permanent,
+                Msg = String.Format("Delete {0} translation for {1} Language?", originalValue, cmbLanguage.Text.ToString())
+                If MessageBox.Show(Msg, "Permanent",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
@@ -202,7 +201,7 @@ Public Class MessagesTableManager
                 Dim dsColumn As DataSet
                 dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM originalMessages")
                 If dsColumn.Tables(0).Rows.Count = 0 Then
-                    MessageBox.Show(Messages.NoDataFound)
+                    MessageBox.Show("No Data Found")
                     Return
                 End If
                 TransTable.Clear()

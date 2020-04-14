@@ -9,7 +9,6 @@ Namespace PresentationLayer.Views
         Property LanguageIdNo As Integer
         Property TranslatedMessage As String
         Property TranslatedCaption As String
-
     End Interface
 
 End Namespace

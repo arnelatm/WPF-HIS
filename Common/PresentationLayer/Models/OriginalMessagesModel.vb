@@ -9,7 +9,6 @@
         Public Property Notes As String
 
         'Public Property TranslatedMessages As TranslatedMessagesModel
-
     End Class
 
 End Namespace

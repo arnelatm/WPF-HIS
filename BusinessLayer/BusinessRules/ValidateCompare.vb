@@ -53,12 +53,13 @@ Namespace BusinessRules
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
                 Dim propValue1 = businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
-                Dim propValue2 = businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject, Nothing)
+                Dim propValue2 = businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject,
+                                                                                                  Nothing)
 
                 Select Case DataType
                     Case ValidationDataType.Integer
 
-                        Dim iVal1 As Integer? = If(propValue1 Is Nothing, nothing, Integer.Parse(propValue1))
+                        Dim iVal1 As Integer? = If(propValue1 Is Nothing, Nothing, Integer.Parse(propValue1))
                         Dim iVal2 As Integer? = If(propValue2 Is Nothing, Nothing, Integer.Parse(propValue2))
 
                         Select Case [Operator]
@@ -66,7 +67,7 @@ Namespace BusinessRules
                                 Return iVal1 = iVal2
                                 'Return EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)
                             Case ValidationOperator.NotEqual
-                                return iVal1 <> iVal2
+                                Return iVal1 <> iVal2
                                 'Return Not EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)
                             Case ValidationOperator.GreaterThan
                                 'EqualityComparer(Of Integer).[Default].Equals(ival1, ival2)

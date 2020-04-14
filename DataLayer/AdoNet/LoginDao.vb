@@ -29,7 +29,8 @@ Namespace AdoNet
             Return x
         End Function
 
-        Public Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login) Implements ILoginDao.GetLogins
+        Public Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login) _
+            Implements ILoginDao.GetLogins
             Dim sql As String =
                     " SELECT IDNo, UserName, Password" &
                     "   FROM [User] ".OrderBy(sortExpression)
@@ -87,7 +88,6 @@ Namespace AdoNet
         '    Dim params() As Object = {"@IDNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
-
     End Class
 
 End Namespace

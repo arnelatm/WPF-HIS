@@ -1,6 +1,4 @@
-﻿Imports AATM.Libraries.Translations
-
-Public Class Messaging
+﻿Public Class Messaging
 
     Private Shared ReadOnly DataAccessControl As New Dac
 

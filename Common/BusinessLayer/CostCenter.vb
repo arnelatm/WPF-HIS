@@ -13,7 +13,8 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 ' establish business rules
                 AddRule(New ValidateRequired("CostCenterName"))
-                AddRule(New ValidateCompare("ParentIdNo","IdNo",ValidationOperator.NotEqual, ValidationDataType.Integer))
+                AddRule(New ValidateCompare("ParentIdNo", "IdNo", ValidationOperator.NotEqual,
+                                            ValidationDataType.Integer))
             End If
         End Sub
 
@@ -26,7 +27,6 @@ Namespace BusinessLayer
         Public Property LevelNumber As Int16
         Public Property Notes As String
         Public Property SortKey As String
-
     End Class
 
 End Namespace

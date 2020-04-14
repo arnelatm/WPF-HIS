@@ -4,7 +4,6 @@
 Imports AATM.BusinessLayer.BusinessObjects
 
 Public Interface ISaltDao
-
     ' gets a specific Salt
 
     Function GetSalt(idNo As Integer) As Salt

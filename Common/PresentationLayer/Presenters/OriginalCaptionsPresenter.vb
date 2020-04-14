@@ -58,7 +58,6 @@ Namespace PresentationLayer.Presenters
         '        TranslatedCaptionPresenter.Display(idNo)
         '    End If
         'End Sub
-
     End Class
 
 End Namespace

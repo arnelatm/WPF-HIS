@@ -32,7 +32,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef profitCenter As ProfitCenter) As Integer Implements IDaoAll(Of ProfitCenter).UpdateRecord
+        Public Function UpdateRecord(ByRef profitCenter As ProfitCenter) As Integer _
+            Implements IDaoAll(Of ProfitCenter).UpdateRecord
             Dim sql As String =
                     " UPDATE [ProfitCenter]" &
                     "    SET ParentIdNo = @ParentIdNo," &
@@ -46,7 +47,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(profitCenter))
         End Function
 
-        Public Function AddRecord(ByRef profitCenter As ProfitCenter) As Integer Implements IDaoAll(Of ProfitCenter).AddRecord
+        Public Function AddRecord(ByRef profitCenter As ProfitCenter) As Integer _
+            Implements IDaoAll(Of ProfitCenter).AddRecord
             Dim sql As String =
                     " INSERT INTO [ProfitCenter] " &
                     " (ParentIdNo,ProfitCenterCode,ProfitCenterName,ProfitCenterType,ProfitCenterNameAra,Notes) " &

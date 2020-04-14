@@ -18,5 +18,4 @@ Public Interface IDaoFactory
 
     ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
     ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
-
 End Interface

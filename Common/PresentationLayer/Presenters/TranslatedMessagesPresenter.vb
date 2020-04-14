@@ -71,7 +71,10 @@ Namespace PresentationLayer.Presenters
                 End If
                 retVal = Model.UpdateRecord(record)
                 If retVal = 0 Then
-                    If Not (String.IsNullOrEmpty(record.TranslatedMessage) And String.IsNullOrEmpty(record.TranslatedCaption)) Then
+                    If _
+                        Not _
+                        (String.IsNullOrEmpty(record.TranslatedMessage) And
+                         String.IsNullOrEmpty(record.TranslatedCaption)) Then
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
                         NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo

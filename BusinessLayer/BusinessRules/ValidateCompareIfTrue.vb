@@ -9,7 +9,8 @@ Namespace BusinessRules
         Private Property [Operator] As ValidationOperator
         Private Property Condition As Boolean
 
-        Public Sub New(condition As Boolean, propertyName As String, otherPropertyName As String, [operator] As ValidationOperator,
+        Public Sub New(condition As Boolean, propertyName As String, otherPropertyName As String,
+                       [operator] As ValidationOperator,
                        dataType As ValidationDataType)
             MyBase.New(propertyName)
             Me.OtherPropertyName = otherPropertyName

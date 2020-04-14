@@ -21,7 +21,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Religion) Implements IDaoAll(Of Religion).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Religion) _
+            Implements IDaoAll(Of Religion).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "ReligionName"
             End If

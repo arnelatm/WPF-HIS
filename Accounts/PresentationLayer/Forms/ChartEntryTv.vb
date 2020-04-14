@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -192,8 +193,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PresenterObj.EditMode And ParentIdNo = IDNo Then
-                MessageBox.Show(Languages.Messages.SorryAMemberCannotBeAParentToItself)
-                'AATM.PresentationLayer.Forms.Messaging.DisplayLocal(Languages.Messages.SorryAMemberCannotBeAParentToItself)
+                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
                 PresenterObj.CancelSave = True
                 Exit Sub
             End If

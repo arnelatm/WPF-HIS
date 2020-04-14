@@ -1123,15 +1123,15 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
-            Dim x, y As Integer?
-            x = Nothing
-            y = Nothing
+        'Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
+        '    Dim x, y As Integer?
+        '    x = Nothing
+        '    y = Nothing
 
-            MessageBox.Show(x = y)
-            MessageBox.Show(EqualityComparer(Of String).[Default].Equals(x, y))
-            x = 5
-        End Sub
+        '    MessageBox.Show(x = y)
+        '    Dim unused = MessageBox.Show(EqualityComparer(Of String).[Default].Equals(x, y))
+        '    x = 5
+        'End Sub
 
     End Class
 

@@ -102,7 +102,7 @@ Namespace Services
                         If SaltDao.InsertSalt(newSalt) > 0 Then
                             ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
                         Else
-                            MessageBox.Show(Languages.Messages.PasswordWasNotEncrypted)
+                            MessageBox.Show("Password was not encrypted!")
                         End If
                     Else
                         'Hash the user entered password with the salt value stored in the Salt table
@@ -148,7 +148,6 @@ Namespace Services
             End If
 
             Return ePassword
-
         End Function
 
         Public Function HashEncryptStringWithSalt(s As String, salt As String) As String

@@ -22,6 +22,7 @@ Namespace PresentationLayer.Forms
             Ea.SubscribeEvent(Me)
         End Sub
 
+#Region "Fields"
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus
             Get
                 Return cacAccountStatus.GetValue()
@@ -379,7 +380,7 @@ Namespace PresentationLayer.Forms
                 txtZipCode.Text = Value
             End Set
         End Property
-
+#End Region
         Protected Overrides Sub CreateDataSources()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()

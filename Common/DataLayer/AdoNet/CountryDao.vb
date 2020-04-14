@@ -25,12 +25,14 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Country) Implements IDaoAll(Of Country).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Country) _
+            Implements IDaoAll(Of Country).GetAll
             If sortExpression = Nothing Then
                 sortExpression = "CountryName ASC"
             End If
-            Dim sql As String = " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
-                                "   FROM [Country] order by " & sortExpression
+            Dim sql As String =
+                    " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
+                    "   FROM [Country] order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
 
@@ -70,9 +72,9 @@ Namespace DataLayer.AdoNet
             .NationalityAra = Extensions.AsString(reader("NationalityAra")),
             .Flag32 = Extensions.AsString(reader("Flag32")),
             .Flag128 = Extensions.AsString(reader("Flag128")),
-            .Isoa2 = Extensions.AsString(reader("ISOA2")),
-            .Isoa3 = Extensions.AsString(reader("ISOA3")),
-            .Ison = Extensions.AsString(reader("ISON")),
+            .ISOA2 = Extensions.AsString(reader("ISOA2")),
+            .ISOA3 = Extensions.AsString(reader("ISOA3")),
+            .ISON = Extensions.AsString(reader("ISON")),
             .PhoneCode = Extensions.AsString(reader("PhoneCode"))}
 
         Private Function Take(country As Country) As Object()
@@ -84,9 +86,9 @@ Namespace DataLayer.AdoNet
                                     "@NationalityAra", country.NationalityAra,
                                     "@Flag32", country.Flag32,
                                     "@Flag128", country.Flag128,
-                                    "@ISOA2", country.Isoa2,
-                                    "@ISOA3", country.Isoa3,
-                                    "@ISON", country.Ison,
+                                    "@ISOA2", country.ISOA2,
+                                    "@ISOA3", country.ISOA3,
+                                    "@ISON", country.ISON,
                                     "@PhoneCode", country.PhoneCode}
         End Function
 

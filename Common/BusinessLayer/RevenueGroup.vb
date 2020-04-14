@@ -24,7 +24,6 @@ Namespace BusinessLayer
         Public Property LevelNumber As Int16
         Public Property Notes As String
         Public Property SortKey As String
-
     End Class
 
 End Namespace

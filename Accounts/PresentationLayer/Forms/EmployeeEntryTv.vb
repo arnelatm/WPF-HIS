@@ -7,7 +7,6 @@ Namespace PresentationLayer.Forms
 
     Public Class EmployeeEntryTv
         Implements IEmployeeView
-
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -27,6 +26,7 @@ Namespace PresentationLayer.Forms
             Ea.SubscribeEvent(Me)
         End Sub
 
+#Region "Fields"
         Public Property Active As Boolean Implements IEmployeeView.Active
             Get
                 Return chkActive.Checked
@@ -36,7 +36,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-#Region "Fields"
 
         Public Property ArAccountIdNo As Integer Implements IEmployeeView.ArAccountIdNo
             Get

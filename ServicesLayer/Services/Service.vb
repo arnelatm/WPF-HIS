@@ -5,7 +5,6 @@ Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace Services
-
     ' implementation of IService interface. It can handle different data providers.
 
     ' ** Facade pattern.
@@ -28,13 +27,17 @@ Namespace Services
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
         End Function
 
-        Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) Implements IService.GetMainTableColumnProperties
+        Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) _
+            Implements IService.GetMainTableColumnProperties
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
 
         Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Integer, ByRef dataModel As TM,
-                                                            ByRef dbDataDao As TD, ByRef externalService As Object) As TM
-            Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
+                                                             ByRef dbDataDao As TD, ByRef externalService As Object) _
+            As TM
+            Return _
+                externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me,
+                                             New Object() {idNo})
         End Function
 
         Public Function GetBizObjectErrors()
@@ -47,7 +50,8 @@ Namespace Services
 
 #Region "Current Service Function"
 
-        Public Function GetRecordsWithIdNo(Of TM)(idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(Of TM)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
+            As List(Of TM) Implements IService.GetRecordsWithIdNo
             Dim bizData = DataDao.GetRecordsWithIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
             GlobalVariables.Mapper.Map(bizData, dataModel)
@@ -65,7 +69,8 @@ Namespace Services
             Return DataDao.AddRecord(DataBo)
         End Function
 
-        Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
+        Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer _
+            Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
 
@@ -90,7 +95,8 @@ Namespace Services
             Return DataDao.InsertTvp(dtTable)
         End Function
 
-        Public Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer Implements IService.TransactionUpdate
+        Public Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer _
+            Implements IService.TransactionUpdate
             Return DataDao.TransactionUpdate(model)
         End Function
 
@@ -99,7 +105,9 @@ Namespace Services
             Return DataDao.UpdateRecord(DataBo)
         End Function
 
-        Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Integer, ByVal tableName As String, ByVal fieldName As String, ByRef value As T) As Integer Implements IService.UpdateRecordWithIdNo
+        Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Integer, ByVal tableName As String,
+                                                    ByVal fieldName As String, ByRef value As T) As Integer _
+            Implements IService.UpdateRecordWithIdNo
             Return DataDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
@@ -116,7 +124,8 @@ Namespace Services
 
 #Region "BaseDao Functions"
 
-        Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
+        Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) _
+            As TType Implements IService.GetSqlValue
             Return BaseDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
         End Function
 
@@ -125,12 +134,15 @@ Namespace Services
             Return BaseDao.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
         End Function
 
-        Public Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer _
+        Public Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
+                                            searchFieldName1 As String, searchFieldName2 As String) As Integer _
             Implements IService.CountRecordWith2Key
-            Return BaseDao.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
+            Return _
+                BaseDao.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
         End Function
 
-        Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer _
+        Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
+            As Integer _
             Implements IService.CountRecordWithKey
             Return BaseDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
         End Function
@@ -140,7 +152,8 @@ Namespace Services
             Return BaseDao.DeleteRecord(idNo, tableName)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer _
+        Public Function FindField(tableName As String, fieldName As String, searchString As String,
+                                  searchAnywhere As Boolean) As Integer _
             Implements IService.FindField
             Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere)
         End Function
@@ -150,12 +163,14 @@ Namespace Services
             Return BaseDao.FindFieldContinue(tableName, idNo)
         End Function
 
-        Public Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) As Object _
+        Public Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) _
+            As Object _
             Implements IService.GetFilteredRecords
             Return BaseDao.GetFilteredRecords(filterExpression, sortKey)
         End Function
 
-        Public Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String Implements IService.GetLastSortKey
+        Public Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String _
+            Implements IService.GetLastSortKey
             Return BaseDao.GetLastSortKey(searchValue, tableName)
         End Function
 
@@ -164,19 +179,25 @@ Namespace Services
             Return BaseDao.GetRecordCount(tableName)
         End Function
 
-        Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object _
+        Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String,
+                                               Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object _
             Implements IService.GetRecordDateTimeStamp
             Return BaseDao.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
         End Function
 
-        Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String _
+        Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
+                                              returnFieldName As String) As String _
             Implements IService.GetRecordFieldWithKey
             Return BaseDao.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
-        Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String _
+        Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
+                                               searchFieldName1 As String, searchFieldName2 As String,
+                                               returnFieldName As String) As String _
             Implements IService.GetRecordFieldWith2Key
-            Return BaseDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
+            Return _
+                BaseDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2,
+                                               returnFieldName)
         End Function
 
         Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
@@ -184,11 +205,15 @@ Namespace Services
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
 
-        Public Overloads Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecords
+        Public Overloads Function GetRecords(ByVal tableName As String, ByVal sortKey As String,
+                                             ByVal ParamArray fields() As String) As Object _
+            Implements IService.GetRecords
             Return BaseDao.GetRecords(tableName, sortKey, fields)
         End Function
 
-        Public Overloads Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecordsFiltered
+        Public Overloads Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String,
+                                                     ByVal filterKey As String, ByVal ParamArray fields() As String) _
+            As Object Implements IService.GetRecordsFiltered
             Return BaseDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
         End Function
 
@@ -197,7 +222,8 @@ Namespace Services
             Return BaseDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
-        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) _
+            As Integer _
             Implements IService.GetIdNoOfSortedPositionNumber
             Return BaseDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
         End Function
@@ -261,7 +287,6 @@ Namespace Services
         '            e.Result = "Hello World"
         '        End If
         '    End Sub
-
     End Class
 
     'Public Class ServiceLogin

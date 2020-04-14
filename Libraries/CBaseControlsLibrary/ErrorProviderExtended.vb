@@ -5,7 +5,6 @@
 Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.Languages
 
 Public Class ErrorProviderExtended
     Inherits ErrorProvider
@@ -99,7 +98,7 @@ Public Class ErrorProviderExtended
             End If
         Next
         If bErrors Then
-            MessageBox.Show(msg, Messages.MissingInformation, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            MessageBox.Show(msg, "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Return False
         Else
             Return True
@@ -107,7 +106,7 @@ Public Class ErrorProviderExtended
     End Function
 
     Public Function ShowErrorMessage(msg As String) As Boolean
-        MessageBox.Show(msg, Languages.StringWords.ShowErrorMessage_Error, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        MessageBox.Show(msg, "[Error]", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
         Return False
     End Function

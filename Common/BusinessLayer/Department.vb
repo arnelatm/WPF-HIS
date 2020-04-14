@@ -24,7 +24,6 @@ Namespace BusinessLayer
         Public Property ProfitCenterIdNo() As Integer
         Public Property CostCenterIdNo() As Integer
         Public Property SortKey() As String
-
     End Class
 
 End Namespace

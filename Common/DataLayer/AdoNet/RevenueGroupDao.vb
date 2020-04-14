@@ -40,7 +40,8 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
-        Public Function UpdateRecord(ByRef revenueGroup As RevenueGroup) As Integer Implements IDaoAll(Of RevenueGroup).UpdateRecord
+        Public Function UpdateRecord(ByRef revenueGroup As RevenueGroup) As Integer _
+            Implements IDaoAll(Of RevenueGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [RevenueGroup]" &
                     "    SET ParentIdNo = @ParentIdNo," &
@@ -53,7 +54,8 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(revenueGroup))
         End Function
 
-        Public Function AddRecord(ByRef revenueGroup As RevenueGroup) As Integer Implements IDaoAll(Of RevenueGroup).AddRecord
+        Public Function AddRecord(ByRef revenueGroup As RevenueGroup) As Integer _
+            Implements IDaoAll(Of RevenueGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [RevenueGroup] " &
                     " (ParentIdNo,RevenueGroupCode,RevenueGroupName,RevenueGroupNameAra,Notes) " &

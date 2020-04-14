@@ -90,7 +90,6 @@ Namespace PresentationLayer.Forms
         Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpSettlementDueDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSettlementDiscount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -179,9 +178,9 @@ Namespace PresentationLayer.Forms
         Me.floApJournalItems.Controls.Add(Me.DataGridViewJournalItems)
         Me.floFullEntryArea.SetFlowBreak(Me.floApJournalItems, true)
         Me.floApJournalItems.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.floApJournalItems.Location = New System.Drawing.Point(3, 213)
+        Me.floApJournalItems.Location = New System.Drawing.Point(3, 226)
         Me.floApJournalItems.Name = "floApJournalItems"
-        Me.floApJournalItems.Size = New System.Drawing.Size(1020, 263)
+        Me.floApJournalItems.Size = New System.Drawing.Size(1034, 252)
         Me.floApJournalItems.TabIndex = 1
         '
         'DataGridViewJournalItems
@@ -208,7 +207,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1015, 250)
+        Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1029, 250)
         Me.DataGridViewJournalItems.StartTrackingChanges = false
         Me.DataGridViewJournalItems.TabIndex = 0
         '
@@ -364,7 +363,7 @@ Namespace PresentationLayer.Forms
         Me.lblCancelled.EditingMode = false
         Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCancelled.Location = New System.Drawing.Point(1, 101)
+        Me.lblCancelled.Location = New System.Drawing.Point(16, 116)
         Me.lblCancelled.Margin = New System.Windows.Forms.Padding(1)
         Me.lblCancelled.Name = "lblCancelled"
         Me.lblCancelled.Size = New System.Drawing.Size(97, 23)
@@ -386,7 +385,7 @@ Namespace PresentationLayer.Forms
         Me.chkPosted.ForeColor = System.Drawing.Color.Black
         Me.chkPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkPosted.LinkedLabel = Me.lblPosted
-        Me.chkPosted.Location = New System.Drawing.Point(100, 126)
+        Me.chkPosted.Location = New System.Drawing.Point(115, 141)
         Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
         Me.chkPosted.Name = "chkPosted"
         Me.chkPosted.Size = New System.Drawing.Size(23, 21)
@@ -400,7 +399,7 @@ Namespace PresentationLayer.Forms
         Me.lblPosted.EditingMode = false
         Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosted.Location = New System.Drawing.Point(1, 126)
+        Me.lblPosted.Location = New System.Drawing.Point(16, 141)
         Me.lblPosted.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPosted.Name = "lblPosted"
         Me.lblPosted.Size = New System.Drawing.Size(97, 23)
@@ -418,7 +417,7 @@ Namespace PresentationLayer.Forms
         Me.floApJournalHeader.Location = New System.Drawing.Point(3, 3)
         Me.floApJournalHeader.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.floApJournalHeader.Name = "floApJournalHeader"
-        Me.floApJournalHeader.Size = New System.Drawing.Size(1020, 204)
+        Me.floApJournalHeader.Size = New System.Drawing.Size(1034, 217)
         Me.floApJournalHeader.TabIndex = 0
         '
         'CFlowLayout3
@@ -449,8 +448,8 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout3.Controls.Add(Me.txtNotes)
         Me.CFlowLayout3.Location = New System.Drawing.Point(3, 3)
         Me.CFlowLayout3.Name = "CFlowLayout3"
-        Me.CFlowLayout3.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout3.Size = New System.Drawing.Size(763, 193)
+        Me.CFlowLayout3.Padding = New System.Windows.Forms.Padding(15)
+        Me.CFlowLayout3.Size = New System.Drawing.Size(758, 204)
         Me.CFlowLayout3.TabIndex = 0
         '
         'lblIdNo
@@ -459,7 +458,7 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo.EditingMode = false
         Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
+        Me.lblIdNo.Location = New System.Drawing.Point(16, 16)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
         Me.lblIdNo.Size = New System.Drawing.Size(145, 23)
@@ -479,7 +478,7 @@ Namespace PresentationLayer.Forms
         Me.txtJournalCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
         Me.txtJournalCode.LinkedLabel = Nothing
-        Me.txtJournalCode.Location = New System.Drawing.Point(158, 11)
+        Me.txtJournalCode.Location = New System.Drawing.Point(163, 16)
         Me.txtJournalCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtJournalCode.Name = "txtJournalCode"
         Me.txtJournalCode.OldValue = Nothing
@@ -502,7 +501,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIDNo.Location = New System.Drawing.Point(185, 11)
+        Me.TxtIDNo.Location = New System.Drawing.Point(190, 16)
         Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIDNo.Name = "TxtIDNo"
         Me.TxtIDNo.OldValue = Nothing
@@ -516,7 +515,7 @@ Namespace PresentationLayer.Forms
         Me.lblReferenceNo.EditingMode = false
         Me.lblReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblReferenceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReferenceNo.Location = New System.Drawing.Point(250, 11)
+        Me.lblReferenceNo.Location = New System.Drawing.Point(255, 16)
         Me.lblReferenceNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReferenceNo.Name = "lblReferenceNo"
         Me.lblReferenceNo.Size = New System.Drawing.Size(128, 23)
@@ -535,7 +534,7 @@ Namespace PresentationLayer.Forms
         Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
         Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
-        Me.txtReferenceNo.Location = New System.Drawing.Point(380, 11)
+        Me.txtReferenceNo.Location = New System.Drawing.Point(385, 16)
         Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReferenceNo.Name = "txtReferenceNo"
         Me.txtReferenceNo.OldValue = Nothing
@@ -549,7 +548,7 @@ Namespace PresentationLayer.Forms
         Me.lblTransactionDate.EditingMode = false
         Me.lblTransactionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTransactionDate.Location = New System.Drawing.Point(472, 11)
+        Me.lblTransactionDate.Location = New System.Drawing.Point(477, 16)
         Me.lblTransactionDate.Margin = New System.Windows.Forms.Padding(1)
         Me.lblTransactionDate.Name = "lblTransactionDate"
         Me.lblTransactionDate.Size = New System.Drawing.Size(141, 23)
@@ -569,7 +568,7 @@ Namespace PresentationLayer.Forms
         Me.dtpTransactionDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
         Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
         Me.dtpTransactionDate.LinkedLabel = Nothing
-        Me.dtpTransactionDate.Location = New System.Drawing.Point(614, 10)
+        Me.dtpTransactionDate.Location = New System.Drawing.Point(619, 15)
         Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpTransactionDate.Name = "dtpTransactionDate"
         Me.dtpTransactionDate.ReadOnlyDp = false
@@ -589,7 +588,7 @@ Namespace PresentationLayer.Forms
         Me.lblSupplierIdNo.EditingMode = false
         Me.lblSupplierIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSupplierIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSupplierIdNo.Location = New System.Drawing.Point(11, 36)
+        Me.lblSupplierIdNo.Location = New System.Drawing.Point(16, 41)
         Me.lblSupplierIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
         Me.lblSupplierIdNo.Size = New System.Drawing.Size(145, 23)
@@ -616,7 +615,7 @@ Namespace PresentationLayer.Forms
         Me.cboSupplierIdNo.FormattingEnabled = true
         Me.cboSupplierIdNo.HideWhenNotEditingOrAdding = false
         Me.cboSupplierIdNo.LinkedLabel = Nothing
-        Me.cboSupplierIdNo.Location = New System.Drawing.Point(158, 36)
+        Me.cboSupplierIdNo.Location = New System.Drawing.Point(163, 41)
         Me.cboSupplierIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cboSupplierIdNo.Name = "cboSupplierIdNo"
         Me.cboSupplierIdNo.OldValue = 0
@@ -644,7 +643,7 @@ Namespace PresentationLayer.Forms
         Me.lblTransactionType.EditingMode = false
         Me.lblTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblTransactionType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTransactionType.Location = New System.Drawing.Point(11, 62)
+        Me.lblTransactionType.Location = New System.Drawing.Point(16, 67)
         Me.lblTransactionType.Margin = New System.Windows.Forms.Padding(1)
         Me.lblTransactionType.Name = "lblTransactionType"
         Me.lblTransactionType.Size = New System.Drawing.Size(145, 23)
@@ -668,7 +667,7 @@ Namespace PresentationLayer.Forms
         Me.cboTransactionType.ForeColor = System.Drawing.Color.Black
         Me.cboTransactionType.HideWhenNotEditingOrAdding = false
         Me.cboTransactionType.LinkedLabel = Nothing
-        Me.cboTransactionType.Location = New System.Drawing.Point(158, 62)
+        Me.cboTransactionType.Location = New System.Drawing.Point(163, 67)
         Me.cboTransactionType.Margin = New System.Windows.Forms.Padding(1)
         Me.cboTransactionType.Name = "cboTransactionType"
         Me.cboTransactionType.OldValue = 0
@@ -696,7 +695,7 @@ Namespace PresentationLayer.Forms
         Me.lblAmount.EditingMode = false
         Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAmount.Location = New System.Drawing.Point(282, 62)
+        Me.lblAmount.Location = New System.Drawing.Point(287, 67)
         Me.lblAmount.Margin = New System.Windows.Forms.Padding(1)
         Me.lblAmount.Name = "lblAmount"
         Me.lblAmount.Size = New System.Drawing.Size(96, 23)
@@ -715,7 +714,7 @@ Namespace PresentationLayer.Forms
         Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtAmount.ForeColor = System.Drawing.Color.Black
         Me.txtAmount.LinkedLabel = Me.lblAmount
-        Me.txtAmount.Location = New System.Drawing.Point(380, 62)
+        Me.txtAmount.Location = New System.Drawing.Point(385, 67)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.OldValue = Nothing
@@ -731,7 +730,7 @@ Namespace PresentationLayer.Forms
         Me.lblInvoiceDate.EditingMode = false
         Me.lblInvoiceDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblInvoiceDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInvoiceDate.Location = New System.Drawing.Point(472, 62)
+        Me.lblInvoiceDate.Location = New System.Drawing.Point(477, 67)
         Me.lblInvoiceDate.Margin = New System.Windows.Forms.Padding(1)
         Me.lblInvoiceDate.Name = "lblInvoiceDate"
         Me.lblInvoiceDate.Size = New System.Drawing.Size(141, 23)
@@ -750,7 +749,7 @@ Namespace PresentationLayer.Forms
         Me.dtpInvoiceDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
         Me.dtpInvoiceDate.ForeColor = System.Drawing.Color.Black
         Me.dtpInvoiceDate.LinkedLabel = Nothing
-        Me.dtpInvoiceDate.Location = New System.Drawing.Point(614, 61)
+        Me.dtpInvoiceDate.Location = New System.Drawing.Point(619, 66)
         Me.dtpInvoiceDate.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpInvoiceDate.Name = "dtpInvoiceDate"
         Me.dtpInvoiceDate.ReadOnlyDp = false
@@ -770,7 +769,7 @@ Namespace PresentationLayer.Forms
         Me.lblDueDate.EditingMode = false
         Me.lblDueDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDueDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDueDate.Location = New System.Drawing.Point(11, 88)
+        Me.lblDueDate.Location = New System.Drawing.Point(16, 93)
         Me.lblDueDate.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDueDate.Name = "lblDueDate"
         Me.lblDueDate.Size = New System.Drawing.Size(145, 23)
@@ -789,7 +788,7 @@ Namespace PresentationLayer.Forms
         Me.dtpDueDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
         Me.dtpDueDate.ForeColor = System.Drawing.Color.Black
         Me.dtpDueDate.LinkedLabel = Nothing
-        Me.dtpDueDate.Location = New System.Drawing.Point(157, 87)
+        Me.dtpDueDate.Location = New System.Drawing.Point(162, 92)
         Me.dtpDueDate.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpDueDate.Name = "dtpDueDate"
         Me.dtpDueDate.ReadOnlyDp = false
@@ -809,7 +808,7 @@ Namespace PresentationLayer.Forms
         Me.lblInvoiceNo.EditingMode = false
         Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInvoiceNo.Location = New System.Drawing.Point(281, 88)
+        Me.lblInvoiceNo.Location = New System.Drawing.Point(286, 93)
         Me.lblInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblInvoiceNo.Name = "lblInvoiceNo"
         Me.lblInvoiceNo.Size = New System.Drawing.Size(332, 23)
@@ -829,7 +828,7 @@ Namespace PresentationLayer.Forms
         Me.txtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtInvoiceNo.ForeColor = System.Drawing.Color.Black
         Me.txtInvoiceNo.LinkedLabel = Me.lblInvoiceNo
-        Me.txtInvoiceNo.Location = New System.Drawing.Point(615, 88)
+        Me.txtInvoiceNo.Location = New System.Drawing.Point(620, 93)
         Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.OldValue = Nothing
@@ -843,7 +842,7 @@ Namespace PresentationLayer.Forms
         Me.lblAccountIdNo.EditingMode = false
         Me.lblAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAccountIdNo.Location = New System.Drawing.Point(11, 113)
+        Me.lblAccountIdNo.Location = New System.Drawing.Point(16, 118)
         Me.lblAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblAccountIdNo.Name = "lblAccountIdNo"
         Me.lblAccountIdNo.Size = New System.Drawing.Size(145, 24)
@@ -868,7 +867,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
-        Me.cboAccountIdNo.Location = New System.Drawing.Point(158, 113)
+        Me.cboAccountIdNo.Location = New System.Drawing.Point(163, 118)
         Me.cboAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cboAccountIdNo.Name = "cboAccountIdNo"
         Me.cboAccountIdNo.OldValue = 0
@@ -896,7 +895,7 @@ Namespace PresentationLayer.Forms
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(11, 140)
+        Me.lblNotes.Location = New System.Drawing.Point(16, 145)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(145, 23)
@@ -915,7 +914,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(158, 140)
+        Me.txtNotes.Location = New System.Drawing.Point(163, 145)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
@@ -932,7 +931,6 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.Controls.Add(Me.lblVatAmount)
         Me.CFlowLayout2.Controls.Add(Me.txtVatAmount)
         Me.CFlowLayout2.Controls.Add(Me.CLabel2)
-        Me.CFlowLayout2.Controls.Add(Me.CLabel1)
         Me.CFlowLayout2.Controls.Add(Me.dtpSettlementDueDate)
         Me.CFlowLayout2.Controls.Add(Me.CLabel5)
         Me.CFlowLayout2.Controls.Add(Me.txtSettlementDiscount)
@@ -943,9 +941,10 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.Controls.Add(Me.chkPosted)
         Me.CFlowLayout2.Controls.Add(Me.lblDateAdded)
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
-        Me.CFlowLayout2.Location = New System.Drawing.Point(772, 3)
+        Me.CFlowLayout2.Location = New System.Drawing.Point(767, 3)
         Me.CFlowLayout2.Name = "CFlowLayout2"
-        Me.CFlowLayout2.Size = New System.Drawing.Size(241, 184)
+        Me.CFlowLayout2.Padding = New System.Windows.Forms.Padding(15)
+        Me.CFlowLayout2.Size = New System.Drawing.Size(259, 204)
         Me.CFlowLayout2.TabIndex = 1
         '
         'lblVatNumber
@@ -954,7 +953,7 @@ Namespace PresentationLayer.Forms
         Me.lblVatNumber.EditingMode = false
         Me.lblVatNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblVatNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVatNumber.Location = New System.Drawing.Point(1, 1)
+        Me.lblVatNumber.Location = New System.Drawing.Point(16, 16)
         Me.lblVatNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.lblVatNumber.Name = "lblVatNumber"
         Me.lblVatNumber.Size = New System.Drawing.Size(97, 23)
@@ -973,7 +972,7 @@ Namespace PresentationLayer.Forms
         Me.txtVatNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
         Me.txtVatNumber.LinkedLabel = Me.lblVatNumber
-        Me.txtVatNumber.Location = New System.Drawing.Point(100, 1)
+        Me.txtVatNumber.Location = New System.Drawing.Point(115, 16)
         Me.txtVatNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.txtVatNumber.MaxLength = 15
         Me.txtVatNumber.Name = "txtVatNumber"
@@ -989,7 +988,7 @@ Namespace PresentationLayer.Forms
         Me.lblVatAmount.EditingMode = false
         Me.lblVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblVatAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVatAmount.Location = New System.Drawing.Point(1, 26)
+        Me.lblVatAmount.Location = New System.Drawing.Point(16, 41)
         Me.lblVatAmount.Margin = New System.Windows.Forms.Padding(1)
         Me.lblVatAmount.Name = "lblVatAmount"
         Me.lblVatAmount.Size = New System.Drawing.Size(97, 23)
@@ -1009,7 +1008,7 @@ Namespace PresentationLayer.Forms
         Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
         Me.txtVatAmount.LinkedLabel = Me.lblVatAmount
-        Me.txtVatAmount.Location = New System.Drawing.Point(100, 26)
+        Me.txtVatAmount.Location = New System.Drawing.Point(115, 41)
         Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
         Me.txtVatAmount.Name = "txtVatAmount"
         Me.txtVatAmount.OldValue = Nothing
@@ -1025,27 +1024,13 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.SetFlowBreak(Me.CLabel2, true)
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel2.Location = New System.Drawing.Point(1, 51)
+        Me.CLabel2.Location = New System.Drawing.Point(16, 66)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
-        Me.CLabel2.Size = New System.Drawing.Size(238, 23)
+        Me.CLabel2.Size = New System.Drawing.Size(207, 23)
         Me.CLabel2.TabIndex = 279
         Me.CLabel2.Text = "Early Settlement Date/Rate:"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel1.Location = New System.Drawing.Point(0, 75)
-        Me.CLabel1.Margin = New System.Windows.Forms.Padding(0)
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(17, 23)
-        Me.CLabel1.TabIndex = 278
-        Me.CLabel1.Text = " "
-        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dtpSettlementDueDate
         '
@@ -1058,7 +1043,7 @@ Namespace PresentationLayer.Forms
         Me.dtpSettlementDueDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
         Me.dtpSettlementDueDate.ForeColor = System.Drawing.Color.Black
         Me.dtpSettlementDueDate.LinkedLabel = Nothing
-        Me.dtpSettlementDueDate.Location = New System.Drawing.Point(17, 75)
+        Me.dtpSettlementDueDate.Location = New System.Drawing.Point(15, 90)
         Me.dtpSettlementDueDate.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpSettlementDueDate.Name = "dtpSettlementDueDate"
         Me.dtpSettlementDueDate.ReadOnlyDp = false
@@ -1078,7 +1063,7 @@ Namespace PresentationLayer.Forms
         Me.CLabel5.EditingMode = false
         Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel5.Location = New System.Drawing.Point(140, 75)
+        Me.CLabel5.Location = New System.Drawing.Point(138, 90)
         Me.CLabel5.Margin = New System.Windows.Forms.Padding(0)
         Me.CLabel5.Name = "CLabel5"
         Me.CLabel5.Size = New System.Drawing.Size(23, 23)
@@ -1097,7 +1082,7 @@ Namespace PresentationLayer.Forms
         Me.txtSettlementDiscount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtSettlementDiscount.ForeColor = System.Drawing.Color.Black
         Me.txtSettlementDiscount.LinkedLabel = Nothing
-        Me.txtSettlementDiscount.Location = New System.Drawing.Point(164, 76)
+        Me.txtSettlementDiscount.Location = New System.Drawing.Point(162, 91)
         Me.txtSettlementDiscount.Margin = New System.Windows.Forms.Padding(1)
         Me.txtSettlementDiscount.Name = "txtSettlementDiscount"
         Me.txtSettlementDiscount.OldValue = Nothing
@@ -1112,7 +1097,7 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.SetFlowBreak(Me.lblPercent, true)
         Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPercent.Location = New System.Drawing.Point(209, 75)
+        Me.lblPercent.Location = New System.Drawing.Point(207, 90)
         Me.lblPercent.Margin = New System.Windows.Forms.Padding(0)
         Me.lblPercent.Name = "lblPercent"
         Me.lblPercent.Size = New System.Drawing.Size(16, 23)
@@ -1134,7 +1119,7 @@ Namespace PresentationLayer.Forms
         Me.chkCancelled.ForeColor = System.Drawing.Color.Black
         Me.chkCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkCancelled.LinkedLabel = Me.lblCancelled
-        Me.chkCancelled.Location = New System.Drawing.Point(100, 101)
+        Me.chkCancelled.Location = New System.Drawing.Point(115, 116)
         Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
         Me.chkCancelled.Name = "chkCancelled"
         Me.chkCancelled.Size = New System.Drawing.Size(23, 21)
@@ -1148,7 +1133,7 @@ Namespace PresentationLayer.Forms
         Me.lblDateAdded.EditingMode = false
         Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDateAdded.Location = New System.Drawing.Point(1, 151)
+        Me.lblDateAdded.Location = New System.Drawing.Point(16, 166)
         Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDateAdded.Name = "lblDateAdded"
         Me.lblDateAdded.Size = New System.Drawing.Size(69, 23)
@@ -1167,7 +1152,7 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Me.lblInvoiceNo
-        Me.txtDateCreated.Location = New System.Drawing.Point(72, 151)
+        Me.txtDateCreated.Location = New System.Drawing.Point(87, 166)
         Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDateCreated.Name = "txtDateCreated"
         Me.txtDateCreated.OldValue = Nothing
@@ -1186,7 +1171,7 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Location = New System.Drawing.Point(0, 57)
         Me.floFullEntryArea.MinimumSize = New System.Drawing.Size(1043, 512)
         Me.floFullEntryArea.Name = "floFullEntryArea"
-        Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 512)
+        Me.floFullEntryArea.Size = New System.Drawing.Size(1107, 531)
         Me.floFullEntryArea.TabIndex = 0
         '
         'CFlowLayout1
@@ -1195,14 +1180,14 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout1.Controls.Add(Me.lblTotals)
         Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
         Me.CFlowLayout1.Controls.Add(Me.txtTotalCredits)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(3, 482)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(3, 484)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Size = New System.Drawing.Size(1013, 30)
         Me.CFlowLayout1.TabIndex = 0
         '
         'ApJournalEntry
         '
-        Me.ClientSize = New System.Drawing.Size(1043, 571)
+        Me.ClientSize = New System.Drawing.Size(1107, 620)
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MinimumSize = New System.Drawing.Size(1059, 580)
         Me.Name = "ApJournalEntry"
@@ -1275,7 +1260,6 @@ End Sub
         Friend WithEvents lblTransactionType As CLabel
         Friend WithEvents cboTransactionType As CaComboBox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents CLabel1 As CLabel
         Friend WithEvents BalanceDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn

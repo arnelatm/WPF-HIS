@@ -26,32 +26,9 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("BankTypeSelection", GetType(BankTypeSelection))
         End Sub
 
-        'Public Sub PairFieldsToControls()
-        '    Dim fieldsDictionary = New Dictionary(Of String, Object)
-        '    fieldsDictionary.Add("IdNo", TxtIDNo)
-        '    fieldsDictionary.Add("BankCode", txtBankCode)
-        '    fieldsDictionary.Add("BankName", txtBankName)
-        '    fieldsDictionary.Add("BankNameAra", txtBankNameAra)
-        '    fieldsDictionary.Add("Notes", txtNotes)
-        'End Sub
-
         Public Sub CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("BankTypeSelection", GetType(BankTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
-
-        Private _fieldObject As List(Of Object)
-
-        Public Property FieldObject As List(Of Object)
-            Get
-                Return _fieldObject
-            End Get
-            Set(value As List(Of Object))
-                _fieldObject = value
-            End Set
-        End Property
-
         Public Property IDNo As Integer Implements IBankView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -96,14 +73,6 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
-
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtBankCode, "Bank Code")
-            MyErrorProvider.Controls.AddMandatory(txtBankName, "Bank Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
 
     End Class
 

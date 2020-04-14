@@ -4,7 +4,6 @@ Namespace DataLayer
 
     Public Interface ICommonDao
         Inherits IBaseDao
-
     End Interface
 
 End Namespace

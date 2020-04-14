@@ -6,7 +6,6 @@ Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.Libraries.Translations
 Imports AATM.PresentationLayer.Views
 
 Public Class BfMain

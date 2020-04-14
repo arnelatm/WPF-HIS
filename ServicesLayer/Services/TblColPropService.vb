@@ -16,7 +16,8 @@ Namespace Services
             DataDao = TblColPropDao
         End Sub
 
-        Public Function GetMainTableColumnProperties(tableName As String) Implements ITblColPropService.GetMainTableColumnProperties
+        Public Function GetMainTableColumnProperties(tableName As String) _
+            Implements ITblColPropService.GetMainTableColumnProperties
             Return DataDao.GetMainTableColumnProperties(tableName)
         End Function
 
@@ -29,7 +30,6 @@ Namespace Services
         '    Implements ITblColPropService.GetUserTblColProp
         '    Return DataDao.GetUserTblColProp(tblColPropObjectIdNo, tblColPropGroupIdNo)
         'End Function
-
     End Class
 
 End Namespace

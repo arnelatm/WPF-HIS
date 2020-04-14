@@ -32,7 +32,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef costCenter As CostCenter) As Integer Implements IDaoAll(Of CostCenter).UpdateRecord
+        Public Function UpdateRecord(ByRef costCenter As CostCenter) As Integer _
+            Implements IDaoAll(Of CostCenter).UpdateRecord
             Dim sql As String =
                     " UPDATE [CostCenter]" &
                     "    SET ParentIdNo = @ParentIdNo," &

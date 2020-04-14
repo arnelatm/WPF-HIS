@@ -31,18 +31,6 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("CategoryTypeSelection", GetType(CategoryTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
-
-        Private _fieldObject As List(Of Object)
-
-        Public Property FieldObject As List(Of Object)
-            Get
-                Return _fieldObject
-            End Get
-            Set(value As List(Of Object))
-                _fieldObject = value
-            End Set
-        End Property
-
         Public Property IDNo As Integer Implements ICategoryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
