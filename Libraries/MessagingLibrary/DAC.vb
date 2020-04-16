@@ -557,7 +557,7 @@ Public Class Dac
         Return message
     End Function
 
-    Function GetCaption(ByVal key As String) As String
+    Function GetMessageCaption(ByVal key As String) As String
         Dim translatedCaption As String = ""
         Dim cmd As String
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"

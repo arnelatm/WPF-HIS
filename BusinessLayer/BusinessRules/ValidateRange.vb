@@ -1,4 +1,6 @@
-﻿Namespace BusinessRules
+﻿Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace BusinessRules
     ' validates a range (min and max) for a given data type
 
     Public Class ValidateRange
@@ -60,7 +62,7 @@
                         Dim tmax As Date = Date.Parse(Max.ToString())
                         Dim tval As Date = Date.Parse(value)
 
-                        Return (tval >= tmin AndAlso tval <= tmax)
+                        Return (tval.TrimMilliseconds() >= tmin.TrimMilliseconds() AndAlso tval.TrimMilliseconds() <= tmax.TrimMilliseconds())
 
                     Case ValidationDataType.String
 

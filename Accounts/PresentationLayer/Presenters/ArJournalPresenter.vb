@@ -1,7 +1,10 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
+Imports AutoMapper
 
 Namespace PresentationLayer.Presenters
 
@@ -9,6 +12,9 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IArJournalView, ArJournalModel)
 
         Private ReadOnly _arOpenInvoiceModel As New ModelAccounts("ArOpenInvoice")
+        Private ReadOnly _arJournalItemModel As New ModelAccounts("ArJournalItem")
+        Protected DtInsertTable As New DataTable
+        Protected DtUpdateTable As New DataTable
 
         Public Sub New(view As IArJournalView)
             MyBase.New(view)
@@ -17,25 +23,28 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New ArJournalModel()
             DataModel = New ArJournalModel
+            GlobalVariables.EventAggregator.SubscribeEvent(Me)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+
+            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
+            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
+            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Notes", GetType(String))
+            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+
+            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
+            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
+            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Notes", GetType(String))
+            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+
         End Sub
-
-        Public Property JournalItemsPresenter As ArJournalItemsPresenter
-
-        Public Overrides Function ChangesMade() As Boolean
-            Dim arJournalChangesMade As Boolean
-            If ObjectsCompare(OriginalModel, View) Then
-                If JournalItemsPresenter.ChangesMadeInJournalItem Then
-                    arJournalChangesMade = True
-                Else
-                    arJournalChangesMade = False
-                End If
-            Else
-                arJournalChangesMade = True
-            End If
-            Return arJournalChangesMade
-        End Function
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
@@ -53,6 +62,252 @@ Namespace PresentationLayer.Presenters
             openInvoiceModel.JournalItemIdNo = journalItem.IdNo
             retValue = _arOpenInvoiceModel.UpdateRecord(Of ArOpenInvoiceModel)(openInvoiceModel)
             Return retValue
+        End Function
+
+        Public Sub OnAfterSave() Handles MyBase.AfterSave
+            If IsEmpty(DataModel.ReferenceNo) Then
+                UpdateGlReferenceNumber()
+            End If
+        End Sub
+
+        Protected Overrides Function DataIsValid() As Boolean
+            Dim retValue = False
+            If MyBase.DataIsValid() Then
+                Dim cPayeeType As String
+                Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
+                Dim specialAccount As String
+                Dim chart As ChartModel
+                retValue = True
+                Dim dateToday As DateTime = Now()
+                retValue = True
+                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AR Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                If Messaging.IsDateRangeValid("Accounts Receivable", DataModel.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                    retValue = False
+                Else
+                    For Each item In DataModel.JournalItems
+                        chart = GetChart(item.AccountIdNo)
+                        specialAccount = chart.SpecialAccount
+                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                            MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                            retValue = False
+                            Exit For
+                        ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Dim caption = "Invalid Entry!"
+                            Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
+                            message = message.Interpolate(Function(x) lineNumber)
+                            Messaging.Show(message, caption)
+                            retValue = False
+                        Else
+                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
+                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Customer Then
+                                Dim lineNumber = Format(item.Sequence, "0")
+                                Dim entryNames = Messaging.TranslateCaption("Accounts Receivables")
+                                Dim caption = "Invalid Entry"
+                                Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                                Dim message = Messaging.GetMessage(True, "MsgOnlyAccountsReceivableAllowed", "Error on line {lineNumber}. Sorry only {entryNames} allowed for this entry!", caption)
+                                caption = Messaging.TranslateCaption(caption)
+                                Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                retValue = False
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+            Return retValue
+        End Function
+
+        Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+            Dim insertReturnValue
+            Dim updateReturnValue
+            Dim parentIdNo As Integer
+            If AddMode Then
+                parentIdNo = retVal
+                CallByName(DataModel, IdFieldName, CallType.Set, retVal)
+            Else
+                parentIdNo = CallByName(DataModel, IdFieldName, CallType.Get)
+            End If
+            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
+            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
+                For Each row As DataRow In DtInsertTable.Rows
+                    row.Item("JournalIdNo") = parentIdNo
+                Next
+                insertReturnValue = Model.InsertTvp(DtInsertTable)
+                If insertReturnValue >= 0 Then
+                    retVal = updateReturnValue + insertReturnValue
+                Else
+                    retVal = insertReturnValue
+                End If
+            Else
+                retVal = updateReturnValue
+            End If
+            Dim newJournalItem As List(Of JournalItemModel)
+            If AddMode Then
+                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(DataModel.IdNo, "Sequence")
+                For Each item In newJournalItem
+                    If IsAccountsReceivableAccount(item.AccountIdNo) Then
+                        AddArOpenInvoice(item, "AR")
+                    End If
+                Next
+            Else
+                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(DataModel.IdNo, "Sequence")
+                Dim newItem
+                Dim oldItem
+                Dim newIsAr
+                Dim oldIsAr
+                Dim oldJournalItem As List(Of JournalItemModel)
+                If Not AddMode Then
+                    oldJournalItem = OriginalModel.Journalitems
+                Else
+                    oldJournalItem = Nothing
+                End If
+                For Each oldItem In oldJournalItem
+                    ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
+                    ' so no problem on deletion
+                    oldIsAr = IsAccountsReceivableAccount(oldItem.AccountIdNo)
+                    If oldIsAr Then
+                        ' this item is AR
+                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+                        If newItem Is Nothing Then
+                            ' item was deleted
+                            DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+                        Else
+                            ' item is found
+                            newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
+                            If newIsAr Then
+                                ' nothing to do
+                            Else
+                                ' new is changed from AR to non-AR
+                                DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+                            End If
+                        End If
+                    Else
+                        ' this item is Non-AR
+                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+                        If newItem Is Nothing Then
+                            ' item is deleted just ignore Non-AR
+                        Else
+                            ' old item still in new
+                            newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
+                            If newIsAr Then
+                                AddArOpenInvoice(newItem, "AR")
+                            Else
+                                ' new is also Non-AR
+                                ' nothing to do
+                            End If
+                        End If
+                    End If
+                Next
+                For Each newItem In newJournalItem
+                    newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
+                    Dim x = newItem.IdNo
+                    oldItem = Nothing
+                    For Each item In OriginalModel.JournalItems
+                        If newItem.IdNo = item.IdNo Then
+                            ' meaning it is the same record
+                            oldItem = item
+                            Exit For
+                        End If
+                    Next
+                    'oldItem = OriginalModel.JournalItems.Find(Function(c) c.IdNo = x)
+                    If oldItem Is Nothing Then
+                        ' this item is new
+                        If newIsAr Then
+                            ' this new item is an AR
+                            AddArOpenInvoice(newItem, "AR")
+                        Else
+                            ' non - AR nothing to do
+                        End If
+                    Else
+                        ' old item, already taken off in first (oldItem) for-loop
+                    End If
+                Next
+            End If
+            If retVal > 0 Then
+                If IsEmpty(DataModel.ReferenceNo) Then
+                    UpdateGlReferenceNumber()
+                End If
+            End If
+            Return retVal
+        End Function
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If DtInsertTable IsNot Nothing Then
+                DtInsertTable.Clear()
+            End If
+            If DtUpdateTable IsNot Nothing Then
+                DtUpdateTable.Clear()
+            End If
+            Dim nRowCount = 1
+            For Each ji In DataModel.JournalItems
+                If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
+                    ' ignore these records (no amount no account)
+                Else
+                    Dim workRow As DataRow
+                    If ji.IdNo <= 0 Then
+                        workRow = DtInsertTable.NewRow()
+                    Else
+                        workRow = DtUpdateTable.NewRow()
+                        workRow("IdNo") = ji.IdNo
+                    End If
+                    workRow("JournalIdNo") = DataModel.IdNo
+                    workRow("Sequence") = nRowCount
+                    workRow("AccountIdNo") = ji.AccountIdNo
+                    workRow("Debit") = ji.Debit
+                    workRow("Credit") = ji.Credit
+                    workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                    workRow("Notes") = If(ji.Notes, "")
+                    If ji.IdNo <= 0 Then
+                        DtInsertTable.Rows.Add(workRow)
+                    Else
+                        DtUpdateTable.Rows.Add(workRow)
+                    End If
+                    nRowCount = nRowCount + 1
+                End If
+            Next
+        End Sub
+
+        Public Sub UpdateFirstLine()
+            If EditMode Or AddMode Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                If DataModel.JournalItems.Count() = 0 Then
+                    DataModel.JournalItems = New List(Of JournalItemModel)
+                    DataModel.JournalItems.Add(NewJournalItem)
+                End If
+                For Each item In DataModel.JournalItems
+                    item.JournalIdNo = DataModel.IdNo
+                    item.Sequence = 1
+                    If DataModel.AccountIdNo Is Nothing Or DataModel.AccountIdNo = 0 Then
+                        item.AccountIdNo = Nothing
+                    Else
+                        item.AccountIdNo = DataModel.AccountIdNo
+                    End If
+                    Dim tranType As String = TransactionTypeToEnum(DataModel.TransactionType)
+                    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
+                        item.Credit = DataModel.Amount
+                        item.Debit = 0
+                    Else
+                        item.Credit = 0
+                        item.Debit = DataModel.Amount
+                    End If
+                    item.ProfitCenterIdNo = 0
+                    Exit For
+                Next
+                GlobalVariables.Mapper.Map(DataModel.JournalItems, View.JournalItems)
+            End If
+        End Sub
+
+        Private Function NewJournalItem()
+            Dim item As New JournalItemModel With {
+                    .JournalIdNo = DataModel.IdNo,
+                    .Sequence = 0,
+                    .AccountIdNo = Nothing,
+                    .Credit = DataModel.Amount,
+                    .Debit = 0,
+                    .ProfitCenterIdNo = 0,
+                    .Notes = ""
+                    }
+            Return item
         End Function
 
     End Class

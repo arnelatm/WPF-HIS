@@ -164,7 +164,7 @@ Namespace AdoNet
         ' transform object into DateTime data type.
 
         <Extension>
-        Public Function AsNullableDateTime(item As Object, Optional ByVal defaultDateTime As Date = Nothing) As Date
+        Public Function AsNullableDateTime(item As Object, Optional ByVal defaultDateTime As Date = Nothing) As Date?
             'Date.TryParse(item.ToString(), result)
             If item.Equals(DBNull.Value) Then
                 Return Nothing

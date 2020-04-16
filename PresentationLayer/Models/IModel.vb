@@ -56,6 +56,9 @@ Public Interface IModel
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                    returnFieldName As String) As String
 
+    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
+                                   returnFieldName As String) As T
+
     Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String

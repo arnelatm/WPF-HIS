@@ -103,7 +103,7 @@ Public Class Model
                 Dim tData As New ClassesLibrary.LookupData
                 tData.IdNo = If(data(i * 3 - 3).Equals(DBNull.Value), 0, CInt(data(i * 3 - 3)))
                 tData.Name = data(i * 3 - 2) & " | " & data(i * 3 - 3)
-                tData.Code = If(data(i * 3 - 1).Equals(DbNull.Value),"",data(i*3-1))
+                tData.Code = If(data(i * 3 - 1).Equals(DBNull.Value), "", data(i * 3 - 1))
                 tlData.Add(tData)
             Next
         Else
@@ -296,6 +296,12 @@ Public Class Model
                                           returnFieldName As String) As String _
         Implements IModel.GetRecordFieldWithKey
         Return Service.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
+    End Function
+
+    Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
+                                          returnFieldName As String) As T _
+        Implements IModel.GetRecordFieldWithKeyG
+        Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
     Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,

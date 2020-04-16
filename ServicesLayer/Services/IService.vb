@@ -48,6 +48,9 @@ Namespace Services
         Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                        returnFieldName As String) As String
 
+        Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
+                                       returnFieldName As String) As T
+
         Function GetRecordPosition(tableName As String, idNo As Integer) As Integer
 
         Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) _

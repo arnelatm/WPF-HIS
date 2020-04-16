@@ -51,22 +51,28 @@ Namespace PresentationLayer.Presenters
                                             "|" + EnumToSpecialAccount(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToSpecialAccount(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
                 Dim chart As ChartModel
+                Dim dateToday As DateTime = Now()
                 retValue = True
-                For Each item In DataModel.JournalItems
-                    chart = GetChart(item.AccountIdNo)
-                    specialAccount = chart.SpecialAccount
-                    If item.AccountIdNo = 0 Then
-                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                        retValue = False
-                        Exit For
-                    ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
-                        Dim lineNumber As String = item.Sequence.ToString()
-                        Dim caption = "Invalid Entry!"
-                        Dim variables = {"lineNumber", lineNumber}
-                        Dim message = Messaging.Show(True, "MsgApArEmAccountsNotAllowed", "Error on line <{lineNumber}>. Supplier (A.P.)/Customer (A.R.)/Employee accounts not allowed for this transaction.", "Invalid Account Entry", variables)
-                        retValue = False
-                    End If
-                Next
+                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                If Messaging.IsDateRangeValid("Cash Disbursement", DataModel.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                    retValue = False
+                Else
+                    For Each item In DataModel.JournalItems
+                        chart = GetChart(item.AccountIdNo)
+                        specialAccount = chart.SpecialAccount
+                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                            MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                            retValue = False
+                            Exit For
+                        ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Dim caption = "Invalid Entry!"
+                            Dim variables = {"lineNumber", lineNumber}
+                            Dim message = Messaging.Show(True, "MsgApArEmAccountsNotAllowed", "Error on line <{lineNumber}>. Supplier (A.P.)/Customer (A.R.)/Employee accounts not allowed for this transaction.", "Invalid Account Entry", variables)
+                            retValue = False
+                        End If
+                    Next
+                End If
             End If
             Return retValue
         End Function
@@ -94,26 +100,30 @@ Namespace PresentationLayer.Presenters
                 End If
                 Dim nRowCount = 1
                 For Each ji In DataModel.JournalItems
-                    Dim workRow As DataRow
-                    If ji.IdNo <= 0 Then
-                        workRow = DtInsertTable.NewRow()
+                    If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
+                        ' ignore these records (no amount no account)
                     Else
-                        workRow = DtUpdateTable.NewRow()
-                        workRow("IdNo") = ji.IdNo
+                        Dim workRow As DataRow
+                        If ji.IdNo <= 0 Then
+                            workRow = DtInsertTable.NewRow()
+                        Else
+                            workRow = DtUpdateTable.NewRow()
+                            workRow("IdNo") = ji.IdNo
+                        End If
+                        workRow("JournalIdNo") = DataModel.IdNo
+                        workRow("Sequence") = nRowCount
+                        workRow("AccountIdNo") = ji.AccountIdNo
+                        workRow("Debit") = ji.Debit
+                        workRow("Credit") = ji.Credit
+                        workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                        workRow("Notes") = If(ji.Notes, "")
+                        If ji.IdNo <= 0 Then
+                            DtInsertTable.Rows.Add(workRow)
+                        Else
+                            DtUpdateTable.Rows.Add(workRow)
+                        End If
+                        nRowCount = nRowCount + 1
                     End If
-                    workRow("JournalIdNo") = DataModel.IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("AccountIdNo") = ji.AccountIdNo
-                    workRow("Debit") = ji.Debit
-                    workRow("Credit") = ji.Credit
-                    workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
-                    workRow("Notes") = If(ji.Notes, "")
-                    If ji.IdNo <= 0 Then
-                        DtInsertTable.Rows.Add(workRow)
-                    Else
-                        DtUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount = nRowCount + 1
                 Next
             End If
         End Sub
@@ -121,14 +131,17 @@ Namespace PresentationLayer.Presenters
         Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
+            Dim parentIdNo As Integer
             If AddMode Then
+                parentIdNo = retVal
                 CallByName(DataModel, IdFieldName, CallType.Set, retVal)
+            Else
+                parentIdNo = CallByName(DataModel, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, DataModel.IdNo)
+            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-
                 For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = retVal
+                    row.Item("JournalIdNo") = parentIdNo
                 Next
                 insertReturnValue = Model.InsertTvp(DtInsertTable)
                 If insertReturnValue >= 0 Then

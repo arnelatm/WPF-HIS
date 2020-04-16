@@ -1,9 +1,10 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.BusinessLayer
 Namespace BusinessLayer
 
     Public Class ArOpenInvoice
-        Inherits AATM.BusinessLayer.BusinessObject
+        Inherits BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Property IdNo As Integer

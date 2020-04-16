@@ -66,6 +66,7 @@ Namespace PresentationLayer.Forms
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -277,7 +278,8 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.ComputedValue = false
         Me.txtDateCreated.CustomFormat = Nothing
         Me.txtDateCreated.DataBoundControl = true
-        Me.txtDateCreated.EditingMode = false
+        Me.txtDateCreated.DisplayOnly = true
+        Me.txtDateCreated.EditingMode = true
         Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, true)
         resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
@@ -293,7 +295,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount})
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
         Me.DataGridViewJournalItems.DataInGridChanged = false
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -411,6 +413,12 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.SpecialAccount, "SpecialAccount")
         Me.SpecialAccount.Name = "SpecialAccount"
         '
+        'AccountIdNoDataGridViewTextBoxColumn
+        '
+        Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
+        resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
+        Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
+        '
         'GeneralJournalEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -461,5 +469,6 @@ End Sub
         Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
+        Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace

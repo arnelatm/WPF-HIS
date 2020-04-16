@@ -39,7 +39,7 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property TransactionType As String
-
+	Public Property JournalItems As List(Of JournalItem)
     End Class
 
 End Namespace

@@ -276,6 +276,10 @@
     <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Form1.vb" />
     <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.Designer.vb">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </Compile>
@@ -361,9 +365,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ApJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ArJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CadOiItemsPresenter.vb" />

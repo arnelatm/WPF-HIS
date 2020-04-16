@@ -23,17 +23,37 @@ Public Module Extensions
     End Function
 
     <Extension()>
-    Public Function ReplaceValues(ByVal template As String, variables As String() ) As String
+    Public Function ReplaceValues(ByVal template As String, variables As String()) As String
         Dim result As String = template
         Dim oldValue As String = ""
         Dim newValue As String = ""
-        For i = 0 To variables.Count - 1 step 2
+        For i = 0 To variables.Count - 1 Step 2
             oldValue = "{" & variables(i) & "}"
-            newValue = variables(i+1)
-            result =  Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
+            newValue = variables(i + 1)
+            result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
         Next
         Return result
     End Function
+
+    <Extension()>
+    Public Function TrimMilliseconds(ByVal dt As DateTime) As DateTime
+        Return New Date(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0, dt.Kind)
+    End Function
+
+    '<Extension()>
+    'Public Function AddBusinessDays(ByVal startDate As DateTime, ByVal days As Integer) As DateTime
+    '    Dim sign As Double = Convert.ToDouble(Math.Sign(days))
+    '    Dim unsignedDays As Integer = Math.Sign(days) * days
+
+    '    For i As Integer = 0 To unsignedDays - 1
+
+    '        Do
+    '            startDate = startDate.AddDays(sign)
+    '        Loop While startDate.DayOfWeek = DayOfWeek.Saturday OrElse startDate.DayOfWeek = DayOfWeek.Sunday
+    '    Next
+
+    '    Return startDate
+    'End Function
 
 End Module
 
