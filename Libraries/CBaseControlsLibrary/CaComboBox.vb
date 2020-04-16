@@ -28,8 +28,10 @@ Public Class CaComboBox
     Private _previousSelectedIndex As Integer = -1
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
     Private _readOnlyCombo As Boolean
+
     'Private _selectable As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
+
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
     'Private _viewable As Boolean
     '<Bindable(True)>

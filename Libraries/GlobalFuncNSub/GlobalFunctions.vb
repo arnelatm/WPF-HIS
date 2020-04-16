@@ -322,8 +322,12 @@ Public Module GlobalFunctions
             If Not value Then
                 Return True
             End If
-        ElseIf TypeOf value Is Date Then
-            If value = Date.MinValue Then
+        ElseIf TypeOf value Is DateTime Then
+            Dim date1 As DateTime = CType(value, DateTime)
+            'Dim date2 as New DateTime(Date1.Year, Date1.Month, Date1.Day, Date1.Hour, Date1.Minute, Date1.Second, 0)
+            'date1 = Ctype(value,DateTime)
+            'date1 =
+            If date1.TrimMilliseconds() < Date.MinValue Then
                 Return True
             End If
         End If

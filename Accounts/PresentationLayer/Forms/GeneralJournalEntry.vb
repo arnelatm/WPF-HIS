@@ -14,15 +14,13 @@ Namespace PresentationLayer.Forms
     Public Class GeneralJournalEntry
         Implements IGeneralJournalView
 
+        Public TxtTotalCredits As Decimal
+        Public TxtTotalDebits As Decimal
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
+        Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
-
-        Private _footer As DgvFooter
-        Public TxtTotalDebits As Decimal
-
-        Public TxtTotalCredits As Decimal
 
         Public Sub New()
             MyBase.New()
@@ -118,21 +116,21 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
-            Get
-                Return TxtTotalDebits
-            End Get
-            Set(value As Decimal)
-                TxtTotalDebits = value
-            End Set
-        End Property
-
         Public Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
             Get
                 Return TxtTotalCredits
             End Get
             Set(value As Decimal)
                 TxtTotalCredits = value
+            End Set
+        End Property
+
+        Public Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
+            Get
+                Return TxtTotalDebits
+            End Get
+            Set(value As Decimal)
+                TxtTotalDebits = value
             End Set
         End Property
 
@@ -165,14 +163,6 @@ Namespace PresentationLayer.Forms
 
 #Region "Methods"
 
-        Private Sub UpdateTotals()
-            If _footer IsNot Nothing Then
-                _footer.SumAllColumns()
-                TotalDebits = _footer.Value("dgvDebit")
-                TotalCredits = _footer.Value("dgvCredit")
-            End If
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
@@ -189,6 +179,11 @@ Namespace PresentationLayer.Forms
          {"ReferenceNo", txtReferenceNo},
          {"TransactionDate", dtpTransactionDate}
         }
+        End Sub
+
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            UpdateTotals()
         End Sub
 
         Private Sub BindJournalItem()
@@ -227,16 +222,14 @@ Namespace PresentationLayer.Forms
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
-                        'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New JournalItemView
                             bsJournalItems.Insert(.RowIndex(), newRow)
-                            'PresenterObj.JournalItemsPresenter.ChangesMadeInJournalItem = True
                             ReSequenceDgvAfterInsert()
                             SendKeys.Send("{UP}")
                         Else
-                            ' ReSharper disable once LocalizableElement
-                            MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
+                            Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+                                           "Invalid Insertion")
                         End If
                 End Select
             End With
@@ -245,6 +238,10 @@ Namespace PresentationLayer.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             ReSequenceDgvAfterDelete()
             UpdateTotals()
+        End Sub
+
+        Private Overloads Sub Dispose()
+            _footer.Dispose()
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -309,13 +306,12 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
-            UpdateTotals()
-        End Sub
-
-        Private Overloads Sub Dispose()
-            _footer.Dispose()
+        Private Sub UpdateTotals()
+            If _footer IsNot Nothing Then
+                _footer.SumAllColumns()
+                TotalDebits = _footer.Value("dgvDebit")
+                TotalCredits = _footer.Value("dgvCredit")
+            End If
         End Sub
 
 #End Region

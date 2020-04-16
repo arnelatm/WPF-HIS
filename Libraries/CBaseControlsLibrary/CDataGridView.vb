@@ -241,7 +241,7 @@ Public Class CDataGridView
 
     Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim iColumn As Integer = CurrentCell.ColumnIndex
-        Dim iRow As Integer = CurrentCell.RowIndex
+        Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
         Try
             Select Case e.KeyData
                 Case Keys.Enter
@@ -259,17 +259,14 @@ Public Class CDataGridView
                     SendKeys.Send("{TAB}")
                     e.Handled = True
                 Case Keys.Down
-                    If iRow = RowCount() Then
+                    If iRow >= RowCount() Then
                         Dim newRow As Integer = iRow - 1
                         Dim newColumn As Integer = FirstVisibleColumn
                         newRow = Math.Min(newRow, RowCount() - 1)
                         CurrentCell = Me(newColumn, newRow)
                     Else
-                        If iRow = RowCount() - 1 Then
-                            iRow = iRow - 1
-                        End If
-                        iRow = Math.Min(iRow, RowCount() - 1)
-                        CurrentCell = Me(iColumn, iRow + 1)
+                        iRow = Math.Min(iRow + 1, RowCount() - 1)
+                        CurrentCell = Me(iColumn, iRow)
                     End If
                     e.Handled = True
                 Case Keys.Tab
@@ -318,7 +315,12 @@ Public Class CDataGridView
                 Return ProcessTabKey(keyData)
             ElseIf currrentColumnIndex = LastEditableColumn Then
                 ' go to next row on the first editable column
-                CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
+                If CurrentCell.RowIndex() >= RowCount() Then
+                    CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
+                Else
+                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
+                End If
+
             End If
         End If
         Return MyBase.ProcessDialogKey(keyData)

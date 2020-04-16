@@ -1,4 +1,6 @@
-﻿Public Class Messaging
+﻿Imports System.Windows.Forms.VisualStyles
+
+Public Class Messaging
 
     Private Shared ReadOnly DataAccessControl As New Dac
 
@@ -21,6 +23,10 @@
         Dim caption As String = ""
         DataAccessControl.GetMessage(translate, key, message, caption)
         Return message
+    End Function
+
+    Public Overloads Shared Function GetCaption(ByVal caption As String) As String
+        Return DataAccessControl.GetMessageCaption(caption)
     End Function
 
     Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
@@ -141,6 +147,10 @@
     End Function
 
     '-------------------------------------------------------------------------------------------------------------------------------
+    Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon) As DialogResult
+        Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", buttons, icon)
+    End Function
+
     Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
         Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", buttons, icon, defaultButton)
     End Function
@@ -162,9 +172,27 @@
         For i = 0 To variables.Count - 1 Step 2
             oldValue = "{" & variables(i) & "}"
             newValue = variables(i + 1)
-            result = Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
+            result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
         Next
         Return result
+    End Function
+
+    Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
+        Dim retValue As DialogResult
+        Dim dateField As String = Messaging.TranslateCaption(text)
+        Dim startDateStr As String = startDate.ToShortDateString()
+        Dim endDateStr As String = endDate.ToShortDateString()
+        Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
+        Dim message = Messaging.GetMessage(True, "MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} And {endDate}!", "Invalid Date")
+        Dim caption = Messaging.GetCaption("Invalid Date")
+        If targetDate < startDate Or targetDate > endDate Then
+            message = Messaging.ReplaceValues(message, variables)
+            Messaging.Show(message, caption)
+            retValue = DialogResult.No
+        Else
+            retValue = DialogResult.Yes
+        End If
+        Return retValue
     End Function
 
 End Class

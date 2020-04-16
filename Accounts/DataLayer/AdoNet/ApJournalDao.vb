@@ -36,10 +36,13 @@ Namespace DataLayer.AdoNet
                     " FROM [ApJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            'Return Db.Read(sql, Make, params).FirstOrDefault()
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New ApJournalItemDao()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
+            For Each item In data.JournalItems
+                data.TotalDebits += item.Debit
+                data.TotalCredits += item.Credit
+            Next
             Return data
         End Function
 
@@ -114,9 +117,9 @@ Namespace DataLayer.AdoNet
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .DueDate = Extensions.AsDate(reader("DueDate")),
+            .DueDate = Extensions.AsNullableDateTime(reader("DueDate")),
             .IdNo = Extensions.AsId(reader("IdNo")),
-            .InvoiceDate = Extensions.AsDate(reader("InvoiceDate")),
+            .InvoiceDate = Extensions.AsNullableDateTime(reader("InvoiceDate")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Posted = Extensions.AsBool(reader("Posted")),
@@ -135,7 +138,6 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", apJournal.AccountIdNo,
                                     "@Amount", apJournal.Amount,
                                     "@Cancelled", apJournal.Cancelled,
-                                    "@DateCreated", apJournal.DateCreated,
                                     "@DueDate", apJournal.DueDate,
                                     "@IdNo", apJournal.IdNo,
                                     "@InvoiceDate", apJournal.InvoiceDate,

@@ -20,7 +20,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Cancelled As Boolean
-        Public Property DateCreated As DateTime
+        Public Property DateCreated As DateTime?
         Public Property IdNo As Integer
         Public Property Notes As String
         Public Property Posted As Boolean
