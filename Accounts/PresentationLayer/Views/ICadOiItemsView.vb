@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views
     Public Interface ICadOiItemsView
         Inherits IView
 
-        Property CadOiItems As IList(Of CadOiItemModel)
+        Property CadOiItems As IList(Of ICadOiItemView)
 
     End Interface
 

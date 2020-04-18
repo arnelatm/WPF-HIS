@@ -135,7 +135,7 @@ Public Class DgvFooter
         MyBase.ScrollBars = Windows.Forms.ScrollBars.None
         MyBase.DefaultCellStyle.SelectionBackColor = Me._parentDGV.DefaultCellStyle.BackColor
         MyBase.DefaultCellStyle.SelectionForeColor = Me._parentDGV.ForeColor
-        MyBase.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MyBase.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         Me.Width = Me.Width
         Me.Dock = DockStyle.Bottom

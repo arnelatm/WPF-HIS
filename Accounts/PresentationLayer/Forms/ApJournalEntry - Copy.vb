@@ -286,6 +286,7 @@ Namespace PresentationLayer.Forms
             cboAccountIdNo.EndUpdate()
         End Sub
 
+
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -319,6 +320,8 @@ Namespace PresentationLayer.Forms
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
             _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
@@ -403,8 +406,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Overloads Sub Dispose()
-            Close()
-            '_footer.Dispose()
+            _footer.Dispose()
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated

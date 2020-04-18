@@ -102,10 +102,10 @@ Namespace PresentationLayer.Presenters
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
                             If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Customer Then
                                 Dim lineNumber = Format(item.Sequence, "0")
-                                Dim entryNames = Messaging.TranslateCaption("Accounts Receivables")
+                                Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
                                 Dim caption = "Invalid Entry"
                                 Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                                Dim message = Messaging.GetMessage(True, "MsgOnlyAccountsReceivableAllowed", "Error on line {lineNumber}. Sorry only {entryNames} allowed for this entry!", caption)
+                                Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
                                 caption = Messaging.TranslateCaption(caption)
                                 Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 retValue = False

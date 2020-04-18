@@ -39,7 +39,6 @@ Namespace PresentationLayer.Forms
 
             AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
             AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
-
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
             If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then

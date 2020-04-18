@@ -13,8 +13,8 @@ Imports AATM.Libraries.CustomControlsLibrary
 
 Namespace PresentationLayer.Forms
 
-    Public Class ApJournalEntry
-        Implements IApJournalView
+    Public Class ArJournalEntry
+        Implements IArJournalView
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -30,11 +30,11 @@ Namespace PresentationLayer.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "ApJournal"
+            MainTableName = "ArJournal"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New ApJournalPresenter(Me)
+            PresenterObj = New ArJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Integer Implements IApJournalView.AccountIdNo
+        Public Property AccountIdNo As Integer Implements IArJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Amount As Decimal Implements IApJournalView.Amount
+        Public Property Amount As Decimal Implements IArJournalView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
@@ -60,7 +60,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Cancelled As Boolean Implements IApJournalView.Cancelled
+        Public Property Cancelled As Boolean Implements IArJournalView.Cancelled
             Get
                 Return chkCancelled.Checked
             End Get
@@ -69,7 +69,16 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
+        Public Property CustomerIdNo As Integer Implements IArJournalView.CustomerIdNo
+            Get
+                Return cboCustomerIdNo.GetValue()
+            End Get
+            Set
+                cboCustomerIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property DateCreated As DateTime? Implements IArJournalView.DateCreated
             Get
                 If String.IsNullOrEmpty(txtDateCreated.Text) Then
                     Return Now()
@@ -85,7 +94,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DueDate As Date? Implements IApJournalView.DueDate
+        Public Property DueDate As Date? Implements IArJournalView.DueDate
             Get
                 Return dtpDueDate.Value
             End Get
@@ -98,7 +107,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IApJournalView.IdNo
+        Public Property IdNo As Integer Implements IArJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -111,20 +120,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property InvoiceDate As Date? Implements IApJournalView.InvoiceDate
-            Get
-                Return dtpInvoiceDate.Value
-            End Get
-            Set
-                'If String.IsNullOrEmpty(Value) Then
-                '    dtpInvoiceDate.Value = Date.Now()
-                'Else
-                dtpInvoiceDate.Value = Value
-                'End If
-            End Set
-        End Property
-
-        Public Property InvoiceNo As String Implements IApJournalView.InvoiceNo
+        Public Property InvoiceNo As String Implements IArJournalView.InvoiceNo
             Get
                 Return txtInvoiceNo.Text
             End Get
@@ -133,7 +129,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of JournalItemView) Implements IApJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IArJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -143,13 +139,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        '' This event handler provides custom item-creation behavior.
-        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) _
-        '    Handles bsJournalItems.AddingNew
-        '    e.NewObject = CreateJournalItem()
-        'End Sub
-
-        Public Property Notes As String Implements IApJournalView.Notes
+        Public Property Notes As String Implements IArJournalView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -158,7 +148,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Posted As Boolean Implements IApJournalView.Posted
+        Public Property Posted As Boolean Implements IArJournalView.Posted
             Get
                 Return chkPosted.Checked
             End Get
@@ -167,7 +157,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ReferenceNo As String Implements IApJournalView.ReferenceNo
+        Public Property ReferenceNo As String Implements IArJournalView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
             End Get
@@ -176,7 +166,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SettlementDiscount As Decimal Implements IApJournalView.SettlementDiscount
+        Public Property SettlementDiscount As Decimal Implements IArJournalView.SettlementDiscount
             Get
                 If txtSettlementDiscount.Text <> "" Then
                     Return Convert.ToDecimal(txtSettlementDiscount.Text)
@@ -189,7 +179,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SettlementDueDate As Date? Implements IApJournalView.SettlementDueDate
+        Public Property SettlementDueDate As Date? Implements IArJournalView.SettlementDueDate
             Get
                 Return dtpSettlementDueDate.Value
             End Get
@@ -202,16 +192,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SupplierIdNo As Integer Implements IApJournalView.SupplierIdNo
-            Get
-                Return cboSupplierIdNo.GetValue()
-            End Get
-            Set
-                cboSupplierIdNo.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property TotalCredits As Decimal Implements IApJournalView.TotalCredits
+        Public Property TotalCredits As Decimal Implements IArJournalView.TotalCredits
             Get
                 Return TxtTotalCredits
             End Get
@@ -220,7 +201,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IApJournalView.TotalDebits
+        Public Property TotalDebits As Decimal Implements IArJournalView.TotalDebits
             Get
                 Return TxtTotalDebits
             End Get
@@ -229,7 +210,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TransactionDate As Date? Implements IApJournalView.TransactionDate
+        Public Property TransactionDate As Date? Implements IArJournalView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -243,7 +224,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property TransactionType As String Implements IApJournalView.TransactionType
+        Public Property TransactionType As String Implements IArJournalView.TransactionType
             Get
                 Return cboTransactionType.GetValue()
             End Get
@@ -252,39 +233,132 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property VatAmount As Decimal Implements IApJournalView.VatAmount
-            Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
-            End Get
-            Set
-                txtVatAmount.Text = FormatMoney(Value)
-            End Set
-        End Property
-
-        Public Property VatNumber As String Implements IApJournalView.VatNumber
-            Get
-                Return txtVatNumber.Text
-            End Get
-            Set
-                txtVatNumber.Text = Value
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
-            cboSupplierIdNo.BeginUpdate()
-            cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByCode()
-            cboSupplierIdNo.EndUpdate()
+            cboCustomerIdNo.BeginUpdate()
+            cboCustomerIdNo.DataSource = PresenterObj.GetCustomerListByCode()
+            cboCustomerIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToSpecialAccount(SpecialAccountSelection.AccountsReceivable))
             cboAccountIdNo.EndUpdate()
         End Sub
+
+        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
+        '    Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        '    If PresenterObj.AddMode Then
+        '        IdNo = passedValue
+        '    End If
+        '    If DtInsertTable IsNot Nothing Then
+        '        DtInsertTable.Clear()
+        '    End If
+        '    If DtUpdateTable IsNot Nothing Then
+        '        DtUpdateTable.Clear()
+        '    End If
+        '    Dim oldJournalItem As List(Of JournalItemModel)
+        '    If Not PresenterObj.AddMode Then
+        '        'oldJournalItem = _journalItemsPresenter.GetRecordsWithIdNo(IdNo)
+        '        oldJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+        '    Else
+        '        oldJournalItem = Nothing
+        '    End If
+        '    Dim nRowCount = 1
+        '    For Each ji In bsJournalItems
+        '        Dim workRow As DataRow
+        '        If ji.IdNo <= 0 Then
+        '            workRow = DtInsertTable.NewRow()
+        '        Else
+        '            workRow = DtUpdateTable.NewRow()
+        '            workRow("IdNo") = ji.IdNo
+        '        End If
+        '        workRow("JournalIdNo") = IdNo
+        '        workRow("Sequence") = nRowCount
+        '        workRow("AccountIdNo") = ji.AccountIdNo
+        '        workRow("Debit") = ji.Debit
+        '        workRow("Credit") = ji.Credit
+        '        workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+        '        workRow("Notes") = If(ji.Notes, "")
+        '        If ji.IdNo <= 0 Then
+        '            DtInsertTable.Rows.Add(workRow)
+        '        Else
+        '            DtUpdateTable.Rows.Add(workRow)
+        '        End If
+        '        nRowCount = nRowCount + 1
+        '    Next
+        '    _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
+        '    Dim newJournalItem As List(Of JournalItemModel)
+        '    If PresenterObj.AddMode Then
+        '        newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+        '        For Each item In newJournalItem
+        '            If _journalItemsPresenter.IsAccountsReceivableAccount(item.AccountIdNo) Then
+        '                PresenterObj.AddArOpenInvoice(item, "AR")
+        '            End If
+        '        Next
+        '    Else
+        '        newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
+        '        Dim newItem
+        '        Dim oldItem
+        '        Dim newIsAr
+        '        Dim oldIsAr
+        '        For Each oldItem In oldJournalItem
+        '            ' deletion of paid A.R. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
+        '            ' so no problem on deletion
+        '            oldIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(oldItem.AccountIdNo)
+        '            If oldIsAr Then
+        '                ' this item is AR
+        '                newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+        '                If newItem Is Nothing Then
+        '                    ' item was deleted
+        '                    PresenterObj.DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+        '                Else
+        '                    ' item is found
+        '                    newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
+        '                    If newIsAr Then
+        '                        ' nothing to do
+        '                    Else
+        '                        ' new is changed from AR to non-AR
+        '                        PresenterObj.DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+        '                    End If
+        '                End If
+        '            Else
+        '                ' this item is Non-AR
+        '                newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+        '                If newItem Is Nothing Then
+        '                    ' item is deleted just ignore Non-AR
+        '                Else
+        '                    ' old item still in new
+        '                    newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
+        '                    If newIsAr Then
+        '                        PresenterObj.AddArOpenInvoice(newItem, "AR")
+        '                    Else
+        '                        ' new is also Non-AR
+        '                        ' nothing to do
+        '                    End If
+        '                End If
+        '            End If
+        '        Next
+        '        For Each newItem In newJournalItem
+        '            newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
+        '            oldItem = oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo)
+        '            If oldItem Is Nothing Then
+        '                ' this item is new
+        '                If newIsAr Then
+        '                    ' this new item is an AR
+        '                    PresenterObj.AddArOpenInvoice(newItem, "AR")
+        '                Else
+        '                    ' non - AR nothing to do
+        '                End If
+        '            Else
+        '                ' old item, already taken off in first (oldItem) for-loop
+        '            End If
+        '        Next
+        '    End If
+        'End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -292,6 +366,7 @@ Namespace PresentationLayer.Forms
          {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
+         {"CustomerIdNo", cboCustomerIdNo},
          {"DateCreated", txtDateCreated},
          {"DueDate", dtpDueDate},
          {"IdNo", TxtIDNo},
@@ -301,11 +376,8 @@ Namespace PresentationLayer.Forms
          {"ReferenceNo", txtReferenceNo},
          {"SettlementDiscount", txtSettlementDiscount},
          {"SettlementDueDate", dtpSettlementDueDate},
-         {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
-         {"TransactionType", cboTransactionType},
-         {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber}
+         {"TransactionType", cboTransactionType}
         }
         End Sub
 
@@ -314,11 +386,13 @@ Namespace PresentationLayer.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub ArJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
             _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
@@ -360,21 +434,20 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboSupplierIdNo_Validated(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated
+        Private Sub cboCustomerIdNo_Validated(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated
             UpdateDueDate()
             UpdateEarlySettlementValues()
-            UpdateVatNumber()
         End Sub
 
-        Private Sub cboSupplierIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboSupplierIdNo.Validating
+        Private Sub cboCustomerIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboCustomerIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
-                cboSupplierIdNo.RevertValue()
+                cboCustomerIdNo.RevertValue()
             End If
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-                                                            Handles DataGridViewJournalItems.CellClick
+                            Handles DataGridViewJournalItems.CellClick
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
@@ -399,12 +472,11 @@ Namespace PresentationLayer.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             ReSequenceDgvAfterDelete()
             UpdateTotals()
-            UpdateTotalVatAmount()
+
         End Sub
 
         Private Overloads Sub Dispose()
-            Close()
-            '_footer.Dispose()
+            _footer.Dispose()
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
@@ -413,7 +485,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PresenterObj.AddMode Then
-                txtJournalCode.Text = AccountStrings.ApJournalPrefix
+                txtJournalCode.Text = AccountStrings.ArJournalPrefix
             End If
             If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
                 If Messaging.Show(True, "AskIfSaveEmptyJournal",
@@ -453,32 +525,12 @@ Namespace PresentationLayer.Forms
             With DataGridViewJournalItems
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvdebit"
-                        If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
-                            .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
-                        End If
                         UpdateTotals()
-                        UpdateTotalVatAmount()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
-                            .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
-                        End If
                         UpdateTotals()
-                        UpdateTotalVatAmount()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
-                    Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.GetValue()
-                        With DataGridViewJournalItems.CurrentRow
-                            Dim currentVatAmount As Decimal
-                            If PresenterObj.IsInputVatAccount(newValue) Then
-                                currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
-                            Else
-                                currentVatAmount = 0
-                            End If
-                            .Cells("ItemVatAmount").Value = currentVatAmount
-                        End With
-                        UpdateTotalVatAmount()
                 End Select
             End With
         End Sub
@@ -532,23 +584,23 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateDueDate()
-            If cboSupplierIdNo.Text IsNot Nothing Then
-                Dim supplierPaymentDueDays =
-                        PresenterObj.GetSupplierPaymentDueDays(cboSupplierIdNo.SelectedValue)
-                DueDate = DateAdd("d", supplierPaymentDueDays, TransactionDate)
+            If cboCustomerIdNo.Text IsNot Nothing Then
+                Dim customerPaymentDueDays =
+                        PresenterObj.GetCustomerPaymentDueDays(cboCustomerIdNo.SelectedValue)
+                DueDate = DateAdd("d", customerPaymentDueDays, TransactionDate)
             Else
                 dtpDueDate.Value = TransactionDate
             End If
         End Sub
 
         Private Sub UpdateEarlySettlementValues()
-            If cboSupplierIdNo.Text IsNot Nothing Then
-                Dim supplierSettlementDueDays =
-                        PresenterObj.GetSupplierSettlementDueDays(cboSupplierIdNo.SelectedValue)
-                Dim supplierSettlementDiscount As Decimal
-                supplierSettlementDiscount = PresenterObj.GetSupplierSettlementDiscount(cboSupplierIdNo.SelectedValue)
-                SettlementDueDate = DateAdd("d", supplierSettlementDueDays, TransactionDate)
-                txtSettlementDiscount.Text = supplierSettlementDiscount
+            If cboCustomerIdNo.Text IsNot Nothing Then
+                Dim customerSettlementDueDays =
+                        PresenterObj.GetCustomerSettlementDueDays(cboCustomerIdNo.SelectedValue)
+                Dim customerSettlementDiscount As Decimal
+                customerSettlementDiscount = PresenterObj.GetCustomerSettlementDiscount(cboCustomerIdNo.SelectedValue)
+                SettlementDueDate = DateAdd("d", customerSettlementDueDays, TransactionDate)
+                txtSettlementDiscount.Text = customerSettlementDiscount
             Else
                 dtpSettlementDueDate.Value = TransactionDate
                 txtSettlementDiscount.Text = 0
@@ -562,37 +614,11 @@ Namespace PresentationLayer.Forms
             DataGridViewJournalItems.Refresh()
         End Sub
 
-        Private Sub UpdateRowVatAmounts()
-            Dim vatAmt As Integer
-            For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If PresenterObj.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
-                    vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
-                    glRow.Cells("ItemVatAmount").Value = vatAmt
-                End If
-            Next
-        End Sub
-
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.SumAllColumns()
-                TotalDebits = _footer.Value("dgvDebit")
-                TotalCredits = _footer.Value("dgvCredit")
-            End If
-        End Sub
-
-        Private Sub UpdateTotalVatAmount()
-            Dim tVatAmount As Decimal = 0
-            For Each row In DataGridViewJournalItems.Rows
-                tVatAmount = tVatAmount + row.cells("ItemVatAmount").Value
-            Next
-            VatAmount = tVatAmount
-        End Sub
-
-        Private Sub UpdateVatNumber()
-            If cboSupplierIdNo.Text IsNot Nothing Then
-                VatNumber = PresenterObj.GetSupplierVatNumber(cboSupplierIdNo.SelectedValue)
-            Else
-                VatNumber = ""
+                'TotalDebits = _footer.Value("dgvDebit")
+                'TotalCredits = _footer.Value("dgvCredit")
             End If
         End Sub
 
@@ -600,10 +626,10 @@ Namespace PresentationLayer.Forms
                                             ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
             ' Check if the starting balance row is included in the selected rows
-            Dim apJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
+            Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
 
             ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(apJournalRow) Then
+            If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
                 ' Do not allow the user to delete the first row.
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
@@ -611,7 +637,7 @@ Namespace PresentationLayer.Forms
             ElseIf DataGridViewJournalItems.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or
                    DataGridViewJournalItems.CurrentRow.Cells("dgvDiscountTaken").Value <> 0 Then
                 ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")
+                Messaging.Show(True, "MsgDeleteCollEntryNotAllowed", "You can't delete this row because this entry has an existing collection and/or discount!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             End If

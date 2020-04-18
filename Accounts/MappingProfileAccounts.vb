@@ -24,6 +24,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of BankModel, IBankView)().ReverseMap()
         CreateMap(Of CadOiItem, CadOiItemModel)().ReverseMap()
         CreateMap(Of CadOiItemModel, ICadOiItemView)().ReverseMap()
+        CreateMap(Of CadOiItemModel, CadOiItemView)().ReverseMap()
         CreateMap(Of CashCode, CashCodeModel)().ReverseMap()
         CreateMap(Of CashCodeModel, ICashCodeView)().ReverseMap()
         CreateMap(Of CashDisbursementJournal, CashDisbursementJournalModel)().ReverseMap()

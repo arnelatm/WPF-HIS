@@ -74,7 +74,7 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="cadOiIdNo">CadOiIDNo id to display.</param>
         Public Shadows Sub Display(cadOiIdNo As Integer)
-            View.CadOiItems = Model.GetRecordsWithIdNo(Of CadOiItemModel)(cadOiIdNo, "Sequence")
+            View.CadOiItems = Model.GetRecordsWithIdNo(Of CadOiItemView)(cadOiIdNo, "Sequence")
         End Sub
 
         Public Function GetCadOiItems(cadOiIdNo As Integer) As List(Of CadOiItemModel)

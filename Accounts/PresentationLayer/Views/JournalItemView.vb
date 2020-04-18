@@ -1,8 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Forms
+Namespace PresentationLayer.Views
 
     Public Class JournalItemView
         Implements IJournalItemView
