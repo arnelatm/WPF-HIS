@@ -383,6 +383,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub BindCadOiItem()
             SuspendLayout()
+            bscadOiItems.DataSource = Nothing
+            DataGridViewCadOiItems.Refresh()
             bscadOiItems.DataSource = CadOiItems
             bscadOiItems.AllowNew = True
             With DataGridViewCadOiItems
@@ -409,6 +411,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub BindJournalItem()
             SuspendLayout()
+            bscadOiItems.DataSource = Nothing
+            DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
@@ -616,7 +620,7 @@ Namespace PresentationLayer.Forms
                         If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
                         End If
-                        UpdateTotals()
+                        UpdateJiTotals()
                         UpdateTotalVatAmount()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
@@ -625,7 +629,7 @@ Namespace PresentationLayer.Forms
                         If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
                         End If
-                        UpdateTotals()
+                        UpdateJiTotals()
                         UpdateTotalVatAmount()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
@@ -759,21 +763,18 @@ Namespace PresentationLayer.Forms
                         DataGridViewJournalItems.Refresh()
                         Exit For
                     Next
-                    UpdateTotals()
+                    UpdateJiTotals()
                 End If
             End If
         End Sub
 
         Private Sub UpdateOiTotals()
-            If bscadOiItems IsNot Nothing Then
-                'Applied = 0
-                'DiscountTaken = 0
-                'For Each item In bscadOiItems
-                '    Applied += item.Amount
-                '    DiscountTaken += item.DiscountTaken
-                'Next
-                'UnApplied = Amount - Applied
+            If _apFooter IsNot Nothing Then
+                _apFooter.SumAllColumns()
             End If
+            Applied = _apFooter.Value("dgvAmount")
+            DiscountTaken = _apFooter.Value("dgvDiscTaken")
+            UnApplied = Amount - Applied
         End Sub
 
         Private Sub UpdateRowVatAmounts()
@@ -787,17 +788,15 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateTotals()
+            UpdateJiTotals()
+            UpdateOiTotals()
+        End Sub
+
+        Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.SumAllColumns()
                 TotalDebits = _jiFooter.Value("dgvDebit")
                 TotalCredits = _jiFooter.Value("dgvCredit")
-            End If
-            If _apFooter IsNot Nothing Then
-                _apFooter.SumAllColumns()
-                'TotalDebits = _apfooter.Value("dgvAmount")
-                'TotalCredits = _apfooter.Value("dgvPreviousBalance")
-                'TotalCredits = _apfooter.Value("dgvDiscountTaken")
-                'TotalCredits = _apfooter.Value("dgvBalance")
             End If
         End Sub
 
