@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class ApJournalDao
         Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal), IDaoChild(Of JournalItem)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As ApJournal _
         Implements IDao(Of ApJournal).GetRecordById
@@ -36,8 +36,7 @@ Namespace DataLayer.AdoNet
                     " FROM [ApJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New ApJournalItemDao()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
                 data.TotalDebits += item.Debit
@@ -67,7 +66,7 @@ Namespace DataLayer.AdoNet
                     "VatAmount = @VatAmount," &
                     "VatNumber = @VatNumber" &
                     "  WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(apJournal))
+            Return _db.Update(sql, Take(apJournal))
         End Function
 
         Public Function AddRecord(ByRef apJournal As ApJournal) As Integer _
@@ -107,7 +106,7 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return Db.Insert(sql, Take(apJournal))
+            Return _db.Insert(sql, Take(apJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, ApJournal) =
@@ -163,7 +162,7 @@ Namespace DataLayer.AdoNet
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
-            If Db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+            If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
                 prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
@@ -175,17 +174,17 @@ Namespace DataLayer.AdoNet
                                           "@Prefix", prefix,
                                           "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
                                          }
-                If Db.Insert(sql, params) Then
+                If _db.Insert(sql, params) Then
                     Return -1
                 End If
             Else
-                prefix = Db.Scalar("select prefix from series where seriesName = '" & series & "'")
-                maxlength = Db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
+                prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+                maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [ApJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
                    ")) where IdNo = " & bizObj.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
 

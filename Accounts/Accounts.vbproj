@@ -368,8 +368,6 @@
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CadOiItemsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
@@ -396,6 +394,7 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
@@ -433,7 +432,7 @@
     <Compile Include="PresentationLayer\Views\ISalesCashItemView.vb" />
     <Compile Include="PresentationLayer\Views\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
-    <Compile Include="PresentationLayer\Forms\JournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />

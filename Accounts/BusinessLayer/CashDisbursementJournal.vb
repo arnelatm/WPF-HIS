@@ -50,6 +50,8 @@ Namespace BusinessLayer
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+        Public Property JournalItems As List(Of JournalItem)
+        Public Property CadOiItems As List(Of CadOiItem)
     End Class
 
 End Namespace

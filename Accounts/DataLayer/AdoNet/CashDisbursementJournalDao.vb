@@ -1,15 +1,16 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashDisbursementJournal
     ' ** DAO Pattern
 
     Public Class CashDisbursementJournalDao
-        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal)
+        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoChild(Of JournalItem)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo As Integer) As CashDisbursementJournal _
             Implements IDao(Of CashDisbursementJournal).GetRecordById
@@ -19,7 +20,22 @@ Namespace DataLayer.AdoNet
                     "   FROM [CashDisbursementJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim jiDao = New CashDisbursementJournalItemDao
+            Dim oiDao = New CadOiItemDao
+            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.JournalItems = ji
+            data.CadOiItems = oi
+            'GlobalVariables.Mapper.Map(ji, data.JournalItems)
+            'GlobalVariables.Mapper.Map(oi, data.CadOiItems)
+            Return data
+            'data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
+            'For Each item In data.JournalItems
+            '    data.TotalDebits += item.Debit
+            '    data.TotalCredits += item.Credit
+            'Next
+            'Return data
         End Function
 
         Public Function UpdateRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
@@ -44,7 +60,7 @@ Namespace DataLayer.AdoNet
                     "       Posted        = @Posted," &
                     "       Cancelled     = @Cancelled" &
                     "  WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(cashDisbursementJournal))
+            Return _db.Update(sql, Take(cashDisbursementJournal))
         End Function
 
         Public Function AddRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
@@ -53,31 +69,31 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [CashDisbursementJournal] " &
                     " (TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayeeIdNo,PayeeName,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,Notes,VatNumber,VatAmount,Posted,Cancelled)" &
                     " VALUES (@TransactionDate,@ReferenceNo,@Amount,@AccountIdNo,@PaymentType,@PayeeIdNo,@PayeeName,@ORNumber,@DiscountTaken,@DiscountAccountIdNo,@Applied,@UnApplied,@Notes,@VatNumber,@VatAmount,@Posted,@Cancelled)"
-            Return Db.Insert(sql, Take(cashDisbursementJournal))
+            Return _db.Insert(sql, Take(cashDisbursementJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CashDisbursementJournal) =
                                     Function(reader) _
             New CashDisbursementJournal() With {
-            .IdNo = Extensions.AsId(reader("IdNo")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .PaymentType = Extensions.AsString(reader("PaymentType")),
-            .PayeeIdNo = Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),
-            .PayeeName = Extensions.AsString(reader("PayeeName")),
-            .OrNumber = Extensions.AsString(reader("ORNumber")),
-            .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .DiscountAccountIdNo = Extensions.AsInt(Of Integer)(reader("DiscountAccountIdNo")),
-            .Applied = Extensions.AsDecimal(reader("Applied")),
-            .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .VatNumber = Extensions.AsString(reader("VatNumber")),
-            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-            .Posted = Extensions.AsBool(reader("Posted")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled"))
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .PaymentType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PaymentType")),
+            .PayeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),
+            .PayeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayeeName")),
+            .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
+            .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
+            .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("DiscountAccountIdNo")),
+            .Applied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Applied")),
+            .UnApplied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnApplied")),
+            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+            .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
+            .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
+            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("DateCreated")),
+            .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled"))
             }
 
         Private Function Take(cashDisbursementJournal As CashDisbursementJournal) As Object()
@@ -124,7 +140,7 @@ Namespace DataLayer.AdoNet
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
-            If Db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+            If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
                 prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
@@ -136,18 +152,33 @@ Namespace DataLayer.AdoNet
                                           "@Prefix", prefix,
                                           "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
                                          }
-                If Db.Insert(sql, params) Then
+                If _db.Insert(sql, params) Then
                     Return -1
                 End If
             Else
-                prefix = Db.Scalar("select prefix from series where seriesName = '" & series & "'")
-                maxlength = Db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
+                prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+                maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CashDisbursementJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
                    ")) where IdNo = " & bizObj.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
+        End Function
+
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+            Dim jiDao = New CashDisbursementJournalItemDao()
+            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Dim jiDao = New CashDisbursementJournalItemDao()
+            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+            Dim jiDao = New CashDisbursementJournalItemDao()
+            Return jiDao.InsertTvp(tvpTable)
         End Function
 
     End Class

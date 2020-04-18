@@ -879,7 +879,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
-            'RaiseEvent AfterRecordRetrieval(modelData)
+            RaiseEvent AfterRecordRetrieval(modelData)
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
             'View = GlobalVariables.Mapper.Map(Of T)(modelData)
             For Each child In ChildPresenters

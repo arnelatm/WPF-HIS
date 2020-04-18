@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -28,6 +30,9 @@
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+        Public Property JournalItems As List(Of JournalItemModel)
+        Public Property CadOiItems As List(Of CadOiItemModel)
+
     End Class
 
 End Namespace
