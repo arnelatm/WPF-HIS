@@ -871,7 +871,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 132</value>
+    <value>1, 131</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -904,7 +904,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 132</value>
+    <value>118, 131</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1560,14 +1560,11 @@
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
   </metadata>
-  <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>969, 300</value>
+    <value>973, 300</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1600,10 +1597,13 @@
     <value>Invoice No.</value>
   </data>
   <data name="dgvInvoiceNo.Width" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>110</value>
   </data>
   <data name="dgvTransactionDate.HeaderText" xml:space="preserve">
     <value>Transaction Date</value>
+  </data>
+  <data name="dgvTransactionDate.Width" type="System.Int32, mscorlib">
+    <value>110</value>
   </data>
   <metadata name="dgvJournalCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1612,7 +1612,7 @@
     <value>Journal Code</value>
   </data>
   <data name="dgvJournalCode.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>110</value>
   </data>
   <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1620,11 +1620,17 @@
   <data name="dgvJournalIdNoAp.HeaderText" xml:space="preserve">
     <value>Journal Id No</value>
   </data>
+  <data name="dgvJournalIdNoAp.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvPreviousBalance.HeaderText" xml:space="preserve">
     <value>Previous Balance</value>
+  </data>
+  <data name="dgvPreviousBalance.Width" type="System.Int32, mscorlib">
+    <value>110</value>
   </data>
   <metadata name="dgvAmount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1632,11 +1638,17 @@
   <data name="dgvAmount.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="dgvAmount.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
   <metadata name="dgvDiscountTaken.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvDiscountTaken.HeaderText" xml:space="preserve">
     <value>Discount Taken</value>
+  </data>
+  <data name="dgvDiscountTaken.Width" type="System.Int32, mscorlib">
+    <value>110</value>
   </data>
   <metadata name="dgvBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1684,10 +1696,10 @@
     <value>808, 17</value>
   </metadata>
   <data name="DataGridViewCadOiItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>978, 3</value>
+    <value>982, 3</value>
   </data>
   <data name="DataGridViewCadOiItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>953, 270</value>
+    <value>969, 304</value>
   </data>
   <data name="DataGridViewCadOiItems.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -90104,6 +90116,12 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bscadOiItems.Name" xml:space="preserve">
+    <value>bscadOiItems</value>
+  </data>
+  <data name="&gt;&gt;bscadOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceCadOi.Name" xml:space="preserve">
     <value>dgvSequenceCadOi</value>
   </data>
@@ -90150,13 +90168,13 @@
     <value>dgvDiscountTaken</value>
   </data>
   <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
     <value>dgvBalance</value>
   </data>
   <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
@@ -90187,12 +90205,6 @@
   </data>
   <data name="&gt;&gt;OpenInvoiceIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bscadOiItems.Name" xml:space="preserve">
-    <value>bscadOiItems</value>
-  </data>
-  <data name="&gt;&gt;bscadOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CashDisbursementJournalEntry</value>
