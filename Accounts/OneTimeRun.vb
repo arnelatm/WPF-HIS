@@ -12,7 +12,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("AskIfSaveEmptyJournal", "Journal Entry is Empty, do you still want to save this entry?", "Empty Journal")
         Messaging.AddMessage("AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.")
         Messaging.AddMessage("MsgAlreadyPosted", "Sorry this record has already been posted!", "Disallowed operation")
-        Messaging.AddMessage("MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", "Invalid Entry")
+        Messaging.AddMessage("MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", "Invalid Entry")
         Messaging.AddMessage("MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "Disallowed operation")
         Messaging.AddMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
         Messaging.AddMessage("MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")

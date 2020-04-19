@@ -1095,6 +1095,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 End If
             End If
         Else
+
             okToSaveRecord = True
         End If
         If okToSaveRecord And DataIsValid() Then
