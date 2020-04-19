@@ -103,8 +103,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewCadOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bscadOiItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.dgvSequenceCadOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -119,6 +117,8 @@ Namespace PresentationLayer.Forms
         Me.CadIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bscadOiItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFullEntryArea.SuspendLayout
         Me.floPurchaseJournalHeader.SuspendLayout
@@ -905,20 +905,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewCadOiItems.SequenceColumn = "dgvSequencecadOi"
         Me.DataGridViewCadOiItems.StartTrackingChanges = false
         '
-        'bscadOiItems
-        '
-        Me.bscadOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.CadOiItemModel)
-        '
-        'btnViewGL
-        '
-        Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
-        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-        Me.btnViewGL.ImageIndex = 0
-        Me.btnViewGL.Name = "btnViewGL"
-        Me.btnViewGL.OriginalImageName = Nothing
-        Me.btnViewGL.SecurityKey = ""
-        '
         'dgvSequenceCadOi
         '
         Me.dgvSequenceCadOi.DataPropertyName = "Sequence"
@@ -926,7 +912,7 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
         Me.dgvSequenceCadOi.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvSequenceCadOi.DisplayOnly = true
-        Me.dgvSequenceCadOi.EditingMode = true
+        Me.dgvSequenceCadOi.EditingMode = false
         resources.ApplyResources(Me.dgvSequenceCadOi, "dgvSequenceCadOi")
         Me.dgvSequenceCadOi.Name = "dgvSequenceCadOi"
         Me.dgvSequenceCadOi.ReadOnly = true
@@ -938,7 +924,7 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
         Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvInvoiceNo.DisplayOnly = true
-        Me.dgvInvoiceNo.EditingMode = true
+        Me.dgvInvoiceNo.EditingMode = false
         resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
         Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
         Me.dgvInvoiceNo.ReadOnly = true
@@ -951,7 +937,7 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
         Me.dgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvTransactionDate.DisplayOnly = true
-        Me.dgvTransactionDate.EditingMode = true
+        Me.dgvTransactionDate.EditingMode = false
         resources.ApplyResources(Me.dgvTransactionDate, "dgvTransactionDate")
         Me.dgvTransactionDate.Name = "dgvTransactionDate"
         Me.dgvTransactionDate.ReadOnly = true
@@ -964,7 +950,7 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
         Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle11
         Me.dgvJournalCode.DisplayOnly = true
-        Me.dgvJournalCode.EditingMode = true
+        Me.dgvJournalCode.EditingMode = false
         resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
         Me.dgvJournalCode.Name = "dgvJournalCode"
         Me.dgvJournalCode.ReadOnly = true
@@ -977,7 +963,7 @@ Namespace PresentationLayer.Forms
         DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
         Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle12
         Me.dgvJournalIdNoAp.DisplayOnly = true
-        Me.dgvJournalIdNoAp.EditingMode = true
+        Me.dgvJournalIdNoAp.EditingMode = false
         resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
         Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
         Me.dgvJournalIdNoAp.ReadOnly = true
@@ -1069,6 +1055,20 @@ Namespace PresentationLayer.Forms
         Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
         resources.ApplyResources(Me.OpenInvoiceIdNo, "OpenInvoiceIdNo")
         Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
+        '
+        'bscadOiItems
+        '
+        Me.bscadOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.CadOiItemModel)
+        '
+        'btnViewGL
+        '
+        Me.btnViewGL.DesignerSelected = false
+        Me.btnViewGL.DisplayOnly = true
+        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+        Me.btnViewGL.ImageIndex = 0
+        Me.btnViewGL.Name = "btnViewGL"
+        Me.btnViewGL.OriginalImageName = Nothing
+        Me.btnViewGL.SecurityKey = ""
         '
         'CashDisbursementJournalEntry
         '

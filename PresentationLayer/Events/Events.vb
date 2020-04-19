@@ -61,6 +61,15 @@ Public Class RecordAdded
     Public Property Model
 End Class
 
+Public Class BeforeAssignment
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
+End Class
+
 Public Class RecordPositionChanged
 
     Public Sub New(ByRef recPos As Integer)

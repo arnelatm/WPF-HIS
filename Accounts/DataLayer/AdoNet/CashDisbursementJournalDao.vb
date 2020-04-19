@@ -8,6 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CashDisbursementJournalDao
+        Inherits DaoAccounts
         Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()
@@ -27,15 +28,7 @@ Namespace DataLayer.AdoNet
             Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
             data.CadOiItems = oi
-            'GlobalVariables.Mapper.Map(ji, data.JournalItems)
-            'GlobalVariables.Mapper.Map(oi, data.CadOiItems)
             Return data
-            'data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
-            'For Each item In data.JournalItems
-            '    data.TotalDebits += item.Debit
-            '    data.TotalCredits += item.Credit
-            'Next
-            'Return data
         End Function
 
         Public Function UpdateRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
@@ -119,18 +112,6 @@ Namespace DataLayer.AdoNet
                                     "@DateCreated", cashDisbursementJournal.DateCreated
                                 }
         End Function
-
-        'Public Function UpdateGlReferenceNumber(ByRef model) As Integer Implements IDao(Of CashDisbursementJournal).UpdateGlReferenceNumber
-        '    Dim retVal As Boolean
-        '    Dim sql1 As String
-        '    Dim sql2 As String
-        '    Dim transactionDate = model.TransactionDate
-        '    Dim series = "CDJOURNAL"
-        '    sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-        '    sql2 = "Update [CashDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & model.IdNo
-        '    retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-        '    Return retVal
-        'End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As CashDisbursementJournal) As Integer Implements IDaoJournals(Of CashDisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
