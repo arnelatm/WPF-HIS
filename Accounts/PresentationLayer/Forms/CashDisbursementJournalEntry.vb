@@ -534,7 +534,7 @@ Namespace PresentationLayer.Forms
                             If .RowIndex() = 0 Then
                                 MessageBox.Show($"Sorry, insertion on first row not allowed for Cash Disbursement journal.")
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert(DataGridViewJournalItems, bsJournalItems)
                                 SendKeys.Send("{UP}")
@@ -620,7 +620,7 @@ Namespace PresentationLayer.Forms
                         bsJournalItems(nIndex).AccountName = chart.AccountName
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
-                        Dim selectedRow As JournalItemModel
+                        Dim selectedRow As JournalItemView
                         selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
                         If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
@@ -629,7 +629,7 @@ Namespace PresentationLayer.Forms
                         UpdateTotalVatAmount()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        Dim selectedRow As JournalItemModel
+                        Dim selectedRow As JournalItemView
                         selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
                         If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
                             DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
@@ -755,22 +755,33 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateFirstLine()
             If PresenterObj.EditMode Or PresenterObj.AddMode Then
                 If bsJournalItems IsNot Nothing Then
-                    For Each item In bsJournalItems
-                        item.JournalIdNo = IdNo
-                        item.Sequence = 1
-                        If cboAccountIdNo.Text Is Nothing Or cboAccountIdNo.Text = "" Then
-                            item.AccountIdNo = Nothing
-                        Else
-                            item.AccountIdNo = AccountIdNo
-                        End If
-                        item.Credit = Amount
-                        item.Debit = 0
-                        item.ProfitCenterIdNo = 0
-                        DataGridViewJournalItems.Refresh()
-                        Exit For
-                    Next
-                    UpdateJiTotals()
+                    If bsJournalItems.Count() = 0 Then
+                        bsJournalItems.Add(New JournalItemView With {
+                                              .JournalIdNo = IdNo,
+                                              .Sequence = 1,
+                                              .AccountIdNo = AccountIdNo,
+                                              .Credit = Amount,
+                                              .Debit = 0,
+                                              .ProfitCenterIdNo = 0})
+                    Else
+                        For Each item In bsJournalItems
+                            item.JournalIdNo = IdNo
+                            item.Sequence = 1
+                            If cboAccountIdNo.Text Is Nothing Or cboAccountIdNo.Text = "" Then
+                                item.AccountIdNo = Nothing
+                            Else
+                                item.AccountIdNo = AccountIdNo
+                            End If
+                            item.Credit = Amount
+                            item.Debit = 0
+                            item.ProfitCenterIdNo = 0
+                            DataGridViewJournalItems.Refresh()
+                            Exit For
+                        Next
+                    End If
                 End If
+                BindJournalItem()
+                UpdateJiTotals()
             End If
         End Sub
 
