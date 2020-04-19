@@ -2,14 +2,16 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class CashDisbursementJournalEntry
-        Implements ICashDisbursementJournalView
+        Implements ICashDisbursementJournalView, ISubscriber(Of BeforeAssignment)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -200,7 +202,7 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cboPaymentType.SetValue(Value)
-                SetPayeeProperty(Value)
+                'SetPayeeProperty(Value)
             End Set
         End Property
 
@@ -329,6 +331,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
+            SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub
 
@@ -406,12 +409,13 @@ Namespace PresentationLayer.Forms
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
             End With
+            UpdateTotals()
             ResumeLayout()
         End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
-            bscadOiItems.DataSource = Nothing
+            bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
@@ -508,6 +512,7 @@ Namespace PresentationLayer.Forms
                         UpdateOiTotals()
                     End If
                     PresenterObj.AddSupplierOpenInvoices()
+                    BindCadOiItem()
                 End If
                 Dim lVatNumber As String
                 lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
@@ -573,10 +578,10 @@ Namespace PresentationLayer.Forms
             UpdateTotalVatAmount()
         End Sub
 
-        Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-            Dim cPaymentType = PresenterObj.GetPaymentType(PresenterObj.TargetIdNo)
-            SetPayeeProperty(cPaymentType)
-        End Sub
+        'Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
+        '    Dim cPaymentType = PresenterObj.GetPaymentType(PresenterObj.TargetIdNo)
+        '    SetPayeeProperty(cPaymentType)
+        'End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
@@ -651,8 +656,9 @@ Namespace PresentationLayer.Forms
             DataGridViewJournalItems.StartTrackingChanges = True
             DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddSupplierOpenInvoices()
+            BindCadOiItem()
             btnViewGL.Visible = False
-            SetPayeeProperty(PaymentType)
+            'SetPayeeProperty(PaymentType)
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -771,10 +777,10 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateOiTotals()
             If _apFooter IsNot Nothing Then
                 _apFooter.SumAllColumns()
+                Applied = _apFooter.Value("dgvAmount")
+                DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                UnApplied = Amount - Applied
             End If
-            Applied = _apFooter.Value("dgvAmount")
-            DiscountTaken = _apFooter.Value("dgvDiscTaken")
-            UnApplied = Amount - Applied
         End Sub
 
         Private Sub UpdateRowVatAmounts()
@@ -821,6 +827,10 @@ Namespace PresentationLayer.Forms
                 ' Cancel the deletion
                 e.Cancel = True
             End If
+        End Sub
+
+        Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+            SetPayeeProperty(eventType.Model.PaymentType)
         End Sub
 
     End Class

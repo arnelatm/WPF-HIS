@@ -90116,12 +90116,6 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bscadOiItems.Name" xml:space="preserve">
-    <value>bscadOiItems</value>
-  </data>
-  <data name="&gt;&gt;bscadOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvSequenceCadOi.Name" xml:space="preserve">
     <value>dgvSequenceCadOi</value>
   </data>
@@ -90205,6 +90199,12 @@
   </data>
   <data name="&gt;&gt;OpenInvoiceIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bscadOiItems.Name" xml:space="preserve">
+    <value>bscadOiItems</value>
+  </data>
+  <data name="&gt;&gt;bscadOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CashDisbursementJournalEntry</value>

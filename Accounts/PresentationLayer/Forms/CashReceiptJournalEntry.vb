@@ -1020,7 +1020,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-            Dim cPayorType = PresenterObj.GetReceiptType(PresenterObj.TargetIdNo)
+            Dim cPayorType As String = PresenterObj.GetReceiptType(PresenterObj.TargetIdNo)
             SetPayorProperty(cPayorType)
         End Sub
 

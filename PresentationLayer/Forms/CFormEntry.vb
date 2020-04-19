@@ -403,7 +403,7 @@ Public Class CFormEntry
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
         If _debugSwitch = 0 Then
             _debugSwitch = 1
-            Debugger.Break()
+            'Debugger.Break()
             btnDebug.Checked = False
         Else
             _debugSwitch = 0

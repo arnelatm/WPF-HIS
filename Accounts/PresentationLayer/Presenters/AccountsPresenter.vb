@@ -102,10 +102,12 @@ Namespace PresentationLayer.Presenters
             Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
         End Function
 
-        Public Function DeleteApOpenInvoice(ByRef idNo As Integer) As String
-            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            Return modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-        End Function
+        Public Sub DeleteApOpenInvoice(ByRef idNo As Integer)
+            If idNo <> 0 Then
+                Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+                modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+            End If
+        End Sub
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")

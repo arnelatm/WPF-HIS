@@ -6,6 +6,8 @@ Namespace DataLayer
     Public Interface IDaoAccounts
         Inherits ICommonDao
 
+        Function GetSupplierOpenInvoices(idNo As Integer) As List(Of CadOiItem)
+
     End Interface
 
     'Public Interface IDaoJournalItems

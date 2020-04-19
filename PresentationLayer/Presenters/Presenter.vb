@@ -89,6 +89,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event BeforeDelete()
 
+    Public Event BeforeCompare()
+
     Public Event AfterRecordRetrieval(values As TM)
 
     Public Event BeforeDisplayView()
@@ -147,6 +149,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New AddModeChanged(Value))
             End If
+            If Value Then
+                SaveOriginalValues()
+            End If
         End Set
         Get
             Return _addMode
@@ -165,6 +170,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             _editMode = Value
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EditModeChanged(Value))
+            End If
+            If Value Then
+                SaveOriginalValues()
             End If
         End Set
         Get
@@ -313,11 +321,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function ChangesMade() As Boolean
         Dim retVal As Boolean = False
+        RaiseEvent BeforeCompare()
         Dim compareLogic As New CompareLogic()
         compareLogic.Config.IgnoreObjectTypes = True
         compareLogic.Config.MaxDifferences = 100
         compareLogic.Config.CompareChildren = True
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
+        compareLogic.Config.MembersToIgnore.Add("Errors")
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
             CompareDifferences = result.DifferencesString
@@ -880,16 +890,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New BeforeAssignment(modelData))
+            End If
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
-            'View = GlobalVariables.Mapper.Map(Of T)(modelData)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
             Next
-            SaveOriginalValues()
-
-            'EditMode = False
-            'AddMode = False
-            'UndoMode = False
         End If
     End Sub
 
