@@ -39,7 +39,9 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [TranslatedCaption] " &
                     " (TranslatedCaption,CaptionIdNo,LanguageIdNo) " &
                     " VALUES (@TranslatedCaption,@CaptionIdNo,@LanguageIdNo) "
-            Return _db.Insert(sql, Take(TranslatedCaption))
+            Dim retVal As Integer
+            retVal = _db.Insert(sql, Take(TranslatedCaption))
+            Return retVal
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, TranslatedCaption) =

@@ -534,6 +534,8 @@ Public Class Dac
                         Else
                             caption = items(2)
                         End If
+                    Else
+                        message = GetOriginalMessage(key, message, caption)
                     End If
                 End If
             End If

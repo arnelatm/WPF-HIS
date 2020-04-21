@@ -722,15 +722,6 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        'Private Function TotalBalance() As Decimal
-        '    'Return bsCadOiItems.Cast (Of Object)().Aggregate (Of Decimal)(0, Function(current, item) current + item.Balance)
-        '    Dim nTotalBalance As Decimal = 0
-        '    For Each item In bscadOiItems
-        '        nTotalBalance += item.Balance
-        '    Next
-        '    Return nTotalBalance
-        'End Function
-
         'Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles cboPaymentType.Leave
         '    If cboPaymentType.SelectedIndex < 0 Then
         '        SetPayeeProperty()

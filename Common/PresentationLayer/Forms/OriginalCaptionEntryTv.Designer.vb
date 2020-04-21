@@ -34,7 +34,6 @@ Namespace PresentationLayer.Forms
         Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtLanguageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCaptionIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
@@ -92,7 +91,6 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtCaptionIdNo)
         Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
@@ -158,23 +156,6 @@ Namespace PresentationLayer.Forms
         Me.txtLanguageIdNo.ReadOnly = true
         Me.txtLanguageIdNo.TabStop = false
         '
-        'txtCaptionIdNo
-        '
-        Me.txtCaptionIdNo.BackColor = System.Drawing.Color.White
-        Me.txtCaptionIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCaptionIdNo.ComputedValue = false
-        Me.txtCaptionIdNo.CustomFormat = Nothing
-        Me.txtCaptionIdNo.DataBoundControl = true
-        Me.txtCaptionIdNo.DisplayOnly = true
-        Me.txtCaptionIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtCaptionIdNo, "txtCaptionIdNo")
-        Me.txtCaptionIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtCaptionIdNo.LinkedLabel = Nothing
-        Me.txtCaptionIdNo.Name = "txtCaptionIdNo"
-        Me.txtCaptionIdNo.OldValue = Nothing
-        Me.txtCaptionIdNo.ReadOnly = true
-        Me.txtCaptionIdNo.TabStop = false
-        '
         'txtIdNoTranslated
         '
         Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
@@ -192,7 +173,7 @@ Namespace PresentationLayer.Forms
         Me.txtIdNoTranslated.ReadOnly = true
         Me.txtIdNoTranslated.TabStop = false
         '
-        'OriginalCaptionsEntryTv
+        'OriginalCaptionEntryTv
         '
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
@@ -213,7 +194,6 @@ End Sub
         Friend WithEvents lblCaption As CLabel
         Friend WithEvents lblTranslatedCaption As CLabel
         Friend WithEvents txtLanguageIdNo As CTextBox
-        Friend WithEvents txtCaptionIdNo As CTextBox
         Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents txtTranslatedCaption As CTextBoxArabic
         Friend WithEvents Label1 As Label

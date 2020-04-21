@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms.VisualStyles
-
-Public Class Messaging
+﻿Public Class Messaging
 
     Private Shared ReadOnly DataAccessControl As New Dac
 
@@ -8,6 +6,7 @@ Public Class Messaging
     Private Shared _key As String = ""
 
     Public Shared Property MessageKey As String
+    Public Shared Property MessageCaption As String
 
     '-------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,6 +21,7 @@ Public Class Messaging
         Dim message As String = ""
         Dim caption As String = ""
         DataAccessControl.GetMessage(translate, key, message, caption)
+        MessageCaption = caption + " [" + MessageKey + "]"
         Return message
     End Function
 
@@ -32,6 +32,7 @@ Public Class Messaging
     Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
         MessageKey = key
         DataAccessControl.GetMessage(translate, key, message, caption)
+        MessageCaption = caption + " [" + MessageKey + "]"
         Return message
     End Function
 
@@ -41,15 +42,17 @@ Public Class Messaging
         Dim message As String = ""
         Dim caption As String = ""
         DataAccessControl.GetMessage(translate, key, message, caption)
-        Return MessagingForm.Show(message, caption + " [" + MessageKey + "]")
+        MessageCaption = caption + +" [" + MessageKey + "]"
+        Return MessagingForm.Show(message, MessageCaption)
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal variables As String())
         MessageKey = key
-        Dim message = GetMessage(translate, key)
-        'message = message.ReplaceValues(variables)
+        Dim caption = ""
+        Dim message = ""
+        message = GetMessage(translate, key, message, caption)
         message = ReplaceValues(message, variables)
-        Return MessagingForm.Show(message, "[" + MessageKey + "]")
+        Return MessagingForm.Show(message, " [" + MessageKey + "]")
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String) As DialogResult
@@ -60,10 +63,10 @@ Public Class Messaging
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal variables As String())
         MessageKey = key
-        message = GetMessage(translate, key, message, "")
-        'message = message.ReplaceValues(variables)
+        Dim caption = ""
+        message = GetMessage(translate, key, message, caption)
         message = ReplaceValues(message, variables)
-        Return MessagingForm.Show(message, "[" + MessageKey + "]")
+        Return MessagingForm.Show(message, caption + " [" + MessageKey + "]")
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal message As String, ByVal caption As String) As DialogResult
@@ -89,6 +92,15 @@ Public Class Messaging
         'message = message.ReplaceValues(variables)
         message = ReplaceValues(message, variables)
         Return MessagingForm.Show(message, " [" + MessageKey + "]", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Function
+
+    Public Overloads Shared Function Show(translate As Boolean, key As String, variables() As Object, buttons As MessageBoxButtons, icons As MessageBoxIcon, Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        MessageKey = key
+        Dim message As String = ""
+        Dim caption As String = ""
+        DataAccessControl.GetMessage(translate, key, message, caption)
+        message = ReplaceValues(message, variables)
+        Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", buttons, icons, defaultButton)
     End Function
 
     Public Overloads Shared Function Show(ByVal message As String, ByVal caption As String, variables As String()) As DialogResult
@@ -167,8 +179,8 @@ Public Class Messaging
 
     Public Shared Function ReplaceValues(ByVal message As String, variables As String()) As String
         Dim result As String = message
-        Dim oldValue As String = ""
-        Dim newValue As String = ""
+        Dim oldValue As String
+        Dim newValue As String
         For i = 0 To variables.Count - 1 Step 2
             oldValue = "{" & variables(i) & "}"
             newValue = variables(i + 1)
@@ -179,15 +191,15 @@ Public Class Messaging
 
     Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
         Dim retValue As DialogResult
-        Dim dateField As String = Messaging.TranslateCaption(text)
+        Dim dateField As String = TranslateCaption(text)
         Dim startDateStr As String = startDate.ToShortDateString()
         Dim endDateStr As String = endDate.ToShortDateString()
         Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-        Dim message = Messaging.GetMessage(True, "MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} And {endDate}!", "Invalid Date")
-        Dim caption = Messaging.GetCaption("Invalid Date")
+        Dim message = GetMessage(True, "MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} And {endDate}!", "Invalid Date")
+        Dim caption = GetCaption("Invalid Date")
         If targetDate < startDate Or targetDate > endDate Then
-            message = Messaging.ReplaceValues(message, variables)
-            Messaging.Show(message, caption)
+            message = ReplaceValues(message, variables)
+            Show(message, caption)
             retValue = DialogResult.No
         Else
             retValue = DialogResult.Yes

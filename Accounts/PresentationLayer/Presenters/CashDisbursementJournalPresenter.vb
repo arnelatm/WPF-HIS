@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -15,12 +14,12 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
+        Private ReadOnly _advancesToSupplierAccountIdNo As Integer
+
         'Private ReadOnly _apJournalItemModel As New ModelAccounts("ApJournalItem")
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Private ReadOnly _cadOiItemModel As New ModelAccounts("CadOiItem")
-
-        Private ReadOnly _advancesToSupplierAccountIdNo As Integer
         Private _oldCadOiItem As List(Of CadOiItemModel)
 
         'Private _apOpenInvoiceBo As New ModelAccounts("ApOpenInvoice")
@@ -68,25 +67,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Property JournalItemsPresenter As CashDisbursementJournalItemsPresenter
-        'Public Property CadOiItemsPresenter As CadOiItemsPresenter
-
-        'Public Overrides Function ChangesMade() As Boolean
-        '    Dim cashDisbursementJournalChangesMade As Boolean
-        '    If ObjectsCompare(OriginalModel, View) Then
-        '        If JournalItemsPresenter.ChangesMadeInJournalItem Then
-        '            cashDisbursementJournalChangesMade = True
-        '        ElseIf CadOiItemsPresenter.ChangesMadeInCadOiItem Then
-        '            cashDisbursementJournalChangesMade = True
-        '        Else
-        '            cashDisbursementJournalChangesMade = False
-        '        End If
-        '    Else
-        '        cashDisbursementJournalChangesMade = True
-        '    End If
-        '    Return cashDisbursementJournalChangesMade
-        'End Function
-
         Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
@@ -94,7 +74,6 @@ Namespace PresentationLayer.Presenters
         Public Sub AddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
                 Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
-                'Dim newItem As New CadOiItemModel
                 Dim nSeq As Integer
                 If AddMode Then
                     View.CadOiItems.Clear()
@@ -143,17 +122,79 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub OnBeforeCompare() Handles MyBase.BeforeCompare
-            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                View.TotalDebits = View.Applied + View.DiscountTaken
-                View.TotalCredits = View.TotalDebits
+        Public Function CadOiItemDataIsValid() As Boolean
+            Dim retVal = True
+            Dim index As Int16 = 0
+            For Each item In View.CadOiItems
+                If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                    If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
+                       (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
+                        Dim lineNumber = item.Sequence.ToString()
+                        Dim variables = {"lineNumber", lineNumber}
+                        Dim message = Messaging.GetMessage(True, "MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
+                        Dim caption = Messaging.TranslateCaption("Invalid Payment")
+                        message = Messaging.ReplaceValues(message, variables)
+                        Messaging.Show(message, caption)
+                        If View.CadOiItems(index).Errors Is Nothing Then
+                            View.CadOiItems(index).Errors = New List(Of String)
+                        End If
+                        View.CadOiItems(index).Errors.Add(message)
+                        'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
+                        retVal = False
+                        Exit For
+                    Else
+                        ' clear error message
+                        'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
+                        If View.CadOiItems(index).Errors IsNot Nothing Then
+                            View.CadOiItems(index).Errors.Clear()
+                        End If
+                    End If
+                End If
+                index += 1
+            Next
+            If retVal Then
+                If View.UnApplied <> 0 Then
+                    Dim totalBalance As Decimal = 0
+                    For Each item In View.CadOiItems
+                        totalBalance += item.Balance
+                    Next
+                    If totalBalance > 0 Then
+                        If View.UnApplied > 0 Then
+                            Messaging.Show(True, "MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
+                            retVal = False
+                        Else
+                            Messaging.Show(True, "MsgPaymentIsOverApplied", "Payment is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")
+                            retVal = False
+                        End If
+                    Else
+                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance", "Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", $"Save Advance Payment",
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Warning,
+                                           MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                            retVal = True
+                        Else
+                            retVal = False
+                        End If
+                    End If
+                Else
+                    retVal = True
+                End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Integer) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
+        End Function
+
+        Public Function GetCadOiItems(cadOiIdNo As Integer) As List(Of CadOiItemModel)
+            Return _cadOiItemModel.GetRecordsWithIdNo(Of CadOiItemModel)(cadOiIdNo, "Sequence")
+        End Function
+
+        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
+            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Integer) As String
@@ -196,15 +237,21 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                View.TotalDebits = 0
+                View.TotalCredits = 0
+                For Each ji In View.CadOiItems
+                    View.TotalDebits += ji.Amount + ji.DiscountTaken
+                Next
+                View.TotalCredits = View.TotalDebits
+            End If
+        End Sub
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                 If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                    'MessageBox.Show(True,"MsgCannotSaveAnEmptyTransaction","Sorry, cannot save an empty transaction!","Error")
-                    'If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
-                    '                   AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
-                    '                   MessageBoxButtons.YesNo,
-                    '                   MessageBoxIcon.Question,
-                    '                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                     CancelSave = True
                 Else
                     SetAsideJournalItems()
@@ -219,6 +266,8 @@ Namespace PresentationLayer.Presenters
                 If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     ' if AP Entry generate paid open invoices
                     nRowCount = 1
+                    View.TotalDebits = 0
+                    View.TotalCredits = 0
                     For Each ji In View.CadOiItems
                         If ji.Amount <> 0 Or ji.DiscountTaken <> 0 Then
                             Dim workRow As DataRow
@@ -240,54 +289,12 @@ Namespace PresentationLayer.Presenters
                             End If
                             nRowCount += 1
                         End If
+                        View.TotalDebits += ji.Amount
+
                     Next
+                    View.TotalCredits = View.TotalDebits
                 End If
 
-            End If
-        End Sub
-
-        Private Sub SetAsideJournalItems()
-
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount As Integer = 1
-            For Each ji In View.JournalItems
-                ' loop through the journal entries but ignore zero values (except for first row)
-                If ji.Debit = 0 And ji.Credit = 0 And nRowCount <> 1 Then
-                    ' ignore zero entries except for the first entry (which is the payment entry)
-                    ' allow zero cash amount in cases where adjustments are being made
-                Else
-                    Dim workRow As DataRow
-                    If ji.IdNo <= 0 Then
-                        workRow = DtInsertTable.NewRow()
-                    Else
-                        workRow = DtUpdateTable.NewRow()
-                        workRow("IdNo") = ji.IdNo
-                    End If
-                    workRow("JournalIdNo") = View.IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("AccountIdNo") = ji.AccountIdNo
-                    workRow("Debit") = ji.Debit
-                    workRow("Credit") = ji.Credit
-                    workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
-                    workRow("Notes") = If(ji.Notes, "")
-                    If ji.IdNo <= 0 Then
-                        DtInsertTable.Rows.Add(workRow)
-                    Else
-                        DtUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount += 1
-                End If
-            Next
-            If DtCadOiInsertTable IsNot Nothing Then
-                DtCadOiInsertTable.Clear()
-            End If
-            If DtCadOiUpdateTable IsNot Nothing Then
-                DtCadOiUpdateTable.Clear()
             End If
         End Sub
 
@@ -299,167 +306,14 @@ Namespace PresentationLayer.Presenters
             Else
                 _oldCadOiItem = Nothing
             End If
-            retVal = SaveJournalItems()
+            retVal = SaveJournalItems(passedValue)
             If retVal > 0 Then
-                retVal = SaveCadOiItems()
+                retVal = SaveCadOiItems(passedValue)
                 If retVal >= 0 Then
                     SaveOpenInvoices()
                 End If
             End If
         End Sub
-
-        Private Function SaveCadOiItems() As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal As Integer
-            updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, View.IdNo)
-            If updateReturnValue >= 0 AndAlso DtCadOiInsertTable.Rows.Count > 0 Then
-                insertReturnValue = _cadOiItemModel.InsertTvp(DtCadOiInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Private Sub SaveOpenInvoices()
-            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                ' save the generated open invoices
-                ' after saving open invoices apply the paid amount
-                UpdateOpenInvoices()
-            Else
-                If _oldCadOiItem IsNot Nothing Then
-                    For Each Item In _oldCadOiItem
-                        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                        End If
-                    Next
-                End If
-            End If
-        End Sub
-
-        Private Sub UpdateOpenInvoices()
-            Dim newCadOiItem As List(Of CadOiItemModel)
-            If AddMode Then
-                ' add Mode so just add the payment
-                newCadOiItem = GetCadOiItems(View.IdNo)
-                For Each item In newCadOiItem
-                    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.OpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                    End If
-                Next
-                If View.UnApplied > 0 Then
-                    ' with advance payment
-                    Dim items As List(Of JournalItemModel)
-                    items = GetJournalItems(View.IdNo)
-                    Dim ji As New JournalItemModel
-                    For Each item In items
-                        If item.AccountIdNo = _advancesToSupplierAccountIdNo And item.OriginalAmount > 0 Then
-                            ji.IdNo = item.IdNo
-                            ji.AccountIdNo = item.AccountIdNo
-                            ji.JournalIdNo = View.IdNo
-                            AddApOpenInvoice(ji, "CK")
-                            Exit For
-                        End If
-                    Next
-                Else
-                    ' no advance payment
-                End If
-            Else
-                Dim oldCadOiItem As List(Of CadOiItemModel)
-                If Not AddMode Then
-                    oldCadOiItem = GetCadOiItems(View.IdNo)
-                Else
-                    oldCadOiItem = Nothing
-                End If
-                ' editing mode save the new paid invoices entry
-                ' newCadOiItem = GetCadOiItems(View.IdNo)
-                ' un-apply the old payments
-                For Each Item In oldCadOiItem
-                    ' if new
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' remove old payments
-                        RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
-                ' re-apply the new payments
-                For Each Item In View.CadOiItems
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' add new payments
-                        AddInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
-                If View.UnApplied > 0 Then
-                    ' with advance payment
-                    ' get the journalItemIdNo
-                    Dim ji As New JournalItemModel
-                    Dim jiItems As List(Of JournalItemModel)
-                    jiItems = GetJournalItems(View.IdNo)
-                    ' get the item.IdNo of the last matching advancesToSupplierAccountIdNo if more than one found
-                    For Each item In jiItems
-                        If item.AccountIdNo = _advancesToSupplierAccountIdNo And item.OriginalAmount > 0 Then
-                            ' if more items found overwrite the old value found and use this one
-                            ji.IdNo = item.IdNo
-                            ji.AccountIdNo = item.AccountIdNo
-                            ji.JournalIdNo = View.IdNo
-                            Exit For
-                        End If
-                    Next
-                    Dim lOpenInvIdNo As Integer
-                    ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = CInt(DataModel.GetAdvancePaymentOpenInvoice(ji.IdNo))
-                    If lOpenInvIdNo = 0 Then
-                        ' no previous entry
-                        ' add the open invoice
-                        DataModel.AddApOpenInvoice(ji, "CK")
-                    Else
-                        ' already added, nothing to do
-                    End If
-                Else
-                    ' get the OpenInvoice IdNo
-                    ' check if the AdvancePayment OpenInvoice already created
-                    Dim lOpenInvoiceIdNo As Integer
-                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
-                    DeleteApOpenInvoice(lOpenInvoiceIdNo)
-                End If
-            End If
-        End Sub
-
-        Private Function SaveJournalItems() As Integer ' ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable, journalIdNo As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim parentIdNo As Integer
-            If AddMode Then
-                parentIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, parentIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = parentIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
-        End Function
 
         Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
@@ -470,14 +324,9 @@ Namespace PresentationLayer.Presenters
             Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
         End Function
 
-        Protected Overrides Function DataIsValid() As Boolean
+        Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
-            If MyBase.DataIsValid() Then
-                'Dim cPayeeType As String
-                Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
-                'Dim specialAccount As String
-                'Dim chart As ChartModel
-                'retValue = True
+            If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
@@ -485,28 +334,25 @@ Namespace PresentationLayer.Presenters
                     retValue = False
                 Else
                     If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                        Dim totalBalance As Decimal
-                        For Each item In View.CadOiItems
-                            totalBalance += item.Balance
-                        Next
                         If CadOiItemDataIsValid() Then
                             retValue = True
                         Else
+                            retValue = False
                             Dim index As Int16 = 0
                             For Each item In View.CadOiItems
                                 If item.Errors IsNot Nothing Then
-                                    Debugger.Break()
                                     View.CadOiItems(index).Errors = item.Errors
                                 Else
-                                    Debugger.Break()
-                                    View.CadOiItems(index).Errors.Clear()
+                                    If View.CadOiItems(index).Errors IsNot Nothing Then
+                                        View.CadOiItems(index).Errors.Clear()
+                                    End If
                                 End If
                                 index += 1
                             Next
                         End If
                     End If
                     If retValue Then
-                        retValue = JournalItemDataIsValid(cashAccount)
+                        retValue = JournalItemDataIsValid()
                         If retValue Then
                             'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
                         End If
@@ -516,7 +362,7 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function JournalItemDataIsValid(cashAccount As String) As Boolean
+        Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
             Dim chart As ChartModel
             Dim specialAccount As String
@@ -581,61 +427,6 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             Return retValue
-        End Function
-
-        Public Function CadOiItemDataIsValid() As Boolean
-            'ByRef cadOiItems As BindingSource, ByVal appliedAmount As Decimal, ByVal unAppliedAmount As Decimal, ByVal totalBalance As Decimal)
-            Dim retVal = True
-            Dim index As Int16 = 0
-            For Each item In View.CadOiItems
-                If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                    If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
-                       (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
-                        Dim errorMsg = String.Format("Error in line {0:N0}. Applied amount and discount exceeds balance.", item.Sequence.ToString())
-                        MessageBox.Show(errorMsg)
-                        View.CadOiItems(index).Errors.Add(errorMsg)
-                        'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
-                        retVal = False
-                        Exit For
-                    Else
-                        ' clear error message
-                        'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
-                        If View.CadOiItems(index).Errors IsNot Nothing Then
-                            View.CadOiItems(index).Errors.Clear()
-                        End If
-                    End If
-                End If
-                index += 1
-            Next
-            If retVal Then
-                If View.UnApplied <> 0 Then
-                    Dim totalBalance As Decimal = 0
-                    For Each item In View.CadOiItems
-                        totalBalance += item.Balance
-                    Next
-                    If totalBalance > 0 Then
-                        If View.UnApplied > 0 Then
-                            MessageBox.Show($"Payment not yet fully applied. Cannot save entry unless amount is fully applied.")
-                            retVal = False
-                        Else
-                            MessageBox.Show($"Payment is over applied. Cannot save entry please reduce the applied payment.")
-                            retVal = False
-                        End If
-                    Else
-                        If MessageBox.Show($"Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", $"Save Advance Payment",
-                                           MessageBoxButtons.YesNo,
-                                           MessageBoxIcon.Warning,
-                                           MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            retVal = True
-                        Else
-                            retVal = False
-                        End If
-                    End If
-                Else
-                    retVal = True
-                End If
-            End If
-            Return retVal
         End Function
 
         Private Sub MakeJournalItem()
@@ -799,24 +590,216 @@ Namespace PresentationLayer.Presenters
             'UpdateTotals()
         End Sub
 
-        Public Function GetCadOiItems(cadOiIdNo As Integer) As List(Of CadOiItemModel)
-            Return _cadOiItemModel.GetRecordsWithIdNo(Of CadOiItemModel)(cadOiIdNo, "Sequence")
+        'Private Sub OnBeforeCompare() Handles MyBase.BeforeCompare
+        '    If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+        '        View.TotalDebits = View.Applied + View.DiscountTaken
+        '        View.TotalCredits = View.TotalDebits
+        '    End If
+        'End Sub
+
+        Private Function SaveCadOiItems(passedValue As Integer) As Integer
+            Dim insertReturnValue
+            Dim updateReturnValue
+            Dim retVal As Integer
+            Dim parentIdNo As Integer
+            updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, View.IdNo)
+            If AddMode Then
+                parentIdNo = passedValue
+                CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+            Else
+                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+            End If
+            If updateReturnValue >= 0 AndAlso DtCadOiInsertTable.Rows.Count > 0 Then
+                For Each row As DataRow In DtCadOiInsertTable.Rows
+                    row.Item("CadIdNo") = parentIdNo
+                Next
+                insertReturnValue = _cadOiItemModel.InsertTvp(DtCadOiInsertTable)
+                If insertReturnValue >= 0 Then
+                    retVal = updateReturnValue + insertReturnValue
+                Else
+                    retVal = insertReturnValue
+                End If
+            Else
+                retVal = updateReturnValue
+            End If
+            Return retVal
         End Function
 
-        'Public Sub OnAfterRecordRetrieval(modelData As CashDisbursementJournalModel) Handles MyBase.AfterRecordRetrieval
-        '    'modelData.JournalItems = GetJournalItems(modelData.IdNo)
-        '    'modelData.CadOiItems = GetCadOiItems(modelData.IdNo)
-        '    'For Each item In modelData.JournalItems
-        '    '    modelData.TotalDebits += item.Debit
-        '    '    modelData.TotalCredits += item.Credit
-        '    'Next
-        '    Dim jiDao = New CashDisbursementJournalItemDao
-        '    Dim oiDao = New CadOiItemDao
-        '    Dim ji = jiDao.GetRecordsWithIdNo(modelData.IdNo, "sequence")
-        '    Dim oi = oiDao.GetRecordsWithIdNo(modelData.IdNo, "sequence")
-        '    GlobalVariables.Mapper.Map(ji, modelData.JournalItems)
-        '    GlobalVariables.Mapper.Map(oi, modelData.CadOiItems)
-        'End Sub
+        Private Function SaveJournalItems(passedValue As Integer) As Integer
+            Dim retVal As Integer
+            Dim insertReturnValue
+            Dim updateReturnValue
+            Dim parentIdNo As Integer
+            If AddMode Then
+                parentIdNo = passedValue
+                CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+            Else
+                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+            End If
+            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, parentIdNo)
+            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
+                For Each row As DataRow In DtInsertTable.Rows
+                    row.Item("JournalIdNo") = parentIdNo
+                Next
+                insertReturnValue = Model.InsertTvp(DtInsertTable)
+                If insertReturnValue >= 0 Then
+                    retVal = updateReturnValue + insertReturnValue
+                Else
+                    retVal = insertReturnValue
+                End If
+            Else
+                retVal = updateReturnValue
+            End If
+            Return retVal
+        End Function
+
+        Private Sub SaveOpenInvoices()
+            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                ' save the generated open invoices
+                ' after saving open invoices apply the paid amount
+                UpdateOpenInvoices()
+            Else
+                If _oldCadOiItem IsNot Nothing Then
+                    For Each Item In _oldCadOiItem
+                        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                            RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        End If
+                    Next
+                End If
+            End If
+        End Sub
+
+        Private Sub SetAsideJournalItems()
+
+            If DtInsertTable IsNot Nothing Then
+                DtInsertTable.Clear()
+            End If
+            If DtUpdateTable IsNot Nothing Then
+                DtUpdateTable.Clear()
+            End If
+            Dim nRowCount As Integer = 1
+            For Each ji In View.JournalItems
+                ' loop through the journal entries but ignore zero values (except for first row)
+                If ji.Debit = 0 And ji.Credit = 0 And nRowCount <> 1 Then
+                    ' ignore zero entries except for the first entry (which is the payment entry)
+                    ' allow zero cash amount in cases where adjustments are being made
+                Else
+                    Dim workRow As DataRow
+                    If ji.IdNo <= 0 Then
+                        workRow = DtInsertTable.NewRow()
+                    Else
+                        workRow = DtUpdateTable.NewRow()
+                        workRow("IdNo") = ji.IdNo
+                    End If
+                    workRow("JournalIdNo") = View.IdNo
+                    workRow("Sequence") = nRowCount
+                    workRow("AccountIdNo") = ji.AccountIdNo
+                    workRow("Debit") = ji.Debit
+                    workRow("Credit") = ji.Credit
+                    workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                    workRow("Notes") = If(ji.Notes, "")
+                    If ji.IdNo <= 0 Then
+                        DtInsertTable.Rows.Add(workRow)
+                    Else
+                        DtUpdateTable.Rows.Add(workRow)
+                    End If
+                    nRowCount += 1
+                End If
+            Next
+            If DtCadOiInsertTable IsNot Nothing Then
+                DtCadOiInsertTable.Clear()
+            End If
+            If DtCadOiUpdateTable IsNot Nothing Then
+                DtCadOiUpdateTable.Clear()
+            End If
+        End Sub
+
+        Private Sub UpdateOpenInvoices()
+            Dim newCadOiItem As List(Of CadOiItemModel)
+            If AddMode Then
+                ' add Mode so just add the payment
+                newCadOiItem = GetCadOiItems(View.IdNo)
+                For Each item In newCadOiItem
+                    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                        AddInvoicePayment(item.OpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                    End If
+                Next
+                If View.UnApplied > 0 Then
+                    ' with advance payment
+                    Dim items As List(Of JournalItemModel)
+                    items = GetJournalItems(View.IdNo)
+                    Dim ji As New JournalItemModel
+                    For Each item In items
+                        If item.AccountIdNo = _advancesToSupplierAccountIdNo And item.OriginalAmount > 0 Then
+                            ji.IdNo = item.IdNo
+                            ji.AccountIdNo = item.AccountIdNo
+                            ji.JournalIdNo = View.IdNo
+                            AddApOpenInvoice(ji, "CD")
+                            Exit For
+                        End If
+                    Next
+                Else
+                    ' no advance payment
+                End If
+            Else
+                Dim oldCadOiItem As List(Of CadOiItemModel)
+                If Not AddMode Then
+                    oldCadOiItem = GetCadOiItems(View.IdNo)
+                Else
+                    oldCadOiItem = Nothing
+                End If
+                ' editing mode save the new paid invoices entry
+                ' newCadOiItem = GetCadOiItems(View.IdNo)
+                ' un-apply the old payments
+                For Each Item In oldCadOiItem
+                    ' if new
+                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                        ' remove old payments
+                        RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                    End If
+                Next
+                ' re-apply the new payments
+                For Each Item In View.CadOiItems
+                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                        ' add new payments
+                        AddInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                    End If
+                Next
+                If View.UnApplied > 0 Then
+                    ' with advance payment
+                    ' get the journalItemIdNo
+                    Dim ji As New JournalItemModel
+                    Dim jiItems As List(Of JournalItemModel)
+                    jiItems = GetJournalItems(View.IdNo)
+                    ' get the item.IdNo of the last matching advancesToSupplierAccountIdNo if more than one found
+                    For Each item In jiItems
+                        If item.AccountIdNo = _advancesToSupplierAccountIdNo And item.OriginalAmount > 0 Then
+                            ' if more items found overwrite the old value found and use this one
+                            ji.IdNo = item.IdNo
+                            ji.AccountIdNo = item.AccountIdNo
+                            ji.JournalIdNo = View.IdNo
+                            Exit For
+                        End If
+                    Next
+                    Dim lOpenInvIdNo As Integer
+                    ' check if the AdvancePayment OpenInvoice already created
+                    lOpenInvIdNo = GetAdvancePaymentCdOpenInvoice(ji.IdNo)
+                    If lOpenInvIdNo = 0 Then
+                        ' no previous entry
+                        ' add the open invoice
+                        AddApOpenInvoice(ji, "CD")
+                    Else
+                        ' already added, nothing to do
+                    End If
+                Else
+                    ' get the OpenInvoice IdNo
+                    ' check if the AdvancePayment OpenInvoice already created
+                    Dim lOpenInvoiceIdNo As Integer
+                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
+                    DeleteApOpenInvoice(lOpenInvoiceIdNo)
+                End If
+            End If
+        End Sub
 
     End Class
 

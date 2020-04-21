@@ -1,10 +1,8 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AutoMapper
 
 Namespace PresentationLayer.Presenters
 
@@ -47,7 +45,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(DataModel.ReferenceNo) Then
+            If IsEmpty(View.ReferenceNo) Then
                 UpdateGlReferenceNumber()
             End If
         End Sub
@@ -60,7 +58,7 @@ Namespace PresentationLayer.Presenters
                 DtUpdateTable.Clear()
             End If
             Dim nRowCount = 1
-            For Each ji In DataModel.JournalItems
+            For Each ji In View.JournalItems
                 If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
                     ' ignore these records (no amount no account)
                 Else
@@ -71,7 +69,7 @@ Namespace PresentationLayer.Presenters
                         workRow = DtUpdateTable.NewRow()
                         workRow("IdNo") = ji.IdNo
                     End If
-                    workRow("JournalIdNo") = DataModel.IdNo
+                    workRow("JournalIdNo") = View.IdNo
                     workRow("Sequence") = nRowCount
                     workRow("AccountIdNo") = ji.AccountIdNo
                     workRow("Debit") = ji.Debit
@@ -88,15 +86,19 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            UpdateTotals()
+        End Sub
+
         Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
             Dim parentIdNo As Integer
             If AddMode Then
                 parentIdNo = retVal
-                CallByName(DataModel, IdFieldName, CallType.Set, retVal)
+                CallByName(View, IdFieldName, CallType.Set, retVal)
             Else
-                parentIdNo = CallByName(DataModel, IdFieldName, CallType.Get)
+                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
             updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
@@ -114,14 +116,14 @@ Namespace PresentationLayer.Presenters
             End If
             Dim newJournalItem As List(Of JournalItemModel)
             If AddMode Then
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(DataModel.IdNo, "Sequence")
+                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 For Each item In newJournalItem
                     If IsAccountsPayableAccount(item.AccountIdNo) Then
                         AddApOpenInvoice(item, "AP")
                     End If
                 Next
             Else
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(DataModel.IdNo, "Sequence")
+                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 Dim newItem
                 Dim oldItem
                 Dim newIsAp
@@ -171,7 +173,6 @@ Namespace PresentationLayer.Presenters
                 Next
                 For Each newItem In newJournalItem
                     newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                    Dim x = newItem.IdNo
                     oldItem = Nothing
                     For Each item In OriginalModel.JournalItems
                         If newItem.IdNo = item.IdNo Then
@@ -195,7 +196,7 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
             If retVal > 0 Then
-                If IsEmpty(DataModel.ReferenceNo) Then
+                If IsEmpty(View.ReferenceNo) Then
                     UpdateGlReferenceNumber()
                 End If
             End If
@@ -204,31 +205,25 @@ Namespace PresentationLayer.Presenters
 
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
-                GlobalVariables.Mapper.Map(View, DataModel)
-                If DataModel.JournalItems.Count() = 0 Then
-                    DataModel.JournalItems = New List(Of JournalItemModel)
-                    DataModel.JournalItems.Add(NewJournalItem)
+                If View.JournalItems.Count() = 0 Then
+                    View.JournalItems = New List(Of JournalItemView)
+                    View.JournalItems.Add(NewJournalItem)
                 End If
-                For Each item In DataModel.JournalItems
-                    item.JournalIdNo = DataModel.IdNo
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
                     item.Sequence = 1
-                    If DataModel.AccountIdNo Is Nothing Or DataModel.AccountIdNo = 0 Then
-                        item.AccountIdNo = Nothing
-                    Else
-                        item.AccountIdNo = DataModel.AccountIdNo
-                    End If
-                    Dim tranType As String = TransactionTypeToEnum(DataModel.TransactionType)
+                    item.AccountIdNo = View.AccountIdNo
+                    Dim tranType As String = TransactionTypeToEnum(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        item.Credit = DataModel.Amount
+                        item.Credit = View.Amount
                         item.Debit = 0
                     Else
                         item.Credit = 0
-                        item.Debit = DataModel.Amount
+                        item.Debit = View.Amount
                     End If
                     item.ProfitCenterIdNo = 0
                     Exit For
                 Next
-                GlobalVariables.Mapper.Map(DataModel.JournalItems, View.JournalItems)
             End If
         End Sub
 
@@ -250,21 +245,29 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Protected Overrides Function DataIsValid() As Boolean
+        Public Sub UpdateTotals()
+            View.TotalDebits = 0
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalDebits += item.Debit
+                View.TotalCredits += item.Credit
+            Next
+        End Sub
+
+        Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
-            If MyBase.DataIsValid() Then
+            If MyBase.IsBizDataValid() Then
                 Dim cPayeeType As String
                 Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
                 Dim chart As ChartModel
-                retValue = True
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AP Journal", "LastPosting", "TransactionName", "LastPostingDate")
-                If Messaging.IsDateRangeValid("Accounts Payable", DataModel.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                If Messaging.IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    For Each item In DataModel.JournalItems
+                    For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
@@ -298,11 +301,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function NewJournalItem()
-            Dim item As New JournalItemModel With {
-                    .JournalIdNo = DataModel.IdNo,
+            Dim item As New JournalItemView With {
+                    .JournalIdNo = View.IdNo,
                     .Sequence = 0,
                     .AccountIdNo = Nothing,
-                    .Credit = DataModel.Amount,
+                    .Credit = View.Amount,
                     .Debit = 0,
                     .ProfitCenterIdNo = 0,
                     .Notes = ""

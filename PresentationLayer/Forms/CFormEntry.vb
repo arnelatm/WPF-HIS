@@ -412,70 +412,70 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Delete)
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Find)
     End Sub
 
     Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.First)
     End Sub
 
     Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Last)
     End Sub
 
     Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Next)
     End Sub
 
     Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         SwitchUiLanguage(True)
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Previous)
     End Sub
 
     Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Quit)
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If _debugSwitch = 0 Then
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RaiseEvent BeforeSave()

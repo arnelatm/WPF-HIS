@@ -140,6 +140,10 @@ Namespace PresentationLayer.Presenters
             Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         End Function
 
+        Public Function GetAdvancePaymentCdOpenInvoice(ByVal idNo As Integer)
+            Return Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        End Function
+
     End Class
 
 End Namespace

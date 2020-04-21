@@ -18,7 +18,9 @@ Namespace BusinessLayer
 
         Public Property IdNo As Integer
         Public Property Caption As String
-        Public Property Notes As String
+        Property TranslatedCaption As String
+        Property IdNoTranslated As Integer
+        Property LanguageIdNo As Integer
     End Class
 
 End Namespace
