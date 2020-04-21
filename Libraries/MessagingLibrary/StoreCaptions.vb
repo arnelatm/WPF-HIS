@@ -67,10 +67,12 @@
                         'TypeOf cCtrl Is TabPage Then
                         'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
                         t = cCtrl.Text
-                        cCtrl.Tag = t
-                        Captions.Add(cCtrl.Text, cCtrl.Name)
-                        InsertWord(t)
-                        InsertFormItem(FormIdNo, t)
+                        If Not String.IsNullOrWhiteSpace(t) Then
+                            cCtrl.Tag = t
+                            Captions.Add(cCtrl.Text, cCtrl.Name)
+                            InsertWord(t)
+                            InsertFormItem(FormIdNo, t)
+                        End If
                     End If
                 Catch ex As Exception
 
