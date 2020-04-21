@@ -83,15 +83,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event AfterEdit(retVal As Integer)
 
+    Public Event AfterRecordRetrieval(values As TM)
+
     Public Event AfterSave(retVal As Integer)
 
     Public Event BeforeAdd()
 
-    Public Event BeforeDelete()
-
     Public Event BeforeCompare()
 
-    Public Event AfterRecordRetrieval(values As TM)
+    Public Event BeforeDelete()
 
     Public Event BeforeDisplayView()
 
@@ -373,6 +373,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.FindFieldContinue(TableName, idNo)
     End Function
 
+    Public Function FindRecord() As Integer
+        Dim idNoOfFoundRecord As Integer = 0
+        If OkToMove() Then
+            idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
+        End If
+        Return idNoOfFoundRecord
+    End Function
+
     Public Function GetBizObjectErrors() As List(Of String)
         Return Model.GetBizObjectErrors()
     End Function
@@ -559,6 +567,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
+    Public Sub GoAddRecord()
+        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
+        Try
+            DataModel = New TM
+            GlobalVariables.Mapper.Map(DataModel, View)
+            MakeDefaultValues()
+            AddMode = True
+            'EditMode = False
+            RaiseEvent BeforeAdd()
+        Catch oEx As Exception
+            MsgBox("Error:   " + oEx.Message)
+            AddMode = False
+        End Try
+    End Sub
+
     Public Overridable Function GoDeleteRecord() As Integer
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
@@ -576,6 +599,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
                     TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+                    If TargetIdNo = 0 Then
+                        ' last record deleted
+                        GoLastRecord()
+                    End If
                     UpdateViewDisplay(TargetIdNo)
                     If Ea IsNot Nothing Then
                         Ea.PublishEvent(New RecordSaved(DataModel))
@@ -598,9 +625,53 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         'RaiseEvent AfterEdit()
     End Sub
 
+    Public Sub GoFindRecord()
+        Dim idNoOfFoundRecord = FindRecord()
+        If idNoOfFoundRecord = 0 Then
+            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
+                              MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                idNoOfFoundRecord = FindFieldContinue(1)
+                RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
+            Else
+                '' stay on the current record
+            End If
+        Else
+            RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
+        End If
+        If EditMode Then
+            EditMode = False
+        End If
+    End Sub
+
     Public Sub GoFirstRecord()
         If OkToMove() Then
             RecordPositionNumber = 1
+        End If
+    End Sub
+
+    Public Sub GoLastRecord()
+        If OkToMove() Then
+            RecordPositionNumber = GetRecordCount()
+        End If
+    End Sub
+
+    Public Sub GoNextRecord()
+        If OkToMove() Then
+            If RecordPositionNumber = RecordCount Then
+                Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
+            Else
+                RecordPositionNumber += 1
+            End If
+        End If
+    End Sub
+
+    Public Sub GoPreviousRecord()
+        If OkToMove() Then
+            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
+                Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
+            Else
+                RecordPositionNumber -= 1
+            End If
         End If
     End Sub
 
@@ -640,22 +711,20 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Function HasRecordChanged(idNo As Integer, timeStampedValue As Object) As Boolean
-        Dim retValue = False
-        Try
-            Dim newDateTimeStamp As Object
-            newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
-            For i = 0 To 7
-                If timeStampedValue(i) <> newDateTimeStamp(i) Then
-                    retValue = True
-                    Exit For
-                End If
-            Next
-        Catch ex As Exception
-            Return Nothing
-        End Try
-        Return retValue
-    End Function
+    Public Sub GoUndoChanges()
+        If OkToMove() Then
+            UndoMode = True
+            If AddMode Then
+                RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
+                AddMode = False
+            Else
+                RecordPositionNumber = RecordPositionNumber
+                EditMode = False
+            End If
+        End If
+        UndoMode = False
+        'CancelClose = True
+    End Sub
 
     Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
         Dim retValue As Boolean = False
@@ -742,7 +811,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     If result = DialogResult.Yes Then
                         result = Save()
                         If result > 0 Then
-                            'UpdateViewDisplay(TargetIdNo)
                             Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             message = message + Environment.NewLine & CompareDifferences
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
@@ -753,14 +821,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                                 EditMode = False
                             End If
                             retValue = True
-                        Else
-                            'Messaging.Show(True, "MsgChangesAbandoned", "Changes on the record not saved.", "Changes abandoned")
-                            'If AddMode Then
-                            '    UpdateViewDisplay(LastIdNo)
-                            'Else
-                            '    UpdateViewDisplay(TargetIdNo)
-                            'End If
-                            'retValue = False
                         End If
                     Else
                         If AddMode Then
@@ -822,51 +882,61 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Overridable Function Save()
-        Dim retVal As Integer = -1
-        If IsOkToSaveRecord() Then
-            RaiseEvent BeforeSave()
-            retVal = InitiateSave()
-            If retVal > 0 Then
-                ' redisplay the record, need to do this to get an updated record
-                ' because if ever something was changed in the record that affects the TreeView
-                ' redisplay the record, need to do this to get an updated record
-                ' and to display the added record in the TreeView if one is present.
-                'Dim lRetVal As Integer
-                'lRetVal = SaveChildren(PresenterObj.AddMode, retVal)
-                'If lRetVal < 0 Then
-                '    retVal = lRetVal
-                'End If
+        Dim retVal As Integer = 0
+        Dim continueSave As Boolean = False
+        If EditMode AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
+            Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+        Else
+            RaiseEvent BeforeValidate()
+            If EditMode AndAlso Not ChangesMade() Then
+                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
             Else
-                '' Something went wrong during the saving since no record was/were updated
-                '' retValue = -1 , for unsuccessful save
-                Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Dim viewIsValid As Boolean = True
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New ValidatingData(viewIsValid))
+                End If
+                If viewIsValid AndAlso IsBizDataValid() Then
+                    RaiseEvent BeforeSave()
+                    retVal = InitiateSave()
+                    If retVal <= 0 Then
+                        Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        'Else
+                        '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
+                    End If
+                    RaiseEvent AfterSave(retVal)
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New RecordSaved(DataModel))
+                    End If
+                End If
             End If
-            RaiseEvent AfterSave(retVal)
+        End If
+        If retVal <= 0 Then
+            Dim lErrors = GetBizObjectErrors()
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New PassErrorList(lErrors))
+            End If
+            Beep()
+            ShowErrors("Record not saved!")
         End If
         Return retVal
+    End Function
+
+    Public Function SaveOrAbandonChanges() As DialogResult
+        Dim result As DialogResult
+        Dim msg As String
+        msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
+                                 "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
+                                 "Please Confirm.")
+        result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
+                                MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button3)
+        Return result
     End Function
 
     Public Sub SaveOriginalValues()
         GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
     End Sub
 
-    'Private Function SaveDataEntry() As Integer
-    '    Dim retVal As Integer
-    '    Dim record As New TM
-    '    GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-    '    If AddMode Then
-    '        retVal = AddRecord(record)
-    '        If retVal > 0 Then
-    '            RaiseEvent ParentRecordAddedSuccessfully(retVal)
-    '        End If
-    '    Else
-    '        retVal = UpdateRecord(record)
-    '        If retVal > 0 Then
-    '            RaiseEvent ParentRecordUpdatedSuccessfully(retVal)
-    '        End If
-    '    End If
-    '    Return retVal
-    'End Function
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
         If additionalMessage IsNot Nothing Then
             _errorList = additionalMessage + Environment.NewLine
@@ -878,9 +948,34 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 _errorList = _errorList & bizError & Environment.NewLine
             End If
         Next
-
+        Messaging.MessageKey = "ValidationErrors"
         Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Sub
+
+    Public Sub Undo()
+        If ChangesMade() Then
+            Dim result As DialogResult
+            result = SaveOrAbandonChanges()
+            If result = DialogResult.Yes Then
+                Save()
+                UpdateViewDisplay(TargetIdNo)
+            ElseIf result = DialogResult.No Then
+                ' undo changes retrieve the last record
+                TargetIdNo = LastIdNo
+                UpdateViewDisplay(TargetIdNo)
+            Else
+                ' DialogResult.Cancel
+                ' don't do anything just continue edits
+            End If
+        Else
+            UpdateViewDisplay(TargetIdNo)
+        End If
+        If AddMode Then
+            AddMode = False
+        Else
+            EditMode = False
+        End If
     End Sub
 
     Public Overridable Sub UpdateViewDisplay(idNo As Integer)
@@ -910,38 +1005,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
-    End Function
-
-    'Public Overridable Function DataIsValid() As Boolean
-    '    Dim retVal = False
-    '    GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-    '    If Model.IsValid(DataModel) Then
-    '        retVal = True
-    '    End If
-    '    Return retVal
-    'End Function
-    Protected Overridable Function DataIsValid() As Boolean
-        Dim retValue As Boolean = False
-        Dim validated As Boolean = False
-        Dim lValidatingData = New ValidatingData(False)
-        RaiseEvent BeforeValidate()
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(lValidatingData)
-        End If
-        If lValidatingData.Validated Then
-            GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-            If Model.IsValid(DataModel) Then
-                retValue = True
-            Else
-                Dim lErrors = GetBizObjectErrors()
-                If Ea IsNot Nothing Then
-                    Ea.PublishEvent(New PassErrorList(lErrors))
-                End If
-                Beep()
-                ShowErrors("Record not saved!")
-            End If
-        End If
-        Return retValue
     End Function
 
     Protected Overridable Function DependentRecordsExist(masterIdNo As Integer) As Integer
@@ -1056,77 +1119,22 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return sortKey
     End Function
 
-    Public Sub GoLastRecord()
-        If OkToMove() Then
-            RecordPositionNumber = GetRecordCount()
+    Protected Overridable Function IsBizDataValid() As Boolean
+        Dim retValue As Boolean = False
+        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        If Model.IsValid(DataModel) Then
+            retValue = True
+            'Else
+            '    Dim lErrors = GetBizObjectErrors()
+            '    If Ea IsNot Nothing Then
+            '        Ea.PublishEvent(New PassErrorList(lErrors))
+            '    End If
+            '    Beep()
+            '    ShowErrors("Record not saved!")
         End If
-    End Sub
-
-    Public Sub GoNextRecord()
-        If OkToMove() Then
-            If RecordPositionNumber = RecordCount Then
-                Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
-            Else
-                RecordPositionNumber += 1
-            End If
-        End If
-    End Sub
-
-    Public Sub GoPreviousRecord()
-        If OkToMove() Then
-            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
-                Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
-            Else
-                RecordPositionNumber -= 1
-            End If
-        End If
-    End Sub
-
-    Public Function IsOkToSaveRecord() As Boolean
-        Dim okToSaveRecord As Boolean = False
-        If Not AddMode Then
-            If HasRecordChanged(TargetIdNo, RecordDateTimeStampValue) Then
-                Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
-            Else
-                If Not ChangesMade() Then
-                    Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
-                Else
-                    okToSaveRecord = True
-                End If
-            End If
-        Else
-
-            okToSaveRecord = True
-        End If
-        If okToSaveRecord And DataIsValid() Then
-            okToSaveRecord = True
-        Else
-            okToSaveRecord = False
-        End If
-        Return okToSaveRecord
+        Return retValue
     End Function
 
-    Public Function SaveOrAbandonChanges() As DialogResult
-        Dim result As DialogResult
-        Dim msg As String
-        msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
-                                 "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
-                                 "Please Confirm.")
-        result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
-                                MessageBoxIcon.Question,
-                                MessageBoxDefaultButton.Button3)
-        Return result
-    End Function
-
-    'Protected Overridable Function SaveChildren(addMode As Boolean, retVal As Integer) As Integer
-    '    For Each child In ChildPresenters
-    '        retVal = child.Save(AddMode)
-    '        If retVal <= 0 Then
-    '            Exit For
-    '        End If
-    '    Next
-    '    Return retVal
-    'End Function
     Protected Function TranslateField(Of TX)(fieldToTranslate As String, ByRef dModel As TX) As String
         Dim translatedField As String = fieldToTranslate
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
@@ -1139,97 +1147,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return translatedField
     End Function
 
-    Public Sub Undo()
-        If ChangesMade() Then
-            Dim result As DialogResult
-            result = SaveOrAbandonChanges()
-            If result = DialogResult.Yes Then
-                Save()
-                UpdateViewDisplay(TargetIdNo)
-            ElseIf result = DialogResult.No Then
-                ' undo changes retrieve the last record
-                TargetIdNo = LastIdNo
-                UpdateViewDisplay(TargetIdNo)
-            Else
-                ' DialogResult.Cancel
-                ' don't do anything just continue edits
-            End If
-        Else
-            UpdateViewDisplay(TargetIdNo)
-        End If
-        If AddMode Then
-            AddMode = False
-        Else
-            EditMode = False
-        End If
-    End Sub
-
     Protected Overridable Function UpdateRecord(record As TM) As Integer
         Return Model.UpdateRecord(record)
     End Function
-
-    Public Function FindRecord() As Integer
-        Dim idNoOfFoundRecord As Integer = 0
-        If OkToMove() Then
-            idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
-        End If
-        Return idNoOfFoundRecord
-    End Function
-
-    Public Sub GoAddRecord()
-        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
-        Try
-            DataModel = New TM
-            GlobalVariables.Mapper.Map(DataModel, View)
-            MakeDefaultValues()
-            AddMode = True
-            'EditMode = False
-            RaiseEvent BeforeAdd()
-        Catch oEx As Exception
-            MsgBox("Error:   " + oEx.Message)
-            AddMode = False
-        End Try
-    End Sub
-
-    'Private Function GetRecordNumberValue(idNo As Integer) As Integer
-    '    Try
-    '        Return GetRecordPosition(idNo)
-    '    Catch ex As Exception
-    '        Return 0
-    '    End Try
-    'End Function
-    Public Sub GoFindRecord()
-        Dim idNoOfFoundRecord = FindRecord()
-        If idNoOfFoundRecord = 0 Then
-            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
-                              MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                idNoOfFoundRecord = FindFieldContinue(1)
-                RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
-            Else
-                '' stay on the current record
-            End If
-        Else
-            RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
-        End If
-        If EditMode Then
-            EditMode = False
-        End If
-    End Sub
-
-    Public Sub GoUndoChanges()
-        If OkToMove() Then
-            UndoMode = True
-            If AddMode Then
-                RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                AddMode = False
-            Else
-                RecordPositionNumber = RecordPositionNumber
-                EditMode = False
-            End If
-        End If
-        UndoMode = False
-        'CancelClose = True
-    End Sub
 
     Private Function InitiateSave() As Integer
         Dim retValue As Integer
@@ -1269,19 +1189,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    'Public Sub OnSuccessfulUpdate(idNo) Handles Me.SuccessfulUpdate
-    '    RecordPositionNumber = GetSortedRecordPosition(idNo)
-    '    DisplayTreeViewData()
-    '    GotoRecordInTreeView()
-    'End Sub
-
-    'Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-    '    DisplayTreeViewData()
-    '    GotoRecordInTreeView()
-    '    'GetAndSetPresenterObj.RecordPositionNumber()
-    'End Sub
-
     Private Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
         If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
             Return False
@@ -1289,47 +1196,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return True
     End Function
 
-    'Public Sub Save()
-    '    If _debugSwitch Then
-    '        Debugger.Break()
-    '    End If
-    '    If IsOkToSaveRecord() Then
-    '        BeforeSave()
-    '        Dim retValue As Short
-    '        Try
-    '            Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-    '                retValue = Save(PresenterObj.AddMode)
-    '                If retValue > 0 Then
-    '                    If PresenterObj.AddMode Then
-    '                        RaiseEvent ParentRecordAddedSuccessfully(retValue)
-    '                        AddChildren()
-    '                        TargetIdNo = retValue
-    '                        RaiseEvent SuccessfulAdd(retValue)
-    '                    Else
-    '                        UpdateChildren(retValue)
-    '                        RaiseEvent ParentRecordUpdatedSuccessfully(retValue)
-    '                        RaiseEvent SuccessfulUpdate(retValue)
-    '                    End If
-    '                End If
-    '                scope.Complete()
-    '            End Using
-    '        Catch ex As TransactionAbortedException
-    '            MessageBox.Show(ex.Message, StringWords.Transaction_Aborted)
-    '        Catch oEx As Exception
-    '            If oEx.Message.Contains("Timeout Expired") Then
-    '                retValue = -1
-    '            Else
-    '                MsgBox("Error:   " + oEx.Message)
-    '                retValue = -1
-    '            End If
-    '            Debugger.Break()
-    '        End Try
-    '        If retValue > 0 Then
-    '            AfterSave()
-    '            ' redisplay the updated record to reflect changes and to put record in viewmode
-    '            sUpdateViewDisplay(TargetIdNo)
-    '            _MBRecordSuccessfullySaved.Show(Me)
-    '        End If
-    '    End If
-    'End Sub
+    Private Function RecordHasChanged(idNo As Integer, timeStampedValue As Object) As Boolean
+        Dim retValue = False
+        Try
+            Dim newDateTimeStamp As Object
+            newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
+            For i = 0 To 7
+                If timeStampedValue(i) <> newDateTimeStamp(i) Then
+                    retValue = True
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            Return Nothing
+        End Try
+        Return retValue
+    End Function
+
 End Class

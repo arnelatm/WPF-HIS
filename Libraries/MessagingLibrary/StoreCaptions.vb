@@ -1,8 +1,4 @@
-﻿
-
-'Imports AATM.Libraries.CBaseControlsLibrary
-
-Public Class StoreCaptions
+﻿Public Class StoreCaptions
     Inherits System.ComponentModel.Component
 
     ' Generated form code omitted, except for the following overloaded
@@ -49,17 +45,33 @@ Public Class StoreCaptions
                 For Each obj As Object In c.Items
                     TranslateToolStrip(FormIdNo, c, obj)
                 Next
-            ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
+            ElseIf TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
                 SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
             Else
                 Try
-                    t = cCtrl.Text
-                    cCtrl.Tag = t
-                    Captions.Add(cCtrl.Text, cCtrl.Name)
-                    InsertWord(t)
-                    InsertFormItem(FormIdNo, t)
+                    If TypeOf cCtrl Is TextBox OrElse
+                       TypeOf cCtrl Is ComboBox OrElse
+                       TypeOf cCtrl Is FlowLayoutPanel Then
+                        'Debugger.Break()
+                    Else
+                        'TypeOf cCtrl Is Button OrElse
+                        'TypeOf cCtrl Is Label OrElse
+                        'TypeOf cCtrl Is CheckBox OrElse
+                        'TypeOf cCtrl Is RadioButton OrElse
+                        'TypeOf cCtrl Is TabControl OrElse
+                        'TypeOf cCtrl Is TreeView OrElse
+                        'TypeOf cCtrl Is Form OrElse
+                        'TypeOf cCtrl Is DataGrid OrElse
+                        'TypeOf cCtrl Is TabPage Then
+                        'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
+                        t = cCtrl.Text
+                        cCtrl.Tag = t
+                        Captions.Add(cCtrl.Text, cCtrl.Name)
+                        InsertWord(t)
+                        InsertFormItem(FormIdNo, t)
+                    End If
                 Catch ex As Exception
 
                 End Try
@@ -129,11 +141,13 @@ Public Class StoreCaptions
 
     Friend Sub InsertWord(ByVal t As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = '" + t + "'"
-        Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
-        If howMany = 0 Then
-            cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + t + "')"
-            _dAc1.ExecCmd(cmd)
+        If Not (String.IsNullOrEmpty(t) OrElse t = "  /  /") Then
+            cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = '" + t + "'"
+            Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
+            If howMany = 0 Then
+                cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + t + "')"
+                _dAc1.ExecCmd(cmd)
+            End If
         End If
     End Sub
 

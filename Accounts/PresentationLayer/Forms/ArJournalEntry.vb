@@ -483,22 +483,22 @@ Namespace PresentationLayer.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.AddMode Then
-                txtJournalCode.Text = AccountStrings.ArJournalPrefix
-            End If
-            If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
-                If Messaging.Show(True, "AskIfSaveEmptyJournal",
-                                  "Journal Entry is Empty, do you still want to save this entry?",
-                                  "Empty Journal",
-                                  MessageBoxButtons.YesNo,
-                                  MessageBoxIcon.Question,
-                                  MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    PresenterObj.CancelSave = True
-                End If
-            End If
+        'Private Sub OnBeforeSave() Handles MyBase.BeforeSave
+        '    If PresenterObj.AddMode Then
+        '        txtJournalCode.Text = AccountStrings.ArJournalPrefix
+        '    End If
+        '    If bsJournalItems Is Nothing OrElse bsJournalItems.Count() = 0 Then
+        '        If Messaging.Show(True, "AskIfSaveEmptyJournal",
+        '                          "Journal Entry is Empty, do you still want to save this entry?",
+        '                          "Empty Journal",
+        '                          MessageBoxButtons.YesNo,
+        '                          MessageBoxIcon.Question,
+        '                          MessageBoxDefaultButton.Button2) = DialogResult.No Then
+        '            PresenterObj.CancelSave = True
+        '        End If
+        '    End If
 
-        End Sub
+        'End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
             Handles DataGridViewJournalItems.CellBeginEdit

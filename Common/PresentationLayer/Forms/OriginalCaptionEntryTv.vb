@@ -5,7 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Forms
 
     Public Class OriginalCaptionEntryTv
-        Implements IOriginalCaptionsView, ITranslatedCaptionView
+        Implements IOriginalCaptionsView
 
         Public Sub New()
             ' This call is required by the designer.
@@ -19,19 +19,8 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New OriginalCaptionsPresenter(Me)
 
-            PresenterObj.TranslatedCaptionPresenter = New TranslatedCaptionPresenter(Me)
-            PresenterObj.AddChildPresenter(PresenterObj.TranslatedCaptionPresenter)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            'CreateEnumResourceFile()
-
-            'ResourceEnumConverter.MakeResource("OriginalCaptionsTypeSelection", GetType(OriginalCaptionsTypeSelection))
-        End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("OriginalCaptionsTypeSelection", GetType(OriginalCaptionsTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
 #Region "OriginalCaptionFields"
@@ -45,8 +34,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ITranslatedCaptionView_Caption As String Implements ITranslatedCaptionView.Caption
-
         Public Property Caption As String Implements IOriginalCaptionsView.Caption
             Get
                 Return txtCaption.Text
@@ -56,11 +43,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-#End Region
-
-#Region "TranslatedCaptionFields"
-
-        Public Property IdNoTranslated As Integer Implements ITranslatedCaptionView.IdNo
+        Public Property IdNoTranslated As Integer Implements IOriginalCaptionsView.IdNoTranslated
             Get
                 Return NumParser(Of Integer)(txtIdNoTranslated.Text)
             End Get
@@ -69,18 +52,13 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CaptionIdNo As Integer Implements ITranslatedCaptionView.CaptionIdNo
+        Public ReadOnly Property LanguageIdNo As Integer Implements IOriginalCaptionsView.LanguageIdNo
             Get
-                Return NumParser(Of Integer)(TxtIDNo.Text)
+                Return 16
             End Get
-            Set(value As Integer)
-                txtCaptionIdNo.Text = value
-            End Set
         End Property
 
-        Public Property LanguageIdNo As Integer Implements ITranslatedCaptionView.LanguageIdNo
-
-        Public Property TranslatedCaption As String Implements ITranslatedCaptionView.TranslatedCaption
+        Public Property TranslatedCaption As String Implements IOriginalCaptionsView.TranslatedCaption
             Get
                 Return txtTranslatedCaption.Text
             End Get

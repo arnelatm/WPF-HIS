@@ -17,11 +17,16 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
-        Public Property MessageKey As String
-        Public Property Message As String
         Public Property Caption As String
+        Public Property IdNo As Integer
+        Public Property IdNoTranslated As Integer
+        Public Property LanguageIdNo As Integer
+        Public Property Message As String
+        Public Property MessageKey As String
         Public Property Notes As String
+        Public Property TranslatedCaption As String
+        Public Property TranslatedMessage As String
+
     End Class
 
 End Namespace

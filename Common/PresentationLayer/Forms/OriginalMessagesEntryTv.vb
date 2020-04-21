@@ -5,7 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Forms
 
     Public Class OriginalMessagesEntryTv
-        Implements IOriginalMessagesView, ITranslatedMessagesView
+        Implements IOriginalMessagesView
 
         Public Sub New()
             ' This call is required by the designer.
@@ -19,13 +19,22 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New OriginalMessagesPresenter(Me)
 
-            PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
-            PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
+            'PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
+            'PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "OriginalMessageFields"
+
+        Public Property Caption As String Implements IOriginalMessagesView.Caption
+            Get
+                Return txtCaption.Text
+            End Get
+            Set
+                txtCaption.Text = Value
+            End Set
+        End Property
 
         Public Property IDNo As Integer Implements IOriginalMessagesView.IdNo
             Get
@@ -33,6 +42,21 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public ReadOnly Property LanguageIdNo As Integer Implements IOriginalMessagesView.LanguageIdNo
+            Get
+                Return 16
+            End Get
+        End Property
+
+        Public Property Message As String Implements IOriginalMessagesView.Message
+            Get
+                Return txtMessage.Text
+            End Get
+            Set
+                txtMessage.Text = Value
             End Set
         End Property
 
@@ -45,30 +69,39 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Message As String Implements IOriginalMessagesView.Message
-            Get
-                Return txtMessage.Text
-            End Get
-            Set
-                txtMessage.Text = Value
-            End Set
-        End Property
-
-        Public Property Caption As String Implements IOriginalMessagesView.Caption
-            Get
-                Return txtCaption.Text
-            End Get
-            Set
-                txtCaption.Text = Value
-            End Set
-        End Property
-
         Public Property Notes As String Implements IOriginalMessagesView.Notes
             Get
                 Return txtNotes.Text
             End Get
             Set
                 txtNotes.Text = Value
+            End Set
+        End Property
+
+        Public Property TranslatedCaption As String Implements IOriginalMessagesView.TranslatedCaption
+            Get
+                Return txtTranslatedCaption.Text
+            End Get
+            Set
+                txtTranslatedCaption.Text = Value
+            End Set
+        End Property
+
+        Public Property TranslatedMessage As String Implements IOriginalMessagesView.TranslatedMessage
+            Get
+                Return txtTranslatedMessage.Text
+            End Get
+            Set
+                txtTranslatedMessage.Text = Value
+            End Set
+        End Property
+
+        Public Property IdNoTranslated As Integer Implements IOriginalMessagesView.IdNoTranslated
+            Get
+                Return NumParser(Of Integer)(txtIdNoTranslated.Text)
+            End Get
+            Set(value As Integer)
+                txtIdNoTranslated.Text = value
             End Set
         End Property
 
@@ -82,47 +115,10 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-#Region "TranslatedMessagesFields"
-
-        Public Property TranslatedMessageIdNo As Integer Implements ITranslatedMessagesView.TranslatedMessageIdNo
-            Get
-                Return NumParser(Of Integer)(txtIdNoTranslated.Text)
-            End Get
-            Set(value As Integer)
-                txtIdNoTranslated.Text = value
-            End Set
-        End Property
-
-        Public Property MessageIdNo As Integer Implements ITranslatedMessagesView.MessageIdNo
-            Get
-                Return NumParser(Of Integer)(TxtIDNo.Text)
-            End Get
-            Set(value As Integer)
-                txtMessageIdNo.Text = value
-            End Set
-        End Property
-
-        Public Property LanguageIdNo As Integer Implements ITranslatedMessagesView.LanguageIdNo
-
-        Public Property TranslatedMessage As String Implements ITranslatedMessagesView.TranslatedMessage
-            Get
-                Return txtTranslatedMessage.Text
-            End Get
-            Set
-                txtTranslatedMessage.Text = Value
-            End Set
-        End Property
-
-        Public Property TranslatedCaption As String Implements ITranslatedMessagesView.TranslatedCaption
-            Get
-                Return txtTranslatedCaption.Text
-            End Get
-            Set
-                txtTranslatedCaption.Text = Value
-            End Set
-        End Property
-
-#End Region
+        Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm
+            txtMessage.RightToLeft = RightToLeft.No
+            txtTranslatedCaption.RightToLeft = RightToLeft.Yes
+        End Sub
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
@@ -135,11 +131,6 @@ Namespace PresentationLayer.Forms
                 ' Visible property stored in first element of the array
                 HideButton(btnDelete)
             End If
-        End Sub
-
-        Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm
-            txtMessage.RightToLeft = RightToLeft.No
-            txtTranslatedCaption.RightToLeft = RightToLeft.Yes
         End Sub
 
     End Class

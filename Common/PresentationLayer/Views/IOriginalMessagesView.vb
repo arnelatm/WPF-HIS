@@ -4,11 +4,17 @@ Namespace PresentationLayer.Views
 
     Public Interface IOriginalMessagesView
         Inherits IView
-        Property IdNo As Integer
-        Property MessageKey As String
-        Property Message As String
+
         Property Caption As String
+        Property IdNo As Integer
+        Property IdNoTranslated As Integer
+        ReadOnly Property LanguageIdNo As Integer
+        Property Message As String
+        Property MessageKey As String
         Property Notes As String
+        Property TranslatedCaption As String
+        Property TranslatedMessage As String
+
     End Interface
 
 End Namespace

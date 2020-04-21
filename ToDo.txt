@@ -1,4 +1,3 @@
 2. Check SecurityObject Name for Menu on Server .
 
 10. Add all default values to jOURNAL ENTRIES especially the dates
-
