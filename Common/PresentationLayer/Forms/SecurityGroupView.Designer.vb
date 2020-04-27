@@ -40,10 +40,10 @@
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
-            Me.DgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DgvSecurityGroupIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DgvSecurityObjectIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DgvSecurityObjectName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.DgvVisible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.DgvEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             CType(Me.DataGridViewGroupAccesses, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,30 +308,38 @@
             'DgvIdNo
             '
             Me.DgvIdNo.DataPropertyName = "IdNo"
+            Me.DgvIdNo.EditingMode = False
             Me.DgvIdNo.HeaderText = "IdNo"
             Me.DgvIdNo.Name = "DgvIdNo"
+            Me.DgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DgvIdNo.Visible = False
             '
             'DgvSecurityGroupIdNo
             '
             Me.DgvSecurityGroupIdNo.DataPropertyName = "SecurityGroupIdNo"
+            Me.DgvSecurityGroupIdNo.EditingMode = False
             Me.DgvSecurityGroupIdNo.HeaderText = "SecurityGroupIdNo"
             Me.DgvSecurityGroupIdNo.Name = "DgvSecurityGroupIdNo"
+            Me.DgvSecurityGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DgvSecurityGroupIdNo.Visible = False
             '
             'DgvSecurityObjectIdNo
             '
             Me.DgvSecurityObjectIdNo.DataPropertyName = "SecurityObjectIdNo"
+            Me.DgvSecurityObjectIdNo.EditingMode = False
             Me.DgvSecurityObjectIdNo.HeaderText = "SecurityObjectIdNo"
             Me.DgvSecurityObjectIdNo.Name = "DgvSecurityObjectIdNo"
+            Me.DgvSecurityObjectIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DgvSecurityObjectIdNo.Visible = False
             '
             'DgvSecurityObjectName
             '
             Me.DgvSecurityObjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.DgvSecurityObjectName.DataPropertyName = "SecurityObjectName"
+            Me.DgvSecurityObjectName.EditingMode = False
             Me.DgvSecurityObjectName.HeaderText = "SecurityObjectName"
             Me.DgvSecurityObjectName.Name = "DgvSecurityObjectName"
+            Me.DgvSecurityObjectName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             '
             'DgvVisible
             '
@@ -387,11 +395,11 @@
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsGroupAccesses As Windows.Forms.BindingSource
-        Friend WithEvents DgvIdNo As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents DgvSecurityGroupIdNo As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents DgvSecurityObjectIdNo As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents DgvSecurityObjectName As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents DgvVisible As Windows.Forms.DataGridViewCheckBoxColumn
-        Friend WithEvents DgvEditable As Windows.Forms.DataGridViewCheckBoxColumn
+        Friend WithEvents DgvIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DgvSecurityGroupIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DgvSecurityObjectIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DgvSecurityObjectName As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DgvVisible As DataGridViewCheckBoxColumn
+        Friend WithEvents DgvEditable As DataGridViewCheckBoxColumn
     End Class
 End NameSpace

@@ -23,7 +23,7 @@ Namespace PresentationLayer.Forms
 
         Public Property IDNo As Integer Implements ISecurityGroupView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)

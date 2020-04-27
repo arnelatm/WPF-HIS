@@ -40,6 +40,7 @@ Public Class MappingProfileCommon
         'CreateMap(Of SecurityGroupModel, SecurityGroupView)().ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.MapFrom( Function(src) IIf(src.ParentIdNo.HasValue, src.ParentIdNo, Nothing ))
         'CreateMap(Of SecurityGroupModel, SecurityGroupView)(MemberList.Source).ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.NullSubstitute(Nothing)).ReverseMap()
         CreateMap(Of SecurityGroupModel, SecurityGroupView)(MemberList.Source).ReverseMap()
+        CreateMap(Of SecurityGroupModel, ISecurityGroupView)(MemberList.Source).ReverseMap()
         'CreateMap(Of SecurityGroupModel, SecurityGroupView).ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.MapFrom( Function(src) IIf(src.ParentIdNo.HasValue, src.ParentIdNo, Nothing )))
         CreateMap(Of SecurityObject, SecurityObjectModel).ReverseMap()
         CreateMap(Of SecurityObjectModel, ISecurityObjectView).ReverseMap()
