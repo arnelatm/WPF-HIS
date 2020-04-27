@@ -1,8 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.LIBRARIES.CBaseControlsLibrary
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports Microsoft.VisualBasic.CompilerServices
+
 
 <DesignerGenerated()>
 Partial Class TranslationTableManager
@@ -45,8 +45,8 @@ Partial Class TranslationTableManager
         'DataGrid1
         '
         Me.DataGrid1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+                                      Or System.Windows.Forms.AnchorStyles.Left)  _
+                                     Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.DataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGrid1.Location = New System.Drawing.Point(90, 39)
         Me.DataGrid1.MultiSelect = false
@@ -195,7 +195,7 @@ Partial Class TranslationTableManager
         Me.ResumeLayout(false)
         Me.PerformLayout
 
-End Sub
+    End Sub
     Friend WithEvents DataGrid1 As DataGridView
     Friend WithEvents txtCaption As TextBox
     Friend WithEvents txtTranslation As TextBox

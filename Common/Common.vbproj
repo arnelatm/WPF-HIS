@@ -53,6 +53,7 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GlobalResources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -122,6 +123,12 @@
     <Compile Include="PresentationLayer\Forms\BranchEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\CommonForm.Designer.vb">
+      <DependentUpon>CommonForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\CommonForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\CostCenterEntry.Designer.vb">
       <DependentUpon>CostCenterEntry.vb</DependentUpon>
     </Compile>
@@ -144,6 +151,12 @@
       <DependentUpon>FormAbout.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\FormAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\MessagesTableManager.Designer.vb">
+      <DependentUpon>MessagesTableManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\MessagesTableManager.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\OriginalCaptionEntryTv.Designer.vb">
@@ -180,6 +193,12 @@
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.Designer.vb">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SecurityGroupView.Designer.vb">
@@ -299,6 +318,9 @@
     <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\MessagesTableManager.resx">
+      <DependentUpon>MessagesTableManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\OriginalCaptionEntryTv.resx">
       <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -318,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\RevenueGroupEntryTv.resx">
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupEntryTv.resx">
+      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupView.resx">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>

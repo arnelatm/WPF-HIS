@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
+
 Public Class TranslationTableManager
 
 #Region " Declarations and Property Procedures "
@@ -128,9 +129,9 @@ Public Class TranslationTableManager
             Case 1
                 Msg = String.Format("Delete {0} for all languages?", originalValue)
                 If MessageBox.Show(Msg, "Permanent",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+                                   MessageBoxButtons.OKCancel,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
                     Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo =" + captionIdNo.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
@@ -147,9 +148,9 @@ Public Class TranslationTableManager
                 End If
                 Msg = String.Format("Delete {0} translation for {1} languages?", originalValue, cmbLanguage.Text.ToString())
                 If MessageBox.Show(Msg, "Permanent",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+                                   MessageBoxButtons.OKCancel,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
                     Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo ='" + captionIdNo.ToString + "'" +
                           " AND LanguageIdNo = " + cmbLanguage.SelectedValue.ToString()

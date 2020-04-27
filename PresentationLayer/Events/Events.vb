@@ -10,6 +10,7 @@
     [Quit]
     [Save]
     [Undo]
+    [Translate]
 End Enum
 
 Public Class AddModeChanged

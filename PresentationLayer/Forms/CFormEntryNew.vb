@@ -10,7 +10,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
-Public Class CFormEntry
+Public Class CFormEntryNew
     Implements ISubscriber(Of RecordPositionChanged),
                ISubscriber(Of EditModeChanged),
                ISubscriber(Of AddModeChanged),
@@ -36,12 +36,10 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
-        'FormEa.SubscribeEvent(Me)
 
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
@@ -864,5 +862,4 @@ Public Class CFormEntry
     'Public Event UndoEdits(addingRec As Boolean)
 
 #End Region
-
 End Class

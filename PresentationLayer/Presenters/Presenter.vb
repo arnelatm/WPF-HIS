@@ -879,8 +879,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 GoSaveRecord()
             Case ButtonClicked.Quit
                 GoQuit()
+            Case ButtonClicked.Translate
+                GoTranslate()
         End Select
     End Sub
+
+    Public Sub GoTranslate()
+        'Dim frm As New TranslationTableManager()
+        'frm.FormIdNoToTranslate = FormIdNo
+        'frm.AppDataDAC = AppDataDAC
+        'frm.TranslatorDAC = TranslatorDAC
+        'frm.Show()
+    End Sub
+
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0
