@@ -1,10 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryTv
     Implements ISubscriber(Of RecordPositionChanged),
@@ -223,7 +221,7 @@ Public Class CFormEntryTv
             Else
                 If parentChanged Then
                     Dim foundNode As TreeNode() = TreeViewTableName.Nodes.Find(parentIdValue.ToString(), True)
-                    If foundNode.Count() <> 0 Then
+                    If foundNode.Length <> 0 Then
                         foundNode(0).Nodes.Add(treeNode)
                     End If
                 End If

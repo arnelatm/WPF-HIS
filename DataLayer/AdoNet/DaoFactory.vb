@@ -26,12 +26,6 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property SecurityDao As ISecurityDao Implements IDaoFactory.SecurityDao
-            Get
-                Return New SecurityDao()
-            End Get
-        End Property
-
         Private ReadOnly Property IDaoFactory_LoginDao As ILoginDao Implements IDaoFactory.LoginDao
             Get
                 Return New LoginDao()
@@ -68,6 +62,18 @@ Namespace AdoNet
                 Return New UserDao()
             End Get
         End Property
+
+        Public Overridable Function CreateDao(classBasename As String) As Object Implements IDaoFactory.CreateDao
+            Dim className = $"AATM.DataLayer.AdoNet." + classBasename + "Dao"
+            Dim dao As Object
+            Dim tType As Type = Type.GetType(className)
+            If tType Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + className)
+                Debugger.Break()
+            End If
+            dao = Activator.CreateInstance(tType)
+            Return dao
+        End Function
 
     End Class
 

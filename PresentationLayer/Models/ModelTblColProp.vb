@@ -9,20 +9,6 @@ Public Class ModelTblColProp
 
     Private Shared ReadOnly TblColPropService = New TblColPropService()
 
-    'Public Function GetControlTblColPropIdNo(searchValue As String) As String _
-    '    Implements IModelTblColProp.GetControlTblColPropIdNo
-    '    Return TblColPropService.GetControlTblColPropIdNo(searchValue)
-    'End Function
-
-    'Public Function GetUserTblColProp(tblColPropObjectIdNo As Integer, tblColPropGroupIdNo As Integer) As ArrayList _
-    '    Implements IModelTblColProp.GetUserTblColProp
-    '    Return TblColPropService.GetUserTblColProp(tblColPropObjectIdNo, tblColPropGroupIdNo)
-    'End Function
-
-    'Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColPropModel) Implements IModelTblColProp.GetMainTableColumnProperties
-    '    Return TblColPropService.GetMainTableColumnProperties(tableName)
-    'End Function
-
     Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColPropModel) _
         Implements IModelTblColProp.GetMainTableColumnProperties
 

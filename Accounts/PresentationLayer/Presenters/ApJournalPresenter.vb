@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
             Dim parentIdNo As Integer

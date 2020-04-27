@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views
         Property ValidityEndDate As Date?
         Property Notes As String
         Property TotalPercentage As Decimal
+        Property DistributionSchemeItems As List(Of DistributionSchemeItemView)
     End Interface
 
 End Namespace

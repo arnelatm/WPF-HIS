@@ -514,7 +514,8 @@ Public Module Adapter
         Return retValue
     End Function
 
-    <Extension()> Public Function GetEnumDescription(ByVal enumConstant As [Enum]) As String
+    <Extension()>
+    Public Function GetEnumDescription(ByVal enumConstant As [Enum]) As String
         Dim attr() As DescriptionAttribute = DirectCast(enumConstant.GetType().GetField(enumConstant.ToString()).GetCustomAttributes(GetType(DescriptionAttribute), False), DescriptionAttribute())
         Return If(attr.Length > 0, attr(0).Description, enumConstant.ToString)
     End Function

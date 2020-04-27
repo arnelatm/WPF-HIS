@@ -13,7 +13,7 @@
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
-        Public Property DiscountAccountIdNo As Int32
+        Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Integer

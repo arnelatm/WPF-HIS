@@ -30,9 +30,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.imageListMember = New System.Windows.Forms.ImageList(Me.components)
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
+            Me.imageListMember = New System.Windows.Forms.ImageList(Me.components)
+            Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonLogout = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonExit = New System.Windows.Forms.ToolStripButton()
@@ -663,9 +662,8 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.Account)
         Me.IsMdiContainer = true
         Me.Name = "Main"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
         Me.Account.ResumeLayout(false)

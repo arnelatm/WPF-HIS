@@ -1,13 +1,18 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
+Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 Imports AutoMapper
 
 Namespace PresentationLayer.Forms
@@ -26,10 +31,13 @@ Namespace PresentationLayer.Forms
     '''     MV Patterns: MVP design pattern is used throughout this WinForms application.
     ''' </remarks>
     Partial Public Class Main
+        Implements IUserView
 
         Private _formCurrentCulture As CultureInfo
         Private _logStatus As LoginStatus
         Public Shared AccountsMapper As IMapper
+        Public Property MainTableName As String
+        Protected Shared Property Service As New Service
 
         'Public Shared DefaultLanguage As String = "English"
         ''' <summary>
@@ -41,7 +49,7 @@ Namespace PresentationLayer.Forms
             AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
-            If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 MenuFormName = "Main"
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
@@ -54,6 +62,8 @@ Namespace PresentationLayer.Forms
                 End If
                 SetLanguageChangeButtons()
             End If
+            MainTableName = "User"
+            PresenterObj = New MainPresenter(Me)
             SetupMapper()
             GlobalVariables.EventAggregator = New EventAggregator
             'CreateEnums()
@@ -70,7 +80,6 @@ Namespace PresentationLayer.Forms
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)
                                                                           cfg.AddProfile(New MappingProfileCommon)
-                                                                          cfg.AddProfile(New MappingProfile)
                                                                       End Sub)
             mapperConfigurationAccounts.AssertConfigurationIsValid()
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
@@ -147,7 +156,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            SecurityPresenterObj = New SecurityPresenter
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                 ToolStripButtonArabic.Visible = False
                 ToolStripButtonEnglish.Visible = True
@@ -158,7 +166,6 @@ Namespace PresentationLayer.Forms
             ToolStripButtonLogin.Enabled = True
             ToolStripButtonLogin.PerformClick()
             ToolStripButtonExit.Enabled = True
-
         End Sub
 
         ''' <summary>
@@ -734,18 +741,18 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSecurityGroups.Click
-            Try
-                Dim childMdiForm As SecurityGroupEntryTv
-                childMdiForm = New SecurityGroupEntryTv With {
-                    .MdiParent = Me
-                    }
-                childMdiForm.Show()
-            Catch ex As Exception
-                Debugger.Break()
-            End Try
-        End Sub
+        'Private Sub SecurityGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+        '    Handles ToolStripMenuItemSecurityGroups.Click
+        '    Try
+        '        Dim childMdiForm As SecurityGroupEntryTv
+        '        childMdiForm = New SecurityGroupEntryTv With {
+        '            .MdiParent = Me
+        '            }
+        '        childMdiForm.Show()
+        '    Catch ex As Exception
+        '        Debugger.Break()
+        '    End Try
+        'End Sub
 
         ''Private Sub UsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
         ''    Dim childMdiForm As AATM.PresentationLayer.UserEntry
@@ -1131,6 +1138,14 @@ Namespace PresentationLayer.Forms
         '    Dim unused = MessageBox.Show(EqualityComparer(Of String).[Default].Equals(x, y))
         '    x = 5
         'End Sub
+
+        Public Property IUserView_IdNo As Integer Implements IUserView.IdNo
+        Public Property Password As String Implements IUserView.Password
+        Public Property FullName As String Implements IUserView.FullName
+        Public Property FullNameAra As String Implements IUserView.FullNameAra
+        Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
+        Public Property SecurityGroupIdNo As Integer Implements IUserView.SecurityGroupIdNo
+        Public Property IUserView_UserName As String Implements IUserView.UserName
 
     End Class
 

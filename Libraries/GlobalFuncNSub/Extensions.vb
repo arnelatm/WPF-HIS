@@ -13,20 +13,20 @@ Public Module Extensions
     <Extension()>
     Public Function Interpolate(ByVal template As String, ParamArray values As Expression(Of Func(Of Object, String))()) As String
         Dim result As String = template
-        values.ToList().ForEach(Function(x)
+        values.ToList().ForEach(Sub(x)
                                     Dim member As MemberExpression = TryCast(x.Body, MemberExpression)
-                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", If(Strings.Left(member.Member.Name, 10) = "$VB$Local_", Mid(member.Member.Name, 11), member.Member.Name), "}")
+                                    Dim oldValue As String = String.Format("{0}{1}{2}", "{", If(Left(member.Member.Name, 10) = "$VB$Local_", Mid(member.Member.Name, 11), member.Member.Name), "}")
                                     Dim newValue As String = x.Compile().Invoke(Nothing).ToString()
                                     result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
-                                End Function)
+                                End Sub)
         Return result
     End Function
 
     <Extension()>
     Public Function ReplaceValues(ByVal template As String, variables As String()) As String
         Dim result As String = template
-        Dim oldValue As String = ""
-        Dim newValue As String = ""
+        Dim oldValue As String
+        Dim newValue As String
         For i = 0 To variables.Count - 1 Step 2
             oldValue = "{" & variables(i) & "}"
             newValue = variables(i + 1)
@@ -39,6 +39,20 @@ Public Module Extensions
     Public Function TrimMilliseconds(ByVal dt As DateTime) As DateTime
         Return New Date(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0, dt.Kind)
     End Function
+
+    '<Extension()>
+    'Public Function IgnoreAllNonExisting(Of TSource, TDestination)(ByVal expression As IMappingExpression(Of TSource, TDestination)) As IMappingExpression(Of TSource, TDestination)
+    '    Dim sourceType = GetType(TSource)
+    '    Dim destinationType = GetType(TDestination)
+    '    Dim allTypes = GlobalVariables.Mapper.ConfigurationProvider.GetAllTypeMaps()
+    '    Dim existingMaps = allTypes.First(Function(x) (x.SourceType Is sourceType) AndAlso (x.DestinationType Is destinationType))
+
+    '    For Each [property] In existingMaps.GetUnmappedPropertyNames()
+    '        expression.ForMember([property], Sub(opt) opt.Ignore())
+    '    Next
+
+    '    Return expression
+    'End Function
 
     '<Extension()>
     'Public Function AddBusinessDays(ByVal startDate As DateTime, ByVal days As Integer) As DateTime
@@ -58,7 +72,7 @@ Public Module Extensions
 End Module
 
 'Public Function MakePlural( noun As String) As String
-'    Dim pluralname As String
+'    Dim pluralName As String
 '    Dim lastLetter = noun.Right(1).ToLower()
 '    Select Case lastLetter
 '        Case "a","b","c","d","g","i","j","k","l","m","n","p","q","r","t","u","v","w"

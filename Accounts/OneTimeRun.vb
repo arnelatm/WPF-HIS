@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports AATM.Common
+Imports AATM.Common.PresentationLayer.Forms
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms

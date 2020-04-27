@@ -70,16 +70,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultFieldValueModel.vb" />
-    <Compile Include="GroupAccessModel.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelDefaultFieldValue.vb" />
-    <Compile Include="IModelSecurity.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
     <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelTblColProp.vb" />
-    <Compile Include="ModelSecurity.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -96,10 +93,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SaltModel.vb" />
-    <Compile Include="SecurityGroupModel.vb" />
-    <Compile Include="SecurityObjectModel.vb" />
     <Compile Include="TblColPropModel.vb" />
-    <Compile Include="UserModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

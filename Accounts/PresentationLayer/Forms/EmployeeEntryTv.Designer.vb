@@ -24,9 +24,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -1595,9 +1594,8 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.CFlowLayout2)
         Me.MinimumSize = New System.Drawing.Size(1165, 480)
         Me.Name = "EmployeeEntryTv"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "Employee Maintenance Form"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Text = "Employee Maintenance Form"
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floMainDisplay.ResumeLayout(false)

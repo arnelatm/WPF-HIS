@@ -8,6 +8,8 @@ Namespace PresentationLayer.Forms
         Implements IBankView
 
         Public Sub New()
+
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
 
@@ -16,19 +18,13 @@ Namespace PresentationLayer.Forms
             TvSecondaryFieldName = "BankCode"
             SortOrderKey = "BankName"
             FirstControl = txtBankCode
-            'PairFieldsToControls()
-
-            ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New BankPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("BankTypeSelection", GetType(BankTypeSelection))
+
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-        End Sub
+#Region "Fields"
         Public Property IDNo As Integer Implements IBankView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
@@ -73,6 +69,20 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+#End Region
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"BankCode", txtBankCode},
+                {"BankName", txtBankName},
+                {"BankNameAra", txtBankNameAra},
+                {"IDNo", TxtIDNo},
+                {"Notes", txtNotes}
+                }
+        End Sub
+
+
 
     End Class
 

@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New ProfitCenter() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
-            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .ProfitCenterCode = Extensions.AsString(reader("ProfitCenterCode")),
             .ProfitCenterName = Extensions.AsString(reader("ProfitCenterName")),
             .ProfitCenterNameAra = Extensions.AsString(reader("ProfitCenterNameAra")),

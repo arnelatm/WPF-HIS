@@ -182,11 +182,30 @@
     <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupView.Designer.vb">
+      <DependentUpon>SecurityGroupView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityGroupView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.Designer.vb">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.Designer.vb">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\UserEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Models\BranchModel.vb" />
     <Compile Include="PresentationLayer\Models\CommonModel.vb" />
     <Compile Include="PresentationLayer\Models\CostCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\CountryModel.vb" />
     <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\OriginalCaptionsModel.vb" />
@@ -206,8 +225,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PresentationLayer\Models\SecurityGroupModel.vb" />
+    <Compile Include="PresentationLayer\Models\SecurityObjectModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedCaptionModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
+    <Compile Include="PresentationLayer\Models\UserModel.vb" />
     <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CostCenterPresenter.vb" />
@@ -221,19 +243,28 @@
     <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedCaptionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityGroupPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityObjectPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SecurityPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\GroupAccessView.vb" />
     <Compile Include="PresentationLayer\Views\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\ICostCenterView.vb" />
     <Compile Include="PresentationLayer\Views\ICountryView.vb" />
     <Compile Include="PresentationLayer\Views\IDepartmentView.vb" />
-    <Compile Include="PresentationLayer\Views\IMainView.vb" />
+    <Compile Include="PresentationLayer\Views\IGroupAccessView.vb" />
     <Compile Include="PresentationLayer\Views\IOriginalCaptionsView.vb" />
     <Compile Include="PresentationLayer\Views\IOriginalMessagesView.vb" />
     <Compile Include="PresentationLayer\Views\IPhoneTypeView.vb" />
     <Compile Include="PresentationLayer\Views\IProfitCenterView.vb" />
     <Compile Include="PresentationLayer\Views\IReligionView.vb" />
     <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\ISecurityObjectView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedCaptionView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\IUserView.vb" />
+    <Compile Include="PresentationLayer\Views\SecurityGroupView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
   </ItemGroup>
@@ -287,6 +318,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\RevenueGroupEntryTv.resx">
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupView.resx">
+      <DependentUpon>SecurityGroupView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">
+      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\UserEntryTv.resx">
+      <DependentUpon>UserEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New RevenueGroup() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
-            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .RevenueGroupCode = Extensions.AsString(reader("RevenueGroupCode")),
             .RevenueGroupName = Extensions.AsString(reader("RevenueGroupName")),
             .RevenueGroupNameAra = Extensions.AsString(reader("RevenueGroupNameAra")),

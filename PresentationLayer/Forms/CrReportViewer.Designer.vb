@@ -28,8 +28,7 @@ Partial Class CrReportViewer
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CrReportViewer))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.btnOk = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
+        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.btnQuit = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
@@ -111,8 +110,7 @@ Partial Class CrReportViewer
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CrystalReportViewer1)
         Me.Name = "CrReportViewer"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(false)
 
 End Sub

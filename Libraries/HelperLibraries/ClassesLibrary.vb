@@ -12,7 +12,7 @@
     Public Class HLookupData
         Property IdNo As Int32
         Property Name As String
-        Property ParentIdNo As Int32
+        Property ParentIdNo As Int32?
         Property Code As String
     End Class
 

@@ -16,7 +16,11 @@ Public Class LoginPresenter
     ''' <param name="view">The view</param>
     Public Sub New(ByVal view As ILoginView)
         MyBase.New(view)
+        ModelPresenter = New ModelLogin
+        DataModel = New LoginModel
     End Sub
+
+
 
     ''' <summary>
     '''     Perform login. Gets data from view and calls model.

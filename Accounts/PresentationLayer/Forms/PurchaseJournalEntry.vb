@@ -3,6 +3,7 @@ Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -580,7 +581,7 @@ Namespace PresentationLayer.Forms
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                     Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.GetValue()
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         With DataGridViewJournalItems.CurrentRow
                             Dim currentVatAmount As Decimal
                             If _journalItemsPresenter.IsInputVatAccount(newValue) Then
@@ -617,7 +618,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub PurchaseJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(System.Decimal)
+            DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(Decimal)
             DataGridViewJournalItems.Columns("ItemVatAmount").ReadOnly = False
         End Sub
 

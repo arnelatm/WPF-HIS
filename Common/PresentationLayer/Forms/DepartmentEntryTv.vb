@@ -1,8 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 

@@ -1,4 +1,5 @@
-﻿Imports AATM.Common.BusinessLayer
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.DataLayer.AdoNet
@@ -10,30 +11,46 @@ Public Class MappingProfileCommon
     Public Sub New()
         CreateMap(Of Branch, BranchModel).ReverseMap()
         CreateMap(Of BranchModel, IBranchView).ReverseMap()
-        CreateMap(Of Department, DepartmentModel).ReverseMap()
-        CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
         CreateMap(Of CostCenter, CostCenterModel).ReverseMap()
         CreateMap(Of CostCenterModel, ICostCenterView).ReverseMap()
         CreateMap(Of Country, CountryModel).ReverseMap()
         CreateMap(Of CountryModel, ICountryView).ReverseMap()
-        CreateMap(Of ProfitCenter, ProfitCenterModel).ReverseMap()
-        CreateMap(Of ProfitCenterModel, IProfitCenterView).ReverseMap()
+        CreateMap(Of Department, DepartmentModel).ReverseMap()
+        CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
+        CreateMap(Of GroupAccess, GroupAccessModel).ReverseMap()
+        CreateMap(Of GroupAccessModel, GroupAccessView)(MemberList.Source).ReverseMap()
+        'CreateMap(Of GroupAccessModel, IGroupAccessView).ReverseMap()
+        CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.TranslatedMessageIdNo))
+        CreateMap(Of OriginalCaptions, OriginalCaptionsModel).ReverseMap()
+        CreateMap(Of OriginalCaptionsModel, IOriginalCaptionsView).ReverseMap()
+        CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
+        CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
         CreateMap(Of PhoneType, PhoneTypeModel).ReverseMap()
         CreateMap(Of PhoneTypeModel, IPhoneTypeView).ReverseMap()
+        CreateMap(Of ProfitCenter, ProfitCenterModel).ReverseMap()
+        CreateMap(Of ProfitCenterModel, IProfitCenterView).ReverseMap()
         CreateMap(Of Religion, ReligionModel).ReverseMap()
         CreateMap(Of ReligionModel, IReligionView).ReverseMap()
         CreateMap(Of RevenueGroup, RevenueGroupModel).ReverseMap()
         CreateMap(Of RevenueGroupModel, IRevenueGroupView).ReverseMap()
+        'CreateMap(Of SecurityGroup, SecurityGroupModel)().ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.NullSubstitute(Nothing)).ReverseMap()
+        'CreateMap(Of SecurityGroup, SecurityGroupModel).ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.MapFrom( Function(src) IIf(src.ParentIdNo.HasValue, src.ParentIdNo, Nothing )))
+        CreateMap(Of SecurityGroup, SecurityGroupModel).ReverseMap()
+        'CreateMap(Of SecurityGroupModel, ISecurityGroupView).ReverseMap()
+        'CreateMap(Of SecurityGroupModel, SecurityGroupView)().ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.MapFrom( Function(src) IIf(src.ParentIdNo.HasValue, src.ParentIdNo, Nothing ))
+        'CreateMap(Of SecurityGroupModel, SecurityGroupView)(MemberList.Source).ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.NullSubstitute(Nothing)).ReverseMap()
+        CreateMap(Of SecurityGroupModel, SecurityGroupView)(MemberList.Source).ReverseMap()
+        'CreateMap(Of SecurityGroupModel, SecurityGroupView).ForMember(Function(dest) dest.ParentIdNo, Sub(opt) opt.MapFrom( Function(src) IIf(src.ParentIdNo.HasValue, src.ParentIdNo, Nothing )))
+        CreateMap(Of SecurityObject, SecurityObjectModel).ReverseMap()
+        CreateMap(Of SecurityObjectModel, ISecurityObjectView).ReverseMap()
         CreateMap(Of TranslatedCaption, TranslatedCaptionModel).ReverseMap()
         CreateMap(Of TranslatedCaptionModel, ITranslatedCaptionView).ReverseMap()
         CreateMap(Of TranslatedMessages, TranslatedMessagesModel).ReverseMap()
-        CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
-        CreateMap(Of OriginalMessagesModel, IOriginalMessagesView).ReverseMap()
-        CreateMap(Of OriginalCaptions, OriginalCaptionsModel).ReverseMap()
-        CreateMap(Of OriginalCaptionsModel, IOriginalCaptionsView).ReverseMap()
-
-        CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.TranslatedMessageIdNo))
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView)().ForMember(Function(dest) dest.TranslatedMessageIdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
+        CreateMap(Of User, UserModel)().ReverseMap()
+        CreateMap(Of UserModel, IUserView).ReverseMap()
+
+        'destination >= destination.Value, opt >= opt.NullSubstitute("Other Value")));;
 
         '    .ForMember(Function(dest) dest.TelephoneNumber, sub(opt) opt.MapFrom(function(src) src.TelephoneNo1)) _
         '    .ForMember(Function(dest) dest.MobileNumber, Sub(opt) opt.MapFrom(function(src) src.MobilePhoneNo)) _

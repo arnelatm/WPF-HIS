@@ -363,6 +363,18 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Protected Overrides Sub CreateDataSources()
+            cacArAccountIdNo.DataSource = PresenterObj.GetChartList()
+            cacBankIdNo.DataSource = PresenterObj.GetBankList()
+            cacCountryCode.DataSource = PresenterObj.GetCountryList()
+            cacDepartmentIdNo.DataSource = PresenterObj.GetDepartmentListByName()
+            cacDesignationIdNo.DataSource = PresenterObj.GetDesignationList()
+            cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
+            cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
+            cacNationalityCode.DataSource = PresenterObj.GetCountryList()
+            cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
+        End Sub
+
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -399,20 +411,6 @@ Namespace PresentationLayer.Forms
          {"ZipCode", txtZipCode},
         {"IdNo", TxtIDNo}
         }
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            cacArAccountIdNo.DataSource = PresenterObj.GetChartList()
-            cacBankIdNo.DataSource = PresenterObj.GetBankList()
-            cacCountryCode.DataSource = PresenterObj.GetCountryList()
-            cacDepartmentIdNo.DataSource = PresenterObj.GetDepartmentListByName()
-            cacDesignationIdNo.DataSource = PresenterObj.GetDesignationList()
-            cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
-            cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = PresenterObj.GetCountryList()
-            cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
-            'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
     End Class

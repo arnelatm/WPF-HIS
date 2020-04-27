@@ -44,9 +44,8 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.floHeader1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -1155,9 +1154,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floFullEntryArea)
         Me.Name = "CheckDisbursementJournalEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floFullEntryArea.ResumeLayout(false)
         Me.floPurchaseJournalHeader.ResumeLayout(false)
         Me.floHeader1.ResumeLayout(false)

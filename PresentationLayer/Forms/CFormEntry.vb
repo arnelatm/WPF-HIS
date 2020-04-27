@@ -9,7 +9,6 @@ Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntry
     Implements ISubscriber(Of RecordPositionChanged),
@@ -30,8 +29,6 @@ Public Class CFormEntry
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SortOrderKey As String = "IdNo"
-    Private Const TurnOn As Boolean = True
-    Private ReadOnly _currentCulture As CultureInfo = GlobalVariables.AppCurrentCultureInfo
     Private _debugSwitch As Byte = 0
 
     Public Sub New()
@@ -175,13 +172,13 @@ Public Class CFormEntry
     Public Sub SetFormTitleCaption()
         lblFormDescription.Text = Text
         lblFormDescription.Left = 0
-        lblFormDescription.Width = Me.Width
+        lblFormDescription.Width = Width
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
     Public Sub ShowFormTitle()
         lblFormDescription.Text = FormTitleCaption
-        lblFormDescription.Width = Me.Width
+        lblFormDescription.Width = Width
         lblFormDescription.Left = 0
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
@@ -533,7 +530,7 @@ Public Class CFormEntry
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
 
             AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
@@ -635,11 +632,11 @@ Public Class CFormEntry
     End Sub
 
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
-        Return SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+        Return PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
     End Function
 
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
                 Return GetPropertyValue(cCtrl, "SecurityKey")
             End If
@@ -650,7 +647,7 @@ Public Class CFormEntry
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey)
-        Return SecurityPresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
     Private Sub Inputs(onOff As Boolean)
@@ -682,7 +679,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub SetAllControlsDynamicProperties()
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim allControls As New List(Of Control)
             Dim resources = New ComponentResourceManager(Me.GetType())
             TableProperties = PresenterObj.TableProperties

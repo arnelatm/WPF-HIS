@@ -32,7 +32,7 @@ Namespace BusinessLayer
         Public Property Applied As Decimal
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
-        Public Property DiscountAccountIdNo As Int32
+        Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Integer
         Public Property Notes As String

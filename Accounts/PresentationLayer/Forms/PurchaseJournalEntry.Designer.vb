@@ -34,10 +34,9 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseJournalEntry))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -1079,9 +1078,8 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MaximumSize = New System.Drawing.Size(1050, 578)
         Me.Name = "PurchaseJournalEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "Purchase Journal Entry"
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            Me.Text = "Purchase Journal Entry"
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit

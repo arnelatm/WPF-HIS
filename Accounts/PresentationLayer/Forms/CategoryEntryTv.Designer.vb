@@ -25,9 +25,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CategoryEntryTv))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCategoryCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtCategoryCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCategoryName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCategoryNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -184,9 +183,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CategoryEntryTv"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout

@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
             .DepartmentName = Extensions.AsString(reader("DepartmentName")),
             .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),
-            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
             .CostCenterIdNo = Extensions.AsInt(Of Integer)(reader("CostCenterIdNo")),

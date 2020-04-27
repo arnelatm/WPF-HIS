@@ -59,11 +59,11 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New CostCenter() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
-            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .CostCenterCode = Extensions.AsString(reader("CostCenterCode")),
             .CostCenterName = Extensions.AsString(reader("CostCenterName")),
             .CostCenterNameAra = Extensions.AsString(reader("CostCenterNameAra")),
-            .ProfitCenterIdNo = Extensions.AsInt(Of Int32)(reader("ProfitCenterIdNo")),
+            .ProfitCenterIdNo = Extensions.AsNullable(Of Int32?)(reader("ProfitCenterIdNo")),
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .Notes = Extensions.AsString(reader("Notes")),
             .SortKey = Extensions.AsString(reader("SortKey"))

@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .OrNumber = Extensions.AsString(reader("ORNumber")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .DiscountAccountIdNo = Extensions.AsInt(Of Integer)(reader("DiscountAccountIdNo")),
+            .DiscountAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
             .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
             .Notes = Extensions.AsString(reader("Notes")),

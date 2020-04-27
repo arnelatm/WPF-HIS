@@ -298,7 +298,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             Dim retVal As Integer
             ' save journal entries
             If Not AddMode Then

@@ -478,7 +478,7 @@ Public Class CaComboBox
     End Function
 
     Public Sub SetValue(ByRef value As Object)
-        If value = Nothing Then
+        If value Is Nothing Then
             Text = Nothing
         Else
             Dim saveDisplaymember As String = DisplayMember

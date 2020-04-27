@@ -1,0 +1,32 @@
+﻿Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer
+
+    Public Class UserPresenter
+        Inherits Presenter(Of IUserView, UserModel)
+
+        Public ParentViewList As List(Of UserModel)
+
+        Public Sub New(view As IUserView)
+            MyBase.New(view)
+            ModelPresenter = New Model("User")
+            TableName = "User"
+            SortOrderKey = "FullName"
+            TreeViewMainField = "FullName"
+            TreeViewSecondaryField = "UserName"
+            OriginalModel = New UserModel()
+            DataModel = New UserModel
+            TreeViewList = New List(Of UserModel)
+            ParentViewList = New List(Of UserModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
+
+        End Sub
+
+    End Class
+End NameSpace

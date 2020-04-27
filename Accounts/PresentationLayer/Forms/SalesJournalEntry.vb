@@ -4,6 +4,7 @@ Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -646,7 +647,7 @@ Namespace PresentationLayer.Forms
                 selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvcashcode"
-                        Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
+                        Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                         Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
                         RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)

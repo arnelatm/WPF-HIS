@@ -93,12 +93,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="atmButton.Designer.vb">
-      <DependentUpon>atmButton.vb</DependentUpon>
-    </Compile>
-    <Compile Include="atmButton.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="BFMain.Designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
@@ -147,7 +141,6 @@
     <Compile Include="LoginEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MappingProfile.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -169,35 +162,14 @@
     <Compile Include="MessagesTableManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SecurityGroupEntryTv.designer.vb">
-      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SecurityGroupEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SecurityObjectEntryTv.designer.vb">
-      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SecurityObjectEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="TranslationTableManager.Designer.vb">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
     </Compile>
     <Compile Include="TranslationTableManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserEntryTv.Designer.vb">
-      <DependentUpon>UserEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="atmButton.resx">
-      <DependentUpon>atmButton.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BFMain.resx">
       <DependentUpon>BFMain.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -230,17 +202,8 @@
     <EmbeddedResource Include="MessagesTableManager.resx">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SecurityGroupEntryTv.resx">
-      <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SecurityObjectEntryTv.resx">
-      <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TranslationTableManager.resx">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserEntryTv.resx">
-      <DependentUpon>UserEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +216,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\AATM.PresentationLayer.Models.GroupAccessModel.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

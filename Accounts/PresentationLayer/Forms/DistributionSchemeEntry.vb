@@ -2,19 +2,20 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.CustomControlsLibrary
 
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntry
-        Implements IDistributionSchemeView, IDistributionSchemeItemsView
+        Implements IDistributionSchemeView
 
-        Protected DtInsertTable As New DataTable
-        Protected DtUpdateTable As New DataTable
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private ReadOnly _profitCentersByCode
-        Private ReadOnly _profitCentersByName
-        Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
+        Private _profitCentersByCode
+        Private _footer As DgvFooter
+        Private _profitCentersByName
+        Private _totalPercentage As Decimal
+        Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
 
         Public Sub New()
 
@@ -34,118 +35,6 @@ Namespace PresentationLayer.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
-            _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
-
-            PresenterObj.DistributionSchemeItemsPresenter = _distributionSchemeItemsPresenter
-
-            DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Percentage", GetType(Decimal))
-
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
-
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
-            _profitCentersByName = PresenterObj.GetProfitCenterListByName()
-        End Sub
-
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If PresenterObj.AddMode Then
-                btnLast.PerformClick()
-            End If
-        End Sub
-
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            dtpValidityStartDate.Value = Date.Now()
-            dtpValidityEndDate.Value = Date.Now()
-            bsDistributionSchemeItems.Clear()
-            DataGridViewDistributionSchemeItems.Refresh()
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If bsDistributionSchemeItems Is Nothing OrElse bsDistributionSchemeItems.Count() = 0 Then
-                If MessageBox.Show("Empty Distribution Scheme Not Allowed.", "Distribution Scheme Error",
-                                   MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    PresenterObj.CancelSave = True
-                End If
-            ElseIf Not DataIsValid() Then
-                PresenterObj.CancelSave = True
-            End If
-        End Sub
-
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-                    Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-
-            If PresenterObj.AddMode Then
-                IdNo = passedValue
-            End If
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In bsDistributionSchemeItems
-                Dim workRow As DataRow
-                If ji.IdNo <= 0 Then
-                    workRow = DtInsertTable.NewRow()
-                Else
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("IdNo") = ji.IdNo
-                End If
-                workRow("DistributionSchemeIdNo") = IdNo
-                workRow("DistributionSchemeIdNo") = passedValue
-                workRow("Sequence") = nRowCount
-                workRow("Percentage") = ji.Percentage
-                If ji.IdNo <= 0 Then
-                    DtInsertTable.Rows.Add(workRow)
-                Else
-                    DtUpdateTable.Rows.Add(workRow)
-                End If
-                nRowCount += 1
-            Next
-            _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-        End Sub
-
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-                    Handles DataGridViewDistributionSchemeItems.CellClick
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case "dgvdeletecolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim selectedRow As New DistributionSchemeItemModel
-                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-                            bsDistributionSchemeItems.Remove(selectedRow)
-                            ReSequenceDgvAfterDelete()
-                            txtTotalPercentage.Text = DistributionSchemeItems.Sum(Function(totals) totals.Percentage)
-                        Else
-                            MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
-                        End If
-                    Case "dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim newRow As New DistributionSchemeItemModel
-                            bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
-                            ReSequenceDgvAfterInsert()
-                            SendKeys.Send("{UP}")
-                        Else
-                            MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
-                        End If
-                End Select
-            End With
-        End Sub
-
-        ' The form will handle all key events before the control with
-        ' focus handles them
-        Private Sub Form1_KeyDown(sender As Object,
-                                  e As KeyEventArgs) Handles MyBase.KeyDown
-            e.Handled = False
         End Sub
 
 #Region "DistributionSchemeView"
@@ -201,10 +90,10 @@ Namespace PresentationLayer.Forms
 
         Public Property TotalPercentage As Decimal Implements IDistributionSchemeView.TotalPercentage
             Get
-                Return txtTotalPercentage.Text
+                Return _totalPercentage
             End Get
             Set
-                txtTotalPercentage.Text = Value
+                _totalPercentage = Value
             End Set
         End Property
 
@@ -234,25 +123,45 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-#End Region
-
-#Region "DistributionSchemeItemsView"
-
-        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
+        Public Property DistributionSchemeitems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeitems
             Get
                 Return _distributionSchemeItems
             End Get
-            Set(value As IList(Of DistributionSchemeItemModel))
-                _distributionSchemeItems = value
+            Set
+                _distributionSchemeItems = Value
                 BindDistributionSchemeItem()
             End Set
         End Property
+#End Region
 
-        Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
+        Protected Overrides Sub CreateDataSources()
+            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _profitCentersByName = PresenterObj.GetProfitCenterListByName()
+        End Sub
+
+
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+        {
+         {"DistributionSchemeCode", txtDistributionSchemeCode},
+         {"DistributionSchemeName", txtDistributionSchemeName},
+         {"DistributionSchemeNameAra", txtDistributionSchemeNameAra},
+         {"IdNo", TxtIDNo},
+         {"Notes", txtNotes},
+         {"ValididtyEndDate", dtpValidityEndDate},
+         {"ValidityStartDate", dtpValidityStartDate}
+        }
+        End Sub
+
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            UpdateTotals()
+        End Sub
+
 
         Private Sub BindDistributionSchemeItem()
             SuspendLayout()
-            bsDistributionSchemeItems.DataSource = DistributionSchemeItems
+            bsDistributionSchemeItems.DataSource = DistributionSchemeitems
             bsDistributionSchemeItems.AllowNew = True
             With DataGridViewDistributionSchemeItems
                 .Refresh()
@@ -270,95 +179,40 @@ Namespace PresentationLayer.Forms
                 dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvProfitCenterIdNo.AutoComplete = True
-                dgvProfitCenterName.DataSource = _profitCentersByName
-                dgvProfitCenterName.DisplayMember = "Name"
-                dgvProfitCenterName.ValueMember = "idNo"
-                dgvProfitCenterName.AutoComplete = True
-                dgvProfitCenterName.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
 
-#End Region
-
-        'Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
-        '    If Not DataGridViewDistributionSchemeItems.DataBindings Is Nothing Then
-        '        DataGridViewDistributionSchemeItems.DataInGridChanged = False
-        '    End If
-        'End Sub
-
-        Protected Overrides Function DataIsValid() As Boolean
-            Dim retValue As Boolean = False
-            If MyBase.DataIsValid() Then
-                retValue = _distributionSchemeItemsPresenter.DataIsValid(DistributionSchemeItems)
-            End If
-            Return retValue
-        End Function
-
-        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-            MyBase.DisplayView(idNoOfRecord)
-            _distributionSchemeItemsPresenter.Display(idNoOfRecord)
-            BindDistributionSchemeItem()
-            With DistributionSchemeItems
-                TotalPercentage = .Sum(Function(totals) totals.Percentage)
-            End With
-            Refresh()
+        Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDistributionSchemeItems.UserDeletedRow
+            ReSequenceDgvAfterDelete()
+            UpdateTotals()
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case "dgvprofitcenteridno"
-                        dgvProfitCenterIdNo.DisplayMember = "Name"
-                    Case "dgvprofitcentername"
-                        dgvProfitCenterName.DisplayMember = "Code"
-                End Select
-            End With
+        Private Overloads Sub Dispose()
+            _footer.Dispose()
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewDistributionSchemeItems.CellEndEdit
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case "dgvprofitcenteridno"
-                        dgvProfitCenterIdNo.DisplayMember = "Code"
-                        SendKeys.Send("{TAB}")
-                    Case "dgvprofitcentername"
-                        dgvProfitCenterName.DisplayMember = "Name"
-                        ' repaint grid to reflect changes in the dgvProfitCenterIdNo
-                        '(this column and dgvProfitCenterIdNo have the same source so any changes here must be reflected there)
-                        DataGridViewDistributionSchemeItems.Refresh()
-                    Case "dgvpercentage"
-                        Dim amount = .Value
-                        If amount <> 0 Then
-                            Dim selectedRow As DistributionSchemeItemModel
-                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-                            If amount > 100 Or amount < 0 Then
-                                selectedRow.Percentage = 0
-                                MessageBox.Show("Percentage value must be between <1-100>.")
-                            End If
-                        End If
-                        txtTotalPercentage.Text = DistributionSchemeItems.Sum(Function(totals) totals.Percentage)
-                        SendKeys.Send("{TAB}")
-                End Select
-            End With
+        Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New DgvFooter(Me.DataGridViewDistributionSchemeItems)
+            _footer.AutoCalc = True
+            _footer.ColumnToSum("dgvPercentage") = True
+            _footer.SetAlignment("dgvPercentage", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvProfitCenterIdNo", "Totals ->")
         End Sub
+
 
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
-            DataGridViewDistributionSchemeItems.StartTrackingChanges = False
-            'DataGridViewDistributionSchemeItems.RemoveDeleteColumn()
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
-            DataGridViewDistributionSchemeItems.StartTrackingChanges = True
             DataGridViewDistributionSchemeItems.AddInsertColumn()
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete()
             Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeItems
-                If item.Sequence > i Then
+            For Each item In DistributionSchemeitems
+                If item.Sequence > i + 1 Then
                     item.Sequence = item.Sequence - 1
                 End If
             Next
@@ -366,7 +220,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub ReSequenceDgvAfterInsert()
             Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeItems
+            For Each item In DistributionSchemeitems
                 If item.Sequence = 0 Then
                     item.Sequence = i
                 ElseIf item.Sequence >= i Then
@@ -375,9 +229,105 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
+
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            DataGridViewDistributionSchemeItems.Focus()
+            If DataGridViewDistributionSchemeItems IsNot Nothing Then
+                DataGridViewDistributionSchemeItems.Focus()
+            End If
         End Sub
+
+        Private Sub UpdateTotals()
+            If _footer IsNot Nothing Then
+                _footer.SumAllColumns()
+                TotalPercentage = _footer.Value("dgvPercentage")
+            End If
+        End Sub
+
+        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+            dtpValidityStartDate.Value = Date.Now()
+            dtpValidityEndDate.Value = Date.Now()
+            bsDistributionSchemeItems.Clear()
+            DataGridViewDistributionSchemeItems.Refresh()
+        End Sub
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If bsDistributionSchemeItems Is Nothing OrElse bsDistributionSchemeItems.Count() = 0 Then
+                If MessageBox.Show("Empty Distribution Scheme Not Allowed.", "Distribution Scheme Error",
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                    PresenterObj.CancelSave = True
+                End If
+            ElseIf Not DataIsValid() Then
+                PresenterObj.CancelSave = True
+            End If
+        End Sub
+
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
+                    Handles DataGridViewDistributionSchemeItems.CellClick
+            With DataGridViewDistributionSchemeItems.CurrentCell
+                Select Case .OwningColumn.Name.ToLower()
+                    Case "dgvdeletecolumn"
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
+                            Dim selectedRow As New DistributionSchemeItemModel
+                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
+                            bsDistributionSchemeItems.Remove(selectedRow)
+                            ReSequenceDgvAfterDelete()
+                            TotalPercentage = DistributionSchemeitems.Sum(Function(totals) totals.Percentage)
+                        Else
+                            MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
+                        End If
+                    Case "dgvinsertcolumn"
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
+                            Dim newRow As New DistributionSchemeItemModel
+                            bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
+                            ReSequenceDgvAfterInsert()
+                            SendKeys.Send("{UP}")
+                        Else
+                            MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
+                        End If
+                End Select
+            End With
+        End Sub
+
+        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
+        '    With DataGridViewDistributionSchemeItems.CurrentCell
+        '        Select Case .OwningColumn.Name.ToLower()
+        '            Case "dgvprofitcenteridno"
+        '                dgvProfitCenterIdNo.DisplayMember = "Name"
+        '            Case "dgvprofitcentername"
+        '                dgvProfitCenterName.DisplayMember = "Code"
+        '        End Select
+        '    End With
+        'End Sub
+
+        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
+        '    Handles DataGridViewDistributionSchemeItems.CellEndEdit
+        '    With DataGridViewDistributionSchemeItems.CurrentCell
+        '        Select Case .OwningColumn.Name.ToLower()
+        '            Case "dgvprofitcenteridno"
+        '                dgvProfitCenterIdNo.DisplayMember = "Code"
+        '                SendKeys.Send("{TAB}")
+        '            Case "dgvprofitcentername"
+        '                dgvProfitCenterName.DisplayMember = "Name"
+        '                ' repaint grid to reflect changes in the dgvProfitCenterIdNo
+        '                '(this column and dgvProfitCenterIdNo have the same source so any changes here must be reflected there)
+        '                DataGridViewDistributionSchemeItems.Refresh()
+        '            Case "dgvpercentage"
+        '                Dim amount = .Value
+        '                If amount <> 0 Then
+        '                    Dim selectedRow As DistributionSchemeItemModel
+        '                    selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
+        '                    If amount > 100 Or amount < 0 Then
+        '                        selectedRow.Percentage = 0
+        '                        MessageBox.Show("Percentage value must be between <1-100>.")
+        '                    End If
+        '                End If
+        '                TotalPercentage = DistributionSchemeitems.Sum(Function(totals) totals.Percentage)
+        '                SendKeys.Send("{TAB}")
+        '        End Select
+        '    End With
+        'End Sub
 
     End Class
 

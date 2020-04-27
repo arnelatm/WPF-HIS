@@ -26,9 +26,8 @@ Namespace PresentationLayer.Forms.Reports
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SuspendLayout
         '
         'btnOk
         '
@@ -53,9 +52,8 @@ Namespace PresentationLayer.Forms.Reports
         Me.ClientSize = New System.Drawing.Size(759, 228)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "AccountReconciliationReport"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "Account Reconciliation Report"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Text = "Account Reconciliation Report"
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub

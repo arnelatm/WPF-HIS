@@ -66,24 +66,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormToolBarButtons.Designer.vb">
-      <DependentUpon>FormToolBarButtons.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormToolBarButtons.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="IGroupAccessView.vb" />
-    <Compile Include="IGroupAccessesView.vb" />
     <Compile Include="ILoginView.vb" />
-    <Compile Include="IMainView.vb" />
     <Compile Include="ISaltView.vb" />
-    <Compile Include="ISecurityGroupsView.vb" />
-    <Compile Include="ISecurityGroupView.vb" />
-    <Compile Include="ISecurityObjectsView.vb" />
-    <Compile Include="ISecurityObjectView.vb" />
-    <Compile Include="IUsersView.vb" />
-    <Compile Include="IUserView.vb" />
-    <Compile Include="IViewNew.vb" />
     <Compile Include="IView.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -102,9 +86,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormToolBarButtons.resx">
-      <DependentUpon>FormToolBarButtons.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

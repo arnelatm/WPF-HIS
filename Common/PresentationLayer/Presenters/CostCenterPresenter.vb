@@ -26,21 +26,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetParentList() As List(Of CostCenterModel)
-            Dim xModel As New CostCenterModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of CostCenterModel)(SortOrderKey, xModel)
-            Dim modelData = Model.GetAll(Of CostCenterModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New CostCenterModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
-
     End Class
 
 End Namespace

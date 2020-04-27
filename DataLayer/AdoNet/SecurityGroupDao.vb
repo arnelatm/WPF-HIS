@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityGroupDao
         Inherits BaseDao
-        Implements IDaoAll(Of SecurityGroup)
+        Implements IDaoAll(Of SecurityGroup), IDaoChild(Of GroupAccess)
 
         Private ReadOnly Db As New Db()
 
@@ -15,8 +15,10 @@ Namespace AdoNet
                     " SELECT IdNo, ParentIdNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode, Notes" &
                     "   FROM [SecurityGroup]" &
                     " WHERE IDNo = @IDNo"
-            Dim parms() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, parms).FirstOrDefault()
+            Dim params() As Object = {"@IDNo", idNo}
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            data.GroupAccesses = GetRecordsWithIdNo(idNo, "SecurityObjectName")
+            Return data
         End Function
 
         Private Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityGroup) _
@@ -63,7 +65,7 @@ Namespace AdoNet
                                     Function(reader) _
             New SecurityGroup() With {
             .IdNo = Extensions.AsId(reader("IDNo")),
-            .ParentIdNo = Extensions.AsInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
             .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra")),
             .SecurityGroupCode = Extensions.AsString(reader("SecurityGroupCode")),
@@ -78,6 +80,40 @@ Namespace AdoNet
                                     "@SecurityGroupCode", securityGroup.SecurityGroupCode,
                                     "@Notes", securityGroup.Notes}
         End Function
+
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+            As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
+            Dim sql As String =
+                    "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
+                    "left join groupAccess " &
+                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
+                    "Order By " & sortExpression & " ASC "
+            Dim params() As Object = {"@SecurityGroupIDNo", idNo}
+            Return Db.Read(sql, MakeGroupAccess, params).ToList()
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupAccessIdNo As Integer) As Integer _
+            Implements IDaoChild(Of GroupAccess).DelUpdateTvp
+            Return Db.DelUpdateTvp("dbo.UpdateGroupAccessTVP", tvpTable, "@MParam", groupAccessIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of GroupAccess).InsertTvp
+            Return Db.InsertTvp("dbo.InsertGroupAccessTVP", tvpTable, "@MParam")
+        End Function
+
+        Private Shared ReadOnly MakeGroupAccess As Func(Of IDataReader, GroupAccess) =
+                                    Function(reader) _
+            New GroupAccess() With {
+            .IdNo = Extensions.AsId(reader("IDNo")),
+            .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIDNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIDNo")),
+            .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
+            .Visible = Extensions.AsBool(reader("Visible")),
+            .Editable = Extensions.AsBool(reader("Editable"))
+            }
 
     End Class
 

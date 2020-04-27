@@ -152,6 +152,8 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+        Public Property IDistributionSchemeView_DistributionSchemeItems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeItems
+
 #End Region
 
 #Region "DistributionSchemeItemsView"

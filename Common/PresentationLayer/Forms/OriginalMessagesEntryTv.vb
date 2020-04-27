@@ -122,7 +122,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
-            Dim controlSecurityValues = SecurityPresenterObj.GetUserSecurityForKey("_Developer",
+            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer",
                                                                                    GlobalVariables.SecurityGroupIdNo)
             If _
                 Not _

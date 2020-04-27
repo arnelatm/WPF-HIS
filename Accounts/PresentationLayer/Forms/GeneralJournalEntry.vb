@@ -2,12 +2,8 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Forms
 
@@ -245,7 +241,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer = New DgvFooter(DataGridViewJournalItems)
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True

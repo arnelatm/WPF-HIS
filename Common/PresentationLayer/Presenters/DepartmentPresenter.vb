@@ -26,21 +26,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetParentList() As List(Of DepartmentModel)
-            Dim xModel As New DepartmentModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepartmentModel)(SortOrderKey, xModel)
-            Dim modelData = Model.GetAll(Of DepartmentModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New DepartmentModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
-
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Model.GetRecordFieldWithKey(idNoToSearch, "Department", "ParentIdNo", "DepartmentName")
         End Function

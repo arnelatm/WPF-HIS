@@ -85,10 +85,10 @@ Public Class MessagesTableManager
         Editing = False
         Dim nIndex = DataGrid1.CurrentRow.Index
         Dim originalValue As String
-        Dim MessageIdNo As Int16
+        Dim messageIdNo As Int16
         originalValue = DataGrid1.Rows(nIndex).Cells(0).Value.TrimEnd
         Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
-        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        messageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
         Select Case cmbLanguage.SelectedValue
             Case 1
                 Msg = String.Format("Delete {0} for all languages?", originalValue)
@@ -97,7 +97,7 @@ Public Class MessagesTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo =" + MessageIdNo.ToString()
+                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo =" + messageIdNo.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     Cmd = "DELETE from OriginalMessages WHERE message = '" + originalValue + "'"
                     Result = TranslatorDAC.ExecCmd(Cmd)
@@ -116,7 +116,7 @@ Public Class MessagesTableManager
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo ='" + MessageIdNo.ToString + "'" +
+                    Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo ='" + messageIdNo.ToString + "'" +
                           " AND LanguageIdNo = " + cmbLanguage.SelectedValue.ToString()
                     Result = TranslatorDAC.ExecCmd(Cmd)
                     LoadColumn("original")
@@ -281,16 +281,16 @@ Public Class MessagesTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.TrimEnd
         Dim translatedValue As String = DataGrid1.CurrentRow.Cells(1).Value.TrimEnd
-        Dim MessageIdNo As Int16
+        Dim messageIdNo As Int16
         Cmd = "Select IdNo from originalMessages where Caption ='" + originalValue + "'"
-        MessageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + MessageIdNo.ToString() +
+        messageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        Cmd = "DELETE from TranslatedMessages WHERE MessageIdNo = " + messageIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)
         ' Insert the translated entry if Original isn't selected
-        If cmbLanguage.Text <> "_Original" Then
+        If cmbLanguage.Text <> $"_Original" Then
             Cmd = "INSERT INTO TranslatedMessages ( MessageIdNo , TranslatedCaption, LanguageIdNo) VALUES ( " _
-                  + MessageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
+                  + messageIdNo.ToString() + ", '" + translatedValue + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
