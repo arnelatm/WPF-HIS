@@ -15,6 +15,7 @@
         Public Property ValidityEndDate As Date
         Public Property Notes As String
         Public Property TotalPercentage As Decimal
+        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel)
 
     End Class
 

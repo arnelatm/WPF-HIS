@@ -1,13 +1,9 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Libraries
 Imports System.ComponentModel
 Imports AATM.Libraries.CustomControlsLibrary
 
@@ -387,7 +383,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ArJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer = New DgvFooter(DataGridViewJournalItems)
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
@@ -427,7 +423,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub cboAccountIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboAccountIdNo.Validating
+        Private Sub cboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboAccountIdNo.RevertValue()
@@ -439,7 +435,7 @@ Namespace PresentationLayer.Forms
             UpdateEarlySettlementValues()
         End Sub
 
-        Private Sub cboCustomerIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboCustomerIdNo.Validating
+        Private Sub cboCustomerIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboCustomerIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboCustomerIdNo.RevertValue()

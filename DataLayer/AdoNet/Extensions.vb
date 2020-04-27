@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Runtime.CompilerServices
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace AdoNet
     ' useful set of Extension methods for Data Access purposes
@@ -53,27 +54,25 @@ Namespace AdoNet
                 'If Not Integer.TryParse(item.ToString(), result) Then
                 result = Convert.ChangeType(item, GetType(T))
             Catch ex As Exception
-                MessageBox.Show("Conversion error (AsNumber Extensions). " & ex.Message)
+                Dim message = Messaging.Show("MsgInvalidNumberConversion", "Conversion error (AsNumber Extensions)" & ex.Message)
             End Try
 
             Return result
         End Function
 
-        <Extension>
-        Public Function AsNullableInt(Of T)(item As Object) As T
-            If item.Equals(DBNull.Value) Then
-                'Dim retVal As Integer?
-                'retVal = DirectCast(Nothing, Nullable(Of Integer))
+        <Extension()>
+        Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T
+            If obj.Equals(DBNull.Value) Then
                 Return Nothing
             End If
+            Dim x As Type = GetType(T)
+            Dim u As Type = Nullable.GetUnderlyingType(x)
 
-            Dim result As T
-            Try
-                result = Convert.ChangeType(item, GetType(T))
-            Catch ex As Exception
-                result = Nothing ' DirectCast(Nothing, Nullable(Of Integer))
-            End Try
-            Return result
+            If u IsNot Nothing Then
+                Return If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, u), T))
+            Else
+                Return CType(Convert.ChangeType(obj, x), T)
+            End If
         End Function
 
         ' transform object into double data type

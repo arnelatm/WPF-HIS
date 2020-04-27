@@ -14,9 +14,6 @@ Public Class BfMain
     Dim _originalText As String
 
     '    Dim _menuLevel As String = ""
-    Private _formCultureInfo As CultureInfo
-
-    Private _formLanguage As String
     Private _textDisplayLanguage As String
     Protected CaptionCollection As New Collection
     Protected FormIdNo As Int16
@@ -72,8 +69,6 @@ Public Class BfMain
 
     'Public Shadows Event Load(sender As Object, e As EventArgs)
     Public Property PresenterObj As Object
-
-    Public Property SecurityPresenterObj As Object
 
     Public Property Errors As List(Of String) Implements IView.Errors
 
@@ -291,7 +286,6 @@ Public Class BfMain
         End If
         If useOriginal Then
             UserOriginalCaptions()
-            targetLanguageIdNo = 0
         Else
             cmd = "Select Caption, translatedCaption from formItemsOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and formIdNo = " + FormIdNo.ToString()
             Dim translations As DataSet
@@ -466,16 +460,16 @@ Public Class BfMain
         Dim controlSecurityValues As ArrayList
         Dim isSelectable As Boolean
         Dim isVisible As Boolean
-        Dim securityIdNo As String
+        Dim securityIdNo As Integer
         'Dim service As New Service
         If GlobalVariables.IsUserLoggedIn Then
             ''if controlSecurityKey = "Main.Menu.Masters.Security" then
             ''    Debugger.Break()
             ''End If
-            securityIdNo = SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-            If securityIdNo IsNot Nothing Then
+            securityIdNo = GetControlSecurityIdNo(controlSecurityKey)
+            If securityIdNo <> 0 Then
                 'securityIdNo = Service.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
-                controlSecurityValues = SecurityPresenterObj.GetUserSecurity(Convert.ToInt32(securityIdNo),
+                controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt32(securityIdNo),
                                                                 GlobalVariables.SecurityGroupIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
@@ -517,7 +511,6 @@ Public Class BfMain
             'Next
             'ds = Nothing
             DoubleBuffered = True
-            Dim dac As New Dac
             Dim cmd As String
             RaiseEvent BeforeLoad()
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
@@ -529,7 +522,18 @@ Public Class BfMain
     End Sub
 
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
-        Return SecurityPresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+        If PresenterObj Is Nothing Then
+            'Dim securityPresenter As SecurityPresenter = New SecurityPresenter(Me)
+            Dim idNo As Integer = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+            Dim retVal As Integer
+            If Not Integer.TryParse(idNo, retVal) Then
+                Return retVal
+            Else
+                Return 0
+            End If
+        Else
+            Return PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+        End If
     End Function
 
     'Private Sub BfForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -594,8 +598,8 @@ Public Class BfMain
 
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-        Return SecurityPresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+        Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
     Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
@@ -639,11 +643,11 @@ Public Class BfMain
                         Dim isSelectable As Boolean
                         Dim isVisible As Boolean
                         'Dim service As New Service
-                        Dim securityIdNo As String = SecurityPresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+                        Dim securityIdNo As Integer = GetControlSecurityIdNo(controlSecurityKey)
 
-                        If securityIdNo IsNot Nothing Then
+                        If securityIdNo <> 0 Then
                             If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                                controlSecurityValues = SecurityPresenterObj.GetUserSecurity(securityIdNo,
+                                controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
                                                                                 GlobalVariables.SecurityGroupIdNo)
                                 If controlSecurityValues.Count > 0 Then
                                     ' Visible property stored in first element of the array
@@ -688,7 +692,7 @@ Public Class BfMain
             For Each obj As Object In dropDownItems
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
                 If subMenu IsNot Nothing Then
-                    Dim r As Int16 = 0
+                    Dim r As Int16
                     r = Dv.Find(obj.Tag)
                     If r > 0 Then
                         obj.Text = Dv(r).Item("translatedCaption")

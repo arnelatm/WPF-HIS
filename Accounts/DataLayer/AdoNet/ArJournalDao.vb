@@ -105,7 +105,7 @@ Namespace DataLayer.AdoNet
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CustomerIdNo = Extensions.AsInt(Of Integer)(reader("CustomerIdNo")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .DueDate = Extensions.AsNullableDateTime(reader("DueDate")),
+            .DueDate = Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
             .IdNo = Extensions.AsId(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .Notes = Extensions.AsString(reader("Notes")),

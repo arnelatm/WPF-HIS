@@ -144,7 +144,7 @@ Namespace DataLayer.AdoNet
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .NormalBalance = Extensions.AsString(reader("NormalBalance")),
             .Notes = Extensions.AsString(reader("Notes")),
-            .ParentIdNo = Extensions.AsNullableInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .PayeeType = Extensions.AsString(reader("PayeeType")),
             .SortKey = Extensions.AsString(reader("SortKey")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount")),

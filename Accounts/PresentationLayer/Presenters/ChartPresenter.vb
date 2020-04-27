@@ -27,21 +27,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetParentList() As List(Of ChartModel)
-            Dim xModel As New ChartModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of ChartModel)(SortOrderKey, xModel)
-            Dim modelData = Model.GetAll(Of ChartModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New ChartModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
-
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Model.GetRecordFieldWithKey(idNoToSearch, "Chart", "ParentIdNo", "AccountName")
         End Function

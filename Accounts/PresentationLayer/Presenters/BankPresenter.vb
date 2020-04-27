@@ -1,25 +1,19 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
     Public Class BankPresenter
         Inherits AccountsPresenter(Of IBankView, BankModel)
 
-        Public ParentViewList As List(Of BankModel)
-
         Public Sub New(view As IBankView)
             MyBase.New(view)
 
             InitializerWithTv("Bank")
-            'TableName = "Bank"
-            'SortOrderKey = "BankName"
-            'TreeViewMainField = "BankName"
-            'TreeViewSecondaryField = "BankCode"
-            'OriginalModel = New BankModel()
-            'DataModel = New BankModel
-            'TreeViewList = New List(Of BankModel)
-            'ParentViewList = New List(Of BankModel)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
+
         End Sub
 
     End Class

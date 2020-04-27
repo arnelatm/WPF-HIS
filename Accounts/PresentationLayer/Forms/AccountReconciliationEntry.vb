@@ -489,12 +489,12 @@ Namespace PresentationLayer.Forms
         '    End If
         'End Sub
 
-        Private Sub CatchClose(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
+        Private Sub CatchClose(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs)
             ' Insert code to deal with impending closure of this form.
         End Sub
 
         Public Sub FormOpened()
-            AddHandler Me.Closing, AddressOf CatchClose
+            AddHandler Closing, AddressOf CatchClose
         End Sub
 
         Private Function GetGlSystemBalance() As Decimal
@@ -630,7 +630,7 @@ Namespace PresentationLayer.Forms
                                 End If
                             End If
                             ReComputeDifference()
-                            Me.Refresh()
+                            Refresh()
                     End Select
                 End With
             End If
@@ -733,7 +733,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub dtpReconciliationDate_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
+        Private Sub dtpReconciliationDate_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
             If dtpReconciliationDate.DateChanged() Then
                 If dtpReconciliationDate.DateChanged() Then
                     If AccountReconciliationItems.Any() Then
@@ -749,7 +749,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboAccountIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboAccountIdNo.Validating
+        Private Sub cboAccountIdNo_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles cboAccountIdNo.Validating
             If cboAccountIdNo.ValueChanged() Then
                 If cboAccountIdNo.SelectedIndex > -1 Then
                     If AccountReconciliationItems.Any() Then

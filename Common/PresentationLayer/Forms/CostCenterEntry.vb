@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ProfitCenterIdNo As Integer Implements ICostCenterView.ProfitCenterIdNo
+        Public Property ProfitCenterIdNo As Integer? Implements ICostCenterView.ProfitCenterIdNo
             Get
                 Return cacProfitCenterIdNo.GetValue()
             End Get

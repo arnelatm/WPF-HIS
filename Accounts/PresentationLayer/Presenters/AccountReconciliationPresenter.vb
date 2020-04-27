@@ -23,20 +23,6 @@ Namespace PresentationLayer.Presenters
         Public Property AccountReconciliationItemsPresenter As AccountReconciliationItemsPresenter
         Public Property MessageBox As Object
 
-        Public Overrides Function ChangesMade() As Boolean
-            Dim accountReconciliationChangesMade As Boolean
-            If GlobalFunctions.ObjectsCompare(OriginalModel, View) Then
-                If AccountReconciliationItemsPresenter.ChangesMadeInAccountReconciliationItems Then
-                    accountReconciliationChangesMade = True
-                Else
-                    accountReconciliationChangesMade = False
-                End If
-            Else
-                accountReconciliationChangesMade = True
-            End If
-            Return accountReconciliationChangesMade
-        End Function
-
         Public Sub PostReconciliation(ByVal idNo As Integer, ByVal accountReconciliationItems As List(Of AccountReconciliationItemModel))
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))

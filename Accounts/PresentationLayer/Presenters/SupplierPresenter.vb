@@ -11,15 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISupplierView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("Supplier")
-            TableName = "Supplier"
-            SortOrderKey = "SupplierName"
-            TreeViewMainField = "SupplierName"
-            TreeViewSecondaryField = "SupplierCode"
-            TreeViewList = New List(Of SupplierModel)
-            OriginalModel = New SupplierModel()
-            DataModel = New SupplierModel
-            ParentViewList = New List(Of SupplierModel)
+            InitializerWithTv("Supplier")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 

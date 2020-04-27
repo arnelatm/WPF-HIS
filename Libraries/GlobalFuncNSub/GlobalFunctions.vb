@@ -172,14 +172,16 @@ Public Module GlobalFunctions
     End Function
 
     Public Function GetPropertyValue(obj As Object, propName As String) As Object
-        Dim propValue As Object
+        Dim propValue As Object = Nothing
         Try
             Dim objType As Type = obj.GetType()
             Dim pInfo As PropertyInfo = objType.GetProperty(propName,
                                                             BindingFlags.Public Or BindingFlags.Instance Or
                                                             BindingFlags.IgnoreCase)
-            propValue = pInfo.GetValue(obj, BindingFlags.GetProperty Or BindingFlags.IgnoreCase, Nothing, Nothing,
-                                       Nothing)
+            If pInfo IsNot Nothing Then
+                propValue = pInfo.GetValue(obj, BindingFlags.GetProperty Or BindingFlags.IgnoreCase, Nothing, Nothing,
+                                           Nothing)
+            End If
         Catch ex As Exception
             'MessageBox.Show("Invalid property " + PropName + " in object " + obj.GetType().ToString())
             'Throw ex

@@ -28,9 +28,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseItemEntry))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.txtPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -570,9 +569,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.CFlowLayout4)
         Me.Name = "PurchaseItemEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
         Me.CFlowLayout4.PerformLayout

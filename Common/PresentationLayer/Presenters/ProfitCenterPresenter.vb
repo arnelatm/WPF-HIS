@@ -26,35 +26,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetParentList() As List(Of ProfitCenterModel)
-            Dim xModel As New ProfitCenterModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of ProfitCenterModel)(SortOrderKey, xModel)
-            Dim modelData = Model.GetAll(Of ProfitCenterModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New ProfitCenterModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
-
-        'Public Function GetProfitCenterList(Optional ByVal sortKey As String = "") As List(Of ProfitCenterModel)
-        '    Dim xModel As New ProfitCenterModel
-        '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of ProfitCenterModel)(sortKey, xModel)
-        '    Dim modelData = Model.GetAll(Of ProfitCenterModel)(newSortOrderKey)
-        '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-        '        TreeViewList.Clear()
-        '    End If
-        '    For Each modData In modelData
-        '        Dim modelTb As New ProfitCenterModel
-        '        MapObject(modData, modelTb)
-        '        TreeViewList.Add(modelTb)
-        '    Next
-        '    Return TreeViewList
-        'End Function
 
         Public Function GetLastSortKey(ByVal searchValue As String) As String
             Return Model.GetLastSortKey(searchValue, TableName)

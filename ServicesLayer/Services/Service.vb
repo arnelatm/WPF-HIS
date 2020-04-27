@@ -23,6 +23,57 @@ Namespace Services
 
         Public Property DataBo As Object
 
+
+        'Public Property SecurityDao = Factory.SecurityDao
+
+        Private ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
+            Get
+                Return Factory.CreateDao("SecurityGroup")
+            End Get
+        End Property
+
+        Private ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
+            Get
+                Return Factory.CreateDao("SecurityObject")
+            End Get
+        End Property
+
+        Private ReadOnly Property UserDao As IDaoAll(Of User)
+            Get
+                Return Factory.CreateDao("User")
+            End Get
+        End Property
+
+        Public Sub New(accountName As String)
+            Dim securityGroup As New SecurityGroup
+            Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + accountName
+            Dim dao = accountName + "Dao"
+            'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            DataBo = GetInstance(bizObject)
+            If DataBo Is Nothing Then
+                MessageBox.Show("Missing Business Object " + bizObject)
+            End If
+            DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
+            If DataDao Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + dao)
+                Debugger.Break()
+            End If
+        End Sub
+
+        Public Function GetInstance(ByVal strFullyQualifiedName As String) As Object
+            Dim type As Type = Type.[GetType](strFullyQualifiedName)
+            If type IsNot Nothing Then Return Activator.CreateInstance(type)
+            For Each asm In AppDomain.CurrentDomain.GetAssemblies()
+                type = asm.[GetType](strFullyQualifiedName)
+                If type IsNot Nothing Then Return Activator.CreateInstance(type)
+            Next
+            Return Nothing
+        End Function
+
+        Public Sub New()
+        End Sub
+
+
         Public Function GetDefaultFieldValues(ByVal tableName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
         End Function
@@ -49,6 +100,23 @@ Namespace Services
         End Function
 
 #Region "Current Service Function"
+
+        Public Function GetControlSecurityIdNo(searchValue As String) As String _
+            Implements IService.GetControlSecurityIdNo
+            Return BaseDao.GetControlSecurityIdNo(searchValue)
+        End Function
+
+        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+            Implements IService.GetUserSecurity
+            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        End Function
+
+
+
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+            Implements IService.GetUserSecurityForKey
+            Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+        End Function
 
         Public Function GetRecordsWithIdNo(Of TM)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
             As List(Of TM) Implements IService.GetRecordsWithIdNo
@@ -246,112 +314,6 @@ Namespace Services
         End Function
 
 #End Region
-
-        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-        '    Implements IService.GetUserSecurity
-        '    Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-        'End Function
-
-        '' ReSharper disable once UnusedMember.Local
-        '    Private Function InvokeMethod(sender As Object, e As WaitWindowEventArgs) As Integer
-        '        Thread.Sleep(500)
-        '        'System.Threading.Thread.Sleep(0)
-        '        Try
-        '            Me.GetType.InvokeMember("Update" + e.Arguments(1), BindingFlags.InvokeMethod, Nothing, Me,
-        '                                    New Object() {e.Arguments(2)})
-        '        Catch ex As Exception
-        '            Throw
-        '        End Try
-        '        e.Result = Me.GetType.InvokeMember("Update" + e.Arguments(1), BindingFlags.InvokeMethod, Nothing, Me,
-        '                                           New Object() {e.Arguments(2)})
-        '        Return e.Result
-        '    End Function
-
-        'Public Function GetRecords (Of TD As New)(tableName As String, sortOrder As String) As List(Of TD) _
-        '    Implements IService.GetRecords
-        '    Dim p = PluralizationService.CreateService(New CultureInfo("en-US"))
-        '    Dim pluralForm = ""
-        '    pluralForm = p.Pluralize(tableName)
-        '    If tableName = pluralForm Then
-        '        ' break the rule because cannot use the same method for the single rule
-        '        pluralForm = tableName + "s"
-        '    End If
-        '    Return Me.GetType.InvokeMember("Get" + pluralForm, BindingFlags.InvokeMethod, Nothing, Me, New Object() {sortOrder})
-        'End Function
-
-        ' ReSharper disable once UnusedMember.Local
-        ' ReSharper disable once UnusedParameter.Local
-        '    Private Sub InvokeMethod2(sender As Object, e As WaitWindowEventArgs)
-
-        '        Thread.Sleep(0)
-
-        '        'AdoNet.BaseDao.HasRecordChanged(eidNo, tableName, timeStampedValue, timeStampField)
-
-        '        If e.Arguments.Count > 0 Then
-        '            e.Result = e.Arguments(0).ToString()
-        '        Else
-        '            e.Result = "Hello World"
-        '        End If
-        '    End Sub
-    End Class
-
-    'Public Class ServiceLogin
-    '    Inherits Service
-
-    '    Protected Shared ReadOnly LoginDao As ILoginDao = Factory.LoginDao()
-
-    '    Public Sub New()
-    '        DataDao = LoginDao
-    '        DataBo = New Login
-    '    End Sub
-
-    'End Class
-
-    Public Class ServiceUser
-        Inherits Service
-
-        Protected ReadOnly UserDao As IDaoAll(Of User) = Factory.UserDao
-
-        Public Sub New()
-            DataDao = UserDao
-            DataBo = New User
-        End Sub
-
-    End Class
-
-    Public Class ServiceSecurityObject
-        Inherits Service
-
-        Protected ReadOnly SecurityObjectDao As IDaoAll(Of SecurityObject) = Factory.SecurityObjectDao()
-
-        Public Sub New()
-            DataDao = SecurityObjectDao
-            DataBo = New SecurityObject
-        End Sub
-
-    End Class
-
-    Public Class ServiceSecurityGroup
-        Inherits Service
-
-        Protected ReadOnly SecurityGroupDao As IDao(Of SecurityGroup) = Factory.SecurityGroupDao()
-
-        Public Sub New()
-            DataDao = SecurityGroupDao
-            DataBo = New SecurityGroup
-        End Sub
-
-    End Class
-
-    Public Class ServiceGroupAccess
-        Inherits Service
-
-        Protected ReadOnly GroupAccessDao As IDaoChild(Of GroupAccess) = Factory.GroupAccessDao()
-
-        Public Sub New()
-            DataDao = GroupAccessDao
-            DataBo = New GroupAccess
-        End Sub
 
     End Class
 

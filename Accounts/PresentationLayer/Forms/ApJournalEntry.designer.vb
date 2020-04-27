@@ -33,9 +33,8 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ApJournalEntry))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.floApJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.floApJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -1114,9 +1113,8 @@ Namespace PresentationLayer.Forms
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MinimumSize = New System.Drawing.Size(1059, 580)
         Me.Name = "ApJournalEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Text = "Accounts Payable Journal Entry"
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            Me.Text = "Accounts Payable Journal Entry"
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floApJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit

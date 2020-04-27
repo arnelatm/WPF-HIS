@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
@@ -144,7 +143,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Integer Implements IPettyCashJournalView.DiscountAccountIdNo
+        Public Property DiscountAccountIdNo As Int32? Implements IPettyCashJournalView.DiscountAccountIdNo
             Get
                 Return cboDiscountAccountIdNo.GetValue()
             End Get
@@ -1320,10 +1319,10 @@ Namespace PresentationLayer.Forms
                                     ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow _
 
             ' Check if the starting balance row is included in the selected rows
-            Dim PettyCashRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
+            Dim pettyCashRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
 
             ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(PettyCashRowEntry) Then
+            If DataGridViewJournalItems.SelectedRows.Contains(pettyCashRowEntry) Then
                 ' Do not allow the user to delete the first row.
                 MessageBox.Show($"Deletion of the first row is not allowed!")
                 ' Cancel the deletion

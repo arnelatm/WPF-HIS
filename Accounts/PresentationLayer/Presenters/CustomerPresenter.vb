@@ -11,15 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICustomerView)
             MyBase.New(view)
-            TableName = "Customer"
-            SortOrderKey = "CustomerName"
-            TreeViewMainField = "CustomerName"
-            TreeViewSecondaryField = "CustomerCode"
-            ModelPresenter = New ModelAccounts("Customer")
-            OriginalModel = New CustomerModel()
-            DataModel = New CustomerModel
-            TreeViewList = New List(Of CustomerModel)
-            ParentViewList = New List(Of CustomerModel)
+            InitializerWithTv("Customer")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub

@@ -28,9 +28,8 @@ Namespace PresentationLayer.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ChartEntryTv))
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me._MBChartCannotBeParentToItself = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
-        Me._MBParentWithChildrenChangedDisallowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+            Me._MBChartCannotBeParentToItself = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
+            Me._MBParentWithChildrenChangedDisallowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBMainAccountNotEditable = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MSGMandatoryFields = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -567,9 +566,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "ChartEntryTv"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout

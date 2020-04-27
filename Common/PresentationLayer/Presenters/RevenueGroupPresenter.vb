@@ -26,36 +26,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetParentList() As List(Of RevenueGroupModel)
-            Dim xModel As New RevenueGroupModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of RevenueGroupModel)(SortOrderKey, xModel)
-            Dim modelData = Model.GetAll(Of RevenueGroupModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New RevenueGroupModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
-
-        'Public Function GetRevenueGroupList(Optional ByVal sortKey As String = "") As List(Of RevenueGroupModel)
-        '    Dim xModel As New RevenueGroupModel
-        '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of RevenueGroupModel)(sortKey, xModel)
-        '    Dim modelData = Model.GetAll(Of RevenueGroupModel)(newSortOrderKey)
-        '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-        '        TreeViewList.Clear()
-        '    End If
-        '    For Each modData In modelData
-        '        Dim modelTb As New RevenueGroupModel
-        '        MapObject(modData, modelTb)
-        '        TreeViewList.Add(modelTb)
-        '    Next
-        '    Return TreeViewList
-        'End Function
-
         Public Function GetLastSortKey(ByVal searchValue As String) As String
             Return Model.GetLastSortKey(searchValue, TableName)
         End Function

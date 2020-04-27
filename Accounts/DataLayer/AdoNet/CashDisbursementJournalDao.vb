@@ -78,7 +78,7 @@ Namespace DataLayer.AdoNet
             .PayeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayeeName")),
             .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
             .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
-            .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("DiscountAccountIdNo")),
+            .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
             .Applied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Applied")),
             .UnApplied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnApplied")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),

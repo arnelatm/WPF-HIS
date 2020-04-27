@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views
         Property CostCenterCode As String
         Property CostCenterName As String
         Property CostCenterNameAra As String
-        Property ProfitCenterIdNo As Integer
+        Property ProfitCenterIdNo As Integer?
         Property LevelNumber As Int16
         Property Notes As String
         Property SortKey As String

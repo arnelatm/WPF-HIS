@@ -125,7 +125,7 @@ Namespace DataLayer.AdoNet
             .CheckDate = Extensions.AsDate(reader("CheckDate")),
             .CheckNumber = Extensions.AsString(reader("CheckNumber")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .DiscountAccountIdNo = Extensions.AsInt(Of Integer)(reader("DiscountAccountIdNo")),
+            .DiscountAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .IdNo = Extensions.AsId(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),

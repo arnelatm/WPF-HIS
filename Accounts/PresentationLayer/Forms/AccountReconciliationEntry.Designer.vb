@@ -39,9 +39,8 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me.floHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -909,9 +908,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.CFlowLayout4)
         Me.Name = "AccountReconciliationEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floHeader.ResumeLayout(false)
         Me.CFlowLayout1.ResumeLayout(false)
         Me.CFlowLayout1.PerformLayout

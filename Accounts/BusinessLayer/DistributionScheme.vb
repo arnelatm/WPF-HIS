@@ -21,7 +21,7 @@ Namespace BusinessLayer
         Public Property TotalPercentage As Decimal
         Public Property ValidityEndDate As Date
         Public Property ValidityStartDate As Date
-
+        Public Property DistributionSchemeItems As List(Of DistributionSchemeItem)
     End Class
 
 End Namespace

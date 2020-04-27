@@ -353,6 +353,7 @@
     <Compile Include="PresentationLayer\Models\GlLedgerItemModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelAccounts.vb" />
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\MainModel.vb" />
     <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
     <Compile Include="PresentationLayer\Models\PcsOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PettyCashJournalModel.vb" />
@@ -384,6 +385,7 @@
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\MainPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PcsOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter.vb" />
@@ -395,6 +397,7 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />

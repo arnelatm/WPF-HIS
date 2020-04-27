@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views
         Property CheckDate As Date?
         Property CheckNumber As String
         ReadOnly Property DateCreated As DateTime?
-        Property DiscountAccountIdNo As Int32
+        Property DiscountAccountIdNo As Int32?
         Property DiscountTaken As Decimal
         Property IdNo As Integer
         Property Notes As String

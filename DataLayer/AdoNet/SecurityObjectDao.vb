@@ -14,7 +14,7 @@ Namespace AdoNet
                              Function(reader) _
             New SecurityObject() With {
             .IdNo = Extensions.AsId(reader("IdNo")),
-            .ParentIdNo = Extensions.AsInt(Of Integer)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra")),
             .Notes = Extensions.AsString(reader("Notes"))}

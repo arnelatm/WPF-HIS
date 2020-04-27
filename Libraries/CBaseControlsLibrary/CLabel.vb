@@ -1,13 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CLabel
     Inherits Label
     Implements IEntryControl
 
-    Private _selectable As Boolean
     Private _editable As Boolean
     Private _editingMode As Boolean
     Private _displayOnly As Boolean

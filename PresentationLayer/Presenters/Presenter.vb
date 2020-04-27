@@ -107,9 +107,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event EditingRecordChanged(editing As Boolean)
 
-    Public Event ParentRecordAddedSuccessfully(idNoOfRecord As Integer)
+    Public Event ParentRecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
 
-    Public Event ParentRecordUpdatedSuccessfully(idNoOfRecord As Integer)
+    Public Event ParentRecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
 
     Public Event SuccessfulAdd(idNoOfRecord As Integer)
 
@@ -695,7 +695,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                                   MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                     addAnother = True
                 Else
-                    RecordPositionNumber = GetSortedRecordPosition(retVal)
+                    Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+                    RecordPositionNumber = GetSortedRecordPosition(idNo)
                 End If
             Else
                 RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
@@ -1211,6 +1212,23 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Return Nothing
         End Try
         Return retValue
+    End Function
+
+
+    Public Function GetControlSecurityIdNo(searchValue As String) As String
+        Try
+            Return Model.GetControlSecurityIdNo(searchValue)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
+        Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+    End Function
+
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList
+        Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
 End Class

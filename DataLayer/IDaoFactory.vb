@@ -8,7 +8,6 @@ Public Interface IDaoFactory
 
     ReadOnly Property DefaultFieldValueDao As IDefaultFieldValueDao
     ReadOnly Property TblColPropDao As ITblColPropDao
-    ReadOnly Property SecurityDao As ISecurityDao
     ReadOnly Property LoginDao As ILoginDao
     ReadOnly Property SaltDao As ISaltDao
     ReadOnly Property UserDao As IDaoAll(Of User)
@@ -18,4 +17,5 @@ Public Interface IDaoFactory
 
     ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
     ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
+    Function CreateDao(classBasename As String)
 End Interface

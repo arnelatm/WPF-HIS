@@ -3,25 +3,11 @@
     Public Class BaseDao
         Implements IBaseDao
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        'Public  Db As Db
         Private _lastFindQuery As String
 
         Private _lastFindParms As Object
-
-        'Public Sub New()
-        '    Db = Db
-        'End Sub
-
-        'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
-        '    Implements IBaseDao.GetUserSecurity
-        '    Dim params() As Object =
-        '            {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
-        '    Dim sql =
-        '            " SELECT top 1 Visible, Selectable, Viewable, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
-        '    Return Db.SqlRead(sql, params)
-        'End Function
 
         Public Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object _
             Implements IBaseDao.GetFilteredRecords
@@ -36,7 +22,7 @@
             Dim retVal As ArrayList
             Dim sql As String = " SELECT " & returnFields & " FROM " & tableName & " where " & searchField &
                                 " = @SearchValue "
-            retVal = Db.SqlRead(sql, params)
+            retVal = _db.SqlRead(sql, params)
             Return retVal
         End Function
 
@@ -61,7 +47,7 @@
                         " Select IDNo FROM [" & tableName & "] order by " & sortOrder &
                         " OFFSET " & recordNo - 1 & " ROWS fetch Next 1 ROWS ONLY"
                 Dim x As Object
-                x = Db.Scalar(sql)
+                x = _db.Scalar(sql)
                 If x Is DBNull.Value Then
                     If recordNo > 0 Then
                         ' return the last record
@@ -74,7 +60,7 @@
                         End If
                         sortOrder = Replace(sortOrder, " DESC", " ASC", )
                         sql = "Select TOP 1 IDNo FROM [" & tableName & "] order by " & sortOrder
-                        x = Db.Scalar(sql)
+                        x = _db.Scalar(sql)
                     Else
                         Return 0
                     End If
@@ -97,14 +83,14 @@
                     " Select count(*) From [" & tableName &
                     "] where " & sortOrder & " <= (Select " & sortOrder &
                     " from [" & tableName & "] where IDNo = " & idNo & ")"
-            Return Db.Scalar(sql)
+            Return _db.Scalar(sql)
         End Function
 
         Public Function GetRecordCount(tableName As String) As Integer _
             Implements IBaseDao.GetRecordCount
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] "
-            Return Db.Scalar(sql)
+            Return _db.Scalar(sql)
         End Function
 
         Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
@@ -112,7 +98,7 @@
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where IDNo < " & idNo
-            Return Db.Scalar(sql)
+            Return _db.Scalar(sql)
         End Function
 
         Public Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) _
@@ -121,7 +107,7 @@
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & sortField & "< '" & nameValue & "'"
-            Return Db.Scalar(sql)
+            Return _db.Scalar(sql)
         End Function
 
         Public Function FindField(tableName As String, fieldName As String, searchString As String,
@@ -142,7 +128,7 @@
             Dim params() As Object = {"@SearchString", searchString}
             _lastFindQuery = sql
             _lastFindParms = params
-            retVal = Db.Scalar(sql & " order by IDNo ", params)
+            retVal = _db.Scalar(sql & " order by IDNo ", params)
             Return retVal
         End Function
 
@@ -157,7 +143,7 @@
                 Dim sql As String
                 sql = _lastFindQuery + " and IDNo > " + lastIdNo.ToString() + " order by IDNo "
                 Dim params() As Object = _lastFindParms
-                retVal = Db.Scalar(sql, params)
+                retVal = _db.Scalar(sql, params)
                 'If RetVal = 0 Then
                 '    MessageBox.Show("This is already the last matching record or no record was found with the last entered search string!")
                 '    '' stay on the current record
@@ -175,7 +161,7 @@
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
                     " Where IdNo = " & idNo
-            Return Db.Delete(sql)
+            Return _db.Delete(sql)
         End Function
 
         'Public  Function GetFirstDependentRecord(ByVal SearchValue As String, ByVal TableName As String, ByVal SearchFieldName As String, ByVal ReturnFieldName As String) As Integer
@@ -192,7 +178,7 @@
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = Db.Scalar(sql, params)
+            Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -206,7 +192,7 @@
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = Db.Scalar(sql, params)
+            Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -221,7 +207,7 @@
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = @SearchValue2 "
             Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
-            Dim retVal = Db.Scalar(sql, params)
+            Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -235,7 +221,7 @@
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Return Db.Scalar(sql, params)
+            Return _db.Scalar(sql, params)
         End Function
 
         Public Function CountRecordWith2Key(searchValue1 As Integer, searchValue2 As String,
@@ -247,7 +233,7 @@
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = '" & searchValue2 &
                     "'"
             Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
-            Return Db.Scalar(sql, params).ToString()
+            Return _db.Scalar(sql, params).ToString()
         End Function
 
         Public Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String,
@@ -258,7 +244,7 @@
                     " Where " & searchFieldName & " = @SearchValue " &
                     " and IDNo <> @currentIDNo "
             Dim params() As Object = {"@SearchValue", searchValue, "@currentIdNo", currentIdNo}
-            Dim nCount = Db.Scalar(sql, params)
+            Dim nCount = _db.Scalar(sql, params)
             Return Not nCount > 0
         End Function
 
@@ -268,7 +254,7 @@
                     " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where IDNO = @IDNo "
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Scalar(sql, params).ToString()
+            Return _db.Scalar(sql, params).ToString()
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, dateTimeStampField As String) _
@@ -279,7 +265,7 @@
                     " Where IdNo = @IdNo "
             Dim params() As Object = {"@IDNo", idNo}
             Dim retValue As Object
-            retValue = Db.Scalar(sql, params)
+            retValue = _db.Scalar(sql, params)
             Return retValue
             'Return System.Text.Encoding.ASCII.GetString(retValue)
         End Function
@@ -299,7 +285,7 @@
             '    "where TC.constraint_type = 'Unique' and cc.TABLE_NAME = @TableName and cc.COLUMN_NAME = @FieldName "
             Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName}
             Dim nCount As Integer
-            nCount = Db.Scalar(sql, params)
+            nCount = _db.Scalar(sql, params)
             If nCount > 0 Then
                 Return True
             Else
@@ -313,7 +299,7 @@
             Dim sql As String = " Select count(*) FROM [" & tableName & "] " &
                                 " Where IdNo = @IdNo and timeStampedField = @timeStampValue "
             Dim params() As Object = {"@IDNo", idNo, "@timeStampValue", timeStampValue}
-            Dim nCount = Db.Scalar(sql, params)
+            Dim nCount = _db.Scalar(sql, params)
             Return Not nCount > 0
         End Function
 
@@ -324,7 +310,7 @@
                 sql = " Select Top 1 SortKey FROM " & tableName &
                       " Where len(RTrim(SortKey)) <= 4" &
                       " order by SortKey DESC "
-                Dim cResult = Db.Scalar(sql)
+                Dim cResult = _db.Scalar(sql)
                 If cResult Is Nothing Then
                     Return ""
                 End If
@@ -336,7 +322,7 @@
                       searchValue.Trim().Length + 4 &
                       " order by SortKey DESC "
                 Dim parms() As Object = {"@SearchValue", searchValue}
-                Return Db.Scalar(sql, parms)
+                Return _db.Scalar(sql, parms)
             End If
         End Function
 
@@ -347,7 +333,7 @@
                     " Update [" & tableName & "] " &
                     " Set " & fieldName & " = @Value" &
                     " where IdNo = " & idNo
-            Return Db.Update(sql, {"@Value", value})
+            Return _db.Update(sql, {"@Value", value})
         End Function
 
         'Private Sub ExecuteSqlTransaction(ByVal connectionString As String)
@@ -451,7 +437,7 @@
                 fields = Strings.Left(fields, Len(fields) - 1)
             End If
             Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-            Return Db.SqlRead(sql)
+            Return _db.SqlRead(sql)
         End Function
 
         Public Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
@@ -464,7 +450,7 @@
             Else
                 sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
             End If
-            Return Db.SqlRead(sql)
+            Return _db.SqlRead(sql)
         End Function
 
         Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) _
@@ -473,11 +459,42 @@
             Dim sql As String =
                     " Select " & sqlStatement & " FROM [" & tableName & "] " &
                     " Where " & condition
-            Dim x = Db.Scalar(sql)
+            Dim x = _db.Scalar(sql)
             If IsDBNull(x) Then
                 Return Nothing
             End If
             Return Convert.ChangeType(x, GetType(TType))
+        End Function
+
+        Public Function GetControlSecurityIdNo(searchValue As String) As String Implements IBaseDao.GetControlSecurityIdNo
+            Dim sql As String =
+                    " Select Top 1 IdNo FROM SecurityObject " &
+                    " Where SecurityObjectName = @SearchValue "
+            Dim params() As Object = {"@SearchValue", searchValue}
+            Dim retVal = _db.Scalar(sql, params)
+            If retVal Is Nothing Then
+                Return Nothing
+            End If
+            Return retVal.ToString()
+        End Function
+
+        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+            Implements IBaseDao.GetUserSecurity
+            Dim params() As Object =
+                    {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
+            Dim sql =
+                    " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
+            Return _db.SqlRead(sql, params)
+        End Function
+
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList Implements IBaseDao.GetUserSecurityForKey
+            Dim params() As Object =
+                    {"@SecurityObjectName", securityObjectName, "@SecurityGroupIDNo", securityGroupIdNo}
+            Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &
+                      "Left Join SecurityObject " &
+                      "on GroupAccess.SecurityObjectIDNo = SecurityObject.IdNo " &
+                      "where SecurityObject.SecurityObjectName = @securityObjectName and GroupAccess.SecurityGroupIdNo = @SecurityGroupIdNo"
+            Return _db.SqlRead(sql, params)
         End Function
 
     End Class

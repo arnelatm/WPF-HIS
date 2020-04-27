@@ -29,10 +29,9 @@ Namespace PresentationLayer.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomerEntryTv))
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
-        Me._MSGMandatoryFields = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
-        Me._localizableMessage1 = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me._MSGMandatoryFields = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
+            Me._localizableMessage1 = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1158,9 +1157,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CustomerEntryTv"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout

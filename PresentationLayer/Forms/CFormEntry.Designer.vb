@@ -25,7 +25,6 @@ Partial Class CFormEntry
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntry))
-        Dim SecurityPresenter1 As AATM.PresentationLayer.Presenters.SecurityPresenter = New AATM.PresentationLayer.Presenters.SecurityPresenter()
         Me._localizableMessage1 = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
         Me.FormToolStrip = New System.Windows.Forms.ToolStrip()
         Me.btnFirst = New System.Windows.Forms.ToolStripButton()
@@ -363,8 +362,7 @@ Partial Class CFormEntry
         Me.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.MinimumSize = New System.Drawing.Size(320, 250)
         Me.Name = "CFormEntry"
-        Me.SecurityPresenterObj = SecurityPresenter1
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FormToolStrip.ResumeLayout(false)
         Me.FormToolStrip.PerformLayout
         Me.floFormTitle.ResumeLayout(false)

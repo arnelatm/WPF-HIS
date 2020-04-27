@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
         Inherits DaoFactoryCommon
         Implements IDaoFactoryAccounts
 
-        Public Overrides Function CreateDao(classBaseName As String) As Object Implements IDaoFactoryAccounts.CreateDao
+        Public Overloads Function CreateDao(classBaseName As String) As Object Implements IDaoFactoryAccounts.CreateDao
             Dim className = $"AATM.Accounts.DataLayer.AdoNet." + classBaseName + "Dao"
             Dim dao As Object
             Dim tType As Type = Type.GetType(className)

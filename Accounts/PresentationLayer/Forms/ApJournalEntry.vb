@@ -1,14 +1,11 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Libraries
 Imports System.ComponentModel
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 
 Namespace PresentationLayer.Forms
@@ -315,7 +312,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New CustomControlsLibrary.DgvFooter(Me.DataGridViewJournalItems)
+            _footer = New DgvFooter(DataGridViewJournalItems)
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
@@ -353,7 +350,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub cboAccountIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboAccountIdNo.Validating
+        Private Sub cboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboAccountIdNo.RevertValue()
@@ -366,7 +363,7 @@ Namespace PresentationLayer.Forms
             UpdateVatNumber()
         End Sub
 
-        Private Sub cboSupplierIdNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cboSupplierIdNo.Validating
+        Private Sub cboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboSupplierIdNo.RevertValue()
@@ -468,7 +465,7 @@ Namespace PresentationLayer.Forms
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                     Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.GetValue()
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         With DataGridViewJournalItems.CurrentRow
                             Dim currentVatAmount As Decimal
                             If PresenterObj.IsInputVatAccount(newValue) Then

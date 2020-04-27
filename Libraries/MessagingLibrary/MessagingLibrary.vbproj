@@ -140,10 +140,6 @@
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Translations\Translations.vbproj">
-      <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
-      <Name>Translations</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -129,20 +129,20 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function SaveChildren(ByVal retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
-            Dim parentIdNo As Integer
+            Dim headerIdNo As Integer
             If AddMode Then
-                parentIdNo = retVal
+                headerIdNo = retVal
                 CallByName(View, IdFieldName, CallType.Set, retVal)
             Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
+            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, headerIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = parentIdNo
+                    row.Item("JournalIdNo") = headerIdNo
                 Next
                 insertReturnValue = Model.InsertTvp(DtInsertTable)
                 If insertReturnValue >= 0 Then

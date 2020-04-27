@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Property Applied As Decimal
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
-        Property DiscountAccountIdNo As Int32
+        Property DiscountAccountIdNo As Int32?
         Property DiscountTaken As Decimal
         Property IdNo As Integer
         Property Notes As String

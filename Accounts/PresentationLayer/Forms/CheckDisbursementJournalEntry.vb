@@ -1,8 +1,8 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -169,7 +169,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Integer Implements ICheckDisbursementJournalView.DiscountAccountIdNo
+        Public Property DiscountAccountIdNo As Int32? Implements ICheckDisbursementJournalView.DiscountAccountIdNo
             Get
                 Return cboDiscountAccountIdNo.GetValue()
             End Get
@@ -1076,7 +1076,7 @@ Namespace PresentationLayer.Forms
                 Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.GetValue()
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         With DataGridViewJournalItems.CurrentRow
                             Dim currentVatAmount As Decimal
                             If _journalItemsPresenter.IsInputVatAccount(newValue) Then

@@ -15,6 +15,13 @@ Public Class Model
 
     Public Property DataService As Object
 
+    Public Sub New(accountName As String)
+        DataService = New Service(accountName)
+    End Sub
+
+    Public Sub New()
+    End Sub
+
     Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
         Implements IModel.GetRecordById
         Dim modelData As New TM
@@ -86,7 +93,7 @@ Public Class Model
             Dim tData As New ClassesLibrary.HLookupData
             tData.IdNo = data(i * 4 - 4)
             tData.Name = data(i * 4 - 3)
-            tData.ParentIdNo = If(data(i * 4 - 2) Is DBNull.Value, 0, data(i * 4 - 2))
+            tData.ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2)))
             tData.Code = If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 1))
             tlData.Add(tData)
         Next
@@ -205,9 +212,14 @@ Public Class Model
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
             Dim tData As New ClassesLibrary.LookupData
+            Dim x = data(i * 3 - 1)
             tData.IdNo = data(i * 3 - 3)
             tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
-            tData.Code = data(i * 3 - 1)
+            If x.Equals(DBNull.Value) Then
+                tData.Code = ""
+            Else
+                tData.Code = data(i * 3 - 1)
+            End If
             tlData.Add(tData)
         Next
         Return tlData
@@ -394,6 +406,21 @@ Public Class Model
         Return DataService.IsValid(dModel)
     End Function
 
+    Public Function GetControlSecurityIdNo(searchValue As String) As String _
+        Implements IModel.GetControlSecurityIdNo
+        Return Service.GetControlSecurityIdNo(searchValue)
+    End Function
+
+    Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        Implements IModel.GetUserSecurity
+        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+    End Function
+
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+        Implements IModel.GetUserSecurityForKey
+        Return Service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+    End Function
+
 End Class
 
 Public Class ModelLogin
@@ -403,44 +430,5 @@ Public Class ModelLogin
         DataService = New ServiceLogin
     End Sub
 
-    'Public Overrides Function GetDataService()
-    '    Return New ServiceLogin
-    'End Function
-
 End Class
 
-Public Class ModelUser
-    Inherits Model
-
-    Public Sub New()
-        DataService = New ServiceUser
-    End Sub
-
-End Class
-
-Public Class ModelSecurityObject
-    Inherits Model
-
-    Public Sub New()
-        DataService = New ServiceSecurityObject()
-    End Sub
-
-End Class
-
-Public Class ModelSecurityGroup
-    Inherits Model
-
-    Public Sub New()
-        DataService = New ServiceSecurityGroup()
-    End Sub
-
-End Class
-
-Public Class ModelGroupAccess
-    Inherits Model
-
-    Public Sub New()
-        DataService = New ServiceGroupAccess()
-    End Sub
-
-End Class
