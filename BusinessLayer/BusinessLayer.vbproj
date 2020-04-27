@@ -146,10 +146,6 @@
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>MessagingLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\Translations\Translations.vbproj">
-      <Project>{604677ED-411D-4F00-B151-F4D39BC9E670}</Project>
-      <Name>Translations</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
