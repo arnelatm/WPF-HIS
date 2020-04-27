@@ -625,10 +625,6 @@
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>MessagingLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\Translations\Translations.vbproj">
-      <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
-      <Name>Translations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\Events\Events.vbproj">
       <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
       <Name>Events</Name>

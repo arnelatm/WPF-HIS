@@ -312,10 +312,6 @@
       <Project>{9D9621DA-7C8E-4DC7-94D1-736AA07AE8AC}</Project>
       <Name>Views</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Translations\Translations.vbproj">
-      <Project>{604677ed-411d-4f00-b151-f4d39bc9e670}</Project>
-      <Name>Translations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Events\Events.vbproj">
       <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
       <Name>Events</Name>
