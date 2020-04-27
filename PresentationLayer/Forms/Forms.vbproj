@@ -105,16 +105,10 @@
     <Compile Include="BFModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormEntry.designer.vb">
+    <Compile Include="CFormEntry.Designer.vb">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="CFormEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CFormEntryNew.Designer.vb">
-      <DependentUpon>CFormEntryNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFormEntryNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
@@ -179,9 +173,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntryNew.resx">
-      <DependentUpon>CFormEntryNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>

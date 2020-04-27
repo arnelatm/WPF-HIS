@@ -1147,6 +1147,13 @@ Namespace PresentationLayer.Forms
         Public Property SecurityGroupIdNo As Integer Implements IUserView.SecurityGroupIdNo
         Public Property IUserView_UserName As String Implements IUserView.UserName
 
+        Private Sub ToolStripMenuItemSecurityGroups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityGroups.Click
+            Dim childMdiForm As SecurityGroupEntryTv
+            childMdiForm = New SecurityGroupEntryTv With {
+                    .MdiParent = Me
+                    }
+            childMdiForm.Show()
+        End Sub
     End Class
 
 End Namespace
