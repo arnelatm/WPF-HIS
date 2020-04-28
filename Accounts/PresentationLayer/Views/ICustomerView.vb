@@ -26,15 +26,15 @@ Namespace PresentationLayer.Views
         Property VatNumber As String
         Property CrNumber As String
         Property AccountStatus As String
-        Property ArAccountIdNo As Int32
-        Property RevAccountIdNo As Int32
-        Property DiscountSchemeIdNo As Int16
+        Property ArAccountIdNo As Int32?
+        Property RevAccountIdNo As Int32?
+        Property DiscountSchemeIdNo As Int16?
         Property CreditLimit As Single
         Property SettlementDueDays As Int16
         Property SettlementDiscount As Decimal
         Property PaymentDueDays As Int16
         Property DateAccountOpen As Date?
-        Property BankIdNo As Int16
+        Property BankIdNo As Int16?
         Property BankAccountNo As String
         Property Iban As String
         Property PaymentMethod As String

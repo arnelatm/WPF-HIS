@@ -82,7 +82,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Integer Implements ISalesJournalView.AccountIdNo
+        Public Property AccountIdNo as Int32 Implements ISalesJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -546,7 +546,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                          pAccountIdNo As Integer, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
+                                          pAccountIdNo as Int32, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
             If debitAmount <> 0 Or creditAmount <> 0 Then
                 counter = counter + 1
                 If counter <= oldJournalItems.Count() Then

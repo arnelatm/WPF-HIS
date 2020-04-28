@@ -2,7 +2,7 @@
 Namespace PresentationLayer.Models
 
     Public Class JournalItemModel
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property AccountName As String
         Public Property Cancelled As Boolean
         Public Property Credit As Decimal

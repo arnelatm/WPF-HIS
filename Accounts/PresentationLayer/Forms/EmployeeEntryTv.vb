@@ -37,7 +37,7 @@ Namespace PresentationLayer.Forms
         End Property
 
 
-        Public Property ArAccountIdNo As Integer Implements IEmployeeView.ArAccountIdNo
+        Public Property ArAccountIdNo As Int32? Implements IEmployeeView.ArAccountIdNo
             Get
                 Return cacArAccountIdNo.GetValue()
             End Get
@@ -68,7 +68,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Private Property BankIdNo As Short Implements IEmployeeView.BankIdNo
+        Private Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
                 Return cacBankIdNo.GetValue()
             End Get
@@ -99,7 +99,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DepartmentIdNo As Short Implements IEmployeeView.DepartmentIdNo
+        Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
                 Return cacDepartmentIdNo.GetValue()
             End Get
@@ -108,7 +108,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DesignationIdNo As Short Implements IEmployeeView.DesignationIdNo
+        Public Property DesignationIdNo As Int16? Implements IEmployeeView.DesignationIdNo
             Get
                 Return cacDesignationIdNo.GetValue()
             End Get
@@ -323,7 +323,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ReligionIdNo As Int16 Implements IEmployeeView.ReligionIdNo
+        Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
             Get
                 Return cacReligionIdNo.GetValue()
             End Get

@@ -41,20 +41,20 @@ Namespace BusinessLayer
         Public Property VatNumber As String
         Public Property CrNumber As String
         Public Property AccountStatus As String
-        Public Property ArAccountIdNo As Int32
-        Public Property RevAccountIdNo As Int32
+        Public Property ArAccountIdNo As Int32?
+        Public Property RevAccountIdNo As Int32?
         Public Property CreditLimit As Single
         Public Property SettlementDueDays As Int16
         Public Property SettlementDiscount As Decimal
         Public Property PaymentDueDays As Int16
         Public Property DateAccountOpen As Date?
-        Public Property BankIdNo As Int16
+        Public Property BankIdNo As Int16?
         Public Property BankAccountNo As String
         Public Property Iban As String
         Public Property PaymentMethod As String
         Public Property Notes As String
         Public Property OpeningBalance As Single
-        Public Property DiscountSchemeIdNo As Int16
+        Public Property DiscountSchemeIdNo As Int16?
         Public Property Active As Boolean
     End Class
 

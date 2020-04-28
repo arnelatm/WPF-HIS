@@ -183,7 +183,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property GlAccountIdNo As Integer Implements IPurchaseItemView.GlAccountIdNo
+        Public Property GlAccountIdNo as Int32 Implements IPurchaseItemView.GlAccountIdNo
             Get
                 Return cboGlAccountIdNo.GetValue()
             End Get
@@ -192,7 +192,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property VatAccountIdNo As Integer Implements IPurchaseItemView.VatAccountIdNo
+        Public Property VatAccountIdNo as Int32 Implements IPurchaseItemView.VatAccountIdNo
             Get
                 Return cboVatAccountIdNo.GetValue()
             End Get

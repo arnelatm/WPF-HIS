@@ -7,7 +7,7 @@ Namespace ServiceLayer.ActionService
 
         Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal)
 
-        Function GetAcctReconItems(Of TM)(accountIdNo As Integer, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(Of TM)(ByVal reconciled As Boolean, ByVal idNo As Integer, ByVal Optional sortOrder As String = Nothing) As List(Of TM)
 
@@ -27,7 +27,7 @@ Namespace ServiceLayer.ActionService
 
     'Public Interface IAccountReconciliationItemService(Of TBo)
 
-    '    Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem)
+    '    Function GetAcctReconItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem)
 
     '    Function GetReconciledRecordsWithIdNo(ByVal reconciled As Boolean, ByVal idNo As Integer, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItem)
 

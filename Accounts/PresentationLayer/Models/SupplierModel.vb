@@ -8,9 +8,9 @@
 
         Public Property AccountStatus As String
         Public Property Active As Boolean
-        Public Property ApAccountIdNo As Int32
+        Public Property ApAccountIdNo As Int32?
         Public Property BankAccountNo As String
-        Public Property BankIdNo As Int16
+        Public Property BankIdNo As Int16?
         Public Property ContactDesignation As String
         Public Property ContactPerson As String
         Public Property CountryCode As String
@@ -20,7 +20,7 @@
         Public Property District As String
         Public Property Email As String
         Public Property Errors As List(Of String)
-        Public Property ExpAccountIdNo As Int32
+        Public Property ExpAccountIdNo As Int32?
         Public Property Fax As String
         Public Property Iban As String
         Public Property IdNo As Integer

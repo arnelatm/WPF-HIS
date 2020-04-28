@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class CadOiItemView
         Implements ICadOiItemView
 
-        Public Property AccountIdNo As Integer Implements ICadOiItemView.AccountIdNo
+        Public Property AccountIdNo as Int32 Implements ICadOiItemView.AccountIdNo
 
         Public Property Amount As Decimal Implements ICadOiItemView.Amount
 

@@ -43,7 +43,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ApAccountIdNo As Int32 Implements ISupplierView.ApAccountIdNo
+        Public Property ApAccountIdNo As Int32? Implements ISupplierView.ApAccountIdNo
             Get
                 Return cacApAccountIdNo.GetValue()
             End Get
@@ -61,7 +61,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property BankIdNo As Int16 Implements ISupplierView.BankIdNo
+        Public Property BankIdNo As Int16? Implements ISupplierView.BankIdNo
             Get
                 Return cacBankIdNo.GetValue()
             End Get
@@ -146,7 +146,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ExpAccountIdNo As Int32 Implements ISupplierView.ExpAccountIdNo
+        Public Property ExpAccountIdNo As Int32? Implements ISupplierView.ExpAccountIdNo
             Get
                 Return cacExpAccountIdNo.GetValue()
             End Get

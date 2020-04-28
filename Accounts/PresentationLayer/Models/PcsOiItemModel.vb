@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class PcsOiItemModel
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property PcsIdNo As Integer

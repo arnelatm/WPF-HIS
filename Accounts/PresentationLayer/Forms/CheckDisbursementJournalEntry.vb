@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemModel)
         Private _profitCentersByCode
         Private _totalBalance As Decimal = 0
-        Private ReadOnly _advancesToSupplierAccountIdNo As Integer
+        Private ReadOnly _advancesToSupplierAccountIdNo as Int32
 
         Public Sub New()
             MyBase.New()
@@ -81,7 +81,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Public Property AccountIdNo As Integer Implements ICheckDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo as Int32 Implements ICheckDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -893,7 +893,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub MakeJournalItem()
             If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                Dim aAccountIdNo As Integer() = {}
+                Dim aAccountIdNo as Int32() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
                 Dim aDiscountTaken() As Decimal = {}
@@ -901,7 +901,7 @@ Namespace PresentationLayer.Forms
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In bsCkdOiItems
-                    Dim nAccountIdNo As Integer
+                    Dim nAccountIdNo as Int32
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)

@@ -95,7 +95,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        'Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        'Public Function GetAcctReconItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
         '    As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetAcctReconItems
         '    Dim sql As String =
         '            "SELECT " &
@@ -123,7 +123,7 @@ Namespace DataLayer.AdoNet
         '    Return x
         'End Function
 
-        'Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        'Public Function GetAcctReconItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
         '    As List(Of AccountReconciliationItem) Implements IDao(Of AccountReconciliationItem).GetAcctReconItems
         '    Dim sql As String =
         '            "SELECT " &
@@ -151,7 +151,7 @@ Namespace DataLayer.AdoNet
         '    Return x
         'End Function
 
-        Public Function GetAcctReconItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetAcctReconItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetAcctReconItems
             Dim sql As String =
                     "SELECT " &
@@ -198,7 +198,7 @@ Namespace DataLayer.AdoNet
         '    .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
         '    }
 
-        Public Function GetGlItems(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetGlItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetGlItems
             Dim sql As String =
                     "SELECT " &

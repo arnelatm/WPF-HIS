@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class CadOiItemModel
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property CadIdNo As Integer

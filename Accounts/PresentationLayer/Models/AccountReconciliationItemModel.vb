@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class AccountReconciliationItemModel
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property AccountReconciliationIdNo As Integer
         Public Property Cleared As Boolean
         Public Property Credit As Decimal
