@@ -44,10 +44,15 @@ Namespace Services
                 Dim salt As String
 
                 Try
-                    salt = SaltDao.GetSaltByLoginIdNo(nLoginIdNo).Salt
+                    Dim result = SaltDao.GetSaltByLoginIdNo(nLoginIdNo)
+                    If result IsNot Nothing Then
+                        salt = result.Salt
+                    Else
+                        salt = Nothing
+                    End If
                     'Dim SaltValue As String
                     'SaltValue = HashEncryptString(nLoginIdNo.ToString())
-                    If Not IsDBNull(salt) Then
+                    If salt IsNot Nothing Then
                         'Hash the user entered password with the salt value stored in the Salt table
 
                         Dim ePassword As String
@@ -59,6 +64,8 @@ Namespace Services
                             'MsgBox("Invalid user name or password.")
                             Return False
                         End If
+                    Else
+                        Return False
 
                     End If
                 Catch ex As Exception
@@ -75,7 +82,7 @@ Namespace Services
 
         Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
 
-        Friend Function HashEncryptString(s As String) As String
+        Public Function HashEncryptString(s As String) As String
             Dim clearBytes As Byte() = Encoding.UTF8.GetBytes(s)
             Dim hashedBytes As Byte() = _hasher.ComputeHash(clearBytes)
             Return Convert.ToBase64String(hashedBytes)
@@ -89,7 +96,7 @@ Namespace Services
 
                 If userLoginIdNo = 0 Then
                     ePassword = password
-                    'saltString = LoginSecurity.GetSalt(28)
+                    'saltString = GetSalt(28)
                     'ePassword = HashEncryptStringWithSalt(password, saltString)
                     ' new user no Salt record yet
                 Else

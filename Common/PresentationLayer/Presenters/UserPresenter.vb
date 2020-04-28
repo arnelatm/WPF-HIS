@@ -1,9 +1,13 @@
-﻿Imports AATM.Common.PresentationLayer.Models
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer
 
@@ -28,5 +32,25 @@ Namespace PresentationLayer
 
         End Sub
 
+        Private Sub OnBeforeSave() Handles MyBase.BeforeSave
+            'Password = Service.Encrypt
+            Dim serviceLogin = New ServiceLogin
+            View.Password = serviceLogin.EncryptPassword(View.IdNo, View.Password)
+        End Sub
+
+        Private Sub OnSuccessfulAdd(newIdNo As Integer) Handles MyBase.SuccessfulAdd
+            Dim serviceLogin = New ServiceLogin
+            Dim ePassword As String
+            ePassword = serviceLogin.EncryptPassword(newIdNo, View.Password)
+            If ePassword IsNot Nothing Then
+                View.Password = ePassword
+                Dim userModel As New UserModel
+                GlobalVariables.Mapper.Map(View, userModel)
+                If UpdateRecord(userModel) <= 0 Then
+                    Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+                End If
+            End If
+        End Sub
+
     End Class
-End NameSpace
+End Namespace

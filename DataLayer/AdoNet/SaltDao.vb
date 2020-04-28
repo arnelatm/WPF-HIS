@@ -24,7 +24,8 @@ Namespace AdoNet
                     "   FROM [Salt]" &
                     "  WHERE LoginIDNo = @LoginIDNo"
             Dim params() As Object = {"@LoginIDNo", loginIdNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim salt = Db.Read(sql, Make, params).FirstOrDefault()
+            Return salt
         End Function
 
         Public Function InsertSalt(salt As Salt) As Integer Implements ISaltDao.InsertSalt
