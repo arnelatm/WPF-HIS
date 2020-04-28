@@ -39,7 +39,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ArAccountIdNo As Int32? Implements IEmployeeView.ArAccountIdNo
             Get
-                Return cacArAccountIdNo.GetValue()
+                Return CType(cacArAccountIdNo.GetValue(), Int32?)
             End Get
             Set
                 cacArAccountIdNo.SetValue(Value)
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Forms
 
         Private Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-                Return cacBankIdNo.GetValue()
+                Return cacBankIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -101,7 +101,7 @@ Namespace PresentationLayer.Forms
 
         Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
-                Return cacDepartmentIdNo.GetValue()
+                Return cacDepartmentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacDepartmentIdNo.SetValue(Value)
@@ -110,7 +110,7 @@ Namespace PresentationLayer.Forms
 
         Public Property DesignationIdNo As Int16? Implements IEmployeeView.DesignationIdNo
             Get
-                Return cacDesignationIdNo.GetValue()
+                Return cacDesignationIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacDesignationIdNo.SetValue(Value)
@@ -325,7 +325,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
             Get
-                Return cacReligionIdNo.GetValue()
+                Return cacReligionIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacReligionIdNo.SetValue(Value)

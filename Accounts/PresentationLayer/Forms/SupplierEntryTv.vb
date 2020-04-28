@@ -45,7 +45,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ApAccountIdNo As Int32? Implements ISupplierView.ApAccountIdNo
             Get
-                Return cacApAccountIdNo.GetValue()
+                Return CType(cacApAccountIdNo.GetValue(), Int32?)
             End Get
             Set
                 cacApAccountIdNo.SetValue(Value)
@@ -63,7 +63,7 @@ Namespace PresentationLayer.Forms
 
         Public Property BankIdNo As Int16? Implements ISupplierView.BankIdNo
             Get
-                Return cacBankIdNo.GetValue()
+                Return CType(cacBankIdNo.GetValue(), Int16?)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -148,7 +148,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ExpAccountIdNo As Int32? Implements ISupplierView.ExpAccountIdNo
             Get
-                Return cacExpAccountIdNo.GetValue()
+                Return CType(cacExpAccountIdNo.GetValue(), Int32?)
             End Get
             Set
                 cacExpAccountIdNo.SetValue(Value)

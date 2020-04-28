@@ -37,7 +37,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ParentIdNo As Integer? Implements IProfitCenterView.ParentIdNo
             Get
-                Return cacParentIdNo.GetValue()
+                Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

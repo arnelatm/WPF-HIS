@@ -62,7 +62,7 @@ Namespace AdoNet
 
         <Extension()>
         Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T
-            If obj.Equals(DBNull.Value) Then
+            If obj.Equals(DBNull.Value) Or obj Is Nothing Then
                 Return Nothing
             End If
             Dim x As Type = GetType(T)

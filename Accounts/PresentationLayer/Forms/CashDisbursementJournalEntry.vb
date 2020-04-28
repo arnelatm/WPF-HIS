@@ -112,7 +112,7 @@ Namespace PresentationLayer.Forms
 
         Public Property DiscountAccountIdNo As Int32? Implements ICashDisbursementJournalView.DiscountAccountIdNo
             Get
-                Return cboDiscountAccountIdNo.GetValue()
+                Return CType(cboDiscountAccountIdNo.GetValue(), Int32?)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)

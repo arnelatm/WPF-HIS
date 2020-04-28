@@ -130,7 +130,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ParentIdNo As Integer? Implements IChartView.ParentIdNo
             Get
-                Return cboParentIdNo.GetValue()
+                Return CType(cboParentIdNo.GetValue(), Integer?)
             End Get
             Set
                 cboParentIdNo.SetValue(Value)

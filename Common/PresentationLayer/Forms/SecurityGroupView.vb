@@ -59,7 +59,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ParentIdNo As Integer? Implements ISecurityGroupView.ParentIdNo
             Get
-                Return cacParentIdNo.GetValue()
+                Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
