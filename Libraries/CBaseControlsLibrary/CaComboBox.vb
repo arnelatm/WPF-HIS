@@ -477,14 +477,23 @@ Public Class CaComboBox
         End If
     End Function
 
-    Public Sub SetValue(ByRef value As Object)
+    Public Function GetNullableValue(Of T)()
+        Dim x = GetValue()
+        If x Is Nothing Then
+            Return Nothing
+        Else
+            Return CType(x, T)
+        End If
+    End Function
+
+    Public Sub SetValue(ByRef value)
         If value Is Nothing Then
             Text = Nothing
         Else
-            Dim saveDisplaymember As String = DisplayMember
+            Dim saveDisplayMember As String = DisplayMember
             DisplayMember = ValueMember
             Text = value
-            DisplayMember = saveDisplaymember
+            DisplayMember = saveDisplayMember
             'SelectedValue = value
             If ValueMember.ToLower() = "idno" Then
                 If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then

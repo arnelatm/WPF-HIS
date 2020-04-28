@@ -130,7 +130,7 @@ Namespace DataLayer.AdoNet
             .SettlementDiscount = Extensions.AsDecimal(reader("SettlementDiscount")),
             .PaymentDueDays = Extensions.AsInt(Of Short)(reader("PaymentDueDays")),
             .DateAccountOpen = Extensions.AsDateTime(reader("DateAccountOpen")),
-            .BankIdNo = Extensions.AsNullable(Of Int16)(reader("BankIdNo")),
+            .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .Iban = Extensions.AsString(reader("Iban")),
             .PaymentMethod = Extensions.AsString(reader("PaymentMethod")),

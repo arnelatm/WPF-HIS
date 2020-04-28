@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ParentIdNo As Integer? Implements ICostCenterView.ParentIdNo
             Get
-                Return cacParentIdNo.GetValue()
+                Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
@@ -50,7 +50,7 @@ Namespace PresentationLayer.Forms
 
         Public Property ProfitCenterIdNo As Integer? Implements ICostCenterView.ProfitCenterIdNo
             Get
-                Return cacProfitCenterIdNo.GetValue()
+                Return CType(cacProfitCenterIdNo.GetValue(), Integer?)
             End Get
             Set
                 cacProfitCenterIdNo.SetValue(Value)
