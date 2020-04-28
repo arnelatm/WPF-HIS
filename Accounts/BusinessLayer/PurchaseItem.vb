@@ -20,7 +20,7 @@ Namespace BusinessLayer
         Public Property Active As Boolean
         Public Property CategoryIdNo As Integer
         Public Property DateCreated As Date?
-        Public Property GlAccountIdNo As Integer
+        Public Property GlAccountIdNo as Int32
         Public Property IdNo As Integer
         Public Property PurchaseItemCode As String
         Public Property PurchaseItemName As String
@@ -34,7 +34,7 @@ Namespace BusinessLayer
         Public Property Unit2Ara As String
         Public Property Unit3 As String
         Public Property Unit3Ara As String
-        Public Property VatAccountIdNo As Integer
+        Public Property VatAccountIdNo as Int32
 
     End Class
 

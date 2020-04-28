@@ -45,7 +45,7 @@ Namespace PresentationLayer.Models
             Return DataService.GetSupplierOpenInvoices(Of TM)(idNo)
         End Function
 
-        Public Function GetAcctReconItems(Of TM)(accountIdNo As Integer, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of TM) Implements IModelAccounts.GetAcctReconItems
             Return DataService.GetAcctReconItems(Of TM)(accountIdNo, reconciliationDate, sortExpression)
         End Function

@@ -2,7 +2,7 @@
 Namespace PresentationLayer.Models
 
     Public Class GlLedgerItemModel
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property Credit As Decimal
         Public Property Debit As Decimal
         Public Property IdNo As Integer

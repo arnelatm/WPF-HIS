@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class CsrOiItemModel
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property CsrIdNo As Integer

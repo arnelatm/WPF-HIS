@@ -59,7 +59,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Public Property AccountIdNo As Integer Implements IPurchaseJournalView.AccountIdNo
+        Public Property AccountIdNo as Int32 Implements IPurchaseJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get

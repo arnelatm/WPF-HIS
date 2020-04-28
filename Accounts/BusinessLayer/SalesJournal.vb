@@ -19,7 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime
         Public Property IdNo As Integer

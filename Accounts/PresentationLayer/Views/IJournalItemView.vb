@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IJournalItemView
         Inherits IView
 
-        Property AccountIdNo As Integer
+        Property AccountIdNo as Int32
         Property AccountName As String
         Property Cancelled As Boolean
         Property Credit As Decimal

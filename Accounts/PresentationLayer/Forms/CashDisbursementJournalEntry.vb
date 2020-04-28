@@ -57,7 +57,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Integer Implements ICashDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo as Int32 Implements ICashDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get

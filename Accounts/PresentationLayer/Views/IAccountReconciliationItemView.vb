@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Interface IAccountReconciliationItemView
         Inherits IView
 
-        Property AccountIdNo As Integer
+        Property AccountIdNo as Int32
         Property AccountReconciliationIdNo As Integer
         Property Cleared As Boolean
         Property Credit As Decimal

@@ -7,14 +7,14 @@
     Public Class EmployeeModel
         Public Property Errors As List(Of String)
         Public Property Active As Boolean
-        Public Property ArAccountIdNo As Int32
+        Public Property ArAccountIdNo As Int32?
         Public Property Balance As Decimal
         Public Property BankAccountNo As String
-        Public Property BankIdNo As Int16
+        Public Property BankIdNo As Int16?
         Public Property BirthDate As Date?
         Public Property CountryCode As String
-        Public Property DepartmentIdNo As Int16
-        Public Property DesignationIdNo As Int16
+        Public Property DepartmentIdNo As Int16?
+        Public Property DesignationIdNo As Int16?
         Public Property District As String
         Public Property Email As String
         Public Property EmployeeCode As String
@@ -34,7 +34,7 @@
         Public Property PoBox As String
         Public Property ProvinceState As String
         Public Property ReleasedDate As Date?
-        Public Property ReligionIdNo As Int16
+        Public Property ReligionIdNo As Int16?
         Public Property Street As String
         Public Property Title As String
         Public Property TownCity As String

@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private ReadOnly _advancesToSupplierAccountIdNo As Integer
+        Private ReadOnly _advancesToSupplierAccountIdNo as Int32
 
         'Private ReadOnly _apJournalItemModel As New ModelAccounts("ApJournalItem")
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
@@ -431,7 +431,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MakeJournalItem()
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                Dim aAccountIdNo As Integer() = {}
+                Dim aAccountIdNo as Int32() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
                 Dim aDiscountTaken() As Decimal = {}
@@ -439,7 +439,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.CadOiItems
-                    Dim nAccountIdNo As Integer
+                    Dim nAccountIdNo as Int32
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)

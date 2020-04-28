@@ -5,9 +5,9 @@ Namespace PresentationLayer.Views
     Public Interface ICashCodeView
         Inherits IView
 
-        Property AccountIdNo As Integer
-        Property BankChargesAccountIdNo As Integer
-        Property BankChargesVatAccountIdNo As Integer
+        Property AccountIdNo as Int32
+        Property BankChargesAccountIdNo as Int32
+        Property BankChargesVatAccountIdNo as Int32
         Property CashCode As String
         Property CashName As String
         Property CashNameAra As String

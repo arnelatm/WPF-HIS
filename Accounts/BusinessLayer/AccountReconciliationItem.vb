@@ -7,7 +7,7 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo as Int32
         Public Property AccountReconciliationIdNo As Integer
         Public Property Cleared As Boolean
         Public Property Credit As Decimal

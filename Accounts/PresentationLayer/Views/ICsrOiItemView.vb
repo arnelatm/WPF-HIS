@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface ICsrOiItemView
         Inherits IView
 
-        Property AccountIdNo As Integer
+        Property AccountIdNo as Int32
         Property Amount As Decimal
         Property Balance As Decimal
         Property CsrIdNo As Integer
