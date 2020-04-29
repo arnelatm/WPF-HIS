@@ -10,7 +10,6 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            'If createRules Then
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
@@ -20,9 +19,9 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
-                'AddRule(New ValidateValueIf("Applied", "Amount", ValidationOperator.Equal, ValidationDataType.String, $"PaymentType", ValidationDataType.String, "A", ValidationOperator.Equal))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
+                AddRule(New ValidateCompareIfTrue(PaymentType = "A", "Amount", "Applied", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
             End If
         End Sub
@@ -35,13 +34,13 @@ Namespace BusinessLayer
         Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32
+        Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
-
         Public Property OrNumber As String
-
         Public Property PayeeIdNo As Int32
         Public Property PayeeName As String
         Public Property PaymentType As String
+        Public Property PcsOiItems As List(Of PcsOiItem)
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property TotalCredits As Decimal

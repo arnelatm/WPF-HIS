@@ -10,7 +10,6 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            'If createRules Then
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
@@ -30,10 +29,12 @@ Namespace BusinessLayer
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
+        Public Property CsrOiItems As List(Of CsrOiItem)
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int32
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32
+        Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayorIdNo As Int32

@@ -51,13 +51,13 @@ Namespace AdoNet
                 'If Not Integer.TryParse(item.ToString(), result) Then
                 result = Convert.ChangeType(item, GetType(T))
             Catch ex As Exception
-                Dim message = Messaging.Show("MsgInvalidNumberConversion", "Conversion error (AsNumber Extensions)" & ex.Message)
+                Messaging.Show("MsgInvalidNumberConversion", "Conversion error (AsNumber Extensions)" & ex.Message)
             End Try
 
             Return result
         End Function
 
-        <Extension()>
+        <Extension>
         Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T
             If obj.Equals(DBNull.Value) Or obj Is Nothing Then
                 Return Nothing
