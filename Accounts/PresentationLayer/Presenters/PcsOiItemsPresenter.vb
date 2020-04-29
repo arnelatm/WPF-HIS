@@ -71,20 +71,20 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap PcsOi Items.
         '''' </summary>
         '''' <param name="pcsOiIdNo">pcsOiIdNo id to display.</param>
-        Public Shadows Sub Display(pcsOiIdNo As Integer)
+        Public Shadows Sub Display(pcsOiIdNo As Int32)
             View.PcsOiItems = Model.GetRecordsWithIdNo(Of PcsOiItemModel)(pcsOiIdNo, "Sequence")
         End Sub
 
-        Public Function GetPcsOiItems(pcsOiIdNo As Integer) As List(Of PcsOiItemModel)
+        Public Function GetPcsOiItems(pcsOiIdNo As Int32) As List(Of PcsOiItemModel)
             Return Model.GetRecordsWithIdNo(Of PcsOiItemModel)(pcsOiIdNo, "Sequence")
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of PcsOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of PcsOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       pcsOiIdNo As Integer)
+                                       pcsOiIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

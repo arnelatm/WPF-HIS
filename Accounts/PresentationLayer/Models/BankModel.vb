@@ -7,7 +7,7 @@
     Public Class BankModel
 
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property BankCode As String
         Public Property BankName As String
         Public Property BankNameAra As String

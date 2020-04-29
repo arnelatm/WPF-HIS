@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
-        Public Property IDNo As Integer Implements IBankView.IdNo
+        Public Property IdNo As Int32 Implements IBankView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get

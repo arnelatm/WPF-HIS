@@ -13,7 +13,7 @@
         Public Property DateCreated As DateTime
         Public Property DueDate As Date?
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property InvoiceNo As String
         Public Property Notes As String
         Public Property Posted As Boolean

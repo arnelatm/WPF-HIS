@@ -45,7 +45,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _recordPositionNumber As Integer = 0
     Private _tableColumnPropertyList As List(Of TblColPropModel)
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
-    Private _targetIdNo As Integer = 0
+    Private _targetIdNo As Int32 = 0
     Private _undoMode As Boolean = False
 
     Shared Sub New()
@@ -183,8 +183,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Property EnumConverter As ResourceEnumConverter
 
     '<Description("This is the last IDNo of the Displayed record before moving to a different record.")>
-    'Public Property CurrentIdNo As Integer
-    Public Property LastIdNo As Integer
+    'Public Property CurrentIdNo As Int32
+    Public Property LastIdNo As Int32
 
     Public Property ModelPresenter
         Get
@@ -195,7 +195,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Set
     End Property
 
-    Public Property NewlyAddedRecordIdNo As Integer
+    Public Property NewlyAddedRecordIdNo As Int32
 
     Public Shared Property RecordCount As Integer
 
@@ -217,7 +217,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     'Public Property TableDefaultFieldValues
     <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
-    Public Property TargetIdNo As Integer
+    Public Property TargetIdNo As Int32
         Get
             Return _targetIdNo
         End Get
@@ -352,7 +352,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function DeleteRecord(idNo As Integer) As Integer
+    Public Function DeleteRecord(idNo As Int32) As Integer
         Try
             Return Model.DeleteRecord(idNo, TableName)
         Catch ex As Exception
@@ -360,7 +360,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Overridable Sub Display(idNo As Integer)
+    Public Overridable Sub Display(idNo As Int32)
         '
     End Sub
 
@@ -369,7 +369,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         RecordPositionNumber = GetSortedRecordPosition(idNo)
     End Sub
 
-    Public Function FindFieldContinue(idNo As Integer) As Integer
+    Public Function FindFieldContinue(idNo As Int32) As Integer
         Return Model.FindFieldContinue(TableName, idNo)
     End Function
 
@@ -460,7 +460,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     '    Return PresenterObj.TargetIdNo
     'End Function
-    Public Function GetRecordDateTimeStamp(idNo As Integer) As Object
+    Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
             Return Model.GetRecordDateTimeStamp(idNo, TableName)
         Catch ex As Exception
@@ -478,7 +478,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetRecordPosition(idNo As Integer)
+    Public Function GetRecordPosition(idNo As Int32)
         Try
             Return Model.GetRecordPosition(TableName, idNo) + 1
         Catch ex As Exception
@@ -486,7 +486,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetRecordWithIdNo(idNo As Integer, returnFieldName As String) As String
+    Public Function GetRecordWithIdNo(idNo As Int32, returnFieldName As String) As String
         Try
             Return Model.GetRecordWithIdNo(idNo, TableName, returnFieldName)
         Catch ex As Exception
@@ -512,7 +512,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return GetLookupDataByCode()
     End Function
 
-    Public Function GetSortedRecordPosition(idNo As Integer) As Integer
+    Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
             Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey)
         Catch ex As Exception
@@ -727,7 +727,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         'CancelClose = True
     End Sub
 
-    Public Overridable Function IsOkToDeleteRecord(idNo As Integer) As Boolean
+    Public Overridable Function IsOkToDeleteRecord(idNo As Int32) As Boolean
         Dim retValue As Boolean = False
         If Not DependentRecordsExist(idNo) Then
             retValue = True
@@ -990,7 +990,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Overridable Sub UpdateViewDisplay(idNo As Integer)
+    Public Overridable Sub UpdateViewDisplay(idNo As Int32)
         If idNo <> 0 Then
             Dim modelData As TM
             RecordCount = GetRecordCount()
@@ -1019,7 +1019,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Protected Overridable Function DependentRecordsExist(masterIdNo As Integer) As Integer
+    Protected Overridable Function DependentRecordsExist(masterIdNo As Int32) As Integer
         Return 0
     End Function
 
@@ -1208,7 +1208,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return True
     End Function
 
-    Private Function RecordHasChanged(idNo As Integer, timeStampedValue As Object) As Boolean
+    Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
         Try
             Dim newDateTimeStamp As Object
@@ -1234,11 +1234,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
-    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList
         Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 

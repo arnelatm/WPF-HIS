@@ -7,8 +7,8 @@ Namespace BusinessObjects
 
         ' ** Enterprise Design Pattern: Identity field pattern
 
-        Public Property IdNo As Integer
-        Public Property LoginIdNo As Integer
+        Public Property IdNo As Int32
+        Public Property LoginIdNo As Int32
         Public Property Salt As String
     End Class
 

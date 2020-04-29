@@ -23,7 +23,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertFileName = "dbo.InsertDistributionSchemeItemTVP"
         End Sub
 
-        'Public Function GetRecordById(idNo As Integer) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
+        'Public Function GetRecordById(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
         '    Dim sql As String =
         '            " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
         '            "   FROM " & TableFileName &
@@ -32,7 +32,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
 
-        Public Function GetDistributionSchemeItems(distributionSchemeIdNo As Integer) As List(Of DistributionSchemeItem)
+        Public Function GetDistributionSchemeItems(distributionSchemeIdNo As Int32) As List(Of DistributionSchemeItem)
             Dim sql As String =
                     " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage " &
                     "   FROM " & TableFileName &
@@ -50,7 +50,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
                     "   FROM " & TableFileName &
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, distributionSchemeItemIdNo As Integer) As Integer Implements IDaoChild(Of DistributionSchemeItem).DelUpdateTvp
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, distributionSchemeItemIdNo As Int32) As Integer Implements IDaoChild(Of DistributionSchemeItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", distributionSchemeItemIdNo)
         End Function
 
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DistributionSchemeItem) =
                                     Function(reader) _
             New DistributionSchemeItem() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .DistributionSchemeIdNo = Extensions.AsInt(Of Integer)(reader("DistributionSchemeIdNo")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
             .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),

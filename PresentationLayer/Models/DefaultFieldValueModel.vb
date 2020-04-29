@@ -1,6 +1,6 @@
 ﻿' DefaultFieldValue business object as seen by the Service client.
 Public Class DefaultFieldValueModel
-    Public Property IdNo As Integer
+    Public Property IdNo As Int32
     Public Property TableName As String
     Public Property FieldName As String
     Public Property DataType As UInt16

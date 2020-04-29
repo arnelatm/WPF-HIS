@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
         '    DbCommon = Db
         'End Sub
 
-        'Public Function GetRecordById(idNo As Integer) As GlLedgerItem Implements IDaoChild(Of GlLedgerItem).GetRecordById
+        'Public Function GetRecordById(idNo) As GlLedgerItem Implements IDaoChild(Of GlLedgerItem).GetRecordById
         '    Dim sql As String =
         '            "SELECT " &
         '            "AccountIdNo," &
@@ -45,7 +45,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
 
-        'Public Function GetGlLedgerItems(journalIdNo As Integer) As List(Of GlLedgerItem)
+        'Public Function GetGlLedgerItems(journalIdNo As Int32) As List(Of GlLedgerItem)
         '    Dim sql As String =
         '            "SELECT " &
         '            "AccountIdNo," &
@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
-        Private Function GetRecordsWithIdNo(journalIdNo As Integer, Optional sortExpression As String = Nothing) As List(Of GlLedgerItem) Implements IDaoChild(Of GlLedgerItem).GetRecordsWithIdNo
+        Private Function GetRecordsWithIdNo(journalIdNo As Int32, Optional sortExpression As String = Nothing) As List(Of GlLedgerItem) Implements IDaoChild(Of GlLedgerItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
@@ -96,7 +96,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, glLedgerItemIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, glLedgerItemIdNo As Int32) As Integer _
             Implements IDaoChild(Of GlLedgerItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", glLedgerItemIdNo)
         End Function
@@ -137,7 +137,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
             .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IDNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IDNo")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .ProfitCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),

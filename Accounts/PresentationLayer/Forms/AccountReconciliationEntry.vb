@@ -98,7 +98,7 @@ Namespace PresentationLayer.Forms
 
         'Public Property AccountReconciliationItemsDataSource As List(Of AccountReconciliationModel)
 
-        Public Property IdNo As Integer Implements IAccountReconciliationView.IdNo
+        Public Property IdNo As Int32 Implements IAccountReconciliationView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)

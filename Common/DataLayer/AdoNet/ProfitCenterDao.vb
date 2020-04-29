@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As ProfitCenter Implements IDaoAll(Of ProfitCenter).GetRecordById
+        Public Function GetRecordById(idNo) As ProfitCenter Implements IDaoAll(Of ProfitCenter).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &
                     "   FROM [ProfitCenter_View]" &
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ProfitCenter) =
                                     Function(reader) _
             New ProfitCenter() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .ProfitCenterCode = Extensions.AsString(reader("ProfitCenterCode")),
             .ProfitCenterName = Extensions.AsString(reader("ProfitCenterName")),

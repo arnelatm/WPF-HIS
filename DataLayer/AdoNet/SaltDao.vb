@@ -9,7 +9,7 @@ Namespace AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetSalt(idNo As Integer) As Salt Implements ISaltDao.GetSalt
+        Public Function GetSalt(idNo As Int32) As Salt Implements ISaltDao.GetSalt
             Dim sql As String =
                     " SELECT IDNo, LoginIDNo, Salt" &
                     "  FROM [Salt]" &
@@ -18,7 +18,7 @@ Namespace AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetSaltByLoginIdNo(loginIdNo As Integer) As Salt Implements ISaltDao.GetSaltByLoginIdNo
+        Public Function GetSaltByLoginIdNo(loginIdNo As Int32) As Salt Implements ISaltDao.GetSaltByLoginIdNo
             Dim sql As String =
                     " SELECT IDNo, LoginIDNo, Salt" &
                     "   FROM [Salt]" &

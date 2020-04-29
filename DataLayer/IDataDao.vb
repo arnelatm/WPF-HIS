@@ -5,7 +5,7 @@
 Public Interface IDataDao
 
     ' gets a specific record data
-    Function GetRecord(Of TBiz)(idNo As Integer) As TBiz
+    Function GetRecord(Of TBiz)(idNo As Int32) As TBiz
 
     ' gets a sorted list of all Documents
     Function GetAll(Of TBiz)(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)

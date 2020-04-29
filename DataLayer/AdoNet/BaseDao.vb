@@ -77,7 +77,7 @@
             End If
         End Function
 
-        Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer _
+        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer _
             Implements IBaseDao.GetSortedRecordPosition
             Dim sql As String =
                     " Select count(*) From [" & tableName &
@@ -93,7 +93,7 @@
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
+        Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer _
             Implements IBaseDao.GetRecordPosition
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
@@ -132,7 +132,7 @@
             Return retVal
         End Function
 
-        Public Function FindFieldContinue(tableName As String, lastIdNo As Integer) _
+        Public Function FindFieldContinue(tableName As String, lastIdNo As Int32) _
             Implements IBaseDao.FindFieldContinue
             Dim retVal As Integer
             If _lastFindQuery Is Nothing Then
@@ -153,7 +153,7 @@
             Return retVal
         End Function
 
-        Public Function DeleteRecord(idNo As Integer, tableName As String) As Int16 _
+        Public Function DeleteRecord(idNo As Int32, tableName As String) As Int16 _
             Implements IBaseDao.DeleteRecord
             If Strings.Right(tableName, 5).ToLower() = "_view" Then
                 tableName = Strings.Left(tableName, Strings.Len(tableName) - 5)
@@ -248,7 +248,7 @@
             Return Not nCount > 0
         End Function
 
-        Public Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String _
+        Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
             Implements IBaseDao.GetRecordWithIdNo
             Dim sql As String =
                     " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
@@ -257,7 +257,7 @@
             Return _db.Scalar(sql, params).ToString()
         End Function
 
-        Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, dateTimeStampField As String) _
+        Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
             As Object _
             Implements IBaseDao.GetRecordDateTimeStamp
             Dim sql As String =
@@ -293,7 +293,7 @@
             End If
         End Function
 
-        Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampValue As Byte,
+        Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
                                          Optional ByVal timeStampedField As String = "DateTimeStamp") As Boolean _
             Implements IBaseDao.HasRecordChanged
             Dim sql As String = " Select count(*) FROM [" & tableName & "] " &
@@ -326,7 +326,7 @@
             End If
         End Function
 
-        Public Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String,
+        Public Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String,
                                                     value As T) As Integer _
             Implements IBaseDao.UpdateRecordWithIdNo
             Dim sql As String =
@@ -478,7 +478,7 @@
             Return retVal.ToString()
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
             Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
                     {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
@@ -487,7 +487,7 @@
             Return _db.SqlRead(sql, params)
         End Function
 
-        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList Implements IBaseDao.GetUserSecurityForKey
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList Implements IBaseDao.GetUserSecurityForKey
             Dim params() As Object =
                     {"@SecurityObjectName", securityObjectName, "@SecurityGroupIDNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &

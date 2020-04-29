@@ -7,7 +7,7 @@ Namespace BusinessLayer
         Inherits BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
 
         Public Property DiscountTaken As Decimal
         Public Property JournalCode As String

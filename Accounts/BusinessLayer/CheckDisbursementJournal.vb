@@ -37,7 +37,7 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int32
         Public Property DiscountTaken As Decimal
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32

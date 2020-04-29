@@ -23,7 +23,7 @@
         Public Property ExpAccountIdNo As Int32?
         Public Property Fax As String
         Public Property Iban As String
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Mobile As String
         Public Property Notes As String
         Public Property OpeningBalance As Single

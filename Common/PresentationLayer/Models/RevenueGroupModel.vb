@@ -3,7 +3,7 @@
     Public Class RevenueGroupModel
         Inherits CommonModel
 
-        Public Property ParentIdNo As Integer?
+        Public Property ParentIdNo As Int32?
         Public Property RevenueGroupCode As String
         Public Property RevenueGroupName As String
         Public Property RevenueGroupNameAra As String

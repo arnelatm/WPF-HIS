@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         '    Throw New NotImplementedException
         'End Function
 
-        Public Function GetRecordById(ByVal idNo As Integer) As Country Implements IDaoAll(Of Country).GetRecordById
+        Public Function GetRecordById(idNo) As Country Implements IDaoAll(Of Country).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
                     "   FROM [Country]" &
@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Country) =
                                     Function(reader) _
             New Country() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .CountryName = Extensions.AsString(reader("CountryName")),
             .CountryNameAra = Extensions.AsString(reader("CountryNameAra")),
             .Nationality = Extensions.AsString(reader("Nationality")),

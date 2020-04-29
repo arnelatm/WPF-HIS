@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Employee Implements IDaoAll(Of Employee).GetRecordById
+        Public Function GetRecordById(idNo) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
             .Gender = Extensions.AsString(reader("Gender")),
             .HiredDate = Extensions.AsNullable(Of Date?)(reader("HiredDate")),
             .Iban = Extensions.AsString(reader("Iban")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .MaritalStatus = Extensions.AsString(reader("MaritalStatus")),
             .NationalIdNo = Extensions.AsString(reader("NationalIdNo")),
             .NationalityCode = Extensions.AsString(reader("NationalityCode")),

@@ -4,9 +4,9 @@ Namespace PresentationLayer.Views
     Public Class SecurityGroupView
         Implements ISecurityGroupView
 
-        Public Property IdNo As Integer Implements ISecurityGroupView.IdNo
+        Public Property IdNo As Int32 Implements ISecurityGroupView.IdNo
 
-        Public Property ParentIdNo As Integer? Implements ISecurityGroupView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements ISecurityGroupView.ParentIdNo
 
         Public Property SecurityGroupName As String Implements ISecurityGroupView.SecurityGroupName
 

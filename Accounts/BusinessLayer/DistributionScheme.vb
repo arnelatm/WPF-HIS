@@ -16,7 +16,7 @@ Namespace BusinessLayer
         Public Property DistributionSchemeCode As String
         Public Property DistributionSchemeName As String
         Public Property DistributionSchemeNameAra As String
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Notes As String
         Public Property TotalPercentage As Decimal
         Public Property ValidityEndDate As Date

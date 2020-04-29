@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CashReceiptJournal _
+        Public Function GetRecordById(idNo) As CashReceiptJournal _
             Implements IDao(Of CashReceiptJournal).GetRecordById
             Dim sql As String = " SELECT " &
                     "AccountIdNo," &
@@ -118,7 +118,7 @@ Namespace DataLayer.AdoNet
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .DiscountAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OrNumber = Extensions.AsString(reader("ORNumber")),
             .PayorIdNo = Extensions.AsInt(Of Integer)(reader("PayorIdNo")),

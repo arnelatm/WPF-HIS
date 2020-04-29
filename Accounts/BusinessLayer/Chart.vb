@@ -23,11 +23,11 @@ Namespace BusinessLayer
         Public Property AccountNameAra As String
         Public Property Active As Boolean
         Public Property DetailAccount As Boolean
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property LevelNumber As Int16
         Public Property NormalBalance As String
         Public Property Notes As String
-        Public Property ParentIdNo As Integer?
+        Public Property ParentIdNo As Int32?
         Public Property PayeeType As String
         Public Property SortKey As String
         Public Property SpecialAccount As String

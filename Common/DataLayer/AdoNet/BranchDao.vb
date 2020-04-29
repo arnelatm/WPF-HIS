@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Branch Implements IDaoAll(Of Branch).GetRecordById
+        Public Function GetRecordById(idNo) As Branch Implements IDaoAll(Of Branch).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, BranchCode, BranchName, BranchNameAra, Notes" &
                     "   FROM [Branch]" &
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Branch) =
                                     Function(reader) _
             New Branch() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .BranchCode = Extensions.AsString(reader("BranchCode")),
             .BranchName = Extensions.AsString(reader("BranchName")),
             .BranchNameAra = Extensions.AsString(reader("BranchNameAra")),

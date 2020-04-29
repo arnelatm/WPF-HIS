@@ -14,7 +14,7 @@ Namespace BusinessLayer
             AddRule(New ValidateRequired("DesignationCode"))
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property DesignationCode As String
         Public Property DesignationName As String
         Public Property DesignationNameAra As String

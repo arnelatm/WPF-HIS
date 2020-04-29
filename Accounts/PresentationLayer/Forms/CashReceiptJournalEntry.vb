@@ -187,7 +187,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements ICashReceiptJournalView.IdNo
+        Public Property IdNo As Int32 Implements ICashReceiptJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -228,7 +228,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayorIdNo As Integer Implements ICashReceiptJournalView.PayorIdNo
+        Public Property PayorIdNo As Int32 Implements ICashReceiptJournalView.PayorIdNo
             Get
                 Return cboPayorIdNo.GetValue()
             End Get
@@ -518,7 +518,7 @@ Namespace PresentationLayer.Forms
                                 Exit For
                             End If
                         Next
-                        Dim lOpenInvIdNo As Integer
+                        Dim lOpenInvIdNo As Int32
                         ' check if the AdvancePayment OpenInvoice already created
                         lOpenInvIdNo = CInt(_journalItemsPresenter.GetAdvancePaymentOpenInvoice(ji.IdNo))
                         If lOpenInvIdNo = 0 Then
@@ -531,7 +531,7 @@ Namespace PresentationLayer.Forms
                     Else
                         ' get the OpenInvoice IdNo
                         ' check if the AdvancePayment OpenInvoice already created
-                        Dim lOpenInvoiceIdNo As Integer
+                        Dim lOpenInvoiceIdNo As Int32
                         lOpenInvoiceIdNo = CInt(PresenterObj.GetCustomerAdvancesOpenIdNo(IdNo))
                         PresenterObj.DeleteArOpenInvoice(lOpenInvoiceIdNo)
                     End If

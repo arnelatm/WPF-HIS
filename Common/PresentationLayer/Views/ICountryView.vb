@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface ICountryView
         Inherits IView
 
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Isoa2 As String
         Property CountryName As String
         Property CountryNameAra As String

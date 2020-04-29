@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateAccountReconciliationItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertAccountReconciliationItemTVP"
 
-        'Public Function GetRecordById(idNo As Integer) As AccountReconciliationItem _
+        'Public Function GetRecordById(idNo) As AccountReconciliationItem _
         '                Implements IDao(Of AccountReconciliationItem).GetRecordById
         '    Dim sql As String =
         '            " SELECT " &
@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoChild(Of AccountReconciliationItem).GetRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Integer, Optional sortExpression As String = Nothing) _
+        Public Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetReconciledRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
@@ -225,7 +225,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, accountReconciliationIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, accountReconciliationIdNo As Int32) As Integer _
             Implements IDaoChild(Of AccountReconciliationItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", accountReconciliationIdNo)
         End Function
@@ -243,7 +243,7 @@ Namespace DataLayer.AdoNet
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
             .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
             .DocumentNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DocumentNumber")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .JournalItemIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
@@ -262,7 +262,7 @@ Namespace DataLayer.AdoNet
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
             .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
             .DocumentNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DocumentNumber")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .JournalItemIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),

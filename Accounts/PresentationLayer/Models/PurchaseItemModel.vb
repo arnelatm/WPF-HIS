@@ -7,11 +7,11 @@
     Public Class PurchaseItemModel
         Public Property Errors As List(Of String)
         Public Property DateCreated As Date?
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property PurchaseItemCode As String
         Public Property PurchaseItemName As String
         Public Property PurchaseItemNameAra As String
-        Public Property CategoryIdNo As Integer
+        Public Property CategoryIdNo As Int32
         Public Property GlAccountIdNo as Int32
         Public Property VatAccountIdNo as Int32
         Public Property Unit1 As String

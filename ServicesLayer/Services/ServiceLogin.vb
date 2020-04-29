@@ -31,7 +31,7 @@ Namespace Services
                 Return False
             End If
 
-            Dim nLoginIdNo As Integer = 0
+            Dim nLoginIdNo As Int32 = 0
             Dim xLogin As Login
             xLogin = DataDao.GetLoginByUserName(userName)
             If xLogin IsNot Nothing Then
@@ -88,7 +88,7 @@ Namespace Services
             Return Convert.ToBase64String(hashedBytes)
         End Function
 
-        Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
+        Public Function EncryptPassword(userLoginIdNo As Int32, password As String) As String
             Dim salt As Salt
             Dim ePassword As String = Nothing
             Dim saltString As String
@@ -132,7 +132,7 @@ Namespace Services
             If String.IsNullOrWhiteSpace(password) Then
                 Return ""
             End If
-            Dim nLoginIdNo As Integer
+            Dim nLoginIdNo As Int32
             nLoginIdNo = DataDao.GetLoginByUserName(userName).IdNo
 
             If nLoginIdNo <> 0 Then

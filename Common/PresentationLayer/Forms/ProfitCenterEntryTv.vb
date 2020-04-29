@@ -26,7 +26,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IDNo As Integer Implements IProfitCenterView.IdNo
+        Public Property IdNo As Int32 Implements IProfitCenterView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Integer? Implements IProfitCenterView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements IProfitCenterView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get

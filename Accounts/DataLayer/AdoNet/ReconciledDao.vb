@@ -15,11 +15,11 @@ Namespace DataLayer.AdoNet
         Protected TableFileName As String = "Reconciled"
         Protected DboTvpInsertFileName As String = "dbo.InsertReconciledTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of Reconciled) Implements IDaoChild(Of Reconciled).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of Reconciled) Implements IDaoChild(Of Reconciled).GetRecordsWithIdNo
             Throw New NotImplementedException
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Reconciled).DelUpdateTvp
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of Reconciled).DelUpdateTvp
             Throw New NotImplementedException
         End Function
 

@@ -2,7 +2,7 @@
 
     Public Class AccountReconciliationReport
 
-        Public Sub New(ByVal idNo As Integer)
+        Public Sub New(ByVal idNo As Int32)
 
             InitializeComponent()
 

@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
 
-        Public Function GetRecordsWithIdNo(journalIdNo As Integer, Optional sortKey As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(journalIdNo As Int32, Optional sortKey As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Int32) As Integer _
             Implements IDaoChild(Of JournalItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
         End Function
@@ -61,7 +61,7 @@ Namespace DataLayer.AdoNet
             .Credit = Extensions.AsDecimal(reader("Credit")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .Debit = Extensions.AsDecimal(reader("Debit")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OriginalAmount = Extensions.AsDecimal(reader("OriginalAmount")),

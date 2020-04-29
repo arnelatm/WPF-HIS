@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo As Integer) As OriginalMessages _
+        Public Function GetRecordById(idNo) As OriginalMessages _
             Implements IDaoAll(Of OriginalMessages).GetRecordById
             Dim sql As String = "select	o.[IdNo], " &
                                 "o.[MessageKey], " &
@@ -93,7 +93,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, OriginalMessages) =
                                     Function(reader) _
             New OriginalMessages() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .MessageKey = Extensions.AsString(reader("MessageKey")),
             .Message = Extensions.AsString(reader("Message")),
             .Caption = Extensions.AsString(reader("Caption")),

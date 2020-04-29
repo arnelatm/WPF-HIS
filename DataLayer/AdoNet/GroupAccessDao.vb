@@ -14,7 +14,7 @@ Namespace AdoNet
         '    DbCommon = Db
         'End Sub
 
-        'Public Function GetRecordById(idNo As Integer) As GroupAccess Implements IDao(Of GroupAccess).GetRecordById
+        'Public Function GetRecordById(idNo) As GroupAccess Implements IDao(Of GroupAccess).GetRecordById
         '    Dim sql As String =
         '            " SELECT IDNo, SecurityGroupIDNo, SecurityObjectIDNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
         '            "   FROM [GroupAccess_View] " &
@@ -34,7 +34,7 @@ Namespace AdoNet
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
-        'Public Function GetRecordsById(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsById
+        'Public Function GetRecordsById(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsById
         '    If sortExpression Is Nothing Then
         '        sortExpression = "IdNo"
         '    End If
@@ -46,7 +46,7 @@ Namespace AdoNet
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
@@ -60,7 +60,7 @@ Namespace AdoNet
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupAccessIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupAccessIdNo As Int32) As Integer _
             Implements IDaoChild(Of GroupAccess).DelUpdateTvp
             Return Db.DelUpdateTvp("dbo.UpdateGroupAccessTVP", tvpTable, "@MParam", groupAccessIdNo)
         End Function
@@ -73,7 +73,7 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GroupAccess) =
                                     Function(reader) _
             New GroupAccess() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIDNo")),
             .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIDNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),

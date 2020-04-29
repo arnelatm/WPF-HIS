@@ -5,10 +5,10 @@ Namespace PresentationLayer.Views
     Public Interface ITranslatedCaptionView
         Inherits IView
 
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Caption As String
-        Property CaptionIdNo As Integer
-        Property LanguageIdNo As Integer
+        Property CaptionIdNo As Int32
+        Property LanguageIdNo As Int32
         Property TranslatedCaption As String
     End Interface
 

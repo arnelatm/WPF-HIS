@@ -36,7 +36,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IDNo As Integer Implements IOriginalMessagesView.IdNo
+        Public Property IdNo As Int32 Implements IOriginalMessagesView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -45,7 +45,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public ReadOnly Property LanguageIdNo As Integer Implements IOriginalMessagesView.LanguageIdNo
+        Public ReadOnly Property LanguageIdNo As Int32 Implements IOriginalMessagesView.LanguageIdNo
             Get
                 Return 16
             End Get

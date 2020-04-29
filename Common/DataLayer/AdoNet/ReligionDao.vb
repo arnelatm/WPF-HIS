@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Religion Implements IDaoAll(Of Religion).GetRecordById
+        Public Function GetRecordById(idNo) As Religion Implements IDaoAll(Of Religion).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion]" &
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Religion) =
                                     Function(reader) _
             New Religion() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .ReligionCode = Extensions.AsString(reader("ReligionCode")),
             .ReligionName = Extensions.AsString(reader("ReligionName")),
             .ReligionNameAra = Extensions.AsString(reader("ReligionNameAra")),

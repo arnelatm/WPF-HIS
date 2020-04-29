@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
 
 #Region "OriginalCaptionFields"
 
-        Public Property IDNo As Integer Implements IOriginalCaptionsView.IdNo
+        Public Property IdNo As Int32 Implements IOriginalCaptionsView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public ReadOnly Property LanguageIdNo As Integer Implements IOriginalCaptionsView.LanguageIdNo
+        Public ReadOnly Property LanguageIdNo As Int32 Implements IOriginalCaptionsView.LanguageIdNo
             Get
                 Return 16
             End Get

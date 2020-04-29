@@ -13,10 +13,10 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Caption As String
-        Public Property CaptionIdNo As Integer
-        Public Property LanguageIdNo As Integer
+        Public Property CaptionIdNo As Int32
+        Public Property LanguageIdNo As Int32
         Public Property TranslatedCaption As String
     End Class
 

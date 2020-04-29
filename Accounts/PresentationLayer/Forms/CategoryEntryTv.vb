@@ -31,7 +31,7 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("CategoryTypeSelection", GetType(CategoryTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
-        Public Property IDNo As Integer Implements ICategoryView.IdNo
+        Public Property IdNo As Int32 Implements ICategoryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
             End Get

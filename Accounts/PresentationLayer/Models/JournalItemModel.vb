@@ -9,14 +9,14 @@ Namespace PresentationLayer.Models
         Public Property DiscountTaken As Decimal
         Public Property Debit As Decimal
         Public Errors As List(Of String)
-        Public Property IdNo As Integer
-        Public Property JournalIdNo As Integer
+        Public Property IdNo As Int32
+        Public Property JournalIdNo As Int32
         Public Property Notes As String
-        Public Property OpenInvoiceIdNo As Integer
+        Public Property OpenInvoiceIdNo As Int32
         Public Property OriginalAmount As Decimal
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
-        Public Property ProfitCenterIdNo As Integer
+        Public Property ProfitCenterIdNo As Int32
         Public Property Sequence As Integer
         Public Property SpecialAccount As String
 

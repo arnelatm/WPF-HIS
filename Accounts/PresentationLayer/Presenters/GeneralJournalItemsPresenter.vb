@@ -42,12 +42,12 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of  Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Overloads Sub Display(journalIdNo As Integer)
+        Public Overloads Sub Display(journalIdNo As Int32)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       journalIdNo As Integer)
+                                       journalIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

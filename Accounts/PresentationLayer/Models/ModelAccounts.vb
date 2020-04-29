@@ -21,13 +21,13 @@ Namespace PresentationLayer.Models
             Return updateResult
         End Function
 
-        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
+        Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
             Dim updateResult As Integer
             updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
             Return updateResult
         End Function
 
-        Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.RemoveInvoicePayment
+        Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.RemoveInvoicePayment
             Dim updateResult As Integer
             updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
             Return updateResult
@@ -37,11 +37,11 @@ Namespace PresentationLayer.Models
             Throw New NotImplementedException()
         End Function
 
-        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IModelAccounts.GetCustomerOpenInvoices
+        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IModelAccounts.GetCustomerOpenInvoices
             Return DataService.GetCustomerOpenInvoices(Of TM)(idNo)
         End Function
 
-        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IModelAccounts.GetSupplierOpenInvoices
+        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IModelAccounts.GetSupplierOpenInvoices
             Return DataService.GetSupplierOpenInvoices(Of TM)(idNo)
         End Function
 
@@ -61,13 +61,13 @@ Namespace PresentationLayer.Models
 
     '    End Sub
 
-    '    Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
+    '    Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
     '        Dim updateResult As Integer
     '        updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
     '        Return updateResult
     '    End Function
 
-    '    Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoicePayment
+    '    Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoicePayment
     '        Dim updateResult As Integer
     '        updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
     '        Return updateResult
@@ -77,11 +77,11 @@ Namespace PresentationLayer.Models
     '        Throw New NotImplementedException()
     '    End Function
 
-    '    Private Function GetCustomerOpenInvoices(idNo As Integer) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetCustomerOpenInvoices
+    '    Private Function GetCustomerOpenInvoices(idNo As Int32) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetCustomerOpenInvoices
     '        Return DataService.GetCustomerOpenInvoices(idNo)
     '    End Function
 
-    '    Private Function GetSupplierOpenInvoices(idNo As Integer) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetSupplierOpenInvoices
+    '    Private Function GetSupplierOpenInvoices(idNo As Int32) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetSupplierOpenInvoices
     '        Return DataService.GetSupplierOpenInvoices(idNo)
     '    End Function
     'End Class

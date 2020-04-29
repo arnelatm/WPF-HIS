@@ -72,20 +72,20 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap CkdOi Items.
         '''' </summary>
         '''' <param name="ckdOiIdNo">CkdOiIDNo id to display.</param>
-        Public Shadows Sub Display(ckdOiIdNo As Integer)
+        Public Shadows Sub Display(ckdOiIdNo As Int32)
             View.CkdOiItems = Model.GetRecordsWithIdNo(Of CkdOiItemModel)(ckdOiIdNo, "Sequence")
         End Sub
 
-        Public Function GetCkdOiItems(ckdOiIdNo As Integer) As List(Of CkdOiItemModel)
+        Public Function GetCkdOiItems(ckdOiIdNo As Int32) As List(Of CkdOiItemModel)
             Return Model.GetRecordsWithIdNo(Of CkdOiItemModel)(ckdOiIdNo, "Sequence")
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of CkdOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of CkdOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CkdOiItemModel)(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       ckdOiIdNo As Integer)
+                                       ckdOiIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

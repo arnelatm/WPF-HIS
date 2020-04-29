@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views
 
         Property AccountIdNo as Int32
         Property Cancelled As Boolean
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Notes As String
         Property ReferenceNo As String
         Property TotalBankCharges As Decimal

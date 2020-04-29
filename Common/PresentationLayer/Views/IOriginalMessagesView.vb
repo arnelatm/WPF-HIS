@@ -6,9 +6,9 @@ Namespace PresentationLayer.Views
         Inherits IView
 
         Property Caption As String
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property IdNoTranslated As Integer
-        ReadOnly Property LanguageIdNo As Integer
+        ReadOnly Property LanguageIdNo As Int32
         Property Message As String
         Property MessageKey As String
         Property Notes As String

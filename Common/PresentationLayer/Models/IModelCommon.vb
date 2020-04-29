@@ -9,7 +9,7 @@ Namespace PresentationLayer.Models
 
         'Function GetCommonService() As Object
 
-        'Function GetRecordById(Of TM As New)(TableName As String, idNo As Integer) As TM
+        'Function GetRecordById(Of TM As New)(TableName As String, idNo As Int32) As TM
 
         'Function GetChartList(ByVal Optional sortKey As String = "AccountName")
     End Interface

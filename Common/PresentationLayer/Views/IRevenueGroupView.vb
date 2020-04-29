@@ -4,8 +4,8 @@ Namespace PresentationLayer.Views
 
     Public Interface IRevenueGroupView
         Inherits IView
-        Property IdNo As Integer
-        Property ParentIdNo As Integer?
+        Property IdNo As Int32
+        Property ParentIdNo As Int32?
         Property RevenueGroupCode As String
         Property RevenueGroupName As String
         Property RevenueGroupNameAra As String

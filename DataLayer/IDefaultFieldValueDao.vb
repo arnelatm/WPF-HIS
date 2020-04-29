@@ -6,7 +6,7 @@ Imports AATM.BusinessLayer.BusinessObjects
 Public Interface IDefaultFieldValueDao
 
     ' gets a specific DefaultFieldValue
-    Function GetRecordById(idNo As Integer) As DefaultFieldValue
+    Function GetRecordById(idNo) As DefaultFieldValue
 
     ' gets a sorted list of all DefaultFieldValues
     Function GetAll(Optional ByVal sortExpression As String = "TableName") As List(Of DefaultFieldValue)

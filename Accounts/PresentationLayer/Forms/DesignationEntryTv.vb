@@ -22,7 +22,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
-        Public Property IDNo As Integer Implements IDesignationView.IdNo
+        Public Property IdNo As Int32 Implements IDesignationView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get

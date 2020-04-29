@@ -9,7 +9,7 @@ Namespace AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetLogin(idNo As Integer) As Login Implements ILoginDao.GetLogin
+        Public Function GetLogin(idNo As Int32) As Login Implements ILoginDao.GetLogin
             Dim sql As String =
                     " SELECT IDNo, UserName, Password" &
                     "  FROM [User]" &
@@ -80,7 +80,7 @@ Namespace AdoNet
                                     "@Password", login.Password}
         End Function
 
-        'Public Function GetRecordById(idNo As Integer) As Login Implements IDao(Of Login).GetRecordById
+        'Public Function GetRecordById(idNo) As Login Implements IDao(Of Login).GetRecordById
         '    Dim sql As String =
         '            " SELECT IDNo, UserName, Password" &
         '            "  FROM [User]" &

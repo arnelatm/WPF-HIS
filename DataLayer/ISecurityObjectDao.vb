@@ -3,7 +3,7 @@
 Public Interface ISecurityObjectDao
 
     ' gets a specific SecurityObject
-    Function GetRecordById(idNo As Integer) As SecurityObject
+    Function GetRecordById(idNo) As SecurityObject
 
     ' gets a sorted list of all SecurityObjects
     Function GetAll(Optional ByVal sortExpression As String = "SecurityObjectName") As List(Of SecurityObject)
@@ -14,7 +14,7 @@ Public Interface ISecurityObjectDao
     ' updates a SecurityObject
     Function UpdateRecord(ByRef securityObject As SecurityObject) As Integer
 
-    'Function GetSecurityObject(idNo As Integer) As SecurityObject
+    'Function GetSecurityObject(idNo As Int32) As SecurityObject
 
     'Function GetSecurityObjects(Optional ByVal sortExpression As String = "SecurityObjectName ASC") _
     '    As List(Of SecurityObject)

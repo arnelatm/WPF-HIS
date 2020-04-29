@@ -128,7 +128,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements ICashDisbursementJournalView.IdNo
+        Public Property IdNo As Int32 Implements ICashDisbursementJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -179,7 +179,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeIdNo As Integer Implements ICashDisbursementJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Int32 Implements ICashDisbursementJournalView.PayeeIdNo
             Get
                 Return cboPayeeIdNo.GetValue()
             End Get
@@ -613,7 +613,7 @@ Namespace PresentationLayer.Forms
                             .Cells("ItemVatAmount").Value = currentVatAmount
                         End With
                         UpdateTotalVatAmount()
-                        'Dim idNo As Integer = .Value
+                        'Dim idNo As Int32 = .Value
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
                         bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount

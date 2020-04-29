@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateSalesCashItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertSalesCashItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of SalesCashItem) Implements IDaoChild(Of SalesCashItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, salesJournalIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, salesJournalIdNo As Int32) As Integer _
             Implements IDaoChild(Of SalesCashItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", salesJournalIdNo)
         End Function
@@ -52,7 +52,7 @@ Namespace DataLayer.AdoNet
             .CashCode = Extensions.AsString(reader("CashCode")),
             .SaleAmount = Extensions.AsDecimal(reader("SaleAmount")),
             .SalesJournalIdNo = Extensions.AsString(reader("SalesJournalIdNo")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence"))
             }
 

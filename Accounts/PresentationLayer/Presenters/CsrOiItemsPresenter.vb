@@ -70,20 +70,20 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap CsrOi Items.
         '''' </summary>
         '''' <param name="csrOiIdNo">CsrOiIDNo id to display.</param>
-        Public Shadows Sub Display(csrOiIdNo As Integer)
+        Public Shadows Sub Display(csrOiIdNo As Int32)
             View.CsrOiItems = Model.GetRecordsWithIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Sub
 
-        Public Function GetCsrOiItems(csrOiIdNo As Integer) As List(Of CsrOiItemModel)
+        Public Function GetCsrOiItems(csrOiIdNo As Int32) As List(Of CsrOiItemModel)
             Return Model.GetRecordsWithIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Function
 
-        Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Integer) As List(Of CsrOiItemModel)
+        Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Int32) As List(Of CsrOiItemModel)
             Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       csrOiIdNo As Integer)
+                                       csrOiIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

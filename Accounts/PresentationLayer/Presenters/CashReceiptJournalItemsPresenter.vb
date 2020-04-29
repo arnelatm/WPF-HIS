@@ -64,20 +64,20 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of Cash Receipt Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Shadows Sub Display(journalIdNo As Integer)
+        Public Shadows Sub Display(journalIdNo As Int32)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
+        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
             Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Integer)
+        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Int32)
             Return Model.GetRecordFieldWith2Key(idNo, "CR", "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       journalIdNo As Integer)
+                                       journalIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

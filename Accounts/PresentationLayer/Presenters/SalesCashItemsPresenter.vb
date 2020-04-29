@@ -73,7 +73,7 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap SalesCash Items.
         '''' </summary>
         '''' <param name="salesCashIdNo">SalesCashIDNo id to display.</param>
-        Public Shadows Sub Display(salesCashIdNo As Integer)
+        Public Shadows Sub Display(salesCashIdNo As Int32)
             View.SalesCashItems = Model.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
             For Each salesCashItem In View.SalesCashItems
                 Dim cashCode As CashCodeModel
@@ -104,16 +104,16 @@ Namespace PresentationLayer.Presenters
             Return (saleAmount - depositAmount - actualBankCharge)
         End Function
 
-        Public Function GetSalesCashItems(salesCashIdNo As Integer) As List(Of SalesCashItemModel)
+        Public Function GetSalesCashItems(salesCashIdNo As Int32) As List(Of SalesCashItemModel)
             Return Model.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Integer) As List(Of SalesCashItemModel)
+        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesCashItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       salesCashIdNo As Integer)
+                                       salesCashIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

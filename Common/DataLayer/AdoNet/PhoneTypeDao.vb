@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordById
+        Public Function GetRecordById(idNo) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType]" &
@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PhoneType) =
                                     Function(reader) _
             New PhoneType() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .PhoneTypeCode = Extensions.AsString(reader("PhoneTypeCode")),
             .PhoneTypeName = Extensions.AsString(reader("PhoneTypeName")),
             .PhoneTypeNameAra = Extensions.AsString(reader("PhoneTypeNameAra")),

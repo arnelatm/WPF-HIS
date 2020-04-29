@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Designation Implements IDaoAll(Of Designation).GetRecordById
+        Public Function GetRecordById(idNo) As Designation Implements IDaoAll(Of Designation).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
                     "   FROM [Designation]" &
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Designation) =
                                     Function(reader) _
             New Designation() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .DesignationCode = Extensions.AsString(reader("DesignationCode")),
             .DesignationName = Extensions.AsString(reader("DesignationName")),
             .DesignationNameAra = Extensions.AsString(reader("DesignationNameAra")),

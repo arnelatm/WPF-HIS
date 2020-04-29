@@ -113,7 +113,7 @@ Public Class CFormEntryTv
         Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
     End Function
 
-    Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Integer) _
+    Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
         As TreeNode
         Dim treeTextDisplay As String
         treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)

@@ -48,7 +48,7 @@ Public Class LoginEntry
         End Get
     End Property
 
-    Public ReadOnly Property IdNo As Integer Implements ILoginView.IdNo
+    Public ReadOnly Property IdNo As Int32 Implements ILoginView.IdNo
         Get
             Return 0
         End Get

@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Chart Implements IDaoAll(Of Chart).GetRecordById
+        Public Function GetRecordById(idNo) As Chart Implements IDaoAll(Of Chart).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountCode," &
@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .AccountNameAra = Extensions.AsString(reader("AccountNameAra")),
             .Active = Extensions.AsBool(reader("Active")),
             .DetailAccount = Extensions.AsBool(reader("DetailAccount")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .NormalBalance = Extensions.AsString(reader("NormalBalance")),
             .Notes = Extensions.AsString(reader("Notes")),

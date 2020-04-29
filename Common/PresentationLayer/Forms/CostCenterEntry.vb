@@ -30,7 +30,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IDNo As Integer Implements ICostCenterView.IdNo
+        Public Property IdNo As Int32 Implements ICostCenterView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Integer? Implements ICostCenterView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements ICostCenterView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ProfitCenterIdNo As Integer? Implements ICostCenterView.ProfitCenterIdNo
+        Public Property ProfitCenterIdNo As Int32? Implements ICostCenterView.ProfitCenterIdNo
             Get
                 Return CType(cacProfitCenterIdNo.GetValue(), Integer?)
             End Get

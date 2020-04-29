@@ -7,7 +7,7 @@
     Public Class DesignationModel
 
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property DesignationCode As String
         Public Property DesignationName As String
         Public Property DesignationNameAra As String

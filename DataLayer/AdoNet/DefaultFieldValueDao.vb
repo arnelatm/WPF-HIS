@@ -9,7 +9,7 @@ Namespace AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As DefaultFieldValue _
+        Public Function GetRecordById(idNo) As DefaultFieldValue _
             Implements IDefaultFieldValueDao.GetRecordById
             Dim sql As String =
                     " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue " &
@@ -62,7 +62,7 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DefaultFieldValue) =
                                     Function(reader) _
             New DefaultFieldValue() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .TableName = Extensions.AsString(reader("TableName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of UShort)(reader("DataType")),

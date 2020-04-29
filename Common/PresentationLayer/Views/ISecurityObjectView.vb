@@ -3,8 +3,8 @@
 Namespace PresentationLayer.Views
     Public Interface ISecurityObjectView
         Inherits IView
-        Property IdNo As Integer
-        Property ParentIdNo As Integer?
+        Property IdNo As Int32
+        Property ParentIdNo As Int32?
         Property SecurityObjectName As String
         Property SecurityObjectNameAra As String
         Property Notes As String

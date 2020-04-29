@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCadOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCadOiItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -41,7 +41,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cadIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cadIdNo As Int32) As Integer _
             Implements IDaoChild(Of CadOiItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", cadIdNo)
         End Function
@@ -58,11 +58,11 @@ Namespace DataLayer.AdoNet
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CadIdNo = Extensions.AsString(reader("CadIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
-            .JournalIdNo = Extensions.AsId(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsId(reader("JournalItemIdNo")),
+            .JournalIdNo = Extensions.AsId(Of Int32)(reader("JournalIdNo")),
+            .JournalItemIdNo = Extensions.AsId(Of Int32)(reader("JournalItemIdNo")),
             .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("OpenInvoiceIdNo")),
             .PreviousBalance = Extensions.AsDecimal(reader("PreviousBalance")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("sequence")),
@@ -87,7 +87,7 @@ Namespace DataLayer.AdoNet
         '                         }
         'End Function
 
-        'Public Function GetSupplierOpenInvoices(idNo As Integer) _
+        'Public Function GetSupplierOpenInvoices(idNo As Int32) _
         '    As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
         '    Dim sql As String =
         '            "SELECT " &

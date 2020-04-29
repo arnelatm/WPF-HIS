@@ -6,7 +6,7 @@ Imports AATM.BusinessLayer.BusinessObjects
 Public Interface ILoginDao
     ' gets a specific Login
 
-    Function GetLogin(idNo As Integer) As Login
+    Function GetLogin(idNo As Int32) As Login
 
     ' gets a specific Login by UserName
 

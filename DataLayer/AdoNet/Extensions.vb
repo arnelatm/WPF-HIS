@@ -9,16 +9,13 @@ Namespace AdoNet
         ' transform object into Identity data type (integer).
 
         <Extension>
-        Public Function AsId(item As Object, Optional ByVal defaultId As Integer = -1) As Integer
+        Public Function AsId(Of T)(item As Object, Optional ByVal defaultId As Integer = -1) As T
             If item Is Nothing Then
-                Return defaultId
+                Return Convert.ChangeType(-1, GetType(T))
             End If
 
-            Dim result As Integer
-            If Not Integer.TryParse(item.ToString(), result) Then
-                Return defaultId
-            End If
-            Return result
+            Return Convert.ChangeType(item, GetType(T))
+
         End Function
 
         ' transform object into integer data type.

@@ -1,5 +1,4 @@
 ﻿Imports AATM.BusinessLayer.BusinessRules
-
 Namespace BusinessLayer.BusinessRules
     ' length validation rule.
     ' length must be between given min and max values
@@ -7,11 +6,11 @@ Namespace BusinessLayer.BusinessRules
     Public Class ValidateParentId
         Inherits BusinessRule
 
-        Private ReadOnly _idNo As Integer
+        Private ReadOnly _idNo As Int32
         Private ReadOnly _newParentId As Integer
         Private ReadOnly _tableName As String
 
-        Public Sub New(propertyName As String, idNo As Integer, tableName As String)
+        Public Sub New(propertyName As String, idNo As Int32, tableName As String)
             MyBase.New(propertyName)
             _idNo = idNo
             _tableName = tableName
@@ -31,7 +30,7 @@ Namespace BusinessLayer.BusinessRules
             [Error] = "Changing this entry's parent is not allowed because this item has existing children entries!"
         End Sub
 
-        Public Sub New(propertyName As String, errorMessage As String, idNo As Integer, tableName As String)
+        Public Sub New(propertyName As String, errorMessage As String, idNo As Int32, tableName As String)
             Me.New(propertyName, idNo, tableName)
             [Error] = errorMessage
         End Sub

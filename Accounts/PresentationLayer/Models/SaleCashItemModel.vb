@@ -15,10 +15,10 @@
         Public Property ComputedBankCharge As Decimal
         Public Property ComputedBankChargeVat As Decimal
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Rate As Decimal
         Public Property SaleAmount As Decimal
-        Public Property SalesJournalIdNo As Integer
+        Public Property SalesJournalIdNo As Int32
         Public Property Sequence As Integer
 
     End Class

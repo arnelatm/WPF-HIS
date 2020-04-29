@@ -11,14 +11,14 @@ Namespace PresentationLayer.Views
         Property Credit As Decimal
         Property Debit As Decimal
         Property DiscountTaken As Decimal
-        Property IdNo As Integer
-        Property JournalIdNo As Integer
+        Property IdNo As Int32
+        Property JournalIdNo As Int32
         Property Notes As String
-        Property OpenInvoiceIdNo As Integer
+        Property OpenInvoiceIdNo As Int32
         Property OriginalAmount As Decimal
         Property PaidAmount As Decimal
         Property PayeeType As String
-        Property ProfitCenterIdNo As Integer
+        Property ProfitCenterIdNo As Int32
         Property Sequence As Integer
         Property SpecialAccount As String
 

@@ -8,7 +8,7 @@
 
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property JournalCode As String
         Public Property JournalIdNo As Int32
         Public Property JournalItemIdNo As Int32

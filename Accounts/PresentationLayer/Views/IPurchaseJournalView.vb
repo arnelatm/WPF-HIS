@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
         Property DueDate As Date?
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property InvoiceDate As Date?
         Property InvoiceNo As String
         Property Notes As String

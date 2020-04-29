@@ -16,7 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property CategoryCode As String
         Public Property CategoryName As String
         Public Property CategoryNameAra As String

@@ -6,11 +6,11 @@ Imports AATM.BusinessLayer.BusinessObjects
 Public Interface ISaltDao
     ' gets a specific Salt
 
-    Function GetSalt(idNo As Integer) As Salt
+    Function GetSalt(idNo As Int32) As Salt
 
     ' gets a specific Salt by LoginIDNo
 
-    Function GetSaltByLoginIdNo(loginIdNo As Integer) As Salt
+    Function GetSaltByLoginIdNo(loginIdNo As Int32) As Salt
 
     ' Insert a Salt
     Function InsertSalt(salt As Salt) As Integer

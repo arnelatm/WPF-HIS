@@ -22,7 +22,7 @@ Public Class Model
     Public Sub New()
     End Sub
 
-    Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM _
+    Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM _
         Implements IModel.GetRecordById
         Dim modelData As New TM
         If idNo <> 0 Then
@@ -44,12 +44,12 @@ Public Class Model
     End Function
 
     Public Function AddRecord(Of TM)(ByRef dataModel As TM) As Integer Implements IModel.AddRecord
-        Dim newlyAddedRecordIdNo As Integer
+        Dim newlyAddedRecordIdNo As Int32
         newlyAddedRecordIdNo = DataService.AddRecord(dataModel)
         Return newlyAddedRecordIdNo
     End Function
 
-    Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Integer, Optional ByRef sortKey As String = Nothing) As List(Of TM) _
+    Public Function GetRecordsWithIdNo(Of TM As New)(idNo As Int32, Optional ByRef sortKey As String = Nothing) As List(Of TM) _
         Implements IModel.GetRecordsWithIdNo
         Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
         Return data
@@ -76,7 +76,7 @@ Public Class Model
     '    Return updateResult
     'End Function
 
-    Public Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
+    Public Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer _
         Implements IModel.UpdateRecordWithIdNo
         Dim updateResult As Integer
@@ -270,7 +270,7 @@ Public Class Model
         Return Service.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
     End Function
 
-    Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrderKey As String) As Integer _
+    Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrderKey As String) As Integer _
         Implements IModel.GetSortedRecordPosition
         Return Service.GetSortedRecordPosition(idNo, tableName, sortOrderKey)
     End Function
@@ -294,12 +294,12 @@ Public Class Model
         Return Service.FindField(tableName, fieldName, searchString, searchAnywhere)
     End Function
 
-    Public Function FindFieldContinue(tableName As String, idNo As Integer) As Integer _
+    Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer _
         Implements IModel.FindFieldContinue
         Return Service.FindFieldContinue(tableName, idNo)
     End Function
 
-    Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer _
+    Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
         Implements IModel.DeleteRecord
         Return Service.DeleteRecord(idNo, tableName)
     End Function
@@ -336,35 +336,35 @@ Public Class Model
         Return Service.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
     End Function
 
-    Public Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String _
+    Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
         Implements IModel.GetRecordWithIdNo
         Return Service.GetRecordWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
-    Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String,
+    Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
                                            Optional dateTimeStampField As String = "DateTimeStamp") As Object _
         Implements IModel.GetRecordDateTimeStamp
         Return Service.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
     End Function
 
-    Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object,
+    Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object,
                                      Optional timeStampField As String = "DateTimeStamp") As Boolean _
         Implements IModel.HasRecordChanged
         Return Service.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
     End Function
 
-    'Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+    'Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
     '    Implements IModel.GetUserSecurity
     '    Return SecurityService.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     'End Function
 
-    Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) _
+    Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
         As Boolean _
         Implements IModel.CheckIfUnique
         Return Service.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
     End Function
 
-    Public Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Integer) _
+    Public Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
         As Boolean _
         Implements IModel.IsUnique
         Return Service.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
@@ -411,12 +411,12 @@ Public Class Model
         Return Service.GetControlSecurityIdNo(searchValue)
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
         Implements IModel.GetUserSecurity
         Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
-    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList _
         Implements IModel.GetUserSecurityForKey
         Return Service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
