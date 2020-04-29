@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo As Integer) As OriginalCaptions _
+        Public Function GetRecordById(idNo) As OriginalCaptions _
             Implements IDaoAll(Of OriginalCaptions).GetRecordById
             Dim sql As String = "select o.[IdNo]," &
                                 "o.[Caption] , " &
@@ -85,7 +85,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, OriginalCaptions) =
                                     Function(reader) _
             New OriginalCaptions() With {
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Caption = Extensions.AsString(reader("Caption")),
             .IdNoTranslated = Extensions.AsInt(Of Integer)(reader("IdNoTranslated")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption")),

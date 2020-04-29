@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IDistributionSchemeView
         Inherits IView
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property DistributionSchemeCode As String
         Property DistributionSchemeName As String
         Property DistributionSchemeNameAra As String

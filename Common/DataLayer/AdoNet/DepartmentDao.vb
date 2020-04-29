@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Department Implements IDaoAll(Of Department).GetRecordById
+        Public Function GetRecordById(idNo) As Department Implements IDaoAll(Of Department).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
         Private Shared _make As Func(Of IDataReader, Department) =
                            Function(reader) _
             New Department() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IDNo")),
             .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
             .DepartmentName = Extensions.AsString(reader("DepartmentName")),
             .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),

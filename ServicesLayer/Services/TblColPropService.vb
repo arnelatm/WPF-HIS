@@ -26,7 +26,7 @@ Namespace Services
         '    Return DataDao.GetControlTblColPropIdNo(searchValue)
         'End Function
 
-        'Public Function GetUserTblColProp(tblColPropObjectIdNo As Integer, tblColPropGroupIdNo As Integer) As ArrayList _
+        'Public Function GetUserTblColProp(tblColPropObjectIdNo As Int32, tblColPropGroupIdNo As Int32) As ArrayList _
         '    Implements ITblColPropService.GetUserTblColProp
         '    Return DataDao.GetUserTblColProp(tblColPropObjectIdNo, tblColPropGroupIdNo)
         'End Function

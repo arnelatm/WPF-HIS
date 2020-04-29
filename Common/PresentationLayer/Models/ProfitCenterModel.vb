@@ -3,7 +3,7 @@
     Public Class ProfitCenterModel
         Inherits CommonModel
 
-        Public Property ParentIdNo As Integer?
+        Public Property ParentIdNo As Int32?
         Public Property ProfitCenterCode As String
         Public Property ProfitCenterName As String
         Public Property ProfitCenterNameAra As String

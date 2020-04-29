@@ -44,7 +44,7 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of Purchase Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Shadows Sub Display(journalIdNo As Integer)
+        Public Shadows Sub Display(journalIdNo As Int32)
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
@@ -56,7 +56,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       journalIdNo As Integer)
+                                       journalIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal

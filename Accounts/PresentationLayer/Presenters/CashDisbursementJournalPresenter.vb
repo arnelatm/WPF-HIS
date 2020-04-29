@@ -67,7 +67,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
@@ -183,27 +183,27 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Integer) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Int32) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
-        Public Function GetCadOiItems(cadOiIdNo As Integer) As List(Of CadOiItemModel)
+        Public Function GetCadOiItems(cadOiIdNo As Int32) As List(Of CadOiItemModel)
             Return _cadOiItemModel.GetRecordsWithIdNo(Of CadOiItemModel)(cadOiIdNo, "Sequence")
         End Function
 
-        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
+        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
             Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetPaymentType(ByRef idNo As Integer) As String
+        Public Function GetPaymentType(ByRef idNo As Int32) As String
             Dim retVal As String
             retVal = Model.GetRecordFieldWithKey(idNo, "CashDisbursementJournal", "IdNo", "PaymentType")
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of CadOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CadOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CadOiItemModel)(supplierIdNo)
         End Function
 
@@ -315,7 +315,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
@@ -601,17 +601,17 @@ Namespace PresentationLayer.Presenters
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal As Integer
-            Dim parentIdNo As Integer
+            Dim headerIdNo As Int32
             updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, View.IdNo)
             If AddMode Then
-                parentIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+                headerIdNo = passedValue
+                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
             Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
             If updateReturnValue >= 0 AndAlso DtCadOiInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtCadOiInsertTable.Rows
-                    row.Item("CadIdNo") = parentIdNo
+                    row.Item("CadIdNo") = headerIdNo
                 Next
                 insertReturnValue = _cadOiItemModel.InsertTvp(DtCadOiInsertTable)
                 If insertReturnValue >= 0 Then
@@ -629,17 +629,17 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             Dim insertReturnValue
             Dim updateReturnValue
-            Dim parentIdNo As Integer
+            Dim headerIdNo As Int32
             If AddMode Then
-                parentIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+                headerIdNo = passedValue
+                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
             Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, parentIdNo)
+            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = parentIdNo
+                    row.Item("JournalIdNo") = headerIdNo
                 Next
                 insertReturnValue = Model.InsertTvp(DtInsertTable)
                 If insertReturnValue >= 0 Then
@@ -781,7 +781,7 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         End If
                     Next
-                    Dim lOpenInvIdNo As Integer
+                    Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
                     lOpenInvIdNo = GetAdvancePaymentCdOpenInvoice(ji.IdNo)
                     If lOpenInvIdNo = 0 Then
@@ -794,7 +794,7 @@ Namespace PresentationLayer.Presenters
                 Else
                     ' get the OpenInvoice IdNo
                     ' check if the AdvancePayment OpenInvoice already created
-                    Dim lOpenInvoiceIdNo As Integer
+                    Dim lOpenInvoiceIdNo As Int32
                     lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
                     DeleteApOpenInvoice(lOpenInvoiceIdNo)
                 End If

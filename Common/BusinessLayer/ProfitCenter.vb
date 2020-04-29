@@ -16,8 +16,8 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
-        Public Property ParentIdNo As Integer?
+        Public Property IdNo As Int32
+        Public Property ParentIdNo As Int32?
         Public Property ProfitCenterCode As String
         Public Property ProfitCenterName As String
         Public Property ProfitCenterNameAra As String

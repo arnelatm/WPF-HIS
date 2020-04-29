@@ -460,7 +460,7 @@ Public Class BfMain
         Dim controlSecurityValues As ArrayList
         Dim isSelectable As Boolean
         Dim isVisible As Boolean
-        Dim securityIdNo As Integer
+        Dim securityIdNo As Int32
         'Dim service As New Service
         If GlobalVariables.IsUserLoggedIn Then
             ''if controlSecurityKey = "Main.Menu.Masters.Security" then
@@ -524,7 +524,7 @@ Public Class BfMain
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
         If PresenterObj Is Nothing Then
             'Dim securityPresenter As SecurityPresenter = New SecurityPresenter(Me)
-            Dim idNo As Integer = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+            Dim idNo As Int32 = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
             Dim retVal As Integer
             If Not Integer.TryParse(idNo, retVal) Then
                 Return retVal
@@ -643,7 +643,7 @@ Public Class BfMain
                         Dim isSelectable As Boolean
                         Dim isVisible As Boolean
                         'Dim service As New Service
-                        Dim securityIdNo As Integer = GetControlSecurityIdNo(controlSecurityKey)
+                        Dim securityIdNo As Int32 = GetControlSecurityIdNo(controlSecurityKey)
 
                         If securityIdNo <> 0 Then
                             If GlobalVariables.SecurityGroupIdNo <> 0 Then

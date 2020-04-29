@@ -6,15 +6,15 @@ Namespace PresentationLayer.Views
         Inherits IView
 
         Property AccountIdNo as Int32
-        Property AccountReconciliationIdNo As Integer
+        Property AccountReconciliationIdNo As Int32
         Property Cleared As Boolean
         Property Credit As Decimal
         Property Debit As Decimal
         Property DocumentNumber As String
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property JournalCode As String
-        Property JournalIdNo As Integer
-        Property JournalItemIdNo As Integer
+        Property JournalIdNo As Int32
+        Property JournalItemIdNo As Int32
         Property PayDescription As String
         Property PayDescriptionAra As String
         Property ReferenceNo As String

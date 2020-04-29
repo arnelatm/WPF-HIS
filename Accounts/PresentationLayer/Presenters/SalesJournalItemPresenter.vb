@@ -73,20 +73,20 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of Cheque Disbursement Journal Items.
         ''' </summary>
         ''' <param name="journalIdNo">JournalIDNo id to display.</param>
-        Public Shadows Sub Display(journalIdNo As Integer)
+        Public Shadows Sub Display(journalIdNo As Int32)
             View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Function GetJournalItems(journalIdNo As Integer) As List(Of JournalItemModel)
+        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
             Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Integer)
+        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Int32)
             Return Model.GetRecordFieldWith2Key(idNo, "CK", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       journalIdNo As Integer)
+                                       journalIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
@@ -104,7 +104,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        'Public Sub MakeJournalItems(ByVal idNo As Integer, ByVal AccountIdNo as Int32, ByVal totalSales As Decimal)
+        'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo as Int32, ByVal totalSales As Decimal)
         '    Dim oldJournalItems = GetJournalItems(idNo)
         '    Dim counter As Integer = 0
         '    MakeSalesJournal(oldJournalItems, counter, AccountIdNo, 0, totalSales)

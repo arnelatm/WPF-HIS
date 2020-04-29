@@ -48,27 +48,27 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetPaymentType(ByRef idNo As Integer) As String
+        Public Function GetPaymentType(ByRef idNo As Int32) As String
             Dim retVal As String
             retVal = Model.GetRecordFieldWithKey(idNo, "PettyCashJournal", "IdNo", "PaymentType")
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Integer) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Int32) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, "PC", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of PcsOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of PcsOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
 

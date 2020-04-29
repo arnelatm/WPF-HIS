@@ -10,7 +10,7 @@ Public Class GlobalVariables
     Private Shared _appCurrentCultureInfo As CultureInfo
     Private Shared _defaultUnmirroredCultureInfoStr As String
 
-    'Private Shared _defaultMirroredLanguageIdNo As Integer
+    'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
 
     Private Shared _defaultCountryIsoa3 As String = ""
@@ -41,9 +41,9 @@ Public Class GlobalVariables
 
     Public Shared Property RightToLeftLayout As Boolean = False
 
-    Public Shared Property SecurityGroupIdNo As Integer = 0
+    Public Shared Property SecurityGroupIdNo As Int32 = 0
 
-    Public Shared Property UserIdNo As Integer
+    Public Shared Property UserIdNo As Int32
 
 #Region "Colors"
 

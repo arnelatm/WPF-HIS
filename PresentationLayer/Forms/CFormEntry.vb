@@ -288,7 +288,7 @@ Public Class CFormEntry
         '
     End Sub
 
-    Protected Overridable Sub DisplayView(idNo As Integer)
+    Protected Overridable Sub DisplayView(idNo As Int32)
         Debugger.Break()
     End Sub
 

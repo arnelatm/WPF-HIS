@@ -7,13 +7,13 @@ Namespace PresentationLayer.Views
 
         Implements IDistributionSchemeItemView
 
-        Public Property IdNo As Integer Implements IDistributionSchemeItemView.IdNo
+        Public Property IdNo As Int32 Implements IDistributionSchemeItemView.IdNo
 
-        Public Property DistributionSchemeIdNo As Integer Implements IDistributionSchemeItemView.DistributionSchemeIdNo
+        Public Property DistributionSchemeIdNo As Int32 Implements IDistributionSchemeItemView.DistributionSchemeIdNo
 
         Public Property Sequence As Integer Implements IDistributionSchemeItemView.Sequence
 
-        Public Property ProfitCenterIdNo As Integer Implements IDistributionSchemeItemView.ProfitCenterIdNo
+        Public Property ProfitCenterIdNo As Int32 Implements IDistributionSchemeItemView.ProfitCenterIdNo
 
         Public Property ProfitCenterName As String Implements IDistributionSchemeItemView.ProfitCenterName
 

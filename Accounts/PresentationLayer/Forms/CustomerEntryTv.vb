@@ -43,7 +43,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Displays"
 
-        Public Property IDNo As Integer Implements ICustomerView.IdNo
+        Public Property IdNo As Int32 Implements ICustomerView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)

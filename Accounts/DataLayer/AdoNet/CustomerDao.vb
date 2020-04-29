@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Customer Implements IDaoAll(Of Customer).GetRecordById
+        Public Function GetRecordById(idNo) As Customer Implements IDaoAll(Of Customer).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CustomerCode, CustomerName, CustomerNameAra, ContactPerson, ContactDesignation, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Mobile, Fax, Email, Website, VatNumber, CrNumber, AccountStatus, " &
@@ -100,7 +100,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Customer) =
                                     Function(reader) _
             New Customer() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .CustomerCode = Extensions.AsString(reader("CustomerCode")),
             .CustomerName = Extensions.AsString(reader("CustomerName")),
             .CustomerNameAra = Extensions.AsString(reader("CustomerNameAra")),

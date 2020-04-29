@@ -116,7 +116,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IPurchaseJournalView.IdNo
+        Public Property IdNo As Int32 Implements IPurchaseJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -221,7 +221,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SupplierIdNo As Integer Implements IPurchaseJournalView.SupplierIdNo
+        Public Property SupplierIdNo As Int32 Implements IPurchaseJournalView.SupplierIdNo
             Get
                 Return cboSupplierIdNo.GetValue()
             End Get

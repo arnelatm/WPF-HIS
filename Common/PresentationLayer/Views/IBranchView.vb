@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IBranchView
         Inherits IView
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property BranchCode As String
         Property BranchName As String
         Property BranchNameAra As String

@@ -14,7 +14,7 @@ Namespace AdoNet
         '    Throw New NotImplementedException()
         'End Sub
 
-        Public Function GetRecordById(idNo As Integer) As User Implements IDao(Of User).GetRecordById
+        Public Function GetRecordById(idNo) As User Implements IDao(Of User).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, UserName, Password, FullName, SecurityGroupIDNo " &
                     "   FROM [User]" &
@@ -59,7 +59,7 @@ Namespace AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, User) = Function(reader) _
             New User() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .UserName = Extensions.AsString(reader("UserName")),
             .Password = Extensions.AsString(reader("Password")),
             .FullName = Extensions.AsString(reader("FullName")),

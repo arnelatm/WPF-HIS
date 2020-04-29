@@ -41,7 +41,7 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
-        'Public Overrides Sub Display(idNo As Integer)
+        'Public Overrides Sub Display(idNo As Int32)
         '    If idNo <> 0 Then
         '        Dim modelData As OriginalMessagesModel
         '        modelData = Model.GetRecordById(Of OriginalMessagesModel)(idNo)

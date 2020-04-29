@@ -7,7 +7,7 @@
         Public Property FullNameAra As String
         Public Property Password As String
         Public Property SecurityLevel As Int16
-        Public Property SecurityGroupIdNo As Integer
+        Public Property SecurityGroupIdNo As Int32
 
 
     End Class

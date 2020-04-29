@@ -4,8 +4,8 @@ Namespace PresentationLayer.Views
 
     Public Interface IProfitCenterView
         Inherits IView
-        Property IdNo As Integer
-        Property ParentIdNo As Integer?
+        Property IdNo As Int32
+        Property ParentIdNo As Int32?
         Property ProfitCenterCode As String
         Property ProfitCenterName As String
         Property ProfitCenterNameAra As String

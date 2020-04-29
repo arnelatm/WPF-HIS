@@ -72,7 +72,7 @@ Namespace PresentationLayer.Forms
 
 #Region "DistributionSchemeView"
 
-        Public Property IDNo As Integer Implements IDistributionSchemeView.IdNo
+        Public Property IdNo As Int32 Implements IDistributionSchemeView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get

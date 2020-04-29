@@ -261,18 +261,18 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
-        Public Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
+        Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
             Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
+        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
             Dim records = DataDao.GetCustomerOpenInvoices(idNo)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function
 
-        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
+        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
             Dim records = DataDao.GetSupplierOpenInvoices(idNo)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
@@ -286,11 +286,11 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
+        Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
             Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Integer, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
+        Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Int32, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
             Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder)
         End Function
 
@@ -300,12 +300,12 @@ Namespace ServiceLayer.ActionService
     '    Inherits ServiceAccounts
     '    Implements IOpenInvoiceService
 
-    '    Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+    '    Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
     '        Implements IOpenInvoiceService.AddInvoicePayment
     '        Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
     '    End Function
 
-    '    Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+    '    Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
     '        Implements IOpenInvoiceService.RemoveInvoicePayment
     '        Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
     '    End Function

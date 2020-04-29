@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views
         Property Balance As Decimal
         Property DateCreated As DateTime?
         Property GlSystemBalance As Decimal
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Posted As Boolean
         Property ReconciliationDate As Date?
         Property TotalCreditsCleared As Decimal

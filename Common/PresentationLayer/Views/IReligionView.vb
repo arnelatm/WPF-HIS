@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IReligionView
         Inherits IView
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property ReligionCode As String
         Property ReligionName As String
         Property ReligionNameAra As String

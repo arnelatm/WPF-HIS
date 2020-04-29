@@ -13,7 +13,7 @@ Namespace BusinessLayer
         Public Property CashCode As String
         Public Property CashName As String
         Public Property CashNameAra As String
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Rate As Decimal
 
     End Class

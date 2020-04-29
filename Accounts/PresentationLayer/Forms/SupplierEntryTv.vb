@@ -173,7 +173,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IDNo As Integer Implements ISupplierView.IdNo
+        Public Property IdNo As Int32 Implements ISupplierView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)

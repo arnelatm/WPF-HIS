@@ -9,12 +9,12 @@
 
     Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
 
-    Function DeleteRecord(idNo As Integer, tableName As String) As Short
+    Function DeleteRecord(idNo As Int32, tableName As String) As Short
 
     Function FindField(tableName As String, fieldName As String, searchString As String,
                        Optional searchAnywhere As Boolean = False) As Integer
 
-    Function FindFieldContinue(tableName As String, lastIdNo As Integer) As Object
+    Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 
     Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object
 
@@ -25,7 +25,7 @@
 
     Function GetRecordCount(tableName As String) As Integer
 
-    Function GetRecordDateTimeStamp(idNo As Integer, tableName As String, dateTimeStampField As String) As Object
+    Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) As Object
 
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                    returnFieldName As String) As String
@@ -37,7 +37,7 @@
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String
 
-    Function GetRecordPosition(tableName As String, idNo As Integer) As Integer
+    Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
 
@@ -46,24 +46,24 @@
     Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                 ParamArray fieldNames() As String) As Object
 
-    Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String
+    Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String
 
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
-    Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer
+    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
     Function GetControlSecurityIdNo(searchValue As String) As String
-    Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList
+    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList
 
-    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList
+    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList
 
-    Function HasRecordChanged(idNo As Integer, tableName As String, timeStampValue As Byte,
+    Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
                               Optional timeStampedField As String = "DateTimeStamp") As Boolean
 
     Function IsFieldUnique(tableName As String, fieldName As String) As Boolean
 
     Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
-    Function UpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) _
+    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer
 
 End Interface

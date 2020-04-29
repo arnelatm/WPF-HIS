@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCkdOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCkdOiItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) _
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of CkdOiItem) Implements IDaoChild(Of CkdOiItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, ckdIdNo As Integer) As Integer _
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, ckdIdNo As Int32) As Integer _
             Implements IDaoChild(Of CkdOiItem).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", ckdIdNo)
         End Function
@@ -61,11 +61,11 @@ Namespace DataLayer.AdoNet
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CkdIdNo = Extensions.AsString(reader("CkdIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
-            .JournalIdNo = Extensions.AsId(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsId(reader("JournalItemIdNo")),
+            .JournalIdNo = Extensions.AsId(Of Int32)(reader("JournalIdNo")),
+            .JournalItemIdNo = Extensions.AsId(Of Int32)(reader("JournalItemIdNo")),
             .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("OpenInvoiceIdNo")),
             .PreviousBalance = Extensions.AsDecimal(reader("PreviousBalance")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("sequence")),
@@ -90,7 +90,7 @@ Namespace DataLayer.AdoNet
         '                         }
         'End Function
 
-        Public Function GetSupplierOpenInvoices(idNo As Integer) _
+        Public Function GetSupplierOpenInvoices(idNo As Int32) _
             As List(Of CkdOiItem) Implements IDaoOiItem(Of CkdOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &

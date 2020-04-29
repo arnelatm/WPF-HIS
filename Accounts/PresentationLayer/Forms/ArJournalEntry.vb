@@ -65,7 +65,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CustomerIdNo As Integer Implements IArJournalView.CustomerIdNo
+        Public Property CustomerIdNo As Int32 Implements IArJournalView.CustomerIdNo
             Get
                 Return cboCustomerIdNo.GetValue()
             End Get
@@ -103,7 +103,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IArJournalView.IdNo
+        Public Property IdNo As Int32 Implements IArJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)

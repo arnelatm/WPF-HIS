@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views
         Inherits IView
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Notes As String
         ReadOnly Property Posted As Boolean
         Property ReferenceNo As String

@@ -38,7 +38,7 @@ Namespace BusinessLayer
         Public Property Gender As String
         Public Property HiredDate As Date?
         Public Property Iban As String
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property MaritalStatus As String
         Public Property NationalIdNo As String
         Public Property NationalityCode As String

@@ -13,7 +13,7 @@ Namespace BusinessObjects
             End If
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property ParentIdNo As Int32?
         Public Property SecurityGroupName As String
         Public Property SecurityGroupNameAra As String

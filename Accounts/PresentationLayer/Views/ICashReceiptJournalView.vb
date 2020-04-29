@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views
         ReadOnly Property DateCreated As DateTime?
         Property DiscountAccountIdNo As Int32?
         Property DiscountTaken As Decimal
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Notes As String
         Property OrNumber As String
         Property PayorIdNo As Int32

@@ -46,27 +46,27 @@ Namespace PresentationLayer.Presenters
             Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
         End Function
 
-        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetPaymentType(ByRef idNo As Integer) As String
+        Public Function GetPaymentType(ByRef idNo As Int32) As String
             Dim retVal As String
             retVal = Model.GetRecordFieldWithKey(idNo, "CheckDisbursementJournal", "IdNo", "PaymentType")
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Integer) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Int32) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, "CK", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Integer) As List(Of CkdOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CkdOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CkdOiItemModel)(supplierIdNo)
         End Function
 

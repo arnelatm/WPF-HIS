@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 #Region "Fields"
-        Public Property IDNo As Integer Implements ISecurityObjectView.IdNo
+        Public Property IdNo As Int32 Implements ISecurityObjectView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIDNo.Text)
             End Get
@@ -34,7 +34,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Integer? Implements ISecurityObjectView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements ISecurityObjectView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get

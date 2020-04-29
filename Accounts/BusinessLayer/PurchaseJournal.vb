@@ -29,7 +29,7 @@ Namespace BusinessLayer
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime
         Public Property DueDate As Date?
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
 
         'Public Property SettlementDueDate As Date?
         'Public Property SettlementDiscount As Decimal

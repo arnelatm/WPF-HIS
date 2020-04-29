@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CashCode Implements IDaoAll(Of CashCode).GetRecordById
+        Public Function GetRecordById(idNo) As CashCode Implements IDaoAll(Of CashCode).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -97,7 +97,7 @@ Namespace DataLayer.AdoNet
             .CashCode = Extensions.AsString(reader("CashCode")),
             .CashName = Extensions.AsString(reader("CashName")),
             .CashNameAra = Extensions.AsString(reader("CashNameAra")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .Rate = Extensions.AsDecimal(reader("Rate"))
             }
 

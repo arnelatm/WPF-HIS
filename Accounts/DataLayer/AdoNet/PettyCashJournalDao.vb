@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As PettyCashJournal _
+        Public Function GetRecordById(idNo) As PettyCashJournal _
             Implements IDao(Of PettyCashJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, PaymentType, PayeeIdNo, PayeeName, " &
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PettyCashJournal) =
                                     Function(reader) _
             New PettyCashJournal() With {
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),

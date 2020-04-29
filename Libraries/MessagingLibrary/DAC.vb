@@ -11,7 +11,7 @@ Public Class Dac
 
 #Region " Declarations and properties "
 
-    Private ReadOnly _defaultMirroredLanguageIdNo As Integer = 0
+    Private ReadOnly _defaultMirroredLanguageIdNo As Int32 = 0
     Public Const SqlError = "Error connecting to server"
     Public Const MdbError = "Error opening MDB file"
     Public Const DbfError = "Error with DBF directory or DBC"
@@ -22,7 +22,7 @@ Public Class Dac
     Public Cn As Object
     Public Dc As Object
 
-    'Public Shared DefaultMirroredLanguageIdNo As Integer
+    'Public Shared DefaultMirroredLanguageIdNo As Int32
 
     <Category("AATM")> Public Property DacAccessType As String = "SQL"
     <Category("AATM")> Public Property DacFileName As String = $"ISPDATA" '""Translations"
@@ -63,7 +63,7 @@ Public Class Dac
         End Set
     End Property
 
-    Public ReadOnly Property DefaultMirroredLanguageIdNo As Integer
+    Public ReadOnly Property DefaultMirroredLanguageIdNo As Int32
         Get
             If _defaultMirroredLanguageIdNo = 0 Then
                 If Not (System.ComponentModel.LicenseManager.CurrentContext.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
@@ -455,7 +455,7 @@ Public Class Dac
         'Dim translatedMessage As String = message
         Dim cmd As String
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
-        Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
+        Dim idNo As Int32 = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
@@ -505,7 +505,7 @@ Public Class Dac
         'Dim translatedMessage As String = message
         Dim cmd As String
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
-        Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
+        Dim idNo As Int32 = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
@@ -563,7 +563,7 @@ Public Class Dac
         Dim translatedCaption As String = ""
         Dim cmd As String
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
-        Dim idNo As Integer = ExecScalar(Of Int16)(cmd)
+        Dim idNo As Int32 = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"

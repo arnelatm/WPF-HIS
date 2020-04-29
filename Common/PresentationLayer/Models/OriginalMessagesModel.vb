@@ -5,7 +5,7 @@
 
         Public Property Caption As String
         Public Property IdNoTranslated As Integer
-        Public Property LanguageIdNo As Integer
+        Public Property LanguageIdNo As Int32
         Public Property Message As String
         Public Property MessageKey As String
         Public Property Notes As String

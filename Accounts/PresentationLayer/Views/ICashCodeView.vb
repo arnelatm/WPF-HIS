@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views
         Property CashCode As String
         Property CashName As String
         Property CashNameAra As String
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Rate As Decimal
 
     End Interface

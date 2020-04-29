@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IBankView
         Inherits IView
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property BankCode As String
         Property BankName As String
         Property BankNameAra As String

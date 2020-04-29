@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
         Public Property AccountReconciliationItemsPresenter As AccountReconciliationItemsPresenter
         Public Property MessageBox As Object
 
-        Public Sub PostReconciliation(ByVal idNo As Integer, ByVal accountReconciliationItems As List(Of AccountReconciliationItemModel))
+        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal accountReconciliationItems As List(Of AccountReconciliationItemModel))
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                     Dim reconciled As New ReconciledModel

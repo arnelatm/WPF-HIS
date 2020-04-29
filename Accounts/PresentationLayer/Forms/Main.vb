@@ -1139,12 +1139,12 @@ Namespace PresentationLayer.Forms
         '    x = 5
         'End Sub
 
-        Public Property IUserView_IdNo As Integer Implements IUserView.IdNo
+        Public Property IUserView_IdNo As Int32 Implements IUserView.IdNo
         Public Property Password As String Implements IUserView.Password
         Public Property FullName As String Implements IUserView.FullName
         Public Property FullNameAra As String Implements IUserView.FullNameAra
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
-        Public Property SecurityGroupIdNo As Integer Implements IUserView.SecurityGroupIdNo
+        Public Property SecurityGroupIdNo As Int32 Implements IUserView.SecurityGroupIdNo
         Public Property IUserView_UserName As String Implements IUserView.UserName
 
         Private Sub ToolStripMenuItemSecurityGroups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityGroups.Click

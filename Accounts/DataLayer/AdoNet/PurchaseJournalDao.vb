@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
         ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As PurchaseJournal _
+        Public Function GetRecordById(idNo) As PurchaseJournal _
         Implements IDao(Of PurchaseJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, SupplierIdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, DueDate, " &
@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DueDate = Extensions.AsDate(reader("DueDate")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),

@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views
         Property Gender As String
         Property HiredDate As Date?
         Property Iban As String
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property MaritalStatus As String
         Property NationalIdNo As String
         Property NationalityCode As String

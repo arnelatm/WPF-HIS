@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CashDisbursementJournal _
+        Public Function GetRecordById(idNo) As CashDisbursementJournal _
             Implements IDao(Of CashDisbursementJournal).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, PaymentType, PayeeIdNo, PayeeName, " &
@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CashDisbursementJournal) =
                                     Function(reader) _
             New CashDisbursementJournal() With {
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(reader("IdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
             .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
             .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
@@ -147,12 +147,12 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             Dim jiDao = New CashDisbursementJournalItemDao()
             Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
             Dim jiDao = New CashDisbursementJournalItemDao()
             Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
         End Function

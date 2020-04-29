@@ -62,7 +62,7 @@ Namespace PresentationLayer.Forms
 
         Public Property GeneralJournalItemsDataSource As List(Of JournalItemModel)
 
-        Public Property IdNo As Integer Implements IGeneralJournalView.IdNo
+        Public Property IdNo As Int32 Implements IGeneralJournalView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)

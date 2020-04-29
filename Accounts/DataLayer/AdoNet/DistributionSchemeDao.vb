@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordById
+        Public Function GetRecordById(idNo) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
                     "   FROM [DistributionScheme]" &
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DistributionScheme) =
                                     Function(reader) _
             New DistributionScheme() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .DistributionSchemeName = Extensions.AsString(reader("DistributionSchemeName")),
             .DistributionSchemeNameAra = Extensions.AsString(reader("DistributionSchemeNameAra")),
             .DistributionSchemeCode = Extensions.AsString(reader("DistributionSchemeCode")),

@@ -52,19 +52,19 @@ Namespace PresentationLayer.Views
 
         Public Property DiscountTaken As Decimal Implements IJournalItemView.DiscountTaken
 
-        Public Property IdNo As Integer Implements IJournalItemView.IdNo
+        Public Property IdNo As Int32 Implements IJournalItemView.IdNo
 
-        Public Property JournalIdNo As Integer Implements IJournalItemView.JournalIdNo
+        Public Property JournalIdNo As Int32 Implements IJournalItemView.JournalIdNo
         Public Property Notes As String Implements IJournalItemView.Notes
 
-        Public Property OpenInvoiceIdNo As Integer Implements IJournalItemView.OpenInvoiceIdNo
+        Public Property OpenInvoiceIdNo As Int32 Implements IJournalItemView.OpenInvoiceIdNo
 
         Public Property OriginalAmount As Decimal Implements IJournalItemView.OriginalAmount
         Public Property PaidAmount As Decimal Implements IJournalItemView.PaidAmount
 
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
 
-        Public Property ProfitCenterIdNo As Integer Implements IJournalItemView.ProfitCenterIdNo
+        Public Property ProfitCenterIdNo As Int32 Implements IJournalItemView.ProfitCenterIdNo
         Public Property Sequence As Integer Implements IJournalItemView.Sequence
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount

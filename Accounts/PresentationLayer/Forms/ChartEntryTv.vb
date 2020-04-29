@@ -85,7 +85,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IDNo As Integer Implements IChartView.IdNo
+        Public Property IdNo As Int32 Implements IChartView.IdNo
             Get
                 If txtIdNo.Text <> "" Then
                     Return Convert.ToInt32(txtIdNo.Text)
@@ -128,7 +128,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Integer? Implements IChartView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements IChartView.ParentIdNo
             Get
                 Return CType(cboParentIdNo.GetValue(), Integer?)
             End Get

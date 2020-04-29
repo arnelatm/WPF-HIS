@@ -2,11 +2,11 @@
     Public Class GroupAccessView
         Implements IGroupAccessView
 
-        Public Property IdNo As Integer Implements IGroupAccessView.IdNo
+        Public Property IdNo As Int32 Implements IGroupAccessView.IdNo
 
-        Public Property SecurityGroupIdNo As Integer Implements IGroupAccessView.SecurityGroupIdNo
+        Public Property SecurityGroupIdNo As Int32 Implements IGroupAccessView.SecurityGroupIdNo
 
-        Public Property SecurityObjectIdNo As Integer Implements IGroupAccessView.SecurityObjectIdNo
+        Public Property SecurityObjectIdNo As Int32 Implements IGroupAccessView.SecurityObjectIdNo
 
         Public Property Visible As Boolean Implements IGroupAccessView.Visible
 

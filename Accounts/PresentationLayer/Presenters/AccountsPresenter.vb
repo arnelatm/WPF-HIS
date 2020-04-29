@@ -102,7 +102,7 @@ Namespace PresentationLayer.Presenters
             Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
         End Function
 
-        Public Sub DeleteApOpenInvoice(ByRef idNo As Integer)
+        Public Sub DeleteApOpenInvoice(ByRef idNo As Int32)
             If idNo <> 0 Then
                 Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
                 modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
@@ -121,7 +121,7 @@ Namespace PresentationLayer.Presenters
             Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
         End Function
 
-        Public Function DeleteArOpenInvoice(ByRef idNo As Integer) As String
+        Public Function DeleteArOpenInvoice(ByRef idNo As Int32) As String
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
             Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
         End Function
@@ -140,7 +140,7 @@ Namespace PresentationLayer.Presenters
             Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         End Function
 
-        Public Function GetAdvancePaymentCdOpenInvoice(ByVal idNo As Integer)
+        Public Function GetAdvancePaymentCdOpenInvoice(ByVal idNo As Int32)
             Return Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 

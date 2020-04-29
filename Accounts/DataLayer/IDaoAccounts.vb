@@ -6,15 +6,15 @@ Namespace DataLayer
     Public Interface IDaoAccounts
         Inherits ICommonDao
 
-        Function GetSupplierOpenInvoices(idNo As Integer) As List(Of CadOiItem)
+        Function GetSupplierOpenInvoices(idNo As Int32) As List(Of CadOiItem)
 
     End Interface
 
     'Public Interface IDaoJournalItems
 
-    '    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+    '    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Int32) As Integer
 
-    '    Function GetRecordsWithIdNo(idNo As Integer, ByRef Optional sortKey As String = Nothing) As Object
+    '    Function GetRecordsWithIdNo(idNo As Int32, ByRef Optional sortKey As String = Nothing) As Object
 
     '    Function InsertTvp(ByRef tvpTable As DataTable) As Integer
 
@@ -48,13 +48,13 @@ Namespace DataLayer
 
         Function GetGlItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
-        Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Integer, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) As List(Of TM)
 
     End Interface
 
     Public Interface IDaoOiItem(Of TM)
 
-        Function GetOpenInvoices(idNo As Integer) As List(Of TM)
+        Function GetOpenInvoices(idNo As Int32) As List(Of TM)
 
     End Interface
 

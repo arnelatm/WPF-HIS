@@ -83,7 +83,7 @@ Namespace Services
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
 
-        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Integer, ByRef dataModel As TM,
+        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Int32, ByRef dataModel As TM,
                                                              ByRef dbDataDao As TD, ByRef externalService As Object) _
             As TM
             Return _
@@ -106,19 +106,19 @@ Namespace Services
             Return BaseDao.GetControlSecurityIdNo(searchValue)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Integer, securityGroupIdNo As Integer) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
             Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
 
 
 
-        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Integer) As ArrayList _
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList _
             Implements IService.GetUserSecurityForKey
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function
 
-        Public Function GetRecordsWithIdNo(Of TM)(idNo As Integer, Optional ByRef sortKey As String = Nothing) _
+        Public Function GetRecordsWithIdNo(Of TM)(idNo As Int32, Optional ByRef sortKey As String = Nothing) _
             As List(Of TM) Implements IService.GetRecordsWithIdNo
             Dim bizData = DataDao.GetRecordsWithIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
@@ -146,11 +146,11 @@ Namespace Services
             Return DataDao.GetAll(sortKey)
         End Function
 
-        'Public Shadows Function GetRecordById(idNo As Integer) Implements IService.GetRecordById
+        'Public Shadows Function GetRecordById(idNo) Implements IService.GetRecordById
         '    Return DataDao.GetRecordById(Convert.ToInt32(idNo))
         'End Function
 
-        Public Function GetRecordById(Of TM As New)(idNo As Integer) As TM Implements IService.GetRecordById
+        Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordById
             Dim modelPresenter As New TM
             Dim record = DataDao.GetRecordById(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
@@ -173,7 +173,7 @@ Namespace Services
             Return DataDao.UpdateRecord(DataBo)
         End Function
 
-        Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Integer, ByVal tableName As String,
+        Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Int32, ByVal tableName As String,
                                                     ByVal fieldName As String, ByRef value As T) As Integer _
             Implements IService.UpdateRecordWithIdNo
             Return DataDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
@@ -215,7 +215,7 @@ Namespace Services
             Return BaseDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
         End Function
 
-        Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer _
+        Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
             Implements IService.DeleteRecord
             Return BaseDao.DeleteRecord(idNo, tableName)
         End Function
@@ -226,7 +226,7 @@ Namespace Services
             Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere)
         End Function
 
-        Public Function FindFieldContinue(tableName As String, idNo As Integer) As Integer _
+        Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer _
             Implements IService.FindFieldContinue
             Return BaseDao.FindFieldContinue(tableName, idNo)
         End Function
@@ -247,7 +247,7 @@ Namespace Services
             Return BaseDao.GetRecordCount(tableName)
         End Function
 
-        Public Function GetRecordDateTimeStamp(idNo As Integer, tableName As String,
+        Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
                                                Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object _
             Implements IService.GetRecordDateTimeStamp
             Return BaseDao.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
@@ -274,7 +274,7 @@ Namespace Services
                                                returnFieldName)
         End Function
 
-        Public Function GetRecordPosition(tableName As String, idNo As Integer) As Integer _
+        Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer _
             Implements IService.GetRecordPosition
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
@@ -291,7 +291,7 @@ Namespace Services
             Return BaseDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
         End Function
 
-        Public Function GetRecordWithIdNo(idNo As Integer, tableName As String, returnFieldName As String) As String _
+        Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
             Implements IService.GetRecordWithIdNo
             Return BaseDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
         End Function
@@ -302,12 +302,12 @@ Namespace Services
             Return BaseDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
         End Function
 
-        Public Function GetSortedRecordPosition(idNo As Integer, tableName As String, sortOrder As String) As Integer _
+        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer _
             Implements IService.GetSortedRecordPosition
             Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
         End Function
 
-        Public Function HasRecordChanged(idNo As Integer, tableName As String, timeStampedValue As Object,
+        Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object,
                                          Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean _
             Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)

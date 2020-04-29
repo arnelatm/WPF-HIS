@@ -75,11 +75,11 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap AccountReconciliation Items.
         '''' </summary>
         '''' <param name="accountIdNo">Account Id to display.</param>
-        Public Overloads Sub Display(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Integer, Optional ByVal sortOrder As String = Nothing)
+        Public Overloads Sub Display(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
             View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, idNo, "TransactionDate")
         End Sub
 
-        Public Function GetAcctReconItems(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Integer, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
+        Public Function GetAcctReconItems(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       accountReconciliationIdNo As Integer)
+                                       accountReconciliationIdNo As Int32)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
@@ -168,7 +168,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Overloads Function SaveReconciliation(ByRef dtInsert As DataTable, ByVal accountReconciliationIdNo As Integer)
+        Public Overloads Function SaveReconciliation(ByRef dtInsert As DataTable, ByVal accountReconciliationIdNo As Int32)
             Dim insertReturnValue
             Dim retVal = -1
             If dtInsert.Rows.Count > 0 Then

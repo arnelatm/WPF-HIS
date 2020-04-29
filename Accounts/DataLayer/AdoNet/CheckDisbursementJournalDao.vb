@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As CheckDisbursementJournal _
+        Public Function GetRecordById(idNo) As CheckDisbursementJournal _
             Implements IDao(Of CheckDisbursementJournal).GetRecordById
             Dim sql As String =
                     "SELECT " &
@@ -127,7 +127,7 @@ Namespace DataLayer.AdoNet
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .DiscountAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OrNumber = Extensions.AsString(reader("ORNumber")),
             .PayeeIdNo = Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),

@@ -132,7 +132,7 @@ Namespace PresentationLayer.Presenters
         Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
-            Dim headerIdNo As Integer
+            Dim headerIdNo As Int32
             If AddMode Then
                 headerIdNo = retVal
                 CallByName(View, IdFieldName, CallType.Set, retVal)

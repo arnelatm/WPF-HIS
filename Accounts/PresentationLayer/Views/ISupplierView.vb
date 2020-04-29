@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views
         Property ExpAccountIdNo As Int32?
         Property Fax As String
         Property Iban As String
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Mobile As String
         Property Notes As String
         Property OpeningBalance As Single

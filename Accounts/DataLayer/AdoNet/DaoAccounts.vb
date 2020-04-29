@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetSupplierOpenInvoices(idNo As Integer) As List(Of CadOiItem) Implements IDaoAccounts.GetSupplierOpenInvoices
+        Public Function GetSupplierOpenInvoices(idNo As Int32) As List(Of CadOiItem) Implements IDaoAccounts.GetSupplierOpenInvoices
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

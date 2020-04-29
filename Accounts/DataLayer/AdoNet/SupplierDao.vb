@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As Supplier Implements IDaoAll(Of Supplier).GetRecordById
+        Public Function GetRecordById(idNo) As Supplier Implements IDaoAll(Of Supplier).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountStatus," &
@@ -212,7 +212,7 @@ Namespace DataLayer.AdoNet
             .ExpAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("ExpAccountIdNo")),
             .Fax = Extensions.AsString(reader("Fax")),
             .Iban = Extensions.AsString(reader("Iban")),
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .Mobile = Extensions.AsString(reader("Mobile")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDouble(reader("OpeningBalance")),

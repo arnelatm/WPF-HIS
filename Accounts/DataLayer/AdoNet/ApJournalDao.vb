@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As ApJournal _
+        Public Function GetRecordById(idNo) As ApJournal _
         Implements IDao(Of ApJournal).GetRecordById
             Dim sql As String =
                     "SELECT " &
@@ -117,7 +117,7 @@ Namespace DataLayer.AdoNet
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .DueDate = Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .Notes = Extensions.AsString(reader("Notes")),
@@ -188,12 +188,12 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             Dim jiDao = New ApJournalItemDao()
             Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
             Dim jiDao = New ApJournalItemDao()
             Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
         End Function

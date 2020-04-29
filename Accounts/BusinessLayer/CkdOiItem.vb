@@ -10,14 +10,14 @@ Namespace BusinessLayer
 
         Public Property Amount As Decimal
         Public Property Balance As Decimal
-        Public Property CkdIdNo As Integer
+        Public Property CkdIdNo As Int32
         Public Property DiscountTaken As Decimal
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property InvoiceNo As String
         Public Property JournalCode As String
-        Public Property JournalIdNo As Integer
-        Public Property JournalItemIdNo As Integer
-        Public Property OpenInvoiceIdNo As Integer
+        Public Property JournalIdNo As Int32
+        Public Property JournalItemIdNo As Int32
+        Public Property OpenInvoiceIdNo As Int32
         Public Property PreviousBalance As Decimal
         Public Property Sequence As Integer
         Public Property TransactionDate As Date

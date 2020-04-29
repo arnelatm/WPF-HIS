@@ -7,13 +7,13 @@ Namespace PresentationLayer.Models
 
         Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
 
-        Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+        Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
-        Function GetCustomerOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
+        Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
-        Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM)
+        Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
-        Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+        Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
@@ -24,15 +24,15 @@ Namespace PresentationLayer.Models
     'Public Interface IModelOpenInvoice
     '    Inherits IModelAccounts
 
-    '    'Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+    '    'Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
-    '    'Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+    '    'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
     '    Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
-    '    Function GetCustomerOpenInvoices(idNo As Integer) As List(Of TM)
-    '    Function GetSupplierOpenInvoices(idNo As Integer) As List(Of TM)
-    '    Function AddInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
-    '    Function RemoveInvoicePayment(idNo As Integer, amount As Decimal, discountTaken As Decimal) As Integer
+    '    Function GetCustomerOpenInvoices(idNo As Int32) As List(Of TM)
+    '    Function GetSupplierOpenInvoices(idNo As Int32) As List(Of TM)
+    '    Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
+    '    Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
     'End Interface
 

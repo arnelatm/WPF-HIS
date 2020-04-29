@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IPurchaseItemView.IdNo
+        Public Property IdNo As Int32 Implements IPurchaseItemView.IdNo
             Get
                 If TxtIDNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIDNo.Text)
@@ -201,7 +201,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CategoryIdNo As Integer Implements IPurchaseItemView.CategoryIdNo
+        Public Property CategoryIdNo As Int32 Implements IPurchaseItemView.CategoryIdNo
             Get
                 Return cboCategoryIdNo.GetValue()
             End Get

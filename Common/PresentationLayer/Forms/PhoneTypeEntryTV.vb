@@ -24,7 +24,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IDNo As Integer Implements IPhoneTypeView.IdNo
+        Public Property IdNo As Int32 Implements IPhoneTypeView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
             End Get

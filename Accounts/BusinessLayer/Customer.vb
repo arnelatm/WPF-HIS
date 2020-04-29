@@ -19,7 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property CustomerCode As String
         Public Property CustomerName As String
         Public Property CustomerNameAra As String

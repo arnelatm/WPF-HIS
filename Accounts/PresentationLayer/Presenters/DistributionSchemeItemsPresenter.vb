@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
         '''     Displays list of DistributionScheme Items.
         ''' </summary>
         ''' <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
-        Public Shadows Sub Display(distributionSchemeIdNo As Integer)
+        Public Shadows Sub Display(distributionSchemeIdNo As Int32)
             View.DistributionSchemeItems = Model.GetRecordsWithIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
         End Sub
 
@@ -55,7 +55,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       distributionSchemeIdNo As Integer)
+                                       distributionSchemeIdNo As Int32)
             Dim insertReturnValue = 0
             Dim updateReturnValue = 0
             Dim retVal = 0

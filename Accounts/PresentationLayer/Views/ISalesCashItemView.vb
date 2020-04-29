@@ -13,10 +13,10 @@ Namespace PresentationLayer.Views
         Property CashCode As String
         Property ComputedBankCharge As Decimal
         Property ComputedBankChargeVat As Decimal
-        Property IdNo As Integer
+        Property IdNo As Int32
         Property Rate As Decimal
         Property SaleAmount As Decimal
-        Property SalesJournalIdNo As Integer
+        Property SalesJournalIdNo As Int32
         Property Sequence As Integer
 
     End Interface

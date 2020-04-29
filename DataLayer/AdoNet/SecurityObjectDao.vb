@@ -13,7 +13,7 @@ Namespace AdoNet
         Private ReadOnly Make As Func(Of IDataReader, SecurityObject) =
                              Function(reader) _
             New SecurityObject() With {
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra")),
@@ -28,7 +28,7 @@ Namespace AdoNet
                                     "@Notes", securityObject.Notes}
         End Function
 
-        Public Function GetRecordById(idNo As Integer) As SecurityObject _
+        Public Function GetRecordById(idNo) As SecurityObject _
             Implements IDaoAll(Of SecurityObject).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &

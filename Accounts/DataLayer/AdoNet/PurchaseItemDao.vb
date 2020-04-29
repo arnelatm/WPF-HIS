@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
+        Public Function GetRecordById(idNo) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseItem) =
                                     Function(reader) _
             New PurchaseItem() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .PurchaseItemCode = Extensions.AsString(reader("PurchaseItemCode")),
             .PurchaseItemName = Extensions.AsString(reader("PurchaseItemName")),
             .PurchaseItemNameAra = Extensions.AsString(reader("PurchaseItemNameAra")),

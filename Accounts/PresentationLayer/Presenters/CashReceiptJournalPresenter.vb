@@ -51,27 +51,27 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Public Function AddInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _arOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Integer, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _arOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetReceiptType(ByRef idNo As Integer) As String
+        Public Function GetReceiptType(ByRef idNo As Int32) As String
             Dim retVal As String
             retVal = Model.GetRecordFieldWithKey(idNo, "CashReceiptJournal", "IdNo", "PayorType")
             Return retVal
         End Function
 
-        Public Function GetCustomerAdvancesOpenIdNo(ByRef idNo As Integer) As Integer
+        Public Function GetCustomerAdvancesOpenIdNo(ByRef idNo As Int32) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, "CR", "ArOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
-        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Integer) As List(Of CsrOiItemModel)
+        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Int32) As List(Of CsrOiItemModel)
             Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 

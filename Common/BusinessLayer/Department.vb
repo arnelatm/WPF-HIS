@@ -15,7 +15,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo() As Integer
+        Public Property IdNo() As Int16
         Public Property DepartmentCode() As String
         Public Property DepartmentName() As String
         Public Property ParentIdNo() As Integer?

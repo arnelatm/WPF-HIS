@@ -13,9 +13,9 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
-        Public Property MessageIdNo As Integer
-        Public Property LanguageIdNo As Integer
+        Public Property IdNo As Int32
+        Public Property MessageIdNo As Int32
+        Public Property LanguageIdNo As Int32
         Public Property TranslatedMessage As String
         Public Property TranslatedCaption As String
     End Class

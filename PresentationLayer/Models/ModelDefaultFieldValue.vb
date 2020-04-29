@@ -15,7 +15,7 @@ Public Class ModelDefaultFieldValue
     '    Return DefaultFieldValuesService.GetControlDefaultFieldValuesIdNo(searchValue)
     'End Function
 
-    'Public Function GetUserDefaultFieldValues(DefaultFieldValuesObjectIdNo As Integer, DefaultFieldValuesGroupIdNo As Integer) As ArrayList _
+    'Public Function GetUserDefaultFieldValues(DefaultFieldValuesObjectIdNo As Int32, DefaultFieldValuesGroupIdNo As Int32) As ArrayList _
     '    Implements IModelDefaultFieldValues.GetUserDefaultFieldValues
     '    Return DefaultFieldValuesService.GetUserDefaultFieldValues(DefaultFieldValuesObjectIdNo, DefaultFieldValuesGroupIdNo)
     'End Function

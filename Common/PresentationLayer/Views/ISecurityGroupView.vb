@@ -4,8 +4,8 @@ Namespace PresentationLayer.Views
 
     Public Interface ISecurityGroupView
         Inherits IView
-        Property IdNo As Integer
-        Property ParentIdNo As Integer?
+        Property IdNo As Int32
+        Property ParentIdNo As Int32?
         Property SecurityGroupName As String
         Property SecurityGroupNameAra As String
         Property SecurityGroupCode As String

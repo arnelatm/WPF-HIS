@@ -16,7 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property PhoneTypeCode As String
         Public Property PhoneTypeName As String
         Public Property PhoneTypeNameAra As String

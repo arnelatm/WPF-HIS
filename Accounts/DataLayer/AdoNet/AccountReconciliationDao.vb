@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo As Integer) As AccountReconciliation _
+        Public Function GetRecordById(idNo) As AccountReconciliation _
             Implements IDao(Of AccountReconciliation).GetRecordById
             Dim sql As String =
                     " SELECT " &
@@ -62,7 +62,7 @@ Namespace DataLayer.AdoNet
             New AccountReconciliation() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .IdNo = Extensions.AsId(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReconciliationDate = Extensions.AsDate(reader("ReconciliationDate"))

@@ -7,7 +7,7 @@
     Public Class DistributionSchemeModel
 
         Public Property Errors As List(Of String)
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property DistributionSchemeCode As String
         Public Property DistributionSchemeName As String
         Public Property DistributionSchemeNameAra As String

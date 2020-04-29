@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
 
         End Sub
 
-        Public Function GetRecordById(idNo As Integer) As Category Implements IDaoAll(Of Category).GetRecordById
+        Public Function GetRecordById(idNo) As Category Implements IDaoAll(Of Category).GetRecordById
             Dim sql As String =
                     " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
                     "   FROM [Category]" &
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Category) =
                                     Function(reader) _
             New Category() With {
-            .IdNo = Extensions.AsId(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .CategoryCode = Extensions.AsString(reader("CategoryCode")),
             .CategoryName = Extensions.AsString(reader("CategoryName")),
             .CategoryNameAra = Extensions.AsString(reader("CategoryNameAra")),

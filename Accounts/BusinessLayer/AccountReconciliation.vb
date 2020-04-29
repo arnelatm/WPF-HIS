@@ -22,7 +22,7 @@ Namespace BusinessLayer
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
         Public Property GlSystemBalance As Decimal
-        Public Property IdNo As Integer
+        Public Property IdNo As Int32
         Public Property Posted As Boolean
         Public Property ReconciliationDate As Date?
         Public Property TotalCreditsCleared As Decimal
