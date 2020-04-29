@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     Public Class CashReceiptJournalDao
         Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As CashReceiptJournal _
             Implements IDao(Of CashReceiptJournal).GetRecordById
@@ -36,7 +36,14 @@ Namespace DataLayer.AdoNet
                     " FROM [CashReceiptJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim jiDao = New CashReceiptJournalItemDao
+            Dim oiDao = New CsrOiItemDao
+            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.JournalItems = ji
+            data.CsrOiItems = oi
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef cashReceiptJournal As CashReceiptJournal) As Integer _
@@ -61,7 +68,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate = @TransactionDate," &
                     "UnApplied     = @UnApplied" &
                     " WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(cashReceiptJournal))
+            Return _db.Update(sql, Take(cashReceiptJournal))
         End Function
 
         Public Function AddRecord(ByRef cashReceiptJournal As CashReceiptJournal) As Integer _
@@ -103,7 +110,7 @@ Namespace DataLayer.AdoNet
                     "@TransactionDate," &
                     "@UnApplied" &
                     ")"
-            Return Db.Insert(sql, Take(cashReceiptJournal))
+            Return _db.Insert(sql, Take(cashReceiptJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CashReceiptJournal) =
@@ -162,7 +169,7 @@ Namespace DataLayer.AdoNet
             Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
-            If Db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+            If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
                 prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
@@ -174,17 +181,17 @@ Namespace DataLayer.AdoNet
                                           "@Prefix", prefix,
                                           "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
                                          }
-                If Db.Insert(sql, params) Then
+                If _db.Insert(sql, params) Then
                     Return -1
                 End If
             Else
-                prefix = Db.Scalar("select prefix from series where seriesName = '" & series & "'")
-                maxlength = Db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
+                prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+                maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CashReceiptJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
                    ")) where IdNo = " & bizObj.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
 

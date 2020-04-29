@@ -2,6 +2,7 @@
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashDisbursementJournal
@@ -16,9 +17,27 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordById(idNo) As CashDisbursementJournal _
             Implements IDao(Of CashDisbursementJournal).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, TransactionDate, ReferenceNo, Amount, AccountIdNo, PaymentType, PayeeIdNo, PayeeName, " &
-                    " ORNumber, DiscountTaken, DiscountAccountIdNo, Applied, UnApplied, Notes, VatNumber, VatAmount, Posted, Cancelled, DateCreated" &
-                    "   FROM [CashDisbursementJournal]" &
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "Amount," &
+                    "Applied," &
+                    "Cancelled," &
+                    "DateCreated," &
+                    "DiscountAccountIdNo," &
+                    "DiscountTaken," &
+                    "IdNo," &
+                    "Notes," &
+                    "ORNumber," &
+                    "PayeeIdNo," &
+                    "PayeeName," &
+                    "PaymentType," &
+                    "Posted," &
+                    "ReferenceNo," &
+                    "TransactionDate," &
+                    "UnApplied," &
+                    "VatAmount," &
+                    "VatNumber" &
+                    " FROM [CashDisbursementJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
@@ -34,82 +53,115 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
             Implements IDao(Of CashDisbursementJournal).UpdateRecord
             Dim sql As String =
-                    " UPDATE [CashDisbursementJournal]" &
-                    " SET TransactionDate = @TransactionDate," &
-                    "       ReferenceNo   = @ReferenceNo," &
-                    "       Amount        = @Amount," &
-                    "       AccountIdNo   = @AccountIdNo," &
-                    "       PaymentType   = @PaymentType," &
-                    "       PayeeIdNo     = @PayeeIdNo," &
-                    "       PayeeName     = @PayeeName," &
-                    "       ORNumber      = @ORNumber," &
-                    "       DiscountTaken = @DiscountTaken," &
-                    "       DiscountAccountIdNo = @DiscountAccountIdNo," &
-                    "       Applied       = @Applied," &
-                    "       UnApplied     = @UnApplied," &
-                    "       Notes         = @Notes," &
-                    "       VatNumber     = @VatNumber," &
-                    "       VatAmount     = @VatAmount," &
-                    "       Posted        = @Posted," &
-                    "       Cancelled     = @Cancelled" &
-                    "  WHERE IDNo = @IDNo"
+                    " UPDATE [CashDisbursementJournal] SET " &
+                    "AccountIdNo   = @AccountIdNo," &
+                    "Amount        = @Amount," &
+                    "Applied       = @Applied," &
+                    "Cancelled     = @Cancelled," &
+                    "DiscountAccountIdNo = @DiscountAccountIdNo," &
+                    "DiscountTaken = @DiscountTaken," &
+                    "Notes         = @Notes," &
+                    "ORNumber      = @ORNumber," &
+                    "PayeeIdNo     = @PayeeIdNo," &
+                    "PayeeName     = @PayeeName," &
+                    "PaymentType   = @PaymentType," &
+                    "Posted        = @Posted," &
+                    "ReferenceNo   = @ReferenceNo," &
+                    "TransactionDate = @TransactionDate," &
+                    "UnApplied     = @UnApplied," &
+                    "VatAmount     = @VatAmount," &
+                    "VatNumber     = @VatNumber," &
+                    " WHERE IDNo = @IDNo"
             Return _db.Update(sql, Take(cashDisbursementJournal))
         End Function
 
         Public Function AddRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
             Implements IDao(Of CashDisbursementJournal).AddRecord
-            Dim sql As String =
-                    " INSERT INTO [CashDisbursementJournal] " &
-                    " (TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayeeIdNo,PayeeName,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,Notes,VatNumber,VatAmount,Posted,Cancelled)" &
-                    " VALUES (@TransactionDate,@ReferenceNo,@Amount,@AccountIdNo,@PaymentType,@PayeeIdNo,@PayeeName,@ORNumber,@DiscountTaken,@DiscountAccountIdNo,@Applied,@UnApplied,@Notes,@VatNumber,@VatAmount,@Posted,@Cancelled)"
+            Dim sql As String = " INSERT INTO [CashDisbursementJournal] (" &
+                    "AccountIdNo," &
+                    "Amount," &
+                    "Applied," &
+                    "Cancelled," &
+                    "DiscountAccountIdNo," &
+                    "DiscountTaken," &
+                    "Notes," &
+                    "ORNumber," &
+                    "PayeeIdNo," &
+                    "PayeeName," &
+                    "PaymentType," &
+                    "Posted," &
+                    "ReferenceNo," &
+                    "TransactionDate," &
+                    "UnApplied," &
+                    "VatAmount," &
+                    "VatNumber" &
+                    ") VALUES (" &
+                    "@AccountIdNo," &
+                    "@Amount," &
+                    "@Applied," &
+                    "@Cancelled," &
+                    "@DiscountAccountIdNo," &
+                    "@DiscountTaken," &
+                    "@Notes," &
+                    "@ORNumber," &
+                    "@PayeeIdNo," &
+                    "@PayeeName," &
+                    "@PaymentType," &
+                    "@Posted," &
+                    "@ReferenceNo," &
+                    "@TransactionDate," &
+                    "@UnApplied," &
+                    "@VatAmount," &
+                    "@VatNumber" &
+                    ")"
             Return _db.Insert(sql, Take(cashDisbursementJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CashDisbursementJournal) =
                                     Function(reader) _
             New CashDisbursementJournal() With {
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
-            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
-            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
-            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .PaymentType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PaymentType")),
-            .PayeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),
-            .PayeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayeeName")),
-            .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
-            .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
-            .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
-            .Applied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Applied")),
-            .UnApplied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnApplied")),
-            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
-            .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
-            .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
-            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("DateCreated")),
-            .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled"))
+            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .Amount = Extensions.AsDecimal(reader("Amount")),
+            .Applied = Extensions.AsDecimal(reader("Applied")),
+            .Cancelled = Extensions.AsBool(reader("Cancelled")),
+            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DiscountAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("DiscountAccountIdNo")),
+            .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .OrNumber = Extensions.AsString(reader("ORNumber")),
+            .PayeeIdNo = Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),
+            .PayeeName = Extensions.AsString(reader("PayeeName")),
+            .PaymentType = Extensions.AsString(reader("PaymentType")),
+            .Posted = Extensions.AsBool(reader("Posted")),
+            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
+            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
+            .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
+            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
+            .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
         Private Function Take(cashDisbursementJournal As CashDisbursementJournal) As Object()
             Return New Object() {
-                                    "@IdNo", cashDisbursementJournal.IdNo,
-                                    "@TransactionDate", cashDisbursementJournal.TransactionDate,
-                                    "@ReferenceNo", cashDisbursementJournal.ReferenceNo,
-                                    "@Amount", cashDisbursementJournal.Amount,
                                     "@AccountIdNo", cashDisbursementJournal.AccountIdNo,
-                                    "@PaymentType", cashDisbursementJournal.PaymentType,
+                                    "@Amount", cashDisbursementJournal.Amount,
+                                    "@Applied", cashDisbursementJournal.Applied,
+                                    "@Cancelled", cashDisbursementJournal.Cancelled,
+                                    "@DateCreated", cashDisbursementJournal.DateCreated,
+                                    "@DiscountAccountIdNo", cashDisbursementJournal.DiscountAccountIdNo,
+                                    "@DiscountTaken", cashDisbursementJournal.DiscountTaken,
+                                    "@IdNo", cashDisbursementJournal.IdNo,
+                                    "@Notes", cashDisbursementJournal.Notes,
+                                    "@ORNumber", cashDisbursementJournal.OrNumber,
                                     "@PayeeIdNo", cashDisbursementJournal.PayeeIdNo,
                                     "@PayeeName", cashDisbursementJournal.PayeeName,
-                                    "@ORNumber", cashDisbursementJournal.OrNumber,
-                                    "@DiscountTaken", cashDisbursementJournal.DiscountTaken,
-                                    "@DiscountAccountIdNo", cashDisbursementJournal.DiscountAccountIdNo,
-                                    "@Applied", cashDisbursementJournal.Applied,
-                                    "@UnApplied", cashDisbursementJournal.UnApplied,
-                                    "@Notes", cashDisbursementJournal.Notes,
-                                    "@VatNumber", cashDisbursementJournal.VatNumber,
-                                    "@VatAmount", cashDisbursementJournal.VatAmount,
+                                    "@PaymentType", cashDisbursementJournal.PaymentType,
                                     "@Posted", cashDisbursementJournal.Posted,
-                                    "@Cancelled", cashDisbursementJournal.Cancelled,
-                                    "@DateCreated", cashDisbursementJournal.DateCreated
+                                    "@ReferenceNo", cashDisbursementJournal.ReferenceNo,
+                                    "@TransactionDate", cashDisbursementJournal.TransactionDate,
+                                    "@UnApplied", cashDisbursementJournal.UnApplied,
+                                    "@VatAmount", cashDisbursementJournal.VatAmount,
+                                    "@VatNumber", cashDisbursementJournal.VatNumber
                                 }
         End Function
 

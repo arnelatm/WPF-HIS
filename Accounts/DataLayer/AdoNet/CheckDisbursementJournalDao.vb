@@ -1,15 +1,16 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for CheckDisbursementJournal
     ' ** DAO Pattern
 
     Public Class CheckDisbursementJournalDao
-        Implements IDao(Of CheckDisbursementJournal), IDaoJournals(Of CheckDisbursementJournal)
+        Implements IDao(Of CheckDisbursementJournal), IDaoJournals(Of CheckDisbursementJournal), IDaoChild(Of JournalItem)
 
-        Private Shared ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As CheckDisbursementJournal _
             Implements IDao(Of CheckDisbursementJournal).GetRecordById
@@ -39,7 +40,14 @@ Namespace DataLayer.AdoNet
                     " FROM [CheckDisbursementJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim jiDao = New CheckDisbursementJournalItemDao
+            Dim oiDao = New CkdOiItemDao
+            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.JournalItems = ji
+            data.CkdOiItems = oi
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef checkDisbursementJournal As CheckDisbursementJournal) As Integer _
@@ -58,7 +66,7 @@ Namespace DataLayer.AdoNet
                     "ORNumber      = @ORNumber," &
                     "PayeeIdNo     = @PayeeIdNo," &
                     "PayeeName     = @PayeeName," &
-                    "PaymentType     = @PaymentType," &
+                    "PaymentType   = @PaymentType," &
                     "Posted        = @Posted," &
                     "ReferenceNo   = @ReferenceNo," &
                     "TransactionDate = @TransactionDate," &
@@ -66,7 +74,7 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(checkDisbursementJournal))
+            Return _db.Update(sql, Take(checkDisbursementJournal))
         End Function
 
         Public Function AddRecord(ByRef checkDisbursementJournal As CheckDisbursementJournal) As Integer _
@@ -112,7 +120,7 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return Db.Insert(sql, Take(checkDisbursementJournal))
+            Return _db.Insert(sql, Take(checkDisbursementJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CheckDisbursementJournal) =
@@ -174,8 +182,23 @@ Namespace DataLayer.AdoNet
             Const series As String = "CDJOURNAL"
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CheckDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
+        End Function
+
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+            Dim jiDao = New CheckDisbursementJournalItemDao()
+            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Dim jiDao = New CheckDisbursementJournalItemDao()
+            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+            Dim jiDao = New CheckDisbursementJournalItemDao()
+            Return jiDao.InsertTvp(tvpTable)
         End Function
 
     End Class

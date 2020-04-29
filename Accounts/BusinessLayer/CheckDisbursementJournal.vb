@@ -21,9 +21,9 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
-                'AddRule(New ValidateValueIf("Applied", "Amount", ValidationOperator.Equal, ValidationDataType.String, $"PaymentType", ValidationDataType.String, "A", ValidationOperator.Equal))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
+                AddRule(New ValidateCompareIfTrue(PaymentType = "A", "Amount", "Applied", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
             End If
         End Sub
@@ -31,6 +31,7 @@ Namespace BusinessLayer
         Public Property AccountIdNo As Int32
         Public Property Amount As Decimal
         Public Property Applied As Decimal
+        Public Property CkdOiItems As List(Of CkdOiItem)
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
@@ -38,6 +39,7 @@ Namespace BusinessLayer
         Public Property DiscountAccountIdNo As Int32
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32
+        Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32

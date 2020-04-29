@@ -7,7 +7,6 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Property AccountIdNo as Int32
-
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property CsrIdNo As Int32
