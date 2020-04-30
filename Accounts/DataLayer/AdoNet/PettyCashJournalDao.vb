@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate," &
                     "UnApplied," &
                     "VatAmount," &
-                    "VatNumber," &
+                    "VatNumber" &
                     "FROM [PettyCashJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
@@ -70,7 +70,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate = @TransactionDate," &
                     "UnApplied     = @UnApplied," &
                     "VatAmount     = @VatAmount," &
-                    "VatNumber     = @VatNumber," &
+                    "VatNumber     = @VatNumber" &
                     " WHERE IDNo = @IDNo"
             Return _db.Update(sql, Take(pettyCashJournal))
         End Function

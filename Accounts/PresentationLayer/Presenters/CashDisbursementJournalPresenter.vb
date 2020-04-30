@@ -14,15 +14,12 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private ReadOnly _advancesToSupplierAccountIdNo as Int32
-
-        'Private ReadOnly _apJournalItemModel As New ModelAccounts("ApJournalItem")
+        Private ReadOnly _advancesToSupplierAccountIdNo As Int32
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Private ReadOnly _cadOiItemModel As New ModelAccounts("CadOiItem")
         Private _oldCadOiItem As List(Of CadOiItemModel)
 
-        'Private _apOpenInvoiceBo As New ModelAccounts("ApOpenInvoice")
         Public Sub New(view As ICashDisbursementJournalView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("CashDisbursementJournal")
@@ -237,17 +234,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                View.TotalDebits = 0
-                View.TotalCredits = 0
-                For Each ji In View.CadOiItems
-                    View.TotalDebits += ji.Amount + ji.DiscountTaken
-                Next
-                View.TotalCredits = View.TotalDebits
-            End If
-        End Sub
-
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                 If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
@@ -298,6 +284,20 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                View.TotalDebits = 0
+                View.TotalCredits = 0
+                For Each ji In View.CadOiItems
+                    View.TotalDebits += ji.Amount + ji.DiscountTaken
+                Next
+                View.TotalCredits = View.TotalDebits
+            End If
+        End Sub
+        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+            Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
+        End Function
+
         Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             Dim retVal As Integer
             ' save journal entries
@@ -314,11 +314,6 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
-
-        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-            Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        End Function
-
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)
             Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
@@ -431,7 +426,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MakeJournalItem()
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                Dim aAccountIdNo as Int32() = {}
+                Dim aAccountIdNo As Int32() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
                 Dim aDiscountTaken() As Decimal = {}
@@ -439,7 +434,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.CadOiItems
-                    Dim nAccountIdNo as Int32
+                    Dim nAccountIdNo As Int32
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)

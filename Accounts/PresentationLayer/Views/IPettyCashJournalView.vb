@@ -25,7 +25,8 @@ Namespace PresentationLayer.Views
         Property UnApplied As Decimal
         Property VatAmount As Decimal
         Property VatNumber As String
-
+        Property JournalItems As List(Of JournalItemView)
+        Property PcsOiItems As List(Of PcsOiItemView)
     End Interface
 
 End Namespace

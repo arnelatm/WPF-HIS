@@ -397,6 +397,7 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
@@ -436,6 +437,7 @@
     <Compile Include="PresentationLayer\Views\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\PcsOiItemView.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />

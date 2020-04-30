@@ -9,6 +9,7 @@
         Public Property AccountIdNo As Int32
         Public Property Amount As Decimal
         Public Property Applied As Decimal
+        Public Property CkdOiItems As List(Of CkdOiItemModel)
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
@@ -17,6 +18,7 @@
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
+        Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32
@@ -30,6 +32,7 @@
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+
     End Class
 
 End Namespace

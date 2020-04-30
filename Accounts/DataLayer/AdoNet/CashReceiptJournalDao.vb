@@ -7,7 +7,8 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CashReceiptJournalDao
-        Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal)
+        Inherits DaoAccounts
+        Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal), IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()
 
@@ -193,6 +194,21 @@ Namespace DataLayer.AdoNet
                    ")) where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
+        End Function
+
+        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+            Dim jiDao = New CashReceiptJournalItemDao()
+            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Dim jiDao = New CashReceiptJournalItemDao()
+            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+            Dim jiDao = New CashReceiptJournalItemDao()
+            Return jiDao.InsertTvp(tvpTable)
         End Function
 
     End Class

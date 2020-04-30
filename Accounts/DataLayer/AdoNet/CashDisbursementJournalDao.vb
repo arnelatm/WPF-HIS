@@ -70,7 +70,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate = @TransactionDate," &
                     "UnApplied     = @UnApplied," &
                     "VatAmount     = @VatAmount," &
-                    "VatNumber     = @VatNumber," &
+                    "VatNumber     = @VatNumber" &
                     " WHERE IDNo = @IDNo"
             Return _db.Update(sql, Take(cashDisbursementJournal))
         End Function
