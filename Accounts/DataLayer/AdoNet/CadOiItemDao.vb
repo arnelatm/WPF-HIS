@@ -8,7 +8,8 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CadOiItemDao
-        Implements IDaoChild(Of CadOiItem) ', IDaoOiItem(Of CadOiItem)
+        Inherits CommonDao
+        Implements IDaoChild(Of CadOiItem), IDaoOiItem(Of CadOiItem)
 
         ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
@@ -87,36 +88,36 @@ Namespace DataLayer.AdoNet
         '                         }
         'End Function
 
-        'Public Function GetSupplierOpenInvoices(idNo As Int32) _
-        '    As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
-        '    Dim sql As String =
-        '            "SELECT " &
-        '            "AccountIdNo," &
-        '            "Balance," &
-        '            "IdNo," &
-        '            "InvoiceNo," &
-        '            "JournalCode," &
-        '            "JournalIdNo," &
-        '            "JournalItemIdNo," &
-        '            "TransactionDate" &
-        '            " FROM ApOpenInvoice_View " &
-        '            " WHERE Balance <> 0 and SupplierIdNo = " & idNo.ToString() &
-        '            " ORDER BY TransactionDate"
-        '    Dim x = Db.Read(sql, MakeCadOiItem).ToList()
-        '    Return x
-        'End Function
+        Public Function GetSupplierOpenInvoices(idNo As Int32) _
+            As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
+            Dim sql As String =
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "Balance," &
+                    "IdNo," &
+                    "InvoiceNo," &
+                    "JournalCode," &
+                    "JournalIdNo," &
+                    "JournalItemIdNo," &
+                    "TransactionDate" &
+                    " FROM ApOpenInvoice_View " &
+                    " WHERE Balance <> 0 and SupplierIdNo = " & idNo.ToString() &
+                    " ORDER BY TransactionDate"
+            Dim x = Db.Read(sql, MakeCadOiItem).ToList()
+            Return x
+        End Function
 
-        'Public Shared ReadOnly MakeCadOiItem As Func(Of IDataReader, CadOiItem) = Function(reader) New CadOiItem() With
-        '    {
-        '    .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-        '    .Balance = Extensions.AsDecimal(reader("Balance")),
-        '    .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
-        '    .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
-        '    .JournalCode = Extensions.AsString(reader("JournalCode")),
-        '    .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-        '    .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
-        '    .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
-        '    }
+        Public Shared ReadOnly MakeCadOiItem As Func(Of IDataReader, CadOiItem) = Function(reader) New CadOiItem() With
+            {
+            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .Balance = Extensions.AsDecimal(reader("Balance")),
+            .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
+            .JournalCode = Extensions.AsString(reader("JournalCode")),
+            .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
+            .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
+            .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
+            }
 
     End Class
 

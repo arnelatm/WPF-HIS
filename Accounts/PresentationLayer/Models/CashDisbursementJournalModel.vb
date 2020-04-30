@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -11,12 +9,14 @@ Namespace PresentationLayer.Models
         Public Property AccountIdNo As Int32
         Public Property Amount As Decimal
         Public Property Applied As Decimal
+        Public Property CadOiItems As List(Of CadOiItemModel)
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
+        Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32
@@ -30,8 +30,6 @@ Namespace PresentationLayer.Models
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
-        Public Property JournalItems As List(Of JournalItemModel)
-        Public Property CadOiItems As List(Of CadOiItemModel)
 
     End Class
 

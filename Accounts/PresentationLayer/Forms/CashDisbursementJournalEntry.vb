@@ -17,8 +17,6 @@ Namespace PresentationLayer.Forms
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
-        'Private ReadOnly _cadOiItemsPresenter As CadOiItemsPresenter
-        'Private ReadOnly _journalItemsPresenter As CashDisbursementJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private ReadOnly _payeeOrigWidth As Integer
@@ -47,17 +45,11 @@ Namespace PresentationLayer.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
-            '_journalItemsPresenter = New CashDisbursementJournalItemsPresenter(Me)
-            '_cadOiItemsPresenter = New CadOiItemsPresenter(Me)
-
-            'PresenterObj.JournalItemsPresenter = _journalItemsPresenter
-            'PresenterObj.CadOiItemsPresenter = _cadOiItemsPresenter
-
         End Sub
 
 #Region "Field Items"
 
-        Public Property AccountIdNo as Int32 Implements ICashDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32 Implements ICashDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -82,6 +74,16 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 txtApplied.Text = FormatMoney(Value)
+            End Set
+        End Property
+
+        Public Property CadOiItems As List(Of CadOiItemView) Implements ICashDisbursementJournalView.CadOiItems
+            Get
+                Return _cadOiItems
+            End Get
+            Set
+                _cadOiItems = Value
+                BindCadOiItem()
             End Set
         End Property
 
@@ -138,16 +140,6 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 TxtIDNo.Text = Convert.ToString(Value)
-            End Set
-        End Property
-
-        Public Property CadOiItems As List(Of CadOiItemView) Implements ICashDisbursementJournalView.CadOiItems
-            Get
-                Return _cadOiItems
-            End Get
-            Set
-                _cadOiItems = Value
-                BindCadOiItem()
             End Set
         End Property
 
@@ -285,6 +277,10 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+            SetPayeeProperty(eventType.Model.PaymentType)
+        End Sub
+
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
@@ -324,66 +320,11 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Private Overloads Sub Dispose()
-            Close()
-            '_jifooter.Dispose()
-            '_apfooter.Dispose()
-        End Sub
-
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
             SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub
-
-        'Protected Overrides Function DataIsValid() As Boolean
-        '    Dim retValue As Boolean = False
-        '    If MyBase.DataIsValid() Then
-        '        If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-        '            _totalBalance = TotalBalance()
-        '            If _cadOiItemsPresenter.DataIsValid(bscadOiItems, Applied, UnApplied, _totalBalance) Then
-        '                retValue = True
-        '            Else
-        '                Dim index As Int16 = 0
-        '                For Each item In bscadOiItems
-        '                    If item.Errors IsNot Nothing Then
-        '                        DataGridViewCadOiItems.Rows(index).Cells("dgvAmount").ErrorText = String.Join(",", cadOiItems(index).Errors)
-        '                    Else
-        '                        DataGridViewCadOiItems.Rows(index).ErrorText = ""
-        '                    End If
-        '                    index += 1
-        '                Next
-        '            End If
-        '        Else
-        '            If _journalItemsPresenter.DataIsValid(JournalItems, PaymentType) Then
-        '                retValue = True
-        '            End If
-        '        End If
-        '    End If
-        '    Return retValue
-        'End Function
-
-        'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-        '    MyBase.DisplayView(idNoOfRecord)
-        '    _journalItemsPresenter.Display(idNoOfRecord)
-        '    TotalDebits = 0
-        '    TotalCredits = 0
-        '    For Each item In bsJournalItems
-        '        TotalDebits += item.Debit
-        '        TotalCredits += item.Credit
-        '    Next
-        '    _cadOiItemsPresenter.Display(idNoOfRecord)
-        '    If bscadOiItems IsNot Nothing Then
-        '        Applied = 0
-        '        DiscountTaken = 0
-        '        _totalBalance = 0
-        '        For Each item In bscadOiItems
-        '            Applied += item.Amount
-        '            DiscountTaken += item.DiscountTaken
-        '            _totalBalance += item.Balance
-        '        Next
-        '    End If
-        'End Sub
 
         Private Sub BindCadOiItem()
             SuspendLayout()
@@ -399,17 +340,17 @@ Namespace PresentationLayer.Forms
                 .AllowUserToAddRows = True
                 .AllowUserToDeleteRows = True
             End With
-            With DataGridViewCadOiItems.Columns
-                If dgvSequenceCadOi IsNot Nothing Then
-                    dgvSequenceCadOi.DisplayOnly = True
-                    dgvInvoiceNo.DisplayOnly = True
-                    dgvPreviousBalance.DisplayOnly = True
-                    dgvBalance.DisplayOnly = True
-                    dgvTransactionDate.DisplayOnly = True
-                    dgvJournalCode.DisplayOnly = True
-                    dgvJournalIdNoAp.DisplayOnly = True
-                End If
-            End With
+            'With DataGridViewCadOiItems.Columns
+            'If dgvSequenceCadOi IsNot Nothing Then
+            '    dgvSequenceCadOi.DisplayOnly = True
+            '    dgvInvoiceNo.DisplayOnly = True
+            '    dgvPreviousBalance.DisplayOnly = True
+            '    dgvBalance.DisplayOnly = True
+            '    dgvTransactionDate.DisplayOnly = True
+            '    dgvJournalCode.DisplayOnly = True
+            '    dgvJournalIdNoAp.DisplayOnly = True
+            'End If
+            'End With
             UpdateTotals()
             ResumeLayout()
         End Sub
@@ -450,12 +391,12 @@ Namespace PresentationLayer.Forms
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCadOiItems.Visible = True
-                btnViewGL.Text = "View Journal Entry"
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
             Else
                 _viewGl = True
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCadOiItems.Visible = False
-                btnViewGL.Text = "Hide Journal Entry"
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
             End If
         End Sub
 
@@ -533,7 +474,7 @@ Namespace PresentationLayer.Forms
                     Case $"dgvinsertcolumn"
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             If .RowIndex() = 0 Then
-                                MessageBox.Show($"Sorry, insertion on first row not allowed for Cash Disbursement journal.")
+                                Messaging.Show(True, "MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
                             Else
                                 Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
@@ -541,48 +482,21 @@ Namespace PresentationLayer.Forms
                                 SendKeys.Send("{UP}")
                             End If
                         Else
-                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable deletion.", "Error")
+                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
                         End If
                 End Select
             End With
         End Sub
 
-        'Private Sub DataGridViewCadOiItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCadOiItems.CellClick
-        '    With DataGridViewCadOiItems.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            'Case $"dgvinsertcolumn"
-        '            '    _cadOiItemsPresenter.ChangesMadeIncadOiItem = True
-        '            '    If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-        '            '        Dim newRow As New cadOiItemModel
-        '            '        bscadOiItems.Insert(.RowIndex(), newRow)
-        '            '        _cadOiItemsPresenter.ChangesMadeIncadOiItem = True
-        '            '        ReSequenceDgvAfterInsert(DataGridViewcadOiItems, cadOiItems)
-        '            '        SendKeys.Send("{UP}")
-        '            '    Else
-        '            '        MessageBox.Show($"Row insertion not allowed while in view mode. Press edit button to enable insertion.")
-        '            '    End If
-        '        End Select
-        '    End With
-        'End Sub
-
         Private Sub DataGridViewCadOiItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewCadOiItems.UserDeletedRow
             ReSequenceDgvAfterDelete(DataGridViewCadOiItems, CadOiItems)
-        End Sub
-
-        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
-
-        End Sub
-
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
             UpdateTotals()
             UpdateTotalVatAmount()
         End Sub
 
-        'Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-        '    Dim cPaymentType = PresenterObj.GetPaymentType(PresenterObj.TargetIdNo)
-        '    SetPayeeProperty(cPaymentType)
-        'End Sub
+        Private Overloads Sub Dispose()
+            Close()
+        End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
@@ -659,7 +573,6 @@ Namespace PresentationLayer.Forms
             PresenterObj.AddSupplierOpenInvoices()
             BindCadOiItem()
             btnViewGL.Visible = False
-            'SetPayeeProperty(PaymentType)
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -723,11 +636,6 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        'Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles cboPaymentType.Leave
-        '    If cboPaymentType.SelectedIndex < 0 Then
-        '        SetPayeeProperty()
-        '    End If
-        'End Sub
         Private Sub txtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
             If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
@@ -777,6 +685,14 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
+        Private Sub UpdateJiTotals()
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.SumAllColumns()
+                TotalDebits = _jiFooter.Value("dgvDebit")
+                TotalCredits = _jiFooter.Value("dgvCredit")
+            End If
+        End Sub
+
         Private Sub UpdateOiTotals()
             If _apFooter IsNot Nothing Then
                 _apFooter.SumAllColumns()
@@ -786,27 +702,9 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub UpdateRowVatAmounts()
-            Dim vatAmt As Integer
-            For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If PresenterObj.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
-                    vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
-                    glRow.Cells("ItemVatAmount").Value = vatAmt
-                End If
-            Next
-        End Sub
-
         Private Sub UpdateTotals()
             UpdateJiTotals()
             UpdateOiTotals()
-        End Sub
-
-        Private Sub UpdateJiTotals()
-            If _jiFooter IsNot Nothing Then
-                _jiFooter.SumAllColumns()
-                TotalDebits = _jiFooter.Value("dgvDebit")
-                TotalCredits = _jiFooter.Value("dgvCredit")
-            End If
         End Sub
 
         Private Sub UpdateTotalVatAmount()
@@ -830,10 +728,6 @@ Namespace PresentationLayer.Forms
                 ' Cancel the deletion
                 e.Cancel = True
             End If
-        End Sub
-
-        Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-            SetPayeeProperty(eventType.Model.PaymentType)
         End Sub
 
     End Class
