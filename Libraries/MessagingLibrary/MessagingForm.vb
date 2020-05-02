@@ -472,7 +472,13 @@ Public Class MessagingForm
                     buttonIndexToFocus = 1
             End Select
 
-            If buttonIndexToFocus > _visibleButtonsCount Then buttonIndexToFocus = _visibleButtonsCount
+            Dim buttonOffset = 3 - _visibleButtonsCount
+
+            buttonIndexToFocus = buttonIndexToFocus + buttonOffset
+
+            If _visibleButtonsCount < 0 Or _visibleButtonsCount > 3 Then
+                buttonIndexToFocus = 3
+            End If
 
             If buttonIndexToFocus = 3 Then
                 buttonToFocus = _button3

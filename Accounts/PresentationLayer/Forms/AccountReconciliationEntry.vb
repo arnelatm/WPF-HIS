@@ -61,7 +61,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Public Property AccountIdNo as Int32 Implements IAccountReconciliationView.AccountIdNo
+        Public Property AccountIdNo As Int32 Implements IAccountReconciliationView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -695,22 +695,22 @@ Namespace PresentationLayer.Forms
             '    SearchForm.RightToLeft = myForm.RightToLeft
             'End If
             searchForm.ShowDialog()
-            Dim _textToSearch As String
-            Dim _searchAnywhere As String
-            _textToSearch = searchForm.TextToSearch
-            _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+            Dim textToSearch As String
+            Dim searchAnywhere As String
+            textToSearch = searchForm.TextToSearch
+            searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
             searchForm.Dispose()
-            If _textToSearch <> "" Then
+            If textToSearch <> "" Then
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                        If _searchAnywhere Then
-                            If row.Cells(columnNo).Value.ToString().Contains(_textToSearch) Then
+                        If searchAnywhere Then
+                            If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
                                 row.Selected = True
                             End If
                         Else
-                            If row.Cells(columnNo).Value.ToString().Equals(_textToSearch) Then
+                            If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
                                 row.Selected = True
                             End If
                         End If
@@ -786,14 +786,14 @@ Namespace PresentationLayer.Forms
                 If Posted Then
                     Messaging.Show(True, "MsgAlreadyPosted", "Sorry this record has already been posted!", "Invalid Request")
                 Else
-                    Dim _err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
+                    Dim err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
                     Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
-                    MyErrorProvider.SetError(txtUnreconciledDifference, _err)
+                    MyErrorProvider.SetError(txtUnreconciledDifference, err)
                 End If
             End If
         End Sub
 
-        Private Sub btnPrint_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrint.ClickButtonArea
+        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrint.ClickButtonArea
             Dim cForm As New AccountReconciliationReport(IdNo)
             cForm.Show()
         End Sub

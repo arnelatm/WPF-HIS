@@ -27,7 +27,6 @@ Namespace PresentationLayer.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
-        Private _totalBalance As Decimal = 0
         Private _viewGl As Boolean = False
 
         Public Sub New()
@@ -418,12 +417,12 @@ Namespace PresentationLayer.Forms
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCkdOiItems.Visible = True
-                btnViewGL.Text = Messaging.GetCaption("View Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
             Else
                 _viewGl = True
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCkdOiItems.Visible = False
-                btnViewGL.Text = Messaging.GetCaption("Hide Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
             End If
         End Sub
 
@@ -431,13 +430,13 @@ Namespace PresentationLayer.Forms
             With DataGridViewCkdOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
-                        Dim selectedRow As CkdOiItemModel
+                        Dim selectedRow As CkdOiItemView
                         Dim amt = .Value
                         selectedRow = DataGridViewCkdOiItems.Rows(.RowIndex).DataBoundItem
                         selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
                         UpdateOiTotals()
                     Case $"dgvdiscounttaken"
-                        Dim selectedRow As CkdOiItemModel
+                        Dim selectedRow As CkdOiItemView
                         Dim amt = .Value
                         selectedRow = DataGridViewCkdOiItems.Rows(.RowIndex).DataBoundItem
                         selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
@@ -503,25 +502,19 @@ Namespace PresentationLayer.Forms
                             If .RowIndex() = 0 Then
                                 Messaging.Show(True, "MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert(DataGridViewJournalItems, bsJournalItems)
                                 SendKeys.Send("{UP}")
                             End If
                         Else
-                            Messaging.AddMessage("MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
+                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
                         End If
                 End Select
             End With
         End Sub
 
-        Private Sub DataGridViewCkdOiItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewCkdOiItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewCkdOiItems, CkdOiItems)
-            UpdateTotals()
-            UpdateTotalVatAmount()
-        End Sub
-
-        Private Overloads Sub Dispose()
+        Public Overloads Sub Dispose()
             Close()
         End Sub
 
@@ -600,6 +593,7 @@ Namespace PresentationLayer.Forms
             PresenterObj.AddSupplierOpenInvoices()
             BindCkdOiItem()
             btnViewGL.Visible = False
+            SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -729,16 +723,6 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub UpdateRowVatAmounts()
-            Dim vatAmt As Integer
-            For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If PresenterObj.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
-                    vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
-                    glRow.Cells("ItemVatAmount").Value = vatAmt
-                End If
-            Next
-        End Sub
-
         Private Sub UpdateTotals()
             UpdateJiTotals()
             UpdateOiTotals()
@@ -761,10 +745,16 @@ Namespace PresentationLayer.Forms
             ' Check if the starting balance row is included in the selected rows
             If DataGridViewJournalItems.SelectedRows.Contains(checkDisbursementRowEntry) Then
                 ' Do not allow the user to delete the first row.
-                MessageBox.Show($"Deletion of the first row is not allowed!")
+                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed")
                 ' Cancel the deletion
                 e.Cancel = True
             End If
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
+            UpdateTotals()
+            UpdateTotalVatAmount()
         End Sub
 
     End Class

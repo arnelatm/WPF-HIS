@@ -65,16 +65,16 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
         End Function
 
-        Public Function IsAccountsPayableAccount(ByVal AccountIdNo as Int32)
-            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
+        Public Function IsAccountsPayableAccount(ByVal AccountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
         End Function
 
-        Public Function IsAccountsReceivableAccount(ByVal AccountIdNo as Int32)
-            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
+        Public Function IsAccountsReceivableAccount(ByVal AccountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
         End Function
 
-        Public Function IsInputVatAccount(ByVal AccountIdNo as Int32)
-            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
+        Public Function IsInputVatAccount(ByVal AccountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
         End Function
 
         Public Function GetAdvancesToSupplierAccountIdNo()
@@ -136,12 +136,16 @@ Namespace PresentationLayer.Presenters
                                  "CashCode", sortKey, "")
         End Function
 
-        Public Function GetEndingGlBalance(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date) As Decimal
-            Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
+        Public Function GetEndingGlBalance(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date) As Decimal
+            Return DataModel.GetEndingGlBalance(AccountIdNo, reconciliationDate)
         End Function
 
         Public Function GetAdvancePaymentCdOpenInvoice(ByVal idNo As Int32)
             Return Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        End Function
+
+        Public Function GetAdvanceCollectionCrOpenInvoice(ByVal idNo As Int32)
+            Return Model.GetRecordFieldWith2Key(idNo, "CR", "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
     End Class

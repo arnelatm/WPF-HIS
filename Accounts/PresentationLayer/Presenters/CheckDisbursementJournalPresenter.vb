@@ -408,18 +408,6 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         End If
-                        'Else
-                        '    cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                        '    If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
-                        '        Dim lineNumber = Format(item.Sequence, "0")
-                        '        Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
-                        '        Dim caption = "Invalid Entry"
-                        '        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                        '        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
-                        '        caption = Messaging.TranslateCaption(caption)
-                        '        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '        retValue = False
-                        '    End If
                     End If
                 End If
             Next
@@ -667,7 +655,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SetAsideJournalItems()
-
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
             End If
@@ -739,16 +726,7 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                Dim oldCkdOiItem As List(Of CkdOiItemModel)
-                If Not AddMode Then
-                    oldCkdOiItem = GetCKdOiItems(View.IdNo)
-                Else
-                    oldCkdOiItem = Nothing
-                End If
-                ' editing mode save the new paid invoices entry
-                ' newCkdOiItem = GetCkdOiItems(View.IdNo)
-                ' un-apply the old payments
-                For Each Item In oldCkdOiItem
+                For Each Item In _oldCkdOiItem
                     ' if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments

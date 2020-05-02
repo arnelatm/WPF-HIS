@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PettyCashJournalDao
         Inherits DaoAccounts
-        Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal), IDaoChild(Of JournalItem)
+        Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal), IDaoChild(Of JournalItem), IDaoOiItem(Of PcsOiItem)
 
         Private ReadOnly _db As New Db()
 
@@ -37,7 +37,7 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    "FROM [PettyCashJournal]" &
+                    " FROM [PettyCashJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
@@ -57,7 +57,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
-                    "Cancelled     = @Cancelled" &
+                    "Cancelled     = @Cancelled," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
@@ -187,6 +187,11 @@ Namespace DataLayer.AdoNet
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
             Dim jiDao = New PettyCashJournalItemDao()
             Return jiDao.InsertTvp(tvpTable)
+        End Function
+
+        Public Function GetOpenInvoices(idNo As Integer) As List(Of PcsOiItem) Implements IDaoOiItem(Of PcsOiItem).GetOpenInvoices
+            Dim oiDao = New PcsOiItemDao
+            Return oiDao.GetOpenInvoices(idNo)
         End Function
 
     End Class

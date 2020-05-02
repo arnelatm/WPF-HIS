@@ -1590,10 +1590,10 @@
   <data name="dgvJournalCode.HeaderText" xml:space="preserve">
     <value>Journal Code</value>
   </data>
-  <metadata name="dgvJournalIdNoJi.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dgvJournalIdNoJi.HeaderText" xml:space="preserve">
+  <data name="dgvJournalIdNoAp.HeaderText" xml:space="preserve">
     <value>Journal Id No</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1614,10 +1614,10 @@
   <data name="dgvDiscountTaken.HeaderText" xml:space="preserve">
     <value>Discount Taken</value>
   </data>
-  <metadata name="dgvNewBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dgvNewBalance.HeaderText" xml:space="preserve">
+  <data name="dgvBalance.HeaderText" xml:space="preserve">
     <value>Balance</value>
   </data>
   <metadata name="CadIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -90068,6 +90068,12 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bsPcsOiItems.Name" xml:space="preserve">
+    <value>bsPcsOiItems</value>
+  </data>
+  <data name="&gt;&gt;bsPcsOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceCadOi.Name" xml:space="preserve">
     <value>dgvSequenceCadOi</value>
   </data>
@@ -90086,10 +90092,10 @@
   <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvJournalIdNoJi.Name" xml:space="preserve">
-    <value>dgvJournalIdNoJi</value>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
+    <value>dgvJournalIdNoAp</value>
   </data>
-  <data name="&gt;&gt;dgvJournalIdNoJi.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
@@ -90110,10 +90116,10 @@
   <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvNewBalance.Name" xml:space="preserve">
-    <value>dgvNewBalance</value>
+  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
+    <value>dgvBalance</value>
   </data>
-  <data name="&gt;&gt;dgvNewBalance.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CadIdNo.Name" xml:space="preserve">
@@ -90127,12 +90133,6 @@
   </data>
   <data name="&gt;&gt;OpenInvoiceIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsPcsOiItems.Name" xml:space="preserve">
-    <value>bsPcsOiItems</value>
-  </data>
-  <data name="&gt;&gt;bsPcsOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PettyCashJournalEntry</value>

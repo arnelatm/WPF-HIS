@@ -7,7 +7,7 @@ Namespace ServiceLayer.ActionService
 
         Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)
 
-        Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(Of TM)(ByVal reconciled As Boolean, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of TM)
 
@@ -15,9 +15,9 @@ Namespace ServiceLayer.ActionService
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
-        Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
+        Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
-        Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
+        'Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
     End Interface
 

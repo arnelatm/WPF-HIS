@@ -703,7 +703,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 107</value>
+    <value>1, 106</value>
   </data>
   <data name="lblCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -736,7 +736,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 107</value>
+    <value>151, 106</value>
   </data>
   <data name="txtCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -766,7 +766,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 107</value>
+    <value>263, 106</value>
   </data>
   <data name="lblCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -796,7 +796,7 @@
     <value>20</value>
   </data>
   <data name="dtpCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 107</value>
+    <value>352, 106</value>
   </data>
   <data name="dtpCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -826,7 +826,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 107</value>
+    <value>461, 106</value>
   </data>
   <data name="lblInvoiceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -859,7 +859,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtORNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 107</value>
+    <value>553, 106</value>
   </data>
   <data name="txtORNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -889,7 +889,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 134</value>
+    <value>1, 133</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -922,7 +922,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 134</value>
+    <value>151, 133</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1563,10 +1563,10 @@
   <data name="dgvJournalCode.HeaderText" xml:space="preserve">
     <value>JournalCode</value>
   </data>
-  <metadata name="JournalIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="JournalIdNo.HeaderText" xml:space="preserve">
+  <data name="DgvJournalIdNoAp.HeaderText" xml:space="preserve">
     <value>JournalIdNo</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1581,7 +1581,7 @@
   <data name="dgvDiscountTaken.HeaderText" xml:space="preserve">
     <value>DiscountTaken</value>
   </data>
-  <data name="dgvNewBalance.HeaderText" xml:space="preserve">
+  <data name="dgvBalance.HeaderText" xml:space="preserve">
     <value>Balance</value>
   </data>
   <data name="CsrIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
@@ -1662,107 +1662,11 @@
   <data name="&gt;&gt;floPurchaseJournalItems.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblTotals.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblTotals.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblTotals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblTotals.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblTotals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 23</value>
-  </data>
-  <data name="lblTotals.TabIndex" type="System.Int32, mscorlib">
-    <value>247</value>
-  </data>
-  <data name="lblTotals.Text" xml:space="preserve">
-    <value>Totals:</value>
-  </data>
-  <data name="lblTotals.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblTotals.Name" xml:space="preserve">
-    <value>lblTotals</value>
-  </data>
-  <data name="&gt;&gt;lblTotals.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTotals.Parent" xml:space="preserve">
-    <value>floFooter</value>
-  </data>
-  <data name="&gt;&gt;lblTotals.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="txtTotalDebits.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtTotalDebits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 1</value>
-  </data>
-  <data name="txtTotalDebits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="txtTotalDebits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Name" xml:space="preserve">
-    <value>txtTotalDebits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.Parent" xml:space="preserve">
-    <value>floFooter</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebits.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtTotalCredits.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtTotalCredits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 1</value>
-  </data>
-  <data name="txtTotalCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="txtTotalCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Name" xml:space="preserve">
-    <value>txtTotalCredits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.Parent" xml:space="preserve">
-    <value>floFooter</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCredits.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="btnViewGL.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="btnViewGL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>493, 3</value>
+    <value>3, 3</value>
   </data>
   <data name="btnViewGL.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 23</value>
@@ -1783,7 +1687,7 @@
     <value>floFooter</value>
   </data>
   <data name="&gt;&gt;btnViewGL.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 490</value>
@@ -1810,7 +1714,7 @@
     <value>Top</value>
   </data>
   <data name="floFullEntryArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
+    <value>0, 53</value>
   </data>
   <data name="floFullEntryArea.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1000, 530</value>
@@ -1839,6 +1743,9 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>100</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk0WwFAAAAAAADYAAAAoAAAAkAYAABoEAAABABgAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAAsPSVsPSV
@@ -90063,19 +89970,19 @@
     <value>StoreCaptions1</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.StoreCaptions, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.StoreCaptions, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
     <value>TranslatorDAC</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Name" xml:space="preserve">
     <value>AppDataDAC</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
     <value>MyErrorProvider</value>
@@ -90185,6 +90092,12 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">
+    <value>bsCsrOiItems</value>
+  </data>
+  <data name="&gt;&gt;bsCsrOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
     <value>dgvSequenceCsrOi</value>
   </data>
@@ -90209,10 +90122,10 @@
   <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;JournalIdNo.Name" xml:space="preserve">
-    <value>JournalIdNo</value>
+  <data name="&gt;&gt;DgvJournalIdNoAp.Name" xml:space="preserve">
+    <value>DgvJournalIdNoAp</value>
   </data>
-  <data name="&gt;&gt;JournalIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;DgvJournalIdNoAp.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
@@ -90233,10 +90146,10 @@
   <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvNewBalance.Name" xml:space="preserve">
-    <value>dgvNewBalance</value>
+  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
+    <value>dgvBalance</value>
   </data>
-  <data name="&gt;&gt;dgvNewBalance.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CsrIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
@@ -90268,12 +90181,6 @@
   </data>
   <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">
-    <value>bsCsrOiItems</value>
-  </data>
-  <data name="&gt;&gt;bsCsrOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CashReceiptJournalEntry</value>

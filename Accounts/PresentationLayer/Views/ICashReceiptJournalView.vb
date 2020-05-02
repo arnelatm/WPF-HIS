@@ -25,6 +25,8 @@ Namespace PresentationLayer.Views
         Property TotalDebits As Decimal
         Property TransactionDate As Date?
         Property UnApplied As Decimal
+        Property JournalItems As List(Of JournalItemView)
+        Property CsrOiItems As List(Of CsrOiItemView)
     End Interface
 
 End Namespace

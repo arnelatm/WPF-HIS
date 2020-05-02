@@ -184,7 +184,6 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cboPaymentType.SetValue(Value)
-                'SetPayeeProperty(Value)
             End Set
         End Property
 
@@ -319,55 +318,12 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        'Private Sub AddSupplierOpenInvoices()
-        '    If PayeeIdNo <> 0 Then
-        '        Dim unpaidInvoices = PresenterObj.GetSupplierOpenInvoices(PayeeIdNo)
-        '        Dim newItem As New PcsOiItemModel
-        '        Dim nSeq As Integer
-        '        If PresenterObj.AddMode Then
-        '            bsPcsOiItems.Clear()
-        '        End If
-        '        If bsPcsOiItems IsNot Nothing Then
-        '            nSeq = bsPcsOiItems.Count()
-        '        Else
-        '            nSeq = 0
-        '        End If
-        '        For Each unpaidInvoice In unpaidInvoices
-        '            Dim itemFound = False
-        '            If bsPcsOiItems IsNot Nothing Then
-        '                For Each item In bsPcsOiItems
-        '                    If item.JournalItemIdNo = unpaidInvoice.JournalItemIdNo And item.JournalCode = unpaidInvoice.JournalCode Then
-        '                        itemFound = True
-        '                    End If
-        '                Next
-        '            End If
-        '            If Not itemFound Then
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            SetPayeeProperty(cboPaymentType.SelectedValue)
+            UpdateTotals()
+        End Sub
 
-        '                If unpaidInvoice.JournalCode = "CD" And unpaidInvoice.JournalIdNo = IdNo Then
-        '                    ' ignore advance payments if applied to this entry.
-        '                Else
-        '                    nSeq = nSeq + 1
-        '                    Dim item As New PcsOiItemModel With {
-        '                            .AccountIdNo = unpaidInvoice.AccountIdNo,
-        '                            .Amount = unpaidInvoice.Amount,
-        '                            .Balance = unpaidInvoice.Balance,
-        '                            .DiscountTaken = unpaidInvoice.DiscountTaken,
-        '                            .InvoiceNo = unpaidInvoice.InvoiceNo,
-        '                            .JournalCode = unpaidInvoice.JournalCode,
-        '                            .JournalIdNo = unpaidInvoice.JournalIdNo,
-        '                            .JournalItemIdNo = unpaidInvoice.JournalItemIdNo,
-        '                            .OpenInvoiceIdNo = unpaidInvoice.OpenInvoiceIdNo,
-        '                            .PreviousBalance = unpaidInvoice.Balance,
-        '                            .Sequence = nSeq,
-        '                            .TransactionDate = unpaidInvoice.TransactionDate
-        '                            }
-        '                    bsPcsOiItems.Add(item)
-        '                End If
-        '            End If
-        '        Next
-        '    End If
-        '    DataGridViewPcsOiItems.Refresh()
-        'End Sub
         Private Sub BindPcsOiItem()
             SuspendLayout()
             bsPcsOiItems.DataSource = Nothing
@@ -530,13 +486,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
-            UpdateTotals()
-            UpdateTotalVatAmount()
-        End Sub
-
-        Private Overloads Sub Dispose()
+        Public Overloads Sub Dispose()
             Close()
         End Sub
 
@@ -615,6 +565,7 @@ Namespace PresentationLayer.Forms
             PresenterObj.AddSupplierOpenInvoices()
             BindPcsOiItem()
             btnViewGL.Visible = False
+            SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -770,6 +721,12 @@ Namespace PresentationLayer.Forms
                 ' Cancel the deletion
                 e.Cancel = True
             End If
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
+            UpdateTotals()
+            UpdateTotalVatAmount()
         End Sub
 
     End Class

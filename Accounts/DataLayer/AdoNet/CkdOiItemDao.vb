@@ -90,7 +90,7 @@ Namespace DataLayer.AdoNet
         '                         }
         'End Function
 
-        Public Function GetSupplierOpenInvoices(idNo As Int32) _
+        Public Function GetOpenInvoices(idNo As Int32) _
             As List(Of CkdOiItem) Implements IDaoOiItem(Of CkdOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &

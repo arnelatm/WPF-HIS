@@ -38,16 +38,16 @@ Namespace PresentationLayer.Models
         End Function
 
         Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IModelAccounts.GetCustomerOpenInvoices
-            Return DataService.GetCustomerOpenInvoices(Of TM)(idNo)
+            Return DataService.GetOpenInvoices(Of TM)(idNo)
         End Function
 
         Public Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IModelAccounts.GetSupplierOpenInvoices
-            Return DataService.GetSupplierOpenInvoices(Of TM)(idNo)
+            Return DataService.GetOpenInvoices(Of TM)(idNo)
         End Function
 
-        Public Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of TM) Implements IModelAccounts.GetAcctReconItems
-            Return DataService.GetAcctReconItems(Of TM)(accountIdNo, reconciliationDate, sortExpression)
+            Return DataService.GetAcctReconItems(Of TM)(AccountIdNo, reconciliationDate, sortExpression)
         End Function
 
     End Class
@@ -67,9 +67,9 @@ Namespace PresentationLayer.Models
     '        Return updateResult
     '    End Function
 
-    '    Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoicePayment
+    '    Public Function RemoveInvoiceCollection(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoiceCollection
     '        Dim updateResult As Integer
-    '        updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
+    '        updateResult = DataService.RemoveInvoiceCollection(idNo, amount, discountTaken)
     '        Return updateResult
     '    End Function
 

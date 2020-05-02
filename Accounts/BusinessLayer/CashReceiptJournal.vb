@@ -1,5 +1,6 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
@@ -46,6 +47,7 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property UnApplied As Decimal
+
     End Class
 
 End Namespace

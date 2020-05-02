@@ -265,22 +265,22 @@ Namespace ServiceLayer.ActionService
             Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
         End Function
 
-        Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
-            Dim records = DataDao.GetCustomerOpenInvoices(idNo)
+        'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
+        '    Dim records = DataDao.GetCustomerOpenInvoices(idNo)
+        '    Dim model As New List(Of TM)
+        '    GlobalVariables.Mapper.Map(records, model)
+        '    Return model
+        'End Function
+
+        Public Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetOpenInvoices
+            Dim records = DataDao.GetOpenInvoices(idNo)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function
 
-        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
-            Dim records = DataDao.GetSupplierOpenInvoices(idNo)
-            Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
-            Return model
-        End Function
-
-        Public Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetAcctReconItems
-            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
+        Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetAcctReconItems
+            Dim records = DataDao.GetAcctReconItems(AccountIdNo, reconciliationDate, sortOrder)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model
@@ -305,9 +305,9 @@ Namespace ServiceLayer.ActionService
     '        Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
     '    End Function
 
-    '    Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
-    '        Implements IOpenInvoiceService.RemoveInvoicePayment
-    '        Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
+    '    Public Function RemoveInvoiceCollection(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+    '        Implements IOpenInvoiceService.RemoveInvoiceCollection
+    '        Return DataDao.RemoveInvoiceCollection(idNo, amount, discountTaken)
     '    End Function
 
     'End Class

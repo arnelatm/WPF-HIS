@@ -398,6 +398,7 @@
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
