@@ -215,11 +215,11 @@ Namespace PresentationLayer.Presenters
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = TransactionTypeToEnum(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        item.Credit = View.Amount
-                        item.Debit = 0
-                    Else
-                        item.Credit = 0
                         item.Debit = View.Amount
+                        item.Credit = 0
+                    Else
+                        item.Debit = 0
+                        item.Credit = View.Amount
                     End If
                     item.ProfitCenterIdNo = 0
                     Exit For
@@ -305,8 +305,8 @@ Namespace PresentationLayer.Presenters
                     .JournalIdNo = View.IdNo,
                     .Sequence = 0,
                     .AccountIdNo = Nothing,
-                    .Credit = View.Amount,
-                    .Debit = 0,
+                    .Debit = View.Amount,
+                    .Credit = 0,
                     .ProfitCenterIdNo = 0,
                     .Notes = ""
                     }

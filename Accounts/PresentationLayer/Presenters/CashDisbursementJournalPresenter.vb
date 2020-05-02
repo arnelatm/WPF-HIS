@@ -151,7 +151,7 @@ Namespace PresentationLayer.Presenters
             Next
             If retVal Then
                 If View.UnApplied <> 0 Then
-                    Dim totalBalance As Decimal = 0
+                    Dim totalBalance As Decimal = 0D
                     For Each item In View.CadOiItems
                         totalBalance += item.Balance
                     Next
@@ -164,7 +164,7 @@ Namespace PresentationLayer.Presenters
                             retVal = False
                         End If
                     Else
-                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance", "Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", $"Save Advance Payment",
+                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance", "Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", "Save Advance Payment",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -243,9 +243,6 @@ Namespace PresentationLayer.Presenters
                     SetAsideJournalItems()
                 End If
             Else
-                'If AddMode Then
-                '    CallByName(DataModel, IdFieldName, CallType.Set, passedValue)
-                'End If
                 MakeJournalItem()
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
@@ -276,11 +273,9 @@ Namespace PresentationLayer.Presenters
                             nRowCount += 1
                         End If
                         View.TotalDebits += ji.Amount
-
                     Next
                     View.TotalCredits = View.TotalDebits
                 End If
-
             End If
         End Sub
 
@@ -294,6 +289,7 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalDebits
             End If
         End Sub
+
         Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
             Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         End Function
@@ -314,6 +310,7 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
+
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)
             Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
@@ -361,7 +358,6 @@ Namespace PresentationLayer.Presenters
             Dim retValue As Boolean = True
             Dim chart As ChartModel
             Dim specialAccount As String
-            'Dim cPayeeType As String
             For Each item In View.JournalItems
                 chart = GetChart(item.AccountIdNo)
                 specialAccount = chart.SpecialAccount
@@ -406,18 +402,6 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         End If
-                        'Else
-                        '    cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                        '    If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
-                        '        Dim lineNumber = Format(item.Sequence, "0")
-                        '        Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
-                        '        Dim caption = "Invalid Entry"
-                        '        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                        '        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
-                        '        caption = Messaging.TranslateCaption(caption)
-                        '        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '        retValue = False
-                        '    End If
                     End If
                 End If
             Next
@@ -582,15 +566,7 @@ Namespace PresentationLayer.Presenters
             Else
                 View.CadOiItems.Clear()
             End If
-            'UpdateTotals()
         End Sub
-
-        'Private Sub OnBeforeCompare() Handles MyBase.BeforeCompare
-        '    If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-        '        View.TotalDebits = View.Applied + View.DiscountTaken
-        '        View.TotalCredits = View.TotalDebits
-        '    End If
-        'End Sub
 
         Private Function SaveCadOiItems(passedValue As Integer) As Integer
             Dim insertReturnValue
@@ -665,7 +641,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SetAsideJournalItems()
-
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
             End If
@@ -737,16 +712,7 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                Dim oldCadOiItem As List(Of CadOiItemModel)
-                If Not AddMode Then
-                    oldCadOiItem = GetCadOiItems(View.IdNo)
-                Else
-                    oldCadOiItem = Nothing
-                End If
-                ' editing mode save the new paid invoices entry
-                ' newCadOiItem = GetCadOiItems(View.IdNo)
-                ' un-apply the old payments
-                For Each Item In oldCadOiItem
+                For Each Item In _oldCadOiItem
                     ' if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments

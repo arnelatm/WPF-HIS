@@ -6,8 +6,6 @@ Namespace DataLayer
     Public Interface IDaoAccounts
         Inherits ICommonDao
 
-        Function GetSupplierOpenInvoices(idNo As Int32) As List(Of CadOiItem)
-
     End Interface
 
     'Public Interface IDaoJournalItems
@@ -34,6 +32,8 @@ Namespace DataLayer
 
         Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
+        'Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
+
     End Interface
 
     Public Interface IDaoChart
@@ -44,9 +44,9 @@ Namespace DataLayer
 
     Public Interface IDaoAccountReconciliationItem(Of TM)
 
-        Function GetAcctReconItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(AccountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
-        Function GetGlItems(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetGlItems(AccountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) As List(Of TM)
 

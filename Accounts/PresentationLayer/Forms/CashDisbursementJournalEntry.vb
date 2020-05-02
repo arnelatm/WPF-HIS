@@ -27,7 +27,6 @@ Namespace PresentationLayer.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
-        Private _totalBalance As Decimal = 0
         Private _viewGl As Boolean = False
 
         Public Sub New()
@@ -488,13 +487,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub DataGridViewCadOiItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewCadOiItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewCadOiItems, CadOiItems)
-            UpdateTotals()
-            UpdateTotalVatAmount()
-        End Sub
-
-        Private Overloads Sub Dispose()
+        Public Overloads Sub Dispose()
             Close()
         End Sub
 
@@ -573,6 +566,7 @@ Namespace PresentationLayer.Forms
             PresenterObj.AddSupplierOpenInvoices()
             BindCadOiItem()
             btnViewGL.Visible = False
+            SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -728,6 +722,12 @@ Namespace PresentationLayer.Forms
                 ' Cancel the deletion
                 e.Cancel = True
             End If
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
+            UpdateTotals()
+            UpdateTotalVatAmount()
         End Sub
 
     End Class

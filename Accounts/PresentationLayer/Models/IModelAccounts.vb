@@ -17,7 +17,7 @@ Namespace PresentationLayer.Models
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
-        Function GetAcctReconItems(Of TM)(AccountIdNo as Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
     End Interface
 
@@ -26,13 +26,13 @@ Namespace PresentationLayer.Models
 
     '    'Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
-    '    'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+    '    'Function RemoveInvoiceCollection(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
     '    Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
     '    Function GetCustomerOpenInvoices(idNo As Int32) As List(Of TM)
     '    Function GetSupplierOpenInvoices(idNo As Int32) As List(Of TM)
     '    Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
-    '    Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
+    '    Function RemoveInvoiceCollection(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
     'End Interface
 

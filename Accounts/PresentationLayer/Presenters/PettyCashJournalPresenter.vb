@@ -243,9 +243,6 @@ Namespace PresentationLayer.Presenters
                     SetAsideJournalItems()
                 End If
             Else
-                'If AddMode Then
-                '    CallByName(DataModel, IdFieldName, CallType.Set, passedValue)
-                'End If
                 MakeJournalItem()
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
@@ -276,11 +273,9 @@ Namespace PresentationLayer.Presenters
                             nRowCount += 1
                         End If
                         View.TotalDebits += ji.Amount
-
                     Next
                     View.TotalCredits = View.TotalDebits
                 End If
-
             End If
         End Sub
 
@@ -365,7 +360,6 @@ Namespace PresentationLayer.Presenters
             Dim retValue As Boolean = True
             Dim chart As ChartModel
             Dim specialAccount As String
-            'Dim cPayeeType As String
             For Each item In View.JournalItems
                 chart = GetChart(item.AccountIdNo)
                 specialAccount = chart.SpecialAccount
@@ -410,18 +404,6 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         End If
-                        'Else
-                        '    cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                        '    If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
-                        '        Dim lineNumber = Format(item.Sequence, "0")
-                        '        Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
-                        '        Dim caption = "Invalid Entry"
-                        '        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                        '        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
-                        '        caption = Messaging.TranslateCaption(caption)
-                        '        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '        retValue = False
-                        '    End If
                     End If
                 End If
             Next
@@ -669,7 +651,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SetAsideJournalItems()
-
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
             End If
@@ -741,16 +722,7 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                Dim oldPcsOiItem As List(Of PcsOiItemModel)
-                If Not AddMode Then
-                    oldPcsOiItem = GetPcsOiItems(View.IdNo)
-                Else
-                    oldPcsOiItem = Nothing
-                End If
-                ' editing mode save the new paid invoices entry
-                ' newPcsOiItem = GetPcsOiItems(View.IdNo)
-                ' un-apply the old payments
-                For Each Item In oldPcsOiItem
+                For Each Item In _oldPcsOiItem
                     ' if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments

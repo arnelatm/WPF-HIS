@@ -71,25 +71,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
 
-        '' ReSharper disable once UnusedMember.Local
-        'Private Function Take(PcsOiItem As PcsOiItem) As Object()
-        '    Return New Object() {
-        '                            "@AccountIdNo", PcsOiItem.AccountIdNo,
-        '                            "@Amount", PcsOiItem.Amount,
-        '                            "@Balance", PcsOiItem.Balance,
-        '                            "@PcsIdNo", PcsOiItem.PcsIdNo,
-        '                            "@DiscountTaken", PcsOiItem.DiscountTaken,
-        '                            "@IdNo", PcsOiItem.IdNo,
-        '                            "@InvoiceNo", PcsOiItem.InvoiceNo,
-        '                            "@JournalItemIdNo", PcsOiItem.JournalItemIdNo,
-        '                            "@OpenInvoiceIdNo", PcsOiItem.OpenInvoiceIdNo,
-        '                            "@PreviousBalance", PcsOiItem.PreviousBalance,
-        '                            "@Sequence", PcsOiItem.Sequence,
-        '                            "@TransactionDate", PcsOiItem.TransactionDate
-        '                         }
-        'End Function
-
-        Public Function GetSupplierOpenInvoices(idNo As Int32) _
+        Public Function GetOpenInvoices(idNo As Int32) _
             As List(Of PcsOiItem) Implements IDaoOiItem(Of PcsOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &

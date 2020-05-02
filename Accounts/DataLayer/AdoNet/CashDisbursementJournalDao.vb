@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class CashDisbursementJournalDao
         Inherits DaoAccounts
-        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoChild(Of JournalItem)
+        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoChild(Of JournalItem), IDaoOiItem(Of CadOiItem)
 
         Private ReadOnly _db As New Db()
 
@@ -212,6 +212,11 @@ Namespace DataLayer.AdoNet
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
             Dim jiDao = New CashDisbursementJournalItemDao()
             Return jiDao.InsertTvp(tvpTable)
+        End Function
+
+        Public Function GetOpenInvoices(idNo As Integer) As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
+            Dim oiDao = New CadOiItemDao
+            Return oiDao.GetOpenInvoices(idNo)
         End Function
 
     End Class
