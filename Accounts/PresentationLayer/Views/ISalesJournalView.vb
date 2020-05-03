@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface ISalesJournalView
         Inherits IView
 
-        Property AccountIdNo as Int32
+        Property AccountIdNo As Int32
         Property Cancelled As Boolean
         Property IdNo As Int32
         Property Notes As String
@@ -19,6 +19,9 @@ Namespace PresentationLayer.Views
         Property TotalDeposits As Decimal
         ReadOnly Property DateCreated As DateTime?
         ReadOnly Property Posted As Boolean
+        Property SalesCashItems As List(Of SalesCashItemVIew)
+        Property JournalItems As List(Of JournalItemView)
+
     End Interface
 
 End Namespace

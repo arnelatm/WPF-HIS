@@ -573,13 +573,13 @@ Namespace PresentationLayer.Presenters
             Dim updateReturnValue
             Dim retVal As Integer
             Dim headerIdNo As Int32
-            updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, View.IdNo)
             If AddMode Then
                 headerIdNo = passedValue
                 CallByName(View, IdFieldName, CallType.Set, headerIdNo)
             Else
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
+            updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, headerIdNo)
             If updateReturnValue >= 0 AndAlso DtCadOiInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtCadOiInsertTable.Rows
                     row.Item("CadIdNo") = headerIdNo

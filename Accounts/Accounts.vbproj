@@ -439,6 +439,7 @@
     <Compile Include="PresentationLayer\Views\ISupplierView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
     <Compile Include="PresentationLayer\Views\PcsOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\SalesCashItemVIew.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />

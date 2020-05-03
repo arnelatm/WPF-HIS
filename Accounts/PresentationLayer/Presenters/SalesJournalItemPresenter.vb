@@ -7,8 +7,6 @@ Namespace PresentationLayer.Presenters
     Public Class SalesJournalItemsPresenter
         Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
-        Public ParentViewList As List(Of JournalItemModel)
-
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("JournalItem")
@@ -18,8 +16,6 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
-
-        Public Property ChangesMadeInJournalItem As Boolean = False
 
         Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel), ByVal paymentType As String)
             Dim retVal = True
@@ -76,33 +72,6 @@ Namespace PresentationLayer.Presenters
         Public Shadows Sub Display(journalIdNo As Int32)
             View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
-
-        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
-        End Function
-
-        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, "CK", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
-        End Function
-
-        Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
-                                       journalIdNo As Int32)
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal
-            updateReturnValue = Model.DelUpdateTvp(dtUpdate, journalIdNo)
-            If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
-                insertReturnValue = Model.InsertTvp(dtInsert)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
 
         'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo as Int32, ByVal totalSales As Decimal)
         '    Dim oldJournalItems = GetJournalItems(idNo)

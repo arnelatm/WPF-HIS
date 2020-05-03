@@ -19,7 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime
         Public Property IdNo As Int32
@@ -33,6 +33,8 @@ Namespace BusinessLayer
         Public Property TotalDeposits As Decimal
         Public Property TotalSales As Decimal
         Public Property TransactionDate As Date?
+        Public Property SalesCashItems As List(Of SalesCashItem)
+        Public Property JournalItems As List(Of JournalItem)
     End Class
 
 End Namespace

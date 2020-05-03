@@ -5,28 +5,33 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
     Public Class SalesJournalEntry
-        Implements ISalesJournalView, IJournalItemsView, ISalesCashItemsView
+        Implements ISalesJournalView
 
-        Protected DtInsertTable As New DataTable
-        Protected DtSalesCashInsertTable As New DataTable
-        Protected DtSalesCashUpdateTable As New DataTable
-        Protected DtUpdateTable As New DataTable
+        Public TxtTotalCredits As Decimal
+        Public TxtTotalDebits As Decimal
+        Public TxtTotalBankCharges As Decimal
+        Public TxtTotalBankChargesVat As Decimal
+        Public TxtTotalDeposits As Decimal
+        Public TxtTotalSales As Decimal
 
-        Private ReadOnly _journalItemsPresenter As SalesJournalItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private ReadOnly _salesCashItemsPresenter As SalesCashItemsPresenter
         Private _accountsByCode
+
         Private _cashCodes
-        Private _cashCodesModel As List(Of CashCodeModel)
-        Private _journalItems As List(Of JournalItemModel)
+
+        Private _slFooter As DgvFooter
+        Private _salesCashItems As List(Of SalesCashItemView)
+        Private _jiFooter As DgvFooter
+        Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
-        Private _salesCashItems As List(Of SalesCashItemModel)
-        Private _vatRate As Decimal = GetVatPercentage()
+        Private _viewGl As Boolean = False
 
         Public Sub New()
             MyBase.New()
@@ -42,47 +47,11 @@ Namespace PresentationLayer.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
-            _journalItemsPresenter = New SalesJournalItemsPresenter(Me)
-            _salesCashItemsPresenter = New SalesCashItemsPresenter(Me)
-
-            PresenterObj.JournalItemsPresenter = _journalItemsPresenter
-            PresenterObj.SalesCashItemsPresenter = _salesCashItemsPresenter
-
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
-            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
-            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
-
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
-
-            DtSalesCashInsertTable.Columns.Add("CashCode", GetType(String))
-            DtSalesCashInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesCashInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesCashInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashInsertTable.Columns.Add("Sequence", GetType(Int32))
-
-            DtSalesCashUpdateTable.Columns.Add("CashCode", GetType(String))
-            DtSalesCashUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesCashUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtSalesCashUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesCashUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashUpdateTable.Columns.Add("Sequence", GetType(Int32))
-
         End Sub
 
 #Region "Fields"
 
-        Public Property AccountIdNo as Int32 Implements ISalesJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32 Implements ISalesJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -129,7 +98,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property JournalItems As IList(Of JournalItemModel) Implements IJournalItemsView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements ISalesJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -138,14 +107,6 @@ Namespace PresentationLayer.Forms
                 BindJournalItem()
             End Set
         End Property
-
-        Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
-            'JournalItems = New List(Of JournalItemModel)
-            'SalesCashItems = New List(Of SalesCashItemModel)
-            'BindJournalItem()
-            'BindSalesCashItem()
-        End Sub
 
         Public Property Notes As String Implements ISalesJournalView.Notes
             Get
@@ -174,67 +135,67 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SalesCashItems As IList(Of SalesCashItemModel) Implements ISalesCashItemsView.SalesCashItems
+        Public Property SalesCashItems As List(Of SalesCashItemView) Implements ISalesJournalView.SalesCashItems
             Get
                 Return _salesCashItems
             End Get
-            Set(value As IList(Of SalesCashItemModel))
-                _salesCashItems = value
+            Set
+                _salesCashItems = Value
                 BindSalesCashItem()
             End Set
         End Property
 
         Public Property TotalBankCharges As Decimal Implements ISalesJournalView.TotalBankCharges
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalBankCharges.Text), _nfi)
+                Return TxtTotalBankCharges
             End Get
             Set
-                txtTotalBankCharges.Text = FormatMoney(Value)
+                TxtTotalBankCharges = Value
             End Set
         End Property
 
         Public Property TotalBankChargesVat As Decimal Implements ISalesJournalView.TotalBankChargesVat
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalBankChargesVat.Text), _nfi)
+                Return TxtTotalBankChargesVat
             End Get
             Set
-                txtTotalBankChargesVat.Text = FormatMoney(Value)
+                TxtTotalBankChargesVat = Value
             End Set
         End Property
 
         Public Property TotalCredits As Decimal Implements ISalesJournalView.TotalCredits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCredits.Text), _nfi)
+                Return TxtTotalCredits
             End Get
-            Set
-                txtTotalCredits.Text = FormatMoney(Value)
+            Set(value As Decimal)
+                TxtTotalCredits = value
             End Set
         End Property
 
         Public Property TotalDebits As Decimal Implements ISalesJournalView.TotalDebits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebits.Text), _nfi)
+                Return TxtTotalDebits
             End Get
-            Set
-                txtTotalDebits.Text = FormatMoney(Value)
+            Set(value As Decimal)
+                TxtTotalDebits = value
             End Set
         End Property
 
         Public Property TotalDeposits As Decimal Implements ISalesJournalView.TotalDeposits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDeposits.Text), _nfi)
+                Return TxtTotalDeposits
             End Get
             Set
-                txtTotalDeposits.Text = FormatMoney(Value)
+                TxtTotalDeposits = Value
             End Set
         End Property
 
         Public Property TotalSales As Decimal Implements ISalesJournalView.TotalSales
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalSales.Text), _nfi)
+                Return TxtTotalSales
             End Get
             Set
-                txtTotalSales.Text = FormatMoney(Value)
+                TxtTotalSales = Value
             End Set
         End Property
 
@@ -253,163 +214,48 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(ReferenceNo) Then
-                PresenterObj.UpdateGlReferenceNumber()
-            End If
-            If PresenterObj.AddMode Then
-                btnLast.PerformClick()
-            End If
-        End Sub
-
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            SuspendLayout()
-            txtJournalCode.Text = AccountStrings.SalesJournalPrefix
-            dtpTransactionDate.Value = Date.Now()
-            bsJournalItems.Clear()
-            Dim item As New SalesCashItem With {
-                .Sequence = 1
-            }
-            bsSalesCashItems.Clear()
-            DataGridViewSalesCashItems.Refresh()
-            TotalBankCharges = 0
-            TotalSales = 0
-            TotalBankChargesVat = 0
-            TotalDeposits = 0
-            TotalCredits = 0
-            TotalDebits = 0
-            ResumeLayout()
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.AddMode Then
-                txtJournalCode.Text = AccountStrings.SalesJournalPrefix
-            End If
-            MakeJournalItems()
-            UpdateTotals()
-        End Sub
-
-        Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If PresenterObj.AddMode Then
-                IdNo = passedValue
-            End If
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            If DtSalesCashInsertTable IsNot Nothing Then
-                DtSalesCashInsertTable.Clear()
-            End If
-            If DtSalesCashUpdateTable IsNot Nothing Then
-                DtSalesCashUpdateTable.Clear()
-            End If
-            Dim nRowCount As Integer = 1
-            For Each ji In bsJournalItems
-                ' loop through the journal entries but ignore zero values
-                Dim workRow As DataRow
-                If ji.IdNo <= 0 Then
-                    workRow = DtInsertTable.NewRow()
-                Else
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("IdNo") = ji.IdNo
-                End If
-                workRow("JournalIdNo") = IdNo
-                workRow("Sequence") = nRowCount
-                workRow("AccountIdNo") = ji.AccountIdNo
-                workRow("Debit") = ji.Debit
-                workRow("Credit") = ji.Credit
-                workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
-                workRow("Notes") = If(ji.Notes, "")
-                If ji.IdNo <= 0 Then
-                    DtInsertTable.Rows.Add(workRow)
-                Else
-                    DtUpdateTable.Rows.Add(workRow)
-                End If
-                nRowCount += 1
-            Next
-            ' save JournalItem entries
-            _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-            ' save Sales Cash entries
-            nRowCount = 1
-            For Each sc In bsSalesCashItems
-                If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
-                    Dim workRow As DataRow
-                    If sc.IdNo <= 0 Then
-                        workRow = DtSalesCashInsertTable.NewRow()
-                    Else
-                        workRow = DtSalesCashUpdateTable.NewRow()
-                        workRow("IdNo") = sc.IdNo
-                    End If
-                    workRow("CashCode") = sc.CashCode
-                    workRow("SalesJournalIdNo") = IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("SaleAmount") = sc.SaleAmount
-                    workRow("DepositAmount") = sc.DepositAmount
-                    If sc.IdNo <= 0 Then
-                        DtSalesCashInsertTable.Rows.Add(workRow)
-                    Else
-                        DtSalesCashUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount += 1
-                End If
-            Next
-            ' save the generated open invoices
-            _salesCashItemsPresenter.Save(DtSalesCashInsertTable, DtSalesCashUpdateTable, IdNo)
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _cashCodes = PresenterObj.GetCashCodes()
-            _cashCodesModel = PresenterObj.GetCashCodesModel()
             _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
             cboAccountIdNo.EndUpdate()
-
-            'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
-        {
-         {"AccountIdNo", cboAccountIdNo},
-         {"Cancelled", chkCancelled},
-         {"DateCreated", txtDateCreated},
-         {"IdNo", TxtIDNo},
-         {"Notes", txtNotes},
-         {"Posted", chkPosted},
-         {"ReferenceNo", txtReferenceNo},
-         {"TotalBankCharges", txtTotalBankCharges},
-         {"TotalBankChargesVat", txtTotalBankChargesVat},
-         {"TotalDeposits", txtTotalDeposits},
-         {"TotalCredit", txtTotalCredits},
-         {"TotalDebit", txtTotalDebits},
-         {"TotalSalesAmount", txtTotalSales},
-         {"TransactionDate", dtpTransactionDate}
-        }
+                {
+                {"AccountIdNo", cboAccountIdNo},
+                {"Cancelled", chkCancelled},
+                {"DateCreated", txtDateCreated},
+                {"IdNo", TxtIDNo},
+                {"Notes", txtNotes},
+                {"Posted", chkPosted},
+                {"ReferenceNo", txtReferenceNo},
+                {"TotalBankCharges", TxtTotalBankCharges},
+                {"TotalBankChargesVat", TxtTotalBankChargesVat},
+                {"TotalDeposits", TxtTotalDeposits},
+                {"TotalCredit", TxtTotalCredits},
+                {"TotalDebit", TxtTotalDebits},
+                {"TotalSalesAmount", TxtTotalSales},
+                {"TransactionDate", dtpTransactionDate}
+                }
         End Sub
 
-        Protected Overrides Function DataIsValid() As Boolean
-            Dim retValue As Boolean = False
-            If MyBase.DataIsValid() Then
-                retValue = True
-            End If
-            Return retValue
-        End Function
-
-        Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-            MyBase.DisplayView(idNoOfRecord)
-            _journalItemsPresenter.Display(idNoOfRecord)
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            SuspendLayout()
+            DataGridViewJournalItems.Visible = False
+            DataGridViewSalesCashItems.Visible = True
+            ResumeLayout()
             UpdateTotals()
-            _salesCashItemsPresenter.Display(idNoOfRecord)
-            UpdateSalesDepositsTotal()
         End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
+            bsJournalItems.DataSource = Nothing
+            DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
@@ -441,6 +287,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub BindSalesCashItem()
             SuspendLayout()
+            bsSalesCashItems.DataSource = Nothing
+            DataGridViewSalesCashItems.Refresh()
             bsSalesCashItems.DataSource = SalesCashItems
             bsSalesCashItems.AllowNew = True
             With DataGridViewSalesCashItems
@@ -457,168 +305,122 @@ Namespace PresentationLayer.Forms
                     dgvCashCode.DisplayMember = "Name"
                     dgvCashCode.ValueMember = "Code"
                     dgvCashCode.AutoComplete = AutoCompleteMode.SuggestAppend
-                    dgvCashCode.DisplayStyleForCurrentCellOnly = True
-                    dgvCashCode.AutoComplete = True
-                    dgvComputedBankCharge.DisplayOnly = True
-                    dgvComputedVat.DisplayOnly = True
-                    dgvRate.DisplayOnly = True
-                    dgvActualBankCharge.DisplayOnly = True
-                    dgvActualVat.DisplayOnly = True
-                    dgvBankChargeDifference.DisplayOnly = True
-                    dgvVatDifference.DisplayOnly = True
+                    'dgvCashCode.DisplayStyleForCurrentCellOnly = True
+                    'dgvCashCode.AutoComplete = True
+                    'dgvComputedBankCharge.DisplayOnly = True
+                    'dgvComputedVat.DisplayOnly = True
+                    'dgvRate.DisplayOnly = True
+                    'dgvActualBankCharge.DisplayOnly = True
+                    'dgvActualVat.DisplayOnly = True
+                    'dgvBankChargeDifference.DisplayOnly = True
+                    'dgvVatDifference.DisplayOnly = True
                 End If
             End With
             ResumeLayout()
         End Sub
 
-        Private Sub btnHideJournalEntries_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnHideJournalEntries.ClickButtonArea
-            HideJournalItems()
+        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+            If _viewGl Then
+                _viewGl = False
+                DataGridViewJournalItems.Visible = False
+                DataGridViewSalesCashItems.Visible = True
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+            Else
+                _viewGl = True
+                DataGridViewJournalItems.Visible = True
+                DataGridViewSalesCashItems.Visible = False
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+            End If
         End Sub
 
-        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            DisplayJournalItems()
+        Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit
+            UpdateTotals()
+            'With DataGridViewSalesCashItems.CurrentCell
+            '    Dim selectedRow As DataGridViewRow
+            '    selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+            '    Select Case .OwningColumn.Name.ToLower()
+            '        Case $"dgvcashcode"
+            '            Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
+            '            Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
+            '            Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
+            '            'RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+            '        Case $"dgvsaleamount"
+            '            Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
+            '            Dim pSaleAmount As Decimal = .Value
+            '            Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
+            '            'RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+            '        Case $"dgvdepositamount"
+            '            Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
+            '            Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
+            '            Dim pDepositAmount As Decimal = .Value
+            '            'RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+            '    End Select
+            'End With
+        End Sub
+
+        Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            KeyPreview = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems)
+            _jiFooter.AutoCalc = True
+            _jiFooter.ColumnToSum("dgvDebit") = True
+            _jiFooter.ColumnToSum("dgvCredit") = True
+            ' _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
+
+            _slFooter = New DgvFooter(DataGridViewSalesCashItems)
+            _slFooter.AutoCalc = True
+            _slFooter.ColumnToSum("dgvSaleAmount") = True
+            _slFooter.ColumnToSum("dgvDepositAmount") = True
+            _slFooter.ColumnToSum("dgvComputedBankCharge") = True
+            _slFooter.ColumnToSum("dgvComputedVat") = True
+            _slFooter.ColumnToSum("dgvActualBankCharge") = True
+            _slFooter.ColumnToSum("dgvActualVat") = True
+            _slFooter.ColumnToSum("dgvBankChargeDifference") = True
+            _slFooter.ColumnToSum("dgvVatDifference") = True
+            _slFooter.SetText("dgvCashCode", "Totals")
+
         End Sub
 
         Private Sub DataGridViewSalesCashItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellClick
             With DataGridViewSalesCashItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvinsertcolumn"
-                        _salesCashItemsPresenter.ChangesMadeInSalesCashItem = True
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New SalesCashItemModel
                             bsSalesCashItems.Insert(.RowIndex(), newRow)
-                            _salesCashItemsPresenter.ChangesMadeInSalesCashItem = True
                             ReSequenceDgvAfterInsert(DataGridViewSalesCashItems, SalesCashItems)
                             SendKeys.Send("{UP}")
                         Else
-                            MessageBox.Show($"Row insertion not allowed while in view mode. Press edit button to enable insertion.")
+                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
                         End If
                 End Select
             End With
         End Sub
 
-        Private Sub DataGridViewSalesCashItems_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewSalesCashItems.ChangesMade
-            _salesCashItemsPresenter.ChangesMadeInSalesCashItem = True
+        Private Sub DataGridViewJournalItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellClick
+            With DataGridViewJournalItems.CurrentCell
+                Select Case .OwningColumn.Name.ToLower()
+                    Case $"dgvinsertcolumn"
+                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
+                            Beep()
+                        Else
+                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
+                        End If
+                End Select
+            End With
         End Sub
 
-        Private Sub DataGridViewSalesCashItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesCashItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewSalesCashItems, SalesCashItems)
-            UpdateSalesDepositsTotal()
-        End Sub
-
-        Private Sub DisplayJournalItems()
-            DisplayJournalItems(True)
-        End Sub
-
-        Private Sub DisplayJournalItems(display As Boolean)
-            DataGridViewJournalItems.Visible = display
-            DataGridViewSalesCashItems.Visible = Not display
-            _floSalesCashItemsFooter.Visible = display
-            _floJournalItemsFooter.Visible = Not display
-        End Sub
-
-        Private Sub DisplayViewGlButton(display As Boolean)
-            btnViewGL.Visible = display
-        End Sub
-
-        Private Sub HideJournalItems()
-            DisplayJournalItems(False)
-        End Sub
-
-        Private Sub MakeJournalItems()
-            Dim oldJournalItems = _journalItemsPresenter.GetJournalItems(IdNo)
-            Dim counter As Integer = 0
-            MakeSalesJournal(oldJournalItems, counter, AccountIdNo, 0, TotalSales, "", "")
-            For Each item As SalesCashItemModel In bsSalesCashItems
-                If item.CashCode IsNot Nothing Then
-                    Dim cashCode = _cashCodesModel.Find(Function(c) c.CashCode.Trim() = item.CashCode.Trim())
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.AccountIdNo, item.DepositAmount, 0, cashCode.CashName, cashCode.CashNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesAccountIdNo, item.ActualBankCharge, 0, cashCode.CashName, cashCode.CashNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, cashCode.CashName, cashCode.CashNameAra)
-                End If
-            Next
-            If counter < bsJournalItems.Count() Then
-                While bsJournalItems.Count() > counter
-                    bsJournalItems.RemoveAt(counter)
-                End While
-            End If
-            UpdateTotals()
-        End Sub
-
-        Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                          pAccountIdNo as Int32, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
-            If debitAmount <> 0 Or creditAmount <> 0 Then
-                counter = counter + 1
-                If counter <= oldJournalItems.Count() Then
-                    bsJournalItems.Item(counter - 1).AccountIdNo = pAccountIdNo
-                    bsJournalItems.Item(counter - 1).Debit = debitAmount
-                    bsJournalItems.Item(counter - 1).Credit = creditAmount
-                    bsJournalItems.Item(counter - 1).Sequence = counter
-                    bsJournalItems.Item(counter - 1).Notes = Strings.RTrim(LTrim(note)) + IIf(note = noteAra, "", "-" + noteAra)
-                Else
-                    Dim ji As New JournalItemModel With {
-                            .AccountIdNo = pAccountIdNo,
-                            .Credit = creditAmount,
-                            .Debit = debitAmount,
-                            .IdNo = 0,
-                            .JournalIdNo = IdNo,
-                            .Notes = Strings.Trim(note + IIf(note = noteAra, "", "-" + noteAra)),
-                            .Sequence = counter
-                            }
-                    bsJournalItems.Add(ji)
-                End If
-            End If
-        End Sub
-
-        Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
-            If Not DataGridViewSalesCashItems.DataBindings Is Nothing Then
-                DataGridViewSalesCashItems.DataInGridChanged = False
-            End If
+        Public Overloads Sub Dispose()
+            Close()
         End Sub
 
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             DataGridViewSalesCashItems.RemoveInsertColumn()
-            DataGridViewSalesCashItems.StartTrackingChanges = False
-            _salesCashItemsPresenter.ChangesMadeInSalesCashItem = False
-            HideJournalItems()
-            DisplayViewGlButton(True)
+            btnViewGL.Visible = True
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             DataGridViewSalesCashItems.AddInsertColumn()
-            DataGridViewSalesCashItems.StartTrackingChanges = True
-            _salesCashItemsPresenter.ChangesMadeInSalesCashItem = False
-            HideJournalItems()
-            DisplayViewGlButton(False)
-        End Sub
-
-        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            Dim nIndex As Integer = 0
-            If selectedRow IsNot Nothing Then
-                nIndex = selectedRow.Index
-            End If
-            If nIndex < bsSalesCashItems.Count() Then
-                bsSalesCashItems(nIndex).ActualBankCharge = _salesCashItemsPresenter.GetActualBankCharge(pSaleAmount, pDepositAmount)
-                bsSalesCashItems(nIndex).ActualBankChargeVat = _salesCashItemsPresenter.GetActualBankChargeVat(pSaleAmount, pDepositAmount, bsSalesCashItems(nIndex).ActualBankCharge)
-                bsSalesCashItems(nIndex).BankChargeDifference = bsSalesCashItems(nIndex).ActualBankCharge - bsSalesCashItems(nIndex).ComputedBankCharge
-                bsSalesCashItems(nIndex).BankChargeVatDifference = bsSalesCashItems(nIndex).ActualBankChargeVat - bsSalesCashItems(nIndex).ComputedBankChargeVat
-                UpdateSalesDepositsTotal()
-            End If
-        End Sub
-
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            If pCashCode IsNot Nothing Then
-                Dim nIndex As Integer = 0
-                Dim cashCode As Object
-                cashCode = _cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = pCashCode.Trim())
-                nIndex = selectedRow.Index
-                bsSalesCashItems(nIndex).Rate = cashCode.Rate
-                bsSalesCashItems(nIndex).ComputedBankCharge = _salesCashItemsPresenter.GetComputedBankCharge(pSaleAmount, cashCode.Rate)
-                bsSalesCashItems(nIndex).ComputedBankChargeVat = _salesCashItemsPresenter.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)
-                bsSalesCashItems(nIndex).DepositAmount = pSaleAmount - bsSalesCashItems(nIndex).ComputedBankCharge - bsSalesCashItems(nIndex).ComputedBankChargeVat
-                RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)
-                DataGridViewSalesCashItems.Refresh()
-            End If
+            btnViewGL.Visible = False
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
@@ -641,52 +443,119 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit
-            With DataGridViewSalesCashItems.CurrentCell
-                Dim selectedRow As DataGridViewRow
-                selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvcashcode"
-                        Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
-                        Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                        RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
-                    Case $"dgvsaleamount"
-                        Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
-                        Dim pSaleAmount As Decimal = .Value
-                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                        RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
-                    Case $"dgvdepositamount"
-                        Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
-                        Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pDepositAmount As Decimal = .Value
-                        RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
-                End Select
-            End With
-        End Sub
-
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewSalesCashItems.Focus()
         End Sub
 
-        Private Sub UpdateSalesDepositsTotal()
-            If SalesCashItems IsNot Nothing Then
-                TotalBankChargesVat = SalesCashItems.Sum(Function(totals) totals.ActualBankChargeVat)
-                TotalBankCharges = SalesCashItems.Sum(Function(totals) totals.ActualBankCharge)
-                TotalDeposits = SalesCashItems.Sum(Function(totals) totals.DepositAmount)
-                TotalSales = SalesCashItems.Sum(Function(totals) totals.SaleAmount)
-            Else
-                TotalBankChargesVat = 0
-                TotalBankCharges = 0
-                TotalDeposits = 0
-                TotalSales = 0
+        Private Sub UpdateJiTotals()
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.SumAllColumns()
+                TotalDebits = _jiFooter.Value("dgvDebit")
+                TotalCredits = _jiFooter.Value("dgvCredit")
+            End If
+        End Sub
+
+        Private Sub UpdateSlTotals()
+            If _slFooter IsNot Nothing Then
+                _slFooter.SumAllColumns()
+                'Applied = _apFooter.Value("dgvAmount")
+                'DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                'UnApplied = Amount - Applied
             End If
         End Sub
 
         Private Sub UpdateTotals()
-            TotalDebits = JournalItems.Sum(Function(totals) totals.Debit)
-            TotalCredits = JournalItems.Sum(Function(totals) totals.Credit)
+            UpdateJiTotals()
+            UpdateSlTotals()
         End Sub
+
+        Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesCashItems.UserDeletedRow
+            ReSequenceDgvAfterDelete(DataGridViewSalesCashItems, SalesCashItems)
+            UpdateSlTotals()
+        End Sub
+
+        'Private Sub UpdateSlTotals()
+        '    If SalesCashItems IsNot Nothing Then
+        '        TotalBankChargesVat = SalesCashItems.Sum(Function(totals) totals.ActualBankChargeVat)
+        '        TotalBankCharges = SalesCashItems.Sum(Function(totals) totals.ActualBankCharge)
+        '        TotalDeposits = SalesCashItems.Sum(Function(totals) totals.DepositAmount)
+        '        TotalSales = SalesCashItems.Sum(Function(totals) totals.SaleAmount)
+        '    Else
+        '        TotalBankChargesVat = 0
+        '        TotalBankCharges = 0
+        '        TotalDeposits = 0
+        '        TotalSales = 0
+        '    End If
+        'End Sub
+
+        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        '    If PresenterObj.AddMode Then
+        '        IdNo = passedValue
+        '    End If
+        '    ' save JournalItem entries
+        '    _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
+        '    ' save Sales Cash entries
+        '    nRowCount = 1
+
+        '    ' save the generated open invoices
+        '    _salesCashItemsPresenter.Save(DtSalesCashInsertTable, DtSalesCashUpdateTable, IdNo)
+        'End Sub
+
+        'Protected Overrides Function DataIsValid() As Boolean
+        '    Dim retValue As Boolean = False
+        '    If MyBase.DataIsValid() Then
+        '        retValue = True
+        '    End If
+        '    Return retValue
+        'End Function
+
+        'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
+        '    MyBase.DisplayView(idNoOfRecord)
+        '    _journalItemsPresenter.Display(idNoOfRecord)
+        '    UpdateTotals()
+        '    _salesCashItemsPresenter.Display(idNoOfRecord)
+        '    UpdateSalesDepositsTotal()
+        'End Sub
+
+        'Private Sub DisplayJournalItems()
+        '    DisplayJournalItems(True)
+        'End Sub
+
+        'Private Sub DisplayJournalItems(display As Boolean)
+        '    DataGridViewJournalItems.Visible = display
+        '    DataGridViewSalesCashItems.Visible = Not display
+        '    _floSalesCashItemsFooter.Visible = display
+        '    _floJournalItemsFooter.Visible = Not display
+        'End Sub
+
+        'Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
+        '    Dim nIndex As Integer = 0
+        '    If selectedRow IsNot Nothing Then
+        '        nIndex = selectedRow.Index
+        '    End If
+        '    If nIndex < bsSalesCashItems.Count() Then
+        '        bsSalesCashItems(nIndex).ActualBankCharge = _salesCashItemsPresenter.GetActualBankCharge(pSaleAmount, pDepositAmount)
+        '        bsSalesCashItems(nIndex).ActualBankChargeVat = _salesCashItemsPresenter.GetActualBankChargeVat(pSaleAmount, pDepositAmount, bsSalesCashItems(nIndex).ActualBankCharge)
+        '        bsSalesCashItems(nIndex).BankChargeDifference = bsSalesCashItems(nIndex).ActualBankCharge - bsSalesCashItems(nIndex).ComputedBankCharge
+        '        bsSalesCashItems(nIndex).BankChargeVatDifference = bsSalesCashItems(nIndex).ActualBankChargeVat - bsSalesCashItems(nIndex).ComputedBankChargeVat
+        '        UpdateSalesDepositsTotal()
+        '    End If
+        'End Sub
+
+        'Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
+        '    If pCashCode IsNot Nothing Then
+        '        Dim nIndex As Integer = 0
+        '        Dim cashCode As Object
+        '        cashCode = _cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = pCashCode.Trim())
+        '        nIndex = selectedRow.Index
+        '        bsSalesCashItems(nIndex).Rate = cashCode.Rate
+        '        bsSalesCashItems(nIndex).ComputedBankCharge = _salesCashItemsPresenter.GetComputedBankCharge(pSaleAmount, cashCode.Rate)
+        '        bsSalesCashItems(nIndex).ComputedBankChargeVat = _salesCashItemsPresenter.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)
+        '        bsSalesCashItems(nIndex).DepositAmount = pSaleAmount - bsSalesCashItems(nIndex).ComputedBankCharge - bsSalesCashItems(nIndex).ComputedBankChargeVat
+        '        RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)
+        '        DataGridViewSalesCashItems.Refresh()
+        '    End If
+        'End Sub
 
     End Class
 
