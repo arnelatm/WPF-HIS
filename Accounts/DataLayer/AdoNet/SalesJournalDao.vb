@@ -7,10 +7,10 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class SalesJournalDao
-        Implements IDao(Of SalesJournal), IDaoJournals(Of SalesJournal)
+        Implements IDao(Of SalesJournal), IDaoJournals(Of SalesJournal), IDaoChild(Of JournalItem)
 
         ' ReSharper disable once InconsistentNaming
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As SalesJournal _
             Implements IDao(Of SalesJournal).GetRecordById
@@ -27,7 +27,14 @@ Namespace DataLayer.AdoNet
                     " FROM [SalesJournal]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim jiDao = New SalesJournalItemDao
+            Dim sdDao = New SalesCashItemDao
+            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim sd = sdDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.JournalItems = ji
+            data.SalesCashItems = sd
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef salesJournal As SalesJournal) As Integer _
@@ -41,7 +48,7 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo = @ReferenceNo," &
                     "TransactionDate = @TransactionDate" &
                     " WHERE IDNo = @IDNo"
-            Return Db.Update(sql, Take(salesJournal))
+            Return _db.Update(sql, Take(salesJournal))
         End Function
 
         Public Function AddRecord(ByRef salesJournal As SalesJournal) As Integer _
@@ -63,7 +70,7 @@ Namespace DataLayer.AdoNet
                     "@ReferenceNo," &
                     "@TransactionDate" &
                     ")"
-            Return Db.Insert(sql, Take(salesJournal))
+            Return _db.Insert(sql, Take(salesJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, SalesJournal) =
@@ -99,8 +106,23 @@ Namespace DataLayer.AdoNet
             Dim referenceNo As String
             referenceNo = "S" + Right("00" + Month(transactionDate).ToString, 2) & "-" & Right("00" + DateAndTime.Day(transactionDate).ToString, 2)
             sql = "Update [SalesJournal] set ReferenceNo = '" & referenceNo & "' where IdNo = " & bizObj.IdNo
-            retVal = Db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
+            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
             Return retVal
+        End Function
+
+        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+            Dim jiDao = New SalesJournalItemDao()
+            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+            Dim jiDao = New SalesJournalItemDao()
+            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+            Dim jiDao = New SalesJournalItemDao()
+            Return jiDao.InsertTvp(tvpTable)
         End Function
 
     End Class

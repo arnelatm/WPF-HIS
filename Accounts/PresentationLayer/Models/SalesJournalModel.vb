@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class SalesJournalModel
 
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime
         Public Property Errors As List(Of String)
@@ -21,6 +21,8 @@
         Public Property TotalBankChargesVat As Decimal
         Public Property TotalSales As Decimal
         Public Property TransactionDate As Date?
+        Public Property SalesCashItems As List(Of SalesCashItemModel)
+        Public Property JournalItems As List(Of JournalItemModel)
     End Class
 
 End Namespace
