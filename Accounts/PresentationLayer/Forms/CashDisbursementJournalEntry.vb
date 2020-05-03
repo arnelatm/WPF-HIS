@@ -495,7 +495,7 @@ Namespace PresentationLayer.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                    If cColumnName = $"dgvsalesaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()

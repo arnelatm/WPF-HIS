@@ -91,12 +91,12 @@ Namespace PresentationLayer.Forms
             Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvCashCode = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvBankChargeDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -547,7 +547,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewSalesCashItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewSalesCashItems.AutoGenerateColumns = False
             Me.DataGridViewSalesCashItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewSalesCashItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvCashCode, Me.dgvSaleAmount, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
+            Me.DataGridViewSalesCashItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvCashCode, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
             Me.DataGridViewSalesCashItems.DataInGridChanged = False
             Me.DataGridViewSalesCashItems.DataSource = Me.bsSalesCashItems
             DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -649,70 +649,14 @@ Namespace PresentationLayer.Forms
             Me.dgvSaleAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSaleAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             '
-            'dgvDepositAmount
+            'dgvActualBankCharge
             '
-            Me.dgvDepositAmount.DataPropertyName = "DepositAmount"
+            Me.dgvActualBankCharge.DataPropertyName = "ActualBankCharge"
             DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle10.Format = "###,##0.00"
-            Me.dgvDepositAmount.DefaultCellStyle = DataGridViewCellStyle10
-            Me.dgvDepositAmount.EditingMode = False
-            resources.ApplyResources(Me.dgvDepositAmount, "dgvDepositAmount")
-            Me.dgvDepositAmount.Name = "dgvDepositAmount"
-            Me.dgvDepositAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvDepositAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvRate
-            '
-            Me.dgvRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.Format = "###,##0.00"
-            Me.dgvRate.DefaultCellStyle = DataGridViewCellStyle11
-            Me.dgvRate.EditingMode = False
-            resources.ApplyResources(Me.dgvRate, "dgvRate")
-            Me.dgvRate.Name = "dgvRate"
-            Me.dgvRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvComputedBankCharge
-            '
-            Me.dgvComputedBankCharge.DataPropertyName = "ComputedBankCharge"
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.Format = "###,##0.00"
-            Me.dgvComputedBankCharge.DefaultCellStyle = DataGridViewCellStyle12
-            Me.dgvComputedBankCharge.EditingMode = False
-            resources.ApplyResources(Me.dgvComputedBankCharge, "dgvComputedBankCharge")
-            Me.dgvComputedBankCharge.Name = "dgvComputedBankCharge"
-            Me.dgvComputedBankCharge.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvComputedBankCharge.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvComputedVat
-            '
-            Me.dgvComputedVat.DataPropertyName = "ComputedBankChargeVat"
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle13.Format = "###,##0.00"
-            Me.dgvComputedVat.DefaultCellStyle = DataGridViewCellStyle13
-            Me.dgvComputedVat.EditingMode = False
-            resources.ApplyResources(Me.dgvComputedVat, "dgvComputedVat")
-            Me.dgvComputedVat.Name = "dgvComputedVat"
-            Me.dgvComputedVat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvComputedVat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvActualBankCharge
-            '
-            Me.dgvActualBankCharge.DataPropertyName = "ActualBankCharge"
-            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle14.Format = "###,##0.00"
-            Me.dgvActualBankCharge.DefaultCellStyle = DataGridViewCellStyle14
+            Me.dgvActualBankCharge.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvActualBankCharge.EditingMode = False
             resources.ApplyResources(Me.dgvActualBankCharge, "dgvActualBankCharge")
             Me.dgvActualBankCharge.Name = "dgvActualBankCharge"
@@ -722,16 +666,71 @@ Namespace PresentationLayer.Forms
             'dgvActualVat
             '
             Me.dgvActualVat.DataPropertyName = "ActualBankChargeVat"
-            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle15.Format = "###,##0.00"
-            Me.dgvActualVat.DefaultCellStyle = DataGridViewCellStyle15
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.Format = "###,##0.00"
+            Me.dgvActualVat.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvActualVat.EditingMode = False
             resources.ApplyResources(Me.dgvActualVat, "dgvActualVat")
             Me.dgvActualVat.Name = "dgvActualVat"
             Me.dgvActualVat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvActualVat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvDepositAmount
+            '
+            Me.dgvDepositAmount.DataPropertyName = "DepositAmount"
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.Format = "###,##0.00"
+            Me.dgvDepositAmount.DefaultCellStyle = DataGridViewCellStyle12
+            Me.dgvDepositAmount.EditingMode = False
+            resources.ApplyResources(Me.dgvDepositAmount, "dgvDepositAmount")
+            Me.dgvDepositAmount.Name = "dgvDepositAmount"
+            Me.dgvDepositAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+            '
+            'dgvRate
+            '
+            Me.dgvRate.DataPropertyName = "Rate"
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvRate.DefaultCellStyle = DataGridViewCellStyle13
+            Me.dgvRate.EditingMode = False
+            resources.ApplyResources(Me.dgvRate, "dgvRate")
+            Me.dgvRate.Name = "dgvRate"
+            Me.dgvRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvComputedBankCharge
+            '
+            Me.dgvComputedBankCharge.DataPropertyName = "ComputedBankCharge"
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.Format = "###,##0.00"
+            Me.dgvComputedBankCharge.DefaultCellStyle = DataGridViewCellStyle14
+            Me.dgvComputedBankCharge.EditingMode = False
+            resources.ApplyResources(Me.dgvComputedBankCharge, "dgvComputedBankCharge")
+            Me.dgvComputedBankCharge.Name = "dgvComputedBankCharge"
+            Me.dgvComputedBankCharge.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvComputedBankCharge.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvComputedVat
+            '
+            Me.dgvComputedVat.DataPropertyName = "ComputedBankChargeVat"
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle15.Format = "###,##0.00"
+            Me.dgvComputedVat.DefaultCellStyle = DataGridViewCellStyle15
+            Me.dgvComputedVat.EditingMode = False
+            resources.ApplyResources(Me.dgvComputedVat, "dgvComputedVat")
+            Me.dgvComputedVat.Name = "dgvComputedVat"
+            Me.dgvComputedVat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvComputedVat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             '
             'dgvBankChargeDifference
             '
@@ -822,7 +821,6 @@ Namespace PresentationLayer.Forms
         Friend WithEvents floHeader1 As CFlowLayout
         Friend WithEvents floHeader2 As CFlowLayout
         Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents DataGridViewSalesCashItems As CDataGridView
         Friend WithEvents bsSalesCashItems As Windows.Forms.BindingSource
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As Windows.Forms.DataGridViewCheckBoxColumn
@@ -864,15 +862,16 @@ Namespace PresentationLayer.Forms
         Friend WithEvents dgvSequenceSc As CdgvColumnText
         Friend WithEvents dgvCashCode As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney
+        Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
+        Friend WithEvents dgvActualVat As CdgvColumnMoney
         Friend WithEvents dgvDepositAmount As CdgvColumnMoney
         Friend WithEvents dgvRate As CdgvColumnMoney
         Friend WithEvents dgvComputedBankCharge As CdgvColumnMoney
         Friend WithEvents dgvComputedVat As CdgvColumnMoney
-        Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
-        Friend WithEvents dgvActualVat As CdgvColumnMoney
         Friend WithEvents dgvBankChargeDifference As CdgvColumnMoney
         Friend WithEvents dgvVatDifference As CdgvColumnMoney
         Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents DgvSalesJournalIdNo As DataGridViewTextBoxColumn
+        Public WithEvents DataGridViewSalesCashItems As CDataGridView
     End Class
 End Namespace

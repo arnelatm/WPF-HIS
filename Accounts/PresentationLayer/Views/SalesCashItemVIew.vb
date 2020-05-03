@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
         Private _bankChargeVatDifference As Decimal = 0D
-        Private _saleAmount As Decimal = 0D
+        'Private _saleAmount As Decimal = 0D
 
         'Private _depositAmount As Decimal = 0D
         Private _rate As Decimal = 0D
@@ -25,9 +25,11 @@ Namespace PresentationLayer.Views
 
         Private ReadOnly _cashCodesModel As List(Of CashCodeModel) = _modelCashCode.GetAll(Of CashCodeModel)("CashName")
 
+        Public Property InterActiveChange As Boolean = False
+
         Public Property ActualBankCharge As Decimal Implements ISalesCashItemView.ActualBankCharge
             Get
-                Return Math.Round((SaleAmount - DepositAmount) / (1D + _vatRate), 2)
+                Return Math.Round((SaleAmount - DepositAmount) / (1 + _vatRate), 2)
             End Get
             Set(value As Decimal)
                 _actualBankCharge = value
@@ -109,18 +111,22 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property SaleAmount As Decimal Implements ISalesCashItemView.SaleAmount
-            Get
-                Return _saleAmount
-            End Get
-            Set(value As Decimal)
-                _saleAmount = value
-                _computedBankCharge = ComputedBankCharge
-                _actualBankCharge = _computedBankCharge
-                _computedBankChargeVat = ComputedBankChargeVat
-                _actualBankChargeVat = _computedBankChargeVat
-                _DepositAmount = value - _actualBankCharge - _actualBankChargeVat
-            End Set
-        End Property
+        '    Get
+        '        Return _saleAmount
+        '    End Get
+        '    Set(value As Decimal)
+
+        '        If _saleAmount <> value Then
+        '            _saleAmount = value
+        '            _computedBankCharge = GetComputedBankCharge(value, Rate)
+        '            _computedBankChargeVat = GetComputedBankChargeVat(_computedBankCharge)
+        '            _actualBankChargeVat = _computedBankChargeVat
+        '            _actualBankCharge = _computedBankCharge
+        '            _bankChargeDifference = 0
+        '            _bankChargeVatDifference = 0
+        '        End If
+        '    End Set
+        'End Property
 
         Public Property SalesJournalIdNo As Integer Implements ISalesCashItemView.SalesJournalIdNo
 
@@ -147,13 +153,13 @@ Namespace PresentationLayer.Views
         '    Next
         'End Sub
 
-        'Public Function GetComputedBankCharge(ByRef saleAmount As Decimal, ByRef rate As Decimal)
-        '    Return Math.Round(rate * saleAmount / 100, 2)
-        'End Function
+        Public Function GetComputedBankCharge(pSaleAmount As Decimal, pRate As Decimal)
+            Return Math.Round(pRate * pSaleAmount / 100, 2)
+        End Function
 
-        'Public Function GetComputedBankChargeVat(computedBankCharge)
-        '    Return Math.Round(computedBankCharge * _vatRate, 2)
-        'End Function
+        Public Function GetComputedBankChargeVat(pBankCharge)
+            Return Math.Round(pBankCharge * _vatRate, 2)
+        End Function
 
         'Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
         '    Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)

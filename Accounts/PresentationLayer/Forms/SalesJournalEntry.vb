@@ -305,15 +305,14 @@ Namespace PresentationLayer.Forms
                     dgvCashCode.DisplayMember = "Name"
                     dgvCashCode.ValueMember = "Code"
                     dgvCashCode.AutoComplete = AutoCompleteMode.SuggestAppend
-                    'dgvCashCode.DisplayStyleForCurrentCellOnly = True
-                    'dgvCashCode.AutoComplete = True
-                    'dgvComputedBankCharge.DisplayOnly = True
-                    'dgvComputedVat.DisplayOnly = True
-                    'dgvRate.DisplayOnly = True
-                    'dgvActualBankCharge.DisplayOnly = True
-                    'dgvActualVat.DisplayOnly = True
-                    'dgvBankChargeDifference.DisplayOnly = True
-                    'dgvVatDifference.DisplayOnly = True
+                    dgvCashCode.DisplayStyleForCurrentCellOnly = True
+                    dgvCashCode.AutoComplete = True
+                    dgvComputedBankCharge.DisplayOnly = True
+                    dgvComputedVat.DisplayOnly = True
+                    dgvRate.DisplayOnly = True
+                    dgvBankChargeDifference.DisplayOnly = True
+                    dgvVatDifference.DisplayOnly = True
+                    dgvDepositAmount.DisplayOnly = True
                 End If
             End With
             ResumeLayout()
@@ -330,6 +329,21 @@ Namespace PresentationLayer.Forms
                 DataGridViewJournalItems.Visible = True
                 DataGridViewSalesCashItems.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+            End If
+        End Sub
+
+
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewJournalItems.CurrentCell
+                    'DataGridViewSalesCashItems.
+                    'Dim cColumnName = .OwningColumn.Name.ToLower()
+                    'If cColumnName = $"dgvsaleamount" Then
+                    '    Beep()
+                    '    e.Cancel = True
+                    '    DataGridViewJournalItems.EndEdit()
+                    'End If
+                End With
             End If
         End Sub
 
