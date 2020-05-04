@@ -697,6 +697,18 @@ Namespace PresentationLayer.Forms
             cForm.Show()
         End Sub
 
+        'Protected Overrides Sub EndEditOnAllBindingSources()
+        '    'Dim bindingSourcesQuery = From BindingSources In components.Components
+        '    '                          Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
+        '    'Select Case BindingSources
+        '    Dim currentComponents = components.Components
+        '    For Each item In currentComponents
+        '        If TypeOf item Is Windows.Forms.BindingSource Then
+        '            item.EndEdit()
+        '        End If
+        '    Next
+        'End Sub
+
         'Private Function ShowError(translate As Boolean, key As String, message As String, caption As String, ParamArray variables As String())
         '    Dim oldValue As String = ""
         '    Dim newValue As String = ""

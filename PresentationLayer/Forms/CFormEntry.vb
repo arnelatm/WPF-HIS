@@ -40,6 +40,7 @@ Public Class CFormEntry
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
+
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
@@ -473,7 +474,15 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        EndEditOnAllBindingSources()
+
+        Dim allControls As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+            If TypeOf cCtrl Is DataGridView Then
+                Dim cGrid As DataGridView = cCtrl
+                cGrid.EndEdit()
+            End If
+        Next
+
         RaiseEvent BeforeSave()
         RunButtonRoutine(ButtonClicked.Save)
     End Sub
@@ -808,16 +817,6 @@ Public Class CFormEntry
         Return False
     End Function
 
-    Private Sub EndEditOnAllBindingSources()
-        Dim bindingSourcesQuery = From BindingSources In components.Components
-                                  Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
-                                  Select BindingSources
-
-        For Each bindingSource As Windows.Forms.BindingSource In bindingSourcesQuery
-            bindingSource.EndEdit()
-        Next
-    End Sub
-
 #Region "Temporary Events"
 
     'Public Event AddingRecordChanged(adding As Boolean)
@@ -873,4 +872,5 @@ Public Class CFormEntry
     'Public Event UndoEdits(addingRec As Boolean)
 
 #End Region
+
 End Class
