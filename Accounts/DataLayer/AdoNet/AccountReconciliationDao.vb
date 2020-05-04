@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class AccountReconciliationDao
-        Implements IDao(Of AccountReconciliation)
+        Implements IDao(Of AccountReconciliation) ', IDaoChild(Of AccountReconciliationItem)
 
         Private ReadOnly Db As New Db()
 
@@ -24,7 +24,14 @@ Namespace DataLayer.AdoNet
                     " FROM [AccountReconciliation]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            Dim arDao = New AccountReconciliationItemDao()
+            data.AccountReconciliationItems = arDao.GetRecordsWithIdNo(idNo, "Sequence")
+            'For Each item In data.AccountReconciliationItems
+            '    data.TotalDebits += item.Debit
+            '    data.TotalCredits += item.Credit
+            'Next
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef accountReconciliation As AccountReconciliation) As Integer _
@@ -79,6 +86,20 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
+        'Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of AccountReconciliationItem) Implements IDaoChild(Of AccountReconciliationItem).GetRecordsWithIdNo
+        '    Dim arDao = New AccountReconciliationItemDao()
+        '    Return arDao.GetRecordsWithIdNo(idNo, sortExpression)
+        'End Function
+
+        'Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of AccountReconciliationItem).DelUpdateTvp
+        '    Dim arDao = New AccountReconciliationItemDao()
+        '    Return arDao.DelUpdateTvp(tvpTable, groupIdNo)
+        'End Function
+
+        'Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of AccountReconciliationItem).InsertTvp
+        '    Dim arDao = New AccountReconciliationItemDao()
+        '    Return arDao.InsertTvp(tvpTable)
+        'End Function
     End Class
 
 End Namespace

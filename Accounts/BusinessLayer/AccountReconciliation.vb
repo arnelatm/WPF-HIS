@@ -1,5 +1,6 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
@@ -18,7 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Integer
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
         Public Property GlSystemBalance As Decimal
@@ -34,6 +35,7 @@ Namespace BusinessLayer
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
+        Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
     End Class
 
 End Namespace

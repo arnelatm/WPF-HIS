@@ -72,9 +72,9 @@ Namespace PresentationLayer.Presenters
             End Set
         End Property
 
-        Public Function SalesCashItemDataIsValid() As Boolean
-            Return True
-        End Function
+        'Public Function SalesCashItemDataIsValid() As Boolean
+        '    Return True
+        'End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
             Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
@@ -171,29 +171,6 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Sales Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If Messaging.IsDateRangeValid("Sales Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                Else
-                    If SalesCashItemDataIsValid() Then
-                        retValue = True
-                    Else
-                        retValue = False
-                        Dim index As Int16 = 0
-                        For Each item In View.SalesCashItems
-                            If item.Errors IsNot Nothing Then
-                                View.SalesCashItems(index).Errors = item.Errors
-                            Else
-                                If View.SalesCashItems(index).Errors IsNot Nothing Then
-                                    View.SalesCashItems(index).Errors.Clear()
-                                End If
-                            End If
-                            index += 1
-                        Next
-                    End If
-                    'If retValue Then
-                    '    retValue = JournalItemDataIsValid()
-                    '    If retValue Then
-                    '        'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                    '    End If
-                    'End If
                 End If
             End If
             Return retValue

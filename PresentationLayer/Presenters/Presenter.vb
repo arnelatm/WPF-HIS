@@ -892,7 +892,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         'frm.Show()
     End Sub
 
-
     Public Overridable Function Save()
         Dim retVal As Integer = 0
         Dim continueSave As Boolean = False
@@ -1136,13 +1135,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
         If Model.IsValid(DataModel) Then
             retValue = True
-            'Else
-            '    Dim lErrors = GetBizObjectErrors()
-            '    If Ea IsNot Nothing Then
-            '        Ea.PublishEvent(New PassErrorList(lErrors))
-            '    End If
-            '    Beep()
-            '    ShowErrors("Record not saved!")
         End If
         Return retValue
     End Function
@@ -1224,7 +1216,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
         Return retValue
     End Function
-
 
     Public Function GetControlSecurityIdNo(searchValue As String) As String
         Try

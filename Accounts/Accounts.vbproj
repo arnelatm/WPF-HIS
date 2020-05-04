@@ -396,6 +396,7 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\AccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />

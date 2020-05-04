@@ -75,15 +75,15 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap AccountReconciliation Items.
         '''' </summary>
         '''' <param name="accountIdNo">Account Id to display.</param>
-        Public Overloads Sub Display(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
-            View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, idNo, "TransactionDate")
+        Public Overloads Sub Display(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
+            View.AccountReconciliationItems = GetAcctReconItems(AccountIdNo, reconciliationDate, idNo, "TransactionDate")
         End Sub
 
-        Public Function GetAcctReconItems(ByVal AccountIdNo as Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
+        Public Function GetAcctReconItems(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
@@ -164,22 +164,6 @@ Namespace PresentationLayer.Presenters
                 End If
             Else
                 retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Public Overloads Function SaveReconciliation(ByRef dtInsert As DataTable, ByVal accountReconciliationIdNo As Int32)
-            Dim insertReturnValue
-            Dim retVal = -1
-            If dtInsert.Rows.Count > 0 Then
-                insertReturnValue = _modelReconciled.InsertTvp(dtInsert)
-                If insertReturnValue >= 0 Then
-                    retVal = insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                Return 0
             End If
             Return retVal
         End Function
