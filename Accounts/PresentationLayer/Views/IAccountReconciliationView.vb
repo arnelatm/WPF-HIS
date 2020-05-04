@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IAccountReconciliationView
         Inherits IView
 
-        Property AccountIdNo as Int32
+        Property AccountIdNo As Int32
         Property Balance As Decimal
         Property DateCreated As DateTime?
         Property GlSystemBalance As Decimal
@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views
         Property TotalQtyDebitsCleared As Integer
         Property TotalQtyDebitsNotCleared As Integer
         Property UnreconciledDifference As Decimal
-
+        Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
     End Interface
 
 End Namespace

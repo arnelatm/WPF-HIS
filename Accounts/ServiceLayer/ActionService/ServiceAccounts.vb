@@ -300,7 +300,7 @@ Namespace ServiceLayer.ActionService
     '    Inherits ServiceAccounts
     '    Implements IOpenInvoiceService
 
-    '    Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
+    '    Public  AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
     '        Implements IOpenInvoiceService.AddInvoicePayment
     '        Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
     '    End Function

@@ -7,7 +7,7 @@
     Public Class AccountReconciliationModel
 
         Public Property Errors As List(Of String)
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
         Public Property GlSystemBalance As Decimal
@@ -23,6 +23,7 @@
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
+        Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
     End Class
 
 End Namespace

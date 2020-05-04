@@ -20,7 +20,6 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New GeneralJournalModel()
             DataModel = New GeneralJournalModel
             Ea = New EventAggregator()
-
             Ea.SubscribeEvent(Me)
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))

@@ -13,7 +13,7 @@ Public Class MappingProfileAccounts
     Public Sub New()
         CreateMap(Of AccountReconciliation, AccountReconciliationModel)().ReverseMap()
         CreateMap(Of AccountReconciliationItem, AccountReconciliationItemModel)().ReverseMap()
-        CreateMap(Of AccountReconciliationItemModel, IAccountReconciliationItemView)().ReverseMap()
+        CreateMap(Of AccountReconciliationItemModel, AccountReconciliationItemView)().ReverseMap()
         CreateMap(Of AccountReconciliationModel, IAccountReconciliationView)().ReverseMap()
         CreateMap(Of ApJournal, ApJournalModel)().ReverseMap()
         CreateMap(Of ApJournalModel, IApJournalView)().ReverseMap()
