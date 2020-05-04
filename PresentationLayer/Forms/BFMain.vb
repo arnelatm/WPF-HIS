@@ -15,6 +15,7 @@ Public Class BfMain
 
     '    Dim _menuLevel As String = ""
     Private _textDisplayLanguage As String
+
     Protected CaptionCollection As New Collection
     Protected FormIdNo As Int16
     Protected InitializationMode As Boolean = True
@@ -874,6 +875,18 @@ Public Class BfMain
     '        Dim r As Rectangle = ClientRectangle
     '        e.Graphics.DrawImage(BackgroundImage, r)
     '    End If
+    'End Sub
+
+    'Protected Overridable Sub EndEditOnAllBindingSources()
+    '    'Dim bindingSourcesQuery = From BindingSources In components.Components
+    '    '                          Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
+    '    'Select Case BindingSources
+    '    Dim currentComponents = components.Components
+    '    For Each item In currentComponents
+    '        If TypeOf item Is Windows.Forms.BindingSource Then
+    '            item.EndEdit()
+    '        End If
+    '    Next
     'End Sub
 
 End Class
