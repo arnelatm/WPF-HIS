@@ -10,40 +10,15 @@ Namespace PresentationLayer.Views
         Implements ISalesCashItemView
 
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
-        Private _actualBankCharge As Decimal = 0D
-        Private _actualBankChargeVat As Decimal = 0D
         Private _computedBankCharge As Decimal = 0D
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
         Private _bankChargeVatDifference As Decimal = 0D
-        'Private _saleAmount As Decimal = 0D
-
-        'Private _depositAmount As Decimal = 0D
-        Private _rate As Decimal = 0D
-
         Private ReadOnly _modelCashCode As New ModelAccounts("CashCode")
-
         Private ReadOnly _cashCodesModel As List(Of CashCodeModel) = _modelCashCode.GetAll(Of CashCodeModel)("CashName")
-
-        Public Property InterActiveChange As Boolean = False
-
         Public Property ActualBankCharge As Decimal Implements ISalesCashItemView.ActualBankCharge
-            Get
-                Return Math.Round((SaleAmount - DepositAmount) / (1 + _vatRate), 2)
-            End Get
-            Set(value As Decimal)
-                _actualBankCharge = value
-            End Set
-        End Property
 
         Public Property ActualBankChargeVat As Decimal Implements ISalesCashItemView.ActualBankChargeVat
-            Get
-                Return SaleAmount - DepositAmount - ActualBankCharge
-            End Get
-            Set(value As Decimal)
-                _actualBankChargeVat = value
-            End Set
-        End Property
 
         Public Property BankChargeDifference As Decimal Implements ISalesCashItemView.BankChargeDifference
             Get
@@ -64,13 +39,6 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property DepositAmount As Decimal Implements ISalesCashItemView.DepositAmount
-        '    Get
-        '        Return SaleAmount - ActualBankCharge - ActualBankChargeVat
-        '    End Get
-        '    Set(value As Decimal)
-        '        _depositAmount = value
-        '    End Set
-        'End Property
 
         Public Property CashCode As String Implements ISalesCashItemView.CashCode
 
@@ -95,38 +63,8 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Integer Implements ISalesCashItemView.IdNo
 
         Public Property Rate As Decimal Implements ISalesCashItemView.Rate
-            Get
-                Dim cCashCode As New CashCodeModel
-                Dim nIndex As Integer = 0
-                cCashCode = _cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = CashCode.Trim())
-                'If cCashCode IsNot Nothing Then
-                Return cCashCode.Rate
-                'Else
-                'Return 0
-                'End If
-            End Get
-            Set(value As Decimal)
-                _rate = value
-            End Set
-        End Property
 
         Public Property SaleAmount As Decimal Implements ISalesCashItemView.SaleAmount
-        '    Get
-        '        Return _saleAmount
-        '    End Get
-        '    Set(value As Decimal)
-
-        '        If _saleAmount <> value Then
-        '            _saleAmount = value
-        '            _computedBankCharge = GetComputedBankCharge(value, Rate)
-        '            _computedBankChargeVat = GetComputedBankChargeVat(_computedBankCharge)
-        '            _actualBankChargeVat = _computedBankChargeVat
-        '            _actualBankCharge = _computedBankCharge
-        '            _bankChargeDifference = 0
-        '            _bankChargeVatDifference = 0
-        '        End If
-        '    End Set
-        'End Property
 
         Public Property SalesJournalIdNo As Integer Implements ISalesCashItemView.SalesJournalIdNo
 
@@ -134,43 +72,12 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
 
-        '''' <summary>
-        ''''     Displays list of Ap SalesCash Items.
-        '''' </summary>
-        '''' <param name="salesCashIdNo">SalesCashIDNo id to display.</param>
-        'Public Shadows Sub Display(salesCashIdNo As Int32)
-        '    View.SalesCashItems = Model.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
-        '    For Each salesCashItem In View.SalesCashItems
-        '        Dim cashCode As CashCodeModel
-        '        cashCode = _cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = salesCashItem.CashCode.Trim())
-        '        salesCashItem.Rate = cashCode.Rate
-        '        salesCashItem.ActualBankCharge = GetActualBankCharge(salesCashItem.SaleAmount, salesCashItem.DepositAmount)
-        '        salesCashItem.ActualBankChargeVat = GetActualBankChargeVat(salesCashItem.SaleAmount, salesCashItem.DepositAmount, salesCashItem.ActualBankCharge)
-        '        salesCashItem.ComputedBankCharge = GetComputedBankCharge(salesCashItem.SaleAmount, cashCode.Rate)
-        '        salesCashItem.ComputedBankChargeVat = GetComputedBankChargeVat(salesCashItem.ComputedBankCharge)
-        '        salesCashItem.BankChargeDifference = salesCashItem.ActualBankCharge - salesCashItem.ComputedBankCharge
-        '        salesCashItem.BankChargeVatDifference = salesCashItem.ActualBankChargeVat - salesCashItem.ComputedBankChargeVat
-        '    Next
-        'End Sub
-
-        Public Function GetComputedBankCharge(pSaleAmount As Decimal, pRate As Decimal)
-            Return Math.Round(pRate * pSaleAmount / 100, 2)
-        End Function
-
-        Public Function GetComputedBankChargeVat(pBankCharge)
-            Return Math.Round(pBankCharge * _vatRate, 2)
-        End Function
-
-        'Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
-        '    Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
+        'Public Function GetComputedBankCharge(pSaleAmount As Decimal, pRate As Decimal)
+        '    Return Math.Round(pRate * pSaleAmount / 100, 2)
         'End Function
 
-        'Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
-        '    Return (saleAmount - depositAmount - actualBankCharge)
-        'End Function
-
-        'Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesCashItemModel)
-        '    Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+        'Public Function GetComputedBankChargeVat(pBankCharge)
+        '    Return Math.Round(pBankCharge * _vatRate, 2)
         'End Function
 
     End Class

@@ -17,6 +17,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _salesCashItemModel As New ModelAccounts("SalesCashItem")
         Private _cashCodesModel As List(Of CashCodeModel)
         Private _oldSalesCashItem As List(Of SalesCashItemModel)
+        Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
             MyBase.New(view)
@@ -80,7 +81,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetSalesCashItems(salesCashIdNo As Int32) As List(Of SalesCashItemModel)
-            Return Model.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
+            Return _salesCashItemModel.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
         End Function
 
         Public Sub OnAfterSave() Handles MyBase.AfterSave
@@ -99,7 +100,7 @@ Namespace PresentationLayer.Presenters
             If View.SalesCashItems IsNot Nothing Then
                 View.SalesCashItems.Clear()
             Else
-                View.SalesCashItems = New List(Of SalesCashItemVIew)
+                View.SalesCashItems = New List(Of SalesCashItemView)
             End If
         End Sub
 
@@ -201,8 +202,12 @@ Namespace PresentationLayer.Presenters
         Private Sub MakeJournalItems()
             Dim oldJournalItems = GetJournalItems(View.IdNo)
             Dim counter As Integer = 0
-            MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "", "")
-            For Each item As SalesCashItemVIew In View.SalesCashItems
+            View.TotalSales = 0
+            For Each item In View.SalesCashItems
+                View.TotalSales = View.TotalSales + item.SaleAmount
+            Next
+            MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
+            For Each item As SalesCashItemView In View.SalesCashItems
                 If item.CashCode IsNot Nothing Then
                     Dim cashCode = _cashCodesModel.Find(Function(c) c.CashCode.Trim() = item.CashCode.Trim())
                     MakeSalesJournal(oldJournalItems, counter, cashCode.AccountIdNo, item.DepositAmount, 0, cashCode.CashName, cashCode.CashNameAra)
@@ -336,6 +341,18 @@ Namespace PresentationLayer.Presenters
                 nRowCount += 1
             Next
         End Sub
+
+        Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
+            Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
+        End Function
+
+        Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
+            Return (saleAmount - depositAmount - actualBankCharge)
+        End Function
+
+        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesCashItemModel)
+            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+        End Function
 
     End Class
 

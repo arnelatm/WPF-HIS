@@ -82,12 +82,6 @@ Namespace PresentationLayer.Forms
             Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.DataGridViewSalesCashItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.floSalesCashItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvCashCode = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -101,6 +95,12 @@ Namespace PresentationLayer.Forms
             Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DgvSalesJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.floSalesCashItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -566,52 +566,6 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewSalesCashItems.SequenceColumn = "dgvSequenceSc"
             Me.DataGridViewSalesCashItems.StartTrackingChanges = False
             '
-            'bsSalesCashItems
-            '
-            Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesCashItem)
-            '
-            'floJournalItemsFooter
-            '
-            Me.floJournalItemsFooter.BackColor = System.Drawing.Color.Transparent
-            Me.floJournalItemsFooter.Controls.Add(Me.btnViewGL)
-            resources.ApplyResources(Me.floJournalItemsFooter, "floJournalItemsFooter")
-            Me.floJournalItemsFooter.Name = "floJournalItemsFooter"
-            '
-            'btnViewGL
-            '
-            Me.btnViewGL.DesignerSelected = False
-            Me.btnViewGL.DisplayOnly = True
-            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-            Me.btnViewGL.ImageIndex = 0
-            Me.btnViewGL.Name = "btnViewGL"
-            Me.btnViewGL.OriginalImageName = Nothing
-            Me.btnViewGL.SecurityKey = ""
-            '
-            'floSalesCashItemsFooter
-            '
-            Me.floSalesCashItemsFooter.BackColor = System.Drawing.Color.Transparent
-            Me.floSalesCashItemsFooter.Controls.Add(Me.CLabel1)
-            Me.floSalesCashItemsFooter.Controls.Add(Me.btnHideJournalEntries)
-            resources.ApplyResources(Me.floSalesCashItemsFooter, "floSalesCashItemsFooter")
-            Me.floSalesCashItemsFooter.Name = "floSalesCashItemsFooter"
-            '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            '
-            'btnHideJournalEntries
-            '
-            Me.btnHideJournalEntries.DesignerSelected = False
-            Me.btnHideJournalEntries.DisplayOnly = True
-            resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
-            Me.btnHideJournalEntries.ImageIndex = 0
-            Me.btnHideJournalEntries.Name = "btnHideJournalEntries"
-            Me.btnHideJournalEntries.OriginalImageName = Nothing
-            Me.btnHideJournalEntries.SecurityKey = ""
-            '
             'dgvSequenceSc
             '
             Me.dgvSequenceSc.DataPropertyName = "Sequence"
@@ -619,7 +573,7 @@ Namespace PresentationLayer.Forms
             DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
             Me.dgvSequenceSc.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvSequenceSc.DisplayOnly = True
-            Me.dgvSequenceSc.EditingMode = True
+            Me.dgvSequenceSc.EditingMode = False
             resources.ApplyResources(Me.dgvSequenceSc, "dgvSequenceSc")
             Me.dgvSequenceSc.Name = "dgvSequenceSc"
             Me.dgvSequenceSc.ReadOnly = True
@@ -772,6 +726,52 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.DgvSalesJournalIdNo, "DgvSalesJournalIdNo")
             Me.DgvSalesJournalIdNo.Name = "DgvSalesJournalIdNo"
             '
+            'bsSalesCashItems
+            '
+            Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesCashItemView)
+            '
+            'floJournalItemsFooter
+            '
+            Me.floJournalItemsFooter.BackColor = System.Drawing.Color.Transparent
+            Me.floJournalItemsFooter.Controls.Add(Me.btnViewGL)
+            resources.ApplyResources(Me.floJournalItemsFooter, "floJournalItemsFooter")
+            Me.floJournalItemsFooter.Name = "floJournalItemsFooter"
+            '
+            'btnViewGL
+            '
+            Me.btnViewGL.DesignerSelected = False
+            Me.btnViewGL.DisplayOnly = True
+            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+            Me.btnViewGL.ImageIndex = 0
+            Me.btnViewGL.Name = "btnViewGL"
+            Me.btnViewGL.OriginalImageName = Nothing
+            Me.btnViewGL.SecurityKey = ""
+            '
+            'floSalesCashItemsFooter
+            '
+            Me.floSalesCashItemsFooter.BackColor = System.Drawing.Color.Transparent
+            Me.floSalesCashItemsFooter.Controls.Add(Me.CLabel1)
+            Me.floSalesCashItemsFooter.Controls.Add(Me.btnHideJournalEntries)
+            resources.ApplyResources(Me.floSalesCashItemsFooter, "floSalesCashItemsFooter")
+            Me.floSalesCashItemsFooter.Name = "floSalesCashItemsFooter"
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            '
+            'btnHideJournalEntries
+            '
+            Me.btnHideJournalEntries.DesignerSelected = False
+            Me.btnHideJournalEntries.DisplayOnly = True
+            resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
+            Me.btnHideJournalEntries.ImageIndex = 0
+            Me.btnHideJournalEntries.Name = "btnHideJournalEntries"
+            Me.btnHideJournalEntries.OriginalImageName = Nothing
+            Me.btnHideJournalEntries.SecurityKey = ""
+            '
             'SalesJournalEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -859,6 +859,7 @@ Namespace PresentationLayer.Forms
         Friend WithEvents DataGridViewCheckBoxColumn2 As DataGridViewCheckBoxColumn
         Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
         Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
+        Public WithEvents DataGridViewSalesCashItems As CDataGridView
         Friend WithEvents dgvSequenceSc As CdgvColumnText
         Friend WithEvents dgvCashCode As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney
@@ -872,6 +873,5 @@ Namespace PresentationLayer.Forms
         Friend WithEvents dgvVatDifference As CdgvColumnMoney
         Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents DgvSalesJournalIdNo As DataGridViewTextBoxColumn
-        Public WithEvents DataGridViewSalesCashItems As CDataGridView
     End Class
 End Namespace
