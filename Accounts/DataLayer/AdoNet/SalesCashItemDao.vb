@@ -26,13 +26,18 @@ Namespace DataLayer.AdoNet
                     "DepositAmount," &
                     "CashCode," &
                     "IdNo," &
+                    "Rate," &
                     "SaleAmount," &
                     "SalesJournalIdNo," &
                     "Sequence" &
-                    " FROM " & TableFileName &
+                    " FROM SalesCashItem_View" &
                     " WHERE SalesJournalIdNo = " & idNo &
                     " ORDER BY " & sortExpression
             Dim x = Db.Read(sql, Make).ToList()
+            For Each item In x
+                item.ActualBankChargeVat = Math.Round((item.SaleAmount - item.DepositAmount) / 1.05D * 0.05, 2)
+                item.ActualBankCharge = item.SaleAmount - item.DepositAmount - item.ActualBankChargeVat
+            Next
             Return x
         End Function
 
@@ -53,6 +58,7 @@ Namespace DataLayer.AdoNet
             .SaleAmount = Extensions.AsDecimal(reader("SaleAmount")),
             .SalesJournalIdNo = Extensions.AsString(reader("SalesJournalIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Rate = Extensions.AsDecimal(reader("Rate")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence"))
             }
 

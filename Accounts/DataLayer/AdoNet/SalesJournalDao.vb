@@ -34,6 +34,9 @@ Namespace DataLayer.AdoNet
             Dim sd = sdDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
             data.SalesCashItems = sd
+            'For Each item In data.SalesCashItems
+            '    item.ComputedBankCharge = item.SaleAmount *
+            'Next
             Return data
         End Function
 

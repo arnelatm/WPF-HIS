@@ -319,7 +319,7 @@ Public Class DgvFooter
                 If dgvr.Tag.ToString = "spacer" Then _parentDGV.Rows.Remove(dgvr)
             Next
 
-            _parentDGV.Rows.Add(SpacerRow)
+            '_parentDGV.Rows.Add(SpacerRow)
 
             _parentDGV.FirstDisplayedScrollingRowIndex = _parentDGV.Rows.Count - 2
 

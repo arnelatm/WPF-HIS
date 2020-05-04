@@ -561,6 +561,7 @@
     </None>
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesCashItemView.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
