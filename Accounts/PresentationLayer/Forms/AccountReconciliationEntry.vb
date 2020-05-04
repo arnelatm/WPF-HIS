@@ -270,7 +270,7 @@ Namespace PresentationLayer.Forms
                 With DataGridViewReconciliationItems.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
-                            Dim selectedRow As AccountReconciliationItemModel
+                            Dim selectedRow As AccountReconciliationItemView
                             Dim checked = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).EditedFormattedValue
                             selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
                             If checked Then

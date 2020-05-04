@@ -473,6 +473,7 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+        EndEditOnAllBindingSources()
         RaiseEvent BeforeSave()
         RunButtonRoutine(ButtonClicked.Save)
     End Sub
@@ -806,6 +807,16 @@ Public Class CFormEntry
         Debugger.Break()
         Return False
     End Function
+
+    Private Sub EndEditOnAllBindingSources()
+        Dim bindingSourcesQuery = From BindingSources In components.Components
+                                  Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
+                                  Select BindingSources
+
+        For Each bindingSource As Windows.Forms.BindingSource In bindingSourcesQuery
+            bindingSource.EndEdit()
+        Next
+    End Sub
 
 #Region "Temporary Events"
 

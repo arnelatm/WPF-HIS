@@ -11,6 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Protected ModelItemPresenter As New ModelAccounts("AccountReconciliationItem")
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
@@ -143,7 +144,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAcctReconItems(ByVal accountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
+        Public Function GetAcctReconItems(ByVal accountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
@@ -174,7 +175,9 @@ Namespace PresentationLayer.Presenters
                     nSeq = nSeq + 1
                 Next
             End If
-            Return acctReconItems
+            Dim result As New List(Of AccountReconciliationItemView)
+            GlobalVariables.Mapper.Map(acctReconItems, result)
+            Return result
         End Function
 
         Private Sub AddNewItem(acctReconItem As AccountReconciliationItemModel, actualReconItems As List(Of AccountReconciliationItemModel), nSeq As Integer)
