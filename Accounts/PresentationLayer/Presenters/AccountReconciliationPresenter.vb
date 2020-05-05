@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Protected ModelItemPresenter As New ModelAccounts("AccountReconciliationItem")
+        'Protected ModelItemPresenter As New ModelAccounts("AccountReconciliationItem")
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)

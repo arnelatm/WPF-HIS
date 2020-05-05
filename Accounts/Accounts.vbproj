@@ -129,7 +129,6 @@
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
-    <Compile Include="DataLayer\AdoNet\AccountReconciliationItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
@@ -562,6 +561,9 @@
     </None>
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesCashItemView.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

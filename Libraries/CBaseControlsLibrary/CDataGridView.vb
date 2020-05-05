@@ -14,7 +14,6 @@ Public Class CDataGridView
     Private _lastEditableColumn As Integer = -1
     Private _firstEditableColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
-    Private _sequenceColumn As String = "dgvSequence"
 
     Public Event ChangesMade As EventHandler
 
@@ -25,14 +24,7 @@ Public Class CDataGridView
     <DefaultValue(GetType(String))>
     <Description("Enter here the property name for sequence column")>
     <Browsable(True)>
-    Public Property SequenceColumn As String
-        Get
-            Return _sequenceColumn
-        End Get
-        Set(value As String)
-            _sequenceColumn = value
-        End Set
-    End Property
+    Public Property SequenceColumn As String = "dgvSequence"
 
     Public ReadOnly Property LastEditableColumn As Integer
         Get

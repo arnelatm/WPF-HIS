@@ -340,19 +340,19 @@ Public Class CFormEntry
             If PresenterObj.RecordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
-                btnLast.Enabled = True
-                btnNext.Enabled = True
+                'btnLast.Enabled = True
+                'btnNext.Enabled = True
             Else
                 btnFirst.Enabled = True
                 btnPrev.Enabled = True
-                btnLast.Enabled = True
-                btnNext.Enabled = True
+                'btnLast.Enabled = True
+                'btnNext.Enabled = True
             End If
-            If PresenterObj.RecordPositionNumber = RecordCount Then
+            If PresenterObj.RecordPositionNumber >= RecordCount Then
                 btnLast.Enabled = False
                 btnNext.Enabled = False
-                btnFirst.Enabled = True
-                btnPrev.Enabled = True
+                'btnFirst.Enabled = True
+                'btnPrev.Enabled = True
             Else
                 btnLast.Enabled = True
                 btnNext.Enabled = True
@@ -549,13 +549,6 @@ Public Class CFormEntry
 
             Try
                 PresenterObj.RecordPositionNumber = PresenterObj.GetRecordCount()
-                'If PresenterObj.RecordPositionNumber <> 0 Then
-                '    'PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-                '    'PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
-                '    'RaiseEvent DisplayedRecordChanged()
-                'Else
-                '    UpdateButtonDisplays(False, False)
-                'End If
             Catch ex As Exception
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
@@ -579,6 +572,12 @@ Public Class CFormEntry
                 btnOriginal.Visible = False
             End If
             FirstControl.Focus()
+            UpdateButtonDisplays(False, False)
+            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
+            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
+                ' Visible property stored in first element of the array
+                HideButton(btnDebug)
+            End If
         End If
     End Sub
 

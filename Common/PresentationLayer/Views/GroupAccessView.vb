@@ -1,6 +1,9 @@
 ﻿Namespace PresentationLayer.Views
+
     Public Class GroupAccessView
         Implements IGroupAccessView
+
+        Private _visible As Boolean = False
 
         Public Property IdNo As Int32 Implements IGroupAccessView.IdNo
 
@@ -9,6 +12,16 @@
         Public Property SecurityObjectIdNo As Int32 Implements IGroupAccessView.SecurityObjectIdNo
 
         Public Property Visible As Boolean Implements IGroupAccessView.Visible
+            Get
+                Return _visible
+            End Get
+            Set(value As Boolean)
+                If Not value Then
+                    Editable = False
+                End If
+                _visible = value
+            End Set
+        End Property
 
         Public Property Editable As Boolean Implements IGroupAccessView.Editable
 
@@ -16,4 +29,5 @@
 
         Public Property Errors As List(Of String) Implements IGroupAccessView.Errors
     End Class
+
 End Namespace

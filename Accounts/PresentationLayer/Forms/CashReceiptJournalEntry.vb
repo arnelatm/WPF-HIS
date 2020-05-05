@@ -427,17 +427,18 @@ Namespace PresentationLayer.Forms
                 .AllowUserToAddRows = True
                 .AllowUserToDeleteRows = True
             End With
-            'With DataGridViewCsrOiItems.Columns
-            '    If dgvSequenceCsrOi IsNot Nothing Then
-            '        dgvSequenceCsrOi.DisplayOnly = True
-            '        dgvInvoiceNo.DisplayOnly = True
-            '        dgvPreviousBalance.DisplayOnly = True
-            '        dgvNewBalance.DisplayOnly = True
-            '        dgvTransactionDate.DisplayOnly = True
-            '        dgvJournalCode.DisplayOnly = True
-            '        dgvJournalIdNoJi.DisplayOnly = True
-            '    End If
-            'End With
+            With DataGridViewCsrOiItems.Columns
+                If dgvSequenceCsrOi IsNot Nothing Then
+                    dgvSequenceCsrOi.DisplayOnly = True
+                    dgvInvoiceNo.DisplayOnly = True
+                    dgvPreviousBalance.DisplayOnly = True
+                    dgvBalance.DisplayOnly = True
+                    dgvTransactionDate.DisplayOnly = True
+                    dgvJournalIdNoJi.DisplayOnly = True
+                    dgvJournalCode.DisplayOnly = True
+                    dgvJournalIdNoJi.DisplayOnly = True
+                End If
+            End With
             UpdateTotals()
             ResumeLayout()
         End Sub
