@@ -15,7 +15,6 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateAccountReconciliationItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertAccountReconciliationItemTVP"
 
-
         Public Function GetRecordById(idNo) As AccountReconciliation _
             Implements IDao(Of AccountReconciliation).GetRecordById
             Dim sql As String =
@@ -30,12 +29,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim arDao = New AccountReconciliationItemDao()
-            data.AccountReconciliationItems = arDao.GetRecordsWithIdNo(idNo, "Sequence")
-            'For Each item In data.AccountReconciliationItems
-            '    data.TotalDebits += item.Debit
-            '    data.TotalCredits += item.Credit
-            'Next
+            data.AccountReconciliationItems = GetRecordsWithIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -117,7 +111,6 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-
         Public Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetReconciledRecordsWithIdNo
             Dim sql As String =
@@ -145,7 +138,6 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-
         Public Shared ReadOnly MakeAccountReconciliationItem As Func(Of IDataReader, AccountReconciliationItem) = Function(reader) New AccountReconciliationItem() With
             {
             .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
@@ -165,7 +157,6 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Sequence"))
             }
 
-
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of AccountReconciliationItem).DelUpdateTvp
             Return _db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", groupIdNo)
         End Function
@@ -173,7 +164,6 @@ Namespace DataLayer.AdoNet
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of AccountReconciliationItem).InsertTvp
             Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
-
 
         Public Function GetAcctReconItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetAcctReconItems
@@ -203,7 +193,6 @@ Namespace DataLayer.AdoNet
             Dim x = _db.Read(sql, MakeAccountReconciliationItem).ToList()
             Return x
         End Function
-
 
         Public Function GetGlItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetGlItems

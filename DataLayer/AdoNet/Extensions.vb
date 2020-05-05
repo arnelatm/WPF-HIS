@@ -10,7 +10,7 @@ Namespace AdoNet
 
         <Extension>
         Public Function AsId(Of T)(item As Object, Optional ByVal defaultId As Integer = -1) As T
-            If item Is Nothing Then
+            If item Is Nothing Or item Is DBNull.Value Then
                 Return Convert.ChangeType(-1, GetType(T))
             End If
 

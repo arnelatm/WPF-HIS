@@ -339,17 +339,17 @@ Namespace PresentationLayer.Forms
                 .AllowUserToAddRows = True
                 .AllowUserToDeleteRows = True
             End With
-            'With DataGridViewCadOiItems.Columns
-            'If dgvSequenceCadOi IsNot Nothing Then
-            '    dgvSequenceCadOi.DisplayOnly = True
-            '    dgvInvoiceNo.DisplayOnly = True
-            '    dgvPreviousBalance.DisplayOnly = True
-            '    dgvBalance.DisplayOnly = True
-            '    dgvTransactionDate.DisplayOnly = True
-            '    dgvJournalCode.DisplayOnly = True
-            '    dgvJournalIdNoAp.DisplayOnly = True
-            'End If
-            'End With
+            With DataGridViewCadOiItems.Columns
+                If dgvSequenceCadOi IsNot Nothing Then
+                    dgvSequenceCadOi.DisplayOnly = True
+                    dgvInvoiceNo.DisplayOnly = True
+                    dgvPreviousBalance.DisplayOnly = True
+                    dgvBalance.DisplayOnly = True
+                    dgvTransactionDate.DisplayOnly = True
+                    dgvJournalCode.DisplayOnly = True
+                    dgvJournalIdNoAp.DisplayOnly = True
+                End If
+            End With
             UpdateTotals()
             ResumeLayout()
         End Sub
@@ -437,8 +437,10 @@ Namespace PresentationLayer.Forms
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(System.Decimal)
-            DataGridViewJournalItems.Columns("ItemVatAmount").ReadOnly = False
+            'DataGridViewJournalItems.Columns.Add("ItemVatAmount", "")
+            'DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(System.Decimal)
+            'DataGridViewJournalItems.Columns("ItemVatAmount").ReadOnly = False
+            'DataGridViewJournalItems.Columns("ItemVatAmount").Visible = False
         End Sub
 
         Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
@@ -510,17 +512,7 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        With DataGridViewJournalItems.CurrentRow
-                            Dim currentVatAmount As Decimal
-                            If PresenterObj.IsInputVatAccount(newValue) Then
-                                currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
-                            Else
-                                currentVatAmount = 0
-                            End If
-                            .Cells("ItemVatAmount").Value = currentVatAmount
-                        End With
                         UpdateTotalVatAmount()
-                        'Dim idNo As Int32 = .Value
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
                         bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
@@ -528,20 +520,10 @@ Namespace PresentationLayer.Forms
                         bsJournalItems(nIndex).AccountName = chart.AccountName
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
-                        Dim selectedRow As JournalItemView
-                        selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
-                        If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
-                            DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
-                        End If
                         UpdateJiTotals()
                         UpdateTotalVatAmount()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        Dim selectedRow As JournalItemView
-                        selectedRow = DataGridViewJournalItems.Rows(.RowIndex).DataBoundItem
-                        If PresenterObj.IsInputVatAccount(selectedRow.AccountIdNo) Then
-                            DataGridViewJournalItems.Rows(.RowIndex).Cells("ItemVatAmount").Value = selectedRow.Debit - selectedRow.Credit
-                        End If
                         UpdateJiTotals()
                         UpdateTotalVatAmount()
                     Case $"dgvnotes"
@@ -702,7 +684,9 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateTotalVatAmount()
             Dim tVatAmount As Decimal = 0
             For Each row In DataGridViewJournalItems.Rows
-                tVatAmount = tVatAmount + row.cells("ItemVatAmount").Value
+                If PresenterObj.IsInputVatAccount(row.Cells("dgvAccountIdNo").Value) Then
+                    tVatAmount = tVatAmount + row.Cells("dgvDebit").Value - row.Cells("dgvCredit").Value
+                End If
             Next
             VatAmount = tVatAmount
         End Sub

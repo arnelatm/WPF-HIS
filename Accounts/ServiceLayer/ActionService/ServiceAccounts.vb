@@ -130,11 +130,11 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
-            End Get
-        End Property
+        'Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
+        '    Get
+        '        Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
+        '    End Get
+        'End Property
 
         Private ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem)
             Get
