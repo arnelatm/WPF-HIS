@@ -128,6 +128,7 @@ Namespace PresentationLayer.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.DefaultFieldValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -257,7 +258,7 @@ Namespace PresentationLayer.Forms
             '
             'ToolStripMenuItemGeneral
             '
-            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems})
+            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemCostCenters, Me.ToolStripMenuItemProfitCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
             Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
             resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
             '
@@ -653,6 +654,11 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'DefaultFieldValuesToolStripMenuItem
+            '
+            Me.DefaultFieldValuesToolStripMenuItem.Name = "DefaultFieldValuesToolStripMenuItem"
+            resources.ApplyResources(Me.DefaultFieldValuesToolStripMenuItem, "DefaultFieldValuesToolStripMenuItem")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -664,8 +670,8 @@ Namespace PresentationLayer.Forms
             Me.Name = "Main"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.ToolStrip.ResumeLayout(false)
-        Me.ToolStrip.PerformLayout
+            Me.ToolStrip.ResumeLayout(False)
+            Me.ToolStrip.PerformLayout
         Me.Account.ResumeLayout(false)
         Me.Account.PerformLayout
         Me.contextMenuStripMember.ResumeLayout(false)
@@ -775,5 +781,6 @@ End Sub
         Friend WithEvents PettyCashToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCreateAllMessages As ToolStripMenuItem
         Friend WithEvents TestToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents DefaultFieldValuesToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
