@@ -847,12 +847,12 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay.Controls.Add(Me.txtCreditLimit)
             Me.floDataDisplay.Controls.Add(Me.lblPaymentMethod)
             Me.floDataDisplay.Controls.Add(Me.cacPaymentMethod)
-            Me.floDataDisplay.Controls.Add(Me.lblPaymentDueDays)
-            Me.floDataDisplay.Controls.Add(Me.txtPaymentDueDays)
-            Me.floDataDisplay.Controls.Add(Me.lblSettlementDueDays)
-            Me.floDataDisplay.Controls.Add(Me.txtSettlementDueDays)
             Me.floDataDisplay.Controls.Add(Me.lblOpeningBalance)
             Me.floDataDisplay.Controls.Add(Me.txtOpeningBalance)
+            Me.floDataDisplay.Controls.Add(Me.lblSettlementDueDays)
+            Me.floDataDisplay.Controls.Add(Me.txtSettlementDueDays)
+            Me.floDataDisplay.Controls.Add(Me.lblPaymentDueDays)
+            Me.floDataDisplay.Controls.Add(Me.txtPaymentDueDays)
             Me.floDataDisplay.Controls.Add(Me.lblSettlementDiscount)
             Me.floDataDisplay.Controls.Add(Me.txtSettlementDiscount)
             Me.floDataDisplay.Controls.Add(Me.CLabel3)
@@ -1140,11 +1140,11 @@ Namespace PresentationLayer.Forms
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
-            Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents _MBSupplierCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage

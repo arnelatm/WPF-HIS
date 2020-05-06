@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 53</value>
+  </data>
+  <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 218</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
+    <value>TreeViewTableName</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>146, 17</value>
+  </metadata>
+  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>281, 17</value>
+  </metadata>
+  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>411, 17</value>
+  </metadata>
+  <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>535, 17</value>
+  </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 11</value>
+  </data>
+  <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="lblIdNo.Text" xml:space="preserve">
+    <value>ID No.</value>
+  </data>
+  <data name="lblIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblIdNo.Name" xml:space="preserve">
+    <value>lblIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTableName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 36</value>
+  </data>
+  <data name="lblTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblTableName.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="lblTableName.Text" xml:space="preserve">
+    <value>Table Name</value>
+  </data>
+  <data name="lblTableName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblTableName.Name" xml:space="preserve">
+    <value>lblTableName</value>
+  </data>
+  <data name="&gt;&gt;lblTableName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblTableName.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblTableName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtTableName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 36</value>
+  </data>
+  <data name="txtTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtTableName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Name" xml:space="preserve">
+    <value>txtTableName</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblFieldName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblFieldName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 61</value>
+  </data>
+  <data name="lblFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblFieldName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblFieldName.TabIndex" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="lblFieldName.Text" xml:space="preserve">
+    <value>Field Name</value>
+  </data>
+  <data name="lblFieldName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblFieldName.Name" xml:space="preserve">
+    <value>lblFieldName</value>
+  </data>
+  <data name="&gt;&gt;lblFieldName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblFieldName.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblFieldName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtFieldName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtFieldName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 61</value>
+  </data>
+  <data name="txtFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtFieldName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtFieldName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtFieldName.Name" xml:space="preserve">
+    <value>txtFieldName</value>
+  </data>
+  <data name="&gt;&gt;txtFieldName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtFieldName.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtFieldName.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblDataType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDataType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 86</value>
+  </data>
+  <data name="lblDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDataType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblDataType.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="lblDataType.Text" xml:space="preserve">
+    <value>Data Type</value>
+  </data>
+  <data name="lblDataType.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDataType.Name" xml:space="preserve">
+    <value>lblDataType</value>
+  </data>
+  <data name="&gt;&gt;lblDataType.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDataType.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDataType.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txtDataType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtDataType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 86</value>
+  </data>
+  <data name="txtDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtDataType.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txtDataType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtDataType.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtDataType.Name" xml:space="preserve">
+    <value>txtDataType</value>
+  </data>
+  <data name="&gt;&gt;txtDataType.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtDataType.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtDataType.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblLength.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 111</value>
+  </data>
+  <data name="lblLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblLength.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="lblLength.Text" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="lblLength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblLength.Name" xml:space="preserve">
+    <value>lblLength</value>
+  </data>
+  <data name="&gt;&gt;lblLength.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblLength.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblLength.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="txtLength.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 111</value>
+  </data>
+  <data name="txtLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="txtLength.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="&gt;&gt;txtLength.Name" xml:space="preserve">
+    <value>txtLength</value>
+  </data>
+  <data name="&gt;&gt;txtLength.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtLength.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtLength.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 136</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>Linked Table</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txtLinkedTable.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtLinkedTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 136</value>
+  </data>
+  <data name="txtLinkedTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtLinkedTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtLinkedTable.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedTable.Name" xml:space="preserve">
+    <value>txtLinkedTable</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedTable.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedTable.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedTable.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 161</value>
+  </data>
+  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="CLabel2.Text" xml:space="preserve">
+    <value>Linked Field</value>
+  </data>
+  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
+    <value>CLabel2</value>
+  </data>
+  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="txtLinkedField.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtLinkedField.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 161</value>
+  </data>
+  <data name="txtLinkedField.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtLinkedField.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtLinkedField.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedField.Name" xml:space="preserve">
+    <value>txtLinkedField</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedField.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedField.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtLinkedField.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="CLabel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 186</value>
+  </data>
+  <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="CLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>163</value>
+  </data>
+  <data name="CLabel3.Text" xml:space="preserve">
+    <value>Default Value</value>
+  </data>
+  <data name="CLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel3.Name" xml:space="preserve">
+    <value>CLabel3</value>
+  </data>
+  <data name="&gt;&gt;CLabel3.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel3.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;CLabel3.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="txtDefaultValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 186</value>
+  </data>
+  <data name="txtDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtDefaultValue.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="&gt;&gt;txtDefaultValue.Name" xml:space="preserve">
+    <value>txtDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;txtDefaultValue.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtDefaultValue.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtDefaultValue.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 53</value>
+  </data>
+  <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>596, 180</value>
+  </data>
+  <data name="floDataDisplay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 0, 0</value>
+  </data>
+  <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>605, 218</value>
+  </data>
+  <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="&gt;&gt;floDataDisplay.Name" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;floDataDisplay.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floDataDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;floDataDisplay.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 11</value>
+  </data>
+  <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
+    <value>TxtIdNo</value>
+  </data>
+  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>905, 271</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>320, 235</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Default Field Values Maintenance Form</value>
+  </data>
+  <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
+    <value>StoreCaptions1</value>
+  </data>
+  <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
+    <value>AATM.Libraries.MessagingLibrary.StoreCaptions, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
+    <value>TranslatorDAC</value>
+  </data>
+  <data name="&gt;&gt;TranslatorDAC.Type" xml:space="preserve">
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;AppDataDAC.Name" xml:space="preserve">
+    <value>AppDataDAC</value>
+  </data>
+  <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
+    <value>MyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>DefaultFieldValueEntryTv</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>

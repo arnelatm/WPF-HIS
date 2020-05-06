@@ -132,7 +132,7 @@
     <value>No</value>
   </data>
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 485</value>
+    <value>300, 474</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -180,7 +180,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 443</value>
+    <value>166, 443</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -190,7 +190,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>519, 23</value>
+    <value>549, 23</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -214,7 +214,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 443</value>
+    <value>11, 443</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -250,13 +250,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 416</value>
+    <value>289, 416</value>
   </data>
   <data name="lblAccountStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblAccountStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>221, 20</value>
   </data>
   <data name="lblAccountStatus.TabIndex" type="System.Int32, mscorlib">
     <value>238</value>
@@ -286,7 +286,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateAccountOpen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 416</value>
+    <value>11, 416</value>
   </data>
   <data name="lblDateAccountOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -325,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 391</value>
+    <value>11, 366</value>
   </data>
   <data name="lblOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -352,19 +352,19 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblOpeningBalance.ZOrder" xml:space="preserve">
-    <value>60</value>
+    <value>56</value>
   </data>
   <data name="txtOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 391</value>
+    <value>166, 366</value>
   </data>
   <data name="txtOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtOpeningBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 23</value>
+    <value>195, 23</value>
   </data>
   <data name="txtOpeningBalance.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>27</value>
   </data>
   <data name="txtOpeningBalance.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -379,7 +379,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtOpeningBalance.ZOrder" xml:space="preserve">
-    <value>61</value>
+    <value>57</value>
   </data>
   <data name="CLabel3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -388,7 +388,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 391</value>
+    <value>553, 391</value>
   </data>
   <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -427,7 +427,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSettlementDiscount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 391</value>
+    <value>271, 391</value>
   </data>
   <data name="lblSettlementDiscount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -442,7 +442,7 @@
     <value>Early Settlement Discount Rate (%)</value>
   </data>
   <data name="lblSettlementDiscount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblSettlementDiscount.Name" xml:space="preserve">
     <value>lblSettlementDiscount</value>
@@ -457,7 +457,7 @@
     <value>62</value>
   </data>
   <data name="txtSettlementDiscount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 391</value>
+    <value>511, 391</value>
   </data>
   <data name="txtSettlementDiscount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -467,6 +467,9 @@
   </data>
   <data name="txtSettlementDiscount.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
+  </data>
+  <data name="txtSettlementDiscount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;txtSettlementDiscount.Name" xml:space="preserve">
     <value>txtSettlementDiscount</value>
@@ -490,7 +493,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 11</value>
+    <value>11, 11</value>
   </data>
   <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -526,7 +529,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 11</value>
+    <value>166, 11</value>
   </data>
   <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -556,13 +559,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblSupplierCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 11</value>
+    <value>230, 11</value>
   </data>
   <data name="lblSupplierCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSupplierCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="lblSupplierCode.TabIndex" type="System.Int32, mscorlib">
     <value>156</value>
@@ -589,7 +592,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSupplierCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 11</value>
+    <value>362, 11</value>
   </data>
   <data name="txtSupplierCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -619,13 +622,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 11</value>
+    <value>441, 11</value>
   </data>
   <data name="lblVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 23</value>
+    <value>101, 23</value>
   </data>
   <data name="lblVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>209</value>
@@ -634,7 +637,7 @@
     <value>VAT No.</value>
   </data>
   <data name="lblVatNumber.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblVatNumber.Name" xml:space="preserve">
     <value>lblVatNumber</value>
@@ -652,13 +655,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 11</value>
+    <value>544, 11</value>
   </data>
   <data name="txtVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 23</value>
+    <value>171, 23</value>
   </data>
   <data name="txtVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -682,7 +685,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSupplierName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 36</value>
+    <value>11, 36</value>
   </data>
   <data name="lblSupplierName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -715,13 +718,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSupplierName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 36</value>
+    <value>166, 36</value>
   </data>
   <data name="txtSupplierName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSupplierName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 23</value>
+    <value>549, 23</value>
   </data>
   <data name="txtSupplierName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -745,7 +748,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSupplierNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 61</value>
+    <value>11, 61</value>
   </data>
   <data name="lblSupplierNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -778,7 +781,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSupplierNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 61</value>
+    <value>166, 61</value>
   </data>
   <data name="txtSupplierNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -787,7 +790,7 @@
     <value>Yes</value>
   </data>
   <data name="txtSupplierNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 23</value>
+    <value>549, 23</value>
   </data>
   <data name="txtSupplierNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -811,7 +814,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblContactPerson.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 86</value>
+    <value>11, 86</value>
   </data>
   <data name="lblContactPerson.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -844,7 +847,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtContactPerson.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 86</value>
+    <value>166, 86</value>
   </data>
   <data name="txtContactPerson.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -874,13 +877,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblContactDesignation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 86</value>
+    <value>362, 86</value>
   </data>
   <data name="lblContactDesignation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblContactDesignation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblContactDesignation.TabIndex" type="System.Int32, mscorlib">
     <value>185</value>
@@ -889,7 +892,7 @@
     <value>Contact Designation</value>
   </data>
   <data name="lblContactDesignation.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblContactDesignation.Name" xml:space="preserve">
     <value>lblContactDesignation</value>
@@ -907,7 +910,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtContactDesignation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 86</value>
+    <value>512, 86</value>
   </data>
   <data name="txtContactDesignation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -937,7 +940,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStreet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 111</value>
+    <value>11, 111</value>
   </data>
   <data name="lblStreet.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -970,7 +973,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtStreet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 111</value>
+    <value>166, 111</value>
   </data>
   <data name="txtStreet.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1000,13 +1003,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblDistrict.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 111</value>
+    <value>362, 111</value>
   </data>
   <data name="lblDistrict.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDistrict.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblDistrict.TabIndex" type="System.Int32, mscorlib">
     <value>189</value>
@@ -1015,7 +1018,7 @@
     <value>District</value>
   </data>
   <data name="lblDistrict.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblDistrict.Name" xml:space="preserve">
     <value>lblDistrict</value>
@@ -1033,7 +1036,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDistrict.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 111</value>
+    <value>512, 111</value>
   </data>
   <data name="txtDistrict.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1063,7 +1066,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTownCity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 136</value>
+    <value>11, 136</value>
   </data>
   <data name="lblTownCity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1096,7 +1099,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTownCity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 136</value>
+    <value>166, 136</value>
   </data>
   <data name="txtTownCity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1126,13 +1129,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblProvinceState.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 136</value>
+    <value>362, 136</value>
   </data>
   <data name="lblProvinceState.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblProvinceState.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblProvinceState.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>
@@ -1141,7 +1144,7 @@
     <value>Province/State</value>
   </data>
   <data name="lblProvinceState.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblProvinceState.Name" xml:space="preserve">
     <value>lblProvinceState</value>
@@ -1159,7 +1162,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtProvinceState.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 136</value>
+    <value>512, 136</value>
   </data>
   <data name="txtProvinceState.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1189,7 +1192,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPoBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 161</value>
+    <value>11, 161</value>
   </data>
   <data name="lblPoBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1222,13 +1225,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPoBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 161</value>
+    <value>166, 161</value>
   </data>
   <data name="txtPoBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPoBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 23</value>
+    <value>62, 23</value>
   </data>
   <data name="txtPoBox.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1258,7 +1261,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblZipCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 23</value>
+    <value>68, 23</value>
   </data>
   <data name="lblZipCode.TabIndex" type="System.Int32, mscorlib">
     <value>197</value>
@@ -1285,13 +1288,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtZipCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 161</value>
+    <value>300, 161</value>
   </data>
   <data name="txtZipCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtZipCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 23</value>
+    <value>61, 23</value>
   </data>
   <data name="txtZipCode.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1315,13 +1318,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCountryCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 161</value>
+    <value>363, 161</value>
   </data>
   <data name="lblCountryCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCountryCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblCountryCode.TabIndex" type="System.Int32, mscorlib">
     <value>195</value>
@@ -1330,7 +1333,7 @@
     <value>Country</value>
   </data>
   <data name="lblCountryCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblCountryCode.Name" xml:space="preserve">
     <value>lblCountryCode</value>
@@ -1348,7 +1351,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacCountryCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 161</value>
+    <value>513, 161</value>
   </data>
   <data name="cacCountryCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1378,7 +1381,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPhone1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 187</value>
+    <value>11, 187</value>
   </data>
   <data name="lblPhone1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1411,7 +1414,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPhone1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 187</value>
+    <value>166, 187</value>
   </data>
   <data name="txtPhone1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1441,13 +1444,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblPhone2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 187</value>
+    <value>362, 187</value>
   </data>
   <data name="lblPhone2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblPhone2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblPhone2.TabIndex" type="System.Int32, mscorlib">
     <value>203</value>
@@ -1456,7 +1459,7 @@
     <value>Secondary Phone No.</value>
   </data>
   <data name="lblPhone2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblPhone2.Name" xml:space="preserve">
     <value>lblPhone2</value>
@@ -1474,7 +1477,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPhone2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 187</value>
+    <value>512, 187</value>
   </data>
   <data name="txtPhone2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1504,7 +1507,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 212</value>
+    <value>11, 212</value>
   </data>
   <data name="lblFax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1537,7 +1540,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtFax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 212</value>
+    <value>166, 212</value>
   </data>
   <data name="txtFax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1567,13 +1570,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblMobile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 212</value>
+    <value>362, 212</value>
   </data>
   <data name="lblMobile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblMobile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblMobile.TabIndex" type="System.Int32, mscorlib">
     <value>207</value>
@@ -1582,7 +1585,7 @@
     <value>Mobile Number</value>
   </data>
   <data name="lblMobile.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblMobile.Name" xml:space="preserve">
     <value>lblMobile</value>
@@ -1600,7 +1603,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMobile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 212</value>
+    <value>512, 212</value>
   </data>
   <data name="txtMobile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1630,7 +1633,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEmail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 237</value>
+    <value>11, 237</value>
   </data>
   <data name="lblEmail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1663,7 +1666,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtEmail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 237</value>
+    <value>166, 237</value>
   </data>
   <data name="txtEmail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1693,13 +1696,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblWebsite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 237</value>
+    <value>362, 237</value>
   </data>
   <data name="lblWebsite.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblWebsite.TabIndex" type="System.Int32, mscorlib">
     <value>213</value>
@@ -1708,7 +1711,7 @@
     <value>Website Address</value>
   </data>
   <data name="lblWebsite.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblWebsite.Name" xml:space="preserve">
     <value>lblWebsite</value>
@@ -1726,7 +1729,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtWebsite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 237</value>
+    <value>512, 237</value>
   </data>
   <data name="txtWebsite.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1756,7 +1759,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCrNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 262</value>
+    <value>11, 262</value>
   </data>
   <data name="lblCrNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1789,7 +1792,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCrNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 262</value>
+    <value>166, 262</value>
   </data>
   <data name="txtCrNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1819,13 +1822,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblBankIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 262</value>
+    <value>362, 262</value>
   </data>
   <data name="lblBankIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblBankIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblBankIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>216</value>
@@ -1834,7 +1837,7 @@
     <value>Bank Name</value>
   </data>
   <data name="lblBankIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblBankIdNo.Name" xml:space="preserve">
     <value>lblBankIdNo</value>
@@ -1852,7 +1855,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacBankIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 262</value>
+    <value>512, 262</value>
   </data>
   <data name="cacBankIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1882,7 +1885,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBankAccountNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 288</value>
+    <value>11, 288</value>
   </data>
   <data name="lblBankAccountNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1915,7 +1918,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBankAccountNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 288</value>
+    <value>166, 288</value>
   </data>
   <data name="txtBankAccountNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1945,13 +1948,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblIban.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 288</value>
+    <value>362, 288</value>
   </data>
   <data name="lblIban.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIban.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblIban.TabIndex" type="System.Int32, mscorlib">
     <value>220</value>
@@ -1960,7 +1963,7 @@
     <value>IBAN Number</value>
   </data>
   <data name="lblIban.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblIban.Name" xml:space="preserve">
     <value>lblIban</value>
@@ -1978,7 +1981,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtIban.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 288</value>
+    <value>512, 288</value>
   </data>
   <data name="txtIban.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2008,7 +2011,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblExpAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 313</value>
+    <value>11, 313</value>
   </data>
   <data name="lblExpAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2020,7 +2023,7 @@
     <value>236</value>
   </data>
   <data name="lblExpAccountIdNo.Text" xml:space="preserve">
-    <value>Default Purchase Account</value>
+    <value>Default Purchase Acct.</value>
   </data>
   <data name="lblExpAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -2041,7 +2044,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacExpAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 313</value>
+    <value>166, 313</value>
   </data>
   <data name="cacExpAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2071,13 +2074,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblApAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 313</value>
+    <value>362, 313</value>
   </data>
   <data name="lblApAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblApAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="lblApAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>234</value>
@@ -2086,7 +2089,7 @@
     <value>Override AP Account</value>
   </data>
   <data name="lblApAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblApAccountIdNo.Name" xml:space="preserve">
     <value>lblApAccountIdNo</value>
@@ -2104,7 +2107,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacApAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 313</value>
+    <value>512, 313</value>
   </data>
   <data name="cacApAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2134,7 +2137,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCreditLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 339</value>
+    <value>11, 339</value>
   </data>
   <data name="lblCreditLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2167,7 +2170,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCreditLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 339</value>
+    <value>166, 339</value>
   </data>
   <data name="txtCreditLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2200,13 +2203,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblPaymentMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 339</value>
+    <value>362, 339</value>
   </data>
   <data name="lblPaymentMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblPaymentMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 21</value>
+    <value>148, 21</value>
   </data>
   <data name="lblPaymentMethod.TabIndex" type="System.Int32, mscorlib">
     <value>168</value>
@@ -2215,7 +2218,7 @@
     <value>Payment Method</value>
   </data>
   <data name="lblPaymentMethod.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblPaymentMethod.Name" xml:space="preserve">
     <value>lblPaymentMethod</value>
@@ -2233,7 +2236,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacPaymentMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 339</value>
+    <value>512, 339</value>
   </data>
   <data name="cacPaymentMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2256,6 +2259,42 @@
   <data name="&gt;&gt;cacPaymentMethod.ZOrder" xml:space="preserve">
     <value>55</value>
   </data>
+  <data name="lblSettlementDueDays.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblSettlementDueDays.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSettlementDueDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>363, 366</value>
+  </data>
+  <data name="lblSettlementDueDays.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblSettlementDueDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 23</value>
+  </data>
+  <data name="lblSettlementDueDays.TabIndex" type="System.Int32, mscorlib">
+    <value>224</value>
+  </data>
+  <data name="lblSettlementDueDays.Text" xml:space="preserve">
+    <value>Early Settlement Due Days</value>
+  </data>
+  <data name="lblSettlementDueDays.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblSettlementDueDays.Name" xml:space="preserve">
+    <value>lblSettlementDueDays</value>
+  </data>
+  <data name="&gt;&gt;lblSettlementDueDays.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblSettlementDueDays.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblSettlementDueDays.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
   <data name="lblPaymentDueDays.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -2263,7 +2302,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPaymentDueDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 366</value>
+    <value>11, 391</value>
   </data>
   <data name="lblPaymentDueDays.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2290,22 +2329,22 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblPaymentDueDays.ZOrder" xml:space="preserve">
-    <value>56</value>
+    <value>60</value>
   </data>
   <data name="txtPaymentDueDays.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPaymentDueDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 366</value>
+    <value>166, 391</value>
   </data>
   <data name="txtPaymentDueDays.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPaymentDueDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 23</value>
+    <value>103, 23</value>
   </data>
   <data name="txtPaymentDueDays.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>29</value>
   </data>
   <data name="txtPaymentDueDays.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -2320,43 +2359,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtPaymentDueDays.ZOrder" xml:space="preserve">
-    <value>57</value>
-  </data>
-  <data name="lblSettlementDueDays.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblSettlementDueDays.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSettlementDueDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 366</value>
-  </data>
-  <data name="lblSettlementDueDays.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblSettlementDueDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 23</value>
-  </data>
-  <data name="lblSettlementDueDays.TabIndex" type="System.Int32, mscorlib">
-    <value>224</value>
-  </data>
-  <data name="lblSettlementDueDays.Text" xml:space="preserve">
-    <value>Early Settlement Due Days</value>
-  </data>
-  <data name="lblSettlementDueDays.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblSettlementDueDays.Name" xml:space="preserve">
-    <value>lblSettlementDueDays</value>
-  </data>
-  <data name="&gt;&gt;lblSettlementDueDays.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblSettlementDueDays.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblSettlementDueDays.ZOrder" xml:space="preserve">
-    <value>58</value>
+    <value>61</value>
   </data>
   <data name="lblActive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -2365,7 +2368,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 391</value>
+    <value>572, 391</value>
   </data>
   <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2380,7 +2383,7 @@
     <value>Active Account?</value>
   </data>
   <data name="lblActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblActive.Name" xml:space="preserve">
     <value>lblActive</value>
@@ -2404,7 +2407,7 @@
     <value>Flat</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>651, 391</value>
+    <value>692, 391</value>
   </data>
   <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2434,7 +2437,7 @@
     <value>Tahoma, 9.75pt</value>
   </data>
   <data name="dtpDateAccountOpen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 415</value>
+    <value>165, 415</value>
   </data>
   <data name="dtpDateAccountOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -2471,13 +2474,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cacAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 416</value>
+    <value>512, 416</value>
   </data>
   <data name="cacAccountStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cacAccountStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 24</value>
+    <value>203, 24</value>
   </data>
   <data name="cacAccountStatus.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -2498,19 +2501,19 @@
     <value>Right</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 53</value>
+    <value>296, 53</value>
   </data>
   <data name="floDataDisplay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>694, 481</value>
+    <value>690, 481</value>
   </data>
   <data name="floDataDisplay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 10, 0, 0</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>694, 485</value>
+    <value>740, 481</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2531,16 +2534,19 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSettlementDueDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 366</value>
+    <value>609, 366</value>
   </data>
   <data name="txtSettlementDueDays.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSettlementDueDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>106, 23</value>
   </data>
   <data name="txtSettlementDueDays.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
+  </data>
+  <data name="txtSettlementDueDays.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;txtSettlementDueDays.Name" xml:space="preserve">
     <value>txtSettlementDueDays</value>
@@ -2564,7 +2570,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 538</value>
+    <value>1036, 527</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1016, 525</value>

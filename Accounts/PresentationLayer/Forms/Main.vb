@@ -1155,6 +1155,13 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefaultFieldValuesToolStripMenuItem.Click
+            Dim childMdiForm As DefaultFieldValueEntryTv
+            childMdiForm = New DefaultFieldValueEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
     End Class
 
 End Namespace
