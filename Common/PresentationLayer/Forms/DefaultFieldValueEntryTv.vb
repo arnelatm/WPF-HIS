@@ -71,46 +71,37 @@ Namespace PresentationLayer.Forms
 
         Public Property DecimalPart As Byte Implements IDefaultFieldValueView.DecimalPart
             Get
-                Throw New NotImplementedException()
+                Return txtDecimalPart.Text
             End Get
-            Set(value As Byte)
-                Throw New NotImplementedException()
+            Set
+                txtDecimalPart.Text = Value
             End Set
         End Property
 
-        Public Property LinkedTableName As String Implements IDefaultFieldValueView.LinkedTableName
+        Public Property LinkedTable As String Implements IDefaultFieldValueView.LinkedTable
             Get
-                Throw New NotImplementedException()
+                Return txtLinkedTable.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtLinkedTable.Text = Value
             End Set
         End Property
 
-        Public Property LinkedFieldName As String Implements IDefaultFieldValueView.LinkedFieldName
+        Public Property LinkedField As String Implements IDefaultFieldValueView.LinkedField
             Get
-                Throw New NotImplementedException()
+                Return txtLinkedField.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtLinkedField.Text = Value
             End Set
         End Property
 
         Public Property DefaultValue As String Implements IDefaultFieldValueView.DefaultValue
             Get
-                Throw New NotImplementedException()
+                Return txtDefaultValue.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
-        Private Property IDefaultFieldValueView_Length As UShort Implements IDefaultFieldValueView.Length
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As UShort)
-                Throw New NotImplementedException()
+            Set
+                txtDefaultValue.Text = Value
             End Set
         End Property
 

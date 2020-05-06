@@ -10,8 +10,8 @@ Namespace PresentationLayer.Views
         Property DataType As Byte
         Property Length As UShort
         Property DecimalPart As Byte
-        Property LinkedTableName As String
-        Property LinkedFieldName As String
+        Property LinkedTable As String
+        Property LinkedField As String
         Property DefaultValue As String
 
     End Interface
