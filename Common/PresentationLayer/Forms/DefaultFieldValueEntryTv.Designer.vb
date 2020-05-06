@@ -31,17 +31,21 @@ Namespace PresentationLayer.Forms
         Me.txtDataType = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTableName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDataType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblLength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLength = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLinkedTable = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLinkedField = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDefaultValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtDecimalPart = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -132,12 +136,16 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay.Controls.Add(Me.txtDataType)
             Me.floDataDisplay.Controls.Add(Me.lblLength)
             Me.floDataDisplay.Controls.Add(Me.txtLength)
+            Me.floDataDisplay.Controls.Add(Me.txtDecimalPart)
+            Me.floDataDisplay.Controls.Add(Me.CTextBox2)
             Me.floDataDisplay.Controls.Add(Me.CLabel1)
             Me.floDataDisplay.Controls.Add(Me.txtLinkedTable)
             Me.floDataDisplay.Controls.Add(Me.CLabel2)
             Me.floDataDisplay.Controls.Add(Me.txtLinkedField)
             Me.floDataDisplay.Controls.Add(Me.CLabel3)
             Me.floDataDisplay.Controls.Add(Me.txtDefaultValue)
+            Me.floDataDisplay.Controls.Add(Me.CLabel4)
+            Me.floDataDisplay.Controls.Add(Me.CTextBox1)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'lblIdNo
@@ -147,19 +155,19 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
             '
-            'lblFieldName
-            '
-            Me.lblFieldName.DisplayOnly = True
-            Me.lblFieldName.EditingMode = False
-            resources.ApplyResources(Me.lblFieldName, "lblFieldName")
-            Me.lblFieldName.Name = "lblFieldName"
-            '
             'lblTableName
             '
             Me.lblTableName.DisplayOnly = True
             Me.lblTableName.EditingMode = False
             resources.ApplyResources(Me.lblTableName, "lblTableName")
             Me.lblTableName.Name = "lblTableName"
+            '
+            'lblFieldName
+            '
+            Me.lblFieldName.DisplayOnly = True
+            Me.lblFieldName.EditingMode = False
+            resources.ApplyResources(Me.lblFieldName, "lblFieldName")
+            Me.lblFieldName.Name = "lblFieldName"
             '
             'lblDataType
             '
@@ -199,20 +207,6 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.CLabel1, "CLabel1")
             Me.CLabel1.Name = "CLabel1"
             '
-            'CLabel2
-            '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.Name = "CLabel2"
-            '
-            'CLabel3
-            '
-            Me.CLabel3.DisplayOnly = True
-            Me.CLabel3.EditingMode = False
-            resources.ApplyResources(Me.CLabel3, "CLabel3")
-            Me.CLabel3.Name = "CLabel3"
-            '
             'txtLinkedTable
             '
             Me.txtLinkedTable.BackColor = System.Drawing.Color.White
@@ -229,6 +223,13 @@ Namespace PresentationLayer.Forms
             Me.txtLinkedTable.OldValue = Nothing
             Me.txtLinkedTable.ReadOnly = True
             Me.txtLinkedTable.ValueIsMandatory = True
+            '
+            'CLabel2
+            '
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.Name = "CLabel2"
             '
             'txtLinkedField
             '
@@ -247,6 +248,13 @@ Namespace PresentationLayer.Forms
             Me.txtLinkedField.ReadOnly = True
             Me.txtLinkedField.ValueIsMandatory = True
             '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            resources.ApplyResources(Me.CLabel3, "CLabel3")
+            Me.CLabel3.Name = "CLabel3"
+            '
             'txtDefaultValue
             '
             Me.txtDefaultValue.BackColor = System.Drawing.Color.White
@@ -264,11 +272,59 @@ Namespace PresentationLayer.Forms
             Me.txtDefaultValue.ReadOnly = True
             Me.txtDefaultValue.ValueIsMandatory = True
             '
+            'CLabel4
+            '
+            Me.CLabel4.DisplayOnly = True
+            Me.CLabel4.EditingMode = False
+            resources.ApplyResources(Me.CLabel4, "CLabel4")
+            Me.CLabel4.Name = "CLabel4"
+            '
+            'CTextBox1
+            '
+            Me.CTextBox1.BackColor = System.Drawing.Color.White
+            Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.CTextBox1.ComputedValue = False
+            Me.CTextBox1.CustomFormat = Nothing
+            Me.CTextBox1.DataBoundControl = True
+            Me.CTextBox1.EditingMode = True
+            Me.floDataDisplay.SetFlowBreak(Me.CTextBox1, True)
+            resources.ApplyResources(Me.CTextBox1, "CTextBox1")
+            Me.CTextBox1.ForeColor = System.Drawing.Color.Black
+            Me.CTextBox1.LinkedLabel = Nothing
+            Me.CTextBox1.Name = "CTextBox1"
+            Me.CTextBox1.OldValue = Nothing
+            Me.CTextBox1.ReadOnly = True
+            Me.CTextBox1.ValueIsMandatory = True
+            '
+            'txtDecimalPart
+            '
+            Me.txtDecimalPart.DisplayOnly = True
+            Me.txtDecimalPart.EditingMode = False
+            resources.ApplyResources(Me.txtDecimalPart, "txtDecimalPart")
+            Me.txtDecimalPart.Name = "txtDecimalPart"
+            '
+            'CTextBox2
+            '
+            Me.CTextBox2.BackColor = System.Drawing.Color.White
+            Me.CTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.CTextBox2.ComputedValue = False
+            Me.CTextBox2.CustomFormat = Nothing
+            Me.CTextBox2.DataBoundControl = True
+            Me.CTextBox2.EditingMode = True
+            Me.floDataDisplay.SetFlowBreak(Me.CTextBox2, True)
+            resources.ApplyResources(Me.CTextBox2, "CTextBox2")
+            Me.CTextBox2.ForeColor = System.Drawing.Color.Black
+            Me.CTextBox2.LinkedLabel = Nothing
+            Me.CTextBox2.Name = "CTextBox2"
+            Me.CTextBox2.OldValue = Nothing
+            Me.CTextBox2.ReadOnly = True
+            Me.CTextBox2.ValueIsMandatory = True
+            '
             'DefaultFieldValueEntryTv
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "DefaultFieldValueEntryTv"
+            Me.Name = "DefaultFieldValueEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -295,5 +351,9 @@ End Sub
         Friend WithEvents txtLinkedField As CTextBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtDefaultValue As CTextBox
+        Friend WithEvents txtDecimalPart As CLabel
+        Friend WithEvents CTextBox2 As CTextBox
+        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents CTextBox1 As CTextBox
     End Class
 End NameSpace

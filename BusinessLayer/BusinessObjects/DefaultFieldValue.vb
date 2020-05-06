@@ -21,6 +21,8 @@ Namespace BusinessObjects
         Public Property Length As UInt16
         Public Property DecimalPart As UInt16
         Public Property DefaultValue As String
+        Public Property LinkedTable As String
+        Public Property LinkedField As String
     End Class
 
 End Namespace

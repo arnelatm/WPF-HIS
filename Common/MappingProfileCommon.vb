@@ -15,6 +15,8 @@ Public Class MappingProfileCommon
         CreateMap(Of CostCenterModel, ICostCenterView).ReverseMap()
         CreateMap(Of Country, CountryModel).ReverseMap()
         CreateMap(Of CountryModel, ICountryView).ReverseMap()
+        CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
+        CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
         CreateMap(Of Department, DepartmentModel).ReverseMap()
         CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
         CreateMap(Of GroupAccess, GroupAccessModel).ReverseMap()
