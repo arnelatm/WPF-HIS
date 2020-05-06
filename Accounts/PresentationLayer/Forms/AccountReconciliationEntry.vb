@@ -52,11 +52,10 @@ Namespace PresentationLayer.Forms
 
         Public Property Balance As Decimal Implements IAccountReconciliationView.Balance
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtBalance.Text), _nfi)
+                Return txtBalance.Text.ToDecimalNumber(_nfi)
             End Get
             Set
                 txtBalance.Text = FormatMoney(Value)
-                txtBalance2.Text = FormatMoney(Value)
             End Set
         End Property
 
@@ -80,14 +79,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IAccountReconciliationView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
-                Else
-                    Return 0
-                End If
+                Return TxtIDNo.Text.ToInt32Number()
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIDNo.Text = Value.ToString()
             End Set
         End Property
 

@@ -1,4 +1,5 @@
-﻿Imports System.Linq.Expressions
+﻿Imports System.Globalization
+Imports System.Linq.Expressions
 Imports System.Runtime.CompilerServices
 
 Public Module Extensions
@@ -38,6 +39,82 @@ Public Module Extensions
     <Extension()>
     Public Function TrimMilliseconds(ByVal dt As DateTime) As DateTime
         Return New Date(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0, dt.Kind)
+    End Function
+
+    <Extension()>
+    Public Function ToMoney(number As Decimal, noOfDigits As Short) As String
+        Dim cFormat As String = "C" + noOfDigits.ToString()
+        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+    End Function
+
+    <Extension()>
+    Public Function ToMoney(number As Single, noOfDigits As Short) As String
+        Dim cFormat As String = "C" + noOfDigits.ToString()
+        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+    End Function
+
+    <Extension()>
+    Public Function ToMoney(number As Single) As String
+        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+    End Function
+
+    <Extension()>
+    Public Function ToMoney(number As Double) As String
+        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+    End Function
+
+    <Extension()>
+    Public Function ToInt16Number(numberString As String) As Short
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToInt16(NumParser(Of Int16)(numberString))
+        Else
+            Return 0S
+        End If
+    End Function
+
+    <Extension()>
+    Public Function ToInt32Number(numberString As String) As Integer
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToInt32(NumParser(Of Int32)(numberString))
+        Else
+            Return 0I
+        End If
+    End Function
+
+    <Extension()>
+    Public Function ToInt64Number(numberString As String) As Long
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToInt64(NumParser(Of Int64)(numberString))
+        Else
+            Return 0L
+        End If
+    End Function
+
+    <Extension()>
+    Public Function ToDecimalNumber(numberString As String, nfi As NumberFormatInfo) As Decimal
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToDecimal(NumParser(Of Decimal)(numberString), nfi)
+        Else
+            Return 0@
+        End If
+    End Function
+
+    <Extension()>
+    Public Function ToSingleNumber(numberString As String, nfi As NumberFormatInfo) As Single
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToSingle(NumParser(Of Single)(numberString), nfi)
+        Else
+            Return 0F
+        End If
+    End Function
+
+    <Extension()>
+    Public Function ToDoubleNumber(numberString As String, nfi As NumberFormatInfo) As Double
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToDouble(NumParser(Of Double)(numberString), nfi)
+        Else
+            Return 0D
+        End If
     End Function
 
     '<Extension()>

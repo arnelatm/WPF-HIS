@@ -1,16 +1,20 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
     Public Class SupplierEntryTv
         Implements ISupplierView
 
+        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
+            _nfi.NumberDecimalDigits = 2
             MainTableName = "Supplier"
             TvMainFieldName = "SupplierName"
             TvSecondaryFieldName = "SupplierCode"
@@ -23,6 +27,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus
             Get
                 Return cacAccountStatus.GetValue()
@@ -99,14 +104,10 @@ Namespace PresentationLayer.Forms
 
         Public Property CreditLimit As Single Implements ISupplierView.CreditLimit
             Get
-                If txtCreditLimit.Text <> "" Then
-                    Return Convert.ToSingle(txtCreditLimit.Text)
-                Else
-                    Return 0
-                End If
+                Return txtCreditLimit.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtCreditLimit.Text = Value
+                txtCreditLimit.Text = Value.ToMoney()
             End Set
         End Property
 
@@ -214,24 +215,16 @@ Namespace PresentationLayer.Forms
         'End Property
         Public Property OpeningBalance As Single Implements ISupplierView.OpeningBalance
             Get
-                If txtOpeningBalance.Text <> "" Then
-                    Return Convert.ToSingle(txtOpeningBalance.Text)
-                Else
-                    Return 0
-                End If
+                Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtOpeningBalance.Text = Value
+                txtOpeningBalance.Text = Value.ToMoney()
             End Set
         End Property
 
         Public Property PaymentDueDays As Int16 Implements ISupplierView.PaymentDueDays
             Get
-                If txtPaymentDueDays.Text <> "" Then
-                    Return Convert.ToInt16(txtPaymentDueDays.Text)
-                Else
-                    Return 0
-                End If
+                Return txtPaymentDueDays.Text.ToInt16Number()
             End Get
             Set
                 txtPaymentDueDays.Text = Value
@@ -285,24 +278,16 @@ Namespace PresentationLayer.Forms
 
         Public Property SettlementDiscount As Decimal Implements ISupplierView.SettlementDiscount
             Get
-                If txtSettlementDiscount.Text <> "" Then
-                    Return Convert.ToDecimal(txtSettlementDiscount.Text)
-                Else
-                    Return 0
-                End If
+                Return txtSettlementDiscount.Text.ToDecimalNumber(_nfi)
             End Get
             Set
-                txtSettlementDiscount.Text = Value
+                txtSettlementDiscount.Text = Value.ToMoney(2)
             End Set
         End Property
 
         Public Property SettlementDueDays As Int16 Implements ISupplierView.SettlementDueDays
             Get
-                If txtSettlementDueDays.Text <> "" Then
-                    Return Convert.ToInt16(txtSettlementDueDays.Text)
-                Else
-                    Return 0
-                End If
+                Return txtSettlementDueDays.Text.ToInt16Number()
             End Get
             Set
                 txtSettlementDueDays.Text = Value
@@ -380,7 +365,9 @@ Namespace PresentationLayer.Forms
                 txtZipCode.Text = Value
             End Set
         End Property
+
 #End Region
+
         Protected Overrides Sub CreateDataSources()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()
