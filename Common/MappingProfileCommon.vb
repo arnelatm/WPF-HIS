@@ -4,6 +4,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.DataLayer.AdoNet
 Imports AutoMapper
+Imports DefaultFieldValue = AATM.Common.BusinessLayer.DefaultFieldValue
 
 Public Class MappingProfileCommon
     Inherits Profile

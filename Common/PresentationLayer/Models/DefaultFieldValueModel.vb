@@ -10,7 +10,7 @@ Namespace PresentationLayer.Models
         Public Property TableName As String
         Public Property FieldName As String
         Public Property DataType As Byte
-        Public Property Length As UShort
+        Public Property Length As Byte
         Public Property DecimalPart As Byte
         Public Property LinkedTable As String
         Public Property LinkedField As String

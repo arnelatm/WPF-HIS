@@ -2,7 +2,8 @@
 Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
-    Public Class DefaultFieldValueView
+
+    Public Class DefaultFieldValue
         Inherits BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -11,7 +12,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TableName"))
                 AddRule(New ValidateRequired("FieldName"))
-                AddRule(New ValidateRequired("DataTypeFieldName"))
+                AddRule(New ValidateRequired("DefaultValue"))
             End If
         End Sub
 
@@ -19,11 +20,12 @@ Namespace BusinessLayer
         Public Property TableName As String
         Public Property FieldName As String
         Public Property DataType As Byte
-        Public Property Length As UShort
+        Public Property Length As Byte
         Public Property DecimalPart As Byte
         Public Property LinkedTable As String
         Public Property LinkedField As String
         Public Property DefaultValue As String
 
     End Class
+
 End Namespace

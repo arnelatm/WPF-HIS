@@ -15,7 +15,7 @@ Namespace PresentationLayer.Forms
             TvMainFieldName = "TableName"
             TvSecondaryFieldName = "FieldName"
             SortOrderKey = "TableName, FieldName"
-            FirstControl = txtTableName
+            FirstControl = CboTableName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DefaultFieldValuePresenter(Me)
             Ea = PresenterObj.Ea
@@ -44,23 +44,23 @@ Namespace PresentationLayer.Forms
 
         Public Property TableName As String Implements IDefaultFieldValueView.TableName
             Get
-                Return txtTableName.Text
+                Return CboTableName.Text
             End Get
             Set
-                txtTableName.Text = Value
+                CboTableName.Text = Value
             End Set
         End Property
 
         Public Property DataType As Byte Implements IDefaultFieldValueView.DataType
             Get
-                Return txtDataType.Text
+                Return cboDataType.GetValue()
             End Get
             Set
-                txtDataType.Text = Value
+                cboDataType.SetValue(Value)
             End Set
         End Property
 
-        Public Property Length As UShort Implements IDefaultFieldValueView.Length
+        Public Property Length As Byte Implements IDefaultFieldValueView.Length
             Get
                 Return txtLength.Text
             End Get
@@ -107,14 +107,21 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Protected Overrides Sub CreateDataSources()
+            cboDataType.DataSource = PresenterObj.MakeEnumComboList(Of DataTypeSelection)
+        End Sub
+
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"FieldName", txtFieldName},
-                {"TableName", txtTableName},
-                {"DataType", txtDataType},
+                {"TableName", CboTableName},
+                {"DataType", cboDataType},
                 {"IdNo", TxtIdNo},
-                {"Length", txtLength}
+                {"Length", txtLength},
+                {"DecimalPart", lblDecimalPart},
+                {"LinkedTable", txtLinkedTable},
+                {"LinkedField", txtLinkedField}
                 }
         End Sub
 

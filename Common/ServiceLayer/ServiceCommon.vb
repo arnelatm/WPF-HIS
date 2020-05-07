@@ -84,6 +84,12 @@ Namespace ServiceLayer
             End Get
         End Property
 
+        Private Shadows ReadOnly Property DefaultFieldValueDao As IDaoAll(Of DefaultFieldValue)
+            Get
+                Return DaoFactoryCommonFactory.CreateDao("DefaultFieldValue")
+            End Get
+        End Property
+
         Public Sub New(accountName As String)
             Dim bizObject = $"AATM.Common.BusinessLayer." + accountName
             Dim dao = accountName + "Dao"

@@ -69,13 +69,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultFieldValueModel.vb" />
     <Compile Include="IModel.vb" />
-    <Compile Include="IModelDefaultFieldValue.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
     <Compile Include="Model.vb" />
-    <Compile Include="ModelDefaultFieldValue.vb" />
     <Compile Include="ModelTblColProp.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

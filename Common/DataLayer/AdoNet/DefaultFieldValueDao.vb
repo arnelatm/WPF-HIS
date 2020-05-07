@@ -1,5 +1,4 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Common.BusinessLayer
+﻿Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
@@ -35,16 +34,16 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef DefaultFieldValue As DefaultFieldValue) As Integer Implements IDaoAll(Of DefaultFieldValue).UpdateRecord
             Dim sql As String =
-                    " UPDATE [DefaultFieldValue]" &
-                    "    SET TableName = @TableName," &
-                    "        FieldName = @FieldName," &
-                    "        DataType = @DataType," &
-                    "        Length = @Length," &
-                    "        DecimalPart = @DecimalPart," &
-                    "        LinkedTable = @LinkedTable" &
-                    "        LinkedField = @LinkedField" &
-                    "        DefaultValue = @DefaultValue" &
-                    "  WHERE IDNo = @IDNo"
+                    "UPDATE [DefaultFieldValue] " &
+                    "SET TableName = @TableName," &
+                    "FieldName = @FieldName," &
+                    "DataType = @DataType," &
+                    "Length = @Length," &
+                    "DecimalPart = @DecimalPart," &
+                    "LinkedTable = @LinkedTable," &
+                    "LinkedField = @LinkedField," &
+                    "DefaultValue = @DefaultValue " &
+                    "WHERE IDNo = @IDNo"
 
             Return _db.Update(sql, Take(DefaultFieldValue))
         End Function
@@ -63,9 +62,9 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .TableName = Extensions.AsString(reader("TableName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
-            .DataType = Extensions.AsString(reader("DataType")),
-            .Length = Extensions.AsString(reader("Length")),
-            .DecimalPart = Extensions.AsString(reader("DecimalPart")),
+            .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
+            .Length = Extensions.AsInt(Of Byte)(reader("Length")),
+            .DecimalPart = Extensions.AsInt(Of Byte)(reader("DecimalPart")),
             .LinkedTable = Extensions.AsString(reader("LinkedTable")),
             .LinkedField = Extensions.AsString(reader("LinkedField")),
             .DefaultValue = Extensions.AsString(reader("DefaultValue"))

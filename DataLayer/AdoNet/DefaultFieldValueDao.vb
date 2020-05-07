@@ -12,7 +12,7 @@ Namespace AdoNet
         Public Function GetRecordById(idNo) As DefaultFieldValue _
             Implements IDefaultFieldValueDao.GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue " &
+                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
                     "   FROM [DefaultFieldValue]" &
                     " WHERE IDNo = @IDNo"
             Dim params() As Object = {"@IDNo", idNo}
@@ -22,7 +22,7 @@ Namespace AdoNet
         Public Function GetAll(Optional sortExpression As String = "TableName") As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetAll
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue " &
+                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
                     "   FROM [DefaultFieldValue] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -35,8 +35,10 @@ Namespace AdoNet
                     "        FieldName = @FieldName," &
                     "        DataType = @DataType," &
                     "        Length = @Length," &
-                    "        DecimalPart = @DecimalPart" &
-                    "        DefaultValue = @DefaultValue" &
+                    "        DecimalPart = @DecimalPart," &
+                    "        DefaultValue = @DefaultValue," &
+                    "        LinkedTable = @LinkedTable," &
+                    "        LinkedField = @LinkedField" &
                     "  WHERE IDNo = @IDNo"
             Return Db.Update(sql, Take(defaultFieldValue))
         End Function
@@ -44,7 +46,7 @@ Namespace AdoNet
         Public Function GetDefaultFieldValues(tableName As String) As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetTableDefaultValues
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue " &
+                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
                     "   FROM [DefaultFieldValue] where TableName = '" & tableName & "'"
             Dim data = Db.Read(sql, Make).ToList()
             Return data
@@ -54,8 +56,8 @@ Namespace AdoNet
             Implements IDefaultFieldValueDao.AddRecord
             Dim sql As String =
                     " INSERT INTO [DefaultFieldValue] " &
-                    " (TableName, FieldName, DataType, Length, DecimalPart, DefaultValue) " &
-                    " VALUES (@TableName, @FieldName, @DataType, @Length, @DecimalPart, @DefaultValue) "
+                    " (TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField) " &
+                    " VALUES (@TableName, @FieldName, @DataType, @Length, @DecimalPart, @DefaultValue, @LinkedTable, @LinkedField) "
             Return Db.Insert(sql, Take(defaultFieldValue))
         End Function
 
@@ -65,9 +67,11 @@ Namespace AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
             .TableName = Extensions.AsString(reader("TableName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
-            .DataType = Extensions.AsInt(Of UShort)(reader("DataType")),
-            .Length = Extensions.AsInt(Of UShort)(reader("Length")),
-            .DecimalPart = Extensions.AsInt(Of UShort)(reader("DecimalPart")),
+            .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
+            .Length = Extensions.AsInt(Of Byte)(reader("Length")),
+            .DecimalPart = Extensions.AsInt(Of Byte)(reader("DecimalPart")),
+            .LinkedTable = Extensions.AsString(reader("LinkedTable")),
+            .LinkedField = Extensions.AsString(reader("LinkedField")),
             .DefaultValue = Extensions.AsString(reader("DefaultValue"))
             }
 
@@ -79,6 +83,8 @@ Namespace AdoNet
                                     "@DataType", defaultFieldValue.DataType,
                                     "@Length", defaultFieldValue.Length,
                                     "@DecimalPart", defaultFieldValue.DecimalPart,
+                                    "@LinkedTable", defaultFieldValue.LinkedTable,
+                                    "@LinkedField", defaultFieldValue.LinkedField,
                                     "@DefaultValue", defaultFieldValue.DefaultValue
                                 }
         End Function

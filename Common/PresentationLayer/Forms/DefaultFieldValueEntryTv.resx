@@ -231,31 +231,82 @@
   <data name="&gt;&gt;lblTableName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtTableName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboTableName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="cboTableName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtTableName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboTableName.Items" xml:space="preserve">
+    <value>ApJournal</value>
+  </data>
+  <data name="cboTableName.Items1" xml:space="preserve">
+    <value>ArJournal</value>
+  </data>
+  <data name="cboTableName.Items2" xml:space="preserve">
+    <value>CashDisbursementJournal</value>
+  </data>
+  <data name="cboTableName.Items3" xml:space="preserve">
+    <value>CashReceiptJournal</value>
+  </data>
+  <data name="cboTableName.Items4" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="cboTableName.Items5" xml:space="preserve">
+    <value>CheckDisbursementJournal</value>
+  </data>
+  <data name="cboTableName.Items6" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="cboTableName.Items7" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="cboTableName.Items8" xml:space="preserve">
+    <value>GeneralJournal</value>
+  </data>
+  <data name="cboTableName.Items9" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="cboTableName.Items10" xml:space="preserve">
+    <value>Patient</value>
+  </data>
+  <data name="cboTableName.Items11" xml:space="preserve">
+    <value>SalesJournal</value>
+  </data>
+  <data name="cboTableName.Items12" xml:space="preserve">
+    <value>SecurityGroup</value>
+  </data>
+  <data name="cboTableName.Items13" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="cboTableName.Items14" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboTableName.Items15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboTableName.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 36</value>
   </data>
-  <data name="txtTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+  <data name="cboTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 24</value>
   </data>
-  <data name="txtTableName.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboTableName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;txtTableName.Name" xml:space="preserve">
-    <value>txtTableName</value>
+  <data name="&gt;&gt;cboTableName.Name" xml:space="preserve">
+    <value>cboTableName</value>
   </data>
-  <data name="&gt;&gt;txtTableName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;cboTableName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtTableName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboTableName.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtTableName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboTableName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblFieldName.Font" type="System.Drawing.Font, System.Drawing">
@@ -304,7 +355,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtFieldName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtFieldName.Name" xml:space="preserve">
     <value>txtFieldName</value>
@@ -351,41 +402,41 @@
   <data name="&gt;&gt;lblDataType.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="txtDataType.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboDataType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtDataType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboDataType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboDataType.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 86</value>
   </data>
-  <data name="txtDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtDataType.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="cboDataType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 24</value>
   </data>
-  <data name="txtDataType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+  <data name="cboDataType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="txtDataType.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;cboDataType.Name" xml:space="preserve">
+    <value>cboDataType</value>
   </data>
-  <data name="&gt;&gt;txtDataType.Name" xml:space="preserve">
-    <value>txtDataType</value>
+  <data name="&gt;&gt;cboDataType.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDataType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtDataType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboDataType.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtDataType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboDataType.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="lblLength.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 111</value>
+    <value>11, 112</value>
   </data>
   <data name="lblLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -418,7 +469,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 111</value>
+    <value>168, 112</value>
   </data>
   <data name="txtLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -427,7 +478,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtLength.TabIndex" type="System.Int32, mscorlib">
-    <value>160</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;txtLength.Name" xml:space="preserve">
     <value>txtLength</value>
@@ -441,67 +492,67 @@
   <data name="&gt;&gt;txtLength.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lblDecimalPart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDecimalPart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 137</value>
+  </data>
+  <data name="lblDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDecimalPart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="lblDecimalPart.TabIndex" type="System.Int32, mscorlib">
+    <value>169</value>
+  </data>
+  <data name="lblDecimalPart.Text" xml:space="preserve">
+    <value>Decimal Part</value>
+  </data>
+  <data name="lblDecimalPart.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDecimalPart.Name" xml:space="preserve">
+    <value>lblDecimalPart</value>
+  </data>
+  <data name="&gt;&gt;lblDecimalPart.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDecimalPart.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDecimalPart.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <data name="txtDecimalPart.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtDecimalPart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="txtDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 136</value>
+    <value>168, 137</value>
   </data>
   <data name="txtDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDecimalPart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 23</value>
+    <value>62, 23</value>
   </data>
   <data name="txtDecimalPart.TabIndex" type="System.Int32, mscorlib">
-    <value>169</value>
-  </data>
-  <data name="txtDecimalPart.Text" xml:space="preserve">
-    <value>Decimal Part</value>
-  </data>
-  <data name="txtDecimalPart.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtDecimalPart.Name" xml:space="preserve">
     <value>txtDecimalPart</value>
   </data>
   <data name="&gt;&gt;txtDecimalPart.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDecimalPart.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtDecimalPart.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="CTextBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="CTextBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 136</value>
-  </data>
-  <data name="CTextBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="CTextBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="CTextBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>170</value>
-  </data>
-  <data name="&gt;&gt;CTextBox2.Name" xml:space="preserve">
-    <value>CTextBox2</value>
-  </data>
-  <data name="&gt;&gt;CTextBox2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CTextBox2.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;CTextBox2.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -511,7 +562,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 161</value>
+    <value>11, 162</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -544,7 +595,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 161</value>
+    <value>168, 162</value>
   </data>
   <data name="txtLinkedTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -553,7 +604,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtLinkedTable.TabIndex" type="System.Int32, mscorlib">
-    <value>164</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtLinkedTable.Name" xml:space="preserve">
     <value>txtLinkedTable</value>
@@ -574,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 186</value>
+    <value>11, 187</value>
   </data>
   <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -607,7 +658,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 186</value>
+    <value>168, 187</value>
   </data>
   <data name="txtLinkedField.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -616,7 +667,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtLinkedField.TabIndex" type="System.Int32, mscorlib">
-    <value>165</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtLinkedField.Name" xml:space="preserve">
     <value>txtLinkedField</value>
@@ -637,7 +688,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 211</value>
+    <value>11, 212</value>
   </data>
   <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -670,7 +721,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 211</value>
+    <value>168, 212</value>
   </data>
   <data name="txtDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -679,7 +730,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtDefaultValue.TabIndex" type="System.Int32, mscorlib">
-    <value>166</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;txtDefaultValue.Name" xml:space="preserve">
     <value>txtDefaultValue</value>
@@ -692,69 +743,6 @@
   </data>
   <data name="&gt;&gt;txtDefaultValue.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="CLabel4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="CLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 236</value>
-  </data>
-  <data name="CLabel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="CLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 23</value>
-  </data>
-  <data name="CLabel4.TabIndex" type="System.Int32, mscorlib">
-    <value>167</value>
-  </data>
-  <data name="CLabel4.Text" xml:space="preserve">
-    <value>Length</value>
-  </data>
-  <data name="CLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;CLabel4.Name" xml:space="preserve">
-    <value>CLabel4</value>
-  </data>
-  <data name="&gt;&gt;CLabel4.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel4.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;CLabel4.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="CTextBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="CTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 236</value>
-  </data>
-  <data name="CTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="CTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="CTextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>168</value>
-  </data>
-  <data name="&gt;&gt;CTextBox1.Name" xml:space="preserve">
-    <value>CTextBox1</value>
-  </data>
-  <data name="&gt;&gt;CTextBox1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CTextBox1.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;CTextBox1.ZOrder" xml:space="preserve">
-    <value>19</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>

@@ -1,12 +1,16 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
     Public Class CustomerEntryTv
         Implements ICustomerView
+
+        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Public Sub New()
             MyBase.New()
@@ -274,11 +278,7 @@ Namespace PresentationLayer.Forms
 
         Public Property CreditLimit As Single Implements ICustomerView.CreditLimit
             Get
-                If txtCreditLimit.Text <> "" Then
-                    Return Convert.ToSingle(txtCreditLimit.Text)
-                Else
-                    Return 0
-                End If
+                Return txtCreditLimit.Text.ToSingleNumber(_nfi)
             End Get
             Set
                 txtCreditLimit.Text = Value
@@ -287,11 +287,7 @@ Namespace PresentationLayer.Forms
 
         Public Property SettlementDueDays As Int16 Implements ICustomerView.SettlementDueDays
             Get
-                If txtSettlementDueDays.Text <> "" Then
-                    Return Convert.ToInt16(txtSettlementDueDays.Text)
-                Else
-                    Return 0
-                End If
+                Return txtSettlementDueDays.Text.ToInt16Number()
             End Get
             Set
                 txtSettlementDueDays.Text = Value
@@ -300,11 +296,7 @@ Namespace PresentationLayer.Forms
 
         Public Property SettlementDiscount As Decimal Implements ICustomerView.SettlementDiscount
             Get
-                If txtSettlementDiscount.Text <> "" Then
-                    Return Convert.ToDecimal(txtSettlementDiscount.Text)
-                Else
-                    Return 0
-                End If
+                Return txtSettlementDiscount.Text.ToDecimalNumber(_nfi)
             End Get
             Set
                 txtSettlementDiscount.Text = Value
@@ -385,24 +377,16 @@ Namespace PresentationLayer.Forms
 
         Public Property OpeningBalance As Single Implements ICustomerView.OpeningBalance
             Get
-                If txtOpeningBalance.Text <> "" Then
-                    Return Convert.ToSingle(txtOpeningBalance.Text)
-                Else
-                    Return 0
-                End If
+                Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtOpeningBalance.Text = Value
+                txtOpeningBalance.Text = Value.ToMoney()
             End Set
         End Property
 
         Public Property PaymentDueDays As Int16 Implements ICustomerView.PaymentDueDays
             Get
-                If txtPaymentDueDays.Text <> "" Then
-                    Return Convert.ToInt16(txtPaymentDueDays.Text)
-                Else
-                    Return 0
-                End If
+                Return txtPaymentDueDays.Text.ToInt16Number()
             End Get
             Set
                 txtPaymentDueDays.Text = Value
@@ -410,6 +394,7 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
+
         Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
             ' Create a resource writer.
             ' just a test program nothing to do with this program
