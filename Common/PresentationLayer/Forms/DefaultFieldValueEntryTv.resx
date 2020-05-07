@@ -313,7 +313,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblFieldName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 61</value>
+    <value>11, 62</value>
   </data>
   <data name="lblFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -346,7 +346,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtFieldName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 61</value>
+    <value>168, 62</value>
   </data>
   <data name="txtFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -373,7 +373,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblDataType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 86</value>
+    <value>11, 87</value>
   </data>
   <data name="lblDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -409,7 +409,7 @@
     <value>False</value>
   </data>
   <data name="cboDataType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 86</value>
+    <value>168, 87</value>
   </data>
   <data name="cboDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -436,7 +436,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 112</value>
+    <value>11, 114</value>
   </data>
   <data name="lblLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -469,7 +469,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 112</value>
+    <value>168, 114</value>
   </data>
   <data name="txtLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -499,7 +499,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 137</value>
+    <value>11, 139</value>
   </data>
   <data name="lblDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -532,7 +532,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 137</value>
+    <value>168, 139</value>
   </data>
   <data name="txtDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -562,7 +562,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 162</value>
+    <value>11, 164</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -595,7 +595,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 162</value>
+    <value>168, 164</value>
   </data>
   <data name="txtLinkedTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -625,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 187</value>
+    <value>11, 189</value>
   </data>
   <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -658,7 +658,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 187</value>
+    <value>168, 189</value>
   </data>
   <data name="txtLinkedField.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -688,7 +688,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 212</value>
+    <value>11, 214</value>
   </data>
   <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -721,7 +721,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 212</value>
+    <value>168, 214</value>
   </data>
   <data name="txtDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

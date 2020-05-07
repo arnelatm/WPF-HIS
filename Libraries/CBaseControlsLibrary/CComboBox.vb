@@ -93,6 +93,18 @@ Public Class CComboBox
     '<Browsable(True)>
     'Public Property FixedDataSource As Boolean = True
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the lowest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MinimumValue As Decimal? = Nothing
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the highest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MaximumValue As Decimal? = Nothing
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>

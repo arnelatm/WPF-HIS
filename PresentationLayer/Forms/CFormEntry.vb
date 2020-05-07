@@ -717,13 +717,35 @@ Public Class CFormEntry
                 If fldName.ToLower() = row.FldName.ToLower Then
                     If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CComboBox OrElse TypeOf cCtrl Is CMaskedTextBox OrElse
                        TypeOf cCtrl Is CTextBoxArabic Then
-                        'Dim mm As TextBox = CCtrl
-                        If row.FldType.ToLower = "int" OrElse row.FldType.ToLower = "numeric" OrElse row.FldType.ToLower = "decimal" OrElse row.FldType.ToLower = "single" OrElse row.FldType.ToLower = "money" Then
-                            If row.FldType.ToLower = "money" Then
-                                SetPropertyValue(cCtrl, "Maxlength", 19)
-                            Else
-                                SetPropertyValue(cCtrl, "Maxlength", row.MaxLength)
-                            End If
+                        If row.FldType.ToLower = "int" OrElse
+                            row.FldType.ToLower = "smallint" OrElse
+                            row.FldType.ToLower = "money" OrElse
+                            row.FldType.ToLower = "decimal" OrElse
+                            row.FldType.ToLower = "bigint" OrElse
+                            row.FldType.ToLower = "tinyint" OrElse
+                            row.FldType.ToLower = "smallmoney" OrElse
+                            row.FldType.ToLower = "real" OrElse
+                            row.FldType.ToLower = "float" OrElse
+                            row.FldType.ToLower = "numeric" Then
+
+                            Select Case row.FldType.ToLower
+                                Case "tinyint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", 0)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 255)
+                                Case "smallint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -32768)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 32767)
+                                Case "bigint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807)
+                            End Select
+
+
+                            'If row.FldType.ToLower = "money" Then
+                            '    SetPropertyValue(cCtrl, "Maxlength", 19)
+                            'Else
+                            '    SetPropertyValue(cCtrl, "Maxlength", row.MaxLength)
+                            'End If
 
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
                             'If CommonDaoOld.IsFieldUnique(MainTableName, fldName) Then

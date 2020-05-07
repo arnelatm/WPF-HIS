@@ -31,6 +31,18 @@ Public Class CMaskedTextBox
         End Set
     End Property
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the lowest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MinimumValue As Decimal? = Nothing
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the highest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MaximumValue As Decimal? = Nothing
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode

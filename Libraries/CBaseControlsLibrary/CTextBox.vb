@@ -119,6 +119,19 @@ Public Class CTextBox
         End Set
     End Property
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the lowest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MinimumValue As Decimal? = Nothing
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to the highest allowed value for this control")>
+    <Browsable(True)>
+    Public Property MaximumValue As Decimal? = Nothing
+
+
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Me.ReadOnly = Not editableControl
     'End Sub

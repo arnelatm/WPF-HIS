@@ -30,6 +30,7 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTableName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboTableName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDataType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -43,7 +44,6 @@ Namespace PresentationLayer.Forms
             Me.txtLinkedField = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDefaultValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboTableName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -126,6 +126,30 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblTableName, "lblTableName")
             Me.lblTableName.Name = "lblTableName"
             '
+            'cboTableName
+            '
+            Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+            Me.cboTableName.BackColor = System.Drawing.Color.White
+            Me.cboTableName.DefaultValue = Nothing
+            Me.cboTableName.DisplayOnly = False
+            Me.cboTableName.EditingMode = True
+            resources.ApplyResources(Me.cboTableName, "cboTableName")
+            Me.cboTableName.ForeColor = System.Drawing.Color.Black
+            Me.cboTableName.FormattingEnabled = True
+            Me.cboTableName.HideWhenNotEditingOrAdding = False
+            Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15")})
+            Me.cboTableName.LinkedLabel = Nothing
+            Me.cboTableName.Name = "cboTableName"
+            Me.cboTableName.OldValue = 0
+            Me.cboTableName.OriginalDataSource = Nothing
+            Me.cboTableName.OriginalDropDownStyle = 1
+            Me.cboTableName.OriginalList = Nothing
+            Me.cboTableName.PreviousSelectedIndex = -1
+            Me.cboTableName.ReadOnlyCombo = False
+            Me.cboTableName.ValueIsMandatory = False
+            Me.cboTableName.ValueIsNullable = False
+            Me.cboTableName.ValueIsNumeric = False
+            '
             'lblFieldName
             '
             Me.lblFieldName.DisplayOnly = True
@@ -197,6 +221,7 @@ Namespace PresentationLayer.Forms
             Me.txtLength.OldValue = Nothing
             Me.txtLength.ReadOnly = True
             Me.txtLength.ValueIsMandatory = True
+            Me.txtLength.ValueIsNumeric = True
             '
             'lblDecimalPart
             '
@@ -293,29 +318,6 @@ Namespace PresentationLayer.Forms
             Me.txtDefaultValue.OldValue = Nothing
             Me.txtDefaultValue.ReadOnly = True
             Me.txtDefaultValue.ValueIsMandatory = True
-            '
-            'cboTableName
-            '
-            Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-            Me.cboTableName.BackColor = System.Drawing.Color.White
-            Me.cboTableName.DefaultValue = Nothing
-            Me.cboTableName.DisplayOnly = False
-            Me.cboTableName.EditingMode = True
-            resources.ApplyResources(Me.cboTableName, "cboTableName")
-            Me.cboTableName.FormattingEnabled = True
-            Me.cboTableName.HideWhenNotEditingOrAdding = False
-            Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15")})
-            Me.cboTableName.LinkedLabel = Nothing
-            Me.cboTableName.Name = "cboTableName"
-            Me.cboTableName.OldValue = 0
-            Me.cboTableName.OriginalDataSource = Nothing
-            Me.cboTableName.OriginalDropDownStyle = 1
-            Me.cboTableName.OriginalList = Nothing
-            Me.cboTableName.PreviousSelectedIndex = -1
-            Me.cboTableName.ReadOnlyCombo = False
-            Me.cboTableName.ValueIsMandatory = False
-            Me.cboTableName.ValueIsNullable = False
-            Me.cboTableName.ValueIsNumeric = False
             '
             'DefaultFieldValueEntryTv
             '
