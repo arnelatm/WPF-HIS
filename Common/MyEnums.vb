@@ -100,6 +100,27 @@ Public Enum DebitCreditSelection
     Credit
 End Enum
 
+<TypeConverter(GetType(LocalizedEnumConverter))>
+Public Enum DataTypeSelection
+    BooleanType = 0
+    ByteType = 1
+    CharType = 2
+    DateType = 3
+    DecimalType = 4
+    DoubleType = 5
+    IntegerType = 6
+    LongType = 7
+    ObjectType = 8
+    SByteType = 9
+    ShortType = 10
+    SingleType = 11
+    StringType = 12
+    UIntegerType = 13
+    ULongType = 14
+    UserDefinedType = 15
+    UShortType = 16
+End Enum
+
 Public Module Adapter
 
     Public Function MaleFemaleToEnum(value As String)

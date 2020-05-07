@@ -44,14 +44,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
     Private _tableColumnPropertyList As List(Of TblColPropModel)
-    Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+
+    'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
+
     Private _undoMode As Boolean = False
 
     Shared Sub New()
         Model = New Model()
         ModelTblColProp = New ModelTblColProp
-        ModelDefaultFieldValue = New ModelDefaultFieldValue
+        'ModelDefaultFieldValue = New ModelDefaultFieldValue
     End Sub
 
     Public Sub New(view As T)
@@ -69,7 +71,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
-            TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
+            'TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End If
     End Sub
 
@@ -122,26 +124,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Event TextDisplayChanged()
 
     Public Event UndoEdits(addingRec As Boolean)
-
-    Public Enum DataTypeSelection
-        BooleanType = 0
-        ByteType = 1
-        CharType = 2
-        DateType = 3
-        DecimalType = 4
-        DoubleType = 5
-        IntegerType = 6
-        LongType = 7
-        ObjectType = 8
-        SByteType = 9
-        ShortType = 10
-        SingleType = 11
-        StringType = 12
-        UIntegerType = 13
-        ULongType = 14
-        UserDefinedType = 15
-        UShortType = 16
-    End Enum
 
     Public Property AddMode As Boolean
         Set
@@ -209,7 +191,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Set
     End Property
 
-    Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
+    'Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
 
     Public Shared Property TableName As String
 
@@ -264,8 +246,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected Property FieldsToShow As String()
     Protected Property FilterKey As String = Nothing
     Protected Shared Property Model As New Model()
-
-    Protected Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 
     Protected Shared Property ModelTblColProp As IModelTblColProp
 
@@ -567,12 +547,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Sub GoAddRecord()
+    Public Overridable Sub GoAddRecord()
         LastIdNo = CallByName(View, IdFieldName, CallType.Get)
         Try
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
-            MakeDefaultValues()
+            'MakeDefaultValues()
             AddMode = True
             'EditMode = False
             RaiseEvent BeforeAdd()
@@ -735,49 +715,49 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Sub MakeDefaultValues()
-        For Each item In TableDefaultFieldValues
-            Select Case item.DataType
-                Case DataTypeSelection.StringType
-                    CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-                Case DataTypeSelection.CharType
-                    CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-                Case DataTypeSelection.IntegerType
-                    CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
-                Case DataTypeSelection.BooleanType
-                    CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
-                Case DataTypeSelection.SingleType
-                    CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
-                Case DataTypeSelection.DoubleType
-                    CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
-                Case DataTypeSelection.DecimalType
-                    CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
-                Case DataTypeSelection.LongType
-                    CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
-                Case DataTypeSelection.DateType
-                    If item.DefaultValue = "today" Then
-                        CallByName(View, item.FieldName, CallType.Set, Today())
-                    ElseIf item.DefaultValue = "yesterday" Then
-                        CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
-                    ElseIf item.DefaultValue = "tomorrow" Then
-                        CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
-                    Else
-                        CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
-                    End If
-                Case DataTypeSelection.ShortType
-                    CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
-                Case DataTypeSelection.UIntegerType
-                    CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
-                Case DataTypeSelection.ULongType
-                    CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
-                Case DataTypeSelection.UShortType
-                    CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
-                Case Else
-                    MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
-            End Select
-        Next item
-        Return
-    End Sub
+    'Public Sub MakeDefaultValues()
+    '    For Each item In TableDefaultFieldValues
+    '        Select Case item.DataType
+    '            Case DataTypeSelection.StringType
+    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+    '            Case DataTypeSelection.CharType
+    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+    '            Case DataTypeSelection.IntegerType
+    '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
+    '            Case DataTypeSelection.BooleanType
+    '                CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
+    '            Case DataTypeSelection.SingleType
+    '                CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
+    '            Case DataTypeSelection.DoubleType
+    '                CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
+    '            Case DataTypeSelection.DecimalType
+    '                CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
+    '            Case DataTypeSelection.LongType
+    '                CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
+    '            Case DataTypeSelection.DateType
+    '                If item.DefaultValue = "today" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, Today())
+    '                ElseIf item.DefaultValue = "yesterday" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
+    '                ElseIf item.DefaultValue = "tomorrow" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
+    '                Else
+    '                    CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
+    '                End If
+    '            Case DataTypeSelection.ShortType
+    '                CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
+    '            Case DataTypeSelection.UIntegerType
+    '                CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
+    '            Case DataTypeSelection.ULongType
+    '                CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
+    '            Case DataTypeSelection.UShortType
+    '                CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
+    '            Case Else
+    '                MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
+    '        End Select
+    '    Next item
+    '    Return
+    'End Sub
 
     Public Function MakeEnumComboList(Of TE)()
         If EnumConverter Is Nothing Then

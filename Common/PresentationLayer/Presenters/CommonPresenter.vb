@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -8,14 +9,21 @@ Namespace PresentationLayer.Presenters
         Inherits Presenter(Of T, TM)
 
         Private Shared Shadows Property CommonModel As IModelCommon
+        Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+
+        Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 
         Shared Sub New()
             CommonModel = New ModelCommon()
+            ModelDefaultFieldValue = New ModelDefaultFieldValue
         End Sub
 
         Public Sub New(view As IView)
             MyBase.New(view)
+            TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End Sub
+
+        Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
 
         Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
@@ -225,6 +233,55 @@ Namespace PresentationLayer.Presenters
             Next
             Return GetTableListFiltered()
         End Function
+
+        Public Overrides Sub GoAddRecord()
+            MyBase.GoAddRecord()
+            MakeDefaultValues()
+        End Sub
+
+        Public Sub MakeDefaultValues()
+            For Each item In TableDefaultFieldValues
+                Select Case item.DataType
+                    Case DataTypeSelection.StringType
+                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                    Case DataTypeSelection.CharType
+                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                    Case DataTypeSelection.IntegerType
+                        CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
+                    Case DataTypeSelection.BooleanType
+                        CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
+                    Case DataTypeSelection.SingleType
+                        CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
+                    Case DataTypeSelection.DoubleType
+                        CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
+                    Case DataTypeSelection.DecimalType
+                        CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
+                    Case DataTypeSelection.LongType
+                        CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
+                    Case DataTypeSelection.DateType
+                        If item.DefaultValue = "today" Then
+                            CallByName(View, item.FieldName, CallType.Set, Today())
+                        ElseIf item.DefaultValue = "yesterday" Then
+                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
+                        ElseIf item.DefaultValue = "tomorrow" Then
+                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
+                        Else
+                            CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
+                        End If
+                    Case DataTypeSelection.ShortType
+                        CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
+                    Case DataTypeSelection.UIntegerType
+                        CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
+                    Case DataTypeSelection.ULongType
+                        CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
+                    Case DataTypeSelection.UShortType
+                        CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
+                    Case Else
+                        MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
+                End Select
+            Next item
+            Return
+        End Sub
 
     End Class
 

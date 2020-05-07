@@ -235,7 +235,9 @@
     <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />
     <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\IModelDefaultFieldValue.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
+    <Compile Include="PresentationLayer\Models\ModelDefaultFieldValue.vb" />
     <Compile Include="PresentationLayer\Models\OriginalCaptionsModel.vb" />
     <Compile Include="PresentationLayer\Models\OriginalMessagesModel.vb" />
     <Compile Include="PresentationLayer\Models\PhoneTypeModel.vb" />
