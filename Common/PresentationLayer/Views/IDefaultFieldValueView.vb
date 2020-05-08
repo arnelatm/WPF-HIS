@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property TableName As String
         Property FieldName As String
         Property DataType As Byte
-        Property Length As Byte
+        Property Length As Int16?
         Property DecimalPart As Byte
         Property LinkedTable As String
         Property LinkedField As String

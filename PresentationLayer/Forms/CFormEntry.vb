@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Reflection
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
@@ -213,6 +214,26 @@ Public Class CFormEntry
         FirstControl.Focus()
     End Sub
 
+    Public Function ValidateNumericValues()
+        Dim validationsPassed As Boolean
+        validationsPassed = True
+        Dim allControls As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+            If TypeOf cCtrl Is IEntryControl Then
+                If TypeOf cCtrl Is CTextBox Then
+                    Dim thisControl As CTextBox = cCtrl
+                    If thisControl.ValueIsNumeric Then
+                        If Not ValidateNumber(cCtrl) Then
+                            validationsPassed = False
+                            Exit For
+                        End If
+                    End If
+                End If
+            End If
+        Next
+        Return validationsPassed
+    End Function
+
     Public Function ValidateView()
         Dim validationsPassed As Boolean
         validationsPassed = True
@@ -236,9 +257,16 @@ Public Class CFormEntry
                     If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
                         thisControl.Text = englishText
                     End If
-                ElseIf TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
+                ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
                     ' check for duplicate values
-                    If GetPropertyValue(cCtrl, "ValueIsUnique") Then
+                    Dim thisControl As CTextBox = cCtrl
+                    If thisControl.ValueIsNumeric Then
+                        If Not ValidateNumber(cCtrl) Then
+                            validationsPassed = False
+                        Else
+                            validationsPassed = True
+                        End If
+                    ElseIf GetPropertyValue(cCtrl, "ValueIsUnique") Then
                         Dim fldName As String = cCtrl.Name.Substring(3)
                         Dim fieldDescription As String
                         If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
@@ -273,6 +301,131 @@ Public Class CFormEntry
         PresenterObj.AutoValidationsPassed = validationsPassed
         Return validationsPassed
     End Function
+
+    Public Function ValidateNumber(ByRef obj As Object)
+        Dim objName = Strings.Mid(obj.Name, 4)
+        If objName.ToLower() = "length" Or objName.ToLower() = "decimalpart" Then
+            Debugger.Break()
+        End If
+        Dim targetValue = obj.Text
+
+        Dim y As PropertyInfo = [GetType]().GetProperty(objName)
+        Dim x As Type = y.PropertyType
+        Dim u As Type = Nullable.GetUnderlyingType(x)
+        If targetValue.Equals(DBNull.Value) Or String.IsNullOrEmpty(targetValue) Then
+            If u IsNot Nothing Then
+                Return True
+            Else
+                MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                Return False
+            End If
+        Else
+            Dim num As Double
+            Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+            If Not isNumeric Then
+                MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> is not a number!")
+                Return False
+            End If
+            Dim nMinValue As Double
+            Dim nMaxValue As Double
+            Dim typeCode As TypeCode
+            If u Is Nothing Then
+                typeCode = Type.GetTypeCode(x)
+                nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+            Else
+                typeCode = Type.GetTypeCode(u)
+                nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+            End If
+            If num < nMinValue OrElse num > nMaxValue Then
+                MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & "-" & nMaxValue.ToString())
+                Return False
+            End If
+            Return True
+        End If
+
+        'If x IsNot Nothing Then
+        '    If targetValue Is Nothing Then
+        '        Return True
+        '    Else
+        '        Dim num As Decimal
+        '        Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+        '        If Not isNumeric Then
+        '            MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> is not a number!")
+        '            Return False
+        '        End If
+        '        Select Case x.Name
+        '            Case "Byte"
+        '                If num < 0 OrElse num > 255 Then
+        '                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between 0-255.")
+        '                    Return False
+        '                End If
+        '                Return True
+        '            Case Else
+        '                Return True
+        '        End Select
+        '    End If
+        'Else
+        '    Return True
+        'End If
+    End Function
+
+    'Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double
+    '    Dim objName = Strings.Mid(obj.Name, 4)
+    '    Dim targetValue = obj.Text
+    '    Dim y As PropertyInfo = [GetType]().GetProperty(objName)
+    '    Dim x As Type = y.PropertyType
+    '    Dim u As Type = Nullable.GetUnderlyingType(x)
+    '    Dim typeCode As TypeCode
+    '    Dim nMinValue As Double
+    '    If u Is Nothing Then
+    '        typeCode = Type.GetTypeCode(x)
+    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+    '    Else
+    '        typeCode = Type.GetTypeCode(u)
+    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+    '    End If
+    '    Return nMinValue
+    'End Function
+
+    'Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
+    '    Dim nMinValue As Double
+    '    Select Case typeCode
+    '        Case TypeCode.Byte
+    '            nMinValue = Byte.MinValue
+    '            nMaxValue = Byte.MaxValue
+    '        Case TypeCode.Int16
+    '            nMinValue = Int16.MinValue
+    '            nMaxValue = Int16.MaxValue
+    '        Case TypeCode.Int32
+    '            nMinValue = Int32.MinValue
+    '            nMaxValue = Int32.MaxValue
+    '        Case TypeCode.Int64
+    '            nMinValue = Int64.MinValue
+    '            nMaxValue = Int64.MaxValue
+    '        Case TypeCode.UInt16
+    '            nMinValue = UInt16.MinValue
+    '            nMaxValue = UInt16.MaxValue
+    '        Case TypeCode.UInt32
+    '            nMinValue = UInt32.MinValue
+    '            nMaxValue = UInt32.MaxValue
+    '        Case TypeCode.UInt64
+    '            nMinValue = UInt64.MinValue
+    '            nMaxValue = UInt64.MaxValue
+    '        Case TypeCode.Single
+    '            nMinValue = Single.MinValue
+    '            nMaxValue = Single.MaxValue
+    '        Case TypeCode.Decimal
+    '            nMinValue = Decimal.MinValue
+    '            nMaxValue = Decimal.MaxValue
+    '        Case TypeCode.DBNull
+    '            nMinValue = 0
+    '            nMaxValue = 0
+    '        Case Else
+    '            nMinValue = Double.MinValue
+    '            nMaxValue = Double.MaxValue
+    '    End Select
+    '    Return nMinValue
+    'End Function
 
     Protected Overridable Sub AddMandatoryFieldCHeck()
     End Sub
@@ -482,9 +635,10 @@ Public Class CFormEntry
                 cGrid.EndEdit()
             End If
         Next
-
-        RaiseEvent BeforeSave()
-        RunButtonRoutine(ButtonClicked.Save)
+        If ValidateNumericValues() Then
+            RaiseEvent BeforeSave()
+            RunButtonRoutine(ButtonClicked.Save)
+        End If
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
@@ -705,7 +859,7 @@ Public Class CFormEntry
             ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
             ' textboxes  = txt<FieldName>
             ' combobox   = cbo<FieldName>
-            ' datetimepicker = dtp<FieldName>
+            ' datetimePicker = dtp<FieldName>
             ' so to get the field name just get the characters from the control starting at the 4th character onwards
             Dim fldName As String
             fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
@@ -729,17 +883,19 @@ Public Class CFormEntry
                             row.FldType.ToLower = "numeric" Then
 
                             Select Case row.FldType.ToLower
+                                Case "int"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 2147483648D)
                                 Case "tinyint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", 0)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 255)
+                                    SetPropertyValue(cCtrl, "MinimumValue", 0D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 255D)
                                 Case "smallint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", -32768)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 32767)
+                                    SetPropertyValue(cCtrl, "MinimumValue", -32768D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 32767D)
                                 Case "bigint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807)
+                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
                             End Select
-
 
                             'If row.FldType.ToLower = "money" Then
                             '    SetPropertyValue(cCtrl, "Maxlength", 19)

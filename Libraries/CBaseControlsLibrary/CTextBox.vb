@@ -9,7 +9,6 @@ Public Class CTextBox
     Implements IEntryControl
 
     Private _defaultVal As String
-    Private _isNumeric As Boolean
     Private _isMandatory As Boolean
     Private _displayOnly As Boolean
     Private _textToSearch As String
@@ -120,17 +119,14 @@ Public Class CTextBox
     End Property
 
     <Category("Custom Properties")>
-    <DefaultValue(False)>
     <Description("Set to the lowest allowed value for this control")>
     <Browsable(True)>
     Public Property MinimumValue As Decimal? = Nothing
 
     <Category("Custom Properties")>
-    <DefaultValue(False)>
     <Description("Set to the highest allowed value for this control")>
     <Browsable(True)>
     Public Property MaximumValue As Decimal? = Nothing
-
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Me.ReadOnly = Not editableControl
@@ -155,13 +151,6 @@ Public Class CTextBox
     <Description("Set to True to specify that this control will only accept numeric values.")>
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean
-        Get
-            Return _isNumeric
-        End Get
-        Set
-            _isNumeric = Value
-        End Set
-    End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
