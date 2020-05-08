@@ -15,7 +15,7 @@ Namespace PresentationLayer.Forms
             TvMainFieldName = "TableName"
             TvSecondaryFieldName = "FieldName"
             SortOrderKey = "TableName, FieldName"
-            FirstControl = CboTableName
+            FirstControl = cboTableName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DefaultFieldValuePresenter(Me)
             Ea = PresenterObj.Ea
@@ -44,10 +44,10 @@ Namespace PresentationLayer.Forms
 
         Public Property TableName As String Implements IDefaultFieldValueView.TableName
             Get
-                Return CboTableName.Text
+                Return cboTableName.Text
             End Get
             Set
-                CboTableName.Text = Value
+                cboTableName.Text = Value
             End Set
         End Property
 
@@ -60,18 +60,52 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Length As Byte Implements IDefaultFieldValueView.Length
+        Public Property Length As Int16? Implements IDefaultFieldValueView.Length
             Get
-                Return txtLength.Text
+                Return txtLength.Text.ToInt16Number()
             End Get
             Set
                 txtLength.Text = Value
             End Set
         End Property
 
+        Public Function ValidateValue(Of TM)(ByRef originalValue As Object, ByVal targetValue As Object)
+            If targetValue.Equals(DBNull.Value) Or targetValue Is Nothing Then
+                Return Nothing
+            End If
+            Dim x As Type = GetType(TM)
+            Dim u As Type = Nullable.GetUnderlyingType(x)
+
+            If x IsNot Nothing Then
+                If targetValue Is Nothing Then
+                    Return Nothing
+                Else
+                    Dim num As Decimal
+                    Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+                    If Not isNumeric Then
+                        MessageBox.Show($"The entered value for " & originalValue.Name & $" must be a number! Reverting to previous Value.")
+                        Return originalValue.Text
+                    End If
+                    Select Case x.Name
+                        Case "Byte"
+                            If num < 0 OrElse num > 255 Then
+                                MessageBox.Show($"The entered value for " & originalValue.Name & $" must be between 0-255. Reverting to previous Value.")
+                                Return originalValue.Text
+                            End If
+                            Return num.ToString()
+                            'Return CType(Convert.ChangeType(targetValue, u), TM).ToString()
+                        Case Else
+                            Return 0
+                    End Select
+                End If
+            Else
+                Return CType(Convert.ChangeType(targetValue, x), TM)
+            End If
+        End Function
+
         Public Property DecimalPart As Byte Implements IDefaultFieldValueView.DecimalPart
             Get
-                Return txtDecimalPart.Text
+                Return NumParser(Of Byte)(txtDecimalPart.Text)
             End Get
             Set
                 txtDecimalPart.Text = Value
@@ -115,7 +149,7 @@ Namespace PresentationLayer.Forms
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"FieldName", txtFieldName},
-                {"TableName", CboTableName},
+                {"TableName", cboTableName},
                 {"DataType", cboDataType},
                 {"IdNo", TxtIdNo},
                 {"Length", txtLength},

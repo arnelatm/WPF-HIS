@@ -91,6 +91,15 @@ Public Module Extensions
     End Function
 
     <Extension()>
+    Public Function ToByteNumber(numberString As String) As Byte
+        If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
+            Return Convert.ToByte(NumParser(Of Byte)(numberString))
+        Else
+            Return 0@
+        End If
+    End Function
+
+    <Extension()>
     Public Function ToDecimalNumber(numberString As String, nfi As NumberFormatInfo) As Decimal
         If numberString IsNot Nothing AndAlso numberString.Trim() <> "" Then
             Return Convert.ToDecimal(NumParser(Of Decimal)(numberString), nfi)

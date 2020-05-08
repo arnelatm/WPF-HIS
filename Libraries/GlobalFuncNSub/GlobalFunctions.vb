@@ -640,6 +640,64 @@ Public Module GlobalFunctions
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
 
+    Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double
+        Dim objName = Strings.Mid(obj.Name, 4)
+        Dim targetValue = obj.Text
+        Dim y As PropertyInfo = obj.GetProperty(objName)
+        Dim x As Type = y.PropertyType
+        Dim u As Type = Nullable.GetUnderlyingType(x)
+        Dim typeCode As TypeCode
+        Dim nMinValue As Double
+        If u Is Nothing Then
+            typeCode = Type.GetTypeCode(x)
+            nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+        Else
+            typeCode = Type.GetTypeCode(u)
+            nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+        End If
+        Return nMinValue
+    End Function
+
+    Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
+        Dim nMinValue As Double
+        Select Case typeCode
+            Case TypeCode.Byte
+                nMinValue = Byte.MinValue
+                nMaxValue = Byte.MaxValue
+            Case TypeCode.Int16
+                nMinValue = Int16.MinValue
+                nMaxValue = Int16.MaxValue
+            Case TypeCode.Int32
+                nMinValue = Int32.MinValue
+                nMaxValue = Int32.MaxValue
+            Case TypeCode.Int64
+                nMinValue = Int64.MinValue
+                nMaxValue = Int64.MaxValue
+            Case TypeCode.UInt16
+                nMinValue = UInt16.MinValue
+                nMaxValue = UInt16.MaxValue
+            Case TypeCode.UInt32
+                nMinValue = UInt32.MinValue
+                nMaxValue = UInt32.MaxValue
+            Case TypeCode.UInt64
+                nMinValue = UInt64.MinValue
+                nMaxValue = UInt64.MaxValue
+            Case TypeCode.Single
+                nMinValue = Single.MinValue
+                nMaxValue = Single.MaxValue
+            Case TypeCode.Decimal
+                nMinValue = Decimal.MinValue
+                nMaxValue = Decimal.MaxValue
+            Case TypeCode.DBNull
+                nMinValue = 0
+                nMaxValue = 0
+            Case Else
+                nMinValue = Double.MinValue
+                nMaxValue = Double.MaxValue
+        End Select
+        Return nMinValue
+    End Function
+
     'Public Function CompareValues(source, Target) As Boolean
     '    Dim retVal As Boolean = False
     '    Dim source1 As New List(Of String)
