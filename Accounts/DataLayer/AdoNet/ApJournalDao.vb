@@ -34,8 +34,8 @@ Namespace DataLayer.AdoNet
                     "VatAmount," &
                     "VatNumber" &
                     " FROM [ApJournal]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
                     "TransactionType = @TransactionType," &
                     "VatAmount = @VatAmount," &
                     "VatNumber = @VatNumber" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(apJournal))
         End Function
 

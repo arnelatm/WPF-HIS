@@ -16,10 +16,10 @@ Namespace AdoNet
 
         Public Function GetRecordById(idNo) As User Implements IDao(Of User).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, UserName, Password, FullName, SecurityGroupIDNo " &
+                    " SELECT IdNo, UserName, Password, FullName, SecurityGroupIdNo " &
                     "   FROM [User]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -33,7 +33,7 @@ Namespace AdoNet
                 sortExpression = "FullName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, UserName, Password, FullName, SecurityGroupIDNo " &
+                    " SELECT IdNo, UserName, Password, FullName, SecurityGroupIdNo " &
                     "   FROM [User] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -41,8 +41,8 @@ Namespace AdoNet
         Public Function AddRecord(ByRef user As User) As Integer Implements IDao(Of User).AddRecord
             Dim sql As String =
                     " INSERT INTO [User] " &
-                    " (UserName,Password,FullName,SecurityGroupIDNo) " &
-                    " VALUES (@UserName,@Password,@FullName,@SecurityGroupIDNo)"
+                    " (UserName,Password,FullName,SecurityGroupIdNo) " &
+                    " VALUES (@UserName,@Password,@FullName,@SecurityGroupIdNo)"
             Return Db.Insert(sql, Take(user))
         End Function
 
@@ -52,26 +52,26 @@ Namespace AdoNet
                     "    SET UserName = @UserName," &
                     "        Password = @Password," &
                     "        FullName = @FullName," &
-                    "        SecurityGroupIDNo = @SecurityGroupIDNo" &
-                    "  WHERE IDNo = @IDNo"
+                    "        SecurityGroupIdNo = @SecurityGroupIdNo" &
+                    "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(user))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, User) = Function(reader) _
             New User() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .UserName = Extensions.AsString(reader("UserName")),
             .Password = Extensions.AsString(reader("Password")),
             .FullName = Extensions.AsString(reader("FullName")),
-            .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIDNo"))}
+            .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIdNo"))}
 
         Private Function Take(user As User) As Object()
             Return New Object() {
-                                    "@IDNo", user.IdNo,
+                                    "@IdNo", user.IdNo,
                                     "@UserName", user.UserName,
                                     "@Password", user.Password,
                                     "@FullName", user.FullName,
-                                    "@SecurityGroupIDNo", user.SecurityGroupIdNo}
+                                    "@SecurityGroupIdNo", user.SecurityGroupIdNo}
         End Function
 
     End Class

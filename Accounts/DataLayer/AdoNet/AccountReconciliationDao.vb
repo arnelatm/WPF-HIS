@@ -26,8 +26,8 @@ Namespace DataLayer.AdoNet
                     "Posted," &
                     "ReconciliationDate" &
                     " FROM [AccountReconciliation]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             data.AccountReconciliationItems = GetRecordsWithIdNo(idNo, "Sequence")
             Return data
@@ -41,7 +41,7 @@ Namespace DataLayer.AdoNet
                     "Balance = @Balance," &
                     "Posted = @Posted," &
                     "ReconciliationDate = @ReconciliationDate " &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(accountReconciliation))
         End Function
 

@@ -14,8 +14,8 @@ Namespace AdoNet
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode, Notes" &
                     "   FROM [SecurityGroup]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             data.GroupAccesses = GetRecordsWithIdNo(idNo, "SecurityObjectName")
             Return data
@@ -27,7 +27,7 @@ Namespace AdoNet
                 sortExpression = "SecurityGroupName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, SecurityGroupName, FullName, FullNameName " &
+                    " SELECT IdNo, ParentIdNo, SecurityGroupName, FullName, FullNameName " &
                     "   FROM [SecurityGroup] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -41,7 +41,7 @@ Namespace AdoNet
                     "        SecurityGroupCode = @SecurityGroupCode, " &
                     "        ParentIdNo = @ParentIdNo, " &
                     "        Notes = @Notes " &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(securityGroup))
         End Function
 
@@ -57,14 +57,14 @@ Namespace AdoNet
         'Public Sub DeleteSecurityGroup(securityGroup As SecurityGroup) Implements IDao(Of SecurityGroup).DeleteSecurityGroup
         '    Dim sql As String =
         '            " DELETE FROM [SecurityGroup]" &
-        '            "  WHERE IDNo = @IDNo"
+        '            "  WHERE IdNo = @IdNo"
         '    Db.Update(sql, Take(SecurityGroup))
         'End Sub
 
         Private Shared ReadOnly Make As Func(Of IDataReader, SecurityGroup) =
                                     Function(reader) _
             New SecurityGroup() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
             .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra")),
@@ -89,9 +89,9 @@ Namespace AdoNet
             Dim sql As String =
                     "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
                     "left join groupAccess " &
-                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
+                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
                     "Order By " & sortExpression & " ASC "
-            Dim params() As Object = {"@SecurityGroupIDNo", idNo}
+            Dim params() As Object = {"@SecurityGroupIdNo", idNo}
             Return Db.Read(sql, MakeGroupAccess, params).ToList()
         End Function
 
@@ -107,9 +107,9 @@ Namespace AdoNet
         Private Shared ReadOnly MakeGroupAccess As Func(Of IDataReader, GroupAccess) =
                                     Function(reader) _
             New GroupAccess() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
-            .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIDNo")),
-            .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIdNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
             .Editable = Extensions.AsBool(reader("Editable"))

@@ -91,7 +91,7 @@ Namespace PresentationLayer.Forms
             Me.lblVatNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCustomerCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCustomerCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -746,22 +746,22 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblCustomerCode, "lblCustomerCode")
             Me.lblCustomerCode.Name = "lblCustomerCode"
             '
-            'TxtIDNo
+            'TxtIdNo
             '
-            Me.TxtIDNo.BackColor = System.Drawing.Color.White
-            Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIDNo.ComputedValue = False
-            Me.TxtIDNo.CustomFormat = Nothing
-            Me.TxtIDNo.DataBoundControl = True
-            Me.TxtIDNo.DisplayOnly = True
-            Me.TxtIDNo.EditingMode = True
-            resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-            Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIDNo.Name = "TxtIDNo"
-            Me.TxtIDNo.OldValue = Nothing
-            Me.TxtIDNo.ReadOnly = True
-            Me.TxtIDNo.TabStop = False
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
             '
             'lblIdNo
             '
@@ -775,7 +775,7 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-            Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
+            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblCustomerCode)
             Me.floDataDisplay.Controls.Add(Me.txtCustomerCode)
             Me.floDataDisplay.Controls.Add(Me.lblVatNumber)
@@ -1176,7 +1176,7 @@ End Sub
         Friend WithEvents txtOpeningBalance As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblCustomerCode As CLabel
         Friend WithEvents txtCustomerCode As CTextBox
         Friend WithEvents lblVatNumber As CLabel

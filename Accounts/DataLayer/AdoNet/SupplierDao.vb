@@ -53,8 +53,8 @@ Namespace DataLayer.AdoNet
                     "Website," &
                     "ZipCode" &
                     " FROM [Supplier]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim x As Supplier
             x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "SupplierName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, SupplierCode, SupplierName, SupplierNameAra " &
+                    " SELECT IdNo, SupplierCode, SupplierName, SupplierNameAra " &
                     "   FROM [Supplier] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -111,7 +111,7 @@ Namespace DataLayer.AdoNet
                     "VatNumber = @VatNumber," &
                     "Website = @Website," &
                     "ZipCode = @ZipCode" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(supplier))
         End Function
 
@@ -212,7 +212,7 @@ Namespace DataLayer.AdoNet
             .ExpAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("ExpAccountIdNo")),
             .Fax = Extensions.AsString(reader("Fax")),
             .Iban = Extensions.AsString(reader("Iban")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Mobile = Extensions.AsString(reader("Mobile")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDouble(reader("OpeningBalance")),
@@ -252,7 +252,7 @@ Namespace DataLayer.AdoNet
                                     "@ExpAccountIdNo", supplier.ExpAccountIdNo,
                                     "@Fax", supplier.Fax,
                                     "@Iban", supplier.Iban,
-                                    "@IDNo", supplier.IdNo,
+                                    "@IdNo", supplier.IdNo,
                                     "@Mobile", supplier.Mobile,
                                     "@Notes", supplier.Notes,
                                     "@OpeningBalance", supplier.OpeningBalance,

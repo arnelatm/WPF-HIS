@@ -20,7 +20,7 @@ Namespace BusinessLayer.BusinessRules
             '        ParentID Is changed by the user so
             '         check for records which have this record as parent.
             '         check for matching children entries
-            '        If CommonDaoOld.CountRecordWithKey(TxtIDNo.Text, MainTableName, "ParentIdNo") > 0 Then
+            '        If CommonDaoOld.CountRecordWithKey(TxtIdNo.Text, MainTableName, "ParentIdNo") > 0 Then
             '            _MBParentWithChildrenChangedDisallowed.Show(Me)
             '            CancelSave = True
             '            Exit Sub

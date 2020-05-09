@@ -18,10 +18,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Country Implements IDaoAll(Of Country).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
+                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
                     "   FROM [Country]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "CountryName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
+                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
                     "   FROM [Country] order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -49,7 +49,7 @@ Namespace DataLayer.AdoNet
                     "        ISOA3 = @ISOA3," &
                     "        ISON = @ISON," &
                     "        PhoneCode = @PhoneCode" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(country))
         End Function
@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Country) =
                                     Function(reader) _
             New Country() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .CountryName = Extensions.AsString(reader("CountryName")),
             .CountryNameAra = Extensions.AsString(reader("CountryNameAra")),
             .Nationality = Extensions.AsString(reader("Nationality")),
@@ -79,7 +79,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(country As Country) As Object()
             Return New Object() {
-                                    "@IDNo", country.IdNo,
+                                    "@IdNo", country.IdNo,
                                     "@CountryName", country.CountryName,
                                     "@CountryNameAra", country.CountryNameAra,
                                     "@Nationality", country.Nationality,

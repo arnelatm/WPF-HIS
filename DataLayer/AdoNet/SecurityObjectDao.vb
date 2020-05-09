@@ -31,10 +31,10 @@ Namespace AdoNet
         Public Function GetRecordById(idNo) As SecurityObject _
             Implements IDaoAll(Of SecurityObject).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
+                    " SELECT IdNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &
-                    " WHERE IDNo = @IDNo"
-            Dim parms() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim parms() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, parms).FirstOrDefault()
         End Function
 
@@ -63,7 +63,7 @@ Namespace AdoNet
                     "        SecurityObjectNameAra = @SecurityObjectNameAra," &
                     "        ParentIdNo = @ParentIdNo," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(recordData))
         End Function

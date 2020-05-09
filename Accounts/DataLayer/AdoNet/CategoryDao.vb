@@ -19,10 +19,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Category Implements IDaoAll(Of Category).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
+                    " SELECT IdNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
                     "   FROM [Category]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -32,7 +32,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "CategoryName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
+                    " SELECT IdNo, CategoryCode, CategoryName, CategoryNameAra, Notes" &
                     "   FROM [Category] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
                     "        CategoryName = @CategoryName," &
                     "        CategoryNameAra = @CategoryNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(category))
         End Function
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Category) =
                                     Function(reader) _
             New Category() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .CategoryCode = Extensions.AsString(reader("CategoryCode")),
             .CategoryName = Extensions.AsString(reader("CategoryName")),
             .CategoryNameAra = Extensions.AsString(reader("CategoryNameAra")),
@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(category As Category) As Object()
             Return New Object() {
-                                    "@IDNo", category.IdNo,
+                                    "@IdNo", category.IdNo,
                                     "@CategoryCode", category.CategoryCode,
                                     "@CategoryName", category.CategoryName,
                                     "@CategoryNameAra", category.CategoryNameAra,

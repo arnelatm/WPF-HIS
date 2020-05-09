@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Religion Implements IDaoAll(Of Religion).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
+                    " SELECT IdNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "ReligionName"
             End If
             Dim sql As String =
-                    " SELECT IDNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
+                    " SELECT IdNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "        ReligionName = @ReligionName," &
                     "        ReligionNameAra = @ReligionNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(religion))
         End Function
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Religion) =
                                     Function(reader) _
             New Religion() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ReligionCode = Extensions.AsString(reader("ReligionCode")),
             .ReligionName = Extensions.AsString(reader("ReligionName")),
             .ReligionNameAra = Extensions.AsString(reader("ReligionNameAra")),
@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(religion As Religion) As Object()
             Return New Object() {
-                                    "@IDNo", religion.IdNo,
+                                    "@IdNo", religion.IdNo,
                                     "@ReligionCode", religion.ReligionCode,
                                     "@ReligionName", religion.ReligionName,
                                     "@ReligionNameAra", religion.ReligionNameAra,

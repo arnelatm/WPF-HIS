@@ -15,12 +15,12 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
+                    " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
                     " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active" &
                     "   FROM [Employee]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             'Dim x As Employee
             'x = Db.Read(sql, Make, params).FirstOrDefault()
             'Return x
@@ -33,7 +33,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "EmployeeName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
+                    " SELECT IdNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
                     "   FROM [Employee] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
                     " OpeningBalance = @OpeningBalance," &
                     " Balance = @Balance," &
                     " Active = @Active" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(employee))
         End Function
 
@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
             .Gender = Extensions.AsString(reader("Gender")),
             .HiredDate = Extensions.AsNullable(Of Date?)(reader("HiredDate")),
             .Iban = Extensions.AsString(reader("Iban")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .MaritalStatus = Extensions.AsString(reader("MaritalStatus")),
             .NationalIdNo = Extensions.AsString(reader("NationalIdNo")),
             .NationalityCode = Extensions.AsString(reader("NationalityCode")),
@@ -129,7 +129,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(ByRef employee As Employee) As Object()
             Return New Object() {
-                                    "@IDNo", employee.IdNo,
+                                    "@IdNo", employee.IdNo,
                                     "@EmployeeCode", employee.EmployeeCode,
                                     "@Title", employee.Title,
                                     "@EmployeeName", employee.EmployeeName,

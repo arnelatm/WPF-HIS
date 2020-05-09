@@ -26,7 +26,7 @@ Namespace DataLayer.AdoNet
                     "Credit," &
                     "Debit," &
                     "DiscountTaken," &
-                    "IDNo," &
+                    "IdNo," &
                     "JournalIdNo," &
                     "Notes," &
                     "OpenInvoiceIdNo," &
@@ -61,7 +61,7 @@ Namespace DataLayer.AdoNet
             .Credit = Extensions.AsDecimal(reader("Credit")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .Debit = Extensions.AsDecimal(reader("Debit")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OriginalAmount = Extensions.AsDecimal(reader("OriginalAmount")),

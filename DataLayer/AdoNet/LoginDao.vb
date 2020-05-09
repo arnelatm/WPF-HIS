@@ -11,17 +11,17 @@ Namespace AdoNet
 
         Public Function GetLogin(idNo As Int32) As Login Implements ILoginDao.GetLogin
             Dim sql As String =
-                    " SELECT IDNo, UserName, Password" &
+                    " SELECT IdNo, UserName, Password" &
                     "  FROM [User]" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
 
-            Dim params() As Object = {"@IDNo", idNo}
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetLoginByUserName(userName As String) As Login Implements ILoginDao.GetLoginByUserName
             Dim sql As String =
-                    " SELECT IDNo, UserName, Password" &
+                    " SELECT IdNo, UserName, Password" &
                     "   FROM [User]" &
                     "  WHERE UserName = @UserName"
             Dim params() As Object = {"@UserName", userName}
@@ -29,10 +29,10 @@ Namespace AdoNet
             Return x
         End Function
 
-        Public Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login) _
+        Public Function GetLogins(Optional ByVal sortExpression As String = "IdNo ASC") As List(Of Login) _
             Implements ILoginDao.GetLogins
             Dim sql As String =
-                    " SELECT IDNo, UserName, Password" &
+                    " SELECT IdNo, UserName, Password" &
                     "   FROM [User] ".OrderBy(sortExpression)
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -50,14 +50,14 @@ Namespace AdoNet
                     " UPDATE [User]" &
                     "    SET UserName = @UserName, " &
                     "        Password = @Password" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Db.Update(sql, Take(login))
         End Sub
 
         Public Sub DeleteLogin(login As Login) Implements ILoginDao.DeleteLogin
             Dim sql As String =
                     " DELETE FROM [User]" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Db.Update(sql, Take(login))
         End Sub
@@ -67,7 +67,7 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Login) =
                                     Function(reader) _
             New Login() With {
-            .IdNo = Extensions.AsInt(Of Integer)(reader("IDNo")),
+            .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .UserName = Extensions.AsString(reader("UserName")),
             .Password = Extensions.AsString(reader("Password"))
             }
@@ -82,10 +82,10 @@ Namespace AdoNet
 
         'Public Function GetRecordById(idNo) As Login Implements IDao(Of Login).GetRecordById
         '    Dim sql As String =
-        '            " SELECT IDNo, UserName, Password" &
+        '            " SELECT IdNo, UserName, Password" &
         '            "  FROM [User]" &
-        '            " WHERE IDNo = @IDNo"
-        '    Dim params() As Object = {"@IDNo", idNo}
+        '            " WHERE IdNo = @IdNo"
+        '    Dim params() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
     End Class

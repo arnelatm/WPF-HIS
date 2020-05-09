@@ -17,7 +17,7 @@ SELECT        dbo.CheckDisbursementJournalItem.AccountIdNo, dbo.CheckDisbursemen
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CheckDisbursementJournal INNER JOIN
                          dbo.CheckDisbursementJournalItem ON dbo.CheckDisbursementJournal.IdNo = dbo.CheckDisbursementJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CheckDisbursementJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 

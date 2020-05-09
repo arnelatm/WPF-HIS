@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "Caption"
             End If
             Dim sql As String =
-                    " SELECT IDNo, Caption" &
+                    " SELECT IdNo, Caption" &
                     "   FROM [OriginalCaptions] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -46,20 +46,24 @@ Namespace DataLayer.AdoNet
             Dim retVal As Integer = 0
             Dim sql As String = "UPDATE [OriginalCaptions] " &
                     "Set Caption = @Caption " &
-                    "WHERE IDNo = @IDNo"
+                    "WHERE IdNo = @IdNo"
             retVal = _db.Update(sql, Take(originalCaptions))
             If retVal > 0 Then
-                sql = "UPDATE [TranslatedCaption] " &
+                If String.IsNullOrWhiteSpace(originalCaptions.TranslatedCaption) Then
+                    DeleteRecord(originalCaptions.IdNoTranslated, "TranslatedCaption")
+                Else
+                    sql = "UPDATE [TranslatedCaption] " &
                       "SET TranslatedCaption = @TranslatedCaption, " &
                       "LanguageIdNo = @LanguageIdNo, " &
                       "CaptionIdNo = @IdNo " &
-                      "WHERE IDNo = @IdNoTranslated"
-                retVal = _db.Update(sql, TakeTranslatedCaption(originalCaptions))
-                If retVal <= 0 Then
-                    sql = " INSERT INTO [TranslatedCaption] " &
+                      "WHERE IdNo = @IdNoTranslated"
+                    retVal = _db.Update(sql, TakeTranslatedCaption(originalCaptions))
+                    If retVal <= 0 Then
+                        sql = " INSERT INTO [TranslatedCaption] " &
                           " (TranslatedCaption,CaptionIdNo,LanguageIdNo) " &
                           " VALUES (@TranslatedCaption,@IdNo,@LanguageIdNo) "
-                    retVal = _db.Insert(sql, TakeTranslatedCaption(originalCaptions))
+                        retVal = _db.Insert(sql, TakeTranslatedCaption(originalCaptions))
+                    End If
                 End If
             End If
             Return retVal
@@ -94,7 +98,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(originalCaptions As OriginalCaptions) As Object()
             Return New Object() {
-                                    "@IDNo", originalCaptions.IdNo,
+                                    "@IdNo", originalCaptions.IdNo,
                                     "@Caption", originalCaptions.Caption
                                 }
         End Function

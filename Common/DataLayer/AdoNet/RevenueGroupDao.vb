@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As RevenueGroup Implements IDaoAll(Of RevenueGroup).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
+                    " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM [RevenueGroup_View]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "SortKey"
             End If
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
+                    " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM [RevenueGroup_View] order by '" + sortExpression = "'"
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -35,7 +35,7 @@ Namespace DataLayer.AdoNet
         'Public Function GetAll(Optional sortExpression As String = "RevenueGroupName ASC") As List(Of RevenueGroup) _
         '    Implements IDaoAll(Of RevenueGroup).GetAll
         '    Dim sql As String =
-        '            " SELECT IDNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
+        '            " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
         '            "   FROM [RevenueGroup] " & "order by " & sortExpression
         '    Return Db.Read(sql, Make).ToList()
         'End Function
@@ -49,7 +49,7 @@ Namespace DataLayer.AdoNet
                     "        RevenueGroupName = @RevenueGroupName," &
                     "        RevenueGroupNameAra = @RevenueGroupNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(revenueGroup))
         End Function
@@ -66,7 +66,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, RevenueGroup) =
                                     Function(reader) _
             New RevenueGroup() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .RevenueGroupCode = Extensions.AsString(reader("RevenueGroupCode")),
             .RevenueGroupName = Extensions.AsString(reader("RevenueGroupName")),
@@ -78,7 +78,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(revenueGroup As RevenueGroup) As Object()
             Return New Object() {
-                                    "@IDNo", revenueGroup.IdNo,
+                                    "@IdNo", revenueGroup.IdNo,
                                     "@ParentIdNo", revenueGroup.ParentIdNo,
                                     "@RevenueGroupCode", revenueGroup.RevenueGroupCode,
                                     "@RevenueGroupName", revenueGroup.RevenueGroupName,

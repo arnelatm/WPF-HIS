@@ -304,15 +304,15 @@ Public Class CFormEntry
 
     Public Function ValidateNumber(ByRef obj As Object)
         Dim objName = Strings.Mid(obj.Name, 4)
-        If objName.ToLower() = "length" Or objName.ToLower() = "decimalpart" Then
-            Debugger.Break()
-        End If
+        'If objName.ToLower() = "length" Or objName.ToLower() = "decimalpart" Then
+        '    Debugger.Break()
+        'End If
         Dim targetValue = obj.Text
 
-        Dim y As PropertyInfo = [GetType]().GetProperty(objName)
+        Dim y As PropertyInfo = [GetType]().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
         Dim x As Type = y.PropertyType
         Dim u As Type = Nullable.GetUnderlyingType(x)
-        If targetValue.Equals(DBNull.Value) Or String.IsNullOrEmpty(targetValue) Then
+        If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
             If u IsNot Nothing Then
                 Return True
             Else
@@ -323,50 +323,42 @@ Public Class CFormEntry
             Dim num As Double
             Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
             If Not isNumeric Then
-                MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> is not a number!")
+                MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
                 Return False
             End If
             Dim nMinValue As Double
             Dim nMaxValue As Double
-            Dim typeCode As TypeCode
+            Dim typeCode As TypeCode = Type.GetTypeCode(x)
+            Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
             If u Is Nothing Then
-                typeCode = Type.GetTypeCode(x)
-                nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+                nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
             Else
                 typeCode = Type.GetTypeCode(u)
-                nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+                nMinValue = GlobalFunctions.GetMinMaxValue(underlyingTypeCode, nMaxValue)
             End If
             If num < nMinValue OrElse num > nMaxValue Then
-                MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & "-" & nMaxValue.ToString())
+                MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
                 Return False
+            End If
+            Dim isInteger As Boolean = False
+            If u Is Nothing Then
+                If NumTypeIsInteger(typeCode) Then
+                    isInteger = True
+                End If
+            Else
+                If NumTypeIsInteger(underlyingTypeCode) Then
+                    isInteger = True
+                End If
+            End If
+            If isInteger Then
+                If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                    MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
+                    Return False
+                End If
             End If
             Return True
         End If
 
-        'If x IsNot Nothing Then
-        '    If targetValue Is Nothing Then
-        '        Return True
-        '    Else
-        '        Dim num As Decimal
-        '        Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
-        '        If Not isNumeric Then
-        '            MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> is not a number!")
-        '            Return False
-        '        End If
-        '        Select Case x.Name
-        '            Case "Byte"
-        '                If num < 0 OrElse num > 255 Then
-        '                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between 0-255.")
-        '                    Return False
-        '                End If
-        '                Return True
-        '            Case Else
-        '                Return True
-        '        End Select
-        '    End If
-        'Else
-        '    Return True
-        'End If
     End Function
 
     'Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double

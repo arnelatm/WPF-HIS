@@ -31,8 +31,8 @@ Namespace DataLayer.AdoNet
                     "TransactionDate," &
                     "TransactionType" &
                     " FROM [ArJournal]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
                     "SettlementDueDate = @SettlementDueDate," &
                     "TransactionDate = @TransactionDate," &
                     "TransactionType = @TransactionType" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(arJournal))
         End Function
 

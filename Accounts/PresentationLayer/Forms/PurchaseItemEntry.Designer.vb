@@ -39,7 +39,7 @@ Namespace PresentationLayer.Forms
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblGlAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -167,7 +167,7 @@ Namespace PresentationLayer.Forms
         '
         Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
-        Me.CFlowLayout4.Controls.Add(Me.TxtIDNo)
+        Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
         Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemCode)
@@ -211,22 +211,22 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = true
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-        Me.CFlowLayout4.SetFlowBreak(Me.TxtIDNo, true)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = true
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.CFlowLayout4.SetFlowBreak(Me.TxtIdNo, true)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
         '
         'lblCategoryIdNo
         '
@@ -583,7 +583,7 @@ End Sub
         Friend WithEvents txtPurchaseItemName As CTextBox
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblPurchaseItemCode As CLabel
         Friend WithEvents txtPurchaseItemCode As CTextBox
         Friend WithEvents lblPurchaseItemName As CLabel

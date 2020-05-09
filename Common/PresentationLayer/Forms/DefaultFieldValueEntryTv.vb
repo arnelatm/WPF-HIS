@@ -60,7 +60,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Length As Int16? Implements IDefaultFieldValueView.Length
+        Public Property Length As Byte Implements IDefaultFieldValueView.Length
             Get
                 Return txtLength.Text.ToInt16Number()
             End Get

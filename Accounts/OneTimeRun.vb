@@ -29,7 +29,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
         Messaging.AddMessage("MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} and {endDate}!", "Invalid Date")
         Messaging.AddMessage("MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-        Messaging.AddMessage("MsgNoChangesMadeNothingToSave", "No changes made, nothing to save", "Nothing to save.")
+        Messaging.AddMessage("MsgNoChangesMadeNothingToSave", "No changes made or changes have equivalent values as the original values, nothing to save!", "Nothing to save.")
         Messaging.AddMessage("MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
         Messaging.AddMessage("MsgPasswordNotSaved", "Password not saved", "Error")
         Messaging.AddMessage("MsgPaymentCollExistChangeNotAllowed", "Sorry, this account receivable has already been partially or fully collected/discounted, changing account/customer not allowed. Value will revert to previous value.", "Modification Error")

@@ -81,7 +81,7 @@ Public Class ErrorProviderExtended
                     ElseIf TypeOf Controls(i).ControlObj Is CTextBoxArabic OrElse TypeOf Controls(i).ControlObj Is CTextBoxIdNo Then
                         ' Don't check this fields for mandatory values they are checked later when saving and besides
                         ' for CTextBoxArabic this controls are automatically filled with their English Counterpart values if empty.
-                        ' and for CTextBoxIDNo this are Identity Columns and are automatically filled by the Server.
+                        ' and for CTextBoxIdNo this are Identity Columns and are automatically filled by the Server.
                     Else
                         If Trim(Controls(i).ControlObj.text) = "" Then
                             msg &= "> " & Controls(i).DisplayName & vbNewLine

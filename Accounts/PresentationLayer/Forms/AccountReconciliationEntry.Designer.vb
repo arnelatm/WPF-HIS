@@ -42,7 +42,7 @@ Namespace PresentationLayer.Forms
             Me.floHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpReconciliationDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -127,7 +127,7 @@ Namespace PresentationLayer.Forms
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.TxtIDNo)
+        Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblTransactionDate)
         Me.CFlowLayout1.Controls.Add(Me.dtpReconciliationDate)
         Me.CFlowLayout1.Controls.Add(Me.lblBalance)
@@ -149,21 +149,21 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = true
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = true
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
         '
         'lblTransactionDate
         '
@@ -931,7 +931,7 @@ Namespace PresentationLayer.Forms
 End Sub
 
         Friend WithEvents floHeader As CFlowLayout
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpReconciliationDate As CCustomDateTimePicker
         Friend WithEvents lblNotes As CLabel

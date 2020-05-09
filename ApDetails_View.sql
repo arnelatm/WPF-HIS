@@ -31,7 +31,7 @@ CREATE VIEW [dbo].[APDetails_View]
 	  ,[TransactionType]
   FROM [ISPDATA].[dbo].[ApJournalItem] a
   RIGHT OUTER JOIN dbo.ApJournal b
-  on a.JournalIdNo = b.IDNo 
+  on a.JournalIdNo = b.IdNo 
 )
 UNION
 (SELECT 'CK'
@@ -51,7 +51,7 @@ UNION
 	  ,[PaymentType]
   FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] A
   RIGHT OUTER JOIN dbo.CheckDisbursementJournal b
-  on a.JournalIdNo = b.IDNo
+  on a.JournalIdNo = b.IdNo
   WHERE PaymentType='A'
 )
 GO

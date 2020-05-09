@@ -26,10 +26,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IPhoneTypeView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -77,7 +77,7 @@ Namespace PresentationLayer.Forms
                 {"PhoneTypeCode", txtPhoneTypeCode},
                 {"PhoneTypeName", txtPhoneTypeName},
                 {"PhoneTypeNameAra", txtPhoneTypeNameAra},
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

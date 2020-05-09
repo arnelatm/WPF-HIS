@@ -414,6 +414,38 @@ Public Module GlobalFunctions
         Try
             Return Parser(Of T).Parser(numString)
         Catch ex As Exception
+            Dim z As New T
+            Dim x As Type = z.GetType()
+            Dim u As Type = Nullable.GetUnderlyingType(x)
+            Dim typeCode As TypeCode = Type.GetTypeCode(x)
+            Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
+            If u Is Nothing Then
+                If NumTypeIsInteger(typeCode) Then
+                    Dim num As Double
+                    Dim isNumeric As Boolean = Decimal.TryParse(numString, num)
+                    If Not isNumeric Then
+                        Return Parser(Of T).Parser(0)
+                    End If
+                    If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        ' remove trailing zeroes
+                        numString = Strings.Left(numString, numString.IndexOf(".", StringComparison.Ordinal))
+                        Return Parser(Of T).Parser(numString)
+                    End If
+                End If
+            Else
+                If NumTypeIsInteger(underlyingTypeCode) Then
+                    Dim num As Double
+                    Dim isNumeric As Boolean = Decimal.TryParse(numString, num)
+                    If Not isNumeric Then
+                        Return Parser(Of T).Parser(0)
+                    End If
+                    If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        ' remove trailing zeroes
+                        numString = Strings.Left(numString, numString.IndexOf(".", StringComparison.Ordinal) - 1)
+                        Return Parser(Of T).Parser(numString)
+                    End If
+                End If
+            End If
             Return Parser(Of T).Parser(0)
         End Try
     End Function
@@ -640,24 +672,6 @@ Public Module GlobalFunctions
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
 
-    Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double
-        Dim objName = Strings.Mid(obj.Name, 4)
-        Dim targetValue = obj.Text
-        Dim y As PropertyInfo = obj.GetProperty(objName)
-        Dim x As Type = y.PropertyType
-        Dim u As Type = Nullable.GetUnderlyingType(x)
-        Dim typeCode As TypeCode
-        Dim nMinValue As Double
-        If u Is Nothing Then
-            typeCode = Type.GetTypeCode(x)
-            nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-        Else
-            typeCode = Type.GetTypeCode(u)
-            nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-        End If
-        Return nMinValue
-    End Function
-
     Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
         Dim nMinValue As Double
         Select Case typeCode
@@ -696,6 +710,14 @@ Public Module GlobalFunctions
                 nMaxValue = Double.MaxValue
         End Select
         Return nMinValue
+    End Function
+
+    Public Function NumTypeIsInteger(typeCode As TypeCode) As Boolean
+        If TypeCode.Byte OrElse TypeCode.Int16 OrElse TypeCode.Int32 OrElse TypeCode.Int64 _
+            OrElse TypeCode.UInt16 OrElse TypeCode.UInt32 OrElse TypeCode.UInt64 Then
+            Return True
+        End If
+        Return False
     End Function
 
     'Public Function CompareValues(source, Target) As Boolean

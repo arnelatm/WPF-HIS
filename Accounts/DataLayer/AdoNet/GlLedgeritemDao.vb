@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
         '            "Credit," &
         '            "DiscountTaken," &
         '            "Debit," &
-        '            "IDNo," &
+        '            "IdNo," &
         '            "JournalIdNo," &
         '            "Notes," &
         '            "OpenInvoiceIdNo," &
@@ -40,8 +40,8 @@ Namespace DataLayer.AdoNet
         '            "Sequence," &
         '            "SpecialAccount" &
         '            " FROM " & TableFileName &
-        '            " WHERE IDNo = @IDNo"
-        '    Dim params() As Object = {"@IDNo", idNo}
+        '            " WHERE IdNo = @IdNo"
+        '    Dim params() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
 
@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
         '            "AccountIdNo," &
         '            "Credit," &
         '            "Debit," &
-        '            "IDNo," &
+        '            "IdNo," &
         '            "JournalIdNo," &
         '            "Notes," &
         '            "OpenInvoiceIdNo," &
@@ -77,7 +77,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Credit," &
                     "Debit," &
-                    "IDNo," &
+                    "IdNo," &
                     "JournalIdNo," &
                     "Notes," &
                     "PaidAmount," &
@@ -112,7 +112,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Credit," &
                     "Debit," &
-                    "IDNo," &
+                    "IdNo," &
                     "JournalIdNo," &
                     "Notes," &
                     "PaidAmount," &
@@ -137,7 +137,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
             .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .ProfitCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
@@ -149,7 +149,7 @@ Namespace DataLayer.AdoNet
         '                            "@AccountIdNo", glLedgerItem.AccountIdNo,
         '                            "@Credit", glLedgerItem.Credit,
         '                            "@Debit", glLedgerItem.Debit,
-        '                            "@IDNo", glLedgerItem.IdNo,
+        '                            "@IdNo", glLedgerItem.IdNo,
         '                            "@JournalIdNo", glLedgerItem.JournalIdNo,
         '                            "@Notes", glLedgerItem.Notes,
         '                            "@ProfitCenterIdNo", glLedgerItem.ProfitCenterIdNo,

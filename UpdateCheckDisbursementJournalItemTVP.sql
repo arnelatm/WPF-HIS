@@ -36,7 +36,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.[Sequence] = B.[Sequence]
 from CheckDisbursementJournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO

@@ -25,18 +25,18 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetDepartmentList()
-            cacProfitCenterIDNo.DataSource = PresenterObj.GetProfitCenterList()
-            cacCostCenterIDNo.DataSource = PresenterObj.GetCostCenterList()
+            cacProfitCenterIdNo.DataSource = PresenterObj.GetProfitCenterList()
+            cacCostCenterIdNo.DataSource = PresenterObj.GetCostCenterList()
         End Sub
 
 #Region "Fields"
 
         Public Property IdNo As Int32 Implements IDepartmentView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -78,19 +78,19 @@ Namespace PresentationLayer.Forms
 
         Public Property ProfitCenterIdNo As Int32 Implements IDepartmentView.ProfitCenterIdNo
             Get
-                Return cacProfitCenterIDNo.GetValue()
+                Return cacProfitCenterIdNo.GetValue()
             End Get
             Set
-                cacProfitCenterIDNo.SetValue(Value)
+                cacProfitCenterIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property CostCenterIdNo As Int32 Implements IDepartmentView.CostCenterIdNo
             Get
-                Return cacCostCenterIDNo.GetValue()
+                Return cacCostCenterIdNo.GetValue()
             End Get
             Set
-                cacProfitCenterIDNo.SetValue(Value)
+                cacProfitCenterIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -120,11 +120,11 @@ Namespace PresentationLayer.Forms
                 {"DepartmentCode", txtDepartmentCode},
                 {"DepartmentName", txtDepartmentName},
                 {"DepartmentNameAra", txtDepartmentNameAra},
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
-                {"CostCenterIdNo", cacCostCenterIDNo},
-                {"ProfitCenterIdNo", cacProfitCenterIDNo},
-                {"ParentId", TxtIDNo},
+                {"CostCenterIdNo", cacCostCenterIdNo},
+                {"ProfitCenterIdNo", cacProfitCenterIdNo},
+                {"ParentId", TxtIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

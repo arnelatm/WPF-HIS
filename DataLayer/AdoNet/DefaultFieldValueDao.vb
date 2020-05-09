@@ -12,17 +12,17 @@ Namespace AdoNet
         Public Function GetRecordById(idNo) As DefaultFieldValue _
             Implements IDefaultFieldValueDao.GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
+                    " SELECT IdNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
                     "   FROM [DefaultFieldValue]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetAll(Optional sortExpression As String = "TableName") As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetAll
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
+                    " SELECT IdNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
                     "   FROM [DefaultFieldValue] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -39,14 +39,14 @@ Namespace AdoNet
                     "        DefaultValue = @DefaultValue," &
                     "        LinkedTable = @LinkedTable," &
                     "        LinkedField = @LinkedField" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(defaultFieldValue))
         End Function
 
         Public Function GetDefaultFieldValues(tableName As String) As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetTableDefaultValues
             Dim sql As String =
-                    " SELECT IDNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
+                    " SELECT IdNo, TableName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
                     "   FROM [DefaultFieldValue] where TableName = '" & tableName & "'"
             Dim data = Db.Read(sql, Make).ToList()
             Return data
@@ -64,7 +64,7 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DefaultFieldValue) =
                                     Function(reader) _
             New DefaultFieldValue() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .TableName = Extensions.AsString(reader("TableName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
@@ -77,7 +77,7 @@ Namespace AdoNet
 
         Private Function Take(defaultFieldValue As DefaultFieldValue) As Object()
             Return New Object() {
-                                    "@IDNo", defaultFieldValue.IdNo,
+                                    "@IdNo", defaultFieldValue.IdNo,
                                     "@TableName", defaultFieldValue.TableName,
                                     "@FieldName", defaultFieldValue.FieldName,
                                     "@DataType", defaultFieldValue.DataType,

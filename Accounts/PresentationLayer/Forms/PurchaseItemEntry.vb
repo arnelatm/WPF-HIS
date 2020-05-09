@@ -43,14 +43,14 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IPurchaseItemView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
+                If TxtIdNo.Text <> "" Then
+                    Return Convert.ToInt16(TxtIdNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -228,7 +228,7 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
-         {"IdNo", TxtIDNo},
+         {"IdNo", TxtIdNo},
          {"PurchaseItemCode", txtPurchaseItemCode},
          {"PurchaseItemName", txtPurchaseItemName},
          {"PurchaseItemNameAra", txtPurchaseItemNameAra},

@@ -131,14 +131,14 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements ICashDisbursementJournalView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
+                If TxtIdNo.Text <> "" Then
+                    Return Convert.ToInt16(TxtIdNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -304,7 +304,7 @@ Namespace PresentationLayer.Forms
          {"DateCreated", txtDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
-         {"IdNo", TxtIDNo},
+         {"IdNo", TxtIdNo},
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
          {"PaymentType", cboPaymentType},

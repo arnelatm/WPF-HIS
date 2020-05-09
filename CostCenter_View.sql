@@ -14,7 +14,7 @@ GO
 ALTER View [dbo].[CostCenter_View] as 
 with cte as
 (
-select IDNo
+select IdNo
       ,CostCenterCode
       ,CostCenterName
       ,CostCenterNameAra
@@ -29,7 +29,7 @@ select IDNo
 from CostCenter
 where ParentIdNo IS NULL
 union all
-select t.IDNo
+select t.IdNo
       ,t.CostCenterCode
       ,t.CostCenterName
       ,t.CostCenterNameAra
@@ -46,7 +46,7 @@ select t.IDNo
 join CostCenter t on cte.IdNo = t.ParentIdNo
 )
    
-select IDNo
+select IdNo
       ,CostCenterCode
       ,CostCenterName
       ,CostCenterNameAra

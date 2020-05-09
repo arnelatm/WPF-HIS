@@ -27,10 +27,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements ICountryView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -117,7 +117,7 @@ Namespace PresentationLayer.Forms
                 {"CountryCode", txtIsoA2},
                 {"CountryName", txtCountryName},
                 {"CountryNameAra", txtCountryNameAra},
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"Nationality", txtNationality},
                 {"NationalityAra", txtNationalityAra},
                 {"Isoa3", TxtISOA3},

@@ -17,8 +17,8 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, TranslatedCaption, CaptionIdNo, LanguageIdNo " &
                     "   FROM [TranslatedCaption]" &
-                    " WHERE CaptionIdNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE CaptionIdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
                     "    SET TranslatedCaption = @TranslatedCaption," &
                     "        LanguageIdNo = @LanguageIdNo," &
                     "        CaptionIdNo = @CaptionIdNo" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(TranslatedCaption))
         End Function
 
@@ -47,14 +47,14 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, TranslatedCaption) =
                                     Function(reader) _
             New TranslatedCaption() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .CaptionIdNo = Extensions.AsInt(Of Integer)(reader("CaptionIdNo")),
             .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
             }
 
         Private Function Take(TranslatedCaption As TranslatedCaption) As Object()
-            Return New Object() {"@IDNo", TranslatedCaption.IdNo,
+            Return New Object() {"@IdNo", TranslatedCaption.IdNo,
                                  "@CaptionIdNo", TranslatedCaption.CaptionIdNo,
                                  "@LanguageIdNo", TranslatedCaption.LanguageIdNo,
                                  "@TranslatedCaption", TranslatedCaption.TranslatedCaption}

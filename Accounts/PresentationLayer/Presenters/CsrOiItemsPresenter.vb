@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
         '''' <summary>
         ''''     Displays list of Ap CsrOi Items.
         '''' </summary>
-        '''' <param name="csrOiIdNo">CsrOiIDNo id to display.</param>
+        '''' <param name="csrOiIdNo">CsrOiIdNo id to display.</param>
         Public Shadows Sub Display(csrOiIdNo As Int32)
             View.CsrOiItems = Model.GetRecordsWithIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Sub

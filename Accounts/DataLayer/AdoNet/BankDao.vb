@@ -15,10 +15,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Bank Implements IDaoAll(Of Bank).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, BankCode, BankName, BankNameAra" &
+                    " SELECT IdNo, BankCode, BankName, BankNameAra" &
                     "   FROM [Bank]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "BankName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, BankCode, BankName, BankNameAra" &
+                    " SELECT IdNo, BankCode, BankName, BankNameAra" &
                     "   FROM [Bank] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "    SET BankCode = @BankCode," &
                     "        BankName = @BankName," &
                     "        BankNameAra = @BankNameAra" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(bank))
         End Function
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Bank) =
                                     Function(reader) _
             New Bank() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .BankCode = Extensions.AsString(reader("BankCode")),
             .BankName = Extensions.AsString(reader("BankName")),
             .BankNameAra = Extensions.AsString(reader("BankNameAra"))
@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(bank As Bank) As Object()
             Return New Object() {
-                                    "@IDNo", bank.IdNo,
+                                    "@IdNo", bank.IdNo,
                                     "@BankCode", bank.BankCode,
                                     "@BankName", bank.BankName,
                                     "@BankNameAra", bank.BankNameAra

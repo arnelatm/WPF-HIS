@@ -37,7 +37,7 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDistributionSchemeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDistributionSchemeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDistributionSchemeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -71,7 +71,7 @@ Namespace PresentationLayer.Forms
         Me.floJournalHeader.BackColor = System.Drawing.Color.Transparent
         Me.floJournalHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.floJournalHeader.Controls.Add(Me.lblIdNo)
-        Me.floJournalHeader.Controls.Add(Me.TxtIDNo)
+        Me.floJournalHeader.Controls.Add(Me.TxtIdNo)
         Me.floJournalHeader.Controls.Add(Me.lblDistributionSchemeCode)
         Me.floJournalHeader.Controls.Add(Me.txtDistributionSchemeCode)
         Me.floJournalHeader.Controls.Add(Me.lblDistributionSchemeName)
@@ -94,22 +94,22 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = true
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-        Me.floJournalHeader.SetFlowBreak(Me.TxtIDNo, true)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = true
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.floJournalHeader.SetFlowBreak(Me.TxtIdNo, true)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
         '
         'lblDistributionSchemeCode
         '
@@ -400,7 +400,7 @@ Namespace PresentationLayer.Forms
 End Sub
 
         Friend WithEvents floJournalHeader As CFlowLayout
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtDistributionSchemeCode As CTextBox
         Friend WithEvents lblDistributionSchemeCode As CLabel
         Friend WithEvents lblNotes As CLabel

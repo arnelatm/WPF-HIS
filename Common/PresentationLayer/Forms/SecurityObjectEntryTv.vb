@@ -27,10 +27,10 @@ Namespace PresentationLayer.Forms
 #Region "Fields"
         Public Property IdNo As Int32 Implements ISecurityObjectView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -79,7 +79,7 @@ Namespace PresentationLayer.Forms
             cacParentIdNo.DataSource = PresenterObj.GetSecurityObjectList()
         End Sub
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And cacParentIdNo.Text = TxtIDNo.Text Then
+            If PresenterObj.EditMode And cacParentIdNo.Text = TxtIdNo.Text Then
                 Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
                 PresenterObj.CancelSave = True
                 Exit Sub
@@ -95,9 +95,9 @@ Namespace PresentationLayer.Forms
                 {
                 {"SecurityObjectName", txtSecurityObjectName},
                 {"SecurityObjectNameAra", txtSecurityObjectNameAra},
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
-                {"ParentId", TxtIDNo},
+                {"ParentId", TxtIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

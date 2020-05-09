@@ -29,7 +29,7 @@ Namespace PresentationLayer.Forms
         Me._MBRevenueGroupCannotBeParentToItself = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBParentWithChildrenChangedDisallowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MSGMandatoryFields = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtRevenueGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtRevenueGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtRevenueGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -81,27 +81,27 @@ Namespace PresentationLayer.Forms
         '
         Me._MSGMandatoryFields.Value = "Following fields are mandatory, "
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = false
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
-        Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Location = New System.Drawing.Point(256, 11)
-        Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
-        Me.TxtIDNo.TabIndex = 0
-        Me.TxtIDNo.TabStop = false
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = false
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.Location = New System.Drawing.Point(256, 11)
+        Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+        Me.TxtIdNo.TabIndex = 0
+        Me.TxtIdNo.TabStop = false
         '
         'txtRevenueGroupCode
         '
@@ -190,7 +190,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
+        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblRevenueGroupCode)
         Me.floDataDisplay.Controls.Add(Me.txtRevenueGroupCode)
         Me.floDataDisplay.Controls.Add(Me.lblRevenueGroupName)
@@ -457,7 +457,7 @@ Namespace PresentationLayer.Forms
         Me.PerformLayout
 
 End Sub
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtRevenueGroupCode As CTextBox
         Friend WithEvents txtRevenueGroupName As CTextBox
         Friend WithEvents txtRevenueGroupNameAra As CTextBoxArabic

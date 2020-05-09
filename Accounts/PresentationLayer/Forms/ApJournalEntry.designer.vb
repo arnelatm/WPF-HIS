@@ -59,7 +59,7 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -359,7 +359,7 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout3.Controls.Add(Me.lblIdNo)
         Me.CFlowLayout3.Controls.Add(Me.txtJournalCode)
-        Me.CFlowLayout3.Controls.Add(Me.TxtIDNo)
+        Me.CFlowLayout3.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout3.Controls.Add(Me.lblReferenceNo)
         Me.CFlowLayout3.Controls.Add(Me.txtReferenceNo)
         Me.CFlowLayout3.Controls.Add(Me.lblTransactionDate)
@@ -423,25 +423,25 @@ Namespace PresentationLayer.Forms
         Me.txtJournalCode.Text = "AP"
         Me.txtJournalCode.ValueIsMandatory = true
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = true
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIDNo.Location = New System.Drawing.Point(190, 16)
-        Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.Size = New System.Drawing.Size(63, 23)
-        Me.TxtIDNo.TabIndex = 0
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = true
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.Location = New System.Drawing.Point(190, 16)
+        Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.Size = New System.Drawing.Size(63, 23)
+        Me.TxtIdNo.TabIndex = 0
         '
         'lblReferenceNo
         '
@@ -1136,7 +1136,7 @@ End Sub
         Friend WithEvents floApJournalHeader As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtJournalCode As CTextBox
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblReferenceNo As CLabel
         Friend WithEvents txtReferenceNo As CTextBox
         Friend WithEvents lblTransactionDate As CLabel

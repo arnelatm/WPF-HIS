@@ -25,10 +25,10 @@ Namespace DataLayer.AdoNet
 
         'Public Function GetRecordById(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
         '    Dim sql As String =
-        '            " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
+        '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
         '            "   FROM " & TableFileName &
-        '            " WHERE IDNo = @IDNo"
-        '    Dim params() As Object = {"@IDNo", idNo}
+        '            " WHERE IdNo = @IdNo"
+        '    Dim params() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
         'End Function
 
@@ -45,14 +45,14 @@ Namespace DataLayer.AdoNet
         'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of DistributionSchemeItem) _
         '    Implements IDaoAll(Of DistributionSchemeItem)
         '    Dim sql As String =
-        '            " SELECT IDNo, DistributionSchemeIdNo,  " &
+        '            " SELECT IdNo, DistributionSchemeIdNo,  " &
         '            "   FROM " & TableFileName & " order by " & sortExpression
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
         Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
-                    " SELECT IDNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
+                    " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
                     "   FROM " & TableFileName &
                     "  WHERE DistributionSchemeIdNo = " & idNo &
                     "  ORDER BY " & sortExpression
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DistributionSchemeItem) =
                                     Function(reader) _
             New DistributionSchemeItem() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DistributionSchemeIdNo = Extensions.AsInt(Of Integer)(reader("DistributionSchemeIdNo")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
             .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
@@ -80,7 +80,7 @@ Namespace DataLayer.AdoNet
 
         'Private Function Take(distributionSchemeItem As DistributionSchemeItem) As Object()
         '    Return New Object() {
-        '                            "@IDNo", distributionSchemeItem.IdNo,
+        '                            "@IdNo", distributionSchemeItem.IdNo,
         '                            "@DistributionSchemeIdNo", distributionSchemeItem.DistributionSchemeIdNo,
         '                            "@Sequence", distributionSchemeItem.Sequence,
         '                            "@ProfitCenterIdNo", distributionSchemeItem.ProfitCenterIdNo,

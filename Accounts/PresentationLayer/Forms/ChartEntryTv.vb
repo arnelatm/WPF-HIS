@@ -192,13 +192,13 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And ParentIdNo = IDNo Then
+            If PresenterObj.EditMode And ParentIdNo = IdNo Then
                 Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
                 PresenterObj.CancelSave = True
                 Exit Sub
             End If
             If PresenterObj.EditMode And chkDetailAccount.Checked Then
-                Dim acctName = PresenterObj.GetAccountNameOfChild(IDNo)
+                Dim acctName = PresenterObj.GetAccountNameOfChild(IdNo)
                 If Not (acctName Is Nothing Or acctName = "") Then
                     Dim foundAccount = " (" & acctName & ")"
                     MessageBox.Show(Me,
@@ -214,7 +214,7 @@ Namespace PresentationLayer.Forms
             '        ' ParentID is changed by the user so
             '        ' check for records which have this record as parent.
             '        ' check for matching children entries
-            '        If CommonDaoOld.CountRecordWithKey(TxtIDNo.Text, MainTableName, "ParentIdNo") > 0 Then
+            '        If CommonDaoOld.CountRecordWithKey(TxtIdNo.Text, MainTableName, "ParentIdNo") > 0 Then
             '            _MBParentWithChildrenChangedDisallowed.Show(Me)
             '            CancelSave = True
             '            Exit Sub
@@ -240,7 +240,7 @@ Namespace PresentationLayer.Forms
                     {"AccountNameAra", txtAccountNameAra},
                     {"Active", chkActive},
                     {"DetailAccount", chkDetailAccount},
-                    {"IDNo", txtIdNo},
+                    {"IdNo", txtIdNo},
                     {"LevelNumber", txtLevelNumber},
                     {"NormalBalance", cboNormalBalance},
                     {"Notes", txtNotes},
@@ -257,7 +257,7 @@ Namespace PresentationLayer.Forms
         '    ' need to change to blank because of error in selection using arrow keys.
         '    'cacParentIdNo.ValueMember = ""
         '    'cacParentIdNo.DisplayMember = ""
-        '    cacParentIdNo.ValueMember = "IDNo"
+        '    cacParentIdNo.ValueMember = "IdNo"
         '    cacParentIdNo.DisplayMember = "Name"
         '    cacParentIdNo.DataSource = PresenterObj.GetChartList("AccountName")
 

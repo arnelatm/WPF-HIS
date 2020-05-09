@@ -26,10 +26,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IBranchView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -77,7 +77,7 @@ Namespace PresentationLayer.Forms
                 {"BranchCode", txtBranchCode},
                 {"BranchName", txtBranchName},
                 {"BranchNameAra", txtBranchNameAra},
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub
