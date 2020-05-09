@@ -27,10 +27,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IOriginalCaptionsView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 

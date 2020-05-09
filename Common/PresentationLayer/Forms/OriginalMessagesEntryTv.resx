@@ -162,7 +162,7 @@
     <value>535, 17</value>
   </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TxtIDNo.Enabled" type="System.Boolean, mscorlib">
+  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -747,31 +747,31 @@
   <data name="&gt;&gt;floDataDisplay.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TxtIDNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 11</value>
   </data>
-  <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="TxtIDNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="TxtIDNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Name" xml:space="preserve">
-    <value>TxtIDNo</value>
+  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
+    <value>TxtIdNo</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

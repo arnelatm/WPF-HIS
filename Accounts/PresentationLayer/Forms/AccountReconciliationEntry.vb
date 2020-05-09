@@ -79,10 +79,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IAccountReconciliationView.IdNo
             Get
-                Return TxtIDNo.Text.ToInt32Number()
+                Return TxtIdNo.Text.ToInt32Number()
             End Get
             Set
-                TxtIDNo.Text = Value.ToString()
+                TxtIdNo.Text = Value.ToString()
             End Set
         End Property
 
@@ -226,7 +226,7 @@ Namespace PresentationLayer.Forms
                 {
                 {"AccountIdNo", cboAccountIdNo},
                 {"Balance", txtBalance},
-                {"IdNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"ReconciliationDate", dtpReconciliationDate}
                 }
         End Sub

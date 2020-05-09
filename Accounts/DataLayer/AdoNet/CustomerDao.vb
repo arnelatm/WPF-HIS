@@ -15,13 +15,13 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Customer Implements IDaoAll(Of Customer).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, CustomerCode, CustomerName, CustomerNameAra, ContactPerson, ContactDesignation, Street, District, TownCity, " &
+                    " SELECT IdNo, CustomerCode, CustomerName, CustomerNameAra, ContactPerson, ContactDesignation, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Mobile, Fax, Email, Website, VatNumber, CrNumber, AccountStatus, " &
                     " ArAccountIdNo, RevAccountIdNo, DiscountSchemeIdNo, CreditLimit, SettlementDueDays, SettlementDiscount, PaymentDueDays, DateAccountOpen, " &
                     " BankIdNo, BankAccountNo, Iban, PaymentMethod, Notes, OpeningBalance, Active" &
                     "   FROM [Customer]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim x As Customer
             x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
@@ -34,7 +34,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "CustomerName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, CustomerCode, CustomerName, CustomerNameAra " &
+                    " SELECT IdNo, CustomerCode, CustomerName, CustomerNameAra " &
                     "   FROM [Customer] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -78,7 +78,7 @@ Namespace DataLayer.AdoNet
                     "       Notes = @Notes," &
                     "       OpeningBalance = @OpeningBalance," &
                     "       Active = @Active" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(customer))
         End Function
@@ -100,7 +100,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Customer) =
                                     Function(reader) _
             New Customer() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .CustomerCode = Extensions.AsString(reader("CustomerCode")),
             .CustomerName = Extensions.AsString(reader("CustomerName")),
             .CustomerNameAra = Extensions.AsString(reader("CustomerNameAra")),
@@ -141,7 +141,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(ByRef customer As Customer) As Object()
             Return New Object() {
-                                    "@IDNo", customer.IdNo,
+                                    "@IdNo", customer.IdNo,
                                     "@CustomerCode", customer.CustomerCode,
                                     "@CustomerName", customer.CustomerName,
                                     "@CustomerNameAra", customer.CustomerNameAra,

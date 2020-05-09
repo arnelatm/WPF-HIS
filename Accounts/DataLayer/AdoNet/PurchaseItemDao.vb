@@ -15,11 +15,11 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
+                    " SELECT IdNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &
                     "   FROM [PurchaseItem]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "PurchaseItemName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra" &
+                    " SELECT IdNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra" &
                     "   FROM [PurchaseItem] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -53,7 +53,7 @@ Namespace DataLayer.AdoNet
                     "        StdPrice2 = @StdPrice2," &
                     "        StdPrice3 = @StdPrice3," &
                     "        Active = @Active" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(purchaseItem))
         End Function
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseItem) =
                                     Function(reader) _
             New PurchaseItem() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .PurchaseItemCode = Extensions.AsString(reader("PurchaseItemCode")),
             .PurchaseItemName = Extensions.AsString(reader("PurchaseItemName")),
             .PurchaseItemNameAra = Extensions.AsString(reader("PurchaseItemNameAra")),
@@ -92,7 +92,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(purchaseItem As PurchaseItem) As Object()
             Return New Object() {
-                                    "@IDNo", purchaseItem.IdNo,
+                                    "@IdNo", purchaseItem.IdNo,
                                     "@PurchaseItemCode", purchaseItem.PurchaseItemCode,
                                     "@PurchaseItemName", purchaseItem.PurchaseItemName,
                                     "@PurchaseItemNameAra", purchaseItem.PurchaseItemNameAra,

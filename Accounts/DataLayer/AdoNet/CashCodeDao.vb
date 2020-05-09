@@ -25,8 +25,8 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Rate," &
                     " FROM [CashCode]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
         End Function
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
                     "CashNameAra = @CashNameAra," &
                     "IdNo = @IdNo, " &
                     "Rate = @Rate" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(cashCode))
         End Function
 
@@ -97,7 +97,7 @@ Namespace DataLayer.AdoNet
             .CashCode = Extensions.AsString(reader("CashCode")),
             .CashName = Extensions.AsString(reader("CashName")),
             .CashNameAra = Extensions.AsString(reader("CashNameAra")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Rate = Extensions.AsDecimal(reader("Rate"))
             }
 
@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
                                     "@CashCode", cashCode.CashCode,
                                     "@CashName", cashCode.CashName,
                                     "@CashNameAra", cashCode.CashNameAra,
-                                    "@IDNo", cashCode.IdNo,
+                                    "@IdNo", cashCode.IdNo,
                                     "@Rate", cashCode.Rate
                                 }
         End Function

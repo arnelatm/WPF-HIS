@@ -27,7 +27,7 @@
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSecurityGroupCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSecurityGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSecurityGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -64,26 +64,26 @@
             Me.lblIdNo.Text = "SecurityGroup ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'TxtIDNo
+            'TxtIdNo
             '
-            Me.TxtIDNo.BackColor = System.Drawing.Color.White
-            Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIDNo.ComputedValue = False
-            Me.TxtIDNo.CustomFormat = Nothing
-            Me.TxtIDNo.DataBoundControl = True
-            Me.TxtIDNo.DisplayOnly = True
-            Me.TxtIDNo.EditingMode = True
-            Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIDNo.LinkedLabel = Nothing
-            Me.TxtIDNo.Location = New System.Drawing.Point(238, 13)
-            Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.TxtIDNo.Name = "TxtIDNo"
-            Me.TxtIDNo.OldValue = Nothing
-            Me.TxtIDNo.ReadOnly = True
-            Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
-            Me.TxtIDNo.TabIndex = 179
-            Me.TxtIDNo.TabStop = False
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.Location = New System.Drawing.Point(238, 13)
+            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+            Me.TxtIdNo.TabIndex = 179
+            Me.TxtIdNo.TabStop = False
             '
             'lblSecurityGroupCode
             '
@@ -360,7 +360,7 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.lblIdNo)
-            Me.Controls.Add(Me.TxtIDNo)
+            Me.Controls.Add(Me.TxtIdNo)
             Me.Controls.Add(Me.lblSecurityGroupCode)
             Me.Controls.Add(Me.txtSecurityGroupCode)
             Me.Controls.Add(Me.lblSecurityGroupName)
@@ -382,7 +382,7 @@
         End Sub
 
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents TxtIDNo As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblSecurityGroupCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtSecurityGroupCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblSecurityGroupName As Libraries.CBaseControlsLibrary.CLabel

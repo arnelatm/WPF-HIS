@@ -17,8 +17,8 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, TranslatedMessage, TranslatedCaption, MessageIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &
-                    " WHERE MessageIdNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE MessageIdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
                     "        TranslatedCaption = @TranslatedCaption," &
                     "        LanguageIdNo = @LanguageIdNo," &
                     "        MessageIdNo = @MessageIdNo" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(translatedMessages))
         End Function
 
@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, TranslatedMessages) =
                                     Function(reader) _
             New TranslatedMessages() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .MessageIdNo = Extensions.AsInt(Of Integer)(reader("MessageIdNo")),
             .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
             .TranslatedMessage = Extensions.AsString(reader("TranslatedMessage")),
@@ -54,7 +54,7 @@ Namespace DataLayer.AdoNet
             }
 
         Private Function Take(translatedMessages As TranslatedMessages) As Object()
-            Return New Object() {"@IDNo", translatedMessages.IdNo,
+            Return New Object() {"@IdNo", translatedMessages.IdNo,
                                  "@MessageIdNo", translatedMessages.MessageIdNo,
                                  "@LanguageIdNo", translatedMessages.LanguageIdNo,
                                  "@TranslatedMessage", translatedMessages.TranslatedMessage,

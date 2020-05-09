@@ -436,7 +436,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 114</value>
+    <value>11, 113</value>
   </data>
   <data name="lblLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -469,7 +469,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 114</value>
+    <value>168, 113</value>
   </data>
   <data name="txtLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -479,6 +479,9 @@
   </data>
   <data name="txtLength.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="txtLength.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;txtLength.Name" xml:space="preserve">
     <value>txtLength</value>
@@ -499,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 139</value>
+    <value>11, 138</value>
   </data>
   <data name="lblDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -532,7 +535,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 139</value>
+    <value>168, 138</value>
   </data>
   <data name="txtDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -542,6 +545,9 @@
   </data>
   <data name="txtDecimalPart.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="txtDecimalPart.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;txtDecimalPart.Name" xml:space="preserve">
     <value>txtDecimalPart</value>
@@ -562,7 +568,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 164</value>
+    <value>11, 163</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -595,7 +601,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 164</value>
+    <value>168, 163</value>
   </data>
   <data name="txtLinkedTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -625,7 +631,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 189</value>
+    <value>11, 188</value>
   </data>
   <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -658,7 +664,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 189</value>
+    <value>168, 188</value>
   </data>
   <data name="txtLinkedField.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -688,7 +694,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 214</value>
+    <value>11, 213</value>
   </data>
   <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -721,7 +727,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 214</value>
+    <value>168, 213</value>
   </data>
   <data name="txtDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

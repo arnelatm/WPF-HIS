@@ -44,7 +44,7 @@
                 Return 0
             Else
                 Dim sql As String =
-                        " Select IDNo FROM [" & tableName & "] order by " & sortOrder &
+                        " Select IdNo FROM [" & tableName & "] order by " & sortOrder &
                         " OFFSET " & recordNo - 1 & " ROWS fetch Next 1 ROWS ONLY"
                 Dim x As Object
                 x = _db.Scalar(sql)
@@ -59,7 +59,7 @@
                             sortOrder = sortOrder.Trim() + " DESC"
                         End If
                         sortOrder = Replace(sortOrder, " DESC", " ASC", )
-                        sql = "Select TOP 1 IDNo FROM [" & tableName & "] order by " & sortOrder
+                        sql = "Select TOP 1 IdNo FROM [" & tableName & "] order by " & sortOrder
                         x = _db.Scalar(sql)
                     Else
                         Return 0
@@ -82,7 +82,7 @@
             Dim sql As String =
                     " Select count(*) From [" & tableName &
                     "] where " & sortOrder & " <= (Select " & sortOrder &
-                    " from [" & tableName & "] where IDNo = " & idNo & ")"
+                    " from [" & tableName & "] where IdNo = " & idNo & ")"
             Return _db.Scalar(sql)
         End Function
 
@@ -97,7 +97,7 @@
             Implements IBaseDao.GetRecordPosition
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
-                    " Where IDNo < " & idNo
+                    " Where IdNo < " & idNo
             Return _db.Scalar(sql)
         End Function
 
@@ -115,7 +115,7 @@
             Implements IBaseDao.FindField
             Dim retVal As Integer
             Dim sql As String =
-                    " SELECT IDNo FROM [" & tableName & "] " &
+                    " SELECT IdNo FROM [" & tableName & "] " &
                     " Where "
             If searchAnywhere Then
                 searchString = "%" & searchString.Trim() & "%"
@@ -128,7 +128,7 @@
             Dim params() As Object = {"@SearchString", searchString}
             _lastFindQuery = sql
             _lastFindParms = params
-            retVal = _db.Scalar(sql & " order by IDNo ", params)
+            retVal = _db.Scalar(sql & " order by IdNo ", params)
             Return retVal
         End Function
 
@@ -141,13 +141,13 @@
                 retVal = lastIdNo
             Else
                 Dim sql As String
-                sql = _lastFindQuery + " and IDNo > " + lastIdNo.ToString() + " order by IDNo "
+                sql = _lastFindQuery + " and IdNo > " + lastIdNo.ToString() + " order by IdNo "
                 Dim params() As Object = _lastFindParms
                 retVal = _db.Scalar(sql, params)
                 'If RetVal = 0 Then
                 '    MessageBox.Show("This is already the last matching record or no record was found with the last entered search string!")
                 '    '' stay on the current record
-                '    RetVal = LastIDNo
+                '    RetVal = LastIdNo
                 'End If
             End If
             Return retVal
@@ -242,7 +242,7 @@
             Dim sql As String =
                     " Select count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue " &
-                    " and IDNo <> @currentIDNo "
+                    " and IdNo <> @currentIdNo "
             Dim params() As Object = {"@SearchValue", searchValue, "@currentIdNo", currentIdNo}
             Dim nCount = _db.Scalar(sql, params)
             Return Not nCount > 0
@@ -252,8 +252,8 @@
             Implements IBaseDao.GetRecordWithIdNo
             Dim sql As String =
                     " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
-                    " Where IDNO = @IDNo "
-            Dim params() As Object = {"@IDNo", idNo}
+                    " Where IdNo = @IdNo "
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Scalar(sql, params).ToString()
         End Function
 
@@ -263,7 +263,7 @@
             Dim sql As String =
                     " Select top 1 " & dateTimeStampField & " FROM [" & tableName & "] " &
                     " Where IdNo = @IdNo "
-            Dim params() As Object = {"@IDNo", idNo}
+            Dim params() As Object = {"@IdNo", idNo}
             Dim retValue As Object
             retValue = _db.Scalar(sql, params)
             Return retValue
@@ -298,7 +298,7 @@
             Implements IBaseDao.HasRecordChanged
             Dim sql As String = " Select count(*) FROM [" & tableName & "] " &
                                 " Where IdNo = @IdNo and timeStampedField = @timeStampValue "
-            Dim params() As Object = {"@IDNo", idNo, "@timeStampValue", timeStampValue}
+            Dim params() As Object = {"@IdNo", idNo, "@timeStampValue", timeStampValue}
             Dim nCount = _db.Scalar(sql, params)
             Return Not nCount > 0
         End Function
@@ -481,18 +481,18 @@
         Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
             Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
-                    {"@SecurityObjectIDNo", securityObjectIdNo, "@SecurityGroupIDNo", securityGroupIdNo}
+                    {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql =
-                    " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIDNo = @SecurityObjectIDNo and SecurityGroupIDNo = @SecurityGroupIDNo"
+                    " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
             Return _db.SqlRead(sql, params)
         End Function
 
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList Implements IBaseDao.GetUserSecurityForKey
             Dim params() As Object =
-                    {"@SecurityObjectName", securityObjectName, "@SecurityGroupIDNo", securityGroupIdNo}
+                    {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &
                       "Left Join SecurityObject " &
-                      "on GroupAccess.SecurityObjectIDNo = SecurityObject.IdNo " &
+                      "on GroupAccess.SecurityObjectIdNo = SecurityObject.IdNo " &
                       "where SecurityObject.SecurityObjectName = @securityObjectName and GroupAccess.SecurityGroupIdNo = @SecurityGroupIdNo"
             Return _db.SqlRead(sql, params)
         End Function

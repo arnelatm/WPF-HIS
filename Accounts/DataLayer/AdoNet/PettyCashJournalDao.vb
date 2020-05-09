@@ -38,8 +38,8 @@ Namespace DataLayer.AdoNet
                     "VatAmount," &
                     "VatNumber" &
                     " FROM [PettyCashJournal]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New PettyCashJournalItemDao
             Dim oiDao = New PcsOiItemDao
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
                     "UnApplied     = @UnApplied," &
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(pettyCashJournal))
         End Function
 

@@ -225,16 +225,16 @@
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 60</value>
   </data>
-  <data name="TxtIDNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 1</value>
   </data>
-  <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="TxtIDNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
   <data name="$this.Text" xml:space="preserve">

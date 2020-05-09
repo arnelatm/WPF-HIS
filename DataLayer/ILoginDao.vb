@@ -14,7 +14,7 @@ Public Interface ILoginDao
 
     ' gets a sorted list of all Logins
 
-    Function GetLogins(Optional ByVal sortExpression As String = "IDNo ASC") As List(Of Login)
+    Function GetLogins(Optional ByVal sortExpression As String = "IdNo ASC") As List(Of Login)
 
     ' gets Login given an order
 

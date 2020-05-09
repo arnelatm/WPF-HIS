@@ -196,12 +196,12 @@ CREATE TYPE [dbo].[CadOiItemUpdate] AS TABLE(
 	[Amount] [money] NULL,
 	[CadIdNo] [int] NOT NULL,
 	[DiscountTaken] [money] NULL,
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[JournalItemIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -219,12 +219,12 @@ CREATE TYPE [dbo].[CkdOiItemUpdate] AS TABLE(
 	[Amount] [money] NULL,
 	[CkdIdNo] [int] NOT NULL,
 	[DiscountTaken] [money] NULL,
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[JournalItemIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -242,12 +242,12 @@ CREATE TYPE [dbo].[CsrOiItemUpdate] AS TABLE(
 	[Amount] [money] NULL,
 	[CsrIdNo] [int] NOT NULL,
 	[DiscountTaken] [money] NULL,
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[JournalItemIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -267,33 +267,33 @@ CREATE TYPE [dbo].[DistributionSchemeItemInsert] AS TABLE(
 GO
 /****** Object:  UserDefinedTableType [dbo].[DistributionSchemeItemMerge]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[DistributionSchemeItemMerge] AS TABLE(
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[Sequence] [int] NULL,
 	[DistributionSchemeIdNo] [int] NOT NULL,
 	[ProfitCenterIdNo] [int] NOT NULL,
 	[Percentage] [decimal](6, 2) NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
 /****** Object:  UserDefinedTableType [dbo].[DistributionSchemeItemUpdate]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[DistributionSchemeItemUpdate] AS TABLE(
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[DistributionSchemeIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	[ProfitCenterIdNo] [int] NOT NULL,
 	[Percentage] [decimal](6, 2) NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
 /****** Object:  UserDefinedTableType [dbo].[EmployeeLoanJournalItemInsert]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[EmployeeLoanJournalItemInsert] AS TABLE(
-	[JournalIDNo] [int] NOT NULL,
+	[JournalIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NULL,
@@ -304,8 +304,8 @@ CREATE TYPE [dbo].[EmployeeLoanJournalItemInsert] AS TABLE(
 GO
 /****** Object:  UserDefinedTableType [dbo].[EmployeeLoanJournalItemUpdate]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[EmployeeLoanJournalItemUpdate] AS TABLE(
-	[IDNo] [int] NOT NULL,
-	[JournalIDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
+	[JournalIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NULL,
@@ -314,14 +314,14 @@ CREATE TYPE [dbo].[EmployeeLoanJournalItemUpdate] AS TABLE(
 	[Notes] [nvarchar](100) NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
 /****** Object:  UserDefinedTableType [dbo].[GroupAccessInsert]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[GroupAccessInsert] AS TABLE(
-	[SecurityGroupIDNo] [int] NOT NULL,
-	[SecurityObjectIDNo] [int] NOT NULL,
+	[SecurityGroupIdNo] [int] NOT NULL,
+	[SecurityObjectIdNo] [int] NOT NULL,
 	[Visible] [bit] NOT NULL,
 	[Selectable] [bit] NOT NULL,
 	[Viewable] [bit] NOT NULL,
@@ -330,16 +330,16 @@ CREATE TYPE [dbo].[GroupAccessInsert] AS TABLE(
 GO
 /****** Object:  UserDefinedTableType [dbo].[GroupAccessUpdate]    Script Date: 3/28/2020 6:33:04 AM ******/
 CREATE TYPE [dbo].[GroupAccessUpdate] AS TABLE(
-	[IDNo] [int] NOT NULL,
-	[SecurityGroupIDNo] [int] NOT NULL,
-	[SecurityObjectIDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
+	[SecurityGroupIdNo] [int] NOT NULL,
+	[SecurityObjectIdNo] [int] NOT NULL,
 	[Visible] [bit] NOT NULL,
 	[Selectable] [bit] NOT NULL,
 	[Viewable] [bit] NOT NULL,
 	[Editable] [bit] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -348,7 +348,7 @@ CREATE TYPE [dbo].[JournalItemInsert] AS TABLE(
 	[AccountIdNo] [int] NOT NULL,
 	[Credit] [money] NOT NULL,
 	[Debit] [money] NOT NULL,
-	[JournalIDNo] [int] NOT NULL,
+	[JournalIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](100) NOT NULL,
 	[ProfitCenterIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL
@@ -359,14 +359,14 @@ CREATE TYPE [dbo].[JournalItemUpdate] AS TABLE(
 	[AccountIdNo] [int] NOT NULL,
 	[Credit] [money] NOT NULL,
 	[Debit] [money] NOT NULL,
-	[IDNo] [int] NOT NULL,
-	[JournalIDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
+	[JournalIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](100) NOT NULL,
 	[ProfitCenterIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -384,12 +384,12 @@ CREATE TYPE [dbo].[PcsOiItemUpdate] AS TABLE(
 	[Amount] [money] NULL,
 	[PtcIdNo] [int] NOT NULL,
 	[DiscountTaken] [money] NULL,
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[JournalItemIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -413,13 +413,13 @@ GO
 CREATE TYPE [dbo].[SalesCashItemUpdate] AS TABLE(
 	[CashCode] [char](1) NOT NULL,
 	[DepositAmount] [money] NULL,
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[SaleAmount] [money] NULL,
 	[SalesJournalIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (IGNORE_DUP_KEY = OFF)
 )
 GO
@@ -1125,8 +1125,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Chart](
-	[IDNo] [int] NOT NULL,
-	[ParentIDNo] [int] NULL,
+	[IdNo] [int] NOT NULL,
+	[ParentIdNo] [int] NULL,
 	[AccountCode] [varchar](5) NOT NULL,
 	[AccountName] [varchar](50) NOT NULL,
 	[AccountNameAra] [nvarchar](50) NOT NULL,
@@ -1149,7 +1149,7 @@ CREATE TABLE [dbo].[Chart](
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK__ChartIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_ChartCode] UNIQUE NONCLUSTERED 
 (
@@ -1253,7 +1253,7 @@ SELECT        dbo.CashDisbursementJournalItem.AccountIdNo, dbo.CashDisbursementJ
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CashDisbursementJournal INNER JOIN
                          dbo.CashDisbursementJournalItem ON dbo.CashDisbursementJournal.IdNo = dbo.CashDisbursementJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.CashDisbursementJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.CashDisbursementJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CashDisbursementJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  View [dbo].[Chart_View]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1408,7 +1408,7 @@ SELECT        dbo.ArJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArJourn
                          dbo.ArJournalItem.Credit - dbo.ArJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, 
                          dbo.ArJournalItem.Sequence
 FROM            dbo.ArJournalItem INNER JOIN
-                         dbo.Chart ON dbo.ArJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.ArJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ArOpenInvoice ON dbo.ArJournalItem.IdNo = dbo.ArOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[CheckDisbursementJournal]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1481,7 +1481,7 @@ SELECT        dbo.CheckDisbursementJournalItem.AccountIdNo, dbo.CheckDisbursemen
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CheckDisbursementJournal INNER JOIN
                          dbo.CheckDisbursementJournalItem ON dbo.CheckDisbursementJournal.IdNo = dbo.CheckDisbursementJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CheckDisbursementJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[Languages]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1621,7 +1621,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ApJournal](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[SupplierIdNo] [int] NOT NULL,
 	[TransactionDate] [date] NULL,
 	[ReferenceNo] [varchar](15) NULL,
@@ -1642,7 +1642,7 @@ CREATE TABLE [dbo].[ApJournal](
 	[DateTimeStamp] [timestamp] NOT NULL,
  CONSTRAINT [PK_ApIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -1676,7 +1676,7 @@ CREATE VIEW [dbo].[APDetails_View]
 	  ,[TransactionType]
   FROM [ISPDATA].[dbo].[ApJournalItem] a
   RIGHT OUTER JOIN dbo.ApJournal b
-  on a.JournalIdNo = b.IDNo 
+  on a.JournalIdNo = b.IdNo 
 )
 UNION
 (SELECT 'CK'
@@ -1696,7 +1696,7 @@ UNION
 	  ,[PaymentType]
   FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] A
   RIGHT OUTER JOIN dbo.CheckDisbursementJournal b
-  on a.JournalIdNo = b.IDNo
+  on a.JournalIdNo = b.IdNo
   WHERE PaymentType='A'
 )
 GO
@@ -1811,7 +1811,7 @@ SELECT        dbo.GeneralJournalItem.IdNo, dbo.GeneralJournalItem.Sequence, dbo.
                          dbo.Chart.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.GeneralJournal INNER JOIN
                          dbo.GeneralJournalItem ON dbo.GeneralJournal.IdNo = dbo.GeneralJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.GeneralJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.GeneralJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.GeneralJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[CashReceiptJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1848,7 +1848,7 @@ SELECT        dbo.CashReceiptJournalItem.IdNo, dbo.CashReceiptJournalItem.Sequen
                          dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, dbo.CashReceiptJournalItem.Credit - dbo.CashReceiptJournalItem.Debit AS OriginalAmount, 
                          dbo.ApOpenInvoice.PaidAmount, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CashReceiptJournalItem LEFT OUTER JOIN
-                         dbo.Chart ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CashReceiptJournalItem.IdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[PettyCashJournal]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1922,7 +1922,7 @@ SELECT        dbo.PettyCashJournalItem.AccountIdNo, dbo.PettyCashJournalItem.Cre
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.PettyCashJournal INNER JOIN
                          dbo.PettyCashJournalItem ON dbo.PettyCashJournal.IdNo = dbo.PettyCashJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.PettyCashJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.PettyCashJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.PettyCashJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[PurchaseJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1959,7 +1959,7 @@ SELECT        dbo.PurchaseJournalItem.IdNo, dbo.PurchaseJournalItem.Sequence, db
                          dbo.PurchaseJournalItem.Notes, dbo.PurchaseJournalItem.Posted, dbo.PurchaseJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.PurchaseJournalItem.Credit - dbo.PurchaseJournalItem.Debit AS OriginalAmount, dbo.ApOpenInvoice.PaidAmount, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType
 FROM            dbo.PurchaseJournalItem LEFT OUTER JOIN
-                         dbo.Chart ON dbo.PurchaseJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.PurchaseJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.PurchaseJournalItem.IdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[ArJournal]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -1968,7 +1968,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ArJournal](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[CustomerIdNo] [int] NOT NULL,
 	[TransactionDate] [date] NULL,
 	[ReferenceNo] [varchar](15) NULL,
@@ -1987,7 +1987,7 @@ CREATE TABLE [dbo].[ArJournal](
 	[DateTimeStamp] [timestamp] NOT NULL,
  CONSTRAINT [PK_ArIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -2052,7 +2052,7 @@ CREATE VIEW [dbo].[ARDetails_View]
 	  ,[TransactionType]
   FROM [ISPDATA].[dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
-  on a.JournalIdNo = b.IDNo 
+  on a.JournalIdNo = b.IdNo 
 )
 UNION
 (SELECT 'CR'
@@ -2072,7 +2072,7 @@ UNION
 	  ,[PayorType]
   FROM [ISPDATA].[dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
-  on a.JournalIdNo = b.IDNo
+  on a.JournalIdNo = b.IdNo
   WHERE PayorType='A'
 )
 GO
@@ -2091,7 +2091,7 @@ SELECT			dbo.ArOpenInvoice.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArOpenInvoic
                 dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Chart.SpecialAccount
 FROM            dbo.ARDetails_View 
 				INNER JOIN dbo.Chart 
-				ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo 
+				ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IdNo 
 				RIGHT OUTER JOIN dbo.ArOpenInvoice 
 				ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ARDetails_View.JournalCode = dbo.ArOpenInvoice.JournalCode Collate SQL_Latin1_General_CP1_CI_AS
 GO
@@ -2158,7 +2158,7 @@ CREATE TABLE [dbo].[Supplier](
 	[Active] [bit] NULL,
 	[DateCreated] [datetime2](7) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_SupplierDetailsIDNo2] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SupplierDetailsIdNo2] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
@@ -2183,9 +2183,9 @@ SELECT        dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenI
                          dbo.ApJournalItem.Credit, dbo.ApJournalItem.ProfitCenterIdNo, dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.Sequence, 
                          dbo.ApJournal.SupplierIdNo, dbo.ApJournal.InvoiceNo, dbo.ApJournal.InvoiceDate, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra
 FROM            dbo.Chart INNER JOIN
-                         dbo.ApJournalItem ON dbo.Chart.IDNo = dbo.ApJournalItem.AccountIdNo INNER JOIN
-                         dbo.ApJournal ON dbo.ApJournalItem.JournalIdNo = dbo.ApJournal.IDNo INNER JOIN
-                         dbo.Supplier ON dbo.ApJournal.SupplierIdNo = dbo.Supplier.IDNo RIGHT OUTER JOIN
+                         dbo.ApJournalItem ON dbo.Chart.IdNo = dbo.ApJournalItem.AccountIdNo INNER JOIN
+                         dbo.ApJournal ON dbo.ApJournalItem.JournalIdNo = dbo.ApJournal.IdNo INNER JOIN
+                         dbo.Supplier ON dbo.ApJournal.SupplierIdNo = dbo.Supplier.IdNo RIGHT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.ApJournalItem.IdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[PcsOiItem]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -2223,7 +2223,7 @@ FROM        dbo.ApOpenInvoice
 			LEFT OUTER JOIN dbo.APDetails_View 
 			ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode Collate SQL_Latin1_General_CP1_CI_AS
 			LEFT OUTER JOIN dbo.Chart 
-			ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
+			ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IdNo
 GO
 /****** Object:  View [dbo].[PcsOiItem_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -2258,7 +2258,7 @@ FROM            dbo.ApOpenInvoice
 			LEFT OUTER JOIN dbo.APDetails_View 
 			ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS 
 			LEFT OUTER JOIN dbo.Chart 
-			ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo 
+			ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IdNo 
 GO
 /****** Object:  Table [dbo].[Customer]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -2306,7 +2306,7 @@ CREATE TABLE [dbo].[Customer](
 	[Active] [bit] NULL,
 	[DateCreated] [datetime2](7) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_CustomerDetailsIDNo2] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_CustomerDetailsIdNo2] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
@@ -2514,7 +2514,7 @@ UNION
   LEFT OUTER JOIN dbo.[Supplier] s
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
-  on b.PayeeIdNo = e.IDNo 
+  on b.PayeeIdNo = e.IdNo 
 )
 UNION
 (SELECT 'CD'
@@ -2554,7 +2554,7 @@ UNION
   LEFT OUTER JOIN dbo.[Supplier] s
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
-  on b.PayeeIdNo = e.IDNo 
+  on b.PayeeIdNo = e.IdNo 
 )
 UNION
 (SELECT 'CR'
@@ -2598,7 +2598,7 @@ UNION
   LEFT OUTER JOIN dbo.[Supplier] s
   on b.PayorIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
-  on b.PayorIdNo = e.IDNo 
+  on b.PayorIdNo = e.IdNo 
 )
 UNION
 (SELECT 'GJ'
@@ -2658,7 +2658,7 @@ UNION
   LEFT OUTER JOIN dbo.[Supplier] s
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
-  on b.PayeeIdNo = e.IDNo 
+  on b.PayeeIdNo = e.IdNo 
 )
 UNION
 (SELECT 'SJ'
@@ -2721,7 +2721,7 @@ GO
 CREATE View [dbo].[ProfitCenter_View] as 
 with cte as
 (
-select IDNo
+select IdNo
       ,ProfitCenterCode
       ,ProfitCenterName
       ,ProfitCenterNameAra
@@ -2736,7 +2736,7 @@ select IDNo
 from ProfitCenter
 where ParentIdNo IS NULL
 union all
-select t.IDNo
+select t.IdNo
       ,t.ProfitCenterCode
       ,t.ProfitCenterName
       ,t.ProfitCenterNameAra
@@ -2753,7 +2753,7 @@ select t.IDNo
 join ProfitCenter t on cte.IdNo = t.ParentIdNo
 )
    
-select IDNo
+select IdNo
       ,ProfitCenterCode
       ,ProfitCenterName
       ,ProfitCenterNameAra
@@ -2782,7 +2782,7 @@ SELECT        dbo.ApJournalItem.IdNo, dbo.ApJournalItem.Sequence, dbo.ApJournalI
                          dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.ApJournalItem.Credit - dbo.ApJournalItem.Debit AS OriginalAmount, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType
 FROM            dbo.ApJournalItem LEFT OUTER JOIN
-                         dbo.Chart ON dbo.ApJournalItem.AccountIdNo = dbo.Chart.IDNo LEFT OUTER JOIN
+                         dbo.Chart ON dbo.ApJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.ApJournalItem.IdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  View [dbo].[UnpaidOpenInvoices_View]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -2796,7 +2796,7 @@ SELECT        dbo.ApJournalItem_View.IdNo, dbo.ApJournalItem_View.JournalIdNo, d
                          dbo.ApJournalItem_View.PaidAmount, dbo.ApJournalItem_View.OpenInvoiceIdNo, dbo.ApJournalItem_View.OriginalAmount, dbo.ApJournalItem_View.OriginalAmount - dbo.ApJournalItem_View.PaidAmount AS Balance, 
                          dbo.ApJournalItem_View.SpecialAccount, dbo.ApJournal.TransactionDate, dbo.ApJournal.SupplierIdNo, dbo.ApJournal.ReferenceNo
 FROM            dbo.ApJournalItem_View INNER JOIN
-                         dbo.ApJournal ON dbo.ApJournalItem_View.JournalIdNo = dbo.ApJournal.IDNo
+                         dbo.ApJournal ON dbo.ApJournalItem_View.JournalIdNo = dbo.ApJournal.IdNo
 WHERE        (dbo.ApJournalItem_View.SpecialAccount = 'AP')
 GO
 /****** Object:  Table [dbo].[CostCenter]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -2805,7 +2805,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CostCenter](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[CostCenterCode] [varchar](5) NOT NULL,
 	[CostCenterName] [varchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
@@ -2815,7 +2815,7 @@ CREATE TABLE [dbo].[CostCenter](
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK_CostCenterIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -2831,7 +2831,7 @@ GO
 CREATE View [dbo].[CostCenter_View] as 
 with cte as
 (
-select IDNo
+select IdNo
       ,CostCenterCode
       ,CostCenterName
       ,CostCenterNameAra
@@ -2846,7 +2846,7 @@ select IDNo
 from CostCenter
 where ParentIdNo IS NULL
 union all
-select t.IDNo
+select t.IdNo
       ,t.CostCenterCode
       ,t.CostCenterName
       ,t.CostCenterNameAra
@@ -2863,7 +2863,7 @@ select t.IDNo
 join CostCenter t on cte.IdNo = t.ParentIdNo
 )
    
-select IDNo
+select IdNo
       ,CostCenterCode
       ,CostCenterName
       ,CostCenterNameAra
@@ -2912,7 +2912,7 @@ GO
 Create View [dbo].[RevenueGroup_View] as 
 with cte as
 (
-select IDNo
+select IdNo
       ,RevenueGroupCode
       ,RevenueGroupName
       ,RevenueGroupNameAra
@@ -2926,7 +2926,7 @@ select IDNo
 from RevenueGroup
 where ParentIdNo IS NULL
 union all
-select t.IDNo
+select t.IdNo
       ,t.RevenueGroupCode
       ,t.RevenueGroupName
       ,t.RevenueGroupNameAra
@@ -2942,7 +2942,7 @@ select t.IDNo
 join RevenueGroup t on cte.IdNo = t.ParentIdNo
 )
    
-select IDNo
+select IdNo
       ,RevenueGroupCode
       ,RevenueGroupName
       ,RevenueGroupNameAra
@@ -3118,8 +3118,8 @@ CREATE TABLE [dbo].[Department](
 	[DepartmentNameAra] [nvarchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
 	[Notes] [nvarchar](250) NULL,
-	[ProfitCenterIDNo] [smallint] NULL,
-	[CostCenterIDNo] [smallint] NULL,
+	[ProfitCenterIdNo] [smallint] NULL,
+	[CostCenterIdNo] [smallint] NULL,
 	[Active] [bit] NULL,
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK_DepartmentIdNo] PRIMARY KEY CLUSTERED 
@@ -3150,14 +3150,14 @@ GO
 Create View [dbo].[Department_View] as 
 with cte as
 (
-select IDNo
+select IdNo
       ,DepartmentCode
       ,DepartmentName
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIDNo
-      ,CostCenterIDNo
+      ,ProfitCenterIdNo
+      ,CostCenterIdNo
       ,Active
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by DepartmentName) as varchar(max)) as [path]
@@ -3167,14 +3167,14 @@ select IDNo
 from Department
 where ParentIdNo IS NULL
 union all
-select t.IDNo
+select t.IdNo
       ,t.DepartmentCode
       ,t.DepartmentName
       ,t.DepartmentNameAra
       ,t.ParentIdNo
       ,t.Notes
-      ,t.ProfitCenterIDNo
-      ,t.CostCenterIDNo
+      ,t.ProfitCenterIdNo
+      ,t.CostCenterIdNo
       ,t.Active
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.DepartmentName) as varchar(max))
@@ -3186,14 +3186,14 @@ select t.IDNo
 join Department t on cte.IdNo = t.ParentIdNo
 )
    
-select IDNo
+select IdNo
       ,DepartmentCode
       ,DepartmentName
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIDNo
-      ,CostCenterIDNo
+      ,ProfitCenterIdNo
+      ,CostCenterIdNo
       ,Active
       ,DateTimeStamp
 	  ,LevelNumber
@@ -3215,7 +3215,7 @@ CREATE TABLE [dbo].[SecurityObject](
 	[SecurityObjectNameAra] [nvarchar](200) NULL,
 	[Notes] [varchar](255) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_SecurityObjectIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SecurityObjectIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -3228,14 +3228,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[GroupAccess](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[SecurityGroupIDNo] [int] NOT NULL,
-	[SecurityObjectIDNo] [int] NOT NULL,
+	[SecurityGroupIdNo] [int] NOT NULL,
+	[SecurityObjectIdNo] [int] NOT NULL,
 	[Visible] [bit] NOT NULL,
 	[Viewable] [bit] NOT NULL,
 	[Selectable] [bit] NOT NULL,
 	[Editable] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_SecurityGroupAccessIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SecurityGroupAccessIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -3253,7 +3253,7 @@ CREATE TABLE [dbo].[SecurityGroup](
 	[DateTimeStamp] [timestamp] NULL,
 	[SecurityGroupCode] [varchar](10) NULL,
 	[SecurityGroupNameAra] [nvarchar](50) NULL,
- CONSTRAINT [PK_IDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_IdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
@@ -3270,11 +3270,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[GroupAccess_View]
 AS
-SELECT        dbo.SecurityObject.IDNo, dbo.SecurityObject.SecurityObjectName, dbo.SecurityGroup.IDNo AS Expr1, dbo.GroupAccess.Visible, dbo.GroupAccess.Editable, dbo.GroupAccess.SecurityGroupIDNo, 
-                         dbo.GroupAccess.SecurityObjectIDNo, dbo.GroupAccess.IDNo AS Expr2, dbo.SecurityGroup.SecurityGroupName
+SELECT        dbo.SecurityObject.IdNo, dbo.SecurityObject.SecurityObjectName, dbo.SecurityGroup.IdNo AS Expr1, dbo.GroupAccess.Visible, dbo.GroupAccess.Editable, dbo.GroupAccess.SecurityGroupIdNo, 
+                         dbo.GroupAccess.SecurityObjectIdNo, dbo.GroupAccess.IdNo AS Expr2, dbo.SecurityGroup.SecurityGroupName
 FROM            dbo.SecurityGroup INNER JOIN
-                         dbo.GroupAccess ON dbo.SecurityGroup.IDNo = dbo.GroupAccess.SecurityGroupIDNo RIGHT OUTER JOIN
-                         dbo.SecurityObject ON dbo.GroupAccess.SecurityObjectIDNo = dbo.SecurityObject.IDNo
+                         dbo.GroupAccess ON dbo.SecurityGroup.IdNo = dbo.GroupAccess.SecurityGroupIdNo RIGHT OUTER JOIN
+                         dbo.SecurityObject ON dbo.GroupAccess.SecurityObjectIdNo = dbo.SecurityObject.IdNo
 GO
 /****** Object:  View [dbo].[APStatement_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -3288,7 +3288,7 @@ SELECT        dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.IdNo, dbo.ApDet
                          dbo.ApDetails_View.ProfitCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
                          dbo.ApDetails_View.TransactionType, dbo.Chart.SpecialAccount
 FROM            dbo.ApDetails_View INNER JOIN
-                         dbo.Chart ON dbo.ApDetails_View.AccountIdNo = dbo.Chart.IDNo
+                         dbo.Chart ON dbo.ApDetails_View.AccountIdNo = dbo.Chart.IdNo
 WHERE        (dbo.Chart.SpecialAccount = 'AP')
 GO
 /****** Object:  View [dbo].[SalesJournalItem_View]    Script Date: 3/28/2020 6:33:04 AM ******/
@@ -3304,7 +3304,7 @@ SELECT        dbo.SalesJournalItem.IdNo, dbo.SalesJournalItem.Sequence, dbo.Sale
                          dbo.SalesJournalItem.ProfitCenterIdNo, dbo.Chart.AccountName, dbo.SalesJournalItem.Debit - dbo.SalesJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, dbo.SalesJournalItem.Notes, 
                          0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 0 AS DiscountTaken
 FROM            dbo.SalesJournalItem INNER JOIN
-                         dbo.Chart ON dbo.SalesJournalItem.AccountIdNo = dbo.Chart.IDNo
+                         dbo.Chart ON dbo.SalesJournalItem.AccountIdNo = dbo.Chart.IdNo
 GO
 /****** Object:  Table [dbo].[EmployeeLoanJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -3367,8 +3367,8 @@ AS
 SELECT        dbo.EmployeeLoanJournalItem.IdNo, dbo.EmployeeLoanJournalItem.Sequence, dbo.EmployeeLoanJournalItem.JournalIdNo, dbo.EmployeeLoanJournalItem.AccountIdNo, dbo.EmployeeLoanJournalItem.TransactionDate, dbo.EmployeeLoanJournalItem.Debit, 
                          dbo.EmployeeLoanJournalItem.Credit, dbo.EmployeeLoanJournalItem.ProfitCenterIdNo, dbo.EmployeeLoanJournalItem.Notes, dbo.EmployeeLoanJournalItem.Posted, dbo.EmployeeLoanJournalItem.DateTimeStamp, dbo.Chart.AccountName
 FROM            dbo.EmployeeLoanJournal INNER JOIN
-                         dbo.EmployeeLoanJournalItem ON dbo.EmployeeLoanJournal.IDNo = dbo.EmployeeLoanJournalItem.JournalIdNo INNER JOIN
-                         dbo.Chart ON dbo.EmployeeLoanJournalItem.AccountIdNo = dbo.Chart.IDNo 
+                         dbo.EmployeeLoanJournalItem ON dbo.EmployeeLoanJournal.IdNo = dbo.EmployeeLoanJournalItem.JournalIdNo INNER JOIN
+                         dbo.Chart ON dbo.EmployeeLoanJournalItem.AccountIdNo = dbo.Chart.IdNo 
 GO
 /****** Object:  Table [dbo].[CsrOiItem]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -3475,7 +3475,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Branch](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[BranchCode] [varchar](5) NOT NULL,
 	[BranchName] [varchar](50) NOT NULL,
 	[BranchNameAra] [nvarchar](50) NOT NULL,
@@ -3485,7 +3485,7 @@ CREATE TABLE [dbo].[Branch](
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK__BranchIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_BranchCode] UNIQUE NONCLUSTERED 
 (
@@ -3547,7 +3547,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Country](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[ISOA2] [varchar](2) NOT NULL,
 	[CountryName] [varchar](100) NOT NULL,
 	[CountryNameAra] [varchar](100) NOT NULL,
@@ -3559,9 +3559,9 @@ CREATE TABLE [dbo].[Country](
 	[ISON] [int] NULL,
 	[PhoneCode] [varchar](4) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_CountryIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_CountryIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_ISOA2] UNIQUE NONCLUSTERED 
 (
@@ -3569,7 +3569,7 @@ CREATE TABLE [dbo].[Country](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_NameAra] UNIQUE NONCLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_NameEng] UNIQUE NONCLUSTERED 
 (
@@ -3768,7 +3768,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[EmployeeOld](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[BranchID] [varchar](4) NULL,
 	[EmployeeID] [varchar](15) NOT NULL,
 	[FirstName] [varchar](40) NOT NULL,
@@ -3791,9 +3791,9 @@ CREATE TABLE [dbo].[EmployeeOld](
 	[NationalID] [varchar](3) NULL,
 	[ReligionID] [int] NULL,
 	[FileNo] [varchar](20) NULL,
-	[DepartmentIDNo] [int] NULL,
-	[DesignationIDNo] [int] NULL,
-	[PayGroupIDNo] [int] NULL,
+	[DepartmentIdNo] [int] NULL,
+	[DesignationIdNo] [int] NULL,
+	[PayGroupIdNo] [int] NULL,
 	[PayRank] [int] NULL,
 	[UserID] [varchar](15) NULL,
 	[MainTelephone] [varchar](15) NULL,
@@ -3807,7 +3807,7 @@ CREATE TABLE [dbo].[EmployeeOld](
 	[CreateDate] [datetime] NOT NULL,
  CONSTRAINT [PK__Employee__B87DC9ABAA40C497] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
@@ -3818,8 +3818,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[InterfaceObjectsSecurity](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[LoginIDNo] [int] NOT NULL,
-	[InterfaceObjectIDNo] [int] NOT NULL,
+	[LoginIdNo] [int] NOT NULL,
+	[InterfaceObjectIdNo] [int] NOT NULL,
 	[Editable] [bit] NOT NULL,
 	[Visible] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NULL,
@@ -3940,7 +3940,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ProfitCenterOld](
-	[IDNo] [smallint] IDENTITY(1,1) NOT NULL,
+	[IdNo] [smallint] IDENTITY(1,1) NOT NULL,
 	[ProfitCenterCode] [varchar](5) NOT NULL,
 	[ProfitCenterName] [varchar](50) NOT NULL,
 	[ProfitCenterNameAra] [varchar](50) NOT NULL,
@@ -3953,7 +3953,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ProfitCenterOrg](
-	[IDNo] [int] NOT NULL,
+	[IdNo] [int] NOT NULL,
 	[ParentID] [int] NULL,
 	[ProfitCenterCode] [varchar](5) NOT NULL,
 	[ProfitCenterName] [varchar](50) NOT NULL,
@@ -3962,7 +3962,7 @@ CREATE TABLE [dbo].[ProfitCenterOrg](
 	[EmployeeName] [nvarchar](50) NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -4104,10 +4104,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Salt](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[LoginIDNo] [int] NOT NULL,
+	[LoginIdNo] [int] NOT NULL,
 	[Salt] [varchar](50) NULL,
 	[Modified] [timestamp] NOT NULL,
- CONSTRAINT [PK_SaltIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SaltIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -4153,7 +4153,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Supplier2](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[BranchID] [varchar](15) NULL,
 	[SupplierID] [varchar](15) NOT NULL,
 	[Courtesy] [varchar](15) NULL,
@@ -4189,9 +4189,9 @@ CREATE TABLE [dbo].[Supplier2](
 	[UserId] [varchar](10) NULL,
 	[MachineId] [varchar](20) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_SupplierDetailsIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SupplierDetailsIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -4204,12 +4204,12 @@ CREATE TABLE [dbo].[User](
 	[IdNo] [int] IDENTITY(18,1) NOT NULL,
 	[UserName] [varchar](20) NOT NULL,
 	[Password] [varchar](50) NULL,
-	[SecurityGroupIDNo] [int] NULL,
+	[SecurityGroupIdNo] [int] NULL,
 	[FullName] [varchar](50) NULL,
 	[FullNameAra] [nvarchar](50) NULL,
 	[SecurityLevel] [tinyint] NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_UserIDNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -4221,14 +4221,14 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[xxxLoginxxx](
-	[IDNo] [int] IDENTITY(1,1) NOT NULL,
+	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[LoginName] [varchar](50) NOT NULL,
 	[Password] [varchar](50) NULL,
 	[Modified] [timestamp] NOT NULL,
-	[SecurityGroupIDNo] [int] NULL,
- CONSTRAINT [PK_LoginIDNo] PRIMARY KEY CLUSTERED 
+	[SecurityGroupIdNo] [int] NULL,
+ CONSTRAINT [PK_LoginIdNo] PRIMARY KEY CLUSTERED 
 (
-	[IDNo] ASC
+	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -4299,22 +4299,22 @@ GO
 /****** Object:  Index [IX_GroupAccessSGIDSOID]    Script Date: 3/28/2020 6:33:05 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [IX_GroupAccessSGIDSOID] ON [dbo].[GroupAccess]
 (
-	[SecurityGroupIDNo] ASC,
-	[SecurityObjectIDNo] ASC
+	[SecurityGroupIdNo] ASC,
+	[SecurityObjectIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 /****** Object:  Index [IX_GroupsSecurity]    Script Date: 3/28/2020 6:33:05 AM ******/
 CREATE NONCLUSTERED INDEX [IX_GroupsSecurity] ON [dbo].[GroupAccess]
 (
-	[SecurityGroupIDNo] ASC,
-	[SecurityObjectIDNo] ASC
+	[SecurityGroupIdNo] ASC,
+	[SecurityObjectIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_IntObjLoginIDNo]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_IntObjLoginIDNo] ON [dbo].[InterfaceObjectsSecurity]
+/****** Object:  Index [IX_IntObjLoginIdNo]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_IntObjLoginIdNo] ON [dbo].[InterfaceObjectsSecurity]
 (
-	[LoginIDNo] ASC,
-	[InterfaceObjectIDNo] ASC
+	[LoginIdNo] ASC,
+	[InterfaceObjectIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
@@ -4353,10 +4353,10 @@ CREATE NONCLUSTERED INDEX [IX_PurchaseSupplierIdNo] ON [dbo].[PurchaseJournal]
 	[SupplierIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_LoginIDNo]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE NONCLUSTERED INDEX [IX_LoginIDNo] ON [dbo].[Salt]
+/****** Object:  Index [IX_LoginIdNo]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE NONCLUSTERED INDEX [IX_LoginIdNo] ON [dbo].[Salt]
 (
-	[LoginIDNo] ASC
+	[LoginIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
@@ -4579,8 +4579,8 @@ ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_Posted
 GO
 ALTER TABLE [dbo].[Supplier] ADD  CONSTRAINT [DF_Supplier2_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Chart]  WITH CHECK ADD  CONSTRAINT [FK__Chart__ParentId] FOREIGN KEY([ParentIDNo])
-REFERENCES [dbo].[Chart] ([IDNo])
+ALTER TABLE [dbo].[Chart]  WITH CHECK ADD  CONSTRAINT [FK__Chart__ParentId] FOREIGN KEY([ParentIdNo])
+REFERENCES [dbo].[Chart] ([IdNo])
 GO
 ALTER TABLE [dbo].[Chart] CHECK CONSTRAINT [FK__Chart__ParentId]
 GO
@@ -4590,7 +4590,7 @@ GO
 ALTER TABLE [dbo].[ProfitCenter] CHECK CONSTRAINT [FK__ProfitCen__Paren__6BAEFA67]
 GO
 ALTER TABLE [dbo].[ProfitCenterOrg]  WITH CHECK ADD FOREIGN KEY([ParentID])
-REFERENCES [dbo].[ProfitCenterOrg] ([IDNo])
+REFERENCES [dbo].[ProfitCenterOrg] ([IdNo])
 GO
 ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_User] FOREIGN KEY([IdNo])
 REFERENCES [dbo].[User] ([IdNo])
@@ -4847,8 +4847,8 @@ GO
 CREATE PROC [dbo].[InsertGroupAccessTVP]
   @MParam groupAccessInsert READONLY
 AS 
-INSERT  INTO GroupAccess (SecurityGroupIDNo, SecurityObjectIDNo, Visible,Selectable, Viewable, Editable)
-        SELECT  SecurityGroupIDNo, SecurityObjectIDNo, Visible, Selectable, Viewable, Editable
+INSERT  INTO GroupAccess (SecurityGroupIdNo, SecurityObjectIdNo, Visible,Selectable, Viewable, Editable)
+        SELECT  SecurityGroupIdNo, SecurityObjectIdNo, Visible, Selectable, Viewable, Editable
         FROM    @MParam
 SET IDENTITY_INSERT DBO.GroupAccess ON;
 GO
@@ -5060,7 +5060,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from ApJournalItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5098,7 +5098,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from ArJournalItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5132,7 +5132,7 @@ SET a.Amount = B.Amount,
 	a.JournalItemIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CadOiItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5171,7 +5171,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.[Sequence] = B.[Sequence]
 from CashDisbursementJournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5207,7 +5207,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.[Sequence] = B.[Sequence]
 from CashReceiptJournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5245,7 +5245,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.[Sequence] = B.[Sequence]
 from CheckDisbursementJournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5277,7 +5277,7 @@ SET a.Amount = B.Amount,
 	a.JournalItemIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CkdOiItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5311,7 +5311,7 @@ SET a.Amount = B.Amount,
 	a.JournalItemIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CsrOiItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5345,7 +5345,7 @@ SET A.DistributionSchemeIdNo = @GroupIdNo,
 	A.ProfitCenteridNo = B.ProfitCenterIdNo,
 	A.Percentage = B.Percentage
 from [dbo].DistributionSchemeItem A INNER JOIN @MParam As B
-	ON A.IDNo = B.IDNo
+	ON A.IdNo = B.IdNo
 
 END
 
@@ -5381,7 +5381,7 @@ SET a.JournalIdNo = @GroupIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.Notes = B.Notes
 from EmployeeLoanJournalItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5421,7 +5421,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].GeneralJournalItem A INNER JOIN @MParam As B
-	ON A.IDNo = B.IDNo
+	ON A.IdNo = B.IdNo
 
 END
 
@@ -5442,14 +5442,14 @@ DELETE A
 FROM [DBO].GroupAccess A WHERE A.SecurityGroupIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
 UPDATE a 
-SET a.SecurityGroupIDNo = @GroupIdNo ,
-    a.SecurityObjectIDNo = B.SecurityObjectIDNo ,
+SET a.SecurityGroupIdNo = @GroupIdNo ,
+    a.SecurityObjectIdNo = B.SecurityObjectIdNo ,
 	a.Visible = B.Visible ,
 	a.Selectable = B.Selectable ,
 	a.Viewable = B.Viewable ,
 	a.Editable = B.Editable
 from GroupAccess a INNER JOIN @MParam as B
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5480,7 +5480,7 @@ SET a.AccountIdNo = B.AccountIdNo ,
     a.[Sequence] = B.[Sequence]
 from JournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 GO
 /****** Object:  StoredProcedure [dbo].[UpdatePcsOiItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
@@ -5550,7 +5550,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.[Sequence] = B.[Sequence]
 from PettyCashJournalItem a
 JOIN @MParam b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5585,7 +5585,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from PurchaseJournalItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 
@@ -5620,7 +5620,7 @@ SET a.CashCode = B.CashCode,
 	a.SalesJournalIdNo = B.SalesJournalIdNo,
     a.[Sequence] = B.[Sequence]
 from SalesCashItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
 GO
@@ -5660,7 +5660,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].SalesJournalItem A INNER JOIN @MParam As B
-	ON A.IDNo = B.IDNo
+	ON A.IdNo = B.IdNo
 
 END
 

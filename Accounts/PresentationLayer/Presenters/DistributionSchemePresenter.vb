@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Percentage", GetType(Decimal))
 
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
             DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))

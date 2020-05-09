@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "MessageKey"
             End If
             Dim sql As String =
-                    " SELECT IDNo, MessageKey, Message, Caption, Notes" &
+                    " SELECT IdNo, MessageKey, Message, Caption, Notes" &
                     "   FROM [OriginalMessages] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -55,18 +55,27 @@ Namespace DataLayer.AdoNet
                     "  WHERE IdNo = @IdNo"
             Dim retVal = _db.Update(sql, Take(originalMessages))
             If retVal > 0 Then
-                sql = " UPDATE [TranslatedMessages]" &
-                    "    SET TranslatedMessage = @TranslatedMessage," &
-                    "        TranslatedCaption = @TranslatedCaption," &
-                    "        LanguageIdNo = @LanguageIdNo," &
-                    "        MessageIdNo = @IdNo" &
-                    "  WHERE IdNo = @IdNoTranslated"
-                retVal = _db.Update(sql, TakeTranslatedMessage(originalMessages))
-                If retVal = 0 Then
-                    sql = "INSERT INTO [TranslatedMessages] " &
+                If (String.IsNullOrWhiteSpace(originalMessages.TranslatedMessage) AndAlso String.IsNullOrWhiteSpace(originalMessages.TranslatedCaption)) Then
+                    DeleteRecord(originalMessages.IdNoTranslated, "TranslatedMessages")
+                Else
+                    If String.IsNullOrWhiteSpace(originalMessages.TranslatedMessage) Then
+                        originalMessages.TranslatedMessage = originalMessages.Message
+                    Else
+                        originalMessages.TranslatedCaption = originalMessages.Caption
+                    End If
+                    sql = " UPDATE [TranslatedMessages]" &
+                        "    SET TranslatedMessage = @TranslatedMessage," &
+                        "        TranslatedCaption = @TranslatedCaption," &
+                        "        LanguageIdNo = @LanguageIdNo," &
+                        "        MessageIdNo = @IdNo" &
+                        "  WHERE IdNo = @IdNoTranslated"
+                    retVal = _db.Update(sql, TakeTranslatedMessage(originalMessages))
+                    If retVal = 0 Then
+                        sql = "INSERT INTO [TranslatedMessages] " &
                           "(TranslatedMessage,TranslatedCaption,MessageIdNo,LanguageIdNo) " &
                           "VALUES (@TranslatedMessage,@TranslatedCaption,@IdNo,@LanguageIdNo)"
-                    retVal = _db.Insert(sql, TakeTranslatedMessage(originalMessages))
+                        retVal = _db.Insert(sql, TakeTranslatedMessage(originalMessages))
+                    End If
                 End If
             End If
             Return retVal
@@ -93,7 +102,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, OriginalMessages) =
                                     Function(reader) _
             New OriginalMessages() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .MessageKey = Extensions.AsString(reader("MessageKey")),
             .Message = Extensions.AsString(reader("Message")),
             .Caption = Extensions.AsString(reader("Caption")),
@@ -106,7 +115,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(originalMessage As OriginalMessages) As Object()
             Return New Object() {
-                                    "@IDNo", originalMessage.IdNo,
+                                    "@IdNo", originalMessage.IdNo,
                                     "@MessageKey", originalMessage.MessageKey,
                                     "@Message", originalMessage.Message,
                                     "@Caption", originalMessage.Caption,

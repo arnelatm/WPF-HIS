@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
             DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
 
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
@@ -118,14 +118,14 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IPurchaseJournalView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
+                If TxtIdNo.Text <> "" Then
+                    Return Convert.ToInt16(TxtIdNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -393,7 +393,7 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
-         {"IdNo", TxtIDNo},
+         {"IdNo", TxtIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"ReferenceNo", txtReferenceNo},
          {"Amount", txtAmount},

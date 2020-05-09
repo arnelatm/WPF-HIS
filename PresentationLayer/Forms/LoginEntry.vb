@@ -70,7 +70,7 @@ Public Class LoginEntry
                                                                                                  "User", "UserName", "IdNo"))
                 GlobalVariables.SecurityGroupIdNo =
                     Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
-                                                                          "SecurityGroupIDNo"))
+                                                                          "SecurityGroupIdNo"))
             Else
                 Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
             End If

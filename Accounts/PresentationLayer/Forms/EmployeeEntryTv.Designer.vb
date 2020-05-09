@@ -95,7 +95,7 @@ Namespace PresentationLayer.Forms
             Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.tbpOthers = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.EmployeeModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -1503,26 +1503,26 @@ Namespace PresentationLayer.Forms
             Me.lblIdNo.Text = "Employee Id No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'TxtIDNo
+            'TxtIdNo
             '
-            Me.TxtIDNo.BackColor = System.Drawing.Color.White
-            Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIDNo.ComputedValue = False
-            Me.TxtIDNo.CustomFormat = Nothing
-            Me.TxtIDNo.DataBoundControl = True
-            Me.TxtIDNo.DisplayOnly = True
-            Me.TxtIDNo.EditingMode = True
-            Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIDNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIDNo.Location = New System.Drawing.Point(186, 1)
-            Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.TxtIDNo.Name = "TxtIDNo"
-            Me.TxtIDNo.OldValue = Nothing
-            Me.TxtIDNo.ReadOnly = True
-            Me.TxtIDNo.Size = New System.Drawing.Size(62, 23)
-            Me.TxtIDNo.TabIndex = 151
-            Me.TxtIDNo.TabStop = False
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.Location = New System.Drawing.Point(186, 1)
+            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+            Me.TxtIdNo.TabIndex = 151
+            Me.TxtIdNo.TabStop = False
             '
             'lblEmployeeCode
             '
@@ -1577,7 +1577,7 @@ Namespace PresentationLayer.Forms
             '
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.TxtIDNo)
+            Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblEmployeeCode)
             Me.CFlowLayout4.Controls.Add(Me.txtEmployeeCode)
             Me.CFlowLayout4.Controls.Add(Me.lblEmployeeName)
@@ -1688,7 +1688,7 @@ End Sub
         Friend WithEvents groupBoxContactInfo As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents TxtIDNo As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents EmployeeTabControl As Libraries.CBaseControlsLibrary.CTabControl

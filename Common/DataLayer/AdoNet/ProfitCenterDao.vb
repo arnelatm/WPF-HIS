@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As ProfitCenter Implements IDaoAll(Of ProfitCenter).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &
+                    " SELECT IdNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &
                     "   FROM [ProfitCenter_View]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "SortKey"
             End If
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &
+                    " SELECT IdNo, ParentIdNo, ProfitCenterCode, ProfitCenterName, ProfitCenterNameAra, ProfitCenterType, LevelNumber, Notes, SortKey" &
                     "   FROM [ProfitCenter_View] order by '" + sortExpression + "'"
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
                     "        ProfitCenterNameAra = @ProfitCenterNameAra," &
                     "        ProfitCenterType = @ProfitCenterType," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(profitCenter))
         End Function
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ProfitCenter) =
                                     Function(reader) _
             New ProfitCenter() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
             .ProfitCenterCode = Extensions.AsString(reader("ProfitCenterCode")),
             .ProfitCenterName = Extensions.AsString(reader("ProfitCenterName")),
@@ -72,7 +72,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(profitCenter As ProfitCenter) As Object()
             Return New Object() {
-                                    "@IDNo", profitCenter.IdNo,
+                                    "@IdNo", profitCenter.IdNo,
                                     "@ParentIdNo", profitCenter.ParentIdNo,
                                     "@ProfitCenterCode", profitCenter.ProfitCenterCode,
                                     "@ProfitCenterName", profitCenter.ProfitCenterName,

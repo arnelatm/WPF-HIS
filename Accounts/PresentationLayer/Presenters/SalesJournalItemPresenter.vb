@@ -68,7 +68,7 @@ Namespace PresentationLayer.Presenters
         ''' <summary>
         '''     Displays list of Cheque Disbursement Journal Items.
         ''' </summary>
-        ''' <param name="journalIdNo">JournalIDNo id to display.</param>
+        ''' <param name="journalIdNo">JournalIdNo id to display.</param>
         Public Shadows Sub Display(journalIdNo As Int32)
             View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub

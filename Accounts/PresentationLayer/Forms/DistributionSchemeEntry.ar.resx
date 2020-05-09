@@ -124,7 +124,7 @@
   <data name="txtJournalCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>808, 11</value>
   </data>
-  <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>732, 11</value>
   </data>
   <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">

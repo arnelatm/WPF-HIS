@@ -87,14 +87,14 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements ISalesJournalView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
+                If TxtIdNo.Text <> "" Then
+                    Return Convert.ToInt16(TxtIdNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -229,7 +229,7 @@ Namespace PresentationLayer.Forms
                 {"AccountIdNo", cboAccountIdNo},
                 {"Cancelled", chkCancelled},
                 {"DateCreated", txtDateCreated},
-                {"IdNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"Notes", txtNotes},
                 {"Posted", chkPosted},
                 {"ReferenceNo", txtReferenceNo},

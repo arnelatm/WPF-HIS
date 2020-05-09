@@ -164,7 +164,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Property EnumConverter As ResourceEnumConverter
 
-    '<Description("This is the last IDNo of the Displayed record before moving to a different record.")>
+    '<Description("This is the last IdNo of the Displayed record before moving to a different record.")>
     'Public Property CurrentIdNo As Int32
     Public Property LastIdNo As Int32
 
@@ -198,7 +198,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Shared Property TableProperties As Array
 
     'Public Property TableDefaultFieldValues
-    <Description("This is the value of the current IDNo in the TxtIDNo Field ")>
+    <Description("This is the value of the current IdNo in the TxtIdNo Field ")>
     Public Property TargetIdNo As Int32
         Get
             Return _targetIdNo

@@ -38,7 +38,7 @@
             Me.SecurityGroupView.BackColor = System.Drawing.Color.Transparent
             Me.SecurityGroupView.Errors = Nothing
             Me.SecurityGroupView.GroupAccesses = Nothing
-            Me.SecurityGroupView.IDNo = 0
+            Me.SecurityGroupView.IdNo = 0
             Me.SecurityGroupView.Location = New System.Drawing.Point(306, 53)
             Me.SecurityGroupView.MainTableName = "SecurityGroup"
             Me.SecurityGroupView.Name = "SecurityGroupView"

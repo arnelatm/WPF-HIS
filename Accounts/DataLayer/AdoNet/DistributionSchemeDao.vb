@@ -15,10 +15,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
+                    " SELECT IdNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
                     "   FROM [DistributionScheme]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "IdNo"
             End If
             Dim sql As String =
-                    " SELECT IDNo, DistributionSchemeCode, DistributionSchemeName, DistributionSchemeNameAra " &
+                    " SELECT IdNo, DistributionSchemeCode, DistributionSchemeName, DistributionSchemeNameAra " &
                     "   FROM [DistributionScheme] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
                     "        ValidityStartDate = @ValidityStartDate," &
                     "        ValidityEndDate = @ValidityEndDate," &
                     "        Notes = @Notes " &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(distributionScheme))
         End Function
 
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DistributionScheme) =
                                     Function(reader) _
             New DistributionScheme() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DistributionSchemeName = Extensions.AsString(reader("DistributionSchemeName")),
             .DistributionSchemeNameAra = Extensions.AsString(reader("DistributionSchemeNameAra")),
             .DistributionSchemeCode = Extensions.AsString(reader("DistributionSchemeCode")),
@@ -70,7 +70,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(distributionScheme As DistributionScheme) As Object()
             Return New Object() {
-                                    "@IDNo", distributionScheme.IdNo,
+                                    "@IdNo", distributionScheme.IdNo,
                                     "@DistributionSchemeName", distributionScheme.DistributionSchemeName,
                                     "@DistributionSchemeNameAra", distributionScheme.DistributionSchemeNameAra,
                                     "@DistributionSchemeCode", distributionScheme.DistributionSchemeCode,

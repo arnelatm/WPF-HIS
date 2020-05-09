@@ -8,7 +8,7 @@ Public Interface ISaltDao
 
     Function GetSalt(idNo As Int32) As Salt
 
-    ' gets a specific Salt by LoginIDNo
+    ' gets a specific Salt by LoginIdNo
 
     Function GetSaltByLoginIdNo(loginIdNo As Int32) As Salt
 

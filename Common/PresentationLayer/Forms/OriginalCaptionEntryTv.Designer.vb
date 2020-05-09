@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalCaptionEntryTv))
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -44,23 +44,23 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = false
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIDNo, true)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.TabStop = false
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = false
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.TabStop = false
         '
         'txtCaption
         '
@@ -85,7 +85,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.Label1)
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIDNo)
+        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblCaption)
         Me.floDataDisplay.Controls.Add(Me.txtCaption)
         Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
@@ -187,7 +187,7 @@ Namespace PresentationLayer.Forms
         Me.PerformLayout
 
 End Sub
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtCaption As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel

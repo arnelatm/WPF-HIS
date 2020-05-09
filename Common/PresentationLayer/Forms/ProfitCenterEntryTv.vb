@@ -28,10 +28,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IProfitCenterView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIDNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -100,7 +100,7 @@ Namespace PresentationLayer.Forms
 
         Public Property LevelNumber As Int16 Implements IProfitCenterView.LevelNumber
             Get
-                Return GlobalFunctions.NumParser(Of Int16)(TxtIDNo.Text)
+                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set(value As Int16)
                 txtLevelNumber.Text = value
@@ -117,7 +117,7 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"IDNo", TxtIDNo},
+                {"IdNo", TxtIdNo},
                 {"LevelNumber", txtLevelNumber},
                 {"Notes", txtNotes},
                 {"ParentIdNo", cacParentIdNo},

@@ -33,7 +33,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))

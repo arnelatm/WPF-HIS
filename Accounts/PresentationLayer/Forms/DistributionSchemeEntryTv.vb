@@ -44,7 +44,7 @@ Namespace PresentationLayer.Forms
             DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Percentage", GetType(Decimal))
 
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
             DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
@@ -74,10 +74,10 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IDistributionSchemeView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIDNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -233,7 +233,7 @@ Namespace PresentationLayer.Forms
 
         Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             If PresenterObj.AddMode Then
-                IDNo = passedValue
+                IdNo = passedValue
             End If
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
@@ -250,7 +250,7 @@ Namespace PresentationLayer.Forms
                     workRow = DtUpdateTable.NewRow()
                     workRow("IdNo") = ji.IdNo
                 End If
-                workRow("DistributionSchemeIdNo") = IDNo
+                workRow("DistributionSchemeIdNo") = IdNo
                 workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
                 workRow("Sequence") = nRowCount
                 workRow("Percentage") = ji.Percentage
@@ -261,7 +261,7 @@ Namespace PresentationLayer.Forms
                 End If
                 nRowCount += 1
             Next
-            _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IDNo)
+            _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
         End Sub
 
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit

@@ -408,9 +408,9 @@ Namespace AdoNet
                     tryAgain = False
                     Using command = CreateCommand(sql & ";SELECT SCOPE_IDENTITY();", connection, params)
                         Try
-                            '' ExecuteScalar returns the first column of the result set and since this is usually the IDNo this will return 0
-                            '' because IDNo=0 for inserted records. THat is why the need for the ";SELECT SCOPE_IDENTITY();" to return the
-                            '' Identity column (since this is usually the IDNo) this will return the IDNo of the newly added record.
+                            '' ExecuteScalar returns the first column of the result set and since this is usually the IdNo this will return 0
+                            '' because IdNo=0 for inserted records. THat is why the need for the ";SELECT SCOPE_IDENTITY();" to return the
+                            '' Identity column (since this is usually the IdNo) this will return the IdNo of the newly added record.
                             retValue = Integer.Parse(command.ExecuteScalar().ToString())
                         Catch ex As SqlException
                             If ex.Number = 2627 OrElse ex.Number = 2601 Then

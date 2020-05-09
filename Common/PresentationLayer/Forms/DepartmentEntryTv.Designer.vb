@@ -27,7 +27,7 @@ Namespace PresentationLayer.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DepartmentEntryTv))
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -37,9 +37,9 @@ Namespace PresentationLayer.Forms
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacProfitCenterIDNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cacProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacCostCenterIDNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cacCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -56,7 +56,7 @@ Namespace PresentationLayer.Forms
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.TxtIDNo)
+        Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblDepartmentCode)
         Me.CFlowLayout1.Controls.Add(Me.txtDepartmentCode)
         Me.CFlowLayout1.Controls.Add(Me.lblDepartmentName)
@@ -66,9 +66,9 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout1.Controls.Add(Me.lblParentIdNo)
         Me.CFlowLayout1.Controls.Add(Me.cacParentIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblProfitCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.cacProfitCenterIDNo)
+        Me.CFlowLayout1.Controls.Add(Me.cacProfitCenterIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblCostCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.cacCostCenterIDNo)
+        Me.CFlowLayout1.Controls.Add(Me.cacCostCenterIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtSortKey)
@@ -82,23 +82,23 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblIdNo, "lblIdNo")
         Me.lblIdNo.Name = "lblIdNo"
         '
-        'TxtIDNo
+        'TxtIdNo
         '
-        Me.TxtIDNo.BackColor = System.Drawing.Color.White
-        Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIDNo.ComputedValue = false
-        Me.TxtIDNo.CustomFormat = Nothing
-        Me.TxtIDNo.DataBoundControl = true
-        Me.TxtIDNo.DisplayOnly = true
-        Me.TxtIDNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIDNo, "TxtIDNo")
-        Me.CFlowLayout1.SetFlowBreak(Me.TxtIDNo, true)
-        Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIDNo.LinkedLabel = Nothing
-        Me.TxtIDNo.Name = "TxtIDNo"
-        Me.TxtIDNo.OldValue = Nothing
-        Me.TxtIDNo.ReadOnly = true
-        Me.TxtIDNo.TabStop = false
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = false
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, true)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.TabStop = false
         '
         'lblDepartmentCode
         '
@@ -218,40 +218,40 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblProfitCenterIdNo, "lblProfitCenterIdNo")
         Me.lblProfitCenterIdNo.Name = "lblProfitCenterIdNo"
         '
-        'cacProfitCenterIDNo
+        'cacProfitCenterIdNo
         '
-        Me.cacProfitCenterIDNo.BackColor = System.Drawing.Color.White
-        Me.cacProfitCenterIDNo.ChangingSearchValueOnly = false
-        Me.cacProfitCenterIDNo.CurrentSearchTerm = ""
-        Me.cacProfitCenterIDNo.DefaultValue = Nothing
-        Me.cacProfitCenterIDNo.DisplayMember = "Name"
-        Me.cacProfitCenterIDNo.DropDownHeight = 200
-        Me.cacProfitCenterIDNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacProfitCenterIDNo.EditingMode = false
-        Me.cacProfitCenterIDNo.FilterRule = Nothing
-        Me.CFlowLayout1.SetFlowBreak(Me.cacProfitCenterIDNo, true)
-        resources.ApplyResources(Me.cacProfitCenterIDNo, "cacProfitCenterIDNo")
-        Me.cacProfitCenterIDNo.ForeColor = System.Drawing.Color.Black
-        Me.cacProfitCenterIDNo.FormattingEnabled = true
-        Me.cacProfitCenterIDNo.HideWhenNotEditingOrAdding = false
-        Me.cacProfitCenterIDNo.LinkedLabel = Nothing
-        Me.cacProfitCenterIDNo.Name = "cacProfitCenterIDNo"
-        Me.cacProfitCenterIDNo.OldValue = 0
-        Me.cacProfitCenterIDNo.OriginalDataSource = Nothing
-        Me.cacProfitCenterIDNo.OriginalList = Nothing
-        Me.cacProfitCenterIDNo.OverrideDropDownStyleList = false
-        Me.cacProfitCenterIDNo.PreviousSearchTerm = Nothing
-        Me.cacProfitCenterIDNo.PreviousSelectedIndex = -1
-        Me.cacProfitCenterIDNo.PropertySelector = Nothing
-        Me.cacProfitCenterIDNo.ReadOnlyCombo = false
-        Me.cacProfitCenterIDNo.SearchAnywhere = false
-        Me.cacProfitCenterIDNo.SuggestBoxHeight = 200
-        Me.cacProfitCenterIDNo.SuggestListOrderRule = Nothing
-        Me.cacProfitCenterIDNo.TextToSearch = Nothing
-        Me.cacProfitCenterIDNo.ValueIsMandatory = false
-        Me.cacProfitCenterIDNo.ValueIsNullable = false
-        Me.cacProfitCenterIDNo.ValueIsNumeric = false
-        Me.cacProfitCenterIDNo.ValueMember = "IdNo"
+        Me.cacProfitCenterIdNo.BackColor = System.Drawing.Color.White
+        Me.cacProfitCenterIdNo.ChangingSearchValueOnly = false
+        Me.cacProfitCenterIdNo.CurrentSearchTerm = ""
+        Me.cacProfitCenterIdNo.DefaultValue = Nothing
+        Me.cacProfitCenterIdNo.DisplayMember = "Name"
+        Me.cacProfitCenterIdNo.DropDownHeight = 200
+        Me.cacProfitCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cacProfitCenterIdNo.EditingMode = false
+        Me.cacProfitCenterIdNo.FilterRule = Nothing
+        Me.CFlowLayout1.SetFlowBreak(Me.cacProfitCenterIdNo, true)
+        resources.ApplyResources(Me.cacProfitCenterIdNo, "cacProfitCenterIdNo")
+        Me.cacProfitCenterIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacProfitCenterIdNo.FormattingEnabled = true
+        Me.cacProfitCenterIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacProfitCenterIdNo.LinkedLabel = Nothing
+        Me.cacProfitCenterIdNo.Name = "cacProfitCenterIdNo"
+        Me.cacProfitCenterIdNo.OldValue = 0
+        Me.cacProfitCenterIdNo.OriginalDataSource = Nothing
+        Me.cacProfitCenterIdNo.OriginalList = Nothing
+        Me.cacProfitCenterIdNo.OverrideDropDownStyleList = false
+        Me.cacProfitCenterIdNo.PreviousSearchTerm = Nothing
+        Me.cacProfitCenterIdNo.PreviousSelectedIndex = -1
+        Me.cacProfitCenterIdNo.PropertySelector = Nothing
+        Me.cacProfitCenterIdNo.ReadOnlyCombo = false
+        Me.cacProfitCenterIdNo.SearchAnywhere = false
+        Me.cacProfitCenterIdNo.SuggestBoxHeight = 200
+        Me.cacProfitCenterIdNo.SuggestListOrderRule = Nothing
+        Me.cacProfitCenterIdNo.TextToSearch = Nothing
+        Me.cacProfitCenterIdNo.ValueIsMandatory = false
+        Me.cacProfitCenterIdNo.ValueIsNullable = false
+        Me.cacProfitCenterIdNo.ValueIsNumeric = false
+        Me.cacProfitCenterIdNo.ValueMember = "IdNo"
         '
         'lblCostCenterIdNo
         '
@@ -260,40 +260,40 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.lblCostCenterIdNo, "lblCostCenterIdNo")
         Me.lblCostCenterIdNo.Name = "lblCostCenterIdNo"
         '
-        'cacCostCenterIDNo
+        'cacCostCenterIdNo
         '
-        Me.cacCostCenterIDNo.BackColor = System.Drawing.Color.White
-        Me.cacCostCenterIDNo.ChangingSearchValueOnly = false
-        Me.cacCostCenterIDNo.CurrentSearchTerm = ""
-        Me.cacCostCenterIDNo.DefaultValue = Nothing
-        Me.cacCostCenterIDNo.DisplayMember = "Name"
-        Me.cacCostCenterIDNo.DropDownHeight = 200
-        Me.cacCostCenterIDNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacCostCenterIDNo.EditingMode = false
-        Me.cacCostCenterIDNo.FilterRule = Nothing
-        Me.CFlowLayout1.SetFlowBreak(Me.cacCostCenterIDNo, true)
-        resources.ApplyResources(Me.cacCostCenterIDNo, "cacCostCenterIDNo")
-        Me.cacCostCenterIDNo.ForeColor = System.Drawing.Color.Black
-        Me.cacCostCenterIDNo.FormattingEnabled = true
-        Me.cacCostCenterIDNo.HideWhenNotEditingOrAdding = false
-        Me.cacCostCenterIDNo.LinkedLabel = Nothing
-        Me.cacCostCenterIDNo.Name = "cacCostCenterIDNo"
-        Me.cacCostCenterIDNo.OldValue = 0
-        Me.cacCostCenterIDNo.OriginalDataSource = Nothing
-        Me.cacCostCenterIDNo.OriginalList = Nothing
-        Me.cacCostCenterIDNo.OverrideDropDownStyleList = false
-        Me.cacCostCenterIDNo.PreviousSearchTerm = Nothing
-        Me.cacCostCenterIDNo.PreviousSelectedIndex = -1
-        Me.cacCostCenterIDNo.PropertySelector = Nothing
-        Me.cacCostCenterIDNo.ReadOnlyCombo = false
-        Me.cacCostCenterIDNo.SearchAnywhere = false
-        Me.cacCostCenterIDNo.SuggestBoxHeight = 200
-        Me.cacCostCenterIDNo.SuggestListOrderRule = Nothing
-        Me.cacCostCenterIDNo.TextToSearch = Nothing
-        Me.cacCostCenterIDNo.ValueIsMandatory = false
-        Me.cacCostCenterIDNo.ValueIsNullable = false
-        Me.cacCostCenterIDNo.ValueIsNumeric = false
-        Me.cacCostCenterIDNo.ValueMember = "IdNo"
+        Me.cacCostCenterIdNo.BackColor = System.Drawing.Color.White
+        Me.cacCostCenterIdNo.ChangingSearchValueOnly = false
+        Me.cacCostCenterIdNo.CurrentSearchTerm = ""
+        Me.cacCostCenterIdNo.DefaultValue = Nothing
+        Me.cacCostCenterIdNo.DisplayMember = "Name"
+        Me.cacCostCenterIdNo.DropDownHeight = 200
+        Me.cacCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cacCostCenterIdNo.EditingMode = false
+        Me.cacCostCenterIdNo.FilterRule = Nothing
+        Me.CFlowLayout1.SetFlowBreak(Me.cacCostCenterIdNo, true)
+        resources.ApplyResources(Me.cacCostCenterIdNo, "cacCostCenterIdNo")
+        Me.cacCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacCostCenterIdNo.FormattingEnabled = true
+        Me.cacCostCenterIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacCostCenterIdNo.LinkedLabel = Nothing
+        Me.cacCostCenterIdNo.Name = "cacCostCenterIdNo"
+        Me.cacCostCenterIdNo.OldValue = 0
+        Me.cacCostCenterIdNo.OriginalDataSource = Nothing
+        Me.cacCostCenterIdNo.OriginalList = Nothing
+        Me.cacCostCenterIdNo.OverrideDropDownStyleList = false
+        Me.cacCostCenterIdNo.PreviousSearchTerm = Nothing
+        Me.cacCostCenterIdNo.PreviousSelectedIndex = -1
+        Me.cacCostCenterIdNo.PropertySelector = Nothing
+        Me.cacCostCenterIdNo.ReadOnlyCombo = false
+        Me.cacCostCenterIdNo.SearchAnywhere = false
+        Me.cacCostCenterIdNo.SuggestBoxHeight = 200
+        Me.cacCostCenterIdNo.SuggestListOrderRule = Nothing
+        Me.cacCostCenterIdNo.TextToSearch = Nothing
+        Me.cacCostCenterIdNo.ValueIsMandatory = false
+        Me.cacCostCenterIdNo.ValueIsNullable = false
+        Me.cacCostCenterIdNo.ValueIsNumeric = false
+        Me.cacCostCenterIdNo.ValueMember = "IdNo"
         '
         'lblNotes
         '
@@ -351,7 +351,7 @@ End Sub
 
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblDepartmentCode As CLabel
         Friend WithEvents txtDepartmentCode As CTextBox
         Friend WithEvents lblDepartmentName As CLabel
@@ -364,8 +364,8 @@ End Sub
         Friend WithEvents lblCostCenterIdNo As CLabel
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents cacParentIdNo As CaComboBox
-        Friend WithEvents cacProfitCenterIDNo As CaComboBox
-        Friend WithEvents cacCostCenterIDNo As CaComboBox
+        Friend WithEvents cacProfitCenterIdNo As CaComboBox
+        Friend WithEvents cacCostCenterIdNo As CaComboBox
         Friend WithEvents txtSortKey As CTextBox
     End Class
 End NameSpace

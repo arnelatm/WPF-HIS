@@ -15,10 +15,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Designation Implements IDaoAll(Of Designation).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
+                    " SELECT IdNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
                     "   FROM [Designation]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "DesignationName ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
+                    " SELECT IdNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
                     "   FROM [Designation] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "        DesignationName = @DesignationName," &
                     "        DesignationNameAra = @DesignationNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(designation))
         End Function
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Designation) =
                                     Function(reader) _
             New Designation() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DesignationCode = Extensions.AsString(reader("DesignationCode")),
             .DesignationName = Extensions.AsString(reader("DesignationName")),
             .DesignationNameAra = Extensions.AsString(reader("DesignationNameAra")),
@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(designation As Designation) As Object()
             Return New Object() {
-                                    "@IDNo", designation.IdNo,
+                                    "@IdNo", designation.IdNo,
                                     "@DesignationCode", designation.DesignationCode,
                                     "@DesignationName", designation.DesignationName,
                                     "@DesignationNameAra", designation.DesignationNameAra,

@@ -43,7 +43,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
@@ -58,7 +58,7 @@ Namespace PresentationLayer.Presenters
             DtCadOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
             DtCadOiUpdateTable.Columns.Add("cadIdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtCadOiUpdateTable.Columns.Add("IDNo", GetType(Int32))
+            DtCadOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 

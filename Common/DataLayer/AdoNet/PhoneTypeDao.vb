@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
+                    " SELECT IdNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "PhoneTypeName"
             End If
             Dim sql As String =
-                    " SELECT IDNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
+                    " SELECT IdNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -40,7 +40,7 @@ Namespace DataLayer.AdoNet
                     "        PhoneTypeName = @PhoneTypeName," &
                     "        PhoneTypeNameAra = @PhoneTypeNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(phoneType))
         End Function
@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PhoneType) =
                                     Function(reader) _
             New PhoneType() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .PhoneTypeCode = Extensions.AsString(reader("PhoneTypeCode")),
             .PhoneTypeName = Extensions.AsString(reader("PhoneTypeName")),
             .PhoneTypeNameAra = Extensions.AsString(reader("PhoneTypeNameAra")),
@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(phoneType As PhoneType) As Object()
             Return New Object() {
-                                    "@IDNo", phoneType.IdNo,
+                                    "@IdNo", phoneType.IdNo,
                                     "@PhoneTypeCode", phoneType.PhoneTypeCode,
                                     "@PhoneTypeName", phoneType.PhoneTypeName,
                                     "@PhoneTypeNameAra", phoneType.PhoneTypeNameAra,

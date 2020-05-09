@@ -97,14 +97,14 @@ Namespace PresentationLayer.Forms
 
         Public Property IdNo As Int32 Implements IApJournalView.IdNo
             Get
-                If TxtIDNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIDNo.Text)
+                If TxtIdNo.Text <> "" Then
+                    Return Convert.ToInt16(TxtIdNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                TxtIDNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -291,7 +291,7 @@ Namespace PresentationLayer.Forms
          {"Cancelled", chkCancelled},
          {"DateCreated", txtDateCreated},
          {"DueDate", dtpDueDate},
-         {"IdNo", TxtIDNo},
+         {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
          {"Notes", txtNotes},
          {"Posted", chkPosted},

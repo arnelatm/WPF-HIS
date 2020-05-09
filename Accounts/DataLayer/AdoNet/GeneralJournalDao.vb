@@ -23,8 +23,8 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo," &
                     "TransactionDate" &
                     " FROM [GeneralJournal]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New GeneralJournalItemDao()
             data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
                     "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
                     "TransactionDate = @TransactionDate" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(generalJournal))
         End Function
 

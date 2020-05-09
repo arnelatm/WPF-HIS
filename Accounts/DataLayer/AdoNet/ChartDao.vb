@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
                     "AccountNameAra," &
                     "Active," &
                     "DetailAccount," &
-                    "IDNo," &
+                    "IdNo," &
                     "LevelNumber," &
                     "NormalBalance," &
                     "Notes," &
@@ -32,8 +32,8 @@ Namespace DataLayer.AdoNet
                     "SpecialAccount," &
                     "WithReconciliation" &
                     " FROM [Chart_View]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
         End Function
@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
                   "a.AccountNameAra," &
                   "a.Active," &
                   "a.DetailAccount," &
-                  "a.IDNo," &
+                  "a.IdNo," &
                   "a.LevelNumber," &
                   "a.NormalBalance," &
                   "a.Notes," &
@@ -74,7 +74,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "AccountName Asc"
             End If
             Dim sql As String =
-                    " SELECT IDNo, ParentIdNo, AccountCode, AccountName, AccountNameAra, AccountGroup, DetailAccount, NormalBalance, " &
+                    " SELECT IdNo, ParentIdNo, AccountCode, AccountName, AccountNameAra, AccountGroup, DetailAccount, NormalBalance, " &
                     " PayeeType, WithReconciliation, Active, Notes, LevelNumber, SortKey" &
                     "   FROM [Chart_View] order by sortKey"
             Return Db.Read(sql, Make).ToList()
@@ -95,7 +95,7 @@ Namespace DataLayer.AdoNet
                     "PayeeType = @PayeeType," &
                     "SpecialAccount = @SpecialAccount," &
                     "WithReconciliation = @WithReconciliation" &
-                    " WHERE IDNo = @IDNo"
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(chart))
         End Function
 
@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .AccountNameAra = Extensions.AsString(reader("AccountNameAra")),
             .Active = Extensions.AsBool(reader("Active")),
             .DetailAccount = Extensions.AsBool(reader("DetailAccount")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .NormalBalance = Extensions.AsString(reader("NormalBalance")),
             .Notes = Extensions.AsString(reader("Notes")),
@@ -159,7 +159,7 @@ Namespace DataLayer.AdoNet
                                     "@AccountNameAra", chart.AccountNameAra,
                                     "@Active", chart.Active,
                                     "@DetailAccount", chart.DetailAccount,
-                                    "@IDNo", chart.IdNo,
+                                    "@IdNo", chart.IdNo,
                                     "@LevelNumber", chart.LevelNumber,
                                     "@NormalBalance", chart.NormalBalance,
                                     "@Notes", chart.Notes,

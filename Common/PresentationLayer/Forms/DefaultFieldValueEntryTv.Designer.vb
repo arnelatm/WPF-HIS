@@ -66,6 +66,8 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
@@ -83,6 +85,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtFieldName, "txtFieldName")
             Me.txtFieldName.ForeColor = System.Drawing.Color.Black
             Me.txtFieldName.LinkedLabel = Nothing
+            Me.txtFieldName.MaximumValue = Nothing
+            Me.txtFieldName.MinimumValue = Nothing
             Me.txtFieldName.Name = "txtFieldName"
             Me.txtFieldName.OldValue = Nothing
             Me.txtFieldName.ReadOnly = True
@@ -139,6 +143,8 @@ Namespace PresentationLayer.Forms
             Me.cboTableName.HideWhenNotEditingOrAdding = False
             Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15")})
             Me.cboTableName.LinkedLabel = Nothing
+            Me.cboTableName.MaximumValue = Nothing
+            Me.cboTableName.MinimumValue = Nothing
             Me.cboTableName.Name = "cboTableName"
             Me.cboTableName.OldValue = 0
             Me.cboTableName.OriginalDataSource = Nothing
@@ -217,6 +223,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtLength, "txtLength")
             Me.txtLength.ForeColor = System.Drawing.Color.Black
             Me.txtLength.LinkedLabel = Nothing
+            Me.txtLength.MaximumValue = Nothing
+            Me.txtLength.MinimumValue = Nothing
             Me.txtLength.Name = "txtLength"
             Me.txtLength.OldValue = Nothing
             Me.txtLength.ReadOnly = True
@@ -242,6 +250,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtDecimalPart, "txtDecimalPart")
             Me.txtDecimalPart.ForeColor = System.Drawing.Color.Black
             Me.txtDecimalPart.LinkedLabel = Nothing
+            Me.txtDecimalPart.MaximumValue = Nothing
+            Me.txtDecimalPart.MinimumValue = Nothing
             Me.txtDecimalPart.Name = "txtDecimalPart"
             Me.txtDecimalPart.OldValue = Nothing
             Me.txtDecimalPart.ReadOnly = True
@@ -266,6 +276,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtLinkedTable, "txtLinkedTable")
             Me.txtLinkedTable.ForeColor = System.Drawing.Color.Black
             Me.txtLinkedTable.LinkedLabel = Nothing
+            Me.txtLinkedTable.MaximumValue = Nothing
+            Me.txtLinkedTable.MinimumValue = Nothing
             Me.txtLinkedTable.Name = "txtLinkedTable"
             Me.txtLinkedTable.OldValue = Nothing
             Me.txtLinkedTable.ReadOnly = True
@@ -290,6 +302,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtLinkedField, "txtLinkedField")
             Me.txtLinkedField.ForeColor = System.Drawing.Color.Black
             Me.txtLinkedField.LinkedLabel = Nothing
+            Me.txtLinkedField.MaximumValue = Nothing
+            Me.txtLinkedField.MinimumValue = Nothing
             Me.txtLinkedField.Name = "txtLinkedField"
             Me.txtLinkedField.OldValue = Nothing
             Me.txtLinkedField.ReadOnly = True
@@ -314,6 +328,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtDefaultValue, "txtDefaultValue")
             Me.txtDefaultValue.ForeColor = System.Drawing.Color.Black
             Me.txtDefaultValue.LinkedLabel = Nothing
+            Me.txtDefaultValue.MaximumValue = Nothing
+            Me.txtDefaultValue.MinimumValue = Nothing
             Me.txtDefaultValue.Name = "txtDefaultValue"
             Me.txtDefaultValue.OldValue = Nothing
             Me.txtDefaultValue.ReadOnly = True

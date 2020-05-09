@@ -47,6 +47,7 @@ Public Class Parser(Of T As Structure)
     Public Shared ReadOnly Parser As ParserFunction = GetFunction()
 
     Private Shared Function GetFunction() As ParserFunction
+        Debugger.Break()
         Dim t As Type = GetType(T)
         Dim m As MethodInfo = t.GetMethod("Parse", New Type() {GetType(String)})
         Dim d As ParserFunction = DirectCast(
@@ -71,6 +72,7 @@ Class Test(Of T As {Structure, IConvertible})
         Dim result As T = _getInt(n)
         Return result
     End Function
+
 End Class
 
 Class Cast(Of T, U)
@@ -80,4 +82,5 @@ Class Cast(Of T, U)
         Dim par1 = Expression.Parameter(GetType(T))
         [Do] = Expression.Lambda(Of Func(Of T, U))(Expression.Convert(par1, GetType(U)), par1).Compile()
     End Sub
+
 End Class

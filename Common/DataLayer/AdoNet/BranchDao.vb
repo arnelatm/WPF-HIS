@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Branch Implements IDaoAll(Of Branch).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, BranchCode, BranchName, BranchNameAra, Notes" &
+                    " SELECT IdNo, BranchCode, BranchName, BranchNameAra, Notes" &
                     "   FROM [Branch]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "BranchName"
             End If
             Dim sql As String =
-                    " SELECT IDNo, BranchCode, BranchName, BranchNameAra, Notes" &
+                    " SELECT IdNo, BranchCode, BranchName, BranchNameAra, Notes" &
                     "   FROM [Branch] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "        BranchName = @BranchName," &
                     "        BranchNameAra = @BranchNameAra," &
                     "        Notes = @Notes" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(branch))
         End Function
@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Branch) =
                                     Function(reader) _
             New Branch() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .BranchCode = Extensions.AsString(reader("BranchCode")),
             .BranchName = Extensions.AsString(reader("BranchName")),
             .BranchNameAra = Extensions.AsString(reader("BranchNameAra")),
@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(branch As Branch) As Object()
             Return New Object() {
-                                    "@IDNo", branch.IdNo,
+                                    "@IdNo", branch.IdNo,
                                     "@BranchCode", branch.BranchCode,
                                     "@BranchName", branch.BranchName,
                                     "@BranchNameAra", branch.BranchNameAra,

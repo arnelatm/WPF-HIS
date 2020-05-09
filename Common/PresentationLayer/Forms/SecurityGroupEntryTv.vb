@@ -36,7 +36,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And SecurityGroupView.ParentIdNo = SecurityGroupView.TxtIDNo.Text Then
+            If PresenterObj.EditMode And SecurityGroupView.ParentIdNo = SecurityGroupView.TxtIdNo.Text Then
                 Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
                 PresenterObj.CancelSave = True
                 Exit Sub
@@ -50,9 +50,9 @@ Namespace PresentationLayer.Forms
             With SecurityGroupView
                 FieldsDictionary = New Dictionary(Of String, Object) From
                     {
-                    {"IDNo", .TxtIDNo},
+                    {"IdNo", .TxtIdNo},
                     {"Notes", .txtNotes},
-                    {"ParentId", .TxtIDNo},
+                    {"ParentId", .TxtIdNo},
                     {"ParentIdNo", .cacParentIdNo},
                     {"SecurityGroupCode", .txtSecurityGroupCode},
                     {"SecurityGroupName", .txtSecurityGroupName},

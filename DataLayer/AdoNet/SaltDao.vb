@@ -11,19 +11,19 @@ Namespace AdoNet
 
         Public Function GetSalt(idNo As Int32) As Salt Implements ISaltDao.GetSalt
             Dim sql As String =
-                    " SELECT IDNo, LoginIDNo, Salt" &
+                    " SELECT IdNo, LoginIdNo, Salt" &
                     "  FROM [Salt]" &
-                    " WHERE IDNo = @lDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @lDNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetSaltByLoginIdNo(loginIdNo As Int32) As Salt Implements ISaltDao.GetSaltByLoginIdNo
             Dim sql As String =
-                    " SELECT IDNo, LoginIDNo, Salt" &
+                    " SELECT IdNo, LoginIdNo, Salt" &
                     "   FROM [Salt]" &
-                    "  WHERE LoginIDNo = @LoginIDNo"
-            Dim params() As Object = {"@LoginIDNo", loginIdNo}
+                    "  WHERE LoginIdNo = @LoginIdNo"
+            Dim params() As Object = {"@LoginIdNo", loginIdNo}
             Dim salt = Db.Read(sql, Make, params).FirstOrDefault()
             Return salt
         End Function
@@ -39,7 +39,7 @@ Namespace AdoNet
         Public Sub DeleteSalt(salt As Salt) Implements ISaltDao.DeleteSalt
             Dim sql As String =
                     " DELETE FROM [Salt]" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Db.Update(sql, Take(salt))
         End Sub
@@ -49,8 +49,8 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Salt) =
                                     Function(reader) _
             New Salt() With {
-            .IdNo = Extensions.AsInt(Of Integer)(reader("IDNo")),
-            .LoginIdNo = Extensions.AsInt(Of Integer)(reader("LoginIDNo")),
+            .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .LoginIdNo = Extensions.AsInt(Of Integer)(reader("LoginIdNo")),
             .Salt = Extensions.AsString(reader("Salt"))
             }
 
@@ -58,7 +58,7 @@ Namespace AdoNet
 
         Private Function Take(salt As Salt) As Object()
             Return New Object() {
-                                    "@LoginIDNo", salt.LoginIdNo,
+                                    "@LoginIdNo", salt.LoginIdNo,
                                     "@Salt", salt.Salt}
         End Function
 

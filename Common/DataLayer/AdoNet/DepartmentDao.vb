@@ -14,10 +14,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Department Implements IDaoAll(Of Department).GetRecordById
             Dim sql As String =
-                    " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
+                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim x = db.Read(sql, _make, params).FirstOrDefault()
             Return x
         End Function
@@ -28,14 +28,14 @@ Namespace DataLayer.AdoNet
                 sortExpression = "SortKey ASC"
             End If
             Dim sql As String =
-                    " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
+                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo, SortKey" &
                     "   FROM [Department_View] order by '" + sortExpression + "'"
             Return db.Read(sql, _make).ToList()
         End Function
 
         'Public Function GetAll(Optional ByVal sortExpression As String = "DepartmentName ASC") As List(Of Department) Implements IDaoAll(Of Department).GetAll
         '    Dim sql As String =
-        '        " SELECT IDNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo" &
+        '        " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, ProfitCenterIdNo, CostCenterIdNo" &
         '        "   FROM [Department_View] " & "order by sortKey"
         '    Return _db.Read(sql, _make).ToList()
         'End Function
@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
                     "        Notes = @Notes," &
                     "        ProfitCenterIdNo = @ProfitCenterIdNo," &
                     "        CostCenterIdNo = @CostCenterIdNo" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
 
             Return db.Update(sql, Take(department))
         End Function
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
         Private Shared _make As Func(Of IDataReader, Department) =
                            Function(reader) _
             New Department() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IDNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
             .DepartmentName = Extensions.AsString(reader("DepartmentName")),
             .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),
@@ -79,7 +79,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(ByVal department As Department) As Object()
             Return New Object() {
-                                    "@IDNo", department.IdNo,
+                                    "@IdNo", department.IdNo,
                                     "@DepartmentCode", department.DepartmentCode,
                                     "@DepartmentName", department.DepartmentName,
                                     "@DepartmentNameAra", department.DepartmentNameAra,

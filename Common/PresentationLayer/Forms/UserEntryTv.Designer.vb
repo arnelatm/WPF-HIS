@@ -27,8 +27,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblIDNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIDNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblUserName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblFullName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,8 +58,8 @@ Namespace PresentationLayer.Forms
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-            Me.CFlowLayout1.Controls.Add(Me.lblIDNo)
-            Me.CFlowLayout1.Controls.Add(Me.TxtIDNo)
+            Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
+            Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblUserName)
             Me.CFlowLayout1.Controls.Add(Me.TxtUserName)
             Me.CFlowLayout1.Controls.Add(Me.lblFullName)
@@ -79,39 +79,39 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout1.Size = New System.Drawing.Size(501, 201)
             Me.CFlowLayout1.TabIndex = 125
             '
-            'lblIDNo
+            'lblIdNo
             '
-            Me.lblIDNo.DisplayOnly = true
-            Me.lblIDNo.EditingMode = false
-            Me.lblIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-            Me.lblIDNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblIDNo.Location = New System.Drawing.Point(11, 11)
-            Me.lblIDNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblIDNo.Name = "lblIDNo"
-            Me.lblIDNo.Size = New System.Drawing.Size(152, 23)
-            Me.lblIDNo.TabIndex = 111
-            Me.lblIDNo.Text = "ID No."
-            Me.lblIDNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.DisplayOnly = true
+            Me.lblIdNo.EditingMode = false
+            Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+            Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
+            Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Size = New System.Drawing.Size(152, 23)
+            Me.lblIdNo.TabIndex = 111
+            Me.lblIdNo.Text = "ID No."
+            Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'TxtIDNo
+            'TxtIdNo
             '
-            Me.TxtIDNo.BackColor = System.Drawing.Color.White
-            Me.TxtIDNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIDNo.ComputedValue = false
-            Me.TxtIDNo.CustomFormat = Nothing
-            Me.TxtIDNo.DataBoundControl = true
-            Me.TxtIDNo.EditingMode = false
-            Me.CFlowLayout1.SetFlowBreak(Me.TxtIDNo, true)
-            Me.TxtIDNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-            Me.TxtIDNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIDNo.LinkedLabel = Me.lblIDNo
-            Me.TxtIDNo.Location = New System.Drawing.Point(165, 11)
-            Me.TxtIDNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.TxtIDNo.Name = "TxtIDNo"
-            Me.TxtIDNo.OldValue = Nothing
-            Me.TxtIDNo.Size = New System.Drawing.Size(77, 23)
-            Me.TxtIDNo.TabIndex = 0
-            Me.TxtIDNo.TabStop = false
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = false
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = true
+            Me.TxtIdNo.EditingMode = false
+            Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, true)
+            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.Location = New System.Drawing.Point(165, 11)
+            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.Size = New System.Drawing.Size(77, 23)
+            Me.TxtIdNo.TabIndex = 0
+            Me.TxtIdNo.TabStop = false
             '
             'lblUserName
             '
@@ -371,8 +371,8 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Friend WithEvents CFlowLayout1 As CFlowLayout
-        Friend WithEvents lblIDNo As CLabel
-        Friend WithEvents TxtIDNo As CTextBox
+        Friend WithEvents lblIdNo As CLabel
+        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblUserName As CLabel
         Friend WithEvents TxtUserName As CTextBox
         Friend WithEvents lblFullName As CLabel

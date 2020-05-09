@@ -195,34 +195,34 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TxtIDNo.Enabled" type="System.Boolean, mscorlib">
+  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="TxtIDNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="TxtIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 11</value>
   </data>
-  <data name="TxtIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="TxtIDNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="TxtIDNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>160</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Name" xml:space="preserve">
-    <value>TxtIDNo</value>
+  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
+    <value>TxtIdNo</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;TxtIDNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblDepartmentCode.Font" type="System.Drawing.Font, System.Drawing">
@@ -504,31 +504,31 @@
   <data name="&gt;&gt;lblProfitCenterIdNo.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cacProfitCenterIDNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cacProfitCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cacProfitCenterIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cacProfitCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 137</value>
   </data>
-  <data name="cacProfitCenterIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cacProfitCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cacProfitCenterIDNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cacProfitCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cacProfitCenterIDNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cacProfitCenterIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIDNo.Name" xml:space="preserve">
-    <value>cacProfitCenterIDNo</value>
+  <data name="&gt;&gt;cacProfitCenterIdNo.Name" xml:space="preserve">
+    <value>cacProfitCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIDNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cacProfitCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIDNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cacProfitCenterIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIDNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cacProfitCenterIdNo.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="lblCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -564,31 +564,31 @@
   <data name="&gt;&gt;lblCostCenterIdNo.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="cacCostCenterIDNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cacCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cacCostCenterIDNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cacCostCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 163</value>
   </data>
-  <data name="cacCostCenterIDNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cacCostCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cacCostCenterIDNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cacCostCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cacCostCenterIDNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cacCostCenterIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;cacCostCenterIDNo.Name" xml:space="preserve">
-    <value>cacCostCenterIDNo</value>
+  <data name="&gt;&gt;cacCostCenterIdNo.Name" xml:space="preserve">
+    <value>cacCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;cacCostCenterIDNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cacCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cacCostCenterIDNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cacCostCenterIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;cacCostCenterIDNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cacCostCenterIdNo.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">

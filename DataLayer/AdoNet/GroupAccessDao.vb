@@ -16,11 +16,11 @@ Namespace AdoNet
 
         'Public Function GetRecordById(idNo) As GroupAccess Implements IDao(Of GroupAccess).GetRecordById
         '    Dim sql As String =
-        '            " SELECT IDNo, SecurityGroupIDNo, SecurityObjectIDNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
+        '            " SELECT IdNo, SecurityGroupIdNo, SecurityObjectIdNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
         '            "   FROM [GroupAccess_View] " &
-        '            "  WHERE IDNo = @IDNo"
+        '            "  WHERE IdNo = @IdNo"
 
-        '    Dim parms() As Object = {"@IDNo", idNo}
+        '    Dim parms() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, parms).FirstOrDefault()
         'End Function
 
@@ -29,7 +29,7 @@ Namespace AdoNet
         '        sortExpression = "IdNo"
         '    End If
         '    Dim sql As String =
-        '            " SELECT IDNo, SecurityGroupIdNo,  " &
+        '            " SELECT IdNo, SecurityGroupIdNo,  " &
         '            "   FROM [GroupAccess_View] " & "order by " & sortExpression
         '    Return Db.Read(sql, Make).ToList()
         'End Function
@@ -40,9 +40,9 @@ Namespace AdoNet
         '    End If
         '    Dim sql As String = "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Selectable, GroupAccess.Viewable, GroupAccess.Editable from SecurityObject  " &
         '                        "left join groupAccess " &
-        '                        "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
+        '                        "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
         '                        "Order By " & sortExpression & " ASC "
-        '    Dim params() As Object = {"@SecurityGroupIDNo", idNo}
+        '    Dim params() As Object = {"@SecurityGroupIdNo", idNo}
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
@@ -54,9 +54,9 @@ Namespace AdoNet
             Dim sql As String =
                     "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
                     "left join groupAccess " &
-                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIDNo  and SecurityGroupIDNo = @SecurityGroupIdNo " &
+                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
                     "Order By " & sortExpression & " ASC "
-            Dim params() As Object = {"@SecurityGroupIDNo", idNo}
+            Dim params() As Object = {"@SecurityGroupIdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
         End Function
 
@@ -73,9 +73,9 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GroupAccess) =
                                     Function(reader) _
             New GroupAccess() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IDNo")),
-            .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIDNo")),
-            .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIDNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .SecurityGroupIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityGroupIdNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Integer?)(reader("SecurityObjectIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
             .Editable = Extensions.AsBool(reader("Editable"))
@@ -86,9 +86,9 @@ Namespace AdoNet
         ' ReSharper disable once UnusedMember.Local
         Private Function Take(groupAccess As GroupAccess) As Object()
             Return New Object() {
-                                    "@IDNo", groupAccess.IdNo,
-                                    "@SecurityGroupIDNo", groupAccess.SecurityGroupIdNo,
-                                    "@SecurityObjectIDNo", groupAccess.SecurityObjectIdNo,
+                                    "@IdNo", groupAccess.IdNo,
+                                    "@SecurityGroupIdNo", groupAccess.SecurityGroupIdNo,
+                                    "@SecurityObjectIdNo", groupAccess.SecurityObjectIdNo,
                                     "@SecurityObjectName", groupAccess.SecurityObjectName,
                                     "@Visible", groupAccess.Visible,
                                     "@Editable", groupAccess.Editable

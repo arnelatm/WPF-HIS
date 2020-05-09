@@ -525,7 +525,7 @@ Public Class BfMain
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
         If PresenterObj Is Nothing Then
             'Dim securityPresenter As SecurityPresenter = New SecurityPresenter(Me)
-            Dim idNo As Int32 = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+            Dim idNo As Int32 = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
             Dim retVal As Integer
             If Not Integer.TryParse(idNo, retVal) Then
                 Return retVal
@@ -533,7 +533,7 @@ Public Class BfMain
                 Return 0
             End If
         Else
-            Return PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IDNo")
+            Return PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
         End If
     End Function
 

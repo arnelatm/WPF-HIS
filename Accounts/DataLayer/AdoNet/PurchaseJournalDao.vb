@@ -19,8 +19,8 @@ Namespace DataLayer.AdoNet
                     " InvoiceNo, InvoiceDate, SettlementDiscount, SettlementDueDate, VatNumber, VatAmount, Posted, " &
                     " Cancelled, Notes, VatNumber, VatAmount, Posted, Cancelled, DateCreated" &
                     "   FROM [PurchaseJournal]" &
-                    " WHERE IDNo = @IDNo"
-            Dim params() As Object = {"@IDNo", idNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
                     "       SettlementDueDate = @SettlementDueDate," &
                     "       VatAmount = @VatAmount," &
                     "       VatNumber = @VatNumber" &
-                    "  WHERE IDNo = @IDNo"
+                    "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(purchaseJournal))
         End Function
 
