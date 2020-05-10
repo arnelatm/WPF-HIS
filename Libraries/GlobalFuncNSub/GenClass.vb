@@ -47,7 +47,7 @@ Public Class Parser(Of T As Structure)
     Public Shared ReadOnly Parser As ParserFunction = GetFunction()
 
     Private Shared Function GetFunction() As ParserFunction
-        Debugger.Break()
+        'Debugger.Break()
         Dim t As Type = GetType(T)
         Dim m As MethodInfo = t.GetMethod("Parse", New Type() {GetType(String)})
         Dim d As ParserFunction = DirectCast(

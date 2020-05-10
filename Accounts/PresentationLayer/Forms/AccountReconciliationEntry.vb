@@ -56,6 +56,7 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 txtBalance.Text = FormatMoney(Value)
+                txtBalance2.Text = txtBalance.Text
             End Set
         End Property
 
