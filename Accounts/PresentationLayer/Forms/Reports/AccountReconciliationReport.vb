@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Forms.Reports
+﻿Imports System.Configuration
+
+Namespace PresentationLayer.Forms.Reports
 
     Public Class AccountReconciliationReport
 
@@ -9,7 +11,9 @@
             'AddHandler OkButtonClicked, AddressOf OnOkButtonClicked
             'myReportDocument.SetDatabaseLogon("user", "pass", "dbserver", "database1"
 
-            Report.Load("\\Ibn-server\isp\Accounts\Reports\Account Reconciliation Report.rpt")
+            Dim reportPaths As String = ConfigurationManager.AppSettings.Get("ReportPaths")
+
+            Report.Load(reportPaths & "Account Reconciliation Report.rpt")
             Report.SetParameterValue("ReconciliationNumber", idNo)
             Report.DataSourceConnections.Clear()
             Report.SetDatabaseLogon("iGroupAdmin", "igss@123", "IBN-SERVER", "ISPDATA")

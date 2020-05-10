@@ -1474,31 +1474,31 @@
   <data name="&gt;&gt;btnPost.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnPrint.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="btnPrintAccountRecon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="btnPrint.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnPrintAccountRecon.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 3</value>
   </data>
-  <data name="btnPrint.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnPrintAccountRecon.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 26</value>
   </data>
-  <data name="btnPrint.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnPrintAccountRecon.TabIndex" type="System.Int32, mscorlib">
     <value>252</value>
   </data>
-  <data name="btnPrint.Text" xml:space="preserve">
+  <data name="btnPrintAccountRecon.Text" xml:space="preserve">
     <value>Print</value>
   </data>
-  <data name="&gt;&gt;btnPrint.Name" xml:space="preserve">
-    <value>btnPrint</value>
+  <data name="&gt;&gt;btnPrintAccountRecon.Name" xml:space="preserve">
+    <value>btnPrintAccountRecon</value>
   </data>
-  <data name="&gt;&gt;btnPrint.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnPrintAccountRecon.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;btnPrint.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnPrintAccountRecon.Parent" xml:space="preserve">
     <value>CFlowLayout7</value>
   </data>
-  <data name="&gt;&gt;btnPrint.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnPrintAccountRecon.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="CFlowLayout7.Location" type="System.Drawing.Point, System.Drawing">
@@ -1703,7 +1703,7 @@
     <value>Top</value>
   </data>
   <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
+    <value>0, 53</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
     <value>997, 526</value>
@@ -1726,6 +1726,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
@@ -2893,19 +2896,19 @@
     <value>StoreCaptions1</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.StoreCaptions, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.StoreCaptions, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
     <value>TranslatorDAC</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Name" xml:space="preserve">
     <value>AppDataDAC</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
     <value>MyErrorProvider</value>

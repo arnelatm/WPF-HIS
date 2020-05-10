@@ -472,6 +472,7 @@ Public Class CFormEntry
             btnUndo.Enabled = False
             btnSave.Enabled = False
             btnFind.Enabled = False
+            btnPrint.Enabled = False
             PresenterObj.RecordPositionNumber = 0
             If Not PresenterObj.AddMode Then
                 btnUndo.Enabled = False
@@ -508,12 +509,14 @@ Public Class CFormEntry
                 btnDelete.Enabled = False
                 btnUndo.Enabled = True
                 btnSave.Enabled = True
+                btnPrint.Enabled = False
             Else
                 btnEdit.Enabled = True
                 btnDelete.Enabled = True
                 btnAdd.Enabled = True
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
+                btnPrint.Enabled = True
             End If
         End If
     End Sub
@@ -631,6 +634,13 @@ Public Class CFormEntry
             RaiseEvent BeforeSave()
             RunButtonRoutine(ButtonClicked.Save)
         End If
+    End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Print)
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click

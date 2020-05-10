@@ -687,7 +687,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrint.ClickButtonArea
+        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintAccountRecon.ClickButtonArea
             Dim cForm As New AccountReconciliationReport(IdNo)
             cForm.Show()
         End Sub

@@ -1,4 +1,5 @@
 ﻿Imports System.Transactions
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -198,6 +199,11 @@ Namespace PresentationLayer.Presenters
                     .TransactionDate = acctReconItem.TransactionDate,
                     .Sequence = nSeq}
             actualReconItems.Add(item)
+        End Sub
+
+        Public Overrides Sub GoPrintRecord()
+            Dim cForm As New AccountReconciliationReport(View.IdNo)
+            cForm.Show()
         End Sub
 
     End Class

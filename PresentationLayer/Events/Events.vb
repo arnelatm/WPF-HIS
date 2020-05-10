@@ -10,6 +10,7 @@
     [Quit]
     [Save]
     [Undo]
+    [Print]
     [Translate]
 End Enum
 
