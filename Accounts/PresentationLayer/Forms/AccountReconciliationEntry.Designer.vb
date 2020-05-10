@@ -944,8 +944,8 @@ Namespace PresentationLayer.Forms
             Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floHeader.ResumeLayout(False)
-            Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout
         Me.CFlowLayout3.ResumeLayout(false)
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
