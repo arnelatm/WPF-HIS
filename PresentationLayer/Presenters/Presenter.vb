@@ -692,6 +692,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
+    Public Overridable Sub GoPrintRecord()
+
+    End Sub
+
     Public Sub GoUndoChanges()
         If OkToMove() Then
             UndoMode = True
@@ -857,6 +861,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 GoEditRecord()
             Case ButtonClicked.Save
                 GoSaveRecord()
+            Case ButtonClicked.Print
+                GoPrintRecord()
             Case ButtonClicked.Quit
                 GoQuit()
             Case ButtonClicked.Translate
