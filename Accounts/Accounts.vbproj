@@ -224,9 +224,7 @@
     <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.Designer.vb">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb" />
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
     </Compile>
@@ -313,6 +311,18 @@
       <DependentUpon>AccountReconciliationReport.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\CashDisbursementJournalReport.Designer.vb">
+      <DependentUpon>CashDisbursementJournalReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\CashDisbursementJournalReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.designer.vb">
+      <DependentUpon>CheckDisbursementJournalReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
@@ -539,6 +549,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.resx">
       <DependentUpon>AccountReconciliationReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.resx">
+      <DependentUpon>CheckDisbursementJournalReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>

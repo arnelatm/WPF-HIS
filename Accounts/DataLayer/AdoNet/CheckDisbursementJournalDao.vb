@@ -179,7 +179,7 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Const series As String = "CDJOURNAL"
+            Const series As String = "CKJOURNAL"
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [CheckDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)

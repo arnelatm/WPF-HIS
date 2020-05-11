@@ -205,6 +205,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
             Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
             Me.txtJournalCode.LinkedLabel = Nothing
+            Me.txtJournalCode.MaximumValue = Nothing
+            Me.txtJournalCode.MinimumValue = Nothing
             Me.txtJournalCode.Name = "txtJournalCode"
             Me.txtJournalCode.OldValue = Nothing
             Me.txtJournalCode.ReadOnly = True
@@ -223,6 +225,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
@@ -245,6 +249,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
             Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
+            Me.txtReferenceNo.MaximumValue = Nothing
+            Me.txtReferenceNo.MinimumValue = Nothing
             Me.txtReferenceNo.Name = "txtReferenceNo"
             Me.txtReferenceNo.OldValue = Nothing
             Me.txtReferenceNo.ValueIsMandatory = True
@@ -372,6 +378,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Me.lblAmount
+            Me.txtPayeeName.MaximumValue = Nothing
+            Me.txtPayeeName.MinimumValue = Nothing
             Me.txtPayeeName.Name = "txtPayeeName"
             Me.txtPayeeName.OldValue = Nothing
             Me.txtPayeeName.ValueIsMandatory = True
@@ -436,6 +444,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtAmount, "txtAmount")
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Me.lblAmount
+            Me.txtAmount.MaximumValue = Nothing
+            Me.txtAmount.MinimumValue = Nothing
             Me.txtAmount.Name = "txtAmount"
             Me.txtAmount.OldValue = Nothing
             Me.txtAmount.ValueIsMandatory = True
@@ -459,6 +469,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtORNumber, "txtORNumber")
             Me.txtORNumber.ForeColor = System.Drawing.Color.Black
             Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
+            Me.txtORNumber.MaximumValue = Nothing
+            Me.txtORNumber.MinimumValue = Nothing
             Me.txtORNumber.Name = "txtORNumber"
             Me.txtORNumber.OldValue = Nothing
             Me.txtORNumber.ValueIsMandatory = True
@@ -481,6 +493,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
             Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
             Me.txtVatNumber.LinkedLabel = Me.lblApplied
+            Me.txtVatNumber.MaximumValue = Nothing
+            Me.txtVatNumber.MinimumValue = Nothing
             Me.txtVatNumber.Name = "txtVatNumber"
             Me.txtVatNumber.OldValue = Nothing
             Me.txtVatNumber.ValueIsMandatory = True
@@ -554,6 +568,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ValueIsMandatory = True
@@ -599,6 +615,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtVatAmount, "txtVatAmount")
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
             Me.txtVatAmount.LinkedLabel = Me.lblApplied
+            Me.txtVatAmount.MaximumValue = Nothing
+            Me.txtVatAmount.MinimumValue = Nothing
             Me.txtVatAmount.Name = "txtVatAmount"
             Me.txtVatAmount.OldValue = Nothing
             Me.txtVatAmount.ReadOnly = True
@@ -617,6 +635,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtApplied, "txtApplied")
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
             Me.txtApplied.LinkedLabel = Me.lblApplied
+            Me.txtApplied.MaximumValue = Nothing
+            Me.txtApplied.MinimumValue = Nothing
             Me.txtApplied.Name = "txtApplied"
             Me.txtApplied.OldValue = Nothing
             Me.txtApplied.ReadOnly = True
@@ -643,6 +663,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtUnapplied, "txtUnapplied")
             Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
             Me.txtUnapplied.LinkedLabel = Me.CLabel2
+            Me.txtUnapplied.MaximumValue = Nothing
+            Me.txtUnapplied.MinimumValue = Nothing
             Me.txtUnapplied.Name = "txtUnapplied"
             Me.txtUnapplied.OldValue = Nothing
             Me.txtUnapplied.ReadOnly = True
@@ -668,6 +690,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtDiscountTaken, "txtDiscountTaken")
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
             Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
+            Me.txtDiscountTaken.MaximumValue = Nothing
+            Me.txtDiscountTaken.MinimumValue = Nothing
             Me.txtDiscountTaken.Name = "txtDiscountTaken"
             Me.txtDiscountTaken.OldValue = Nothing
             Me.txtDiscountTaken.ReadOnly = True
@@ -734,6 +758,8 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
             Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
             Me.txtDateCreated.LinkedLabel = Nothing
+            Me.txtDateCreated.MaximumValue = Nothing
+            Me.txtDateCreated.MinimumValue = Nothing
             Me.txtDateCreated.Name = "txtDateCreated"
             Me.txtDateCreated.OldValue = Nothing
             Me.txtDateCreated.TabStop = False

@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -760,6 +762,11 @@ Namespace PresentationLayer.Presenters
                     DeleteApOpenInvoice(lOpenInvoiceIdNo)
                 End If
             End If
+        End Sub
+
+        Public Overrides Sub GoPrintRecord()
+            Dim cForm As New CashDisbursementJournalReport(View.IdNo)
+            cForm.Show()
         End Sub
 
     End Class

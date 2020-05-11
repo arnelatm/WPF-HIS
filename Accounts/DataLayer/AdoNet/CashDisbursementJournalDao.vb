@@ -169,34 +169,43 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Dim transactionDate = bizObj.TransactionDate
-            Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
-            Dim maxlength As Int16
-            Dim prefix As String
-            If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
-                maxlength = 4
-                prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
-                Dim sql As String = "INSERT INTO [Series] " &
-                    " (SeriesName,Value,MaxLength,Prefix,Description)" &
-                    " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
-                Dim params() As Object = {"@SeriesName", series,
-                                          "@Value", 0,
-                                          "@MaxLength", 4,
-                                          "@Prefix", prefix,
-                                          "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
-                                         }
-                If _db.Insert(sql, params) Then
-                    Return -1
-                End If
-            Else
-                prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
-                maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
-            End If
+            Const series As String = "CDJOURNAL"
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [CashDisbursementJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & bizObj.IdNo
+            sql2 = "Update [CashDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
+
+            'Dim retVal As Boolean
+            'Dim sql1 As String
+            'Dim sql2 As String
+            'Dim transactionDate = bizObj.TransactionDate
+            'Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+            'Dim maxlength As Int16
+            'Dim prefix As String
+            'If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+            '    maxlength = 4
+            '    prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+            '    Dim sql As String = "INSERT INTO [Series] " &
+            '        " (SeriesName,Value,MaxLength,Prefix,Description)" &
+            '        " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
+            '    Dim params() As Object = {"@SeriesName", series,
+            '                              "@Value", 0,
+            '                              "@MaxLength", 4,
+            '                              "@Prefix", prefix,
+            '                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+            '                             }
+            '    If _db.Insert(sql, params) Then
+            '        Return -1
+            '    End If
+            'Else
+            '    prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+            '    maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
+            'End If
+            'sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
+            'sql2 = "Update [CashDisbursementJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
+            '       ")) where IdNo = " & bizObj.IdNo
+            'retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            'Return retVal
         End Function
 
         Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo

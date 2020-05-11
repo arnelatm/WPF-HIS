@@ -56,7 +56,6 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 txtBalance.Text = FormatMoney(Value)
-                txtBalance2.Text = txtBalance.Text
             End Set
         End Property
 
@@ -688,7 +687,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintAccountRecon.ClickButtonArea
+        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) 
             Dim cForm As New AccountReconciliationReport(IdNo)
             cForm.Show()
         End Sub
