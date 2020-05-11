@@ -27,18 +27,17 @@ Namespace PresentationLayer.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountReconciliationEntry))
         Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
-        Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -73,7 +72,6 @@ Namespace PresentationLayer.Forms
             Me.txtTotalDebitsNotCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout7 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.btnPost = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.btnPrintAccountRecon = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblEndingBankBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBalance2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -99,7 +97,6 @@ Namespace PresentationLayer.Forms
             Me.dgvCleared = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvPayDescription = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvAccountReconciliationIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvAccountIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsAccountReconciliationItems = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floHeader.SuspendLayout()
@@ -587,7 +584,6 @@ Namespace PresentationLayer.Forms
             '
             Me.CFlowLayout7.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout7.Controls.Add(Me.btnPost)
-            Me.CFlowLayout7.Controls.Add(Me.btnPrintAccountRecon)
             resources.ApplyResources(Me.CFlowLayout7, "CFlowLayout7")
             Me.CFlowLayout7.Name = "CFlowLayout7"
             '
@@ -596,26 +592,13 @@ Namespace PresentationLayer.Forms
             CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer)), System.Drawing.Color.White}
             CBlendItems1.iPoint = New Single() {0!, 1.006211!, 1.0!}
             Me.btnPost.ColorFillBlend = CBlendItems1
-            Me.btnPost.DesignerSelected = False
+            Me.btnPost.DesignerSelected = True
             Me.btnPost.DisplayOnly = True
             Me.btnPost.ImageIndex = 0
             resources.ApplyResources(Me.btnPost, "btnPost")
             Me.btnPost.Name = "btnPost"
             Me.btnPost.OriginalImageName = Nothing
             Me.btnPost.SecurityKey = ""
-            '
-            'btnPrintAccountRecon
-            '
-            CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer)), System.Drawing.Color.White}
-            CBlendItems2.iPoint = New Single() {0!, 1.006211!, 1.0!}
-            Me.btnPrintAccountRecon.ColorFillBlend = CBlendItems2
-            Me.btnPrintAccountRecon.DesignerSelected = False
-            Me.btnPrintAccountRecon.DisplayOnly = True
-            resources.ApplyResources(Me.btnPrintAccountRecon, "btnPrintAccountRecon")
-            Me.btnPrintAccountRecon.ImageIndex = 0
-            Me.btnPrintAccountRecon.Name = "btnPrintAccountRecon"
-            Me.btnPrintAccountRecon.OriginalImageName = Nothing
-            Me.btnPrintAccountRecon.SecurityKey = ""
             '
             'CFlowLayout6
             '
@@ -767,10 +750,6 @@ Namespace PresentationLayer.Forms
             Me.txtUnreconciledDifference.TabStop = False
             Me.txtUnreconciledDifference.ValueIsMandatory = True
             '
-            'CsrOiItemModelBindingSource
-            '
-            Me.CsrOiItemModelBindingSource.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.CsrOiItemModel)
-            '
             'CFlowLayout4
             '
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
@@ -787,7 +766,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewReconciliationItems.AutoGenerateColumns = False
             Me.DataGridViewReconciliationItems.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo, Me.dgvAccountIdNo})
+            Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo})
             Me.DataGridViewReconciliationItems.DataInGridChanged = False
             Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -926,16 +905,6 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.dgvAccountReconciliationIdNo, "dgvAccountReconciliationIdNo")
             Me.dgvAccountReconciliationIdNo.Name = "dgvAccountReconciliationIdNo"
             '
-            'dgvAccountIdNo
-            '
-            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-            '
-            'bsAccountReconciliationItems
-            '
-            Me.bsAccountReconciliationItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel)
-            '
             'AccountReconciliationEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -1023,7 +992,6 @@ End Sub
         Friend WithEvents lblPosted As CLabel
         Friend WithEvents chkPosted As CCheckBox
         Friend WithEvents CFlowLayout7 As CFlowLayout
-        Friend WithEvents btnPrintAccountRecon As CButton
         Friend WithEvents btnPost As CButton
     End Class
 End NameSpace

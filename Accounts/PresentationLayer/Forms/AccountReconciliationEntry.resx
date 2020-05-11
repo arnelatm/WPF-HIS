@@ -1474,33 +1474,6 @@
   <data name="&gt;&gt;btnPost.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnPrintAccountRecon.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
-  </data>
-  <data name="btnPrintAccountRecon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 3</value>
-  </data>
-  <data name="btnPrintAccountRecon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 26</value>
-  </data>
-  <data name="btnPrintAccountRecon.TabIndex" type="System.Int32, mscorlib">
-    <value>252</value>
-  </data>
-  <data name="btnPrintAccountRecon.Text" xml:space="preserve">
-    <value>Print</value>
-  </data>
-  <data name="&gt;&gt;btnPrintAccountRecon.Name" xml:space="preserve">
-    <value>btnPrintAccountRecon</value>
-  </data>
-  <data name="&gt;&gt;btnPrintAccountRecon.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnPrintAccountRecon.Parent" xml:space="preserve">
-    <value>CFlowLayout7</value>
-  </data>
-  <data name="&gt;&gt;btnPrintAccountRecon.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="CFlowLayout7.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 78</value>
   </data>
@@ -1664,12 +1637,6 @@
     <value>AccountReconciliationIdNo</value>
   </data>
   <data name="dgvAccountReconciliationIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
-    <value>AccountIdNo</value>
-  </data>
-  <data name="dgvAccountIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <metadata name="bsAccountReconciliationItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -2986,12 +2953,6 @@
     <value>dgvAccountReconciliationIdNo</value>
   </data>
   <data name="&gt;&gt;dgvAccountReconciliationIdNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
-    <value>dgvAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bsAccountReconciliationItems.Name" xml:space="preserve">

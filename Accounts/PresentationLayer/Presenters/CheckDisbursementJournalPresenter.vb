@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -775,6 +776,12 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
+
+        'Public Overrides Sub GoPrintRecord()
+        '    Dim cForm As New CheckDisbursementReport(View.IdNo)
+        '    cForm.Show()
+        'End Sub
+
 
     End Class
 
