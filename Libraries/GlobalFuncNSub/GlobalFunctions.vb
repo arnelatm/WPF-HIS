@@ -712,9 +712,9 @@ Public Module GlobalFunctions
         Return nMinValue
     End Function
 
-    Public Function NumTypeIsInteger(typeCode As TypeCode) As Boolean
-        If TypeCode.Byte OrElse TypeCode.Int16 OrElse TypeCode.Int32 OrElse TypeCode.Int64 _
-            OrElse TypeCode.UInt16 OrElse TypeCode.UInt32 OrElse TypeCode.UInt64 Then
+    Public Function NumTypeIsInteger(ByVal typeCodeVal As TypeCode) As Boolean
+        If typeCodeVal = TypeCode.Byte OrElse typeCodeVal = TypeCode.Int16 OrElse typeCodeVal = TypeCode.Int32 OrElse typeCodeVal = TypeCode.Int64 _
+            OrElse typeCodeVal = TypeCode.UInt16 OrElse typeCodeVal = TypeCode.UInt32 OrElse typeCodeVal = TypeCode.UInt64 Then
             Return True
         End If
         Return False

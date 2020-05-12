@@ -777,10 +777,20 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'Public Overrides Sub GoPrintRecord()
-        '    Dim cForm As New CheckDisbursementReport(View.IdNo)
-        '    cForm.Show()
-        'End Sub
+        Public Overrides Sub GoPrintRecord()
+            Dim transactionAmount As String
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New CheckDisbursementJournalReport(View.IdNo, transactionAmount, totalCreditAmount)
+            cForm.Show()
+        End Sub
 
 
     End Class

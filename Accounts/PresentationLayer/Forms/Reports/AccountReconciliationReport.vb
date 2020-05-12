@@ -21,6 +21,10 @@ Namespace PresentationLayer.Forms.Reports
 
         End Sub
 
+        Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            Close()
+        End Sub
+
         'Private Sub AccountReconciliationReport_Load() Handles MyBase.Load
         '    Dim dateToday As DateTime
         '    dateToday = Now

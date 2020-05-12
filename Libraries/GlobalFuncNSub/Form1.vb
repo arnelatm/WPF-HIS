@@ -20,6 +20,7 @@
     Private Sub txtNumber_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNumber.TextChanged
         Try
             Dim toWord As New ToWord(Convert.ToDecimal(txtNumber.Text), currencies(Convert.ToInt32(cboCurrency.SelectedValue)))
+            Dim toWord2 As New ToWord(500D, currencies(0))
             txtEnglishWord.Text = toWord.ConvertToEnglish()
             txtArabicWord.Text = toWord.ConvertToArabic()
         Catch ex As Exception
