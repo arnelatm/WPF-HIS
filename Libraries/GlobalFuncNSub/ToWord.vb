@@ -1,4 +1,4 @@
-﻿Class ToWord
+﻿Public Class ToWord
     ''' Group Levels: 987,654,321.234
     ''' 234 : Group Level -1
     ''' 321 : Group Level 0
@@ -96,7 +96,7 @@
     ''' <param name="number">Number to be converted</param>
     ''' <param name="currency">Currency to use</param>
     Public Sub New(ByVal number As [Decimal], ByVal currency As CurrencyInfo)
-        InitializeClass(number, currency, [String].Empty, "only.", "فقط", "لا غير.")
+        InitializeClass(number, currency, [String].Empty, "only.", "فقط", $"لا غير")
     End Sub
 
     ''' <summary>

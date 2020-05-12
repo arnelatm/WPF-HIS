@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Forms.Reports
     Public Class CashDisbursementJournalReport
-        Public Sub New(ByVal idNo As Int32)
+        Public Sub New(ByVal idNo As Int32, ByVal amount As String, ByVal lineTotal As String)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -13,6 +13,8 @@ Namespace PresentationLayer.Forms.Reports
 
             Report.Load(reportPaths & "Cash Disbursement Journal.rpt")
             Report.SetParameterValue("CashDisbursementJournalIdNo", idNo)
+            Report.SetParameterValue("CreditAmountInWords", amount)
+            Report.SetParameterValue("TotalLineAmountInWords", lineTotal)
             Report.DataSourceConnections.Clear()
             Report.SetDatabaseLogon("iGroupAdmin", "igss@123", "IBN-SERVER", "ISPDATA")
             ProcessReport()

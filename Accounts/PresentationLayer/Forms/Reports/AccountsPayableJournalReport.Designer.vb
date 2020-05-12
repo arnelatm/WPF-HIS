@@ -1,21 +1,21 @@
-﻿Imports AATM.Libraries.BaseControlsLibrary
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
-Imports AATM.PresentationLayer.Forms
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms.Reports
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class AccountReconciliationReport
+
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+    Partial Class AccountsPayableJournalReport
         Inherits CrReportViewer
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-            MyBase.Dispose(disposing)
+            Try
+                If disposing AndAlso components IsNot Nothing Then
+                    components.Dispose()
+                End If
+            Finally
+                MyBase.Dispose(disposing)
+            End Try
         End Sub
 
         'Required by the Windows Form Designer
@@ -32,32 +32,27 @@ Namespace PresentationLayer.Forms.Reports
             'btnOk
             '
             Me.btnOk.DesignerSelected = True
-            Me.btnOk.Location = New System.Drawing.Point(280, 182)
-            Me.btnOk.Margin = New System.Windows.Forms.Padding(2)
+            Me.btnOk.Location = New System.Drawing.Point(341, 187)
             '
             'btnCancel
             '
-            Me.btnCancel.Location = New System.Drawing.Point(379, 182)
-            Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
-            '
-            'btnQuit
-            '
-            Me.btnQuit.Location = New System.Drawing.Point(737, 0)
+            Me.btnCancel.Location = New System.Drawing.Point(422, 187)
+            Me.btnCancel.Visible = False
             '
             'CrystalReportViewer1
             '
-            Me.CrystalReportViewer1.Size = New System.Drawing.Size(731, 181)
+            Me.CrystalReportViewer1.Size = New System.Drawing.Size(759, 181)
             '
-            'AccountReconciliationReport
+            'AccountsPayableJournalReport
             '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.ClientSize = New System.Drawing.Size(759, 228)
-            Me.Margin = New System.Windows.Forms.Padding(2)
-            Me.Name = "AccountReconciliationReport"
-            Me.Text = "Account Reconciliation Report"
+            Me.Name = "AccountsPayableJournalReport"
+            Me.Text = "AccountsPayableJournalReport"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.ResumeLayout(false)
+            Me.ResumeLayout(False)
 
-End Sub
-
+        End Sub
     End Class
 End NameSpace
