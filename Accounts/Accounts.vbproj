@@ -321,10 +321,10 @@
     <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.designer.vb">
-      <DependentUpon>AccountReconciliationReport.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Forms\Reports\ApStatementReport.Designer.vb">
+      <DependentUpon>ApStatementReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.vb">
+    <Compile Include="PresentationLayer\Forms\Reports\ApStatementReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\ReportForm.Designer.vb">
@@ -333,10 +333,22 @@
     <Compile Include="PresentationLayer\Forms\Reports\ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.Designer.vb">
+      <DependentUpon>StatementOfAccountsPayable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAp.Designer.vb">
+      <DependentUpon>StatementOfAp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SupplierEntryTv.Designer.vb">
@@ -410,6 +422,7 @@
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesCashItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
@@ -560,17 +573,23 @@
     <EmbeddedResource Include="PresentationLayer\Forms\PurchaseJournalEntry.resx">
       <DependentUpon>PurchaseJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.resx">
-      <DependentUpon>AccountReconciliationReport.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ApStatementReport.resx">
+      <DependentUpon>ApStatementReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.resx">
+      <DependentUpon>StatementOfAccountsPayable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfAp.resx">
+      <DependentUpon>StatementOfAp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.ar-SA.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>

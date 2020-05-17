@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Forms
@@ -1184,12 +1185,21 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
-            'Dim childMdiForm As StatementOfAccountsPayable
-            'childMdiForm = New StatementOfAccountsPayable With {
-            '    .MdiParent = Me
-            '    }
-            'childMdiForm.Show()
+            Dim childMdiForm As StatementOfAp
+            childMdiForm = New StatementOfAp With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
+
+
+
+        'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        '    Dim cForm As New AccountReconciliationReport(IdNo)
+        '    cForm.Show()
+        'End Sub
+
+
     End Class
 
 End Namespace
