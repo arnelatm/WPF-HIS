@@ -688,11 +688,6 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs) 
-            Dim cForm As New AccountReconciliationReport(IdNo)
-            cForm.Show()
-        End Sub
-
         'Protected Overrides Sub EndEditOnAllBindingSources()
         '    'Dim bindingSourcesQuery = From BindingSources In components.Components
         '    '                          Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
