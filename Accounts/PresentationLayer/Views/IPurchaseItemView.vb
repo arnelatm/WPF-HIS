@@ -9,8 +9,8 @@ Namespace PresentationLayer.Views
         Property PurchaseItemCode As String
         Property PurchaseItemName As String
         Property PurchaseItemNameAra As String
-        Property GlAccountIdNo as Int32
-        Property VatAccountIdNo as Int32
+        Property GlAccountIdNo As Int32?
+        Property VatAccountIdNo As Int32?
         Property Unit1 As String
         Property Unit2 As String
         Property Unit3 As String

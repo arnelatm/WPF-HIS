@@ -26,7 +26,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property CadOiItems As List(Of CadOiItem)
@@ -38,7 +38,7 @@ Namespace BusinessLayer
         Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayeeIdNo As Int32
+        Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
         Public Property Posted As Boolean

@@ -6,10 +6,10 @@
     ''' </summary>
     Public Class ArJournalModel
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
-        Public Property CustomerIdNo As Int32
+        Public Property CustomerIdNo As Int32?
         Public Property DateCreated As DateTime
         Public Property DueDate As Date?
         Public Property Errors As List(Of String)

@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Int32 Implements IAccountReconciliationView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements IAccountReconciliationView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -56,6 +56,7 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 txtBalance.Text = FormatMoney(Value)
+                txtBalance2.Text = txtBalance.Text
             End Set
         End Property
 

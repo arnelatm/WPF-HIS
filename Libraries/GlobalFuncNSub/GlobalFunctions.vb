@@ -712,6 +712,48 @@ Public Module GlobalFunctions
         Return nMinValue
     End Function
 
+    Public Function ConvertObjectToType(ByVal value As Object)
+        Dim result
+        Dim typeCode As TypeCode = value.GetTypeCode()
+        Select Case typeCode
+            Case TypeCode.String
+                result = value.ToString()
+            Case TypeCode.Boolean
+                result = Convert.ToBoolean(value)
+            Case TypeCode.Int32
+                result = Convert.ToInt32(value)
+            Case TypeCode.Decimal
+                result = Convert.ToDecimal(value)
+            Case TypeCode.Int16
+                result = Convert.ToInt16(value)
+            Case TypeCode.DateTime
+                result = Convert.ToDateTime(value)
+            Case TypeCode.Single
+                result = Convert.ToSingle(value)
+            Case TypeCode.Empty
+                result = Nothing
+            Case TypeCode.DBNull
+                result = Nothing
+            Case TypeCode.Char
+                result = Convert.ToChar(value)
+            Case TypeCode.Byte
+                result = Convert.ToByte(value)
+            Case TypeCode.Int64
+                result = Convert.ToInt64(value)
+            Case TypeCode.UInt16
+                result = Convert.ToUInt16(value)
+            Case TypeCode.UInt32
+                result = Convert.ToUInt32(value)
+            Case TypeCode.UInt64
+                result = Convert.ToUInt64(value)
+            Case TypeCode.SByte
+                result = Convert.ToSByte(value)
+            Case Else
+                result = value
+        End Select
+        Return result
+    End Function
+
     Public Function NumTypeIsInteger(ByVal typeCodeVal As TypeCode) As Boolean
         If typeCodeVal = TypeCode.Byte OrElse typeCodeVal = TypeCode.Int16 OrElse typeCodeVal = TypeCode.Int32 OrElse typeCodeVal = TypeCode.Int64 _
             OrElse typeCodeVal = TypeCode.UInt16 OrElse typeCodeVal = TypeCode.UInt32 OrElse typeCodeVal = TypeCode.UInt64 Then

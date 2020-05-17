@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IAccountReconciliationView
         Inherits IView
 
-        Property AccountIdNo As Int32
+        Property AccountIdNo As Int32?
         Property Balance As Decimal
         Property DateCreated As DateTime?
         Property GlSystemBalance As Decimal

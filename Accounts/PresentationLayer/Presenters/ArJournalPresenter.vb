@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -312,6 +314,22 @@ Namespace PresentationLayer.Presenters
                     }
             Return item
         End Function
+
+        Public Overrides Sub GoPrintRecord()
+            Dim transactionAmount As String
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalCreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            cForm.Show()
+        End Sub
+
 
     End Class
 

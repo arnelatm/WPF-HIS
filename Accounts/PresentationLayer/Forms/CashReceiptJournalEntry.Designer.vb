@@ -1190,7 +1190,7 @@ Namespace PresentationLayer.Forms
         Friend WithEvents dgvInvoiceNo As CdgvColumnText
         Friend WithEvents dgvTransactionDate As CdgvColumnText
         Friend WithEvents dgvJournalCode As CdgvColumnText
-        Friend WithEvents DgvJournalIdNoAp As CdgvColumnText
+        Friend WithEvents dgvJournalIdNoAp As CdgvColumnText
         Friend WithEvents dgvPreviousBalance As CdgvColumnMoney
         Friend WithEvents dgvAmount As CdgvColumnMoney
         Friend WithEvents dgvDiscountTaken As CdgvColumnMoney

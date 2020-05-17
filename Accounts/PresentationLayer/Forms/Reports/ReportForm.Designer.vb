@@ -1,8 +1,9 @@
 ﻿Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms.Reports
+
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class CashDisbursementJournalReport
+    Partial Class ReportForm
         Inherits CrReportViewer
 
         'Form overrides dispose to clean up the component list.
@@ -30,28 +31,31 @@ Namespace PresentationLayer.Forms.Reports
             '
             'btnOk
             '
-            Me.btnOk.Location = New System.Drawing.Point(280, 182)
-            Me.btnOk.Margin = New System.Windows.Forms.Padding(2)
+            Me.btnOk.DesignerSelected = False
+            Me.btnOk.Location = New System.Drawing.Point(0, 415)
+            Me.btnOk.Visible = False
             '
             'btnCancel
             '
-            Me.btnCancel.Location = New System.Drawing.Point(379, 182)
-            Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
-            '
-            'CrystalReportViewer1
-            '
-            Me.CrystalReportViewer1.Size = New System.Drawing.Size(731, 181)
+            Me.btnCancel.DesignerSelected = True
+            Me.btnCancel.Location = New System.Drawing.Point(362, 415)
+            Me.btnCancel.Text = "Close"
             '
             'btnQuit
             '
-            Me.btnQuit.Location = New System.Drawing.Point(737, 0)
+            Me.btnQuit.Location = New System.Drawing.Point(766, 12)
             '
-            'AccountReconciliationReport
+            'CrystalReportViewer1
             '
-            Me.ClientSize = New System.Drawing.Size(759, 228)
-            Me.Margin = New System.Windows.Forms.Padding(2)
-            Me.Name = "AccountReconciliationReport"
-            Me.Text = "Account Reconciliation Report"
+            Me.CrystalReportViewer1.Size = New System.Drawing.Size(760, 409)
+            '
+            'ReportForm
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.ClientSize = New System.Drawing.Size(800, 450)
+            Me.Name = "ReportForm"
+            Me.Text = "Report Form"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
 

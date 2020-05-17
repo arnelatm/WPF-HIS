@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -79,7 +80,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-
                 If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
                                    AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
                                    MessageBoxButtons.YesNo,
@@ -166,6 +166,21 @@ Namespace PresentationLayer.Presenters
             retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
+
+        Public Overrides Sub GoPrintRecord()
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords")
+
+            cForm.Show()
+        End Sub
+
 
     End Class
 

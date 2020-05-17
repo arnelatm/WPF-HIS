@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
             View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Overloads Function IsInputVatAccount(ByVal AccountIdNo as Int32)
+        Public Overloads Function IsInputVatAccount(ByVal accountIdNo As Int32)
             If Model.CountRecordWith2Key(accountIdNo, "VI", "AccountTypes", "AccountIdNo", "AccountTypes") > 0 Then
                 Return True
             End If

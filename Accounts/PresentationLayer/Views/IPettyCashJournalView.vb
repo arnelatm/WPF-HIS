@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IPettyCashJournalView
         Inherits IView
-        Property AccountIdNo As Int32
+        Property AccountIdNo As Int32?
         Property Amount As Decimal
         Property Applied As Decimal
         Property Cancelled As Boolean
@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views
         Property IdNo As Int32
         Property Notes As String
         Property OrNumber As String
-        Property PayeeIdNo As Int32
+        Property PayeeIdNo As Int32?
         Property PayeeName As String
         Property PaymentType As String
         Property Posted As Boolean

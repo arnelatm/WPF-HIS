@@ -28,7 +28,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property CkdOiItems As List(Of CkdOiItem)
@@ -36,13 +36,13 @@ Namespace BusinessLayer
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
-        Public Property DiscountAccountIdNo As Int32
+        Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32
         Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayeeIdNo As Int32
+        Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
         Public Property Posted As Boolean

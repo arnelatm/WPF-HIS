@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -419,7 +420,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.CsrOiItems
-                    Dim nAccountIdNo As Int32
+                    Dim nAccountIdNo As Int32?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)
@@ -574,13 +575,13 @@ Namespace PresentationLayer.Presenters
             Dim updateReturnValue
             Dim retVal As Integer
             Dim headerIdNo As Int32
-            updateReturnValue = _csrOiItemModel.DelUpdateTvp(DtCsrOiUpdateTable, View.IdNo)
             If AddMode Then
                 headerIdNo = passedValue
                 CallByName(View, IdFieldName, CallType.Set, headerIdNo)
             Else
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
+            updateReturnValue = _csrOiItemModel.DelUpdateTvp(DtCsrOiUpdateTable, headerIdNo)
             If updateReturnValue >= 0 AndAlso DtCsrOiInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtCsrOiInsertTable.Rows
                     row.Item("CsrIdNo") = headerIdNo
@@ -762,6 +763,22 @@ Namespace PresentationLayer.Presenters
                     DeleteArOpenInvoice(lOpenInvoiceIdNo)
                 End If
             End If
+        End Sub
+
+
+        Public Overrides Sub GoPrintRecord()
+            Dim transactionAmount As String
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New ReportForm("Cash Receipt Journal.Rpt", View.IdNo, "CashReceiptJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            cForm.Show()
         End Sub
 
     End Class

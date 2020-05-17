@@ -1,9 +1,9 @@
 ﻿Public Class ToWord
-    ''' Group Levels: 987,654,321.234
-    ''' 234 : Group Level -1
-    ''' 321 : Group Level 0
-    ''' 654 : Group Level 1
-    ''' 987 : Group Level 2
+    ' Group Levels: 987,654,321.234
+    ' 234 : Group Level -1
+    ' 321 : Group Level 0
+    ' 654 : Group Level 1
+    ' 987 : Group Level 2
 
 #Region "Variables & Properties"
 
@@ -115,12 +115,12 @@
     ''' <summary>
     ''' Initialize Class Variables
     ''' </summary>
-    ''' <param name="number">Number to be converted</param>
-    ''' <param name="currency">Currency to use</param>
-    ''' <param name="englishPrefixText">English text to be placed before the generated text</param>
-    ''' <param name="englishSuffixText">English text to be placed after the generated text</param>
-    ''' <param name="arabicPrefixText">Arabic text to be placed before the generated text</param>
-    ''' <param name="arabicSuffixText">Arabic text to be placed after the generated text</param>
+    ''' <param name="number1">Number to be converted</param>
+    ''' <param name="currency2">Currency to use</param>
+    ''' <param name="englishPrefixText3">English text to be placed before the generated text</param>
+    ''' <param name="englishSuffixText4">English text to be placed after the generated text</param>
+    ''' <param name="arabicPrefixText5">Arabic text to be placed before the generated text</param>
+    ''' <param name="arabicSuffixText6">Arabic text to be placed after the generated text</param>
     Private Sub InitializeClass(ByVal number1 As [Decimal], ByVal currency2 As CurrencyInfo, ByVal englishPrefixText3 As [String], ByVal englishSuffixText4 As [String], ByVal arabicPrefixText5 As [String], ByVal arabicSuffixText6 As [String])
         Number = number1
         Currency = currency2

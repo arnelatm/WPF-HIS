@@ -202,8 +202,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub GoPrintRecord()
-            Dim cForm As New AccountReconciliationReport(View.IdNo)
+
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            Dim cForm As New ReportForm("Account Reconciliation.Rpt", View.IdNo, "ReconciliationNumber")
             cForm.Show()
+
         End Sub
 
     End Class

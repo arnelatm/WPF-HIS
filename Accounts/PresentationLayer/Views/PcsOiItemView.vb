@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class PcsOiItemView
         Implements IPcsOiItemView
 
-        Public Property AccountIdNo As Integer Implements IPcsOiItemView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements IPcsOiItemView.AccountIdNo
 
         Public Property Amount As Decimal Implements IPcsOiItemView.Amount
 

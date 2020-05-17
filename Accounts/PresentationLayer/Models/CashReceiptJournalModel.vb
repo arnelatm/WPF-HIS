@@ -7,7 +7,7 @@ Namespace PresentationLayer.Models
     ''' </summary>
     Public Class CashReceiptJournalModel
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property CsrOiItems As List(Of CsrOiItemModel)
@@ -22,7 +22,7 @@ Namespace PresentationLayer.Models
         Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayorIdNo As Int32
+        Public Property PayorIdNo As Int32?
         Public Property PayorName As String
         Public Property PayorType As String
         Public Property Posted As Boolean

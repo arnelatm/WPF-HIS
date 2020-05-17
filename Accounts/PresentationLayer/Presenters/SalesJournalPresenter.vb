@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -238,9 +240,9 @@ Namespace PresentationLayer.Presenters
             updateReturnValue = _salesCashItemModel.DelUpdateTvp(DtSalesCashUpdateTable, headerIdNo)
             If updateReturnValue >= 0 AndAlso DtSalesCashInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtSalesCashInsertTable.Rows
-                    row.Item("DgvSalesJournalIdNo") = headerIdNo
+                    row.Item("SalesJournalIdNo") = headerIdNo
                 Next
-                insertReturnValue = Model.InsertTvp(DtSalesCashInsertTable)
+                insertReturnValue = _salesCashItemModel.InsertTvp(DtSalesCashInsertTable)
                 If insertReturnValue >= 0 Then
                     retVal = updateReturnValue + insertReturnValue
                 Else
@@ -330,6 +332,20 @@ Namespace PresentationLayer.Presenters
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesCashItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
+
+        Public Overrides Sub GoPrintRecord()
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords")
+            cForm.Show()
+        End Sub
+
 
     End Class
 

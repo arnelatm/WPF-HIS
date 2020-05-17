@@ -6,7 +6,7 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property CkdIdNo As Int32

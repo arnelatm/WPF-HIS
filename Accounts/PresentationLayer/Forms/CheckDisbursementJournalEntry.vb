@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int32 Implements ICheckDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements ICheckDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -195,7 +195,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeIdNo As Int32 Implements ICheckDisbursementJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Int32? Implements ICheckDisbursementJournalView.PayeeIdNo
             Get
                 Return cboPayeeIdNo.GetValue()
             End Get
@@ -558,7 +558,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
-            DataGridViewJournalItems.StartTrackingChanges = False
             DataGridViewJournalItems.RemoveInsertColumn()
             If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
@@ -568,7 +567,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
-            DataGridViewJournalItems.StartTrackingChanges = True
             DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddSupplierOpenInvoices()
             BindCkdOiItem()
@@ -633,7 +631,11 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
-            cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            If savePayeeIdNo Is Nothing Then
+                cboPayeeIdNo.SelectedValue = ""
+            Else
+                cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            End If
             ResumeLayout()
         End Sub
 

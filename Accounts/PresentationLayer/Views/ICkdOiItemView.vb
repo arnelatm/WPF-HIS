@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface ICkdOiItemView
         Inherits IView
 
-        Property AccountIdNo as Int32
+        Property AccountIdNo As Int32?
         Property Amount As Decimal
         Property Balance As Decimal
         Property CkdIdNo As Int32

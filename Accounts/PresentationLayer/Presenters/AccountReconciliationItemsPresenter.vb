@@ -75,15 +75,15 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of Ap AccountReconciliation Items.
         '''' </summary>
         '''' <param name="accountIdNo">Account Id to display.</param>
-        Public Overloads Sub Display(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
-            View.AccountReconciliationItems = GetAcctReconItems(AccountIdNo, reconciliationDate, idNo, "TransactionDate")
+        Public Overloads Sub Display(ByVal accountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
+            View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, idNo, "TransactionDate")
         End Sub
 
-        Public Function GetAcctReconItems(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
+        Public Function GetAcctReconItems(ByVal accountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
