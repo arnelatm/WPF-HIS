@@ -25,6 +25,16 @@ Namespace PresentationLayer.Presenters
 
         Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
 
+
+        Public Function GetRecords(ByVal pTableToGet As String, ByVal pDisplayName As String, ByVal pDisplayCode As String, Optional ByVal sortKey As String = "IdNo")
+            TableToGet = pTableToGet
+            SortExpression = sortKey
+            DisplayName = pDisplayName
+            DisplayNameArabic = pDisplayName
+            DisplayCode = pDisplayCode
+            Return GetLookupDataByCode()
+        End Function
+
         Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
             SortExpression = sortKey

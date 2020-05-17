@@ -316,8 +316,12 @@ Public Class CFormEntry
             If u IsNot Nothing Then
                 Return True
             Else
-                MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
-                Return False
+                If Type.GetTypeCode(x) = TypeCode.String Then
+                    Return True
+                Else
+                    MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                    Return False
+                End If
             End If
         Else
             Dim num As Double

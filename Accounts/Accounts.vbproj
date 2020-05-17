@@ -209,6 +209,12 @@
     <Compile Include="PresentationLayer\Forms\ArJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\ArJournalReport.Designer.vb">
+      <DependentUpon>ArJournalReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\ArJournalReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\BankEntryTv.Designer.vb">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </Compile>
@@ -224,7 +230,9 @@
     <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.Designer.vb">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\CategoryEntryTv.Designer.vb">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
     </Compile>
@@ -295,6 +303,12 @@
     <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\PostPettyCash.Designer.vb">
+      <DependentUpon>PostPettyCash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\PostPettyCash.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.Designer.vb">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
     </Compile>
@@ -313,22 +327,10 @@
     <Compile Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\AccountsPayableJournalReport.Designer.vb">
-      <DependentUpon>AccountsPayableJournalReport.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Forms\Reports\ReportForm.Designer.vb">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\AccountsPayableJournalReport.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\CashDisbursementJournalReport.Designer.vb">
-      <DependentUpon>CashDisbursementJournalReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\CashDisbursementJournalReport.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.designer.vb">
-      <DependentUpon>CheckDisbursementJournalReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.vb">
+    <Compile Include="PresentationLayer\Forms\Reports\ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
@@ -404,6 +406,7 @@
     <Compile Include="PresentationLayer\Presenters\PcsOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PostPettyCashPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
@@ -503,6 +506,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.resx">
       <DependentUpon>CheckDisbursementJournalEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CustomerEntryTv.resx">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
@@ -547,6 +551,9 @@
     <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.resx">
       <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\PostPettyCash.resx">
+      <DependentUpon>PostPettyCash.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\PurchaseItemEntry.resx">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -556,11 +563,11 @@
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\AccountReconciliationReport.resx">
       <DependentUpon>AccountReconciliationReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\AccountsPayableJournalReport.resx">
-      <DependentUpon>AccountsPayableJournalReport.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Forms\ArJournalReport.resx">
+      <DependentUpon>ArJournalReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\CheckDisbursementJournalReport.resx">
-      <DependentUpon>CheckDisbursementJournalReport.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ReportForm.resx">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>

@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int32 Implements IPettyCashJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements IPettyCashJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -160,7 +160,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeIdNo As Int32 Implements IPettyCashJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Int32? Implements IPettyCashJournalView.PayeeIdNo
             Get
                 Return cboPayeeIdNo.GetValue()
             End Get
@@ -600,7 +600,11 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
-            cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            If savePayeeIdNo Is Nothing Then
+                cboPayeeIdNo.SelectedValue = ""
+            Else
+                cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            End If
             ResumeLayout()
         End Sub
 

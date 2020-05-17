@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class CkdOiItemModel
 
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Balance As Decimal
         Public Property CkdIdNo As Int32

@@ -420,7 +420,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.CadOiItems
-                    Dim nAccountIdNo As Int32
+                    Dim nAccountIdNo As Int32?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)
@@ -775,7 +775,7 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New CashDisbursementJournalReport(View.IdNo, transactionAmount, totalCreditAmount)
+            Dim cForm As New ReportForm("Cash Disbursement Journal.Rpt", View.IdNo, "CashDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
             cForm.Show()
         End Sub
 

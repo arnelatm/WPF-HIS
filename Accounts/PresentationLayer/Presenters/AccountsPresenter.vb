@@ -65,16 +65,16 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
         End Function
 
-        Public Function IsAccountsPayableAccount(ByVal AccountIdNo As Int32)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
+        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
         End Function
 
-        Public Function IsAccountsReceivableAccount(ByVal AccountIdNo As Int32)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
+        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
         End Function
 
-        Public Function IsInputVatAccount(ByVal AccountIdNo As Int32)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
+        Public Function IsInputVatAccount(ByVal accountIdNo As Int32)
+            Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
         End Function
 
         Public Function GetAdvancesToSupplierAccountIdNo()

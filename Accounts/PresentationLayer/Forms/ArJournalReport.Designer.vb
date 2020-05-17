@@ -1,9 +1,8 @@
 ﻿Imports AATM.PresentationLayer.Forms
 
-Namespace PresentationLayer.Forms.Reports
-
+Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class AccountsPayableJournalReport
+    Partial Class ArJournalReport
         Inherits CrReportViewer
 
         'Form overrides dispose to clean up the component list.
@@ -31,25 +30,28 @@ Namespace PresentationLayer.Forms.Reports
             '
             'btnOk
             '
-            Me.btnOk.DesignerSelected = True
-            Me.btnOk.Location = New System.Drawing.Point(341, 187)
+            Me.btnOk.Location = New System.Drawing.Point(338, 187)
             '
             'btnCancel
             '
-            Me.btnCancel.Location = New System.Drawing.Point(422, 187)
+            Me.btnCancel.Location = New System.Drawing.Point(419, 187)
             Me.btnCancel.Visible = False
+            '
+            'btnQuit
+            '
+            Me.btnQuit.Location = New System.Drawing.Point(776, 0)
             '
             'CrystalReportViewer1
             '
-            Me.CrystalReportViewer1.Size = New System.Drawing.Size(759, 181)
+            Me.CrystalReportViewer1.Size = New System.Drawing.Size(774, 181)
             '
-            'AccountsPayableJournalReport
+            'ArJournalReport
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.ClientSize = New System.Drawing.Size(759, 228)
-            Me.Name = "AccountsPayableJournalReport"
-            Me.Text = "AccountsPayableJournalReport"
+            Me.ClientSize = New System.Drawing.Size(800, 450)
+            Me.Name = "ArJournalReport"
+            Me.Text = "ArJournalReport"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
 

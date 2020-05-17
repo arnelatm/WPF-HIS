@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Int32 Implements ICashReceiptJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements ICashReceiptJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -195,7 +195,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayorIdNo As Int32 Implements ICashReceiptJournalView.PayorIdNo
+        Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
             Get
                 Return cboPayorIdNo.GetValue()
             End Get
@@ -281,38 +281,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(ReferenceNo) Then
-                PresenterObj.UpdateGlReferenceNumber()
-            End If
-            If PresenterObj.AddMode Then
-                btnLast.PerformClick()
-            End If
-        End Sub
-
 #End Region
-
-        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-        '     Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-        '    If PresenterObj.AddMode Then
-        '        IdNo = passedValue
-        '    End If
-
-        '    ' save journal entries
-        '    _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-
-        '    ' save the generated open invoices
-        '    _csrOiItemsPresenter.Save(DtCsrOiInsertTable, DtCsrOiUpdateTable, IdNo)
-
-        '    If oldCsrOiItem IsNot Nothing Then
-        '        For Each Item In oldCsrOiItem
-        '            If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-        '                PresenterObj.RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-        '            End If
-        '        Next
-        '    End If
-
-        'End Sub
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
             SetPayorProperty(eventType.Model.PayorType)
@@ -434,9 +403,8 @@ Namespace PresentationLayer.Forms
                     dgvPreviousBalance.DisplayOnly = True
                     dgvBalance.DisplayOnly = True
                     dgvTransactionDate.DisplayOnly = True
-                    dgvJournalIdNoJi.DisplayOnly = True
                     dgvJournalCode.DisplayOnly = True
-                    dgvJournalIdNoJi.DisplayOnly = True
+                    dgvJournalIdNoAp.DisplayOnly = True
                 End If
             End With
             UpdateTotals()
@@ -445,6 +413,8 @@ Namespace PresentationLayer.Forms
 
         Private Sub BindJournalItem()
             SuspendLayout()
+            bsJournalItems.DataSource = Nothing
+            DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
@@ -568,11 +538,6 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub DataGridViewCsrOiItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewCsrOiItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewCsrOiItems, CsrOiItems)
-            UpdateTotals()
-        End Sub
-
         Public Overloads Sub Dispose()
             Close()
         End Sub
@@ -615,8 +580,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
-            DataGridViewJournalItems.StartTrackingChanges = False
+        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             DataGridViewJournalItems.RemoveInsertColumn()
             If PaymentTypeToEnum(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 btnViewGL.Visible = True
@@ -625,8 +589,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
-            DataGridViewJournalItems.StartTrackingChanges = True
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddCustomerOpenInvoices()
             BindCsrOiItem()
@@ -691,7 +654,11 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayorIdNo.DataSource = cbDataSource
-            cboPayorIdNo.SelectedValue = savePayorIdNo
+            If savePayorIdNo Is Nothing Then
+                cboPayorIdNo.SelectedValue = ""
+            Else
+                cboPayorIdNo.SelectedValue = savePayorIdNo
+            End If
             ResumeLayout()
         End Sub
 
@@ -791,11 +758,6 @@ Namespace PresentationLayer.Forms
             ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
             UpdateTotals()
         End Sub
-
-        'Private Sub OnBeforeDisplayView() Handles MyBase.BeforeDisplayView
-        '    Dim cPayorType As String = PresenterObj.GetReceiptType(PresenterObj.TargetIdNo)
-        '    SetPayorProperty(cPayorType)
-        'End Sub
 
     End Class
 

@@ -19,7 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Integer
+        Public Property AccountIdNo As Int32?
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
         Public Property GlSystemBalance As Decimal

@@ -7,7 +7,7 @@
     Public Class PurchaseJournalModel
 
         Public Property Errors As List(Of String)
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime

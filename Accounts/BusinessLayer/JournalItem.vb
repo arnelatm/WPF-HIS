@@ -9,7 +9,7 @@ Namespace BusinessLayer
             ' establish business rules
         End Sub
 
-        Public Property AccountIdNo as Int32
+        Public Property AccountIdNo As Int32?
         Public Property AccountName As String
         Public Property DiscountTaken As Decimal
         Public Property OriginalAmount As Decimal

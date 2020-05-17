@@ -39,7 +39,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo as Int32 Implements IApJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements IApJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -199,7 +199,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SupplierIdNo As Int32 Implements IApJournalView.SupplierIdNo
+        Public Property SupplierIdNo As Int32? Implements IApJournalView.SupplierIdNo
             Get
                 Return cboSupplierIdNo.GetValue()
             End Get

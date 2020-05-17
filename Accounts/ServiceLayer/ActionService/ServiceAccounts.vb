@@ -279,8 +279,8 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetAcctReconItems
-            Dim records = DataDao.GetAcctReconItems(AccountIdNo, reconciliationDate, sortOrder)
+        Public Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetAcctReconItems
+            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model

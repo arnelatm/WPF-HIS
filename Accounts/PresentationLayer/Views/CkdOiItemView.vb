@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class CkdOiItemView
         Implements ICkdOiItemView
 
-        Public Property AccountIdNo As Integer Implements ICkdOiItemView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements ICkdOiItemView.AccountIdNo
 
         Public Property Amount As Decimal Implements ICkdOiItemView.Amount
 

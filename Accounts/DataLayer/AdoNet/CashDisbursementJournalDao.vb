@@ -120,7 +120,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CashDisbursementJournal) =
                                     Function(reader) _
             New CashDisbursementJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsNullable(Of Int32)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
@@ -130,7 +130,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OrNumber = Extensions.AsString(reader("ORNumber")),
-            .PayeeIdNo = Extensions.AsInt(Of Integer)(reader("PayeeIdNo")),
+            .PayeeIdNo = Extensions.AsNullable(Of Int32)(reader("PayeeIdNo")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
             .Posted = Extensions.AsBool(reader("Posted")),

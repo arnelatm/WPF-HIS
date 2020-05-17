@@ -48,7 +48,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int32 Implements ICashDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements ICashDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -170,7 +170,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PayeeIdNo As Int32 Implements ICashDisbursementJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Int32? Implements ICashDisbursementJournalView.PayeeIdNo
             Get
                 Return cboPayeeIdNo.GetValue()
             End Get
@@ -497,7 +497,7 @@ Namespace PresentationLayer.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvsalesaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -606,7 +606,11 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
-            cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            If savePayeeIdNo Is Nothing Then
+                cboPayeeIdNo.SelectedValue = ""
+            Else
+                cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            End If
             ResumeLayout()
         End Sub
 

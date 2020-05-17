@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views
     Public Interface IApJournalView
         Inherits IView
 
-        Property AccountIdNo As Int32
+        Property AccountIdNo As Int32?
         Property Amount As Decimal
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views
         Property ReferenceNo As String
         Property SettlementDiscount As Decimal
         Property SettlementDueDate As Date?
-        Property SupplierIdNo As Int32
+        Property SupplierIdNo As Int32?
         Property TotalCredits As Decimal
         Property TotalDebits As Decimal
         Property TransactionDate As Date?

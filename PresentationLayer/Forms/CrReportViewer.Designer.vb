@@ -29,19 +29,19 @@ Partial Class CrReportViewer
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CrReportViewer))
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnCancel = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
+        Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.btnQuit = New AATM.LIBRARIES.CBaseControlsLibrary.CButton()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.btnQuit = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'btnOk
         '
         Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
         Me.btnOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnOk.DesignerSelected = false
-        Me.btnOk.DisplayOnly = true
+        Me.btnOk.DesignerSelected = True
+        Me.btnOk.DisplayOnly = True
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(106, 187)
         Me.btnOk.Name = "btnOk"
@@ -56,9 +56,9 @@ Partial Class CrReportViewer
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnCancel.BackColor = System.Drawing.Color.Transparent
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCancel.DesignerSelected = false
+        Me.btnCancel.DesignerSelected = False
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.DisplayOnly = true
+        Me.btnCancel.DisplayOnly = True
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(187, 187)
         Me.btnCancel.Name = "btnCancel"
@@ -71,12 +71,12 @@ Partial Class CrReportViewer
         'CrystalReportViewer1
         '
         Me.CrystalReportViewer1.ActiveViewIndex = -1
-        Me.CrystalReportViewer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.CrystalReportViewer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.CrystalReportViewer1.EnableDrillDown = false
+        Me.CrystalReportViewer1.EnableDrillDown = False
         Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 0)
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
         Me.CrystalReportViewer1.Size = New System.Drawing.Size(353, 181)
@@ -85,13 +85,13 @@ Partial Class CrReportViewer
         '
         'btnQuit
         '
-        Me.btnQuit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnQuit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnQuit.BackColor = System.Drawing.Color.Transparent
         Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnQuit.DesignerSelected = false
+        Me.btnQuit.DesignerSelected = False
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuit.DisplayOnly = true
-        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"),System.Drawing.Image)
+        Me.btnQuit.DisplayOnly = True
+        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
         Me.btnQuit.ImageIndex = 0
         Me.btnQuit.Location = New System.Drawing.Point(353, 0)
         Me.btnQuit.Name = "btnQuit"
@@ -99,7 +99,7 @@ Partial Class CrReportViewer
         Me.btnQuit.SecurityKey = ""
         Me.btnQuit.Size = New System.Drawing.Size(22, 23)
         Me.btnQuit.TabIndex = 5
-        Me.btnQuit.Visible = false
+        Me.btnQuit.Visible = False
         '
         'CrReportViewer
         '

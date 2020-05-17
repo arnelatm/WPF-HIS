@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class AccountReconciliationItemView
         Implements IAccountReconciliationItemView
 
-        Public Property AccountIdNo As Integer Implements IAccountReconciliationItemView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements IAccountReconciliationItemView.AccountIdNo
 
         Public Property AccountReconciliationIdNo As Integer Implements IAccountReconciliationItemView.AccountReconciliationIdNo
 

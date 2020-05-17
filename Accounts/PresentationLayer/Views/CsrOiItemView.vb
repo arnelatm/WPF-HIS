@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class CsrOiItemView
         Implements ICsrOiItemView
 
-        Public Property AccountIdNo As Integer Implements ICsrOiItemView.AccountIdNo
+        Public Property AccountIdNo As Int32? Implements ICsrOiItemView.AccountIdNo
         Public Property Amount As Decimal Implements ICsrOiItemView.Amount
 
         Public Property Balance As Decimal Implements ICsrOiItemView.Balance
