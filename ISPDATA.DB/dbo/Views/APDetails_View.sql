@@ -3,110 +3,110 @@
 CREATE VIEW [dbo].[APDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
-	  ,a.[IdNo]
+	  ,apj.[IdNo]
       ,[Sequence]
       ,[JournalIdNo]
-      ,a.[AccountIdNo]
+      ,apj.[AccountIdNo]
       ,[Debit]
       ,[Credit]
       ,[ProfitCenterIdNo]
-      ,a.[Notes]
-      ,a.[Posted]
+      ,apj.[Notes]
+      ,apj.[Posted]
 	  ,[SupplierIdNo]
 	  ,[InvoiceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[TransactionType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[ApJournalItem] a
+  FROM [ISPDATA].[dbo].[ApJournalItem] apj
   LEFT OUTER JOIN dbo.ApJournal b
   on a.JournalIdNo = b.IDNo 
 )
 UNION
 (SELECT 'CK'
-	  ,a.[IdNo]
+	  ,cki.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
+      ,cki.[AccountIdNo]
       ,[Debit]
       ,[Credit]
 	  ,[ProfitCenterIdNo]
-      ,a.[Notes]
-	  ,a.[Posted]
+      ,cki.[Notes]
+	  ,cki.[Posted]
 	  ,[PayeeIdNo]
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CheckDisbursementJournal b
-  on a.JournalIdNo = b.IDNo
+	  ,ck.Notes AS 'MainNote'
+  FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] cki
+  LEFT OUTER JOIN dbo.CheckDisbursementJournal ck
+  on cki.JournalIdNo = ck.IDNo
   WHERE PaymentType='A'
 )
 UNION
 (SELECT 'CD'
-	  ,a.[IdNo]
+	  ,cdi.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
+      ,cdi.[AccountIdNo]
       ,[Debit]
       ,[Credit]
 	  ,[ProfitCenterIdNo]
-      ,a.[Notes]
-	  ,a.[Posted]
+      ,cdi.[Notes]
+	  ,cdi.[Posted]
 	  ,[PayeeIdNo]
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CashDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CashDisbursementJournal b
-  on a.JournalIdNo = b.IDNo
+	  ,cd.Notes AS 'MainNote'
+  FROM [ISPDATA].[dbo].[CashDisbursementJournalItem] cdi
+  LEFT OUTER JOIN dbo.CashDisbursementJournal cd
+  on cdi.JournalIdNo = cd.IDNo
   WHERE PaymentType='A'
 )
 UNION
 (SELECT 'PC'
-	  ,a.[IdNo]
+	  ,pci.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
+      ,pci.[AccountIdNo]
       ,[Debit]
       ,[Credit]
 	  ,[ProfitCenterIdNo]
-      ,a.[Notes]
-	  ,a.[Posted]
+      ,pci.[Notes]
+	  ,pci.[Posted]
 	  ,[PayeeIdNo]
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[PettyCashJournalItem] A
-  LEFT OUTER JOIN dbo.PettyCashJournal b
-  on a.JournalIdNo = b.IDNo
+	  ,pc.Notes AS 'MainNote'
+  FROM [ISPDATA].[dbo].[PettyCashJournalItem] pci
+  LEFT OUTER JOIN dbo.PettyCashJournal pc
+  on pci.JournalIdNo = pc.IDNo
   WHERE PaymentType='A'
 )
 UNION
 (SELECT 'CR'
-	  ,a.[IdNo]
+	  ,cri.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
+      ,cri.[AccountIdNo]
       ,[Debit]
       ,[Credit]
 	  ,[ProfitCenterIdNo]
-      ,a.[Notes]
-	  ,a.[Posted]
+      ,cri.[Notes]
+	  ,cri.[Posted]
 	  ,[PayorIdNo]
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PayorType]
-	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CashReceiptJournalItem] A
-  LEFT OUTER JOIN dbo.CashReceiptJournal b
-  on a.JournalIdNo = b.IDNo
+	  ,cr.Notes AS 'MainNote'
+  FROM [ISPDATA].[dbo].[CashReceiptJournalItem] cri
+  LEFT OUTER JOIN dbo.CashReceiptJournal cr
+  on cri.JournalIdNo = cr.IDNo
   WHERE PayorType='A'
 )
