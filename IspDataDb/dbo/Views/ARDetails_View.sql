@@ -18,7 +18,7 @@ CREATE VIEW [dbo].[ARDetails_View]
       ,[ReferenceNo]
 	  ,[TransactionType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[ArJournalItem] a
+  FROM [dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IDNo 
 )
@@ -39,7 +39,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PayorType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CashReceiptJournalItem] A
+  FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PayorType='A'
@@ -61,7 +61,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] A
+  FROM [dbo].[CheckDisbursementJournalItem] A
   LEFT OUTER JOIN dbo.CheckDisbursementJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='R'
@@ -83,7 +83,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[CashDisbursementJournalItem] A
+  FROM [dbo].[CashDisbursementJournalItem] A
   LEFT OUTER JOIN dbo.CashDisbursementJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='R'
@@ -105,7 +105,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [ISPDATA].[dbo].[PettyCashJournalItem] A
+  FROM [dbo].[PettyCashJournalItem] A
   LEFT OUTER JOIN dbo.PettyCashJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='R'

@@ -29,7 +29,7 @@ CREATE   VIEW [dbo].[GlLedgers_View]
 	  ,[InvoiceNo] AS 'DocumentNumber'
 	  ,[SupplierName] AS 'PayDescription'
 	  ,[SupplierNameAra] AS 'PayDescriptionAra'
-  FROM [ISPDATA].[dbo].[ApJournalItem] a
+  FROM [dbo].[ApJournalItem] a
   LEFT OUTER JOIN dbo.[ApJournal] b
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Supplier] c
@@ -51,7 +51,7 @@ UNION
 	  ,[InvoiceNo] AS 'DocumentNumber'
 	  ,[CustomerName]
 	  ,[CustomerNameAra]
-  FROM [ISPDATA].[dbo].[ArJournalItem] a
+  FROM [dbo].[ArJournalItem] a
   LEFT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Customer] c
@@ -87,7 +87,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
-  FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] a
+  FROM [dbo].[CheckDisbursementJournalItem] a
   LEFT OUTER JOIN dbo.CheckDisbursementJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
@@ -127,7 +127,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
-  FROM [ISPDATA].[dbo].[CashDisbursementJournalItem] a
+  FROM [dbo].[CashDisbursementJournalItem] a
   LEFT OUTER JOIN dbo.CashDisbursementJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
@@ -171,7 +171,7 @@ UNION
 			WHEN b.PayorType = 'O' then b.PayorName
 			ELSE b.PayorName
 	   END
-  FROM [ISPDATA].[dbo].[CashReceiptJournalItem] a
+  FROM [dbo].[CashReceiptJournalItem] a
   LEFT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
@@ -197,7 +197,7 @@ UNION
 	  ,''
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
-  FROM [ISPDATA].[dbo].[GeneralJournalItem] a
+  FROM [dbo].[GeneralJournalItem] a
   LEFT OUTER JOIN dbo.GeneralJournal b
   on a.JournalIdNo = b.IdNo
 )
@@ -231,7 +231,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
-  FROM [ISPDATA].[dbo].[PettyCashJournalItem] a
+  FROM [dbo].[PettyCashJournalItem] a
   LEFT OUTER JOIN dbo.PettyCashJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
@@ -257,7 +257,7 @@ UNION
 	  ,''
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
-  FROM [ISPDATA].[dbo].[SalesJournalItem] a
+  FROM [dbo].[SalesJournalItem] a
   LEFT OUTER JOIN dbo.SalesJournal b
   on a.JournalIdNo = b.Idno
 )
