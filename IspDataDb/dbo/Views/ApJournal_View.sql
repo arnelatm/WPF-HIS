@@ -24,6 +24,6 @@ SELECT TOP (1000) a.[IDNo]
 	  ,dbo.currency_conversion(a.Amount) AS WordAmount
 	  ,s.SupplierCode
 	  ,s.SupplierNameAra
-  FROM [ISPDATA].[dbo].[ApJournal] a
+  FROM [dbo].[ApJournal] a
   Left JOIN dbo.Supplier s
   ON SupplierIdNo = s.IdNo
