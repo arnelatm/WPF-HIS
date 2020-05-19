@@ -383,47 +383,47 @@ Public Module Adapter
         Return retValue
     End Function
 
-    Public Function EnumToPayeeType(value As String) As String
-        Dim retValue As String
-        Select Case value
-            Case Nothing
-                retValue = Nothing
-            Case PayeeTypeSelection.None
-                retValue = Nothing
-            Case PayeeTypeSelection.Employee
-                retValue = "E"
-            Case PayeeTypeSelection.Customer
-                retValue = "C"
-            Case PayeeTypeSelection.Supplier
-                retValue = "S"
-            Case PayeeTypeSelection.Others
-                retValue = "O"
-            Case Else
-                retValue = Nothing
-        End Select
-        Return retValue
-    End Function
+    'Public Function EnumToPayeeType(value As String) As String
+    '    Dim retValue As String
+    '    Select Case value
+    '        Case Nothing
+    '            retValue = Nothing
+    '        Case PayeeTypeSelection.None
+    '            retValue = Nothing
+    '        Case PayeeTypeSelection.Employee
+    '            retValue = "E"
+    '        Case PayeeTypeSelection.Customer
+    '            retValue = "C"
+    '        Case PayeeTypeSelection.Supplier
+    '            retValue = "S"
+    '        Case PayeeTypeSelection.Others
+    '            retValue = "O"
+    '        Case Else
+    '            retValue = Nothing
+    '    End Select
+    '    Return retValue
+    'End Function
 
-    Public Function EnumToReceiptType(value As String) As String
-        Dim retValue As String
-        Select Case value
-            Case Nothing
-                retValue = "A"
-            Case ReceiptTypeSelection.AccountsReceivable
-                retValue = "R"
-            Case ReceiptTypeSelection.SupplierRefund
-                retValue = "S"
-            Case ReceiptTypeSelection.Employee
-                retValue = "E"
-            Case ReceiptTypeSelection.Customer
-                retValue = "C"
-            Case ReceiptTypeSelection.Others
-                retValue = "O"
-            Case Else
-                retValue = "A"
-        End Select
-        Return retValue
-    End Function
+    'Public Function EnumToReceiptType(value As String) As String
+    '    Dim retValue As String
+    '    Select Case value
+    '        Case Nothing
+    '            retValue = "A"
+    '        Case ReceiptTypeSelection.AccountsReceivable
+    '            retValue = "A"
+    '        Case ReceiptTypeSelection.SupplierRefund
+    '            retValue = "R"
+    '        Case ReceiptTypeSelection.Employee
+    '            retValue = "E"
+    '        Case ReceiptTypeSelection.Customer
+    '            retValue = "C"
+    '        Case ReceiptTypeSelection.Others
+    '            retValue = "O"
+    '        Case Else
+    '            retValue = "A"
+    '    End Select
+    '    Return retValue
+    'End Function
 
     Public Function EnumToSpecialAccount(value As String) As String
         Dim retValue As String
@@ -638,7 +638,7 @@ Public Module Adapter
                 retValue = ReceiptTypeSelection.AccountsReceivable
             Case "A"
                 retValue = ReceiptTypeSelection.AccountsReceivable
-            Case "S"
+            Case "R"
                 retValue = ReceiptTypeSelection.SupplierRefund
             Case "E"
                 retValue = ReceiptTypeSelection.Employee
