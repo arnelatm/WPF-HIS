@@ -412,26 +412,26 @@ Public Module Adapter
         Return retValue
     End Function
 
-    Public Function EnumToPayeeType(value As String) As String
-        Dim retValue As String
-        Select Case value
-            Case Nothing
-                retValue = Nothing
-            Case PayeeTypeSelection.None
-                retValue = Nothing
-            Case PayeeTypeSelection.Employee
-                retValue = "E"
-            Case PayeeTypeSelection.Customer
-                retValue = "C"
-            Case PayeeTypeSelection.Supplier
-                retValue = "S"
-            Case PayeeTypeSelection.Others
-                retValue = "O"
-            Case Else
-                retValue = Nothing
-        End Select
-        Return retValue
-    End Function
+    'Public Function EnumToPayeeType(value As String) As String
+    '    Dim retValue As String
+    '    Select Case value
+    '        Case Nothing
+    '            retValue = Nothing
+    '        Case PayeeTypeSelection.None
+    '            retValue = Nothing
+    '        Case PayeeTypeSelection.Employee
+    '            retValue = "E"
+    '        Case PayeeTypeSelection.Customer
+    '            retValue = "C"
+    '        Case PayeeTypeSelection.Supplier
+    '            retValue = "S"
+    '        Case PayeeTypeSelection.Others
+    '            retValue = "O"
+    '        Case Else
+    '            retValue = Nothing
+    '    End Select
+    '    Return retValue
+    'End Function
 
     Public Function PaymentMethodToEnum(value As String) As String
         Dim retValue As String
