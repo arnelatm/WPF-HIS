@@ -25,7 +25,7 @@
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.dtpEndingDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.dtpBeginningDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -76,43 +76,43 @@
             Me.lblBeginningDate.Text = "Beginning Date :"
             Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'cboSupplierCode
+            'cboSupplierIdNo
             '
-            Me.cboSupplierCode.BackColor = System.Drawing.Color.White
-            Me.cboSupplierCode.ChangingSearchValueOnly = False
-            Me.cboSupplierCode.CurrentSearchTerm = ""
-            Me.cboSupplierCode.DefaultValue = Nothing
-            Me.cboSupplierCode.DisplayMember = "Name"
-            Me.cboSupplierCode.DropDownHeight = 200
-            Me.cboSupplierCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboSupplierCode.EditingMode = False
-            Me.cboSupplierCode.FilterRule = Nothing
-            Me.cboSupplierCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboSupplierCode.ForeColor = System.Drawing.Color.Black
-            Me.cboSupplierCode.FormattingEnabled = True
-            Me.cboSupplierCode.HideWhenNotEditingOrAdding = False
-            Me.cboSupplierCode.LinkedLabel = Nothing
-            Me.cboSupplierCode.Location = New System.Drawing.Point(153, 82)
-            Me.cboSupplierCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboSupplierCode.Name = "cboSupplierCode"
-            Me.cboSupplierCode.OldValue = 0
-            Me.cboSupplierCode.OriginalDataSource = Nothing
-            Me.cboSupplierCode.OriginalList = Nothing
-            Me.cboSupplierCode.OverrideDropDownStyleList = False
-            Me.cboSupplierCode.PreviousSearchTerm = Nothing
-            Me.cboSupplierCode.PreviousSelectedIndex = -1
-            Me.cboSupplierCode.PropertySelector = Nothing
-            Me.cboSupplierCode.ReadOnlyCombo = False
-            Me.cboSupplierCode.SearchAnywhere = False
-            Me.cboSupplierCode.Size = New System.Drawing.Size(520, 24)
-            Me.cboSupplierCode.SuggestBoxHeight = 200
-            Me.cboSupplierCode.SuggestListOrderRule = Nothing
-            Me.cboSupplierCode.TabIndex = 25
-            Me.cboSupplierCode.TextToSearch = Nothing
-            Me.cboSupplierCode.ValueIsMandatory = False
-            Me.cboSupplierCode.ValueIsNullable = False
-            Me.cboSupplierCode.ValueIsNumeric = False
-            Me.cboSupplierCode.ValueMember = "Code"
+            Me.cboSupplierIdNo.BackColor = System.Drawing.Color.White
+            Me.cboSupplierIdNo.ChangingSearchValueOnly = False
+            Me.cboSupplierIdNo.CurrentSearchTerm = ""
+            Me.cboSupplierIdNo.DefaultValue = Nothing
+            Me.cboSupplierIdNo.DisplayMember = "Name"
+            Me.cboSupplierIdNo.DropDownHeight = 200
+            Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboSupplierIdNo.EditingMode = False
+            Me.cboSupplierIdNo.FilterRule = Nothing
+            Me.cboSupplierIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboSupplierIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboSupplierIdNo.FormattingEnabled = True
+            Me.cboSupplierIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboSupplierIdNo.LinkedLabel = Nothing
+            Me.cboSupplierIdNo.Location = New System.Drawing.Point(153, 82)
+            Me.cboSupplierIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboSupplierIdNo.Name = "cboSupplierIdNo"
+            Me.cboSupplierIdNo.OldValue = 0
+            Me.cboSupplierIdNo.OriginalDataSource = Nothing
+            Me.cboSupplierIdNo.OriginalList = Nothing
+            Me.cboSupplierIdNo.OverrideDropDownStyleList = False
+            Me.cboSupplierIdNo.PreviousSearchTerm = Nothing
+            Me.cboSupplierIdNo.PreviousSelectedIndex = -1
+            Me.cboSupplierIdNo.PropertySelector = Nothing
+            Me.cboSupplierIdNo.ReadOnlyCombo = False
+            Me.cboSupplierIdNo.SearchAnywhere = False
+            Me.cboSupplierIdNo.Size = New System.Drawing.Size(520, 24)
+            Me.cboSupplierIdNo.SuggestBoxHeight = 200
+            Me.cboSupplierIdNo.SuggestListOrderRule = Nothing
+            Me.cboSupplierIdNo.TabIndex = 25
+            Me.cboSupplierIdNo.TextToSearch = Nothing
+            Me.cboSupplierIdNo.ValueIsMandatory = False
+            Me.cboSupplierIdNo.ValueIsNullable = False
+            Me.cboSupplierIdNo.ValueIsNumeric = False
+            Me.cboSupplierIdNo.ValueMember = "IdNo"
             '
             'dtpEndingDate
             '
@@ -173,7 +173,7 @@
             Me.CFlowLayout1.Controls.Add(Me.CLabel3)
             Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
             Me.CFlowLayout1.Controls.Add(Me.lblSupplierCode)
-            Me.CFlowLayout1.Controls.Add(Me.cboSupplierCode)
+            Me.CFlowLayout1.Controls.Add(Me.cboSupplierIdNo)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(696, 121)
@@ -209,7 +209,7 @@
             '
             'btnOk
             '
-            Me.btnOk.DesignerSelected = True
+            Me.btnOk.DesignerSelected = False
             Me.btnOk.DisplayOnly = True
             Me.btnOk.ImageIndex = 0
             Me.btnOk.Location = New System.Drawing.Point(238, 139)
@@ -251,7 +251,7 @@
         Friend WithEvents lblSupplierCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSupplierCode As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboSupplierIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents dtpEndingDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents dtpBeginningDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

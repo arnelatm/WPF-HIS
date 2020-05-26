@@ -128,6 +128,7 @@
     <Compile Include="BusinessLayer\SalesCashItem.vb" />
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
+    <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
@@ -321,22 +322,10 @@
     <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ApStatementReport.Designer.vb">
-      <DependentUpon>ApStatementReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ApStatementReport.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\ReportForm.Designer.vb">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\ReportForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.Designer.vb">
-      <DependentUpon>StatementOfAccountsPayable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
@@ -576,14 +565,8 @@
     <EmbeddedResource Include="PresentationLayer\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ApStatementReport.resx">
-      <DependentUpon>ApStatementReport.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfAccountsPayable.resx">
-      <DependentUpon>StatementOfAccountsPayable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>

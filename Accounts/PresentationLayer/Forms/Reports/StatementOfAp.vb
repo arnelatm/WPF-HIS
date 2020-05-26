@@ -17,7 +17,7 @@ Namespace PresentationLayer.Forms.Reports
             MainTableName = "AccountsPayableJournal"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
-            cboSupplierCode.DataSource = PresenterObj.GetSupplierListByCode()
+            cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByName()
             Dim today = Now()
             dtpBeginningDate.Value = DateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = DateSerial(today.Year, today.Month, today.Day)
@@ -25,7 +25,8 @@ Namespace PresentationLayer.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm As New ReportForm("Statement of Accounts Payable.Rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierCode.SelectedItem.Code, "SupplierCode")
+
+            Dim cForm As New ReportForm("Statement of Accounts Payable.Rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo")
             cForm.Show()
         End Sub
 

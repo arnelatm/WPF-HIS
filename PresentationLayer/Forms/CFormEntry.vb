@@ -477,7 +477,7 @@ Public Class CFormEntry
             btnSave.Enabled = False
             btnFind.Enabled = False
             btnPrint.Enabled = False
-            PresenterObj.RecordPositionNumber = 0
+            'PresenterObj.RecordPositionNumber = 0
             If Not PresenterObj.AddMode Then
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
