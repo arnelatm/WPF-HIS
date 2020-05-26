@@ -18,7 +18,7 @@ UPDATE a
 SET a.Amount = B.Amount,
 	a.CkdIdNo = @GroupIdNo,
 	a.DiscountTaken = B.DiscountTaken,
-	a.JournalItemIdNo = B.JournalItemIdNo,
+	a.ApOpenInvoiceIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CkdOiItem a INNER JOIN @MParam As b
 on a.IDNo = b.IDNo
