@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ApOpenInvoice] (
-    [IdNo]            INT           NOT NULL,
+    [IdNo]            INT           IDENTITY (1, 1) NOT NULL,
     [JournalCode]     VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [JournalIdNo]     INT           NOT NULL,
     [JournalItemIdNo] INT           NOT NULL,
@@ -7,6 +7,8 @@
     [DiscountTaken]   MONEY         CONSTRAINT [DF_ApOpenInvoice_DiscountTaken] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_ApOpenInvoice] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
