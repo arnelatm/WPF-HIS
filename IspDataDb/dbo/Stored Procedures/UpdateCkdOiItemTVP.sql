@@ -16,9 +16,9 @@ FROM [DBO].CkdOiItem A WHERE A.CkdIdNo = @GroupIdNo and NOT EXISTS (SELECT * FRO
 -- Update existing CkdOiItems
 UPDATE a 
 SET a.Amount = B.Amount,
+	a.ApOpenInvoiceIdNo = B.ApOpenInvoiceIdNo,
 	a.CkdIdNo = @GroupIdNo,
 	a.DiscountTaken = B.DiscountTaken,
-	a.ApOpenInvoiceIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CkdOiItem a INNER JOIN @MParam As b
 on a.IDNo = b.IDNo
