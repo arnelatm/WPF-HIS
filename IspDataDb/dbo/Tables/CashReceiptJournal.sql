@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CashReceiptJournal] (
-    [IdNo]                INT            IDENTITY (1, 1) NOT NULL,
+    [IdNo]                INT            NOT NULL,
     [TransactionDate]     DATE           NOT NULL,
     [ReferenceNo]         VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Amount]              MONEY          NULL,
@@ -16,9 +16,11 @@
     [UnApplied]           MONEY          NULL,
     [Notes]               NVARCHAR (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Posted]              BIT            NULL,
-    [Cancelled]           BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_CashReceiptJournal_DateCreated] DEFAULT (getdate()) NULL,
+    [Cancelled]           BIT            NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashReceiptJournal] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

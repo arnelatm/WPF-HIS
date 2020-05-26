@@ -1,9 +1,7 @@
 ﻿CREATE TABLE [dbo].[GeneralJournal] (
-    [IdNo]            INT            IDENTITY (1, 1) NOT NULL,
+    [IdNo]            INT            NOT NULL,
     [TransactionDate] DATE           NOT NULL,
     [ReferenceNo]     NVARCHAR (10)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [TransactionType] CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [Amount]          MONEY          NULL,
     [Notes]           NVARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Posted]          NCHAR (10)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Cancelled]       BIT            NULL,
@@ -11,6 +9,8 @@
     [DateTimeStamp]   ROWVERSION     NULL,
     CONSTRAINT [PK_JournalIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 GO

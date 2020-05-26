@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CashReceiptJournalItem] (
-    [IdNo]             INT            IDENTITY (1, 1) NOT NULL,
+    [IdNo]             INT            NOT NULL,
     [Sequence]         INT            CONSTRAINT [DF_CashReceiptJournalItem_Sequence] DEFAULT ((0)) NOT NULL,
     [JournalIdNo]      INT            CONSTRAINT [DF_CashReceiptJournalItem_JournalIdNo] DEFAULT ((0)) NOT NULL,
     [AccountIdNo]      INT            CONSTRAINT [DF_CashReceiptJournalItem_AccountIdNo] DEFAULT ((0)) NOT NULL,
@@ -11,4 +11,6 @@
     [DateTimeStamp]    ROWVERSION     NOT NULL,
     CONSTRAINT [PK_CashReceiptJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
