@@ -119,7 +119,6 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.CadIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bscadOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -945,7 +944,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewCadOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewCadOiItems.AutoGenerateColumns = False
             Me.DataGridViewCadOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewCadOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceCadOi, Me.dgvInvoiceNo, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn1, Me.CadIdNo, Me.DataGridViewTextBoxColumn3, Me.OpenInvoiceIdNo})
+            Me.DataGridViewCadOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceCadOi, Me.dgvInvoiceNo, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn1, Me.CadIdNo, Me.OpenInvoiceIdNo})
             Me.DataGridViewCadOiItems.DataInGridChanged = False
             Me.DataGridViewCadOiItems.DataSource = Me.bscadOiItems
             DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1102,12 +1101,6 @@ Namespace PresentationLayer.Forms
             Me.CadIdNo.DataPropertyName = "CadIdNo"
             resources.ApplyResources(Me.CadIdNo, "CadIdNo")
             Me.CadIdNo.Name = "CadIdNo"
-            '
-            'DataGridViewTextBoxColumn3
-            '
-            Me.DataGridViewTextBoxColumn3.DataPropertyName = "JournalItemIdNo"
-            resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
-            Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
             '
             'OpenInvoiceIdNo
             '

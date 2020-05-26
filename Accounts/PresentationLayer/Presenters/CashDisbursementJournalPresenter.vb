@@ -52,16 +52,16 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCadOiInsertTable.Columns.Add("Amount", GetType(Decimal))
+            DtCadOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtCadOiInsertTable.Columns.Add("cadIdNo", GetType(Int32))
             DtCadOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtCadOiInsertTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtCadOiInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCadOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
+            DtCadOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("cadIdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtCadOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtCadOiUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtCadOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
@@ -86,7 +86,7 @@ Namespace PresentationLayer.Presenters
                     Dim itemFound = False
                     If View.CadOiItems IsNot Nothing Then
                         For Each item In View.CadOiItems
-                            If item.JournalItemIdNo = unpaidInvoice.JournalItemIdNo And item.JournalCode = unpaidInvoice.JournalCode Then
+                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
                                 itemFound = True
                             End If
                         Next
@@ -100,13 +100,12 @@ Namespace PresentationLayer.Presenters
                             Dim item As New CadOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
+                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
                                     .Balance = unpaidInvoice.Balance,
                                     .DiscountTaken = unpaidInvoice.DiscountTaken,
                                     .InvoiceNo = unpaidInvoice.InvoiceNo,
                                     .JournalCode = unpaidInvoice.JournalCode,
                                     .JournalIdNo = unpaidInvoice.JournalIdNo,
-                                    .JournalItemIdNo = unpaidInvoice.JournalItemIdNo,
-                                    .OpenInvoiceIdNo = unpaidInvoice.OpenInvoiceIdNo,
                                     .PreviousBalance = unpaidInvoice.Balance,
                                     .Sequence = nSeq,
                                     .TransactionDate = unpaidInvoice.TransactionDate
@@ -266,7 +265,7 @@ Namespace PresentationLayer.Presenters
                             workRow("Sequence") = nRowCount
                             workRow("Amount") = ji.Amount
                             workRow("DiscountTaken") = ji.DiscountTaken
-                            workRow("JournalItemIdNo") = ji.JournalItemIdNo
+                            workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
                             If ji.IdNo <= 0 Then
                                 DtCadOiInsertTable.Rows.Add(workRow)
                             Else
@@ -635,7 +634,7 @@ Namespace PresentationLayer.Presenters
                 If _oldCadOiItem IsNot Nothing Then
                     For Each Item In _oldCadOiItem
                         If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                         End If
                     Next
                 End If
@@ -693,7 +692,7 @@ Namespace PresentationLayer.Presenters
                 newCadOiItem = GetCadOiItems(View.IdNo)
                 For Each item In newCadOiItem
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.OpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then
@@ -718,14 +717,14 @@ Namespace PresentationLayer.Presenters
                     ' if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments
-                        RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 ' re-apply the new payments
                 For Each Item In View.CadOiItems
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' add new payments
-                        AddInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then

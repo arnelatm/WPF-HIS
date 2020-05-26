@@ -31,8 +31,6 @@ Namespace DataLayer.AdoNet
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "OpenInvoiceIdNo," &
                     "PreviousBalance," &
                     "Sequence," &
                     "TransactionDate" &
@@ -57,6 +55,7 @@ Namespace DataLayer.AdoNet
             New PcsOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .PcsIdNo = Extensions.AsString(reader("PcsIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
@@ -64,8 +63,6 @@ Namespace DataLayer.AdoNet
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsId(Of Int32)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsId(Of Int32)(reader("JournalItemIdNo")),
-            .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("OpenInvoiceIdNo")),
             .PreviousBalance = Extensions.AsDecimal(reader("PreviousBalance")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("sequence")),
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
@@ -81,7 +78,6 @@ Namespace DataLayer.AdoNet
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "JournalItemIdNo," &
                     "TransactionDate" &
                     " FROM ApOpenInvoice_View " &
                     " WHERE Balance <> 0 and SupplierIdNo = " & idNo.ToString() &
@@ -93,12 +89,12 @@ Namespace DataLayer.AdoNet
         Public Shared ReadOnly MakePcsOiItem As Func(Of IDataReader, PcsOiItem) = Function(reader) New PcsOiItem() With
             {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
-            .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }
 
