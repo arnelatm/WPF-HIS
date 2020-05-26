@@ -17,7 +17,7 @@ FROM [DBO].CsrOiItem A WHERE A.CsrIdNo = @GroupIdNo and NOT EXISTS (SELECT * FRO
 -- Update existing CsrOiItems
 UPDATE a 
 SET a.Amount = B.Amount,
-	a.ApOpenInvoiceIdNo= B.ApOpenInvoiceIdNo,
+	a.ArOpenInvoiceIdNo= B.ArOpenInvoiceIdNo,
 	a.CsrIdNo = @GroupIdNo,
 	a.DiscountTaken = B.DiscountTaken,
     a.[Sequence] = B.[Sequence]

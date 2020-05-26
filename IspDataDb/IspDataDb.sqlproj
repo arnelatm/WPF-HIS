@@ -266,4 +266,7 @@
     <Build Include="dbo\User Defined Types\PcsOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\ReconciledInsert.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="IspDataDb.refactorlog" />
+  </ItemGroup>
 </Project>

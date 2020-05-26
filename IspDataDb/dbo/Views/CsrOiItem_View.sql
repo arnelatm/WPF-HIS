@@ -3,11 +3,11 @@ CREATE VIEW [dbo].[CsrOiItem_View]
 AS
 SELECT        dbo.CsrOiItem.Sequence, dbo.ArOpenInvoice_View.InvoiceNo, dbo.ArOpenInvoice_View.TransactionDate, 
                          dbo.ArOpenInvoice_View.Balance + dbo.CsrOiItem.Amount + dbo.CsrOiItem.DiscountTaken AS PreviousBalance, dbo.CsrOiItem.Amount, dbo.CsrOiItem.DiscountTaken, dbo.ArOpenInvoice_View.Balance, 
-                         dbo.CsrOiItem.JournalItemIdNo, dbo.ArOpenInvoice_View.Amount AS InvoiceAmount, dbo.ArOpenInvoice_View.JournalCode, dbo.ArOpenInvoice_View.JournalItemIdNo AS ArJournalItemIdNo, 
+                         dbo.CsrOiItem.ArOpenInvoiceIdNo, dbo.ArOpenInvoice_View.Amount AS InvoiceAmount, dbo.ArOpenInvoice_View.JournalCode, dbo.ArOpenInvoice_View.JournalItemIdNo AS ArJournalItemIdNo, 
                          dbo.ArOpenInvoice_View.ReferenceNo, dbo.ArOpenInvoice_View.PaidAmount, dbo.CsrOiItem.IdNo, dbo.ArOpenInvoice_View.CustomerIdNo, dbo.ArOpenInvoice_View.IdNo AS OpenInvoiceIdNo, 
                          dbo.CsrOiItem.CsrIdNo, dbo.ArOpenInvoice_View.AccountIdNo, dbo.ArOpenInvoice_View.JournalIdNo
 FROM            dbo.CsrOiItem LEFT OUTER JOIN
-                         dbo.ArOpenInvoice_View ON dbo.CsrOiItem.JournalItemIdNo = dbo.ArOpenInvoice_View.JournalItemIdNo
+                         dbo.ArOpenInvoice_View ON dbo.CsrOiItem.ArOpenInvoiceIdNo = dbo.ArOpenInvoice_View.JournalItemIdNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
