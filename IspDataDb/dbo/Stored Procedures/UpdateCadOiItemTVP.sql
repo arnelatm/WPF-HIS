@@ -19,7 +19,7 @@ UPDATE a
 SET a.Amount = B.Amount,
 	a.CadIdNo = @GroupIdNo,
 	a.DiscountTaken = B.DiscountTaken,
-	a.JournalItemIdNo = B.JournalItemIdNo,
+	a.ApOpenInvoiceIdNo = B.JournalItemIdNo,
     a.[Sequence] = B.[Sequence]
 from CadOiItem a INNER JOIN @MParam As b
 on a.IDNo = b.IDNo
