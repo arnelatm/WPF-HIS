@@ -21,7 +21,7 @@
     [VATNumber]          VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CRNumber]           VARCHAR (20)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [AccountStatus]      CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [APAccountIdNo]      INT            NULL,
+    [APAccountIdNo]      INT            NOT NULL,
     [ExpAccountIdNo]     INT            NULL,
     [CreditLimit]        MONEY          NULL,
     [SettlementDueDays]  SMALLINT       NULL,
@@ -42,4 +42,6 @@
     CONSTRAINT [IX_SupplierName2] UNIQUE NONCLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_SupplierNameAra2] UNIQUE NONCLUSTERED ([IdNo] ASC)
 );
+
+
 

@@ -1,15 +1,13 @@
-﻿
-CREATE VIEW [dbo].[ApInvoices_View]
+﻿CREATE VIEW dbo.ApInvoices_View
 AS
-SELECT			dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.ProfitCenterIdNo, dbo.APDetails_View.Notes, 
-                dbo.APDetails_View.Posted, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, dbo.APDetails_View.TransactionDate, 
-                dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.ApOpenInvoice.IdNo, 
-                dbo.ApOpenInvoice.JournalIdNo
-FROM            dbo.ApOpenInvoice 
-				LEFT OUTER JOIN dbo.APDetails_View 
-				ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS
-				LEFT OUTER JOIN dbo.Chart 
-				ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
+SELECT        dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.ProfitCenterIdNo, 
+                         dbo.APDetails_View.Notes, dbo.APDetails_View.Posted, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, 
+                         dbo.APDetails_View.TransactionDate, dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, 
+                         dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalIdNo
+FROM            dbo.ApOpenInvoice LEFT OUTER JOIN
+                         dbo.APDetails_View ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND 
+                         dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
+                         dbo.Chart ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -17,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[42] 4[29] 3[6] 2) )"
+         Configuration = "(H (1[61] 4[11] 3[6] 2) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -95,10 +93,10 @@ Begin DesignProperties =
          End
          Begin Table = "APDetails_View"
             Begin Extent = 
-               Top = 24
-               Left = 386
-               Bottom = 339
-               Right = 565
+               Top = 36
+               Left = 280
+               Bottom = 351
+               Right = 459
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -140,6 +138,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApInvoices_View';
+
+
 
 
 GO

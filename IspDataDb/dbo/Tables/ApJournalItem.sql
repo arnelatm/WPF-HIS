@@ -8,7 +8,9 @@
     [ProfitCenterIdNo] INT            CONSTRAINT [DF_ApJournalItem_ProfitCenterIdNo] DEFAULT ((0)) NOT NULL,
     [Notes]            NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [Posted]           BIT            CONSTRAINT [DF_ApJournalItem_Posted] DEFAULT ((0)) NOT NULL,
-    [DateTimeStamp]    ROWVERSION     NOT NULL,
+    [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_ApJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

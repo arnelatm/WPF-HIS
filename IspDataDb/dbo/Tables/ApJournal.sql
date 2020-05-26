@@ -17,7 +17,9 @@
     [Posted]             BIT            NULL,
     [Cancelled]          BIT            NULL,
     [DateCreated]        DATETIME       CONSTRAINT [DF_ApJournal_DateCreated] DEFAULT (getdate()) NOT NULL,
-    [DateTimeStamp]      ROWVERSION     NOT NULL,
+    [DateTimeStamp]      ROWVERSION     NULL,
     CONSTRAINT [PK_ApIdNo] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
+
+
 
