@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[GeneralJournalItem] (
-    [IdNo]             INT            NOT NULL,
+    [IdNo]             INT            IDENTITY (1, 1) NOT NULL,
     [Sequence]         INT            CONSTRAINT [DF_GeneralJournalItem_Sequence] DEFAULT ((0)) NOT NULL,
     [JournalIdNo]      INT            CONSTRAINT [DF_GeneralJournalItem_JournalIdNo] DEFAULT ((0)) NOT NULL,
     [AccountIdNo]      INT            CONSTRAINT [DF_GeneralJournalItem_AccountIdNo] DEFAULT ((0)) NOT NULL,
@@ -11,6 +11,8 @@
     [DateTimeStamp]    ROWVERSION     NOT NULL,
     CONSTRAINT [PK_GeneralJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
