@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="20a6c6ad-455c-46ef-b6b9-89268d09f6b2" ChangeDateTime="05/26/2020 22:35:47">
+    <Property Name="ElementName" Value="[dbo].[CsrOiItem].[ApOpenInvoiceIdNo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CsrOiItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ArOpenInvoiceIdNo" />
+  </Operation>
+</Operations>
