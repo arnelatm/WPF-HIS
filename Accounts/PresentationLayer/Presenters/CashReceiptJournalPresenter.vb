@@ -52,16 +52,16 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCsrOiInsertTable.Columns.Add("Amount", GetType(Decimal))
+            DtCsrOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtCsrOiInsertTable.Columns.Add("CsrIdNo", GetType(Int32))
             DtCsrOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtCsrOiInsertTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtCsrOiInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCsrOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
+            DtCsrOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtCsrOiUpdateTable.Columns.Add("CsrIdNo", GetType(Int32))
             DtCsrOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtCsrOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtCsrOiUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtCsrOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
@@ -86,7 +86,7 @@ Namespace PresentationLayer.Presenters
                     Dim itemFound = False
                     If View.CsrOiItems IsNot Nothing Then
                         For Each item In View.CsrOiItems
-                            If item.JournalItemIdNo = unpaidInvoice.JournalItemIdNo And item.JournalCode = unpaidInvoice.JournalCode Then
+                            If item.ArOpenInvoiceIdNo = unpaidInvoice.IdNo Then
                                 itemFound = True
                             End If
                         Next
@@ -100,13 +100,12 @@ Namespace PresentationLayer.Presenters
                             Dim item As New CsrOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
+                                    .ArOpenInvoiceIdNo = unpaidInvoice.IdNo,
                                     .Balance = unpaidInvoice.Balance,
                                     .DiscountTaken = unpaidInvoice.DiscountTaken,
                                     .InvoiceNo = unpaidInvoice.InvoiceNo,
                                     .JournalCode = unpaidInvoice.JournalCode,
                                     .JournalIdNo = unpaidInvoice.JournalIdNo,
-                                    .JournalItemIdNo = unpaidInvoice.JournalItemIdNo,
-                                    .OpenInvoiceIdNo = unpaidInvoice.OpenInvoiceIdNo,
                                     .PreviousBalance = unpaidInvoice.Balance,
                                     .Sequence = nSeq,
                                     .TransactionDate = unpaidInvoice.TransactionDate
@@ -262,11 +261,11 @@ Namespace PresentationLayer.Presenters
                                 workRow = DtCsrOiUpdateTable.NewRow()
                                 workRow("IdNo") = ji.IdNo
                             End If
-                            workRow("csrIdNo") = View.IdNo
-                            workRow("Sequence") = nRowCount
                             workRow("Amount") = ji.Amount
+                            workRow("ArOpenInvoiceIdNo") = ji.ArOpenInvoiceIdNo
+                            workRow("CsrIdNo") = View.IdNo
                             workRow("DiscountTaken") = ji.DiscountTaken
-                            workRow("JournalItemIdNo") = ji.JournalItemIdNo
+                            workRow("Sequence") = nRowCount
                             If ji.IdNo <= 0 Then
                                 DtCsrOiInsertTable.Rows.Add(workRow)
                             Else
@@ -635,7 +634,7 @@ Namespace PresentationLayer.Presenters
                 If _oldCsrOiItem IsNot Nothing Then
                     For Each Item In _oldCsrOiItem
                         If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                            RemoveInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                         End If
                     Next
                 End If
@@ -694,7 +693,7 @@ Namespace PresentationLayer.Presenters
                 newCsrOiItem = GetCsrOiItems(View.IdNo)
                 For Each item In newCsrOiItem
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.OpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                        AddInvoicePayment(item.ArOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then
@@ -719,14 +718,14 @@ Namespace PresentationLayer.Presenters
                     'if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments
-                        RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        RemoveInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 ' re-apply the new payments
                 For Each Item In View.CsrOiItems
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' add new payments
-                        AddInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        AddInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then
@@ -764,7 +763,6 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
-
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
