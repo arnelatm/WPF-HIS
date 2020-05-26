@@ -50,16 +50,16 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             DtPcsOiInsertTable.Columns.Add("Amount", GetType(Decimal))
-            DtPcsOiInsertTable.Columns.Add("pcsIdNo", GetType(Int32))
+            DtPcsOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtPcsOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtPcsOiInsertTable.Columns.Add("JournalItemIdNo", GetType(Int32))
+            DtPcsOiInsertTable.Columns.Add("PcsIdNo", GetType(Int32))
             DtPcsOiInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtPcsOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
-            DtPcsOiUpdateTable.Columns.Add("pcsIdNo", GetType(Int32))
+            DtPcsOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtPcsOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtPcsOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtPcsOiUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
+            DtPcsOiUpdateTable.Columns.Add("PcsIdNo", GetType(Int32))
             DtPcsOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
@@ -84,7 +84,7 @@ Namespace PresentationLayer.Presenters
                     Dim itemFound = False
                     If View.PcsOiItems IsNot Nothing Then
                         For Each item In View.PcsOiItems
-                            If item.JournalItemIdNo = unpaidInvoice.JournalItemIdNo And item.JournalCode = unpaidInvoice.JournalCode Then
+                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
                                 itemFound = True
                             End If
                         Next
@@ -98,13 +98,12 @@ Namespace PresentationLayer.Presenters
                             Dim item As New PcsOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
+                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
                                     .Balance = unpaidInvoice.Balance,
                                     .DiscountTaken = unpaidInvoice.DiscountTaken,
                                     .InvoiceNo = unpaidInvoice.InvoiceNo,
                                     .JournalCode = unpaidInvoice.JournalCode,
                                     .JournalIdNo = unpaidInvoice.JournalIdNo,
-                                    .JournalItemIdNo = unpaidInvoice.JournalItemIdNo,
-                                    .OpenInvoiceIdNo = unpaidInvoice.OpenInvoiceIdNo,
                                     .PreviousBalance = unpaidInvoice.Balance,
                                     .Sequence = nSeq,
                                     .TransactionDate = unpaidInvoice.TransactionDate
@@ -264,7 +263,7 @@ Namespace PresentationLayer.Presenters
                             workRow("Sequence") = nRowCount
                             workRow("Amount") = ji.Amount
                             workRow("DiscountTaken") = ji.DiscountTaken
-                            workRow("JournalItemIdNo") = ji.JournalItemIdNo
+                            workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
                             If ji.IdNo <= 0 Then
                                 DtPcsOiInsertTable.Rows.Add(workRow)
                             Else
@@ -643,7 +642,7 @@ Namespace PresentationLayer.Presenters
                 If _oldPcsOiItem IsNot Nothing Then
                     For Each Item In _oldPcsOiItem
                         If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                         End If
                     Next
                 End If
@@ -701,7 +700,7 @@ Namespace PresentationLayer.Presenters
                 newPcsOiItem = GetPcsOiItems(View.IdNo)
                 For Each item In newPcsOiItem
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.OpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then
@@ -726,14 +725,14 @@ Namespace PresentationLayer.Presenters
                     ' if new
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' remove old payments
-                        RemoveInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 ' re-apply the new payments
                 For Each Item In View.PcsOiItems
                     If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
                         ' add new payments
-                        AddInvoicePayment(Item.OpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
                     End If
                 Next
                 If View.UnApplied > 0 Then

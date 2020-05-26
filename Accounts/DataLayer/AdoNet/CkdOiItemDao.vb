@@ -32,8 +32,6 @@ Namespace DataLayer.AdoNet
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "OpenInvoiceIdNo," &
                     "PreviousBalance," &
                     "Sequence," &
                     "TransactionDate" &
@@ -58,6 +56,7 @@ Namespace DataLayer.AdoNet
             New CkdOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CkdIdNo = Extensions.AsString(reader("CkdIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
@@ -65,42 +64,22 @@ Namespace DataLayer.AdoNet
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsId(Of Int32)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsId(Of Int32)(reader("JournalItemIdNo")),
-            .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("OpenInvoiceIdNo")),
             .PreviousBalance = Extensions.AsDecimal(reader("PreviousBalance")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("sequence")),
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
-
-        '' ReSharper disable once UnusedMember.Local
-        'Private Function Take(ckdOiItem As CkdOiItem) As Object()
-        '    Return New Object() {
-        '                            "@AccountIdNo", ckdOiItem.AccountIdNo,
-        '                            "@Amount", ckdOiItem.Amount,
-        '                            "@Balance", ckdOiItem.Balance,
-        '                            "@CkdIdNo", ckdOiItem.CkdIdNo,
-        '                            "@DiscountTaken", ckdOiItem.DiscountTaken,
-        '                            "@IdNo", ckdOiItem.IdNo,
-        '                            "@InvoiceNo", ckdOiItem.InvoiceNo,
-        '                            "@JournalItemIdNo", ckdOiItem.JournalItemIdNo,
-        '                            "@OpenInvoiceIdNo", ckdOiItem.OpenInvoiceIdNo,
-        '                            "@PreviousBalance", ckdOiItem.PreviousBalance,
-        '                            "@Sequence", ckdOiItem.Sequence,
-        '                            "@TransactionDate", ckdOiItem.TransactionDate
-        '                         }
-        'End Function
 
         Public Function GetOpenInvoices(idNo As Int32) _
             As List(Of CkdOiItem) Implements IDaoOiItem(Of CkdOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
+                    "ApOpenInvoiceIdNo," &
                     "Balance," &
                     "IdNo," &
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "JournalItemIdNo," &
                     "TransactionDate" &
                     " FROM ApOpenInvoice_View " &
                     " WHERE Balance <> 0 and SupplierIdNo = " & idNo.ToString() &
@@ -112,12 +91,12 @@ Namespace DataLayer.AdoNet
         Public Shared ReadOnly MakeCkdOiItem As Func(Of IDataReader, CkdOiItem) = Function(reader) New CkdOiItem() With
             {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
-            .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
-            .JournalItemIdNo = Extensions.AsInt(Of Integer)(reader("JournalItemIdNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }
 

@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views
 
         Property AccountIdNo As Int32?
         Property Amount As Decimal
+        Property ApOpenInvoiceIdNo As Int32
         Property Balance As Decimal
         Property PcsIdNo As Int32
         Property DiscountTaken As Decimal
@@ -14,8 +15,6 @@ Namespace PresentationLayer.Views
         Property InvoiceNo As String
         Property JournalCode As String
         Property JournalIdNo As Int32
-        Property JournalItemIdNo As Int32
-        Property OpenInvoiceIdNo As Int32
         Property PreviousBalance As Decimal
         Property Sequence As Integer
         Property TransactionDate As Date?
