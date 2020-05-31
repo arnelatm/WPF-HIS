@@ -493,18 +493,18 @@ Namespace PresentationLayer.Forms
             Close()
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
-            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
-                With DataGridViewJournalItems.CurrentCell
-                    Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
-                        Beep()
-                        e.Cancel = True
-                        DataGridViewJournalItems.EndEdit()
-                    End If
-                End With
-            End If
-        End Sub
+        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+        '    If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
+        '        With DataGridViewJournalItems.CurrentCell
+        '            Dim cColumnName = .OwningColumn.Name.ToLower()
+        '            If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+        '                Beep()
+        '                e.Cancel = True
+        '                DataGridViewJournalItems.EndEdit()
+        '            End If
+        '        End With
+        '    End If
+        'End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems.CurrentCell
@@ -512,13 +512,28 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        UpdateTotalVatAmount()
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
-                        bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                        bsJournalItems(nIndex).PayeeType = chart.PayeeType
-                        bsJournalItems(nIndex).AccountName = chart.AccountName
-                        DataGridViewJournalItems.Refresh()
+                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
+                        '    bsJournalItems.AddNew()
+                        'End If
+                        Dim ji As New JournalItemView()
+                        JournalItems(nIndex).AccountIdNo = newValue
+                        JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                        JournalItems(nIndex).AccountName = chart.PayeeType
+                        'JournalItems.Add(ji)
+                        'bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                        'bsJournalItems(nIndex).PayeeType = chart.PayeeType
+                        'bsJournalItems(nIndex).AccountName = chart.AccountName
+                        UpdateTotalVatAmount()
+                        BindJournalItem()
+                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
+                        '   bsJournalItems.AddNew()
+                        'End If
+                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
+                        '    My.Computer.Keyboard.SendKeys("0")
+                        'End If
+                        'DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
                         UpdateJiTotals()
                         UpdateTotalVatAmount()
