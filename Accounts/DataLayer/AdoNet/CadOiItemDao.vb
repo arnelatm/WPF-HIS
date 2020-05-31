@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "ApOpenInvoiceIdNo," &
                     "Balance," &
                     "CadIdNo," &
                     "DiscountTaken," &
@@ -30,7 +31,6 @@ Namespace DataLayer.AdoNet
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "ApOpenInvoiceIdNo," &
                     "PreviousBalance," &
                     "Sequence," &
                     "TransactionDate" &

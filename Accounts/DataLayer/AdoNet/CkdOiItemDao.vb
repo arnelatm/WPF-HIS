@@ -25,6 +25,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "ApOpenInvoiceIdNo," &
                     "Balance," &
                     "CkdIdNo," &
                     "DiscountTaken," &
@@ -56,7 +57,7 @@ Namespace DataLayer.AdoNet
             New CkdOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
-            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("ApOpenInvoiceIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CkdIdNo = Extensions.AsString(reader("CkdIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
@@ -74,9 +75,8 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
-                    "ApOpenInvoiceIdNo," &
-                    "Balance," &
                     "IdNo," &
+                    "Balance," &
                     "InvoiceNo," &
                     "JournalCode," &
                     "JournalIdNo," &
@@ -93,7 +93,6 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
-            .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
