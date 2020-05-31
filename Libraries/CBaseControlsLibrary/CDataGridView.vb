@@ -237,30 +237,40 @@ Public Class CDataGridView
         Try
             Select Case e.KeyData
                 Case Keys.Enter
-                    If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-                        Dim r = Math.Min(iRow + 1, RowCount() - 1)
-                        Dim c = FirstVisibleColumn
-                        CurrentCell = Me(c, r)
-                    Else
-                        If iColumn = ColumnCount() Then
-                            iColumn = FirstVisibleColumn
-                        End If
-                        iRow = Math.Min(iRow, RowCount() - 1)
-                        CurrentCell = Me(iColumn, iRow)
-                    End If
+                    'If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
+                    '    Dim r = Math.Min(iRow + 1, RowCount() - 1)
+                    '    Dim c = FirstVisibleColumn
+                    '    CurrentCell = Me(c, r)
+                    'Else
+                    '    If iColumn = ColumnCount() Then
+                    '        iColumn = FirstVisibleColumn
+                    '    End If
+                    '    iRow = Math.Min(iRow, RowCount() - 1)
+                    '    CurrentCell = Me(iColumn, iRow)
+                    'End If
                     SendKeys.Send("{TAB}")
                     e.Handled = True
-                Case Keys.Down
-                    If iRow >= RowCount() Then
-                        Dim newRow As Integer = iRow - 1
-                        Dim newColumn As Integer = FirstVisibleColumn
-                        newRow = Math.Min(newRow, RowCount() - 1)
-                        CurrentCell = Me(newColumn, newRow)
-                    Else
-                        iRow = Math.Min(iRow + 1, RowCount() - 1)
-                        CurrentCell = Me(iColumn, iRow)
-                    End If
-                    e.Handled = True
+                'Case Keys.Down
+                '    If iRow >= RowCount() - 1 Then
+                '        Dim newRow As Integer = iRow - 1
+                '        Dim newColumn As Integer = FirstVisibleColumn
+                '        newRow = Math.Min(newRow, RowCount() - 1)
+                '        CurrentCell = Me(newColumn, newRow)
+                '        e.Handled = True
+                '    Else
+                '        e.Handled = False
+                '        'iRow = Math.Min(iRow + 1, RowCount() - 1)
+                '        'If iRow = RowCount() - 1 And iColumn > 1 Then
+                '        '    Try
+                '        '        CurrentCell = Me(iColumn, iRow)
+                '        '    Catch
+                '        '        iRow = iRow - 1
+                '        '        CurrentCell = Me(iColumn, iRow)
+                '        '        Refresh()
+                '        '    End Try
+                '        'End If
+                '    End If
+
                 Case Keys.Tab
                     If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
                         CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
@@ -382,6 +392,7 @@ Public Class CDataGridView
     'End Function
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
+
         Try
         Catch ex As Exception
             If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then

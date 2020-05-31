@@ -76,7 +76,6 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
-                    "ArOpenInvoiceIdNo," &
                     "Balance," &
                     "IdNo," &
                     "InvoiceNo," &
@@ -93,7 +92,7 @@ Namespace DataLayer.AdoNet
         Public Shared ReadOnly MakeCsrOiItem As Func(Of IDataReader, CsrOiItem) = Function(reader) New CsrOiItem() With
             {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .ArOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("ArOpenInvoiceIdNo")),
+            .ArOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),

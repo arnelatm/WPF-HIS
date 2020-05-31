@@ -110,8 +110,8 @@ Namespace PresentationLayer.Presenters
             MakeJournalItems()
             SetAsideJournalItems()
             Dim nRowCount As Integer
+            nRowCount = 1
             For Each sc In View.SalesCashItems
-                nRowCount = 1
                 If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
                     Dim workRow As DataRow
                     If sc.IdNo <= 0 Then
@@ -130,7 +130,7 @@ Namespace PresentationLayer.Presenters
                     Else
                         DtSalesCashUpdateTable.Rows.Add(workRow)
                     End If
-                    nRowCount += 1
+                    nRowCount = nRowCount + 1
                     View.TotalDebits += sc.SaleAmount
                 End If
             Next
@@ -317,7 +317,7 @@ Namespace PresentationLayer.Presenters
                 Else
                     DtUpdateTable.Rows.Add(workRow)
                 End If
-                nRowCount += 1
+                nRowCount = nRowCount + 1
             Next
         End Sub
 

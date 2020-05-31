@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports System.ComponentModel
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 
 Namespace PresentationLayer.Forms
@@ -520,6 +521,15 @@ Namespace PresentationLayer.Forms
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                    Case $"dgvaccountidno"
+                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < JournalItems.Count() Then
+                                JournalItems(nIndex).AccountIdNo = newValue
+                                BindJournalItem()
+                            End If
+                        End If
                     Case $"dgvdebit"
                         UpdateTotals()
                         SendKeys.Send("{TAB}")

@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -150,7 +151,7 @@ Namespace PresentationLayer.Presenters
             Next
             If retVal Then
                 If View.UnApplied <> 0 Then
-                    Dim totalBalance As Decimal = 0
+                    Dim totalBalance As Decimal = 0D
                     For Each item In View.PcsOiItems
                         totalBalance += item.Balance
                     Next
@@ -241,6 +242,8 @@ Namespace PresentationLayer.Presenters
                 Else
                     SetAsideJournalItems()
                 End If
+                View.UnApplied = 0
+                View.Applied = View.Amount
             Else
                 MakeJournalItem()
                 SetAsideJournalItems()
@@ -360,13 +363,15 @@ Namespace PresentationLayer.Presenters
             Dim chart As ChartModel
             Dim specialAccount As String
             For Each item In View.JournalItems
-                chart = GetChart(item.AccountIdNo)
-                specialAccount = chart.SpecialAccount
-                If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                    MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                    retValue = False
-                    Exit For
+                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) Then
+                    If (item.Debit <> 0 Or item.Credit <> 0) Then
+                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                        retValue = False
+                        Exit For
+                    End If
                 ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    chart = GetChart(item.AccountIdNo)
+                    specialAccount = chart.SpecialAccount
                     If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
@@ -419,7 +424,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.PcsOiItems
-                    Dim nAccountIdNo As Int32
+                    Dim nAccountIdNo As Int32?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)
@@ -582,13 +587,13 @@ Namespace PresentationLayer.Presenters
             Dim updateReturnValue
             Dim retVal As Integer
             Dim headerIdNo As Int32
-            updateReturnValue = _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, View.IdNo)
             If AddMode Then
                 headerIdNo = passedValue
                 CallByName(View, IdFieldName, CallType.Set, headerIdNo)
             Else
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
+	    updateReturnValue = _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, View.IdNo)
             If updateReturnValue >= 0 AndAlso DtPcsOiInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtPcsOiInsertTable.Rows
                     row.Item("PcsIdNo") = headerIdNo
@@ -769,6 +774,21 @@ Namespace PresentationLayer.Presenters
                     DeleteApOpenInvoice(lOpenInvoiceIdNo)
                 End If
             End If
+        End Sub
+
+        Public Overrides Sub GoPrintRecord()
+            Dim transactionAmount As String
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", View.IdNo, "PettyCashJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            cForm.Show()
         End Sub
 
     End Class

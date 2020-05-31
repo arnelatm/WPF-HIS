@@ -1696,7 +1696,7 @@
     <value>3, 3</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 270</value>
+    <value>980, 305</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1785,26 +1785,14 @@
   <data name="dgvIdNo1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="JournalItemIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>JournalItemIdNo</value>
-  </data>
-  <data name="JournalItemIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>OpenInvoiceIdNo</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <metadata name="bsCkdOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>808, 17</value>
+    <value>17, 56</value>
   </metadata>
   <data name="DataGridViewCkdOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>989, 3</value>
   </data>
   <data name="DataGridViewCkdOiItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 270</value>
+    <value>976, 305</value>
   </data>
   <data name="DataGridViewCkdOiItems.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1828,7 +1816,7 @@
     <value>3, 204</value>
   </data>
   <data name="floPurchaseJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>987, 280</value>
+    <value>987, 315</value>
   </data>
   <data name="floPurchaseJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1873,7 +1861,7 @@
     <value>0</value>
   </data>
   <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 490</value>
+    <value>3, 525</value>
   </data>
   <data name="floFooter.Size" type="System.Drawing.Size, System.Drawing">
     <value>974, 26</value>
@@ -1900,7 +1888,7 @@
     <value>0, 53</value>
   </data>
   <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 526</value>
+    <value>1000, 555</value>
   </data>
   <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -90135,7 +90123,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 584</value>
+    <value>1000, 613</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1016, 623</value>
@@ -90275,12 +90263,6 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bsCkdOiItems.Name" xml:space="preserve">
-    <value>bsCkdOiItems</value>
-  </data>
-  <data name="&gt;&gt;bsCkdOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvSequenceCkdOi.Name" xml:space="preserve">
     <value>dgvSequenceCkdOi</value>
   </data>
@@ -90353,17 +90335,11 @@
   <data name="&gt;&gt;dgvIdNo1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;JournalItemIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>JournalItemIdNoDataGridViewTextBoxColumn</value>
+  <data name="&gt;&gt;bsCkdOiItems.Name" xml:space="preserve">
+    <value>bsCkdOiItems</value>
   </data>
-  <data name="&gt;&gt;JournalItemIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;bsCkdOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CheckDisbursementJournalEntry</value>
