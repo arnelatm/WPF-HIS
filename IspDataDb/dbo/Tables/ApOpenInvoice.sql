@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ApOpenInvoice] (
     [IdNo]            INT           IDENTITY (1, 1) NOT NULL,
-    [JournalCode]     VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [JournalCode]     VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [JournalIdNo]     INT           NOT NULL,
     [JournalItemIdNo] INT           NOT NULL,
     [PaidAmount]      MONEY         CONSTRAINT [DF_ApOpenInvoice_PaidAmount] DEFAULT ((0)) NOT NULL,
