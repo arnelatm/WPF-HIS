@@ -216,11 +216,15 @@ Namespace PresentationLayer.Presenters
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = TransactionTypeToEnum(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        item.Credit = View.Amount
-                        item.Debit = 0
+                        If item.Credit = 0 Then
+                            item.Credit = View.Amount
+                            item.Debit = 0
+                        End If
                     Else
-                        item.Credit = 0
-                        item.Debit = View.Amount
+                        If item.Debit = 0 Then
+                            item.Credit = 0
+                            item.Debit = View.Amount
+                        End If
                     End If
                     item.ProfitCenterIdNo = 0
                     Exit For
@@ -268,9 +272,17 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
+                    Dim nTotalAp = 0
                     For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
+                        If specialAccount = EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable) Then
+                            If View.TransactionType = "I" Or View.TransactionType = "C" Then
+                                nTotalAp = nTotalAp + item.Credit - item.Debit
+                            Else
+                                nTotalAp = nTotalAp + item.Debit - item.Credit
+                            End If
+                        End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
@@ -296,6 +308,10 @@ Namespace PresentationLayer.Presenters
                             End If
                         End If
                     Next
+                    If nTotalAp <> View.Amount Then
+                        Messaging.Show(True, "MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
+                        retValue = False
+                    End If
                 End If
             End If
             Return retValue
@@ -313,7 +329,6 @@ Namespace PresentationLayer.Presenters
                     }
             Return item
         End Function
-
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
