@@ -517,16 +517,18 @@ Namespace PresentationLayer.Forms
                         'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
                         '    bsJournalItems.AddNew()
                         'End If
-                        Dim ji As New JournalItemView()
-                        JournalItems(nIndex).AccountIdNo = newValue
-                        JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                        JournalItems(nIndex).AccountName = chart.PayeeType
-                        'JournalItems.Add(ji)
-                        'bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                        'bsJournalItems(nIndex).PayeeType = chart.PayeeType
-                        'bsJournalItems(nIndex).AccountName = chart.AccountName
-                        UpdateTotalVatAmount()
-                        BindJournalItem()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            Dim ji As New JournalItemView()
+                            JournalItems(nIndex).AccountIdNo = newValue
+                            JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                            JournalItems(nIndex).AccountName = chart.PayeeType
+                            'JournalItems.Add(ji)
+                            'bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                            'bsJournalItems(nIndex).PayeeType = chart.PayeeType
+                            'bsJournalItems(nIndex).AccountName = chart.AccountName
+                            UpdateTotalVatAmount()
+                            BindJournalItem()
+                        End If
                         'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
                         '   bsJournalItems.AddNew()
                         'End If
