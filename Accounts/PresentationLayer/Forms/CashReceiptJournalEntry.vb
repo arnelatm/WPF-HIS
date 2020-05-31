@@ -459,6 +459,15 @@ Namespace PresentationLayer.Forms
         Private Sub CsrOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCsrOiItems.CellEndEdit
             With DataGridViewCsrOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
+                    Case $"dgvaccountidno"
+                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < JournalItems.Count() Then
+                                JournalItems(nIndex).AccountIdNo = newValue
+                                BindJournalItem()
+                            End If
+                        End If
                     Case $"dgvamount"
                         Dim selectedRow As CsrOiItemView
                         Dim amt = .Value
@@ -565,10 +574,15 @@ Namespace PresentationLayer.Forms
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
-                        bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                        bsJournalItems(nIndex).payeeType = chart.PayeeType
-                        bsJournalItems(nIndex).AccountName = chart.AccountName
-                        DataGridViewJournalItems.Refresh()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < JournalItems.Count() Then
+                                JournalItems(nIndex).AccountIdNo = newValue
+                                JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                                JournalItems(nIndex).PayeeType = chart.PayeeType
+                                JournalItems(nIndex).AccountName = chart.AccountName
+                                BindJournalItem()
+                            End If
+                        End If
                     Case $"dgvdebit"
                         UpdateJiTotals()
                         SendKeys.Send("{TAB}")
@@ -636,7 +650,7 @@ Namespace PresentationLayer.Forms
             Else
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCsrOiItems.Visible = False
-                Applied = 0
+                Applied = Amount
                 UnApplied = 0
                 DiscountTaken = 0
                 If payorTypeEnum = ReceiptTypeSelection.Customer Then

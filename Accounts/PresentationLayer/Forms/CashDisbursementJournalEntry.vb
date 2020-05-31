@@ -514,30 +514,16 @@ Namespace PresentationLayer.Forms
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
-                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
-                        '    bsJournalItems.AddNew()
-                        'End If
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            'Dim ji As New JournalItemView()
                             If nIndex < JournalItems.Count() Then
                                 JournalItems(nIndex).AccountIdNo = newValue
                                 JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                                JournalItems(nIndex).AccountName = chart.PayeeType
-                                'JournalItems.Add(ji)
-                                'bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                                'bsJournalItems(nIndex).PayeeType = chart.PayeeType
-                                'bsJournalItems(nIndex).AccountName = chart.AccountName
+                                JournalItems(nIndex).PayeeType = chart.PayeeType
+                                JournalItems(nIndex).AccountName = chart.AccountName
                                 UpdateTotalVatAmount()
                                 BindJournalItem()
                             End If
                         End If
-                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
-                        '   bsJournalItems.AddNew()
-                        'End If
-                        'If nIndex = DataGridViewJournalItems.RowCount() - 1 Then
-                        '    My.Computer.Keyboard.SendKeys("0")
-                        'End If
-                        'DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
                         UpdateJiTotals()
                         UpdateTotalVatAmount()
@@ -607,7 +593,7 @@ Namespace PresentationLayer.Forms
             Else
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCadOiItems.Visible = False
-                Applied = 0
+                Applied = Amount
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
