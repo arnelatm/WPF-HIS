@@ -243,6 +243,8 @@ Namespace PresentationLayer.Presenters
                 Else
                     SetAsideJournalItems()
                 End If
+                View.UnApplied = 0
+                View.Applied = View.Amount
             Else
                 MakeJournalItem()
                 SetAsideJournalItems()
@@ -360,13 +362,15 @@ Namespace PresentationLayer.Presenters
             Dim chart As ChartModel
             Dim specialAccount As String
             For Each item In View.JournalItems
-                chart = GetChart(item.AccountIdNo)
-                specialAccount = chart.SpecialAccount
-                If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                    MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                    retValue = False
-                    Exit For
+                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) Then
+                    If (item.Debit <> 0 Or item.Credit <> 0) Then
+                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                        retValue = False
+                        Exit For
+                    End If
                 ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    chart = GetChart(item.AccountIdNo)
+                    specialAccount = chart.SpecialAccount
                     If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")

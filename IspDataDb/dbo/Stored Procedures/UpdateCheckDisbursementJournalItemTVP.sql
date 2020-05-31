@@ -13,7 +13,7 @@ BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].ChequeDisbursementJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].CheckDisbursementJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
 -- Update existing ChequeDisbursementJournalItems
 UPDATE a 
@@ -24,7 +24,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Notes = B.Notes,
 	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
 	a.[Sequence] = B.[Sequence]
-from ChequeDisbursementJournalItem a
+from CheckDisbursementJournalItem a
 JOIN @MParam b
 on a.IDNo = b.IDNo
 
