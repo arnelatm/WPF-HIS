@@ -243,6 +243,8 @@ Namespace PresentationLayer.Presenters
                 Else
                     SetAsideJournalItems()
                 End If
+                View.UnApplied = 0
+                View.Applied = View.Amount
             Else
                 MakeJournalItem()
                 SetAsideJournalItems()

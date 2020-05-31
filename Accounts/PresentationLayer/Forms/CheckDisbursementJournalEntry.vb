@@ -537,13 +537,19 @@ Namespace PresentationLayer.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        UpdateTotalVatAmount()
                         Dim chart As ChartModel
                         chart = PresenterObj.GetChart(newValue)
-                        bsJournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                        bsJournalItems(nIndex).PayeeType = chart.PayeeType
-                        bsJournalItems(nIndex).AccountName = chart.AccountName
-                        DataGridViewJournalItems.Refresh()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < JournalItems.Count() Then
+                                JournalItems(nIndex).AccountIdNo = newValue
+                                JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
+                                bsJournalItems(nIndex).PayeeType = chart.PayeeType
+                                bsJournalItems(nIndex).AccountName = chart.AccountName
+                                UpdateTotalVatAmount()
+                                BindJournalItem()
+                            End If
+                        End If
+
                     Case $"dgvdebit"
                         UpdateJiTotals()
                         UpdateTotalVatAmount()
@@ -613,7 +619,7 @@ Namespace PresentationLayer.Forms
             Else
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCkdOiItems.Visible = False
-                Applied = 0
+                Applied = Amount
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
@@ -741,6 +747,9 @@ Namespace PresentationLayer.Forms
             UpdateTotalVatAmount()
         End Sub
 
+        Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
+
+        End Sub
     End Class
 
 End Namespace

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CashReceiptJournalItem] (
-    [IdNo]             INT            NOT NULL,
+    [IdNo]             INT            NOT NULL IDENTITY,
     [Sequence]         INT            CONSTRAINT [DF_CashReceiptJournalItem_Sequence] DEFAULT ((0)) NOT NULL,
     [JournalIdNo]      INT            CONSTRAINT [DF_CashReceiptJournalItem_JournalIdNo] DEFAULT ((0)) NOT NULL,
     [AccountIdNo]      INT            CONSTRAINT [DF_CashReceiptJournalItem_AccountIdNo] DEFAULT ((0)) NOT NULL,

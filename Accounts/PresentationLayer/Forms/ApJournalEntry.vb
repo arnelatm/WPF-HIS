@@ -449,6 +449,25 @@ Namespace PresentationLayer.Forms
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                    Case $"dgvaccountidno"
+                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
+                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < JournalItems.Count() Then
+                                JournalItems(nIndex).AccountIdNo = newValue
+                                With DataGridViewJournalItems.CurrentRow
+                                    Dim currentVatAmount As Decimal
+                                    If PresenterObj.IsInputVatAccount(newValue) Then
+                                        currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
+                                    Else
+                                        currentVatAmount = 0
+                                    End If
+                                    .Cells("ItemVatAmount").Value = currentVatAmount
+                                End With
+                                UpdateTotalVatAmount()
+                                BindJournalItem()
+                            End If
+                        End If
                     Case $"dgvdebit"
                         If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                             .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
@@ -464,18 +483,7 @@ Namespace PresentationLayer.Forms
                         UpdateTotalVatAmount()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
-                    Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        With DataGridViewJournalItems.CurrentRow
-                            Dim currentVatAmount As Decimal
-                            If PresenterObj.IsInputVatAccount(newValue) Then
-                                currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
-                            Else
-                                currentVatAmount = 0
-                            End If
-                            .Cells("ItemVatAmount").Value = currentVatAmount
-                        End With
-                        UpdateTotalVatAmount()
+
                 End Select
             End With
         End Sub

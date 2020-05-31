@@ -9,14 +9,12 @@
         Public Property AccountIdNo As Int32?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
-        Public Property PcsOiItems As List(Of PcsOiItemModel)
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int32?
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
-        Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32?
@@ -30,6 +28,10 @@
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+        Public Property JournalItems As List(Of JournalItemModel)
+        Public Property PcsOiItems As List(Of PcsOiItemModel)
+
     End Class
+
 
 End Namespace

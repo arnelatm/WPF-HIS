@@ -356,11 +356,19 @@ Namespace PresentationLayer.Forms
                 selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvcashcode"
-                        Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
-                        Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                        RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
-                        UpdateTotals()
+                        Dim nIndex = DataGridViewSalesCashItems.CurrentRow.Index
+                        Dim newValue = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
+                            If nIndex < SalesCashItems.Count() Then
+                                Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
+                                Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
+                                Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
+                                SalesCashItems(nIndex).CashCode = newValue
+                                RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+                                UpdateTotals()
+                                BindSalesCashItem()
+                            End If
+                        End If
                     Case $"dgvsaleamount"
                         Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
                         Dim pSaleAmount As Decimal = .Value
