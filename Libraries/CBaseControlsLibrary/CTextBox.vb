@@ -42,19 +42,21 @@ Public Class CTextBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            'If Me.Name.ToLower() = "txtprofitcentercode" Then
-            '    Debugger.Break()
-            'End If
             _editingMode = value
-            If value Or DisplayOnly Then
+            If value Then
+                If DisplayOnly Then
+                    Me.ReadOnly = True
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    Me.ReadOnly = False
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
+            Else
+                Me.ReadOnly = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Me.ReadOnly = True
-                Refresh()
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
             End If
         End Set
     End Property
@@ -232,16 +234,22 @@ Public Class CTextBox
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
-        If Not (EditingMode Or DisplayOnly) Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
             BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not (EditingMode Or DisplayOnly) Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 

@@ -168,16 +168,22 @@ Public Class CComboBox
     Public Property LinkedLabel As CLabel
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not EditingMode Then
+        If EditingMode Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
             BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not EditingMode Then
+        If EditingMode Then
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
@@ -322,8 +328,8 @@ Public Class CComboBox
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property

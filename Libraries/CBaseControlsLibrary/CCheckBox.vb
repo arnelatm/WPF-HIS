@@ -9,6 +9,7 @@ Public Class CCheckBox
     Implements IEntryControl
 
     Private _editingMode As Boolean = False
+    Private _oldValue As String
 
     Public Sub New()
         MyBase.New()
@@ -24,33 +25,50 @@ Public Class CCheckBox
         AutoSize = False
     End Sub
 
-    Protected Overrides Sub OnPaint(ByVal pevent As PaintEventArgs)
-        pevent.Graphics.Clear(BackColor)
+    Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
+        pEvent.Graphics.Clear(BackColor)
 
         Using brush As SolidBrush = New SolidBrush(ForeColor)
-            pevent.Graphics.DrawString(Text, Font, brush, 27, 4)
+            pEvent.Graphics.DrawString(Text, Font, brush, 27, 4)
         End Using
 
         Dim pt As Point = New Point(0, 0)
         Dim rect As Rectangle = New Rectangle(pt, New Size(22, 20))
-        pevent.Graphics.FillRectangle(Brushes.White, rect)
+        Dim cForeColor As Color
+
+        If Focused Then
+            cForeColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+
+            cForeColor = GlobalVariables.DefaultFormControlBackgroundColor
+        End If
+        Dim cBrush = New SolidBrush(cForeColor)
+        pEvent.Graphics.FillRectangle(cBrush, rect)
+
 
         If Checked Then
             Dim cCol As Color
-            If _editingMode Then
-                cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            If _editingMode And Not DisplayOnly Then
+                If Focused Then
+                    cCol = GlobalVariables.DefaultFormControlEditingForegroundColor
+                Else
+                    cCol = GlobalVariables.DefaultFormControlForegroundColor
+                End If
             Else
-                cCol = GlobalVariables.DefaultFormControlForegroundColor
+                If Focused Then
+                    cCol = GlobalVariables.DefaultFormControlForegroundColor
+                Else
+                    cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                End If
             End If
             Using brush As SolidBrush = New SolidBrush(cCol)
-
                 Using wing As Font = New Font("Wingdings", 12.0F)
-                    pevent.Graphics.DrawString("ü", wing, brush, 1, 2)
+                    pEvent.Graphics.DrawString("ü", wing, brush, 1, 2)
                 End Using
             End Using
         End If
 
-        pevent.Graphics.DrawRectangle(Pens.Gray, rect)
+        pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
         Dim fRect As Rectangle = ClientRectangle
 
         If Focused Then
@@ -59,7 +77,7 @@ Public Class CCheckBox
             Using pen As Pen = New Pen(Brushes.Gray) With {
                 .DashStyle = DashStyle.Dot
                 }
-                pevent.Graphics.DrawRectangle(pen, fRect)
+                pEvent.Graphics.DrawRectangle(pen, fRect)
             End Using
         End If
     End Sub
@@ -89,21 +107,33 @@ Public Class CCheckBox
     <Browsable(True)>
     Public Property LinkedLabel As CLabel
 
+    Public Property OldValue() As String
+        Get
+            Return _oldValue
+        End Get
+        Set(ByVal value As String)
+            _oldValue = value
+        End Set
+    End Property
+
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not DisplayOnly Then
-            If Not _editingMode Then
-                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-            End If
+        _oldValue = Text
+        If EditingMode And Not DisplayOnly Then
+            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not DisplayOnly Then
-            If Not _editingMode Then
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            End If
+        If EditingMode And Not DisplayOnly Then
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
@@ -113,16 +143,20 @@ Public Class CCheckBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Or DisplayOnly Then
+            If value Then
+                If DisplayOnly Then
+                    AutoCheck = False
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    AutoCheck = True
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
+            Else
                 AutoCheck = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Enabled = False
-            Else
-                AutoCheck = True
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Enabled = True
             End If
         End Set
     End Property

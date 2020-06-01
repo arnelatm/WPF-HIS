@@ -179,49 +179,21 @@ Public Class CDataGridView
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value OrElse DisplayOnly Then
+            If DisplayOnly OrElse Not value Then
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Me.ReadOnly = True
-                If DisplayOnly Then
-                    '' readonly values never changes to False
-                Else
-                    For Each col In Columns
-                        If TypeOf col Is IEntryControl Then
-                            col.EditingMode = value
-                            col.DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                            col.DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                            col.ReadOnly = True
-                        Else
-                            col.ReadOnly = True
-                        End If
-                    Next
-                End If
             Else
-                Me.ReadOnly = False
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                If DisplayOnly Then
-                    '' readonly values never changes to False
-                Else
-                    For Each col In Columns
-                        If TypeOf col Is IEntryControl Then
-                            col.EditingMode = value
-                            If col.DisplayOnly Then
-                                col.DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                                col.DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                                col.ReadOnly = True
-                            Else
-                                col.DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                                col.DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                                col.ReadOnly = False
-                            End If
-                        Else
-                            col.ReadOnly = False
-                        End If
-                    Next
-                End If
+                Me.ReadOnly = False
             End If
+            For Each col In Columns
+                If TypeOf col Is IEntryControl Then
+                    col.EditingMode = value
+                End If
+            Next
+
         End Set
     End Property
 
@@ -272,11 +244,29 @@ Public Class CDataGridView
                 '    End If
 
                 Case Keys.Tab
-                    If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
-                        CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
-                        e.Handled = True
-                    Else
-                        e.Handled = False
+                    If EditingMode Then
+                        If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
+                            ' if on the last editable column, move to the first editable column on the next row
+                            Dim r = Math.Min(iRow + 1, RowCount() - 1)
+                            Dim vc = FirstVisibleColumn
+                            Dim ec = FirstEditableColumn
+                            Dim c = If(ec > 0, ec, vc)
+                            CurrentCell = Me(c, r)
+                        Else
+                            If iColumn + 1 = ColumnCount() Then
+                                Dim vc = FirstVisibleColumn
+                                Dim ec = FirstEditableColumn
+                                iColumn = If(ec > 0, ec, vc)
+                            End If
+                            iRow = Math.Min(iRow, RowCount() - 1)
+                            CurrentCell = Me(iColumn, iRow)
+                        End If
+                        If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
+                            CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
+                            e.Handled = True
+                        Else
+                            e.Handled = False
+                        End If
                     End If
 
                 Case Else
