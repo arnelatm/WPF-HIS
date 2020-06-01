@@ -823,7 +823,7 @@ Public Class CFormEntry
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
-                SetPropertyValue(ctrl, "EditingMode", Not onOff)
+                SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
         FirstControl.Focus()

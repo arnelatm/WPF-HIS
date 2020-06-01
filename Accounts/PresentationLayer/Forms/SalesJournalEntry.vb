@@ -4,15 +4,19 @@ Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class SalesJournalEntry
         Implements ISalesJournalView
+        '           ISubscriber(Of EditModeChanged),
+        '           ISubscriber(Of AddModeChanged)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -349,6 +353,24 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
+        Private Sub SjOnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewSalesCashItems.CellBeginEdit
+            If DataGridViewSalesCashItems.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewJournalItems.CurrentCell
+                    Dim selectedRow As DataGridViewRow
+                    selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+                    '    Select Case .OwningColumn.Name.ToLower()
+                    '        Case $"dgvcashcode"
+                    'selectedRow.Cells("dgvInteractiveChange").Value = True
+                    'If cColumnName = $"dgvsaleamount" Then
+                    '    Beep()
+                    '    e.Cancel = True
+                    '    DataGridViewJournalItems.EndEdit()
+                    'End If
+                End With
+            End If
+        End Sub
+
+
         Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit
             UpdateTotals()
             With DataGridViewSalesCashItems.CurrentCell
@@ -589,6 +611,17 @@ Namespace PresentationLayer.Forms
                 DataGridViewSalesCashItems.Refresh()
             End If
         End Sub
+
+        'Public Sub SjOnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+        '    MyBase.OnEventHandlerEditModeChanged(e)
+        '    If e.EditMode Then
+        '        DataGridViewSalesCashItems.EditingMode = True
+        '        DataGridViewJournalItems.EditingMode = True
+        '    Else
+        '        DataGridViewSalesCashItems.EditingMode = True
+        '        DataGridViewJournalItems.EditingMode = True
+        '    End If
+        'End Sub
 
     End Class
 
