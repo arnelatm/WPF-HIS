@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -36,6 +37,17 @@ Namespace PresentationLayer.Presenters
             TreeViewList = New List(Of TM)
             Initializer(baseClassName)
         End Sub
+
+        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
+        '    Dim type As Type = View.GetType
+        '    If type.GetProperty("Posted") IsNot Nothing Then
+        '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
+        '        If cPosted Then
+        '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
+        '            CancelEdit = True
+        '        End If
+        '    End If
+        'End Sub
 
         Public Function GetSupplierVatNumber(idNo As String)
             Return Model.GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")

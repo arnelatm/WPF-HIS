@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Threading
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CCalendar
@@ -46,6 +47,7 @@ Public Class CCalendar
                 TargetCalendar = New UmAlQuraCalendar
                 If Not CultureSupportUmAlQura(targetCulture) Then
                     targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                    targetCulture.DateTimeFormat.ShortDatePattern = "dd/mm/yyyy"
                 End If
                 formCalendarType = CalendarToUse.UmAlQura
             Case CalendarToUse.Hijri
@@ -53,6 +55,7 @@ Public Class CCalendar
                 If Not CultureSupportHijri(targetCulture) Then
                     targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                     TargetCalendar = New HijriCalendar()
+                    targetCulture.DateTimeFormat.ShortDatePattern = "dd/mm/yyyy"
                 End If
                 formCalendarType = CalendarToUse.Hijri
             Case Else
@@ -75,13 +78,13 @@ Public Class CCalendar
     End Sub
 
     Private Sub SetCalendarLabels()
-        lblSunday.Text = originalCulture.DateTimeFormat.DayNames(0)
-        lblMonday.Text = originalCulture.DateTimeFormat.DayNames(1)
-        lblTuesday.Text = originalCulture.DateTimeFormat.DayNames(2)
-        lblWednesday.Text = originalCulture.DateTimeFormat.DayNames(3)
-        lblThursday.Text = originalCulture.DateTimeFormat.DayNames(4)
-        lblFriday.Text = originalCulture.DateTimeFormat.DayNames(5)
-        lblSaturday.Text = originalCulture.DateTimeFormat.DayNames(6)
+        lblSunday.Text = originalCulture.DateTimeFormat.ShortestDayNames(0)
+        lblMonday.Text = originalCulture.DateTimeFormat.ShortestDayNames(1)
+        lblTuesday.Text = originalCulture.DateTimeFormat.ShortestDayNames(2)
+        lblWednesday.Text = originalCulture.DateTimeFormat.ShortestDayNames(3)
+        lblThursday.Text = originalCulture.DateTimeFormat.ShortestDayNames(4)
+        lblFriday.Text = originalCulture.DateTimeFormat.ShortestDayNames(5)
+        lblSaturday.Text = originalCulture.DateTimeFormat.ShortestDayNames(6)
         DaysOfWeek(0) = lblSunday
         DaysOfWeek(1) = lblMonday
         DaysOfWeek(2) = lblTuesday
@@ -510,7 +513,7 @@ Public Class CCalendar
                     retDateStr = Nothing
                 Else
                     Dim newDate As DateTime = dDate
-                    retDateStr = newDate.ToString(targetCulture)
+                    retDateStr = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(newDate, targetCulture))
                 End If
             End If
             Return retDateStr

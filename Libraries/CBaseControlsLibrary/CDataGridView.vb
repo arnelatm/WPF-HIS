@@ -252,21 +252,17 @@ Public Class CDataGridView
                             Dim ec = FirstEditableColumn
                             Dim c = If(ec > 0, ec, vc)
                             CurrentCell = Me(c, r)
-                        Else
-                            If iColumn + 1 = ColumnCount() Then
-                                Dim vc = FirstVisibleColumn
-                                Dim ec = FirstEditableColumn
-                                iColumn = If(ec > 0, ec, vc)
-                            End If
-                            iRow = Math.Min(iRow, RowCount() - 1)
-                            CurrentCell = Me(iColumn, iRow)
-                        End If
-                        If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
-                            CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
                             e.Handled = True
-                        Else
-                            e.Handled = False
+                            'Else
+                            '    iRow = Math.Min(iRow, RowCount() - 1)
+                            '    CurrentCell = Me(iColumn, iRow)
                         End If
+                        'If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
+                        '    CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
+                        '    e.Handled = True
+                        'Else
+                        '    e.Handled = False
+                        'End If
                     End If
 
                 Case Else

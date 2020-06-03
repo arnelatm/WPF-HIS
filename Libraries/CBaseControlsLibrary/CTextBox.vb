@@ -9,13 +9,10 @@ Public Class CTextBox
     Implements IEntryControl
 
     Private _defaultVal As String
-    Private _isMandatory As Boolean
-    Private _displayOnly As Boolean
     Private _textToSearch As String
     Private _searchAnywhere As Boolean
     Private _oldValue As String
-    Private _editingMode As Boolean
-
+    Private _editingMode As Boolean = True
     'Private _viewable As Boolean
     'Private _selectable As Boolean
     Private _editable As Boolean
@@ -172,29 +169,12 @@ Public Class CTextBox
     <Description("Set to True to specify that this control is Read Only .")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(value As Boolean)
-            _displayOnly = value
-            If value Then
-                _editingMode = True
-            End If
-        End Set
-    End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is mandatory.")>
     <Browsable(True)>
     Public Property ValueIsMandatory As Boolean
-        Get
-            Return _isMandatory
-        End Get
-        Set
-            _isMandatory = Value
-        End Set
-    End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>

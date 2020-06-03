@@ -151,7 +151,7 @@
     <value>1</value>
   </data>
   <data name="YearsEdit.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt, style=Bold</value>
+    <value>Arial Narrow, 9.75pt</value>
   </data>
   <data name="YearsEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 0</value>
@@ -160,7 +160,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="YearsEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>50, 22</value>
   </data>
   <data name="YearsEdit.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -373,7 +373,7 @@
     <value>4</value>
   </data>
   <data name="lblThursday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblThursday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -391,7 +391,7 @@
     <value>87</value>
   </data>
   <data name="lblThursday.Text" xml:space="preserve">
-    <value>Thu</value>
+    <value>Th</value>
   </data>
   <data name="lblThursday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -409,7 +409,7 @@
     <value>5</value>
   </data>
   <data name="lblFriday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblFriday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -427,7 +427,7 @@
     <value>86</value>
   </data>
   <data name="lblFriday.Text" xml:space="preserve">
-    <value>Fri</value>
+    <value>Fr</value>
   </data>
   <data name="lblFriday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -445,7 +445,7 @@
     <value>6</value>
   </data>
   <data name="lblWednesday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblWednesday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -463,7 +463,7 @@
     <value>85</value>
   </data>
   <data name="lblWednesday.Text" xml:space="preserve">
-    <value>Wed</value>
+    <value>We</value>
   </data>
   <data name="lblWednesday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -481,7 +481,7 @@
     <value>7</value>
   </data>
   <data name="lblTuesday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblTuesday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -499,7 +499,7 @@
     <value>84</value>
   </data>
   <data name="lblTuesday.Text" xml:space="preserve">
-    <value>Tue</value>
+    <value>Tu</value>
   </data>
   <data name="lblTuesday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -517,7 +517,7 @@
     <value>8</value>
   </data>
   <data name="lblMonday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblMonday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -535,7 +535,7 @@
     <value>82</value>
   </data>
   <data name="lblMonday.Text" xml:space="preserve">
-    <value>Mon</value>
+    <value>Mo</value>
   </data>
   <data name="lblMonday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -553,7 +553,7 @@
     <value>9</value>
   </data>
   <data name="lblSaturday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblSaturday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -571,7 +571,7 @@
     <value>80</value>
   </data>
   <data name="lblSaturday.Text" xml:space="preserve">
-    <value>Sat</value>
+    <value>Sa</value>
   </data>
   <data name="lblSaturday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -589,7 +589,7 @@
     <value>10</value>
   </data>
   <data name="lblSunday.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 7pt</value>
+    <value>Tahoma, 9.75pt</value>
   </data>
   <data name="lblSunday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -607,7 +607,7 @@
     <value>81</value>
   </data>
   <data name="lblSunday.Text" xml:space="preserve">
-    <value>Sun</value>
+    <value>Su</value>
   </data>
   <data name="lblSunday.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

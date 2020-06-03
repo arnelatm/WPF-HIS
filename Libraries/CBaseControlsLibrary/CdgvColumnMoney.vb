@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CdgvColumnMoney
     Inherits DataGridViewColumn
@@ -38,15 +39,23 @@ Public Class CdgvColumnMoney
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Or DisplayOnly Then
-                'Me.DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                'Me.DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Me.ReadOnly = True
+            If value Then
+                If DisplayOnly Then
+                    Me.ReadOnly = True
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                Else
+                    Me.ReadOnly = False
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    Me.ReadOnly = False
+                End If
             Else
-                'Me.DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                'Me.DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
+                Me.ReadOnly = True
+                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
+
         End Set
     End Property
 

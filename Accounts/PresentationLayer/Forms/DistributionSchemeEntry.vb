@@ -192,13 +192,13 @@ Namespace PresentationLayer.Forms
             _footer.Dispose()
         End Sub
 
-        Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New DgvFooter(Me.DataGridViewDistributionSchemeItems)
-            _footer.AutoCalc = True
-            _footer.ColumnToSum("dgvPercentage") = True
-            _footer.SetAlignment("dgvPercentage", ContentAlignment.MiddleRight)
-            _footer.SetText("DgvProfitCenterIdNo", "Totals ->")
-        End Sub
+        'Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    _footer = New DgvFooter(Me.DataGridViewDistributionSchemeItems)
+        '    _footer.AutoCalc = True
+        '    _footer.ColumnToSum("dgvPercentage") = True
+        '    _footer.SetAlignment("dgvPercentage", ContentAlignment.MiddleRight)
+        '    _footer.SetText("DgvProfitCenterIdNo", "Totals ->")
+        'End Sub
 
 
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff

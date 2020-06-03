@@ -198,9 +198,6 @@
   <data name="&gt;&gt;txtJournalCode.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -390,6 +387,9 @@
   <data name="cboPayorType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboPayorType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboPayorType.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 28</value>
   </data>
@@ -452,6 +452,9 @@
   </data>
   <data name="cboPayorIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboPayorIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboPayorIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>366, 28</value>
@@ -579,6 +582,9 @@
   <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 54</value>
   </data>
@@ -671,6 +677,9 @@
   </data>
   <data name="cboDiscountAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboDiscountAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboDiscountAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 80</value>
@@ -1434,10 +1443,10 @@
   <data name="&gt;&gt;floPurchaseJournalHeader.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="dgvSequence.HeaderText" xml:space="preserve">
+  <data name="dgvSequenceCsrOi.HeaderText" xml:space="preserve">
     <value>Seq.</value>
   </data>
-  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
+  <data name="dgvSequenceCsrOi.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
   <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
@@ -1548,26 +1557,35 @@
   <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="dgvSequenceCsrOi.HeaderText" xml:space="preserve">
-    <value>Sequence</value>
+  <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvSequence.HeaderText" xml:space="preserve">
+    <value>Seq</value>
   </data>
+  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <metadata name="dgvInvoiceNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="dgvInvoiceNo.HeaderText" xml:space="preserve">
-    <value>InvoiceNo</value>
+    <value>Invoice No.</value>
   </data>
   <data name="dgvTransactionDate.HeaderText" xml:space="preserve">
-    <value>TransactionDate</value>
+    <value>Transaction Date</value>
   </data>
   <metadata name="dgvJournalCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvJournalCode.HeaderText" xml:space="preserve">
-    <value>JournalCode</value>
+    <value>Journal Code</value>
   </data>
-  <metadata name="DgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="DgvJournalIdNoAp.HeaderText" xml:space="preserve">
-    <value>JournalIdNo</value>
+  <data name="dgvJournalIdNoAp.HeaderText" xml:space="preserve">
+    <value>Journal Id No</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1575,20 +1593,20 @@
   <data name="dgvPreviousBalance.HeaderText" xml:space="preserve">
     <value>Previous Balance</value>
   </data>
+  <data name="dgvPreviousBalance.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
   <data name="dgvAmount.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
   <data name="dgvDiscountTaken.HeaderText" xml:space="preserve">
-    <value>DiscountTaken</value>
+    <value>Discount Taken</value>
   </data>
+  <metadata name="dgvBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="dgvBalance.HeaderText" xml:space="preserve">
     <value>Balance</value>
-  </data>
-  <data name="CsrIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>CsrIdNo</value>
-  </data>
-  <data name="CsrIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="AccountIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountIdNo</value>
@@ -1602,18 +1620,6 @@
   <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="dgvJournalIdNoJi.HeaderText" xml:space="preserve">
-    <value>JournalItemIdNo</value>
-  </data>
-  <data name="dgvJournalIdNoJi.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="OpenInvoiceIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>OpenInvoiceIdNo</value>
-  </data>
-  <data name="OpenInvoiceIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 17</value>
   </metadata>
@@ -1621,7 +1627,7 @@
     <value>968, 3</value>
   </data>
   <data name="DataGridViewCsrOiItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>943, 270</value>
+    <value>963, 270</value>
   </data>
   <data name="DataGridViewCsrOiItems.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -89990,10 +89996,10 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
-    <value>dgvSequence</value>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
+    <value>dgvSequenceCsrOi</value>
   </data>
-  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
@@ -90092,10 +90098,10 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
-    <value>dgvSequenceCsrOi</value>
+  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
+    <value>dgvSequence</value>
   </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">
@@ -90116,10 +90122,10 @@
   <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DgvJournalIdNoAp.Name" xml:space="preserve">
-    <value>DgvJournalIdNoAp</value>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
+    <value>dgvJournalIdNoAp</value>
   </data>
-  <data name="&gt;&gt;DgvJournalIdNoAp.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
@@ -90146,12 +90152,6 @@
   <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CsrIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>CsrIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;CsrIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountIdNoDataGridViewTextBoxColumn</value>
   </data>
@@ -90162,18 +90162,6 @@
     <value>IdNoDataGridViewTextBoxColumn</value>
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoJi.Name" xml:space="preserve">
-    <value>dgvJournalIdNoJi</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoJi.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>OpenInvoiceIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">

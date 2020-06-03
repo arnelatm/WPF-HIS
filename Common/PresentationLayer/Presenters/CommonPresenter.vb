@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -291,6 +292,17 @@ Namespace PresentationLayer.Presenters
                 End Select
             Next item
             Return
+        End Sub
+
+        Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
+            Dim type As Type = View.GetType
+            If type.GetProperty("Posted") IsNot Nothing Then
+                Dim cPosted = CallByName(View, "Posted", CallType.Get)
+                If cPosted Then
+                    Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
+                    CancelEdit = True
+                End If
+            End If
         End Sub
 
     End Class

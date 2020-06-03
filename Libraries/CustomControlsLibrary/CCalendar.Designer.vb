@@ -63,16 +63,18 @@ Partial Class CCalendar
         Me.cboMonths.FormattingEnabled = true
         Me.cboMonths.HideWhenNotEditingOrAdding = false
         Me.cboMonths.LinkedLabel = Nothing
+        Me.cboMonths.MaximumValue = Nothing
+        Me.cboMonths.MinimumValue = Nothing
         Me.cboMonths.Name = "cboMonths"
         Me.cboMonths.OldValue = 0
         Me.cboMonths.OriginalDataSource = Nothing
         Me.cboMonths.OriginalDropDownStyle = 1
         Me.cboMonths.OriginalList = Nothing
         Me.cboMonths.PreviousSelectedIndex = -1
-        Me.cboMonths.ReadOnlyCombo = false
-        Me.cboMonths.ValueIsMandatory = false
-        Me.cboMonths.ValueIsNullable = false
-        Me.cboMonths.ValueIsNumeric = false
+        Me.cboMonths.ReadOnlyCombo = False
+        Me.cboMonths.ValueIsMandatory = False
+        Me.cboMonths.ValueIsNullable = False
+        Me.cboMonths.ValueIsNumeric = False
         '
         'YearsEdit
         '
@@ -105,9 +107,9 @@ Partial Class CCalendar
         'btnCalendarOk
         '
         Me.btnCalendarOk.BackColor = System.Drawing.Color.Lime
-        Me.btnCalendarOk.DesignerSelected = false
+        Me.btnCalendarOk.DesignerSelected = False
         Me.btnCalendarOk.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnCalendarOk.DisplayOnly = true
+        Me.btnCalendarOk.DisplayOnly = True
         Me.btnCalendarOk.ImageIndex = 0
         resources.ApplyResources(Me.btnCalendarOk, "btnCalendarOk")
         Me.btnCalendarOk.Name = "btnCalendarOk"
@@ -117,9 +119,9 @@ Partial Class CCalendar
         'btnCalendarCancel
         '
         Me.btnCalendarCancel.BackColor = System.Drawing.Color.Lime
-        Me.btnCalendarCancel.DesignerSelected = true
+        Me.btnCalendarCancel.DesignerSelected = False
         Me.btnCalendarCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCalendarCancel.DisplayOnly = true
+        Me.btnCalendarCancel.DisplayOnly = True
         resources.ApplyResources(Me.btnCalendarCancel, "btnCalendarCancel")
         Me.btnCalendarCancel.ImageIndex = 0
         Me.btnCalendarCancel.Name = "btnCalendarCancel"
@@ -179,7 +181,7 @@ Partial Class CCalendar
         resources.ApplyResources(Me.ShapeContainer1, "ShapeContainer1")
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.TabStop = false
+        Me.ShapeContainer1.TabStop = False
         '
         'LineShape4
         '
@@ -207,13 +209,15 @@ Partial Class CCalendar
         Me.cboCalendars.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboCalendars.BackColor = System.Drawing.Color.White
         Me.cboCalendars.DefaultValue = Nothing
-        Me.cboCalendars.DisplayOnly = false
-        Me.cboCalendars.EditingMode = false
+        Me.cboCalendars.DisplayOnly = False
+        Me.cboCalendars.EditingMode = False
         resources.ApplyResources(Me.cboCalendars, "cboCalendars")
         Me.cboCalendars.ForeColor = System.Drawing.Color.Black
-        Me.cboCalendars.FormattingEnabled = true
-        Me.cboCalendars.HideWhenNotEditingOrAdding = false
+        Me.cboCalendars.FormattingEnabled = True
+        Me.cboCalendars.HideWhenNotEditingOrAdding = False
         Me.cboCalendars.LinkedLabel = Nothing
+        Me.cboCalendars.MaximumValue = Nothing
+        Me.cboCalendars.MinimumValue = Nothing
         Me.cboCalendars.Name = "cboCalendars"
         Me.cboCalendars.OldValue = 0
         Me.cboCalendars.OriginalDataSource = Nothing
