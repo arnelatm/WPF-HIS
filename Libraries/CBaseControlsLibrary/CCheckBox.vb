@@ -8,7 +8,7 @@ Public Class CCheckBox
     Inherits CheckBox
     Implements IEntryControl
 
-    Private _editingMode As Boolean = False
+    Private _editingMode As Boolean = True
     Private _oldValue As String
 
     Public Sub New()

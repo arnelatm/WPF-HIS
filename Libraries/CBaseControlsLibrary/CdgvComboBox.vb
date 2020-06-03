@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvComboBox
     Inherits ComboBox
-    Implements IDataGridViewEditingControl
+    Implements IDataGridViewEditingControl, IEntryControl
     'Implements IEntryControl, IDataGridViewEditingControl
 
 #Region "Custom Properties"
@@ -165,29 +165,30 @@ Public Class CDgvComboBox
         End Set
     End Property
 
-    'Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
-    '    Get
-    '        Return _editingMode
-    '    End Get
-    '    Set(value As Boolean)
-    '        _editingMode = value
-    '        If value Then
-    '            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '            DropDownHeight = 1
-    '        Else
-    '            If DisplayOnly Then
-    '                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '            Else
-    '                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-    '                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-    '            End If
-    '            DropDownHeight = 200
-    '            IntegralHeight = True
-    '        End If
-    '    End Set
-    'End Property
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(value As Boolean)
+            _editingMode = value
+            If value Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                DropDownHeight = 200
+                IntegralHeight = True
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                DropDownHeight = 1
+            End If
+        End Set
+    End Property
+
+    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+    End Property
 
     Public Property OriginalList As Object() = Nothing
 

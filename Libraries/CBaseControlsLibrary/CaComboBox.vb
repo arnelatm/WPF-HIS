@@ -88,19 +88,22 @@ Public Class CaComboBox
         Set(value As Boolean)
             _editingMode = value
             If value Then
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                DropDownHeight = 1
-            Else
                 If DisplayOnly Then
+                    Me.ReadOnlyCombo = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
+                    Me.ReadOnlyCombo = False
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
                 DropDownHeight = 200
                 IntegralHeight = True
+            Else
+                Me.ReadOnlyCombo = True
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                DropDownHeight = 1
             End If
         End Set
     End Property
@@ -300,16 +303,22 @@ Public Class CaComboBox
     Private _previousIndex As Integer
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not (EditingMode Or DisplayOnly) Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
             BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not (EditingMode Or DisplayOnly) Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 

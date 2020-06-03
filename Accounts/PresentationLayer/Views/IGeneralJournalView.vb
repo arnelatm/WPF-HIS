@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views
         Property DateCreated As DateTime?
         Property IdNo As Int32
         Property Notes As String
-        ReadOnly Property Posted As Boolean
+        Property Posted As Boolean
         Property ReferenceNo As String
         Property TotalDebits As Decimal
         Property TotalCredits As Decimal

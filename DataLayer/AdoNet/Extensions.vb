@@ -236,7 +236,7 @@ Namespace AdoNet
                 Return defaultBool
             End If
             Dim x As Boolean
-            x = New List(Of String)() From {"yes", "y", "true", "1"}.Contains(item.ToString().ToLower())
+            x = New List(Of String)() From {"yes", "y", "true", "1"}.Contains(item.ToString().ToLower().Trim())
             Return x
             'Return New List(Of String)() From {"yes", "y", "true"}.Contains(item.ToString().ToLower())
         End Function

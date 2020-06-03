@@ -9,13 +9,12 @@ Public Class CMaskedTextBox
 
     Private _defaultVal As String
     Private _isNumeric As Boolean
-    Private _displayOnly As Boolean
     Private _textToSearch As String
     Private _searchAnywhere As Boolean
     Private _oldValue As String
     Private _editsALlowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
-    Private _editingMode As Boolean = True
+    Private _editingMode As Boolean = False
 
     <Bindable(True)>
     <Category("Properties")>
@@ -49,14 +48,21 @@ Public Class CMaskedTextBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Or DisplayOnly Then
+            If value Then
+                If DisplayOnly Then
+                    [ReadOnly] = True
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    [ReadOnly] = False
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
+
+            Else
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 [ReadOnly] = True
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
             End If
         End Set
     End Property
@@ -67,14 +73,6 @@ Public Class CMaskedTextBox
     <Description("Set to True to specify that this control is mandatory.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set
-            _displayOnly = Value
-            EditingMode = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -128,16 +126,22 @@ Public Class CMaskedTextBox
     End Sub
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not _editingMode Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
             BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not _editingMode Then
+        If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 

@@ -62,6 +62,7 @@ Public Class CCustomDateTimePicker
         btnCalendarType.Width = _btnCalendarTypeWidth
         txtLongDate.Width = _longDateWidth
         SetupDisplayWidths()
+        EditingMode = True
     End Sub
 
     Public Property CalendarType As CalendarToUse
@@ -85,7 +86,11 @@ Public Class CCustomDateTimePicker
         Dim dateMask As String
         Dim tempDate As Date
         tempDate = #2018-12-31#
-        dateMask = Regex.Replace(CalendarDateToShortDateString(tempDate, _targetCulture), "\d", "0")
+        If _targetCulture.Name = "ar-SA" Then
+            dateMask = Regex.Replace(CalendarDateToShortDateString(tempDate, _targetCulture), "\d", "0")
+        Else
+            dateMask = Regex.Replace(CalendarDateToShortDateString(tempDate, _targetCulture), "\d", "0")
+        End If
         EmptyMask = Regex.Replace(dateMask, "\d", " ").TrimEnd
         txtDate.Mask = dateMask
         txtDate.EmptyMask = EmptyMask
@@ -119,13 +124,16 @@ Public Class CCustomDateTimePicker
         Dim myValue = Me.Value
         Select Case CalendarType
             Case CalendarToUse.Hijri
-                CalendarType = CalendarToUse.UmAlQura
-                SetTargetCulture()
-            Case CalendarToUse.UmAlQura
                 CalendarType = CalendarToUse.Gregorian
                 SetTargetCulture()
-            Case Else
+            Case CalendarToUse.UmAlQura
                 CalendarType = CalendarToUse.Hijri
+                SetTargetCulture()
+            Case CalendarToUse.Gregorian
+                CalendarType = CalendarToUse.UmAlQura
+                SetTargetCulture()
+            Case Else
+                CalendarType = CalendarToUse.Gregorian
                 SetTargetCulture()
         End Select
         Me.Value = myValue
@@ -173,7 +181,6 @@ Public Class CCustomDateTimePicker
         End Get
         Set
             _displayOnly = Value
-            'EditingMode = Value
             txtTime.DisplayOnly = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
@@ -204,12 +211,20 @@ Public Class CCustomDateTimePicker
             txtTime.EditingMode = Value
             txtDate.EditingMode = Value
             txtLongDate.EditingMode = Value
-            If Value Or DisplayOnly Then
+            If Value Then
+                If DisplayOnly Then
+                    Me.ReadOnlyDp = True
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    Me.ReadOnlyDp = False
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
+            Else
+                Me.ReadOnlyDp = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
         End Set
     End Property
@@ -545,7 +560,7 @@ Public Class CCustomDateTimePicker
 
             SetCalendarLocation(calendarForm)
             retVal = calendarForm.ShowDialog()
-            If EditingMode And retVal <> DialogResult.Retry Then
+            If (Not EditingMode) And retVal <> DialogResult.Retry Then
                 calendarForm.Dispose()
                 Exit Do
             ElseIf retVal = DialogResult.OK Then
