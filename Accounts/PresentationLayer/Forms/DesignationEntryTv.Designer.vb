@@ -54,10 +54,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -75,6 +77,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDesignationCode, "txtDesignationCode")
         Me.txtDesignationCode.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationCode.LinkedLabel = Nothing
+        Me.txtDesignationCode.MaximumValue = Nothing
+        Me.txtDesignationCode.MinimumValue = Nothing
         Me.txtDesignationCode.Name = "txtDesignationCode"
         Me.txtDesignationCode.OldValue = Nothing
         Me.txtDesignationCode.ReadOnly = true
@@ -92,8 +96,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDesignationName, "txtDesignationName")
         Me.txtDesignationName.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationName.LinkedLabel = Nothing
+        Me.txtDesignationName.MaximumValue = Nothing
+        Me.txtDesignationName.MinimumValue = Nothing
         Me.txtDesignationName.Name = "txtDesignationName"
         Me.txtDesignationName.OldValue = Nothing
+        Me.txtDesignationName.ReadOnly = true
         Me.txtDesignationName.ValueIsMandatory = true
         '
         'txtDesignationNameAra
@@ -109,8 +116,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDesignationNameAra, "txtDesignationNameAra")
         Me.txtDesignationNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtDesignationNameAra.LinkedLabel = Nothing
+        Me.txtDesignationNameAra.MaximumValue = Nothing
+        Me.txtDesignationNameAra.MinimumValue = Nothing
         Me.txtDesignationNameAra.Name = "txtDesignationNameAra"
         Me.txtDesignationNameAra.OldValue = Nothing
+        Me.txtDesignationNameAra.ReadOnly = true
         '
         'txtNotes
         '
@@ -123,8 +133,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay

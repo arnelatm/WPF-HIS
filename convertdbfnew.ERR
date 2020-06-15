@@ -1,0 +1,4 @@
+	If custorig.CustCode <> "E" Then
+Error in line 250: Unrecognized command verb.
+Endif
+Error in line 294: An IF | ELSE | ENDIF statement is missing.

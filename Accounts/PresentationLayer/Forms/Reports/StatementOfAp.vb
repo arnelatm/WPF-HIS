@@ -14,7 +14,7 @@ Namespace PresentationLayer.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "AccountsPayableJournal"
+            MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
             cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByName()

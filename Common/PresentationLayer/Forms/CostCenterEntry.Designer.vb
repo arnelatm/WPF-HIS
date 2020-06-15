@@ -52,10 +52,10 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 258)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 258)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 262)
         '
         'TxtIdNo
         '
@@ -65,6 +65,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.CustomFormat = Nothing
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.Editable = true
         Me.TxtIdNo.EditingMode = true
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
         Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
@@ -72,6 +73,8 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Nothing
         Me.TxtIdNo.Location = New System.Drawing.Point(245, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -93,8 +96,11 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterCode.LinkedLabel = Nothing
         Me.txtCostCenterCode.Location = New System.Drawing.Point(245, 36)
         Me.txtCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtCostCenterCode.MaximumValue = Nothing
+        Me.txtCostCenterCode.MinimumValue = Nothing
         Me.txtCostCenterCode.Name = "txtCostCenterCode"
         Me.txtCostCenterCode.OldValue = Nothing
+        Me.txtCostCenterCode.ReadOnly = true
         Me.txtCostCenterCode.Size = New System.Drawing.Size(62, 23)
         Me.txtCostCenterCode.TabIndex = 0
         Me.txtCostCenterCode.ValueIsMandatory = true
@@ -113,8 +119,11 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterName.LinkedLabel = Nothing
         Me.txtCostCenterName.Location = New System.Drawing.Point(245, 61)
         Me.txtCostCenterName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtCostCenterName.MaximumValue = Nothing
+        Me.txtCostCenterName.MinimumValue = Nothing
         Me.txtCostCenterName.Name = "txtCostCenterName"
         Me.txtCostCenterName.OldValue = Nothing
+        Me.txtCostCenterName.ReadOnly = true
         Me.txtCostCenterName.Size = New System.Drawing.Size(418, 23)
         Me.txtCostCenterName.TabIndex = 1
         Me.txtCostCenterName.ValueIsMandatory = true
@@ -134,8 +143,11 @@ Namespace PresentationLayer.Forms
         Me.txtCostCenterNameAra.LinkedLabel = Nothing
         Me.txtCostCenterNameAra.Location = New System.Drawing.Point(245, 86)
         Me.txtCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtCostCenterNameAra.MaximumValue = Nothing
+        Me.txtCostCenterNameAra.MinimumValue = Nothing
         Me.txtCostCenterNameAra.Name = "txtCostCenterNameAra"
         Me.txtCostCenterNameAra.OldValue = Nothing
+        Me.txtCostCenterNameAra.ReadOnly = true
         Me.txtCostCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtCostCenterNameAra.Size = New System.Drawing.Size(418, 23)
         Me.txtCostCenterNameAra.TabIndex = 2
@@ -154,9 +166,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(245, 191)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(418, 60)
         Me.txtNotes.TabIndex = 6
         Me.txtNotes.ValueIsMandatory = true
@@ -183,11 +198,11 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtSortKey)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(685, 258)
+        Me.floDataDisplay.Size = New System.Drawing.Size(685, 262)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -263,7 +278,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.CurrentSearchTerm = ""
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.DropDownHeight = 1
+        Me.cacParentIdNo.DropDownHeight = 200
         Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = true
         Me.cacParentIdNo.FilterRule = Nothing
@@ -326,6 +341,8 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
         Me.txtLevelNumber.Location = New System.Drawing.Point(245, 137)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtLevelNumber.MaximumValue = Nothing
+        Me.txtLevelNumber.MinimumValue = Nothing
         Me.txtLevelNumber.Name = "txtLevelNumber"
         Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
@@ -354,7 +371,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterIdNo.CurrentSearchTerm = ""
         Me.cacProfitCenterIdNo.DefaultValue = Nothing
         Me.cacProfitCenterIdNo.DisplayMember = "Name"
-        Me.cacProfitCenterIdNo.DropDownHeight = 1
+        Me.cacProfitCenterIdNo.DropDownHeight = 200
         Me.cacProfitCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacProfitCenterIdNo.EditingMode = true
         Me.cacProfitCenterIdNo.FilterRule = Nothing
@@ -414,8 +431,11 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.LinkedLabel = Nothing
         Me.txtSortKey.Location = New System.Drawing.Point(13, 256)
         Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtSortKey.MaximumValue = Nothing
+        Me.txtSortKey.MinimumValue = Nothing
         Me.txtSortKey.Name = "txtSortKey"
         Me.txtSortKey.OldValue = Nothing
+        Me.txtSortKey.ReadOnly = true
         Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
         Me.txtSortKey.TabIndex = 164
         Me.txtSortKey.ValueIsMandatory = true
@@ -423,6 +443,7 @@ Namespace PresentationLayer.Forms
         '
         'CostCenterEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(979, 315)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CostCenterEntryTv"

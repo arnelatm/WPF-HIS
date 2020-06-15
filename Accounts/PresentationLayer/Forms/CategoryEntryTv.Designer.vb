@@ -25,8 +25,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CategoryEntryTv))
-            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtCategoryCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtCategoryCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCategoryName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtCategoryNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -54,10 +54,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -75,6 +77,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtCategoryCode, "txtCategoryCode")
         Me.txtCategoryCode.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryCode.LinkedLabel = Nothing
+        Me.txtCategoryCode.MaximumValue = Nothing
+        Me.txtCategoryCode.MinimumValue = Nothing
         Me.txtCategoryCode.Name = "txtCategoryCode"
         Me.txtCategoryCode.OldValue = Nothing
         Me.txtCategoryCode.ReadOnly = true
@@ -92,8 +96,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtCategoryName, "txtCategoryName")
         Me.txtCategoryName.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryName.LinkedLabel = Nothing
+        Me.txtCategoryName.MaximumValue = Nothing
+        Me.txtCategoryName.MinimumValue = Nothing
         Me.txtCategoryName.Name = "txtCategoryName"
         Me.txtCategoryName.OldValue = Nothing
+        Me.txtCategoryName.ReadOnly = true
         Me.txtCategoryName.ValueIsMandatory = true
         '
         'txtCategoryNameAra
@@ -109,8 +116,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtCategoryNameAra, "txtCategoryNameAra")
         Me.txtCategoryNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtCategoryNameAra.LinkedLabel = Nothing
+        Me.txtCategoryNameAra.MaximumValue = Nothing
+        Me.txtCategoryNameAra.MinimumValue = Nothing
         Me.txtCategoryNameAra.Name = "txtCategoryNameAra"
         Me.txtCategoryNameAra.OldValue = Nothing
+        Me.txtCategoryNameAra.ReadOnly = true
         '
         'txtNotes
         '
@@ -123,8 +133,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay
@@ -183,8 +196,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CategoryEntryTv"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout

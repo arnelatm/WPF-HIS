@@ -34,9 +34,9 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseJournalEntry))
-            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblTotals = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -116,6 +116,8 @@ Namespace PresentationLayer.Forms
         Me.txtTotalCredits.LinkedLabel = Me.lblTotals
         Me.txtTotalCredits.Location = New System.Drawing.Point(374, 1)
         Me.txtTotalCredits.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtTotalCredits.MaximumValue = Nothing
+        Me.txtTotalCredits.MinimumValue = Nothing
         Me.txtTotalCredits.Name = "txtTotalCredits"
         Me.txtTotalCredits.OldValue = Nothing
         Me.txtTotalCredits.ReadOnly = true
@@ -153,6 +155,8 @@ Namespace PresentationLayer.Forms
         Me.txtTotalDebits.LinkedLabel = Me.lblTotals
         Me.txtTotalDebits.Location = New System.Drawing.Point(282, 1)
         Me.txtTotalDebits.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtTotalDebits.MaximumValue = Nothing
+        Me.txtTotalDebits.MinimumValue = Nothing
         Me.txtTotalDebits.Name = "txtTotalDebits"
         Me.txtTotalDebits.OldValue = Nothing
         Me.txtTotalDebits.ReadOnly = true
@@ -197,6 +201,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
+        Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1015, 250)
         Me.DataGridViewJournalItems.StartTrackingChanges = false
@@ -213,6 +218,7 @@ Namespace PresentationLayer.Forms
         Me.dgvIdNo.HeaderText = "IdNo"
         Me.dgvIdNo.MinimumWidth = 40
         Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvIdNo.Visible = false
         Me.dgvIdNo.Width = 50
@@ -222,6 +228,7 @@ Namespace PresentationLayer.Forms
         Me.dgvJournalIdNo.DataPropertyName = "JournalIdNo"
         Me.dgvJournalIdNo.HeaderText = "GeneralJournal Id No."
         Me.dgvJournalIdNo.Name = "dgvJournalIdNo"
+        Me.dgvJournalIdNo.ReadOnly = true
         Me.dgvJournalIdNo.Visible = false
         '
         'dgvSequence
@@ -233,6 +240,7 @@ Namespace PresentationLayer.Forms
         Me.dgvSequence.EditingMode = false
         Me.dgvSequence.HeaderText = "Seq"
         Me.dgvSequence.Name = "dgvSequence"
+        Me.dgvSequence.ReadOnly = true
         Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvSequence.Width = 30
         '
@@ -244,6 +252,7 @@ Namespace PresentationLayer.Forms
         Me.dgvAccountIdNo.HeaderText = "Account Code-Name"
         Me.dgvAccountIdNo.MinimumWidth = 200
         Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+        Me.dgvAccountIdNo.ReadOnly = true
         Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvAccountIdNo.Width = 200
         '
@@ -259,6 +268,7 @@ Namespace PresentationLayer.Forms
         Me.dgvDebit.HeaderText = "Debit"
         Me.dgvDebit.MinimumWidth = 90
         Me.dgvDebit.Name = "dgvDebit"
+        Me.dgvDebit.ReadOnly = true
         Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvDebit.Width = 90
@@ -275,6 +285,7 @@ Namespace PresentationLayer.Forms
         Me.dgvCredit.HeaderText = "Credit"
         Me.dgvCredit.MinimumWidth = 90
         Me.dgvCredit.Name = "dgvCredit"
+        Me.dgvCredit.ReadOnly = true
         Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvCredit.Width = 90
@@ -286,6 +297,7 @@ Namespace PresentationLayer.Forms
         Me.dgvProfitCenterIdNo.HeaderText = "Cost Center Code-Name"
         Me.dgvProfitCenterIdNo.MinimumWidth = 120
         Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
+        Me.dgvProfitCenterIdNo.ReadOnly = true
         Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvProfitCenterIdNo.Width = 120
         '
@@ -295,11 +307,13 @@ Namespace PresentationLayer.Forms
         Me.dgvNotes.DataPropertyName = "Notes"
         Me.dgvNotes.HeaderText = "Notes / Description"
         Me.dgvNotes.Name = "dgvNotes"
+        Me.dgvNotes.ReadOnly = true
         '
         'ItemVatAmount
         '
         Me.ItemVatAmount.HeaderText = "ItemVatAmount"
         Me.ItemVatAmount.Name = "ItemVatAmount"
+        Me.ItemVatAmount.ReadOnly = true
         Me.ItemVatAmount.Visible = false
         '
         'lblCancelled
@@ -333,6 +347,7 @@ Namespace PresentationLayer.Forms
         Me.chkPosted.Location = New System.Drawing.Point(100, 76)
         Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
         Me.chkPosted.Name = "chkPosted"
+        Me.chkPosted.OldValue = Nothing
         Me.chkPosted.Size = New System.Drawing.Size(23, 21)
         Me.chkPosted.TabIndex = 7
         Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -428,6 +443,8 @@ Namespace PresentationLayer.Forms
         Me.txtJournalCode.LinkedLabel = Nothing
         Me.txtJournalCode.Location = New System.Drawing.Point(158, 11)
         Me.txtJournalCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtJournalCode.MaximumValue = Nothing
+        Me.txtJournalCode.MinimumValue = Nothing
         Me.txtJournalCode.Name = "txtJournalCode"
         Me.txtJournalCode.OldValue = Nothing
         Me.txtJournalCode.ReadOnly = true
@@ -451,6 +468,8 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
         Me.TxtIdNo.Location = New System.Drawing.Point(185, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -484,8 +503,11 @@ Namespace PresentationLayer.Forms
         Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
         Me.txtReferenceNo.Location = New System.Drawing.Point(388, 11)
         Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtReferenceNo.MaximumValue = Nothing
+        Me.txtReferenceNo.MinimumValue = Nothing
         Me.txtReferenceNo.Name = "txtReferenceNo"
         Me.txtReferenceNo.OldValue = Nothing
+        Me.txtReferenceNo.ReadOnly = true
         Me.txtReferenceNo.Size = New System.Drawing.Size(90, 23)
         Me.txtReferenceNo.TabIndex = 1
         Me.txtReferenceNo.ValueIsMandatory = true
@@ -552,7 +574,7 @@ Namespace PresentationLayer.Forms
         Me.cboSupplierIdNo.CurrentSearchTerm = ""
         Me.cboSupplierIdNo.DefaultValue = Nothing
         Me.cboSupplierIdNo.DisplayMember = "Name"
-        Me.cboSupplierIdNo.DropDownHeight = 200
+        Me.cboSupplierIdNo.DropDownHeight = 1
         Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSupplierIdNo.EditingMode = false
         Me.cboSupplierIdNo.FilterRule = Nothing
@@ -562,6 +584,7 @@ Namespace PresentationLayer.Forms
         Me.cboSupplierIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboSupplierIdNo.FormattingEnabled = true
         Me.cboSupplierIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboSupplierIdNo.IntegralHeight = false
         Me.cboSupplierIdNo.LinkedLabel = Nothing
         Me.cboSupplierIdNo.Location = New System.Drawing.Point(158, 36)
         Me.cboSupplierIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -612,8 +635,11 @@ Namespace PresentationLayer.Forms
         Me.txtAmount.LinkedLabel = Me.lblAmount
         Me.txtAmount.Location = New System.Drawing.Point(158, 62)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtAmount.MaximumValue = Nothing
+        Me.txtAmount.MinimumValue = Nothing
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.OldValue = Nothing
+        Me.txtAmount.ReadOnly = true
         Me.txtAmount.Size = New System.Drawing.Size(122, 23)
         Me.txtAmount.TabIndex = 4
         Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -647,8 +673,11 @@ Namespace PresentationLayer.Forms
         Me.txtInvoiceNo.LinkedLabel = Me.lblInvoiceNo
         Me.txtInvoiceNo.Location = New System.Drawing.Point(388, 62)
         Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtInvoiceNo.MaximumValue = Nothing
+        Me.txtInvoiceNo.MinimumValue = Nothing
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.OldValue = Nothing
+        Me.txtInvoiceNo.ReadOnly = true
         Me.txtInvoiceNo.Size = New System.Drawing.Size(122, 23)
         Me.txtInvoiceNo.TabIndex = 5
         Me.txtInvoiceNo.ValueIsMandatory = true
@@ -798,8 +827,11 @@ Namespace PresentationLayer.Forms
         Me.txtSettlementDiscount.LinkedLabel = Me.lblEarlySettlementDiscount
         Me.txtSettlementDiscount.Location = New System.Drawing.Point(681, 87)
         Me.txtSettlementDiscount.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtSettlementDiscount.MaximumValue = Nothing
+        Me.txtSettlementDiscount.MinimumValue = Nothing
         Me.txtSettlementDiscount.Name = "txtSettlementDiscount"
         Me.txtSettlementDiscount.OldValue = Nothing
+        Me.txtSettlementDiscount.ReadOnly = true
         Me.txtSettlementDiscount.Size = New System.Drawing.Size(44, 23)
         Me.txtSettlementDiscount.TabIndex = 9
         Me.txtSettlementDiscount.ValueIsMandatory = true
@@ -840,7 +872,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.CurrentSearchTerm = ""
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
-        Me.cboAccountIdNo.DropDownHeight = 200
+        Me.cboAccountIdNo.DropDownHeight = 1
         Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
@@ -848,6 +880,7 @@ Namespace PresentationLayer.Forms
         Me.cboAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboAccountIdNo.IntegralHeight = false
         Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
         Me.cboAccountIdNo.Location = New System.Drawing.Point(158, 112)
         Me.cboAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -898,9 +931,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(158, 138)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(579, 46)
         Me.txtNotes.TabIndex = 11
         Me.txtNotes.ValueIsMandatory = true
@@ -950,9 +986,12 @@ Namespace PresentationLayer.Forms
         Me.txtVatNumber.LinkedLabel = Me.lblVatNumber
         Me.txtVatNumber.Location = New System.Drawing.Point(100, 1)
         Me.txtVatNumber.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtVatNumber.MaximumValue = Nothing
         Me.txtVatNumber.MaxLength = 15
+        Me.txtVatNumber.MinimumValue = Nothing
         Me.txtVatNumber.Name = "txtVatNumber"
         Me.txtVatNumber.OldValue = Nothing
+        Me.txtVatNumber.ReadOnly = true
         Me.txtVatNumber.Size = New System.Drawing.Size(122, 23)
         Me.txtVatNumber.TabIndex = 1
         Me.txtVatNumber.ValueIsMandatory = true
@@ -986,6 +1025,8 @@ Namespace PresentationLayer.Forms
         Me.txtVatAmount.LinkedLabel = Me.lblVatAmount
         Me.txtVatAmount.Location = New System.Drawing.Point(100, 26)
         Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtVatAmount.MaximumValue = Nothing
+        Me.txtVatAmount.MinimumValue = Nothing
         Me.txtVatAmount.Name = "txtVatAmount"
         Me.txtVatAmount.OldValue = Nothing
         Me.txtVatAmount.ReadOnly = true
@@ -1010,6 +1051,7 @@ Namespace PresentationLayer.Forms
         Me.chkCancelled.Location = New System.Drawing.Point(100, 51)
         Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
         Me.chkCancelled.Name = "chkCancelled"
+        Me.chkCancelled.OldValue = Nothing
         Me.chkCancelled.Size = New System.Drawing.Size(23, 21)
         Me.chkCancelled.TabIndex = 5
         Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1042,8 +1084,11 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated.LinkedLabel = Me.lblInvoiceNo
         Me.txtDateCreated.Location = New System.Drawing.Point(72, 101)
         Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtDateCreated.MaximumValue = Nothing
+        Me.txtDateCreated.MinimumValue = Nothing
         Me.txtDateCreated.Name = "txtDateCreated"
         Me.txtDateCreated.OldValue = Nothing
+        Me.txtDateCreated.ReadOnly = true
         Me.txtDateCreated.Size = New System.Drawing.Size(150, 20)
         Me.txtDateCreated.TabIndex = 9
         Me.txtDateCreated.ValueIsMandatory = true
@@ -1056,7 +1101,7 @@ Namespace PresentationLayer.Forms
         Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.CFlowLayout1)
         Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 57)
+        Me.floFullEntryArea.Location = New System.Drawing.Point(0, 53)
         Me.floFullEntryArea.Name = "floFullEntryArea"
         Me.floFullEntryArea.Size = New System.Drawing.Size(1034, 509)
         Me.floFullEntryArea.TabIndex = 0
@@ -1074,12 +1119,13 @@ Namespace PresentationLayer.Forms
         '
         'PurchaseJournalEntry
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(1034, 539)
         Me.Controls.Add(Me.floFullEntryArea)
         Me.MaximumSize = New System.Drawing.Size(1050, 578)
         Me.Name = "PurchaseJournalEntry"
-            Me.Text = "Purchase Journal Entry"
-            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+        Me.Text = "Purchase Journal Entry"
+        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit

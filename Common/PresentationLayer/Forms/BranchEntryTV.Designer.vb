@@ -54,10 +54,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -75,6 +77,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBranchCode, "txtBranchCode")
         Me.txtBranchCode.ForeColor = System.Drawing.Color.Black
         Me.txtBranchCode.LinkedLabel = Nothing
+        Me.txtBranchCode.MaximumValue = Nothing
+        Me.txtBranchCode.MinimumValue = Nothing
         Me.txtBranchCode.Name = "txtBranchCode"
         Me.txtBranchCode.OldValue = Nothing
         Me.txtBranchCode.ReadOnly = true
@@ -92,8 +96,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBranchName, "txtBranchName")
         Me.txtBranchName.ForeColor = System.Drawing.Color.Black
         Me.txtBranchName.LinkedLabel = Nothing
+        Me.txtBranchName.MaximumValue = Nothing
+        Me.txtBranchName.MinimumValue = Nothing
         Me.txtBranchName.Name = "txtBranchName"
         Me.txtBranchName.OldValue = Nothing
+        Me.txtBranchName.ReadOnly = true
         Me.txtBranchName.ValueIsMandatory = true
         '
         'txtBranchNameAra
@@ -109,8 +116,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBranchNameAra, "txtBranchNameAra")
         Me.txtBranchNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtBranchNameAra.LinkedLabel = Nothing
+        Me.txtBranchNameAra.MaximumValue = Nothing
+        Me.txtBranchNameAra.MinimumValue = Nothing
         Me.txtBranchNameAra.Name = "txtBranchNameAra"
         Me.txtBranchNameAra.OldValue = Nothing
+        Me.txtBranchNameAra.ReadOnly = true
         '
         'txtNotes
         '
@@ -123,8 +133,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay

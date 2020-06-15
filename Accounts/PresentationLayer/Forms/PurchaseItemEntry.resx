@@ -171,9 +171,6 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -239,6 +236,9 @@
   </data>
   <data name="cboCategoryIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboCategoryIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboCategoryIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 26</value>
@@ -438,6 +438,9 @@
   <data name="cboGlAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboGlAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboGlAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 127</value>
   </data>
@@ -500,6 +503,9 @@
   </data>
   <data name="cboVatAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboVatAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboVatAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 153</value>
@@ -1171,7 +1177,7 @@
     <value>Top</value>
   </data>
   <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
+    <value>0, 53</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
     <value>653, 376</value>
@@ -1251,6 +1257,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
@@ -2418,19 +2427,19 @@
     <value>StoreCaptions1</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.StoreCaptions, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.StoreCaptions, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
     <value>TranslatorDAC</value>
   </data>
   <data name="&gt;&gt;TranslatorDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Name" xml:space="preserve">
     <value>AppDataDAC</value>
   </data>
   <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.Translations.Dac, Translations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
     <value>MyErrorProvider</value>

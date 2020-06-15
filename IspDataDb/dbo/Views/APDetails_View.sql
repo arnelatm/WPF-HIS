@@ -1,4 +1,5 @@
-﻿CREATE VIEW [APDetails_View]	
+﻿
+CREATE VIEW [dbo].[APDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
 	  ,ai.[IdNo]
@@ -106,5 +107,5 @@ UNION
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo
-  WHERE PayorType='A'
+  WHERE PayorType='R'
 )

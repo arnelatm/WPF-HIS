@@ -168,9 +168,6 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -441,6 +438,9 @@
   </data>
   <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 26</value>

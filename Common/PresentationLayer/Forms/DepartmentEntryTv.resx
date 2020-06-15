@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
+    <value>0, 53</value>
   </data>
   <data name="TreeViewTableName.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>300, 255</value>
@@ -135,7 +135,7 @@
     <value>No</value>
   </data>
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 255</value>
+    <value>300, 259</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -194,9 +194,6 @@
   </data>
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="TxtIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -447,6 +444,9 @@
   <data name="cacParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cacParentIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cacParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>191, 111</value>
   </data>
@@ -507,6 +507,9 @@
   <data name="cacProfitCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cacProfitCenterIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cacProfitCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 137</value>
   </data>
@@ -566,6 +569,9 @@
   </data>
   <data name="cacCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cacCostCenterIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cacCostCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 163</value>
@@ -691,13 +697,13 @@
     <value>Right</value>
   </data>
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 57</value>
+    <value>307, 53</value>
   </data>
   <data name="CFlowLayout1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>628, 255</value>
+    <value>628, 259</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -717,6 +723,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>935, 312</value>
   </data>

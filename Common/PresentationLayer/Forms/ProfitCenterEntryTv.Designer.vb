@@ -57,9 +57,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 257)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 261)
         '
         'LocalizableContent1
         '
@@ -96,6 +96,8 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
         Me.TxtIdNo.Location = New System.Drawing.Point(245, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -130,8 +132,11 @@ Namespace PresentationLayer.Forms
         Me.txtProfitCenterCode.LinkedLabel = Me.lblProfitCenterCode
         Me.txtProfitCenterCode.Location = New System.Drawing.Point(245, 36)
         Me.txtProfitCenterCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtProfitCenterCode.MaximumValue = Nothing
+        Me.txtProfitCenterCode.MinimumValue = Nothing
         Me.txtProfitCenterCode.Name = "txtProfitCenterCode"
         Me.txtProfitCenterCode.OldValue = Nothing
+        Me.txtProfitCenterCode.ReadOnly = true
         Me.txtProfitCenterCode.Size = New System.Drawing.Size(62, 23)
         Me.txtProfitCenterCode.TabIndex = 0
         Me.txtProfitCenterCode.ValueIsMandatory = true
@@ -163,8 +168,11 @@ Namespace PresentationLayer.Forms
         Me.txtProfitCenterName.LinkedLabel = Me.lblProfitCenterName
         Me.txtProfitCenterName.Location = New System.Drawing.Point(245, 61)
         Me.txtProfitCenterName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtProfitCenterName.MaximumValue = Nothing
+        Me.txtProfitCenterName.MinimumValue = Nothing
         Me.txtProfitCenterName.Name = "txtProfitCenterName"
         Me.txtProfitCenterName.OldValue = Nothing
+        Me.txtProfitCenterName.ReadOnly = true
         Me.txtProfitCenterName.Size = New System.Drawing.Size(418, 23)
         Me.txtProfitCenterName.TabIndex = 1
         Me.txtProfitCenterName.ValueIsMandatory = true
@@ -197,8 +205,11 @@ Namespace PresentationLayer.Forms
         Me.txtProfitCenterNameAra.LinkedLabel = Me.lblProfitCenterNameAra
         Me.txtProfitCenterNameAra.Location = New System.Drawing.Point(245, 86)
         Me.txtProfitCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtProfitCenterNameAra.MaximumValue = Nothing
+        Me.txtProfitCenterNameAra.MinimumValue = Nothing
         Me.txtProfitCenterNameAra.Name = "txtProfitCenterNameAra"
         Me.txtProfitCenterNameAra.OldValue = Nothing
+        Me.txtProfitCenterNameAra.ReadOnly = true
         Me.txtProfitCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtProfitCenterNameAra.Size = New System.Drawing.Size(418, 23)
         Me.txtProfitCenterNameAra.TabIndex = 2
@@ -230,9 +241,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(245, 191)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(418, 60)
         Me.txtNotes.TabIndex = 3
         Me.txtNotes.ValueIsMandatory = true
@@ -259,11 +273,11 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtSortKey)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(677, 257)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(677, 257)
+        Me.floDataDisplay.Size = New System.Drawing.Size(677, 261)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblParentIdNo
@@ -287,7 +301,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.CurrentSearchTerm = ""
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.DropDownHeight = 200
+        Me.cacParentIdNo.DropDownHeight = 1
         Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = false
         Me.cacParentIdNo.FilterRule = Nothing
@@ -296,6 +310,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacParentIdNo.FormattingEnabled = true
         Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacParentIdNo.IntegralHeight = false
         Me.cacParentIdNo.LinkedLabel = Me.lblParentIdNo
         Me.cacParentIdNo.Location = New System.Drawing.Point(245, 111)
         Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -340,7 +355,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterType.CurrentSearchTerm = ""
         Me.cacProfitCenterType.DefaultValue = Nothing
         Me.cacProfitCenterType.DisplayMember = "Name"
-        Me.cacProfitCenterType.DropDownHeight = 200
+        Me.cacProfitCenterType.DropDownHeight = 1
         Me.cacProfitCenterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacProfitCenterType.EditingMode = false
         Me.cacProfitCenterType.FilterRule = Nothing
@@ -349,6 +364,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterType.ForeColor = System.Drawing.Color.Black
         Me.cacProfitCenterType.FormattingEnabled = true
         Me.cacProfitCenterType.HideWhenNotEditingOrAdding = false
+        Me.cacProfitCenterType.IntegralHeight = false
         Me.cacProfitCenterType.LinkedLabel = Me.lblProfitCenterType
         Me.cacProfitCenterType.Location = New System.Drawing.Point(245, 137)
         Me.cacProfitCenterType.Margin = New System.Windows.Forms.Padding(1)
@@ -402,6 +418,8 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
         Me.txtLevelNumber.Location = New System.Drawing.Point(245, 163)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtLevelNumber.MaximumValue = Nothing
+        Me.txtLevelNumber.MinimumValue = Nothing
         Me.txtLevelNumber.Name = "txtLevelNumber"
         Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
@@ -436,8 +454,11 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.LinkedLabel = Nothing
         Me.txtSortKey.Location = New System.Drawing.Point(13, 256)
         Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtSortKey.MaximumValue = Nothing
+        Me.txtSortKey.MinimumValue = Nothing
         Me.txtSortKey.Name = "txtSortKey"
         Me.txtSortKey.OldValue = Nothing
+        Me.txtSortKey.ReadOnly = true
         Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
         Me.txtSortKey.TabIndex = 164
         Me.txtSortKey.ValueIsMandatory = true
@@ -445,6 +466,7 @@ Namespace PresentationLayer.Forms
         '
         'ProfitCenterEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(976, 314)
         Me.Controls.Add(Me.floDataDisplay)
         Me.MinimumSize = New System.Drawing.Size(992, 353)

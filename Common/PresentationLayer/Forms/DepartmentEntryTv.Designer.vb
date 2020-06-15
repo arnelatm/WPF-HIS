@@ -91,10 +91,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -119,8 +121,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDepartmentCode, "txtDepartmentCode")
         Me.txtDepartmentCode.ForeColor = System.Drawing.Color.Black
         Me.txtDepartmentCode.LinkedLabel = Nothing
+        Me.txtDepartmentCode.MaximumValue = Nothing
+        Me.txtDepartmentCode.MinimumValue = Nothing
         Me.txtDepartmentCode.Name = "txtDepartmentCode"
         Me.txtDepartmentCode.OldValue = Nothing
+        Me.txtDepartmentCode.ReadOnly = true
         Me.txtDepartmentCode.ValueIsMandatory = true
         '
         'lblDepartmentName
@@ -142,8 +147,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDepartmentName, "txtDepartmentName")
         Me.txtDepartmentName.ForeColor = System.Drawing.Color.Black
         Me.txtDepartmentName.LinkedLabel = Nothing
+        Me.txtDepartmentName.MaximumValue = Nothing
+        Me.txtDepartmentName.MinimumValue = Nothing
         Me.txtDepartmentName.Name = "txtDepartmentName"
         Me.txtDepartmentName.OldValue = Nothing
+        Me.txtDepartmentName.ReadOnly = true
         Me.txtDepartmentName.ValueIsMandatory = true
         '
         'lblDepartmentNameAra
@@ -166,8 +174,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDepartmentNameAra, "txtDepartmentNameAra")
         Me.txtDepartmentNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtDepartmentNameAra.LinkedLabel = Nothing
+        Me.txtDepartmentNameAra.MaximumValue = Nothing
+        Me.txtDepartmentNameAra.MinimumValue = Nothing
         Me.txtDepartmentNameAra.Name = "txtDepartmentNameAra"
         Me.txtDepartmentNameAra.OldValue = Nothing
+        Me.txtDepartmentNameAra.ReadOnly = true
         '
         'lblParentIdNo
         '
@@ -183,7 +194,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.CurrentSearchTerm = ""
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.DropDownHeight = 200
+        Me.cacParentIdNo.DropDownHeight = 1
         Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = false
         Me.cacParentIdNo.FilterRule = Nothing
@@ -225,7 +236,7 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterIdNo.CurrentSearchTerm = ""
         Me.cacProfitCenterIdNo.DefaultValue = Nothing
         Me.cacProfitCenterIdNo.DisplayMember = "Name"
-        Me.cacProfitCenterIdNo.DropDownHeight = 200
+        Me.cacProfitCenterIdNo.DropDownHeight = 1
         Me.cacProfitCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacProfitCenterIdNo.EditingMode = false
         Me.cacProfitCenterIdNo.FilterRule = Nothing
@@ -267,7 +278,7 @@ Namespace PresentationLayer.Forms
         Me.cacCostCenterIdNo.CurrentSearchTerm = ""
         Me.cacCostCenterIdNo.DefaultValue = Nothing
         Me.cacCostCenterIdNo.DisplayMember = "Name"
-        Me.cacCostCenterIdNo.DropDownHeight = 200
+        Me.cacCostCenterIdNo.DropDownHeight = 1
         Me.cacCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacCostCenterIdNo.EditingMode = false
         Me.cacCostCenterIdNo.FilterRule = Nothing
@@ -313,8 +324,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'txtSortKey
@@ -328,6 +342,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtSortKey, "txtSortKey")
         Me.txtSortKey.ForeColor = System.Drawing.Color.Black
         Me.txtSortKey.LinkedLabel = Nothing
+        Me.txtSortKey.MaximumValue = Nothing
+        Me.txtSortKey.MinimumValue = Nothing
         Me.txtSortKey.Name = "txtSortKey"
         Me.txtSortKey.OldValue = Nothing
         Me.txtSortKey.ReadOnly = true

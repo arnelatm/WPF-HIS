@@ -1044,40 +1044,40 @@
   <data name="&gt;&gt;txtApplied.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblUnapplied.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblUnapplied.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblUnapplied.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 26</value>
   </data>
-  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblUnapplied.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblUnapplied.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 23</value>
   </data>
-  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblUnapplied.TabIndex" type="System.Int32, mscorlib">
     <value>279</value>
   </data>
-  <data name="CLabel2.Text" xml:space="preserve">
+  <data name="lblUnapplied.Text" xml:space="preserve">
     <value>Unapplied Amount</value>
   </data>
-  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblUnapplied.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
-    <value>CLabel2</value>
+  <data name="&gt;&gt;lblUnapplied.Name" xml:space="preserve">
+    <value>lblUnapplied</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblUnapplied.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblUnapplied.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
-  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblUnapplied.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="txtUnapplied.Font" type="System.Drawing.Font, System.Drawing">
@@ -1443,10 +1443,10 @@
   <data name="&gt;&gt;floPurchaseJournalHeader.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="dgvSequenceCsrOi.HeaderText" xml:space="preserve">
+  <data name="dgvSequence.HeaderText" xml:space="preserve">
     <value>Seq.</value>
   </data>
-  <data name="dgvSequenceCsrOi.Width" type="System.Int32, mscorlib">
+  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
   <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
@@ -1557,13 +1557,13 @@
   <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvSequenceCsrOi.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dgvSequence.HeaderText" xml:space="preserve">
+  <data name="dgvSequenceCsrOi.HeaderText" xml:space="preserve">
     <value>Seq</value>
   </data>
-  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
+  <data name="dgvSequenceCsrOi.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <metadata name="dgvInvoiceNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -89996,10 +89996,10 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
-    <value>dgvSequenceCsrOi</value>
+  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
+    <value>dgvSequence</value>
   </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
@@ -90098,10 +90098,10 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
-    <value>dgvSequence</value>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
+    <value>dgvSequenceCsrOi</value>
   </data>
-  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">

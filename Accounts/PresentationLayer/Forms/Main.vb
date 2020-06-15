@@ -1173,7 +1173,11 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
-
+            Dim childMdiForm As StatementOfAr
+            childMdiForm = New StatementOfAr With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
         Private Sub StatementOfAccountsReToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatementOfAccountsReToolStripMenuItem.Click
@@ -1192,7 +1196,46 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeReceivableToolStripMenuItem.Click
+            Dim childMdiForm As ErJournalEntry
+            childMdiForm = New ErJournalEntry With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
 
+
+        Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatementOfEmployeeLoansToolStripMenuItem.Click
+            Dim childMdiForm As StatementOfEr
+            childMdiForm = New StatementOfEr With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemSummaryOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
+            Dim childMdiForm As ArSummary
+            childMdiForm = New ArSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryOfAccountsPayableToolStripMenuItem1.Click
+            Dim childMdiForm As ApSummary
+            childMdiForm = New ApSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStateOfEmployeeLoans.Click
+            Dim childMdiForm As ErSummary
+            childMdiForm = New ErSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
 
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)

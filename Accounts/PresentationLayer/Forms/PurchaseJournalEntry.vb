@@ -178,10 +178,13 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public ReadOnly Property Posted As Boolean Implements IPurchaseJournalView.Posted
+        Public Property Posted As Boolean Implements IPurchaseJournalView.Posted
             Get
                 Return chkPosted.Checked
             End Get
+            Set
+                chkPosted.Checked = Value
+            End Set
         End Property
 
         Public Property PurchaseJournalItemsDataSource As List(Of JournalItemModel)

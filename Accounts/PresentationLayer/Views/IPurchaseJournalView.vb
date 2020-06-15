@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views
         Property TransactionDate As Date?
         Property VatAmount As Decimal
         Property VatNumber As String
-        ReadOnly Property Posted As Boolean
+        Property Posted As Boolean
 
     End Interface
 

@@ -388,7 +388,7 @@ Public Class CaComboBox
         _suggestBindingList.RaiseListChangedEvents = False
         PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
         _suggestBindingList.RaiseListChangedEvents = True
-        _suggestBindingList.ResetBindings()
+            _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
         SuggestListForm.Visible = showForm

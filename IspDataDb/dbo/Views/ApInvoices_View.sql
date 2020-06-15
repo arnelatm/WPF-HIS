@@ -3,10 +3,11 @@ AS
 SELECT        dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.ProfitCenterIdNo, 
                          dbo.APDetails_View.Notes, dbo.APDetails_View.Posted, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, 
                          dbo.APDetails_View.TransactionDate, dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, 
-                         dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalIdNo
-FROM            dbo.ApOpenInvoice LEFT OUTER JOIN
-                         dbo.APDetails_View ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND 
-                         dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
+                         dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalIdNo, dbo.Supplier.SupplierCode
+FROM            dbo.Supplier RIGHT OUTER JOIN
+                         dbo.APDetails_View ON dbo.Supplier.IdNo = dbo.APDetails_View.SupplierIdNo RIGHT OUTER JOIN
+                         dbo.ApOpenInvoice ON dbo.APDetails_View.IdNo = dbo.ApOpenInvoice.JournalItemIdNo AND 
+                         dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ApOpenInvoice.JournalCode LEFT OUTER JOIN
                          dbo.Chart ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
 
 GO
@@ -95,7 +96,7 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 36
                Left = 280
-               Bottom = 351
+               Bottom = 504
                Right = 459
             End
             DisplayFlags = 280
@@ -110,6 +111,16 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 6
+         End
+         Begin Table = "Supplier"
+            Begin Extent = 
+               Top = 6
+               Left = 839
+               Bottom = 519
+               Right = 1033
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -138,6 +149,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApInvoices_View';
+
+
 
 
 

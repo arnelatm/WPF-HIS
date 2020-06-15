@@ -62,10 +62,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -83,8 +85,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtMessageKey, "txtMessageKey")
         Me.txtMessageKey.ForeColor = System.Drawing.Color.Black
         Me.txtMessageKey.LinkedLabel = Me.lblMessageKey
+        Me.txtMessageKey.MaximumValue = Nothing
+        Me.txtMessageKey.MinimumValue = Nothing
         Me.txtMessageKey.Name = "txtMessageKey"
         Me.txtMessageKey.OldValue = Nothing
+        Me.txtMessageKey.ReadOnly = true
         Me.txtMessageKey.SecurityKey = "Translators_Developer"
         Me.txtMessageKey.TabStop = false
         Me.txtMessageKey.ValueIsMandatory = true
@@ -109,8 +114,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtMessage, "txtMessage")
         Me.txtMessage.ForeColor = System.Drawing.Color.Black
         Me.txtMessage.LinkedLabel = Nothing
+        Me.txtMessage.MaximumValue = Nothing
+        Me.txtMessage.MinimumValue = Nothing
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.OldValue = Nothing
+        Me.txtMessage.ReadOnly = true
         Me.txtMessage.SecurityKey = "Translators_Developer"
         Me.txtMessage.ValueIsMandatory = true
         '
@@ -125,8 +133,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.SecurityKey = "Translators_Developer"
         Me.txtNotes.ValueIsMandatory = true
         '
@@ -190,8 +201,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
         Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
         Me.txtTranslatedMessage.LinkedLabel = Me.lblTranslatedMessage
+        Me.txtTranslatedMessage.MaximumValue = Nothing
+        Me.txtTranslatedMessage.MinimumValue = Nothing
         Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
         Me.txtTranslatedMessage.OldValue = Nothing
+        Me.txtTranslatedMessage.ReadOnly = true
         Me.txtTranslatedMessage.ValueIsMandatory = true
         '
         'lblCaption
@@ -214,8 +228,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtCaption, "txtCaption")
         Me.txtCaption.ForeColor = System.Drawing.Color.Black
         Me.txtCaption.LinkedLabel = Nothing
+        Me.txtCaption.MaximumValue = Nothing
+        Me.txtCaption.MinimumValue = Nothing
         Me.txtCaption.Name = "txtCaption"
         Me.txtCaption.OldValue = Nothing
+        Me.txtCaption.ReadOnly = true
         Me.txtCaption.SecurityKey = "Translators_Developer"
         Me.txtCaption.ValueIsMandatory = true
         '
@@ -238,8 +255,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
         Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
         Me.txtTranslatedCaption.LinkedLabel = Nothing
+        Me.txtTranslatedCaption.MaximumValue = Nothing
+        Me.txtTranslatedCaption.MinimumValue = Nothing
         Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
         Me.txtTranslatedCaption.OldValue = Nothing
+        Me.txtTranslatedCaption.ReadOnly = true
         Me.txtTranslatedCaption.TabStop = false
         Me.txtTranslatedCaption.ValueIsMandatory = true
         '
@@ -262,6 +282,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
         Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtLanguageIdNo.LinkedLabel = Nothing
+        Me.txtLanguageIdNo.MaximumValue = Nothing
+        Me.txtLanguageIdNo.MinimumValue = Nothing
         Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
         Me.txtLanguageIdNo.OldValue = Nothing
         Me.txtLanguageIdNo.ReadOnly = true
@@ -279,6 +301,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtMessageIdNo, "txtMessageIdNo")
         Me.txtMessageIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtMessageIdNo.LinkedLabel = Nothing
+        Me.txtMessageIdNo.MaximumValue = Nothing
+        Me.txtMessageIdNo.MinimumValue = Nothing
         Me.txtMessageIdNo.Name = "txtMessageIdNo"
         Me.txtMessageIdNo.OldValue = Nothing
         Me.txtMessageIdNo.ReadOnly = true
@@ -296,6 +320,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
         Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
         Me.txtIdNoTranslated.LinkedLabel = Nothing
+        Me.txtIdNoTranslated.MaximumValue = Nothing
+        Me.txtIdNoTranslated.MinimumValue = Nothing
         Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
         Me.txtIdNoTranslated.OldValue = Nothing
         Me.txtIdNoTranslated.ReadOnly = true
