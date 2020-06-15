@@ -57,10 +57,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -78,6 +80,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBankCode, "txtBankCode")
         Me.txtBankCode.ForeColor = System.Drawing.Color.Black
         Me.txtBankCode.LinkedLabel = Nothing
+        Me.txtBankCode.MaximumValue = Nothing
+        Me.txtBankCode.MinimumValue = Nothing
         Me.txtBankCode.Name = "txtBankCode"
         Me.txtBankCode.OldValue = Nothing
         Me.txtBankCode.ReadOnly = true
@@ -95,8 +99,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBankName, "txtBankName")
         Me.txtBankName.ForeColor = System.Drawing.Color.Black
         Me.txtBankName.LinkedLabel = Nothing
+        Me.txtBankName.MaximumValue = Nothing
+        Me.txtBankName.MinimumValue = Nothing
         Me.txtBankName.Name = "txtBankName"
         Me.txtBankName.OldValue = Nothing
+        Me.txtBankName.ReadOnly = true
         Me.txtBankName.ValueIsMandatory = true
         '
         'txtBankNameAra
@@ -112,8 +119,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtBankNameAra, "txtBankNameAra")
         Me.txtBankNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtBankNameAra.LinkedLabel = Nothing
+        Me.txtBankNameAra.MaximumValue = Nothing
+        Me.txtBankNameAra.MinimumValue = Nothing
         Me.txtBankNameAra.Name = "txtBankNameAra"
         Me.txtBankNameAra.OldValue = Nothing
+        Me.txtBankNameAra.ReadOnly = true
         '
         'txtNotes
         '
@@ -126,8 +136,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'floDataDisplay

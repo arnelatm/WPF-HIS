@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Property Cancelled As Boolean
         Property CheckDate As Date?
         Property CheckNumber As String
-        ReadOnly Property DateCreated As DateTime?
+        Property DateCreated As DateTime?
         Property DiscountAccountIdNo As Int32?
         Property DiscountTaken As Decimal
         Property IdNo As Int32
@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views
         Property PayorIdNo As Int32?
         Property PayorName As String
         Property PayorType As String
-        ReadOnly Property Posted As Boolean
+        Property Posted As Boolean
         Property ReferenceNo As String
         Property TotalCredits As Decimal
         Property TotalDebits As Decimal

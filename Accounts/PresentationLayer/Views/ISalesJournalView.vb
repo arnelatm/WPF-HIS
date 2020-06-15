@@ -17,8 +17,8 @@ Namespace PresentationLayer.Views
         Property TotalSales As Decimal
         Property TransactionDate As Date?
         Property TotalDeposits As Decimal
-        ReadOnly Property DateCreated As DateTime?
-        ReadOnly Property Posted As Boolean
+        Property DateCreated As DateTime?
+        Property Posted As Boolean
         Property SalesCashItems As List(Of SalesCashItemVIew)
         Property JournalItems As List(Of JournalItemView)
 

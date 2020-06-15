@@ -28,8 +28,8 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseItemEntry))
-            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.txtPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.txtPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -82,8 +82,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtPurchaseItemNameAra, "txtPurchaseItemNameAra")
         Me.txtPurchaseItemNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemNameAra.LinkedLabel = Me.lblPurchaseItemNameAra
+        Me.txtPurchaseItemNameAra.MaximumValue = Nothing
+        Me.txtPurchaseItemNameAra.MinimumValue = Nothing
         Me.txtPurchaseItemNameAra.Name = "txtPurchaseItemNameAra"
         Me.txtPurchaseItemNameAra.OldValue = Nothing
+        Me.txtPurchaseItemNameAra.ReadOnly = true
         '
         'txtPurchaseItemName
         '
@@ -97,8 +100,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtPurchaseItemName, "txtPurchaseItemName")
         Me.txtPurchaseItemName.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemName.LinkedLabel = Me.lblPurchaseItemName
+        Me.txtPurchaseItemName.MaximumValue = Nothing
+        Me.txtPurchaseItemName.MinimumValue = Nothing
         Me.txtPurchaseItemName.Name = "txtPurchaseItemName"
         Me.txtPurchaseItemName.OldValue = Nothing
+        Me.txtPurchaseItemName.ReadOnly = true
         Me.txtPurchaseItemName.ValueIsMandatory = true
         '
         'lblPurchaseItemName
@@ -127,6 +133,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtPurchaseItemCode, "txtPurchaseItemCode")
         Me.txtPurchaseItemCode.ForeColor = System.Drawing.Color.Black
         Me.txtPurchaseItemCode.LinkedLabel = Me.lblPurchaseItemCode
+        Me.txtPurchaseItemCode.MaximumValue = Nothing
+        Me.txtPurchaseItemCode.MinimumValue = Nothing
         Me.txtPurchaseItemCode.Name = "txtPurchaseItemCode"
         Me.txtPurchaseItemCode.OldValue = Nothing
         Me.txtPurchaseItemCode.ReadOnly = true
@@ -151,8 +159,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
+        Me.txtDateCreated.MaximumValue = Nothing
+        Me.txtDateCreated.MinimumValue = Nothing
         Me.txtDateCreated.Name = "txtDateCreated"
         Me.txtDateCreated.OldValue = Nothing
+        Me.txtDateCreated.ReadOnly = true
         Me.txtDateCreated.ValueIsMandatory = true
         '
         'lblDateCreated
@@ -220,10 +231,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.CFlowLayout4.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -242,7 +255,7 @@ Namespace PresentationLayer.Forms
         Me.cboCategoryIdNo.CurrentSearchTerm = ""
         Me.cboCategoryIdNo.DefaultValue = ""
         Me.cboCategoryIdNo.DisplayMember = "Name"
-        Me.cboCategoryIdNo.DropDownHeight = 200
+        Me.cboCategoryIdNo.DropDownHeight = 1
         Me.cboCategoryIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCategoryIdNo.EditingMode = false
         Me.cboCategoryIdNo.FilterRule = Nothing
@@ -282,7 +295,7 @@ Namespace PresentationLayer.Forms
         Me.cboGlAccountIdNo.CurrentSearchTerm = ""
         Me.cboGlAccountIdNo.DefaultValue = ""
         Me.cboGlAccountIdNo.DisplayMember = "Name"
-        Me.cboGlAccountIdNo.DropDownHeight = 200
+        Me.cboGlAccountIdNo.DropDownHeight = 1
         Me.cboGlAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboGlAccountIdNo.EditingMode = false
         Me.cboGlAccountIdNo.FilterRule = Nothing
@@ -322,7 +335,7 @@ Namespace PresentationLayer.Forms
         Me.cboVatAccountIdNo.CurrentSearchTerm = ""
         Me.cboVatAccountIdNo.DefaultValue = ""
         Me.cboVatAccountIdNo.DisplayMember = "Name"
-        Me.cboVatAccountIdNo.DropDownHeight = 200
+        Me.cboVatAccountIdNo.DropDownHeight = 1
         Me.cboVatAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboVatAccountIdNo.EditingMode = false
         Me.cboVatAccountIdNo.FilterRule = Nothing
@@ -395,6 +408,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit1, "txtUnit1")
         Me.txtUnit1.ForeColor = System.Drawing.Color.Black
         Me.txtUnit1.LinkedLabel = Me.lblUnit
+        Me.txtUnit1.MaximumValue = Nothing
+        Me.txtUnit1.MinimumValue = Nothing
         Me.txtUnit1.Name = "txtUnit1"
         Me.txtUnit1.OldValue = Nothing
         Me.txtUnit1.ReadOnly = true
@@ -412,8 +427,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit1Ara, "txtUnit1Ara")
         Me.txtUnit1Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit1Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+        Me.txtUnit1Ara.MaximumValue = Nothing
+        Me.txtUnit1Ara.MinimumValue = Nothing
         Me.txtUnit1Ara.Name = "txtUnit1Ara"
         Me.txtUnit1Ara.OldValue = Nothing
+        Me.txtUnit1Ara.ReadOnly = true
         '
         'txtStdPrice1
         '
@@ -427,6 +445,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtStdPrice1, "txtStdPrice1")
         Me.txtStdPrice1.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice1.LinkedLabel = Me.lblUnitStdPrice
+        Me.txtStdPrice1.MaximumValue = Nothing
+        Me.txtStdPrice1.MinimumValue = Nothing
         Me.txtStdPrice1.Name = "txtStdPrice1"
         Me.txtStdPrice1.OldValue = Nothing
         Me.txtStdPrice1.ReadOnly = true
@@ -450,6 +470,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit2, "txtUnit2")
         Me.txtUnit2.ForeColor = System.Drawing.Color.Black
         Me.txtUnit2.LinkedLabel = Me.lblUnit
+        Me.txtUnit2.MaximumValue = Nothing
+        Me.txtUnit2.MinimumValue = Nothing
         Me.txtUnit2.Name = "txtUnit2"
         Me.txtUnit2.OldValue = Nothing
         Me.txtUnit2.ReadOnly = true
@@ -467,8 +489,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit2Ara, "txtUnit2Ara")
         Me.txtUnit2Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit2Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+        Me.txtUnit2Ara.MaximumValue = Nothing
+        Me.txtUnit2Ara.MinimumValue = Nothing
         Me.txtUnit2Ara.Name = "txtUnit2Ara"
         Me.txtUnit2Ara.OldValue = Nothing
+        Me.txtUnit2Ara.ReadOnly = true
         '
         'txtStdPrice2
         '
@@ -482,6 +507,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtStdPrice2, "txtStdPrice2")
         Me.txtStdPrice2.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice2.LinkedLabel = Me.lblUnitStdPrice
+        Me.txtStdPrice2.MaximumValue = Nothing
+        Me.txtStdPrice2.MinimumValue = Nothing
         Me.txtStdPrice2.Name = "txtStdPrice2"
         Me.txtStdPrice2.OldValue = Nothing
         Me.txtStdPrice2.ReadOnly = true
@@ -505,6 +532,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit3, "txtUnit3")
         Me.txtUnit3.ForeColor = System.Drawing.Color.Black
         Me.txtUnit3.LinkedLabel = Me.lblUnit
+        Me.txtUnit3.MaximumValue = Nothing
+        Me.txtUnit3.MinimumValue = Nothing
         Me.txtUnit3.Name = "txtUnit3"
         Me.txtUnit3.OldValue = Nothing
         Me.txtUnit3.ReadOnly = true
@@ -522,8 +551,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtUnit3Ara, "txtUnit3Ara")
         Me.txtUnit3Ara.ForeColor = System.Drawing.Color.Black
         Me.txtUnit3Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+        Me.txtUnit3Ara.MaximumValue = Nothing
+        Me.txtUnit3Ara.MinimumValue = Nothing
         Me.txtUnit3Ara.Name = "txtUnit3Ara"
         Me.txtUnit3Ara.OldValue = Nothing
+        Me.txtUnit3Ara.ReadOnly = true
         '
         'txtStdPrice3
         '
@@ -537,6 +569,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtStdPrice3, "txtStdPrice3")
         Me.txtStdPrice3.ForeColor = System.Drawing.Color.Black
         Me.txtStdPrice3.LinkedLabel = Me.lblUnitStdPrice
+        Me.txtStdPrice3.MaximumValue = Nothing
+        Me.txtStdPrice3.MinimumValue = Nothing
         Me.txtStdPrice3.Name = "txtStdPrice3"
         Me.txtStdPrice3.OldValue = Nothing
         Me.txtStdPrice3.ReadOnly = true
@@ -552,7 +586,6 @@ Namespace PresentationLayer.Forms
         'chkActive
         '
         resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.AutoCheck = false
         Me.chkActive.BackColor = System.Drawing.Color.White
         Me.chkActive.Checked = true
         Me.chkActive.CheckState = System.Windows.Forms.CheckState.Checked
@@ -562,6 +595,7 @@ Namespace PresentationLayer.Forms
         Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.LinkedLabel = Me.lblCancelled
         Me.chkActive.Name = "chkActive"
+        Me.chkActive.OldValue = Nothing
         Me.chkActive.UseVisualStyleBackColor = false
         '
         'PurchaseItemEntry
@@ -569,8 +603,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.CFlowLayout4)
         Me.Name = "PurchaseItemEntry"
-            Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
-            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
         Me.CFlowLayout4.PerformLayout

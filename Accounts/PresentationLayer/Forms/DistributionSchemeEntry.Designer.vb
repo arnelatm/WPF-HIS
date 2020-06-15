@@ -103,10 +103,12 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.floJournalHeader.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -130,8 +132,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDistributionSchemeCode, "txtDistributionSchemeCode")
         Me.txtDistributionSchemeCode.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeCode.LinkedLabel = Me.lblDistributionSchemeCode
+        Me.txtDistributionSchemeCode.MaximumValue = Nothing
+        Me.txtDistributionSchemeCode.MinimumValue = Nothing
         Me.txtDistributionSchemeCode.Name = "txtDistributionSchemeCode"
         Me.txtDistributionSchemeCode.OldValue = Nothing
+        Me.txtDistributionSchemeCode.ReadOnly = true
         Me.txtDistributionSchemeCode.ValueIsMandatory = true
         '
         'lblDistributionSchemeName
@@ -153,8 +158,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDistributionSchemeName, "txtDistributionSchemeName")
         Me.txtDistributionSchemeName.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeName.LinkedLabel = Me.lblDistributionSchemeName
+        Me.txtDistributionSchemeName.MaximumValue = Nothing
+        Me.txtDistributionSchemeName.MinimumValue = Nothing
         Me.txtDistributionSchemeName.Name = "txtDistributionSchemeName"
         Me.txtDistributionSchemeName.OldValue = Nothing
+        Me.txtDistributionSchemeName.ReadOnly = true
         Me.txtDistributionSchemeName.ValueIsMandatory = true
         '
         'lblDistributionSchemeNameAra
@@ -177,6 +185,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtDistributionSchemeNameAra, "txtDistributionSchemeNameAra")
         Me.txtDistributionSchemeNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtDistributionSchemeNameAra.LinkedLabel = Me.lblDistributionSchemeNameAra
+        Me.txtDistributionSchemeNameAra.MaximumValue = Nothing
+        Me.txtDistributionSchemeNameAra.MinimumValue = Nothing
         Me.txtDistributionSchemeNameAra.Name = "txtDistributionSchemeNameAra"
         Me.txtDistributionSchemeNameAra.OldValue = Nothing
         Me.txtDistributionSchemeNameAra.ReadOnly = true
@@ -256,8 +266,11 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.ValueIsMandatory = true
         '
         'lblAmount
@@ -288,6 +301,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewDistributionSchemeItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         resources.ApplyResources(Me.DataGridViewDistributionSchemeItems, "DataGridViewDistributionSchemeItems")
         Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
+        Me.DataGridViewDistributionSchemeItems.ReadOnly = true
         Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewDistributionSchemeItems.StartTrackingChanges = false
         '
@@ -301,6 +315,7 @@ Namespace PresentationLayer.Forms
         Me.dgvIdNo.EditingMode = false
         resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
         Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvDistributionSchemeIdNo
@@ -312,6 +327,7 @@ Namespace PresentationLayer.Forms
         Me.dgvDistributionSchemeIdNo.EditingMode = false
         resources.ApplyResources(Me.dgvDistributionSchemeIdNo, "dgvDistributionSchemeIdNo")
         Me.dgvDistributionSchemeIdNo.Name = "dgvDistributionSchemeIdNo"
+        Me.dgvDistributionSchemeIdNo.ReadOnly = true
         Me.dgvDistributionSchemeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvSequence
@@ -324,6 +340,7 @@ Namespace PresentationLayer.Forms
         Me.dgvSequence.FillWeight = 1!
         resources.ApplyResources(Me.dgvSequence, "dgvSequence")
         Me.dgvSequence.Name = "dgvSequence"
+        Me.dgvSequence.ReadOnly = true
         Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvProfitCenterIdNo
@@ -337,6 +354,7 @@ Namespace PresentationLayer.Forms
         Me.dgvProfitCenterIdNo.FillWeight = 1!
         resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
         Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
+        Me.dgvProfitCenterIdNo.ReadOnly = true
         Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvProfitCenterName
@@ -350,6 +368,7 @@ Namespace PresentationLayer.Forms
         Me.dgvProfitCenterName.FillWeight = 1!
         resources.ApplyResources(Me.dgvProfitCenterName, "dgvProfitCenterName")
         Me.dgvProfitCenterName.Name = "dgvProfitCenterName"
+        Me.dgvProfitCenterName.ReadOnly = true
         Me.dgvProfitCenterName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Percentage
@@ -358,6 +377,7 @@ Namespace PresentationLayer.Forms
         Me.Percentage.FillWeight = 1!
         resources.ApplyResources(Me.Percentage, "Percentage")
         Me.Percentage.Name = "Percentage"
+        Me.Percentage.ReadOnly = true
         '
         'txtTotalPercentage
         '
@@ -371,6 +391,8 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.txtTotalPercentage, "txtTotalPercentage")
         Me.txtTotalPercentage.ForeColor = System.Drawing.Color.Black
         Me.txtTotalPercentage.LinkedLabel = Nothing
+        Me.txtTotalPercentage.MaximumValue = Nothing
+        Me.txtTotalPercentage.MinimumValue = Nothing
         Me.txtTotalPercentage.Name = "txtTotalPercentage"
         Me.txtTotalPercentage.OldValue = Nothing
         Me.txtTotalPercentage.ReadOnly = true

@@ -236,7 +236,7 @@
         '
         'StatementOfAp
         '
-        Me.ClientSize = New System.Drawing.Size(695, 177)
+        Me.ClientSize = New System.Drawing.Size(722, 178)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CFlowLayout1)

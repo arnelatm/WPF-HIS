@@ -265,6 +265,15 @@
     <Build Include="dbo\User Defined Types\PcsOiItemInsert.sql" />
     <Build Include="dbo\User Defined Types\PcsOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\ReconciledInsert.sql" />
+    <Build Include="dbo\Tables\ErJournalItem.sql" />
+    <Build Include="dbo\Tables\ErJournal.sql" />
+    <Build Include="dbo\Views\ErStatement_View.sql" />
+    <Build Include="dbo\Views\ErDetails_View.sql" />
+    <Build Include="dbo\Views\ArOpenInvoice_View1.sql" />
+    <Build Include="dbo\Views\ApOpenInvoice_View1.sql" />
+    <Build Include="dbo\Functions\generate_series.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateErJournalItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertErJournalItemTVP.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

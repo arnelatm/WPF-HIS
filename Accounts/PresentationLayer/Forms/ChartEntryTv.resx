@@ -179,10 +179,6 @@
   <data name="_MSGMandatoryFields.Value" xml:space="preserve">
     <value>Following fields are mandatory, </value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -198,6 +194,7 @@
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 24</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
@@ -441,6 +438,9 @@
   <data name="cboParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboParentIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 101</value>
   </data>
@@ -567,6 +567,9 @@
   <data name="cboAccountGroup.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboAccountGroup.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboAccountGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 152</value>
   </data>
@@ -629,6 +632,9 @@
   </data>
   <data name="cboSpecialAccount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboSpecialAccount.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboSpecialAccount.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 178</value>
@@ -918,6 +924,9 @@
   <data name="cboNormalBalance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboNormalBalance.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboNormalBalance.Location" type="System.Drawing.Point, System.Drawing">
     <value>492, 228</value>
   </data>
@@ -981,6 +990,9 @@
   <data name="cboPayeeType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboPayeeType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboPayeeType.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 254</value>
   </data>
@@ -1009,7 +1021,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 279</value>
+    <value>0, 280</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1042,7 +1054,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 279</value>
+    <value>196, 280</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1075,7 +1087,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSortKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 339</value>
+    <value>0, 340</value>
   </data>
   <data name="txtSortKey.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

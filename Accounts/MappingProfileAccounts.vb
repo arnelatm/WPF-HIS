@@ -53,6 +53,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of DistributionSchemeItemModel, IDistributionSchemeItemView)().ReverseMap()
         CreateMap(Of Employee, EmployeeModel)().ReverseMap()
         CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
+        CreateMap(Of ErJournal, ErJournalModel)().ReverseMap()
+        CreateMap(Of ErJournalModel, IErJournalView)().ReverseMap()
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
         CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap()
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()

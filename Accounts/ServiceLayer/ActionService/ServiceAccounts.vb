@@ -33,6 +33,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property ErJournalDao As IDao(Of ErJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ErJournal")
+            End Get
+        End Property
+
         Private ReadOnly Property CashDisbursementJournalDao As IDao(Of CashDisbursementJournal)
             Get
                 Return DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
@@ -151,6 +157,12 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property ArJournalItemDao As IDaoChild(Of JournalItem)
             Get
                 Return DaoFactoryAccounts.CreateDao("ArJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ErJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ErJournalItem")
             End Get
         End Property
 
