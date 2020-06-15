@@ -1,7 +1,5 @@
 ﻿
-
-
-CREATE VIEW [dbo].[APDetails_View]	
+CREATE VIEW [dbo].[APDetails_Viewx]	
   AS
 (SELECT 'AP' AS 'JournalCode'
 	  ,ai.[IdNo]
@@ -11,14 +9,14 @@ CREATE VIEW [dbo].[APDetails_View]
       ,ai.[Debit]
       ,ai.[Credit]
       ,ai.[ProfitCenterIdNo]
-      ,ai.[Notes] Collate Arabic_CI_AS AS 'Notes'
+      ,ai.[Notes]
       ,ai.[Posted]
 	  ,b.[SupplierIdNo]
-	  ,b.[InvoiceNo] Collate Arabic_CI_AS AS 'InvoiceNo'
+	  ,b.[InvoiceNo]
 	  ,b.[TransactionDate]
-      ,b.[ReferenceNo] Collate Arabic_CI_AS AS 'ReferenceNo'
-	  ,b.[TransactionType] Collate SQL_Latin1_General_CP1_CI_AS AS 'TransactionType'
-	  ,b.Notes Collate Arabic_CI_AS AS 'MainNote'
+      ,b.[ReferenceNo]
+	  ,b.[TransactionType]
+	  ,b.Notes AS 'MainNote'
   FROM [ApJournalItem] aS ai
   LEFT OUTER JOIN ApJournal AS b
   on ai.JournalIdNo = b.IDNo 

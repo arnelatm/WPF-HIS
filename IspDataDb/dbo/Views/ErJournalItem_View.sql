@@ -1,0 +1,13 @@
+﻿
+
+CREATE VIEW [dbo].[ErJournalItem_View]
+AS
+SELECT        dbo.ErJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ErJournalItem.JournalIdNo, dbo.ErJournalItem.AccountIdNo, dbo.ErJournalItem.Debit, dbo.ErJournalItem.Credit, dbo.ErJournalItem.ProfitCenterIdNo, 
+                dbo.ErJournalItem.Notes, dbo.ErJournalItem.Posted, dbo.ErJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ArOpenInvoice.IdNo AS OpenInvoiceIdNo, 
+                dbo.ErJournalItem.Credit - dbo.ErJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, 
+                dbo.ErJournalItem.Sequence
+FROM            dbo.ErJournalItem 
+				LEFT OUTER JOIN dbo.Chart 
+				ON dbo.ErJournalItem.AccountIdNo = dbo.Chart.IDNo 
+				LEFT OUTER JOIN dbo.ArOpenInvoice 
+				ON dbo.ErJournalItem.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ArOpenInvoice.JournalCode = 'ER'

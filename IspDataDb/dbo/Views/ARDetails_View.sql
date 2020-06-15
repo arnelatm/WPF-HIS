@@ -1,5 +1,6 @@
 ﻿
 
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -10,14 +11,14 @@ CREATE VIEW [dbo].[ARDetails_View]
       ,[Debit]
       ,[Credit]
       ,[ProfitCenterIdNo]
-      ,a.[Notes]
+      ,a.[Notes] COLLATE Arabic_CI_AS AS 'Notes'
       ,a.[Posted]
 	  ,[CustomerIdNo]
-	  ,[InvoiceNo]
+	  ,[InvoiceNo] COLLATE Arabic_CI_AS AS 'InvoiceNo'
 	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,[TransactionType]
-	  ,b.Notes AS 'MainNote'
+      ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'
+	  ,[TransactionType] COLLATE SQL_Latin1_General_CP1_CI_AS AS 'TransactionType'
+	  ,b.Notes COLLATE Arabic_CI_AS AS 'MainNote'
   FROM [dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IDNo 
