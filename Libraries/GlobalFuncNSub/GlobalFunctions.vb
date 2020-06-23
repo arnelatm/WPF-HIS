@@ -243,6 +243,15 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    Public Function GregorianDateSerial(ByVal nYear As Integer, nMonth As Integer, nDay As Integer) As DateTime
+        Dim value As DateTime
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = DateSerial(nYear,nMonth,nDay)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
     Public Function HijriMonthInEnglish(iMonth As Int16)
         Dim strMonth As String
         strMonth = ""

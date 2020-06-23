@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms.Reports
@@ -19,24 +20,23 @@ Namespace PresentationLayer.Forms.Reports
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
-            Dim currentDate = Now()
-            Dim endDate As Date
+
             _period = period
             ' returns previous month last day
 
 
-            Select Case _period
-                Case "Y"
-                    endDate = DateSerial(currentDate.Year - 1, 12, 31)
-                    Text = "Trial Balance for the Year"
-                    lblDateCaption.Text = "Year End Date:"
-                Case "M"
-                    endDate = DateSerial(currentDate.Year, Month(currentDate), 0)
-                    Text = "Trial Balance for the Month"
-                    lblDateCaption.Text = "Month End Date:"
-            End Select
-            lblTitle.Text = Text
-            dtpEndingDate.Value = endDate
+            'Select Case _period
+            '    Case "Y"
+            '        endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
+            '        Text = "Trial Balance for the Year"
+            '        lblDateCaption.Text = "Year End Date:"
+            '    Case "M"
+            '        endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+            '        Text = "Trial Balance for the Month"
+            '        lblDateCaption.Text = "Month End Date:"
+            'End Select
+            'lblTitle.Text = Text
+
 
         End Sub
 
@@ -74,5 +74,25 @@ Namespace PresentationLayer.Forms.Reports
             Close()
         End Sub
 
+        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
+            RunTranslator(FormIdNo)
+        End Sub
+
+        Private Sub TrialBalance_BeforeLoad() Handles MyBase.BeforeLoad
+            Dim currentDate = Now()
+            Dim endDate As Date
+            Select Case _period
+                Case "Y"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
+                    Text = "Trial Balance for the Year"
+                    lblDateCaption.Text = "Year End Date:"
+                Case "M"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Trial Balance for the Month"
+                    lblDateCaption.Text = "Month End Date:"
+            End Select
+            lblTitle.Text = Text
+            dtpEndingDate.Value = endDate
+        End Sub
     End Class
 End Namespace

@@ -281,9 +281,9 @@ Public Class TranslationTableManager
                 End If
                 TransTable.Clear()
                 For Each dr As DataRow In dsColumn.Tables(0).Rows
-                    Dim newrow As DataRow = TransTable.NewRow
-                    newrow(0) = dr.Item(0)
-                    newrow(1) = ""
+                    Dim newRow As DataRow = TransTable.NewRow
+                    newRow(0) = dr.Item(0)
+                    newRow(1) = ""
                     TransTable.Rows.Add(newrow)
                 Next
                 DataGrid1.DataSource = TransTable
