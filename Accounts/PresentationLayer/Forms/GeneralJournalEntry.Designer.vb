@@ -36,426 +36,451 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floJournalHeader.SuspendLayout()
-            Me.CFlowLayout1.SuspendLayout()
-            Me.CFlowLayout2.SuspendLayout()
-            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CFlowLayout4.SuspendLayout()
-            Me.SuspendLayout()
-            '
-            'floJournalHeader
-            '
-            Me.floJournalHeader.BackColor = System.Drawing.Color.Transparent
-            Me.floJournalHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.floJournalHeader.Controls.Add(Me.CFlowLayout1)
-            Me.floJournalHeader.Controls.Add(Me.CFlowLayout2)
-            resources.ApplyResources(Me.floJournalHeader, "floJournalHeader")
-            Me.floJournalHeader.Name = "floJournalHeader"
-            '
-            'CFlowLayout1
-            '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.CLabel1)
-            Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.lblReferenceNo)
-            Me.CFlowLayout1.Controls.Add(Me.txtReferenceNo)
-            Me.CFlowLayout1.Controls.Add(Me.lblTransactionDate)
-            Me.CFlowLayout1.Controls.Add(Me.dtpTransactionDate)
-            Me.CFlowLayout1.Controls.Add(Me.lblNotes)
-            Me.CFlowLayout1.Controls.Add(Me.txtNotes)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
-            '
-            'lblIdNo
-            '
-            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-            Me.lblIdNo.Name = "lblIdNo"
-            '
-            'CLabel1
-            '
-            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            '
-            'TxtIdNo
-            '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = True
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
-            '
-            'lblReferenceNo
-            '
-            Me.lblReferenceNo.BackColor = System.Drawing.Color.Transparent
-            Me.lblReferenceNo.DisplayOnly = True
-            Me.lblReferenceNo.EditingMode = False
-            resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
-            Me.lblReferenceNo.Name = "lblReferenceNo"
-            '
-            'txtReferenceNo
-            '
-            Me.txtReferenceNo.BackColor = System.Drawing.Color.White
-            Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtReferenceNo.ComputedValue = False
-            Me.txtReferenceNo.CustomFormat = Nothing
-            Me.txtReferenceNo.DataBoundControl = True
-            Me.txtReferenceNo.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtReferenceNo, True)
-            resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
-            Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
-            Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
-            Me.txtReferenceNo.MaximumValue = Nothing
-            Me.txtReferenceNo.MinimumValue = Nothing
-            Me.txtReferenceNo.Name = "txtReferenceNo"
-            Me.txtReferenceNo.OldValue = Nothing
-            Me.txtReferenceNo.ReadOnly = True
-            Me.txtReferenceNo.ValueIsMandatory = True
-            '
-            'lblTransactionDate
-            '
-            Me.lblTransactionDate.BackColor = System.Drawing.Color.Transparent
-            Me.lblTransactionDate.DisplayOnly = True
-            Me.lblTransactionDate.EditingMode = False
-            resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
-            Me.lblTransactionDate.Name = "lblTransactionDate"
-            '
-            'dtpTransactionDate
-            '
-            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpTransactionDate.DefaultValue = Nothing
-            Me.dtpTransactionDate.DisplayOnly = False
-            Me.dtpTransactionDate.DtpDefaultValue = Nothing
-            Me.dtpTransactionDate.EditingMode = False
-            Me.dtpTransactionDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpTransactionDate, True)
-            resources.ApplyResources(Me.dtpTransactionDate, "dtpTransactionDate")
-            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Name = "dtpTransactionDate"
-            Me.dtpTransactionDate.ReadOnlyDp = False
-            Me.dtpTransactionDate.SecurityKey = Nothing
-            Me.dtpTransactionDate.ShowLongDate = False
-            Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpTransactionDate.Value = Nothing
-            Me.dtpTransactionDate.ValueIsMandatory = False
-            Me.dtpTransactionDate.ValueIsNullable = False
-            '
-            'lblNotes
-            '
-            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = False
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Me.lblNotes
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.ValueIsMandatory = True
-            '
-            'CFlowLayout2
-            '
-            Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout2.Controls.Add(Me.lblActive)
-            Me.CFlowLayout2.Controls.Add(Me.chkPosted)
-            Me.CFlowLayout2.Controls.Add(Me.lblCancelled)
-            Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
-            Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
-            Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
-            resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
-            Me.CFlowLayout2.Name = "CFlowLayout2"
-            '
-            'lblActive
-            '
-            Me.lblActive.BackColor = System.Drawing.Color.Transparent
-            Me.lblActive.DisplayOnly = True
-            Me.lblActive.EditingMode = False
-            resources.ApplyResources(Me.lblActive, "lblActive")
-            Me.lblActive.Name = "lblActive"
-            '
-            'chkPosted
-            '
-            resources.ApplyResources(Me.chkPosted, "chkPosted")
-            Me.chkPosted.AutoCheck = False
-            Me.chkPosted.BackColor = System.Drawing.Color.White
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
-            Me.chkPosted.ForeColor = System.Drawing.Color.Black
-            Me.chkPosted.LinkedLabel = Me.lblActive
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.OldValue = Nothing
-            Me.chkPosted.UseVisualStyleBackColor = False
-            '
-            'lblCancelled
-            '
-            Me.lblCancelled.BackColor = System.Drawing.Color.Transparent
-            Me.lblCancelled.DisplayOnly = True
-            Me.lblCancelled.EditingMode = False
-            resources.ApplyResources(Me.lblCancelled, "lblCancelled")
-            Me.lblCancelled.Name = "lblCancelled"
-            '
-            'chkCancelled
-            '
-            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-            Me.chkCancelled.AutoCheck = False
-            Me.chkCancelled.BackColor = System.Drawing.Color.White
-            Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, True)
-            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
-            Me.chkCancelled.LinkedLabel = Me.lblCancelled
-            Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.OldValue = Nothing
-            Me.chkCancelled.UseVisualStyleBackColor = False
-            '
-            'lblDateCreated
-            '
-            Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
-            Me.lblDateCreated.DisplayOnly = True
-            Me.lblDateCreated.EditingMode = False
-            resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
-            Me.lblDateCreated.Name = "lblDateCreated"
-            '
-            'txtDateCreated
-            '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.DisplayOnly = True
-            Me.txtDateCreated.EditingMode = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, True)
-            resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Me.lblReferenceNo
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.ValueIsMandatory = True
-            '
-            'DataGridViewJournalItems
-            '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DataGridViewJournalItems.AutoGenerateColumns = False
-            Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
-            Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewJournalItems.DataInGridChanged = False
-            Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle8
-            Me.DataGridViewJournalItems.DisplayOnly = False
-            Me.DataGridViewJournalItems.EditingMode = False
-            Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
-            Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
-            Me.DataGridViewJournalItems.ReadOnly = True
-            Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
-            Me.DataGridViewJournalItems.StartTrackingChanges = False
-            '
-            'dgvSequence
-            '
-            Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvSequence.EditingMode = False
-            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
-            Me.dgvSequence.Name = "dgvSequence"
-            Me.dgvSequence.ReadOnly = True
-            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'dgvAccountIdNo
-            '
-            Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader
-            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
-            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-            Me.dgvAccountIdNo.ReadOnly = True
-            Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'dgvDebit
-            '
-            Me.dgvDebit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvDebit.DataPropertyName = "Debit"
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.Format = "N2"
-            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvDebit.EditingMode = False
-            resources.ApplyResources(Me.dgvDebit, "dgvDebit")
-            Me.dgvDebit.Name = "dgvDebit"
-            Me.dgvDebit.ReadOnly = True
-            Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvCredit
-            '
-            Me.dgvCredit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvCredit.DataPropertyName = "Credit"
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.Format = "N2"
-            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvCredit.EditingMode = False
-            resources.ApplyResources(Me.dgvCredit, "dgvCredit")
-            Me.dgvCredit.Name = "dgvCredit"
-            Me.dgvCredit.ReadOnly = True
-            Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvProfitCenterIdNo
-            '
-            Me.dgvProfitCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvProfitCenterIdNo.DataPropertyName = "ProfitCenterIdNo"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvProfitCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
-            resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
-            Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
-            Me.dgvProfitCenterIdNo.ReadOnly = True
-            Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'dgvNotes
-            '
-            Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvNotes.DataPropertyName = "Notes"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
-            Me.dgvNotes.EditingMode = False
-            resources.ApplyResources(Me.dgvNotes, "dgvNotes")
-            Me.dgvNotes.Name = "dgvNotes"
-            Me.dgvNotes.ReadOnly = True
-            Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'dgvIdNo
-            '
-            Me.dgvIdNo.DataPropertyName = "IdNo"
-            resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
-            Me.dgvIdNo.Name = "dgvIdNo"
-            Me.dgvIdNo.ReadOnly = True
-            '
-            'SpecialAccount
-            '
-            Me.SpecialAccount.DataPropertyName = "SpecialAccount"
-            resources.ApplyResources(Me.SpecialAccount, "SpecialAccount")
-            Me.SpecialAccount.Name = "SpecialAccount"
-            Me.SpecialAccount.ReadOnly = True
-            '
-            'AccountIdNoDataGridViewTextBoxColumn
-            '
-            Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
-            resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
-            Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
-            Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'bsJournalItems
-            '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-            '
-            'CFlowLayout4
-            '
-            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-            Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-            Me.CFlowLayout4.Name = "CFlowLayout4"
-            '
-            'GeneralJournalEntry
-            '
-            resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.CFlowLayout4)
-            Me.Name = "GeneralJournalEntry"
-            Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floJournalHeader.ResumeLayout(false)
+        Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.floJournalHeader.SuspendLayout
+        Me.CFlowLayout1.SuspendLayout
+        Me.CFlowLayout2.SuspendLayout
+        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.CFlowLayout4.SuspendLayout
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
+        '
+        'floJournalHeader
+        '
+        Me.floJournalHeader.BackColor = System.Drawing.Color.Transparent
+        Me.floJournalHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.floJournalHeader.Controls.Add(Me.CFlowLayout1)
+        Me.floJournalHeader.Controls.Add(Me.CFlowLayout2)
+        resources.ApplyResources(Me.floJournalHeader, "floJournalHeader")
+        Me.floJournalHeader.Name = "floJournalHeader"
+        '
+        'CFlowLayout1
+        '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel1)
+        Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblReferenceNo)
+        Me.CFlowLayout1.Controls.Add(Me.txtReferenceNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblTransactionDate)
+        Me.CFlowLayout1.Controls.Add(Me.dtpTransactionDate)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel2)
+        Me.CFlowLayout1.Controls.Add(Me.chkClosingJournal)
+        Me.CFlowLayout1.Controls.Add(Me.lblNotes)
+        Me.CFlowLayout1.Controls.Add(Me.txtNotes)
+        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        '
+        'lblIdNo
+        '
+        Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+        Me.lblIdNo.Name = "lblIdNo"
+        '
+        'CLabel1
+        '
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        resources.ApplyResources(Me.CLabel1, "CLabel1")
+        Me.CLabel1.Name = "CLabel1"
+        '
+        'TxtIdNo
+        '
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = true
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        '
+        'lblReferenceNo
+        '
+        Me.lblReferenceNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblReferenceNo.DisplayOnly = true
+        Me.lblReferenceNo.EditingMode = false
+        resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
+        Me.lblReferenceNo.Name = "lblReferenceNo"
+        '
+        'txtReferenceNo
+        '
+        Me.txtReferenceNo.BackColor = System.Drawing.Color.White
+        Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtReferenceNo.ComputedValue = false
+        Me.txtReferenceNo.CustomFormat = Nothing
+        Me.txtReferenceNo.DataBoundControl = true
+        Me.txtReferenceNo.EditingMode = false
+        Me.CFlowLayout1.SetFlowBreak(Me.txtReferenceNo, true)
+        resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
+        Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
+        Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
+        Me.txtReferenceNo.MaximumValue = Nothing
+        Me.txtReferenceNo.MinimumValue = Nothing
+        Me.txtReferenceNo.Name = "txtReferenceNo"
+        Me.txtReferenceNo.OldValue = Nothing
+        Me.txtReferenceNo.ReadOnly = true
+        Me.txtReferenceNo.ValueIsMandatory = true
+        '
+        'lblTransactionDate
+        '
+        Me.lblTransactionDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblTransactionDate.DisplayOnly = true
+        Me.lblTransactionDate.EditingMode = false
+        resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
+        Me.lblTransactionDate.Name = "lblTransactionDate"
+        '
+        'dtpTransactionDate
+        '
+        Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpTransactionDate.DefaultValue = Nothing
+        Me.dtpTransactionDate.DisplayOnly = false
+        Me.dtpTransactionDate.DtpDefaultValue = Nothing
+        Me.dtpTransactionDate.EditingMode = false
+        Me.dtpTransactionDate.EditsAllowed = false
+        resources.ApplyResources(Me.dtpTransactionDate, "dtpTransactionDate")
+        Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpTransactionDate.LinkedLabel = Nothing
+        Me.dtpTransactionDate.Name = "dtpTransactionDate"
+        Me.dtpTransactionDate.ReadOnlyDp = false
+        Me.dtpTransactionDate.SecurityKey = Nothing
+        Me.dtpTransactionDate.ShowLongDate = false
+        Me.dtpTransactionDate.ShowTime = false
+        Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpTransactionDate.Value = Nothing
+        Me.dtpTransactionDate.ValueIsMandatory = false
+        Me.dtpTransactionDate.ValueIsNullable = false
+        '
+        'lblNotes
+        '
+        Me.lblNotes.BackColor = System.Drawing.Color.Transparent
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
+        resources.ApplyResources(Me.lblNotes, "lblNotes")
+        Me.lblNotes.Name = "lblNotes"
+        '
+        'txtNotes
+        '
+        Me.txtNotes.BackColor = System.Drawing.Color.White
+        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
+        Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
+        resources.ApplyResources(Me.txtNotes, "txtNotes")
+        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+        Me.txtNotes.LinkedLabel = Me.lblNotes
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
+        Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
+        Me.txtNotes.ValueIsMandatory = true
+        '
+        'CFlowLayout2
+        '
+        Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout2.Controls.Add(Me.lblActive)
+        Me.CFlowLayout2.Controls.Add(Me.chkPosted)
+        Me.CFlowLayout2.Controls.Add(Me.lblCancelled)
+        Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
+        Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
+        Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
+        resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
+        Me.CFlowLayout2.Name = "CFlowLayout2"
+        '
+        'lblActive
+        '
+        Me.lblActive.BackColor = System.Drawing.Color.Transparent
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
+        resources.ApplyResources(Me.lblActive, "lblActive")
+        Me.lblActive.Name = "lblActive"
+        '
+        'chkPosted
+        '
+        resources.ApplyResources(Me.chkPosted, "chkPosted")
+        Me.chkPosted.AutoCheck = false
+        Me.chkPosted.BackColor = System.Drawing.Color.White
+        Me.chkPosted.DisplayOnly = true
+        Me.chkPosted.EditingMode = true
+        Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, true)
+        Me.chkPosted.ForeColor = System.Drawing.Color.Black
+        Me.chkPosted.LinkedLabel = Me.lblActive
+        Me.chkPosted.Name = "chkPosted"
+        Me.chkPosted.OldValue = Nothing
+        Me.chkPosted.UseVisualStyleBackColor = false
+        '
+        'lblCancelled
+        '
+        Me.lblCancelled.BackColor = System.Drawing.Color.Transparent
+        Me.lblCancelled.DisplayOnly = true
+        Me.lblCancelled.EditingMode = false
+        resources.ApplyResources(Me.lblCancelled, "lblCancelled")
+        Me.lblCancelled.Name = "lblCancelled"
+        '
+        'chkCancelled
+        '
+        resources.ApplyResources(Me.chkCancelled, "chkCancelled")
+        Me.chkCancelled.AutoCheck = false
+        Me.chkCancelled.BackColor = System.Drawing.Color.White
+        Me.chkCancelled.DisplayOnly = true
+        Me.chkCancelled.EditingMode = true
+        Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, true)
+        Me.chkCancelled.ForeColor = System.Drawing.Color.Black
+        Me.chkCancelled.LinkedLabel = Me.lblCancelled
+        Me.chkCancelled.Name = "chkCancelled"
+        Me.chkCancelled.OldValue = Nothing
+        Me.chkCancelled.UseVisualStyleBackColor = false
+        '
+        'lblDateCreated
+        '
+        Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
+        Me.lblDateCreated.DisplayOnly = true
+        Me.lblDateCreated.EditingMode = false
+        resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
+        Me.lblDateCreated.Name = "lblDateCreated"
+        '
+        'txtDateCreated
+        '
+        Me.txtDateCreated.BackColor = System.Drawing.Color.White
+        Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDateCreated.ComputedValue = false
+        Me.txtDateCreated.CustomFormat = Nothing
+        Me.txtDateCreated.DataBoundControl = true
+        Me.txtDateCreated.DisplayOnly = true
+        Me.txtDateCreated.EditingMode = true
+        Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, true)
+        resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
+        Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
+        Me.txtDateCreated.LinkedLabel = Me.lblReferenceNo
+        Me.txtDateCreated.MaximumValue = Nothing
+        Me.txtDateCreated.MinimumValue = Nothing
+        Me.txtDateCreated.Name = "txtDateCreated"
+        Me.txtDateCreated.OldValue = Nothing
+        Me.txtDateCreated.ReadOnly = true
+        Me.txtDateCreated.ValueIsMandatory = true
+        '
+        'DataGridViewJournalItems
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewJournalItems.AutoGenerateColumns = false
+        Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
+        Me.DataGridViewJournalItems.DataInGridChanged = false
+        Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle8
+        Me.DataGridViewJournalItems.DisplayOnly = false
+        Me.DataGridViewJournalItems.EditingMode = false
+        Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
+        Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
+        Me.DataGridViewJournalItems.ReadOnly = true
+        Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+        Me.DataGridViewJournalItems.StartTrackingChanges = false
+        '
+        'dgvSequence
+        '
+        Me.dgvSequence.DataPropertyName = "Sequence"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvSequence.EditingMode = false
+        resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+        Me.dgvSequence.Name = "dgvSequence"
+        Me.dgvSequence.ReadOnly = true
+        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvAccountIdNo
+        '
+        Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader
+        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
+        resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
+        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+        Me.dgvAccountIdNo.ReadOnly = true
+        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvDebit
+        '
+        Me.dgvDebit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.dgvDebit.DataPropertyName = "Debit"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.Format = "N2"
+        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvDebit.EditingMode = false
+        resources.ApplyResources(Me.dgvDebit, "dgvDebit")
+        Me.dgvDebit.Name = "dgvDebit"
+        Me.dgvDebit.ReadOnly = true
+        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'dgvCredit
+        '
+        Me.dgvCredit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.dgvCredit.DataPropertyName = "Credit"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.Format = "N2"
+        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvCredit.EditingMode = false
+        resources.ApplyResources(Me.dgvCredit, "dgvCredit")
+        Me.dgvCredit.Name = "dgvCredit"
+        Me.dgvCredit.ReadOnly = true
+        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'dgvProfitCenterIdNo
+        '
+        Me.dgvProfitCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.dgvProfitCenterIdNo.DataPropertyName = "ProfitCenterIdNo"
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvProfitCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+        resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
+        Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
+        Me.dgvProfitCenterIdNo.ReadOnly = true
+        Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvNotes
+        '
+        Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvNotes.DataPropertyName = "Notes"
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvNotes.EditingMode = false
+        resources.ApplyResources(Me.dgvNotes, "dgvNotes")
+        Me.dgvNotes.Name = "dgvNotes"
+        Me.dgvNotes.ReadOnly = true
+        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvIdNo
+        '
+        Me.dgvIdNo.DataPropertyName = "IdNo"
+        resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
+        Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
+        '
+        'SpecialAccount
+        '
+        Me.SpecialAccount.DataPropertyName = "SpecialAccount"
+        resources.ApplyResources(Me.SpecialAccount, "SpecialAccount")
+        Me.SpecialAccount.Name = "SpecialAccount"
+        Me.SpecialAccount.ReadOnly = true
+        '
+        'CFlowLayout4
+        '
+        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+        Me.CFlowLayout4.Name = "CFlowLayout4"
+        '
+        'AccountIdNoDataGridViewTextBoxColumn
+        '
+        Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
+        resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
+        Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
+        Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+        '
+        'CLabel2
+        '
+        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.Name = "CLabel2"
+        '
+        'chkClosingJournal
+        '
+        resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
+        Me.chkClosingJournal.AutoCheck = false
+        Me.chkClosingJournal.BackColor = System.Drawing.Color.White
+        Me.chkClosingJournal.DisplayOnly = true
+        Me.chkClosingJournal.EditingMode = true
+        Me.CFlowLayout1.SetFlowBreak(Me.chkClosingJournal, true)
+        Me.chkClosingJournal.ForeColor = System.Drawing.Color.Black
+        Me.chkClosingJournal.LinkedLabel = Me.lblActive
+        Me.chkClosingJournal.Name = "chkClosingJournal"
+        Me.chkClosingJournal.OldValue = Nothing
+        Me.chkClosingJournal.UseVisualStyleBackColor = false
+        '
+        'GeneralJournalEntry
+        '
+        resources.ApplyResources(Me, "$this")
+        Me.Controls.Add(Me.CFlowLayout4)
+        Me.Name = "GeneralJournalEntry"
+        Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        Me.floJournalHeader.ResumeLayout(false)
         Me.CFlowLayout1.ResumeLayout(false)
         Me.CFlowLayout1.PerformLayout
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -491,5 +516,7 @@ End Sub
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents chkClosingJournal As CCheckBox
     End Class
 End NameSpace

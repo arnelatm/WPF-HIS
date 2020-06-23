@@ -10,7 +10,7 @@ Namespace PresentationLayer.Models
 
         'Public Property Amount As Decimal
         Public Property Cancelled As Boolean
-
+        Public Property ClosingJournal As Boolean
         Public Property DateCreated As DateTime?
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

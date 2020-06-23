@@ -613,7 +613,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
-            Dim myForm = New GeneralJournalEntry
+            Dim myForm = New GeneralJournalEntry(False)
             myForm.Show()
         End Sub
 
@@ -1232,6 +1232,27 @@ Namespace PresentationLayer.Forms
         Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStateOfEmployeeLoans.Click
             Dim childMdiForm As ErSummary
             childMdiForm = New ErSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosingEntryToolStripMenuItem.Click
+            Dim myForm = New GeneralJournalEntry(True)
+            myForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemTrialBalanceForAGivenYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTrialBalanceForAGivenYear.Click
+            Dim childMdiForm As TrialBalance
+            childMdiForm = New TrialBalance("Y") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemTrialBalance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTrialBalance.Click
+            Dim childMdiForm As TrialBalance
+            childMdiForm = New TrialBalance("M") With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

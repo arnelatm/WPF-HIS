@@ -47,6 +47,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
         Messaging.AddMessage("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
         Messaging.AddMessage("MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
+        Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
     End Sub
 
     Public Shared Sub CreateEnums()

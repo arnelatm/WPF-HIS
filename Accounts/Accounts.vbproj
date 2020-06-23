@@ -367,6 +367,12 @@
     <Compile Include="PresentationLayer\Forms\Reports\StatementOfEr.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\TrialBalance.designer.vb">
+      <DependentUpon>TrialBalance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\TrialBalance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </Compile>
@@ -627,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfEr.resx">
       <DependentUpon>StatementOfEr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\TrialBalance.resx">
+      <DependentUpon>TrialBalance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
