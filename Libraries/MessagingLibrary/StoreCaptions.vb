@@ -1,4 +1,6 @@
-﻿Public Class StoreCaptions
+﻿Imports AATM.Libraries.CustomControlsLibrary
+
+Public Class StoreCaptions
     Inherits System.ComponentModel.Component
 
     ' Generated form code omitted, except for the following overloaded
@@ -32,12 +34,7 @@
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
-            'If IsTranslatable(cCtrl) Then
-            If TypeOf cCtrl Is DataGrid Then
-                t = CType(cCtrl, DataGrid).CaptionText
-                cCtrl.Tag = t
-                Captions.Add(cCtrl.Text, cCtrl.Name)
-            ElseIf TypeOf cCtrl Is ToolStrip Then
+            If TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = ""
                 Dim toolStrip As ToolStrip = cCtrl
                 Dim c As ToolStrip
@@ -49,10 +46,22 @@
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
                 SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
+            ElseIf TypeOf cCtrl Is DataGridView Then
+                Dim c As DataGridView
+                c = cCtrl
+                For Each col As DataGridViewColumn In c.Columns
+                    TranslateDataGridView(FormIdNo, c, col)
+                Next
+            ElseIf TypeOf cCtrl Is DataGrid Then
+                t = CType(cCtrl, DataGrid).CaptionText
+                cCtrl.Tag = t
+                Captions.Add(cCtrl.Text, cCtrl.Name)
             Else
                 Try
                     If TypeOf cCtrl Is TextBox OrElse
                        TypeOf cCtrl Is ComboBox OrElse
+                       TypeOf cCtrl Is CCustomDateTimePicker OrElse
+                       TypeOf cCtrl Is MaskedTextBox OrElse
                        TypeOf cCtrl Is FlowLayoutPanel Then
                         'Debugger.Break()
                     Else
@@ -104,6 +113,22 @@
             Else
                 Captions.Add("", c.Name + "." + obj.Name + ".ToolTipText")
             End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    
+    Private Sub TranslateDataGridView(formIdNo As Short, c As DataGridView, obj As Object)
+        Dim t As String
+        Try
+            For each col As DataGridViewColumn In c.Columns
+                t = col.HeaderText
+                Captions.Add(t, c.Name + "." + col.HeaderText)
+                InsertWord(t)
+                InsertFormItem(formIdNo, t)
+            Next
+
         Catch ex As Exception
 
         End Try

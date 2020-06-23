@@ -201,6 +201,14 @@ Public Class BfMain
 
     End Sub
 
+    Protected Sub RunTranslator(ByVal nFormIdNo)
+        Dim frm As New TranslationTableManager()
+        frm.FormIdNoToTranslate = FormIdNo
+        frm.AppDataDAC = AppDataDAC
+        frm.TranslatorDAC = TranslatorDAC
+        frm.Show()
+    End Sub
+
     Protected Overridable Sub ChangeToLtrDisplay()
         SuspendLayout()
         RightToLeftLayout = False
@@ -307,15 +315,7 @@ Public Class BfMain
             Dim allCtrl As New List(Of Control)
             For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
                 If IsTranslatable(cCtrl) Then
-                    If TypeOf cCtrl Is DataGrid Then
-                        _originalText = CaptionCollection.Item(cCtrl.Name)
-                        r = Dv.Find(_originalText)
-                        If r >= 0 Then
-                            CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
-                        Else
-                            CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-                        End If
-                    ElseIf TypeOf cCtrl Is ToolStrip Then
+                    If TypeOf cCtrl Is ToolStrip Then
                         TranslateToolStripItems(cCtrl)
                     ElseIf TypeOf cCtrl Is MenuStrip Then
                         Dim subMenuName = ""
@@ -326,6 +326,23 @@ Public Class BfMain
                         cT.ExpandAll()
                         cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                         cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                    ElseIf TypeOf cCtrl Is DataGridView Then
+                        '_originalText = CaptionCollection.Item(cCtrl.Name)
+                        'r = Dv.Find(_originalText)
+                        'If r >= 0 Then
+                        '    CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
+                        'Else
+                        '    CType(cCtrl, DataGridView).Text = cCtrl.Tag
+                        'End If
+                        TranslateDataGridView(cCtrl)
+                    ElseIf TypeOf cCtrl Is DataGrid Then
+                        _originalText = CaptionCollection.Item(cCtrl.Name)
+                        r = Dv.Find(_originalText)
+                        If r >= 0 Then
+                            CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
+                        Else
+                            CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
+                        End If
                     Else
                         If TypeOf cCtrl Is CButton Then
                             TranslateButton(cCtrl)
@@ -368,6 +385,12 @@ Public Class BfMain
                     c.RightToLeft = RightToLeft.No
                 End If
             End If
+        Next
+    End Sub
+
+    Private Sub TranslateDataGridView(ByRef cDataGridView As DataGridView)
+        For Each col As DataGridViewColumn In cDataGridView.Columns
+            col.HeaderText = Messaging.TranslateCaption(col.HeaderText)
         Next
     End Sub
 
@@ -888,5 +911,7 @@ Public Class BfMain
     '        End If
     '    Next
     'End Sub
+
+
 
 End Class

@@ -581,7 +581,7 @@ Public Class Dac
         Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
         If NeedToTranslateText(textDisplayLanguage) Then
             Dim cmd As String
-            cmd = "SELECT Concat(Coalesce(Translated,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT Concat(Coalesce(TranslatedCaption,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
             translatedText = ExecScalar(Of String)(cmd)
             'If Strings.Left(translatedText, 1) <> "~" Then
             '    translatedText = Strings.Mid(translatedText, 2)

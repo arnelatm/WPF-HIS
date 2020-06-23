@@ -651,12 +651,9 @@ Public Class CFormEntry
         If _debugSwitch Then
             Debugger.Break()
         End If
-        'RunButtonRoutine(ButtonClicked.Save)
-        Dim frm As New TranslationTableManager()
-        frm.FormIdNoToTranslate = FormIdNo
-        frm.AppDataDAC = AppDataDAC
-        frm.TranslatorDAC = TranslatorDAC
-        frm.Show()
+
+        RunTranslator(FormIdNo)
+
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click

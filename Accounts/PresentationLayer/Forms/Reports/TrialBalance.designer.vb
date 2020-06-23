@@ -29,6 +29,7 @@
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnTranslate = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -92,7 +93,7 @@
         Me.lblTitle.Location = New System.Drawing.Point(0, 0)
         Me.lblTitle.Margin = New System.Windows.Forms.Padding(1)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(321, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(339, 25)
         Me.lblTitle.TabIndex = 26
         Me.lblTitle.Text = "Trial Balance Yearly"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -115,7 +116,7 @@
         Me.btnOk.DesignerSelected = false
         Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(67, 99)
+        Me.btnOk.Location = New System.Drawing.Point(122, 98)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
@@ -128,7 +129,7 @@
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.DisplayOnly = true
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(173, 99)
+        Me.btnCancel.Location = New System.Drawing.Point(231, 98)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -136,9 +137,23 @@
         Me.btnCancel.TabIndex = 28
         Me.btnCancel.Text = "Cancel"
         '
+        'btnTranslate
+        '
+        Me.btnTranslate.DesignerSelected = false
+        Me.btnTranslate.DisplayOnly = true
+        Me.btnTranslate.ImageIndex = 0
+        Me.btnTranslate.Location = New System.Drawing.Point(12, 98)
+        Me.btnTranslate.Name = "btnTranslate"
+        Me.btnTranslate.OriginalImageName = Nothing
+        Me.btnTranslate.SecurityKey = ""
+        Me.btnTranslate.Size = New System.Drawing.Size(89, 25)
+        Me.btnTranslate.TabIndex = 29
+        Me.btnTranslate.Text = "Translate"
+        '
         'TrialBalance
         '
-        Me.ClientSize = New System.Drawing.Size(321, 133)
+        Me.ClientSize = New System.Drawing.Size(337, 133)
+        Me.Controls.Add(Me.btnTranslate)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
@@ -158,5 +173,6 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents btnTranslate As Libraries.CBaseControlsLibrary.CButton
     End Class
 End NameSpace
