@@ -279,6 +279,15 @@
     <Build Include="dbo\Views\ErJournalItem_View.sql" />
     <Build Include="dbo\Views\APDetails_Viewx.sql" />
     <Build Include="dbo\Views\APDetails_View1.sql" />
+    <Build Include="dbo\Tables\ChartBalance.sql" />
+    <Build Include="dbo\Views\RetainedEarnings_View.sql" />
+    <Build Include="dbo\Views\JournalDetails_View.sql" />
+    <Build Include="dbo\Views\GeneralLedger_View.sql" />
+    <Build Include="dbo\Views\GeneralJournalNormal_View.sql" />
+    <Build Include="dbo\Views\GeneralJournalClosing_View.sql" />
+    <Build Include="dbo\Views\Chart_ViewTestx.sql" />
+    <Build Include="dbo\Views\Chart_ViewTest.sql" />
+    <Build Include="dbo\Views\Captions_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

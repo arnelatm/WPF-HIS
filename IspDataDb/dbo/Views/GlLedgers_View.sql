@@ -3,18 +3,30 @@
 
 
 
-
-
-
-
-
-
-
-
-
 CREATE   VIEW [dbo].[GlLedgers_View]	
   AS
-(SELECT 'AP' AS 'JournalCode'
+(SELECT 'GJ' AS 'JournalCode'
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+      ,[Debit]
+      ,[Credit]
+	  ,[ProfitCenterIdNo]
+      ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
+	  ,a.[Posted]
+	  ,[TransactionDate] 
+      ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'
+	  ,'' COLLATE Arabic_CI_AS AS 'DocumentNumber'
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescription'
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescriptionAra'
+	  ,[ClosingJournal]
+  FROM [dbo].[GeneralJournalItem] a
+  LEFT OUTER JOIN dbo.GeneralJournal b
+  on a.JournalIdNo = b.IdNo
+)
+UNION
+(SELECT 'AP' 
 	  ,a.[IdNo]
       ,[Sequence]
       ,[JournalIdNo]
@@ -25,10 +37,11 @@ CREATE   VIEW [dbo].[GlLedgers_View]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,[InvoiceNo] AS 'DocumentNumber'
-	  ,[SupplierName] AS 'PayDescription'
-	  ,[SupplierNameAra] AS 'PayDescriptionAra'
+      ,[ReferenceNo] 
+	  ,[InvoiceNo] 
+	  ,[SupplierName] 
+	  ,[SupplierNameAra] 
+	  ,CAST(0 AS BIT) 
   FROM [dbo].[ApJournalItem] a
   LEFT OUTER JOIN dbo.[ApJournal] b
   on a.JournalIdNo = b.IdNo 
@@ -51,11 +64,35 @@ UNION
 	  ,[InvoiceNo] AS 'DocumentNumber'
 	  ,[CustomerName]
 	  ,[CustomerNameAra]
+	  ,CAST(0 AS BIT)
   FROM [dbo].[ArJournalItem] a
   LEFT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Customer] c
   on b.CustomerIdNo = c.IdNo 
+)
+UNION
+(SELECT 'ER' 
+	  ,a.[IdNo]
+      ,[Sequence]
+      ,[JournalIdNo]
+      ,a.[AccountIdNo]
+      ,[Debit]
+      ,[Credit]
+      ,[ProfitCenterIdNo]
+      ,a.[Notes]
+      ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,[ReferenceNo] AS 'DocumentNumber'
+	  ,[EmployeeName]
+	  ,[EmployeeNameAra]
+	  ,CAST(0 AS BIT)
+  FROM [dbo].[ErJournalItem] a
+  LEFT OUTER JOIN dbo.ErJournal b
+  on a.JournalIdNo = b.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.EmployeeIdNO = e.IdNo 
 )
 UNION
 (SELECT 'CK'
@@ -87,6 +124,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
+	   ,CAST(0 AS BIT)
   FROM [dbo].[CheckDisbursementJournalItem] a
   LEFT OUTER JOIN dbo.CheckDisbursementJournal b
   on a.JournalIdNo = b.IdNo
@@ -127,6 +165,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
+	  ,CAST(0 AS BIT)
   FROM [dbo].[CashDisbursementJournalItem] a
   LEFT OUTER JOIN dbo.CashDisbursementJournal b
   on a.JournalIdNo = b.IdNo
@@ -171,6 +210,7 @@ UNION
 			WHEN b.PayorType = 'O' then b.PayorName
 			ELSE b.PayorName
 	   END
+	  ,CAST(0 AS BIT)
   FROM [dbo].[CashReceiptJournalItem] a
   LEFT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IdNo
@@ -180,26 +220,6 @@ UNION
   on b.PayorIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayorIdNo = e.IDNo 
-)
-UNION
-(SELECT 'GJ'
-	  ,a.[IdNo]
-      ,[Sequence]
-	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
-	  ,[ProfitCenterIdNo]
-      ,a.[Notes]
-	  ,a.[Posted]
-	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,''
-	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
-	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
-  FROM [dbo].[GeneralJournalItem] a
-  LEFT OUTER JOIN dbo.GeneralJournal b
-  on a.JournalIdNo = b.IdNo
 )
 UNION
 (SELECT 'PC'
@@ -231,6 +251,7 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
+	  ,CAST(0 AS BIT)
   FROM [dbo].[PettyCashJournalItem] a
   LEFT OUTER JOIN dbo.PettyCashJournal b
   on a.JournalIdNo = b.IdNo
@@ -257,6 +278,7 @@ UNION
 	  ,''
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
+	  ,CAST(0 AS BIT)
   FROM [dbo].[SalesJournalItem] a
   LEFT OUTER JOIN dbo.SalesJournal b
   on a.JournalIdNo = b.Idno

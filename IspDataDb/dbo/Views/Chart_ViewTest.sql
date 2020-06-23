@@ -1,7 +1,8 @@
 ﻿
 
 
-CREATE View [dbo].[Chart_View] as 
+
+CREATE View [dbo].[Chart_ViewTest] as 
 with cte as
 (
 select
@@ -26,9 +27,9 @@ select
 	SpecialAccount,
 	Active,
 	DateTimeStamp,
-    cast(row_number()over(partition by ParentIdNo order by ParentIdNo) as varchar(max)) as [path],
+    cast(row_number()over(partition by ParentIdNo order by IdNo) as varchar(max)) as [path],
     0 as levelnumber,
-    row_number() over (partition by ParentIdNo order by ParentIdNo) / power(1000.0,0) as SortKey
+    row_number() over (partition by ParentIdNo order by IdNo) / power(1000.0,0) as SortKey
  
 from Chart
 where ParentIdNo IS NULL
@@ -55,9 +56,9 @@ select
 	t.SpecialAccount,
 	t.Active,
 	t.DateTimeStamp,
-    [path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.AccountName) as varchar(max)),
+    [path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.AccountCode) as varchar(max)),
     levelnumber+1,
-    SortKey + row_number()over(partition by t.ParentIdNo order by t.AccountName) / power(1000.0,levelnumber+1)
+    SortKey + row_number()over(partition by t.ParentIdNo order by t.AccountCode) / power(1000.0,levelnumber+1)
  
 from
     cte
@@ -90,6 +91,3 @@ select
     [path],
     SortKey
 from cte
-
-
-
