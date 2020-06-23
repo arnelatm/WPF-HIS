@@ -367,92 +367,56 @@
   <data name="&gt;&gt;dtpTransactionDate.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblNotes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>279, 26</value>
   </data>
-  <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 23</value>
+  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 23</value>
   </data>
-  <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
+  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
   </data>
-  <data name="lblNotes.Text" xml:space="preserve">
-    <value>Description/Notes</value>
+  <data name="CLabel2.Text" xml:space="preserve">
+    <value>Closing Entry?</value>
   </data>
-  <data name="lblNotes.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
-    <value>lblNotes</value>
+  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
+    <value>CLabel2</value>
   </data>
-  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
+  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+  <data name="chkClosingJournal.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
   </data>
-  <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 51</value>
+  <data name="chkClosingJournal.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
-  <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkClosingJournal.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="txtNotes.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chkClosingJournal.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 49</value>
-  </data>
-  <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
-    <value>txtNotes</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 13</value>
-  </data>
-  <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>777, 111</value>
-  </data>
-  <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
-    <value>246</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
-    <value>floJournalHeader</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="chkClosingJournal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblActive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -488,6 +452,120 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblActive.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkClosingJournal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>660, 26</value>
+  </data>
+  <data name="chkClosingJournal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="chkClosingJournal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 21</value>
+  </data>
+  <data name="chkClosingJournal.TabIndex" type="System.Int32, mscorlib">
+    <value>249</value>
+  </data>
+  <data name="chkClosingJournal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;chkClosingJournal.Name" xml:space="preserve">
+    <value>chkClosingJournal</value>
+  </data>
+  <data name="&gt;&gt;chkClosingJournal.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkClosingJournal.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;chkClosingJournal.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblNotes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 51</value>
+  </data>
+  <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 23</value>
+  </data>
+  <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="lblNotes.Text" xml:space="preserve">
+    <value>Description/Notes</value>
+  </data>
+  <data name="lblNotes.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
+    <value>lblNotes</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 51</value>
+  </data>
+  <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtNotes.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 49</value>
+  </data>
+  <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
+    <value>txtNotes</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 13</value>
+  </data>
+  <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>777, 111</value>
+  </data>
+  <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
+    <value>246</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
+    <value>floJournalHeader</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="chkPosted.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
@@ -2012,6 +2090,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>979, 453</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>995, 483</value>

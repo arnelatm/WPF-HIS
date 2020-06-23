@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views
     Public Interface IGeneralJournalView
         Inherits IView
         Property Cancelled As Boolean
+        Property ClosingJournal As Boolean
         Property DateCreated As DateTime?
         Property IdNo As Int32
         Property Notes As String

@@ -20,6 +20,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Cancelled As Boolean
+        Public Property ClosingJournal As Boolean
         Public Property DateCreated As DateTime?
         Public Property IdNo As Int32
         Public Property Notes As String

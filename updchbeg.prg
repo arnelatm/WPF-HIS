@@ -1,0 +1,18 @@
+SET DELETED Off
+CLOSE Data
+Use y:\acctbackup\chart.dbf
+Go Top
+lnfh = Fcreate("C:\TEMP\SQL\UpdateChartBegBal.sql")
+lctr = 0
+nFctr = 0
+Do While Not Eof()
+	cByDebit = STR(Chart.ByDebit,10,2)
+	cByCredit = STR(Chart.ByCredit,10,2)
+	
+	cText = "UPDATE Chart SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.AcctCode
+	Fputs(lnfh,cText)
+	Skip
+Enddo
+Fclose(lnfh)
+CLOSE ALL
+Cancel

@@ -887,6 +887,7 @@ Create Table c:\temp\GnJournal.Dbf (IdNo Integer(6),;
 	Reference c(15),;
 	Notes c(254),;
 	Posted Logical,;
+	Closing Logical,;
 	Cancelled Logical,;
 	DtCreated Date(8))
 Use
@@ -953,6 +954,7 @@ Do While Not Eof()
 	Replace GnJournal.TransDate With genrjour.Date
 	Replace GnJournal.Reference With genrjour.Reference
 	Replace GnJournal.Notes With genrjour.Descript
+	Replace GnJournal.Closing WITH genrjour.Closing
 	Replace GnJournal.Posted With Iif(genrjour.Posted="P",.T.,.F.)
 	Replace GnJournal.Cancelled With genrjour.Cancelled
 	Replace GnJournal.DtCreated With genrjour.DateAdded
@@ -2098,7 +2100,36 @@ Close All
 *******************************************************************************
 
 Close Databases
-Use c:\temp\supplier.Dbf
+
+
+Create Table c:\temp\ChartNBal.Dbf ;
+	(IdNo Integer(6),;
+	Year INT(4),;
+	AcctIdNo INT(7),;
+	ByDebit numeric(10,2),;
+	ByCredit numeric(10,2))
+nCtr = 0
+Select 1
+Use y:\acctbackup\chartBal.Dbf Alias ChartBal Exclusive
+SELECT 2
+USE c:\temp\ChartNBal ALIAS ChartNBal
+SELECT 1
+GO Top
+Do While Not Eof()
+	nCtr = nCtr + 1
+	SELECT ChartNBal
+	Append Blank
+	Replace ChartNBal.IdNo With nCtr
+	Replace ChartNBal.AcctIdNo WITH VAL(ChartBal.AcctCode)
+	Replace ChartNBal.Year With VAL(ChartBal.Year)
+	Replace ChartNBal.ByDebit With ChartBal.ByDebit
+	Replace ChartNBal.ByCredit With ChartBal.ByCredit
+	Select ChartBal
+	Skip
+ENDDO
+
+CLOSE DataBase
+
 Set Deleted On
 Set Exclusive On
 Set Safety Off
@@ -2132,7 +2163,7 @@ DbfToSql(cFields,"ErJournal","ErJournal")
 cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"ErJourItm","ErJournalItem")
 
-cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Notes],[Posted],[Cancelled],[DateCreated]"
+cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Notes],[Posted],[ClosingJournal],[Cancelled],[DateCreated]"
 DbfToSql(cFields,"GnJournal","GeneralJournal")
 
 cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
@@ -2173,7 +2204,26 @@ DbfToSql(cFields,"CsrOiItm","CsrOiItem")
 cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
 DbfToSql(cFields,"ArOpInvo","ArOpenInvoice")
 
-Close All
+cFields = "[IdNo],[Year],[AccountIdNo],[Debit],[Credit]"
+DbfToSql(cFields,"ChartNBal","ChartBalance")
+
+SET DELETED Off
+CLOSE Data
+Use y:\acctbackup\chart.dbf
+Go Top
+lnfh = Fcreate("C:\TEMP\SQL\UpdateChartBegBal.sql")
+lctr = 0
+nFctr = 0
+Do While Not Eof()
+	cByDebit = STR(Chart.ByDebit,10,2)
+	cByCredit = STR(Chart.ByCredit,10,2)
+	
+	cText = "UPDATE Chart SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.AcctCode
+	Fputs(lnfh,cText)
+	Skip
+Enddo
+Fclose(lnfh)
+CLOSE ALL
 Cancel
 
 

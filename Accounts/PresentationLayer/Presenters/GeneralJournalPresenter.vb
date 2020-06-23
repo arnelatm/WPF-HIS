@@ -12,11 +12,17 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private _closingEntry As Boolean
 
-        Public Sub New(view As IGeneralJournalView)
+        Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
+            _closingEntry = closingEntry
             ModelPresenter = New ModelAccounts("GeneralJournal")
-            TableName = "GeneralJournal"
+            If Not view.ClosingJournal Then
+                TableName = "GeneralJournalNormal_View"
+            Else
+                TableName = "GeneralJournalClosing_View"
+            End If
             SortOrderKey = "IdNo"
             OriginalModel = New GeneralJournalModel()
             DataModel = New GeneralJournalModel

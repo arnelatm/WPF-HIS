@@ -17,17 +17,27 @@ Namespace PresentationLayer.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _profitCentersByCode
+        Private ReadOnly _closingEntry as Boolean
 
-        Public Sub New()
+        Public Sub New(ByVal closingEntry As Boolean)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "GeneralJournal"
+            _closingEntry = closingEntry
+            ClosingJournal = _closingEntry
+            If Not closingEntry Then
+                Text = "General Journal Entry"
+                MainTableName = "GeneralJournalNormal_View"
+            Else
+                Text = "Closing Entry"
+                MainTableName = "GeneralJournalClosing_View"
+            End If
+
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New GeneralJournalPresenter(Me)
+            PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
@@ -43,6 +53,16 @@ Namespace PresentationLayer.Forms
                 chkCancelled.Checked = Value
             End Set
         End Property
+
+        Public Property ClosingJournal As Boolean Implements IGeneralJournalView.ClosingJournal
+            Get 
+                return chkClosingJournal.Checked
+            End Get
+            Set(value As Boolean)
+                chkClosingJournal.Checked = value
+            End Set
+        End Property
+
 
         Public Property DateCreated As DateTime? Implements IGeneralJournalView.DateCreated
             Get
@@ -211,6 +231,13 @@ Namespace PresentationLayer.Forms
                 dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
+        End Sub
+
+
+        Private Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If PresenterObj.AddMode Then
+                chkClosingJournal.Checked = _closingEntry
+            End If
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _

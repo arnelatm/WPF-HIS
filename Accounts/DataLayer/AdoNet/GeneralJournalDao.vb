@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT " &
                     "Cancelled," &
+                    "ClosingJournal," &
                     "DateCreated," &
                     "IdNo," &
                     "Notes," &
@@ -40,6 +41,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "UPDATE [GeneralJournal] SET " &
                     "Cancelled = @Cancelled," &
+                    "ClosingJournal = @ClosingJournal," &
                     "Notes = @Notes," &
                     "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
@@ -54,12 +56,14 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [GeneralJournal] " &
                     "(" &
                     "Cancelled," &
+                    "ClosingJournal," &
                     "Notes," &
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate" &
                     ") VALUES (" &
                     "@Cancelled," &
+                    "@ClosingJournal," &
                     "@Notes," &
                     "@Posted," &
                     "@ReferenceNo," &
@@ -72,6 +76,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New GeneralJournal() With {
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
+            .ClosingJournal = Extensions.AsBool(reader("ClosingJournal")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
@@ -83,6 +88,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(generalJournal As GeneralJournal) As Object()
             Return New Object() {
                                     "@Cancelled", generalJournal.Cancelled,
+                                    "@ClosingJournal", generalJournal.ClosingJournal,
                                     "@DateCreated", generalJournal.DateCreated,
                                     "@IdNo", generalJournal.IdNo,
                                     "@Notes", generalJournal.Notes,
