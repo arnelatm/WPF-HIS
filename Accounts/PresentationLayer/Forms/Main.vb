@@ -1242,7 +1242,7 @@ Namespace PresentationLayer.Forms
             myForm.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemTrialBalanceForAGivenYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTrialBalanceForAGivenYear.Click
+        Private Sub YearlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("Y") With {
                 .MdiParent = Me
@@ -1250,12 +1250,56 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemTrialBalance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTrialBalance.Click
+        Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("M") With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()
+        End Sub
+
+        Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem.Click
+            Dim childMdiForm As TrialBalance
+            childMdiForm = New TrialBalance("Q") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub SemestralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SemestralToolStripMenuItem.Click
+            Dim childMdiForm As TrialBalance
+            childMdiForm = New TrialBalance("S") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomToolStripMenuItem.Click
+            Dim childMdiForm As TrialBalance
+            childMdiForm = New TrialBalance("C") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub YearlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem1.Click
+            Dim childMdiForm As BalanceSheet
+            childMdiForm = New BalanceSheet("Y") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub MonthlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem1.Click
+            Dim childMdiForm As BalanceSheet
+            childMdiForm = New BalanceSheet("M") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralLedgerDetailToolStripMenuItem.Click
+
         End Sub
 
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)

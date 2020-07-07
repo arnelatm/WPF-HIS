@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAASgBBgEoAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAVgBBgFYAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3727,17 +3727,65 @@
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Text" xml:space="preserve">
     <value>Summary of Accounts Receivable</value>
   </data>
+  <data name="MonthlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 22</value>
+  </data>
+  <data name="MonthlyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="QuarterlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 22</value>
+  </data>
+  <data name="QuarterlyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Quarterly</value>
+  </data>
+  <data name="SemestralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 22</value>
+  </data>
+  <data name="SemestralToolStripMenuItem.Text" xml:space="preserve">
+    <value>Semestral</value>
+  </data>
+  <data name="YearlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 22</value>
+  </data>
+  <data name="YearlyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="CustomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 22</value>
+  </data>
+  <data name="CustomToolStripMenuItem.Text" xml:space="preserve">
+    <value>Custom</value>
+  </data>
   <data name="ToolStripMenuItemTrialBalance.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 22</value>
   </data>
   <data name="ToolStripMenuItemTrialBalance.Text" xml:space="preserve">
-    <value>Trial Balance for a given Month</value>
+    <value>Trial Balance</value>
   </data>
-  <data name="ToolStripMenuItemTrialBalanceForAGivenYear.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="YearlyToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="YearlyToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="MonthlyToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="MonthlyToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 22</value>
   </data>
-  <data name="ToolStripMenuItemTrialBalanceForAGivenYear.Text" xml:space="preserve">
-    <value>Trial Balance for a Given Year</value>
+  <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="GeneralLedgerDetailToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 22</value>
+  </data>
+  <data name="GeneralLedgerDetailToolStripMenuItem.Text" xml:space="preserve">
+    <value>General Ledger Detail </value>
   </data>
   <data name="ToolStripMenuItemIncomeStatementForAGivenMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 22</value>
@@ -3750,12 +3798,6 @@
   </data>
   <data name="ToolStripMenuItemIncomeStatementForAGivenYear.Text" xml:space="preserve">
     <value>Income Statement for a given Year</value>
-  </data>
-  <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
-  </data>
-  <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
-    <value>Balance Sheet for a Given Month</value>
   </data>
   <data name="ToolStripMenuItemBalanceSheetForAGivenYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 22</value>
@@ -3979,7 +4021,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAASgBBgEoAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAVgBBgFYAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4790,10 +4832,52 @@
   <data name="&gt;&gt;ToolStripMenuItemTrialBalance.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemTrialBalanceForAGivenYear.Name" xml:space="preserve">
-    <value>ToolStripMenuItemTrialBalanceForAGivenYear</value>
+  <data name="&gt;&gt;MonthlyToolStripMenuItem.Name" xml:space="preserve">
+    <value>MonthlyToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemTrialBalanceForAGivenYear.Type" xml:space="preserve">
+  <data name="&gt;&gt;MonthlyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QuarterlyToolStripMenuItem.Name" xml:space="preserve">
+    <value>QuarterlyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;QuarterlyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SemestralToolStripMenuItem.Name" xml:space="preserve">
+    <value>SemestralToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;SemestralToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem.Name" xml:space="preserve">
+    <value>YearlyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CustomToolStripMenuItem.Name" xml:space="preserve">
+    <value>CustomToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;CustomToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemBalanceSheet.Name" xml:space="preserve">
+    <value>ToolStripMenuItemBalanceSheet</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemBalanceSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem1.Name" xml:space="preserve">
+    <value>YearlyToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MonthlyToolStripMenuItem1.Name" xml:space="preserve">
+    <value>MonthlyToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;MonthlyToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenMonth.Name" xml:space="preserve">
@@ -4806,12 +4890,6 @@
     <value>ToolStripMenuItemIncomeStatementForAGivenYear</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenYear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemBalanceSheet.Name" xml:space="preserve">
-    <value>ToolStripMenuItemBalanceSheet</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemBalanceSheet.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemBalanceSheetForAGivenYear.Name" xml:space="preserve">
@@ -5034,6 +5112,12 @@
     <value>toolStripMenuItem19</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GeneralLedgerDetailToolStripMenuItem.Name" xml:space="preserve">
+    <value>GeneralLedgerDetailToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;GeneralLedgerDetailToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

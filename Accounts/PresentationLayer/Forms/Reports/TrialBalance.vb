@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -17,56 +18,57 @@ Namespace PresentationLayer.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "ApJournal"
+            MainTableName = "Chart"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
-
             _period = period
-            ' returns previous month last day
-
-
-            'Select Case _period
-            '    Case "Y"
-            '        endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
-            '        Text = "Trial Balance for the Year"
-            '        lblDateCaption.Text = "Year End Date:"
-            '    Case "M"
-            '        endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
-            '        Text = "Trial Balance for the Month"
-            '        lblDateCaption.Text = "Month End Date:"
-            'End Select
-            'lblTitle.Text = Text
-
 
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            If _period = "Y" And (Month(dtpEndingDate.Value) <> 12 Or Microsoft.VisualBasic.DateAndTime.Day(dtpEndingDate.Value) <> 31) Then
-                Messaging.Show(True, "MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
-            Else
-                Dim beginningDate As Date
-                Dim lastPostingDate As Date
-                Dim chartBalanceYear As Integer
-                Dim begDataDate As Date
-                lastPostingDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim beginningDate As Date
+            Dim lastPostingDate As Date
+            Dim chartBalanceYear As Integer
+            Dim begDataDate As Date
+            lastPostingDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
-                Select Case _period
-                    Case "Y"
-                        beginningDate = DateSerial(Year(dtpEndingDate.Value), 1, 1)
-                    Case "M"
-                        beginningDate = DateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
-                        dtpEndingDate.Value = DateSerial(Year(dtpEndingDate.Value),month(dtpEndingDate.Value)+1,0)
-                End Select
-                If beginningDate < lastPostingDate Then
-                    chartBalanceYear = Year(beginningDate)
-                    begDataDate = beginningDate
-                Else
-                    chartBalanceYear = Year(lastPostingDate)
-                    begDataDate = lastPostingDate
-                End If
-                Dim cForm As New ReportForm("Trial Balance.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", begDataDate, "begDataDate", _period, "Period")
-                cForm.Show()
+            Select Case _period
+                Case "Y"
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
+                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
+                Case "M"
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
+                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value) + 1, 0)
+                Case "Q"
+                    Dim nMonth = Month(dtpEndingDate.Value)
+                    Dim quarter = Int(nMonth / 3 + 0.8)
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3 - 2, 1)
+                    Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3, 1)
+                    quarterEndDate = DateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
+                    dtpEndingDate.Value = quarterEndDate
+                Case "S"
+                    Dim nMonth = Month(dtpEndingDate.Value)
+                    Dim semester = Int(nMonth / 6 + 0.9)
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6 - 5, 1)
+                    Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6, 1)
+                    semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
+                    dtpEndingDate.Value = semesterEndDate
+                Case "C"
+                    beginningDate = dtpBeginningDate.Value
+            End Select
+            If beginningDate < lastPostingDate Then
+                chartBalanceYear = Year(beginningDate)
+                begDataDate = beginningDate
+            Else
+                chartBalanceYear = Year(lastPostingDate)
+                begDataDate = lastPostingDate
             End If
+            Dim cForm As New ReportForm("Trial Balance.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", begDataDate, "begDataDate", _period, "Period")
+            cForm.Show()
+
+            CultureInfo.CurrentCulture = curCulture
 
         End Sub
 
@@ -81,15 +83,35 @@ Namespace PresentationLayer.Forms.Reports
         Private Sub TrialBalance_BeforeLoad() Handles MyBase.BeforeLoad
             Dim currentDate = Now()
             Dim endDate As Date
+            lblBegDateCaption.Visible = False
+            dtpBeginningDate.Visible = False
             Select Case _period
                 Case "Y"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
                     Text = "Trial Balance for the Year"
-                    lblDateCaption.Text = "Year End Date:"
+                    lblEndDateCaption.Text = "Year End Date:"
                 Case "M"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
                     Text = "Trial Balance for the Month"
-                    lblDateCaption.Text = "Month End Date:"
+                    lblEndDateCaption.Text = "Month End Date:"
+                Case "Q"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Trial Balance for the Quarter"
+                    lblEndDateCaption.Text = "Quarterly End Date:"
+                Case "S"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Trial Balance for the Semester"
+                    lblEndDateCaption.Text = "Semester End Date:"
+                Case "C"
+                    lblBegDateCaption.Visible = True
+                    lblEndDateCaption.Visible = True
+                    dtpEndingDate.Visible = True
+                    dtpBeginningDate.Visible = True
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Trial Balance for Custom Period"
+                    lblEndDateCaption.Text = "Period Beginning Date:"
+                    lblEndDateCaption.Text = "Period End Date:"
+                    
             End Select
             lblTitle.Text = Text
             dtpEndingDate.Value = endDate

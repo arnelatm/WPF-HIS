@@ -22,7 +22,7 @@
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TrialBalance))
-        Me.lblDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblEndDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndingDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -30,22 +30,24 @@
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnTranslate = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.dtpBeginningDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.lblBegDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
-        'lblDateCaption
+        'lblEndDateCaption
         '
-        Me.lblDateCaption.DisplayOnly = true
-        Me.lblDateCaption.EditingMode = false
-        Me.lblDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblDateCaption.Location = New System.Drawing.Point(11, 11)
-        Me.lblDateCaption.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblDateCaption.Name = "lblDateCaption"
-        Me.lblDateCaption.Size = New System.Drawing.Size(171, 25)
-        Me.lblDateCaption.TabIndex = 21
-        Me.lblDateCaption.Text = "Ending Date:"
-        Me.lblDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblEndDateCaption.DisplayOnly = true
+        Me.lblEndDateCaption.EditingMode = false
+        Me.lblEndDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblEndDateCaption.Location = New System.Drawing.Point(11, 38)
+        Me.lblEndDateCaption.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblEndDateCaption.Name = "lblEndDateCaption"
+        Me.lblEndDateCaption.Size = New System.Drawing.Size(171, 25)
+        Me.lblEndDateCaption.TabIndex = 21
+        Me.lblEndDateCaption.Text = "Ending Date:"
+        Me.lblEndDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'dtpEndingDate
         '
@@ -58,7 +60,7 @@
         Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, true)
         Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
         Me.dtpEndingDate.LinkedLabel = Nothing
-        Me.dtpEndingDate.Location = New System.Drawing.Point(184, 11)
+        Me.dtpEndingDate.Location = New System.Drawing.Point(184, 38)
         Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpEndingDate.Name = "dtpEndingDate"
         Me.dtpEndingDate.ReadOnlyDp = false
@@ -75,12 +77,14 @@
         'CFlowLayout1
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.lblDateCaption)
+        Me.CFlowLayout1.Controls.Add(Me.lblBegDateCaption)
+        Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
+        Me.CFlowLayout1.Controls.Add(Me.lblEndDateCaption)
         Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(309, 47)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(309, 79)
         Me.CFlowLayout1.TabIndex = 26
         '
         'lblTitle
@@ -116,7 +120,7 @@
         Me.btnOk.DesignerSelected = false
         Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(122, 98)
+        Me.btnOk.Location = New System.Drawing.Point(122, 131)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
@@ -129,7 +133,7 @@
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.DisplayOnly = true
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(231, 98)
+        Me.btnCancel.Location = New System.Drawing.Point(231, 131)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -142,7 +146,7 @@
         Me.btnTranslate.DesignerSelected = false
         Me.btnTranslate.DisplayOnly = true
         Me.btnTranslate.ImageIndex = 0
-        Me.btnTranslate.Location = New System.Drawing.Point(12, 98)
+        Me.btnTranslate.Location = New System.Drawing.Point(12, 131)
         Me.btnTranslate.Name = "btnTranslate"
         Me.btnTranslate.OriginalImageName = Nothing
         Me.btnTranslate.SecurityKey = ""
@@ -150,9 +154,47 @@
         Me.btnTranslate.TabIndex = 29
         Me.btnTranslate.Text = "Translate"
         '
+        'dtpBeginningDate
+        '
+        Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpBeginningDate.DefaultValue = Nothing
+        Me.dtpBeginningDate.DisplayOnly = false
+        Me.dtpBeginningDate.DtpDefaultValue = Nothing
+        Me.dtpBeginningDate.EditingMode = true
+        Me.dtpBeginningDate.EditsAllowed = false
+        Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, true)
+        Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpBeginningDate.LinkedLabel = Nothing
+        Me.dtpBeginningDate.Location = New System.Drawing.Point(184, 11)
+        Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpBeginningDate.Name = "dtpBeginningDate"
+        Me.dtpBeginningDate.ReadOnlyDp = false
+        Me.dtpBeginningDate.SecurityKey = Nothing
+        Me.dtpBeginningDate.ShowLongDate = false
+        Me.dtpBeginningDate.ShowTime = false
+        Me.dtpBeginningDate.Size = New System.Drawing.Size(107, 25)
+        Me.dtpBeginningDate.TabIndex = 26
+        Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpBeginningDate.Value = Nothing
+        Me.dtpBeginningDate.ValueIsMandatory = false
+        Me.dtpBeginningDate.ValueIsNullable = false
+        '
+        'lblBegDateCaption
+        '
+        Me.lblBegDateCaption.DisplayOnly = true
+        Me.lblBegDateCaption.EditingMode = false
+        Me.lblBegDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblBegDateCaption.Location = New System.Drawing.Point(11, 11)
+        Me.lblBegDateCaption.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblBegDateCaption.Name = "lblBegDateCaption"
+        Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
+        Me.lblBegDateCaption.TabIndex = 25
+        Me.lblBegDateCaption.Text = "Ending Date:"
+        Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'TrialBalance
         '
-        Me.ClientSize = New System.Drawing.Size(337, 133)
+        Me.ClientSize = New System.Drawing.Size(337, 171)
         Me.Controls.Add(Me.btnTranslate)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnCancel)
@@ -166,7 +208,7 @@
         Me.ResumeLayout(false)
 
 End Sub
-        Friend WithEvents lblDateCaption As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblEndDateCaption As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpEndingDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblTitle As Libraries.CBaseControlsLibrary.CLabel
@@ -174,5 +216,7 @@ End Sub
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnTranslate As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents dtpBeginningDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents lblBegDateCaption As Libraries.CBaseControlsLibrary.CLabel
     End Class
 End NameSpace
