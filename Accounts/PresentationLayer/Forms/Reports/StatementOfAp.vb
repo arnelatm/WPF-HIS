@@ -19,8 +19,8 @@ Namespace PresentationLayer.Forms.Reports
             PresenterObj = New ReportPresenter(Me)
             cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByName()
             Dim today = Now()
-            dtpBeginningDate.Value = DateSerial(today.Year, 1, 1)
-            dtpEndingDate.Value = DateSerial(today.Year, today.Month, today.Day)
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
+            dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
 
         End Sub
 

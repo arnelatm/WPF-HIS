@@ -343,6 +343,12 @@
     <Compile Include="PresentationLayer\Forms\Reports\ArSummary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheet.designer.vb">
+      <DependentUpon>BalanceSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\ErSummary.designer.vb">
       <DependentUpon>ErSummary.vb</DependentUpon>
     </Compile>
@@ -621,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\ArSummary.resx">
       <DependentUpon>ArSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Reports\BalanceSheet.resx">
+      <DependentUpon>BalanceSheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Reports\ErSummary.resx">
       <DependentUpon>ErSummary.vb</DependentUpon>

@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms.Reports
     Public Class ArSummary
@@ -19,9 +20,9 @@ Namespace PresentationLayer.Forms.Reports
             PresenterObj = New ReportPresenter(Me)
             Dim currentDate = Now()
             ' returns previous month last day
-            Dim endDate = DateSerial(currentDate.Year,currentDate.Month,0)
+            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year,currentDate.Month,0)
             dtpEndingDate.Value = endDate
-            dtpBeginningDate.Value = DateSerial(endDate.Year,endDate.Month,1)
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year,endDate.Month,1)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
