@@ -2,9 +2,7 @@
 
 
 
-
-
-CREATE View [dbo].[Chart_View] as 
+CREATE View [dbo].[Chart_View2] as 
 with cte as
 (
 select
@@ -30,16 +28,7 @@ select
 	Active,
 	GroupSortOrder,
 	DateTimeStamp,
-	CASE AccountGroup 
-		WHEN 'A' THEN 1
-		WHEN 'L' THEN 2
-		WHEN 'E' THEN 3
-		WHEN 'R' THEN 4
-		WHEN 'C' THEN 5
-		WHEN 'X' THEN 6
-		ELSE 0
-	END AS 'AccountGroupOrder',
-    cast(row_number()over(partition by ParentIdNo order by ParentIdNo) as varchar(max)) as [path],
+    cast(row_number() OVER (partition by ParentIdNo order by ParentIdNo) as varchar(max)) as [path],
     0 as levelnumber,
     row_number() over (partition by ParentIdNo order by ParentIdNo) / power(1000.0,0) as SortKey
  
@@ -69,10 +58,9 @@ select
 	t.Active,
 	t.GroupSortOrder,
 	t.DateTimeStamp,
-	AccountGroupOrder,
-    [path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.GroupSortOrder) as varchar(max)),
+    [path] +'-'+ cast(row_number() OVER (partition by t.ParentIdNo order by t.GroupSortOrder) as varchar(max)),
     levelnumber+1,
-    SortKey + row_number()over(partition by t.ParentIdNo order by t.GroupSortOrder) / power(1000.0,levelnumber+1)
+    SortKey + row_number() OVER (partition by t.ParentIdNo order by t.GroupSortOrder) / power(1000.0,levelnumber+1)
  
 from
     cte
@@ -101,12 +89,8 @@ select
 	SpecialAccount,
 	Active,
 	LevelNumber,
-	LevelNumber+1 AS PLevelNumber,
+	GroupSortOrder,
 	DateTimeStamp,   
-	AccountGroupOrder,
     [path],
     SortKey
 from cte
-
-
-

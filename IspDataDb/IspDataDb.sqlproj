@@ -288,6 +288,17 @@
     <Build Include="dbo\Views\Chart_ViewTestx.sql" />
     <Build Include="dbo\Views\Chart_ViewTest.sql" />
     <Build Include="dbo\Views\Captions_View.sql" />
+    <Build Include="dbo\Views\GLBalanceSheet_View.sql" />
+    <Build Include="dbo\Views\Earnings_View.sql" />
+    <Build Include="dbo\Views\CurrentEarnings_View.sql" />
+    <Build Include="dbo\Views\ChartBalance_View.sql" />
+    <Build Include="dbo\Views\Chart_View2.sql" />
+    <Build Include="dbo\Views\BalanceSheetLayout_View2.sql" />
+    <Build Include="dbo\Views\BalanceSheetLayout_View.sql" />
+    <Build Include="dbo\Views\BalanceSheet_View.sql" />
+    <Build Include="dbo\Functions\FuncGlStatement.sql" />
+    <Build Include="dbo\Functions\FuncGlBalanceSheet.sql" />
+    <Build Include="dbo\Functions\FuncAccountBalance.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
