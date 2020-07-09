@@ -1298,8 +1298,12 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralLedgerDetailToolStripMenuItem.Click
-
+        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionDetailToolStripMenuItem.Click
+            Dim childMdiForm As TransactionDetail
+            childMdiForm = New TransactionDetail With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)

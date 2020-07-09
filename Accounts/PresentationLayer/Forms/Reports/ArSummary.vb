@@ -26,7 +26,7 @@ Namespace PresentationLayer.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm As New ReportForm("Summary of Accounts Receivable.Rpt") 
+            Dim cForm As New ReportForm("Summary of Accounts Receivable.Rpt",dtpEndingDate.Value , "BeginningDate", dtpEndingDate.Value, "EndingDate")
             cForm.Show()
         End Sub
 
