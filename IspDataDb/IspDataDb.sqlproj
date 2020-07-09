@@ -299,6 +299,7 @@
     <Build Include="dbo\Functions\FuncGlStatement.sql" />
     <Build Include="dbo\Functions\FuncGlBalanceSheet.sql" />
     <Build Include="dbo\Functions\FuncAccountBalance.sql" />
+    <Build Include="dbo\Functions\FuncAcctStatement.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
