@@ -3,15 +3,17 @@
 
 
 
-CREATE   VIEW [dbo].[GlLedgers_View]	
+
+CREATE VIEW [dbo].[GlLedgers_View]	
   AS
 (SELECT 'GJ' AS 'JournalCode'
 	  ,a.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.[AccountCode]
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
 	  ,a.[Posted]
@@ -24,6 +26,8 @@ CREATE   VIEW [dbo].[GlLedgers_View]
   FROM [dbo].[GeneralJournalItem] a
   LEFT OUTER JOIN dbo.GeneralJournal b
   on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'AP' 
@@ -31,8 +35,9 @@ UNION
       ,[Sequence]
       ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
       ,[ProfitCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
@@ -47,6 +52,8 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Supplier] c
   on b.SupplierIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'AR' AS 'JournalCode'
@@ -54,8 +61,9 @@ UNION
       ,[Sequence]
       ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
       ,[ProfitCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
@@ -70,6 +78,8 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Customer] c
   on b.CustomerIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'ER' 
@@ -77,8 +87,9 @@ UNION
       ,[Sequence]
       ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
       ,[ProfitCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
@@ -93,6 +104,8 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.EmployeeIdNO = e.IdNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'CK'
@@ -100,8 +113,9 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
@@ -134,6 +148,8 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'CD'
@@ -141,8 +157,9 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
@@ -175,6 +192,8 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'CR'
@@ -182,8 +201,9 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
@@ -220,6 +240,8 @@ UNION
   on b.PayorIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayorIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'PC'
@@ -227,8 +249,9 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
@@ -261,6 +284,8 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
 UNION
 (SELECT 'SJ'
@@ -268,8 +293,9 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
 	  ,[ProfitCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
@@ -282,4 +308,6 @@ UNION
   FROM [dbo].[SalesJournalItem] a
   LEFT OUTER JOIN dbo.SalesJournal b
   on a.JournalIdNo = b.Idno
+  LEFT OUTER JOIN dbo.Chart ch
+  ON a.AccountIdNo = ch.IdNo
 )
