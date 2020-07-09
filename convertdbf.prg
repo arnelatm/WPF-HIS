@@ -459,7 +459,7 @@ Do While Not Eof()
 *!*				Replace ErJournal.Cancelled With .F.
 *!*				Replace ErJournal.DtCreated With Date(2016,12,31)
 *!*			Else
-*!*				nArCtr = nArCtr + 1
+			nArCtr = nArCtr + 1
 			Select ArJourItm
 			Append Blank
 			Replace ArJourItm.IdNo With nArCtr
