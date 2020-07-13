@@ -1306,6 +1306,14 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub YearlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem2.Click
+            Dim childMdiForm As IncomeStatement
+            childMdiForm = New IncomeStatement("Y") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

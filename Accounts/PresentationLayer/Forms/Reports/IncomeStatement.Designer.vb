@@ -1,6 +1,6 @@
 ﻿Namespace PresentationLayer.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class BalanceSheet
+    Partial Class IncomeStatement
         Inherits AATM.PresentationLayer.Forms.BfMain
 
         'Form overrides dispose to clean up the component list.
@@ -21,7 +21,7 @@
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BalanceSheet))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IncomeStatement))
         Me.lblEndDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndingDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -99,7 +99,7 @@
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(339, 25)
         Me.lblTitle.TabIndex = 26
-        Me.lblTitle.Text = "Balance Sheet Yearly"
+        Me.lblTitle.Text = "Income Statement Yearly"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CLabel1
@@ -192,7 +192,7 @@
         Me.lblBegDateCaption.Text = "Ending Date:"
         Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'BalanceSheet
+        'IncomeStatement
         '
         Me.ClientSize = New System.Drawing.Size(337, 171)
         Me.Controls.Add(Me.btnTranslate)
@@ -201,8 +201,8 @@
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
-        Me.Name = "BalanceSheet"
-        Me.Text = "Balance Sheet Yearly"
+        Me.Name = "IncomeStatement"
+        Me.Text = "Income Statement Yearly"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
