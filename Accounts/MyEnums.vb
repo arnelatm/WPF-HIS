@@ -117,17 +117,19 @@ Public Enum SpecialAccountSelection
     <EnumCode("AP")> AccountsPayable
     <EnumCode("PD")> AccountsPayableDiscount
     <EnumCode("AR")> AccountsReceivable
-    <EnumCode("SL")> Sales
-    <EnumCode("RD")> AccountsReceivableDiscount
+    <EnumCode("AS")> AdvancesToSupplier
     <EnumCode("BA")> Bank
+    <EnumCode("BI")> BeginningInventory
+    <EnumCode("CA")> CustomerAdvances
     <EnumCode("CS")> Cash
     <EnumCode("CK")> CheckingAccount
-    <EnumCode("PC")> PettyCashAccount
     <EnumCode("EL")> EmployeeLoan
+    <EnumCode("EI")> EndingInventory
+    <EnumCode("SL")> Sales
+    <EnumCode("RD")> AccountsReceivableDiscount
+    <EnumCode("PC")> PettyCashAccount
     <EnumCode("VI")> VatInput
     <EnumCode("VO")> VatOutput
-    <EnumCode("AS")> AdvancesToSupplier
-    <EnumCode("CA")> CustomerAdvances
 End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
@@ -460,8 +462,12 @@ Public Module Adapter
                 retValue = "AS"
             Case SpecialAccountSelection.CustomerAdvances
                 retValue = "AC"
+            Case SpecialAccountSelection.BeginningInventory
+                retValue = "BI"
+            Case SpecialAccountSelection.EndingInventory
+                retValue = "EI"
             Case Else
-                retValue = "A"
+                retValue = ""
         End Select
         Return retValue
     End Function

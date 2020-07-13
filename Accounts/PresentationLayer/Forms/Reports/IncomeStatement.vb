@@ -5,7 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms.Reports
-    Public Class TrialBalance
+    Public Class IncomeStatement
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
@@ -35,8 +35,6 @@ Namespace PresentationLayer.Forms.Reports
             Dim language As String
             language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
 
-            lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
-
             Select Case _period
                 Case "Y"
                     beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
@@ -61,19 +59,20 @@ Namespace PresentationLayer.Forms.Reports
                 Case "C"
                     beginningDate = dtpBeginningDate.Value
             End Select
-            If beginningDate < LastFiscalYearDate Then
+            If beginningDate < lastFiscalYearDate Then
                 chartBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
             Else
-                chartBalanceYear = Year(LastFiscalYearDate)
-                begDataDate = LastFiscalYearDate
+                chartBalanceYear = Year(lastFiscalYearDate)
+                begDataDate =  DateSerial(chartBalanceYear, 1, 1)
             End If
-            Dim cForm As New ReportForm("Trial Balance.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", lastFiscalYearDate, "lastFiscalYearDate", _period, "Period", language, "Language")
+            Dim cForm As New ReportForm("Income Statement.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", language, "Language", _period, "Period")
             cForm.Show()
 
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
+
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
@@ -83,7 +82,7 @@ Namespace PresentationLayer.Forms.Reports
             RunTranslator(FormIdNo)
         End Sub
 
-        Private Sub TrialBalance_BeforeLoad() Handles MyBase.BeforeLoad
+        Private Sub IncomeStatement_BeforeLoad() Handles MyBase.BeforeLoad
             Dim currentDate = Now()
             Dim endDate As Date
             lblBegDateCaption.Visible = False
@@ -91,19 +90,19 @@ Namespace PresentationLayer.Forms.Reports
             Select Case _period
                 Case "Y"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
-                    Text = "Trial Balance for the Year"
+                    Text = "Income Statement for the Year"
                     lblEndDateCaption.Text = "Year End Date:"
                 Case "M"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
-                    Text = "Trial Balance for the Month"
+                    Text = "Income Statement for the Month"
                     lblEndDateCaption.Text = "Month End Date:"
                 Case "Q"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
-                    Text = "Trial Balance for the Quarter"
+                    Text = "Income Statement for the Quarter"
                     lblEndDateCaption.Text = "Quarterly End Date:"
                 Case "S"
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
-                    Text = "Trial Balance for the Semester"
+                    Text = "Income Statement for the Semester"
                     lblEndDateCaption.Text = "Semester End Date:"
                 Case "C"
                     lblBegDateCaption.Visible = True
@@ -111,7 +110,7 @@ Namespace PresentationLayer.Forms.Reports
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
                     endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
-                    Text = "Trial Balance for Custom Period"
+                    Text = "Income Statement for Custom Period"
                     lblEndDateCaption.Text = "Period Beginning Date:"
                     lblEndDateCaption.Text = "Period End Date:"
                     

@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAWABBgFgAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAWgBBgFoAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3692,73 +3692,73 @@
     <value>&amp;Transactions</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsPayable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsPayable.Text" xml:space="preserve">
     <value>Statement of Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsReceivable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsReceivable.Text" xml:space="preserve">
     <value>Statement of Accounts Receivable</value>
   </data>
   <data name="StatementOfEmployeeLoansToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="StatementOfEmployeeLoansToolStripMenuItem.Text" xml:space="preserve">
     <value>Statement of Employee Loans</value>
   </data>
   <data name="ToolStripMenuItemStateOfEmployeeLoans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStateOfEmployeeLoans.Text" xml:space="preserve">
     <value>Summary of Employee Loans</value>
   </data>
   <data name="SummaryOfAccountsPayableToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="SummaryOfAccountsPayableToolStripMenuItem1.Text" xml:space="preserve">
     <value>Summary of Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Text" xml:space="preserve">
     <value>Summary of Accounts Receivable</value>
   </data>
   <data name="MonthlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="MonthlyToolStripMenuItem.Text" xml:space="preserve">
     <value>Monthly</value>
   </data>
   <data name="QuarterlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="QuarterlyToolStripMenuItem.Text" xml:space="preserve">
     <value>Quarterly</value>
   </data>
   <data name="SemestralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="SemestralToolStripMenuItem.Text" xml:space="preserve">
     <value>Semestral</value>
   </data>
   <data name="YearlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="YearlyToolStripMenuItem.Text" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <data name="CustomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="CustomToolStripMenuItem.Text" xml:space="preserve">
     <value>Custom</value>
   </data>
   <data name="ToolStripMenuItemTrialBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemTrialBalance.Text" xml:space="preserve">
     <value>Trial Balance</value>
@@ -3776,34 +3776,52 @@
     <value>Monthly</value>
   </data>
   <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
     <value>Balance Sheet</value>
   </data>
+  <data name="YearlyToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="YearlyToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="MonthlyToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="MonthlyToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="QuarterlyToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="QuarterlyToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Quarterly</value>
+  </data>
+  <data name="SemiAnnuallyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="SemiAnnuallyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Semi-Annually</value>
+  </data>
+  <data name="CustomRangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="CustomRangeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Custom Range</value>
+  </data>
+  <data name="ToolStripMenuItemIncomeStatementForAGivenYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 22</value>
+  </data>
+  <data name="ToolStripMenuItemIncomeStatementForAGivenYear.Text" xml:space="preserve">
+    <value>Income Statement </value>
+  </data>
   <data name="TransactionDetailToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="TransactionDetailToolStripMenuItem.Text" xml:space="preserve">
     <value>Transaction Detail </value>
-  </data>
-  <data name="ToolStripMenuItemIncomeStatementForAGivenMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
-  </data>
-  <data name="ToolStripMenuItemIncomeStatementForAGivenMonth.Text" xml:space="preserve">
-    <value>Income Statement for a given month</value>
-  </data>
-  <data name="ToolStripMenuItemIncomeStatementForAGivenYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
-  </data>
-  <data name="ToolStripMenuItemIncomeStatementForAGivenYear.Text" xml:space="preserve">
-    <value>Income Statement for a given Year</value>
-  </data>
-  <data name="ToolStripMenuItemBalanceSheetForAGivenYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
-  </data>
-  <data name="ToolStripMenuItemBalanceSheetForAGivenYear.Text" xml:space="preserve">
-    <value>Balance Sheet for a Given Year</value>
   </data>
   <data name="StatementOfAccountsReToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 22</value>
@@ -3872,7 +3890,7 @@
     <value>Statement of Accounts Receivable</value>
   </data>
   <data name="OldSystemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 22</value>
+    <value>254, 22</value>
   </data>
   <data name="OldSystemToolStripMenuItem.Text" xml:space="preserve">
     <value>Old System</value>
@@ -4021,7 +4039,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAWABBgFgAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAWgBBgFoAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4066,7 +4084,7 @@
 </value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1198, 17</value>
+    <value>17, 56</value>
   </metadata>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4886,22 +4904,10 @@
   <data name="&gt;&gt;TransactionDetailToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenMonth.Name" xml:space="preserve">
-    <value>ToolStripMenuItemIncomeStatementForAGivenMonth</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenMonth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenYear.Name" xml:space="preserve">
     <value>ToolStripMenuItemIncomeStatementForAGivenYear</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemIncomeStatementForAGivenYear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemBalanceSheetForAGivenYear.Name" xml:space="preserve">
-    <value>ToolStripMenuItemBalanceSheetForAGivenYear</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemBalanceSheetForAGivenYear.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;OldSystemToolStripMenuItem.Name" xml:space="preserve">
@@ -5118,6 +5124,36 @@
     <value>toolStripMenuItem19</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem2.Name" xml:space="preserve">
+    <value>YearlyToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;YearlyToolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MonthlyToolStripMenuItem2.Name" xml:space="preserve">
+    <value>MonthlyToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;MonthlyToolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QuarterlyToolStripMenuItem1.Name" xml:space="preserve">
+    <value>QuarterlyToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;QuarterlyToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SemiAnnuallyToolStripMenuItem.Name" xml:space="preserve">
+    <value>SemiAnnuallyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;SemiAnnuallyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CustomRangeToolStripMenuItem.Name" xml:space="preserve">
+    <value>CustomRangeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;CustomRangeToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

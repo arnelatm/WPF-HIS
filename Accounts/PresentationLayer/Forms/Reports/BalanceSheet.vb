@@ -1,222 +1,123 @@
-﻿Namespace PresentationLayer.Forms.Reports
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class BalanceSheet
-        Inherits AATM.PresentationLayer.Forms.BfMain
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
-        'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
-        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-            MyBase.Dispose(disposing)
+Namespace PresentationLayer.Forms.Reports
+    Public Class BalanceSheet
+
+        Public Property MainTableName As String
+        Protected SortOrderKey As String
+        Private ReadOnly _period As String
+
+        Public Sub New(period As String)
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+            MainTableName = "Chart"
+            SortOrderKey = "IdNo"
+            PresenterObj = New ReportPresenter(Me)
+            _period = period
+
         End Sub
 
-        'Required by the Windows Form Designer
-        Private components As System.ComponentModel.IContainer
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim beginningDate As Date
+            Dim lastFiscalYearDate As Date
+            Dim chartBalanceYear As Integer
+            Dim begDataDate As Date
+            Dim language As String
+            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
-        'NOTE: The following procedure is required by the Windows Form Designer
-        'It can be modified using the Windows Form Designer.  
-        'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
-        Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BalanceSheet))
-        Me.lblEndDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpEndingDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnTranslate = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.dtpBeginningDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.lblBegDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'lblEndDateCaption
-        '
-        Me.lblEndDateCaption.DisplayOnly = true
-        Me.lblEndDateCaption.EditingMode = false
-        Me.lblEndDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEndDateCaption.Location = New System.Drawing.Point(11, 38)
-        Me.lblEndDateCaption.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEndDateCaption.Name = "lblEndDateCaption"
-        Me.lblEndDateCaption.Size = New System.Drawing.Size(171, 25)
-        Me.lblEndDateCaption.TabIndex = 21
-        Me.lblEndDateCaption.Text = "Ending Date:"
-        Me.lblEndDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'dtpEndingDate
-        '
-        Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndingDate.DefaultValue = Nothing
-        Me.dtpEndingDate.DisplayOnly = false
-        Me.dtpEndingDate.DtpDefaultValue = Nothing
-        Me.dtpEndingDate.EditingMode = true
-        Me.dtpEndingDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, true)
-        Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndingDate.LinkedLabel = Nothing
-        Me.dtpEndingDate.Location = New System.Drawing.Point(184, 38)
-        Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpEndingDate.Name = "dtpEndingDate"
-        Me.dtpEndingDate.ReadOnlyDp = false
-        Me.dtpEndingDate.SecurityKey = Nothing
-        Me.dtpEndingDate.ShowLongDate = false
-        Me.dtpEndingDate.ShowTime = false
-        Me.dtpEndingDate.Size = New System.Drawing.Size(107, 25)
-        Me.dtpEndingDate.TabIndex = 24
-        Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpEndingDate.Value = Nothing
-        Me.dtpEndingDate.ValueIsMandatory = false
-        Me.dtpEndingDate.ValueIsNullable = false
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.lblBegDateCaption)
-        Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
-        Me.CFlowLayout1.Controls.Add(Me.lblEndDateCaption)
-        Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(309, 79)
-        Me.CFlowLayout1.TabIndex = 26
-        '
-        'lblTitle
-        '
-        Me.lblTitle.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(0,Byte),Integer))
-        Me.lblTitle.DisplayOnly = true
-        Me.lblTitle.EditingMode = false
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lblTitle.Location = New System.Drawing.Point(0, 0)
-        Me.lblTitle.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(339, 25)
-        Me.lblTitle.TabIndex = 26
-        Me.lblTitle.Text = "Balance Sheet Yearly"
-        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel1.Location = New System.Drawing.Point(25, 37)
-        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(150, 25)
-        Me.CLabel1.TabIndex = 26
-        Me.CLabel1.Text = "Beginning Date :"
-        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnOk
-        '
-        Me.btnOk.DesignerSelected = false
-        Me.btnOk.DisplayOnly = true
-        Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(122, 131)
-        Me.btnOk.Name = "btnOk"
-        Me.btnOk.OriginalImageName = Nothing
-        Me.btnOk.SecurityKey = ""
-        Me.btnOk.Size = New System.Drawing.Size(90, 25)
-        Me.btnOk.TabIndex = 27
-        Me.btnOk.Text = "Ok"
-        '
-        'btnCancel
-        '
-        Me.btnCancel.DesignerSelected = false
-        Me.btnCancel.DisplayOnly = true
-        Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(231, 131)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.OriginalImageName = Nothing
-        Me.btnCancel.SecurityKey = ""
-        Me.btnCancel.Size = New System.Drawing.Size(90, 25)
-        Me.btnCancel.TabIndex = 28
-        Me.btnCancel.Text = "Cancel"
-        '
-        'btnTranslate
-        '
-        Me.btnTranslate.DesignerSelected = false
-        Me.btnTranslate.DisplayOnly = true
-        Me.btnTranslate.ImageIndex = 0
-        Me.btnTranslate.Location = New System.Drawing.Point(12, 131)
-        Me.btnTranslate.Name = "btnTranslate"
-        Me.btnTranslate.OriginalImageName = Nothing
-        Me.btnTranslate.SecurityKey = ""
-        Me.btnTranslate.Size = New System.Drawing.Size(89, 25)
-        Me.btnTranslate.TabIndex = 29
-        Me.btnTranslate.Text = "Translate"
-        '
-        'dtpBeginningDate
-        '
-        Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpBeginningDate.DefaultValue = Nothing
-        Me.dtpBeginningDate.DisplayOnly = false
-        Me.dtpBeginningDate.DtpDefaultValue = Nothing
-        Me.dtpBeginningDate.EditingMode = true
-        Me.dtpBeginningDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, true)
-        Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpBeginningDate.LinkedLabel = Nothing
-        Me.dtpBeginningDate.Location = New System.Drawing.Point(184, 11)
-        Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpBeginningDate.Name = "dtpBeginningDate"
-        Me.dtpBeginningDate.ReadOnlyDp = false
-        Me.dtpBeginningDate.SecurityKey = Nothing
-        Me.dtpBeginningDate.ShowLongDate = false
-        Me.dtpBeginningDate.ShowTime = false
-        Me.dtpBeginningDate.Size = New System.Drawing.Size(107, 25)
-        Me.dtpBeginningDate.TabIndex = 26
-        Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpBeginningDate.Value = Nothing
-        Me.dtpBeginningDate.ValueIsMandatory = false
-        Me.dtpBeginningDate.ValueIsNullable = false
-        '
-        'lblBegDateCaption
-        '
-        Me.lblBegDateCaption.DisplayOnly = true
-        Me.lblBegDateCaption.EditingMode = false
-        Me.lblBegDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblBegDateCaption.Location = New System.Drawing.Point(11, 11)
-        Me.lblBegDateCaption.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblBegDateCaption.Name = "lblBegDateCaption"
-        Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
-        Me.lblBegDateCaption.TabIndex = 25
-        Me.lblBegDateCaption.Text = "Ending Date:"
-        Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'BalanceSheet
-        '
-        Me.ClientSize = New System.Drawing.Size(337, 171)
-        Me.Controls.Add(Me.btnTranslate)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
-        Me.Name = "BalanceSheet"
-        Me.Text = "Balance Sheet Yearly"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.ResumeLayout(false)
+            Select Case _period
+                Case "Y"
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
+                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
+                Case "M"
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
+                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value) + 1, 0)
+                Case "Q"
+                    Dim nMonth = Month(dtpEndingDate.Value)
+                    Dim quarter = Int(nMonth / 3 + 0.8)
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3 - 2, 1)
+                    Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3, 1)
+                    quarterEndDate = DateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
+                    dtpEndingDate.Value = quarterEndDate
+                Case "S"
+                    Dim nMonth = Month(dtpEndingDate.Value)
+                    Dim semester = Int(nMonth / 6 + 0.9)
+                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6 - 5, 1)
+                    Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6, 1)
+                    semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
+                    dtpEndingDate.Value = semesterEndDate
+                Case "C"
+                    beginningDate = dtpBeginningDate.Value
+            End Select
+            If beginningDate < lastFiscalYearDate Then
+                chartBalanceYear = Year(beginningDate)
+                begDataDate = beginningDate
+            Else
+                chartBalanceYear = Year(lastFiscalYearDate)
+                begDataDate =  DateSerial(chartBalanceYear, 1, 1)
+            End If
+            Dim cForm As New ReportForm("Balance Sheet.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate",language, "Language", _period, "Period")
+            cForm.Show()
 
-End Sub
-        Friend WithEvents lblEndDateCaption As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpEndingDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
-        Friend WithEvents lblTitle As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents btnTranslate As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents dtpBeginningDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents lblBegDateCaption As Libraries.CBaseControlsLibrary.CLabel
+            CultureInfo.CurrentCulture = curCulture
+
+        End Sub
+
+
+        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
+            Close()
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
+            RunTranslator(FormIdNo)
+        End Sub
+
+        Private Sub BalanceSheet_BeforeLoad() Handles MyBase.BeforeLoad
+            Dim currentDate = Now()
+            Dim endDate As Date
+            lblBegDateCaption.Visible = False
+            dtpBeginningDate.Visible = False
+            Select Case _period
+                Case "Y"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
+                    Text = "Balance Sheet for the Year"
+                    lblEndDateCaption.Text = "Year End Date:"
+                Case "M"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Balance Sheet for the Month"
+                    lblEndDateCaption.Text = "Month End Date:"
+                Case "Q"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Balance Sheet for the Quarter"
+                    lblEndDateCaption.Text = "Quarterly End Date:"
+                Case "S"
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Balance Sheet for the Semester"
+                    lblEndDateCaption.Text = "Semester End Date:"
+                Case "C"
+                    lblBegDateCaption.Visible = True
+                    lblEndDateCaption.Visible = True
+                    dtpEndingDate.Visible = True
+                    dtpBeginningDate.Visible = True
+                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
+                    Text = "Balance Sheet for Custom Period"
+                    lblEndDateCaption.Text = "Period Beginning Date:"
+                    lblEndDateCaption.Text = "Period End Date:"
+                    
+            End Select
+            lblTitle.Text = Text
+            dtpEndingDate.Value = endDate
+        End Sub
     End Class
-End NameSpace
+End Namespace
