@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Chart] (
-    [IdNo]               INT           NOT NULL,
+    [IdNo]               INT           IDENTITY (1, 1) NOT NULL,
     [ParentIDNo]         INT           NULL,
     [AccountCode]        VARCHAR (5)   COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [AccountName]        VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -28,6 +28,8 @@
     CONSTRAINT [IX_ChartName] UNIQUE NONCLUSTERED ([AccountName] ASC),
     CONSTRAINT [IX_ChartNameAra] UNIQUE NONCLUSTERED ([AccountNameAra] ASC)
 );
+
+
 
 
 

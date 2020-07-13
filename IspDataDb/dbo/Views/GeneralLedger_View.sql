@@ -1,8 +1,9 @@
-﻿CREATE VIEW dbo.GeneralLedger_View
+﻿
+CREATE VIEW [dbo].[GeneralLedger_View]
 AS
 SELECT        dbo.Chart_View.IdNo, dbo.Chart_View.AccountCode, dbo.Chart_View.AccountName, dbo.Chart_View.AccountNameAra, dbo.GlLedgers_View.Debit, dbo.GlLedgers_View.Credit, dbo.GlLedgers_View.TransactionDate, 
                          dbo.GlLedgers_View.Posted, dbo.GlLedgers_View.JournalCode, dbo.GlLedgers_View.IdNo AS JournalItemIdNo, dbo.GlLedgers_View.JournalIdNo, dbo.Chart_View.SortKey, 
-                         dbo.GlLedgers_View.ClosingJournal
+                         dbo.GlLedgers_View.ClosingJournal,dbo.Chart_View.SpecialAccount
 FROM            dbo.Chart_View LEFT OUTER JOIN
                          dbo.GlLedgers_View ON dbo.Chart_View.IdNo = dbo.GlLedgers_View.AccountIdNo
 GO

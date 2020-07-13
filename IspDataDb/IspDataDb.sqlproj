@@ -300,6 +300,12 @@
     <Build Include="dbo\Functions\FuncGlBalanceSheet.sql" />
     <Build Include="dbo\Functions\FuncAccountBalance.sql" />
     <Build Include="dbo\Functions\FuncAcctStatement.sql" />
+    <Build Include="dbo\Views\IncomeStatementLayout_View2.sql" />
+    <Build Include="dbo\Views\IncomeStatementLayout_View.sql" />
+    <Build Include="dbo\Views\ChartIs_View.sql" />
+    <Build Include="dbo\Functions\FuncGlIncomeStatementOld.sql" />
+    <Build Include="dbo\Functions\FuncGlIncomeStatement.sql" />
+    <Build Include="dbo\Functions\FuncGlBalanceSheetOld.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
