@@ -1384,18 +1384,22 @@ Do While Not Eof()
 	nIdNo = 0
 	If CReceipt.Apply_To = "I" Then
 		If CReceipt.PayType = "C" Then
-			cPaymType = "A"
+			cPaymType = "R"
 		Else
 			If CReceipt.PayType = "S" Then
-				cPaymType = "R"
+				cPaymType = "A"
 			Endif
 		Endif
 	Else
 		If CReceipt.PayType = "C" Then
-			cPaymType = "C"
-		Else
-			cPaymType = "O"
-			cPayee = CReceipt.Payor
+			cPaymType = "R"
+		ELSE
+			IF cPaymType = "S" then
+ 				cPaymType = "A"
+			else
+		 		cPaymType = "O"
+	 			cPayee = CReceipt.Payor
+	 	 ENDIF
 		Endif
 	Endif
 	If cPaymType = "A" Or cPaymType = "C"
@@ -2287,6 +2291,7 @@ Do While Not Eof()
 		nFctr = nFctr+1
 		lnfh = Fcreate("C:\TEMP\SQL\" + targetName + Alltrim(Str(nFctr)) + ".sql")
 		lctr = 0
+		Fputs(lnfh,"SET IDENTITY_INSERT " + targetName + " ON" )
 	Endif
 Enddo
 Fputs(lnfh,"SET IDENTITY_INSERT " + targetName + " OFF" )

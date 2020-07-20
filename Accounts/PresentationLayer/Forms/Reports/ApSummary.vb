@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -26,7 +27,13 @@ Namespace PresentationLayer.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm As New ReportForm("Summary of Accounts Payable.Rpt") 
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            Dim cForm As New ReportForm("Summary of Accounts Payable.Rpt", dtpBeginningDate.Value, "BeginningDate",
+                                        dtpEndingDate.Value, "EndingDate",  chkIncludeZeroBalances.Checked, "IncludeZeroBalances", language, "Language"
+            ) 
             cForm.Show()
         End Sub
 

@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -780,6 +781,10 @@ Namespace PresentationLayer.Presenters
             Dim transactionAmount As String
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             View.TotalCredits = 0
@@ -787,7 +792,7 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", "ar", "Language")
             cForm.Show()
         End Sub
 
