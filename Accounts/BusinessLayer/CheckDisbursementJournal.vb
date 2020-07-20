@@ -17,7 +17,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PaymentType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("CheckNumber"))
-                AddRule(New ValidateRange("CheckDate", Date.Today.AddDays(-366), Date.Today.AddDays(366), ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                'AddRule(New ValidateRange("CheckDate", Date.MinValue , Date.Today.AddDays(366), ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))

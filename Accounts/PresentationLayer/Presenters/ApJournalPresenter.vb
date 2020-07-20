@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -272,7 +273,7 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    Dim nTotalAp = 0
+                    Dim nTotalAp as Decimal = 0
                     For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
@@ -334,6 +335,10 @@ Namespace PresentationLayer.Presenters
             Dim transactionAmount As String
             Dim totalApAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             View.TotalCredits = 0
@@ -341,7 +346,7 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "ApJournalIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords")
+            Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "ApJournalIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", "ar", "Language")
             cForm.Show()
         End Sub
 
