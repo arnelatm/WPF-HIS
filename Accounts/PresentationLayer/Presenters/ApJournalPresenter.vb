@@ -273,7 +273,7 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    Dim nTotalAp as Decimal = 0
+                    Dim nTotalAp As Decimal = 0
                     For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
@@ -338,14 +338,22 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
             Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "ApJournalIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", "ar", "Language")
             cForm.Show()
         End Sub
