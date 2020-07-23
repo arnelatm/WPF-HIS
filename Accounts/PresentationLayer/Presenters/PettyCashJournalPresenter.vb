@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms.Reports
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -593,7 +594,7 @@ Namespace PresentationLayer.Presenters
             Else
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-	    updateReturnValue = _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, View.IdNo)
+            updateReturnValue = _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, View.IdNo)
             If updateReturnValue >= 0 AndAlso DtPcsOiInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtPcsOiInsertTable.Rows
                     row.Item("PcsIdNo") = headerIdNo
@@ -780,14 +781,27 @@ Namespace PresentationLayer.Presenters
             Dim transactionAmount As String
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", View.IdNo, "PettyCashJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            If language = "ar" Then
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
+            Dim cForm As New ReportForm("Employee Receivable Journal.Rpt", View.IdNo, "ERJournalIdNo", transactionAmount, "ERAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
