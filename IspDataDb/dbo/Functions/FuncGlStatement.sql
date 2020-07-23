@@ -1,6 +1,7 @@
 ﻿
 
 
+
 CREATE FUNCTION [dbo].[FuncGlStatement] (@StartDate Date, @EndDate Date, @LastFiscalYearEnd Date)
 RETURNS TABLE
 AS
@@ -8,7 +9,7 @@ RETURN
 (   SELECT idno, Sum(Balance) as 'Balance'
     FROM [GLBalanceSheet_View]
 	/***WHERE (TransactionDate >= @StartDate and TransactionDate <= @EndDate ) ***/
-    WHERE (TransactionDate >= @StartDate and TransactionDate < @EndDate and  closingjournal = 0 and (SpecialAccount <> 'BI' or SpecialAccount <> 'EI')) 
+    WHERE (TransactionDate >= @StartDate and TransactionDate < @EndDate and (SpecialAccount is Null or (SpecialAccount <> 'BI' and SpecialAccount <> 'EI')))
 		   OR 
 		  (TransactionDate >= @LastFiscalYearEnd and TransactionDate < @EndDate and  closingjournal = 1 and (SpecialAccount <> 'BI' or SpecialAccount <> 'EI')) 
 		   OR
