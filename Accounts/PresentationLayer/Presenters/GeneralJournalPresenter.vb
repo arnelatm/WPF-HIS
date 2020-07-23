@@ -187,8 +187,13 @@ Namespace PresentationLayer.Presenters
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", "ar", "Language")
+            If language = "ar" Then
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
+    
+            Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
 
             cForm.Show()
         End Sub

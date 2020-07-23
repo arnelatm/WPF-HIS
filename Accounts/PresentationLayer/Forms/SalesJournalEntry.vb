@@ -353,22 +353,22 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub SjOnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewSalesCashItems.CellBeginEdit
-            If DataGridViewSalesCashItems.CurrentCell.RowIndex() = 0 Then
-                With DataGridViewJournalItems.CurrentCell
-                    Dim selectedRow As DataGridViewRow
-                    selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
-                    '    Select Case .OwningColumn.Name.ToLower()
-                    '        Case $"dgvcashcode"
-                    'selectedRow.Cells("dgvInteractiveChange").Value = True
-                    'If cColumnName = $"dgvsaleamount" Then
-                    '    Beep()
-                    '    e.Cancel = True
-                    '    DataGridViewJournalItems.EndEdit()
-                    'End If
-                End With
-            End If
-        End Sub
+        'Private Sub SjOnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewSalesCashItems.CellBeginEdit
+        '    If DataGridViewSalesCashItems.CurrentCell.RowIndex() = 0 Then
+        '        With DataGridViewJournalItems.CurrentCell
+        '            Dim selectedRow As DataGridViewRow
+        '            selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+        '            '    Select Case .OwningColumn.Name.ToLower()
+        '            '        Case $"dgvcashcode"
+        '            'selectedRow.Cells("dgvInteractiveChange").Value = True
+        '            'If cColumnName = $"dgvsaleamount" Then
+        '            '    Beep()
+        '            '    e.Cancel = True
+        '            '    DataGridViewJournalItems.EndEdit()
+        '            'End If
+        '        End With
+        '    End If
+        'End Sub
 
 
         Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit

@@ -168,10 +168,10 @@
     Private Sub ExtractIntegerAndDecimalParts()
         Dim splits As [String]() = Number.ToString().Split("."c)
 
-        _intergerValue = Convert.ToInt32(splits(0))
+        _intergerValue = Convert.ToInt64(splits(0))
 
         If splits.Length > 1 Then
-            _decimalValue = Convert.ToInt32(GetDecimalValue(splits(1)))
+            _decimalValue = Convert.ToInt64(GetDecimalValue(splits(1)))
         End If
     End Sub
 #End Region

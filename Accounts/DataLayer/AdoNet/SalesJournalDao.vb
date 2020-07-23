@@ -93,8 +93,6 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@AccountIdNo", salesJournal.AccountIdNo,
                                     "@Cancelled", salesJournal.Cancelled,
-                                    "@DateCreated", salesJournal.DateCreated,
-                                    "@IdNo", salesJournal.IdNo,
                                     "@Notes", salesJournal.Notes,
                                     "@Posted", salesJournal.Posted,
                                     "@ReferenceNo", salesJournal.ReferenceNo,
