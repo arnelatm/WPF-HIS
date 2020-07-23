@@ -1,6 +1,7 @@
 ﻿
 
 
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -43,7 +44,7 @@ UNION
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
-  WHERE PayorType='A'
+  WHERE PayorType='R'
 )
 UNION
 (SELECT 'CK'

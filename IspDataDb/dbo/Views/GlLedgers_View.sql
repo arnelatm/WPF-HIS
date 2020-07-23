@@ -4,6 +4,7 @@
 
 
 
+
 CREATE VIEW [dbo].[GlLedgers_View]	
   AS
 (SELECT 'GJ' AS 'JournalCode'
@@ -217,7 +218,7 @@ UNION
 	  ,CASE
 			WHEN b.PayorType = 'A' then s.SupplierName
 			WHEN b.PayorType = 'C' then c.CustomerName
-			WHEN b.PayorType = 'R' then s.SupplierName
+			WHEN b.PayorType = 'R' then c.CustomerName
 			WHEN b.PayorType = 'E' then e.EmployeeName
 			WHEN b.PayorType = 'O' then b.PayorName
 			ELSE b.PayorName
@@ -225,7 +226,7 @@ UNION
 	  ,CASE
 			WHEN b.PayorType = 'A' then s.SupplierNameAra
 			WHEN b.PayorType = 'C' then c.CustomerNameAra
-			WHEN b.PayorType = 'R' then s.SupplierNameAra
+			WHEN b.PayorType = 'R' then c.CustomerNameAra
 			WHEN b.PayorType = 'E' then e.EmployeeNameAra
 			WHEN b.PayorType = 'O' then b.PayorName
 			ELSE b.PayorName

@@ -7,7 +7,9 @@
     [Posted]          BIT            NOT NULL,
     [Cancelled]       BIT            NOT NULL,
     [DateCreated]     DATETIME       CONSTRAINT [DF_SalesJournal_DateCreated] DEFAULT (getdate()) NULL,
-    [DateTimeStamp]   ROWVERSION     NOT NULL,
+    [DateTimeStamp]   ROWVERSION     NULL,
     CONSTRAINT [PK_SalesJournal] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
