@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Forms
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -336,13 +337,21 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub GoPrintRecord()
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords")
+            Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
