@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Forms
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Forms
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -768,17 +769,30 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub GoPrintRecord()
-            Dim transactionAmount As String
-            Dim totalCreditAmount As String
+            Dim transactionAmountInWords As String
+            Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Cash Disbursement Journal.Rpt", View.IdNo, "CashDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords")
+            If language = "ar" Then
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
+            Dim cForm As New ReportForm("Cash Disbursement Journal.Rpt", View.IdNo, "CashDisbursementJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
