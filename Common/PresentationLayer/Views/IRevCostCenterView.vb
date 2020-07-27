@@ -2,14 +2,14 @@
 
 Namespace PresentationLayer.Views
 
-    Public Interface ICostCenterView
+    Public Interface IRevCostCenterView
         Inherits IView
         Property IdNo As Int32
         Property ParentIdNo As Int32?
-        Property CostCenterCode As String
-        Property CostCenterName As String
-        Property CostCenterNameAra As String
-        Property ProfitCenterIdNo As Int32?
+        Property RevCostCenterCode As String
+        Property RevCostCenterName As String
+        Property RevCostCenterNameAra As String
+        Property RCType As String
         Property LevelNumber As Int16
         Property Notes As String
         Property SortKey As String

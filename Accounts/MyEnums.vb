@@ -637,6 +637,7 @@ Public Module Adapter
         Return retValue
     End Function
 
+
     Public Function ReceiptTypeToEnum(value As String) As String
         Dim retValue As String
         Select Case value

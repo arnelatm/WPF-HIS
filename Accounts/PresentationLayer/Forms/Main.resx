@@ -3442,10 +3442,10 @@
   <data name="ToolStripMenuItemDepartments.Text" xml:space="preserve">
     <value>Departments</value>
   </data>
-  <data name="ToolStripMenuItemCostCenters.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemRevCostCenters.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
-  <data name="ToolStripMenuItemCostCenters.Text" xml:space="preserve">
+  <data name="ToolStripMenuItemRevCostCenters.Text" xml:space="preserve">
     <value>Cost Centers</value>
   </data>
   <data name="ToolStripMenuItemProfitCenters.Size" type="System.Drawing.Size, System.Drawing">
@@ -4562,10 +4562,10 @@
   <data name="&gt;&gt;ToolStripMenuItemDepartments.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemCostCenters.Name" xml:space="preserve">
-    <value>ToolStripMenuItemCostCenters</value>
+  <data name="&gt;&gt;ToolStripMenuItemRevCostCenters.Name" xml:space="preserve">
+    <value>ToolStripMenuItemRevCostCenters</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemCostCenters.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemRevCostCenters.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemProfitCenters.Name" xml:space="preserve">

@@ -4,7 +4,7 @@ Imports AATM.Libraries.LocalizationUtilities
 
 Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class CostCenterEntryTv
+    Partial Class RevCostCenterEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -26,21 +26,21 @@ Namespace PresentationLayer.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.txtRevCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtRevCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblRevCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblRevCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cacRcType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -55,7 +55,7 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 258)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 262)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 258)
         '
         'TxtIdNo
         '
@@ -71,7 +71,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.Location = New System.Drawing.Point(245, 11)
+        Me.TxtIdNo.Location = New System.Drawing.Point(213, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIdNo.MaximumValue = Nothing
         Me.TxtIdNo.MinimumValue = Nothing
@@ -82,75 +82,75 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.TabIndex = 0
         Me.TxtIdNo.TabStop = false
         '
-        'txtCostCenterCode
+        'txtRevCostCenterCode
         '
-        Me.txtCostCenterCode.BackColor = System.Drawing.Color.White
-        Me.txtCostCenterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCostCenterCode.ComputedValue = false
-        Me.txtCostCenterCode.CustomFormat = Nothing
-        Me.txtCostCenterCode.DataBoundControl = true
-        Me.txtCostCenterCode.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtCostCenterCode, true)
-        Me.txtCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtCostCenterCode.ForeColor = System.Drawing.Color.Black
-        Me.txtCostCenterCode.LinkedLabel = Nothing
-        Me.txtCostCenterCode.Location = New System.Drawing.Point(245, 36)
-        Me.txtCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtCostCenterCode.MaximumValue = Nothing
-        Me.txtCostCenterCode.MinimumValue = Nothing
-        Me.txtCostCenterCode.Name = "txtCostCenterCode"
-        Me.txtCostCenterCode.OldValue = Nothing
-        Me.txtCostCenterCode.ReadOnly = true
-        Me.txtCostCenterCode.Size = New System.Drawing.Size(62, 23)
-        Me.txtCostCenterCode.TabIndex = 0
-        Me.txtCostCenterCode.ValueIsMandatory = true
+        Me.txtRevCostCenterCode.BackColor = System.Drawing.Color.White
+        Me.txtRevCostCenterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRevCostCenterCode.ComputedValue = false
+        Me.txtRevCostCenterCode.CustomFormat = Nothing
+        Me.txtRevCostCenterCode.DataBoundControl = true
+        Me.txtRevCostCenterCode.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterCode, true)
+        Me.txtRevCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtRevCostCenterCode.ForeColor = System.Drawing.Color.Black
+        Me.txtRevCostCenterCode.LinkedLabel = Nothing
+        Me.txtRevCostCenterCode.Location = New System.Drawing.Point(213, 36)
+        Me.txtRevCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevCostCenterCode.MaximumValue = Nothing
+        Me.txtRevCostCenterCode.MinimumValue = Nothing
+        Me.txtRevCostCenterCode.Name = "txtRevCostCenterCode"
+        Me.txtRevCostCenterCode.OldValue = Nothing
+        Me.txtRevCostCenterCode.ReadOnly = true
+        Me.txtRevCostCenterCode.Size = New System.Drawing.Size(62, 23)
+        Me.txtRevCostCenterCode.TabIndex = 0
+        Me.txtRevCostCenterCode.ValueIsMandatory = true
         '
-        'txtCostCenterName
+        'txtRevCostCenterName
         '
-        Me.txtCostCenterName.BackColor = System.Drawing.Color.White
-        Me.txtCostCenterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCostCenterName.ComputedValue = false
-        Me.txtCostCenterName.CustomFormat = Nothing
-        Me.txtCostCenterName.DataBoundControl = true
-        Me.txtCostCenterName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtCostCenterName, true)
-        Me.txtCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtCostCenterName.ForeColor = System.Drawing.Color.Black
-        Me.txtCostCenterName.LinkedLabel = Nothing
-        Me.txtCostCenterName.Location = New System.Drawing.Point(245, 61)
-        Me.txtCostCenterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtCostCenterName.MaximumValue = Nothing
-        Me.txtCostCenterName.MinimumValue = Nothing
-        Me.txtCostCenterName.Name = "txtCostCenterName"
-        Me.txtCostCenterName.OldValue = Nothing
-        Me.txtCostCenterName.ReadOnly = true
-        Me.txtCostCenterName.Size = New System.Drawing.Size(418, 23)
-        Me.txtCostCenterName.TabIndex = 1
-        Me.txtCostCenterName.ValueIsMandatory = true
+        Me.txtRevCostCenterName.BackColor = System.Drawing.Color.White
+        Me.txtRevCostCenterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRevCostCenterName.ComputedValue = false
+        Me.txtRevCostCenterName.CustomFormat = Nothing
+        Me.txtRevCostCenterName.DataBoundControl = true
+        Me.txtRevCostCenterName.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterName, true)
+        Me.txtRevCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtRevCostCenterName.ForeColor = System.Drawing.Color.Black
+        Me.txtRevCostCenterName.LinkedLabel = Nothing
+        Me.txtRevCostCenterName.Location = New System.Drawing.Point(213, 61)
+        Me.txtRevCostCenterName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevCostCenterName.MaximumValue = Nothing
+        Me.txtRevCostCenterName.MinimumValue = Nothing
+        Me.txtRevCostCenterName.Name = "txtRevCostCenterName"
+        Me.txtRevCostCenterName.OldValue = Nothing
+        Me.txtRevCostCenterName.ReadOnly = true
+        Me.txtRevCostCenterName.Size = New System.Drawing.Size(418, 23)
+        Me.txtRevCostCenterName.TabIndex = 1
+        Me.txtRevCostCenterName.ValueIsMandatory = true
         '
-        'txtCostCenterNameAra
+        'txtRevCostCenterNameAra
         '
-        Me.txtCostCenterNameAra.BackColor = System.Drawing.Color.White
-        Me.txtCostCenterNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCostCenterNameAra.ComputedValue = false
-        Me.txtCostCenterNameAra.CustomFormat = Nothing
-        Me.txtCostCenterNameAra.DataBoundControl = true
-        Me.txtCostCenterNameAra.EditingMode = false
-        Me.txtCostCenterNameAra.EnglishControl = Me.txtCostCenterName
-        Me.floDataDisplay.SetFlowBreak(Me.txtCostCenterNameAra, true)
-        Me.txtCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtCostCenterNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtCostCenterNameAra.LinkedLabel = Nothing
-        Me.txtCostCenterNameAra.Location = New System.Drawing.Point(245, 86)
-        Me.txtCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtCostCenterNameAra.MaximumValue = Nothing
-        Me.txtCostCenterNameAra.MinimumValue = Nothing
-        Me.txtCostCenterNameAra.Name = "txtCostCenterNameAra"
-        Me.txtCostCenterNameAra.OldValue = Nothing
-        Me.txtCostCenterNameAra.ReadOnly = true
-        Me.txtCostCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.txtCostCenterNameAra.Size = New System.Drawing.Size(418, 23)
-        Me.txtCostCenterNameAra.TabIndex = 2
+        Me.txtRevCostCenterNameAra.BackColor = System.Drawing.Color.White
+        Me.txtRevCostCenterNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRevCostCenterNameAra.ComputedValue = false
+        Me.txtRevCostCenterNameAra.CustomFormat = Nothing
+        Me.txtRevCostCenterNameAra.DataBoundControl = true
+        Me.txtRevCostCenterNameAra.EditingMode = false
+        Me.txtRevCostCenterNameAra.EnglishControl = Me.txtRevCostCenterName
+        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterNameAra, true)
+        Me.txtRevCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtRevCostCenterNameAra.ForeColor = System.Drawing.Color.Black
+        Me.txtRevCostCenterNameAra.LinkedLabel = Nothing
+        Me.txtRevCostCenterNameAra.Location = New System.Drawing.Point(213, 86)
+        Me.txtRevCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevCostCenterNameAra.MaximumValue = Nothing
+        Me.txtRevCostCenterNameAra.MinimumValue = Nothing
+        Me.txtRevCostCenterNameAra.Name = "txtRevCostCenterNameAra"
+        Me.txtRevCostCenterNameAra.OldValue = Nothing
+        Me.txtRevCostCenterNameAra.ReadOnly = true
+        Me.txtRevCostCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtRevCostCenterNameAra.Size = New System.Drawing.Size(418, 23)
+        Me.txtRevCostCenterNameAra.TabIndex = 2
         '
         'txtNotes
         '
@@ -164,7 +164,7 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(245, 191)
+        Me.txtNotes.Location = New System.Drawing.Point(213, 191)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing
@@ -182,18 +182,18 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblCostCenterCode)
-        Me.floDataDisplay.Controls.Add(Me.txtCostCenterCode)
-        Me.floDataDisplay.Controls.Add(Me.lblCostCenterName)
-        Me.floDataDisplay.Controls.Add(Me.txtCostCenterName)
-        Me.floDataDisplay.Controls.Add(Me.lblCostCenterNameAra)
-        Me.floDataDisplay.Controls.Add(Me.txtCostCenterNameAra)
+        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterCode)
+        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterCode)
+        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterName)
+        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterName)
+        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterNameAra)
+        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblLevelNumber)
         Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
         Me.floDataDisplay.Controls.Add(Me.lblProfitCenterIdNo)
-        Me.floDataDisplay.Controls.Add(Me.cacProfitCenterIdNo)
+        Me.floDataDisplay.Controls.Add(Me.cacRcType)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtSortKey)
@@ -202,7 +202,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(685, 262)
+        Me.floDataDisplay.Size = New System.Drawing.Size(654, 257)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -213,49 +213,49 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(232, 23)
+        Me.lblIdNo.Size = New System.Drawing.Size(200, 23)
         Me.lblIdNo.TabIndex = 150
-        Me.lblIdNo.Text = "CostCenter ID No."
+        Me.lblIdNo.Text = "ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblCostCenterCode
+        'lblRevCostCenterCode
         '
-        Me.lblCostCenterCode.DisplayOnly = true
-        Me.lblCostCenterCode.EditingMode = false
-        Me.lblCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblCostCenterCode.Location = New System.Drawing.Point(11, 36)
-        Me.lblCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblCostCenterCode.Name = "lblCostCenterCode"
-        Me.lblCostCenterCode.Size = New System.Drawing.Size(232, 23)
-        Me.lblCostCenterCode.TabIndex = 156
-        Me.lblCostCenterCode.Text = "CostCenter Code"
-        Me.lblCostCenterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRevCostCenterCode.DisplayOnly = true
+        Me.lblRevCostCenterCode.EditingMode = false
+        Me.lblRevCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblRevCostCenterCode.Location = New System.Drawing.Point(11, 36)
+        Me.lblRevCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRevCostCenterCode.Name = "lblRevCostCenterCode"
+        Me.lblRevCostCenterCode.Size = New System.Drawing.Size(200, 23)
+        Me.lblRevCostCenterCode.TabIndex = 156
+        Me.lblRevCostCenterCode.Text = "Code"
+        Me.lblRevCostCenterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblCostCenterName
+        'lblRevCostCenterName
         '
-        Me.lblCostCenterName.DisplayOnly = true
-        Me.lblCostCenterName.EditingMode = false
-        Me.lblCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblCostCenterName.Location = New System.Drawing.Point(11, 61)
-        Me.lblCostCenterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblCostCenterName.Name = "lblCostCenterName"
-        Me.lblCostCenterName.Size = New System.Drawing.Size(232, 23)
-        Me.lblCostCenterName.TabIndex = 157
-        Me.lblCostCenterName.Text = "CostCenter Name"
-        Me.lblCostCenterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRevCostCenterName.DisplayOnly = true
+        Me.lblRevCostCenterName.EditingMode = false
+        Me.lblRevCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblRevCostCenterName.Location = New System.Drawing.Point(11, 61)
+        Me.lblRevCostCenterName.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRevCostCenterName.Name = "lblRevCostCenterName"
+        Me.lblRevCostCenterName.Size = New System.Drawing.Size(200, 23)
+        Me.lblRevCostCenterName.TabIndex = 157
+        Me.lblRevCostCenterName.Text = "Name"
+        Me.lblRevCostCenterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblCostCenterNameAra
+        'lblRevCostCenterNameAra
         '
-        Me.lblCostCenterNameAra.DisplayOnly = true
-        Me.lblCostCenterNameAra.EditingMode = false
-        Me.lblCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblCostCenterNameAra.Location = New System.Drawing.Point(11, 86)
-        Me.lblCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblCostCenterNameAra.Name = "lblCostCenterNameAra"
-        Me.lblCostCenterNameAra.Size = New System.Drawing.Size(232, 23)
-        Me.lblCostCenterNameAra.TabIndex = 158
-        Me.lblCostCenterNameAra.Text = "CostCenter Name (Arabic)"
-        Me.lblCostCenterNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRevCostCenterNameAra.DisplayOnly = true
+        Me.lblRevCostCenterNameAra.EditingMode = false
+        Me.lblRevCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblRevCostCenterNameAra.Location = New System.Drawing.Point(11, 86)
+        Me.lblRevCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRevCostCenterNameAra.Name = "lblRevCostCenterNameAra"
+        Me.lblRevCostCenterNameAra.Size = New System.Drawing.Size(200, 23)
+        Me.lblRevCostCenterNameAra.TabIndex = 158
+        Me.lblRevCostCenterNameAra.Text = "Name (Arabic)"
+        Me.lblRevCostCenterNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblParentIdNo
         '
@@ -266,9 +266,9 @@ Namespace PresentationLayer.Forms
         Me.lblParentIdNo.Location = New System.Drawing.Point(11, 111)
         Me.lblParentIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblParentIdNo.Name = "lblParentIdNo"
-        Me.lblParentIdNo.Size = New System.Drawing.Size(232, 23)
+        Me.lblParentIdNo.Size = New System.Drawing.Size(200, 23)
         Me.lblParentIdNo.TabIndex = 161
-        Me.lblParentIdNo.Text = "Parent Cost Center"
+        Me.lblParentIdNo.Text = "Parent "
         Me.lblParentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cacParentIdNo
@@ -289,7 +289,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
         Me.cacParentIdNo.IntegralHeight = false
         Me.cacParentIdNo.LinkedLabel = Nothing
-        Me.cacParentIdNo.Location = New System.Drawing.Point(245, 111)
+        Me.cacParentIdNo.Location = New System.Drawing.Point(213, 111)
         Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cacParentIdNo.Name = "cacParentIdNo"
         Me.cacParentIdNo.OldValue = 0
@@ -320,7 +320,7 @@ Namespace PresentationLayer.Forms
         Me.lblLevelNumber.Location = New System.Drawing.Point(11, 137)
         Me.lblLevelNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.lblLevelNumber.Name = "lblLevelNumber"
-        Me.lblLevelNumber.Size = New System.Drawing.Size(232, 26)
+        Me.lblLevelNumber.Size = New System.Drawing.Size(200, 26)
         Me.lblLevelNumber.TabIndex = 160
         Me.lblLevelNumber.Text = "Level"
         Me.lblLevelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -339,7 +339,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
         Me.txtLevelNumber.IgnoreNullCheck = true
         Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
-        Me.txtLevelNumber.Location = New System.Drawing.Point(245, 137)
+        Me.txtLevelNumber.Location = New System.Drawing.Point(213, 137)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.txtLevelNumber.MaximumValue = Nothing
         Me.txtLevelNumber.MinimumValue = Nothing
@@ -359,50 +359,50 @@ Namespace PresentationLayer.Forms
         Me.lblProfitCenterIdNo.Location = New System.Drawing.Point(11, 165)
         Me.lblProfitCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblProfitCenterIdNo.Name = "lblProfitCenterIdNo"
-        Me.lblProfitCenterIdNo.Size = New System.Drawing.Size(232, 23)
+        Me.lblProfitCenterIdNo.Size = New System.Drawing.Size(200, 23)
         Me.lblProfitCenterIdNo.TabIndex = 166
-        Me.lblProfitCenterIdNo.Text = "Profit Center Link"
+        Me.lblProfitCenterIdNo.Text = "Revenue or Cost Center?"
         Me.lblProfitCenterIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'cacProfitCenterIdNo
+        'cacRcType
         '
-        Me.cacProfitCenterIdNo.BackColor = System.Drawing.Color.White
-        Me.cacProfitCenterIdNo.ChangingSearchValueOnly = false
-        Me.cacProfitCenterIdNo.CurrentSearchTerm = ""
-        Me.cacProfitCenterIdNo.DefaultValue = Nothing
-        Me.cacProfitCenterIdNo.DisplayMember = "Name"
-        Me.cacProfitCenterIdNo.DropDownHeight = 200
-        Me.cacProfitCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacProfitCenterIdNo.EditingMode = true
-        Me.cacProfitCenterIdNo.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cacProfitCenterIdNo, true)
-        Me.cacProfitCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cacProfitCenterIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cacProfitCenterIdNo.FormattingEnabled = true
-        Me.cacProfitCenterIdNo.HideWhenNotEditingOrAdding = false
-        Me.cacProfitCenterIdNo.IntegralHeight = false
-        Me.cacProfitCenterIdNo.LinkedLabel = Nothing
-        Me.cacProfitCenterIdNo.Location = New System.Drawing.Point(245, 165)
-        Me.cacProfitCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cacProfitCenterIdNo.Name = "cacProfitCenterIdNo"
-        Me.cacProfitCenterIdNo.OldValue = 0
-        Me.cacProfitCenterIdNo.OriginalDataSource = Nothing
-        Me.cacProfitCenterIdNo.OriginalList = Nothing
-        Me.cacProfitCenterIdNo.OverrideDropDownStyleList = false
-        Me.cacProfitCenterIdNo.PreviousSearchTerm = Nothing
-        Me.cacProfitCenterIdNo.PreviousSelectedIndex = -1
-        Me.cacProfitCenterIdNo.PropertySelector = Nothing
-        Me.cacProfitCenterIdNo.ReadOnlyCombo = false
-        Me.cacProfitCenterIdNo.SearchAnywhere = false
-        Me.cacProfitCenterIdNo.Size = New System.Drawing.Size(418, 24)
-        Me.cacProfitCenterIdNo.SuggestBoxHeight = 200
-        Me.cacProfitCenterIdNo.SuggestListOrderRule = Nothing
-        Me.cacProfitCenterIdNo.TabIndex = 5
-        Me.cacProfitCenterIdNo.TextToSearch = Nothing
-        Me.cacProfitCenterIdNo.ValueIsMandatory = false
-        Me.cacProfitCenterIdNo.ValueIsNullable = false
-        Me.cacProfitCenterIdNo.ValueIsNumeric = false
-        Me.cacProfitCenterIdNo.ValueMember = "IdNo"
+        Me.cacRcType.BackColor = System.Drawing.Color.White
+        Me.cacRcType.ChangingSearchValueOnly = false
+        Me.cacRcType.CurrentSearchTerm = ""
+        Me.cacRcType.DefaultValue = Nothing
+        Me.cacRcType.DisplayMember = "Name"
+        Me.cacRcType.DropDownHeight = 200
+        Me.cacRcType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cacRcType.EditingMode = true
+        Me.cacRcType.FilterRule = Nothing
+        Me.floDataDisplay.SetFlowBreak(Me.cacRcType, true)
+        Me.cacRcType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cacRcType.ForeColor = System.Drawing.Color.Black
+        Me.cacRcType.FormattingEnabled = true
+        Me.cacRcType.HideWhenNotEditingOrAdding = false
+        Me.cacRcType.IntegralHeight = false
+        Me.cacRcType.LinkedLabel = Nothing
+        Me.cacRcType.Location = New System.Drawing.Point(213, 165)
+        Me.cacRcType.Margin = New System.Windows.Forms.Padding(1)
+        Me.cacRcType.Name = "cacRcType"
+        Me.cacRcType.OldValue = 0
+        Me.cacRcType.OriginalDataSource = Nothing
+        Me.cacRcType.OriginalList = Nothing
+        Me.cacRcType.OverrideDropDownStyleList = false
+        Me.cacRcType.PreviousSearchTerm = Nothing
+        Me.cacRcType.PreviousSelectedIndex = -1
+        Me.cacRcType.PropertySelector = Nothing
+        Me.cacRcType.ReadOnlyCombo = false
+        Me.cacRcType.SearchAnywhere = false
+        Me.cacRcType.Size = New System.Drawing.Size(191, 24)
+        Me.cacRcType.SuggestBoxHeight = 200
+        Me.cacRcType.SuggestListOrderRule = Nothing
+        Me.cacRcType.TabIndex = 5
+        Me.cacRcType.TextToSearch = Nothing
+        Me.cacRcType.ValueIsMandatory = false
+        Me.cacRcType.ValueIsNullable = false
+        Me.cacRcType.ValueIsNumeric = false
+        Me.cacRcType.ValueMember = "Code"
         '
         'lblNotes
         '
@@ -412,7 +412,7 @@ Namespace PresentationLayer.Forms
         Me.lblNotes.Location = New System.Drawing.Point(11, 191)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Size = New System.Drawing.Size(232, 23)
+        Me.lblNotes.Size = New System.Drawing.Size(200, 23)
         Me.lblNotes.TabIndex = 159
         Me.lblNotes.Text = "Notes"
         Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -441,13 +441,13 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.ValueIsMandatory = true
         Me.txtSortKey.Visible = false
         '
-        'CostCenterEntryTv
+        'RevCostCenterEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(979, 315)
+        Me.ClientSize = New System.Drawing.Size(955, 310)
         Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "CostCenterEntryTv"
-        Me.Text = "CostCenters Maintenance Form"
+        Me.Name = "RevCostCenterEntryTv"
+        Me.Text = "Revenue/Cost Centers Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -458,25 +458,25 @@ Namespace PresentationLayer.Forms
 
 End Sub
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtCostCenterCode As CTextBox
-        Friend WithEvents txtCostCenterName As CTextBox
-        Friend WithEvents txtCostCenterNameAra As CTextBoxArabic
+        Friend WithEvents txtRevCostCenterCode As CTextBox
+        Friend WithEvents txtRevCostCenterName As CTextBox
+        Friend WithEvents txtRevCostCenterNameAra As CTextBoxArabic
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblCostCenterCode As CLabel
-        Friend WithEvents lblCostCenterName As CLabel
-        Friend WithEvents lblCostCenterNameAra As CLabel
+        Friend WithEvents lblRevCostCenterCode As CLabel
+        Friend WithEvents lblRevCostCenterName As CLabel
+        Friend WithEvents lblRevCostCenterNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents lblLevelNumber As CLabel
         Friend WithEvents txtLevelNumber As CTextBox
-        Friend WithEvents _MBCostCenterCannotBeParentToItself As LocalizableMessageBox
+        Friend WithEvents _MBRevCostCenterCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
         Friend WithEvents cacParentIdNo As CaComboBox
         Friend WithEvents lblProfitCenterIdNo As CLabel
-        Friend WithEvents cacProfitCenterIdNo As CaComboBox
+        Friend WithEvents cacRcType As CaComboBox
     End Class
 End Namespace

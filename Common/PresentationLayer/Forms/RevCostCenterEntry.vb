@@ -4,33 +4,33 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
-    Public Class CostCenterEntryTv
-        Implements ICostCenterView
+    Public Class RevCostCenterEntryTv
+        Implements IRevCostCenterView
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "CostCenter"
-            TvMainFieldName = "CostCenterName"
-            TvSecondaryFieldName = "CostCenterCode"
+            MainTableName = "RevCostCenter"
+            TvMainFieldName = "RevCostCenterName"
+            TvSecondaryFieldName = "RevCostCenterCode"
             SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
-            FirstControl = txtCostCenterCode
+            FirstControl = txtRevCostCenterCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New CostCenterPresenter(Me)
+            PresenterObj = New RevCostCenterPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetCostCenterList()
-            cacProfitCenterIdNo.DataSource = PresenterObj.GetProfitCenterList()
+            cacParentIdNo.DataSource = PresenterObj.GetRevCostCenterList()
+            cacRcType.DataSource =  PresenterObj.MakeEnumComboList(Of RcTypeSelection)
         End Sub
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements ICostCenterView.IdNo
+        Public Property IdNo As Int32 Implements IRevCostCenterView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements ICostCenterView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements IRevCostCenterView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
@@ -48,43 +48,43 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ProfitCenterIdNo As Int32? Implements ICostCenterView.ProfitCenterIdNo
+        Public Property RCType As String Implements IRevCostCenterView.RCType
             Get
-                Return CType(cacProfitCenterIdNo.GetValue(), Integer?)
+                Return cacRcType.GetValue()
             End Get
             Set
-                cacProfitCenterIdNo.SetValue(Value)
+                cacRCType.SetValue(Value)
             End Set
         End Property
 
-        Public Property CostCenterCode As String Implements ICostCenterView.CostCenterCode
+        Public Property RevCostCenterCode As String Implements IRevCostCenterView.RevCostCenterCode
             Get
-                Return txtCostCenterCode.Text
+                Return txtRevCostCenterCode.Text
             End Get
             Set
-                txtCostCenterCode.Text = Value
+                txtRevCostCenterCode.Text = Value
             End Set
         End Property
 
-        Public Property CostCenterName As String Implements ICostCenterView.CostCenterName
+        Public Property RevCostCenterName As String Implements IRevCostCenterView.RevCostCenterName
             Get
-                Return txtCostCenterName.Text
+                Return txtRevCostCenterName.Text
             End Get
             Set
-                txtCostCenterName.Text = Value
+                txtRevCostCenterName.Text = Value
             End Set
         End Property
 
-        Public Property CostCenterNameAra As String Implements ICostCenterView.CostCenterNameAra
+        Public Property RevCostCenterNameAra As String Implements IRevCostCenterView.RevCostCenterNameAra
             Get
-                Return txtCostCenterNameAra.Text
+                Return txtRevCostCenterNameAra.Text
             End Get
             Set
-                txtCostCenterNameAra.Text = Value
+                txtRevCostCenterNameAra.Text = Value
             End Set
         End Property
 
-        Public Property Notes As String Implements ICostCenterView.Notes
+        Public Property Notes As String Implements IRevCostCenterView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -93,7 +93,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SortKey As String Implements ICostCenterView.SortKey
+        Public Property SortKey As String Implements IRevCostCenterView.SortKey
             Get
                 Return txtSortKey.Text
             End Get
@@ -102,7 +102,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property LevelNumber As Int16 Implements ICostCenterView.LevelNumber
+        Public Property LevelNumber As Int16 Implements IRevCostCenterView.LevelNumber
             Get
                 Return NumParser(Of Int16)(txtLevelNumber.Text)
             End Get
@@ -116,9 +116,9 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"CostCenterCode", txtCostCenterCode},
-                {"CostCenterName", txtCostCenterName},
-                {"CostCenterNameAra", txtCostCenterNameAra},
+                {"RevCostCenterCode", txtRevCostCenterCode},
+                {"RevCostCenterName", txtRevCostCenterName},
+                {"RevCostCenterNameAra", txtRevCostCenterNameAra},
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
                 {"Notes", txtNotes}

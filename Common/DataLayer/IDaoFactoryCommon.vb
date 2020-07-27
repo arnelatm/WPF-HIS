@@ -12,7 +12,7 @@ Namespace DataLayer
         'ReadOnly Property CountryDao As ICountryDao
         'ReadOnly Property BranchDao As IBranchDao
         'ReadOnly Property ProfitCenterDao As IProfitCenterDao
-        'ReadOnly Property CostCenterDao As ICostCenterDao
+        'ReadOnly Property RevCostCenterDao As IRevCostCenterDao
         'ReadOnly Property DepartmentDao As IDepartmentDao
         'ReadOnly Property ReligionDao As IReligionDao
         'ReadOnly Property RevenueGroupDao As IRevenueGroupDao

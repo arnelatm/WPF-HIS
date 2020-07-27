@@ -2799,27 +2799,27 @@ FROM            dbo.ApJournalItem_View INNER JOIN
                          dbo.ApJournal ON dbo.ApJournalItem_View.JournalIdNo = dbo.ApJournal.IdNo
 WHERE        (dbo.ApJournalItem_View.SpecialAccount = 'AP')
 GO
-/****** Object:  Table [dbo].[CostCenter]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[RevCostCenter]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[CostCenter](
+CREATE TABLE [dbo].[RevCostCenter](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[CostCenterCode] [varchar](5) NOT NULL,
-	[CostCenterName] [varchar](50) NOT NULL,
+	[RevCostCenterCode] [varchar](5) NOT NULL,
+	[RevCostCenterName] [varchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
 	[ProfitCenterIdNo] [int] NULL,
-	[CostCenterNameAra] [varchar](50) NOT NULL,
+	[RevCostCenterNameAra] [varchar](50) NOT NULL,
 	[Notes] [varchar](255) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_CostCenterIdNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_RevCostCenterIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[CostCenter_View]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  View [dbo].[RevCostCenter_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2828,45 +2828,45 @@ GO
 
 
 
-CREATE View [dbo].[CostCenter_View] as 
+CREATE View [dbo].[RevCostCenter_View] as 
 with cte as
 (
 select IdNo
-      ,CostCenterCode
-      ,CostCenterName
-      ,CostCenterNameAra
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
       ,ParentIdNo
 	  ,ProfitCenterIdNo
       ,[Notes]
       ,DateTimeStamp
-      ,cast(row_number()over(partition by ParentIdNo order by CostCenterName) as varchar(max)) as [path]
+      ,cast(row_number()over(partition by ParentIdNo order by RevCostCenterName) as varchar(max)) as [path]
       ,0 as levelnumber
-      ,row_number() over (partition by ParentIdNo order by CostCenterName) / power(10.0,0) as SortKey
+      ,row_number() over (partition by ParentIdNo order by RevCostCenterName) / power(10.0,0) as SortKey
  
-from CostCenter
+from RevCostCenter
 where ParentIdNo IS NULL
 union all
 select t.IdNo
-      ,t.CostCenterCode
-      ,t.CostCenterName
-      ,t.CostCenterNameAra
+      ,t.RevCostCenterCode
+      ,t.RevCostCenterName
+      ,t.RevCostCenterNameAra
 	  ,t.ParentIdNo
 	  ,t.ProfitCenterIdNo
       ,t.[Notes]
       ,t.DateTimeStamp
-      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.CostCenterName) as varchar(max))
+      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) as varchar(max))
       ,levelnumber+1
-      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.CostCenterName) / power(10.0,levelnumber+1)
+      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) / power(10.0,levelnumber+1)
  
  from
     cte
-join CostCenter t on cte.IdNo = t.ParentIdNo
+join RevCostCenter t on cte.IdNo = t.ParentIdNo
 )
    
 select IdNo
-      ,CostCenterCode
-      ,CostCenterName
-      ,CostCenterNameAra
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
 	  ,ParentIdNo
 	  ,ProfitCenterIdNo
       ,[Notes]
@@ -3119,7 +3119,7 @@ CREATE TABLE [dbo].[Department](
 	[ParentIdNo] [smallint] NULL,
 	[Notes] [nvarchar](250) NULL,
 	[ProfitCenterIdNo] [smallint] NULL,
-	[CostCenterIdNo] [smallint] NULL,
+	[RevCostCenterIdNo] [smallint] NULL,
 	[Active] [bit] NULL,
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK_DepartmentIdNo] PRIMARY KEY CLUSTERED 
@@ -3157,7 +3157,7 @@ select IdNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIdNo
-      ,CostCenterIdNo
+      ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by DepartmentName) as varchar(max)) as [path]
@@ -3174,7 +3174,7 @@ select t.IdNo
       ,t.ParentIdNo
       ,t.Notes
       ,t.ProfitCenterIdNo
-      ,t.CostCenterIdNo
+      ,t.RevCostCenterIdNo
       ,t.Active
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.DepartmentName) as varchar(max))
@@ -3193,7 +3193,7 @@ select IdNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIdNo
-      ,CostCenterIdNo
+      ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
 	  ,LevelNumber
@@ -4254,26 +4254,26 @@ CREATE NONCLUSTERED INDEX [IX_ApOpenInvoiceJournalItemIdNo] ON [dbo].[ApOpenInvo
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_CostCenterCode]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE NONCLUSTERED INDEX [IX_CostCenterCode] ON [dbo].[CostCenter]
+/****** Object:  Index [IX_RevCostCenterCode]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RevCostCenterCode] ON [dbo].[RevCostCenter]
 (
-	[CostCenterCode] ASC
+	[RevCostCenterCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_CostCenterName]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_CostCenterName] ON [dbo].[CostCenter]
+/****** Object:  Index [IX_RevCostCenterName]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_RevCostCenterName] ON [dbo].[RevCostCenter]
 (
-	[CostCenterName] ASC
+	[RevCostCenterName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_CostCenterNameAra]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE NONCLUSTERED INDEX [IX_CostCenterNameAra] ON [dbo].[CostCenter]
+/****** Object:  Index [IX_RevCostCenterNameAra]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RevCostCenterNameAra] ON [dbo].[RevCostCenter]
 (
-	[CostCenterNameAra] ASC
+	[RevCostCenterNameAra] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 /****** Object:  Index [IX_DistributionScheme]    Script Date: 3/28/2020 6:33:05 AM ******/

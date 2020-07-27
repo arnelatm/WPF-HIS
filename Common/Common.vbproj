@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\Branch.vb" />
-    <Compile Include="BusinessLayer\CostCenter.vb" />
+    <Compile Include="BusinessLayer\RevCostCenter.vb" />
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\DefaultFieldValue.vb" />
     <Compile Include="BusinessLayer\Department.vb" />
@@ -98,7 +98,7 @@
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryCommon.vb" />
-    <Compile Include="DataLayer\AdoNet\CostCenterDao.vb" />
+    <Compile Include="DataLayer\AdoNet\RevCostCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepartmentDao.vb" />
     <Compile Include="DataLayer\AdoNet\OriginalCaptionsDao.vb" />
@@ -137,10 +137,10 @@
     <Compile Include="PresentationLayer\Forms\CommonForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CostCenterEntry.Designer.vb">
-      <DependentUpon>CostCenterEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Forms\RevCostCenterEntry.Designer.vb">
+      <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CostCenterEntry.vb">
+    <Compile Include="PresentationLayer\Forms\RevCostCenterEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\CountryEntryTv.Designer.vb">
@@ -230,7 +230,7 @@
     <Compile Include="PresentationLayer\Models\DefaultFieldValueModel.vb" />
     <Compile Include="PresentationLayer\Models\BranchModel.vb" />
     <Compile Include="PresentationLayer\Models\CommonModel.vb" />
-    <Compile Include="PresentationLayer\Models\CostCenterModel.vb" />
+    <Compile Include="PresentationLayer\Models\RevCostCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\CountryModel.vb" />
     <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />
     <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
@@ -263,7 +263,7 @@
     <Compile Include="PresentationLayer\Presenters\DefaultFieldValuePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CostCenterPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\RevCostCenterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CountryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepartmentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\OriginalCaptionsPresenter.vb" />
@@ -281,7 +281,7 @@
     <Compile Include="PresentationLayer\Views\GroupAccessView.vb" />
     <Compile Include="PresentationLayer\Views\IDefaultFieldValueView.vb" />
     <Compile Include="PresentationLayer\Views\IBranchView.vb" />
-    <Compile Include="PresentationLayer\Views\ICostCenterView.vb" />
+    <Compile Include="PresentationLayer\Views\IRevCostCenterView.vb" />
     <Compile Include="PresentationLayer\Views\ICountryView.vb" />
     <Compile Include="PresentationLayer\Views\IDepartmentView.vb" />
     <Compile Include="PresentationLayer\Views\IGroupAccessView.vb" />
@@ -325,8 +325,8 @@
     <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTV.resx">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CostCenterEntry.resx">
-      <DependentUpon>CostCenterEntry.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Forms\RevCostCenterEntry.resx">
+      <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\CountryEntryTv.resx">
       <DependentUpon>CountryEntryTv.vb</DependentUpon>

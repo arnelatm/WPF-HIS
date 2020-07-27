@@ -9,7 +9,7 @@
         Public Property ParentIdNo() As Integer?
         Public Property Notes() As String
         Public Property ProfitCenterIdNo() As Integer
-        Public Property CostCenterIdNo() As Integer
+        Public Property RevCostCenterIdNo() As Integer
         Public Property SortKey As String
     End Class
 

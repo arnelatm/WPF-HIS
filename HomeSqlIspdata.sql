@@ -1340,35 +1340,35 @@ INSERT [dbo].[CkdOiItem] ([IdNo], [CkdIdNo], [JournalItemIdNo], [Sequence], [Amo
 GO
 SET IDENTITY_INSERT [dbo].[CkdOiItem] OFF
 GO
-SET IDENTITY_INSERT [dbo].[CostCenter] ON 
+SET IDENTITY_INSERT [dbo].[RevCostCenter] ON 
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (1, N'001', N'Surgery', NULL, NULL, N'Surgery', N'edited')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (1, N'001', N'Surgery', NULL, NULL, N'Surgery', N'edited')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (2, N'002', N'Internal Medicine', NULL, NULL, N'Internal Medicine', N'SYSS')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (2, N'002', N'Internal Medicine', NULL, NULL, N'Internal Medicine', N'SYSS')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (3, N'003', N'E.N.T.', NULL, NULL, N'E.N.T.', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (3, N'003', N'E.N.T.', NULL, NULL, N'E.N.T.', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (4, N'004', N'Dental', 43, NULL, N'Dental', N'a')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (4, N'004', N'Dental', 43, NULL, N'Dental', N'a')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (5, N'005', N'O.B.', NULL, NULL, N'O.B.', N'adddd')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (5, N'005', N'O.B.', NULL, NULL, N'O.B.', N'adddd')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (6, N'006', N'Pediatrics', NULL, NULL, N'Pediatrics', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (6, N'006', N'Pediatrics', NULL, NULL, N'Pediatrics', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (7, N'008', N'Gen. Practitioner', NULL, NULL, N'Gen. Practitioner', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (7, N'008', N'Gen. Practitioner', NULL, NULL, N'Gen. Practitioner', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (8, N'301', N'Diagnostic Center ', NULL, NULL, N'Diagnostic Center ', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (8, N'301', N'Diagnostic Center ', NULL, NULL, N'Diagnostic Center ', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (9, N'201', N'Laboratory', NULL, NULL, N'Laboratory', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (9, N'201', N'Laboratory', NULL, NULL, N'Laboratory', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (10, N'202', N'Radiology', NULL, NULL, N'Radiology', N'dfdfdfdf')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (10, N'202', N'Radiology', NULL, NULL, N'Radiology', N'dfdfdfdf')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (42, N'007', N'Dermatology', NULL, NULL, N'Dermatology', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (42, N'007', N'Dermatology', NULL, NULL, N'Dermatology', NULL)
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (43, N'104', N'Dental Cost Center', NULL, 6, N'Dental Cost Center', N's')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (43, N'104', N'Dental Cost Center', NULL, 6, N'Dental Cost Center', N's')
 GO
-INSERT [dbo].[CostCenter] ([IdNo], [CostCenterCode], [CostCenterName], [ParentIdNo], [ProfitCenterIdNo], [CostCenterNameAra], [Notes]) VALUES (44, N'test', N'test', NULL, 0, N'test', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (44, N'test', N'test', NULL, 0, N'test', NULL)
 GO
-SET IDENTITY_INSERT [dbo].[CostCenter] OFF
+SET IDENTITY_INSERT [dbo].[RevCostCenter] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Country] ON 
 GO
@@ -2642,39 +2642,39 @@ SET IDENTITY_INSERT [dbo].[DefaultFieldValue] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Department] ON 
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL, N'dr essam', 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL, N'dr essam', 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL, NULL, 3, 2, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL, NULL, 3, 2, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (5, N'005', N'Obstetrics & Gynecology', N'Obstetrics & Gynecology', NULL, NULL, 2, 1, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (5, N'005', N'Obstetrics & Gynecology', N'Obstetrics & Gynecology', NULL, NULL, 2, 1, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (13, N'006', N'Pediatrics 1', N'Pediatrics 1', 61, NULL, 1, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (13, N'006', N'Pediatrics 1', N'Pediatrics 1', 61, NULL, 1, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (18, N'008', N'General Practitioner 1', N'General Practitioner 1', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (18, N'008', N'General Practitioner 1', N'General Practitioner 1', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (20, N'009', N'General Practitioner 2', N'General Practitioner 2', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (20, N'009', N'General Practitioner 2', N'General Practitioner 2', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (26, N'015', N'Internal Medicine 2', N'Internal Medicine 2', NULL, NULL, 3, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (26, N'015', N'Internal Medicine 2', N'Internal Medicine 2', NULL, NULL, 3, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (28, N'999', N'Admin', N'Admin', NULL, N'yrd', 0, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (28, N'999', N'Admin', N'Admin', NULL, N'yrd', 0, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (49, N'004', N'Dental', N'Dental', 59, NULL, 5, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (49, N'004', N'Dental', N'Dental', 59, NULL, 5, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (50, N'012', N'Pediatrics 2', N'Pediatrics 2', 61, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (50, N'012', N'Pediatrics 2', N'Pediatrics 2', 61, NULL, 0, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (52, N'090', N'Opthalmology', N'Opthalmology', NULL, N'1', 5, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (52, N'090', N'Opthalmology', N'Opthalmology', NULL, N'1', 5, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (53, N'301', N'Diagnostic Center', N'Diagnostic Center', NULL, N'x', 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (53, N'301', N'Diagnostic Center', N'Diagnostic Center', NULL, N'x', 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (54, N'010', N'General Practitioner 3', N'General Practitioner 3', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (54, N'010', N'General Practitioner 3', N'General Practitioner 3', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (55, N'201', N'Laboratory', N'Laboratory', NULL, NULL, 80, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (55, N'201', N'Laboratory', N'Laboratory', NULL, NULL, 80, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (59, N'444', N'Dental Department', N'Dental Department', NULL, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (59, N'444', N'Dental Department', N'Dental Department', NULL, NULL, 0, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (60, N'888', N'General Practitioner Department', N'General Practitioner Department', NULL, NULL, 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (60, N'888', N'General Practitioner Department', N'General Practitioner Department', NULL, NULL, 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [CostCenterIdNo], [Active]) VALUES (61, N'666', N'Pediatrics Department', N'Pediatrics Department', NULL, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (61, N'666', N'Pediatrics Department', N'Pediatrics Department', NULL, NULL, 0, 0, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Department] OFF
 GO
@@ -7720,15 +7720,15 @@ INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6086, N'Profit Cente
 GO
 INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6087, N'Cost Center')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6088, N'CostCenters Maintenance Form')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6088, N'RevCostCenters Maintenance Form')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6089, N'CostCenter ID No.')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6089, N'RevCostCenter ID No.')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6090, N'CostCenter Code')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6090, N'RevCostCenter Code')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6091, N'CostCenter Name')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6091, N'RevCostCenter Name')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6092, N'CostCenter Name (Arabic)')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6092, N'RevCostCenter Name (Arabic)')
 GO
 INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6093, N'Parent Cost Center')
 GO
@@ -24370,7 +24370,7 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (5, N'Main.Menu.Masters.General.Departments', NULL, NULL)
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (6, N'Main.Menu.Masters.General.CostCenters', NULL, NULL)
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (6, N'Main.Menu.Masters.General.RevCostCenters', NULL, NULL)
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (7, N'Main.Menu.Masters.General.ProfitCenters', NULL, NULL)
 GO
@@ -25428,7 +25428,7 @@ INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5010, N'PettyCashJournal
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5011, N'DepartmentEntryTv')
 GO
-INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5012, N'CostCenterEntryTv')
+INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5012, N'RevCostCenterEntryTv')
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5013, N'PhoneTypeEntryTv')
 GO
