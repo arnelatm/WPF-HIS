@@ -792,7 +792,7 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", "ar", "Language")
+            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

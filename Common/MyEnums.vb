@@ -121,6 +121,14 @@ Public Enum DataTypeSelection
     UShortType = 16
 End Enum
 
+<TypeConverter(GetType(LocalizedEnumConverter))>
+Public Enum RcTypeSelection
+    <EnumCode("")> None
+    <EnumCode("R")> Revenue
+    <EnumCode("C")> Cost
+    <EnumCode("B")> RevenueAndCost
+End Enum
+
 Public Module Adapter
 
     Public Function MaleFemaleToEnum(value As String)
@@ -183,6 +191,25 @@ Public Module Adapter
                 retValue = Nothing
             Case Else
                 retValue = Nothing
+        End Select
+        Return retValue
+    End Function
+
+
+
+    Public Function RCTypeToEnum(value As String) As Int16
+        Dim retValue As Int16
+        Select Case value
+            Case Nothing
+                retValue = RcTypeSelection.Cost
+            Case "R"
+                retValue = RcTypeSelection.Revenue
+            Case "C"
+                retValue = RcTypeSelection.Cost
+            Case "B"
+                retValue = RcTypeSelection.RevenueAndCost
+            Case Else
+                retValue = RcTypeSelection.RevenueAndCost
         End Select
         Return retValue
     End Function

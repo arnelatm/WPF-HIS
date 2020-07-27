@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class CostCenter
+    Public Class RevCostCenter
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -12,7 +12,7 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 ' establish business rules
-                AddRule(New ValidateRequired("CostCenterName"))
+                AddRule(New ValidateRequired("RevCostCenterName"))
                 AddRule(New ValidateCompare("ParentIdNo", "IdNo", ValidationOperator.NotEqual,
                                             ValidationDataType.Integer))
             End If
@@ -20,10 +20,10 @@ Namespace BusinessLayer
 
         Public Property IdNo As Int32
         Public Property ParentIdNo As Int32?
-        Public Property CostCenterCode As String
-        Public Property CostCenterName As String
-        Public Property CostCenterNameAra As String
-        Public Property ProfitCenterIdNo As Int32?
+        Public Property RevCostCenterCode As String
+        Public Property RevCostCenterName As String
+        Public Property RevCostCenterNameAra As String
+        Public Property RCType As String
         Public Property LevelNumber As Int16
         Public Property Notes As String
         Public Property SortKey As String

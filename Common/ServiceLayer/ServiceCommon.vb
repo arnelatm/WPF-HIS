@@ -18,9 +18,9 @@ Namespace ServiceLayer
             End Get
         End Property
 
-        Private ReadOnly Property CostCenterDao As IDaoAll(Of CostCenter)
+        Private ReadOnly Property RevCostCenterDao As IDaoAll(Of RevCostCenter)
             Get
-                Return DaoFactoryCommonFactory.CreateDao("CostCenter")
+                Return DaoFactoryCommonFactory.CreateDao("RevCostCenter")
             End Get
         End Property
 

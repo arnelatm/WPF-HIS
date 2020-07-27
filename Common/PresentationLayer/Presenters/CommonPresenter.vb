@@ -63,12 +63,12 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
-        Public Function GetCostCenterList(Optional ByVal sortKey As String = "CostCenterName")
-            TableToGet = "CostCenter"
+        Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
+            TableToGet = "RevCostCenter"
             SortExpression = sortKey
-            DisplayName = "CostCenterName"
-            DisplayNameArabic = "CostCenterNameAra"
-            DisplayCode = "CostCenterCode"
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
             Return GetTableList()
         End Function
 

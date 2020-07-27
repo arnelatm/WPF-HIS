@@ -756,7 +756,7 @@ FROM            dbo.CheckDisbursementJournal INNER JOIN
                          dbo.Chart ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CheckDisbursementJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
-/****** Object:  View [dbo].[CostCenter_View]    Script Date: 3/27/2020 6:57:40 AM ******/
+/****** Object:  View [dbo].[RevCostCenter_View]    Script Date: 3/27/2020 6:57:40 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -765,45 +765,45 @@ GO
 
 
 
-CREATE View [dbo].[CostCenter_View] as 
+CREATE View [dbo].[RevCostCenter_View] as 
 with cte as
 (
 select IdNo
-      ,CostCenterCode
-      ,CostCenterName
-      ,CostCenterNameAra
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
       ,ParentIdNo
 	  ,ProfitCenterIdNo
       ,[Notes]
       ,DateTimeStamp
-      ,cast(row_number()over(partition by ParentIdNo order by CostCenterName) as varchar(max)) as [path]
+      ,cast(row_number()over(partition by ParentIdNo order by RevCostCenterName) as varchar(max)) as [path]
       ,0 as levelnumber
-      ,row_number() over (partition by ParentIdNo order by CostCenterName) / power(10.0,0) as SortKey
+      ,row_number() over (partition by ParentIdNo order by RevCostCenterName) / power(10.0,0) as SortKey
  
-from CostCenter
+from RevCostCenter
 where ParentIdNo IS NULL
 union all
 select t.IdNo
-      ,t.CostCenterCode
-      ,t.CostCenterName
-      ,t.CostCenterNameAra
+      ,t.RevCostCenterCode
+      ,t.RevCostCenterName
+      ,t.RevCostCenterNameAra
 	  ,t.ParentIdNo
 	  ,t.ProfitCenterIdNo
       ,t.[Notes]
       ,t.DateTimeStamp
-      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.CostCenterName) as varchar(max))
+      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) as varchar(max))
       ,levelnumber+1
-      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.CostCenterName) / power(10.0,levelnumber+1)
+      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) / power(10.0,levelnumber+1)
  
  from
     cte
-join CostCenter t on cte.IdNo = t.ParentIdNo
+join RevCostCenter t on cte.IdNo = t.ParentIdNo
 )
    
 select IdNo
-      ,CostCenterCode
-      ,CostCenterName
-      ,CostCenterNameAra
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
 	  ,ParentIdNo
 	  ,ProfitCenterIdNo
       ,[Notes]
@@ -835,7 +835,7 @@ select IdNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIdNo
-      ,CostCenterIdNo
+      ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by DepartmentName) as varchar(max)) as [path]
@@ -852,7 +852,7 @@ select t.IdNo
       ,t.ParentIdNo
       ,t.Notes
       ,t.ProfitCenterIdNo
-      ,t.CostCenterIdNo
+      ,t.RevCostCenterIdNo
       ,t.Active
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.DepartmentName) as varchar(max))
@@ -871,7 +871,7 @@ select IdNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIdNo
-      ,CostCenterIdNo
+      ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
 	  ,LevelNumber

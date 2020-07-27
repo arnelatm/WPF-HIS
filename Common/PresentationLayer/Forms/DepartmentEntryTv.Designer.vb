@@ -38,8 +38,8 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -67,8 +67,8 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout1.Controls.Add(Me.cacParentIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblProfitCenterIdNo)
         Me.CFlowLayout1.Controls.Add(Me.cacProfitCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.lblCostCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.cacCostCenterIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblRevCostCenterIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.cacRevCostCenterIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtSortKey)
@@ -264,47 +264,47 @@ Namespace PresentationLayer.Forms
         Me.cacProfitCenterIdNo.ValueIsNumeric = false
         Me.cacProfitCenterIdNo.ValueMember = "IdNo"
         '
-        'lblCostCenterIdNo
+        'lblRevCostCenterIdNo
         '
-        Me.lblCostCenterIdNo.DisplayOnly = true
-        Me.lblCostCenterIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblCostCenterIdNo, "lblCostCenterIdNo")
-        Me.lblCostCenterIdNo.Name = "lblCostCenterIdNo"
+        Me.lblRevCostCenterIdNo.DisplayOnly = true
+        Me.lblRevCostCenterIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblRevCostCenterIdNo, "lblRevCostCenterIdNo")
+        Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
         '
-        'cacCostCenterIdNo
+        'cacRevCostCenterIdNo
         '
-        Me.cacCostCenterIdNo.BackColor = System.Drawing.Color.White
-        Me.cacCostCenterIdNo.ChangingSearchValueOnly = false
-        Me.cacCostCenterIdNo.CurrentSearchTerm = ""
-        Me.cacCostCenterIdNo.DefaultValue = Nothing
-        Me.cacCostCenterIdNo.DisplayMember = "Name"
-        Me.cacCostCenterIdNo.DropDownHeight = 1
-        Me.cacCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacCostCenterIdNo.EditingMode = false
-        Me.cacCostCenterIdNo.FilterRule = Nothing
-        Me.CFlowLayout1.SetFlowBreak(Me.cacCostCenterIdNo, true)
-        resources.ApplyResources(Me.cacCostCenterIdNo, "cacCostCenterIdNo")
-        Me.cacCostCenterIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cacCostCenterIdNo.FormattingEnabled = true
-        Me.cacCostCenterIdNo.HideWhenNotEditingOrAdding = false
-        Me.cacCostCenterIdNo.LinkedLabel = Nothing
-        Me.cacCostCenterIdNo.Name = "cacCostCenterIdNo"
-        Me.cacCostCenterIdNo.OldValue = 0
-        Me.cacCostCenterIdNo.OriginalDataSource = Nothing
-        Me.cacCostCenterIdNo.OriginalList = Nothing
-        Me.cacCostCenterIdNo.OverrideDropDownStyleList = false
-        Me.cacCostCenterIdNo.PreviousSearchTerm = Nothing
-        Me.cacCostCenterIdNo.PreviousSelectedIndex = -1
-        Me.cacCostCenterIdNo.PropertySelector = Nothing
-        Me.cacCostCenterIdNo.ReadOnlyCombo = false
-        Me.cacCostCenterIdNo.SearchAnywhere = false
-        Me.cacCostCenterIdNo.SuggestBoxHeight = 200
-        Me.cacCostCenterIdNo.SuggestListOrderRule = Nothing
-        Me.cacCostCenterIdNo.TextToSearch = Nothing
-        Me.cacCostCenterIdNo.ValueIsMandatory = false
-        Me.cacCostCenterIdNo.ValueIsNullable = false
-        Me.cacCostCenterIdNo.ValueIsNumeric = false
-        Me.cacCostCenterIdNo.ValueMember = "IdNo"
+        Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+        Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = false
+        Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
+        Me.cacRevCostCenterIdNo.DefaultValue = Nothing
+        Me.cacRevCostCenterIdNo.DisplayMember = "Name"
+        Me.cacRevCostCenterIdNo.DropDownHeight = 1
+        Me.cacRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cacRevCostCenterIdNo.EditingMode = false
+        Me.cacRevCostCenterIdNo.FilterRule = Nothing
+        Me.CFlowLayout1.SetFlowBreak(Me.cacRevCostCenterIdNo, true)
+        resources.ApplyResources(Me.cacRevCostCenterIdNo, "cacRevCostCenterIdNo")
+        Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacRevCostCenterIdNo.FormattingEnabled = true
+        Me.cacRevCostCenterIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacRevCostCenterIdNo.LinkedLabel = Nothing
+        Me.cacRevCostCenterIdNo.Name = "cacRevCostCenterIdNo"
+        Me.cacRevCostCenterIdNo.OldValue = 0
+        Me.cacRevCostCenterIdNo.OriginalDataSource = Nothing
+        Me.cacRevCostCenterIdNo.OriginalList = Nothing
+        Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = false
+        Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
+        Me.cacRevCostCenterIdNo.PreviousSelectedIndex = -1
+        Me.cacRevCostCenterIdNo.PropertySelector = Nothing
+        Me.cacRevCostCenterIdNo.ReadOnlyCombo = false
+        Me.cacRevCostCenterIdNo.SearchAnywhere = false
+        Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
+        Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
+        Me.cacRevCostCenterIdNo.TextToSearch = Nothing
+        Me.cacRevCostCenterIdNo.ValueIsMandatory = false
+        Me.cacRevCostCenterIdNo.ValueIsNullable = false
+        Me.cacRevCostCenterIdNo.ValueIsNumeric = false
+        Me.cacRevCostCenterIdNo.ValueMember = "IdNo"
         '
         'lblNotes
         '
@@ -377,11 +377,11 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblProfitCenterIdNo As CLabel
-        Friend WithEvents lblCostCenterIdNo As CLabel
+        Friend WithEvents lblRevCostCenterIdNo As CLabel
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents cacParentIdNo As CaComboBox
         Friend WithEvents cacProfitCenterIdNo As CaComboBox
-        Friend WithEvents cacCostCenterIdNo As CaComboBox
+        Friend WithEvents cacRevCostCenterIdNo As CaComboBox
         Friend WithEvents txtSortKey As CTextBox
     End Class
 End NameSpace

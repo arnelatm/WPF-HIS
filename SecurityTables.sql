@@ -819,7 +819,7 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (36, N'Main.Account.Masters.General.Branches', NULL, 11, NULL)
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (37, N'Main.Account.Masters.General.CostCenters', NULL, 11, NULL)
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (37, N'Main.Account.Masters.General.RevCostCenters', NULL, 11, NULL)
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (38, N'Main.Account.Masters.General.Departments', NULL, 11, NULL)
 GO

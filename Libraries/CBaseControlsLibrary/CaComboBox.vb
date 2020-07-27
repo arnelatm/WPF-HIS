@@ -516,9 +516,9 @@ Public Class CaComboBox
                     Text = value.ToString()
                     MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
-                'If SelectedItem.Code <> value Then
-                '    Text = Nothing
-                'End If
+                If SelectedItem.Code <> value Then
+                    Text = Nothing
+                End If
             End If
         End If
         'If value Is Nothing Then

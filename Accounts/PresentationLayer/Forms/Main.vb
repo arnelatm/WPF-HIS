@@ -523,11 +523,11 @@ Namespace PresentationLayer.Forms
             ShowEntryForm(ChartEntryTv)
         End Sub
 
-        Private Sub CostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemCostCenters.Click
-            Dim childMdiForm As CostCenterEntryTv
+        Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemRevCostCenters.Click
+            Dim childMdiForm As RevCostCenterEntryTv
             'Set the Parent Form of the Child window.
-            childMdiForm = New CostCenterEntryTv() With {
+            childMdiForm = New RevCostCenterEntryTv() With {
                 .MdiParent = Me
                 }
             'Display the new form.

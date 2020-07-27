@@ -40,8 +40,8 @@ Public Class CForm
             End If
             'If System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If GlobalVariables.RightToLeftLayout Then
-                RightToLeftLayout = True
-                RightToLeft = RightToLeft.Yes
+                'RightToLeftLayout = True
+                'RightToLeft = RightToLeft.Yes
                 'If GetPropertyValue(Me, "RightToLeftLayout") IsNot Nothing Then
                 '    Me.RightToLeftLayout = True
                 '    If GetPropertyValue(Me, "RightToLeft") IsNot Nothing Then
@@ -66,8 +66,8 @@ Public Class CForm
                     End If
                 Next cCtrl
             Else
-                RightToLeftLayout = False
-                RightToLeft = RightToLeft.No
+                'RightToLeftLayout = False
+                'RightToLeft = RightToLeft.No
             End If
         End If
     End Sub

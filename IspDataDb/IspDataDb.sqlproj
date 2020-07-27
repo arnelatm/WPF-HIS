@@ -84,7 +84,7 @@
     <Build Include="dbo\Tables\DistributionSchemeItem.sql" />
     <Build Include="dbo\Tables\Document.sql" />
     <Build Include="dbo\Tables\EmployeeOld.sql" />
-    <Build Include="dbo\Tables\CostCenter.sql" />
+    <Build Include="dbo\Tables\RevCostCenter.sql" />
     <Build Include="dbo\Tables\ProfitCenter.sql" />
     <Build Include="dbo\Tables\NumberSeries.sql" />
     <Build Include="dbo\Tables\Patient.sql" />
@@ -179,7 +179,7 @@
     <Build Include="dbo\Views\ApInvoices_View.sql" />
     <Build Include="dbo\Views\ProfitCenter_View.sql" />
     <Build Include="dbo\Views\UnpaidOpenInvoices_View.sql" />
-    <Build Include="dbo\Views\CostCenter_View.sql" />
+    <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\RevenueGroup_View.sql" />
     <Build Include="dbo\Views\AccountReconciliationItem_View.sql" />
     <Build Include="dbo\Views\InputVatAccountTypes.sql" />
