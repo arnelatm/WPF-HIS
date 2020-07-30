@@ -570,81 +570,81 @@ SET IDENTITY_INSERT [dbo].[ApJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[ApJournalItem] ON 
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (1, 1, 35, 210, 0.0000, 800.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (1, 1, 35, 210, 0.0000, 800.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (2, 2, 35, 424, 800.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (2, 2, 35, 424, 800.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (3, 1, 36, 227, 0.0000, 900.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (3, 1, 36, 227, 0.0000, 900.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (4, 2, 36, 424, 900.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (4, 2, 36, 424, 900.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (7, 1, 38, 227, 0.0000, 1.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (7, 1, 38, 227, 0.0000, 1.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (8, 2, 38, 106, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (8, 2, 38, 106, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (11, 1, 40, 227, 0.0000, 1.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (11, 1, 40, 227, 0.0000, 1.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (12, 2, 40, 106, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (12, 2, 40, 106, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (13, 1, 41, 227, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (13, 1, 41, 227, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (14, 2, 41, 104, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (14, 2, 41, 104, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (39, 1, 54, 227, 0.0000, 1.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (39, 1, 54, 227, 0.0000, 1.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (40, 2, 54, 106, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (40, 2, 54, 106, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (49, 1, 1, 104, 0.0000, 900.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (49, 1, 1, 104, 0.0000, 900.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (50, 2, 1, 227, 900.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (50, 2, 1, 227, 900.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (53, 1, 2, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (53, 1, 2, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (54, 2, 2, 114, 0.0000, 1.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (54, 2, 2, 114, 0.0000, 1.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (55, 3, 2, 116, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (55, 3, 2, 116, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (56, 4, 2, 104, 1.0000, 0.0000, 1, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (56, 4, 2, 104, 1.0000, 0.0000, 1, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (57, 1, 3, 104, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (57, 1, 3, 104, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (58, 2, 3, 140, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (58, 2, 3, 140, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (59, 1, 4, 104, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (59, 1, 4, 104, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (60, 2, 4, 119, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (60, 2, 4, 119, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (61, 1, 5, 104, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (61, 1, 5, 104, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (62, 2, 5, 438, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (62, 2, 5, 438, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (64, 1, 6, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (64, 1, 6, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (65, 2, 6, 441, 4.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (65, 2, 6, 441, 4.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (66, 3, 6, 229, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (66, 3, 6, 229, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (67, 1, 7, 107, 0.0000, 6.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (67, 1, 7, 107, 0.0000, 6.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (68, 2, 7, 447, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (68, 2, 7, 447, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (69, 3, 7, 229, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (69, 3, 7, 229, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (73, 1, 55, 227, 0.0000, 5.2500, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (73, 1, 55, 227, 0.0000, 5.2500, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (74, 2, 55, 119, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (74, 2, 55, 119, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (75, 3, 55, 104, 0.2500, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (75, 3, 55, 104, 0.2500, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (76, 1, 8, 106, 0.0000, 4.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (76, 1, 8, 106, 0.0000, 4.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (77, 2, 8, 447, 0.0000, 0.2500, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (77, 2, 8, 447, 0.0000, 0.2500, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (78, 3, 8, 227, 4.2500, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (78, 3, 8, 227, 4.2500, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (79, 1, 9, 106, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (79, 1, 9, 106, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (80, 2, 9, 119, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ApJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (80, 2, 9, 119, 5.0000, 0.0000, 0, N'', 0)
 GO
 SET IDENTITY_INSERT [dbo].[ApJournalItem] OFF
 GO
@@ -690,41 +690,41 @@ SET IDENTITY_INSERT [dbo].[ArJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[ArJournalItem] ON 
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (25, 1, 13, 124, 55.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (25, 1, 13, 124, 55.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (26, 2, 13, 104, 0.0000, 55.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (26, 2, 13, 104, 0.0000, 55.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (29, 1, 15, 124, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (29, 1, 15, 124, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (30, 2, 15, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (30, 2, 15, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (33, 1, 17, 124, 555.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (33, 1, 17, 124, 555.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (34, 2, 17, 104, 0.0000, 555.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (34, 2, 17, 104, 0.0000, 555.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (35, 1, 19, 124, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (35, 1, 19, 124, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (36, 2, 19, 104, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (36, 2, 19, 104, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (37, 1, 20, 124, 55.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (37, 1, 20, 124, 55.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (38, 2, 20, 104, 0.0000, 55.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (38, 2, 20, 104, 0.0000, 55.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (39, 1, 21, 124, 22.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (39, 1, 21, 124, 22.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (40, 2, 21, 104, 0.0000, 22.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (40, 2, 21, 104, 0.0000, 22.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (41, 1, 22, 124, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (41, 1, 22, 124, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (42, 2, 22, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (42, 2, 22, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (43, 1, 23, 124, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (43, 1, 23, 124, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (44, 2, 23, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (44, 2, 23, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (47, 1, 25, 124, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (47, 1, 25, 124, 5.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (48, 2, 25, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[ArJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (48, 2, 25, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
 SET IDENTITY_INSERT [dbo].[ArJournalItem] OFF
 GO
@@ -830,27 +830,27 @@ SET IDENTITY_INSERT [dbo].[CashDisbursementJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CashDisbursementJournalItem] ON 
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (50, 1, 3, 106, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (50, 1, 3, 106, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (51, 2, 3, 424, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (51, 2, 3, 424, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (52, 1, 4, 106, 0.0000, 100.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (52, 1, 4, 106, 0.0000, 100.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (53, 2, 4, 210, 100.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (53, 2, 4, 210, 100.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (54, 1, 5, 107, 0.0000, 100.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (54, 1, 5, 107, 0.0000, 100.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (55, 2, 5, 447, 0.0000, 100.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (55, 2, 5, 447, 0.0000, 100.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (56, 3, 5, 210, 200.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (56, 3, 5, 210, 200.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (57, 1, 6, 107, 0.0000, 200.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (57, 1, 6, 107, 0.0000, 200.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (58, 2, 6, 210, 200.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (58, 2, 6, 210, 200.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (59, 1, 7, 107, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (59, 1, 7, 107, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (60, 2, 7, 108, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashDisbursementJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (60, 2, 7, 108, 5.0000, 0.0000, 0, N'', 0)
 GO
 SET IDENTITY_INSERT [dbo].[CashDisbursementJournalItem] OFF
 GO
@@ -866,13 +866,13 @@ SET IDENTITY_INSERT [dbo].[CashReceiptJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CashReceiptJournalItem] ON 
 GO
-INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (1, 1, 1, 107, 200.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (1, 1, 1, 107, 200.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (2, 2, 1, 240, 0.0000, 200.0000, 0, N'', 0)
+INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (2, 2, 1, 240, 0.0000, 200.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (3, 1, 2, 107, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (3, 1, 2, 107, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (4, 2, 2, 218, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[CashReceiptJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (4, 2, 2, 218, 0.0000, 500.0000, 0, N'', 0)
 GO
 SET IDENTITY_INSERT [dbo].[CashReceiptJournalItem] OFF
 GO
@@ -1326,9 +1326,9 @@ SET IDENTITY_INSERT [dbo].[CheckDisbursementJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CheckDisbursementJournalItem] ON 
 GO
-INSERT [dbo].[CheckDisbursementJournalItem] ([IdNo], [Sequence], [AccountIdNo], [Debit], [Credit], [Notes], [JournalIdNo], [ProfitCenterIdNo], [Posted]) VALUES (167, 1, 107, 0.0000, 200.0000, N'', 1, 0, 0)
+INSERT [dbo].[CheckDisbursementJournalItem] ([IdNo], [Sequence], [AccountIdNo], [Debit], [Credit], [Notes], [JournalIdNo], [RevCostCenterIdNo], [Posted]) VALUES (167, 1, 107, 0.0000, 200.0000, N'', 1, 0, 0)
 GO
-INSERT [dbo].[CheckDisbursementJournalItem] ([IdNo], [Sequence], [AccountIdNo], [Debit], [Credit], [Notes], [JournalIdNo], [ProfitCenterIdNo], [Posted]) VALUES (168, 2, 210, 200.0000, 0.0000, N'', 1, 0, 0)
+INSERT [dbo].[CheckDisbursementJournalItem] ([IdNo], [Sequence], [AccountIdNo], [Debit], [Credit], [Notes], [JournalIdNo], [RevCostCenterIdNo], [Posted]) VALUES (168, 2, 210, 200.0000, 0.0000, N'', 1, 0, 0)
 GO
 SET IDENTITY_INSERT [dbo].[CheckDisbursementJournalItem] OFF
 GO
@@ -1342,31 +1342,31 @@ SET IDENTITY_INSERT [dbo].[CkdOiItem] OFF
 GO
 SET IDENTITY_INSERT [dbo].[RevCostCenter] ON 
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (1, N'001', N'Surgery', NULL, NULL, N'Surgery', N'edited')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (1, N'001', N'Surgery', NULL, NULL, N'Surgery', N'edited')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (2, N'002', N'Internal Medicine', NULL, NULL, N'Internal Medicine', N'SYSS')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (2, N'002', N'Internal Medicine', NULL, NULL, N'Internal Medicine', N'SYSS')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (3, N'003', N'E.N.T.', NULL, NULL, N'E.N.T.', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (3, N'003', N'E.N.T.', NULL, NULL, N'E.N.T.', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (4, N'004', N'Dental', 43, NULL, N'Dental', N'a')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (4, N'004', N'Dental', 43, NULL, N'Dental', N'a')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (5, N'005', N'O.B.', NULL, NULL, N'O.B.', N'adddd')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (5, N'005', N'O.B.', NULL, NULL, N'O.B.', N'adddd')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (6, N'006', N'Pediatrics', NULL, NULL, N'Pediatrics', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (6, N'006', N'Pediatrics', NULL, NULL, N'Pediatrics', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (7, N'008', N'Gen. Practitioner', NULL, NULL, N'Gen. Practitioner', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (7, N'008', N'Gen. Practitioner', NULL, NULL, N'Gen. Practitioner', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (8, N'301', N'Diagnostic Center ', NULL, NULL, N'Diagnostic Center ', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (8, N'301', N'Diagnostic Center ', NULL, NULL, N'Diagnostic Center ', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (9, N'201', N'Laboratory', NULL, NULL, N'Laboratory', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (9, N'201', N'Laboratory', NULL, NULL, N'Laboratory', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (10, N'202', N'Radiology', NULL, NULL, N'Radiology', N'dfdfdfdf')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (10, N'202', N'Radiology', NULL, NULL, N'Radiology', N'dfdfdfdf')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (42, N'007', N'Dermatology', NULL, NULL, N'Dermatology', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (42, N'007', N'Dermatology', NULL, NULL, N'Dermatology', NULL)
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (43, N'104', N'Dental Cost Center', NULL, 6, N'Dental Cost Center', N's')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (43, N'104', N'Dental Cost Center', NULL, 6, N'Dental Cost Center', N's')
 GO
-INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [ProfitCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (44, N'test', N'test', NULL, 0, N'test', NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterIdNo], [RevCostCenterNameAra], [Notes]) VALUES (44, N'test', N'test', NULL, 0, N'test', NULL)
 GO
 SET IDENTITY_INSERT [dbo].[RevCostCenter] OFF
 GO
@@ -2642,39 +2642,39 @@ SET IDENTITY_INSERT [dbo].[DefaultFieldValue] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Department] ON 
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL, N'dr essam', 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL, N'dr essam', 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL, NULL, 3, 2, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL, NULL, 3, 2, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (5, N'005', N'Obstetrics & Gynecology', N'Obstetrics & Gynecology', NULL, NULL, 2, 1, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (5, N'005', N'Obstetrics & Gynecology', N'Obstetrics & Gynecology', NULL, NULL, 2, 1, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (13, N'006', N'Pediatrics 1', N'Pediatrics 1', 61, NULL, 1, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (13, N'006', N'Pediatrics 1', N'Pediatrics 1', 61, NULL, 1, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (18, N'008', N'General Practitioner 1', N'General Practitioner 1', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (18, N'008', N'General Practitioner 1', N'General Practitioner 1', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (20, N'009', N'General Practitioner 2', N'General Practitioner 2', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (20, N'009', N'General Practitioner 2', N'General Practitioner 2', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (26, N'015', N'Internal Medicine 2', N'Internal Medicine 2', NULL, NULL, 3, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (26, N'015', N'Internal Medicine 2', N'Internal Medicine 2', NULL, NULL, 3, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (28, N'999', N'Admin', N'Admin', NULL, N'yrd', 0, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (28, N'999', N'Admin', N'Admin', NULL, N'yrd', 0, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (49, N'004', N'Dental', N'Dental', 59, NULL, 5, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (49, N'004', N'Dental', N'Dental', 59, NULL, 5, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (50, N'012', N'Pediatrics 2', N'Pediatrics 2', 61, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (50, N'012', N'Pediatrics 2', N'Pediatrics 2', 61, NULL, 0, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (52, N'090', N'Opthalmology', N'Opthalmology', NULL, N'1', 5, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (52, N'090', N'Opthalmology', N'Opthalmology', NULL, N'1', 5, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (53, N'301', N'Diagnostic Center', N'Diagnostic Center', NULL, N'x', 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (53, N'301', N'Diagnostic Center', N'Diagnostic Center', NULL, N'x', 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (54, N'010', N'General Practitioner 3', N'General Practitioner 3', 60, NULL, 21, 7, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (54, N'010', N'General Practitioner 3', N'General Practitioner 3', 60, NULL, 21, 7, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (55, N'201', N'Laboratory', N'Laboratory', NULL, NULL, 80, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (55, N'201', N'Laboratory', N'Laboratory', NULL, NULL, 80, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (59, N'444', N'Dental Department', N'Dental Department', NULL, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (59, N'444', N'Dental Department', N'Dental Department', NULL, NULL, 0, 0, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (60, N'888', N'General Practitioner Department', N'General Practitioner Department', NULL, NULL, 4, 4, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (60, N'888', N'General Practitioner Department', N'General Practitioner Department', NULL, NULL, 4, 4, NULL)
 GO
-INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [ProfitCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (61, N'666', N'Pediatrics Department', N'Pediatrics Department', NULL, NULL, 0, 0, NULL)
+INSERT [dbo].[Department] ([IdNo], [DepartmentCode], [DepartmentName], [DepartmentNameAra], [ParentIdNo], [Notes], [RevCostCenterIdNo], [RevCostCenterIdNo], [Active]) VALUES (61, N'666', N'Pediatrics Department', N'Pediatrics Department', NULL, NULL, 0, 0, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Department] OFF
 GO
@@ -2696,21 +2696,21 @@ SET IDENTITY_INSERT [dbo].[DistributionScheme] OFF
 GO
 SET IDENTITY_INSERT [dbo].[DistributionSchemeItem] ON 
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (3, 4, 1, 4, CAST(25.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (3, 4, 1, 4, CAST(25.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (4, 4, 4, 56, CAST(25.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (4, 4, 4, 56, CAST(25.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (5, 4, 5, 45, CAST(40.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (5, 4, 5, 45, CAST(40.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (7, 4, 2, 54, CAST(5.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (7, 4, 2, 54, CAST(5.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (8, 4, 3, 6, CAST(5.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (8, 4, 3, 6, CAST(5.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (9, 5, 1, 81, CAST(60.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (9, 5, 1, 81, CAST(60.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (10, 5, 2, 82, CAST(20.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (10, 5, 2, 82, CAST(20.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [ProfitCenterIdNo], [Percentage]) VALUES (11, 5, 3, 45, CAST(20.00 AS Decimal(18, 2)))
+INSERT [dbo].[DistributionSchemeItem] ([IdNo], [DistributionSchemeIdNo], [Sequence], [RevCostCenterIdNo], [Percentage]) VALUES (11, 5, 3, 45, CAST(20.00 AS Decimal(18, 2)))
 GO
 SET IDENTITY_INSERT [dbo].[DistributionSchemeItem] OFF
 GO
@@ -5936,21 +5936,21 @@ SET IDENTITY_INSERT [dbo].[GeneralJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[GeneralJournalItem] ON 
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (7, 1, 1, 104, 500.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (7, 1, 1, 104, 500.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (8, 2, 1, 106, 0.0000, 500.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (8, 2, 1, 106, 0.0000, 500.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (9, 1, 2, 104, 100.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (9, 1, 2, 104, 100.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (10, 2, 2, 106, 0.0000, 100.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (10, 2, 2, 106, 0.0000, 100.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (11, 1, 3, 106, 0.0000, 1.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (11, 1, 3, 106, 0.0000, 1.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (12, 2, 3, 104, 1.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (12, 2, 3, 104, 1.0000, 0.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (13, 1, 4, 104, 0.0000, 5.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (13, 1, 4, 104, 0.0000, 5.0000, 0, N'', 0)
 GO
-INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [ProfitCenterIdNo], [Notes], [Posted]) VALUES (14, 2, 4, 106, 5.0000, 0.0000, 0, N'', 0)
+INSERT [dbo].[GeneralJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Debit], [Credit], [RevCostCenterIdNo], [Notes], [Posted]) VALUES (14, 2, 4, 106, 5.0000, 0.0000, 0, N'', 0)
 GO
 SET IDENTITY_INSERT [dbo].[GeneralJournalItem] OFF
 GO
@@ -7742,15 +7742,15 @@ INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6097, N'Phone Type N
 GO
 INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6098, N'Phone Type Name Arabic')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6099, N'ProfitCenters Maintenance Form')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6099, N'RevCostCenters Maintenance Form')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6100, N'ProfitCenter ID No.')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6100, N'RevCostCenter ID No.')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6101, N'ProfitCenter Code')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6101, N'RevCostCenter Code')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6102, N'ProfitCenter Name')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6102, N'RevCostCenter Name')
 GO
-INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6103, N'ProfitCenter Name (Arabic)')
+INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6103, N'RevCostCenter Name (Arabic)')
 GO
 INSERT [dbo].[OriginalCaptions] ([idno], [Caption]) VALUES (6104, N'Parent Profit Center')
 GO
@@ -24050,73 +24050,73 @@ INSERT [dbo].[PhoneType] ([IdNo], [PhoneTypeCode], [PhoneTypeName], [PhoneTypeNa
 GO
 SET IDENTITY_INSERT [dbo].[PhoneType] OFF
 GO
-SET IDENTITY_INSERT [dbo].[ProfitCenter] ON 
+SET IDENTITY_INSERT [dbo].[RevCostCenter] ON 
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (1, N'001', N'Surgery', NULL, N'Surgery', NULL, N'EDITED')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (1, N'001', N'Surgery', NULL, N'Surgery', NULL, N'EDITED')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (2, N'042', N'Internal Medicine', NULL, N'Internal Medicine', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (2, N'042', N'Internal Medicine', NULL, N'Internal Medicine', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (3, N'015', N'Internal Medicine 2', 2, N'Internal Medicine 2', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (3, N'015', N'Internal Medicine 2', 2, N'Internal Medicine 2', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (4, N'002', N'Internal Medicine 1', 2, N'Internal Medicine 1', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (4, N'002', N'Internal Medicine 1', 2, N'Internal Medicine 1', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (5, N'044', N'Dental', NULL, N'الأسنان', NULL, N'ddfasdfsDDDD')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (5, N'044', N'Dental', NULL, N'الأسنان', NULL, N'ddfasdfsDDDD')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (6, N'004', N'Dental 1', 5, N'Dental 1', NULL, N'dfdfddsdddddd')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (6, N'004', N'Dental 1', 5, N'Dental 1', NULL, N'dfdfddsdddddd')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (7, N'014', N'Dental 2', 5, N'Dental 2', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (7, N'014', N'Dental 2', 5, N'Dental 2', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (9, N'046', N'Pedia', NULL, N'سييبيسبشيبيس', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (9, N'046', N'Pedia', NULL, N'سييبيسبشيبيس', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (10, N'012', N'Pedia 2', 9, N'Pedia 2', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (10, N'012', N'Pedia 2', 9, N'Pedia 2', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (21, N'048', N'General Practitioner', NULL, N'General Practitioner', NULL, N'2')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (21, N'048', N'General Practitioner', NULL, N'General Practitioner', NULL, N'2')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (22, N'999', N'Others', NULL, N'Others', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (22, N'999', N'Others', NULL, N'Others', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (23, N'009', N'G.P. 2', 21, N'G.P. 2', NULL, N'fddfdfdfddfffdddsd')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (23, N'009', N'G.P. 2', 21, N'G.P. 2', NULL, N'fddfdfdfddfffdddsd')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (44, N'006', N'Pedia 1', 9, N'Pedia 1', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (44, N'006', N'Pedia 1', 9, N'Pedia 1', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (45, N'008', N'G.P. 1', 21, N'G.P. 1', NULL, N'5')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (45, N'008', N'G.P. 1', 21, N'G.P. 1', NULL, N'5')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (48, N'045', N'Obstetrics & Gynecology', NULL, N'Obstetrics & Gynecology', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (48, N'045', N'Obstetrics & Gynecology', NULL, N'Obstetrics & Gynecology', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (49, N'005', N'O.B. 1', 48, N'O.B. 1', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (49, N'005', N'O.B. 1', 48, N'O.B. 1', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (52, N'035', N'O.B. 2', 48, N'O.B. 2', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (52, N'035', N'O.B. 2', 48, N'O.B. 2', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (54, N'003', N'Eye Ear Nose Throat Clinic', NULL, N'E.N.T.', NULL, N'2')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (54, N'003', N'Eye Ear Nose Throat Clinic', NULL, N'E.N.T.', NULL, N'2')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (56, N'007', N'Dermatology', NULL, N'Dermatology', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (56, N'007', N'Dermatology', NULL, N'Dermatology', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (75, N'010', N'G.P. 3', 21, N'dfsfdfsdfsdsf', NULL, N'ffddsdsddsdf')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (75, N'010', N'G.P. 3', 21, N'dfsfdfsdfsdsf', NULL, N'ffddsdsddsdf')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (76, N'024', N'Dental 3', 5, N'Dental 3', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (76, N'024', N'Dental 3', 5, N'Dental 3', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (77, N'017', N'Pedia 3', 9, N'FDDFDFDSDD', NULL, N'fddds')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (77, N'017', N'Pedia 3', 9, N'FDDFDFDSDD', NULL, N'fddds')
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (78, N'034', N'Dental 4', 5, N'Dental 4', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (78, N'034', N'Dental 4', 5, N'Dental 4', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (79, N'011', N'G.P. Other', 21, N'G.P. Other', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (79, N'011', N'G.P. Other', 21, N'G.P. Other', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (80, N'201', N'Laboratory', NULL, N'Laboratory', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (80, N'201', N'Laboratory', NULL, N'Laboratory', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (81, N'301', N'Diagnostic Center', NULL, N'Diagnostic Center', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (81, N'301', N'Diagnostic Center', NULL, N'Diagnostic Center', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (82, N'202', N'Radiology', NULL, N'Radiology', NULL, NULL)
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (82, N'202', N'Radiology', NULL, N'Radiology', NULL, NULL)
 GO
-INSERT [dbo].[ProfitCenter] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ParentIdNo], [ProfitCenterNameAra], [ProfitCenterType], [Notes]) VALUES (83, N'018', N'Opthalmology', NULL, N'Opthalmology', NULL, N'DFADFDFDFDFDF')
+INSERT [dbo].[RevCostCenter] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [ParentIdNo], [RevCostCenterNameAra], [RevCostCenterType], [Notes]) VALUES (83, N'018', N'Opthalmology', NULL, N'Opthalmology', NULL, N'DFADFDFDFDFDF')
 GO
-SET IDENTITY_INSERT [dbo].[ProfitCenter] OFF
+SET IDENTITY_INSERT [dbo].[RevCostCenter] OFF
 GO
-SET IDENTITY_INSERT [dbo].[ProfitCenterOld] ON 
+SET IDENTITY_INSERT [dbo].[RevCostCenterOld] ON 
 GO
-INSERT [dbo].[ProfitCenterOld] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ProfitCenterNameAra], [Description]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL)
+INSERT [dbo].[RevCostCenterOld] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [RevCostCenterNameAra], [Description]) VALUES (1, N'001', N'Surgery', N'Surgery', NULL)
 GO
-INSERT [dbo].[ProfitCenterOld] ([IdNo], [ProfitCenterCode], [ProfitCenterName], [ProfitCenterNameAra], [Description]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL)
+INSERT [dbo].[RevCostCenterOld] ([IdNo], [RevCostCenterCode], [RevCostCenterName], [RevCostCenterNameAra], [Description]) VALUES (2, N'002', N'Internal Medicine', N'Internal Medicine', NULL)
 GO
-SET IDENTITY_INSERT [dbo].[ProfitCenterOld] OFF
+SET IDENTITY_INSERT [dbo].[RevCostCenterOld] OFF
 GO
 SET IDENTITY_INSERT [dbo].[PurchaseItem] ON 
 GO
@@ -24222,69 +24222,69 @@ SET IDENTITY_INSERT [dbo].[SalesJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[SalesJournalItem] ON 
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (32, 1, 4, 417, N'', 0.0000, 272.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (32, 1, 4, 417, N'', 0.0000, 272.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (33, 2, 4, 104, N'Cash', 5.0000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (33, 2, 4, 104, N'Cash', 5.0000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (34, 3, 4, 107, N'MADA', 19.8700, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (34, 3, 4, 107, N'MADA', 19.8700, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (35, 4, 4, 551, N'MADA', 0.1200, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (35, 4, 4, 551, N'MADA', 0.1200, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (36, 5, 4, 231, N'MADA', 0.0100, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (36, 5, 4, 231, N'MADA', 0.0100, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (37, 6, 4, 107, N'Visa', 24.5200, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (37, 6, 4, 107, N'Visa', 24.5200, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (38, 7, 4, 551, N'Visa', 0.4600, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (38, 7, 4, 551, N'Visa', 0.4600, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (39, 8, 4, 231, N'Visa', 0.0200, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (39, 8, 4, 231, N'Visa', 0.0200, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (40, 9, 4, 107, N'Mastercard', 217.6800, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (40, 9, 4, 107, N'Mastercard', 217.6800, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (41, 10, 4, 551, N'Mastercard', 4.1100, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (41, 10, 4, 551, N'Mastercard', 4.1100, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (42, 11, 4, 231, N'Mastercard', 0.2100, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (42, 11, 4, 231, N'Mastercard', 0.2100, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (43, 1, 5, 401, N'', 0.0000, 6050.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (43, 1, 5, 401, N'', 0.0000, 6050.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (44, 2, 5, 104, N'Cash', 50.0000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (44, 2, 5, 104, N'Cash', 50.0000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (45, 3, 5, 107, N'MADA', 5962.2000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (45, 3, 5, 107, N'MADA', 5962.2000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (46, 4, 5, 551, N'MADA', 36.0000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (46, 4, 5, 551, N'MADA', 36.0000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (47, 5, 5, 231, N'MADA', 1.8000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (47, 5, 5, 231, N'MADA', 1.8000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (48, 1, 6, 417, N'', 0.0000, 1000.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (48, 1, 6, 417, N'', 0.0000, 1000.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (49, 2, 6, 104, N'Cash', 500.0000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (49, 2, 6, 104, N'Cash', 500.0000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (50, 3, 6, 107, N'MADA', 298.1100, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (50, 3, 6, 107, N'MADA', 298.1100, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (51, 4, 6, 551, N'MADA', 1.8000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (51, 4, 6, 551, N'MADA', 1.8000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (52, 5, 6, 231, N'MADA', 0.0900, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (52, 5, 6, 231, N'MADA', 0.0900, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (53, 6, 6, 107, N'Visa', 196.1200, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (53, 6, 6, 107, N'Visa', 196.1200, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (54, 7, 6, 551, N'Visa', 3.7000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (54, 7, 6, 551, N'Visa', 3.7000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (55, 8, 6, 231, N'Visa', 0.1800, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (55, 8, 6, 231, N'Visa', 0.1800, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (56, 1, 7, 417, N'', 0.0000, 10.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (56, 1, 7, 417, N'', 0.0000, 10.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (57, 2, 7, 104, N'Cash', 1.0000, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (57, 2, 7, 104, N'Cash', 1.0000, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (58, 3, 7, 107, N'MADA', 1.9900, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (58, 3, 7, 107, N'MADA', 1.9900, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (59, 4, 7, 551, N'MADA', 0.0100, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (59, 4, 7, 551, N'MADA', 0.0100, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (60, 5, 7, 107, N'Visa', 2.9400, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (60, 5, 7, 107, N'Visa', 2.9400, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (61, 6, 7, 551, N'Visa', 0.0600, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (61, 6, 7, 551, N'Visa', 0.0600, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (62, 7, 7, 107, N'Mastercard', 3.9300, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (62, 7, 7, 107, N'Mastercard', 3.9300, 0.0000, 0, 0)
 GO
-INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [ProfitCenterIdNo], [Posted]) VALUES (63, 8, 7, 551, N'Mastercard', 0.0700, 0.0000, 0, 0)
+INSERT [dbo].[SalesJournalItem] ([IdNo], [Sequence], [JournalIdNo], [AccountIdNo], [Notes], [Debit], [Credit], [RevCostCenterIdNo], [Posted]) VALUES (63, 8, 7, 551, N'Mastercard', 0.0700, 0.0000, 0, 0)
 GO
 SET IDENTITY_INSERT [dbo].[SalesJournalItem] OFF
 GO
@@ -24372,7 +24372,7 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (6, N'Main.Menu.Masters.General.RevCostCenters', NULL, NULL)
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (7, N'Main.Menu.Masters.General.ProfitCenters', NULL, NULL)
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (7, N'Main.Menu.Masters.General.RevCostCenters', NULL, NULL)
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [Notes]) VALUES (8, N'Main.Menu.Masters.General.Countries', NULL, NULL)
 GO
@@ -25432,7 +25432,7 @@ INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5012, N'RevCostCenterEnt
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5013, N'PhoneTypeEntryTv')
 GO
-INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5014, N'ProfitCenterEntryTv')
+INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5014, N'RevCostCenterEntryTv')
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (6011, N'ReligionEntryTv')
 GO

@@ -1,9 +1,13 @@
 ﻿CREATE TYPE [dbo].[JournalItemInsert] AS TABLE (
-    [AccountIdNo]      INT            NOT NULL,
-    [Credit]           MONEY          NOT NULL,
-    [Debit]            MONEY          NOT NULL,
-    [JournalIDNo]      INT            NOT NULL,
-    [Notes]            NVARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-    [ProfitCenterIdNo] INT            NOT NULL,
-    [Sequence]         INT            NOT NULL);
+    [AccountIdNo]       INT            NOT NULL,
+    [Credit]            MONEY          NOT NULL,
+    [Debit]             MONEY          NOT NULL,
+    [JournalIDNo]       INT            NOT NULL,
+    [Notes]             NVARCHAR (100) NOT NULL,
+    [RevCostCenterIdNo] INT            NOT NULL,
+    [Sequence]          INT            NOT NULL);
+
+
+
+
 

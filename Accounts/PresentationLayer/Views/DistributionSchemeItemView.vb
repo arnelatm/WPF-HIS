@@ -13,9 +13,9 @@ Namespace PresentationLayer.Views
 
         Public Property Sequence As Integer Implements IDistributionSchemeItemView.Sequence
 
-        Public Property ProfitCenterIdNo As Int32 Implements IDistributionSchemeItemView.ProfitCenterIdNo
+        Public Property RevCostCenterIdNo As Int32 Implements IDistributionSchemeItemView.RevCostCenterIdNo
 
-        Public Property ProfitCenterName As String Implements IDistributionSchemeItemView.ProfitCenterName
+        Public Property RevCostCenterName As String Implements IDistributionSchemeItemView.RevCostCenterName
 
         Public Property Percentage As Decimal Implements IDistributionSchemeItemView.Percentage
 

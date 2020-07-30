@@ -471,67 +471,67 @@
   <data name="&gt;&gt;cacParentIdNo.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblProfitCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblRevCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblProfitCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblRevCostCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 137</value>
   </data>
-  <data name="lblProfitCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblRevCostCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblProfitCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblRevCostCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 23</value>
   </data>
-  <data name="lblProfitCenterIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblRevCostCenterIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>168</value>
   </data>
-  <data name="lblProfitCenterIdNo.Text" xml:space="preserve">
+  <data name="lblRevCostCenterIdNo.Text" xml:space="preserve">
     <value>Profit Center</value>
   </data>
-  <data name="lblProfitCenterIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblRevCostCenterIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblProfitCenterIdNo.Name" xml:space="preserve">
-    <value>lblProfitCenterIdNo</value>
+  <data name="&gt;&gt;lblRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>lblRevCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;lblProfitCenterIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblProfitCenterIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblRevCostCenterIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;lblProfitCenterIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblRevCostCenterIdNo.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cacProfitCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cacRevCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cacProfitCenterIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cacRevCostCenterIdNo.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cacProfitCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cacRevCostCenterIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 137</value>
   </data>
-  <data name="cacProfitCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cacRevCostCenterIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cacProfitCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cacRevCostCenterIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cacProfitCenterIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cacRevCostCenterIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIdNo.Name" xml:space="preserve">
-    <value>cacProfitCenterIdNo</value>
+  <data name="&gt;&gt;cacRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>cacRevCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cacRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cacRevCostCenterIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;cacProfitCenterIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cacRevCostCenterIdNo.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="lblRevCostCenterIdNo.Font" type="System.Drawing.Font, System.Drawing">

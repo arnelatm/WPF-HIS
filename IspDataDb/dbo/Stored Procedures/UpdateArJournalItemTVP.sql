@@ -6,6 +6,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateArJournalItemTVP]
   @MParam JournalItemUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -23,7 +24,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from ArJournalItem a INNER JOIN @MParam As b
 on a.IDNo = b.IDNo

@@ -40,7 +40,7 @@ Namespace PresentationLayer.Presenters
             Else
                 For Each item In distributionSchemeItems
                     totalPercentage = totalPercentage + item.Percentage
-                    If item.ProfitCenterIdNo = 0 Then
+                    If item.RevCostCenterIdNo = 0 Then
                         MessageBox.Show("Blank Profit Center is not allowed in line #" + item.Sequence.ToString())
                         retVal = False
                         Exit For

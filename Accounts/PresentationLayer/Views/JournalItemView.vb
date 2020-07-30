@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views
 
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
 
-        Public Property ProfitCenterIdNo As Int32 Implements IJournalItemView.ProfitCenterIdNo
+        Public Property RevCostCenterIdNo As Int32 Implements IJournalItemView.RevCostCenterIdNo
         Public Property Sequence As Integer Implements IJournalItemView.Sequence
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount

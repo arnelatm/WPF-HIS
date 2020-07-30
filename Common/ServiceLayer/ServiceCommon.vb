@@ -54,11 +54,11 @@ Namespace ServiceLayer
             End Get
         End Property
 
-        Private ReadOnly Property ProfitCenterDao As IDaoAll(Of ProfitCenter)
-            Get
-                Return DaoFactoryCommonFactory.CreateDao("ProfitCenter")
-            End Get
-        End Property
+        'Private ReadOnly Property RevCostCenterDao As IDaoAll(Of RevCostCenter)
+        '    Get
+        '        Return DaoFactoryCommonFactory.CreateDao("RevCostCenter")
+        '    End Get
+        'End Property
 
         Private ReadOnly Property ReligionDao As IDaoAll(Of Religion)
             Get

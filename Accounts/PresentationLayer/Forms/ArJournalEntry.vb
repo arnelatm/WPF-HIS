@@ -19,7 +19,7 @@ Namespace PresentationLayer.Forms
         Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
 
         Public Sub New()
             MyBase.New()
@@ -234,7 +234,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboCustomerIdNo.BeginUpdate()
             cboCustomerIdNo.DataSource = PresenterObj.GetCustomerListByCode()
             cboCustomerIdNo.EndUpdate()
@@ -278,7 +278,7 @@ Namespace PresentationLayer.Forms
         '        workRow("AccountIdNo") = ji.AccountIdNo
         '        workRow("Debit") = ji.Debit
         '        workRow("Credit") = ji.Credit
-        '        workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+        '        workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
         '        workRow("Notes") = If(ji.Notes, "")
         '        If ji.IdNo <= 0 Then
         '            DtInsertTable.Rows.Add(workRow)
@@ -415,11 +415,11 @@ Namespace PresentationLayer.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Name"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Name"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub

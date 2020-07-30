@@ -261,7 +261,7 @@ GO
 CREATE TYPE [dbo].[DistributionSchemeItemInsert] AS TABLE(
 	[DistributionSchemeIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
-	[ProfitCenteridNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Percentage] [decimal](6, 2) NULL
 )
 GO
@@ -270,7 +270,7 @@ CREATE TYPE [dbo].[DistributionSchemeItemMerge] AS TABLE(
 	[IdNo] [int] NOT NULL,
 	[Sequence] [int] NULL,
 	[DistributionSchemeIdNo] [int] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Percentage] [decimal](6, 2) NULL,
 	PRIMARY KEY CLUSTERED 
 (
@@ -283,7 +283,7 @@ CREATE TYPE [dbo].[DistributionSchemeItemUpdate] AS TABLE(
 	[IdNo] [int] NOT NULL,
 	[DistributionSchemeIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Percentage] [decimal](6, 2) NULL,
 	PRIMARY KEY CLUSTERED 
 (
@@ -298,7 +298,7 @@ CREATE TYPE [dbo].[EmployeeLoanJournalItemInsert] AS TABLE(
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NULL,
 	[Credit] [money] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[Notes] [nvarchar](100) NULL
 )
 GO
@@ -310,7 +310,7 @@ CREATE TYPE [dbo].[EmployeeLoanJournalItemUpdate] AS TABLE(
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NULL,
 	[Credit] [money] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[Notes] [nvarchar](100) NULL,
 	PRIMARY KEY CLUSTERED 
 (
@@ -350,7 +350,7 @@ CREATE TYPE [dbo].[JournalItemInsert] AS TABLE(
 	[Debit] [money] NOT NULL,
 	[JournalIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](100) NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL
 )
 GO
@@ -362,7 +362,7 @@ CREATE TYPE [dbo].[JournalItemUpdate] AS TABLE(
 	[IdNo] [int] NOT NULL,
 	[JournalIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](100) NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (
@@ -1229,7 +1229,7 @@ CREATE TABLE [dbo].[CashDisbursementJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1248,7 +1248,7 @@ GO
 CREATE VIEW [dbo].[CashDisbursementJournalItem_View]
 AS
 SELECT        dbo.CashDisbursementJournalItem.AccountIdNo, dbo.CashDisbursementJournalItem.Credit, dbo.CashDisbursementJournalItem.Debit, dbo.CashDisbursementJournalItem.IdNo, 
-                         dbo.CashDisbursementJournalItem.JournalIdNo, dbo.CashDisbursementJournalItem.Notes, dbo.CashDisbursementJournalItem.ProfitCenterIdNo, dbo.CashDisbursementJournalItem.Sequence, 
+                         dbo.CashDisbursementJournalItem.JournalIdNo, dbo.CashDisbursementJournalItem.Notes, dbo.CashDisbursementJournalItem.RevCostCenterIdNo, dbo.CashDisbursementJournalItem.Sequence, 
                          dbo.Chart.AccountName, dbo.CashDisbursementJournalItem.Debit - dbo.CashDisbursementJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, 0 AS OpenInvoiceIdNo, 
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CashDisbursementJournal INNER JOIN
@@ -1368,7 +1368,7 @@ CREATE TABLE [dbo].[ArJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1403,7 +1403,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[ArJournalItem_View]
 AS
-SELECT        dbo.ArJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArJournalItem.JournalIdNo, dbo.ArJournalItem.AccountIdNo, dbo.ArJournalItem.Debit, dbo.ArJournalItem.Credit, dbo.ArJournalItem.ProfitCenterIdNo, 
+SELECT        dbo.ArJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArJournalItem.JournalIdNo, dbo.ArJournalItem.AccountIdNo, dbo.ArJournalItem.Debit, dbo.ArJournalItem.Credit, dbo.ArJournalItem.RevCostCenterIdNo, 
                          dbo.ArJournalItem.Notes, dbo.ArJournalItem.Posted, dbo.ArJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ArOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.ArJournalItem.Credit - dbo.ArJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, 
                          dbo.ArJournalItem.Sequence
@@ -1458,7 +1458,7 @@ CREATE TABLE [dbo].[CheckDisbursementJournalItem](
 	[Credit] [money] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[JournalIdNo] [int] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
  CONSTRAINT [PK_ChequeDisbursementJournalItemsIdNo] PRIMARY KEY CLUSTERED 
@@ -1476,7 +1476,7 @@ GO
 CREATE VIEW [dbo].[CheckDisbursementJournalItem_View]
 AS
 SELECT        dbo.CheckDisbursementJournalItem.AccountIdNo, dbo.CheckDisbursementJournalItem.Credit, dbo.CheckDisbursementJournalItem.Debit, dbo.CheckDisbursementJournalItem.IdNo, 
-                         dbo.CheckDisbursementJournalItem.JournalIdNo, dbo.CheckDisbursementJournalItem.Notes, dbo.CheckDisbursementJournalItem.ProfitCenterIdNo, dbo.CheckDisbursementJournalItem.Sequence, 
+                         dbo.CheckDisbursementJournalItem.JournalIdNo, dbo.CheckDisbursementJournalItem.Notes, dbo.CheckDisbursementJournalItem.RevCostCenterIdNo, dbo.CheckDisbursementJournalItem.Sequence, 
                          dbo.Chart.AccountName, dbo.CheckDisbursementJournalItem.Debit - dbo.CheckDisbursementJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, 0 AS OpenInvoiceIdNo, 
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CheckDisbursementJournal INNER JOIN
@@ -1605,7 +1605,7 @@ CREATE TABLE [dbo].[ApJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1666,7 +1666,7 @@ CREATE VIEW [dbo].[APDetails_View]
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-      ,[ProfitCenterIdNo]
+      ,[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[SupplierIdNo]
@@ -1686,7 +1686,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[PayeeIdNo]
@@ -1767,7 +1767,7 @@ CREATE TABLE [dbo].[GeneralJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[Timestamp] [timestamp] NOT NULL,
@@ -1807,7 +1807,7 @@ GO
 CREATE VIEW [dbo].[GeneralJournalItem_View]
 AS
 SELECT        dbo.GeneralJournalItem.IdNo, dbo.GeneralJournalItem.Sequence, dbo.GeneralJournalItem.JournalIdNo, dbo.GeneralJournalItem.AccountIdNo, dbo.GeneralJournalItem.Debit, dbo.GeneralJournalItem.Credit, 
-                         dbo.GeneralJournalItem.ProfitCenterIdNo, dbo.GeneralJournalItem.Notes, dbo.Chart.AccountName, dbo.GeneralJournalItem.Debit - dbo.GeneralJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, 
+                         dbo.GeneralJournalItem.RevCostCenterIdNo, dbo.GeneralJournalItem.Notes, dbo.Chart.AccountName, dbo.GeneralJournalItem.Debit - dbo.GeneralJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, 
                          dbo.Chart.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.GeneralJournal INNER JOIN
                          dbo.GeneralJournalItem ON dbo.GeneralJournal.IdNo = dbo.GeneralJournalItem.JournalIdNo INNER JOIN
@@ -1826,7 +1826,7 @@ CREATE TABLE [dbo].[CashReceiptJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1844,7 +1844,7 @@ GO
 CREATE VIEW [dbo].[CashReceiptJournalItem_View]
 AS
 SELECT        dbo.CashReceiptJournalItem.IdNo, dbo.CashReceiptJournalItem.Sequence, dbo.CashReceiptJournalItem.JournalIdNo, dbo.CashReceiptJournalItem.AccountIdNo, dbo.CashReceiptJournalItem.Debit, 
-                         dbo.CashReceiptJournalItem.Credit, dbo.CashReceiptJournalItem.ProfitCenterIdNo, dbo.CashReceiptJournalItem.Notes, dbo.CashReceiptJournalItem.Posted, dbo.CashReceiptJournalItem.DateTimeStamp, 
+                         dbo.CashReceiptJournalItem.Credit, dbo.CashReceiptJournalItem.RevCostCenterIdNo, dbo.CashReceiptJournalItem.Notes, dbo.CashReceiptJournalItem.Posted, dbo.CashReceiptJournalItem.DateTimeStamp, 
                          dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, dbo.CashReceiptJournalItem.Credit - dbo.CashReceiptJournalItem.Debit AS OriginalAmount, 
                          dbo.ApOpenInvoice.PaidAmount, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CashReceiptJournalItem LEFT OUTER JOIN
@@ -1897,7 +1897,7 @@ CREATE TABLE [dbo].[PettyCashJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1917,7 +1917,7 @@ GO
 CREATE VIEW [dbo].[PettyCashJournalItem_View]
 AS
 SELECT        dbo.PettyCashJournalItem.AccountIdNo, dbo.PettyCashJournalItem.Credit, dbo.PettyCashJournalItem.Debit, dbo.PettyCashJournalItem.IdNo, 
-                         dbo.PettyCashJournalItem.JournalIdNo, dbo.PettyCashJournalItem.Notes, dbo.PettyCashJournalItem.ProfitCenterIdNo, dbo.PettyCashJournalItem.Sequence, 
+                         dbo.PettyCashJournalItem.JournalIdNo, dbo.PettyCashJournalItem.Notes, dbo.PettyCashJournalItem.RevCostCenterIdNo, dbo.PettyCashJournalItem.Sequence, 
                          dbo.Chart.AccountName, dbo.PettyCashJournalItem.Debit - dbo.PettyCashJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, 0 AS OpenInvoiceIdNo, 
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.PettyCashJournal INNER JOIN
@@ -1937,7 +1937,7 @@ CREATE TABLE [dbo].[PurchaseJournalItem](
 	[AccountIdNo] [int] NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
@@ -1955,7 +1955,7 @@ GO
 
 CREATE VIEW [dbo].[PurchaseJournalItem_View]
 AS
-SELECT        dbo.PurchaseJournalItem.IdNo, dbo.PurchaseJournalItem.Sequence, dbo.PurchaseJournalItem.JournalIdNo, dbo.PurchaseJournalItem.AccountIdNo, dbo.PurchaseJournalItem.Debit, dbo.PurchaseJournalItem.Credit, dbo.PurchaseJournalItem.ProfitCenterIdNo, 
+SELECT        dbo.PurchaseJournalItem.IdNo, dbo.PurchaseJournalItem.Sequence, dbo.PurchaseJournalItem.JournalIdNo, dbo.PurchaseJournalItem.AccountIdNo, dbo.PurchaseJournalItem.Debit, dbo.PurchaseJournalItem.Credit, dbo.PurchaseJournalItem.RevCostCenterIdNo, 
                          dbo.PurchaseJournalItem.Notes, dbo.PurchaseJournalItem.Posted, dbo.PurchaseJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.PurchaseJournalItem.Credit - dbo.PurchaseJournalItem.Debit AS OriginalAmount, dbo.ApOpenInvoice.PaidAmount, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType
 FROM            dbo.PurchaseJournalItem LEFT OUTER JOIN
@@ -2042,7 +2042,7 @@ CREATE VIEW [dbo].[ARDetails_View]
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-      ,[ProfitCenterIdNo]
+      ,[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[CustomerIdNo]
@@ -2062,7 +2062,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[PayorIdNo]
@@ -2180,7 +2180,7 @@ GO
 CREATE VIEW [dbo].[SupplierInvoices]
 AS
 SELECT        dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.ApJournalItem.Debit, 
-                         dbo.ApJournalItem.Credit, dbo.ApJournalItem.ProfitCenterIdNo, dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.Sequence, 
+                         dbo.ApJournalItem.Credit, dbo.ApJournalItem.RevCostCenterIdNo, dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.Sequence, 
                          dbo.ApJournal.SupplierIdNo, dbo.ApJournal.InvoiceNo, dbo.ApJournal.InvoiceDate, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra
 FROM            dbo.Chart INNER JOIN
                          dbo.ApJournalItem ON dbo.Chart.IdNo = dbo.ApJournalItem.AccountIdNo INNER JOIN
@@ -2250,7 +2250,7 @@ GO
 
 CREATE VIEW [dbo].[ApInvoices_View]
 AS
-SELECT        dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.ProfitCenterIdNo, dbo.APDetails_View.Notes, 
+SELECT        dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.RevCostCenterIdNo, dbo.APDetails_View.Notes, 
                          dbo.APDetails_View.Posted, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, dbo.APDetails_View.TransactionDate, 
                          dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.ApOpenInvoice.IdNo, 
                          dbo.ApOpenInvoice.JournalIdNo
@@ -2404,7 +2404,7 @@ CREATE TABLE [dbo].[SalesJournalItem](
 	[Notes] [nvarchar](100) NOT NULL,
 	[Debit] [money] NOT NULL,
 	[Credit] [money] NOT NULL,
-	[ProfitCenterIdNo] [int] NOT NULL,
+	[RevCostCenterIdNo] [int] NOT NULL,
 	[Posted] [bit] NOT NULL,
  CONSTRAINT [PK_SalesJournalItemsIdNo] PRIMARY KEY CLUSTERED 
 (
@@ -2440,7 +2440,7 @@ CREATE   VIEW [dbo].[GlLedgers_View]
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-      ,[ProfitCenterIdNo]
+      ,[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -2462,7 +2462,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-      ,[ProfitCenterIdNo]
+      ,[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -2484,7 +2484,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2524,7 +2524,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2564,7 +2564,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2608,7 +2608,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2628,7 +2628,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2668,7 +2668,7 @@ UNION
       ,a.[AccountIdNo]
       ,[Debit]
       ,[Credit]
-	  ,[ProfitCenterIdNo]
+	  ,[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -2681,35 +2681,35 @@ UNION
   on a.JournalIdNo = b.Idno
 )
 GO
-/****** Object:  Table [dbo].[ProfitCenter]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[RevCostCenter]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ProfitCenter](
+CREATE TABLE [dbo].[RevCostCenter](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[ProfitCenterCode] [varchar](5) NOT NULL,
-	[ProfitCenterName] [varchar](50) NOT NULL,
+	[RevCostCenterCode] [varchar](5) NOT NULL,
+	[RevCostCenterName] [varchar](50) NOT NULL,
 	[ParentIdNo] [int] NULL,
-	[ProfitCenterNameAra] [nvarchar](50) NOT NULL,
-	[ProfitCenterType] [varchar](10) NULL,
+	[RevCostCenterNameAra] [nvarchar](50) NOT NULL,
+	[RevCostCenterType] [varchar](10) NULL,
 	[Notes] [varchar](255) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK__ProfitCenterID] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK__RevCostCenterID] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_ProfitCenterCode] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_RevCostCenterCode] UNIQUE NONCLUSTERED 
 (
-	[ProfitCenterCode] ASC
+	[RevCostCenterCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_ProfitCenterNameAra] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_RevCostCenterNameAra] UNIQUE NONCLUSTERED 
 (
-	[ProfitCenterNameAra] ASC
+	[RevCostCenterNameAra] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ProfitCenter_View]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  View [dbo].[RevCostCenter_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2718,46 +2718,46 @@ GO
 
 
 
-CREATE View [dbo].[ProfitCenter_View] as 
+CREATE View [dbo].[RevCostCenter_View] as 
 with cte as
 (
 select IdNo
-      ,ProfitCenterCode
-      ,ProfitCenterName
-      ,ProfitCenterNameAra
-	  ,ProfitCenterType
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
+	  ,RevCostCenterType
       ,ParentIdNo
       ,[Notes]
       ,DateTimeStamp
-      ,cast(row_number()over(partition by ParentIdNo order by ProfitCenterName) as varchar(max)) as [path]
+      ,cast(row_number()over(partition by ParentIdNo order by RevCostCenterName) as varchar(max)) as [path]
       ,0 as levelnumber
-      ,row_number() over (partition by ParentIdNo order by ProfitCenterName) / power(10.0,0) as SortKey
+      ,row_number() over (partition by ParentIdNo order by RevCostCenterName) / power(10.0,0) as SortKey
  
-from ProfitCenter
+from RevCostCenter
 where ParentIdNo IS NULL
 union all
 select t.IdNo
-      ,t.ProfitCenterCode
-      ,t.ProfitCenterName
-      ,t.ProfitCenterNameAra
-	  ,t.ProfitCenterType
+      ,t.RevCostCenterCode
+      ,t.RevCostCenterName
+      ,t.RevCostCenterNameAra
+	  ,t.RevCostCenterType
       ,t.ParentIdNo
       ,t.[Notes]
       ,t.DateTimeStamp
-      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.ProfitCenterName) as varchar(max))
+      ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) as varchar(max))
       ,levelnumber+1
-      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.ProfitCenterName) / power(10.0,levelnumber+1)
+      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) / power(10.0,levelnumber+1)
  
  from
     cte
-join ProfitCenter t on cte.IdNo = t.ParentIdNo
+join RevCostCenter t on cte.IdNo = t.ParentIdNo
 )
    
 select IdNo
-      ,ProfitCenterCode
-      ,ProfitCenterName
-      ,ProfitCenterNameAra
-	  ,ProfitCenterType
+      ,RevCostCenterCode
+      ,RevCostCenterName
+      ,RevCostCenterNameAra
+	  ,RevCostCenterType
       ,ParentIdNo
       ,[Notes]
       ,DateTimeStamp
@@ -2778,7 +2778,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[ApJournalItem_View]
 AS
-SELECT        dbo.ApJournalItem.IdNo, dbo.ApJournalItem.Sequence, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.Debit, dbo.ApJournalItem.Credit, dbo.ApJournalItem.ProfitCenterIdNo, 
+SELECT        dbo.ApJournalItem.IdNo, dbo.ApJournalItem.Sequence, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.Debit, dbo.ApJournalItem.Credit, dbo.ApJournalItem.RevCostCenterIdNo, 
                          dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.ApJournalItem.Credit - dbo.ApJournalItem.Debit AS OriginalAmount, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType
 FROM            dbo.ApJournalItem LEFT OUTER JOIN
@@ -2809,7 +2809,7 @@ CREATE TABLE [dbo].[RevCostCenter](
 	[RevCostCenterCode] [varchar](5) NOT NULL,
 	[RevCostCenterName] [varchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[RevCostCenterNameAra] [varchar](50) NOT NULL,
 	[Notes] [varchar](255) NULL,
 	[DateTimeStamp] [timestamp] NULL,
@@ -2836,7 +2836,7 @@ select IdNo
       ,RevCostCenterName
       ,RevCostCenterNameAra
       ,ParentIdNo
-	  ,ProfitCenterIdNo
+	  ,RevCostCenterIdNo
       ,[Notes]
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by RevCostCenterName) as varchar(max)) as [path]
@@ -2851,7 +2851,7 @@ select t.IdNo
       ,t.RevCostCenterName
       ,t.RevCostCenterNameAra
 	  ,t.ParentIdNo
-	  ,t.ProfitCenterIdNo
+	  ,t.RevCostCenterIdNo
       ,t.[Notes]
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) as varchar(max))
@@ -2868,7 +2868,7 @@ select IdNo
       ,RevCostCenterName
       ,RevCostCenterNameAra
 	  ,ParentIdNo
-	  ,ProfitCenterIdNo
+	  ,RevCostCenterIdNo
       ,[Notes]
       ,DateTimeStamp
 	  ,LevelNumber
@@ -3067,7 +3067,7 @@ GO
 CREATE VIEW [dbo].[GlReconciliation_View]
 AS
 SELECT			dbo.GlLedgers_View.JournalCode, dbo.GlLedgers_View.IdNo, dbo.GlLedgers_View.Sequence, dbo.GlLedgers_View.JournalIdNo, dbo.GlLedgers_View.AccountIdNo, dbo.GlLedgers_View.Debit, 
-                dbo.GlLedgers_View.Credit,dbo.GlLedgers_View.DocumentNumber, dbo.GlLedgers_View.ProfitCenterIdNo, dbo.GlLedgers_View.Notes, dbo.GlLedgers_View.Posted, dbo.GlLedgers_View.TransactionDate, dbo.GlLedgers_View.ReferenceNo, 
+                dbo.GlLedgers_View.Credit,dbo.GlLedgers_View.DocumentNumber, dbo.GlLedgers_View.RevCostCenterIdNo, dbo.GlLedgers_View.Notes, dbo.GlLedgers_View.Posted, dbo.GlLedgers_View.TransactionDate, dbo.GlLedgers_View.ReferenceNo, 
                 dbo.GlLedgers_View.PayDescription, dbo.GlLedgers_View.PayDescriptionAra, dbo.Reconciled.IdNo AS Reconciled
 FROM            dbo.GlLedgers_View 
 				LEFT OUTER JOIN dbo.Reconciled 
@@ -3118,7 +3118,7 @@ CREATE TABLE [dbo].[Department](
 	[DepartmentNameAra] [nvarchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
 	[Notes] [nvarchar](250) NULL,
-	[ProfitCenterIdNo] [smallint] NULL,
+	[RevCostCenterIdNo] [smallint] NULL,
 	[RevCostCenterIdNo] [smallint] NULL,
 	[Active] [bit] NULL,
 	[DateTimeStamp] [timestamp] NULL,
@@ -3156,7 +3156,7 @@ select IdNo
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIdNo
+      ,RevCostCenterIdNo
       ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
@@ -3173,7 +3173,7 @@ select t.IdNo
       ,t.DepartmentNameAra
       ,t.ParentIdNo
       ,t.Notes
-      ,t.ProfitCenterIdNo
+      ,t.RevCostCenterIdNo
       ,t.RevCostCenterIdNo
       ,t.Active
       ,t.DateTimeStamp
@@ -3192,7 +3192,7 @@ select IdNo
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIdNo
+      ,RevCostCenterIdNo
       ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
@@ -3285,7 +3285,7 @@ GO
 CREATE VIEW [dbo].[APStatement_View]
 AS
 SELECT        dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.IdNo, dbo.ApDetails_View.Sequence, dbo.ApDetails_View.JournalIdNo, dbo.ApDetails_View.AccountIdNo, dbo.ApDetails_View.Debit, dbo.ApDetails_View.Credit, 
-                         dbo.ApDetails_View.ProfitCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+                         dbo.ApDetails_View.RevCostCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
                          dbo.ApDetails_View.TransactionType, dbo.Chart.SpecialAccount
 FROM            dbo.ApDetails_View INNER JOIN
                          dbo.Chart ON dbo.ApDetails_View.AccountIdNo = dbo.Chart.IdNo
@@ -3301,7 +3301,7 @@ GO
 CREATE VIEW [dbo].[SalesJournalItem_View]
 AS
 SELECT        dbo.SalesJournalItem.IdNo, dbo.SalesJournalItem.Sequence, dbo.SalesJournalItem.JournalIdNo, dbo.SalesJournalItem.AccountIdNo, dbo.SalesJournalItem.Debit, dbo.SalesJournalItem.Credit, 
-                         dbo.SalesJournalItem.ProfitCenterIdNo, dbo.Chart.AccountName, dbo.SalesJournalItem.Debit - dbo.SalesJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, dbo.SalesJournalItem.Notes, 
+                         dbo.SalesJournalItem.RevCostCenterIdNo, dbo.Chart.AccountName, dbo.SalesJournalItem.Debit - dbo.SalesJournalItem.Credit AS OriginalAmount, dbo.Chart.PayeeType, dbo.Chart.SpecialAccount, dbo.SalesJournalItem.Notes, 
                          0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 0 AS DiscountTaken
 FROM            dbo.SalesJournalItem INNER JOIN
                          dbo.Chart ON dbo.SalesJournalItem.AccountIdNo = dbo.Chart.IdNo
@@ -3319,7 +3319,7 @@ CREATE TABLE [dbo].[EmployeeLoanJournalItem](
 	[TransactionDate] [datetime2](7) NULL,
 	[Debit] [money] NULL,
 	[Credit] [money] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[Notes] [nvarchar](100) NULL,
 	[Posted] [bit] NULL,
 	[DateTimeStamp] [timestamp] NULL,
@@ -3365,7 +3365,7 @@ GO
 CREATE VIEW [dbo].[EmployeeJournalItem_View]
 AS
 SELECT        dbo.EmployeeLoanJournalItem.IdNo, dbo.EmployeeLoanJournalItem.Sequence, dbo.EmployeeLoanJournalItem.JournalIdNo, dbo.EmployeeLoanJournalItem.AccountIdNo, dbo.EmployeeLoanJournalItem.TransactionDate, dbo.EmployeeLoanJournalItem.Debit, 
-                         dbo.EmployeeLoanJournalItem.Credit, dbo.EmployeeLoanJournalItem.ProfitCenterIdNo, dbo.EmployeeLoanJournalItem.Notes, dbo.EmployeeLoanJournalItem.Posted, dbo.EmployeeLoanJournalItem.DateTimeStamp, dbo.Chart.AccountName
+                         dbo.EmployeeLoanJournalItem.Credit, dbo.EmployeeLoanJournalItem.RevCostCenterIdNo, dbo.EmployeeLoanJournalItem.Notes, dbo.EmployeeLoanJournalItem.Posted, dbo.EmployeeLoanJournalItem.DateTimeStamp, dbo.Chart.AccountName
 FROM            dbo.EmployeeLoanJournal INNER JOIN
                          dbo.EmployeeLoanJournalItem ON dbo.EmployeeLoanJournal.IdNo = dbo.EmployeeLoanJournalItem.JournalIdNo INNER JOIN
                          dbo.Chart ON dbo.EmployeeLoanJournalItem.AccountIdNo = dbo.Chart.IdNo 
@@ -3704,7 +3704,7 @@ CREATE TABLE [dbo].[DistributionSchemeItem](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[DistributionSchemeIdNo] [int] NULL,
 	[Sequence] [int] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[Percentage] [decimal](18, 2) NULL,
  CONSTRAINT [PK_DistributionSchemeItem] PRIMARY KEY CLUSTERED 
 (
@@ -3934,30 +3934,30 @@ CREATE TABLE [dbo].[PhoneType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProfitCenterOld]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[RevCostCenterOld]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ProfitCenterOld](
+CREATE TABLE [dbo].[RevCostCenterOld](
 	[IdNo] [smallint] IDENTITY(1,1) NOT NULL,
-	[ProfitCenterCode] [varchar](5) NOT NULL,
-	[ProfitCenterName] [varchar](50) NOT NULL,
-	[ProfitCenterNameAra] [varchar](50) NOT NULL,
+	[RevCostCenterCode] [varchar](5) NOT NULL,
+	[RevCostCenterName] [varchar](50) NOT NULL,
+	[RevCostCenterNameAra] [varchar](50) NOT NULL,
 	[Description] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProfitCenterOrg]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[RevCostCenterOrg]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ProfitCenterOrg](
+CREATE TABLE [dbo].[RevCostCenterOrg](
 	[IdNo] [int] NOT NULL,
 	[ParentID] [int] NULL,
-	[ProfitCenterCode] [varchar](5) NOT NULL,
-	[ProfitCenterName] [varchar](50) NOT NULL,
-	[ProfitCenterNameAra] [nvarchar](50) NOT NULL,
+	[RevCostCenterCode] [varchar](5) NOT NULL,
+	[RevCostCenterName] [varchar](50) NOT NULL,
+	[RevCostCenterNameAra] [nvarchar](50) NOT NULL,
 	[Descripton] [varchar](50) NULL,
 	[EmployeeName] [nvarchar](50) NULL,
 PRIMARY KEY CLUSTERED 
@@ -4319,14 +4319,14 @@ CREATE UNIQUE NONCLUSTERED INDEX [IX_IntObjLoginIdNo] ON [dbo].[InterfaceObjects
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_ProfitCenterName]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_ProfitCenterName] ON [dbo].[ProfitCenter]
+/****** Object:  Index [IX_RevCostCenterName]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_RevCostCenterName] ON [dbo].[RevCostCenter]
 (
-	[ProfitCenterName] ASC
+	[RevCostCenterName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_ProfitCenterParent]    Script Date: 3/28/2020 6:33:05 AM ******/
-CREATE NONCLUSTERED INDEX [IX_ProfitCenterParent] ON [dbo].[ProfitCenter]
+/****** Object:  Index [IX_RevCostCenterParent]    Script Date: 3/28/2020 6:33:05 AM ******/
+CREATE NONCLUSTERED INDEX [IX_RevCostCenterParent] ON [dbo].[RevCostCenter]
 (
 	[ParentIdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -4391,7 +4391,7 @@ ALTER TABLE [dbo].[ApJournalItem] ADD  CONSTRAINT [DF_ApJournalItem_Debit]  DEFA
 GO
 ALTER TABLE [dbo].[ApJournalItem] ADD  CONSTRAINT [DF_ApJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[ApJournalItem] ADD  CONSTRAINT [DF_ApJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[ApJournalItem] ADD  CONSTRAINT [DF_ApJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[ApJournalItem] ADD  CONSTRAINT [DF_ApJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4411,7 +4411,7 @@ ALTER TABLE [dbo].[ArJournalItem] ADD  CONSTRAINT [DF_ArJournalItem_Debit]  DEFA
 GO
 ALTER TABLE [dbo].[ArJournalItem] ADD  CONSTRAINT [DF_ArJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[ArJournalItem] ADD  CONSTRAINT [DF_ArJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[ArJournalItem] ADD  CONSTRAINT [DF_ArJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[ArJournalItem] ADD  CONSTRAINT [DF_ArJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4427,7 +4427,7 @@ ALTER TABLE [dbo].[CashDisbursementJournalItem] ADD  CONSTRAINT [DF_CashDisburse
 GO
 ALTER TABLE [dbo].[CashDisbursementJournalItem] ADD  CONSTRAINT [DF_CashDisbursementJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[CashDisbursementJournalItem] ADD  CONSTRAINT [DF_CashDisbursementJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[CashDisbursementJournalItem] ADD  CONSTRAINT [DF_CashDisbursementJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[CashDisbursementJournalItem] ADD  CONSTRAINT [DF_CashDisbursementJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4443,7 +4443,7 @@ ALTER TABLE [dbo].[CashReceiptJournalItem] ADD  CONSTRAINT [DF_CashReceiptJourna
 GO
 ALTER TABLE [dbo].[CashReceiptJournalItem] ADD  CONSTRAINT [DF_CashReceiptJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[CashReceiptJournalItem] ADD  CONSTRAINT [DF_CashReceiptJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[CashReceiptJournalItem] ADD  CONSTRAINT [DF_CashReceiptJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[CashReceiptJournalItem] ADD  CONSTRAINT [DF_CashReceiptJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4459,7 +4459,7 @@ ALTER TABLE [dbo].[CheckDisbursementJournalItem] ADD  CONSTRAINT [DF_ChequeDisbu
 GO
 ALTER TABLE [dbo].[CheckDisbursementJournalItem] ADD  CONSTRAINT [DF_ChequeDisbursementJournalItem_JournalIdNo]  DEFAULT ((0)) FOR [JournalIdNo]
 GO
-ALTER TABLE [dbo].[CheckDisbursementJournalItem] ADD  CONSTRAINT [DF_ChequeDisbursementJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[CheckDisbursementJournalItem] ADD  CONSTRAINT [DF_ChequeDisbursementJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[CheckDisbursementJournalItem] ADD  CONSTRAINT [DF_ChequeDisbursementJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4521,7 +4521,7 @@ ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_De
 GO
 ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4535,7 +4535,7 @@ ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalIte
 GO
 ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4553,7 +4553,7 @@ ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_
 GO
 ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4573,7 +4573,7 @@ ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_Debit]
 GO
 ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_ProfitCenterIdNo]  DEFAULT ((0)) FOR [ProfitCenterIdNo]
+ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
 ALTER TABLE [dbo].[SalesJournalItem] ADD  CONSTRAINT [DF_SalesJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
@@ -4584,13 +4584,13 @@ REFERENCES [dbo].[Chart] ([IdNo])
 GO
 ALTER TABLE [dbo].[Chart] CHECK CONSTRAINT [FK__Chart__ParentId]
 GO
-ALTER TABLE [dbo].[ProfitCenter]  WITH CHECK ADD  CONSTRAINT [FK__ProfitCen__Paren__6BAEFA67] FOREIGN KEY([ParentIdNo])
-REFERENCES [dbo].[ProfitCenter] ([IdNo])
+ALTER TABLE [dbo].[RevCostCenter]  WITH CHECK ADD  CONSTRAINT [FK__ProfitCen__Paren__6BAEFA67] FOREIGN KEY([ParentIdNo])
+REFERENCES [dbo].[RevCostCenter] ([IdNo])
 GO
-ALTER TABLE [dbo].[ProfitCenter] CHECK CONSTRAINT [FK__ProfitCen__Paren__6BAEFA67]
+ALTER TABLE [dbo].[RevCostCenter] CHECK CONSTRAINT [FK__ProfitCen__Paren__6BAEFA67]
 GO
-ALTER TABLE [dbo].[ProfitCenterOrg]  WITH CHECK ADD FOREIGN KEY([ParentID])
-REFERENCES [dbo].[ProfitCenterOrg] ([IdNo])
+ALTER TABLE [dbo].[RevCostCenterOrg]  WITH CHECK ADD FOREIGN KEY([ParentID])
+REFERENCES [dbo].[RevCostCenterOrg] ([IdNo])
 GO
 ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_User] FOREIGN KEY([IdNo])
 REFERENCES [dbo].[User] ([IdNo])
@@ -4633,8 +4633,8 @@ GO
 create PROC [dbo].[InsertApJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO ApJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO ApJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.ApJournalItem ON;
 
@@ -4655,8 +4655,8 @@ GO
 create PROC [dbo].[InsertArJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO ArJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO ArJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.ArJournalItem ON;
 
@@ -4693,8 +4693,8 @@ GO
 CREATE PROC [dbo].[InsertCashDisbursementJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO CashDisbursementJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence
+INSERT  INTO CashDisbursementJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.CashDisbursementJournalItem ON;
 
@@ -4713,8 +4713,8 @@ GO
 CREATE PROC [dbo].[InsertCashReceiptJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO CashReceiptJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO CashReceiptJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.CashReceiptJournalItem ON;
 
@@ -4734,8 +4734,8 @@ GO
 Create PROC [dbo].[InsertCheckDisbursementJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO CheckDisbursementJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO CheckDisbursementJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.CheckDisbursementJournalItem ON;
 
@@ -4792,8 +4792,8 @@ GO
 create PROC [dbo].[InsertDistributionSchemeItemTVP]
   @MParam DistributionSchemeItemInsert READONLY
 AS 
-INSERT  INTO DistributionSchemeItem (DistributionSchemeIdNo, [Sequence], ProfitCenteridNo, [Percentage])
-        SELECT  DistributionSchemeIdNo, [Sequence], ProfitCenteridNo, [Percentage]
+INSERT  INTO DistributionSchemeItem (DistributionSchemeIdNo, [Sequence], RevCostCenterIdNo, [Percentage])
+        SELECT  DistributionSchemeIdNo, [Sequence], RevCostCenterIdNo, [Percentage]
         FROM    @MParam
 SET IDENTITY_INSERT DBO.DistributionSchemeItem ON;
 
@@ -4812,8 +4812,8 @@ GO
 create PROC [dbo].[InsertEmployeeLoanJournalItemTVP]
   @MParam EmployeeLoanJournalItemInsert READONLY
 AS 
-INSERT  INTO EmployeeLoanJournalItem (JournalIdNo, Sequence, AccountIdNo, Debit, Credit, ProfitCenterIdNo, Notes)
-        SELECT  JournalIdNo, Sequence, AccountIdNo, Debit, Credit, ProfitCenteridNo, Notes
+INSERT  INTO EmployeeLoanJournalItem (JournalIdNo, Sequence, AccountIdNo, Debit, Credit, RevCostCenterIdNo, Notes)
+        SELECT  JournalIdNo, Sequence, AccountIdNo, Debit, Credit, RevCostCenterIdNo, Notes
         FROM    @MParam
 SET IDENTITY_INSERT DBO.EmployeeLoanJournalItem ON;
 
@@ -4832,8 +4832,8 @@ GO
 create PROC [dbo].[InsertGeneralJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO GeneralJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO GeneralJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.GeneralJournalItem ON;
 
@@ -4865,8 +4865,8 @@ GO
 CREATE PROC [dbo].[InsertJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO JournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO JournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.JournalItem ON;
 
@@ -4906,8 +4906,8 @@ GO
 CREATE PROC [dbo].[InsertPettyCashJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO PettyCashJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence
+INSERT  INTO PettyCashJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.PettyCashJournalItem ON;
 
@@ -4925,8 +4925,8 @@ GO
 create PROC [dbo].[InsertPurchaseJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO PurchaseJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence
+INSERT  INTO PurchaseJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.PurchaseJournalItem ON;
 
@@ -4985,8 +4985,8 @@ GO
 create PROC [dbo].[InsertSalesJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO SalesJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO SalesJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.SalesJournalItem ON;
 
@@ -5057,7 +5057,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from ApJournalItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
@@ -5095,7 +5095,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from ArJournalItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
@@ -5167,7 +5167,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from CashDisbursementJournalItem a
 JOIN @MParam b
@@ -5203,7 +5203,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from CashReceiptJournalItem a
 JOIN @MParam b
@@ -5241,7 +5241,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from CheckDisbursementJournalItem a
 JOIN @MParam b
@@ -5342,7 +5342,7 @@ FROM [DBO].DistributionSchemeItem A WHERE A.DistributionSchemeIdNo = @GroupIdNo 
 UPDATE A
 SET A.DistributionSchemeIdNo = @GroupIdNo,
     A.[Sequence] = B.[Sequence],
-	A.ProfitCenteridNo = B.ProfitCenterIdNo,
+	A.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	A.Percentage = B.Percentage
 from [dbo].DistributionSchemeItem A INNER JOIN @MParam As B
 	ON A.IdNo = B.IdNo
@@ -5378,7 +5378,7 @@ SET a.JournalIdNo = @GroupIdNo,
 	a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.Credit = B.Credit,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.Notes = B.Notes
 from EmployeeLoanJournalItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
@@ -5418,7 +5418,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].GeneralJournalItem A INNER JOIN @MParam As B
 	ON A.IdNo = B.IdNo
@@ -5476,7 +5476,7 @@ SET a.AccountIdNo = B.AccountIdNo ,
 	a.Debit = B.Debit,
 	a.JournalIdNo = B.JournalIdNo ,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
     a.[Sequence] = B.[Sequence]
 from JournalItem a
 JOIN @MParam b
@@ -5546,7 +5546,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from PettyCashJournalItem a
 JOIN @MParam b
@@ -5582,7 +5582,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from PurchaseJournalItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
@@ -5657,7 +5657,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].SalesJournalItem A INNER JOIN @MParam As B
 	ON A.IdNo = B.IdNo

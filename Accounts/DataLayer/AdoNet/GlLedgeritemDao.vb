@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
         '            "OriginalAmount," &
         '            "PaidAmount," &
         '            "PayeeType," &
-        '            "ProfitCenterIdNo," &
+        '            "RevCostCenterIdNo," &
         '            "Sequence," &
         '            "SpecialAccount" &
         '            " FROM " & TableFileName &
@@ -58,7 +58,7 @@ Namespace DataLayer.AdoNet
         '            "OriginalAmount," &
         '            "PaidAmount," &
         '            "PayeeType," &
-        '            "ProfitCenterIdNo," &
+        '            "RevCostCenterIdNo," &
         '            "Sequence," &
         '            "SpecialAccount" &
         '            " FROM " & TableFileName &
@@ -85,7 +85,7 @@ Namespace DataLayer.AdoNet
                     "PayDescriptionAra," &
                     "PayeeType," &
                     "Posted," &
-                    "ProfitCenterIdNo," &
+                    "RevCostCenterIdNo," &
                     "ReferenceNo," &
                     "Sequence," &
                     "TransactionDate" &
@@ -120,7 +120,7 @@ Namespace DataLayer.AdoNet
                     "PayDescriptionAra," &
                     "PayeeType," &
                     "Posted," &
-                    "ProfitCenterIdNo," &
+                    "RevCostCenterIdNo," &
                     "ReferenceNo," &
                     "Sequence," &
                     "TransactionDate" &
@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
-            .ProfitCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
+            .RevCostCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("Sequence"))
             }
 
@@ -152,7 +152,7 @@ Namespace DataLayer.AdoNet
         '                            "@IdNo", glLedgerItem.IdNo,
         '                            "@JournalIdNo", glLedgerItem.JournalIdNo,
         '                            "@Notes", glLedgerItem.Notes,
-        '                            "@ProfitCenterIdNo", glLedgerItem.ProfitCenterIdNo,
+        '                            "@RevCostCenterIdNo", glLedgerItem.RevCostCenterIdNo,
         '                            "@Sequence", glLedgerItem.Sequence
         '                        }
         'End Function

@@ -7,6 +7,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateJournalItemTVP]
   @MParam JournalItemUpdate READONLY
 AS 
@@ -16,7 +17,7 @@ SET a.AccountIdNo = B.AccountIdNo ,
 	a.Debit = B.Debit,
 	a.JournalIdNo = B.JournalIdNo ,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
     a.[Sequence] = B.[Sequence]
 from JournalItem a
 JOIN @MParam b

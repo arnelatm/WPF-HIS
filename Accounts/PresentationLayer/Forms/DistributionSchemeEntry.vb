@@ -11,9 +11,9 @@ Namespace PresentationLayer.Forms
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
         Private _footer As DgvFooter
-        Private _profitCentersByName
+        Private _revCostCenterByName
         Private _totalPercentage As Decimal
         Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
 
@@ -135,8 +135,8 @@ Namespace PresentationLayer.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
-            _profitCentersByName = PresenterObj.GetProfitCenterListByName()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
         End Sub
 
 
@@ -173,12 +173,12 @@ Namespace PresentationLayer.Forms
             End With
             With DataGridViewDistributionSchemeItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Code"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvProfitCenterIdNo.AutoComplete = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Code"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.AutoComplete = True
             End With
             ResumeLayout()
         End Sub
@@ -197,7 +197,7 @@ Namespace PresentationLayer.Forms
         '    _footer.AutoCalc = True
         '    _footer.ColumnToSum("dgvPercentage") = True
         '    _footer.SetAlignment("dgvPercentage", ContentAlignment.MiddleRight)
-        '    _footer.SetText("DgvProfitCenterIdNo", "Totals ->")
+        '    _footer.SetText("DgvRevCostCenterIdNo", "Totals ->")
         'End Sub
 
 
@@ -293,10 +293,10 @@ Namespace PresentationLayer.Forms
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
         '    With DataGridViewDistributionSchemeItems.CurrentCell
         '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvprofitcenteridno"
-        '                dgvProfitCenterIdNo.DisplayMember = "Name"
-        '            Case "dgvprofitcentername"
-        '                dgvProfitCenterName.DisplayMember = "Code"
+        '            Case "dgvRevCostCenterIdNo"
+        '                dgvRevCostCenterIdNo.DisplayMember = "Name"
+        '            Case "dgvRevCostCenterName"
+        '                dgvRevCostCenterName.DisplayMember = "Code"
         '        End Select
         '    End With
         'End Sub
@@ -305,13 +305,13 @@ Namespace PresentationLayer.Forms
         '    Handles DataGridViewDistributionSchemeItems.CellEndEdit
         '    With DataGridViewDistributionSchemeItems.CurrentCell
         '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvprofitcenteridno"
-        '                dgvProfitCenterIdNo.DisplayMember = "Code"
+        '            Case "dgvRevCostCenterIdNo"
+        '                dgvRevCostCenterIdNo.DisplayMember = "Code"
         '                SendKeys.Send("{TAB}")
-        '            Case "dgvprofitcentername"
-        '                dgvProfitCenterName.DisplayMember = "Name"
-        '                ' repaint grid to reflect changes in the dgvProfitCenterIdNo
-        '                '(this column and dgvProfitCenterIdNo have the same source so any changes here must be reflected there)
+        '            Case "dgvRevCostCenterName"
+        '                dgvRevCostCenterName.DisplayMember = "Name"
+        '                ' repaint grid to reflect changes in the dgvRevCostCenterIdNo
+        '                '(this column and dgvRevCostCenterIdNo have the same source so any changes here must be reflected there)
         '                DataGridViewDistributionSchemeItems.Refresh()
         '            Case "dgvpercentage"
         '                Dim amount = .Value

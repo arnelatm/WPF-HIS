@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
         Me.lblRevenueGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblProfitCenter = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblRevCostCenter = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CaComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -199,7 +199,7 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtRevenueGroupNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblProfitCenter)
+        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenter)
         Me.floDataDisplay.Controls.Add(Me.CaComboBox1)
         Me.floDataDisplay.Controls.Add(Me.CLabel1)
         Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
@@ -318,19 +318,19 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.ValueIsNumeric = false
         Me.cacParentIdNo.ValueMember = "IdNo"
         '
-        'lblProfitCenter
+        'lblRevCostCenter
         '
-        Me.lblProfitCenter.DisplayOnly = true
-        Me.lblProfitCenter.EditingMode = false
-        Me.lblProfitCenter.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblProfitCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblProfitCenter.Location = New System.Drawing.Point(11, 137)
-        Me.lblProfitCenter.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblProfitCenter.Name = "lblProfitCenter"
-        Me.lblProfitCenter.Size = New System.Drawing.Size(243, 26)
-        Me.lblProfitCenter.TabIndex = 160
-        Me.lblProfitCenter.Text = "Level"
-        Me.lblProfitCenter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRevCostCenter.DisplayOnly = true
+        Me.lblRevCostCenter.EditingMode = false
+        Me.lblRevCostCenter.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblRevCostCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRevCostCenter.Location = New System.Drawing.Point(11, 137)
+        Me.lblRevCostCenter.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRevCostCenter.Name = "lblRevCostCenter"
+        Me.lblRevCostCenter.Size = New System.Drawing.Size(243, 26)
+        Me.lblRevCostCenter.TabIndex = 160
+        Me.lblRevCostCenter.Text = "Level"
+        Me.lblRevCostCenter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'CaComboBox1
         '
@@ -397,7 +397,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
         Me.txtLevelNumber.IgnoreNullCheck = true
-        Me.txtLevelNumber.LinkedLabel = Me.lblProfitCenter
+        Me.txtLevelNumber.LinkedLabel = Me.lblRevCostCenter
         Me.txtLevelNumber.Location = New System.Drawing.Point(256, 165)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
         Me.txtLevelNumber.Name = "txtLevelNumber"
@@ -469,7 +469,7 @@ End Sub
         Friend WithEvents lblRevenueGroupNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents lblProfitCenter As CLabel
+        Friend WithEvents lblRevCostCenter As CLabel
         Friend WithEvents txtLevelNumber As CTextBox
         Friend WithEvents _MBRevenueGroupCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox

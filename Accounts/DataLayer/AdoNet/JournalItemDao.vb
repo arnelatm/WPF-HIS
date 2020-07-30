@@ -33,7 +33,7 @@ Namespace DataLayer.AdoNet
                     "OriginalAmount," &
                     "PaidAmount," &
                     "PayeeType," &
-                    "ProfitCenterIdNo," &
+                    "RevCostCenterIdNo," &
                     "Sequence," &
                     "SpecialAccount" &
                     " FROM " & TableFileName &
@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
             .OpenInvoiceIdNo = Extensions.AsDecimal(reader("OpenInvoiceIdNo")),
             .PaidAmount = Extensions.AsDecimal(reader("PaidAmount")),
             .PayeeType = Extensions.AsString(reader("PayeeType")),
-            .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
+            .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
             }

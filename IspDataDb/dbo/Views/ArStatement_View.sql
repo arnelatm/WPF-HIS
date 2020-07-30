@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.ArStatement_View
 AS
 SELECT        dbo.ARDetails_View.JournalCode, dbo.ARDetails_View.IdNo, dbo.ARDetails_View.Sequence, dbo.ARDetails_View.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.Debit, 
-                         dbo.ARDetails_View.Credit, dbo.ARDetails_View.ProfitCenterIdNo, dbo.ARDetails_View.Notes, dbo.ARDetails_View.Posted, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.InvoiceNo, 
+                         dbo.ARDetails_View.Credit, dbo.ARDetails_View.RevCostCenterIdNo, dbo.ARDetails_View.Notes, dbo.ARDetails_View.Posted, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.InvoiceNo, 
                          dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.ARDetails_View.MainNote
 FROM            dbo.ARDetails_View INNER JOIN
                          dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo

@@ -33,7 +33,7 @@ Public Module GlobalSubs
     '        'obj.GetType.InvokeMember(methodName, Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.CreateInstance , nothing, obj, arguments  )
     '        'obj.GetType.InvokeMember(methodName, Reflection.BindingFlags.InvokeMethod or Reflection.BindingFlags.Public Or Reflection.BindingFlags.FlattenHierarchy , nothing, obj, arguments  )
     '        Dim obj2 As Object = Activator.CreateInstance(obj)
-    '        obj2.GetType.InvokeMember("UpdateProfitCenter", Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.IgnoreCase, Nothing, obj2, arguments)
+    '        obj2.GetType.InvokeMember("UpdateRevCostCenter", Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.IgnoreCase, Nothing, obj2, arguments)
 
     '    Catch ex As Exception
     '        MessageBox.Show("Invalid property " & methodName & " in object " & obj.Name)

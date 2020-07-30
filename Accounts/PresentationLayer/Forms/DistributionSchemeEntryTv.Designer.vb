@@ -52,7 +52,7 @@ Namespace PresentationLayer.Forms
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvDistributionSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvCaComboboxColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvCaComboboxColumn()
         Me.dgvPercentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtTotalPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -338,16 +338,16 @@ Namespace PresentationLayer.Forms
         Me.dgvSequence.ReadOnly = true
         Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'dgvProfitCenterIdNo
+        'dgvRevCostCenterIdNo
         '
-        Me.dgvProfitCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvProfitCenterIdNo.DataPropertyName = "ProfitCenterIdNo"
+        Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvProfitCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
-        Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
-        Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+        resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvPercentage
         '
@@ -432,7 +432,7 @@ End Sub
         Friend WithEvents dgvIdNo As CdgvColumnText
         Friend WithEvents dgvDistributionSchemeIdNo As CdgvColumnText
         Friend WithEvents dgvSequence As CdgvColumnText
-        Friend WithEvents dgvProfitCenterIdNo As cDgvCaComboboxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As cDgvCaComboboxColumn
         Friend WithEvents dgvPercentage As Windows.Forms.DataGridViewTextBoxColumn
     End Class
 End NameSpace

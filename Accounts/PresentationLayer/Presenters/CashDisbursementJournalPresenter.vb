@@ -40,7 +40,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
@@ -49,7 +49,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCadOiInsertTable.Columns.Add("Amount", GetType(Decimal))
@@ -225,7 +225,7 @@ Namespace PresentationLayer.Presenters
                     .AccountIdNo = Nothing,
                     .Credit = View.Amount,
                     .Debit = 0,
-                    .ProfitCenterIdNo = 0,
+                    .RevCostCenterIdNo = 0,
                     .Notes = ""
                     }
             View.JournalItems.Add(item)
@@ -453,12 +453,12 @@ Namespace PresentationLayer.Presenters
                         item.AccountIdNo = View.AccountIdNo
                         item.Credit = If(View.Amount < 0, 0, View.Amount)
                         item.Debit = If(View.Amount < 0, View.Amount * -1, 0)
-                        item.ProfitCenterIdNo = 0
+                        item.RevCostCenterIdNo = 0
                         item.Notes = ""
                     Else
                         item.Credit = 0
                         item.Debit = 0
-                        item.ProfitCenterIdNo = 0
+                        item.RevCostCenterIdNo = 0
                         item.Notes = ""
                     End If
                     nCounter = nCounter + 1
@@ -471,7 +471,7 @@ Namespace PresentationLayer.Presenters
                             .AccountIdNo = View.AccountIdNo,
                             .Credit = If(View.Amount < 0, 0, View.Amount),
                             .Debit = If(View.Amount < 0, View.Amount * -1, 0),
-                            .ProfitCenterIdNo = 0,
+                            .RevCostCenterIdNo = 0,
                             .Notes = ""
                             }
                     View.JournalItems.Add(item)
@@ -511,7 +511,7 @@ Namespace PresentationLayer.Presenters
                                 .AccountIdNo = View.DiscountAccountIdNo,
                                 .Credit = If(View.DiscountTaken < 0, 0, View.DiscountTaken),
                                 .Debit = If(View.DiscountTaken < 0, View.DiscountTaken * -1, 0),
-                                .ProfitCenterIdNo = 0,
+                                .RevCostCenterIdNo = 0,
                                 .Notes = ""
                                 }
                         View.JournalItems.Add(item)
@@ -531,7 +531,7 @@ Namespace PresentationLayer.Presenters
                                 .AccountIdNo = aAccountIdNo(nCounter),
                                 .Credit = If(nAmount < 0, nAmount * -1, 0),
                                 .Debit = If(nAmount < 0, 0, nAmount),
-                                .ProfitCenterIdNo = 0,
+                                .RevCostCenterIdNo = 0,
                                 .Notes = ""
                                 }
                         View.JournalItems.Add(ji)
@@ -561,7 +561,7 @@ Namespace PresentationLayer.Presenters
                             .AccountIdNo = _advancesToSupplierAccountIdNo,
                             .Credit = 0,
                             .Debit = View.UnApplied,
-                            .ProfitCenterIdNo = 0,
+                            .RevCostCenterIdNo = 0,
                             .Notes = ""
                             }
                         View.JournalItems.Add(jiModel)
@@ -672,7 +672,7 @@ Namespace PresentationLayer.Presenters
                     workRow("AccountIdNo") = ji.AccountIdNo
                     workRow("Debit") = ji.Debit
                     workRow("Credit") = ji.Credit
-                    workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                    workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
                     workRow("Notes") = If(ji.Notes, "")
                     If ji.IdNo <= 0 Then
                         DtInsertTable.Rows.Add(workRow)

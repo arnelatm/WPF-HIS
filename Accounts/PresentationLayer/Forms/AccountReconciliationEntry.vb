@@ -216,7 +216,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             PresenterObj.GetDetailAccountListByCode()
-            PresenterObj.GetProfitCenterListByCode()
+            'PresenterObj.GetRevCostCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CK,CS")
             cboAccountIdNo.EndUpdate()

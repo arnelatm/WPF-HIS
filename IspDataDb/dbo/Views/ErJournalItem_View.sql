@@ -2,7 +2,7 @@
 
 CREATE VIEW [dbo].[ErJournalItem_View]
 AS
-SELECT        dbo.ErJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ErJournalItem.JournalIdNo, dbo.ErJournalItem.AccountIdNo, dbo.ErJournalItem.Debit, dbo.ErJournalItem.Credit, dbo.ErJournalItem.ProfitCenterIdNo, 
+SELECT        dbo.ErJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ErJournalItem.JournalIdNo, dbo.ErJournalItem.AccountIdNo, dbo.ErJournalItem.Debit, dbo.ErJournalItem.Credit, dbo.ErJournalItem.RevCostCenterIdNo, 
                 dbo.ErJournalItem.Notes, dbo.ErJournalItem.Posted, dbo.ErJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ArOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                 dbo.ErJournalItem.Credit - dbo.ErJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, 
                 dbo.ErJournalItem.Sequence

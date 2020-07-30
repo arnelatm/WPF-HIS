@@ -294,10 +294,10 @@
   <data name="PaymentTypeSelection_Others" xml:space="preserve">
     <value>Others</value>
   </data>
-  <data name="ProfitCenterTypeSelection_Direct" xml:space="preserve">
+  <data name="RevCostCenterTypeSelection_Direct" xml:space="preserve">
     <value>Direct</value>
   </data>
-  <data name="ProfitCenterTypeSelection_Shared" xml:space="preserve">
+  <data name="RevCostCenterTypeSelection_Shared" xml:space="preserve">
     <value>Shared</value>
   </data>
   <data name="ReceiptTypeSelection_None" xml:space="preserve">

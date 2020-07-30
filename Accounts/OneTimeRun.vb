@@ -61,7 +61,6 @@ Public Class OneTimeRun
         ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
         ResourceEnumConverter.MakeResource("PaymentMethodSelection", GetType(PaymentMethodSelection))
         ResourceEnumConverter.MakeResource("PaymentTypeSelection", GetType(PaymentTypeSelection))
-        ResourceEnumConverter.MakeResource("ProfitCenterTypeSelection", GetType(ProfitCenterTypeSelection))
         ResourceEnumConverter.MakeResource("ReceiptTypeSelection", GetType(ReceiptTypeSelection))
         ResourceEnumConverter.MakeResource("SecurityLevelSelection", GetType(SecurityLevelSelection))
         ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))

@@ -137,7 +137,7 @@
   <data name="dgvAccountName.Width" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
-  <data name="dgvProfitCenterIdNo.Width" type="System.Int32, mscorlib">
+  <data name="dgvRevCostCenterIdNo.Width" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
   <data name="txtTotalDebits.Error" xml:space="preserve">

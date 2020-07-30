@@ -1450,7 +1450,7 @@
     <value>40</value>
   </data>
   <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
-    <value>Account ID No. - Name</value>
+    <value>Account Code - Name</value>
   </data>
   <data name="dgvAccountIdNo.Width" type="System.Int32, mscorlib">
     <value>200</value>
@@ -1461,11 +1461,11 @@
   <data name="dgvCredit.HeaderText" xml:space="preserve">
     <value>Credit</value>
   </data>
-  <data name="dgvProfitCenterIdNo.HeaderText" xml:space="preserve">
-    <value>Profit Center ID No.</value>
+  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
+    <value>Revenue/Cost Center Code-Name</value>
   </data>
-  <data name="dgvProfitCenterIdNo.Width" type="System.Int32, mscorlib">
-    <value>150</value>
+  <data name="dgvRevCostCenterIdNo.Width" type="System.Int32, mscorlib">
+    <value>200</value>
   </data>
   <data name="dgvNotesDescription.HeaderText" xml:space="preserve">
     <value>Notes/Description</value>
@@ -89996,6 +89996,12 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
+    <value>bsJournalItems</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
     <value>dgvSequenceCsrOi</value>
   </data>
@@ -90006,6 +90012,12 @@
     <value>dgvInvoiceNo</value>
   </data>
   <data name="&gt;&gt;dgvInvoiceNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvTransactionDate.Name" xml:space="preserve">
+    <value>dgvTransactionDate</value>
+  </data>
+  <data name="&gt;&gt;dgvTransactionDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvJournalCode.Name" xml:space="preserve">
@@ -90026,11 +90038,41 @@
   <data name="&gt;&gt;dgvPreviousBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;dgvAmount.Name" xml:space="preserve">
+    <value>dgvAmount</value>
+  </data>
+  <data name="&gt;&gt;dgvAmount.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvDiscountTaken.Name" xml:space="preserve">
+    <value>dgvDiscountTaken</value>
+  </data>
+  <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
     <value>dgvBalance</value>
   </data>
   <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>AccountIdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>IdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">
+    <value>bsCsrOiItems</value>
+  </data>
+  <data name="&gt;&gt;bsCsrOiItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
@@ -90056,10 +90098,10 @@
   <data name="&gt;&gt;dgvCredit.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Name" xml:space="preserve">
-    <value>dgvProfitCenterIdNo</value>
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>dgvRevCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvNotesDescription.Name" xml:space="preserve">
@@ -90127,48 +90169,6 @@
   </data>
   <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvTransactionDate.Name" xml:space="preserve">
-    <value>dgvTransactionDate</value>
-  </data>
-  <data name="&gt;&gt;dgvTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvAmount.Name" xml:space="preserve">
-    <value>dgvAmount</value>
-  </data>
-  <data name="&gt;&gt;dgvAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvDiscountTaken.Name" xml:space="preserve">
-    <value>dgvDiscountTaken</value>
-  </data>
-  <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>AccountIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>IdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">
-    <value>bsCsrOiItems</value>
-  </data>
-  <data name="&gt;&gt;bsCsrOiItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CashReceiptJournalEntry</value>
