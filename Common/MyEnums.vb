@@ -1,11 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports AATM.Libraries.GlobalFuncNSub
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
-Public Enum ProfitCenterTypeSelection
-    <EnumCode("D")> Direct
-    <EnumCode("S")> [Shared]
-End Enum
+'<TypeConverter(GetType(LocalizedEnumConverter))>
+'Public Enum RevCostCenterTypeSelection
+'    <EnumCode("D")> Direct
+'    <EnumCode("S")> [Shared]
+'End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum YesNoSelection

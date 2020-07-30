@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[RevCostCenter](
 	[RevCostCenterCode] [varchar](5) NOT NULL,
 	[RevCostCenterName] [varchar](50) NOT NULL,
 	[ParentIdNo] [smallint] NULL,
-	[ProfitCenterIdNo] [int] NULL,
+	[RevCostCenterIdNo] [int] NULL,
 	[RevCostCenterNameAra] [varchar](50) NOT NULL,
 	[Notes] [varchar](255) NULL,
 	[DateTimeStamp] [timestamp] NULL,

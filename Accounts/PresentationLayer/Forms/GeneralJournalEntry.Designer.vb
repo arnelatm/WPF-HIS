@@ -45,36 +45,36 @@ Namespace PresentationLayer.Forms
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
         Me.CFlowLayout2.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout4.SuspendLayout
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.CFlowLayout4.SuspendLayout
         Me.SuspendLayout
         '
         'floJournalHeader
@@ -193,6 +193,36 @@ Namespace PresentationLayer.Forms
         Me.dtpTransactionDate.ValueIsMandatory = false
         Me.dtpTransactionDate.ValueIsNullable = false
         '
+        'CLabel2
+        '
+        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.Name = "CLabel2"
+        '
+        'chkClosingJournal
+        '
+        resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
+        Me.chkClosingJournal.AutoCheck = false
+        Me.chkClosingJournal.BackColor = System.Drawing.Color.White
+        Me.chkClosingJournal.DisplayOnly = true
+        Me.chkClosingJournal.EditingMode = true
+        Me.CFlowLayout1.SetFlowBreak(Me.chkClosingJournal, true)
+        Me.chkClosingJournal.ForeColor = System.Drawing.Color.Black
+        Me.chkClosingJournal.LinkedLabel = Me.lblActive
+        Me.chkClosingJournal.Name = "chkClosingJournal"
+        Me.chkClosingJournal.OldValue = Nothing
+        Me.chkClosingJournal.UseVisualStyleBackColor = false
+        '
+        'lblActive
+        '
+        Me.lblActive.BackColor = System.Drawing.Color.Transparent
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
+        resources.ApplyResources(Me.lblActive, "lblActive")
+        Me.lblActive.Name = "lblActive"
+        '
         'lblNotes
         '
         Me.lblNotes.BackColor = System.Drawing.Color.Transparent
@@ -230,14 +260,6 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
         Me.CFlowLayout2.Name = "CFlowLayout2"
-        '
-        'lblActive
-        '
-        Me.lblActive.BackColor = System.Drawing.Color.Transparent
-        Me.lblActive.DisplayOnly = true
-        Me.lblActive.EditingMode = false
-        resources.ApplyResources(Me.lblActive, "lblActive")
-        Me.lblActive.Name = "lblActive"
         '
         'chkPosted
         '
@@ -310,7 +332,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
         Me.DataGridViewJournalItems.DataInGridChanged = false
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -329,6 +351,18 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.StartTrackingChanges = false
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+        '
+        'CFlowLayout4
+        '
+        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+        Me.CFlowLayout4.Name = "CFlowLayout4"
         '
         'dgvSequence
         '
@@ -386,17 +420,17 @@ Namespace PresentationLayer.Forms
         Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'dgvProfitCenterIdNo
+        'dgvRevCostCenterIdNo
         '
-        Me.dgvProfitCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.dgvProfitCenterIdNo.DataPropertyName = "ProfitCenterIdNo"
+        Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvProfitCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
-        Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
-        Me.dgvProfitCenterIdNo.ReadOnly = true
-        Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+        resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+        Me.dgvRevCostCenterIdNo.ReadOnly = true
+        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'dgvNotes
         '
@@ -425,46 +459,12 @@ Namespace PresentationLayer.Forms
         Me.SpecialAccount.Name = "SpecialAccount"
         Me.SpecialAccount.ReadOnly = true
         '
-        'CFlowLayout4
-        '
-        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-        Me.CFlowLayout4.Name = "CFlowLayout4"
-        '
         'AccountIdNoDataGridViewTextBoxColumn
         '
         Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
         resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
         Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
         Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-        '
-        'CLabel2
-        '
-        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.CLabel2.DisplayOnly = true
-        Me.CLabel2.EditingMode = false
-        resources.ApplyResources(Me.CLabel2, "CLabel2")
-        Me.CLabel2.Name = "CLabel2"
-        '
-        'chkClosingJournal
-        '
-        resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
-        Me.chkClosingJournal.AutoCheck = false
-        Me.chkClosingJournal.BackColor = System.Drawing.Color.White
-        Me.chkClosingJournal.DisplayOnly = true
-        Me.chkClosingJournal.EditingMode = true
-        Me.CFlowLayout1.SetFlowBreak(Me.chkClosingJournal, true)
-        Me.chkClosingJournal.ForeColor = System.Drawing.Color.Black
-        Me.chkClosingJournal.LinkedLabel = Me.lblActive
-        Me.chkClosingJournal.Name = "chkClosingJournal"
-        Me.chkClosingJournal.OldValue = Nothing
-        Me.chkClosingJournal.UseVisualStyleBackColor = false
         '
         'GeneralJournalEntry
         '
@@ -479,8 +479,8 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout4.ResumeLayout(false)
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
+        Me.CFlowLayout4.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -507,16 +507,16 @@ End Sub
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents chkClosingJournal As CCheckBox
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvColumnMoney
         Friend WithEvents dgvCredit As CdgvColumnMoney
-        Friend WithEvents dgvProfitCenterIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents chkClosingJournal As CCheckBox
     End Class
 End NameSpace

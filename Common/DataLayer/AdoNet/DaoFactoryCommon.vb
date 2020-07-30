@@ -49,9 +49,9 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-        'Public ReadOnly Property ProfitCenterDao As IProfitCenterDao Implements IDaoFactoryCommon.ProfitCenterDao
+        'Public ReadOnly Property RevCostCenterDao As IRevCostCenterDao Implements IDaoFactoryCommon.RevCostCenterDao
         '    Get
-        '        Return New ProfitCenterDao()
+        '        Return New RevCostCenterDao()
         '    End Get
         'End Property
 

@@ -85,13 +85,13 @@
     <Build Include="dbo\Tables\Document.sql" />
     <Build Include="dbo\Tables\EmployeeOld.sql" />
     <Build Include="dbo\Tables\RevCostCenter.sql" />
-    <Build Include="dbo\Tables\ProfitCenter.sql" />
+    <Build Include="dbo\Tables\RevCostCenter.sql" />
     <Build Include="dbo\Tables\NumberSeries.sql" />
     <Build Include="dbo\Tables\Patient.sql" />
     <Build Include="dbo\Tables\DefaultFieldValue.sql" />
     <Build Include="dbo\Tables\PhoneType.sql" />
-    <Build Include="dbo\Tables\ProfitCenterOld.sql" />
-    <Build Include="dbo\Tables\ProfitCenterOrg.sql" />
+    <Build Include="dbo\Tables\RevCostCenterOld.sql" />
+    <Build Include="dbo\Tables\RevCostCenterOrg.sql" />
     <Build Include="dbo\Tables\PurchaseItem.sql" />
     <Build Include="dbo\Tables\PurchaseJournal.sql" />
     <Build Include="dbo\Tables\BankAccount.sql" />
@@ -177,7 +177,7 @@
     <Build Include="dbo\Views\SupplierInvoices.sql" />
     <Build Include="dbo\Views\PcsOiItem_View.sql" />
     <Build Include="dbo\Views\ApInvoices_View.sql" />
-    <Build Include="dbo\Views\ProfitCenter_View.sql" />
+    <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\UnpaidOpenInvoices_View.sql" />
     <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\RevenueGroup_View.sql" />
@@ -293,7 +293,6 @@
     <Build Include="dbo\Views\CurrentEarnings_View.sql" />
     <Build Include="dbo\Views\ChartBalance_View.sql" />
     <Build Include="dbo\Views\Chart_View2.sql" />
-    <Build Include="dbo\Views\BalanceSheetLayout_View2.sql" />
     <Build Include="dbo\Views\BalanceSheetLayout_View.sql" />
     <Build Include="dbo\Views\BalanceSheet_View.sql" />
     <Build Include="dbo\Functions\FuncGlStatement.sql" />
@@ -306,6 +305,29 @@
     <Build Include="dbo\Functions\FuncGlIncomeStatementOld.sql" />
     <Build Include="dbo\Functions\FuncGlIncomeStatement.sql" />
     <Build Include="dbo\Functions\FuncGlBalanceSheetOld.sql" />
+    <Build Include="dbo\Tables\RevCostCenter.sql" />
+    <Build Include="dbo\Tables\GLLEDGERVIEW_1.sql" />
+    <Build Include="dbo\Tables\CostCenter_1.sql" />
+    <Build Include="dbo\Views\RevCostCenter_View.sql" />
+    <Build Include="dbo\Views\PettyCashJournalTransaction_View_1.sql" />
+    <Build Include="dbo\Views\GeneralJournalTransaction_View_1.sql" />
+    <Build Include="dbo\Views\ErJournalTransaction_View_1.sql" />
+    <Build Include="dbo\Views\CostCenter_View_1.sql" />
+    <Build Include="dbo\Views\CkdJournalTransaction_View_1.sql" />
+    <Build Include="dbo\Views\ARJournalTransaction_View_1.sql" />
+    <Build Include="dbo\Views\ApJournalTransaction_View_1.sql" />
+    <Build Include="dbo\User Defined Types\JournalItemUpdatex.sql" />
+    <Build Include="dbo\User Defined Types\JournalItemInsertx.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemUpdatex.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemInsertx.sql" />
+    <Build Include="dbo\User Defined Types\DistributionSchemeItemUpdatex.sql" />
+    <Build Include="dbo\User Defined Types\DistributionSchemeItemMergex.sql" />
+    <Build Include="dbo\User Defined Types\DistributionSchemeItemInsertx.sql" />
+    <Build Include="dbo\Tables\ProfitCenterOrg_1.sql" />
+    <Build Include="dbo\Tables\ProfitCenterOld_1.sql" />
+    <Build Include="dbo\Tables\ProfitCenter_1.sql" />
+    <Build Include="dbo\Views\ProfitCenter_View_1.sql" />
+    <Build Include="dbo\Views\CrcJournalTransaction_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

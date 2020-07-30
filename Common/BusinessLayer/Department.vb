@@ -21,7 +21,6 @@ Namespace BusinessLayer
         Public Property ParentIdNo() As Integer?
         Public Property DepartmentNameAra() As String
         Public Property Notes() As String
-        Public Property ProfitCenterIdNo() As Integer
         Public Property RevCostCenterIdNo() As Integer
         Public Property SortKey() As String
     End Class

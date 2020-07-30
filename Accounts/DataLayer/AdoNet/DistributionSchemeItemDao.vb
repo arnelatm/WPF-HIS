@@ -25,7 +25,7 @@ Namespace DataLayer.AdoNet
 
         'Public Function GetRecordById(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
         '    Dim sql As String =
-        '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
+        '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage" &
         '            "   FROM " & TableFileName &
         '            " WHERE IdNo = @IdNo"
         '    Dim params() As Object = {"@IdNo", idNo}
@@ -34,7 +34,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetDistributionSchemeItems(distributionSchemeIdNo As Int32) As List(Of DistributionSchemeItem)
             Dim sql As String =
-                    " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage " &
+                    " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage " &
                     "   FROM " & TableFileName &
                     "  WHERE DistributionSchemeIdNo = @DistributionSchemeIdNo" &
                     "  ORDER BY Sequence"
@@ -52,7 +52,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
             Dim sql As String =
-                    " SELECT IdNo, DistributionSchemeIdNo, Sequence, ProfitCenterIdNo, Percentage" &
+                    " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage" &
                     "   FROM " & TableFileName &
                     "  WHERE DistributionSchemeIdNo = " & idNo &
                     "  ORDER BY " & sortExpression
@@ -74,7 +74,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DistributionSchemeIdNo = Extensions.AsInt(Of Integer)(reader("DistributionSchemeIdNo")),
             .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
-            .ProfitCenterIdNo = Extensions.AsInt(Of Integer)(reader("ProfitCenterIdNo")),
+            .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Percentage = Extensions.AsString(reader("Percentage"))
             }
 
@@ -83,7 +83,7 @@ Namespace DataLayer.AdoNet
         '                            "@IdNo", distributionSchemeItem.IdNo,
         '                            "@DistributionSchemeIdNo", distributionSchemeItem.DistributionSchemeIdNo,
         '                            "@Sequence", distributionSchemeItem.Sequence,
-        '                            "@ProfitCenterIdNo", distributionSchemeItem.ProfitCenterIdNo,
+        '                            "@RevCostCenterIdNo", distributionSchemeItem.RevCostCenterIdNo,
         '                            "@Percentage", distributionSchemeItem.Percentage
         '                        }
         'End Function

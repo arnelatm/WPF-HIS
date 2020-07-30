@@ -3,7 +3,7 @@
 CREATE VIEW [dbo].[ApStatement_View]
 AS
 SELECT        dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.IdNo, dbo.ApDetails_View.Sequence, dbo.ApDetails_View.JournalIdNo, dbo.ApDetails_View.AccountIdNo, dbo.ApDetails_View.Debit, dbo.ApDetails_View.Credit, 
-                         dbo.ApDetails_View.ProfitCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+                         dbo.ApDetails_View.RevCostCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
                          dbo.ApDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.APDetails_View.MainNote
 FROM            dbo.ApDetails_View INNER JOIN
                          dbo.Chart ON dbo.ApDetails_View.AccountIdNo = dbo.Chart.IDNo

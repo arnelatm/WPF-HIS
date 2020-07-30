@@ -6,7 +6,7 @@
     [TransactionDate]  DATETIME2 (7)  NULL,
     [Debit]            MONEY          NULL,
     [Credit]           MONEY          NULL,
-    [ProfitCenterIdNo] INT            NULL,
+    [RevCostCenterIdNo] INT            NULL,
     [Notes]            NVARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Posted]           BIT            NULL,
     [DateTimeStamp]    ROWVERSION     NULL,

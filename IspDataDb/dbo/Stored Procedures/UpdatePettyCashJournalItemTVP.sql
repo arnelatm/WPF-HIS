@@ -7,6 +7,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdatePettyCashJournalItemTVP]
   @MParam JournalItemUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -24,7 +25,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.ProfitCenterIdNo = B.ProfitCenterIdNo,
+	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from PettyCashJournalItem a
 JOIN @MParam b

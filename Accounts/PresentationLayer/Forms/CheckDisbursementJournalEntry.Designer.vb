@@ -29,10 +29,6 @@ Namespace PresentationLayer.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CheckDisbursementJournalEntry))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -44,6 +40,10 @@ Namespace PresentationLayer.Forms
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.floHeader1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -92,23 +92,6 @@ Namespace PresentationLayer.Forms
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvProfitCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewCkdOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceCkdOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -126,6 +109,23 @@ Namespace PresentationLayer.Forms
         Me.bsCkdOiItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFullEntryArea.SuspendLayout
         Me.floPurchaseJournalHeader.SuspendLayout
@@ -840,7 +840,7 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvProfitCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.dgvJournalIdNo, Me.ItemVatAmount, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.dgvJournalIdNo, Me.ItemVatAmount, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
         Me.DataGridViewJournalItems.DataInGridChanged = false
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -859,152 +859,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.StartTrackingChanges = false
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvSequence.EditingMode = false
-        resources.ApplyResources(Me.dgvSequence, "dgvSequence")
-        Me.dgvSequence.Name = "dgvSequence"
-        Me.dgvSequence.ReadOnly = true
-        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvAccountIdNo
-        '
-        Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-        resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-        Me.dgvAccountIdNo.ReadOnly = true
-        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvDebit
-        '
-        Me.dgvDebit.DataPropertyName = "Debit"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.Format = "###,##0.00"
-        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvDebit.EditingMode = false
-        resources.ApplyResources(Me.dgvDebit, "dgvDebit")
-        Me.dgvDebit.Name = "dgvDebit"
-        Me.dgvDebit.ReadOnly = true
-        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvCredit
-        '
-        Me.dgvCredit.DataPropertyName = "Credit"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.Format = "###,##0.00"
-        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvCredit.EditingMode = false
-        resources.ApplyResources(Me.dgvCredit, "dgvCredit")
-        Me.dgvCredit.Name = "dgvCredit"
-        Me.dgvCredit.ReadOnly = true
-        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvProfitCenterIdNo
-        '
-        Me.dgvProfitCenterIdNo.DataPropertyName = "ProfitCenterIdNo"
-        resources.ApplyResources(Me.dgvProfitCenterIdNo, "dgvProfitCenterIdNo")
-        Me.dgvProfitCenterIdNo.Name = "dgvProfitCenterIdNo"
-        Me.dgvProfitCenterIdNo.ReadOnly = true
-        Me.dgvProfitCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvNotes
-        '
-        Me.dgvNotes.DataPropertyName = "Notes"
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvNotes.EditingMode = false
-        resources.ApplyResources(Me.dgvNotes, "dgvNotes")
-        Me.dgvNotes.Name = "dgvNotes"
-        Me.dgvNotes.ReadOnly = true
-        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'dgvIdNo
-        '
-        Me.dgvIdNo.DataPropertyName = "IdNo"
-        resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
-        Me.dgvIdNo.Name = "dgvIdNo"
-        Me.dgvIdNo.ReadOnly = true
-        '
-        'dgvJournalIdNo
-        '
-        Me.dgvJournalIdNo.DataPropertyName = "JournalIdNo"
-        resources.ApplyResources(Me.dgvJournalIdNo, "dgvJournalIdNo")
-        Me.dgvJournalIdNo.Name = "dgvJournalIdNo"
-        Me.dgvJournalIdNo.ReadOnly = true
-        '
-        'ItemVatAmount
-        '
-        resources.ApplyResources(Me.ItemVatAmount, "ItemVatAmount")
-        Me.ItemVatAmount.Name = "ItemVatAmount"
-        Me.ItemVatAmount.ReadOnly = true
-        '
-        'AccountNameDataGridViewTextBoxColumn
-        '
-        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'CancelledDataGridViewCheckBoxColumn
-        '
-        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
-        resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
-        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
-        Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = true
-        '
-        'DiscountTakenDataGridViewTextBoxColumn
-        '
-        Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
-        resources.ApplyResources(Me.DiscountTakenDataGridViewTextBoxColumn, "DiscountTakenDataGridViewTextBoxColumn")
-        Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
-        Me.DiscountTakenDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'OpenInvoiceIdNoDataGridViewTextBoxColumn
-        '
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
-        resources.ApplyResources(Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, "OpenInvoiceIdNoDataGridViewTextBoxColumn")
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'OriginalAmountDataGridViewTextBoxColumn
-        '
-        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
-        resources.ApplyResources(Me.OriginalAmountDataGridViewTextBoxColumn, "OriginalAmountDataGridViewTextBoxColumn")
-        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
-        Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PaidAmountDataGridViewTextBoxColumn
-        '
-        Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
-        resources.ApplyResources(Me.PaidAmountDataGridViewTextBoxColumn, "PaidAmountDataGridViewTextBoxColumn")
-        Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
-        Me.PaidAmountDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PayeeTypeDataGridViewTextBoxColumn
-        '
-        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
-        resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
-        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
-        Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'SpecialAccountDataGridViewTextBoxColumn
-        '
-        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
-        resources.ApplyResources(Me.SpecialAccountDataGridViewTextBoxColumn, "SpecialAccountDataGridViewTextBoxColumn")
-        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
-        Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = true
         '
         'bsJournalItems
         '
@@ -1203,6 +1057,152 @@ Namespace PresentationLayer.Forms
         Me.btnViewGL.OriginalImageName = Nothing
         Me.btnViewGL.SecurityKey = ""
         '
+        'dgvSequence
+        '
+        Me.dgvSequence.DataPropertyName = "Sequence"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvSequence.EditingMode = false
+        resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+        Me.dgvSequence.Name = "dgvSequence"
+        Me.dgvSequence.ReadOnly = true
+        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvAccountIdNo
+        '
+        Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
+        resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
+        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+        Me.dgvAccountIdNo.ReadOnly = true
+        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvDebit
+        '
+        Me.dgvDebit.DataPropertyName = "Debit"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.Format = "###,##0.00"
+        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvDebit.EditingMode = false
+        resources.ApplyResources(Me.dgvDebit, "dgvDebit")
+        Me.dgvDebit.Name = "dgvDebit"
+        Me.dgvDebit.ReadOnly = true
+        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvCredit
+        '
+        Me.dgvCredit.DataPropertyName = "Credit"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.Format = "###,##0.00"
+        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvCredit.EditingMode = false
+        resources.ApplyResources(Me.dgvCredit, "dgvCredit")
+        Me.dgvCredit.Name = "dgvCredit"
+        Me.dgvCredit.ReadOnly = true
+        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvRevCostCenterIdNo
+        '
+        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
+        resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+        Me.dgvRevCostCenterIdNo.ReadOnly = true
+        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvNotes
+        '
+        Me.dgvNotes.DataPropertyName = "Notes"
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvNotes.EditingMode = false
+        resources.ApplyResources(Me.dgvNotes, "dgvNotes")
+        Me.dgvNotes.Name = "dgvNotes"
+        Me.dgvNotes.ReadOnly = true
+        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'dgvIdNo
+        '
+        Me.dgvIdNo.DataPropertyName = "IdNo"
+        resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
+        Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
+        '
+        'dgvJournalIdNo
+        '
+        Me.dgvJournalIdNo.DataPropertyName = "JournalIdNo"
+        resources.ApplyResources(Me.dgvJournalIdNo, "dgvJournalIdNo")
+        Me.dgvJournalIdNo.Name = "dgvJournalIdNo"
+        Me.dgvJournalIdNo.ReadOnly = true
+        '
+        'ItemVatAmount
+        '
+        resources.ApplyResources(Me.ItemVatAmount, "ItemVatAmount")
+        Me.ItemVatAmount.Name = "ItemVatAmount"
+        Me.ItemVatAmount.ReadOnly = true
+        '
+        'AccountNameDataGridViewTextBoxColumn
+        '
+        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
+        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'CancelledDataGridViewCheckBoxColumn
+        '
+        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
+        resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
+        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
+        Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = true
+        '
+        'DiscountTakenDataGridViewTextBoxColumn
+        '
+        Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
+        resources.ApplyResources(Me.DiscountTakenDataGridViewTextBoxColumn, "DiscountTakenDataGridViewTextBoxColumn")
+        Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
+        Me.DiscountTakenDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'OpenInvoiceIdNoDataGridViewTextBoxColumn
+        '
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
+        resources.ApplyResources(Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, "OpenInvoiceIdNoDataGridViewTextBoxColumn")
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'OriginalAmountDataGridViewTextBoxColumn
+        '
+        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
+        resources.ApplyResources(Me.OriginalAmountDataGridViewTextBoxColumn, "OriginalAmountDataGridViewTextBoxColumn")
+        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
+        Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'PaidAmountDataGridViewTextBoxColumn
+        '
+        Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
+        resources.ApplyResources(Me.PaidAmountDataGridViewTextBoxColumn, "PaidAmountDataGridViewTextBoxColumn")
+        Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
+        Me.PaidAmountDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'PayeeTypeDataGridViewTextBoxColumn
+        '
+        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
+        resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
+        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
+        Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'SpecialAccountDataGridViewTextBoxColumn
+        '
+        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
+        resources.ApplyResources(Me.SpecialAccountDataGridViewTextBoxColumn, "SpecialAccountDataGridViewTextBoxColumn")
+        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
+        Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = true
+        '
         'CheckDisbursementJournalEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -1280,23 +1280,6 @@ End Sub
         Friend WithEvents DataGridViewCkdOiItems As CDataGridView
         Friend WithEvents bsCkdOiItems As Windows.Forms.BindingSource
         Friend WithEvents btnViewGL As CButton
-        Friend WithEvents dgvSequence As CdgvColumnText
-        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvColumnMoney
-        Friend WithEvents dgvCredit As CdgvColumnMoney
-        Friend WithEvents dgvProfitCenterIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvNotes As CdgvColumnText
-        Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
-        Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
-        Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
-        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequenceCkdOi As CdgvColumnText
         Friend WithEvents dgvInvoiceNo As CdgvColumnText
         Friend WithEvents dgvTransactionDate As CdgvColumnText
@@ -1311,5 +1294,22 @@ End Sub
         Friend WithEvents dgvIdNo1 As DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequence As CdgvColumnText
+        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvDebit As CdgvColumnMoney
+        Friend WithEvents dgvCredit As CdgvColumnMoney
+        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvNotes As CdgvColumnText
+        Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
+        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace

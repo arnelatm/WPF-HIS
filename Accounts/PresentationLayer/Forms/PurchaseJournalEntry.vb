@@ -17,7 +17,7 @@ Namespace PresentationLayer.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _journalItems As List(Of JournalItemModel)
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
         Private _suppliersByCode
 
         Public Sub New()
@@ -45,7 +45,7 @@ Namespace PresentationLayer.Forms
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
 
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
@@ -54,7 +54,7 @@ Namespace PresentationLayer.Forms
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
 
         End Sub
@@ -319,7 +319,7 @@ Namespace PresentationLayer.Forms
                 .AccountIdNo = Nothing,
                 .Credit = Amount,
                 .Debit = 0,
-                .ProfitCenterIdNo = 0,
+                .RevCostCenterIdNo = 0,
                 .Notes = ""
             }
             bsJournalItems.Add(item)
@@ -368,7 +368,7 @@ Namespace PresentationLayer.Forms
                 workRow("AccountIdNo") = ji.AccountIdNo
                 workRow("Debit") = ji.Debit
                 workRow("Credit") = ji.Credit
-                workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
                 workRow("Notes") = If(ji.Notes, "")
                 If ji.IdNo <= 0 Then
                     DtInsertTable.Rows.Add(workRow)
@@ -382,7 +382,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboSupplierIdNo.BeginUpdate()
             cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByCode()
             cboSupplierIdNo.EndUpdate()
@@ -430,10 +430,10 @@ Namespace PresentationLayer.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Name"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Name"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -451,7 +451,7 @@ Namespace PresentationLayer.Forms
                     .AccountIdNo = AccountIdNo,
                     .Credit = Amount,
                     .Debit = 0,
-                    .ProfitCenterIdNo = 0,
+                    .RevCostCenterIdNo = 0,
                     .Notes = ""
                 }
             Else
@@ -461,7 +461,7 @@ Namespace PresentationLayer.Forms
                     item.AccountIdNo = AccountIdNo
                     item.Credit = Amount
                     item.Debit = 0
-                    item.ProfitCenterIdNo = 0
+                    item.RevCostCenterIdNo = 0
                     Exit For
                 Next
             End If
@@ -666,7 +666,7 @@ Namespace PresentationLayer.Forms
                         End If
                         item.Credit = Amount
                         item.Debit = 0
-                        item.ProfitCenterIdNo = 0
+                        item.RevCostCenterIdNo = 0
                         DataGridViewJournalItems.Refresh()
                         Exit For
                     Next

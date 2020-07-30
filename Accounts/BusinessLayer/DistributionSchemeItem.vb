@@ -12,8 +12,8 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property DistributionSchemeIdNo As Int32
         Public Property Sequence As Integer
-        Public Property ProfitCenterIdNo As Int32
-        Public Property ProfitCenterName As String
+        Public Property RevCostCenterIdNo As Int32
+        Public Property RevCostCenterName As String
         Public Property Percentage As Decimal
     End Class
 

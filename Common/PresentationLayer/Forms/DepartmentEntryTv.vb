@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetDepartmentList()
-            cacProfitCenterIdNo.DataSource = PresenterObj.GetProfitCenterList()
+            cacRevCostCenterIdNo.DataSource = PresenterObj.GetRevCostCenterList()
             cacRevCostCenterIdNo.DataSource = PresenterObj.GetRevCostCenterList()
         End Sub
 
@@ -76,21 +76,12 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ProfitCenterIdNo As Int32 Implements IDepartmentView.ProfitCenterIdNo
-            Get
-                Return cacProfitCenterIdNo.GetValue()
-            End Get
-            Set
-                cacProfitCenterIdNo.SetValue(Value)
-            End Set
-        End Property
-
         Public Property RevCostCenterIdNo As Int32 Implements IDepartmentView.RevCostCenterIdNo
             Get
                 Return cacRevCostCenterIdNo.GetValue()
             End Get
             Set
-                cacProfitCenterIdNo.SetValue(Value)
+                cacRevCostCenterIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -123,7 +114,7 @@ Namespace PresentationLayer.Forms
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
                 {"RevCostCenterIdNo", cacRevCostCenterIdNo},
-                {"ProfitCenterIdNo", cacProfitCenterIdNo},
+                {"RevCostCenterIdNo", cacRevCostCenterIdNo},
                 {"ParentId", TxtIdNo},
                 {"Notes", txtNotes}
                 }

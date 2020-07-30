@@ -813,7 +813,7 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (33, N'Main.Account.Reports', N'Main.Menu.Reports', 9, NULL)
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (34, N'Main.Account.Masters.General.ProfitCenters', NULL, 11, N'Only the Developer should have access to this objects')
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (34, N'Main.Account.Masters.General.RevCostCenters', NULL, 11, N'Only the Developer should have access to this objects')
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (35, N'Main.Account.Masters.General.Countries', NULL, 11, N'admin user2')
 GO

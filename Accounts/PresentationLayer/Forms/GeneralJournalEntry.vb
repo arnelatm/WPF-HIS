@@ -16,7 +16,7 @@ Namespace PresentationLayer.Forms
         Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
         Private ReadOnly _closingEntry as Boolean
 
         Public Sub New(ByVal closingEntry As Boolean)
@@ -181,7 +181,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -224,11 +224,11 @@ Namespace PresentationLayer.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Name"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Name"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub

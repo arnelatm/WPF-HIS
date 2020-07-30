@@ -26,7 +26,7 @@ Namespace PresentationLayer.Forms
         Private _cadOiItems As List(Of CadOiItemView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
         Private _viewGl As Boolean = False
 
         Public Sub New()
@@ -282,7 +282,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
@@ -376,11 +376,11 @@ Namespace PresentationLayer.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Name"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Name"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -628,7 +628,7 @@ Namespace PresentationLayer.Forms
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewJournalItems.Visible Then
                 DataGridViewJournalItems.Focus()
-                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvProfitCenterIdNo").Index(), 0)
+                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
             Else
                 DataGridViewCadOiItems.Focus()
                 DataGridViewCadOiItems.CurrentCell = DataGridViewCadOiItems(DataGridViewCadOiItems.Columns("dgvAmount").Index(), 0)
@@ -645,7 +645,7 @@ Namespace PresentationLayer.Forms
                                               .AccountIdNo = AccountIdNo,
                                               .Credit = Amount,
                                               .Debit = 0,
-                                              .ProfitCenterIdNo = 0})
+                                              .RevCostCenterIdNo = 0})
                     Else
                         For Each item In bsJournalItems
                             item.JournalIdNo = IdNo
@@ -657,7 +657,7 @@ Namespace PresentationLayer.Forms
                             End If
                             item.Credit = Amount
                             item.Debit = 0
-                            item.ProfitCenterIdNo = 0
+                            item.RevCostCenterIdNo = 0
                             DataGridViewJournalItems.Refresh()
                             Exit For
                         Next

@@ -89,7 +89,6 @@
     <Compile Include="BusinessLayer\OriginalCaptions.vb" />
     <Compile Include="BusinessLayer\OriginalMessages.vb" />
     <Compile Include="BusinessLayer\PhoneType.vb" />
-    <Compile Include="BusinessLayer\ProfitCenter.vb" />
     <Compile Include="BusinessLayer\Religion.vb" />
     <Compile Include="BusinessLayer\RevenueGroup.vb" />
     <Compile Include="BusinessLayer\TranslatedCaption.vb" />
@@ -104,7 +103,6 @@
     <Compile Include="DataLayer\AdoNet\OriginalCaptionsDao.vb" />
     <Compile Include="DataLayer\AdoNet\OriginalMessagesDao.vb" />
     <Compile Include="DataLayer\AdoNet\PhoneTypeDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ProfitCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReligionDao.vb" />
     <Compile Include="DataLayer\AdoNet\RevenueGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\TranslatedCaptionDao.vb" />
@@ -185,12 +183,6 @@
     <Compile Include="PresentationLayer\Forms\PhoneTypeEntryTV.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ProfitCenterEntryTv.Designer.vb">
-      <DependentUpon>ProfitCenterEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\ProfitCenterEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Forms\ReligionEntryTv.Designer.vb">
       <DependentUpon>ReligionEntryTv.vb</DependentUpon>
     </Compile>
@@ -241,7 +233,6 @@
     <Compile Include="PresentationLayer\Models\OriginalCaptionsModel.vb" />
     <Compile Include="PresentationLayer\Models\OriginalMessagesModel.vb" />
     <Compile Include="PresentationLayer\Models\PhoneTypeModel.vb" />
-    <Compile Include="PresentationLayer\Models\ProfitCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\ReligionModel.vb" />
     <Compile Include="PresentationLayer\Models\RevenueGroupModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -269,7 +260,6 @@
     <Compile Include="PresentationLayer\Presenters\OriginalCaptionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\OriginalMessagesPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PhoneTypePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ProfitCenterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReligionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedCaptionPresenter.vb" />
@@ -288,7 +278,6 @@
     <Compile Include="PresentationLayer\Views\IOriginalCaptionsView.vb" />
     <Compile Include="PresentationLayer\Views\IOriginalMessagesView.vb" />
     <Compile Include="PresentationLayer\Views\IPhoneTypeView.vb" />
-    <Compile Include="PresentationLayer\Views\IProfitCenterView.vb" />
     <Compile Include="PresentationLayer\Views\IReligionView.vb" />
     <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
     <Compile Include="PresentationLayer\Views\ISecurityGroupView.vb" />
@@ -353,9 +342,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\PhoneTypeEntryTV.resx">
       <DependentUpon>PhoneTypeEntryTV.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ProfitCenterEntryTv.resx">
-      <DependentUpon>ProfitCenterEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\ReligionEntryTv.resx">
       <DependentUpon>ReligionEntryTv.vb</DependentUpon>

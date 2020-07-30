@@ -387,6 +387,9 @@
   <data name="cboPaymentType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cboPaymentType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cboPaymentType.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 28</value>
   </data>
@@ -452,6 +455,9 @@
   </data>
   <data name="cboPayeeIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboPayeeIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboPayeeIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>387, 28</value>
@@ -578,6 +584,9 @@
   </data>
   <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 54</value>
@@ -836,6 +845,9 @@
   </data>
   <data name="cboDiscountAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboDiscountAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cboDiscountAccountIdNo.ItemHeight" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1476,10 +1488,10 @@
   <data name="DgvCredit.Width" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
-  <data name="dgvProfitCenterIdNo.HeaderText" xml:space="preserve">
-    <value>Cost Center Code-Name</value>
+  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
+    <value>Revenue/Cost Center Code-Name</value>
   </data>
-  <data name="dgvProfitCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="dgvRevCostCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
     <value>200</value>
   </data>
   <data name="dgvNotes.HeaderText" xml:space="preserve">
@@ -1558,7 +1570,7 @@
     <value>False</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>675, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1687,7 +1699,7 @@
     <value>False</value>
   </data>
   <metadata name="bscadOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>150, 56</value>
+    <value>808, 17</value>
   </metadata>
   <data name="DataGridViewCadOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>982, 3</value>
@@ -90059,10 +90071,10 @@
   <data name="&gt;&gt;DgvCredit.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Name" xml:space="preserve">
-    <value>dgvProfitCenterIdNo</value>
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>dgvRevCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvNotes.Name" xml:space="preserve">

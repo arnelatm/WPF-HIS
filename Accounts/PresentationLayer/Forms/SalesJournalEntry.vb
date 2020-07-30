@@ -34,7 +34,7 @@ Namespace PresentationLayer.Forms
         Private _salesCashItems As List(Of SalesCashItemView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _profitCentersByCode
+        Private _revCostCenterByCode
         Private _viewGl As Boolean = False
 
         Public Sub New()
@@ -221,7 +221,7 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _cashCodes = PresenterObj.GetCashCodes()
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
             cboAccountIdNo.EndUpdate()
@@ -279,11 +279,11 @@ Namespace PresentationLayer.Forms
                     dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                     dgvAccountIdNo.AutoComplete = True
-                    dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                    dgvProfitCenterIdNo.DisplayMember = "Name"
-                    dgvProfitCenterIdNo.ValueMember = "idNo"
-                    dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                    dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                    dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                    dgvRevCostCenterIdNo.DisplayMember = "Name"
+                    dgvRevCostCenterIdNo.ValueMember = "idNo"
+                    dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                    dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
                 End If
             End With
             ResumeLayout()

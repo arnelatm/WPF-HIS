@@ -19,7 +19,7 @@ select IdNo
       ,RevCostCenterName
       ,RevCostCenterNameAra
       ,ParentIdNo
-	  ,ProfitCenterIdNo
+	  ,RevCostCenterIdNo
       ,[Notes]
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by RevCostCenterName) as varchar(max)) as [path]
@@ -34,7 +34,7 @@ select t.IdNo
       ,t.RevCostCenterName
       ,t.RevCostCenterNameAra
 	  ,t.ParentIdNo
-	  ,t.ProfitCenterIdNo
+	  ,t.RevCostCenterIdNo
       ,t.[Notes]
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.RevCostCenterName) as varchar(max))
@@ -51,7 +51,7 @@ select IdNo
       ,RevCostCenterName
       ,RevCostCenterNameAra
 	  ,ParentIdNo
-	  ,ProfitCenterIdNo
+	  ,RevCostCenterIdNo
       ,[Notes]
       ,DateTimeStamp
 	  ,LevelNumber

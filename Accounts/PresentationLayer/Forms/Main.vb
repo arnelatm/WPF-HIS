@@ -704,16 +704,16 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ProfitCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemProfitCenters.Click
-            Dim childMdiForm As ProfitCenterEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New ProfitCenterEntryTv() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
-        End Sub
+        'Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+        '    Handles ToolStripMenuItemRevCostCenters.Click
+        '    Dim childMdiForm As RevCostCenterEntryTv
+        '    'Set the Parent Form of the Child window.
+        '    childMdiForm = New RevCostCenterEntryTv() With {
+        '        .MdiParent = Me
+        '        }
+        '    'Display the new form.
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As PurchaseJournalEntry

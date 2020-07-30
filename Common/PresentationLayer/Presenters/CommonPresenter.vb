@@ -54,15 +54,6 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
-        Public Function GetProfitCenterList(Optional ByVal sortKey As String = "ProfitCenterName")
-            TableToGet = "ProfitCenter"
-            SortExpression = sortKey
-            DisplayName = "ProfitCenterName"
-            DisplayNameArabic = "ProfitCenterNameAra"
-            DisplayCode = "ProfitCenterCode"
-            Return GetTableList()
-        End Function
-
         Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
             TableToGet = "RevCostCenter"
             SortExpression = sortKey
@@ -144,21 +135,21 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
-        Public Function GetProfitCenterListByCode(Optional ByVal sortKey As String = "ProfitCenterCode")
-            TableToGet = "ProfitCenter"
+        Public Function GetRevCostCenterListByCode(Optional ByVal sortKey As String = "RevCostCenterCode")
+            TableToGet = "RevCostCenter"
             SortExpression = sortKey
-            DisplayName = "ProfitCenterName"
-            DisplayNameArabic = "ProfitCenterNameAra"
-            DisplayCode = "ProfitCenterCode"
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
             Return GetLookupDataByCode()
         End Function
 
-        Public Function GetProfitCenterListByName(Optional ByVal sortKey As String = "ProfitCenterName")
-            TableToGet = "ProfitCenter"
+        Public Function GetRevCostCenterListByName(Optional ByVal sortKey As String = "RevCostCenterName")
+            TableToGet = "RevCostCenter"
             SortExpression = sortKey
-            DisplayName = "ProfitCenterName"
-            DisplayNameArabic = "ProfitCenterNameAra"
-            DisplayCode = "ProfitCenterCode"
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
             Return GetLookupDataByName()
         End Function
 

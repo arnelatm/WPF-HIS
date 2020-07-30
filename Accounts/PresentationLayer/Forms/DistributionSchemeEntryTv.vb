@@ -12,8 +12,8 @@ Namespace PresentationLayer.Forms
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _profitCentersByCode
-        Private ReadOnly _profitCentersByName
+        Private ReadOnly _revCostCenterByCode
+        Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
@@ -41,17 +41,17 @@ Namespace PresentationLayer.Forms
 
             DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Sequence", GetType(Int32))
-            DtInsertTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Percentage", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
-            DtUpdateTable.Columns.Add("ProfitCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
-            _profitCentersByCode = PresenterObj.GetProfitCenterListByCode()
-            _profitCentersByName = PresenterObj.GetProfitCenterListByName()
+            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
 
             'CreateEnumResourceFile()
 
@@ -182,12 +182,12 @@ Namespace PresentationLayer.Forms
             End With
             With DataGridViewDistributionSchemeItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvProfitCenterIdNo.DataSource = _profitCentersByCode
-                dgvProfitCenterIdNo.DisplayMember = "Name"
-                dgvProfitCenterIdNo.ValueMember = "idNo"
-                dgvProfitCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvProfitCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvProfitCenterIdNo.AutoComplete = True
+                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DisplayMember = "Name"
+                dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.AutoComplete = True
             End With
         End Sub
 
@@ -251,7 +251,7 @@ Namespace PresentationLayer.Forms
                     workRow("IdNo") = ji.IdNo
                 End If
                 workRow("DistributionSchemeIdNo") = IdNo
-                workRow("ProfitCenterIdNo") = ji.ProfitCenterIdNo
+                workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
                 workRow("Sequence") = nRowCount
                 workRow("Percentage") = ji.Percentage
                 If ji.IdNo <= 0 Then
@@ -267,8 +267,8 @@ Namespace PresentationLayer.Forms
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
         '    With DataGridViewDistributionSchemeItems.CurrentCell
         '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvprofitcenteridno"
-        '                dgvProfitCenterIdNo.DisplayMember = "Name"
+        '            Case "dgvRevCostCenterIdNo"
+        '                dgvRevCostCenterIdNo.DisplayMember = "Name"
         '        End Select
         '    End With
         'End Sub
@@ -276,8 +276,8 @@ Namespace PresentationLayer.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDistributionSchemeItems.CellEndEdit
             With DataGridViewDistributionSchemeItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
-                    'Case "dgvprofitcenteridno"
-                    '    dgvProfitCenterIdNo.DisplayMember = "Name"
+                    'Case "dgvRevCostCenterIdNo"
+                    '    dgvRevCostCenterIdNo.DisplayMember = "Name"
                     Case "dgvpercentage"
                         Dim amount = .Value
                         If amount <> 0 Then

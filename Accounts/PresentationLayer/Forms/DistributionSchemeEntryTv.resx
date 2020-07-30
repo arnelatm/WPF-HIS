@@ -704,13 +704,13 @@
   <data name="dgvSequence.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="dgvProfitCenterIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvRevCostCenterIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dgvProfitCenterIdNo.HeaderText" xml:space="preserve">
+  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
     <value>Profit Center</value>
   </data>
-  <data name="dgvProfitCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="dgvRevCostCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
     <value>400</value>
   </data>
   <metadata name="dgvPercentage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -854,10 +854,10 @@
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Name" xml:space="preserve">
-    <value>dgvProfitCenterIdNo</value>
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>dgvRevCostCenterIdNo</value>
   </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvCaComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPercentage.Name" xml:space="preserve">

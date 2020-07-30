@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views
         Property OriginalAmount As Decimal
         Property PaidAmount As Decimal
         Property PayeeType As String
-        Property ProfitCenterIdNo As Int32
+        Property RevCostCenterIdNo As Int32
         Property Sequence As Integer
         Property SpecialAccount As String
 

@@ -11,7 +11,7 @@ Namespace DataLayer
         'ReadOnly Property CommonDao As ICommonDao
         'ReadOnly Property CountryDao As ICountryDao
         'ReadOnly Property BranchDao As IBranchDao
-        'ReadOnly Property ProfitCenterDao As IProfitCenterDao
+        'ReadOnly Property RevCostCenterDao As IRevCostCenterDao
         'ReadOnly Property RevCostCenterDao As IRevCostCenterDao
         'ReadOnly Property DepartmentDao As IDepartmentDao
         'ReadOnly Property ReligionDao As IReligionDao

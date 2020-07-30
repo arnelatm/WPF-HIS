@@ -16,7 +16,7 @@ Namespace PresentationLayer.Models
         Public Property OriginalAmount As Decimal
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
-        Public Property ProfitCenterIdNo As Int32
+        Public Property RevCostCenterIdNo As Int32
         Public Property Sequence As Integer
         Public Property SpecialAccount As String
 

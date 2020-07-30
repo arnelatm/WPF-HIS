@@ -1494,13 +1494,13 @@
   <data name="dgvCredit.Width" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
-  <data name="dgvProfitCenterIdNo.HeaderText" xml:space="preserve">
-    <value>Cost Center Code-Name</value>
+  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
+    <value>Revenue/Cost Center Code-Name</value>
   </data>
-  <data name="dgvProfitCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="dgvRevCostCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
     <value>200</value>
   </data>
-  <data name="dgvProfitCenterIdNo.Width" type="System.Int32, mscorlib">
+  <data name="dgvRevCostCenterIdNo.Width" type="System.Int32, mscorlib">
     <value>240</value>
   </data>
   <data name="dgvNotes.HeaderText" xml:space="preserve">
@@ -90050,102 +90050,6 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
-    <value>dgvSequence</value>
-  </data>
-  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
-    <value>dgvAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvDebit.Name" xml:space="preserve">
-    <value>dgvDebit</value>
-  </data>
-  <data name="&gt;&gt;dgvDebit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvCredit.Name" xml:space="preserve">
-    <value>dgvCredit</value>
-  </data>
-  <data name="&gt;&gt;dgvCredit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Name" xml:space="preserve">
-    <value>dgvProfitCenterIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvProfitCenterIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvNotes.Name" xml:space="preserve">
-    <value>dgvNotes</value>
-  </data>
-  <data name="&gt;&gt;dgvNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>DiscountTakenDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>IdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>JournalIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>OpenInvoiceIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>OriginalAmountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PaidAmountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PayeeTypeDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>SpecialAccountDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>AccountNameDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Name" xml:space="preserve">
-    <value>CancelledDataGridViewCheckBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
     <value>bsJournalItems</value>
   </data>
@@ -90235,6 +90139,102 @@
   </data>
   <data name="&gt;&gt;bsPcsOiItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
+    <value>dgvSequence</value>
+  </data>
+  <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
+    <value>dgvAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvDebit.Name" xml:space="preserve">
+    <value>dgvDebit</value>
+  </data>
+  <data name="&gt;&gt;dgvDebit.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvCredit.Name" xml:space="preserve">
+    <value>dgvCredit</value>
+  </data>
+  <data name="&gt;&gt;dgvCredit.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
+    <value>dgvRevCostCenterIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvNotes.Name" xml:space="preserve">
+    <value>dgvNotes</value>
+  </data>
+  <data name="&gt;&gt;dgvNotes.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>DiscountTakenDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;DiscountTakenDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>IdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>JournalIdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>OpenInvoiceIdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;OpenInvoiceIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>OriginalAmountDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;OriginalAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>PaidAmountDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;PaidAmountDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>PayeeTypeDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>SpecialAccountDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>AccountNameDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Name" xml:space="preserve">
+    <value>CancelledDataGridViewCheckBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;CancelledDataGridViewCheckBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PettyCashJournalEntry</value>

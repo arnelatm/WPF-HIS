@@ -4,11 +4,12 @@
 
 
 
-create PROC [dbo].[InsertGeneralJournalItemTVP]
+
+CREATE PROC [dbo].[InsertGeneralJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO GeneralJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, ProfitCenterIdNo, Sequence)
-        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, ProfitCenteridNo, Sequence
+INSERT  INTO GeneralJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+        SELECT  AccountIdNo,Credit, Debit, JournalIdNo, Notes, RevCostCenteridNo, Sequence
         FROM    @MParam
 SET IDENTITY_INSERT DBO.GeneralJournalItem ON;
 

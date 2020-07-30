@@ -10,7 +10,7 @@ select IDNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIDNo
-      ,RevCostCenterIDNo
+      ,CostCenterIDNo
       ,Active
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by DepartmentName) as varchar(max)) as [path]
@@ -27,7 +27,7 @@ select t.IDNo
       ,t.ParentIdNo
       ,t.Notes
       ,t.ProfitCenterIDNo
-      ,t.RevCostCenterIDNo
+      ,t.CostCenterIDNo
       ,t.Active
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.DepartmentName) as varchar(max))
@@ -46,7 +46,7 @@ select IDNo
       ,ParentIdNo
       ,Notes
       ,ProfitCenterIDNo
-      ,RevCostCenterIDNo
+      ,CostCenterIDNo
       ,Active
       ,DateTimeStamp
 	  ,LevelNumber

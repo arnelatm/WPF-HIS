@@ -56,7 +56,7 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemProfitCenters = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDistributionSchemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -285,7 +285,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemProfitCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -309,10 +309,10 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemRevCostCenters.Name = "ToolStripMenuItemRevCostCenters"
         resources.ApplyResources(Me.ToolStripMenuItemRevCostCenters, "ToolStripMenuItemRevCostCenters")
         '
-        'ToolStripMenuItemProfitCenters
+        'ToolStripMenuItemRevCostCenters
         '
-        Me.ToolStripMenuItemProfitCenters.Name = "ToolStripMenuItemProfitCenters"
-        resources.ApplyResources(Me.ToolStripMenuItemProfitCenters, "ToolStripMenuItemProfitCenters")
+        Me.ToolStripMenuItemRevCostCenters.Name = "ToolStripMenuItemRevCostCenters"
+        resources.ApplyResources(Me.ToolStripMenuItemRevCostCenters, "ToolStripMenuItemRevCostCenters")
         '
         'ToolStripMenuItemRevenueGroups
         '
@@ -909,7 +909,6 @@ End Sub
         Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
         Friend WithEvents ToolStripMenuItemDepartments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRevCostCenters As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemProfitCenters As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemChartOfAccounts As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierVendors As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCustomerClients As ToolStripMenuItem
