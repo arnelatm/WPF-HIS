@@ -33,4 +33,4 @@
       ,[path]+'-A'
 	  ,REPLACE(RTRIM(REPLACE(SortKey, '0', ' ')), ' ', '0')+'999'
 	  ,CASE WHEN AccountGroup='A' THEN 1 WHEN AccountGroup='L' THEN 2 WHEN AccountGroup='E' THEN 3 END 
-  FROM [ISPDATA].[dbo].[Chart_View] WHERE NOT DetailAccount=1)
+  FROM [dbo].[Chart_View] WHERE NOT DetailAccount=1)

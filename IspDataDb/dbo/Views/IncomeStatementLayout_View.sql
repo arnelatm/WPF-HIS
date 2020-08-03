@@ -32,4 +32,4 @@
       ,[LevelNumber]+1 AS 'LevelNumber'
       ,[path]+'-A'
 	  ,REPLACE(RTRIM(REPLACE(SortKey, '0', ' ')), ' ', '0')+'999'
-  FROM [ISPDATA].[dbo].[Chart_View] WHERE NOT DetailAccount=1)
+  FROM [dbo].[Chart_View] WHERE NOT DetailAccount=1)
