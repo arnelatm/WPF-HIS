@@ -269,7 +269,6 @@
     <Build Include="dbo\Tables\ErJournal.sql" />
     <Build Include="dbo\Views\ErStatement_View.sql" />
     <Build Include="dbo\Views\ErDetails_View.sql" />
-    <Build Include="dbo\Views\ApOpenInvoice_View1.sql" />
     <Build Include="dbo\Functions\generate_series.sql" />
     <Build Include="dbo\Stored Procedures\UpdateErJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertErJournalItemTVP.sql" />
@@ -277,8 +276,6 @@
     <Build Include="dbo\Tables\EmployeeNew.sql" />
     <Build Include="dbo\Views\ErOpenInvoice_View.sql" />
     <Build Include="dbo\Views\ErJournalItem_View.sql" />
-    <Build Include="dbo\Views\APDetails_Viewx.sql" />
-    <Build Include="dbo\Views\APDetails_View1.sql" />
     <Build Include="dbo\Tables\ChartBalance.sql" />
     <Build Include="dbo\Views\RetainedEarnings_View.sql" />
     <Build Include="dbo\Views\JournalDetails_View.sql" />
@@ -306,7 +303,6 @@
     <Build Include="dbo\Functions\FuncGlIncomeStatement.sql" />
     <Build Include="dbo\Functions\FuncGlBalanceSheetOld.sql" />
     <Build Include="dbo\Tables\RevCostCenter.sql" />
-    <Build Include="dbo\Tables\GLLEDGERVIEW_1.sql" />
     <Build Include="dbo\Tables\CostCenter_1.sql" />
     <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\PettyCashJournalTransaction_View_1.sql" />

@@ -1,10 +1,12 @@
-﻿CREATE VIEW dbo.ARJournalTransaction_View
+﻿
+
+CREATE VIEW [dbo].[ARJournalTransaction_View]
 AS
 SELECT        dbo.ArJournalItem.Sequence, dbo.ArJournalItem.JournalIdNo, dbo.ArJournalItem.Debit, dbo.ArJournalItem.Credit, dbo.ArJournalItem.Notes, dbo.ArJournalItem.Posted, dbo.Customer.CustomerCode, 
                          dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.ArJournal.TransactionDate, dbo.ArJournal.ReferenceNo, dbo.ArJournal.Amount, dbo.ArJournal.InvoiceNo, dbo.ArJournal.InvoiceDate, 
-                         dbo.ArJournal.Notes AS Expr1, dbo.ArJournal.Posted AS Expr2, dbo.ArJournal.Cancelled, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.ProfitCenter.ProfitCenterCode
-FROM            dbo.ProfitCenter RIGHT OUTER JOIN
-                         dbo.ArJournalItem ON dbo.ProfitCenter.IdNo = dbo.ArJournalItem.ProfitCenterIdNo LEFT OUTER JOIN
+                         dbo.ArJournal.Notes AS Expr1, dbo.ArJournal.Posted AS Expr2, dbo.ArJournal.Cancelled, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.RevCostCenter.RevCostCenterCode
+FROM            dbo.RevCostCenter RIGHT OUTER JOIN
+                         dbo.ArJournalItem ON dbo.RevCostCenter.IdNo = dbo.ArJournalItem.RevCostCenterIdNo LEFT OUTER JOIN
                          dbo.Chart ON dbo.ArJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.ArJournal LEFT OUTER JOIN
                          dbo.Customer ON dbo.ArJournal.CustomerIdNo = dbo.Customer.IdNo ON dbo.ArJournalItem.JournalIdNo = dbo.ArJournal.IDNo

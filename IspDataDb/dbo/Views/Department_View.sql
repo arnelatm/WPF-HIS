@@ -1,6 +1,7 @@
 ﻿
 
-Create View [dbo].[Department_View] as 
+
+CREATE View [dbo].[Department_View] as 
 with cte as
 (
 select IDNo
@@ -9,8 +10,7 @@ select IDNo
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIDNo
-      ,CostCenterIDNo
+      ,RevCostCenterIDNo
       ,Active
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by DepartmentName) as varchar(max)) as [path]
@@ -26,8 +26,7 @@ select t.IDNo
       ,t.DepartmentNameAra
       ,t.ParentIdNo
       ,t.Notes
-      ,t.ProfitCenterIDNo
-      ,t.CostCenterIDNo
+      ,t.RevCostCenterIdNo
       ,t.Active
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.DepartmentName) as varchar(max))
@@ -45,8 +44,7 @@ select IDNo
       ,DepartmentNameAra
       ,ParentIdNo
       ,Notes
-      ,ProfitCenterIDNo
-      ,CostCenterIDNo
+      ,RevCostCenterIdNo
       ,Active
       ,DateTimeStamp
 	  ,LevelNumber

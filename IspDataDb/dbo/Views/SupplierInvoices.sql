@@ -1,7 +1,8 @@
-﻿CREATE VIEW [dbo].[SupplierInvoices]
+﻿
+CREATE VIEW [dbo].[SupplierInvoices]
 AS
 SELECT        dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.ApJournalItem.Debit, 
-                         dbo.ApJournalItem.Credit, dbo.ApJournalItem.ProfitCenterIdNo, dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.Sequence, 
+                         dbo.ApJournalItem.Credit, dbo.ApJournalItem.RevCostCenterIdNo, dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.Sequence, 
                          dbo.ApJournal.SupplierIdNo, dbo.ApJournal.InvoiceNo, dbo.ApJournal.InvoiceDate, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra
 FROM            dbo.Chart INNER JOIN
                          dbo.ApJournalItem ON dbo.Chart.IDNo = dbo.ApJournalItem.AccountIdNo INNER JOIN
