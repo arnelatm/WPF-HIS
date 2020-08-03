@@ -229,6 +229,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblReferenceNo
         '
@@ -627,6 +628,7 @@ Namespace PresentationLayer.Forms
         Me.txtVatAmount.ReadOnly = true
         Me.txtVatAmount.TabStop = false
         Me.txtVatAmount.ValueIsMandatory = true
+        Me.txtVatAmount.ValueIsNumeric = true
         '
         'txtApplied
         '
@@ -647,6 +649,7 @@ Namespace PresentationLayer.Forms
         Me.txtApplied.ReadOnly = true
         Me.txtApplied.TabStop = false
         Me.txtApplied.ValueIsMandatory = true
+        Me.txtApplied.ValueIsNumeric = true
         '
         'CLabel2
         '
@@ -675,6 +678,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnapplied.ReadOnly = true
         Me.txtUnapplied.TabStop = false
         Me.txtUnapplied.ValueIsMandatory = true
+        Me.txtUnapplied.ValueIsNumeric = true
         '
         'lblDiscountTaken
         '
@@ -702,6 +706,7 @@ Namespace PresentationLayer.Forms
         Me.txtDiscountTaken.ReadOnly = true
         Me.txtDiscountTaken.TabStop = false
         Me.txtDiscountTaken.ValueIsMandatory = true
+        Me.txtDiscountTaken.ValueIsNumeric = true
         '
         'lblCancelled
         '

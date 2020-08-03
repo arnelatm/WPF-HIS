@@ -1,6 +1,7 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms.Reports
+
     Public Class ReportForm
 
         Public Sub New(ByVal fileName As String, ByVal ParamArray args() As Object)
@@ -24,5 +25,7 @@ Namespace PresentationLayer.Forms.Reports
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
 
         End Sub
+
     End Class
+
 End Namespace

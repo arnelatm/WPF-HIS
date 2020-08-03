@@ -365,6 +365,15 @@ Public Class BfMain
                         End Try
 
                     End If
+                ElseIf TypeOf cCtrl Is CTextBox Then
+                    Dim tc = CType(cCtrl, CTextBox)
+                    If tc.ValueIsNumeric Then
+                        If tc.RightToLeft = RightToLeft.Yes Then
+                            tc.TextAlign = HorizontalAlignment.Left
+                        Else
+                            tc.TextAlign = HorizontalAlignment.Right
+                        End If
+                    End If
                 End If
             Next
         End If
@@ -911,7 +920,5 @@ Public Class BfMain
     '        End If
     '    Next
     'End Sub
-
-
 
 End Class

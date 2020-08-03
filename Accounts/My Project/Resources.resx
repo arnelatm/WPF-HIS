@@ -144,22 +144,22 @@
   <data name="AccountGroupSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="AccountGroupSelection_Assets" xml:space="preserve">
-    <value>Assets</value>
+  <data name="AccountGroupSelection_Asset" xml:space="preserve">
+    <value>Asset</value>
   </data>
-  <data name="AccountGroupSelection_Liabilities" xml:space="preserve">
-    <value>Liabilities</value>
+  <data name="AccountGroupSelection_Liability" xml:space="preserve">
+    <value>Liability</value>
   </data>
   <data name="AccountGroupSelection_Equity" xml:space="preserve">
     <value>Equity</value>
   </data>
+  <data name="AccountGroupSelection_RevExpSummary" xml:space="preserve">
+    <value>RevExpSummary</value>
+  </data>
   <data name="AccountGroupSelection_Revenue" xml:space="preserve">
     <value>Revenue</value>
   </data>
-  <data name="AccountGroupSelection_CostOfGoodsSold" xml:space="preserve">
-    <value>CostOfGoodsSold</value>
-  </data>
-  <data name="AccountGroupSelection_Expenses" xml:space="preserve">
+  <data name="AccountGroupSelection_Expense" xml:space="preserve">
     <value>Expenses</value>
   </data>
   <data name="AccountStatusSelection_Open" xml:space="preserve">

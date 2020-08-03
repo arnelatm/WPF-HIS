@@ -61,20 +61,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Assets.
+        '''  Looks up a localized string similar to Asset.
         '''</summary>
-        Friend ReadOnly Property AccountGroupSelection_Assets() As String
+        Friend ReadOnly Property AccountGroupSelection_Asset() As String
             Get
-                Return ResourceManager.GetString("AccountGroupSelection_Assets", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to CostOfGoodsSold.
-        '''</summary>
-        Friend ReadOnly Property AccountGroupSelection_CostOfGoodsSold() As String
-            Get
-                Return ResourceManager.GetString("AccountGroupSelection_CostOfGoodsSold", resourceCulture)
+                Return ResourceManager.GetString("AccountGroupSelection_Asset", resourceCulture)
             End Get
         End Property
         
@@ -90,18 +81,18 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Expenses.
         '''</summary>
-        Friend ReadOnly Property AccountGroupSelection_Expenses() As String
+        Friend ReadOnly Property AccountGroupSelection_Expense() As String
             Get
-                Return ResourceManager.GetString("AccountGroupSelection_Expenses", resourceCulture)
+                Return ResourceManager.GetString("AccountGroupSelection_Expense", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Liabilities.
+        '''  Looks up a localized string similar to Liability.
         '''</summary>
-        Friend ReadOnly Property AccountGroupSelection_Liabilities() As String
+        Friend ReadOnly Property AccountGroupSelection_Liability() As String
             Get
-                Return ResourceManager.GetString("AccountGroupSelection_Liabilities", resourceCulture)
+                Return ResourceManager.GetString("AccountGroupSelection_Liability", resourceCulture)
             End Get
         End Property
         
@@ -120,6 +111,15 @@ Namespace My.Resources
         Friend ReadOnly Property AccountGroupSelection_Revenue() As String
             Get
                 Return ResourceManager.GetString("AccountGroupSelection_Revenue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to RevExpSummary.
+        '''</summary>
+        Friend ReadOnly Property AccountGroupSelection_RevExpSummary() As String
+            Get
+                Return ResourceManager.GetString("AccountGroupSelection_RevExpSummary", resourceCulture)
             End Get
         End Property
         

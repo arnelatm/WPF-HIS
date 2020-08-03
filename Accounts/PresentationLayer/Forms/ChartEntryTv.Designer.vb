@@ -114,6 +114,7 @@ Namespace PresentationLayer.Forms
         Me.txtIdNo.OldValue = Nothing
         Me.txtIdNo.ReadOnly = true
         Me.txtIdNo.TabStop = false
+        Me.txtIdNo.ValueIsNumeric = true
         '
         'lblIdNo
         '
@@ -323,6 +324,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
         Me.txtLevelNumber.ValueIsMandatory = true
+        Me.txtLevelNumber.ValueIsNumeric = true
         '
         'lblAccountGroup
         '

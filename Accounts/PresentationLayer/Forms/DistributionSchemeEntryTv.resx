@@ -178,7 +178,7 @@
     <value>150</value>
   </data>
   <data name="lblIdNo.Text" xml:space="preserve">
-    <value>Branch ID No.</value>
+    <value>Distribution Scheme Id No.</value>
   </data>
   <data name="lblIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

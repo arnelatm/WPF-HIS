@@ -57,9 +57,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 268)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 272)
         '
         'LocalizableContent1
         '
@@ -96,12 +96,15 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Nothing
         Me.TxtIdNo.Location = New System.Drawing.Point(256, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIdNo.TabIndex = 0
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'txtRevenueGroupCode
         '
@@ -117,8 +120,11 @@ Namespace PresentationLayer.Forms
         Me.txtRevenueGroupCode.LinkedLabel = Nothing
         Me.txtRevenueGroupCode.Location = New System.Drawing.Point(256, 36)
         Me.txtRevenueGroupCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevenueGroupCode.MaximumValue = Nothing
+        Me.txtRevenueGroupCode.MinimumValue = Nothing
         Me.txtRevenueGroupCode.Name = "txtRevenueGroupCode"
         Me.txtRevenueGroupCode.OldValue = Nothing
+        Me.txtRevenueGroupCode.ReadOnly = true
         Me.txtRevenueGroupCode.Size = New System.Drawing.Size(62, 23)
         Me.txtRevenueGroupCode.TabIndex = 0
         Me.txtRevenueGroupCode.ValueIsMandatory = true
@@ -137,8 +143,11 @@ Namespace PresentationLayer.Forms
         Me.txtRevenueGroupName.LinkedLabel = Nothing
         Me.txtRevenueGroupName.Location = New System.Drawing.Point(256, 61)
         Me.txtRevenueGroupName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevenueGroupName.MaximumValue = Nothing
+        Me.txtRevenueGroupName.MinimumValue = Nothing
         Me.txtRevenueGroupName.Name = "txtRevenueGroupName"
         Me.txtRevenueGroupName.OldValue = Nothing
+        Me.txtRevenueGroupName.ReadOnly = true
         Me.txtRevenueGroupName.Size = New System.Drawing.Size(418, 23)
         Me.txtRevenueGroupName.TabIndex = 1
         Me.txtRevenueGroupName.ValueIsMandatory = true
@@ -158,8 +167,11 @@ Namespace PresentationLayer.Forms
         Me.txtRevenueGroupNameAra.LinkedLabel = Nothing
         Me.txtRevenueGroupNameAra.Location = New System.Drawing.Point(256, 86)
         Me.txtRevenueGroupNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRevenueGroupNameAra.MaximumValue = Nothing
+        Me.txtRevenueGroupNameAra.MinimumValue = Nothing
         Me.txtRevenueGroupNameAra.Name = "txtRevenueGroupNameAra"
         Me.txtRevenueGroupNameAra.OldValue = Nothing
+        Me.txtRevenueGroupNameAra.ReadOnly = true
         Me.txtRevenueGroupNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtRevenueGroupNameAra.Size = New System.Drawing.Size(418, 23)
         Me.txtRevenueGroupNameAra.TabIndex = 2
@@ -178,9 +190,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(256, 193)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(418, 60)
         Me.txtNotes.TabIndex = 3
         Me.txtNotes.ValueIsMandatory = true
@@ -207,11 +222,11 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Controls.Add(Me.txtSortKey)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(692, 268)
+        Me.floDataDisplay.Size = New System.Drawing.Size(692, 272)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -287,7 +302,8 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.CurrentSearchTerm = ""
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.DropDownHeight = 200
+        Me.cacParentIdNo.DropDownHeight = 1
+        Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = false
         Me.cacParentIdNo.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, true)
@@ -295,6 +311,7 @@ Namespace PresentationLayer.Forms
         Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacParentIdNo.FormattingEnabled = true
         Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacParentIdNo.IntegralHeight = false
         Me.cacParentIdNo.LinkedLabel = Nothing
         Me.cacParentIdNo.Location = New System.Drawing.Point(256, 111)
         Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -339,7 +356,8 @@ Namespace PresentationLayer.Forms
         Me.CaComboBox1.CurrentSearchTerm = ""
         Me.CaComboBox1.DefaultValue = Nothing
         Me.CaComboBox1.DisplayMember = "Name"
-        Me.CaComboBox1.DropDownHeight = 200
+        Me.CaComboBox1.DropDownHeight = 1
+        Me.CaComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CaComboBox1.EditingMode = false
         Me.CaComboBox1.FilterRule = Nothing
         Me.floDataDisplay.SetFlowBreak(Me.CaComboBox1, true)
@@ -347,6 +365,7 @@ Namespace PresentationLayer.Forms
         Me.CaComboBox1.ForeColor = System.Drawing.Color.Black
         Me.CaComboBox1.FormattingEnabled = true
         Me.CaComboBox1.HideWhenNotEditingOrAdding = false
+        Me.CaComboBox1.IntegralHeight = false
         Me.CaComboBox1.LinkedLabel = Nothing
         Me.CaComboBox1.Location = New System.Drawing.Point(256, 137)
         Me.CaComboBox1.Margin = New System.Windows.Forms.Padding(1)
@@ -400,12 +419,15 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.LinkedLabel = Me.lblRevCostCenter
         Me.txtLevelNumber.Location = New System.Drawing.Point(256, 165)
         Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtLevelNumber.MaximumValue = Nothing
+        Me.txtLevelNumber.MinimumValue = Nothing
         Me.txtLevelNumber.Name = "txtLevelNumber"
         Me.txtLevelNumber.OldValue = Nothing
         Me.txtLevelNumber.ReadOnly = true
         Me.txtLevelNumber.Size = New System.Drawing.Size(74, 23)
         Me.txtLevelNumber.TabIndex = 163
         Me.txtLevelNumber.ValueIsMandatory = true
+        Me.txtLevelNumber.ValueIsNumeric = true
         '
         'lblNotes
         '
@@ -434,8 +456,11 @@ Namespace PresentationLayer.Forms
         Me.txtSortKey.LinkedLabel = Nothing
         Me.txtSortKey.Location = New System.Drawing.Point(13, 258)
         Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtSortKey.MaximumValue = Nothing
+        Me.txtSortKey.MinimumValue = Nothing
         Me.txtSortKey.Name = "txtSortKey"
         Me.txtSortKey.OldValue = Nothing
+        Me.txtSortKey.ReadOnly = true
         Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
         Me.txtSortKey.TabIndex = 164
         Me.txtSortKey.ValueIsMandatory = true
@@ -443,6 +468,7 @@ Namespace PresentationLayer.Forms
         '
         'RevenueGroupEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(995, 325)
         Me.Controls.Add(Me.floDataDisplay)
         Me.MinimumSize = New System.Drawing.Size(1011, 364)

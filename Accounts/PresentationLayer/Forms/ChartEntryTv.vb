@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.My.Resources
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
@@ -130,10 +131,29 @@ Namespace PresentationLayer.Forms
 
         Public Property ParentIdNo As Int32? Implements IChartView.ParentIdNo
             Get
-                Return CType(cboParentIdNo.GetValue(), Integer?)
+                'Return cboParentIdNo.GetValue()
+                Dim value As Int32?
+                value = CType(cboParentIdNo.GetValue(), Integer?)
+                'If PresenterObj.EditableAccountGroup(value) Then
+                '    cboAccountGroup.DisplayOnly = False
+                'Else
+                '    cboAccountGroup.DisplayOnly = True
+                'End If
+                Return value
             End Get
             Set
                 cboParentIdNo.SetValue(Value)
+                'If PresenterObj.EditableAccountGroup(Value) Then
+                '    cboAccountGroup.DisplayOnly = False
+                '    Dim parentAccountGroup = PresenterObj.GetParentAccountGroup(Value)
+                '    If parentAccountGroup Is Nothing Then
+                '        cboAccountGroup.SelectedValue = ""
+                '    Else
+                '        cboAccountGroup.SelectedValue = parentAccountGroup
+                '    End If
+                'Else
+                '    cboAccountGroup.DisplayOnly = True
+                'End If
             End Set
         End Property
 
@@ -252,46 +272,36 @@ Namespace PresentationLayer.Forms
                     }
         End Sub
 
-        'Private Sub UpdateParentIdComboListData()
-        '    Dim chartsList = PresenterObj.GetChartList("AccountName")
-        '    ' need to change to blank because of error in selection using arrow keys.
-        '    'cacParentIdNo.ValueMember = ""
-        '    'cacParentIdNo.DisplayMember = ""
-        '    cacParentIdNo.ValueMember = "IdNo"
-        '    cacParentIdNo.DisplayMember = "Name"
-        '    cacParentIdNo.DataSource = PresenterObj.GetChartList("AccountName")
+        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+            If PresenterObj.AccountHasChildren(IdNo) Then
+                cboParentIdNo.DisplayOnly = True
+            Else
+                cboParentIdNo.DisplayOnly = False
+            End If
+            cboAccountGroup.DisplayOnly = True
+        End Sub
 
-        'End Sub
-        'Public Sub CheckIfDeletable() Handles MyBase.BeforeDelete
-        '    If CInt(txtLevelNumber.Text) = 0 Then
-        '        _MBMainAccountNotEditable.Show(Me)
-        '        CancelDelete = True
-        '    End If
-        'End Sub
-
-        'Private Sub ParentIdNoTextChanged(sender As Object, e As EventArgs) Handles cacParentIdNo.TextChanged
-        '    'If (value Is Nothing And cacParentIdNo.Text Is Nothing) Or value <> CInt(cacParentIdNo.Text) Then
-        '    Dim x = PresenterObj.GetRecordFieldWithKey(cacParentIdNo.Text, "Chart", "IdNo", "LevelNumber")
-        '    Dim y = PresenterObj.GetRecordFieldWithKey(cacParentIdNo.Text, "Chart", "IdNo", "AccountGroup")
-        '    txtLevelNumber.Text = (CInt(x) + 1).ToString()
-        '    cacAccountGroup.Text = AccountGroupToEnum(y)
-        '    If cacParentIdNo.Text Is Nothing Or cacParentIdNo.Text = "" Then
-        '        Select Case cacAccountGroup.Text
-        '            Case AccountGroupSelection.Assets
-        '                cacParentIdNo.Text = DebitCreditSelection.Debit
-        '            Case AccountGroupSelection.Liabilities
-        '                cacParentIdNo.Text = DebitCreditSelection.Credit
-        '            Case AccountGroupSelection.Equity
-        '                cacParentIdNo.Text = DebitCreditSelection.Credit
-        '            Case AccountGroupSelection.Revenue
-        '                cacParentIdNo.Text = DebitCreditSelection.Credit
-        '            Case AccountGroupSelection.CostOfGoodsSold
-        '                cacParentIdNo.Text = DebitCreditSelection.Debit
-        '            Case AccountGroupSelection.Expenses
-        '                cacParentIdNo.Text = DebitCreditSelection.Debit
-        '        End Select
-        '    End If
-        'End Sub
+        Private Sub cboParentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParentIdNo.SelectedIndexChanged
+            If PresenterObj.AccountHasChildren(IdNo) Then
+                cboAccountGroup.DisplayOnly = False
+            Else
+                Dim parentAccount As ChartModel
+                parentAccount = PresenterObj.ModelPresenter.GetRecordById(Of ChartModel)(cboParentIdNo.SelectedValue)
+                If parentAccount.AccountGroup Is Nothing Then
+                    cboAccountGroup.SelectedValue = ""
+                    txtLevelNumber.Text = 0
+                    cboAccountGroup.DisplayOnly = True
+                Else
+                    cboAccountGroup.SelectedValue = parentAccount.AccountGroup
+                    txtLevelNumber.Text = parentAccount.LevelNumber + 1
+                    If parentAccount.AccountGroup = "S" Then
+                        cboAccountGroup.DisplayOnly = False
+                    Else
+                        cboAccountGroup.DisplayOnly = True
+                    End If
+                End If
+            End If
+        End Sub
 
     End Class
 

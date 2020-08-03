@@ -44,9 +44,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 179)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 183)
         '
         'TxtIdNo
         '
@@ -63,12 +63,15 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Nothing
         Me.TxtIdNo.Location = New System.Drawing.Point(199, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIdNo.TabIndex = 0
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'txtPhoneTypeCode
         '
@@ -84,8 +87,11 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeCode.LinkedLabel = Nothing
         Me.txtPhoneTypeCode.Location = New System.Drawing.Point(199, 36)
         Me.txtPhoneTypeCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPhoneTypeCode.MaximumValue = Nothing
+        Me.txtPhoneTypeCode.MinimumValue = Nothing
         Me.txtPhoneTypeCode.Name = "txtPhoneTypeCode"
         Me.txtPhoneTypeCode.OldValue = Nothing
+        Me.txtPhoneTypeCode.ReadOnly = true
         Me.txtPhoneTypeCode.Size = New System.Drawing.Size(100, 23)
         Me.txtPhoneTypeCode.TabIndex = 152
         Me.txtPhoneTypeCode.ValueIsMandatory = true
@@ -104,8 +110,11 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeName.LinkedLabel = Nothing
         Me.txtPhoneTypeName.Location = New System.Drawing.Point(199, 61)
         Me.txtPhoneTypeName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPhoneTypeName.MaximumValue = Nothing
+        Me.txtPhoneTypeName.MinimumValue = Nothing
         Me.txtPhoneTypeName.Name = "txtPhoneTypeName"
         Me.txtPhoneTypeName.OldValue = Nothing
+        Me.txtPhoneTypeName.ReadOnly = true
         Me.txtPhoneTypeName.Size = New System.Drawing.Size(388, 23)
         Me.txtPhoneTypeName.TabIndex = 154
         Me.txtPhoneTypeName.ValueIsMandatory = true
@@ -125,8 +134,11 @@ Namespace PresentationLayer.Forms
         Me.txtPhoneTypeNameAra.LinkedLabel = Nothing
         Me.txtPhoneTypeNameAra.Location = New System.Drawing.Point(199, 86)
         Me.txtPhoneTypeNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPhoneTypeNameAra.MaximumValue = Nothing
+        Me.txtPhoneTypeNameAra.MinimumValue = Nothing
         Me.txtPhoneTypeNameAra.Name = "txtPhoneTypeNameAra"
         Me.txtPhoneTypeNameAra.OldValue = Nothing
+        Me.txtPhoneTypeNameAra.ReadOnly = true
         Me.txtPhoneTypeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtPhoneTypeNameAra.Size = New System.Drawing.Size(388, 23)
         Me.txtPhoneTypeNameAra.TabIndex = 156
@@ -144,9 +156,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(199, 111)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(388, 60)
         Me.txtNotes.TabIndex = 3
         Me.txtNotes.ValueIsMandatory = true
@@ -166,11 +181,11 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(598, 180)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(607, 180)
+        Me.floDataDisplay.Size = New System.Drawing.Size(607, 183)
         Me.floDataDisplay.TabIndex = 147
         '
         'lblIdNo
@@ -240,6 +255,7 @@ Namespace PresentationLayer.Forms
         '
         'PhoneTypeEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(905, 236)
         Me.Controls.Add(Me.floDataDisplay)
         Me.MinimumSize = New System.Drawing.Size(914, 265)

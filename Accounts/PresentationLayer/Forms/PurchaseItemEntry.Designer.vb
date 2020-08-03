@@ -240,6 +240,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblCategoryIdNo
         '
@@ -451,6 +452,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice1.OldValue = Nothing
         Me.txtStdPrice1.ReadOnly = true
         Me.txtStdPrice1.ValueIsMandatory = true
+        Me.txtStdPrice1.ValueIsNumeric = true
         '
         'lblUnit2
         '
@@ -513,6 +515,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice2.OldValue = Nothing
         Me.txtStdPrice2.ReadOnly = true
         Me.txtStdPrice2.ValueIsMandatory = true
+        Me.txtStdPrice2.ValueIsNumeric = true
         '
         'lblUnit3
         '
@@ -575,6 +578,7 @@ Namespace PresentationLayer.Forms
         Me.txtStdPrice3.OldValue = Nothing
         Me.txtStdPrice3.ReadOnly = true
         Me.txtStdPrice3.ValueIsMandatory = true
+        Me.txtStdPrice3.ValueIsNumeric = true
         '
         'lblCancelled
         '

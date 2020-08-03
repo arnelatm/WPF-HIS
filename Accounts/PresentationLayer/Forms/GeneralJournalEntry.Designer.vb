@@ -57,8 +57,6 @@ Namespace PresentationLayer.Forms
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -68,6 +66,8 @@ Namespace PresentationLayer.Forms
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -136,6 +136,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblReferenceNo
         '
@@ -352,18 +353,6 @@ Namespace PresentationLayer.Forms
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.StartTrackingChanges = false
         '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-        '
-        'CFlowLayout4
-        '
-        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-        Me.CFlowLayout4.Name = "CFlowLayout4"
-        '
         'dgvSequence
         '
         Me.dgvSequence.DataPropertyName = "Sequence"
@@ -465,6 +454,18 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
         Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
         Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+        '
+        'CFlowLayout4
+        '
+        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+        Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+        Me.CFlowLayout4.Name = "CFlowLayout4"
         '
         'GeneralJournalEntry
         '

@@ -86,6 +86,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'txtDistributionSchemeCode
         '

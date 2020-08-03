@@ -13,6 +13,7 @@ Public Class CTextBox
     Private _searchAnywhere As Boolean
     Private _oldValue As String
     Private _editingMode As Boolean = True
+
     'Private _viewable As Boolean
     'Private _selectable As Boolean
     Private _editable As Boolean
@@ -116,6 +117,12 @@ Public Class CTextBox
             DisplayOnly = Value
         End Set
     End Property
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control doesn't change alignment.")>
+    <Browsable(True)>
+    Public Property FixedAlignment As Boolean
 
     <Category("Custom Properties")>
     <Description("Set to the lowest allowed value for this control")>
