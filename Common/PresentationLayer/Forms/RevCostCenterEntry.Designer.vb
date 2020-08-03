@@ -81,6 +81,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIdNo.TabIndex = 0
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'txtRevCostCenterCode
         '
@@ -349,6 +350,7 @@ Namespace PresentationLayer.Forms
         Me.txtLevelNumber.Size = New System.Drawing.Size(72, 23)
         Me.txtLevelNumber.TabIndex = 4
         Me.txtLevelNumber.ValueIsMandatory = true
+        Me.txtLevelNumber.ValueIsNumeric = true
         '
         'lblRevCostCenterIdNo
         '

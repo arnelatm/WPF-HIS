@@ -316,8 +316,6 @@
     <Build Include="dbo\Views\CkdJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ARJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ApJournalTransaction_View_1.sql" />
-    <Build Include="dbo\User Defined Types\JournalItemUpdatex.sql" />
-    <Build Include="dbo\User Defined Types\JournalItemInsertx.sql" />
     <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemUpdatex.sql" />
     <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemInsertx.sql" />
     <Build Include="dbo\User Defined Types\DistributionSchemeItemUpdatex.sql" />
@@ -328,6 +326,7 @@
     <Build Include="dbo\Tables\ProfitCenter_1.sql" />
     <Build Include="dbo\Views\ProfitCenter_View_1.sql" />
     <Build Include="dbo\Views\CrcJournalTransaction_View.sql" />
+    <Build Include="dbo\Views\CashDisbursementJournalTransaction_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

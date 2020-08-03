@@ -83,15 +83,16 @@ Public Enum AccountStatusSelection
     SeeNote
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
-Public Enum AccountGroupSelection
-    None
-    Assets
-    Liabilities
-    Capital
-    Revenue
-    Expenses
-End Enum
+'<TypeConverter(GetType(LocalizedEnumConverter))>
+'Public Enum AccountGroupSelection
+'    None
+'    Asset
+'    Liability
+'    Equity
+'    RevExpSummary
+'    Revenue
+'    Expense
+'End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum DebitCreditSelection
@@ -194,8 +195,6 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
-
-
 
     Public Function RCTypeToEnum(value As String) As Int16
         Dim retValue As Int16
@@ -376,49 +375,51 @@ Public Module Adapter
         Return retValue
     End Function
 
-    Public Function AccountGroupToEnum(value As String) As String
-        Dim retValue As String
-        Select Case value
-            Case Nothing
-                retValue = AccountGroupSelection.None
-            Case "A"
-                retValue = AccountGroupSelection.Assets
-            Case "L"
-                retValue = AccountGroupSelection.Liabilities
-            Case "C"
-                retValue = AccountGroupSelection.Capital
-            Case "R"
-                retValue = AccountGroupSelection.Revenue
-            Case "E"
-                retValue = AccountGroupSelection.Expenses
-            Case Else
-                retValue = AccountGroupSelection.None
-        End Select
-        Return retValue
-    End Function
+    'Public Function AccountGroupToEnum(value As String) As String
+    '    Dim retValue As String
+    '    Select Case value
+    '        Case Nothing
+    '            retValue = AccountGroupSelection.None
+    '        Case "A"
+    '            retValue = AccountGroupSelection.Asset
+    '        Case "L"
+    '            retValue = AccountGroupSelection.Liability
+    '        Case "C"
+    '            retValue = AccountGroupSelection.Capital
+    '        Case "R"
+    '            retValue = AccountGroupSelection.Revenue
+    '        Case "E"
+    '            retValue = AccountGroupSelection.Expense
+    '        Case Else
+    '            retValue = AccountGroupSelection.None
+    '    End Select
+    '    Return retValue
+    'End Function
 
-    Public Function EnumToAccountGroup(value As String) As String
-        Dim retValue As String
-        Select Case value
-            Case Nothing
-                retValue = Nothing
-            Case AccountGroupSelection.None
-                retValue = Nothing
-            Case AccountGroupSelection.Assets
-                retValue = "A"
-            Case AccountGroupSelection.Liabilities
-                retValue = "L"
-            Case AccountGroupSelection.Capital
-                retValue = "C"
-            Case AccountGroupSelection.Revenue
-                retValue = "R"
-            Case AccountGroupSelection.Expenses
-                retValue = "E"
-            Case Else
-                retValue = Nothing
-        End Select
-        Return retValue
-    End Function
+    'Public Function EnumToAccountGroup(value As String) As String
+    '    Dim retValue As String
+    '    Select Case value
+    '        Case Nothing
+    '            retValue = Nothing
+    '        Case AccountGroupSelection.None
+    '            retValue = Nothing
+    '        Case AccountGroupSelection.Asset
+    '            retValue = "A"
+    '        Case AccountGroupSelection.Liability
+    '            retValue = "L"
+    '        Case AccountGroupSelection.Equity
+    '            retValue = "E"
+    '        Case AccountGroupSelection.RevExpSummary
+    '            retValue = "S"
+    '        Case AccountGroupSelection.Revenue
+    '            retValue = "R"
+    '        Case AccountGroupSelection.Expense
+    '            retValue = "E"
+    '        Case Else
+    '            retValue = Nothing
+    '    End Select
+    '    Return retValue
+    'End Function
 
     Public Function PayeeTypeToEnum(value As String) As String
         Dim retValue As String

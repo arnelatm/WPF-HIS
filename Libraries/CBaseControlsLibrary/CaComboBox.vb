@@ -2,6 +2,7 @@
 Imports System.Drawing
 Imports System.Linq.Expressions
 Imports System.Threading
+Imports System.Windows
 Imports System.Windows.Forms
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -63,7 +64,17 @@ Public Class CaComboBox
             Return _displayOnly
         End Get
         Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
             _displayOnly = value
+            If value Then
+                Me.ReadOnlyCombo = True
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                Me.ReadOnlyCombo = False
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
         End Set
     End Property
 
@@ -388,7 +399,7 @@ Public Class CaComboBox
         _suggestBindingList.RaiseListChangedEvents = False
         PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
         _suggestBindingList.RaiseListChangedEvents = True
-            _suggestBindingList.ResetBindings()
+        _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
         SuggestListForm.Visible = showForm
@@ -508,16 +519,19 @@ Public Class CaComboBox
                 If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                    Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 If SelectedItem IsNot Nothing AndAlso SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
-                End If
-                If SelectedItem.Code <> value Then
-                    Text = Nothing
+                    Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                Else
+                    If SelectedItem IsNot Nothing Then
+                        If SelectedItem.Code <> value Then
+                            Text = Nothing
+                        End If
+                    End If
                 End If
             End If
         End If
@@ -667,7 +681,7 @@ Public Class CaComboBox
     Private Shadows Sub OnDropDownClosed(sender As Object, e As EventArgs) Handles Me.DropDownClosed
         If DisplayOnly Then
             SelectedIndex = _previousIndex
-            MessageBox.Show($"Sorry you don't have the proper security credentials to change this value. Reverting to original value.")
+            Forms.MessageBox.Show($"Sorry you don't have the proper security credentials to change this value. Reverting to original value.")
         End If
     End Sub
 

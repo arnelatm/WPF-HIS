@@ -163,6 +163,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblTransactionDate
         '
@@ -220,6 +221,7 @@ Namespace PresentationLayer.Forms
         Me.txtBalance.ReadOnly = true
         Me.txtBalance.TabStop = false
         Me.txtBalance.ValueIsMandatory = true
+        Me.txtBalance.ValueIsNumeric = true
         '
         'lblDateAdded
         '
@@ -342,6 +344,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalOutstandingCredits.ReadOnly = true
         Me.txtTotalOutstandingCredits.TabStop = false
         Me.txtTotalOutstandingCredits.ValueIsMandatory = true
+        Me.txtTotalOutstandingCredits.ValueIsNumeric = true
         '
         'txtTotalQtyCreditsCleared
         '
@@ -362,6 +365,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalQtyCreditsCleared.ReadOnly = true
         Me.txtTotalQtyCreditsCleared.TabStop = false
         Me.txtTotalQtyCreditsCleared.ValueIsMandatory = true
+        Me.txtTotalQtyCreditsCleared.ValueIsNumeric = true
         '
         'lblCreditsCleared
         '
@@ -420,6 +424,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalQtyDebitsCleared.ReadOnly = true
         Me.txtTotalQtyDebitsCleared.TabStop = false
         Me.txtTotalQtyDebitsCleared.ValueIsMandatory = true
+        Me.txtTotalQtyDebitsCleared.ValueIsNumeric = true
         '
         'txtTotalDebitsCleared
         '
@@ -441,6 +446,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalDebitsCleared.ReadOnly = true
         Me.txtTotalDebitsCleared.TabStop = false
         Me.txtTotalDebitsCleared.ValueIsMandatory = true
+        Me.txtTotalDebitsCleared.ValueIsNumeric = true
         '
         'lblTotalCreditsNotCleared
         '
@@ -470,6 +476,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalCreditsCleared.ReadOnly = true
         Me.txtTotalCreditsCleared.TabStop = false
         Me.txtTotalCreditsCleared.ValueIsMandatory = true
+        Me.txtTotalCreditsCleared.ValueIsNumeric = true
         '
         'CFlowLayout5
         '
@@ -513,6 +520,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalQtyCreditsNotCleared.ReadOnly = true
         Me.txtTotalQtyCreditsNotCleared.TabStop = false
         Me.txtTotalQtyCreditsNotCleared.ValueIsMandatory = true
+        Me.txtTotalQtyCreditsNotCleared.ValueIsNumeric = true
         '
         'txtTotalCreditsNotCleared
         '
@@ -532,6 +540,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalCreditsNotCleared.OldValue = Nothing
         Me.txtTotalCreditsNotCleared.ReadOnly = true
         Me.txtTotalCreditsNotCleared.ValueIsMandatory = true
+        Me.txtTotalCreditsNotCleared.ValueIsNumeric = true
         '
         'txtTotalQtyDebitsNotCleared
         '
@@ -552,6 +561,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalQtyDebitsNotCleared.ReadOnly = true
         Me.txtTotalQtyDebitsNotCleared.TabStop = false
         Me.txtTotalQtyDebitsNotCleared.ValueIsMandatory = true
+        Me.txtTotalQtyDebitsNotCleared.ValueIsNumeric = true
         '
         'lblTotalDebitsNotCleared
         '
@@ -580,6 +590,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalDebitsNotCleared.ReadOnly = true
         Me.txtTotalDebitsNotCleared.TabStop = false
         Me.txtTotalDebitsNotCleared.ValueIsMandatory = true
+        Me.txtTotalDebitsNotCleared.ValueIsNumeric = true
         '
         'CFlowLayout7
         '
@@ -646,6 +657,7 @@ Namespace PresentationLayer.Forms
         Me.txtBalance2.ReadOnly = true
         Me.txtBalance2.TabStop = false
         Me.txtBalance2.ValueIsMandatory = true
+        Me.txtBalance2.ValueIsNumeric = true
         '
         'lblTotalDepositsInTransit
         '
@@ -675,6 +687,7 @@ Namespace PresentationLayer.Forms
         Me.txtTotalOutstandingDeposits.ReadOnly = true
         Me.txtTotalOutstandingDeposits.TabStop = false
         Me.txtTotalOutstandingDeposits.ValueIsMandatory = true
+        Me.txtTotalOutstandingDeposits.ValueIsNumeric = true
         '
         'lblOutstandingCredits
         '
@@ -712,6 +725,7 @@ Namespace PresentationLayer.Forms
         Me.txtGlSystemBalance.ReadOnly = true
         Me.txtGlSystemBalance.TabStop = false
         Me.txtGlSystemBalance.ValueIsMandatory = true
+        Me.txtGlSystemBalance.ValueIsNumeric = true
         '
         'CLabel7
         '
@@ -750,6 +764,7 @@ Namespace PresentationLayer.Forms
         Me.txtUnreconciledDifference.ReadOnly = true
         Me.txtUnreconciledDifference.TabStop = false
         Me.txtUnreconciledDifference.ValueIsMandatory = true
+        Me.txtUnreconciledDifference.ValueIsNumeric = true
         '
         'CFlowLayout4
         '

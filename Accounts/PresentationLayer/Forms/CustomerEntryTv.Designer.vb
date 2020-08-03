@@ -180,6 +180,7 @@ Namespace PresentationLayer.Forms
         Me.txtOpeningBalance.Name = "txtOpeningBalance"
         Me.txtOpeningBalance.OldValue = Nothing
         Me.txtOpeningBalance.ReadOnly = true
+        Me.txtOpeningBalance.ValueIsNumeric = true
         '
         'lblOpeningBalance
         '
@@ -288,6 +289,7 @@ Namespace PresentationLayer.Forms
         Me.txtCreditLimit.Name = "txtCreditLimit"
         Me.txtCreditLimit.OldValue = Nothing
         Me.txtCreditLimit.ReadOnly = true
+        Me.txtCreditLimit.ValueIsNumeric = true
         '
         'lblCreditLimit
         '
@@ -842,6 +844,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblIdNo
         '

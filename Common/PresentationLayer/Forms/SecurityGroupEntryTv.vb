@@ -1,6 +1,7 @@
 ﻿Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
+
     Public Class SecurityGroupEntryTv
 
         Public Sub New()
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Forms
             Ea.SubscribeEvent(Me)
 
         End Sub
+
         Protected Overrides Sub CreateDataSources()
             UpdateParentIdData()
         End Sub
@@ -61,5 +63,10 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
+        Private Sub SecurityGroupView_Load(sender As Object, e As EventArgs) Handles SecurityGroupView.Load
+
+        End Sub
+
     End Class
+
 End Namespace

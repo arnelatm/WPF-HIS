@@ -5,12 +5,12 @@ Imports AATM.Libraries.GlobalFuncNSub
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum AccountGroupSelection
     <EnumCode(" ")> None
-    <EnumCode("A")> Assets
-    <EnumCode("L")> Liabilities
+    <EnumCode("A")> Asset
+    <EnumCode("L")> Liability
     <EnumCode("E")> Equity
+    <EnumCode("S")> RevExpSummary
     <EnumCode("R")> Revenue
-    <EnumCode("C")> CostOfGoodsSold
-    <EnumCode("X")> Expenses
+    <EnumCode("X")> Expense
 End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
@@ -162,17 +162,17 @@ Public Module Adapter
             Case Nothing
                 retValue = AccountGroupSelection.None
             Case "A"
-                retValue = AccountGroupSelection.Assets
+                retValue = AccountGroupSelection.Asset
             Case "L"
-                retValue = AccountGroupSelection.Liabilities
+                retValue = AccountGroupSelection.Liability
             Case "E"
                 retValue = AccountGroupSelection.Equity
+            Case "S"
+                retValue = AccountGroupSelection.RevExpSummary
             Case "R"
                 retValue = AccountGroupSelection.Revenue
-            Case "C"
-                retValue = AccountGroupSelection.CostOfGoodsSold
             Case "X"
-                retValue = AccountGroupSelection.Expenses
+                retValue = AccountGroupSelection.Expense
             Case Else
                 retValue = AccountGroupSelection.None
         End Select
@@ -243,18 +243,18 @@ Public Module Adapter
                 retValue = " "
             Case AccountGroupSelection.None
                 retValue = " "
-            Case AccountGroupSelection.Assets
+            Case AccountGroupSelection.Asset
                 retValue = "A"
-            Case AccountGroupSelection.Liabilities
+            Case AccountGroupSelection.Liability
                 retValue = "L"
             Case AccountGroupSelection.Equity
                 retValue = "E"
+            Case AccountGroupSelection.RevExpSummary
+                retValue = "S"
             Case AccountGroupSelection.Revenue
                 retValue = "R"
-            Case AccountGroupSelection.CostOfGoodsSold
-                retValue = "C"
-            Case AccountGroupSelection.Expenses
-                retValue = "E"
+            Case AccountGroupSelection.Expense
+                retValue = "X"
             Case Else
                 retValue = Nothing
         End Select
@@ -636,7 +636,6 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
-
 
     Public Function ReceiptTypeToEnum(value As String) As String
         Dim retValue As String

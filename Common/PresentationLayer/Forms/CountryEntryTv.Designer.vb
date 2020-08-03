@@ -56,10 +56,10 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 297)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 301)
         '
         'floDataDisplay
         '
@@ -88,10 +88,10 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.LblFlag128)
         Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
         Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-        Me.floDataDisplay.Location = New System.Drawing.Point(300, 57)
+        Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(415, 297)
+        Me.floDataDisplay.Size = New System.Drawing.Size(415, 301)
         Me.floDataDisplay.TabIndex = 148
         '
         'lblIdNo
@@ -123,6 +123,8 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Nothing
         Me.TxtIdNo.Location = New System.Drawing.Point(174, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
@@ -160,6 +162,8 @@ Namespace PresentationLayer.Forms
         Me.txtIsoA2.LinkedLabel = Nothing
         Me.txtIsoA2.Location = New System.Drawing.Point(174, 36)
         Me.txtIsoA2.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtIsoA2.MaximumValue = Nothing
+        Me.txtIsoA2.MinimumValue = Nothing
         Me.txtIsoA2.Name = "txtIsoA2"
         Me.txtIsoA2.OldValue = Nothing
         Me.txtIsoA2.ReadOnly = true
@@ -197,6 +201,8 @@ Namespace PresentationLayer.Forms
         Me.txtCountryName.LinkedLabel = Nothing
         Me.txtCountryName.Location = New System.Drawing.Point(174, 61)
         Me.txtCountryName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtCountryName.MaximumValue = Nothing
+        Me.txtCountryName.MinimumValue = Nothing
         Me.txtCountryName.Name = "txtCountryName"
         Me.txtCountryName.OldValue = Nothing
         Me.txtCountryName.ReadOnly = true
@@ -235,8 +241,11 @@ Namespace PresentationLayer.Forms
         Me.txtCountryNameAra.LinkedLabel = Nothing
         Me.txtCountryNameAra.Location = New System.Drawing.Point(174, 86)
         Me.txtCountryNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtCountryNameAra.MaximumValue = Nothing
+        Me.txtCountryNameAra.MinimumValue = Nothing
         Me.txtCountryNameAra.Name = "txtCountryNameAra"
         Me.txtCountryNameAra.OldValue = Nothing
+        Me.txtCountryNameAra.ReadOnly = true
         Me.txtCountryNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtCountryNameAra.Size = New System.Drawing.Size(221, 23)
         Me.txtCountryNameAra.TabIndex = 3
@@ -272,8 +281,11 @@ Namespace PresentationLayer.Forms
         Me.txtNationality.LinkedLabel = Nothing
         Me.txtNationality.Location = New System.Drawing.Point(174, 111)
         Me.txtNationality.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNationality.MaximumValue = Nothing
+        Me.txtNationality.MinimumValue = Nothing
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.OldValue = Nothing
+        Me.txtNationality.ReadOnly = true
         Me.txtNationality.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtNationality.Size = New System.Drawing.Size(221, 23)
         Me.txtNationality.TabIndex = 4
@@ -309,8 +321,11 @@ Namespace PresentationLayer.Forms
         Me.txtNationalityAra.LinkedLabel = Nothing
         Me.txtNationalityAra.Location = New System.Drawing.Point(174, 136)
         Me.txtNationalityAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNationalityAra.MaximumValue = Nothing
+        Me.txtNationalityAra.MinimumValue = Nothing
         Me.txtNationalityAra.Name = "txtNationalityAra"
         Me.txtNationalityAra.OldValue = Nothing
+        Me.txtNationalityAra.ReadOnly = true
         Me.txtNationalityAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtNationalityAra.Size = New System.Drawing.Size(221, 23)
         Me.txtNationalityAra.TabIndex = 5
@@ -345,6 +360,8 @@ Namespace PresentationLayer.Forms
         Me.TxtISOA3.LinkedLabel = Nothing
         Me.TxtISOA3.Location = New System.Drawing.Point(174, 161)
         Me.TxtISOA3.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtISOA3.MaximumValue = Nothing
+        Me.TxtISOA3.MinimumValue = Nothing
         Me.TxtISOA3.Name = "TxtISOA3"
         Me.TxtISOA3.OldValue = Nothing
         Me.TxtISOA3.ReadOnly = true
@@ -380,11 +397,14 @@ Namespace PresentationLayer.Forms
         Me.TxtISON.LinkedLabel = Me.LblISON
         Me.TxtISON.Location = New System.Drawing.Point(174, 186)
         Me.TxtISON.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtISON.MaximumValue = Nothing
+        Me.TxtISON.MinimumValue = Nothing
         Me.TxtISON.Name = "TxtISON"
         Me.TxtISON.OldValue = Nothing
         Me.TxtISON.ReadOnly = true
         Me.TxtISON.Size = New System.Drawing.Size(62, 23)
         Me.TxtISON.TabIndex = 7
+        Me.TxtISON.ValueIsNumeric = true
         '
         'LblPhoneCode
         '
@@ -414,11 +434,14 @@ Namespace PresentationLayer.Forms
         Me.TxtPhoneCode.LinkedLabel = Me.LblPhoneCode
         Me.TxtPhoneCode.Location = New System.Drawing.Point(174, 211)
         Me.TxtPhoneCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtPhoneCode.MaximumValue = Nothing
+        Me.TxtPhoneCode.MinimumValue = Nothing
         Me.TxtPhoneCode.Name = "TxtPhoneCode"
         Me.TxtPhoneCode.OldValue = Nothing
         Me.TxtPhoneCode.ReadOnly = true
         Me.TxtPhoneCode.Size = New System.Drawing.Size(62, 23)
         Me.TxtPhoneCode.TabIndex = 8
+        Me.TxtPhoneCode.ValueIsNullable = true
         Me.TxtPhoneCode.ValueIsNumeric = true
         '
         'LblFlag32
@@ -449,6 +472,8 @@ Namespace PresentationLayer.Forms
         Me.TxtFlag32.LinkedLabel = Me.LblFlag32
         Me.TxtFlag32.Location = New System.Drawing.Point(174, 236)
         Me.TxtFlag32.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtFlag32.MaximumValue = Nothing
+        Me.TxtFlag32.MinimumValue = Nothing
         Me.TxtFlag32.Name = "TxtFlag32"
         Me.TxtFlag32.OldValue = Nothing
         Me.TxtFlag32.ReadOnly = true
@@ -483,6 +508,8 @@ Namespace PresentationLayer.Forms
         Me.TxtFlag128.LinkedLabel = Me.LblFlag128
         Me.TxtFlag128.Location = New System.Drawing.Point(174, 261)
         Me.TxtFlag128.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtFlag128.MaximumValue = Nothing
+        Me.TxtFlag128.MinimumValue = Nothing
         Me.TxtFlag128.Name = "TxtFlag128"
         Me.TxtFlag128.OldValue = Nothing
         Me.TxtFlag128.ReadOnly = true
@@ -491,6 +518,7 @@ Namespace PresentationLayer.Forms
         '
         'CountryEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(712, 354)
         Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "CountryEntryTv"

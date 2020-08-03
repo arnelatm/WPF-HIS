@@ -23,7 +23,6 @@ Namespace PresentationLayer.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BranchEntryTv))
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtBranchCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -64,6 +63,7 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'txtBranchCode
         '

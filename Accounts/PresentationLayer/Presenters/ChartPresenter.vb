@@ -27,6 +27,25 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
+        Public Function EditableAccountGroup(ByVal idNo As Int32?) As Boolean
+            Dim accountGroup As String
+            If idNo Is Nothing Then
+                Return True
+            End If
+            accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Chart", "IdNo", "AccountGroup")
+            If accountGroup = "S" Then
+                Return True
+            End If
+            Return False
+        End Function
+
+        Public Function AccountHasChildren(ByVal idNo As Int32?) As Boolean
+            If idNo Is Nothing Then
+                Return True
+            End If
+            Return Model.CountRecordWithKey(idNo, "Chart", "ParentIdNo") > 0
+        End Function
+
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Model.GetRecordFieldWithKey(idNoToSearch, "Chart", "ParentIdNo", "AccountName")
         End Function

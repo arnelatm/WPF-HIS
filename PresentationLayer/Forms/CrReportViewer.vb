@@ -8,8 +8,8 @@ Public Class CrReportViewer
     Public Report As New ReportDocument
 
     Public Event OkButtonClicked()
-    Private myceLocale As CrystalDecisions.ReportAppServer.CommonControls.CeLocale
 
+    Private myceLocale As CrystalDecisions.ReportAppServer.CommonControls.CeLocale
 
     Public Sub New()
 
@@ -28,9 +28,6 @@ Public Class CrReportViewer
 
         Try
             Report.ReportClientDocument.LocaleID = CType(myceLocale, CrystalDecisions.ReportAppServer.DataDefModel.CeLocale)
-
-
-
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
@@ -45,9 +42,31 @@ Public Class CrReportViewer
         Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
         Dim server As String = ConfigurationManager.AppSettings.Get("SERVER")
         Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
+        'Dim sqlCon As String = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
+        Dim sqlCon As String
+
         Report.Load(reportPaths & ReportFileName)
 
-        Report.SetDatabaseLogon(uid, pwd, server, database)
+        'Report.SetDatabaseLogon(uid, pwd, server, database)
+
+        'This line is necessary to replace the dataSource in the report with the one
+        'related to the environment
+
+        If Report.DataSourceConnections.Count > 0 Then
+
+            Report.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
+
+            '    SetConnection(Server, Database, UID, Pwd)
+
+            'sqlCon = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
+            'Report.DataSourceConnections(0).SetConnection(sqlCon.DataSource,
+            '                                 "",
+            '                                 sqlCon.UserID,
+            '                                 sqlCon.Password)
+        End If
+        'This line sets the credentials for the dataSource set in the DataSourceConnections.SetConnection
+        'Report.SetDatabaseLogon(sqlCon.UserID, sqlCon.Password, sqlCon.DataSource, "")
+
     End Sub
 
     Protected Sub ProcessReport()

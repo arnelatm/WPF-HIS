@@ -180,7 +180,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 441</value>
+    <value>166, 442</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -214,7 +214,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 441</value>
+    <value>11, 442</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1350,6 +1350,9 @@
   <data name="cacCountryCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cacCountryCode.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cacCountryCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>513, 161</value>
   </data>
@@ -1854,6 +1857,9 @@
   <data name="cacBankIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cacBankIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cacBankIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>512, 262</value>
   </data>
@@ -2043,6 +2049,9 @@
   <data name="cacExpAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="cacExpAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cacExpAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>166, 313</value>
   </data>
@@ -2105,6 +2114,9 @@
   </data>
   <data name="cacApAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cacApAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cacApAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>512, 313</value>
@@ -2234,6 +2246,9 @@
   </data>
   <data name="cacPaymentMethod.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cacPaymentMethod.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cacPaymentMethod.Location" type="System.Drawing.Point, System.Drawing">
     <value>512, 339</value>
@@ -2472,6 +2487,9 @@
   </data>
   <data name="cacAccountStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cacAccountStatus.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cacAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>512, 415</value>

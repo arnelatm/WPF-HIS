@@ -43,9 +43,9 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 57)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 163)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 167)
         '
         'lblIdNo
         '
@@ -76,12 +76,15 @@ Namespace PresentationLayer.Forms
         Me.TxtIdNo.LinkedLabel = Nothing
         Me.TxtIdNo.Location = New System.Drawing.Point(184, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIdNo.TabIndex = 117
         Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
         '
         'lblReligionCode
         '
@@ -153,8 +156,11 @@ Namespace PresentationLayer.Forms
         Me.txtReligionCode.LinkedLabel = Nothing
         Me.txtReligionCode.Location = New System.Drawing.Point(184, 36)
         Me.txtReligionCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtReligionCode.MaximumValue = Nothing
+        Me.txtReligionCode.MinimumValue = Nothing
         Me.txtReligionCode.Name = "txtReligionCode"
         Me.txtReligionCode.OldValue = Nothing
+        Me.txtReligionCode.ReadOnly = true
         Me.txtReligionCode.Size = New System.Drawing.Size(62, 23)
         Me.txtReligionCode.TabIndex = 118
         Me.txtReligionCode.ValueIsMandatory = true
@@ -173,9 +179,12 @@ Namespace PresentationLayer.Forms
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.Location = New System.Drawing.Point(184, 111)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(228, 44)
         Me.txtNotes.TabIndex = 121
         Me.txtNotes.ValueIsMandatory = true
@@ -194,8 +203,11 @@ Namespace PresentationLayer.Forms
         Me.txtReligionNameAra.LinkedLabel = Nothing
         Me.txtReligionNameAra.Location = New System.Drawing.Point(184, 86)
         Me.txtReligionNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtReligionNameAra.MaximumValue = Nothing
+        Me.txtReligionNameAra.MinimumValue = Nothing
         Me.txtReligionNameAra.Name = "txtReligionNameAra"
         Me.txtReligionNameAra.OldValue = Nothing
+        Me.txtReligionNameAra.ReadOnly = true
         Me.txtReligionNameAra.Size = New System.Drawing.Size(228, 23)
         Me.txtReligionNameAra.TabIndex = 120
         Me.txtReligionNameAra.ValueIsMandatory = true
@@ -214,8 +226,11 @@ Namespace PresentationLayer.Forms
         Me.txtReligionName.LinkedLabel = Nothing
         Me.txtReligionName.Location = New System.Drawing.Point(184, 61)
         Me.txtReligionName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtReligionName.MaximumValue = Nothing
+        Me.txtReligionName.MinimumValue = Nothing
         Me.txtReligionName.Name = "txtReligionName"
         Me.txtReligionName.OldValue = Nothing
+        Me.txtReligionName.ReadOnly = true
         Me.txtReligionName.Size = New System.Drawing.Size(228, 23)
         Me.txtReligionName.TabIndex = 119
         Me.txtReligionName.ValueIsMandatory = true
@@ -234,14 +249,15 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout1.Controls.Add(Me.lblNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtNotes)
         Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.CFlowLayout1.Location = New System.Drawing.Point(300, 57)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(300, 53)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(428, 163)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(428, 167)
         Me.CFlowLayout1.TabIndex = 127
         '
         'ReligionEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(729, 220)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.MinimumSize = New System.Drawing.Size(745, 259)
