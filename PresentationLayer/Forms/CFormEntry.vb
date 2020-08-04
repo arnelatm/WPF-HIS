@@ -570,6 +570,7 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+        RaiseEvent BeforeEdit()
         RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 

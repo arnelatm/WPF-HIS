@@ -27,16 +27,31 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function EditableAccountGroup(ByVal idNo As Int32?) As Boolean
-            Dim accountGroup As String
-            If idNo Is Nothing Then
-                Return True
+        Public Function EditableAccountGroup(ByVal idNo As Int32?, ByVal parentIdNo As Int32?) As Boolean
+            If AccountHasChildren(idNo) Then
+                return False
+            Else
+                Dim parentAccount As ChartModel
+                parentAccount = ModelPresenter.GetRecordById(Of ChartModel)(parentIdNo)
+                If parentAccount.AccountGroup Is Nothing Then
+                    return False
+                Else
+                    If parentAccount.AccountGroup = "S" Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
             End If
-            accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Chart", "IdNo", "AccountGroup")
-            If accountGroup = "S" Then
-                Return True
-            End If
-            Return False
+            'Dim accountGroup As String
+            'If idNo Is Nothing Then
+            '    Return True
+            'End If
+            'accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Chart", "IdNo", "AccountGroup")
+            'If accountGroup = "S" Then
+            '    Return True
+            'End If
+            'Return False
         End Function
 
         Public Function AccountHasChildren(ByVal idNo As Int32?) As Boolean
