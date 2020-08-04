@@ -4,11 +4,12 @@
 
 
 
+
 /****** Script for SelectTopNRows command from SSMS  ******/
   CREATE VIEW [dbo].[IncomeStatementLayout_View] as
   (SELECT IdNo,ParentIDNo,AccountCode,AccountName,AccountNameAra,DetailAccount,AccountGroup,ByDebit,BYCredit,Debit,Credit,NormalBalance,CloseDebit,CloseCredit,PayeeType,
-		  WithReconciliation,IncomeExpSummary,SpecialAccount,Active,LevelNumber,Path,SortKey
-		  FROM ChartIs_View)
+		  WithReconciliation,IncomeExpSummary,SpecialAccount,Active,LevelNumber,Path,SortKey	  
+		  FROM Chart_View)
   UNION
   (SELECT [IdNo]
       ,[ParentIdNo]
@@ -31,5 +32,5 @@
 	  ,Active
       ,[LevelNumber]+1 AS 'LevelNumber'
       ,[path]+'-A'
-	  ,REPLACE(RTRIM(REPLACE(SortKey, '0', ' ')), ' ', '0')+'999'
+	  ,REPLACE(RTRIM(REPLACE(SortKey, '0', ' ')), ' ', '0')+'999'  
   FROM [dbo].[Chart_View] WHERE NOT DetailAccount=1)

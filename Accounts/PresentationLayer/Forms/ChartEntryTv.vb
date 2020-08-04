@@ -143,6 +143,11 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cboParentIdNo.SetValue(Value)
+                'If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
+                '    cboAccountGroup.DisplayOnly = False
+                'Else
+                '    cboAccountGroup.DisplayOnly = True
+                'End If
                 'If PresenterObj.EditableAccountGroup(Value) Then
                 '    cboAccountGroup.DisplayOnly = False
                 '    Dim parentAccountGroup = PresenterObj.GetParentAccountGroup(Value)
@@ -278,30 +283,48 @@ Namespace PresentationLayer.Forms
             Else
                 cboParentIdNo.DisplayOnly = False
             End If
-            cboAccountGroup.DisplayOnly = True
+            If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
+                cboAccountGroup.DisplayOnly = False
+            Else
+                cboAccountGroup.DisplayOnly = True
+            End If
         End Sub
 
         Private Sub cboParentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParentIdNo.SelectedIndexChanged
-            If PresenterObj.AccountHasChildren(IdNo) Then
+            If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
                 cboAccountGroup.DisplayOnly = False
             Else
-                Dim parentAccount As ChartModel
-                parentAccount = PresenterObj.ModelPresenter.GetRecordById(Of ChartModel)(cboParentIdNo.SelectedValue)
-                If parentAccount.AccountGroup Is Nothing Then
-                    cboAccountGroup.SelectedValue = ""
-                    txtLevelNumber.Text = 0
-                    cboAccountGroup.DisplayOnly = True
-                Else
-                    cboAccountGroup.SelectedValue = parentAccount.AccountGroup
-                    txtLevelNumber.Text = parentAccount.LevelNumber + 1
-                    If parentAccount.AccountGroup = "S" Then
-                        cboAccountGroup.DisplayOnly = False
-                    Else
-                        cboAccountGroup.DisplayOnly = True
-                    End If
-                End If
+                cboAccountGroup.DisplayOnly = True
             End If
+            'If PresenterObj.AccountHasChildren(IdNo) Then
+            '    cboAccountGroup.DisplayOnly = False
+            'Else
+            '    Dim parentAccount As ChartModel
+            '    parentAccount = PresenterObj.ModelPresenter.GetRecordById(Of ChartModel)(cboParentIdNo.SelectedValue)
+            '    If parentAccount.AccountGroup Is Nothing Then
+            '        cboAccountGroup.SelectedValue = ""
+            '        txtLevelNumber.Text = 0
+            '        cboAccountGroup.DisplayOnly = True
+            '    Else
+            '        cboAccountGroup.SelectedValue = parentAccount.AccountGroup
+            '        txtLevelNumber.Text = parentAccount.LevelNumber + 1
+            '        If parentAccount.AccountGroup = "S" Then
+            '            cboAccountGroup.DisplayOnly = False
+            '        Else
+            '            cboAccountGroup.DisplayOnly = True
+            '        End If
+            '    End If
+            'End If
         End Sub
+
+        'Public Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+        '    If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
+        '        cboAccountGroup.DisplayOnly = False
+        '    Else
+        '        cboAccountGroup.DisplayOnly = True
+        '    End If
+        'End Sub
+
 
     End Class
 

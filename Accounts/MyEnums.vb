@@ -121,6 +121,7 @@ Public Enum SpecialAccountSelection
     <EnumCode("BA")> Bank
     <EnumCode("BI")> BeginningInventory
     <EnumCode("CA")> CustomerAdvances
+    <EnumCode("CE")> CurrentEarning
     <EnumCode("CS")> Cash
     <EnumCode("CK")> CheckingAccount
     <EnumCode("EL")> EmployeeLoan
@@ -448,6 +449,8 @@ Public Module Adapter
                 retValue = "CS"
             Case SpecialAccountSelection.CheckingAccount
                 retValue = "CK"
+            Case SpecialAccountSelection.CurrentEarning
+                retValue = "CE"
             Case SpecialAccountSelection.EmployeeLoan
                 retValue = "EL"
             Case SpecialAccountSelection.Sales
@@ -673,6 +676,8 @@ Public Module Adapter
                 retValue = SpecialAccountSelection.Cash
             Case "SL"
                 retValue = SpecialAccountSelection.Sales
+            Case "CE"
+                retValue = SpecialAccountSelection.CurrentEarning
             Case "CK"
                 retValue = SpecialAccountSelection.CheckingAccount
             Case "BA"
