@@ -107,7 +107,7 @@ Namespace PresentationLayer.Forms
                 Return txtCreditLimit.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtCreditLimit.Text = Value.ToMoney()
+                txtCreditLimit.Text = Value.ToString("N", _nfi)
             End Set
         End Property
 
@@ -218,7 +218,7 @@ Namespace PresentationLayer.Forms
                 Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtOpeningBalance.Text = Value.ToMoney()
+                txtOpeningBalance.Text = Value.ToString("N", _nfi)
             End Set
         End Property
 
@@ -281,7 +281,7 @@ Namespace PresentationLayer.Forms
                 Return txtSettlementDiscount.Text.ToDecimalNumber(_nfi)
             End Get
             Set
-                txtSettlementDiscount.Text = Value.ToMoney(2)
+                txtSettlementDiscount.Text = Value.ToString("N", _nfi)
             End Set
         End Property
 

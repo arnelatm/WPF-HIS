@@ -380,7 +380,7 @@ Namespace PresentationLayer.Forms
                 Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtOpeningBalance.Text = Value.ToMoney()
+                txtOpeningBalance.Text = Value.ToString("N",_nfi)
             End Set
         End Property
 

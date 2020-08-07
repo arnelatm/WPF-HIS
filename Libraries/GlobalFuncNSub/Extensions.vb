@@ -44,23 +44,23 @@ Public Module Extensions
     <Extension()>
     Public Function ToMoney(number As Decimal, noOfDigits As Short) As String
         Dim cFormat As String = "C" + noOfDigits.ToString()
-        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name))
     End Function
 
     <Extension()>
     Public Function ToMoney(number As Single, noOfDigits As Short) As String
         Dim cFormat As String = "C" + noOfDigits.ToString()
-        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+        Return number.ToString(cFormat, New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name))
     End Function
 
     <Extension()>
     Public Function ToMoney(number As Single) As String
-        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name))
     End Function
 
-    <Extension()>
+    '<Extension()>
     Public Function ToMoney(number As Double) As String
-        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name)).Remove(0, 1)
+        Return number.ToString("C", New Globalization.CultureInfo(GlobalVariables.AppCurrentCultureInfo.Name))
     End Function
 
     <Extension()>

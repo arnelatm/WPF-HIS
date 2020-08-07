@@ -315,12 +315,12 @@ Public Class BfMain
             Dim allCtrl As New List(Of Control)
             For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
                 If IsTranslatable(cCtrl) Then
-                    If TypeOf cCtrl Is ToolStrip Then
-                        TranslateToolStripItems(cCtrl)
-                    ElseIf TypeOf cCtrl Is MenuStrip Then
+                    If TypeOf cCtrl Is MenuStrip Then
                         Dim subMenuName = ""
                         Dim menuStrip As MenuStrip = cCtrl
                         TranslateMenuStripItems(menuStrip.Items, subMenuName)
+                    ElseIf TypeOf cCtrl Is ToolStrip Then
+                        TranslateToolStripItems(cCtrl)
                     ElseIf TypeOf cCtrl Is CTreeView Or TypeOf cCtrl Is TreeView Then
                         Dim cT = CType(cCtrl, TreeView)
                         cT.ExpandAll()

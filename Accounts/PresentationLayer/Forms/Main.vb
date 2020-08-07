@@ -1180,7 +1180,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub StatementOfAccountsReToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatementOfAccountsReToolStripMenuItem.Click
+        Private Sub StatementOfAccountsReToolStripMenuItem_Click(sender As Object, e As EventArgs) 
 
         End Sub
 

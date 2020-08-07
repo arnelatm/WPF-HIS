@@ -56,7 +56,6 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDistributionSchemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -111,20 +110,13 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemBalanceSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.YearlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemIncomeStatementForAGivenYear = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OldSystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatementOfAccountsReToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TrialBalanceForAGivenMonthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TrialBalanceForAGivenYearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IncomeStatementForAGivenMonthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IncomeStatementForAGivenYearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BalanceSheetForAGivenMonthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BalanceSheetForAGivenYearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryOfAccountsPayableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatementOfAccountsPayableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryOfAccountsReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatementOfAccountsReceivableToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.YearlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuarterlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -151,11 +143,6 @@ Namespace PresentationLayer.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.YearlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QuarterlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.Account.SuspendLayout
@@ -285,7 +272,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -303,11 +290,6 @@ Namespace PresentationLayer.Forms
         '
         Me.ToolStripMenuItemDepartments.Name = "ToolStripMenuItemDepartments"
         resources.ApplyResources(Me.ToolStripMenuItemDepartments, "ToolStripMenuItemDepartments")
-        '
-        'ToolStripMenuItemRevCostCenters
-        '
-        Me.ToolStripMenuItemRevCostCenters.Name = "ToolStripMenuItemRevCostCenters"
-        resources.ApplyResources(Me.ToolStripMenuItemRevCostCenters, "ToolStripMenuItemRevCostCenters")
         '
         'ToolStripMenuItemRevCostCenters
         '
@@ -510,7 +492,7 @@ Namespace PresentationLayer.Forms
         '
         'ToolStripMenuItemReports
         '
-        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.TransactionDetailToolStripMenuItem, Me.OldSystemToolStripMenuItem})
+        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.TransactionDetailToolStripMenuItem})
         Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
         resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
         '
@@ -591,77 +573,41 @@ Namespace PresentationLayer.Forms
         Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
         resources.ApplyResources(Me.MonthlyToolStripMenuItem1, "MonthlyToolStripMenuItem1")
         '
-        'TransactionDetailToolStripMenuItem
-        '
-        Me.TransactionDetailToolStripMenuItem.Name = "TransactionDetailToolStripMenuItem"
-        resources.ApplyResources(Me.TransactionDetailToolStripMenuItem, "TransactionDetailToolStripMenuItem")
-        '
         'ToolStripMenuItemIncomeStatementForAGivenYear
         '
         Me.ToolStripMenuItemIncomeStatementForAGivenYear.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YearlyToolStripMenuItem2, Me.MonthlyToolStripMenuItem2, Me.QuarterlyToolStripMenuItem1, Me.SemiAnnuallyToolStripMenuItem, Me.CustomRangeToolStripMenuItem})
         Me.ToolStripMenuItemIncomeStatementForAGivenYear.Name = "ToolStripMenuItemIncomeStatementForAGivenYear"
         resources.ApplyResources(Me.ToolStripMenuItemIncomeStatementForAGivenYear, "ToolStripMenuItemIncomeStatementForAGivenYear")
         '
-        'OldSystemToolStripMenuItem
+        'YearlyToolStripMenuItem2
         '
-        Me.OldSystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatementOfAccountsReToolStripMenuItem, Me.TrialBalanceForAGivenMonthToolStripMenuItem, Me.TrialBalanceForAGivenYearToolStripMenuItem, Me.IncomeStatementForAGivenMonthToolStripMenuItem, Me.IncomeStatementForAGivenYearToolStripMenuItem, Me.BalanceSheetForAGivenMonthToolStripMenuItem, Me.BalanceSheetForAGivenYearToolStripMenuItem, Me.SummaryOfAccountsPayableToolStripMenuItem, Me.StatementOfAccountsPayableToolStripMenuItem, Me.SummaryOfAccountsReceivableToolStripMenuItem, Me.StatementOfAccountsReceivableToolStripMenuItem1})
-        Me.OldSystemToolStripMenuItem.Name = "OldSystemToolStripMenuItem"
-        resources.ApplyResources(Me.OldSystemToolStripMenuItem, "OldSystemToolStripMenuItem")
+        Me.YearlyToolStripMenuItem2.Name = "YearlyToolStripMenuItem2"
+        resources.ApplyResources(Me.YearlyToolStripMenuItem2, "YearlyToolStripMenuItem2")
         '
-        'StatementOfAccountsReToolStripMenuItem
+        'MonthlyToolStripMenuItem2
         '
-        Me.StatementOfAccountsReToolStripMenuItem.Name = "StatementOfAccountsReToolStripMenuItem"
-        resources.ApplyResources(Me.StatementOfAccountsReToolStripMenuItem, "StatementOfAccountsReToolStripMenuItem")
+        Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
+        resources.ApplyResources(Me.MonthlyToolStripMenuItem2, "MonthlyToolStripMenuItem2")
         '
-        'TrialBalanceForAGivenMonthToolStripMenuItem
+        'QuarterlyToolStripMenuItem1
         '
-        Me.TrialBalanceForAGivenMonthToolStripMenuItem.Name = "TrialBalanceForAGivenMonthToolStripMenuItem"
-        resources.ApplyResources(Me.TrialBalanceForAGivenMonthToolStripMenuItem, "TrialBalanceForAGivenMonthToolStripMenuItem")
+        Me.QuarterlyToolStripMenuItem1.Name = "QuarterlyToolStripMenuItem1"
+        resources.ApplyResources(Me.QuarterlyToolStripMenuItem1, "QuarterlyToolStripMenuItem1")
         '
-        'TrialBalanceForAGivenYearToolStripMenuItem
+        'SemiAnnuallyToolStripMenuItem
         '
-        Me.TrialBalanceForAGivenYearToolStripMenuItem.Name = "TrialBalanceForAGivenYearToolStripMenuItem"
-        resources.ApplyResources(Me.TrialBalanceForAGivenYearToolStripMenuItem, "TrialBalanceForAGivenYearToolStripMenuItem")
+        Me.SemiAnnuallyToolStripMenuItem.Name = "SemiAnnuallyToolStripMenuItem"
+        resources.ApplyResources(Me.SemiAnnuallyToolStripMenuItem, "SemiAnnuallyToolStripMenuItem")
         '
-        'IncomeStatementForAGivenMonthToolStripMenuItem
+        'CustomRangeToolStripMenuItem
         '
-        Me.IncomeStatementForAGivenMonthToolStripMenuItem.Name = "IncomeStatementForAGivenMonthToolStripMenuItem"
-        resources.ApplyResources(Me.IncomeStatementForAGivenMonthToolStripMenuItem, "IncomeStatementForAGivenMonthToolStripMenuItem")
+        Me.CustomRangeToolStripMenuItem.Name = "CustomRangeToolStripMenuItem"
+        resources.ApplyResources(Me.CustomRangeToolStripMenuItem, "CustomRangeToolStripMenuItem")
         '
-        'IncomeStatementForAGivenYearToolStripMenuItem
+        'TransactionDetailToolStripMenuItem
         '
-        Me.IncomeStatementForAGivenYearToolStripMenuItem.Name = "IncomeStatementForAGivenYearToolStripMenuItem"
-        resources.ApplyResources(Me.IncomeStatementForAGivenYearToolStripMenuItem, "IncomeStatementForAGivenYearToolStripMenuItem")
-        '
-        'BalanceSheetForAGivenMonthToolStripMenuItem
-        '
-        Me.BalanceSheetForAGivenMonthToolStripMenuItem.Name = "BalanceSheetForAGivenMonthToolStripMenuItem"
-        resources.ApplyResources(Me.BalanceSheetForAGivenMonthToolStripMenuItem, "BalanceSheetForAGivenMonthToolStripMenuItem")
-        '
-        'BalanceSheetForAGivenYearToolStripMenuItem
-        '
-        Me.BalanceSheetForAGivenYearToolStripMenuItem.Name = "BalanceSheetForAGivenYearToolStripMenuItem"
-        resources.ApplyResources(Me.BalanceSheetForAGivenYearToolStripMenuItem, "BalanceSheetForAGivenYearToolStripMenuItem")
-        '
-        'SummaryOfAccountsPayableToolStripMenuItem
-        '
-        Me.SummaryOfAccountsPayableToolStripMenuItem.Name = "SummaryOfAccountsPayableToolStripMenuItem"
-        resources.ApplyResources(Me.SummaryOfAccountsPayableToolStripMenuItem, "SummaryOfAccountsPayableToolStripMenuItem")
-        '
-        'StatementOfAccountsPayableToolStripMenuItem
-        '
-        Me.StatementOfAccountsPayableToolStripMenuItem.Name = "StatementOfAccountsPayableToolStripMenuItem"
-        resources.ApplyResources(Me.StatementOfAccountsPayableToolStripMenuItem, "StatementOfAccountsPayableToolStripMenuItem")
-        '
-        'SummaryOfAccountsReceivableToolStripMenuItem
-        '
-        Me.SummaryOfAccountsReceivableToolStripMenuItem.Name = "SummaryOfAccountsReceivableToolStripMenuItem"
-        resources.ApplyResources(Me.SummaryOfAccountsReceivableToolStripMenuItem, "SummaryOfAccountsReceivableToolStripMenuItem")
-        '
-        'StatementOfAccountsReceivableToolStripMenuItem1
-        '
-        Me.StatementOfAccountsReceivableToolStripMenuItem1.Name = "StatementOfAccountsReceivableToolStripMenuItem1"
-        resources.ApplyResources(Me.StatementOfAccountsReceivableToolStripMenuItem1, "StatementOfAccountsReceivableToolStripMenuItem1")
+        Me.TransactionDetailToolStripMenuItem.Name = "TransactionDetailToolStripMenuItem"
+        resources.ApplyResources(Me.TransactionDetailToolStripMenuItem, "TransactionDetailToolStripMenuItem")
         '
         'ToolStripMenuItemHelp
         '
@@ -800,31 +746,6 @@ Namespace PresentationLayer.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'YearlyToolStripMenuItem2
-        '
-        Me.YearlyToolStripMenuItem2.Name = "YearlyToolStripMenuItem2"
-        resources.ApplyResources(Me.YearlyToolStripMenuItem2, "YearlyToolStripMenuItem2")
-        '
-        'MonthlyToolStripMenuItem2
-        '
-        Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
-        resources.ApplyResources(Me.MonthlyToolStripMenuItem2, "MonthlyToolStripMenuItem2")
-        '
-        'QuarterlyToolStripMenuItem1
-        '
-        Me.QuarterlyToolStripMenuItem1.Name = "QuarterlyToolStripMenuItem1"
-        resources.ApplyResources(Me.QuarterlyToolStripMenuItem1, "QuarterlyToolStripMenuItem1")
-        '
-        'SemiAnnuallyToolStripMenuItem
-        '
-        Me.SemiAnnuallyToolStripMenuItem.Name = "SemiAnnuallyToolStripMenuItem"
-        resources.ApplyResources(Me.SemiAnnuallyToolStripMenuItem, "SemiAnnuallyToolStripMenuItem")
-        '
-        'CustomRangeToolStripMenuItem
-        '
-        Me.CustomRangeToolStripMenuItem.Name = "CustomRangeToolStripMenuItem"
-        resources.ApplyResources(Me.CustomRangeToolStripMenuItem, "CustomRangeToolStripMenuItem")
-        '
         'Main
         '
         Me.AllowDrop = true
@@ -945,18 +866,6 @@ End Sub
         Friend WithEvents TestToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents DefaultFieldValuesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ClosePettyCashAccountToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents OldSystemToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents StatementOfAccountsReToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents TrialBalanceForAGivenMonthToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents TrialBalanceForAGivenYearToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents IncomeStatementForAGivenMonthToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents IncomeStatementForAGivenYearToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents BalanceSheetForAGivenMonthToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents BalanceSheetForAGivenYearToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents SummaryOfAccountsPayableToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents StatementOfAccountsPayableToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents SummaryOfAccountsReceivableToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents StatementOfAccountsReceivableToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents EmployeeReceivableToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents StatementOfEmployeeLoansToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents SummaryOfAccountsPayableToolStripMenuItem1 As ToolStripMenuItem
