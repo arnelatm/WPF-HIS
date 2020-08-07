@@ -34,7 +34,11 @@ Public Class StoreCaptions
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
-            If TypeOf cCtrl Is ToolStrip Then
+            If TypeOf cCtrl Is MenuStrip Then
+                Dim subMenuName = cCtrl.Name
+                Dim menuStrip As MenuStrip = cCtrl
+                SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = ""
                 Dim toolStrip As ToolStrip = cCtrl
                 Dim c As ToolStrip
@@ -42,10 +46,6 @@ Public Class StoreCaptions
                 For Each obj As Object In c.Items
                     TranslateToolStrip(FormIdNo, c, obj)
                 Next
-            ElseIf TypeOf cCtrl Is MenuStrip Then
-                Dim subMenuName = cCtrl.Name
-                Dim menuStrip As MenuStrip = cCtrl
-                SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
             ElseIf TypeOf cCtrl Is DataGridView Then
                 Dim c As DataGridView
                 c = cCtrl
