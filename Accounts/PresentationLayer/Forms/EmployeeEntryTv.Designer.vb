@@ -575,7 +575,7 @@ Namespace PresentationLayer.Forms
         Me.lblBalance.Name = "lblBalance"
         Me.lblBalance.Size = New System.Drawing.Size(194, 23)
         Me.lblBalance.TabIndex = 259
-        Me.lblBalance.Text = "Balance"
+        Me.lblBalance.Text = "Cash Advance Balance"
         Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtBalance

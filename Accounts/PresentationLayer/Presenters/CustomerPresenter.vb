@@ -16,9 +16,10 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        'Public Function GetCustomerList()
-        '    Return GetTreeViewList("CustomerName")
-        'End Function
+        Public Function GetCustomerBalance(idNo As Integer)
+            Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
+        End Function
+
     End Class
 
 End Namespace
