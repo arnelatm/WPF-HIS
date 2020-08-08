@@ -122,7 +122,7 @@ Namespace PresentationLayer.Forms
         Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(839, 53)
         Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TreeViewTableName.Size = New System.Drawing.Size(300, 418)
         '
@@ -585,6 +585,7 @@ Namespace PresentationLayer.Forms
         Me.txtBalance.ComputedValue = false
         Me.txtBalance.CustomFormat = Nothing
         Me.txtBalance.DataBoundControl = true
+        Me.txtBalance.DisplayOnly = true
         Me.txtBalance.EditingMode = false
         Me.floMainDisplay.SetFlowBreak(Me.txtBalance, true)
         Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
@@ -1638,9 +1639,9 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout2.Controls.Add(Me.CFlowLayout4)
         Me.CFlowLayout2.Controls.Add(Me.EmployeeTabControl)
         Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.CFlowLayout2.Location = New System.Drawing.Point(300, 53)
+        Me.CFlowLayout2.Location = New System.Drawing.Point(0, 0)
         Me.CFlowLayout2.Name = "CFlowLayout2"
-        Me.CFlowLayout2.Size = New System.Drawing.Size(839, 418)
+        Me.CFlowLayout2.Size = New System.Drawing.Size(839, 471)
         Me.CFlowLayout2.TabIndex = 6
         '
         'CFlowLayout4
@@ -1667,8 +1668,8 @@ Namespace PresentationLayer.Forms
         Me.MinimumSize = New System.Drawing.Size(1165, 480)
         Me.Name = "EmployeeEntryTv"
         Me.Text = "Employee Maintenance Form"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
+        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floMainDisplay.ResumeLayout(false)
         Me.floMainDisplay.PerformLayout
