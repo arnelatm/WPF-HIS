@@ -4,6 +4,7 @@ Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms.Reports
+
     Public Class ApSummary
 
         Public Property MainTableName As String
@@ -21,19 +22,19 @@ Namespace PresentationLayer.Forms.Reports
             PresenterObj = New ReportPresenter(Me)
             Dim currentDate = Now()
             ' returns previous month last day
-            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year,currentDate.Month,0)
+            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)
             dtpEndingDate.Value = endDate
-            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year,endDate.Month,1)
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year, endDate.Month, 1)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             Dim cForm As New ReportForm("Summary of Accounts Payable.Rpt", dtpBeginningDate.Value, "BeginningDate",
-                                        dtpEndingDate.Value, "EndingDate",  chkIncludeZeroBalances.Checked, "IncludeZeroBalances", language, "Language"
-            ) 
+                                        dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance", language, "Language"
+            )
             cForm.Show()
         End Sub
 
@@ -42,4 +43,5 @@ Namespace PresentationLayer.Forms.Reports
         End Sub
 
     End Class
+
 End Namespace

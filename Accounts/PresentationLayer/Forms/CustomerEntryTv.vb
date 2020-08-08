@@ -380,7 +380,7 @@ Namespace PresentationLayer.Forms
                 Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
             End Get
             Set
-                txtOpeningBalance.Text = Value.ToString("N",_nfi)
+                txtOpeningBalance.Text = Value.ToString("N", _nfi)
             End Set
         End Property
 
@@ -425,6 +425,13 @@ Namespace PresentationLayer.Forms
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
+        End Sub
+
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            Dim value As Double
+            value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
+            txtBalance.Text = value.ToString("N", _nfi)
         End Sub
 
     End Class

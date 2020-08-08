@@ -106,6 +106,8 @@ Namespace PresentationLayer.Forms
         Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
@@ -929,6 +931,8 @@ Namespace PresentationLayer.Forms
         Me.floDataDisplay.Controls.Add(Me.cacAccountStatus)
         Me.floDataDisplay.Controls.Add(Me.lblActive)
         Me.floDataDisplay.Controls.Add(Me.chkActive)
+        Me.floDataDisplay.Controls.Add(Me.CLabel3)
+        Me.floDataDisplay.Controls.Add(Me.txtBalance)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
         Me.floDataDisplay.Name = "floDataDisplay"
@@ -1242,6 +1246,33 @@ Namespace PresentationLayer.Forms
         Me.chkActive.OldValue = Nothing
         Me.chkActive.UseVisualStyleBackColor = true
         '
+        'CLabel3
+        '
+        Me.CLabel3.DisplayOnly = true
+        Me.CLabel3.EditingMode = false
+        resources.ApplyResources(Me.CLabel3, "CLabel3")
+        Me.CLabel3.Name = "CLabel3"
+        '
+        'txtBalance
+        '
+        Me.txtBalance.BackColor = System.Drawing.Color.White
+        Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBalance.ComputedValue = false
+        Me.txtBalance.CustomFormat = Nothing
+        Me.txtBalance.DataBoundControl = true
+        Me.txtBalance.DisplayOnly = true
+        Me.txtBalance.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtBalance, true)
+        resources.ApplyResources(Me.txtBalance, "txtBalance")
+        Me.txtBalance.ForeColor = System.Drawing.Color.Black
+        Me.txtBalance.LinkedLabel = Me.lblOpeningBalance
+        Me.txtBalance.MaximumValue = Nothing
+        Me.txtBalance.MinimumValue = Nothing
+        Me.txtBalance.Name = "txtBalance"
+        Me.txtBalance.OldValue = Nothing
+        Me.txtBalance.ReadOnly = true
+        Me.txtBalance.ValueIsNumeric = true
+        '
         'CustomerEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -1333,5 +1364,7 @@ End Sub
         Friend WithEvents cacPaymentMethod As CaComboBox
         Friend WithEvents cacDiscountSchemeIdNo As CaComboBox
         Friend WithEvents cacAccountStatus As CaComboBox
+        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents txtBalance As CTextBox
     End Class
 End Namespace

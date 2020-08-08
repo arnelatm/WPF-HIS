@@ -308,58 +308,61 @@ Public Class CFormEntry
         '    Debugger.Break()
         'End If
         Dim targetValue = obj.Text
-
         Dim y As PropertyInfo = [GetType]().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
-        Dim x As Type = y.PropertyType
-        Dim u As Type = Nullable.GetUnderlyingType(x)
-        If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
-            If u IsNot Nothing Then
-                Return True
-            Else
-                If Type.GetTypeCode(x) = TypeCode.String Then
+        If y IsNot Nothing Then
+            Dim x As Type = y.PropertyType
+            Dim u As Type = Nullable.GetUnderlyingType(x)
+            If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
+                If u IsNot Nothing Then
                     Return True
                 Else
-                    MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                    If Type.GetTypeCode(x) = TypeCode.String Then
+                        Return True
+                    Else
+                        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                        Return False
+                    End If
+                End If
+            Else
+                Dim num As Double
+                Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+                If Not isNumeric Then
+                    MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
                     Return False
                 End If
+                Dim nMinValue As Double
+                Dim nMaxValue As Double
+                Dim typeCode As TypeCode = Type.GetTypeCode(x)
+                Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
+                If u Is Nothing Then
+                    nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
+                Else
+                    typeCode = Type.GetTypeCode(u)
+                    nMinValue = GlobalFunctions.GetMinMaxValue(underlyingTypeCode, nMaxValue)
+                End If
+                If num < nMinValue OrElse num > nMaxValue Then
+                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
+                    Return False
+                End If
+                Dim isInteger As Boolean = False
+                If u Is Nothing Then
+                    If NumTypeIsInteger(typeCode) Then
+                        isInteger = True
+                    End If
+                Else
+                    If NumTypeIsInteger(underlyingTypeCode) Then
+                        isInteger = True
+                    End If
+                End If
+                If isInteger Then
+                    If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
+                        Return False
+                    End If
+                End If
+                Return True
             End If
         Else
-            Dim num As Double
-            Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
-            If Not isNumeric Then
-                MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
-                Return False
-            End If
-            Dim nMinValue As Double
-            Dim nMaxValue As Double
-            Dim typeCode As TypeCode = Type.GetTypeCode(x)
-            Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
-            If u Is Nothing Then
-                nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
-            Else
-                typeCode = Type.GetTypeCode(u)
-                nMinValue = GlobalFunctions.GetMinMaxValue(underlyingTypeCode, nMaxValue)
-            End If
-            If num < nMinValue OrElse num > nMaxValue Then
-                MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
-                Return False
-            End If
-            Dim isInteger As Boolean = False
-            If u Is Nothing Then
-                If NumTypeIsInteger(typeCode) Then
-                    isInteger = True
-                End If
-            Else
-                If NumTypeIsInteger(underlyingTypeCode) Then
-                    isInteger = True
-                End If
-            End If
-            If isInteger Then
-                If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                    MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
-                    Return False
-                End If
-            End If
             Return True
         End If
 
