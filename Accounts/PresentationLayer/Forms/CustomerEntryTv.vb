@@ -430,8 +430,16 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
             Dim value As Double
-            value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
+            value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo)) + OpeningBalance
             txtBalance.Text = value.ToString("N", _nfi)
+        End Sub
+
+        Public Sub OnInputsTurnedOne Handles MyBase.InputsTurnedOn
+            If PresenterObj.AddMode Then
+                txtOpeningBalance.DisplayOnly = False
+            Else
+                txtOpeningBalance.DisplayOnly = True
+            End If
         End Sub
 
     End Class
