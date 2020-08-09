@@ -708,6 +708,9 @@ Public Module GlobalFunctions
             Case TypeCode.Single
                 nMinValue = Single.MinValue
                 nMaxValue = Single.MaxValue
+            Case TypeCode.Double
+                nMinValue = Double.MinValue
+                nMaxValue = Double.MaxValue
             Case TypeCode.Decimal
                 nMinValue = Decimal.MinValue
                 nMaxValue = Decimal.MaxValue
@@ -739,6 +742,8 @@ Public Module GlobalFunctions
                 result = Convert.ToDateTime(value)
             Case TypeCode.Single
                 result = Convert.ToSingle(value)
+            Case TypeCode.Double
+                result = Convert.ToDouble(value)
             Case TypeCode.Empty
                 result = Nothing
             Case TypeCode.DBNull

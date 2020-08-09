@@ -14,7 +14,7 @@
         Public Property ContactDesignation As String
         Public Property ContactPerson As String
         Public Property CountryCode As String
-        Public Property CreditLimit As Single
+        Public Property CreditLimit As Decimal
         Public Property CrNumber As String
         Public Property DateAccountOpen As Date?
         Public Property District As String
@@ -26,7 +26,7 @@
         Public Property IdNo As Int32
         Public Property Mobile As String
         Public Property Notes As String
-        Public Property OpeningBalance As Single
+        Public Property OpeningBalance As Decimal
         Public Property PaymentDueDays As Int16
         Public Property PaymentMethod As String
         Public Property Phone1 As String

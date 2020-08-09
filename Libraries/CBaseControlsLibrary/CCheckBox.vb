@@ -10,6 +10,8 @@ Public Class CCheckBox
 
     Private _editingMode As Boolean = True
     Private _oldValue As String
+    Private _displayOnly As Boolean
+
 
     Public Sub New()
         MyBase.New()
@@ -101,6 +103,23 @@ Public Class CCheckBox
     <Description("Set to True to specify that this control is read only.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
+            _displayOnly = value
+            If value Then
+                Me.Enabled = True
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                Me.Enabled = False
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        End Set
+    End Property
 
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>

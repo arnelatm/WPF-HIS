@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views
         Property ArAccountIdNo As Int32?
         Property RevAccountIdNo As Int32?
         Property DiscountSchemeIdNo As Int16?
-        Property CreditLimit As Single
+        Property CreditLimit As Decimal
         Property SettlementDueDays As Int16
         Property SettlementDiscount As Decimal
         Property PaymentDueDays As Int16
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views
         Property Iban As String
         Property PaymentMethod As String
         Property Notes As String
-        Property OpeningBalance As Single
+        Property OpeningBalance As Decimal
         Property Active As Boolean
     End Interface
 

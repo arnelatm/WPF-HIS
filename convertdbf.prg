@@ -247,7 +247,7 @@ ctr = 0
 Select 1
 Go Top
 Do While Not Eof()
-*!*		IF CustOrig.Custcode='C77' THEN
+*!*		IF CustOrig.Custcode='C84' THEN
 *!*			SET STEP ON 
 *!*		ENDIF
 	If custorig.CustCode <> "E" Then
@@ -373,7 +373,7 @@ Do While Not Eof()
 		Replace ApJournal.Posted With .T.
 
 		Select supplier
-		Replace supplier.OpBalance With 0
+		* Replace supplier.OpBalance With 0
 	Endif
 	Skip
 Enddo
@@ -646,9 +646,9 @@ Do While Not Eof()
 		Select JOURITEM
 		Skip
 	Enddo
-	If apSw = 0 And Not apCancelled Then
-		Set Step On
-	Endif
+*!*		If apSw = 0 And Not apCancelled Then
+*!*			Set Step On
+*!*		Endif
 	Select ApJournal
 	Append Blank
 	Replace ApJournal.IdNo With Val(cTranno)
@@ -749,7 +749,7 @@ Do While Not Eof()
 			Skip
 			Loop
 		Endif
-		Set Step On
+*!*			Set Step On
 	Else
 		SEQ = SEQ + 1
 		If cCustCode="E" Then
@@ -835,10 +835,10 @@ Do While Not Eof()
 		Select JOURITEM
 		Skip
 	Enddo
-	If nArCtr > 1 Then
-* double ar/er entries in jouritem
-		Set Step On
-	Endif
+*!*		If nArCtr > 1 Then
+*!*	* double ar/er entries in jouritem
+*!*			Set Step On
+*!*		Endif
 	If cCustCode = "E" Then
 		Select ErJournal
 		Append Blank
@@ -1384,18 +1384,18 @@ Do While Not Eof()
 	nIdNo = 0
 	If CReceipt.Apply_To = "I" Then
 		If CReceipt.PayType = "C" Then
-			cPaymType = "R"
+			cPaymType = "A"
 		Else
 			If CReceipt.PayType = "S" Then
-				cPaymType = "A"
+				cPaymType = "R"
 			Endif
 		Endif
 	Else
 		If CReceipt.PayType = "C" Then
-			cPaymType = "R"
+			cPaymType = "A"
 		ELSE
 			IF cPaymType = "S" then
- 				cPaymType = "A"
+ 				cPaymType = "R"
 			else
 		 		cPaymType = "O"
 	 			cPayee = CReceipt.Payor
@@ -1530,9 +1530,9 @@ Do While Not Eof()
 		Select ApJourItm
 		Skip
 	Enddo
-	If apSw = 0 And Not ApJournal.Cancelled
-		Set Step On
-	Endif
+*!*		If apSw = 0 And Not ApJournal.Cancelled
+*!*			Set Step On
+*!*		Endif
 	Select ApOpnInv
 	nCtr = nCtr + 1
 	Append Blank
@@ -1580,9 +1580,9 @@ Do While Not Eof()
 		Select CrJourItm
 		Skip
 	Enddo
-	If apSw = 0 And Not CrJournal.Cancelled
-		Set Step On
-	Endif
+*!*		If apSw = 0 And Not CrJournal.Cancelled
+*!*			Set Step On
+*!*		Endif
 	Select ApOpnInv
 	nCtr = nCtr + 1
 	Append Blank
@@ -1880,9 +1880,9 @@ Do While Not Eof()
 		Select ArJourItm
 		Skip
 	Enddo
-	If arSw = 0 And Not ArJournal.Cancelled
-		Set Step On
-	Endif
+*!*		If arSw = 0 And Not ArJournal.Cancelled
+*!*			Set Step On
+*!*		Endif
 	Select ArOpnInv
 	nCtr = nCtr + 1
 	Append Blank

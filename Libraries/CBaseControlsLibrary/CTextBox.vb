@@ -239,13 +239,14 @@ Public Class CTextBox
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        End If
+        'for editing
+        'If EditingMode And Not DisplayOnly Then
+        '    ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+        '    BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        'Else
+        '    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+        '    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        'End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave

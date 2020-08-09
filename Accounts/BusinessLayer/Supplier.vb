@@ -44,7 +44,7 @@ Namespace BusinessLayer
         Public Property AccountStatus As String
         Public Property ApAccountIdNo As Int32?
         Public Property ExpAccountIdNo As Int32?
-        Public Property CreditLimit As Single
+        Public Property CreditLimit As Decimal
         Public Property SettlementDueDays As Int16
         Public Property SettlementDiscount As Decimal
         Public Property PaymentDueDays As Int16
@@ -54,7 +54,7 @@ Namespace BusinessLayer
         Public Property Iban As String
         Public Property PaymentMethod As String
         Public Property Notes As String
-        Public Property OpeningBalance As Single
+        Public Property OpeningBalance As Decimal
         Public Property Active As Boolean
     End Class
 

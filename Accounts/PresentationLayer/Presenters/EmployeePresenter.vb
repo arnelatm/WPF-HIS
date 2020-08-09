@@ -21,6 +21,11 @@ Namespace PresentationLayer.Presenters
             ea.SubscribeEvent(Me)
         End Sub
 
+        Public Function GetEmployeeBalance(idNo As Integer)
+            Return DataModel.OpeningBalance + Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
+        End Function
+
+
     End Class
 
 End Namespace
