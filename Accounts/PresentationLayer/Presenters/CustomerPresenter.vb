@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetCustomerBalance(idNo As Integer)
-            Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
+            Return DataModel.OpeningBalance + Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
         End Function
 
     End Class

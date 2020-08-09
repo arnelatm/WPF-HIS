@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views
         Property ContactDesignation As String
         Property ContactPerson As String
         Property CountryCode As String
-        Property CreditLimit As Single
+        Property CreditLimit As Decimal
         Property CrNumber As String
         Property DateAccountOpen As Date?
         Property District As String
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views
         Property IdNo As Int32
         Property Mobile As String
         Property Notes As String
-        Property OpeningBalance As Single
+        Property OpeningBalance As Decimal
         Property PaymentDueDays As Int16
         Property PaymentMethod As String
         Property Phone1 As String

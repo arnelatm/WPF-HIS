@@ -756,7 +756,7 @@ Public Class CFormEntry
                     cCtrl.Text = initValue
                 ElseIf TypeOf cCtrl Is TxtComboBox Then
                     CallByName(cCtrl, "MakeDefault", CallType.Method)
-                ElseIf TypeOf cCtrl Is CComboBox Or TypeOf cCtrl Is CaComboBox Then
+                ElseIf TypeOf cCtrl Is CaComboBox Or TypeOf cCtrl Is CComboBox Then
                     'SetPropertyValue(cCtrl, "Text", "")
                     SetPropertyValue(cCtrl, "SelectedItem", Nothing)
                     SetPropertyValue(cCtrl, "SelectedIndex", -1)

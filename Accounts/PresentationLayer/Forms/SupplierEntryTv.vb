@@ -103,9 +103,9 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CreditLimit As Single Implements ISupplierView.CreditLimit
+        Public Property CreditLimit As Decimal Implements ISupplierView.CreditLimit
             Get
-                Return txtCreditLimit.Text.ToSingleNumber(_nfi)
+                Return txtCreditLimit.Text.ToDecimalNumber(_nfi)
             End Get
             Set
                 txtCreditLimit.Text = Value.ToString("N", _nfi)
@@ -214,9 +214,9 @@ Namespace PresentationLayer.Forms
         '        tcbActive.Text = YesNoToEnum(value)
         '    End Set
         'End Property
-        Public Property OpeningBalance As Single Implements ISupplierView.OpeningBalance
+        Public Property OpeningBalance As Decimal Implements ISupplierView.OpeningBalance
             Get
-                Return txtOpeningBalance.Text.ToSingleNumber(_nfi)
+                Return txtOpeningBalance.Text.ToDecimalNumber(_nfi)
             End Get
             Set
                 txtOpeningBalance.Text = Value.ToString("N", _nfi)
@@ -423,8 +423,16 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
             Dim value As Double
-            value = Convert.ToDouble(PresenterObj.GetSupplierBalance(IdNo)) + OpeningBalance
+            value = Convert.ToDouble(PresenterObj.GetSupplierBalance(IdNo)) 
             txtBalance.Text = value.ToString("N", _nfi)
+        End Sub
+
+        Public Sub OnInputsTurnedOn Handles MyBase.InputsTurnedOn
+            If PresenterObj.AddMode Then
+                txtOpeningBalance.DisplayOnly = False
+            Else
+                txtOpeningBalance.DisplayOnly = True
+            End If
         End Sub
 
     End Class

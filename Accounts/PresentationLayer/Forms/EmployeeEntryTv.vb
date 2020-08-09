@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -7,6 +8,10 @@ Namespace PresentationLayer.Forms
 
     Public Class EmployeeEntryTv
         Implements IEmployeeView
+
+        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+
+
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -411,6 +416,21 @@ Namespace PresentationLayer.Forms
          {"ZipCode", txtZipCode},
         {"IdNo", TxtIdNo}
         }
+        End Sub
+
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
+            Dim value As Double
+            value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
+            txtBalance.Text = value.ToString("N", _nfi)
+        End Sub
+
+        Public Sub OnInputsTurnedOn Handles MyBase.InputsTurnedOn
+            If PresenterObj.AddMode Then
+                txtOpeningBalance.DisplayOnly = False
+            Else
+                txtOpeningBalance.DisplayOnly = True
+            End If
         End Sub
 
     End Class
