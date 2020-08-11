@@ -36,12 +36,16 @@
     [Notes]              NVARCHAR (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [OpeningBalance]     MONEY          NULL,
     [Active]             BIT            NULL,
-    [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Supplier2_DateCreated] DEFAULT (getdate()) NULL,
+    [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Supplier_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NULL,
-    CONSTRAINT [PK_SupplierDetailsIDNo2] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_SupplierName2] UNIQUE NONCLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_SupplierNameAra2] UNIQUE NONCLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_SupplierDetailsIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
+    CONSTRAINT [IX_SupplierName] UNIQUE NONCLUSTERED ([IdNo] ASC),
+    CONSTRAINT [IX_SupplierNameAra] UNIQUE NONCLUSTERED ([IdNo] ASC)
 );
+
+
+
+
 
 
 
