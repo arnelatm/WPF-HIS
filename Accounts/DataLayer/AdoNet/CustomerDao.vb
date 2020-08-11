@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports CrystalDecisions.ReportSource
 
 Namespace DataLayer.AdoNet
     ' Data access object for Customer
@@ -9,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class CustomerDao
         Inherits CommonDao
-        Implements IDaoAll(Of Customer)
+        Implements IDaoAll(Of Customer), IDaoPayees(Of Customer)
 
         Private ReadOnly Db As New Db()
 
@@ -179,6 +180,23 @@ Namespace DataLayer.AdoNet
                                     "@OpeningBalance", customer.OpeningBalance,
                                     "@Active", customer.Active
                                 }
+        End Function
+
+        Public Function UpdateOpeningBalance(ByRef bizObj As Customer) As Integer Implements IDaoPayees(Of Customer).UpdateOpeningBalance
+            Dim sql As String
+            If bizObj.OpeningBalance <> 0 Then
+                If Db.Scalar("Select Count(*) from ApOpenInvoice where JournalCode = 'BB' and JournalIdNo = " & bizObj.IdNo) = 0 Then
+                    sql = "INSERT ApOpenInvoice ([JournalCode], [JournalIdNo], [JournalItemIdNo], [PaidAmount], [DiscountTaken]) VALUES " &
+                                                "('BB', @IdNo, 1, 0, 0)"
+                    Dim params() As Object = {"@IdNo", bizObj.IdNo}
+                    If Db.Insert(sql, params) Then
+                        Return 0
+                    Else
+                        Return -1
+                    End If
+                End If
+            End If
+            Return 0
         End Function
 
     End Class

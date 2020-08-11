@@ -20,6 +20,15 @@ Namespace PresentationLayer.Presenters
             Return DataModel.OpeningBalance + Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
         End Function
 
+        
+        Public Sub OnAfterSave() Handles MyBase.AfterSave
+            UpdateOpeningBalance()
+        End Sub
+
+        Public Function UpdateOpeningBalance() 
+            Return ModelPresenter.UpdateOpeningBalance(DataModel)
+        End Function
+
     End Class
 
 End Namespace
