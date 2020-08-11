@@ -18,12 +18,20 @@ Namespace DataLayer
 
     'End Interface
 
+    Public Interface IDaoPayees(Of TBiz)
+
+        Function UpdateOpeningBalance(ByRef bizObj As TBiz) As Integer
+        
+    End Interface
+
+    
     Public Interface IDaoJournals(Of TBiz)
 
         Function UpdateGlReferenceNumber(ByRef bizObj As TBiz) As Integer
 
     End Interface
 
+    
     Public Interface IDaoOpenInvoice(Of TBiz)
 
         Function AddRecord(ByRef openInvoice As TBiz) As Integer
