@@ -157,7 +157,7 @@ Namespace PresentationLayer.Presenters
                         totalBalance += item.Balance
                     Next
                     If totalBalance > 0 Then
-                        If View.UnApplied > 0 Then
+                        If View.UnApplied >= 0 Then
                             Messaging.Show(True, "MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
                             retVal = False
                         Else

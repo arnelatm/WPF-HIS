@@ -32,7 +32,7 @@ Namespace PresentationLayer.Forms
             SecurityGroupView.cacParentIdNo.DataSource = PresenterObj.GetSecurityGroupList()
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
+        Protected Overrides Sub RecordSaved()
             UpdateParentIdData()
             SecurityGroupView.cacParentIdNo.Refresh()
         End Sub

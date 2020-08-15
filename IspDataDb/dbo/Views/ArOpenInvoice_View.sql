@@ -1,15 +1,18 @@
-﻿CREATE VIEW dbo.ArOpenInvoice_View
+﻿
+CREATE VIEW [dbo].[ArOpenInvoice_View]
 AS
 SELECT        dbo.ArOpenInvoice.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArOpenInvoice.JournalItemIdNo, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS Amount, dbo.ArOpenInvoice.PaidAmount, 
                          dbo.ArOpenInvoice.DiscountTaken, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit - dbo.ArOpenInvoice.PaidAmount - dbo.ArOpenInvoice.DiscountTaken AS Balance, 
                          dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS InvoiceAmount, dbo.ArOpenInvoice.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.CustomerIdNo, 
                          dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.Notes, dbo.Chart.AccountCode, 
                          dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Chart.SpecialAccount, dbo.Customer.CustomerCode
-FROM            dbo.Customer RIGHT OUTER JOIN
-                         dbo.ARDetails_View ON dbo.Customer.IdNo = dbo.ARDetails_View.CustomerIdNo RIGHT OUTER JOIN
-                         dbo.ArOpenInvoice ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND 
-                         dbo.ARDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ArOpenInvoice.JournalCode LEFT OUTER JOIN
-                         dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo
+FROM            dbo.Customer 
+				LEFT JOIN dbo.ARDetails_View 
+				ON dbo.Customer.IdNo = dbo.ARDetails_View.CustomerIdNo 
+				LEFT JOIN dbo.ArOpenInvoice 
+				ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ARDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ArOpenInvoice.JournalCode 
+				LEFT JOIN dbo.Chart 
+				ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]

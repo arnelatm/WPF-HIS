@@ -2,6 +2,12 @@
 
 
 
+
+
+
+
+
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -44,7 +50,7 @@ UNION
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
-  WHERE PayorType='R'
+  WHERE PayorType='A'
 )
 UNION
 (SELECT 'CK'
@@ -111,4 +117,32 @@ UNION
   LEFT OUTER JOIN dbo.PettyCashJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='R'
+)
+UNION
+(SELECT 'BB' 
+	  ,IdNo
+      ,1
+      ,IdNo
+      ,(Select AccountIdNo from DefaultAccounts where SpecialAccount='AR')
+      ,case 
+		when OpeningBalance >=0 then OpeningBalance
+		else 0
+	   end 
+      ,case 
+		when OpeningBalance < 0 then OpeningBalance * -1
+		else 0
+	   end 
+	  ,0
+      ,'Beginning Balance'
+      ,1
+	  ,IdNo
+	  ,'Beg.Bal.'
+	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
+      ,'Beg.Bal.'
+	  ,case 
+		when OpeningBalance >=0 then 'D'
+		else 'C'
+	   end 
+	  ,'Beginning Balance'
+  FROM [dbo].Customer 
 )

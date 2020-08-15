@@ -21,6 +21,12 @@ Namespace PresentationLayer.Models
             Return updateResult
         End Function
 
+        Public Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateOpeningBalance
+            Dim updateResult As Integer
+            updateResult = DataService.UpdateOpeningBalance(model)
+            Return updateResult
+        End Function
+
         Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
             Dim updateResult As Integer
             updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)

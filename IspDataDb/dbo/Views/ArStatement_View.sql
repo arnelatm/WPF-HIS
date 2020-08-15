@@ -1,10 +1,13 @@
-﻿CREATE VIEW dbo.ArStatement_View
+﻿
+CREATE VIEW dbo.ArStatement_View
 AS
-SELECT        dbo.ARDetails_View.JournalCode, dbo.ARDetails_View.IdNo, dbo.ARDetails_View.Sequence, dbo.ARDetails_View.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.Debit, 
-                         dbo.ARDetails_View.Credit, dbo.ARDetails_View.RevCostCenterIdNo, dbo.ARDetails_View.Notes, dbo.ARDetails_View.Posted, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.InvoiceNo, 
-                         dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.ARDetails_View.MainNote
+SELECT        dbo.ARDetails_View.JournalCode, dbo.ARDetails_View.IdNo, dbo.ARDetails_View.Sequence, dbo.ARDetails_View.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.Debit, dbo.ARDetails_View.Credit, 
+                         dbo.ARDetails_View.RevCostCenterIdNo, dbo.ARDetails_View.Notes, dbo.ARDetails_View.Posted, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.TransactionDate, 
+                         dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.ARDetails_View.MainNote, dbo.Customer.CustomerCode, dbo.Customer.CustomerName, 
+                         dbo.Customer.CustomerNameAra
 FROM            dbo.ARDetails_View INNER JOIN
-                         dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo
+                         dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
+                         dbo.Customer ON dbo.ARDetails_View.CustomerIdNo = dbo.Customer.IdNo
 WHERE        (dbo.Chart.SpecialAccount = 'AR')
 
 GO
@@ -130,4 +133,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArStatement_View';
+
+
+
+
 

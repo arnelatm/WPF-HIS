@@ -92,6 +92,16 @@ Public Class RecordSaved
 
 End Class
 
+Public Class RecordDeleted
+
+    Public Sub New(ByRef model)
+        Me.Model = model
+    End Sub
+
+    Public Property Model
+
+End Class
+
 Public Class SelectedButton
 
     Public Sub New(ByVal clickedButton As ButtonClicked)

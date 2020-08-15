@@ -273,6 +273,11 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
+        Public Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateOpeningBalance
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return DataDao.UpdateOpeningBalance(DataBo)
+        End Function
+
         Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
             Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
         End Function

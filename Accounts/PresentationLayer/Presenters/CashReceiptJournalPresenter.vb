@@ -53,13 +53,13 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCsrOiInsertTable.Columns.Add("Amount", GetType(Decimal))
-            DtCsrOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
+            DtCsrOiInsertTable.Columns.Add("ArOpenInvoiceIdNo", GetType(Int32))
             DtCsrOiInsertTable.Columns.Add("CsrIdNo", GetType(Int32))
             DtCsrOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtCsrOiInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtCsrOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
-            DtCsrOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
+            DtCsrOiUpdateTable.Columns.Add("ArOpenInvoiceIdNo", GetType(Int32))
             DtCsrOiUpdateTable.Columns.Add("CsrIdNo", GetType(Int32))
             DtCsrOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtCsrOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
@@ -381,7 +381,7 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         End If
                     ElseIf PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.SupplierRefund Then
-                        If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
+                        If specialAccount IsNot Nothing AndAlso "AR|EL".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee")
                             Dim caption = "Invalid Entry"

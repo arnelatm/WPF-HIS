@@ -715,11 +715,11 @@ Namespace PresentationLayer.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            Dim childMdiForm As PurchaseJournalEntry
-            childMdiForm = New PurchaseJournalEntry() With {.MdiParent = Me}
-            childMdiForm.Show()
-        End Sub
+        'Private Sub PurchaseJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        '    Dim childMdiForm As PurchaseJournalEntry
+        '    childMdiForm = New PurchaseJournalEntry() With {.MdiParent = Me}
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemReligions.Click

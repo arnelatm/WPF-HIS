@@ -132,9 +132,14 @@ Public Class CFormEntryTv
         _bypassSelectedChange = False
     End Sub
 
-    Private Sub BfTvEntry_SuccessfulDelete(idNoOfDeletedRecord As Integer) Handles MyBase.SuccessfulDelete
+
+    Protected Overrides Sub RecordDeleted()
         RemoveCurrentNode(True)
     End Sub
+
+    'Private Sub BfTvEntry_SuccessfulDelete(idNoOfDeletedRecord As Integer) Handles MyBase.SuccessfulDelete
+
+    'End Sub
 
     ' ReSharper disable once UnusedMember.Local
     Private Function GetMainFieldName(mainFieldName As String) As String

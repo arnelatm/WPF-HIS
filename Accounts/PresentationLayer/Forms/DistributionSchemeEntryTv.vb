@@ -231,38 +231,38 @@ Namespace PresentationLayer.Forms
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
 
-        Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            If PresenterObj.AddMode Then
-                IdNo = passedValue
-            End If
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In bsDistributionSchemeItems
-                Dim workRow As DataRow
-                If ji.IdNo <= 0 Then
-                    workRow = DtInsertTable.NewRow()
-                Else
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("IdNo") = ji.IdNo
-                End If
-                workRow("DistributionSchemeIdNo") = IdNo
-                workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
-                workRow("Sequence") = nRowCount
-                workRow("Percentage") = ji.Percentage
-                If ji.IdNo <= 0 Then
-                    DtInsertTable.Rows.Add(workRow)
-                Else
-                    DtUpdateTable.Rows.Add(workRow)
-                End If
-                nRowCount += 1
-            Next
-            _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-        End Sub
+        'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        '    If PresenterObj.AddMode Then
+        '        IdNo = passedValue
+        '    End If
+        '    If DtInsertTable IsNot Nothing Then
+        '        DtInsertTable.Clear()
+        '    End If
+        '    If DtUpdateTable IsNot Nothing Then
+        '        DtUpdateTable.Clear()
+        '    End If
+        '    Dim nRowCount = 1
+        '    For Each ji In bsDistributionSchemeItems
+        '        Dim workRow As DataRow
+        '        If ji.IdNo <= 0 Then
+        '            workRow = DtInsertTable.NewRow()
+        '        Else
+        '            workRow = DtUpdateTable.NewRow()
+        '            workRow("IdNo") = ji.IdNo
+        '        End If
+        '        workRow("DistributionSchemeIdNo") = IdNo
+        '        workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
+        '        workRow("Sequence") = nRowCount
+        '        workRow("Percentage") = ji.Percentage
+        '        If ji.IdNo <= 0 Then
+        '            DtInsertTable.Rows.Add(workRow)
+        '        Else
+        '            DtUpdateTable.Rows.Add(workRow)
+        '        End If
+        '        nRowCount += 1
+        '    Next
+        '    _distributionSchemeItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
+        'End Sub
 
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
         '    With DataGridViewDistributionSchemeItems.CurrentCell
@@ -375,7 +375,7 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
+        Protected Overrides Sub RecordSaved()
             If PresenterObj.AddMode Then
                 btnLast.PerformClick()
             End If

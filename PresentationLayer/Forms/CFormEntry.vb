@@ -18,7 +18,8 @@ Public Class CFormEntry
                ISubscriber(Of ValidatingData),
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
-               ISubscriber(Of RecordSaved)
+               ISubscriber(Of RecordSaved),
+               ISubscriber(Of RecordDeleted)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -159,6 +160,10 @@ Public Class CFormEntry
 
     Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
         RecordSaved()
+    End Sub
+
+    Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
+        RecordDeleted()
     End Sub
 
     Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
@@ -468,6 +473,10 @@ Public Class CFormEntry
         '
     End Sub
 
+    Protected Overridable Sub RecordDeleted()
+        '
+    End Sub
+
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
         If RecordCount = 0 Then
             btnFirst.Enabled = False
@@ -723,7 +732,6 @@ Public Class CFormEntry
                 MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
             Next
             SetAllControlsDynamicProperties()
-            RaiseEvent AfterLoad()
             AddMandatoryFieldCHeck()
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
@@ -1003,57 +1011,16 @@ Public Class CFormEntry
 
 #Region "Temporary Events"
 
-    'Public Event AddingRecordChanged(adding As Boolean)
-
-    'Public Event AfterAdd(retVal As Integer)
-
-    'Public Event AfterDelete()
-
-    'Public Event AfterDisplayView()
-
-    'Public Event AfterEdit(retVal As Integer)
-
-    Public Event AfterLoad()
-
-    Public Event AfterSave(retVal As Integer)
 
     Public Event BeforeAdd()
-
-    'Public Event BeforeDelete()
-
-    Public Event BeforeDisplayView()
 
     Public Event BeforeEdit()
 
     Public Event BeforeSave()
 
-    'Public Event BeforeValidate()
-
-    'Public Event CancelChanges()
-
-    Public Event DisplayedRecordChanged()
-
-    'Public Event EditingRecordChanged(editing As Boolean)
-
     Public Event InputsTurnedOff()
 
     Public Event InputsTurnedOn()
-
-    Public Event ParentRecordAddedSuccessfully(passedValue As Integer)
-
-    Public Event ParentRecordUpdatedSuccessfully(passedValue As Integer)
-
-    'Public Event SuccessfulAdd(idNoOfRecord As Integer)
-
-    Public Event SuccessfulDelete(idNoOfDeletedRecord As Integer)
-
-    'Public Event SuccessfulEdit(idNoOfRecord As Integer)
-
-    'Public Event SuccessfulUpdate(idNoOfRecord As Integer)
-
-    'Public Event TextDisplayChanged()
-
-    'Public Event UndoEdits(addingRec As Boolean)
 
 #End Region
 

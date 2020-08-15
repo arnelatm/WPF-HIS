@@ -18,7 +18,7 @@ Namespace DataLayer
 
     'End Interface
 
-    Public Interface IDaoPayees(Of TBiz)
+    Public Interface IDaoContacts(Of TBiz)
 
         Function UpdateOpeningBalance(ByRef bizObj As TBiz) As Integer
         

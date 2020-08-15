@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "ApOpenInvoiceIdNo," &
                     "Balance," &
                     "CadIdNo," &
                     "DiscountTaken," &
@@ -54,7 +55,7 @@ Namespace DataLayer.AdoNet
             New CadOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
-            .ApOpenInvoiceIdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .ApOpenInvoiceIdNo = Extensions.AsId(Of Int32)(reader("ApOpenInvoiceIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CadIdNo = Extensions.AsString(reader("CadIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),

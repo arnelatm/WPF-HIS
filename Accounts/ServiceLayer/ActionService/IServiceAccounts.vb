@@ -15,6 +15,8 @@ Namespace ServiceLayer.ActionService
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
+        Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer
+
         Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
         'Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)

@@ -17,6 +17,8 @@ Namespace PresentationLayer.Models
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
+        Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer
+
         Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
     End Interface

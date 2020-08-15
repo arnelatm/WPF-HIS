@@ -157,7 +157,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.CadOiItems
                         totalBalance += item.Balance
                     Next
-                    If totalBalance > 0 Then
+                    If totalBalance >= 0 Then
                         If View.UnApplied > 0 Then
                             Messaging.Show(True, "MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
                             retVal = False
@@ -314,6 +314,24 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
+
+        'Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.Succ
+        '    Dim retVal As Integer
+        '    ' save journal entries
+        '    If Not AddMode Then
+        '        _oldCadOiItem = GetCadOiItems(View.IdNo)
+        '    Else
+        '        _oldCadOiItem = Nothing
+        '    End If
+        '    retVal = SaveJournalItems(passedValue)
+        '    If retVal > 0 Then
+        '        retVal = SaveCadOiItems(passedValue)
+        '        If retVal >= 0 Then
+        '            SaveOpenInvoices()
+        '        End If
+        '    End If
+        'End Sub
+
 
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)
