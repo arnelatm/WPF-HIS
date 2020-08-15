@@ -240,17 +240,6 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Public Function UpdateOpenInvoice(ByRef journalItem As JournalItemModel, ByVal addBalance As Decimal) As String
-            Dim retValue As String
-            Dim openInvoiceModel As New ApOpenInvoiceModel
-            openInvoiceModel.DiscountTaken = journalItem.DiscountTaken
-            openInvoiceModel.PaidAmount = journalItem.PaidAmount
-            openInvoiceModel.IdNo = journalItem.IdNo
-            openInvoiceModel.JournalItemIdNo = journalItem.IdNo
-            retValue = _apOpenInvoiceModel.UpdateRecord(Of ApOpenInvoiceModel)(openInvoiceModel)
-            Return retValue
-        End Function
-
         Public Sub UpdateTotals()
             View.TotalDebits = 0
             View.TotalCredits = 0

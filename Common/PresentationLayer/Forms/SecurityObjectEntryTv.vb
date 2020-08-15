@@ -85,7 +85,7 @@ Namespace PresentationLayer.Forms
                 Exit Sub
             End If
         End Sub
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
+        Protected Overrides Sub RecordSaved()
             UpdateParentIdData()
             cacParentIdNo.Refresh()
         End Sub

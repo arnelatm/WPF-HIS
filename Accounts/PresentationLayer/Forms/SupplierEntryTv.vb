@@ -427,13 +427,13 @@ Namespace PresentationLayer.Forms
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
 
-        Public Sub OnInputsTurnedOn Handles MyBase.InputsTurnedOn
-            If PresenterObj.AddMode Then
-                txtOpeningBalance.DisplayOnly = False
-            Else
-                txtOpeningBalance.DisplayOnly = True
-            End If
-        End Sub
+        'Public Sub OnInputsTurnedOn Handles MyBase.InputsTurnedOn
+        '    If PresenterObj.AddMode Then
+        '        txtOpeningBalance.DisplayOnly = False
+        '    Else
+        '        txtOpeningBalance.DisplayOnly = True
+        '    End If
+        'End Sub
 
     End Class
 

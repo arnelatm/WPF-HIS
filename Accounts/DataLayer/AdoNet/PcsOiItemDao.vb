@@ -24,6 +24,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "ApOpenInvoiceIdNo," &
                     "Balance," &
                     "PcsIdNo," &
                     "DiscountTaken," &
@@ -55,7 +56,7 @@ Namespace DataLayer.AdoNet
             New PcsOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
-            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("ApOpenInvoiceIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .PcsIdNo = Extensions.AsString(reader("PcsIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),

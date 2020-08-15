@@ -325,12 +325,6 @@
     <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.Designer.vb">
-      <DependentUpon>PurchaseJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\PurchaseJournalEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Forms\Reports\ApSummary.designer.vb">
       <DependentUpon>ApSummary.vb</DependentUpon>
     </Compile>
@@ -627,9 +621,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\PurchaseItemEntry.resx">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PurchaseJournalEntry.resx">
-      <DependentUpon>PurchaseJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>

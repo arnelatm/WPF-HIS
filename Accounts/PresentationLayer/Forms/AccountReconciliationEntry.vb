@@ -232,10 +232,10 @@ Namespace PresentationLayer.Forms
                 }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
-            UpdateTotals()
-        End Sub
+        'Protected Overrides Sub RecordPositionChanged()
+        '    MyBase.RecordPositionChanged()
+        '    UpdateTotals()
+        'End Sub
 
         Private Sub BindAccountReconciliation()
             SuspendLayout()
@@ -457,10 +457,13 @@ Namespace PresentationLayer.Forms
             Return 0
         End Function
 
-        Private Sub OnDisplayedRecordChanged() Handles MyBase.DisplayedRecordChanged
+
+        Protected Overrides Sub RecordPositionChanged()
+            MyBase.RecordPositionChanged()
             If Not DataGridViewReconciliationItems.DataBindings Is Nothing Then
                 DataGridViewReconciliationItems.DataInGridChanged = False
             End If
+            UpdateTotals()
         End Sub
 
         'Private Sub GetAcctReconItems()

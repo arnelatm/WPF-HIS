@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class SupplierDao
         Inherits CommonDao
-        Implements IDaoAll(Of Supplier)
+        Implements IDaoAll(Of Supplier), IDaoContacts(Of Supplier)
 
         Private ReadOnly Db As New Db()
 
@@ -273,6 +273,23 @@ Namespace DataLayer.AdoNet
                                     "@Website", supplier.Website,
                                     "@ZipCode", supplier.ZipCode
                                 }
+        End Function
+
+        Public Function UpdateOpeningBalance(ByRef bizObj As Supplier) As Integer Implements IDaoContacts(Of Supplier).UpdateOpeningBalance
+            Dim sql As String
+            If bizObj.OpeningBalance <> 0 Then
+                If Db.Scalar("Select Count(*) from ApOpenInvoice where JournalCode = 'BB' and JournalIdNo = " & bizObj.IdNo) = 0 Then
+                    sql = "INSERT ApOpenInvoice ([JournalCode], [JournalIdNo], [JournalItemIdNo], [PaidAmount], [DiscountTaken]) VALUES " &
+                          "('BB', @IdNo, @IdNo, 0, 0)"
+                    Dim params() As Object = {"@IdNo", bizObj.IdNo}
+                    If Db.Insert(sql, params) Then
+                        Return 0
+                    Else
+                        Return -1
+                    End If
+                End If
+            End If
+            Return 0
         End Function
 
     End Class

@@ -27,6 +27,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "ArOpenInvoiceIdNo," &
                     "Balance," &
                     "CsrIdNo," &
                     "DiscountTaken," &
@@ -58,7 +59,7 @@ Namespace DataLayer.AdoNet
             New CsrOiItem() With {
             .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
-            .ArOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
+            .ArOpenInvoiceIdNo = Extensions.AsId(Of Int32)(reader("ArOpenInvoiceIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .CsrIdNo = Extensions.AsString(reader("CsrIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),

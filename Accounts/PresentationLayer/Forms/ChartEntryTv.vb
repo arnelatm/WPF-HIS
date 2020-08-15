@@ -4,11 +4,12 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class ChartEntryTv
-        Implements IChartView
+        Implements IChartView, ISubscriber(Of RecordSaved)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -211,10 +212,12 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
+
+        Protected Overrides Sub RecordSaved()
             cboParentIdNo.DataSource = PresenterObj.GetChartList("AccountName")
             cboParentIdNo.Refresh()
         End Sub
+
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PresenterObj.EditMode And ParentIdNo = IdNo Then

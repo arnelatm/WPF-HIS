@@ -105,8 +105,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event CancelChanges()
 
-    Public Event DisplayedRecordChanged()
-
     Public Event EditingRecordChanged(editing As Boolean)
 
     Public Event ParentRecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
@@ -591,7 +589,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 If retValue <= 0 Then
                     Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    RaiseEvent SuccessfulDelete(currentIdNo)
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New RecordDeleted(DataModel))
+                    End If
                     Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
@@ -604,7 +604,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     If Ea IsNot Nothing Then
                         Ea.PublishEvent(New RecordSaved(DataModel))
                     End If
-                    RaiseEvent DisplayedRecordChanged()
                 End If
                 RaiseEvent AfterDelete()
             End If
