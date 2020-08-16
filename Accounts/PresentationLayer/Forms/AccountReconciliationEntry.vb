@@ -457,7 +457,6 @@ Namespace PresentationLayer.Forms
             Return 0
         End Function
 
-
         Protected Overrides Sub RecordPositionChanged()
             MyBase.RecordPositionChanged()
             If Not DataGridViewReconciliationItems.DataBindings Is Nothing Then
@@ -624,12 +623,12 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
-            If Posted Then
-                Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-                PresenterObj.CancelEdit = True
-            End If
-        End Sub
+        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
+        '    If Posted Then
+        '        Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
+        '        PresenterObj.CancelEdit = True
+        '    End If
+        'End Sub
 
         Private Sub dtpReconciliationDate_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
             If dtpReconciliationDate.DateChanged() Then

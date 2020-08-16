@@ -123,7 +123,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DistributionSchemeitems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeitems
+        Public Property DistributionSchemeitems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get
@@ -132,13 +132,13 @@ Namespace PresentationLayer.Forms
                 BindDistributionSchemeItem()
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
         End Sub
-
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -157,7 +157,6 @@ Namespace PresentationLayer.Forms
             MyBase.RecordPositionChanged()
             UpdateTotals()
         End Sub
-
 
         Private Sub BindDistributionSchemeItem()
             SuspendLayout()
@@ -200,7 +199,6 @@ Namespace PresentationLayer.Forms
         '    _footer.SetText("DgvRevCostCenterIdNo", "Totals ->")
         'End Sub
 
-
         Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
@@ -229,7 +227,6 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewDistributionSchemeItems IsNot Nothing Then
                 DataGridViewDistributionSchemeItems.Focus()
@@ -243,7 +240,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        Protected Overrides Sub RecordAdded()
             dtpValidityStartDate.Value = Date.Now()
             dtpValidityEndDate.Value = Date.Now()
             bsDistributionSchemeItems.Clear()

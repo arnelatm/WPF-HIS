@@ -201,7 +201,7 @@ Namespace PresentationLayer.Forms
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
         End Sub
 
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        Protected Overrides Sub RecordAdded()
             dtpValidityStartDate.Value = Date.Now()
             dtpValidityEndDate.Value = Date.Now()
             bsDistributionSchemeItems.Clear()

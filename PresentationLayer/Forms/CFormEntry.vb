@@ -19,7 +19,8 @@ Public Class CFormEntry
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
                ISubscriber(Of RecordSaved),
-               ISubscriber(Of RecordDeleted)
+               ISubscriber(Of RecordDeleted),
+               ISubscriber(Of RecordAdded)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -164,6 +165,10 @@ Public Class CFormEntry
 
     Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
         RecordDeleted()
+    End Sub
+
+    Public Sub OnEventHandlerAddedRecord(ByRef e As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
+        RecordAdded()
     End Sub
 
     Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
@@ -477,6 +482,10 @@ Public Class CFormEntry
         '
     End Sub
 
+    Protected Overridable Sub RecordAdded()
+        '
+    End Sub
+
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
         If RecordCount = 0 Then
             btnFirst.Enabled = False
@@ -582,7 +591,7 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RaiseEvent BeforeEdit()
+        'RaiseEvent BeforeEdit()
         RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 
@@ -1010,11 +1019,6 @@ Public Class CFormEntry
     End Function
 
 #Region "Temporary Events"
-
-
-    Public Event BeforeAdd()
-
-    Public Event BeforeEdit()
 
     Public Event BeforeSave()
 

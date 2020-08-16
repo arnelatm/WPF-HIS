@@ -199,12 +199,12 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
-            If String.IsNullOrEmpty(txtLevelNumber.Text) OrElse CInt(txtLevelNumber.Text) = 0 Then
-                _MBMainAccountNotEditable.Show(Me)
-                PresenterObj.CancelEdit = True
-            End If
-        End Sub
+        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
+        '    If String.IsNullOrEmpty(txtLevelNumber.Text) OrElse CInt(txtLevelNumber.Text) = 0 Then
+        '        _MBMainAccountNotEditable.Show(Me)
+        '        PresenterObj.CancelEdit = True
+        '    End If
+        'End Sub
 
         Public Sub CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
@@ -212,12 +212,10 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
-
         Protected Overrides Sub RecordSaved()
             cboParentIdNo.DataSource = PresenterObj.GetChartList("AccountName")
             cboParentIdNo.Refresh()
         End Sub
-
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PresenterObj.EditMode And ParentIdNo = IdNo Then
@@ -283,6 +281,7 @@ Namespace PresentationLayer.Forms
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             If PresenterObj.AccountHasChildren(IdNo) Then
                 cboParentIdNo.DisplayOnly = True
+                cboNormalBalance.DisplayOnly = True
             Else
                 cboParentIdNo.DisplayOnly = False
             End If
@@ -290,6 +289,21 @@ Namespace PresentationLayer.Forms
                 cboAccountGroup.DisplayOnly = False
             Else
                 cboAccountGroup.DisplayOnly = True
+            End If
+            If LevelNumber = 0 Then
+                cboNormalBalance.DisplayOnly = True
+                cboPayeeType.DisplayOnly = True
+                cboSpecialAccount.DisplayOnly = True
+                chkDetailAccount.DisplayOnly = True
+                chkActive.DisplayOnly = True
+                chkWithReconciliation.DisplayOnly = True
+            Else
+                cboNormalBalance.DisplayOnly = False
+                cboPayeeType.DisplayOnly = False
+                cboSpecialAccount.DisplayOnly = False
+                chkDetailAccount.DisplayOnly = False
+                chkActive.DisplayOnly = False
+                chkWithReconciliation.DisplayOnly = False
             End If
         End Sub
 
@@ -299,7 +313,15 @@ Namespace PresentationLayer.Forms
             Else
                 cboAccountGroup.DisplayOnly = True
             End If
-            'If PresenterObj.AccountHasChildren(IdNo) Then
+            If cboParentIdNo.SelectedValue IsNot Nothing Then
+                cboAccountGroup.SelectedValue = PresenterObj.GetRecordWithIdNo(cboParentIdNo.SelectedValue, "AccountGroup")
+                txtLevelNumber.Text = PresenterObj.GetRecordFieldWithKeyG(Of Integer)(cboParentIdNo.SelectedValue, "Chart_View", "IdNo", "LevelNumber") + 1
+            End If
+            If PresenterObj.AccountHasChildren(IdNo) Then
+                chkDetailAccount.Checked = False
+            Else
+                chkDetailAccount.Checked = True
+            End If
             '    cboAccountGroup.DisplayOnly = False
             'Else
             '    Dim parentAccount As ChartModel
@@ -327,7 +349,6 @@ Namespace PresentationLayer.Forms
         '        cboAccountGroup.DisplayOnly = True
         '    End If
         'End Sub
-
 
     End Class
 
