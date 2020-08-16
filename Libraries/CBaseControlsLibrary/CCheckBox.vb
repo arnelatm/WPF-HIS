@@ -12,7 +12,6 @@ Public Class CCheckBox
     Private _oldValue As String
     Private _displayOnly As Boolean
 
-
     Public Sub New()
         MyBase.New()
         Text = ""
@@ -46,7 +45,6 @@ Public Class CCheckBox
         End If
         Dim cBrush = New SolidBrush(cForeColor)
         pEvent.Graphics.FillRectangle(cBrush, rect)
-
 
         If Checked Then
             Dim cCol As Color
@@ -82,6 +80,7 @@ Public Class CCheckBox
                 pEvent.Graphics.DrawRectangle(pen, fRect)
             End Using
         End If
+
     End Sub
 
     'Private ReadOnly _checkRegionColor As Color = Color.Coral
@@ -107,14 +106,14 @@ Public Class CCheckBox
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            If _displayOnly = value Then Exit Property
+            'If _displayOnly = value Then Exit Property
             _displayOnly = value
             If value Then
-                Me.Enabled = True
+                Me.Enabled = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                Me.Enabled = False
+                Me.Enabled = True
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If

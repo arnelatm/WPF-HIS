@@ -45,6 +45,13 @@ Namespace PresentationLayer.Presenters
             View.AccountReconciliationItems.Clear()
         End Sub
 
+        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
+        '    If Posted Then
+        '        Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
+        '        PresenterObj.CancelEdit = True
+        '    End If
+        'End Sub
+
         Public Overloads Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
             Dim headerIdNo As Integer
             Dim insertReturnValue

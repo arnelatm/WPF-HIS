@@ -42,7 +42,7 @@
         Dim message As String = ""
         Dim caption As String = ""
         DataAccessControl.GetMessage(translate, key, message, caption)
-        MessageCaption = caption + +" [" + MessageKey + "]"
+        MessageCaption = caption + " [" + MessageKey + "]"
         Return MessagingForm.Show(message, MessageCaption)
     End Function
 
