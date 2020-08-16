@@ -319,7 +319,8 @@
     <Build Include="dbo\Views\CrcJournalTransaction_View.sql" />
     <Build Include="dbo\Views\CashDisbursementJournalTransaction_View.sql" />
     <Build Include="dbo\Tables\DefaultAccounts.sql" />
-    <Build Include="dbo\Tables\BeginningBalances.sql" />
+    <Build Include="dbo\Tables\BeginningBalancesXXX.sql" />
+    <Build Include="Security\iGroupAdmin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
