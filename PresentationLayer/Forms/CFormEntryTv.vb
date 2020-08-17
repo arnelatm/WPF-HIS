@@ -231,18 +231,8 @@ Public Class CFormEntryTv
         GotoRecordInTreeView()
     End Sub
 
-    Protected Overrides Sub RecordSaved()
-        MyBase.RecordSaved()
+    Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
         DisplayTreeViewData()
     End Sub
-
-    'Public Sub OeHCfTvSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
-    '    DisplayTreeViewData()
-    'End Sub
-
-    'Public Sub OeHCfTvRecordAdded(ByRef eventType As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
-    '    DisplayTreeViewData()
-    '    GotoRecordInTreeView()
-    'End Sub
 
 End Class

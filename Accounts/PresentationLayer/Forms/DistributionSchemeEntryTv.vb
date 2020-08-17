@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
@@ -201,19 +202,18 @@ Namespace PresentationLayer.Forms
             MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
         End Sub
 
-        Protected Overrides Sub RecordAdded()
-            dtpValidityStartDate.Value = Date.Now()
-            dtpValidityEndDate.Value = Date.Now()
-            bsDistributionSchemeItems.Clear()
-            DataGridViewDistributionSchemeItems.Refresh()
-        End Sub
-
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             DataGridViewDistributionSchemeItems.StartTrackingChanges = True
             DataGridViewDistributionSchemeItems.AddInsertColumn()
+            If PresenterObj.AddMode Then
+                dtpValidityStartDate.Value = Date.Now()
+                dtpValidityEndDate.Value = Date.Now()
+                bsDistributionSchemeItems.Clear()
+                DataGridViewDistributionSchemeItems.Refresh()
+            End If
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
+        Protected Overrides Sub InputsTurnedOff()
             DataGridViewDistributionSchemeItems.StartTrackingChanges = False
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
@@ -362,7 +362,8 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        Protected Overrides Sub RecordSaved()
+        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
+            MyBase.RecordSaved(e)
             If PresenterObj.AddMode Then
                 btnLast.PerformClick()
             End If

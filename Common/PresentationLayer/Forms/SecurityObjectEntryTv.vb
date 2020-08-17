@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
@@ -87,8 +88,8 @@ Namespace PresentationLayer.Forms
             cacParentIdNo.DataSource = PresenterObj.GetSecurityObjectList()
         End Sub
 
-        Protected Overrides Sub RecordSaved()
-            MyBase.RecordSaved()
+        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
+            MyBase.RecordSaved(e)
             UpdateParentIdData()
             cacParentIdNo.Refresh()
         End Sub

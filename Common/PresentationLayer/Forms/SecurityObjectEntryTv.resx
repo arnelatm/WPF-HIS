@@ -132,7 +132,7 @@
     <value>No</value>
   </data>
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 181</value>
+    <value>394, 658</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -171,14 +171,14 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>138, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
   <data name="lblIdNo.Text" xml:space="preserve">
-    <value>SecurityObject ID No.</value>
+    <value>ID No.</value>
   </data>
   <data name="lblIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -208,13 +208,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>138, 23</value>
   </data>
   <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>166</value>
   </data>
   <data name="CLabel1.Text" xml:space="preserve">
-    <value>SecurityObject Code</value>
+    <value>Code</value>
   </data>
   <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -235,7 +235,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityObjectCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 36</value>
+    <value>151, 36</value>
   </data>
   <data name="txtSecurityObjectCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -268,13 +268,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSecurityObjectName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>138, 23</value>
   </data>
   <data name="lblSecurityObjectName.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
   </data>
   <data name="lblSecurityObjectName.Text" xml:space="preserve">
-    <value>SecurityObject Name</value>
+    <value>Name</value>
   </data>
   <data name="lblSecurityObjectName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -295,7 +295,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityObjectName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 61</value>
+    <value>151, 61</value>
   </data>
   <data name="txtSecurityObjectName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -328,13 +328,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSecurityObjectNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>138, 23</value>
   </data>
   <data name="lblSecurityObjectNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
   </data>
   <data name="lblSecurityObjectNameAra.Text" xml:space="preserve">
-    <value>SecurityObject Name (Arabic)</value>
+    <value>Name (Arabic)</value>
   </data>
   <data name="lblSecurityObjectNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -355,7 +355,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityObjectNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 86</value>
+    <value>151, 86</value>
   </data>
   <data name="txtSecurityObjectNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -394,7 +394,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lblParentIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 24</value>
+    <value>139, 24</value>
   </data>
   <data name="lblParentIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>165</value>
@@ -424,7 +424,7 @@
     <value>False</value>
   </data>
   <data name="cacParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 111</value>
+    <value>150, 111</value>
   </data>
   <data name="cacParentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -457,7 +457,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>138, 23</value>
   </data>
   <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -484,7 +484,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 137</value>
+    <value>151, 137</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -514,7 +514,7 @@
     <value>Right</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 53</value>
+    <value>395, 53</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>430, 180</value>
@@ -523,7 +523,7 @@
     <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 181</value>
+    <value>589, 658</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -544,7 +544,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 11</value>
+    <value>151, 11</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -574,7 +574,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>965, 234</value>
+    <value>984, 711</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>981, 250</value>

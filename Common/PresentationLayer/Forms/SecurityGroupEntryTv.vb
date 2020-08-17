@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
@@ -32,8 +33,8 @@ Namespace PresentationLayer.Forms
             SecurityGroupView.cacParentIdNo.DataSource = PresenterObj.GetSecurityGroupList()
         End Sub
 
-        Protected Overrides Sub RecordSaved()
-            MyBase.RecordSaved()
+        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
+            MyBase.RecordSaved(e)
             UpdateParentIdData()
             SecurityGroupView.cacParentIdNo.Refresh()
         End Sub

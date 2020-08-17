@@ -33,13 +33,13 @@ Namespace PresentationLayer.Forms
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSecurityObjectCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -151,6 +151,32 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
             '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            '
+            'txtSecurityObjectCode
+            '
+            Me.txtSecurityObjectCode.BackColor = System.Drawing.Color.White
+            Me.txtSecurityObjectCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtSecurityObjectCode.ComputedValue = False
+            Me.txtSecurityObjectCode.CustomFormat = Nothing
+            Me.txtSecurityObjectCode.DataBoundControl = True
+            Me.txtSecurityObjectCode.EditingMode = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectCode, True)
+            resources.ApplyResources(Me.txtSecurityObjectCode, "txtSecurityObjectCode")
+            Me.txtSecurityObjectCode.ForeColor = System.Drawing.Color.Black
+            Me.txtSecurityObjectCode.LinkedLabel = Nothing
+            Me.txtSecurityObjectCode.MaximumValue = Nothing
+            Me.txtSecurityObjectCode.MinimumValue = Nothing
+            Me.txtSecurityObjectCode.Name = "txtSecurityObjectCode"
+            Me.txtSecurityObjectCode.OldValue = Nothing
+            Me.txtSecurityObjectCode.ReadOnly = True
+            Me.txtSecurityObjectCode.ValueIsMandatory = True
+            '
             'lblSecurityObjectName
             '
             Me.lblSecurityObjectName.DisplayOnly = True
@@ -213,36 +239,10 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
             '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            '
-            'txtSecurityObjectCode
-            '
-            Me.txtSecurityObjectCode.BackColor = System.Drawing.Color.White
-            Me.txtSecurityObjectCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtSecurityObjectCode.ComputedValue = False
-            Me.txtSecurityObjectCode.CustomFormat = Nothing
-            Me.txtSecurityObjectCode.DataBoundControl = True
-            Me.txtSecurityObjectCode.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectCode, True)
-            resources.ApplyResources(Me.txtSecurityObjectCode, "txtSecurityObjectCode")
-            Me.txtSecurityObjectCode.ForeColor = System.Drawing.Color.Black
-            Me.txtSecurityObjectCode.LinkedLabel = Nothing
-            Me.txtSecurityObjectCode.MaximumValue = Nothing
-            Me.txtSecurityObjectCode.MinimumValue = Nothing
-            Me.txtSecurityObjectCode.Name = "txtSecurityObjectCode"
-            Me.txtSecurityObjectCode.OldValue = Nothing
-            Me.txtSecurityObjectCode.ReadOnly = True
-            Me.txtSecurityObjectCode.ValueIsMandatory = True
-            '
             'SecurityObjectEntryTv
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floDataDisplay)
+            Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "SecurityObjectEntryTv"
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

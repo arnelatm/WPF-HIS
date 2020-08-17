@@ -459,12 +459,12 @@ Namespace PresentationLayer.Forms
             Close()
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
+        Protected Overrides Sub InputsTurnedOff()
             DataGridViewSalesCashItems.RemoveInsertColumn()
             btnViewGL.Visible = True
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             DataGridViewSalesCashItems.AddInsertColumn()
             btnViewGL.Visible = False
         End Sub
