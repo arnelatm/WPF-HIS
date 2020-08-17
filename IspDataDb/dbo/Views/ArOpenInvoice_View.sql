@@ -1,14 +1,19 @@
-﻿CREATE VIEW dbo.ArOpenInvoice_View
+﻿
+
+CREATE VIEW [dbo].[ArOpenInvoice_View]
 AS
 SELECT        dbo.ArOpenInvoice.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArOpenInvoice.JournalItemIdNo, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS Amount, dbo.ArOpenInvoice.PaidAmount, 
                          dbo.ArOpenInvoice.DiscountTaken, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit - dbo.ArOpenInvoice.PaidAmount - dbo.ArOpenInvoice.DiscountTaken AS Balance, 
-                         dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS InvoiceAmount, dbo.ArOpenInvoice.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.ReferenceNo, 
-                         dbo.ARDetails_View.TransactionType, dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.Notes, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, 
-                         dbo.Chart.SpecialAccount, dbo.Customer.CustomerCode
-FROM            dbo.Customer RIGHT OUTER JOIN
-                         dbo.ARDetails_View ON dbo.Customer.IdNo = dbo.ARDetails_View.CustomerIdNo LEFT OUTER JOIN
-                         dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IdNo RIGHT OUTER JOIN
-                         dbo.ArOpenInvoice ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ARDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ArOpenInvoice.JournalCode
+                         dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS InvoiceAmount, dbo.ArOpenInvoice.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.CustomerIdNo, 
+                         dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.Notes, dbo.Chart.AccountCode, 
+                         dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Chart.SpecialAccount, dbo.Customer.CustomerCode
+FROM            dbo.Customer 
+				LEFT JOIN dbo.ARDetails_View 
+				ON dbo.Customer.IdNo = dbo.ARDetails_View.CustomerIdNo 
+				LEFT JOIN dbo.ArOpenInvoice 
+				ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ARDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ArOpenInvoice.JournalCode 
+				LEFT JOIN dbo.Chart 
+				ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -82,12 +87,12 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "Customer"
+         Begin Table = "ArOpenInvoice"
             Begin Extent = 
                Top = 6
-               Left = 826
-               Bottom = 299
-               Right = 1030
+               Left = 38
+               Bottom = 332
+               Right = 215
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -102,22 +107,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 1
          End
-         Begin Table = "ArOpenInvoice"
-            Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 332
-               Right = 215
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Chart"
             Begin Extent = 
                Top = 18
                Left = 590
                Bottom = 148
                Right = 788
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Customer"
+            Begin Extent = 
+               Top = 6
+               Left = 826
+               Bottom = 299
+               Right = 1030
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -149,6 +154,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArOpenInvoice_View';
+
+
 
 
 

@@ -2,7 +2,9 @@
 
 
 
-Create View [dbo].[SecurityObject_View] as 
+
+
+CREATE View [dbo].[SecurityObject_View] as 
 with cte as
 (
 select IDNo
@@ -11,9 +13,9 @@ select IDNo
       ,ParentIdNo
       ,Notes
       ,DateTimeStamp
-      ,cast(row_number()over(partition by ParentIdNo order by SecurityObjectName) as varchar(max)) as [path]
+      ,cast(row_number()over(partition by ParentIdNo order by ParentIdNo) as varchar(max)) as [path]
       ,0 as levelnumber
-      ,row_number() over (partition by ParentIdNo order by SecurityObjectName) / power(10.0,0) as SortKey
+      ,row_number() over (partition by ParentIdNo order by ParentIdNo) / power(1000.0,0) as SortKey
  
 from SecurityObject
 where ParentIdNo IS NULL
@@ -26,7 +28,7 @@ select t.IDNo
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.SecurityObjectName) as varchar(max))
       ,levelnumber+1
-      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.SecurityObjectName) / power(10.0,levelnumber+1)
+      ,SortKey + row_number()over(partition by t.ParentIdNo order by t.SecurityObjectName) / power(1000.0,levelnumber+1)
  
  from
     cte
