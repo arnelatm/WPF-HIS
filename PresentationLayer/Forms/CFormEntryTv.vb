@@ -227,12 +227,8 @@ Public Class CFormEntryTv
         End If
     End Sub
 
-    Protected Overrides Sub RecordPositionChanged()
-        MyBase.RecordPositionChanged()
+    Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
         GotoRecordInTreeView()
-        'If TreeViewTableName.SelectedNode IsNot Nothing Then
-        '    TreeViewTableName.SelectedNode.[Text] = PresenterObj.GetTreeNodeText()
-        'End If
     End Sub
 
     Protected Overrides Sub RecordSaved()

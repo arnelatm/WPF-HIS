@@ -156,7 +156,7 @@ Public Class CFormEntry
     End Sub
 
     Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        RecordPositionChanged()
+        RecordPositionChanged(e)
     End Sub
 
     Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
@@ -469,13 +469,8 @@ Public Class CFormEntry
         CreateDataSources()
     End Sub
 
-    Protected Overridable Sub RecordPositionChanged()
-        UpdateRecordCounter()
-        UpdateButtonDisplays(False, False)
-        MyErrorProvider.ClearAllErrorMessages()
-        MyErrorProvider.Clear()
-        TurnOffInputs()
-        Refresh()
+    Protected Overridable Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+
     End Sub
 
     Protected Overridable Sub RecordSaved()

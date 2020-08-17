@@ -376,8 +376,7 @@ Namespace PresentationLayer.Forms
         '    'PresenterObj.Display(PresenterObj.TargetIdNo)
         'End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             SetPayorProperty(cboPayorType.SelectedValue)
             UpdateTotals()
         End Sub
