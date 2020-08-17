@@ -1,6 +1,5 @@
 ﻿Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -15,8 +14,8 @@ Namespace PresentationLayer.Forms
 
             MainTableName = "SecurityObject_View"
             TvMainFieldName = "SecurityObjectName"
-            TvSecondaryFieldName = ""
-            SortOrderKey = "SecurityObjectName"
+            TvSecondaryFieldName = "SecurityCode"
+            SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtSecurityObjectName
             PresenterObj = New SecurityObjectPresenter(Me)
@@ -40,6 +39,15 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property SecurityObjectCode As String Implements ISecurityObjectView.SecurityObjectCode
+            Get
+                Return txtSecurityObjectCode.Text
+            End Get
+            Set
+                txtSecurityObjectCode.Text = Value
             End Set
         End Property
 
@@ -78,14 +86,9 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateParentIdData()
             cacParentIdNo.DataSource = PresenterObj.GetSecurityObjectList()
         End Sub
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And cacParentIdNo.Text = TxtIdNo.Text Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-                PresenterObj.CancelSave = True
-                Exit Sub
-            End If
-        End Sub
+
         Protected Overrides Sub RecordSaved()
+            MyBase.RecordSaved()
             UpdateParentIdData()
             cacParentIdNo.Refresh()
         End Sub

@@ -101,6 +101,10 @@ Public Class LoginEntry
     End Sub
 
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        _textBoxUserName.ReadOnly = False
+        _textBoxPassword.ReadOnly = False
+        _textBoxUserName.DisplayOnly = False
+        _textBoxPassword.DisplayOnly = False
         'Me.Show()
         'LoginPresenter.Display()
     End Sub

@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -24,6 +25,18 @@ Namespace PresentationLayer
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                If EditMode And View.ParentIdNo = View.IdNo Then
+                    Messaging.Show(True, "MsgMemberCannotBeAParentToItself")
+                Else
+                    retValue = True
+                End If
+            End If
+            Return retValue
+        End Function
 
     End Class
 End NameSpace

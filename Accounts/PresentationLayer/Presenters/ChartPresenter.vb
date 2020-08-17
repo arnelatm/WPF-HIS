@@ -66,6 +66,20 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey(idNoToSearch, "Chart", "ParentIdNo", "AccountName")
         End Function
 
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                If EditMode And View.ParentIdNo = View.IdNo Then
+                    Messaging.Show(True, "MsgMemberCannotBeAParentToItself")
+                Else
+                    retValue = True
+                End If
+            End If
+            Return retValue
+        End Function
+
+
     End Class
 
 End Namespace

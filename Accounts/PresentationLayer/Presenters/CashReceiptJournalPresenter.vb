@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -238,12 +237,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
-                If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                    CancelSave = True
-                Else
-                    SetAsideJournalItems()
-                End If
+                SetAsideJournalItems()
             Else
                 MakeJournalItem()
                 SetAsideJournalItems()
@@ -326,30 +320,33 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
                 If Messaging.IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                Else
-                    If PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-                        If CsrOiItemDataIsValid() Then
-                            retValue = True
-                        Else
-                            retValue = False
-                            Dim index As Int16 = 0
-                            For Each item In View.CsrOiItems
-                                If item.Errors IsNot Nothing Then
-                                    View.CsrOiItems(index).Errors = item.Errors
-                                Else
-                                    If View.CsrOiItems(index).Errors IsNot Nothing Then
-                                        View.CsrOiItems(index).Errors.Clear()
-                                    End If
-                                End If
-                                index += 1
-                            Next
-                        End If
+                ElseIf ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                    If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                        Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                        retValue = True
                     End If
+                ElseIf ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                    If CsrOiItemDataIsValid() Then
+                        retValue = True
+                    Else
+                        retValue = False
+                        Dim index As Int16 = 0
+                        For Each item In View.CsrOiItems
+                            If item.Errors IsNot Nothing Then
+                                View.CsrOiItems(index).Errors = item.Errors
+                            Else
+                                If View.CsrOiItems(index).Errors IsNot Nothing Then
+                                    View.CsrOiItems(index).Errors.Clear()
+                                End If
+                            End If
+                            index += 1
+                        Next
+                    End If
+                End If
+                If retValue Then
+                    retValue = JournalItemDataIsValid()
                     If retValue Then
-                        retValue = JournalItemDataIsValid()
-                        If retValue Then
-                            'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                        End If
+                        'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
                     End If
                 End If
             End If

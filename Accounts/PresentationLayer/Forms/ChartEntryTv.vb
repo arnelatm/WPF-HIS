@@ -1,15 +1,10 @@
-﻿Imports AATM.Accounts.My.Resources
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class ChartEntryTv
-        Implements IChartView, ISubscriber(Of RecordSaved)
+        Implements IChartView
 
         Public Sub New()
             ' This call is required by the designer.
@@ -210,43 +205,6 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
             'ResourceEnumConverter.MakeResource("ChartTypeSelection", GetType(ChartTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
-        Protected Overrides Sub RecordSaved()
-            cboParentIdNo.DataSource = PresenterObj.GetChartList("AccountName")
-            cboParentIdNo.Refresh()
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And ParentIdNo = IdNo Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-                PresenterObj.CancelSave = True
-                Exit Sub
-            End If
-            If PresenterObj.EditMode And chkDetailAccount.Checked Then
-                Dim acctName = PresenterObj.GetAccountNameOfChild(IdNo)
-                If Not (acctName Is Nothing Or acctName = "") Then
-                    Dim foundAccount = " (" & acctName & ")"
-                    MessageBox.Show(Me,
-                                    AccountStrings.ChartEntryTv_OnBeforeSave_Child_Account_Found_Message & foundAccount,
-                                    AccountStrings.ChartEntryTv_OnBeforeSave_Child_Account_Found, MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error)
-                    PresenterObj.CancelSave = True
-                End If
-            End If
-            'If PresenterObj.EditMode then
-            '    Dim cOldParentId As String = PresenterObj.GetOriginalValue(cacParentIdNo)
-            '    If cOldParentId <> cacParentIdNo.Text Then
-            '        ' ParentID is changed by the user so
-            '        ' check for records which have this record as parent.
-            '        ' check for matching children entries
-            '        If CommonDaoOld.CountRecordWithKey(TxtIdNo.Text, MainTableName, "ParentIdNo") > 0 Then
-            '            _MBParentWithChildrenChangedDisallowed.Show(Me)
-            '            CancelSave = True
-            '            Exit Sub
-            '        End If
-            '    End If
-            'End If
         End Sub
 
         Protected Overrides Sub CreateDataSources()

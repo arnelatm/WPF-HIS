@@ -589,9 +589,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 If retValue <= 0 Then
                     Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New RecordDeleted(DataModel))
-                    End If
+                    'If Ea IsNot Nothing Then
+                    '    Ea.PublishEvent(New RecordDeleted2(DataModel))
+                    'End If
                     Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
@@ -1172,7 +1172,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 Else
                     retValue = UpdateRecord(record)
                     If retValue > 0 Then
-                        RaiseEvent ParentRecordUpdatedSuccessfully(retValue)
+                        Dim retVal As Integer = 0
+                        RaiseEvent ParentRecordUpdatedSuccessfully(retVal)
+                        retValue = retValue + retVal
                     End If
                     RaiseEvent SuccessfulUpdate(retValue)
                 End If

@@ -195,11 +195,74 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 36</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 23</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>SecurityObject Code</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtSecurityObjectCode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtSecurityObjectCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 36</value>
+  </data>
+  <data name="txtSecurityObjectCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtSecurityObjectCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="txtSecurityObjectCode.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
+  </data>
+  <data name="&gt;&gt;txtSecurityObjectCode.Name" xml:space="preserve">
+    <value>txtSecurityObjectCode</value>
+  </data>
+  <data name="&gt;&gt;txtSecurityObjectCode.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtSecurityObjectCode.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtSecurityObjectCode.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblSecurityObjectName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSecurityObjectName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 36</value>
+    <value>11, 61</value>
   </data>
   <data name="lblSecurityObjectName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -226,13 +289,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblSecurityObjectName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="txtSecurityObjectName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityObjectName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 36</value>
+    <value>232, 61</value>
   </data>
   <data name="txtSecurityObjectName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -253,13 +316,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtSecurityObjectName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblSecurityObjectNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSecurityObjectNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 61</value>
+    <value>11, 86</value>
   </data>
   <data name="lblSecurityObjectNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -286,13 +349,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblSecurityObjectNameAra.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="txtSecurityObjectNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSecurityObjectNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 61</value>
+    <value>232, 86</value>
   </data>
   <data name="txtSecurityObjectNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -316,7 +379,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtSecurityObjectNameAra.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -325,7 +388,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 85</value>
+    <value>10, 110</value>
   </data>
   <data name="lblParentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -352,7 +415,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblParentIdNo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cacParentIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -361,7 +424,7 @@
     <value>False</value>
   </data>
   <data name="cacParentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 86</value>
+    <value>231, 111</value>
   </data>
   <data name="cacParentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -382,13 +445,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cacParentIdNo.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 112</value>
+    <value>11, 137</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -415,13 +478,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 112</value>
+    <value>232, 137</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -445,7 +508,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>

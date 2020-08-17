@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Windows.Forms.VisualStyles
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -61,12 +62,19 @@ Namespace PresentationLayer.Presenters
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
-                If Messaging.IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                    retValue = False
+                ElseIf Messaging.IsDateRangeValid("General Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
                     For Each item In View.JournalItems
-                        chart = GetChart(item.AccountIdNo)
-                        specialAccount = chart.SpecialAccount
+                        If item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0 Then
+                            specialAccount = Nothing
+                        Else
+                            chart = GetChart(item.AccountIdNo)
+                            specialAccount = chart.SpecialAccount
+                        End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
@@ -85,16 +93,10 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
+
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                If MessageBox.Show(AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal_Ask_To_Save,
-                                   AccountStrings.JournalEntry_OnBeforeSave_Empty_Journal,
-                                   MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    CancelSave = True
-                End If
-            End If
+
             If Not CancelSave Then
                 'If AddMode Then
                 '    View.IdNo = passedValue
@@ -107,7 +109,7 @@ Namespace PresentationLayer.Presenters
                 End If
                 Dim nRowCount = 1
                 For Each ji In View.JournalItems
-                    If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
+                    If (ji.AccountIdNo Is Nothing Or ji.AccountIdNo = 0) AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
                         ' ignore these records (no amount no account)
                     Else
                         Dim workRow As DataRow
@@ -180,7 +182,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
 
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             View.TotalCredits = 0
@@ -192,7 +194,7 @@ Namespace PresentationLayer.Presenters
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-    
+
             Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
 
             cForm.Show()

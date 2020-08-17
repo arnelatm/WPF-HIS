@@ -12,7 +12,7 @@ Namespace AdoNet
 
         Public Function GetRecordById(idNo) As SecurityGroup Implements IDao(Of SecurityGroup).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, SecurityGroupName, SecurityGroupNameAra, SecurityGroupCode, Notes" &
+                    " SELECT IdNo, Notes, ParentIdNo, SecurityGroupCode, SecurityGroupName, SecurityGroupNameAra" &
                     "   FROM [SecurityGroup]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -27,7 +27,7 @@ Namespace AdoNet
                 sortExpression = "SecurityGroupName ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, SecurityGroupName, FullName, FullNameName " &
+                    " SELECT IdNo, Notes, ParentIdNo, SecurityGroupCode, SecurityGroupName, SecurityGroupNameAra" &
                     "   FROM [SecurityGroup] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -36,12 +36,12 @@ Namespace AdoNet
             Implements IDao(Of SecurityGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [SecurityGroup]" &
-                    "    SET SecurityGroupName = @SecurityGroupName," &
-                    "        SecurityGroupNameAra = @SecurityGroupNameAra, " &
-                    "        SecurityGroupCode = @SecurityGroupCode, " &
-                    "        ParentIdNo = @ParentIdNo, " &
-                    "        Notes = @Notes " &
-                    "  WHERE IdNo = @IdNo"
+                    " Set Notes = @Notes, " &
+                    " ParentIdNo = @ParentIdNo, " &
+                    " SecurityGroupCode = @SecurityGroupCode, " &
+                    " SecurityGroupName = @SecurityGroupName," &
+                    " SecurityGroupNameAra = @SecurityGroupNameAra" &
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(securityGroup))
         End Function
 
@@ -49,8 +49,8 @@ Namespace AdoNet
             Implements IDao(Of SecurityGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityGroup] " &
-                    " (ParentIdNo,SecurityGroupName,SecurityGroupNameAra,SecurityGroupCode,Notes) " &
-                    " VALUES (@ParentIdNo,@SecurityGroupName,@SecurityGroupNameAra,@SecurityGroupCode,@Notes)"
+                    " (Notes,ParentIdNo,SecurityGroupCode,SecurityGroupName,SecurityGroupNameAra)" &
+                    " VALUES (@Notes,@ParentIdNo,@SecurityGroupCode,@SecurityGroupName,@SecurityGroupNameAra)"
             Return Db.Insert(sql, Take(securityGroup))
         End Function
 
@@ -65,20 +65,20 @@ Namespace AdoNet
                                     Function(reader) _
             New SecurityGroup() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Notes = Extensions.AsString(reader("Notes")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
-            .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
-            .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra")),
             .SecurityGroupCode = Extensions.AsString(reader("SecurityGroupCode")),
-            .Notes = Extensions.AsString(reader("Notes"))}
+            .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
+            .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra"))}
 
         Private Function Take(securityGroup As SecurityGroup) As Object()
             Return New Object() {
                                     "@IdNo", securityGroup.IdNo,
+                                    "@Notes", securityGroup.Notes,
                                     "@ParentIdNo", securityGroup.ParentIdNo,
-                                    "@SecurityGroupName", securityGroup.SecurityGroupName,
-                                    "@SecurityGroupNameAra", securityGroup.SecurityGroupNameAra,
                                     "@SecurityGroupCode", securityGroup.SecurityGroupCode,
-                                    "@Notes", securityGroup.Notes}
+                                    "@SecurityGroupName", securityGroup.SecurityGroupName,
+                                    "@SecurityGroupNameAra", securityGroup.SecurityGroupNameAra}
         End Function
 
         Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _

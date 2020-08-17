@@ -237,12 +237,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                    CancelSave = True
-                Else
-                    SetAsideJournalItems()
-                End If
+                SetAsideJournalItems()
                 View.UnApplied = 0
                 View.Applied = View.Amount
             Else
@@ -330,7 +325,12 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Petty Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                    If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                        If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                            Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                            retValue = False
+                        End If
+                    ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                         If PcsOiItemDataIsValid() Then
                             retValue = True
                         Else

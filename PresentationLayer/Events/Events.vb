@@ -92,15 +92,15 @@ Public Class RecordSaved
 
 End Class
 
-Public Class RecordDeleted
+'Public Class RecordDeleted2
 
-    Public Sub New(ByRef model)
-        Me.Model = model
-    End Sub
+'    Public Sub New(ByRef model)
+'        Me.Model = model
+'    End Sub
 
-    Public Property Model
+'    Public Property Model
 
-End Class
+'End Class
 
 Public Class SelectedButton
 

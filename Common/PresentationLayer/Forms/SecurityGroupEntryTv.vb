@@ -33,19 +33,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub RecordSaved()
+            MyBase.RecordSaved()
             UpdateParentIdData()
             SecurityGroupView.cacParentIdNo.Refresh()
-        End Sub
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.EditMode And SecurityGroupView.ParentIdNo = SecurityGroupView.TxtIdNo.Text Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
-                PresenterObj.CancelSave = True
-                Exit Sub
-            End If
-            ' need to do this since last change on the dataGrid will not be saved unless that cell lose focus.
-            ' so focusing to this field will force the lost focus on the cell and save that last entry.
-            SecurityGroupView.txtNotes.Focus()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -61,10 +51,6 @@ Namespace PresentationLayer.Forms
                     {"SecurityGroupNameAra", .txtSecurityGroupNameAra}
                     }
             End With
-        End Sub
-
-        Private Sub SecurityGroupView_Load(sender As Object, e As EventArgs) Handles SecurityGroupView.Load
-
         End Sub
 
     End Class
