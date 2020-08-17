@@ -19,7 +19,6 @@ Public Class CFormEntry
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
                ISubscriber(Of RecordSaved),
-               ISubscriber(Of RecordAdded),
                ISubscriber(Of BeforeAssignment)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
@@ -76,7 +75,7 @@ Public Class CFormEntry
 
     Protected Property FormTitleCaption As String = ""
 
-    Private Property RecordCount As Integer
+    Protected Property RecordCount As Integer
 
     Public Sub CheckDataChanges()
     End Sub
@@ -112,20 +111,20 @@ Public Class CFormEntry
 
     Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
         If e.AddMode Then
-            TurnOnInputs()
+            Inputs(True)
             UpdateButtonDisplays(False, True)
         Else
-            TurnOffInputs()
+            Inputs(False)
             UpdateButtonDisplays(False, False)
         End If
     End Sub
 
     Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
         If e.EditMode Then
-            TurnOnInputs()
+            Inputs(True)
             UpdateButtonDisplays(True, False)
         Else
-            TurnOffInputs()
+            Inputs(False)
             UpdateButtonDisplays(False, False)
         End If
     End Sub
@@ -156,20 +155,21 @@ Public Class CFormEntry
     End Sub
 
     Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+        UpdateRecordCounter()
+        UpdateButtonDisplays(False, False)
+        MyErrorProvider.ClearAllErrorMessages()
+        MyErrorProvider.Clear()
+        Inputs(False)
         RecordPositionChanged(e)
     End Sub
 
     Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
-        RecordSaved()
+        RecordSaved(e)
     End Sub
 
     'Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted2) Implements ISubscriber(Of RecordDeleted2).OnEventHandler
     '    RecordDeleted()
     'End Sub
-
-    Public Sub OnEventHandlerAddedRecord(ByRef e As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
-        RecordAdded()
-    End Sub
 
     Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
         BeforeAssignment()
@@ -217,15 +217,21 @@ Public Class CFormEntry
         'showWaitForm.ReportProgress(progress)
     End Sub
 
-    Private Sub TurnOffInputs()
-        Inputs(False)
-        RaiseEvent InputsTurnedOff()
+    'Private Sub TurnOffInputs()
+    '    Inputs(False)
+    '    InputsTurnedOff()
+    'End Sub
+
+    'Private Sub TurnOnInputs()
+    '    Inputs(True)
+    '    InputsTurnedOn()
+    '    FirstControl.Focus()
+    'End Sub
+
+    Protected Overridable Sub InputsTurnedOn()
     End Sub
 
-    Private Sub TurnOnInputs()
-        Inputs(True)
-        RaiseEvent InputsTurnedOn()
-        FirstControl.Focus()
+    Protected Overridable Sub InputsTurnedOff()
     End Sub
 
     Public Function ValidateNumericValues()
@@ -473,17 +479,13 @@ Public Class CFormEntry
 
     End Sub
 
-    Protected Overridable Sub RecordSaved()
+    Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
         '
     End Sub
 
     'Protected Overridable Sub RecordDeleted()
     '    '
     'End Sub
-
-    Protected Overridable Sub RecordAdded()
-        '
-    End Sub
 
     Protected Overridable Sub BeforeAssignment()
         '
@@ -726,10 +728,11 @@ Public Class CFormEntry
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateFieldsDictionary()
-            TurnOffInputs()
+            Inputs(False)
 
             Try
-                PresenterObj.RecordPositionNumber = PresenterObj.GetRecordCount()
+                RecordCount = PresenterObj.GetRecordCount()
+                PresenterObj.RecordPositionNumber = RecordCount
             Catch ex As Exception
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
@@ -847,6 +850,11 @@ Public Class CFormEntry
             End If
         Next
         FirstControl.Focus()
+        If onOff Then
+            InputsTurnedOn()
+        Else
+            InputsTurnedOff()
+        End If
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
@@ -1020,13 +1028,13 @@ Public Class CFormEntry
         Return False
     End Function
 
-#Region "Temporary Events"
+    '#Region "Temporary Events"
 
 
-    Public Event InputsTurnedOff()
+    '    Public Event InputsTurnedOff()
 
-    Public Event InputsTurnedOn()
+    '    Public Event InputsTurnedOn()
 
-#End Region
+    '#End Region
 
 End Class

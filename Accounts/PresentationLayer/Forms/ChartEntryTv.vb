@@ -236,7 +236,7 @@ Namespace PresentationLayer.Forms
                     }
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             If PresenterObj.AccountHasChildren(IdNo) Then
                 cboParentIdNo.DisplayOnly = True
                 cboNormalBalance.DisplayOnly = True

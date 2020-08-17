@@ -562,7 +562,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
+        Protected Overrides Sub InputsTurnedOff()
             DataGridViewJournalItems.RemoveInsertColumn()
             If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
@@ -571,7 +571,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddSupplierOpenInvoices()
             BindCkdOiItem()

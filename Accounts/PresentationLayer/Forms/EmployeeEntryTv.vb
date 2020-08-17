@@ -425,7 +425,7 @@ Namespace PresentationLayer.Forms
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
 
-        Public Sub OnInputsTurnedOn Handles MyBase.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             If PresenterObj.AddMode Then
                 txtOpeningBalance.DisplayOnly = False
             Else

@@ -54,15 +54,6 @@ Public Class QuitView
 
 End Class
 
-Public Class RecordAdded
-
-    Public Sub New(ByRef model)
-        Me.Model = model
-    End Sub
-
-    Public Property Model
-End Class
-
 Public Class BeforeAssignment
 
     Public Sub New(ByRef model)

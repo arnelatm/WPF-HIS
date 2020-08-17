@@ -199,12 +199,18 @@ Namespace PresentationLayer.Forms
         '    _footer.SetText("DgvRevCostCenterIdNo", "Totals ->")
         'End Sub
 
-        Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
+        Protected Overrides Sub InputsTurnedOff()
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             DataGridViewDistributionSchemeItems.AddInsertColumn()
+            If PresenterObj.AddMode Then
+                dtpValidityStartDate.Value = Date.Now()
+                dtpValidityEndDate.Value = Date.Now()
+                bsDistributionSchemeItems.Clear()
+                DataGridViewDistributionSchemeItems.Refresh()
+            End If
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete()
@@ -238,13 +244,6 @@ Namespace PresentationLayer.Forms
                 _footer.SumAllColumns()
                 TotalPercentage = _footer.Value("dgvPercentage")
             End If
-        End Sub
-
-        Protected Overrides Sub RecordAdded()
-            dtpValidityStartDate.Value = Date.Now()
-            dtpValidityEndDate.Value = Date.Now()
-            bsDistributionSchemeItems.Clear()
-            DataGridViewDistributionSchemeItems.Refresh()
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _

@@ -118,6 +118,7 @@ Partial Class CFormEntry
         'btnOf
         '
         Me.btnOf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnOf.Enabled = False
         Me.btnOf.Image = CType(resources.GetObject("btnOf.Image"), System.Drawing.Image)
         Me.btnOf.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnOf.Name = "btnOf"
@@ -324,7 +325,7 @@ Partial Class CFormEntry
         Me.btnTranslate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnTranslate.Margin = New System.Windows.Forms.Padding(1)
         Me.btnTranslate.Name = "btnTranslate"
-        Me.btnTranslate.Size = New System.Drawing.Size(54, 23)
+        Me.btnTranslate.Size = New System.Drawing.Size(23, 23)
         Me.btnTranslate.Text = "Translate"
         '
         'btnOriginal

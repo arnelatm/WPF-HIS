@@ -472,11 +472,11 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles Me.InputsTurnedOff
+        Protected Overrides Sub InputsTurnedOff()
             DataGridViewJournalItems.RemoveInsertColumn()
         End Sub
 
-        Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
+        Protected Overrides Sub InputsTurnedOn()
             DataGridViewJournalItems.AddInsertColumn()
         End Sub
 
