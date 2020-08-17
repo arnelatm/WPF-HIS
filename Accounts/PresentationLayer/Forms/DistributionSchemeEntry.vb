@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CustomControlsLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
@@ -153,8 +154,7 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             UpdateTotals()
         End Sub
 

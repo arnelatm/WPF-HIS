@@ -245,8 +245,7 @@ Namespace PresentationLayer.Forms
                 }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             SuspendLayout()
             DataGridViewJournalItems.Visible = False
             DataGridViewSalesCashItems.Visible = True

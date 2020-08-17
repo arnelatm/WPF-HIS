@@ -319,8 +319,7 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub

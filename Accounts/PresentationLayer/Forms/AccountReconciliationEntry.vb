@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 Imports CrystalDecisions.CrystalReports.Engine
 
 Namespace PresentationLayer.Forms
@@ -457,8 +458,7 @@ Namespace PresentationLayer.Forms
             Return 0
         End Function
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             If Not DataGridViewReconciliationItems.DataBindings Is Nothing Then
                 DataGridViewReconciliationItems.DataInGridChanged = False
             End If

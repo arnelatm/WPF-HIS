@@ -4,6 +4,7 @@ Imports System.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
@@ -427,8 +428,7 @@ Namespace PresentationLayer.Forms
                 }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged()
-            MyBase.RecordPositionChanged()
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
             value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
