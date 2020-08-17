@@ -15,8 +15,6 @@ Namespace PresentationLayer.Forms
 
     Public Class SalesJournalEntry
         Implements ISalesJournalView
-        '           ISubscriber(Of EditModeChanged),
-        '           ISubscriber(Of AddModeChanged)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -611,17 +609,6 @@ Namespace PresentationLayer.Forms
                 DataGridViewSalesCashItems.Refresh()
             End If
         End Sub
-
-        'Public Sub SjOnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
-        '    MyBase.OnEventHandlerEditModeChanged(e)
-        '    If e.EditMode Then
-        '        DataGridViewSalesCashItems.EditingMode = True
-        '        DataGridViewJournalItems.EditingMode = True
-        '    Else
-        '        DataGridViewSalesCashItems.EditingMode = True
-        '        DataGridViewJournalItems.EditingMode = True
-        '    End If
-        'End Sub
 
     End Class
 

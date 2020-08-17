@@ -233,13 +233,6 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-
-        Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If PresenterObj.AddMode Then
-                chkClosingJournal.Checked = _closingEntry
-            End If
-        End Sub
-
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
             Handles DataGridViewJournalItems.CellClick
             With DataGridViewJournalItems.CurrentCell
@@ -301,6 +294,7 @@ Namespace PresentationLayer.Forms
 
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             DataGridViewJournalItems.AddInsertColumn()
+            chkClosingJournal.Checked = _closingEntry
         End Sub
 
         Private Sub ReSequenceDgvAfterDelete()

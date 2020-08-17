@@ -237,12 +237,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                    CancelSave = True
-                Else
-                    SetAsideJournalItems()
-                End If
+                SetAsideJournalItems()
             Else
                 'If AddMode Then
                 '    CallByName(DataModel, IdFieldName, CallType.Set, passedValue)
@@ -331,7 +326,12 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Check Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                    If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                        If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                            Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                            retValue = False
+                        End If
+                    ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                         If CKdOiItemDataIsValid() Then
                             retValue = True
                         Else
@@ -366,9 +366,13 @@ Namespace PresentationLayer.Presenters
             Dim specialAccount As String
             'Dim cPayeeType As String
             For Each item In View.JournalItems
-                chart = GetChart(item.AccountIdNo)
-                specialAccount = chart.SpecialAccount
-                If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 Then
+                    specialAccount = Nothing
+                Else
+                    chart = GetChart(item.AccountIdNo)
+                    specialAccount = chart.SpecialAccount
+                End If
+                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                     MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                     retValue = False
                     Exit For

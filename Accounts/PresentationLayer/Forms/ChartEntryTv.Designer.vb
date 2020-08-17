@@ -28,78 +28,51 @@ Namespace PresentationLayer.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ChartEntryTv))
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-        Me._MBChartCannotBeParentToItself = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
-        Me._MBParentWithChildrenChangedDisallowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
-        Me._MBMainAccountNotEditable = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
-        Me._MSGMandatoryFields = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
-        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtAccountCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAccountCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtAccountName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAccountName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'LocalizableContent1
-        '
-        LocalizableContent1.MessageBoxes.Add(Me._MBChartCannotBeParentToItself)
-        LocalizableContent1.MessageBoxes.Add(Me._MBParentWithChildrenChangedDisallowed)
-        LocalizableContent1.MessageBoxes.Add(Me._MBMainAccountNotEditable)
-        LocalizableContent1.Messages.Add(Me._MSGMandatoryFields)
-        '
-        '_MBChartCannotBeParentToItself
-        '
-        resources.ApplyResources(Me._MBChartCannotBeParentToItself, "_MBChartCannotBeParentToItself")
-        '
-        '_MBParentWithChildrenChangedDisallowed
-        '
-        resources.ApplyResources(Me._MBParentWithChildrenChangedDisallowed, "_MBParentWithChildrenChangedDisallowed")
-        '
-        '_MBMainAccountNotEditable
-        '
-        resources.ApplyResources(Me._MBMainAccountNotEditable, "_MBMainAccountNotEditable")
-        '
-        '_MSGMandatoryFields
-        '
-        resources.ApplyResources(Me._MSGMandatoryFields, "_MSGMandatoryFields")
-        '
-        'txtIdNo
-        '
-        Me.txtIdNo.BackColor = System.Drawing.Color.White
-        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNo.ComputedValue = false
+            Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtAccountCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAccountCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtAccountName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAccountName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'TreeViewTableName
+            '
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            '
+            'txtIdNo
+            '
+            Me.txtIdNo.BackColor = System.Drawing.Color.White
+            Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtIdNo.ComputedValue = false
         Me.txtIdNo.CustomFormat = Nothing
         Me.txtIdNo.DataBoundControl = true
         Me.txtIdNo.DisplayOnly = true
@@ -611,14 +584,10 @@ End Sub
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents lblLevelNumber As CLabel
         Friend WithEvents txtLevelNumber As CTextBox
-        Friend WithEvents _MBChartCannotBeParentToItself As LocalizableMessageBox
-        Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
-        Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
         Friend WithEvents lblAccountGroup As CLabel
         Friend WithEvents lblPayeeType As CLabel
         Friend WithEvents lblNormalBalance As CLabel
-        Friend WithEvents _MBMainAccountNotEditable As LocalizableMessageBox
         Friend WithEvents chkWithReconciliation As CCheckBox
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblWithReconciliation As CLabel

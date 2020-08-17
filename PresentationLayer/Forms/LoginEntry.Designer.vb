@@ -125,6 +125,8 @@ Partial Class LoginEntry
         Me.textBoxUserName.LinkedLabel = Nothing
         Me.textBoxUserName.Location = New System.Drawing.Point(96, 20)
         Me.textBoxUserName.Margin = New System.Windows.Forms.Padding(0)
+        Me.textBoxUserName.MaximumValue = Nothing
+        Me.textBoxUserName.MinimumValue = Nothing
         Me.textBoxUserName.Name = "textBoxUserName"
         Me.textBoxUserName.OldValue = Nothing
         Me.textBoxUserName.Size = New System.Drawing.Size(201, 23)
@@ -144,15 +146,17 @@ Partial Class LoginEntry
         '
         Me.textBoxPassword.BackColor = System.Drawing.Color.White
         Me.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.textBoxPassword.ComputedValue = false
+        Me.textBoxPassword.ComputedValue = False
         Me.textBoxPassword.CustomFormat = Nothing
-        Me.textBoxPassword.DataBoundControl = true
-        Me.textBoxPassword.EditingMode = false
-        Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.textBoxPassword.DataBoundControl = True
+        Me.textBoxPassword.EditingMode = False
+        Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.textBoxPassword.ForeColor = System.Drawing.Color.Black
         Me.textBoxPassword.LinkedLabel = Nothing
         Me.textBoxPassword.Location = New System.Drawing.Point(96, 43)
         Me.textBoxPassword.Margin = New System.Windows.Forms.Padding(0)
+        Me.textBoxPassword.MaximumValue = Nothing
+        Me.textBoxPassword.MinimumValue = Nothing
         Me.textBoxPassword.Name = "textBoxPassword"
         Me.textBoxPassword.OldValue = Nothing
         Me.textBoxPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)

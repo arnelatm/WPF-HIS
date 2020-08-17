@@ -5,13 +5,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Public Class CFormEntryTv
-    Implements ISubscriber(Of RecordPositionChanged),
-               ISubscriber(Of EditModeChanged),
-               ISubscriber(Of AddModeChanged),
-               ISubscriber(Of ValidatingData),
-               ISubscriber(Of PassErrorList),
-               ISubscriber(Of QuitView),
-               ISubscriber(Of RecordSaved)
 
     Private _bypassSelectedChange As Boolean = False
     Protected TvMainFieldName As String
@@ -133,9 +126,9 @@ Public Class CFormEntryTv
     End Sub
 
 
-    Protected Overrides Sub RecordDeleted()
-        RemoveCurrentNode(True)
-    End Sub
+    'Protected Overrides Sub RecordDeleted()
+    '    RemoveCurrentNode(True)
+    'End Sub
 
     'Private Sub BfTvEntry_SuccessfulDelete(idNoOfDeletedRecord As Integer) Handles MyBase.SuccessfulDelete
 
@@ -242,9 +235,14 @@ Public Class CFormEntryTv
         'End If
     End Sub
 
-    Public Sub OeHCfTvSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
+    Protected Overrides Sub RecordSaved()
+        MyBase.RecordSaved()
         DisplayTreeViewData()
     End Sub
+
+    'Public Sub OeHCfTvSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
+    '    DisplayTreeViewData()
+    'End Sub
 
     'Public Sub OeHCfTvRecordAdded(ByRef eventType As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
     '    DisplayTreeViewData()

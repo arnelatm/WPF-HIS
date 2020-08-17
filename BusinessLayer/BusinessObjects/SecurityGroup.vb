@@ -14,11 +14,11 @@ Namespace BusinessObjects
         End Sub
 
         Public Property IdNo As Int32
+        Public Property Notes As String
         Public Property ParentIdNo As Int32?
+        Public Property SecurityGroupCode As String
         Public Property SecurityGroupName As String
         Public Property SecurityGroupNameAra As String
-        Public Property SecurityGroupCode As String
-        Public Property Notes As String
         Public Property GroupAccesses As List(Of GroupAccess)
     End Class
 

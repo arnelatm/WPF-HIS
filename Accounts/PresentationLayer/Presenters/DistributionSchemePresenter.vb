@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -42,7 +43,7 @@ Namespace PresentationLayer.Presenters
                 DtUpdateTable.Clear()
             End If
             Dim nRowCount = 1
-            For Each ji In View.DistributionSchemeitems
+            For Each ji In View.DistributionSchemeItems
                 Dim workRow As DataRow
                 If ji.IdNo <= 0 Then
                     workRow = DtInsertTable.NewRow()
@@ -87,6 +88,16 @@ Namespace PresentationLayer.Presenters
                 retVal = updateReturnValue
             End If
             Return retVal
+        End Function
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue As Boolean = False
+            If MyBase.IsBizDataValid() Then
+                If Not (View.DistributionSchemeItems Is Nothing OrElse View.DistributionSchemeItems.Count = 0) Then
+                    retValue = True
+                End If
+            End If
+            Return retValue
         End Function
 
     End Class

@@ -19,8 +19,8 @@ Public Class CFormEntry
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
                ISubscriber(Of RecordSaved),
-               ISubscriber(Of RecordDeleted),
-               ISubscriber(Of RecordAdded)
+               ISubscriber(Of RecordAdded),
+               ISubscriber(Of BeforeAssignment)
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -163,12 +163,16 @@ Public Class CFormEntry
         RecordSaved()
     End Sub
 
-    Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
-        RecordDeleted()
-    End Sub
+    'Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted2) Implements ISubscriber(Of RecordDeleted2).OnEventHandler
+    '    RecordDeleted()
+    'End Sub
 
     Public Sub OnEventHandlerAddedRecord(ByRef e As RecordAdded) Implements ISubscriber(Of RecordAdded).OnEventHandler
         RecordAdded()
+    End Sub
+
+    Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+        BeforeAssignment()
     End Sub
 
     Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
@@ -213,12 +217,12 @@ Public Class CFormEntry
         'showWaitForm.ReportProgress(progress)
     End Sub
 
-    Public Sub TurnOffInputs()
+    Private Sub TurnOffInputs()
         Inputs(False)
         RaiseEvent InputsTurnedOff()
     End Sub
 
-    Public Sub TurnOnInputs()
+    Private Sub TurnOnInputs()
         Inputs(True)
         RaiseEvent InputsTurnedOn()
         FirstControl.Focus()
@@ -478,11 +482,15 @@ Public Class CFormEntry
         '
     End Sub
 
-    Protected Overridable Sub RecordDeleted()
+    'Protected Overridable Sub RecordDeleted()
+    '    '
+    'End Sub
+
+    Protected Overridable Sub RecordAdded()
         '
     End Sub
 
-    Protected Overridable Sub RecordAdded()
+    Protected Overridable Sub BeforeAssignment()
         '
     End Sub
 
@@ -657,7 +665,6 @@ Public Class CFormEntry
             End If
         Next
         If ValidateNumericValues() Then
-            RaiseEvent BeforeSave()
             RunButtonRoutine(ButtonClicked.Save)
         End If
     End Sub
@@ -1020,7 +1027,6 @@ Public Class CFormEntry
 
 #Region "Temporary Events"
 
-    Public Event BeforeSave()
 
     Public Event InputsTurnedOff()
 

@@ -208,19 +208,6 @@ Namespace PresentationLayer.Forms
             DataGridViewDistributionSchemeItems.Refresh()
         End Sub
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If bsDistributionSchemeItems Is Nothing OrElse bsDistributionSchemeItems.Count() = 0 Then
-                If MessageBox.Show("Empty Distribution Scheme Not Allowed.", "Distribution Scheme Error",
-                                   MessageBoxButtons.YesNo,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    PresenterObj.CancelSave = True
-                End If
-            ElseIf Not DataIsValid() Then
-                PresenterObj.CancelSave = True
-            End If
-        End Sub
-
         Private Sub OnInputsTurnedOn() Handles Me.InputsTurnedOn
             DataGridViewDistributionSchemeItems.StartTrackingChanges = True
             DataGridViewDistributionSchemeItems.AddInsertColumn()

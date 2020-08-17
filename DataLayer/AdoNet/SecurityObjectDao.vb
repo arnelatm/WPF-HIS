@@ -15,6 +15,7 @@ Namespace AdoNet
             New SecurityObject() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .SecurityObjectCode = Extensions.AsString(reader("SecurityObjectCode")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra")),
             .Notes = Extensions.AsString(reader("Notes"))}
@@ -23,6 +24,7 @@ Namespace AdoNet
             Return New Object() {
                                     "@IdNo", securityObject.IdNo,
                                     "@ParentIdNo", securityObject.ParentIdNo,
+                                    "@SecurityObjectCode", securityObject.SecurityObjectCode,
                                     "@SecurityObjectName", securityObject.SecurityObjectName,
                                     "@SecurityObjectNameAra", securityObject.SecurityObjectNameAra,
                                     "@Notes", securityObject.Notes}
@@ -31,7 +33,7 @@ Namespace AdoNet
         Public Function GetRecordById(idNo) As SecurityObject _
             Implements IDaoAll(Of SecurityObject).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
+                    " SELECT IdNo, ParentIdNo, SecurityObjectCode, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &
                     " WHERE IdNo = @IdNo"
             Dim parms() As Object = {"@IdNo", idNo}
@@ -41,7 +43,7 @@ Namespace AdoNet
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) _
             Implements IDaoAll(Of SecurityObject).GetAll
             Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, SecurityObjectName, SecurityObjectNameAra, Notes" &
+                    " SELECT IdNo, ParentIdNo, SecurityObjectCode, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -50,8 +52,8 @@ Namespace AdoNet
             Implements IDao(Of SecurityObject).AddRecord
             Dim sql As String =
                     " INSERT INTO [SecurityObject] " &
-                    " (ParentIdNo,SecurityObjectName,SecurityObjectNameAra,Notes) " &
-                    " VALUES (@ParentIdNo, @SecurityObjectName, @SecurityObjectNameAra,@Notes) "
+                    " (ParentIdNo,SecurityObjectCode, SecurityObjectName,SecurityObjectNameAra,Notes) " &
+                    " VALUES (@ParentIdNo, @SecurityObjectCode, @SecurityObjectName, @SecurityObjectNameAra,@Notes) "
             Return Db.Insert(sql, Take(recordData))
         End Function
 
@@ -59,7 +61,8 @@ Namespace AdoNet
             Implements IDao(Of SecurityObject).UpdateRecord
             Dim sql As String =
                     " UPDATE [SecurityObject]" &
-                    "    SET SecurityObjectName = @SecurityObjectName," &
+                    "    SET SecurityObjectCode = @SecurityObjectCode," &
+                    "        SecurityObjectName = @SecurityObjectName," &
                     "        SecurityObjectNameAra = @SecurityObjectNameAra," &
                     "        ParentIdNo = @ParentIdNo," &
                     "        Notes = @Notes" &
