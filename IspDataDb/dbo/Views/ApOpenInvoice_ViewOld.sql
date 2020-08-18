@@ -1,17 +1,15 @@
 ﻿
 
 
-
-
-CREATE VIEW [dbo].[ApOpenInvoice_View]
+CREATE VIEW [dbo].[ApOpenInvoice_ViewOld]
 AS
 SELECT			dbo.ApOpenInvoice.IdNo,
 				dbo.ApOpenInvoice.JournalCode, 
 				dbo.ApOpenInvoice.JournalItemIdNo, 
 				dbo.APDetails_View.Credit - dbo.APDetails_View.Debit AS Amount, 
-				IsNull(dbo.ApPayments_View.Amount,0) as 'PaidAmount', 
-				IsNull(dbo.ApPayments_View.DiscountTaken,0) as 'DiscountTaken', 
-				dbo.APDetails_View.Credit - dbo.APDetails_View.Debit - IsNull(dbo.ApPayments_View.Amount,0) - IsNull(dbo.ApPayments_View.DiscountTaken,0) AS Balance, 
+				dbo.ApOpenInvoice.PaidAmount, 
+                dbo.ApOpenInvoice.DiscountTaken, 
+				dbo.APDetails_View.Credit - dbo.APDetails_View.Debit - dbo.ApOpenInvoice.PaidAmount - dbo.ApOpenInvoice.DiscountTaken AS Balance, 
                 dbo.APDetails_View.Credit - dbo.APDetails_View.Debit AS InvoiceAmount, 
 				dbo.ApOpenInvoice.JournalIdNo, 
 				dbo.APDetails_View.AccountIdNo, 
@@ -28,15 +26,5 @@ SELECT			dbo.ApOpenInvoice.IdNo,
 FROM            dbo.ApOpenInvoice 
 				LEFT OUTER JOIN dbo.APDetails_View 
 				ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode Collate SQL_Latin1_General_CP1_CI_AS
-				LEFT OUTER JOIN dbo.ApPayments_View
-				ON dbo.ApOpenINvoice.IdNo = dbo.ApPayments_View.ApOpenInvoiceIdNo
 				LEFT OUTER JOIN dbo.Chart 
 				ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
-
-GO
-
-
-
-GO
-
-

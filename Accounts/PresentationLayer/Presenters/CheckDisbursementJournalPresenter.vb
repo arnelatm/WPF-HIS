@@ -66,9 +66,9 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-            Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
-        End Function
+        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        '    Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
+        'End Function
 
         Public Sub AddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
@@ -291,9 +291,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-            Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        End Function
+        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
+        'End Function
 
         Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             Dim retVal As Integer
@@ -649,13 +649,13 @@ Namespace PresentationLayer.Presenters
                 ' after saving open invoices apply the paid amount
                 UpdateOpenInvoices()
             Else
-                If _oldCkdOiItem IsNot Nothing Then
-                    For Each Item In _oldCkdOiItem
-                        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                        End If
-                    Next
-                End If
+                'If _oldCkdOiItem IsNot Nothing Then
+                '    For Each Item In _oldCkdOiItem
+                '        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '        End If
+                '    Next
+                'End If
             End If
         End Sub
 
@@ -708,11 +708,11 @@ Namespace PresentationLayer.Presenters
             If AddMode Then
                 ' add Mode so just add the payment
                 newCkdOiItem = GetCKdOiItems(View.IdNo)
-                For Each item In newCkdOiItem
-                    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                    End If
-                Next
+                'For Each item In newCkdOiItem
+                '    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                '        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                '    End If
+                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     Dim items As List(Of JournalItemModel)
@@ -731,20 +731,20 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                For Each Item In _oldCkdOiItem
-                    ' if new
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' remove old payments
-                        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
-                ' re-apply the new payments
-                For Each Item In View.CkdOiItems
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' add new payments
-                        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
+                'For Each Item In _oldCkdOiItem
+                '    ' if new
+                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '        ' remove old payments
+                '        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '    End If
+                'Next
+                '' re-apply the new payments
+                'For Each Item In View.CkdOiItems
+                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '        ' add new payments
+                '        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '    End If
+                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     ' get the journalItemIdNo

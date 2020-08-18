@@ -27,17 +27,17 @@ Namespace PresentationLayer.Models
             Return updateResult
         End Function
 
-        Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
-            Dim updateResult As Integer
-            updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
-            Return updateResult
-        End Function
+        'Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.AddInvoicePayment
+        '    Dim updateResult As Integer
+        '    updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
+        '    Return updateResult
+        'End Function
 
-        Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.RemoveInvoicePayment
-            Dim updateResult As Integer
-            updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
-            Return updateResult
-        End Function
+        'Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelAccounts.RemoveInvoicePayment
+        '    Dim updateResult As Integer
+        '    updateResult = DataService.RemoveInvoicePayment(idNo, amount, discountTaken)
+        '    Return updateResult
+        'End Function
 
         Public Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer Implements IModelAccounts.AddApOpenInvoice
             Throw New NotImplementedException()

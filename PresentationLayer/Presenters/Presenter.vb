@@ -331,12 +331,36 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Function DeleteRecord(idNo As Int32) As Integer
+        Dim retValue As Integer
         Try
-            Return Model.DeleteRecord(idNo, TableName)
-        Catch ex As Exception
-            Return 0
+            Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
+                retValue = Model.DeleteRecord(idNo, TableName)
+                If retValue > 0 Then
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New RecordDeleted(idNo))
+                    End If
+                    RaiseEvent SuccessfulDelete(idNo)
+                End If
+                scope.Complete()
+            End Using
+        Catch ex As TransactionAbortedException
+            MessageBox.Show(ex.Message, "Record Deletion Aborted!")
+        Catch oEx As Exception
+
+            If oEx.Message.Contains("Timeout Expired") Then
+                retValue = -1
+            Else
+                MsgBox("Error:   " + oEx.Message)
+                retValue = -1
+            End If
+            If Debugger.IsAttached Then
+                Debugger.Break()
+            End If
         End Try
+
+        Return retValue
     End Function
+
 
     Public Overridable Sub Display(idNo As Int32)
         '

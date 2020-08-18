@@ -36,9 +36,9 @@ Namespace DataLayer
 
         Function AddRecord(ByRef openInvoice As TBiz) As Integer
 
-        Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        'Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
-        Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
 
         'Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 

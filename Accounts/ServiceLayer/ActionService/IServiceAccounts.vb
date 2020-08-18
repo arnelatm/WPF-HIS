@@ -5,13 +5,13 @@ Namespace ServiceLayer.ActionService
     Public Interface IServiceAccounts
         Inherits IServiceCommon
 
-        Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)
+        'Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)
 
         Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(Of TM)(ByVal reconciled As Boolean, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of TM)
 
-        Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)
+        'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
