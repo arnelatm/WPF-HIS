@@ -322,6 +322,7 @@
     <Build Include="dbo\Views\SecurityGroup_View.sql" />
     <Build Include="dbo\Views\ApPayments_View.sql" />
     <Build Include="dbo\Views\ApPaymentItems_View.sql" />
+    <Build Include="dbo\Views\ApOpenInvoice_ViewOld.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

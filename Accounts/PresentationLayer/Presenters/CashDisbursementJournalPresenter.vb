@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -67,9 +68,9 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-            Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
-        End Function
+        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        '    Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
+        'End Function
 
         Public Sub AddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
@@ -289,9 +290,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-            Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        End Function
+        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
+        '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
+        'End Function
 
         Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
             Dim retVal As Integer
@@ -654,13 +655,13 @@ Namespace PresentationLayer.Presenters
                 ' after saving open invoices apply the paid amount
                 UpdateOpenInvoices()
             Else
-                If _oldCadOiItem IsNot Nothing Then
-                    For Each Item In _oldCadOiItem
-                        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                        End If
-                    Next
-                End If
+                'If _oldCadOiItem IsNot Nothing Then
+                '    For Each Item In _oldCadOiItem
+                '        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '        End If
+                '    Next
+                'End If
             End If
         End Sub
 
@@ -713,11 +714,11 @@ Namespace PresentationLayer.Presenters
             If AddMode Then
                 ' add Mode so just add the payment
                 newCadOiItem = GetCadOiItems(View.IdNo)
-                For Each item In newCadOiItem
-                    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                    End If
-                Next
+                'For Each item In newCadOiItem
+                '    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                '        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
+                '    End If
+                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     Dim items As List(Of JournalItemModel)
@@ -736,20 +737,20 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                For Each Item In _oldCadOiItem
-                    ' if new
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' remove old payments
-                        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
-                ' re-apply the new payments
-                For Each Item In View.CadOiItems
-                    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                        ' add new payments
-                        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                    End If
-                Next
+                'For Each Item In _oldCadOiItem
+                '    ' if new
+                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '        ' remove old payments
+                '        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '    End If
+                'Next
+                '' re-apply the new payments
+                'For Each Item In View.CadOiItems
+                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
+                '        ' add new payments
+                '        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
+                '    End If
+                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     ' get the journalItemIdNo
@@ -812,6 +813,17 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Cash Disbursement Journal.Rpt", View.IdNo, "CashDisbursementJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal IdNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.CadOiItems IsNot Nothing And View.CadOiItems.Any() Then
+                DtCadOiUpdateTable.Clear()
+                _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, IdNo)
+            End If
+            If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
+                DtUpdateTable.Clear()
+                Model.DelUpdateTvp(DtUpdateTable, IdNo)
+            End If
         End Sub
 
     End Class

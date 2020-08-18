@@ -83,15 +83,15 @@ Public Class RecordSaved
 
 End Class
 
-'Public Class RecordDeleted2
+Public Class RecordDeleted
 
-'    Public Sub New(ByRef model)
-'        Me.Model = model
-'    End Sub
+    Public Sub New(ByRef idNo As Int32)
+        Me.IdNo = idNo
+    End Sub
 
-'    Public Property Model
+    Public Property IdNo As Int32
 
-'End Class
+End Class
 
 Public Class SelectedButton
 

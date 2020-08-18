@@ -7,13 +7,13 @@ Namespace PresentationLayer.Models
 
         Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
 
-        Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
+        'Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
         Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
         Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
-        Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
+        'Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 
         Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer
 
