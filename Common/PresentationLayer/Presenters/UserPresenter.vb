@@ -38,7 +38,7 @@ Namespace PresentationLayer
             View.Password = serviceLogin.EncryptPassword(View.IdNo, View.Password)
         End Sub
 
-        Private Sub OnSuccessfulAdd(newIdNo As Int32) Handles MyBase.SuccessfulAdd
+        Private Sub OnSuccessfulAdd(ByRef newIdNo As Int32) Handles MyBase.RecordAddedSuccessfully
             Dim serviceLogin = New ServiceLogin
             Dim ePassword As String
             ePassword = serviceLogin.EncryptPassword(newIdNo, View.Password)

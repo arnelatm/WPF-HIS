@@ -11,16 +11,11 @@
 :r c:\temp\Sql\GeneralJournalItem1.sql
 :r c:\temp\Sql\GeneralJournalItem2.sql
 :r c:\temp\Sql\GeneralJournalItem3.sql
+:r c:\temp\Sql\GeneralJournalItem4.sql
 :r c:\temp\Sql\CashDisbursementJournal.sql
 :r c:\temp\Sql\CashDisbursementJournalItem.sql
 :r c:\temp\Sql\CheckDisbursementJournal.sql
 :r c:\temp\Sql\CheckDisbursementJournalItem.sql
 :r c:\temp\Sql\CashReceiptJournal.sql
 :r c:\temp\Sql\CashReceiptJournalItem.sql
-:r c:\temp\Sql\CadOiItem.sql
-:r c:\temp\Sql\CkdOiItem.sql
-:r c:\temp\Sql\ApOpenInvoice.sql
-:r c:\temp\Sql\CSROiItem.sql
-:r c:\temp\Sql\AROpenInvoice.sql
-:r c:\temp\Sql\ChartBalance.sql
-:r c:\temp\Sql\UpdateChartBegBal.sql
+

@@ -248,7 +248,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-        '    Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        '    Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
         '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If
@@ -453,7 +453,7 @@ Namespace PresentationLayer.Forms
                                 Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
                                                "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert()
                                 SendKeys.Send("{UP}")
@@ -485,7 +485,7 @@ Namespace PresentationLayer.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvcredit" Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -623,12 +623,16 @@ Namespace PresentationLayer.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf DataGridViewJournalItems.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or
-                   DataGridViewJournalItems.CurrentRow.Cells("dgvDiscountTaken").Value <> 0 Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgDeleteCollEntryNotAllowed", "You can't delete this row because this entry has an existing collection and/or discount!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
+            ElseIf PresenterObj.EditMode Then
+                Dim jiIdNo As Integer
+                jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
+                If PresenterObj.ArCollectionExists("AR", jiIdNo) Then
+                    'ElseIf 
+                    ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
+                    Messaging.Show(True, "MsgDeleteCollEntryNotAllowed", "You can't delete this row because this entry has an existing collection and/or discount!", "Delete Error")
+                    ' Cancel the deletion
+                    e.Cancel = True
+                End If
             End If
         End Sub
 

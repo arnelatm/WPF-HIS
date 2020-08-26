@@ -535,7 +535,7 @@ Namespace PresentationLayer.Forms
         '    End If
         'End Sub
 
-        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
         '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If

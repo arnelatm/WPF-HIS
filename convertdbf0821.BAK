@@ -417,7 +417,7 @@ Use c:\temp\ErJourItm Exclusive Alias ErJourItm
 Zap
 Select customer
 Go Top
-nArCtr = 0
+nArCtr = 1000
 nErCtr = 0
 nAmount = 0
 Do While Not Eof()
@@ -462,9 +462,9 @@ Do While Not Eof()
 			nArCtr = nArCtr + 1
 			Select ArJourItm
 			Append Blank
-			Replace ArJourItm.IdNo With nArCtr
+			Replace ArJourItm.IdNo With Customer.IdNo
 			Replace ArJourItm.Sequence With 1
-			Replace ArJourItm.JourIdNo With nArCtr
+			Replace ArJourItm.JourIdNo With Customer.IdNo
 			Replace ArJourItm.AcctIdNo With 112
 			If nAmount  >= 0 Then
 				Replace ArJourItm.Debit With nAmount

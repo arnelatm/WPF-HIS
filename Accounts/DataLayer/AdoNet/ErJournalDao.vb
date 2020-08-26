@@ -113,7 +113,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As ErJournal) As Integer Implements IDaoJournals(Of ErJournal).UpdateGlReferenceNumber
-            Dim retVal As Boolean
+            Dim retVal As Integer
             Dim sql1 As String
             Dim sql2 As String
             Dim transactionDate = bizObj.TransactionDate
@@ -132,8 +132,9 @@ Namespace DataLayer.AdoNet
                                           "@Prefix", prefix,
                                           "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
                                          }
-                If _db.Insert(sql, params) Then
-                    Return -1
+                retVal = _db.Insert(sql, params)
+                If retVal < 0 Then
+                    Return retVal
                 End If
             Else
                 prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")

@@ -155,12 +155,16 @@ Namespace PresentationLayer.Presenters
             Dim updateReturnValue
             Dim retVal
             updateReturnValue = Model.DelUpdateTvp(dtUpdate, accountReconciliationIdNo)
-            If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
-                insertReturnValue = Model.InsertTvp(dtInsert)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
+            If updateReturnValue >= 0 Then
+                If dtInsert.Rows.Count > 0 Then
+                    insertReturnValue = Model.InsertTvp(dtInsert)
+                    If insertReturnValue >= 0 Then
+                        retVal = updateReturnValue + insertReturnValue
+                    Else
+                        retVal = insertReturnValue
+                    End If
                 Else
-                    retVal = insertReturnValue
+                    retVal = updateReturnValue
                 End If
             Else
                 retVal = updateReturnValue

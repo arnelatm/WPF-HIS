@@ -205,11 +205,11 @@ Namespace PresentationLayer.Presenters
             Return ModelPresenter.GetSupplierOpenInvoices(Of CkdOiItemModel)(supplierIdNo)
         End Function
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -295,7 +295,7 @@ Namespace PresentationLayer.Presenters
         '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         'End Function
 
-        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim retVal As Integer
             ' save journal entries
             If Not AddMode Then
@@ -304,10 +304,15 @@ Namespace PresentationLayer.Presenters
                 _oldCkdOiItem = Nothing
             End If
             retVal = SaveJournalItems(passedValue)
-            If retVal > 0 Then
+            If retVal >= 0 Then
                 retVal = SaveCkdOiItems(passedValue)
                 If retVal >= 0 Then
                     SaveOpenInvoices()
+                End If
+            End If
+            If retVal >= 0 Then
+                If IsEmpty(View.ReferenceNo) Then
+                    retVal = UpdateGlReferenceNumber()
                 End If
             End If
         End Sub
@@ -643,11 +648,12 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Private Sub SaveOpenInvoices()
+        Private Function SaveOpenInvoices()
+            Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 ' save the generated open invoices
                 ' after saving open invoices apply the paid amount
-                UpdateOpenInvoices()
+                retVal = UpdateOpenInvoices()
             Else
                 'If _oldCkdOiItem IsNot Nothing Then
                 '    For Each Item In _oldCkdOiItem
@@ -657,7 +663,8 @@ Namespace PresentationLayer.Presenters
                 '    Next
                 'End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Private Sub SetAsideJournalItems()
             If DtInsertTable IsNot Nothing Then
@@ -703,16 +710,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub UpdateOpenInvoices()
-            Dim newCkdOiItem As List(Of CkdOiItemModel)
+        Private Function UpdateOpenInvoices()
+            Dim retVal As Integer = 0
             If AddMode Then
-                ' add Mode so just add the payment
-                newCkdOiItem = GetCKdOiItems(View.IdNo)
-                'For Each item In newCkdOiItem
-                '    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                '        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     Dim items As List(Of JournalItemModel)
@@ -723,7 +723,7 @@ Namespace PresentationLayer.Presenters
                             ji.IdNo = item.IdNo
                             ji.AccountIdNo = item.AccountIdNo
                             ji.JournalIdNo = View.IdNo
-                            AddApOpenInvoice(ji, "CD")
+                            retVal = AddApOpenInvoice(ji, "CD")
                             Exit For
                         End If
                     Next
@@ -731,20 +731,6 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                'For Each Item In _oldCkdOiItem
-                '    ' if new
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' remove old payments
-                '        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
-                '' re-apply the new payments
-                'For Each Item In View.CkdOiItems
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' add new payments
-                '        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     ' get the journalItemIdNo
@@ -767,7 +753,7 @@ Namespace PresentationLayer.Presenters
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
-                        AddApOpenInvoice(ji, "CD")
+                        retVal = AddApOpenInvoice(ji, "CD")
                     Else
                         ' already added, nothing to do
                     End If
@@ -776,10 +762,11 @@ Namespace PresentationLayer.Presenters
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
                     lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
-                    DeleteApOpenInvoice(lOpenInvoiceIdNo)
+                    retVal = DeleteApOpenInvoice(lOpenInvoiceIdNo)
                 End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String

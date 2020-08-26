@@ -1,18 +1,21 @@
 ﻿
 
-CREATE VIEW [dbo].[ArStatement_View]
+CREATE VIEW [dbo].[ArOpenInvoice_Viewx]
 AS
-SELECT        dbo.ARDetails_View.JournalCode, dbo.ARDetails_View.IdNo, dbo.ARDetails_View.Sequence, dbo.ARDetails_View.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.Debit, dbo.ARDetails_View.Credit, 
-                         dbo.ARDetails_View.RevCostCenterIdNo, dbo.ARDetails_View.Notes, dbo.ARDetails_View.Posted, dbo.ARDetails_View.CustomerIdNo, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.TransactionDate, 
-                         dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.ARDetails_View.MainNote, dbo.Customer.CustomerCode, dbo.Customer.CustomerName, 
-                         dbo.Customer.CustomerNameAra
-FROM            dbo.ARDetails_View INNER JOIN
-                         dbo.Chart ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
-                         dbo.Customer ON dbo.ARDetails_View.CustomerIdNo = dbo.Customer.IdNo
-WHERE        (dbo.Chart.SpecialAccount = 'AR' or dbo.Chart.SpecialAccount = 'CA')
-
+SELECT        dbo.ArOpenInvoice.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArOpenInvoice.JournalItemIdNo, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS Amount, dbo.ArOpenInvoice.PaidAmount, 
+                         dbo.ArOpenInvoice.DiscountTaken, dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit - dbo.ArOpenInvoice.PaidAmount - dbo.ArOpenInvoice.DiscountTaken AS Balance, 
+                         dbo.ARDetails_View.Debit - dbo.ARDetails_View.Credit AS InvoiceAmount, dbo.ArOpenInvoice.JournalIdNo, dbo.ARDetails_View.AccountIdNo, dbo.ARDetails_View.CustomerIdNo, 
+                         dbo.ARDetails_View.ReferenceNo, dbo.ARDetails_View.TransactionType, dbo.ARDetails_View.TransactionDate, dbo.ARDetails_View.InvoiceNo, dbo.ARDetails_View.Notes, dbo.Chart.AccountCode, 
+                         dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Chart.SpecialAccount, dbo.Customer.CustomerCode
+FROM            dbo.Customer 
+				LEFT JOIN dbo.ARDetails_View 
+				ON dbo.Customer.IdNo = dbo.ARDetails_View.CustomerIdNo 
+				LEFT JOIN dbo.ArOpenInvoice 
+				ON dbo.ARDetails_View.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ARDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ArOpenInvoice.JournalCode 
+				LEFT JOIN dbo.Chart 
+				ON dbo.ARDetails_View.AccountIdNo = dbo.Chart.IDNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArStatement_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArOpenInvoice_Viewx';
 
 
 GO
@@ -87,25 +90,45 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ARDetails_View"
+         Begin Table = "ArOpenInvoice"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 335
-               Right = 217
+               Bottom = 332
+               Right = 215
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "ARDetails_View"
             Begin Extent = 
-               Top = 6
-               Left = 255
-               Bottom = 335
-               Right = 453
+               Top = 21
+               Left = 316
+               Bottom = 350
+               Right = 495
             End
             DisplayFlags = 280
-            TopColumn = 6
+            TopColumn = 1
+         End
+         Begin Table = "Chart"
+            Begin Extent = 
+               Top = 18
+               Left = 590
+               Bottom = 148
+               Right = 788
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Customer"
+            Begin Extent = 
+               Top = 6
+               Left = 826
+               Bottom = 299
+               Right = 1030
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -133,9 +156,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArStatement_View';
-
-
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ArOpenInvoice_Viewx';
 

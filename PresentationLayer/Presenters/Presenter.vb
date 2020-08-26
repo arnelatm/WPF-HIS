@@ -107,17 +107,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event EditingRecordChanged(editing As Boolean)
 
-    Public Event ParentRecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
+    Public Event RecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
 
-    Public Event ParentRecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
-
-    Public Event SuccessfulAdd(idNoOfRecord As Integer)
+    Public Event RecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
 
     Public Event SuccessfulDelete(idNoOfRecord As Integer)
-
-    Public Event SuccessfulEdit(idNoOfRecord As Integer)
-
-    Public Event SuccessfulUpdate(idNoOfRecord As Integer)
 
     Public Event TextDisplayChanged()
 
@@ -337,7 +331,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 retValue = Model.DeleteRecord(idNo, TableName)
                 If retValue > 0 Then
                     If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New RecordDeleted(idNo))
+                        'Ea.PublishEvent(New RecordDeleted(idNo))
                     End If
                     RaiseEvent SuccessfulDelete(idNo)
                 End If
@@ -359,6 +353,29 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
 
         Return retValue
+    End Function
+
+    Protected Function UpdateDataTables(updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
+        Dim retVal As Integer
+        Dim updateReturnValue As Object
+        Dim insertReturnValue As Object
+        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+            If parentIdNo <> 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
+                Next
+            End If
+            insertReturnValue = Model.InsertTvp(insertTable)
+            If insertReturnValue >= 0 Then
+                retVal = updateReturnValue + insertReturnValue
+            Else
+                retVal = insertReturnValue
+            End If
+        Else
+            retVal = updateReturnValue
+        End If
+        Return retVal
     End Function
 
 
@@ -935,14 +952,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 If viewIsValid AndAlso IsBizDataValid() Then
                     RaiseEvent BeforeSave()
                     retVal = InitiateSave()
-                    If retVal <= 0 Then
+                    If retVal < 0 Then
                         Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         'Else
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
-                    End If
-                    RaiseEvent AfterSave(retVal)
-                    If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New RecordSaved(DataModel))
+                    Else
+                        RaiseEvent AfterSave(retVal)
+                        If Ea IsNot Nothing Then
+                            Ea.PublishEvent(New RecordSaved(DataModel))
+                        End If
                     End If
                 End If
             End If
@@ -1188,23 +1206,33 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then
+                    Dim retVal As Integer = 0
                     retValue = AddRecord(record)
                     If retValue > 0 Then
-                        RaiseEvent ParentRecordAddedSuccessfully(retValue)
+                        retVal = retValue
+                        RaiseEvent RecordAddedSuccessfully(retVal)
+                        If retVal < 0 Then
+                            retValue = retVal
+                        End If
                     End If
-                    RaiseEvent SuccessfulAdd(retValue)
                 Else
                     retValue = UpdateRecord(record)
                     If retValue > 0 Then
-                        Dim retVal As Integer = 0
-                        RaiseEvent ParentRecordUpdatedSuccessfully(retVal)
-                        retValue = retValue + retVal
+                        Dim retVal As Integer = retValue
+                        RaiseEvent RecordUpdatedSuccessfully(retVal)
+                        If retVal < 0 Then
+                            retValue = retVal
+                        Else
+                            retValue = retValue + retVal
+                        End If
                     End If
-                    RaiseEvent SuccessfulUpdate(retValue)
                 End If
-                scope.Complete()
+                If retValue >= 0 Then
+                    scope.Complete()
+                End If
             End Using
         Catch ex As TransactionAbortedException
+            retValue = -1
             MessageBox.Show(ex.Message, "Transaction Aborted")
         Catch oEx As Exception
 

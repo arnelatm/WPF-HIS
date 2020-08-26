@@ -63,7 +63,7 @@ Namespace PresentationLayer
             Next
         End Sub
 
-        Public Sub OnParentRecordUpdatedSuccessfully(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully
+        Public Sub OnParentRecordUpdatedSuccessfully(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully
             Dim updateReturnValue As Integer
             updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, View.ParentIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
@@ -81,9 +81,7 @@ Namespace PresentationLayer
             End If
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim parentIdNo As Int32
             If AddMode Then
                 parentIdNo = retVal
@@ -91,18 +89,7 @@ Namespace PresentationLayer
             Else
                 parentIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("SecurityGroupIdNo") = parentIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue + retVal
-                Else
-                    retVal = insertReturnValue + retVal
-                End If
-            End If
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "SecurityGroupIdNo")
             Return retVal
         End Function
 
