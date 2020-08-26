@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Net.Http.Headers
 Imports AATM.Accounts.PresentationLayer.Forms
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
@@ -207,11 +208,11 @@ Namespace PresentationLayer.Presenters
             Return ModelPresenter.GetSupplierOpenInvoices(Of CadOiItemModel)(supplierIdNo)
         End Function
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -294,7 +295,7 @@ Namespace PresentationLayer.Presenters
         '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
         'End Function
 
-        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        Private Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim retVal As Integer
             ' save journal entries
             If Not AddMode Then
@@ -303,31 +304,19 @@ Namespace PresentationLayer.Presenters
                 _oldCadOiItem = Nothing
             End If
             retVal = SaveJournalItems(passedValue)
-            If retVal > 0 Then
+            If retVal >= 0 Then
                 retVal = SaveCadOiItems(passedValue)
                 If retVal >= 0 Then
-                    SaveOpenInvoices()
+                    retVal = SaveOpenInvoices()
                 End If
             End If
-        End Sub
-
-        'Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.Succ
-        '    Dim retVal As Integer
-        '    ' save journal entries
-        '    If Not AddMode Then
-        '        _oldCadOiItem = GetCadOiItems(View.IdNo)
-        '    Else
-        '        _oldCadOiItem = Nothing
-        '    End If
-        '    retVal = SaveJournalItems(passedValue)
-        '    If retVal > 0 Then
-        '        retVal = SaveCadOiItems(passedValue)
-        '        If retVal >= 0 Then
-        '            SaveOpenInvoices()
-        '        End If
-        '    End If
-        'End Sub
-
+            If retVal >= 0 Then
+                If IsEmpty(View.ReferenceNo) Then
+                    retVal = UpdateGlReferenceNumber()
+                End If
+            End If
+            Return retVal
+        End Function
 
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)
@@ -633,15 +622,23 @@ Namespace PresentationLayer.Presenters
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
             updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
+            If updateReturnValue >= 0 Then
+                If DtInsertTable.Rows.Count > 0 Then
+                    For Each row As DataRow In DtInsertTable.Rows
+                        row.Item("JournalIdNo") = headerIdNo
+                    Next
+                    insertReturnValue = Model.InsertTvp(DtInsertTable)
+                    If insertReturnValue >= 0 Then
+                        retVal = updateReturnValue + insertReturnValue
+                    Else
+                        If insertReturnValue >= 0 Then
+                            retVal = insertReturnValue + updateReturnValue
+                        Else
+                            retVal = insertReturnValue
+                        End If
+                    End If
                 Else
-                    retVal = insertReturnValue
+                    retVal = updateReturnValue
                 End If
             Else
                 retVal = updateReturnValue
@@ -649,21 +646,14 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Private Sub SaveOpenInvoices()
+        Private Function SaveOpenInvoices()
+            Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                ' save the generated open invoices
-                ' after saving open invoices apply the paid amount
-                UpdateOpenInvoices()
-            Else
-                'If _oldCadOiItem IsNot Nothing Then
-                '    For Each Item In _oldCadOiItem
-                '        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '            RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '        End If
-                '    Next
-                'End If
+                ' save the generated open 
+                retVal = UpdateOpenInvoices()
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Private Sub SetAsideJournalItems()
             If DtInsertTable IsNot Nothing Then
@@ -709,16 +699,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub UpdateOpenInvoices()
-            Dim newCadOiItem As List(Of CadOiItemModel)
+        Private Function UpdateOpenInvoices()
+            Dim retVal As Integer = 0
             If AddMode Then
-                ' add Mode so just add the payment
-                newCadOiItem = GetCadOiItems(View.IdNo)
-                'For Each item In newCadOiItem
-                '    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                '        AddInvoicePayment(item.ApOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     Dim items As List(Of JournalItemModel)
@@ -729,28 +712,12 @@ Namespace PresentationLayer.Presenters
                             ji.IdNo = item.IdNo
                             ji.AccountIdNo = item.AccountIdNo
                             ji.JournalIdNo = View.IdNo
-                            AddApOpenInvoice(ji, "CD")
+                            retVal = AddApOpenInvoice(ji, "CD")
                             Exit For
                         End If
                     Next
-                Else
-                    ' no advance payment
                 End If
             Else
-                'For Each Item In _oldCadOiItem
-                '    ' if new
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' remove old payments
-                '        RemoveInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
-                '' re-apply the new payments
-                'For Each Item In View.CadOiItems
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' add new payments
-                '        AddInvoicePayment(Item.ApOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     ' get the journalItemIdNo
@@ -773,7 +740,7 @@ Namespace PresentationLayer.Presenters
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
-                        AddApOpenInvoice(ji, "CD")
+                        retVal = AddApOpenInvoice(ji, "CD")
                     Else
                         ' already added, nothing to do
                     End If
@@ -782,10 +749,11 @@ Namespace PresentationLayer.Presenters
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
                     lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
-                    DeleteApOpenInvoice(lOpenInvoiceIdNo)
+                    retVal = DeleteApOpenInvoice(lOpenInvoiceIdNo)
                 End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmountInWords As String

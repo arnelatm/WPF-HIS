@@ -137,7 +137,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
             Dim headerIdNo As Int32

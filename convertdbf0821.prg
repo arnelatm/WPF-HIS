@@ -417,7 +417,7 @@ Use c:\temp\ErJourItm Exclusive Alias ErJourItm
 Zap
 Select customer
 Go Top
-nArCtr = 0
+nArCtr = 1000
 nErCtr = 0
 nAmount = 0
 Do While Not Eof()
@@ -459,12 +459,12 @@ Do While Not Eof()
 *!*				Replace ErJournal.Cancelled With .F.
 *!*				Replace ErJournal.DtCreated With Date(2016,12,31)
 *!*			Else
-			nArCtr = nArCtr + 1
+*!*			nArCtr = nArCtr + 1
 			Select ArJourItm
 			Append Blank
-			Replace ArJourItm.IdNo With nArCtr
+			Replace ArJourItm.IdNo With Customer.IdNo
 			Replace ArJourItm.Sequence With 1
-			Replace ArJourItm.JourIdNo With nArCtr
+			Replace ArJourItm.JourIdNo With Customer.IdNo
 			Replace ArJourItm.AcctIdNo With 112
 			If nAmount  >= 0 Then
 				Replace ArJourItm.Debit With nAmount
@@ -475,7 +475,7 @@ Do While Not Eof()
 			Replace ArJourItm.Posted With .T.
 			Select ArJournal
 			Append Blank
-			Replace ArJournal.IdNo With nArCtr
+			Replace ArJournal.IdNo With Customer.IdNo
 			Replace ArJournal.CustIdNo With customer.IdNo
 			Replace ArJournal.TransDate With Date(2016,12,31)
 			Replace ArJournal.AcctIdNo With 112
@@ -697,7 +697,7 @@ Set Order To
 Select 5
 Use c:\temp\ArJourItm Exclusive Alias ArJourItm
 Go Bottom
-nArCtrItm = ArJourItm.IdNo
+nArCtrItm = 1038
 
 Select 6
 Use c:\temp\ErJournal.Dbf  Exclusive Alias ErJournal

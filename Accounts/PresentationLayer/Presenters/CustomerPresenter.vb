@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Net.Http.Headers
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 
@@ -20,17 +21,9 @@ Namespace PresentationLayer.Presenters
             Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
         End Function
 
-        Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-            UpdateOpeningBalance()
+        Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
+            retVal = ModelPresenter.UpdateOpeningBalance(DataModel)
         End Sub
-
-        Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-            UpdateOpeningBalance()
-        End Sub
-
-        Public Function UpdateOpeningBalance()
-            Return ModelPresenter.UpdateOpeningBalance(DataModel)
-        End Function
 
     End Class
 

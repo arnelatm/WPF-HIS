@@ -327,56 +327,56 @@ Set Order To
 Select 4
 Use c:\temp\ApJourItm Exclusive Alias ApJourItm
 Zap
-Select supplier
-Go Top
-nCtr = 0
-nAmount = 0
-Do While Not Eof()
-	nAmount = supplier.OpBalance
-	If nAmount <> 0 Then
-		nCtr = nCtr + 1
-		Select ApJourItm
-		Append Blank
-		Replace ApJourItm.IdNo With nCtr
-		Replace ApJourItm.Sequence With 1
-		Replace ApJourItm.JourIdNo With nCtr
-		Replace ApJourItm.AcctIdNo With 210
-		If nAmount  >= 0 Then
-			Replace ApJourItm.Credit With nAmount
-		Else
-			Replace ApJourItm.Debit With nAmount * -1
-		Endif
-		Replace ApJourItm.Notes With "Opening Balance"
-		Replace ApJourItm.Posted With .T.
+*!*	Select supplier
+*!*	Go Top
+*!*	nCtr = 0
+*!*	nAmount = 0
+*!*	Do While Not Eof()
+*!*		nAmount = supplier.OpBalance
+*!*		If nAmount <> 0 Then
+*!*			nCtr = nCtr + 1
+*!*			Select ApJourItm
+*!*			Append Blank
+*!*			Replace ApJourItm.IdNo With nCtr
+*!*			Replace ApJourItm.Sequence With 1
+*!*			Replace ApJourItm.JourIdNo With nCtr
+*!*			Replace ApJourItm.AcctIdNo With 210
+*!*			If nAmount  >= 0 Then
+*!*				Replace ApJourItm.Credit With nAmount
+*!*			Else
+*!*				Replace ApJourItm.Debit With nAmount * -1
+*!*			Endif
+*!*			Replace ApJourItm.Notes With "Opening Balance"
+*!*			Replace ApJourItm.Posted With .T.
 
-		Select ApJournal
-		Append Blank
-		Replace ApJournal.IdNo With nCtr
-		Replace ApJournal.SuppIdNo With supplier.IdNo
-		Replace ApJournal.TransDate With Date(2016,12,31)
-		Replace ApJournal.AcctIdNo With 210
-		Replace ApJournal.Reference With "Beg.Bal."
-		If nAmount >= 0 Then
-			Replace ApJournal.TransType With "C"
-		Else
-			Replace ApJournal.TransType With "D"
-		Endif
-		Replace ApJournal.Amount With Abs(nAmount)
-		Replace ApJournal.AcctIdNo With 210
-		Replace ApJournal.DueDate With Date(2016,12,31)
-		Replace ApJournal.InvoiceNo With "Beg. Bal."
-		Replace ApJournal.InvoiceDt With Date(2016,12,31)
-		Replace ApJournal.Notes With "Beg. Bal."
-		Replace ApJournal.Posted With .T.
-		Replace ApJournal.Cancelled With .F.
-		Replace ApJournal.DtCreated With Date(2016,12,31)
-		Replace ApJournal.Posted With .T.
+*!*			Select ApJournal
+*!*			Append Blank
+*!*			Replace ApJournal.IdNo With nCtr
+*!*			Replace ApJournal.SuppIdNo With supplier.IdNo
+*!*			Replace ApJournal.TransDate With Date(2016,12,31)
+*!*			Replace ApJournal.AcctIdNo With 210
+*!*			Replace ApJournal.Reference With "Beg.Bal."
+*!*			If nAmount >= 0 Then
+*!*				Replace ApJournal.TransType With "C"
+*!*			Else
+*!*				Replace ApJournal.TransType With "D"
+*!*			Endif
+*!*			Replace ApJournal.Amount With Abs(nAmount)
+*!*			Replace ApJournal.AcctIdNo With 210
+*!*			Replace ApJournal.DueDate With Date(2016,12,31)
+*!*			Replace ApJournal.InvoiceNo With "Beg. Bal."
+*!*			Replace ApJournal.InvoiceDt With Date(2016,12,31)
+*!*			Replace ApJournal.Notes With "Beg. Bal."
+*!*			Replace ApJournal.Posted With .T.
+*!*			Replace ApJournal.Cancelled With .F.
+*!*			Replace ApJournal.DtCreated With Date(2016,12,31)
+*!*			Replace ApJournal.Posted With .T.
 
-		Select supplier
-		* Replace supplier.OpBalance With 0
-	Endif
-	Skip
-Enddo
+*!*			Select supplier
+*!*			* Replace supplier.OpBalance With 0
+*!*		Endif
+*!*		Skip
+*!*	Enddo
 
 ********************************
 * create AR beginning balances *
@@ -415,19 +415,119 @@ Set Order To
 Select 6
 Use c:\temp\ErJourItm Exclusive Alias ErJourItm
 Zap
-Select customer
-Go Top
-nArCtr = 0
-nErCtr = 0
-nAmount = 0
-Do While Not Eof()
-	cCustCode = customer.CustCode
-*!*		IF cCustCode='C77' THEN
-*!*			SET STEP ON 
-*!*		ENDIF
-	nAmount = customer.OpBalance
-	If nAmount <> 0 Then
-		If cCustCode <> "E" Then
+*!*	Select customer
+*!*	Go Top
+*!*	nArCtr = 0
+*!*	nErCtr = 0
+*!*	nAmount = 0
+*!*	Do While Not Eof()
+*!*		cCustCode = customer.CustCode
+*!*	*!*		IF cCustCode='C77' THEN
+*!*	*!*			SET STEP ON 
+*!*	*!*		ENDIF
+*!*		nAmount = customer.OpBalance
+*!*		If nAmount <> 0 Then
+*!*			If cCustCode <> "E" Then
+*!*	*!*				nErCtr = nErCtr + 1
+*!*	*!*				Select ErJourItm
+*!*	*!*				Append Blank
+*!*	*!*				Replace ErJourItm.IdNo With nErCtr
+*!*	*!*				Replace ErJourItm.Sequence With 1
+*!*	*!*				Replace ErJourItm.JourIdNo With nErCtr
+*!*	*!*				Replace ErJourItm.AcctIdNo With 114
+*!*	*!*				If nAmount  >= 0 Then
+*!*	*!*					Replace ErJourItm.Debit With nAmount
+*!*	*!*				Else
+*!*	*!*					Replace ErJourItm.Credit With nAmount * -1
+*!*	*!*				Endif
+*!*	*!*				Replace ErJourItm.Notes With "Opening Balance"
+*!*	*!*				Replace ErJourItm.Posted With .T.
+*!*	*!*				Select ErJournal
+*!*	*!*				Append Blank
+*!*	*!*				Replace ErJournal.IdNo With nErCtr
+*!*	*!*				Replace ErJournal.EmplIdNo With Val(Substr(cCustCode,2,5))
+*!*	*!*				Replace ErJournal.TransDate With Date(2016,12,31)
+*!*	*!*				Replace ErJournal.AcctIdNo With 114
+*!*	*!*				Replace ErJournal.Reference With "Beg.Bal."
+*!*	*!*				If nAmount >= 0 Then
+*!*	*!*					Replace ErJournal.TransType With "D"
+*!*	*!*				Else
+*!*	*!*					Replace ErJournal.TransType With "C"
+*!*	*!*				Endif
+*!*	*!*				Replace ErJournal.Amount With Abs(nAmount)
+*!*	*!*				Replace ErJournal.Posted With .T.
+*!*	*!*				Replace ErJournal.Cancelled With .F.
+*!*	*!*				Replace ErJournal.DtCreated With Date(2016,12,31)
+*!*	*!*			Else
+*!*				nArCtr = nArCtr + 1
+*!*				Select ArJourItm
+*!*				Append Blank
+*!*				Replace ArJourItm.IdNo With nArCtr
+*!*				Replace ArJourItm.Sequence With 1
+*!*				Replace ArJourItm.JourIdNo With nArCtr
+*!*				Replace ArJourItm.AcctIdNo With 112
+*!*				If nAmount  >= 0 Then
+*!*					Replace ArJourItm.Debit With nAmount
+*!*				Else
+*!*					Replace ArJourItm.Credit With nAmount * -1
+*!*				Endif
+*!*				Replace ArJourItm.Notes With "Opening Balance"
+*!*				Replace ArJourItm.Posted With .T.
+*!*				Select ArJournal
+*!*				Append Blank
+*!*				Replace ArJournal.IdNo With nArCtr
+*!*				Replace ArJournal.CustIdNo With customer.IdNo
+*!*				Replace ArJournal.TransDate With Date(2016,12,31)
+*!*				Replace ArJournal.AcctIdNo With 112
+*!*				Replace ArJournal.Reference With "Beg.Bal."
+*!*				If nAmount >= 0 Then
+*!*					Replace ArJournal.TransType With "D"
+*!*				Else
+*!*					Replace ArJournal.TransType With "C"
+*!*				Endif
+*!*				Replace ArJournal.Amount With Abs(nAmount)
+*!*				Replace ArJournal.DueDate With Date(2016,12,31)
+*!*				Replace ArJournal.InvoiceNo With "Beg. Bal."
+*!*				Replace ArJournal.InvoiceDt With Date(2016,12,31)
+*!*				Replace ArJournal.Notes With "Beg. Bal."
+*!*				Replace ArJournal.Posted With .T.
+*!*				Replace ArJournal.Cancelled With .F.
+*!*				Replace ArJournal.DtCreated With Date(2016,12,31)
+*!*			Endif
+*!*			Select customer
+*!*		Endif
+*!*		Skip
+*!*	ENDDO
+
+
+********************************
+* create ER beginning balances *
+********************************
+
+CLOSE DATABASES
+
+Select 2
+
+Select 1
+Use Y:\acctbackup\customer.Dbf Index Y:\acctbackup\customer.Cdx
+Select 5
+Use c:\temp\ErJournal.Dbf  Exclusive Alias ErJournal
+Zap
+Set Order To
+Select 6
+Use c:\temp\ErJourItm Exclusive Alias ErJourItm
+Zap
+*!*	Select customer
+*!*	Go Top
+*!*	nErCtr = 0
+*!*	nAmount = 0
+*!*	Do While Not Eof()
+*!*		cCustCode = customer.CustCode
+*!*	*!*		IF cCustCode='C77' THEN
+*!*	*!*			SET STEP ON 
+*!*	*!*		ENDIF
+*!*		nAmount = customer.INIT_BAL
+*!*		If nAmount <> 0 AND cCustCode = "E" Then
 *!*				nErCtr = nErCtr + 1
 *!*				Select ErJourItm
 *!*				Append Blank
@@ -458,111 +558,11 @@ Do While Not Eof()
 *!*				Replace ErJournal.Posted With .T.
 *!*				Replace ErJournal.Cancelled With .F.
 *!*				Replace ErJournal.DtCreated With Date(2016,12,31)
-*!*			Else
-			nArCtr = nArCtr + 1
-			Select ArJourItm
-			Append Blank
-			Replace ArJourItm.IdNo With nArCtr
-			Replace ArJourItm.Sequence With 1
-			Replace ArJourItm.JourIdNo With nArCtr
-			Replace ArJourItm.AcctIdNo With 112
-			If nAmount  >= 0 Then
-				Replace ArJourItm.Debit With nAmount
-			Else
-				Replace ArJourItm.Credit With nAmount * -1
-			Endif
-			Replace ArJourItm.Notes With "Opening Balance"
-			Replace ArJourItm.Posted With .T.
-			Select ArJournal
-			Append Blank
-			Replace ArJournal.IdNo With nArCtr
-			Replace ArJournal.CustIdNo With customer.IdNo
-			Replace ArJournal.TransDate With Date(2016,12,31)
-			Replace ArJournal.AcctIdNo With 112
-			Replace ArJournal.Reference With "Beg.Bal."
-			If nAmount >= 0 Then
-				Replace ArJournal.TransType With "D"
-			Else
-				Replace ArJournal.TransType With "C"
-			Endif
-			Replace ArJournal.Amount With Abs(nAmount)
-			Replace ArJournal.DueDate With Date(2016,12,31)
-			Replace ArJournal.InvoiceNo With "Beg. Bal."
-			Replace ArJournal.InvoiceDt With Date(2016,12,31)
-			Replace ArJournal.Notes With "Beg. Bal."
-			Replace ArJournal.Posted With .T.
-			Replace ArJournal.Cancelled With .F.
-			Replace ArJournal.DtCreated With Date(2016,12,31)
-		Endif
-		Select customer
-	Endif
-	Skip
-ENDDO
 
-
-********************************
-* create ER beginning balances *
-********************************
-
-CLOSE DATABASES
-
-Select 2
-
-Select 1
-Use Y:\acctbackup\customer.Dbf Index Y:\acctbackup\customer.Cdx
-Select 5
-Use c:\temp\ErJournal.Dbf  Exclusive Alias ErJournal
-Zap
-Set Order To
-Select 6
-Use c:\temp\ErJourItm Exclusive Alias ErJourItm
-Zap
-Select customer
-Go Top
-nErCtr = 0
-nAmount = 0
-Do While Not Eof()
-	cCustCode = customer.CustCode
-*!*		IF cCustCode='C77' THEN
-*!*			SET STEP ON 
 *!*		ENDIF
-	nAmount = customer.INIT_BAL
-	If nAmount <> 0 AND cCustCode = "E" Then
-			nErCtr = nErCtr + 1
-			Select ErJourItm
-			Append Blank
-			Replace ErJourItm.IdNo With nErCtr
-			Replace ErJourItm.Sequence With 1
-			Replace ErJourItm.JourIdNo With nErCtr
-			Replace ErJourItm.AcctIdNo With 114
-			If nAmount  >= 0 Then
-				Replace ErJourItm.Debit With nAmount
-			Else
-				Replace ErJourItm.Credit With nAmount * -1
-			Endif
-			Replace ErJourItm.Notes With "Opening Balance"
-			Replace ErJourItm.Posted With .T.
-			Select ErJournal
-			Append Blank
-			Replace ErJournal.IdNo With nErCtr
-			Replace ErJournal.EmplIdNo With Val(Substr(cCustCode,2,5))
-			Replace ErJournal.TransDate With Date(2016,12,31)
-			Replace ErJournal.AcctIdNo With 114
-			Replace ErJournal.Reference With "Beg.Bal."
-			If nAmount >= 0 Then
-				Replace ErJournal.TransType With "D"
-			Else
-				Replace ErJournal.TransType With "C"
-			Endif
-			Replace ErJournal.Amount With Abs(nAmount)
-			Replace ErJournal.Posted With .T.
-			Replace ErJournal.Cancelled With .F.
-			Replace ErJournal.DtCreated With Date(2016,12,31)
-
-	ENDIF
-	Select customer
-	Skip
-Enddo
+*!*		Select customer
+*!*		Skip
+*!*	Enddo
 
 **************************
 * Create APJournal/Items *
@@ -2138,6 +2138,7 @@ Set Deleted On
 Set Exclusive On
 Set Safety Off
 Set Date YMD
+SET CENTURY ON
 
 cFields = "[IdNo], [SupplierCode], [SupplierName], [SupplierNameAra], [ContactPerson], [ContactDesignation], [Street], [District], [TownCity], [ProvinceState], [CountryCode], [POBox], "
 cFields = cFields + "[ZipCode], [Phone1], [Phone2], [Mobile], [Fax], [Email], [Website], [VATNumber], [CRNumber], [AccountStatus], [APAccountIdNo], [ExpAccountIdNo], [CreditLimit], [SettlementDueDays], [SettlementDiscount], "
@@ -2152,44 +2153,44 @@ DbfToSql(cFields,"Customer","Customer")
 cFields = "[IDNo],[SupplierIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[VatNumber],[VatAmount],[Notes],[Posted],[Cancelled],[DateCreated]"
 DbfToSql(cFields,"ApJournal","ApJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"ApJourItm","ApJournalItem")
 
 cFields = "[IDNo],[CustomerIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[Notes],[Posted],[Cancelled],[DateCreated]"
 DbfToSql(cFields,"ArJournal","ArJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"ArJourItm","ArJournalItem")
 
 cFields = "[IDNo],[EmployeeIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[Notes],[Posted],[Cancelled],[DateCreated]"
 DbfToSql(cFields,"ErJournal","ErJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"ErJourItm","ErJournalItem")
 
 cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Notes],[Posted],[ClosingJournal],[Cancelled],[DateCreated]"
 DbfToSql(cFields,"GnJournal","GeneralJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"GnJourItm","GeneralJournalItem")
 
 cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PaymentType],[PayeeIdNo],[PayeeName],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[VatNumber],[VatAmount],[Notes],[Posted],[DateCreated],[Cancelled]"
 DbfToSql(cFields,"CdJournal","CashDisbursementJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"CdJourItm","CashDisbursementJournalItem")
 
 cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PaymentType],[PayeeIdNo],[PayeeName],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[VatNumber],[VatAmount],[Notes],[Posted],"
 cFields = cFields + "[DateCreated],[Cancelled]"
 DbfToSql(cFields,"CkJournal","CheckDisbursementJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"CkJourItm","CheckDisbursementJournalItem")
 
 cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PayorType],[PayorIdNo],[Payorname],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[Notes],[Posted],[DateCreated],[Cancelled]"
 DbfToSql(cFields, "CrJournal","CashReceiptJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[ProfitCenterIdNo],[Notes],[Posted]"
+cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"CrJourItm","CashReceiptJournalItem")
 
 cFields = "[IdNo],[CadIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
@@ -2265,6 +2266,7 @@ Do While Not Eof()
 						Else
 							cSomething = Transform(Something)
 							cSomething = "'" + cSomething + "'"
+							cSomething = Strtran(cSomething ,"/","-")
 						Endif
 					Else
 						cSomething = Trim(Transform(Something))

@@ -52,15 +52,13 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        Public Overloads Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
-            Dim headerIdNo As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
+        Public Overloads Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim parentIdNo As Integer
             If AddMode Then
-                headerIdNo = retVal
+                parentIdNo = retVal
                 CallByName(View, IdFieldName, CallType.Set, retVal)
             Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
+                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
@@ -77,7 +75,7 @@ Namespace PresentationLayer.Presenters
                     workRow = DtUpdateTable.NewRow()
                     workRow("IdNo") = ji.IdNo
                 End If
-                workRow("AccountReconciliationIdNo") = headerIdNo
+                workRow("AccountReconciliationIdNo") = parentIdNo
                 workRow("Cleared") = ji.Cleared
                 workRow("JournalCode") = ji.JournalCode
                 workRow("JournalItemIdNo") = ji.JournalItemIdNo
@@ -89,20 +87,9 @@ Namespace PresentationLayer.Presenters
                 End If
                 nRowCount += 1
             Next
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("AccountReconciliationIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
+
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "AccountReconciliationIdNo")
+
             Return retVal
         End Function
 

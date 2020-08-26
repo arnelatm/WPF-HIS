@@ -277,19 +277,16 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateOpeningBalance(ByRef bizObj As Supplier) As Integer Implements IDaoContacts(Of Supplier).UpdateOpeningBalance
             Dim sql As String
+            Dim retVal As Integer = 0
             If bizObj.OpeningBalance <> 0 Then
                 If Db.Scalar("Select Count(*) from ApOpenInvoice where JournalCode = 'BB' and JournalIdNo = " & bizObj.IdNo) = 0 Then
                     sql = "INSERT ApOpenInvoice ([JournalCode], [JournalIdNo], [JournalItemIdNo], [PaidAmount], [DiscountTaken]) VALUES " &
                           "('BB', @IdNo, @IdNo, 0, 0)"
                     Dim params() As Object = {"@IdNo", bizObj.IdNo}
-                    If Db.Insert(sql, params) Then
-                        Return 0
-                    Else
-                        Return -1
-                    End If
+                    retVal = Db.Insert(sql, params)
                 End If
             End If
-            Return 0
+            Return retVal
         End Function
 
     End Class

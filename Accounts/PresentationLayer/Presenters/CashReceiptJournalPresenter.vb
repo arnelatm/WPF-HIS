@@ -205,12 +205,6 @@ Namespace PresentationLayer.Presenters
             Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
-
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
             If View.JournalItems IsNot Nothing Then
@@ -284,33 +278,29 @@ Namespace PresentationLayer.Presenters
                 Next
                 View.TotalCredits = View.TotalDebits
             End If
+            View.UnApplied = View.Amount - View.Applied
         End Sub
 
-        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _arOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        'End Function
-
-        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
-            Dim retVal As Integer
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             ' save journal entries
+            Dim parentIdNo As Integer = retVal
             If Not AddMode Then
                 _oldCsrOiItem = GetCsrOiItems(View.IdNo)
             Else
                 _oldCsrOiItem = Nothing
             End If
-            retVal = SaveJournalItems(passedValue)
-            If retVal > 0 Then
-                retVal = SaveCsrOiItems(passedValue)
+            retVal = SaveJournalItems(parentIdNo)
+            If retVal >= 0 Then
+                retVal = SaveCsrOiItems(parentIdNo)
                 If retVal >= 0 Then
-                    SaveOpenInvoices()
+                    retVal = SaveOpenInvoices()
                 End If
             End If
+            If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            End If
         End Sub
-
-        Public Function UpdateGlReferenceNumber() As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
-        End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -345,9 +335,9 @@ Namespace PresentationLayer.Presenters
                 End If
                 If retValue Then
                     retValue = JournalItemDataIsValid()
-                    If retValue Then
-                        'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                    End If
+                    'If retValue Then
+                    '    'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
+                    'End If
                 End If
             End If
             Return retValue
@@ -358,13 +348,16 @@ Namespace PresentationLayer.Presenters
             Dim chart As ChartModel
             Dim specialAccount As String
             For Each item In View.JournalItems
-                chart = GetChart(item.AccountIdNo)
-                specialAccount = chart.SpecialAccount
-                If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                    MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                    retValue = False
-                    Exit For
-                ElseIf PaymentTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                If PaymentTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
+                        chart = GetChart(item.AccountIdNo)
+                        specialAccount = chart.SpecialAccount
+                    End If
+                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                        retValue = False
+                        Exit For
+                    End If
                     If PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
@@ -623,11 +616,12 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Private Sub SaveOpenInvoices()
+        Private Function SaveOpenInvoices()
+            Dim retVal As Integer = 0
             If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 ' save the generated open invoices
                 ' after saving open invoices apply the paid amount
-                UpdateOpenInvoices()
+                retVal = UpdateOpenInvoices()
             Else
                 'If _oldCsrOiItem IsNot Nothing Then
                 '    For Each Item In _oldCsrOiItem
@@ -637,7 +631,8 @@ Namespace PresentationLayer.Presenters
                 '    Next
                 'End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Private Sub SetAsideJournalItems()
             If DtInsertTable IsNot Nothing Then
@@ -683,17 +678,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub UpdateOpenInvoices()
+        Private Function UpdateOpenInvoices() As Integer
             ' after saving open invoices apply the paid amount
-            Dim newCsrOiItem As List(Of CsrOiItemModel)
+            Dim retVal As Integer = 0
             If AddMode Then
-                ' add Mode so just add the payment
-                newCsrOiItem = GetCsrOiItems(View.IdNo)
-                'For Each item In newCsrOiItem
-                '    If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                '        AddInvoicePayment(item.ArOpenInvoiceIdNo, item.Amount, item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     Dim items As List(Of JournalItemModel)
@@ -704,7 +692,7 @@ Namespace PresentationLayer.Presenters
                             ji.IdNo = item.IdNo
                             ji.AccountIdNo = item.AccountIdNo
                             ji.JournalIdNo = View.IdNo
-                            AddArOpenInvoice(ji, "CR")
+                            retVal = AddArOpenInvoice(ji, "CR")
                             Exit For
                         End If
                     Next
@@ -712,20 +700,6 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment
                 End If
             Else
-                'For Each Item In _oldCsrOiItem
-                '    'if new
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' remove old payments
-                '        RemoveInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
-                ' re-apply the new payments
-                'For Each Item In View.CsrOiItems
-                '    If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '        ' add new payments
-                '        AddInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '    End If
-                'Next
                 If View.UnApplied > 0 Then
                     ' with advance payment
                     ' get the journalItemIdNo
@@ -748,7 +722,7 @@ Namespace PresentationLayer.Presenters
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
-                        AddArOpenInvoice(ji, "CR")
+                        retVal = AddArOpenInvoice(ji, "CR")
                     Else
                         ' already added, nothing to do
                     End If
@@ -757,10 +731,21 @@ Namespace PresentationLayer.Presenters
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
                     lOpenInvoiceIdNo = CInt(GetAdvanceCollectionOpenIdNo(View.IdNo))
-                    DeleteArOpenInvoice(lOpenInvoiceIdNo)
+                    If lOpenInvoiceIdNo > 0 Then
+                        retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
+                    End If
                 End If
             End If
-        End Sub
+            Return retVal
+        End Function
+
+        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
+            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+            If Model.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
+                Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+            End If
+        End Function
+
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String

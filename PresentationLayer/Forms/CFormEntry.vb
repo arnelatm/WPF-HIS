@@ -19,8 +19,8 @@ Public Class CFormEntry
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
                ISubscriber(Of RecordSaved),
-               ISubscriber(Of RecordDeleted),
                ISubscriber(Of BeforeAssignment)
+    '          ISubscriber(Of RecordDeleted),
 
     Public FieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -168,9 +168,9 @@ Public Class CFormEntry
         RecordSaved(e)
     End Sub
 
-    Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
-        RecordDeleted(e)
-    End Sub
+    'Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
+    '    RecordDeleted(e)
+    'End Sub
 
     Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
         BeforeAssignment()
@@ -482,8 +482,8 @@ Public Class CFormEntry
     Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
     End Sub
 
-    Protected Overridable Sub RecordDeleted(ByRef e As RecordDeleted)
-    End Sub
+    'Protected Overridable Sub RecordDeleted(ByRef e As RecordDeleted)
+    'End Sub
 
     Protected Overridable Sub BeforeAssignment()
     End Sub

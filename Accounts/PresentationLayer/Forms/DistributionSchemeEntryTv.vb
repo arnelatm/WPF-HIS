@@ -218,7 +218,7 @@ Namespace PresentationLayer.Forms
             DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
 
-        'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
         '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If

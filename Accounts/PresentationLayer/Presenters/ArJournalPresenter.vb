@@ -47,11 +47,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
@@ -93,9 +93,7 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim parentIdNo As Int32
             If AddMode Then
                 parentIdNo = retVal
@@ -103,106 +101,74 @@ Namespace PresentationLayer.Presenters
             Else
                 parentIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = parentIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Dim newJournalItem As List(Of JournalItemModel)
-            If AddMode Then
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                For Each item In newJournalItem
-                    If IsAccountsReceivableAccount(item.AccountIdNo) Then
-                        AddArOpenInvoice(item, "AR")
-                    End If
-                Next
-            Else
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                Dim newItem
-                Dim oldItem
-                Dim newIsAr
-                Dim oldIsAr
-                Dim oldJournalItem As List(Of JournalItemModel)
-                If Not AddMode Then
-                    oldJournalItem = OriginalModel.Journalitems
-                Else
-                    oldJournalItem = Nothing
-                End If
-                For Each oldItem In oldJournalItem
-                    ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
-                    ' so no problem on deletion
-                    oldIsAr = IsAccountsReceivableAccount(oldItem.AccountIdNo)
-                    If oldIsAr Then
-                        ' this item is AR
-                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                        If newItem Is Nothing Then
-                            ' item was deleted
-                            DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
-                        Else
-                            ' item is found
-                            newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
-                            If newIsAr Then
-                                ' nothing to do
-                            Else
-                                ' new is changed from AR to non-AR
-                                DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+            If retVal >= 0 Then
+                Dim newJournalItem As List(Of JournalItemModel)
+                If AddMode Then
+                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    For Each item In newJournalItem
+                        If IsAccountsReceivableAccount(item.AccountIdNo) Then
+                            retVal = AddArOpenInvoice(item, "AR")
+                            If retVal < 0 Then
+                                Exit For
                             End If
-                        End If
-                    Else
-                        ' this item is Non-AR
-                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                        If newItem Is Nothing Then
-                            ' item is deleted just ignore Non-AR
-                        Else
-                            ' old item still in new
-                            newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
-                            If newIsAr Then
-                                AddArOpenInvoice(newItem, "AR")
-                            Else
-                                ' new is also Non-AR
-                                ' nothing to do
-                            End If
-                        End If
-                    End If
-                Next
-                For Each newItem In newJournalItem
-                    newIsAr = IsAccountsReceivableAccount(newItem.AccountIdNo)
-                    oldItem = Nothing
-                    For Each item In OriginalModel.JournalItems
-                        If newItem.IdNo = item.IdNo Then
-                            ' meaning it is the same record
-                            oldItem = item
-                            Exit For
                         End If
                     Next
-                    'oldItem = OriginalModel.JournalItems.Find(Function(c) c.IdNo = x)
-                    If oldItem Is Nothing Then
-                        ' this item is new
-                        If newIsAr Then
-                            ' this new item is an AR
-                            AddArOpenInvoice(newItem, "AR")
-                        Else
-                            ' non - AR nothing to do
-                        End If
-                    Else
-                        ' old item, already taken off in first (oldItem) for-loop
+                Else
+                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    retVal = UpdateOldArOpenInvoices(retVal, newJournalItem)
+                    If retVal >= 0 Then
+                        retVal = UpdateNewArOpenInvoices(retVal, newJournalItem)
                     End If
-                Next
-            End If
-            If retVal > 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    UpdateGlReferenceNumber()
                 End If
             End If
+            If retVal >= 0 Then
+                If IsEmpty(View.ReferenceNo) Then
+                    retVal = UpdateGlReferenceNumber()
+                End If
+            End If
+            Return retVal
+        End Function
+
+
+        Private Function UpdateOldArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim newItem
+            Dim oldItem
+            Dim oldJournalItem As List(Of JournalItemModel)
+            If Not AddMode Then
+                oldJournalItem = OriginalModel.Journalitems
+            Else
+                oldJournalItem = Nothing
+            End If
+            For Each oldItem In oldJournalItem
+                ' deletion of paid A.R. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
+                ' so no problem on deletion of related ArOpenInvoice and Payment invoices ('CsrOiItem')
+                If IsAccountsReceivableAccount(oldItem.AccountIdNo) Then
+                    newItem = Not IsNothing(newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo))
+                    If newItem Then
+                        ' don't delete 
+                    Else
+                        ' delete marker ArOpenInvoice (since no payment exist) as paid invoices cannot be deleted (not allowed in the system) see (userdeletingrow) in ArJournalEntry.vb
+                        retVal = DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+                    End If
+                End If
+            Next
+            Return retVal
+        End Function
+
+        Private Function UpdateNewArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim newItem
+            Dim oldItem
+            Dim oldJournalItem As List(Of JournalItemModel)
+            oldJournalItem = OriginalModel.Journalitems
+            For Each newItem In newJournalItem
+                If IsAccountsReceivableAccount(newItem.AccountIdNo) Then
+                    oldItem = Not IsNothing(oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo))
+                    If Not oldItem Then
+                        retVal = AddArOpenInvoice(newItem, "AR")
+                    End If
+                End If
+            Next
             Return retVal
         End Function
 
@@ -259,9 +225,17 @@ Namespace PresentationLayer.Presenters
                 If Messaging.IsDateRangeValid("Accounts Receivable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
+                    Dim nTotalAr As Decimal = 0
                     For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
+                        If specialAccount = EnumToSpecialAccount(SpecialAccountSelection.AccountsReceivable) Then
+                            If View.TransactionType = "I" Or View.TransactionType = "D" Then
+                                nTotalAr = nTotalAr + item.Debit - item.Credit
+                            Else
+                                nTotalAr = nTotalAr + item.Credit - item.Debit
+                            End If
+                        End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
@@ -287,6 +261,10 @@ Namespace PresentationLayer.Presenters
                             End If
                         End If
                     Next
+                    If nTotalAr <> View.Amount Then
+                        Messaging.Show(True, "MsgTotalArMismatch")
+                        retValue = False
+                    End If
                 End If
             End If
             Return retValue
@@ -312,7 +290,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
 
             transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
@@ -321,10 +299,9 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalCreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords",language,"Language")
+            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalCreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
-
 
     End Class
 

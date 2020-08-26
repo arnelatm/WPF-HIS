@@ -46,11 +46,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
@@ -92,9 +92,7 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim headerIdNo As Int32
             If AddMode Then
                 headerIdNo = retVal
@@ -102,12 +100,126 @@ Namespace PresentationLayer.Presenters
             Else
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
+
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, headerIdNo, "JournalIdNo")
+            If retVal >= 0 Then
+                Dim newJournalItem As List(Of JournalItemModel)
+                If AddMode Then
+                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    For Each item In newJournalItem
+                        If IsAccountsPayableAccount(item.AccountIdNo) Then
+                            retVal = AddApOpenInvoice(item, "AP")
+                            If retVal < 0 Then
+                                Exit For
+                            End If
+                        End If
+                    Next
+                Else
+                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    Dim newItem
+                    Dim oldItem
+                    Dim newIsAp
+                    Dim oldIsAp
+                    Dim oldJournalItem As List(Of JournalItemModel)
+                    If Not AddMode Then
+                        oldJournalItem = OriginalModel.Journalitems
+                    Else
+                        oldJournalItem = Nothing
+                    End If
+                    For Each oldItem In oldJournalItem
+                        ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
+                        ' so no problem on deletion
+                        oldIsAp = IsAccountsPayableAccount(oldItem.AccountIdNo)
+                        If oldIsAp Then
+                            ' this item is AP
+                            newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+                            If newItem Is Nothing Then
+                                ' item was deleted
+                                retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
+                                If retVal < 0 Then
+                                    Exit For
+                                End If
+                            Else
+                                ' item is found
+                                newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
+                                If newIsAp Then
+                                    ' nothing to do
+                                Else
+                                    ' new is changed from AP to non-AP
+                                    retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
+                                    If retVal < 0 Then
+                                        Exit For
+                                    End If
+                                End If
+                            End If
+                        Else
+                            ' this item is Non-AP
+                            newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
+                            If newItem Is Nothing Then
+                                ' item is deleted just ignore Non-AP
+                            Else
+                                ' old item still in new
+                                newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
+                                If newIsAp Then
+                                    retVal = AddApOpenInvoice(newItem, "AP")
+                                    If retVal < 0 Then
+                                        Exit For
+                                    End If
+                                Else
+                                    ' new is also Non-AP
+                                    ' nothing to do
+                                End If
+                            End If
+                        End If
+                    Next
+                    If retVal >= 0 Then
+                        For Each newItem In newJournalItem
+                            newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
+                            oldItem = Nothing
+                            For Each item In OriginalModel.JournalItems
+                                If newItem.IdNo = item.IdNo Then
+                                    ' meaning it is the same record
+                                    oldItem = item
+                                    Exit For
+                                End If
+                            Next
+                            'oldItem = OriginalModel.JournalItems.Find(Function(c) c.IdNo = x)
+                            If oldItem Is Nothing Then
+                                ' this item is new
+                                If newIsAp Then
+                                    ' this new item is an AP
+                                    retVal = AddApOpenInvoice(newItem, "AP")
+                                    If retVal >= 0 Then
+                                        Exit For
+                                    End If
+                                Else
+                                    ' non - AP nothing to do
+                                End If
+                            Else
+                                ' old item, already taken off in first (oldItem) for-loop
+                            End If
+                        Next
+                    End If
+                End If
+            End If
+            If retVal >= 0 Then
+                If IsEmpty(View.ReferenceNo) Then
+                    retVal = UpdateGlReferenceNumber()
+                End If
+            End If
+            Return retVal
+        End Function
+
+        Public Function UpdateDataTables(updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
+            Dim retVal As Integer
+            Dim updateReturnValue As Object
+            Dim insertReturnValue As Object
+            updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+            If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
                 Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
+                insertReturnValue = Model.InsertTvp(insertTable)
                 If insertReturnValue >= 0 Then
                     retVal = updateReturnValue + insertReturnValue
                 Else
@@ -115,92 +227,6 @@ Namespace PresentationLayer.Presenters
                 End If
             Else
                 retVal = updateReturnValue
-            End If
-            Dim newJournalItem As List(Of JournalItemModel)
-            If AddMode Then
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                For Each item In newJournalItem
-                    If IsAccountsPayableAccount(item.AccountIdNo) Then
-                        AddApOpenInvoice(item, "AP")
-                    End If
-                Next
-            Else
-                newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                Dim newItem
-                Dim oldItem
-                Dim newIsAp
-                Dim oldIsAp
-                Dim oldJournalItem As List(Of JournalItemModel)
-                If Not AddMode Then
-                    oldJournalItem = OriginalModel.Journalitems
-                Else
-                    oldJournalItem = Nothing
-                End If
-                For Each oldItem In oldJournalItem
-                    ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
-                    ' so no problem on deletion
-                    oldIsAp = IsAccountsPayableAccount(oldItem.AccountIdNo)
-                    If oldIsAp Then
-                        ' this item is AP
-                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                        If newItem Is Nothing Then
-                            ' item was deleted
-                            DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
-                        Else
-                            ' item is found
-                            newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                            If newIsAp Then
-                                ' nothing to do
-                            Else
-                                ' new is changed from AP to non-AP
-                                DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
-                            End If
-                        End If
-                    Else
-                        ' this item is Non-AP
-                        newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                        If newItem Is Nothing Then
-                            ' item is deleted just ignore Non-AP
-                        Else
-                            ' old item still in new
-                            newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                            If newIsAp Then
-                                AddApOpenInvoice(newItem, "AP")
-                            Else
-                                ' new is also Non-AP
-                                ' nothing to do
-                            End If
-                        End If
-                    End If
-                Next
-                For Each newItem In newJournalItem
-                    newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                    oldItem = Nothing
-                    For Each item In OriginalModel.JournalItems
-                        If newItem.IdNo = item.IdNo Then
-                            ' meaning it is the same record
-                            oldItem = item
-                            Exit For
-                        End If
-                    Next
-                    'oldItem = OriginalModel.JournalItems.Find(Function(c) c.IdNo = x)
-                    If oldItem Is Nothing Then
-                        ' this item is new
-                        If newIsAp Then
-                            ' this new item is an AP
-                            AddApOpenInvoice(newItem, "AP")
-                        Else
-                            ' non - AP nothing to do
-                        End If
-                    Else
-                        ' old item, already taken off in first (oldItem) for-loop
-                    End If
-                Next
-            End If
-            If retVal > 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    UpdateGlReferenceNumber()
-                End If
             End If
             Return retVal
         End Function

@@ -46,11 +46,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
@@ -92,7 +92,7 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
             Dim parentIdNo As Int32

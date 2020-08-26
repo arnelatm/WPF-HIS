@@ -45,6 +45,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgSaveReconFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
+        Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
         Messaging.AddMessage("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
         Messaging.AddMessage("MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
         Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")

@@ -337,7 +337,7 @@ Namespace AdoNet
                                 '_waitForm.Show()
                             Case Else
                                 MessageBox.Show(ex.Message)
-                                Throw
+                                'Throw
                         End Select
                     Finally
                         '_waitForm.Close()
@@ -399,9 +399,9 @@ Namespace AdoNet
         ' insert a new record
 
         Public Function Insert(sql As String, ParamArray ByVal params() As Object) As Integer
-            Dim retValue = 0
+            Dim retValue As Int32
             Dim tryAgain As Boolean
-            retValue = 0
+            retValue = -1
             Using connection = CreateConnection()
                 '_waitForm.Show()
                 Do While True
@@ -430,7 +430,7 @@ Namespace AdoNet
                                                "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
                                                "Unique Key Violation", variables, MessageBoxButtons.OK,
                                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                                retValue = -1  '' to indicate Unique Key Violation for now.
+                                retValue = -2  '' to indicate Unique Key Violation for now.
                             ElseIf ex.Number = 515 Then
                                 MessageBox.Show(ex.Message & " Record not added ")
                                 retValue = -1
@@ -438,11 +438,13 @@ Namespace AdoNet
                                 '_waitForm.Close()
                                 Select Case TryToCatchError(ex)
                                     Case DialogResult.Cancel
+                                        retValue = -1
                                         'Exit Do
                                     Case DialogResult.Retry
                                         tryAgain = True
                                         '_waitForm.Show()
                                     Case Else
+                                        retValue = -1
                                         MessageBox.Show(ex.Message)
                                         Throw
                                 End Select
@@ -451,13 +453,15 @@ Namespace AdoNet
                             '_waitForm.Close()
                             Select Case TryToCatchError(ex)
                                 Case DialogResult.Cancel
+                                    retValue = -1
                                     Exit Do
                                 Case DialogResult.Retry
                                     tryAgain = True
                                     '_waitForm.Show()
                                 Case Else
+                                    retValue = -1
                                     MessageBox.Show(ex.Message)
-                                    Throw
+                                    'Throw
                             End Select
                         Finally
                             '_waitForm.Close()
@@ -474,7 +478,7 @@ Namespace AdoNet
         ' update an existing record
 
         Public Function Update(sql As String, ParamArray ByVal parms() As Object) As Integer
-            Dim retVal As Object = Nothing
+            Dim retValue As Object = Nothing
             Dim tryAgain As Boolean
             Using connection = CreateConnection()
                 '_waitForm.Show()
@@ -482,7 +486,7 @@ Namespace AdoNet
                     tryAgain = False
                     Try
                         Using command = CreateCommand(sql, connection, parms)
-                            retVal = command.ExecuteNonQuery()
+                            retValue = command.ExecuteNonQuery()
                         End Using
                     Catch ex As SqlException
                         '_waitForm.Close()
@@ -490,19 +494,23 @@ Namespace AdoNet
                             MessageBox.Show(
                                 "Duplicate values found ....." & ex.Message & vbNewLine & "Record not saved!!",
                                 "NOT Saved", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                            retValue = -1
                         Else
                             Select Case TryToCatchError(ex)
                                 Case DialogResult.Cancel
+                                    retValue = -1
                                     '
                                 Case DialogResult.Retry
                                     tryAgain = True
                                     '_waitForm.Show()
                                 Case Else
+                                    retValue = -1
                                     MessageBox.Show(ex.Message)
                                     Throw
                             End Select
                         End If
                     Catch ex As Exception
+                        retValue = -1
                         MessageBox.Show(ex.Message)
                         Throw
                     Finally
@@ -513,7 +521,7 @@ Namespace AdoNet
                     End If
                 Loop
             End Using
-            Return retVal
+            Return retValue
         End Function
 
         Public Function TvpMerge(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
@@ -535,6 +543,7 @@ Namespace AdoNet
                                 'connection.Close()
                                 Exit Do
                             Catch ex As Exception
+                                retValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
@@ -544,11 +553,13 @@ Namespace AdoNet
                     '_waitForm.Close()
                     Select Case TryToCatchError(ex)
                         Case DialogResult.Cancel
+                            retValue = -1
                             'Exit Do
                         Case DialogResult.Retry
                             '_waitForm.Show()
                             tryAgain = True
                         Case Else
+                            retValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -581,6 +592,7 @@ Namespace AdoNet
                                 'connection.Close()
                                 Exit Do
                             Catch ex As Exception
+                                retValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
@@ -590,11 +602,13 @@ Namespace AdoNet
                     '_waitForm.Close()
                     Select Case TryToCatchError(ex)
                         Case DialogResult.Cancel
+                            retValue = -1
                             'Exit Do
                         Case DialogResult.Retry
                             '_waitForm.Show()
                             tryAgain = True
                         Case Else
+                            retValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -628,6 +642,7 @@ Namespace AdoNet
                                 'connection.Close()
                                 Exit Do
                             Catch ex As Exception
+                                retValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
@@ -638,6 +653,7 @@ Namespace AdoNet
                     Select Case TryToCatchError(ex)
                         Case DialogResult.Cancel
                             'Exit Do
+                            retValue = -1
                         Case DialogResult.Retry
                             '_waitForm.Show()
                             tryAgain = True
@@ -671,6 +687,7 @@ Namespace AdoNet
                                 command.Parameters.AddWithValue("@MParam", dataTableName)
                                 returnValue = command.ExecuteNonQuery()
                             Catch ex As Exception
+                                returnValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
@@ -680,12 +697,14 @@ Namespace AdoNet
                     '_waitForm.Close()
                     Select Case TryToCatchError(ex)
                         Case DialogResult.Cancel
+                            returnValue = -1
                             'Exit Do
                         Case DialogResult.Retry
                             ' do nothing
                             tryAgain = True
                             '_waitForm.Show()
                         Case Else
+                            returnValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -713,6 +732,7 @@ Namespace AdoNet
                                 retValue = command.ExecuteNonQuery()
                                 Exit Do
                             Catch ex As SqlException
+                                retValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
@@ -721,12 +741,14 @@ Namespace AdoNet
                         '_waitForm.Close()
                         Select Case TryToCatchError(ex)
                             Case DialogResult.Cancel
+                                retValue = -1
                                 'Exit Do
                             Case DialogResult.Retry
                                 ' do nothing
                                 tryAgain = True
                                 '_waitForm.Show()
                             Case Else
+                                retValue = -1
                                 MessageBox.Show(ex.Message)
                                 Throw
                         End Select
@@ -910,8 +932,9 @@ Namespace AdoNet
             End If
         End Function
 
-        Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, sql2 As String)
-            Dim retValue = False
+        Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, sql2 As String) As Integer
+            Dim retValue As Integer
+            retValue = 0
             Using connection As New SqlConnection(ConnectionString)
                 connection.Open()
 
@@ -937,7 +960,6 @@ Namespace AdoNet
                     ' Attempt to commit the transaction.
                     transaction.Commit()
 
-                    retValue = True
                 Catch ex As Exception
                     MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
                     MessageBox.Show("  Message: {0}", ex.Message)
@@ -952,6 +974,7 @@ Namespace AdoNet
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
                         Console.WriteLine("  Message: {0}", ex2.Message)
                     End Try
+                    retValue = -1
                 End Try
             End Using
             Return retValue

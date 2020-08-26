@@ -63,7 +63,7 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Function SaveChildren(ByRef retVal As Integer) Handles MyBase.ParentRecordAddedSuccessfully, MyBase.ParentRecordUpdatedSuccessfully
+        Private Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim insertReturnValue
             Dim updateReturnValue
             Dim headerIdNo As Int32

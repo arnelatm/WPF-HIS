@@ -153,7 +153,7 @@
             Return retVal
         End Function
 
-        Public Function DeleteRecord(idNo As Int32, tableName As String) As Int16 _
+        Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
             If Strings.Right(tableName, 5).ToLower() = "_view" Then
                 tableName = Strings.Left(tableName, Strings.Len(tableName) - 5)

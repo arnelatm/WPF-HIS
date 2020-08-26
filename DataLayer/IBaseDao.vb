@@ -9,7 +9,7 @@
 
     Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
 
-    Function DeleteRecord(idNo As Int32, tableName As String) As Short
+    Function DeleteRecord(idNo As Int32, tableName As String) As Int32
 
     Function FindField(tableName As String, fieldName As String, searchString As String,
                        Optional searchAnywhere As Boolean = False) As Integer

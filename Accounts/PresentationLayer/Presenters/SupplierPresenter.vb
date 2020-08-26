@@ -22,13 +22,17 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
-        Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-            UpdateOpeningBalance()
-        End Sub
+        Private Function FunctionOnSuccessfulUpdate() Handles MyBase.RecordUpdatedSuccessfully
+            Dim retVal As Integer
+            retVal = UpdateOpeningBalance()
+            Return retVal
+        End Function
 
-        Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-            UpdateOpeningBalance()
-        End Sub
+        Private Function OnSuccessfulAdd() Handles MyBase.RecordAddedSuccessfully
+            Dim retVal As Integer
+            retVal = UpdateOpeningBalance()
+            Return retVal
+        End Function
 
         Public Function UpdateOpeningBalance()
             Return ModelPresenter.UpdateOpeningBalance(DataModel)

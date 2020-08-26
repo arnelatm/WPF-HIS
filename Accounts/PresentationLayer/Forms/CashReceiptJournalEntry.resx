@@ -1627,7 +1627,7 @@
     <value>968, 3</value>
   </data>
   <data name="DataGridViewCsrOiItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>963, 270</value>
+    <value>963, 300</value>
   </data>
   <data name="DataGridViewCsrOiItems.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1651,7 +1651,7 @@
     <value>3, 211</value>
   </data>
   <data name="floPurchaseJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 273</value>
+    <value>974, 310</value>
   </data>
   <data name="floPurchaseJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1696,7 +1696,7 @@
     <value>0</value>
   </data>
   <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 490</value>
+    <value>3, 527</value>
   </data>
   <data name="floFooter.Size" type="System.Drawing.Size, System.Drawing">
     <value>974, 31</value>
@@ -1726,7 +1726,7 @@
     <value>1000, 530</value>
   </data>
   <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 530</value>
+    <value>1000, 565</value>
   </data>
   <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -89961,10 +89961,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>986, 593</value>
+    <value>986, 629</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1002, 632</value>
+    <value>1002, 668</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1002, 632</value>

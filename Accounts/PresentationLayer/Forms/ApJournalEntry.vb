@@ -381,7 +381,7 @@ Namespace PresentationLayer.Forms
                                 Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
                                                "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert()
                                 SendKeys.Send("{UP}")

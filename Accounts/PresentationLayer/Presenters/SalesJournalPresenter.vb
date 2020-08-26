@@ -147,7 +147,7 @@ Namespace PresentationLayer.Presenters
             View.TotalCredits = View.TotalDebits
         End Sub
 
-        Public Sub SaveChildren(ByRef passedValue As Integer) Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        Private Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim retVal As Integer
             ' save journal entries
             If Not AddMode Then
@@ -159,7 +159,8 @@ Namespace PresentationLayer.Presenters
             If retVal > 0 Then
                 retVal = SaveSalesCashItems(passedValue)
             End If
-        End Sub
+            Return retVal
+        End Function
 
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)

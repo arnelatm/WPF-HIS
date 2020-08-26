@@ -144,26 +144,6 @@ Public Class CFormEntryTv
         Return mainFieldName
     End Function
 
-    'Public Sub OnSuccessfulUpdate() Handles MyBase.SuccessfulUpdate
-    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-    '    'GetAndSetPresenterObj.RecordPositionNumber()
-    '    DisplayTreeViewData()
-    '    GotoRecordInTreeView()
-    'End Sub
-
-    'Public Sub OnSuccessfulAdd() Handles MyBase.SuccessfulAdd
-    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-    '    DisplayTreeViewData()
-    '    GotoRecordInTreeView()
-    '    'GetAndSetPresenterObj.RecordPositionNumber()
-    'End Sub
-
-    'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-    '    Debugger.Break()
-    '    PresenterObj.UpdateViewDisplay(idNoOfRecord)
-    '    GotoRecordInTreeView()
-    'End Sub
-
     Protected Sub DisplayTreeViewData()
         Dim treeViewData = PresenterObj.GetTreeViewDataNew()
         DisplayTree(treeViewData)

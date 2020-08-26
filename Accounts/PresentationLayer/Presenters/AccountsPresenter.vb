@@ -94,7 +94,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCustomerAdvancesAccountIdNo()
-            Return Model.GetRecordFieldWithKey("AC", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
         End Function
 
         Public Function GetChart(idNo As String)
@@ -114,18 +114,28 @@ Namespace PresentationLayer.Presenters
             Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
         End Function
 
-        Public Sub DeleteApOpenInvoice(ByRef idNo As Int32)
+        Public Function DeleteApOpenInvoice(ByRef idNo As Int32)
+            Dim retVal As Integer = 0
             If idNo <> 0 Then
                 Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-                modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+                retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
             End If
-        End Sub
+            Return retVal
+        End Function
+
+        Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
+            Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
+        End Function
+
+        Public Function ArCollectionExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
+            Dim arOpenInvoiceIdNo As Integer
+            arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
+        End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
             Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-                .PaidAmount = 0,
-                .DiscountTaken = 0,
                 .JournalCode = journalCode,
                 .JournalIdNo = journalItem.JournalIdNo,
                 .JournalItemIdNo = journalItem.IdNo
@@ -135,7 +145,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function DeleteArOpenInvoice(ByRef idNo As Int32) As String
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+            If Model.CountRecordWithKey(idNo, "CsrOiItem", "ArOpenInvoiceIdNo") = 0 Then
+                Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+            End If
         End Function
 
         Public Function GetCashCodesModel() As List(Of CashCodeModel)

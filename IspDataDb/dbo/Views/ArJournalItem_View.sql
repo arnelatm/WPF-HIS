@@ -1,12 +1,32 @@
 ﻿
+
+
+
 CREATE VIEW [dbo].[ArJournalItem_View]
 AS
-SELECT        dbo.ArJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ArJournalItem.JournalIdNo, dbo.ArJournalItem.AccountIdNo, dbo.ArJournalItem.Debit, dbo.ArJournalItem.Credit, dbo.ArJournalItem.RevCostCenterIdNo, 
-                dbo.ArJournalItem.Notes, dbo.ArJournalItem.Posted, dbo.ArJournalItem.DateTimeStamp, dbo.Chart.AccountName, dbo.ArOpenInvoice.IdNo AS OpenInvoiceIdNo, 
-                dbo.ArJournalItem.Credit - dbo.ArJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, dbo.Chart.AccountNameAra, dbo.Chart.PayeeType, 
-                dbo.ArJournalItem.Sequence
-FROM            dbo.ArJournalItem 
-				LEFT OUTER JOIN dbo.Chart 
-				ON dbo.ArJournalItem.AccountIdNo = dbo.Chart.IDNo 
-				LEFT OUTER JOIN dbo.ArOpenInvoice 
-				ON dbo.ArJournalItem.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ArOpenInvoice.JournalCode = 'AR'
+SELECT  a.IdNo, 
+		o.JournalCode, 
+		a.JournalIdNo, 
+		a.AccountIdNo, 
+		a.Debit, 
+		a.Credit, 
+		a.RevCostCenterIdNo, 
+		a.Notes, 
+		a.Posted, 
+		a.DateTimeStamp, 
+		c.AccountName, 
+		o.IdNo AS OpenInvoiceIdNo, 
+		a.Credit - a.Debit AS OriginalAmount, 
+		col.PaidAmount, 
+		col.DiscountTaken, 
+		c.SpecialAccount, 
+		c.AccountNameAra, 
+		c.PayeeType, 
+		a.Sequence
+FROM    dbo.ArJournalItem a
+		LEFT OUTER JOIN dbo.Chart c
+		ON a.AccountIdNo = c.IDNo 
+		LEFT OUTER JOIN dbo.ArOpenInvoice o
+		ON a.IdNo = o.JournalItemIdNo AND o.JournalCode = 'AR'
+		LEFT OUTER JOIN dbo.ArCollections_View col
+		on o.IdNo = col.IdNo

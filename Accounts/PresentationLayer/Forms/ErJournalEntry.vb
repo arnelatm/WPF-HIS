@@ -199,7 +199,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-        '    Handles MyBase.ParentRecordUpdatedSuccessfully, MyBase.ParentRecordAddedSuccessfully
+        '    Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
         '    If PresenterObj.AddMode Then
         '        IdNo = passedValue
         '    End If
@@ -395,7 +395,7 @@ Namespace PresentationLayer.Forms
                                 Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
                                                "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert()
                                 SendKeys.Send("{UP}")

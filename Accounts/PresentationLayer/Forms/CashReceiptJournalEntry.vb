@@ -326,56 +326,6 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        'Protected Overrides Function DataIsValid() As Boolean
-        '    Dim retValue As Boolean = False
-        '    If MyBase.DataIsValid() Then
-        '        If ReceiptTypeToEnum(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-        '            _totalBalance = TotalBalance()
-        '            If _csrOiItemsPresenter.DataIsValid(bsCsrOiItems, Applied, UnApplied, _totalBalance) Then
-        '                retValue = True
-        '            Else
-        '                Dim index As Int16 = 0
-        '                For Each item In bsCsrOiItems
-        '                    If item.Errors IsNot Nothing Then
-        '                        DataGridViewCsrOiItems.Rows(index).Cells("dgvAmount").ErrorText = String.Join(",", CsrOiItems(index).Errors)
-        '                    Else
-        '                        DataGridViewCsrOiItems.Rows(index).ErrorText = ""
-        '                    End If
-        '                    index += 1
-        '                Next
-        '            End If
-        '        Else
-        '            If _journalItemsPresenter.DataIsValid(JournalItems, PayorType) Then
-        '                retValue = True
-        '            End If
-        '        End If
-        '    End If
-        '    Return retValue
-        'End Function
-
-        'Protected Overrides Sub DisplayView(ByVal idNoOfRecord As Integer)
-        '    MyBase.DisplayView(idNoOfRecord)
-        '    _journalItemsPresenter.Display(idNoOfRecord)
-        '    TotalDebits = 0
-        '    TotalCredits = 0
-        '    For Each item In bsJournalItems
-        '        TotalDebits += item.Debit
-        '        TotalCredits += item.Credit
-        '    Next
-        '    _csrOiItemsPresenter.Display(idNoOfRecord)
-        '    If bsCsrOiItems IsNot Nothing Then
-        '        Applied = 0
-        '        DiscountTaken = 0
-        '        _totalBalance = 0
-        '        For Each item In bsCsrOiItems
-        '            Applied += item.Amount
-        '            DiscountTaken += item.DiscountTaken
-        '            _totalBalance += item.Balance
-        '        Next
-        '    End If
-        '    'PresenterObj.Display(PresenterObj.TargetIdNo)
-        'End Sub
-
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             SetPayorProperty(cboPayorType.SelectedValue)
             UpdateTotals()
@@ -534,7 +484,7 @@ Namespace PresentationLayer.Forms
                             If .RowIndex() = 0 Then
                                 Messaging.Show(True, "MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
                             Else
-                                Dim newRow As New JournalItemModel
+                                Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
                                 ReSequenceDgvAfterInsert(DataGridViewJournalItems, bsJournalItems)
                                 SendKeys.Send("{UP}")
@@ -755,10 +705,8 @@ Namespace PresentationLayer.Forms
         Private Sub UserDeletingRow(ByVal sender As Object,
                                     ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
-            ' Check if the starting balance row is included in the selected rows
+            ' Check if the first row is included in the selected rows
             Dim cashReceiptRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
             If DataGridViewJournalItems.SelectedRows.Contains(cashReceiptRowEntry) Then
                 ' Do not allow the user to delete the first row.
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed")

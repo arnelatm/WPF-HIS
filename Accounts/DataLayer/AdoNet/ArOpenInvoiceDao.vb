@@ -14,17 +14,13 @@ Namespace DataLayer.AdoNet
             Implements IDaoOpenInvoice(Of ArOpenInvoice).AddRecord
             Dim sql As String =
                     "INSERT INTO [ArOpenInvoice] (" &
-                    "DiscountTaken," &
                     "JournalCode," &
                     "JournalIdNo," &
-                    "JournalItemIdNo," &
-                    "PaidAmount" &
+                    "JournalItemIdNo" &
                     ") VALUES (" &
-                    "@DiscountTaken," &
                     "@JournalCode," &
                     "@JournalIdNo," &
-                    "@JournalItemIdNo," &
-                    "@PaidAmount" &
+                    "@JournalItemIdNo" &
                     ")"
             Return Db.Insert(sql, Take(arOpenInvoice))
         End Function
@@ -44,14 +40,11 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Private Function Take(arOpenInvoice As ArOpenInvoice) As Object()
-            Return New Object() {
-                                    "@DiscountTaken", arOpenInvoice.DiscountTaken,
-                                    "@IdNo", arOpenInvoice.IdNo,
-                                    "@JournalCode", arOpenInvoice.JournalCode,
-                                    "@JournalIdNo", arOpenInvoice.JournalIdNo,
-                                    "@JournalItemIdNo", arOpenInvoice.JournalItemIdNo,
-                                    "@PaidAmount", arOpenInvoice.PaidAmount
-                                }
+            Return New Object() {"@IdNo", arOpenInvoice.IdNo,
+                                 "@JournalCode", arOpenInvoice.JournalCode,
+                                 "@JournalIdNo", arOpenInvoice.JournalIdNo,
+                                 "@JournalItemIdNo", arOpenInvoice.JournalItemIdNo
+                                 }
         End Function
 
     End Class
