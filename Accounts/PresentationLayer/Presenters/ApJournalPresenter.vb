@@ -46,12 +46,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
-
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
@@ -93,15 +87,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim headerIdNo As Int32
+            Dim parentIdNo As Int32
             If AddMode Then
-                headerIdNo = retVal
+                parentIdNo = retVal
                 CallByName(View, IdFieldName, CallType.Set, retVal)
             Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
+                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
-
-            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, headerIdNo, "JournalIdNo")
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
                 If AddMode Then
@@ -116,89 +109,9 @@ Namespace PresentationLayer.Presenters
                     Next
                 Else
                     newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                    Dim newItem
-                    Dim oldItem
-                    Dim newIsAp
-                    Dim oldIsAp
-                    Dim oldJournalItem As List(Of JournalItemModel)
-                    If Not AddMode Then
-                        oldJournalItem = OriginalModel.Journalitems
-                    Else
-                        oldJournalItem = Nothing
-                    End If
-                    For Each oldItem In oldJournalItem
-                        ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
-                        ' so no problem on deletion
-                        oldIsAp = IsAccountsPayableAccount(oldItem.AccountIdNo)
-                        If oldIsAp Then
-                            ' this item is AP
-                            newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                            If newItem Is Nothing Then
-                                ' item was deleted
-                                retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
-                                If retVal < 0 Then
-                                    Exit For
-                                End If
-                            Else
-                                ' item is found
-                                newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                                If newIsAp Then
-                                    ' nothing to do
-                                Else
-                                    ' new is changed from AP to non-AP
-                                    retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
-                                    If retVal < 0 Then
-                                        Exit For
-                                    End If
-                                End If
-                            End If
-                        Else
-                            ' this item is Non-AP
-                            newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-                            If newItem Is Nothing Then
-                                ' item is deleted just ignore Non-AP
-                            Else
-                                ' old item still in new
-                                newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                                If newIsAp Then
-                                    retVal = AddApOpenInvoice(newItem, "AP")
-                                    If retVal < 0 Then
-                                        Exit For
-                                    End If
-                                Else
-                                    ' new is also Non-AP
-                                    ' nothing to do
-                                End If
-                            End If
-                        End If
-                    Next
+                    retVal = RemoveDeletedApOpenInvoices(retVal, newJournalItem)
                     If retVal >= 0 Then
-                        For Each newItem In newJournalItem
-                            newIsAp = IsAccountsPayableAccount(newItem.AccountIdNo)
-                            oldItem = Nothing
-                            For Each item In OriginalModel.JournalItems
-                                If newItem.IdNo = item.IdNo Then
-                                    ' meaning it is the same record
-                                    oldItem = item
-                                    Exit For
-                                End If
-                            Next
-                            'oldItem = OriginalModel.JournalItems.Find(Function(c) c.IdNo = x)
-                            If oldItem Is Nothing Then
-                                ' this item is new
-                                If newIsAp Then
-                                    ' this new item is an AP
-                                    retVal = AddApOpenInvoice(newItem, "AP")
-                                    If retVal >= 0 Then
-                                        Exit For
-                                    End If
-                                Else
-                                    ' non - AP nothing to do
-                                End If
-                            Else
-                                ' old item, already taken off in first (oldItem) for-loop
-                            End If
-                        Next
+                        retVal = AddNewApOpenInvoices(retVal, newJournalItem)
                     End If
                 End If
             End If
@@ -210,24 +123,43 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function UpdateDataTables(updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
-            Dim retVal As Integer
-            Dim updateReturnValue As Object
-            Dim insertReturnValue As Object
-            updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
-            If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
-                For Each row As DataRow In insertTable.Rows
-                    row.Item(parentIdFieldName) = parentIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(insertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
+
+        Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim deletedRecord As Boolean
+            Dim oldJournalItem As List(Of JournalItemModel)
+            If Not AddMode Then
+                oldJournalItem = OriginalModel.Journalitems
             Else
-                retVal = updateReturnValue
+                oldJournalItem = Nothing
             End If
+            For Each oldItem In oldJournalItem
+                ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
+                ' so no problem on deletion of related ApOpenInvoice and Payment invoices ('CkrOiItem','CadOiItem','pcsOiItem')
+                If IsAccountsPayableAccount(oldItem.AccountIdNo) Then
+                    deletedRecord = IsNothing(newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo))
+                    If deletedRecord Then
+                        ' delete marker ArOpenInvoice (since no payment exist) as paid invoices cannot be deleted (not allowed in the system) see (userdeletingrow) in ArJournalEntry.vb
+                        retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
+                    Else
+                        ' don't delete 
+                    End If
+                End If
+            Next
+            Return retVal
+        End Function
+
+        Private Function AddNewApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim newlyAdded
+            Dim oldJournalItem As List(Of JournalItemModel)
+            oldJournalItem = OriginalModel.Journalitems
+            For Each newItem In newJournalItem
+                If IsAccountsPayableAccount(newItem.AccountIdNo) Then
+                    newlyAdded = IsNothing(oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo))
+                    If newlyAdded Then
+                        retVal = AddApOpenInvoice(newItem, "AP")
+                    End If
+                End If
+            Next
             Return retVal
         End Function
 
@@ -325,7 +257,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     If nTotalAp <> View.Amount Then
-                        Messaging.Show(True, "MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
+                        Messaging.Show(True, "MsgTotalApMismatch")
                         retValue = False
                     End If
                 End If

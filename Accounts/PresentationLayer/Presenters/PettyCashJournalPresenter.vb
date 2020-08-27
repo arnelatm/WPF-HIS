@@ -736,7 +736,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = GetAdvancePaymentCdOpenInvoice(ji.IdNo)
+                    lOpenInvIdNo = GetAdvancePaymentOpenInvoice("CD", ji.IdNo)
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice

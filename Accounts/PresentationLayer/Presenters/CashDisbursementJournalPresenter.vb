@@ -1,13 +1,10 @@
 ﻿Imports System.Globalization
-Imports System.Net.Http.Headers
-Imports AATM.Accounts.PresentationLayer.Forms
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -20,7 +17,6 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int32
-        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Private ReadOnly _cadOiItemModel As New ModelAccounts("CadOiItem")
         Private _oldCadOiItem As List(Of CadOiItemModel)
@@ -68,10 +64,6 @@ Namespace PresentationLayer.Presenters
             DtCadOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
-
-        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
-        'End Function
 
         Public Sub AddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
@@ -159,16 +151,16 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.CadOiItems
                         totalBalance += item.Balance
                     Next
-                    If totalBalance >= 0 Then
+                    If totalBalance > 0 Then
                         If View.UnApplied > 0 Then
-                            Messaging.Show(True, "MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgPaymentNotFullyApplied")
                             retVal = False
                         Else
-                            Messaging.Show(True, "MsgPaymentIsOverApplied", "Payment is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgPaymentIsOverApplied")
                             retVal = False
                         End If
                     Else
-                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance", "Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", "Save Advance Payment",
+                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -207,12 +199,6 @@ Namespace PresentationLayer.Presenters
         Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CadOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CadOiItemModel)(supplierIdNo)
         End Function
-
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -261,11 +247,11 @@ Namespace PresentationLayer.Presenters
                                 workRow = DtCadOiUpdateTable.NewRow()
                                 workRow("IdNo") = ji.IdNo
                             End If
-                            workRow("cadIdNo") = View.IdNo
-                            workRow("Sequence") = nRowCount
                             workRow("Amount") = ji.Amount
-                            workRow("DiscountTaken") = ji.DiscountTaken
                             workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
+                            workRow("cadIdNo") = View.IdNo
+                            workRow("DiscountTaken") = ji.DiscountTaken
+                            workRow("Sequence") = nRowCount
                             If ji.IdNo <= 0 Then
                                 DtCadOiInsertTable.Rows.Add(workRow)
                             Else
@@ -290,10 +276,6 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalDebits
             End If
         End Sub
-
-        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        'End Function
 
         Private Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim retVal As Integer
@@ -622,23 +604,15 @@ Namespace PresentationLayer.Presenters
                 headerIdNo = CallByName(View, IdFieldName, CallType.Get)
             End If
             updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 Then
-                If DtInsertTable.Rows.Count > 0 Then
-                    For Each row As DataRow In DtInsertTable.Rows
-                        row.Item("JournalIdNo") = headerIdNo
-                    Next
-                    insertReturnValue = Model.InsertTvp(DtInsertTable)
-                    If insertReturnValue >= 0 Then
-                        retVal = updateReturnValue + insertReturnValue
-                    Else
-                        If insertReturnValue >= 0 Then
-                            retVal = insertReturnValue + updateReturnValue
-                        Else
-                            retVal = insertReturnValue
-                        End If
-                    End If
+            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
+                For Each row As DataRow In DtInsertTable.Rows
+                    row.Item("JournalIdNo") = headerIdNo
+                Next
+                insertReturnValue = Model.InsertTvp(DtInsertTable)
+                If insertReturnValue >= 0 Then
+                    retVal = updateReturnValue + insertReturnValue
                 Else
-                    retVal = updateReturnValue
+                    retVal = insertReturnValue
                 End If
             Else
                 retVal = updateReturnValue
@@ -649,7 +623,7 @@ Namespace PresentationLayer.Presenters
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                ' save the generated open 
+                ' save the generated open invoices
                 retVal = UpdateOpenInvoices()
             End If
             Return retVal
@@ -736,7 +710,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = GetAdvancePaymentCdOpenInvoice(ji.IdNo)
+                    lOpenInvIdNo = GetAdvancePaymentOpenInvoice("CD", ji.IdNo)
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
@@ -760,10 +734,9 @@ Namespace PresentationLayer.Presenters
             Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
-
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
@@ -783,14 +756,14 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Private Sub OnSuccessfulDelete(ByVal IdNo As Int32) Handles MyBase.SuccessfulDelete
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
             If View.CadOiItems IsNot Nothing And View.CadOiItems.Any() Then
                 DtCadOiUpdateTable.Clear()
-                _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, IdNo)
+                _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, idNo)
             End If
             If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                Model.DelUpdateTvp(DtUpdateTable, IdNo)
+                Model.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 

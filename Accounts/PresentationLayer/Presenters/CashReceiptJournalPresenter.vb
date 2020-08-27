@@ -17,7 +17,6 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _advancesToCustomerAccountIdNo As Int32
-        Private ReadOnly _arOpenInvoiceModel As New ModelAccounts("ArOpenInvoice")
 
         Private ReadOnly _csrOiItemModel As New ModelAccounts("CsrOiItem")
         Private _oldCsrOiItem As List(Of CsrOiItemModel)
@@ -158,14 +157,14 @@ Namespace PresentationLayer.Presenters
                     Next
                     If totalBalance > 0 Then
                         If View.UnApplied > 0 Then
-                            Messaging.Show(True, "MsgCollectionNotFullyApplied", "Collection not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgCollectionNotFullyApplied")
                             retVal = False
                         Else
-                            Messaging.Show(True, "MsgCollectionIsOverApplied", "Collection is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgCollectionIsOverApplied")
                             retVal = False
                         End If
                     Else
-                        If Messaging.Show(True, "AskMakeExcessCollectionAdvance", "Amount not yet fully applied or no more unpaid invoices for this customer. Do you want to make the excess collection as an advance collection?", "Save Advance Collection",
+                        If Messaging.Show(True, "AskMakeExcessCollectionAdvance",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -620,16 +619,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer = 0
             If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 ' save the generated open invoices
-                ' after saving open invoices apply the paid amount
                 retVal = UpdateOpenInvoices()
-            Else
-                'If _oldCsrOiItem IsNot Nothing Then
-                '    For Each Item In _oldCsrOiItem
-                '        If Item.Amount <> 0 Or Item.DiscountTaken <> 0 Then
-                '            RemoveInvoicePayment(Item.ArOpenInvoiceIdNo, Item.Amount, Item.DiscountTaken)
-                '        End If
-                '    Next
-                'End If
             End If
             Return retVal
         End Function
@@ -754,7 +744,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()

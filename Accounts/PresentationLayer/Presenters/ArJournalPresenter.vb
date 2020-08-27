@@ -47,12 +47,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
-
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
@@ -116,9 +110,9 @@ Namespace PresentationLayer.Presenters
                     Next
                 Else
                     newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
-                    retVal = UpdateOldArOpenInvoices(retVal, newJournalItem)
+                    retVal = RemoveDeletedArOpenInvoices(retVal, newJournalItem)
                     If retVal >= 0 Then
-                        retVal = UpdateNewArOpenInvoices(retVal, newJournalItem)
+                        retVal = AddNewArOpenInvoices(retVal, newJournalItem)
                     End If
                 End If
             End If
@@ -131,9 +125,8 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
-        Private Function UpdateOldArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
-            Dim newItem
-            Dim oldItem
+        Private Function RemoveDeletedArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim deletedRecord As Boolean
             Dim oldJournalItem As List(Of JournalItemModel)
             If Not AddMode Then
                 oldJournalItem = OriginalModel.Journalitems
@@ -144,27 +137,26 @@ Namespace PresentationLayer.Presenters
                 ' deletion of paid A.R. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
                 ' so no problem on deletion of related ArOpenInvoice and Payment invoices ('CsrOiItem')
                 If IsAccountsReceivableAccount(oldItem.AccountIdNo) Then
-                    newItem = Not IsNothing(newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo))
-                    If newItem Then
-                        ' don't delete 
-                    Else
+                    deletedRecord = IsNothing(newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo))
+                    If deletedRecord Then
                         ' delete marker ArOpenInvoice (since no payment exist) as paid invoices cannot be deleted (not allowed in the system) see (userdeletingrow) in ArJournalEntry.vb
                         retVal = DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
+                    Else
+                        ' don't delete 
                     End If
                 End If
             Next
             Return retVal
         End Function
 
-        Private Function UpdateNewArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
-            Dim newItem
-            Dim oldItem
+        Private Function AddNewArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
+            Dim newlyAdded
             Dim oldJournalItem As List(Of JournalItemModel)
             oldJournalItem = OriginalModel.Journalitems
             For Each newItem In newJournalItem
                 If IsAccountsReceivableAccount(newItem.AccountIdNo) Then
-                    oldItem = Not IsNothing(oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo))
-                    If Not oldItem Then
+                    newlyAdded = IsNothing(oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo))
+                    If newlyAdded Then
                         retVal = AddArOpenInvoice(newItem, "AR")
                     End If
                 End If
@@ -184,11 +176,15 @@ Namespace PresentationLayer.Presenters
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = TransactionTypeToEnum(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        item.Debit = View.Amount
-                        item.Credit = 0
+                        If item.Debit = 0 Then
+                            item.Debit = View.Amount
+                            item.Credit = 0
+                        End If
                     Else
-                        item.Debit = 0
-                        item.Credit = View.Amount
+                        If item.Debit = 0 Then
+                            item.Debit = 0
+                            item.Credit = View.Amount
+                        End If
                     End If
                     item.RevCostCenterIdNo = 0
                     Exit For
@@ -292,13 +288,20 @@ Namespace PresentationLayer.Presenters
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-
-            transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
-            totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            If language = "ar" Then
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
             Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalCreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub

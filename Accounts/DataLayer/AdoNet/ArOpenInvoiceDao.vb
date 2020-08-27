@@ -25,20 +25,6 @@ Namespace DataLayer.AdoNet
             Return Db.Insert(sql, Take(arOpenInvoice))
         End Function
 
-        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
-        'Implements IDaoOpenInvoice(Of ArOpenInvoice).AddInvoicePayment
-        '    Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
-        '    Dim sql As String = "UPDATE [ArOpenInvoice] Set PaidAmount = (PaidAmount + @Amount), DiscountTaken = (DiscountTaken + @DiscountTaken) WHERE IdNo = @IdNo"
-        '    Return Db.Update(sql, params)
-        'End Function
-
-        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer _
-        'Implements IDaoOpenInvoice(Of ArOpenInvoice).RemoveInvoicePayment
-        '    Dim params() As Object = {"@IdNo", idNo, "@Amount", amount, "@DiscountTaken", discountTaken}
-        '    Dim sql As String = "UPDATE [ArOpenInvoice] Set PaidAmount = (PaidAmount - @Amount), DiscountTaken = (DiscountTaken - @DiscountTaken) WHERE IdNo = @IdNo"
-        '    Return Db.Update(sql, params)
-        'End Function
-
         Private Function Take(arOpenInvoice As ArOpenInvoice) As Object()
             Return New Object() {"@IdNo", arOpenInvoice.IdNo,
                                  "@JournalCode", arOpenInvoice.JournalCode,
