@@ -26,8 +26,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")
         Messaging.AddMessage("MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error")
         Messaging.AddMessage("MsgDuplicateKeyValueViolation", "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!", "Unique Key Violation")
+        Messaging.AddMessage("MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
         Messaging.AddMessage("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
         Messaging.AddMessage("MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} and {endDate}!", "Invalid Date")
+        Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
         Messaging.AddMessage("MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
         Messaging.AddMessage("MsgNoChangesMadeNothingToSave", "No changes made or changes have equivalent values as the original values, nothing to save!", "Nothing to save.")
         Messaging.AddMessage("MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
@@ -36,6 +38,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgPaymentDiscExistChangeNotAllowed", "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.", "Modification Error")
         Messaging.AddMessage("MsgPaymentIsOverApplied", "Payment is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")
         Messaging.AddMessage("MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
+        Messaging.AddMessage("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
         Messaging.AddMessage("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Messaging.AddMessage("MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
         Messaging.AddMessage("MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
@@ -46,9 +49,6 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
         Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
-        Messaging.AddMessage("MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-        Messaging.AddMessage("MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-        Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
     End Sub
 
     Public Shared Sub CreateEnums()

@@ -20,7 +20,7 @@ Namespace PresentationLayer.Forms
         Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _RevCostCentersByCode
+        Private _revCostCentersByCode
 
         Public Sub New()
             MyBase.New()
@@ -140,12 +140,6 @@ Namespace PresentationLayer.Forms
                 BindJournalItem()
             End Set
         End Property
-
-        '' This event handler provides custom item-creation behavior.
-        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) _
-        '    Handles bsJournalItems.AddingNew
-        '    e.NewObject = CreateJournalItem()
-        'End Sub
 
         Public Property Notes As String Implements IApJournalView.Notes
             Get
@@ -317,6 +311,8 @@ Namespace PresentationLayer.Forms
             _footer.AutoCalc = True
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
             _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
@@ -342,7 +338,7 @@ Namespace PresentationLayer.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _RevCostCentersByCode
+                dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -406,7 +402,10 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
-            UpdateFirstLine()
+            PresenterObj.UpdateFirstLine()
+            BindJournalItem()
+            UpdateTotals()
+            DataGridViewJournalItems.Refresh()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
@@ -425,7 +424,7 @@ Namespace PresentationLayer.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True, "MsgPaymentCollExistChangeNotAllowed", "Sorry, this account receivable has already been partially or fully collected/discounted, changing account/customer not allowed. Value will revert to previous value.", "Modification Error")
+                Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
             End If
         End Sub
 
@@ -544,13 +543,6 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub UpdateFirstLine()
-            PresenterObj.UpdateFirstLine()
-            BindJournalItem()
-            UpdateTotals()
-            DataGridViewJournalItems.Refresh()
-        End Sub
-
         Private Sub UpdateRowVatAmounts()
             Dim vatAmt As Integer
             For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
@@ -564,8 +556,8 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.SumAllColumns()
-                TotalDebits = _footer.Value("dgvDebit")
-                TotalCredits = _footer.Value("dgvCredit")
+                'TotalDebits = _footer.Value("dgvDebit")
+                'TotalCredits = _footer.Value("dgvCredit")
             End If
         End Sub
 
@@ -597,12 +589,16 @@ Namespace PresentationLayer.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf DataGridViewJournalItems.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or
-                   DataGridViewJournalItems.CurrentRow.Cells("dgvDiscountTaken").Value <> 0 Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgDeletePaidEntryNotAllowed", "You can't delete this row because this entry has an existing payment and/or discount!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
+            ElseIf PresenterObj.EditMode Then
+                Dim jiIdNo As Integer
+                jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
+                If PresenterObj.ApPaymentExists("AP", jiIdNo) Then
+                    'ElseIf 
+                    ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
+                    Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
+                    ' Cancel the deletion
+                    e.Cancel = True
+                End If
             End If
         End Sub
 

@@ -102,11 +102,19 @@ Namespace PresentationLayer.Presenters
             Return chartModel.GetRecordById(Of ChartModel)(idNo)
         End Function
 
+        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
+                .JournalCode = journalCode,
+                .JournalIdNo = journalItem.JournalIdNo,
+                .JournalItemIdNo = journalItem.IdNo
+            }
+            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
+        End Function
+
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
             Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-                .PaidAmount = 0,
-                .DiscountTaken = 0,
                 .JournalCode = journalCode,
                 .JournalIdNo = journalItem.JournalIdNo,
                 .JournalItemIdNo = journalItem.IdNo
@@ -133,14 +141,17 @@ Namespace PresentationLayer.Presenters
             Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
         End Function
 
-        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-                .JournalCode = journalCode,
-                .JournalIdNo = journalItem.JournalIdNo,
-                .JournalItemIdNo = journalItem.IdNo
-            }
-            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
+        Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
+            Dim apOpenInvoiceIdNo As Integer
+            apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CadOiItem", "ApOpenInvoiceIdNo") > 0 Then
+                Return True
+            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkdOiItem", "ApOpenInvoiceIdNo") > 0 Then
+                Return True
+            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "PcsOiItem", "ApOpenInvoiceIdNo") > 0 Then
+                Return True
+            End If
+            Return False
         End Function
 
         Public Function DeleteArOpenInvoice(ByRef idNo As Int32) As String
@@ -164,8 +175,8 @@ Namespace PresentationLayer.Presenters
             Return DataModel.GetEndingGlBalance(AccountIdNo, reconciliationDate)
         End Function
 
-        Public Function GetAdvancePaymentCdOpenInvoice(ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, "CD", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
+            Return Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
         Public Function GetAdvanceCollectionCrOpenInvoice(ByVal idNo As Int32)

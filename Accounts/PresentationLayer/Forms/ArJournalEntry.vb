@@ -247,116 +247,6 @@ Namespace PresentationLayer.Forms
             cboAccountIdNo.EndUpdate()
         End Sub
 
-        'Public Sub OnParentRecordUpdatedSuccessfully(passedValue As Integer) _
-        '    Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-        '    If PresenterObj.AddMode Then
-        '        IdNo = passedValue
-        '    End If
-        '    If DtInsertTable IsNot Nothing Then
-        '        DtInsertTable.Clear()
-        '    End If
-        '    If DtUpdateTable IsNot Nothing Then
-        '        DtUpdateTable.Clear()
-        '    End If
-        '    Dim oldJournalItem As List(Of JournalItemModel)
-        '    If Not PresenterObj.AddMode Then
-        '        'oldJournalItem = _journalItemsPresenter.GetRecordsWithIdNo(IdNo)
-        '        oldJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
-        '    Else
-        '        oldJournalItem = Nothing
-        '    End If
-        '    Dim nRowCount = 1
-        '    For Each ji In bsJournalItems
-        '        Dim workRow As DataRow
-        '        If ji.IdNo <= 0 Then
-        '            workRow = DtInsertTable.NewRow()
-        '        Else
-        '            workRow = DtUpdateTable.NewRow()
-        '            workRow("IdNo") = ji.IdNo
-        '        End If
-        '        workRow("JournalIdNo") = IdNo
-        '        workRow("Sequence") = nRowCount
-        '        workRow("AccountIdNo") = ji.AccountIdNo
-        '        workRow("Debit") = ji.Debit
-        '        workRow("Credit") = ji.Credit
-        '        workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
-        '        workRow("Notes") = If(ji.Notes, "")
-        '        If ji.IdNo <= 0 Then
-        '            DtInsertTable.Rows.Add(workRow)
-        '        Else
-        '            DtUpdateTable.Rows.Add(workRow)
-        '        End If
-        '        nRowCount = nRowCount + 1
-        '    Next
-        '    _journalItemsPresenter.Save(DtInsertTable, DtUpdateTable, IdNo)
-        '    Dim newJournalItem As List(Of JournalItemModel)
-        '    If PresenterObj.AddMode Then
-        '        newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
-        '        For Each item In newJournalItem
-        '            If _journalItemsPresenter.IsAccountsReceivableAccount(item.AccountIdNo) Then
-        '                PresenterObj.AddArOpenInvoice(item, "AR")
-        '            End If
-        '        Next
-        '    Else
-        '        newJournalItem = _journalItemsPresenter.ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(IdNo, "Sequence")
-        '        Dim newItem
-        '        Dim oldItem
-        '        Dim newIsAr
-        '        Dim oldIsAr
-        '        For Each oldItem In oldJournalItem
-        '            ' deletion of paid A.R. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
-        '            ' so no problem on deletion
-        '            oldIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(oldItem.AccountIdNo)
-        '            If oldIsAr Then
-        '                ' this item is AR
-        '                newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-        '                If newItem Is Nothing Then
-        '                    ' item was deleted
-        '                    PresenterObj.DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
-        '                Else
-        '                    ' item is found
-        '                    newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
-        '                    If newIsAr Then
-        '                        ' nothing to do
-        '                    Else
-        '                        ' new is changed from AR to non-AR
-        '                        PresenterObj.DeleteArOpenInvoice(oldItem.OpenInvoiceIdNo)
-        '                    End If
-        '                End If
-        '            Else
-        '                ' this item is Non-AR
-        '                newItem = newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo)
-        '                If newItem Is Nothing Then
-        '                    ' item is deleted just ignore Non-AR
-        '                Else
-        '                    ' old item still in new
-        '                    newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
-        '                    If newIsAr Then
-        '                        PresenterObj.AddArOpenInvoice(newItem, "AR")
-        '                    Else
-        '                        ' new is also Non-AR
-        '                        ' nothing to do
-        '                    End If
-        '                End If
-        '            End If
-        '        Next
-        '        For Each newItem In newJournalItem
-        '            newIsAr = _journalItemsPresenter.IsAccountsReceivableAccount(newItem.AccountIdNo)
-        '            oldItem = oldJournalItem.Find(Function(c) c.IdNo = newItem.IdNo)
-        '            If oldItem Is Nothing Then
-        '                ' this item is new
-        '                If newIsAr Then
-        '                    ' this new item is an AR
-        '                    PresenterObj.AddArOpenInvoice(newItem, "AR")
-        '                Else
-        '                    ' non - AR nothing to do
-        '                End If
-        '            Else
-        '                ' old item, already taken off in first (oldItem) for-loop
-        '            End If
-        '        Next
-        '    End If
-        'End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -477,7 +367,10 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
-            UpdateFirstLine()
+            PresenterObj.UpdateFirstLine()
+            BindJournalItem()
+            UpdateTotals()
+            DataGridViewJournalItems.Refresh()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
@@ -496,7 +389,7 @@ Namespace PresentationLayer.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True, "MsgPaymentCollExistChangeNotAllowed", "Sorry, this account receivable has already been partially or fully collected/discounted, changing account/customer not allowed. Value will revert to previous value.", "Modification Error")
+                Messaging.Show(True, "MsgPaymentCollExistChangeNotAllowed")
             End If
         End Sub
 
@@ -596,13 +489,6 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub UpdateFirstLine()
-            PresenterObj.UpdateFirstLine()
-            BindJournalItem()
-            UpdateTotals()
-            DataGridViewJournalItems.Refresh()
-        End Sub
-
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.SumAllColumns()
@@ -629,7 +515,7 @@ Namespace PresentationLayer.Forms
                 If PresenterObj.ArCollectionExists("AR", jiIdNo) Then
                     'ElseIf 
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
-                    Messaging.Show(True, "MsgDeleteCollEntryNotAllowed", "You can't delete this row because this entry has an existing collection and/or discount!", "Delete Error")
+                    Messaging.Show(True, "MsgDeleteCollEntryNotAllowed")
                     ' Cancel the deletion
                     e.Cancel = True
                 End If
