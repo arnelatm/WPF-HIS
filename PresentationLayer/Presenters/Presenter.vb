@@ -378,6 +378,33 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
+    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
+        Dim retVal As Integer
+        Dim updateReturnValue As Object
+        Dim insertReturnValue As Object
+        If AddMode Then
+            CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+        Else
+            parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+        End If
+        updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
+        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+            If parentIdNo <> 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
+                Next
+            End If
+            insertReturnValue = childDataModel.InsertTvp(insertTable)
+            If insertReturnValue >= 0 Then
+                retVal = updateReturnValue + insertReturnValue
+            Else
+                retVal = insertReturnValue
+            End If
+        Else
+            retVal = updateReturnValue
+        End If
+        Return retVal
+    End Function
 
     Public Overridable Sub Display(idNo As Int32)
         '

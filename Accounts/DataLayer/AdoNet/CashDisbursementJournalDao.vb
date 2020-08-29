@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class CashDisbursementJournalDao
         Inherits DaoAccounts
-        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoChild(Of JournalItem), IDaoOiItem(Of CadOiItem)
+        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoOiItem(Of CadOiItem)
 
         Private ReadOnly _db As New Db()
 
@@ -174,53 +174,6 @@ Namespace DataLayer.AdoNet
             sql2 = "Update [CashDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
-
-            'Dim retVal As Boolean
-            'Dim sql1 As String
-            'Dim sql2 As String
-            'Dim transactionDate = bizObj.TransactionDate
-            'Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
-            'Dim maxlength As Int16
-            'Dim prefix As String
-            'If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
-            '    maxlength = 4
-            '    prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
-            '    Dim sql As String = "INSERT INTO [Series] " &
-            '        " (SeriesName,Value,MaxLength,Prefix,Description)" &
-            '        " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
-            '    Dim params() As Object = {"@SeriesName", series,
-            '                              "@Value", 0,
-            '                              "@MaxLength", 4,
-            '                              "@Prefix", prefix,
-            '                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
-            '                             }
-            '    If _db.Insert(sql, params) Then
-            '        Return -1
-            '    End If
-            'Else
-            '    prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
-            '    maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
-            'End If
-            'sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            'sql2 = "Update [CashDisbursementJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-            '       ")) where IdNo = " & bizObj.IdNo
-            'retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-            'Return retVal
-        End Function
-
-        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
-            Dim jiDao = New CashDisbursementJournalItemDao()
-            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
-        End Function
-
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Dim jiDao = New CashDisbursementJournalItemDao()
-            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
-        End Function
-
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
-            Dim jiDao = New CashDisbursementJournalItemDao()
-            Return jiDao.InsertTvp(tvpTable)
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices

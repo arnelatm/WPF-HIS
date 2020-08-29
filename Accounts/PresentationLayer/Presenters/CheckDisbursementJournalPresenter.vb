@@ -19,6 +19,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _advancesToSupplierAccountIdNo As Int32
 
         Private ReadOnly _ckdOiItemModel As New ModelAccounts("CkdOiItem")
+        Private ReadOnly _ckdJournalItemModel As New ModelAccounts("CheckDisbursementJournalItem")
         Private _oldCkdOiItem As List(Of CkdOiItemModel)
 
         Public Sub New(view As ICheckDisbursementJournalView)
@@ -176,9 +177,9 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Int32) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByVal journalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, "CK", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
@@ -275,35 +276,29 @@ Namespace PresentationLayer.Presenters
                 Next
                 View.TotalCredits = View.TotalDebits
             End If
+            View.UnApplied = View.Amount - View.Applied
         End Sub
 
-        Public Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            Dim retVal As Integer
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             ' save journal entries
+            Dim parentIdNo As Integer = retVal
             If Not AddMode Then
                 _oldCkdOiItem = GetCKdOiItems(View.IdNo)
             Else
                 _oldCkdOiItem = Nothing
             End If
-            retVal = SaveJournalItems(passedValue)
+            retVal = UpdateChildData(_ckdJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = SaveCkdOiItems(passedValue)
+                retVal = UpdateChildData(_ckdOiItemModel, DtCkdOiUpdateTable, DtCkdOiInsertTable, parentIdNo, "PcsIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
             End If
-            If retVal >= 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    retVal = UpdateGlReferenceNumber()
-                End If
+            If retVal >= 0 and IsEmpty(View.ReferenceNo) Then
+		GlobalVariables.Mapper.Map(View, DataModel)
+            	retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             End If
-            Return retVal
-        End Function
-
-        Public Function UpdateGlReferenceNumber() As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
-        End Function
+        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -313,36 +308,31 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Check Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Check Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                Else
-                    If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                        If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                            Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                            retValue = False
-                        End If
-                    ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                        If CKdOiItemDataIsValid() Then
-                            retValue = True
-                        Else
-                            retValue = False
-                            Dim index As Int16 = 0
-                            For Each item In View.CkdOiItems
-                                If item.Errors IsNot Nothing Then
-                                    View.CkdOiItems(index).Errors = item.Errors
-                                Else
-                                    If View.CkdOiItems(index).Errors IsNot Nothing Then
-                                        View.CkdOiItems(index).Errors.Clear()
-                                    End If
-                                End If
-                                index += 1
-                            Next
-                        End If
+                ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                       Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                       retValue = False
                     End If
-                    If retValue Then
-                        retValue = JournalItemDataIsValid()
-                        If retValue Then
-                            'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                        End If
+                ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                    If CkdOiItemDataIsValid() Then
+                       retValue = True
+                    Else
+                       retValue = False
+                       Dim index As Int16 = 0
+                       For Each item In View.CkdOiItems
+                           If item.Errors IsNot Nothing Then
+                               View.CkdOiItems(index).Errors = item.Errors
+                           Else
+                               If View.CkdOiItems(index).Errors IsNot Nothing Then
+                                  View.CkdOiItems(index).Errors.Clear()
+                               End If
+                           End If
+                           index += 1
+                       Next
                     End If
+                End If
+                If retValue Then
+                   retValue = JournalItemDataIsValid()                  
                 End If
             End If
             Return retValue
@@ -351,17 +341,18 @@ Namespace PresentationLayer.Presenters
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
             Dim chart As ChartModel
-            Dim specialAccount As String
+            Dim specialAccount As String = ""
             For Each item In View.JournalItems
-                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) Then
-                    If (item.Debit <> 0 Or item.Credit <> 0) Then
+                If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
+                        chart = GetChart(item.AccountIdNo)
+                        specialAccount = chart.SpecialAccount
+                    End If
+                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                         MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                         retValue = False
                         Exit For
                     End If
-                ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    chart = GetChart(item.AccountIdNo)
-                    specialAccount = chart.SpecialAccount
                     If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
@@ -564,62 +555,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function SaveCkdOiItems(passedValue As Integer) As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal As Integer
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = _ckdOiItemModel.DelUpdateTvp(DtCkdOiUpdateTable, View.IdNo)
-            If updateReturnValue >= 0 AndAlso DtCkdOiInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtCkdOiInsertTable.Rows
-                    row.Item("CkdIdNo") = headerIdNo
-                Next
-                insertReturnValue = _ckdOiItemModel.InsertTvp(DtCkdOiInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Private Function SaveJournalItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
@@ -686,10 +621,12 @@ Namespace PresentationLayer.Presenters
                             ji.IdNo = item.IdNo
                             ji.AccountIdNo = item.AccountIdNo
                             ji.JournalIdNo = View.IdNo
-                            retVal = AddApOpenInvoice(ji, "CK")
+                            retVal = AddApOpenInvoice(ji, "CD")
                             Exit For
                         End If
                     Next
+                Else
+                    ' no advance payment
                 End If
             Else
                 If View.UnApplied > 0 Then
@@ -710,7 +647,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = GetAdvancePaymentOpenInvoice("CK", ji.IdNo)
+                    lOpenInvIdNo = CInt(GetAdvancePaymentOpenInvoice("CK", ji.IdNo))
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
@@ -722,12 +659,22 @@ Namespace PresentationLayer.Presenters
                     ' get the OpenInvoice IdNo
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
-                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
-                    retVal = DeleteApOpenInvoice(lOpenInvoiceIdNo)
+                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo("CK", View.IdNo))
+		    if lOpenInvoiceIdNo > 0 then	
+	                retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
+		    end if
                 End If
             End If
             Return retVal
         End Function
+
+        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
+            Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            If Model.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
+                Return modelArOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+            End If
+        End Function
+
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
@@ -736,7 +683,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
@@ -763,7 +710,7 @@ Namespace PresentationLayer.Presenters
             End If
             If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                Model.DelUpdateTvp(DtUpdateTable, idNo)
+                _ckdJOurnalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 

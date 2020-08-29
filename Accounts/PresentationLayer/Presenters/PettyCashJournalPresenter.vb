@@ -11,15 +11,16 @@ Namespace PresentationLayer.Presenters
     Public Class PettyCashJournalPresenter
         Inherits AccountsPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
 
-        Protected DtInsertTable As New DataTable
+
         Protected DtPcsOiInsertTable As New DataTable
         Protected DtPcsOiUpdateTable As New DataTable
+        Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-
         Private ReadOnly _advancesToSupplierAccountIdNo As Int32
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
-
         Private ReadOnly _pcsOiItemModel As New ModelAccounts("PcsOiItem")
+        Private ReadOnly _pcsJournalItemModel As New ModelAccounts("PettyCashJournalItem")
+
         Private _oldPcsOiItem As List(Of PcsOiItemModel)
 
         Public Sub New(view As IPettyCashJournalView)
@@ -65,10 +66,6 @@ Namespace PresentationLayer.Presenters
             DtPcsOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
-
-        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _apOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
-        'End Function
 
         Public Sub AddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
@@ -158,14 +155,14 @@ Namespace PresentationLayer.Presenters
                     Next
                     If totalBalance > 0 Then
                         If View.UnApplied >= 0 Then
-                            Messaging.Show(True, "MsgPaymentNotFullyApplied", "Payment not yet fully applied. Cannot save entry unless amount is fully applied.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgPaymentNotFullyApplied")
                             retVal = False
                         Else
-                            Messaging.Show(True, "MsgPaymentIsOverApplied", "Payment is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")
+                            Messaging.Show(True, "MsgPaymentIsOverApplied")
                             retVal = False
                         End If
                     Else
-                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance", "Amount not yet fully applied or no more unpaid invoices for this supplier. Do you want to make the excess payment as an advance payment?", $"Save Advance Payment",
+                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -181,9 +178,9 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByRef idNo As Int32) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByVal journalCode as String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, "PC", "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
@@ -204,12 +201,6 @@ Namespace PresentationLayer.Presenters
         Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of PcsOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
         End Function
-
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -258,11 +249,11 @@ Namespace PresentationLayer.Presenters
                                 workRow = DtPcsOiUpdateTable.NewRow()
                                 workRow("IdNo") = ji.IdNo
                             End If
-                            workRow("pcsIdNo") = View.IdNo
-                            workRow("Sequence") = nRowCount
                             workRow("Amount") = ji.Amount
-                            workRow("DiscountTaken") = ji.DiscountTaken
                             workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
+                            workRow("pcsIdNo") = View.IdNo
+                            workRow("DiscountTaken") = ji.DiscountTaken
+                            workRow("Sequence") = nRowCount
                             If ji.IdNo <= 0 Then
                                 DtPcsOiInsertTable.Rows.Add(workRow)
                             Else
@@ -286,41 +277,29 @@ Namespace PresentationLayer.Presenters
                 Next
                 View.TotalCredits = View.TotalDebits
             End If
+            View.UnApplied = View.Amount - View.Applied
         End Sub
 
-        'Public Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _apOpenInvoiceModel.RemoveInvoicePayment(idNo, amount, discountTaken)
-        'End Function
-
-        Private Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            Dim retVal As Integer
-            ' save journal entries
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
+            ' save journal 
+            Dim parentIdNo As Integer = retVal
             If Not AddMode Then
                 _oldPcsOiItem = GetPcsOiItems(View.IdNo)
             Else
                 _oldPcsOiItem = Nothing
             End If
-            retVal = SaveJournalItems(passedValue)
-            If retVal > 0 Then
-                retVal = SavePcsOiItems(passedValue)
+            retVal = UpdateChildData(_pcsJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+            If retVal >= 0 Then
+                retVal = UpdateChildData(_pcsOiItemModel, DtPcsOiUpdateTable, DtPcsOiInsertTable, parentIdNo, "PcsIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
             End If
-            If retVal >= 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    retVal = UpdateGlReferenceNumber()
-                End If
+            If retVal >= 0 and IsEmpty(View.ReferenceNo) Then
+		GlobalVariables.Mapper.Map(View, DataModel)
+		retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             End If
-            Return retVal
-        End Function
-
-        Public Function UpdateGlReferenceNumber() As String
-            Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-            Return retValue
-        End Function
+        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -330,36 +309,31 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Petty Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                Else
-                    If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                        If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                            Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                            retValue = False
-                        End If
-                    ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                        If PcsOiItemDataIsValid() Then
-                            retValue = True
-                        Else
-                            retValue = False
-                            Dim index As Int16 = 0
-                            For Each item In View.PcsOiItems
-                                If item.Errors IsNot Nothing Then
-                                    View.PcsOiItems(index).Errors = item.Errors
-                                Else
-                                    If View.PcsOiItems(index).Errors IsNot Nothing Then
-                                        View.PcsOiItems(index).Errors.Clear()
-                                    End If
+                ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+		    If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+			Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+			retValue = False
+		    End If
+		ElseIf PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+		    If PcsOiItemDataIsValid() Then
+			retValue = True
+                    Else
+                        retValue = False
+                        Dim index As Int16 = 0
+                        For Each item In View.PcsOiItems
+                            If item.Errors IsNot Nothing Then
+                                View.PcsOiItems(index).Errors = item.Errors
+                            Else
+                                If View.PcsOiItems(index).Errors IsNot Nothing Then
+                                   View.PcsOiItems(index).Errors.Clear()
                                 End If
-                                index += 1
-                            Next
-                        End If
+                            End If
+                            index += 1
+                        Next
                     End If
-                    If retValue Then
-                        retValue = JournalItemDataIsValid()
-                        If retValue Then
-                            'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                        End If
-                    End If
+                End If
+                If retValue Then
+                    retValue = JournalItemDataIsValid()
                 End If
             End If
             Return retValue
@@ -368,17 +342,18 @@ Namespace PresentationLayer.Presenters
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
             Dim chart As ChartModel
-            Dim specialAccount As String
+            Dim specialAccount As String = ""
             For Each item In View.JournalItems
-                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) Then
-                    If (item.Debit <> 0 Or item.Credit <> 0) Then
+                If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
+                        chart = GetChart(item.AccountIdNo)
+                        specialAccount = chart.SpecialAccount
+                    End If
+                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                         MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                         retValue = False
                         Exit For
                     End If
-                ElseIf PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    chart = GetChart(item.AccountIdNo)
-                    specialAccount = chart.SpecialAccount
                     If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
@@ -582,72 +557,10 @@ Namespace PresentationLayer.Presenters
             'UpdateTotals()
         End Sub
 
-        'Private Sub OnBeforeCompare() Handles MyBase.BeforeCompare
-        '    If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-        '        View.TotalDebits = View.Applied + View.DiscountTaken
-        '        View.TotalCredits = View.TotalDebits
-        '    End If
-        'End Sub
-
-        Private Function SavePcsOiItems(passedValue As Integer) As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal As Integer
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, View.IdNo)
-            If updateReturnValue >= 0 AndAlso DtPcsOiInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtPcsOiInsertTable.Rows
-                    row.Item("PcsIdNo") = headerIdNo
-                Next
-                insertReturnValue = _pcsOiItemModel.InsertTvp(DtPcsOiInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Private Function SaveJournalItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                ' save the generated open invoices
                 retVal = UpdateOpenInvoices()
             End If
             Return retVal
@@ -736,7 +649,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = GetAdvancePaymentOpenInvoice("CD", ji.IdNo)
+                    lOpenInvIdNo = CInt(GetAdvancePaymentOpenInvoice("PC", ji.IdNo))
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
@@ -748,12 +661,22 @@ Namespace PresentationLayer.Presenters
                     ' get the OpenInvoice IdNo
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
-                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(View.IdNo))
-                    retVal = DeleteApOpenInvoice(lOpenInvoiceIdNo)
+                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo("PC", View.IdNo))
+		    if lOpenInvoiceIdNo > 0 then
+	                retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
+		    end if
                 End If
             End If
             Return retVal
         End Function
+
+        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
+            Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            If Model.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
+                Return modelArOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+            End If
+        End Function
+
 
         Public Overrides Sub GoPrintRecord()
             'Dim transactionAmount As String
@@ -762,7 +685,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-"))
 
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             'If language = "ar" Then
@@ -781,6 +704,17 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", View.IdNo, "PCJournalIdNo", totalCreditAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.PcsOiItems IsNot Nothing And View.PcsOiItems.Any() Then
+                DtPcsOiUpdateTable.Clear()
+                _pcsOiItemModel.DelUpdateTvp(DtPcsOiUpdateTable, idNo)
+            End If
+            If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
+                DtUpdateTable.Clear()
+                _pcsJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
         End Sub
 
     End Class

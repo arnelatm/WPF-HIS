@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PettyCashJournalDao
         Inherits DaoAccounts
-        Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal), IDaoChild(Of JournalItem), IDaoOiItem(Of PcsOiItem)
+        Implements IDao(Of PettyCashJournal), IDaoJournals(Of PettyCashJournal), IDaoOiItem(Of PcsOiItem)
 
         Private ReadOnly _db As New Db()
 
@@ -172,21 +172,6 @@ Namespace DataLayer.AdoNet
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
             sql2 = "Update [PettyCashJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
             Return _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-        End Function
-
-        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
-            Dim jiDao = New PettyCashJournalItemDao()
-            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
-        End Function
-
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Dim jiDao = New PettyCashJournalItemDao()
-            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
-        End Function
-
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
-            Dim jiDao = New PettyCashJournalItemDao()
-            Return jiDao.InsertTvp(tvpTable)
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of PcsOiItem) Implements IDaoOiItem(Of PcsOiItem).GetOpenInvoices

@@ -15,3 +15,6 @@ go
 
 delete from arjournal where ReferenceNo = 'Beg.Bal.' and Notes = 'Beg. Bal.'
 go
+
+update apopeninvoice set journalcode = 'BB' where idno < 51
+update apopeninvoice set journalIdNo = journalidno where idno < 51

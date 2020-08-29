@@ -15,10 +15,10 @@ Namespace PresentationLayer.Presenters
         Protected DtCadOiUpdateTable As New DataTable
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-
         Private ReadOnly _advancesToSupplierAccountIdNo As Int32
 
         Private ReadOnly _cadOiItemModel As New ModelAccounts("CadOiItem")
+        Private ReadOnly _cadJournalItemModel As New ModelAccounts("CashDisbursementJournalItem")
         Private _oldCadOiItem As List(Of CadOiItemModel)
 
         Public Sub New(view As ICashDisbursementJournalView)
@@ -286,18 +286,16 @@ Namespace PresentationLayer.Presenters
             Else
                 _oldCadOiItem = Nothing
             End If
-            retVal = SaveJournalItems(parentIdNo)
+            retVal = UpdateChildData(_cadJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = SaveCadOiItems(parentIdNo)
+                retVal = UpdateChildData(_cadOiItemModel, DtCadOiUpdateTable, DtCadOiInsertTable, parentIdNo, "CadIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
             End If
-            If retVal >= 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    GlobalVariables.Mapper.Map(View, DataModel)
-                    retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-                End If
+            If retVal >= 0 and IsEmpty(View.ReferenceNo) Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             End If
         End Sub
 
@@ -345,7 +343,7 @@ Namespace PresentationLayer.Presenters
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
                 If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    If (item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0) Then
+                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
                     End If
@@ -556,62 +554,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function SaveCadOiItems(passedValue As Integer) As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal As Integer
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = _cadOiItemModel.DelUpdateTvp(DtCadOiUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtCadOiInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtCadOiInsertTable.Rows
-                    row.Item("CadIdNo") = headerIdNo
-                Next
-                insertReturnValue = _cadOiItemModel.InsertTvp(DtCadOiInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Private Function SaveJournalItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
             If PaymentTypeToEnum(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
@@ -704,7 +646,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = GetAdvancePaymentOpenInvoice("CD", ji.IdNo)
+                    lOpenInvIdNo = CInt(GetAdvancePaymentOpenInvoice("CD", ji.IdNo))
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
@@ -717,7 +659,9 @@ Namespace PresentationLayer.Presenters
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
                     lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo("CD", View.IdNo))
-                    retVal = DeleteApOpenInvoice(lOpenInvoiceIdNo)
+		    if lOpenInvoiceIdNo > 0 then
+	                retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
+		    end if
                 End If
             End If
             Return retVal
@@ -765,7 +709,7 @@ Namespace PresentationLayer.Presenters
             End If
             If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                Model.DelUpdateTvp(DtUpdateTable, idNo)
+                _cadJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 

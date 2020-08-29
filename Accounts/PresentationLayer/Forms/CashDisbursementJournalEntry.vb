@@ -436,11 +436,7 @@ Namespace PresentationLayer.Forms
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            'DataGridViewJournalItems.Columns.Add("ItemVatAmount", "")
-            'DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(System.Decimal)
-            'DataGridViewJournalItems.Columns("ItemVatAmount").ReadOnly = False
-            'DataGridViewJournalItems.Columns("ItemVatAmount").Visible = False
-        End Sub
+       End Sub
 
         Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
