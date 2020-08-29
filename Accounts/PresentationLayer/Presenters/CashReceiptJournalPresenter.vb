@@ -19,6 +19,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _advancesToCustomerAccountIdNo As Int32
 
         Private ReadOnly _csrOiItemModel As New ModelAccounts("CsrOiItem")
+        Private ReadOnly _csrJournalItemModel As New ModelAccounts("CashReceiptJournalItem")
         Private _oldCsrOiItem As List(Of CsrOiItemModel)
 
         Public Sub New(view As ICashReceiptJournalView)
@@ -64,10 +65,6 @@ Namespace PresentationLayer.Presenters
             DtCsrOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
         End Sub
-
-        'Public Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-        '    Return _arOpenInvoiceModel.AddInvoicePayment(idNo, amount, discountTaken)
-        'End Function
 
         Public Sub AddCustomerOpenInvoices()
             If View.PayorIdNo <> 0 Then
@@ -290,9 +287,9 @@ Namespace PresentationLayer.Presenters
             Else
                 _oldCsrOiItem = Nothing
             End If
-            retVal = SaveJournalItems(parentIdNo)
+            retVal = UpdateChildData(_csrJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = SaveCsrOiItems(parentIdNo)
+                retVal = UpdateChildData(_csrOiItemModel, DtCsrOiUpdateTable, DtCsrOiInsertTable, parentIdNo, "CsrIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -558,62 +555,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function SaveCsrOiItems(passedValue As Integer) As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim retVal As Integer
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = _csrOiItemModel.DelUpdateTvp(DtCsrOiUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtCsrOiInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtCsrOiInsertTable.Rows
-                    row.Item("CsrIdNo") = headerIdNo
-                Next
-                insertReturnValue = _csrOiItemModel.InsertTvp(DtCsrOiInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Private Function SaveJournalItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
             If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
@@ -770,7 +711,7 @@ Namespace PresentationLayer.Presenters
             End If
             If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                Model.DelUpdateTvp(DtUpdateTable, idNo)
+                _csrJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 

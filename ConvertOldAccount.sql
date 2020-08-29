@@ -1,7 +1,13 @@
+:r c:\temp\Sql\ChartBalance.sql
 :r c:\temp\Sql\customer.sql
 :r c:\temp\Sql\supplier.sql	
 :r c:\temp\Sql\ApJournal.sql
 :r c:\temp\Sql\ApJournalItem.sql
+:r c:\temp\Sql\ApOpenInvoice.sql
+:r c:\temp\Sql\ArOpenInvoice.sql
+:r c:\temp\Sql\CadOiItem.sql
+:r c:\temp\Sql\CkdOiItem.sql
+:r c:\temp\Sql\CsrOiItem.sql
 :r c:\temp\Sql\ArJournal.sql
 :r c:\temp\Sql\ArJournalItem.sql
 :r c:\temp\Sql\ErJournal.sql
@@ -18,4 +24,4 @@
 :r c:\temp\Sql\CheckDisbursementJournalItem.sql
 :r c:\temp\Sql\CashReceiptJournal.sql
 :r c:\temp\Sql\CashReceiptJournalItem.sql
-
+:r c:\temp\Sql\UpdateChartBegBal.sql

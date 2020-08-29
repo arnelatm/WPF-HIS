@@ -78,10 +78,6 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetAdvancePaymentOpenInvoice(ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, "CK", "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
-        End Function
-
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        journalIdNo As Int32)
             Dim insertReturnValue

@@ -183,6 +183,30 @@ Namespace ServiceLayer.ActionService
                 Return DaoFactoryAccounts.CreateDao("CadOiItem")
             End Get
         End Property
+        Private ReadOnly Property CashReceiptJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashReceiptJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashDisbursementJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
+            End Get
+        End Property
+
+
+        Private ReadOnly Property PettyCashJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PettyCashJournalItem")
+            End Get
+        End Property
 
         Private ReadOnly Property CsrOiItemDao As IDaoChild(Of CsrOiItem)
             Get

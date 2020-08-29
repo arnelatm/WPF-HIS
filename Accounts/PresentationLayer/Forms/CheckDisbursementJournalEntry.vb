@@ -463,8 +463,6 @@ Namespace PresentationLayer.Forms
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            'DataGridViewJournalItems.Columns("ItemVatAmount").ValueType = GetType(System.Decimal)
-            'DataGridViewJournalItems.Columns("ItemVatAmount").ReadOnly = False
         End Sub
 
         Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
@@ -542,8 +540,8 @@ Namespace PresentationLayer.Forms
                             If nIndex < JournalItems.Count() Then
                                 JournalItems(nIndex).AccountIdNo = newValue
                                 JournalItems(nIndex).SpecialAccount = chart.SpecialAccount
-                                bsJournalItems(nIndex).PayeeType = chart.PayeeType
-                                bsJournalItems(nIndex).AccountName = chart.AccountName
+                                JournalItems(nIndex).PayeeType = chart.PayeeType
+                                JournalItems(nIndex).AccountName = chart.AccountName
                                 UpdateTotalVatAmount()
                                 BindJournalItem()
                             End If
@@ -746,9 +744,6 @@ Namespace PresentationLayer.Forms
             UpdateTotalVatAmount()
         End Sub
 
-        Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
-
-        End Sub
     End Class
 
 End Namespace

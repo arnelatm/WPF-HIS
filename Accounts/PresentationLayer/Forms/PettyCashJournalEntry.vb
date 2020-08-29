@@ -343,7 +343,7 @@ Namespace PresentationLayer.Forms
                     dgvInvoiceNo.DisplayOnly = True
                     dgvPreviousBalance.DisplayOnly = True
                     dgvBalance.DisplayOnly = True
-                    DgvTransactionDate.DisplayOnly = True
+                    dgvTransactionDate.DisplayOnly = True
                     dgvJournalCode.DisplayOnly = True
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
@@ -397,7 +397,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub PcsOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcsOiItems.CellEndEdit
+        Private Sub pcsOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcsOiItems.CellEndEdit
             With DataGridViewPcsOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
@@ -428,7 +428,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Private Sub PettyCashDisbursementJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub PettyCashJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems)
             _jiFooter.AutoCalc = True
@@ -464,9 +464,6 @@ Namespace PresentationLayer.Forms
                 If Not String.IsNullOrEmpty(lVatNumber) Then
                     VatNumber = lVatNumber
                 End If
-            Else
-                Applied = Amount
-                UnApplied = 0
             End If
         End Sub
 
@@ -715,8 +712,6 @@ Namespace PresentationLayer.Forms
 
             ' Check if the starting balance row is included in the selected rows
             Dim pettyCashRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
             If DataGridViewJournalItems.SelectedRows.Contains(pettyCashRowEntry) Then
                 ' Do not allow the user to delete the first row.
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed")
