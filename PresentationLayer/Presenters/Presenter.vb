@@ -1300,4 +1300,23 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     'End Sub
 
+    Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
+        Dim retValue As DialogResult
+        Dim dateField As String = Messaging.TranslateCaption(text)
+        Dim startDateStr As String = startDate.ToShortDateString()
+        Dim endDateStr As String = endDate.ToShortDateString()
+        Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
+        Dim message = Messaging.GetMessage(True, "MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} And {endDate}!", "Invalid Date")
+        Dim caption = Messaging.GetCaption("Invalid Date")
+        If targetDate < startDate Or targetDate > endDate Then
+            message = Messaging.ReplaceValues(message, variables)
+            Messaging.Show(message, caption)
+            retValue = DialogResult.No
+        Else
+            retValue = DialogResult.Yes
+        End If
+        Return retValue
+    End Function
+
+
 End Class

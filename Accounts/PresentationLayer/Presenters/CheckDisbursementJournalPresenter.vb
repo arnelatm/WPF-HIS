@@ -311,7 +311,7 @@ Namespace PresentationLayer.Presenters
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Check Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
-                If Messaging.IsDateRangeValid("Check Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                If IsDateRangeValid("Check Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
                     If PaymentTypeToEnum(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
