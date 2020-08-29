@@ -65,7 +65,7 @@ Namespace PresentationLayer.Presenters
                 If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                     Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                     retValue = False
-                ElseIf Messaging.IsDateRangeValid("General Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                ElseIf IsDateRangeValid("General Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
                     For Each item In View.JournalItems

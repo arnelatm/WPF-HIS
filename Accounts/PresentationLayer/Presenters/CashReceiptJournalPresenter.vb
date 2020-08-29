@@ -180,9 +180,9 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvanceCollectionOpenIdNo(ByRef idNo As Int32) As Integer
+        Public Function GetAdvanceCollectionOpenIdNo(ByVal journalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, "CR", "ArOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
@@ -231,6 +231,8 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                 SetAsideJournalItems()
+                View.UnApplied = 0
+                View.Applied = View.Amount
             Else
                 MakeJournalItem()
                 SetAsideJournalItems()
@@ -269,7 +271,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 View.TotalDebits = 0
                 View.TotalCredits = 0
                 For Each ji In View.CsrOiItems
@@ -307,12 +309,12 @@ Namespace PresentationLayer.Presenters
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
-                If Messaging.IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                If IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 ElseIf ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
-                        retValue = True
+                        retValue = False
                     End If
                 ElseIf ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                     If CsrOiItemDataIsValid() Then
@@ -334,9 +336,6 @@ Namespace PresentationLayer.Presenters
                 End If
                 If retValue Then
                     retValue = JournalItemDataIsValid()
-                    'If retValue Then
-                    '    'retValue = OpenInvoicePaymentsIsValid(cashAccount, retValue)
-                    'End If
                 End If
             End If
             Return retValue
@@ -345,7 +344,7 @@ Namespace PresentationLayer.Presenters
         Public Overloads Function JournalItemDataIsValid() As Boolean
             Dim retValue = True
             Dim chart As ChartModel
-            Dim specialAccount As String
+            Dim specialAccount As String = ""
             For Each item In View.JournalItems
                 If PaymentTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
@@ -708,7 +707,7 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = CInt(GetAdvanceCollectionCrOpenInvoice(ji.IdNo))
+                    lOpenInvIdNo = CInt(GetAdvanceCollectionOpenInvoice("CR", ji.IdNo))
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
@@ -720,16 +719,16 @@ Namespace PresentationLayer.Presenters
                     ' get the OpenInvoice IdNo
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
-                    lOpenInvoiceIdNo = CInt(GetAdvanceCollectionOpenIdNo(View.IdNo))
+                    lOpenInvoiceIdNo = CInt(GetAdvanceCollectionOpenIdNo("CR", View.IdNo))
                     If lOpenInvoiceIdNo > 0 Then
-                        retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
+                        retVal = DeleteAdvanceCollectionOpenInvoice(lOpenInvoiceIdNo)
                     End If
                 End If
             End If
             Return retVal
         End Function
 
-        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
+        Private Function DeleteAdvanceCollectionOpenInvoice(ByRef idNo As Int32) As String
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
             If Model.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
@@ -762,6 +761,17 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Cash Receipt Journal.Rpt", View.IdNo, "CashReceiptJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Any() Then
+                DtCsrOiUpdateTable.Clear()
+                _csrOiItemModel.DelUpdateTvp(DtCsrOiUpdateTable, idNo)
+            End If
+            If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
+                DtUpdateTable.Clear()
+                Model.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
         End Sub
 
     End Class

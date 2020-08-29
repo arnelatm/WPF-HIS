@@ -179,8 +179,8 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
-        Public Function GetAdvanceCollectionCrOpenInvoice(ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, "CR", "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
+            Return Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
         End Function
 
     End Class
