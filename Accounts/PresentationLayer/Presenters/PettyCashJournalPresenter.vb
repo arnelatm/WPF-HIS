@@ -17,9 +17,11 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _advancesToSupplierAccountIdNo As Int32
-        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
+
         Private ReadOnly _pcsOiItemModel As New ModelAccounts("PcsOiItem")
         Private ReadOnly _pcsJournalItemModel As New ModelAccounts("PettyCashJournalItem")
+        Private ReadOnly _pettyCashCount As Int16 = 0
+        Private ReadOnly _defaultPettyCashAccount As Int32
 
         Private _oldPcsOiItem As List(Of PcsOiItemModel)
 
@@ -32,6 +34,13 @@ Namespace PresentationLayer.Presenters
             DataModel = New PettyCashJournalModel
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+
+            _pettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Chart", "SpecialAccount")
+            If _pettyCashCount = 0 Then
+                Messaging.Show(True, "MsgNoPettyCashAccount")
+            Else
+                _defaultPettyCashAccount = GetRecordFieldWithKey("PC", "Chart", "SpecialAccount", "IdNo")
+            End If
 
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
 
@@ -154,7 +163,7 @@ Namespace PresentationLayer.Presenters
                         totalBalance += item.Balance
                     Next
                     If totalBalance > 0 Then
-                        If View.UnApplied >= 0 Then
+                        If View.UnApplied > 0 Then
                             Messaging.Show(True, "MsgPaymentNotFullyApplied")
                             retVal = False
                         Else
@@ -178,7 +187,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByVal journalCode as String, ByVal idNo As Int32) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByVal journalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
             retVal = Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
@@ -224,6 +233,8 @@ Namespace PresentationLayer.Presenters
             Else
                 View.PcsOiItems = New List(Of PcsOiItemView)
             End If
+            View.AccountIdNo = _defaultPettyCashAccount
+
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -554,7 +565,6 @@ Namespace PresentationLayer.Presenters
             Else
                 View.PcsOiItems.Clear()
             End If
-            'UpdateTotals()
         End Sub
 
         Private Function SaveOpenInvoices()
@@ -679,30 +689,29 @@ Namespace PresentationLayer.Presenters
 
 
         Public Overrides Sub GoPrintRecord()
-            'Dim transactionAmount As String
-            Dim totalCreditAmount As String
+            Dim transactionAmountInWords As String
+            Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            'If language = "ar" Then
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            'Else
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            'End If
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             If language = "ar" Then
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", View.IdNo, "PCJournalIdNo", totalCreditAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", View.IdNo, "PCJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

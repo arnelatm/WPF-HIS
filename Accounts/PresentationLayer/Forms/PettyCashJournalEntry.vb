@@ -495,18 +495,18 @@ Namespace PresentationLayer.Forms
             Close()
         End Sub
 
-        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
-        '    If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
-        '        With DataGridViewJournalItems.CurrentCell
-        '            Dim cColumnName = .OwningColumn.Name.ToLower()
-        '            If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
-        '                Beep()
-        '                e.Cancel = True
-        '                DataGridViewJournalItems.EndEdit()
-        '            End If
-        '        End With
-        '    End If
-        'End Sub
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewJournalItems.CurrentCell
+                    Dim cColumnName = .OwningColumn.Name.ToLower()
+                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                        Beep()
+                        e.Cancel = True
+                        DataGridViewJournalItems.EndEdit()
+                    End If
+                End With
+            End If
+        End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems.CurrentCell
