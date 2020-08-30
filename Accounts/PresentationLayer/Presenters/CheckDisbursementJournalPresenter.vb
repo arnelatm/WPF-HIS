@@ -677,8 +677,8 @@ Namespace PresentationLayer.Presenters
 
 
         Public Overrides Sub GoPrintRecord()
-            Dim transactionAmount As String
-            Dim totalCreditAmount As String
+            Dim transactionAmountInWords As String
+            Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -686,20 +686,20 @@ Namespace PresentationLayer.Presenters
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
-                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             Else
-                transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
             View.TotalCredits = 0
             For Each item In View.JournalItems
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             If language = "ar" Then
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+                totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmount, "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm("Check Disbursement Journal.Rpt", View.IdNo, "CheckDisbursementJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
@@ -710,7 +710,7 @@ Namespace PresentationLayer.Presenters
             End If
             If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                _ckdJOurnalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                _ckdJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 

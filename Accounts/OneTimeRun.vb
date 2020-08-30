@@ -49,6 +49,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
         Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
+        Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Chart of Accounts Entry and declare at least one Petty Cash Account!", "Error")
     End Sub
 
     Public Shared Sub CreateEnums()

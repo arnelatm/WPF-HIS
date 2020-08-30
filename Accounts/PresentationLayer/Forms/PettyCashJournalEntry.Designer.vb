@@ -106,9 +106,6 @@ Namespace PresentationLayer.Forms
         Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewPcsOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsPcsOiItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.dgvSequencePcsOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -122,6 +119,9 @@ Namespace PresentationLayer.Forms
             Me.PcsIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPcsOiItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -993,27 +993,6 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewPcsOiItems.SequenceColumn = "dgvSequencePcsOi"
             Me.DataGridViewPcsOiItems.StartTrackingChanges = False
             '
-            'bsPcsOiItems
-            '
-            Me.bsPcsOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcsOiItemModel)
-            '
-            'floFooter
-            '
-            Me.floFooter.BackColor = System.Drawing.Color.Transparent
-            Me.floFooter.Controls.Add(Me.btnViewGL)
-            resources.ApplyResources(Me.floFooter, "floFooter")
-            Me.floFooter.Name = "floFooter"
-            '
-            'btnViewGL
-            '
-            Me.btnViewGL.DesignerSelected = False
-            Me.btnViewGL.DisplayOnly = True
-            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-            Me.btnViewGL.ImageIndex = 0
-            Me.btnViewGL.Name = "btnViewGL"
-            Me.btnViewGL.OriginalImageName = Nothing
-            Me.btnViewGL.SecurityKey = ""
-            '
             'dgvSequencePcsOi
             '
             Me.dgvSequencePcsOi.DataPropertyName = "Sequence"
@@ -1162,10 +1141,31 @@ Namespace PresentationLayer.Forms
             Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
             Me.OpenInvoiceIdNo.ReadOnly = True
             '
+            'bsPcsOiItems
+            '
+            Me.bsPcsOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcsOiItemModel)
+            '
+            'floFooter
+            '
+            Me.floFooter.BackColor = System.Drawing.Color.Transparent
+            Me.floFooter.Controls.Add(Me.btnViewGL)
+            resources.ApplyResources(Me.floFooter, "floFooter")
+            Me.floFooter.Name = "floFooter"
+            '
+            'btnViewGL
+            '
+            Me.btnViewGL.DesignerSelected = False
+            Me.btnViewGL.DisplayOnly = True
+            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+            Me.btnViewGL.ImageIndex = 0
+            Me.btnViewGL.Name = "btnViewGL"
+            Me.btnViewGL.OriginalImageName = Nothing
+            Me.btnViewGL.SecurityKey = ""
+            '
             'PettyCashJournalEntry
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floFullEntryArea)
+            Me.Controls.Add(Me.floFullEntryArea)
         Me.Name = "PettyCashJournalEntry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
