@@ -848,21 +848,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'End Sub
 
     Public Function MakeEnumComboList(Of TE)()
-        'If EnumConverter Is Nothing Then
-        '    EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-        'End If
         Dim dataList As New List(Of ClassesLibrary.LookupData)
-        'Dim enumValues = [Enum].GetValues(GetType(TE))
-        'Dim x As Object
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New ClassesLibrary.LookupData
-            'dim code As String
             data.IdNo = CInt(c)
-            'code = GlobalFunctions.GetDescription(c,"")
             data.Code = GetEnumCode(c)
-            'x = Adapter.GetEnumDescription(c)
-            'data.Code = Adaptor.GetEnumDescription(c)
-            data.Name = Messaging.TranslateCaption(c.ToString())
+            data.Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
             dataList.Add(data)
         Next
         Return dataList

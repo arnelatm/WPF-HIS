@@ -2,7 +2,7 @@
 Imports System.Runtime.CompilerServices
 Imports AATM.Libraries.GlobalFuncNSub
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum AccountGroupSelection
     <EnumCode(" ")> None
     <EnumCode("A")> Asset
@@ -13,7 +13,7 @@ Public Enum AccountGroupSelection
     <EnumCode("X")> Expense
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum AccountStatusSelection
     <EnumCode("O")> Open
     <EnumCode("E")> ExceededCreditLimit
@@ -24,7 +24,7 @@ Public Enum AccountStatusSelection
     <EnumCode("S")> SeeNote
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum PaymentTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("A")> AccountsPayable
@@ -34,7 +34,7 @@ Public Enum PaymentTypeSelection
     <EnumCode("O")> Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum ReceiptTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("A")> AccountsReceivable
@@ -44,14 +44,14 @@ Public Enum ReceiptTypeSelection
     <EnumCode("O")> Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum DebitCreditSelection
     <EnumCode("")> NotSpecified
     <EnumCode("D")> Debit
     <EnumCode("C")> Credit
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum DocumentTypeSelection
     NotSpecified
     Employee
@@ -62,7 +62,7 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum ImageTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("J")> Jpg
@@ -70,14 +70,14 @@ Public Enum ImageTypeSelection
     <EnumCode("B")> Bmp
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum MaleFemaleSelection
     <EnumCode("")> NotSpecified
     <EnumCode("M")> Male
     <EnumCode("F")> Female
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum MaritalStatusSelection
     <EnumCode("")> NotSpecified
     <EnumCode("S")> [Single]
@@ -86,7 +86,7 @@ Public Enum MaritalStatusSelection
     <EnumCode("D")> Divorced
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum PayeeTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("E")> Employee
@@ -95,7 +95,7 @@ Public Enum PayeeTypeSelection
     <EnumCode("O")> Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum PaymentMethodSelection
     <EnumCode("NO")> NotSpecified
     <EnumCode("CS")> Cash
@@ -111,7 +111,7 @@ Public Enum PaymentMethodSelection
     <EnumCode("OT")> Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum SpecialAccountSelection
     <EnumCode("")> None
     <EnumCode("AP")> AccountsPayable
@@ -133,7 +133,7 @@ Public Enum SpecialAccountSelection
     <EnumCode("VO")> VatOutput
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum TransactionTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("I")> Invoice
@@ -141,7 +141,7 @@ Public Enum TransactionTypeSelection
     <EnumCode("C")> Credit
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum YearMonthDaySelection
     <EnumCode("")> NotSpecified
     <EnumCode("Y")> Year
@@ -149,7 +149,7 @@ Public Enum YearMonthDaySelection
     <EnumCode("D")> Day
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum YesNoSelection
     <EnumCode("N")> No = False
     <EnumCode("Y")> Yes = True
