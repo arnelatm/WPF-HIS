@@ -15,14 +15,14 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum MaleFemaleSelection
-    None
+    NotSpecified
     Male
     Female
 End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum YearMonthDaySelection
-    None
+    NotSpecified
     Year
     Month
     Day
@@ -30,7 +30,7 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum DocumentTypeSelection
-    None
+    NotSpecified
     Employee
     Establishment
     Supplier
@@ -41,7 +41,7 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum PayeeTypeSelection
-    None
+    NotSpecified
     Employee
     Customer
     Supplier
@@ -58,7 +58,7 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum PaymentMethodSelection
-    None
+    NotSpecified
     Cash
     Check
     CreditCard
@@ -96,7 +96,7 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum DebitCreditSelection
-    None
+    NotSpecified
     Debit
     Credit
 End Enum
@@ -124,7 +124,7 @@ End Enum
 
 <TypeConverter(GetType(LocalizedEnumConverter))>
 Public Enum RcTypeSelection
-    <EnumCode("")> None
+    <EnumCode("")> NotSpecified
     <EnumCode("R")> Revenue
     <EnumCode("C")> Cost
     <EnumCode("B")> RevenueAndCost
@@ -136,7 +136,7 @@ Public Module Adapter
         Dim retValue As String
         Select Case value
             Case Nothing
-                retValue = MaleFemaleSelection.None
+                retValue = MaleFemaleSelection.NotSpecified
             Case "M"
                 retValue = MaleFemaleSelection.Male
             Case "F"
@@ -152,7 +152,7 @@ Public Module Adapter
         Select Case value
             Case Nothing
                 retValue = Nothing
-            Case MaleFemaleSelection.None
+            Case MaleFemaleSelection.NotSpecified
                 retValue = Nothing
             Case MaleFemaleSelection.Male
                 retValue = "M"
@@ -168,13 +168,13 @@ Public Module Adapter
         Dim retValue As String
         Select Case value
             Case Nothing
-                retValue = DebitCreditSelection.None
+                retValue = DebitCreditSelection.NotSpecified
             Case "D"
                 retValue = DebitCreditSelection.Debit
             Case "C"
                 retValue = DebitCreditSelection.Credit
             Case Else
-                retValue = DebitCreditSelection.None
+                retValue = DebitCreditSelection.NotSpecified
         End Select
         Return retValue
     End Function
@@ -188,7 +188,7 @@ Public Module Adapter
                 retValue = "D"
             Case DebitCreditSelection.Credit
                 retValue = "C"
-            Case DebitCreditSelection.None
+            Case DebitCreditSelection.NotSpecified
                 retValue = Nothing
             Case Else
                 retValue = Nothing
@@ -265,7 +265,7 @@ Public Module Adapter
         Dim retValue As String
         Select Case value
             Case Nothing
-                retValue = YearMonthDaySelection.None
+                retValue = YearMonthDaySelection.NotSpecified
             Case "D"
                 retValue = YearMonthDaySelection.Day
             Case "M"
@@ -273,7 +273,7 @@ Public Module Adapter
             Case "Y"
                 retValue = YearMonthDaySelection.Year
             Case Else
-                retValue = YearMonthDaySelection.None
+                retValue = YearMonthDaySelection.NotSpecified
         End Select
         Return retValue
     End Function
@@ -283,7 +283,7 @@ Public Module Adapter
         Select Case value
             Case Nothing
                 retValue = Nothing
-            Case YearMonthDaySelection.None
+            Case YearMonthDaySelection.NotSpecified
                 retValue = Nothing
             Case YearMonthDaySelection.Day
                 retValue = "D"
@@ -302,7 +302,7 @@ Public Module Adapter
         Select Case value
             Case Nothing
                 retValue = Nothing
-            Case DocumentTypeSelection.None
+            Case DocumentTypeSelection.NotSpecified
                 retValue = Nothing
             Case DocumentTypeSelection.Employee
                 retValue = "E"
@@ -425,7 +425,7 @@ Public Module Adapter
         Dim retValue As String
         Select Case value
             Case Nothing
-                retValue = PayeeTypeSelection.None
+                retValue = PayeeTypeSelection.NotSpecified
             Case "E"
                 retValue = PayeeTypeSelection.Employee
             Case "C"
@@ -435,7 +435,7 @@ Public Module Adapter
             Case "4"
                 retValue = PayeeTypeSelection.Others
             Case Else
-                retValue = PayeeTypeSelection.None
+                retValue = PayeeTypeSelection.NotSpecified
         End Select
         Return retValue
     End Function
@@ -465,7 +465,7 @@ Public Module Adapter
         Dim retValue As String
         Select Case value
             Case Nothing
-                retValue = PaymentMethodSelection.None
+                retValue = PaymentMethodSelection.NotSpecified
             Case "CS"
                 retValue = PaymentMethodSelection.Cash
             Case "CK"
@@ -489,7 +489,7 @@ Public Module Adapter
             Case "OT"
                 retValue = PaymentMethodSelection.Others
             Case Else
-                retValue = PaymentMethodSelection.None
+                retValue = PaymentMethodSelection.NotSpecified
         End Select
         Return retValue
     End Function
@@ -499,7 +499,7 @@ Public Module Adapter
         Select Case value
             Case Nothing
                 retValue = Nothing
-            Case PaymentMethodSelection.None
+            Case PaymentMethodSelection.NotSpecified
                 retValue = Nothing
             Case PaymentMethodSelection.Cash
                 retValue = "CS"
