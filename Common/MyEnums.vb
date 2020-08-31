@@ -1,26 +1,26 @@
 ﻿Imports System.ComponentModel
 Imports AATM.Libraries.GlobalFuncNSub
 
-'<TypeConverter(GetType(LocalizedEnumConverter))>
+'
 'Public Enum RevCostCenterTypeSelection
 '    <EnumCode("D")> Direct
 '    <EnumCode("S")> [Shared]
 'End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum YesNoSelection
     No = False
     Yes = True
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum MaleFemaleSelection
     NotSpecified
     Male
     Female
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum YearMonthDaySelection
     NotSpecified
     Year
@@ -28,7 +28,7 @@ Public Enum YearMonthDaySelection
     Day
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum DocumentTypeSelection
     NotSpecified
     Employee
@@ -39,7 +39,7 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum PayeeTypeSelection
     NotSpecified
     Employee
@@ -48,7 +48,7 @@ Public Enum PayeeTypeSelection
     Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum ImageTypeSelection
     None
     Jpg
@@ -56,7 +56,7 @@ Public Enum ImageTypeSelection
     Bmp
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum PaymentMethodSelection
     NotSpecified
     Cash
@@ -72,7 +72,7 @@ Public Enum PaymentMethodSelection
     Others
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum AccountStatusSelection
     Open
     ExceededCreditLimit
@@ -83,7 +83,7 @@ Public Enum AccountStatusSelection
     SeeNote
 End Enum
 
-'<TypeConverter(GetType(LocalizedEnumConverter))>
+'
 'Public Enum AccountGroupSelection
 '    None
 '    Asset
@@ -94,14 +94,14 @@ End Enum
 '    Expense
 'End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum DebitCreditSelection
     NotSpecified
     Debit
     Credit
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum DataTypeSelection
     BooleanType = 0
     ByteType = 1
@@ -122,7 +122,7 @@ Public Enum DataTypeSelection
     UShortType = 16
 End Enum
 
-<TypeConverter(GetType(LocalizedEnumConverter))>
+
 Public Enum RcTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("R")> Revenue

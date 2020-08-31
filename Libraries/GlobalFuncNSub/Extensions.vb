@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.Linq.Expressions
 Imports System.Runtime.CompilerServices
+Imports System.Text.RegularExpressions
 
 Public Module Extensions
     ' Declarations will typically be in a separate module.
@@ -124,6 +125,11 @@ Public Module Extensions
         Else
             Return 0D
         End If
+    End Function
+
+    <Extension()>
+    Public Function SplitCamelCase(ByVal str As String) As String
+        Return Regex.Replace(Regex.Replace(str, "(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), "(\p{Ll})(\P{Ll})", "$1 $2")
     End Function
 
     '<Extension()>

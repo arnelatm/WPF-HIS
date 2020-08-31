@@ -113,12 +113,4 @@ Namespace PresentationLayer.Forms
         Administrator3
     End Enum
 
-    Class LocalizedEnumConverter
-        Inherits ResourceEnumConverter
-
-        Public Sub New(type As Type)
-            MyBase.New(type, AATM.Common.My.Resources.ResourceManager)
-        End Sub
-
-    End Class
-End NameSpace
+End Namespace
