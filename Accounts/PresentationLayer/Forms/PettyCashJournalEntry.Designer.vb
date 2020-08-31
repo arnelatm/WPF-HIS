@@ -1166,7 +1166,7 @@ Namespace PresentationLayer.Forms
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floFullEntryArea)
-        Me.Name = "PettyCashJournalEntry"
+            Me.Name = "PettyCashJournalEntry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floFullEntryArea.ResumeLayout(false)
