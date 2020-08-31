@@ -45,6 +45,14 @@ Public Class ResourceEnumConverter
         Return result
     End Function
 
+    'Public Function GetValueText(culture As CultureInfo, value As Object) As String
+    '    Dim type As Type = value.[GetType]()
+    '    Dim resourceName As String = String.Format("{0}_{1}", type.Name, value.ToString())
+    '    Dim result As String = _resourceManager.GetString(resourceName, culture)
+    '    If result Is Nothing Then result = resourceName
+    '    Return result
+    'End Function
+
     'Public Function GetEValueText(culture As CultureInfo, value As Object) As String
     '    Dim type As Type = value.[GetType]()
     '    Dim resourceName As String = String.Format("{0}_{1}", type.Name, value.ToString())
