@@ -38,8 +38,6 @@ Namespace PresentationLayer.Presenters
             _pettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Chart", "SpecialAccount")
             If _pettyCashCount = 0 Then
                 Messaging.Show(True, "MsgNoPettyCashAccount")
-            Else
-                _defaultPettyCashAccount = GetRecordFieldWithKey("PC", "Chart", "SpecialAccount", "IdNo")
             End If
 
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
@@ -233,7 +231,6 @@ Namespace PresentationLayer.Presenters
             Else
                 View.PcsOiItems = New List(Of PcsOiItemView)
             End If
-            View.AccountIdNo = _defaultPettyCashAccount
 
         End Sub
 

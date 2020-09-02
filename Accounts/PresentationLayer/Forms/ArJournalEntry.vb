@@ -247,7 +247,6 @@ Namespace PresentationLayer.Forms
             cboAccountIdNo.EndUpdate()
         End Sub
 
-
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -378,7 +377,7 @@ Namespace PresentationLayer.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvcredit" Then
+                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -513,7 +512,6 @@ Namespace PresentationLayer.Forms
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If PresenterObj.ArCollectionExists("AR", jiIdNo) Then
-                    'ElseIf 
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
                     Messaging.Show(True, "MsgDeleteCollEntryNotAllowed")
                     ' Cancel the deletion
