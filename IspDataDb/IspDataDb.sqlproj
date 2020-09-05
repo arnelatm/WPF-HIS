@@ -326,6 +326,7 @@
     <Build Include="dbo\Views\ARInvoices_View.sql" />
     <Build Include="dbo\Views\ArOpenInvoice_Viewx.sql" />
     <Build Include="dbo\Views\ArCollections_View.sql" />
+    <Build Include="Security\iGroupAdmin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
