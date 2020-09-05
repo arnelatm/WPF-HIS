@@ -6,7 +6,6 @@ Namespace PresentationLayer.Views
         Inherits IView
         Property Active As Boolean
         Property ArAccountIdNo As Int32?
-        Property Balance As Decimal
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property BirthDate As Date?
