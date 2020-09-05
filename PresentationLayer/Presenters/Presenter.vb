@@ -514,14 +514,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-
     'Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
     '                                             returnFieldName As String) As T _
     '    Implements IModel.GetRecordFieldWithKeyG
     '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     'End Function
-
-
 
     Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
                                           returnFieldName As String) _
@@ -1356,6 +1353,5 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         Return retValue
     End Function
-
 
 End Class
