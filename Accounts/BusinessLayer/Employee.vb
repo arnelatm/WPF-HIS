@@ -44,6 +44,10 @@ Namespace BusinessLayer
         Public Property NationalityCode As String
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
+        Public Property PayFrequency As Char
+        Public Property PaySalariedOrHourly As Char
+        Public Property PayRateAmount As Decimal
+        Public Property PayRateType As Char
         Public Property Phone1 As String
         Public Property Phone2 As String
         Public Property PoBox As String

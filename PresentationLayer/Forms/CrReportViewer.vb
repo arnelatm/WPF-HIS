@@ -1,7 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Windows.Forms
 Imports CrystalDecisions.CrystalReports.Engine
-Imports CrystalDecisions.ReportAppServer.CommonControls
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrReportViewer
 
@@ -9,7 +9,7 @@ Public Class CrReportViewer
 
     Public Event OkButtonClicked()
 
-    Private myceLocale As CrystalDecisions.ReportAppServer.CommonControls.CeLocale
+    Private ReadOnly _myCeLocale As CeLocale
 
     Public Sub New()
 
@@ -18,16 +18,16 @@ Public Class CrReportViewer
 
         ' Add any initialization after the InitializeComponent() call.
 
-        Dim valArray As Array = [Enum].GetValues(GetType(CrystalDecisions.ReportAppServer.CommonControls.CeLocale))
+        Dim valArray As Array = [Enum].GetValues(GetType(CeLocale))
         Dim lstCeLocale As New ListBox
         For Each obj As Object In valArray
             lstCeLocale.Items.Add(obj)
         Next
 
-        myceLocale = CeLocale.ceLocaleArabicSaudiArabia
+        _myCeLocale = CeLocale.ceLocaleArabicSaudiArabia
 
         Try
-            Report.ReportClientDocument.LocaleID = CType(myceLocale, CrystalDecisions.ReportAppServer.DataDefModel.CeLocale)
+            Report.ReportClientDocument.LocaleID = _myCeLocale
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
@@ -43,7 +43,6 @@ Public Class CrReportViewer
         Dim server As String = ConfigurationManager.AppSettings.Get("SERVER")
         Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
         'Dim sqlCon As String = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
-        Dim sqlCon As String
 
         Report.Load(reportPaths & ReportFileName)
 

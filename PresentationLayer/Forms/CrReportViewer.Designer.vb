@@ -30,7 +30,7 @@ Partial Class CrReportViewer
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CrReportViewer))
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.CrystalReportViewer1 = New CrystalReportViewer()
         Me.btnQuit = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -81,7 +81,7 @@ Partial Class CrReportViewer
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
         Me.CrystalReportViewer1.Size = New System.Drawing.Size(353, 181)
         Me.CrystalReportViewer1.TabIndex = 2
-        Me.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+        Me.CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
         '
         'btnQuit
         '

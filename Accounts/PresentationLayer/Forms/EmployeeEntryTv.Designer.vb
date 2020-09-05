@@ -25,119 +25,123 @@ Namespace PresentationLayer.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
         Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpHiredDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpReleasedDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.lblArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpBirthDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.groupBoxContactInfo = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblPhone1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPhone1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPhone2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPhone2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtEmail = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.groupBoxAddress = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-        Me.floAddress = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtStreet = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDistrict = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDistrict = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblTownCity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTownCity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblProvinceState = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtProvinceState = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblPoBox = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.EmployeeTabControl = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
-        Me.tbpPersonal = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
-        Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
-        Me.tbpOthers = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.EmployeeModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floMainDisplay.SuspendLayout
-        Me.groupBoxContactInfo.SuspendLayout
-        Me.CFlowLayout1.SuspendLayout
-        Me.groupBoxAddress.SuspendLayout
-        Me.floAddress.SuspendLayout
-        Me.EmployeeTabControl.SuspendLayout
-        Me.tbpPersonal.SuspendLayout
-        Me.CFlowLayout3.SuspendLayout
-        Me.tbpContact.SuspendLayout
-        Me.tbpOthers.SuspendLayout
-        CType(Me.EmployeeModelBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout2.SuspendLayout
-        Me.CFlowLayout4.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.Location = New System.Drawing.Point(0, 0)
+            Me.lblArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayRateType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayRateType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpBirthDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.groupBoxContactInfo = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblPhone1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPhone1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPhone2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPhone2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEmail = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.groupBoxAddress = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+            Me.floAddress = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtStreet = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDistrict = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDistrict = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblTownCity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTownCity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblProvinceState = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtProvinceState = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPoBox = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.EmployeeTabControl = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
+            Me.tbpPersonal = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
+            Me.tbpEmployment = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout5 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpHiredDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpReleasedDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.EmployeeModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floMainDisplay.SuspendLayout()
+            Me.groupBoxContactInfo.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.groupBoxAddress.SuspendLayout()
+            Me.floAddress.SuspendLayout()
+            Me.EmployeeTabControl.SuspendLayout()
+            Me.tbpPersonal.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
+            Me.tbpContact.SuspendLayout()
+            Me.tbpEmployment.SuspendLayout()
+            Me.CFlowLayout5.SuspendLayout()
+            Me.tbpPayroll.SuspendLayout()
+            CType(Me.EmployeeModelBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout2.SuspendLayout()
+            Me.CFlowLayout4.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 645)
+            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 420)
             '
             'floMainDisplay
             '
             Me.floMainDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.floMainDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floMainDisplay.Controls.Add(Me.lblDepartmentIdNo)
-            Me.floMainDisplay.Controls.Add(Me.cacDepartmentIdNo)
-            Me.floMainDisplay.Controls.Add(Me.lblDesignationIdNo)
-            Me.floMainDisplay.Controls.Add(Me.cacDesignationIdNo)
-            Me.floMainDisplay.Controls.Add(Me.lblHiredDate)
-            Me.floMainDisplay.Controls.Add(Me.dtpHiredDate)
-            Me.floMainDisplay.Controls.Add(Me.lblReleasedDate)
-            Me.floMainDisplay.Controls.Add(Me.dtpReleasedDate)
             Me.floMainDisplay.Controls.Add(Me.lblArAccountIdNo)
             Me.floMainDisplay.Controls.Add(Me.cacArAccountIdNo)
             Me.floMainDisplay.Controls.Add(Me.lblBankIdNo)
@@ -150,204 +154,20 @@ Namespace PresentationLayer.Forms
             Me.floMainDisplay.Controls.Add(Me.txtOpeningBalance)
             Me.floMainDisplay.Controls.Add(Me.lblBalance)
             Me.floMainDisplay.Controls.Add(Me.txtBalance)
-            Me.floMainDisplay.Controls.Add(Me.lblNationalIdNo)
-            Me.floMainDisplay.Controls.Add(Me.txtNationalIdNo)
-            Me.floMainDisplay.Controls.Add(Me.lblActive)
-            Me.floMainDisplay.Controls.Add(Me.chkActive)
-            Me.floMainDisplay.Controls.Add(Me.lblNotes)
-            Me.floMainDisplay.Controls.Add(Me.txtNotes)
+            Me.floMainDisplay.Controls.Add(Me.lblPayFrequency)
+            Me.floMainDisplay.Controls.Add(Me.cboPayFrequency)
+            Me.floMainDisplay.Controls.Add(Me.lblPaySalariedOrHourly)
+            Me.floMainDisplay.Controls.Add(Me.cboPaySalariedOrHourly)
+            Me.floMainDisplay.Controls.Add(Me.lblPayRateType)
+            Me.floMainDisplay.Controls.Add(Me.cboPayRateType)
+            Me.floMainDisplay.Controls.Add(Me.lblPayRateAmount)
+            Me.floMainDisplay.Controls.Add(Me.txtPayRateAmount)
             Me.floMainDisplay.Location = New System.Drawing.Point(2, 2)
             Me.floMainDisplay.Margin = New System.Windows.Forms.Padding(0)
             Me.floMainDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floMainDisplay.Name = "floMainDisplay"
-            Me.floMainDisplay.Size = New System.Drawing.Size(812, 260)
+            Me.floMainDisplay.Size = New System.Drawing.Size(812, 285)
             Me.floMainDisplay.TabIndex = 3
-            '
-            'lblDepartmentIdNo
-            '
-            Me.lblDepartmentIdNo.DisplayOnly = True
-            Me.lblDepartmentIdNo.EditingMode = False
-            Me.lblDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblDepartmentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDepartmentIdNo.Location = New System.Drawing.Point(1, 1)
-            Me.lblDepartmentIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblDepartmentIdNo.Name = "lblDepartmentIdNo"
-            Me.lblDepartmentIdNo.Size = New System.Drawing.Size(174, 24)
-            Me.lblDepartmentIdNo.TabIndex = 253
-            Me.lblDepartmentIdNo.Text = "Department"
-            Me.lblDepartmentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'cacDepartmentIdNo
-            '
-            Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
-            Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
-            Me.cacDepartmentIdNo.CurrentSearchTerm = ""
-            Me.cacDepartmentIdNo.DefaultValue = Nothing
-            Me.cacDepartmentIdNo.DisplayMember = "Name"
-            Me.cacDepartmentIdNo.DropDownHeight = 1
-            Me.cacDepartmentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cacDepartmentIdNo.EditingMode = False
-            Me.cacDepartmentIdNo.FilterRule = Nothing
-            Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacDepartmentIdNo.FormattingEnabled = True
-            Me.cacDepartmentIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacDepartmentIdNo.IntegralHeight = False
-            Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
-            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(176, 1)
-            Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
-            Me.cacDepartmentIdNo.OldValue = 0
-            Me.cacDepartmentIdNo.OriginalDataSource = Nothing
-            Me.cacDepartmentIdNo.OriginalList = Nothing
-            Me.cacDepartmentIdNo.OverrideDropDownStyleList = False
-            Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
-            Me.cacDepartmentIdNo.PreviousSelectedIndex = -1
-            Me.cacDepartmentIdNo.PropertySelector = Nothing
-            Me.cacDepartmentIdNo.ReadOnlyCombo = False
-            Me.cacDepartmentIdNo.SearchAnywhere = False
-            Me.cacDepartmentIdNo.Size = New System.Drawing.Size(279, 24)
-            Me.cacDepartmentIdNo.SuggestBoxHeight = 200
-            Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
-            Me.cacDepartmentIdNo.TabIndex = 19
-            Me.cacDepartmentIdNo.TextToSearch = Nothing
-            Me.cacDepartmentIdNo.ValueIsMandatory = False
-            Me.cacDepartmentIdNo.ValueIsNullable = False
-            Me.cacDepartmentIdNo.ValueIsNumeric = False
-            Me.cacDepartmentIdNo.ValueMember = "IdNo"
-            '
-            'lblDesignationIdNo
-            '
-            Me.lblDesignationIdNo.DisplayOnly = True
-            Me.lblDesignationIdNo.EditingMode = False
-            Me.lblDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblDesignationIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDesignationIdNo.Location = New System.Drawing.Point(456, 1)
-            Me.lblDesignationIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblDesignationIdNo.Name = "lblDesignationIdNo"
-            Me.lblDesignationIdNo.Size = New System.Drawing.Size(116, 24)
-            Me.lblDesignationIdNo.TabIndex = 254
-            Me.lblDesignationIdNo.Text = "Designation"
-            Me.lblDesignationIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'cacDesignationIdNo
-            '
-            Me.cacDesignationIdNo.BackColor = System.Drawing.Color.White
-            Me.cacDesignationIdNo.ChangingSearchValueOnly = False
-            Me.cacDesignationIdNo.CurrentSearchTerm = ""
-            Me.cacDesignationIdNo.DefaultValue = Nothing
-            Me.cacDesignationIdNo.DisplayMember = "Name"
-            Me.cacDesignationIdNo.DropDownHeight = 1
-            Me.cacDesignationIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cacDesignationIdNo.EditingMode = False
-            Me.cacDesignationIdNo.FilterRule = Nothing
-            Me.floMainDisplay.SetFlowBreak(Me.cacDesignationIdNo, True)
-            Me.cacDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacDesignationIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacDesignationIdNo.FormattingEnabled = True
-            Me.cacDesignationIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacDesignationIdNo.IntegralHeight = False
-            Me.cacDesignationIdNo.LinkedLabel = Me.lblDesignationIdNo
-            Me.cacDesignationIdNo.Location = New System.Drawing.Point(573, 1)
-            Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
-            Me.cacDesignationIdNo.OldValue = 0
-            Me.cacDesignationIdNo.OriginalDataSource = Nothing
-            Me.cacDesignationIdNo.OriginalList = Nothing
-            Me.cacDesignationIdNo.OverrideDropDownStyleList = False
-            Me.cacDesignationIdNo.PreviousSearchTerm = Nothing
-            Me.cacDesignationIdNo.PreviousSelectedIndex = -1
-            Me.cacDesignationIdNo.PropertySelector = Nothing
-            Me.cacDesignationIdNo.ReadOnlyCombo = False
-            Me.cacDesignationIdNo.SearchAnywhere = False
-            Me.cacDesignationIdNo.Size = New System.Drawing.Size(223, 24)
-            Me.cacDesignationIdNo.SuggestBoxHeight = 200
-            Me.cacDesignationIdNo.SuggestListOrderRule = Nothing
-            Me.cacDesignationIdNo.TabIndex = 20
-            Me.cacDesignationIdNo.TextToSearch = Nothing
-            Me.cacDesignationIdNo.ValueIsMandatory = False
-            Me.cacDesignationIdNo.ValueIsNullable = False
-            Me.cacDesignationIdNo.ValueIsNumeric = False
-            Me.cacDesignationIdNo.ValueMember = "IdNo"
-            '
-            'lblHiredDate
-            '
-            Me.lblHiredDate.DisplayOnly = True
-            Me.lblHiredDate.EditingMode = False
-            Me.lblHiredDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblHiredDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblHiredDate.Location = New System.Drawing.Point(1, 27)
-            Me.lblHiredDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblHiredDate.Name = "lblHiredDate"
-            Me.lblHiredDate.Size = New System.Drawing.Size(174, 24)
-            Me.lblHiredDate.TabIndex = 255
-            Me.lblHiredDate.Text = "Hired Date"
-            Me.lblHiredDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'dtpHiredDate
-            '
-            Me.dtpHiredDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpHiredDate.DefaultValue = Nothing
-            Me.dtpHiredDate.DisplayOnly = False
-            Me.dtpHiredDate.DtpDefaultValue = Nothing
-            Me.dtpHiredDate.EditingMode = False
-            Me.dtpHiredDate.EditsAllowed = False
-            Me.dtpHiredDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
-            Me.dtpHiredDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpHiredDate.LinkedLabel = Me.lblHiredDate
-            Me.dtpHiredDate.Location = New System.Drawing.Point(176, 26)
-            Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpHiredDate.Name = "dtpHiredDate"
-            Me.dtpHiredDate.ReadOnlyDp = False
-            Me.dtpHiredDate.SecurityKey = Nothing
-            Me.dtpHiredDate.ShowLongDate = False
-            Me.dtpHiredDate.ShowTime = False
-            Me.dtpHiredDate.Size = New System.Drawing.Size(123, 24)
-            Me.dtpHiredDate.TabIndex = 21
-            Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpHiredDate.Value = Nothing
-            Me.dtpHiredDate.ValueIsMandatory = False
-            Me.dtpHiredDate.ValueIsNullable = False
-            '
-            'lblReleasedDate
-            '
-            Me.lblReleasedDate.DisplayOnly = True
-            Me.lblReleasedDate.EditingMode = False
-            Me.lblReleasedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblReleasedDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReleasedDate.Location = New System.Drawing.Point(300, 27)
-            Me.lblReleasedDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblReleasedDate.Name = "lblReleasedDate"
-            Me.lblReleasedDate.Size = New System.Drawing.Size(273, 24)
-            Me.lblReleasedDate.TabIndex = 257
-            Me.lblReleasedDate.Text = "Released Date"
-            Me.lblReleasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'dtpReleasedDate
-            '
-            Me.dtpReleasedDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpReleasedDate.DefaultValue = Nothing
-            Me.dtpReleasedDate.DisplayOnly = False
-            Me.dtpReleasedDate.DtpDefaultValue = Nothing
-            Me.dtpReleasedDate.EditingMode = False
-            Me.dtpReleasedDate.EditsAllowed = False
-            Me.floMainDisplay.SetFlowBreak(Me.dtpReleasedDate, True)
-            Me.dtpReleasedDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
-            Me.dtpReleasedDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpReleasedDate.LinkedLabel = Me.lblReleasedDate
-            Me.dtpReleasedDate.Location = New System.Drawing.Point(574, 26)
-            Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpReleasedDate.Name = "dtpReleasedDate"
-            Me.dtpReleasedDate.ReadOnlyDp = False
-            Me.dtpReleasedDate.SecurityKey = Nothing
-            Me.dtpReleasedDate.ShowLongDate = False
-            Me.dtpReleasedDate.ShowTime = False
-            Me.dtpReleasedDate.Size = New System.Drawing.Size(123, 24)
-            Me.dtpReleasedDate.TabIndex = 22
-            Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpReleasedDate.Value = Nothing
-            Me.dtpReleasedDate.ValueIsMandatory = False
-            Me.dtpReleasedDate.ValueIsNullable = False
             '
             'lblArAccountIdNo
             '
@@ -355,10 +175,10 @@ Namespace PresentationLayer.Forms
             Me.lblArAccountIdNo.EditingMode = False
             Me.lblArAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblArAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblArAccountIdNo.Location = New System.Drawing.Point(1, 53)
+            Me.lblArAccountIdNo.Location = New System.Drawing.Point(1, 1)
             Me.lblArAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblArAccountIdNo.Name = "lblArAccountIdNo"
-            Me.lblArAccountIdNo.Size = New System.Drawing.Size(174, 23)
+            Me.lblArAccountIdNo.Size = New System.Drawing.Size(185, 23)
             Me.lblArAccountIdNo.TabIndex = 234
             Me.lblArAccountIdNo.Text = "Override AR Account"
             Me.lblArAccountIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -381,7 +201,7 @@ Namespace PresentationLayer.Forms
             Me.cacArAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cacArAccountIdNo.IntegralHeight = False
             Me.cacArAccountIdNo.LinkedLabel = Me.lblArAccountIdNo
-            Me.cacArAccountIdNo.Location = New System.Drawing.Point(176, 53)
+            Me.cacArAccountIdNo.Location = New System.Drawing.Point(187, 1)
             Me.cacArAccountIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacArAccountIdNo.Name = "cacArAccountIdNo"
             Me.cacArAccountIdNo.OldValue = 0
@@ -396,7 +216,7 @@ Namespace PresentationLayer.Forms
             Me.cacArAccountIdNo.Size = New System.Drawing.Size(621, 24)
             Me.cacArAccountIdNo.SuggestBoxHeight = 200
             Me.cacArAccountIdNo.SuggestListOrderRule = Nothing
-            Me.cacArAccountIdNo.TabIndex = 23
+            Me.cacArAccountIdNo.TabIndex = 1
             Me.cacArAccountIdNo.TextToSearch = Nothing
             Me.cacArAccountIdNo.ValueIsMandatory = False
             Me.cacArAccountIdNo.ValueIsNullable = False
@@ -409,10 +229,10 @@ Namespace PresentationLayer.Forms
             Me.lblBankIdNo.EditingMode = False
             Me.lblBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBankIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBankIdNo.Location = New System.Drawing.Point(1, 79)
+            Me.lblBankIdNo.Location = New System.Drawing.Point(1, 27)
             Me.lblBankIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBankIdNo.Name = "lblBankIdNo"
-            Me.lblBankIdNo.Size = New System.Drawing.Size(174, 23)
+            Me.lblBankIdNo.Size = New System.Drawing.Size(185, 23)
             Me.lblBankIdNo.TabIndex = 216
             Me.lblBankIdNo.Text = "Bank Name"
             Me.lblBankIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -428,13 +248,14 @@ Namespace PresentationLayer.Forms
             Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cacBankIdNo.EditingMode = False
             Me.cacBankIdNo.FilterRule = Nothing
+            Me.floMainDisplay.SetFlowBreak(Me.cacBankIdNo, True)
             Me.cacBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacBankIdNo.ForeColor = System.Drawing.Color.Black
             Me.cacBankIdNo.FormattingEnabled = True
             Me.cacBankIdNo.HideWhenNotEditingOrAdding = False
             Me.cacBankIdNo.IntegralHeight = False
             Me.cacBankIdNo.LinkedLabel = Me.lblBankIdNo
-            Me.cacBankIdNo.Location = New System.Drawing.Point(176, 79)
+            Me.cacBankIdNo.Location = New System.Drawing.Point(187, 27)
             Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacBankIdNo.Name = "cacBankIdNo"
             Me.cacBankIdNo.OldValue = 0
@@ -449,7 +270,7 @@ Namespace PresentationLayer.Forms
             Me.cacBankIdNo.Size = New System.Drawing.Size(279, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
-            Me.cacBankIdNo.TabIndex = 24
+            Me.cacBankIdNo.TabIndex = 2
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.ValueIsMandatory = False
             Me.cacBankIdNo.ValueIsNullable = False
@@ -462,13 +283,13 @@ Namespace PresentationLayer.Forms
             Me.lblBankAccountNo.EditingMode = False
             Me.lblBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBankAccountNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBankAccountNo.Location = New System.Drawing.Point(456, 79)
+            Me.lblBankAccountNo.Location = New System.Drawing.Point(1, 53)
             Me.lblBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBankAccountNo.Name = "lblBankAccountNo"
-            Me.lblBankAccountNo.Size = New System.Drawing.Size(116, 23)
+            Me.lblBankAccountNo.Size = New System.Drawing.Size(185, 23)
             Me.lblBankAccountNo.TabIndex = 218
             Me.lblBankAccountNo.Text = "Account No."
-            Me.lblBankAccountNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblBankAccountNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'txtBankAccountNo
             '
@@ -482,15 +303,15 @@ Namespace PresentationLayer.Forms
             Me.txtBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBankAccountNo.ForeColor = System.Drawing.Color.Black
             Me.txtBankAccountNo.LinkedLabel = Me.lblBankAccountNo
-            Me.txtBankAccountNo.Location = New System.Drawing.Point(574, 79)
+            Me.txtBankAccountNo.Location = New System.Drawing.Point(188, 53)
             Me.txtBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBankAccountNo.MaximumValue = Nothing
             Me.txtBankAccountNo.MinimumValue = Nothing
             Me.txtBankAccountNo.Name = "txtBankAccountNo"
             Me.txtBankAccountNo.OldValue = Nothing
             Me.txtBankAccountNo.ReadOnly = True
-            Me.txtBankAccountNo.Size = New System.Drawing.Size(222, 23)
-            Me.txtBankAccountNo.TabIndex = 25
+            Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
+            Me.txtBankAccountNo.TabIndex = 3
             '
             'lblIban
             '
@@ -498,10 +319,10 @@ Namespace PresentationLayer.Forms
             Me.lblIban.EditingMode = False
             Me.lblIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblIban.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblIban.Location = New System.Drawing.Point(1, 105)
+            Me.lblIban.Location = New System.Drawing.Point(1, 78)
             Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIban.Name = "lblIban"
-            Me.lblIban.Size = New System.Drawing.Size(174, 23)
+            Me.lblIban.Size = New System.Drawing.Size(185, 23)
             Me.lblIban.TabIndex = 220
             Me.lblIban.Text = "IBAN Number"
             Me.lblIban.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -518,7 +339,7 @@ Namespace PresentationLayer.Forms
             Me.txtIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtIban.ForeColor = System.Drawing.Color.Black
             Me.txtIban.LinkedLabel = Me.lblIban
-            Me.txtIban.Location = New System.Drawing.Point(177, 105)
+            Me.txtIban.Location = New System.Drawing.Point(188, 78)
             Me.txtIban.Margin = New System.Windows.Forms.Padding(1)
             Me.txtIban.MaximumValue = Nothing
             Me.txtIban.MinimumValue = Nothing
@@ -526,7 +347,7 @@ Namespace PresentationLayer.Forms
             Me.txtIban.OldValue = Nothing
             Me.txtIban.ReadOnly = True
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
-            Me.txtIban.TabIndex = 26
+            Me.txtIban.TabIndex = 4
             '
             'lblOpeningBalance
             '
@@ -534,12 +355,12 @@ Namespace PresentationLayer.Forms
             Me.lblOpeningBalance.EditingMode = False
             Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 130)
+            Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 103)
             Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblOpeningBalance.Name = "lblOpeningBalance"
-            Me.lblOpeningBalance.Size = New System.Drawing.Size(174, 23)
-            Me.lblOpeningBalance.TabIndex = 30
-            Me.lblOpeningBalance.Text = "Opening Balance"
+            Me.lblOpeningBalance.Size = New System.Drawing.Size(185, 23)
+            Me.lblOpeningBalance.TabIndex = 284
+            Me.lblOpeningBalance.Text = "Open. Bal. (Cash Adv.)"
             Me.lblOpeningBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'txtOpeningBalance
@@ -550,10 +371,11 @@ Namespace PresentationLayer.Forms
             Me.txtOpeningBalance.CustomFormat = Nothing
             Me.txtOpeningBalance.DataBoundControl = True
             Me.txtOpeningBalance.EditingMode = False
+            Me.floMainDisplay.SetFlowBreak(Me.txtOpeningBalance, True)
             Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
             Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-            Me.txtOpeningBalance.Location = New System.Drawing.Point(177, 130)
+            Me.txtOpeningBalance.Location = New System.Drawing.Point(188, 103)
             Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtOpeningBalance.MaximumValue = Nothing
             Me.txtOpeningBalance.MinimumValue = Nothing
@@ -561,7 +383,7 @@ Namespace PresentationLayer.Forms
             Me.txtOpeningBalance.OldValue = Nothing
             Me.txtOpeningBalance.ReadOnly = True
             Me.txtOpeningBalance.Size = New System.Drawing.Size(200, 23)
-            Me.txtOpeningBalance.TabIndex = 27
+            Me.txtOpeningBalance.TabIndex = 5
             Me.txtOpeningBalance.ValueIsNumeric = True
             '
             'lblBalance
@@ -570,13 +392,13 @@ Namespace PresentationLayer.Forms
             Me.lblBalance.EditingMode = False
             Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBalance.Location = New System.Drawing.Point(379, 130)
+            Me.lblBalance.Location = New System.Drawing.Point(1, 128)
             Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBalance.Name = "lblBalance"
-            Me.lblBalance.Size = New System.Drawing.Size(194, 23)
-            Me.lblBalance.TabIndex = 259
+            Me.lblBalance.Size = New System.Drawing.Size(185, 23)
+            Me.lblBalance.TabIndex = 285
             Me.lblBalance.Text = "Cash Advance Balance"
-            Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'txtBalance
             '
@@ -591,124 +413,215 @@ Namespace PresentationLayer.Forms
             Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBalance.ForeColor = System.Drawing.Color.Black
             Me.txtBalance.LinkedLabel = Me.lblBalance
-            Me.txtBalance.Location = New System.Drawing.Point(575, 130)
+            Me.txtBalance.Location = New System.Drawing.Point(188, 128)
             Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBalance.MaximumValue = Nothing
             Me.txtBalance.MinimumValue = Nothing
             Me.txtBalance.Name = "txtBalance"
             Me.txtBalance.OldValue = Nothing
             Me.txtBalance.ReadOnly = True
-            Me.txtBalance.Size = New System.Drawing.Size(222, 23)
-            Me.txtBalance.TabIndex = 28
+            Me.txtBalance.Size = New System.Drawing.Size(200, 23)
+            Me.txtBalance.TabIndex = 6
             Me.txtBalance.ValueIsNumeric = True
             '
-            'lblNationalIdNo
+            'lblPayFrequency
             '
-            Me.lblNationalIdNo.DisplayOnly = True
-            Me.lblNationalIdNo.EditingMode = False
-            Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 155)
-            Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblNationalIdNo.Name = "lblNationalIdNo"
-            Me.lblNationalIdNo.Size = New System.Drawing.Size(174, 23)
-            Me.lblNationalIdNo.TabIndex = 261
-            Me.lblNationalIdNo.Text = "National ID/Iqama #"
-            Me.lblNationalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayFrequency.DisplayOnly = True
+            Me.lblPayFrequency.EditingMode = False
+            Me.lblPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayFrequency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPayFrequency.Location = New System.Drawing.Point(1, 153)
+            Me.lblPayFrequency.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayFrequency.Name = "lblPayFrequency"
+            Me.lblPayFrequency.Size = New System.Drawing.Size(185, 23)
+            Me.lblPayFrequency.TabIndex = 286
+            Me.lblPayFrequency.Text = "Pay Frequency"
+            Me.lblPayFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtNationalIdNo
+            'cboPayFrequency
             '
-            Me.txtNationalIdNo.BackColor = System.Drawing.Color.White
-            Me.txtNationalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNationalIdNo.ComputedValue = False
-            Me.txtNationalIdNo.CustomFormat = Nothing
-            Me.txtNationalIdNo.DataBoundControl = True
-            Me.txtNationalIdNo.EditingMode = False
-            Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
-            Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
-            Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 155)
-            Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtNationalIdNo.MaximumValue = Nothing
-            Me.txtNationalIdNo.MinimumValue = Nothing
-            Me.txtNationalIdNo.Name = "txtNationalIdNo"
-            Me.txtNationalIdNo.OldValue = Nothing
-            Me.txtNationalIdNo.ReadOnly = True
-            Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
-            Me.txtNationalIdNo.TabIndex = 29
+            Me.cboPayFrequency.BackColor = System.Drawing.Color.White
+            Me.cboPayFrequency.ChangingSearchValueOnly = False
+            Me.cboPayFrequency.CurrentSearchTerm = ""
+            Me.cboPayFrequency.DefaultValue = Nothing
+            Me.cboPayFrequency.DisplayMember = "Name"
+            Me.cboPayFrequency.DropDownHeight = 1
+            Me.cboPayFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayFrequency.EditingMode = False
+            Me.cboPayFrequency.FilterRule = Nothing
+            Me.floMainDisplay.SetFlowBreak(Me.cboPayFrequency, True)
+            Me.cboPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayFrequency.ForeColor = System.Drawing.Color.Black
+            Me.cboPayFrequency.FormattingEnabled = True
+            Me.cboPayFrequency.HideWhenNotEditingOrAdding = False
+            Me.cboPayFrequency.IntegralHeight = False
+            Me.cboPayFrequency.LinkedLabel = Me.lblPayFrequency
+            Me.cboPayFrequency.Location = New System.Drawing.Point(187, 153)
+            Me.cboPayFrequency.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPayFrequency.Name = "cboPayFrequency"
+            Me.cboPayFrequency.OldValue = 0
+            Me.cboPayFrequency.OriginalDataSource = Nothing
+            Me.cboPayFrequency.OriginalList = Nothing
+            Me.cboPayFrequency.OverrideDropDownStyleList = False
+            Me.cboPayFrequency.PreviousSearchTerm = Nothing
+            Me.cboPayFrequency.PreviousSelectedIndex = -1
+            Me.cboPayFrequency.PropertySelector = Nothing
+            Me.cboPayFrequency.ReadOnlyCombo = False
+            Me.cboPayFrequency.SearchAnywhere = False
+            Me.cboPayFrequency.Size = New System.Drawing.Size(201, 24)
+            Me.cboPayFrequency.SuggestBoxHeight = 200
+            Me.cboPayFrequency.SuggestListOrderRule = Nothing
+            Me.cboPayFrequency.TabIndex = 7
+            Me.cboPayFrequency.TextToSearch = Nothing
+            Me.cboPayFrequency.ValueIsMandatory = False
+            Me.cboPayFrequency.ValueIsNullable = False
+            Me.cboPayFrequency.ValueIsNumeric = False
+            Me.cboPayFrequency.ValueMember = "IdNo"
             '
-            'lblActive
+            'lblPaySalariedOrHourly
             '
-            Me.lblActive.DisplayOnly = True
-            Me.lblActive.EditingMode = False
-            Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActive.Location = New System.Drawing.Point(379, 155)
-            Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblActive.Name = "lblActive"
-            Me.lblActive.Size = New System.Drawing.Size(194, 24)
-            Me.lblActive.TabIndex = 241
-            Me.lblActive.Text = "Active?"
-            Me.lblActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblPaySalariedOrHourly.DisplayOnly = True
+            Me.lblPaySalariedOrHourly.EditingMode = False
+            Me.lblPaySalariedOrHourly.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPaySalariedOrHourly.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPaySalariedOrHourly.Location = New System.Drawing.Point(1, 179)
+            Me.lblPaySalariedOrHourly.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPaySalariedOrHourly.Name = "lblPaySalariedOrHourly"
+            Me.lblPaySalariedOrHourly.Size = New System.Drawing.Size(185, 23)
+            Me.lblPaySalariedOrHourly.TabIndex = 287
+            Me.lblPaySalariedOrHourly.Text = "Salaried or Hourly"
+            Me.lblPaySalariedOrHourly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'chkActive
+            'cboPaySalariedOrHourly
             '
-            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
-            Me.chkActive.AutoCheck = False
-            Me.chkActive.BackColor = System.Drawing.Color.White
-            Me.chkActive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkActive.DisplayOnly = False
-            Me.chkActive.EditingMode = False
-            Me.chkActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.floMainDisplay.SetFlowBreak(Me.chkActive, True)
-            Me.chkActive.ForeColor = System.Drawing.Color.Black
-            Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Location = New System.Drawing.Point(575, 155)
-            Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkActive.Name = "chkActive"
-            Me.chkActive.OldValue = Nothing
-            Me.chkActive.Size = New System.Drawing.Size(25, 21)
-            Me.chkActive.TabIndex = 30
-            Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkActive.UseVisualStyleBackColor = True
+            Me.cboPaySalariedOrHourly.BackColor = System.Drawing.Color.White
+            Me.cboPaySalariedOrHourly.ChangingSearchValueOnly = False
+            Me.cboPaySalariedOrHourly.CurrentSearchTerm = ""
+            Me.cboPaySalariedOrHourly.DefaultValue = Nothing
+            Me.cboPaySalariedOrHourly.DisplayMember = "Name"
+            Me.cboPaySalariedOrHourly.DropDownHeight = 1
+            Me.cboPaySalariedOrHourly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPaySalariedOrHourly.EditingMode = False
+            Me.cboPaySalariedOrHourly.FilterRule = Nothing
+            Me.floMainDisplay.SetFlowBreak(Me.cboPaySalariedOrHourly, True)
+            Me.cboPaySalariedOrHourly.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPaySalariedOrHourly.ForeColor = System.Drawing.Color.Black
+            Me.cboPaySalariedOrHourly.FormattingEnabled = True
+            Me.cboPaySalariedOrHourly.HideWhenNotEditingOrAdding = False
+            Me.cboPaySalariedOrHourly.IntegralHeight = False
+            Me.cboPaySalariedOrHourly.LinkedLabel = Me.lblPaySalariedOrHourly
+            Me.cboPaySalariedOrHourly.Location = New System.Drawing.Point(187, 179)
+            Me.cboPaySalariedOrHourly.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPaySalariedOrHourly.Name = "cboPaySalariedOrHourly"
+            Me.cboPaySalariedOrHourly.OldValue = 0
+            Me.cboPaySalariedOrHourly.OriginalDataSource = Nothing
+            Me.cboPaySalariedOrHourly.OriginalList = Nothing
+            Me.cboPaySalariedOrHourly.OverrideDropDownStyleList = False
+            Me.cboPaySalariedOrHourly.PreviousSearchTerm = Nothing
+            Me.cboPaySalariedOrHourly.PreviousSelectedIndex = -1
+            Me.cboPaySalariedOrHourly.PropertySelector = Nothing
+            Me.cboPaySalariedOrHourly.ReadOnlyCombo = False
+            Me.cboPaySalariedOrHourly.SearchAnywhere = False
+            Me.cboPaySalariedOrHourly.Size = New System.Drawing.Size(201, 24)
+            Me.cboPaySalariedOrHourly.SuggestBoxHeight = 200
+            Me.cboPaySalariedOrHourly.SuggestListOrderRule = Nothing
+            Me.cboPaySalariedOrHourly.TabIndex = 8
+            Me.cboPaySalariedOrHourly.TextToSearch = Nothing
+            Me.cboPaySalariedOrHourly.ValueIsMandatory = False
+            Me.cboPaySalariedOrHourly.ValueIsNullable = False
+            Me.cboPaySalariedOrHourly.ValueIsNumeric = False
+            Me.cboPaySalariedOrHourly.ValueMember = "IdNo"
             '
-            'lblNotes
+            'lblPayRateType
             '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(1, 181)
-            Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Size = New System.Drawing.Size(174, 23)
-            Me.lblNotes.TabIndex = 159
-            Me.lblNotes.Text = "Notes"
-            Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayRateType.DisplayOnly = True
+            Me.lblPayRateType.EditingMode = False
+            Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPayRateType.Location = New System.Drawing.Point(1, 206)
+            Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayRateType.Name = "lblPayRateType"
+            Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
+            Me.lblPayRateType.TabIndex = 288
+            Me.lblPayRateType.Text = "Pay Rate Type"
+            Me.lblPayRateType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtNotes
+            'cboPayRateType
             '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = False
-            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Me.lblNotes
-            Me.txtNotes.Location = New System.Drawing.Point(177, 181)
-            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Multiline = True
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.Size = New System.Drawing.Size(620, 60)
-            Me.txtNotes.TabIndex = 35
-            Me.txtNotes.ValueIsMandatory = True
+            Me.cboPayRateType.BackColor = System.Drawing.Color.White
+            Me.cboPayRateType.ChangingSearchValueOnly = False
+            Me.cboPayRateType.CurrentSearchTerm = ""
+            Me.cboPayRateType.DefaultValue = Nothing
+            Me.cboPayRateType.DisplayMember = "Name"
+            Me.cboPayRateType.DropDownHeight = 1
+            Me.cboPayRateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayRateType.EditingMode = False
+            Me.cboPayRateType.FilterRule = Nothing
+            Me.floMainDisplay.SetFlowBreak(Me.cboPayRateType, True)
+            Me.cboPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayRateType.ForeColor = System.Drawing.Color.Black
+            Me.cboPayRateType.FormattingEnabled = True
+            Me.cboPayRateType.HideWhenNotEditingOrAdding = False
+            Me.cboPayRateType.IntegralHeight = False
+            Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
+            Me.cboPayRateType.Location = New System.Drawing.Point(187, 206)
+            Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPayRateType.Name = "cboPayRateType"
+            Me.cboPayRateType.OldValue = 0
+            Me.cboPayRateType.OriginalDataSource = Nothing
+            Me.cboPayRateType.OriginalList = Nothing
+            Me.cboPayRateType.OverrideDropDownStyleList = False
+            Me.cboPayRateType.PreviousSearchTerm = Nothing
+            Me.cboPayRateType.PreviousSelectedIndex = -1
+            Me.cboPayRateType.PropertySelector = Nothing
+            Me.cboPayRateType.ReadOnlyCombo = False
+            Me.cboPayRateType.SearchAnywhere = False
+            Me.cboPayRateType.Size = New System.Drawing.Size(201, 24)
+            Me.cboPayRateType.SuggestBoxHeight = 200
+            Me.cboPayRateType.SuggestListOrderRule = Nothing
+            Me.cboPayRateType.TabIndex = 9
+            Me.cboPayRateType.TextToSearch = Nothing
+            Me.cboPayRateType.ValueIsMandatory = False
+            Me.cboPayRateType.ValueIsNullable = False
+            Me.cboPayRateType.ValueIsNumeric = False
+            Me.cboPayRateType.ValueMember = "IdNo"
+            '
+            'lblPayRateAmount
+            '
+            Me.lblPayRateAmount.DisplayOnly = True
+            Me.lblPayRateAmount.EditingMode = False
+            Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(1, 233)
+            Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayRateAmount.Name = "lblPayRateAmount"
+            Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
+            Me.lblPayRateAmount.TabIndex = 292
+            Me.lblPayRateAmount.Text = "Pay Rate Amount"
+            Me.lblPayRateAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtPayRateAmount
+            '
+            Me.txtPayRateAmount.BackColor = System.Drawing.Color.White
+            Me.txtPayRateAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayRateAmount.ComputedValue = False
+            Me.txtPayRateAmount.CustomFormat = Nothing
+            Me.txtPayRateAmount.DataBoundControl = True
+            Me.txtPayRateAmount.EditingMode = False
+            Me.floMainDisplay.SetFlowBreak(Me.txtPayRateAmount, True)
+            Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(188, 233)
+            Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayRateAmount.MaximumValue = Nothing
+            Me.txtPayRateAmount.MinimumValue = Nothing
+            Me.txtPayRateAmount.Name = "txtPayRateAmount"
+            Me.txtPayRateAmount.OldValue = Nothing
+            Me.txtPayRateAmount.Size = New System.Drawing.Size(200, 23)
+            Me.txtPayRateAmount.TabIndex = 10
+            Me.txtPayRateAmount.TabStop = False
+            Me.txtPayRateAmount.ValueIsNumeric = True
             '
             'lblEmployeeName
             '
@@ -809,7 +722,7 @@ Namespace PresentationLayer.Forms
             Me.lblBirthDate.Location = New System.Drawing.Point(1, 105)
             Me.lblBirthDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBirthDate.Name = "lblBirthDate"
-            Me.lblBirthDate.Size = New System.Drawing.Size(175, 23)
+            Me.lblBirthDate.Size = New System.Drawing.Size(174, 23)
             Me.lblBirthDate.TabIndex = 185
             Me.lblBirthDate.Text = "Date of Birth"
             Me.lblBirthDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -826,7 +739,7 @@ Namespace PresentationLayer.Forms
             Me.dtpBirthDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpBirthDate.ForeColor = System.Drawing.Color.Black
             Me.dtpBirthDate.LinkedLabel = Me.lblBirthDate
-            Me.dtpBirthDate.Location = New System.Drawing.Point(177, 104)
+            Me.dtpBirthDate.Location = New System.Drawing.Point(176, 104)
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
             Me.dtpBirthDate.ReadOnlyDp = False
@@ -835,6 +748,7 @@ Namespace PresentationLayer.Forms
             Me.dtpBirthDate.ShowTime = False
             Me.dtpBirthDate.Size = New System.Drawing.Size(123, 24)
             Me.dtpBirthDate.TabIndex = 5
+            Me.dtpBirthDate.TabStop = False
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Value = Nothing
             Me.dtpBirthDate.ValueIsMandatory = False
@@ -887,7 +801,7 @@ Namespace PresentationLayer.Forms
             Me.cacMaritalStatus.Size = New System.Drawing.Size(278, 24)
             Me.cacMaritalStatus.SuggestBoxHeight = 200
             Me.cacMaritalStatus.SuggestListOrderRule = Nothing
-            Me.cacMaritalStatus.TabIndex = 6
+            Me.cacMaritalStatus.TabIndex = 2
             Me.cacMaritalStatus.TextToSearch = Nothing
             Me.cacMaritalStatus.ValueIsMandatory = False
             Me.cacMaritalStatus.ValueIsNullable = False
@@ -941,7 +855,7 @@ Namespace PresentationLayer.Forms
             Me.cacNationalityCode.Size = New System.Drawing.Size(279, 24)
             Me.cacNationalityCode.SuggestBoxHeight = 200
             Me.cacNationalityCode.SuggestListOrderRule = Nothing
-            Me.cacNationalityCode.TabIndex = 7
+            Me.cacNationalityCode.TabIndex = 3
             Me.cacNationalityCode.TextToSearch = Nothing
             Me.cacNationalityCode.ValueIsMandatory = False
             Me.cacNationalityCode.ValueIsNullable = False
@@ -995,7 +909,7 @@ Namespace PresentationLayer.Forms
             Me.cacReligionIdNo.Size = New System.Drawing.Size(278, 24)
             Me.cacReligionIdNo.SuggestBoxHeight = 200
             Me.cacReligionIdNo.SuggestListOrderRule = Nothing
-            Me.cacReligionIdNo.TabIndex = 8
+            Me.cacReligionIdNo.TabIndex = 4
             Me.cacReligionIdNo.TextToSearch = Nothing
             Me.cacReligionIdNo.ValueIsMandatory = False
             Me.cacReligionIdNo.ValueIsNullable = False
@@ -1063,7 +977,7 @@ Namespace PresentationLayer.Forms
             Me.txtPhone1.OldValue = Nothing
             Me.txtPhone1.ReadOnly = True
             Me.txtPhone1.Size = New System.Drawing.Size(194, 23)
-            Me.txtPhone1.TabIndex = 16
+            Me.txtPhone1.TabIndex = 1
             '
             'lblPhone2
             '
@@ -1099,7 +1013,7 @@ Namespace PresentationLayer.Forms
             Me.txtPhone2.OldValue = Nothing
             Me.txtPhone2.ReadOnly = True
             Me.txtPhone2.Size = New System.Drawing.Size(222, 23)
-            Me.txtPhone2.TabIndex = 17
+            Me.txtPhone2.TabIndex = 2
             '
             'lblEmail
             '
@@ -1135,7 +1049,7 @@ Namespace PresentationLayer.Forms
             Me.txtEmail.OldValue = Nothing
             Me.txtEmail.ReadOnly = True
             Me.txtEmail.Size = New System.Drawing.Size(619, 23)
-            Me.txtEmail.TabIndex = 18
+            Me.txtEmail.TabIndex = 3
             '
             'groupBoxAddress
             '
@@ -1206,7 +1120,7 @@ Namespace PresentationLayer.Forms
             Me.txtStreet.OldValue = Nothing
             Me.txtStreet.ReadOnly = True
             Me.txtStreet.Size = New System.Drawing.Size(278, 23)
-            Me.txtStreet.TabIndex = 9
+            Me.txtStreet.TabIndex = 4
             '
             'lblDistrict
             '
@@ -1242,7 +1156,7 @@ Namespace PresentationLayer.Forms
             Me.txtDistrict.OldValue = Nothing
             Me.txtDistrict.ReadOnly = True
             Me.txtDistrict.Size = New System.Drawing.Size(221, 23)
-            Me.txtDistrict.TabIndex = 10
+            Me.txtDistrict.TabIndex = 5
             '
             'lblTownCity
             '
@@ -1277,7 +1191,7 @@ Namespace PresentationLayer.Forms
             Me.txtTownCity.OldValue = Nothing
             Me.txtTownCity.ReadOnly = True
             Me.txtTownCity.Size = New System.Drawing.Size(278, 23)
-            Me.txtTownCity.TabIndex = 11
+            Me.txtTownCity.TabIndex = 6
             '
             'lblProvinceState
             '
@@ -1312,7 +1226,7 @@ Namespace PresentationLayer.Forms
             Me.txtProvinceState.OldValue = Nothing
             Me.txtProvinceState.ReadOnly = True
             Me.txtProvinceState.Size = New System.Drawing.Size(221, 23)
-            Me.txtProvinceState.TabIndex = 12
+            Me.txtProvinceState.TabIndex = 7
             '
             'lblCountryCode
             '
@@ -1360,7 +1274,7 @@ Namespace PresentationLayer.Forms
             Me.cacCountryCode.Size = New System.Drawing.Size(279, 24)
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
-            Me.cacCountryCode.TabIndex = 13
+            Me.cacCountryCode.TabIndex = 8
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.ValueIsMandatory = False
             Me.cacCountryCode.ValueIsNullable = False
@@ -1400,7 +1314,7 @@ Namespace PresentationLayer.Forms
             Me.txtPoBox.OldValue = Nothing
             Me.txtPoBox.ReadOnly = True
             Me.txtPoBox.Size = New System.Drawing.Size(72, 23)
-            Me.txtPoBox.TabIndex = 14
+            Me.txtPoBox.TabIndex = 9
             '
             'lblZipCode
             '
@@ -1435,13 +1349,14 @@ Namespace PresentationLayer.Forms
             Me.txtZipCode.OldValue = Nothing
             Me.txtZipCode.ReadOnly = True
             Me.txtZipCode.Size = New System.Drawing.Size(138, 23)
-            Me.txtZipCode.TabIndex = 15
+            Me.txtZipCode.TabIndex = 10
             '
             'EmployeeTabControl
             '
             Me.EmployeeTabControl.Controls.Add(Me.tbpPersonal)
             Me.EmployeeTabControl.Controls.Add(Me.tbpContact)
-            Me.EmployeeTabControl.Controls.Add(Me.tbpOthers)
+            Me.EmployeeTabControl.Controls.Add(Me.tbpEmployment)
+            Me.EmployeeTabControl.Controls.Add(Me.tbpPayroll)
             Me.EmployeeTabControl.Location = New System.Drawing.Point(3, 91)
             Me.EmployeeTabControl.Name = "EmployeeTabControl"
             Me.EmployeeTabControl.SelectedIndex = 0
@@ -1476,6 +1391,10 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout3.Controls.Add(Me.cacReligionIdNo)
             Me.CFlowLayout3.Controls.Add(Me.lblBirthDate)
             Me.CFlowLayout3.Controls.Add(Me.dtpBirthDate)
+            Me.CFlowLayout3.Controls.Add(Me.lblNationalIdNo)
+            Me.CFlowLayout3.Controls.Add(Me.txtNationalIdNo)
+            Me.CFlowLayout3.Controls.Add(Me.lblNotes)
+            Me.CFlowLayout3.Controls.Add(Me.txtNotes)
             Me.CFlowLayout3.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout3.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout3.Margin = New System.Windows.Forms.Padding(0)
@@ -1517,12 +1436,86 @@ Namespace PresentationLayer.Forms
             Me.cacGender.Size = New System.Drawing.Size(124, 24)
             Me.cacGender.SuggestBoxHeight = 200
             Me.cacGender.SuggestListOrderRule = Nothing
-            Me.cacGender.TabIndex = 250
+            Me.cacGender.TabIndex = 1
             Me.cacGender.TextToSearch = Nothing
             Me.cacGender.ValueIsMandatory = False
             Me.cacGender.ValueIsNullable = False
             Me.cacGender.ValueIsNumeric = False
             Me.cacGender.ValueMember = "Code"
+            '
+            'lblNationalIdNo
+            '
+            Me.lblNationalIdNo.DisplayOnly = True
+            Me.lblNationalIdNo.EditingMode = False
+            Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 130)
+            Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblNationalIdNo.Name = "lblNationalIdNo"
+            Me.lblNationalIdNo.Size = New System.Drawing.Size(174, 23)
+            Me.lblNationalIdNo.TabIndex = 265
+            Me.lblNationalIdNo.Text = "National ID/Iqama #"
+            Me.lblNationalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtNationalIdNo
+            '
+            Me.txtNationalIdNo.BackColor = System.Drawing.Color.White
+            Me.txtNationalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNationalIdNo.ComputedValue = False
+            Me.txtNationalIdNo.CustomFormat = Nothing
+            Me.txtNationalIdNo.DataBoundControl = True
+            Me.txtNationalIdNo.EditingMode = False
+            Me.CFlowLayout3.SetFlowBreak(Me.txtNationalIdNo, True)
+            Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
+            Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 130)
+            Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNationalIdNo.MaximumValue = Nothing
+            Me.txtNationalIdNo.MinimumValue = Nothing
+            Me.txtNationalIdNo.Name = "txtNationalIdNo"
+            Me.txtNationalIdNo.OldValue = Nothing
+            Me.txtNationalIdNo.ReadOnly = True
+            Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
+            Me.txtNationalIdNo.TabIndex = 6
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblNotes.Location = New System.Drawing.Point(1, 155)
+            Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Size = New System.Drawing.Size(174, 23)
+            Me.lblNotes.TabIndex = 271
+            Me.lblNotes.Text = "Notes"
+            Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.CFlowLayout3.SetFlowBreak(Me.txtNotes, True)
+            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Me.lblNotes
+            Me.txtNotes.Location = New System.Drawing.Point(177, 155)
+            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Multiline = True
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.Size = New System.Drawing.Size(620, 60)
+            Me.txtNotes.TabIndex = 7
+            Me.txtNotes.ValueIsMandatory = True
             '
             'tbpContact
             '
@@ -1539,19 +1532,276 @@ Namespace PresentationLayer.Forms
             Me.tbpContact.Text = "Contact Information"
             Me.tbpContact.UseVisualStyleBackColor = True
             '
-            'tbpOthers
+            'tbpEmployment
             '
-            Me.tbpOthers.BackgroundImage = CType(resources.GetObject("tbpOthers.BackgroundImage"), System.Drawing.Image)
-            Me.tbpOthers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-            Me.tbpOthers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.tbpOthers.Controls.Add(Me.floMainDisplay)
-            Me.tbpOthers.Location = New System.Drawing.Point(4, 22)
-            Me.tbpOthers.Name = "tbpOthers"
-            Me.tbpOthers.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpOthers.Size = New System.Drawing.Size(821, 294)
-            Me.tbpOthers.TabIndex = 2
-            Me.tbpOthers.Text = "Payroll Information"
-            Me.tbpOthers.UseVisualStyleBackColor = True
+            Me.tbpEmployment.Controls.Add(Me.CFlowLayout5)
+            Me.tbpEmployment.Location = New System.Drawing.Point(4, 22)
+            Me.tbpEmployment.Name = "tbpEmployment"
+            Me.tbpEmployment.Size = New System.Drawing.Size(821, 294)
+            Me.tbpEmployment.TabIndex = 3
+            Me.tbpEmployment.Text = "Employment Information"
+            Me.tbpEmployment.UseVisualStyleBackColor = True
+            '
+            'CFlowLayout5
+            '
+            Me.CFlowLayout5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.CFlowLayout5.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout5.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            Me.CFlowLayout5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            Me.CFlowLayout5.Controls.Add(Me.lblHiredDate)
+            Me.CFlowLayout5.Controls.Add(Me.dtpHiredDate)
+            Me.CFlowLayout5.Controls.Add(Me.lblReleasedDate)
+            Me.CFlowLayout5.Controls.Add(Me.dtpReleasedDate)
+            Me.CFlowLayout5.Controls.Add(Me.lblDepartmentIdNo)
+            Me.CFlowLayout5.Controls.Add(Me.cacDepartmentIdNo)
+            Me.CFlowLayout5.Controls.Add(Me.lblDesignationIdNo)
+            Me.CFlowLayout5.Controls.Add(Me.cacDesignationIdNo)
+            Me.CFlowLayout5.Controls.Add(Me.lblActive)
+            Me.CFlowLayout5.Controls.Add(Me.chkActive)
+            Me.CFlowLayout5.Dock = System.Windows.Forms.DockStyle.Top
+            Me.CFlowLayout5.Location = New System.Drawing.Point(0, 0)
+            Me.CFlowLayout5.Name = "CFlowLayout5"
+            Me.CFlowLayout5.Padding = New System.Windows.Forms.Padding(3)
+            Me.CFlowLayout5.Size = New System.Drawing.Size(821, 287)
+            Me.CFlowLayout5.TabIndex = 286
+            '
+            'lblHiredDate
+            '
+            Me.lblHiredDate.DisplayOnly = True
+            Me.lblHiredDate.EditingMode = False
+            Me.lblHiredDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblHiredDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblHiredDate.Location = New System.Drawing.Point(4, 4)
+            Me.lblHiredDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblHiredDate.Name = "lblHiredDate"
+            Me.lblHiredDate.Size = New System.Drawing.Size(174, 24)
+            Me.lblHiredDate.TabIndex = 288
+            Me.lblHiredDate.Text = "Hired Date"
+            Me.lblHiredDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'dtpHiredDate
+            '
+            Me.dtpHiredDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpHiredDate.DefaultValue = Nothing
+            Me.dtpHiredDate.DisplayOnly = False
+            Me.dtpHiredDate.DtpDefaultValue = Nothing
+            Me.dtpHiredDate.EditingMode = False
+            Me.dtpHiredDate.EditsAllowed = False
+            Me.CFlowLayout5.SetFlowBreak(Me.dtpHiredDate, True)
+            Me.dtpHiredDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
+            Me.dtpHiredDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpHiredDate.LinkedLabel = Me.lblHiredDate
+            Me.dtpHiredDate.Location = New System.Drawing.Point(179, 3)
+            Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpHiredDate.Name = "dtpHiredDate"
+            Me.dtpHiredDate.ReadOnlyDp = False
+            Me.dtpHiredDate.SecurityKey = Nothing
+            Me.dtpHiredDate.ShowLongDate = False
+            Me.dtpHiredDate.ShowTime = False
+            Me.dtpHiredDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpHiredDate.TabIndex = 1
+            Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpHiredDate.Value = Nothing
+            Me.dtpHiredDate.ValueIsMandatory = False
+            Me.dtpHiredDate.ValueIsNullable = False
+            '
+            'lblReleasedDate
+            '
+            Me.lblReleasedDate.DisplayOnly = True
+            Me.lblReleasedDate.EditingMode = False
+            Me.lblReleasedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblReleasedDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblReleasedDate.Location = New System.Drawing.Point(4, 30)
+            Me.lblReleasedDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblReleasedDate.Name = "lblReleasedDate"
+            Me.lblReleasedDate.Size = New System.Drawing.Size(174, 24)
+            Me.lblReleasedDate.TabIndex = 289
+            Me.lblReleasedDate.Text = "Released Date"
+            Me.lblReleasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'dtpReleasedDate
+            '
+            Me.dtpReleasedDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpReleasedDate.DefaultValue = Nothing
+            Me.dtpReleasedDate.DisplayOnly = False
+            Me.dtpReleasedDate.DtpDefaultValue = Nothing
+            Me.dtpReleasedDate.EditingMode = False
+            Me.dtpReleasedDate.EditsAllowed = False
+            Me.CFlowLayout5.SetFlowBreak(Me.dtpReleasedDate, True)
+            Me.dtpReleasedDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
+            Me.dtpReleasedDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpReleasedDate.LinkedLabel = Me.lblReleasedDate
+            Me.dtpReleasedDate.Location = New System.Drawing.Point(179, 29)
+            Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpReleasedDate.Name = "dtpReleasedDate"
+            Me.dtpReleasedDate.ReadOnlyDp = False
+            Me.dtpReleasedDate.SecurityKey = Nothing
+            Me.dtpReleasedDate.ShowLongDate = False
+            Me.dtpReleasedDate.ShowTime = False
+            Me.dtpReleasedDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpReleasedDate.TabIndex = 2
+            Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpReleasedDate.Value = Nothing
+            Me.dtpReleasedDate.ValueIsMandatory = False
+            Me.dtpReleasedDate.ValueIsNullable = False
+            '
+            'lblDepartmentIdNo
+            '
+            Me.lblDepartmentIdNo.DisplayOnly = True
+            Me.lblDepartmentIdNo.EditingMode = False
+            Me.lblDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblDepartmentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblDepartmentIdNo.Location = New System.Drawing.Point(4, 56)
+            Me.lblDepartmentIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblDepartmentIdNo.Name = "lblDepartmentIdNo"
+            Me.lblDepartmentIdNo.Size = New System.Drawing.Size(174, 24)
+            Me.lblDepartmentIdNo.TabIndex = 284
+            Me.lblDepartmentIdNo.Text = "Department"
+            Me.lblDepartmentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cacDepartmentIdNo
+            '
+            Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
+            Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
+            Me.cacDepartmentIdNo.CurrentSearchTerm = ""
+            Me.cacDepartmentIdNo.DefaultValue = Nothing
+            Me.cacDepartmentIdNo.DisplayMember = "Name"
+            Me.cacDepartmentIdNo.DropDownHeight = 1
+            Me.cacDepartmentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cacDepartmentIdNo.EditingMode = False
+            Me.cacDepartmentIdNo.FilterRule = Nothing
+            Me.CFlowLayout5.SetFlowBreak(Me.cacDepartmentIdNo, True)
+            Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacDepartmentIdNo.FormattingEnabled = True
+            Me.cacDepartmentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacDepartmentIdNo.IntegralHeight = False
+            Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
+            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(179, 56)
+            Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
+            Me.cacDepartmentIdNo.OldValue = 0
+            Me.cacDepartmentIdNo.OriginalDataSource = Nothing
+            Me.cacDepartmentIdNo.OriginalList = Nothing
+            Me.cacDepartmentIdNo.OverrideDropDownStyleList = False
+            Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
+            Me.cacDepartmentIdNo.PreviousSelectedIndex = -1
+            Me.cacDepartmentIdNo.PropertySelector = Nothing
+            Me.cacDepartmentIdNo.ReadOnlyCombo = False
+            Me.cacDepartmentIdNo.SearchAnywhere = False
+            Me.cacDepartmentIdNo.Size = New System.Drawing.Size(279, 24)
+            Me.cacDepartmentIdNo.SuggestBoxHeight = 200
+            Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
+            Me.cacDepartmentIdNo.TabIndex = 3
+            Me.cacDepartmentIdNo.TextToSearch = Nothing
+            Me.cacDepartmentIdNo.ValueIsMandatory = False
+            Me.cacDepartmentIdNo.ValueIsNullable = False
+            Me.cacDepartmentIdNo.ValueIsNumeric = False
+            Me.cacDepartmentIdNo.ValueMember = "IdNo"
+            '
+            'lblDesignationIdNo
+            '
+            Me.lblDesignationIdNo.DisplayOnly = True
+            Me.lblDesignationIdNo.EditingMode = False
+            Me.lblDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblDesignationIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblDesignationIdNo.Location = New System.Drawing.Point(4, 82)
+            Me.lblDesignationIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblDesignationIdNo.Name = "lblDesignationIdNo"
+            Me.lblDesignationIdNo.Size = New System.Drawing.Size(175, 24)
+            Me.lblDesignationIdNo.TabIndex = 285
+            Me.lblDesignationIdNo.Text = "Designation"
+            Me.lblDesignationIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cacDesignationIdNo
+            '
+            Me.cacDesignationIdNo.BackColor = System.Drawing.Color.White
+            Me.cacDesignationIdNo.ChangingSearchValueOnly = False
+            Me.cacDesignationIdNo.CurrentSearchTerm = ""
+            Me.cacDesignationIdNo.DefaultValue = Nothing
+            Me.cacDesignationIdNo.DisplayMember = "Name"
+            Me.cacDesignationIdNo.DropDownHeight = 1
+            Me.cacDesignationIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cacDesignationIdNo.EditingMode = False
+            Me.cacDesignationIdNo.FilterRule = Nothing
+            Me.CFlowLayout5.SetFlowBreak(Me.cacDesignationIdNo, True)
+            Me.cacDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacDesignationIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacDesignationIdNo.FormattingEnabled = True
+            Me.cacDesignationIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacDesignationIdNo.IntegralHeight = False
+            Me.cacDesignationIdNo.LinkedLabel = Me.lblDesignationIdNo
+            Me.cacDesignationIdNo.Location = New System.Drawing.Point(180, 82)
+            Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
+            Me.cacDesignationIdNo.OldValue = 0
+            Me.cacDesignationIdNo.OriginalDataSource = Nothing
+            Me.cacDesignationIdNo.OriginalList = Nothing
+            Me.cacDesignationIdNo.OverrideDropDownStyleList = False
+            Me.cacDesignationIdNo.PreviousSearchTerm = Nothing
+            Me.cacDesignationIdNo.PreviousSelectedIndex = -1
+            Me.cacDesignationIdNo.PropertySelector = Nothing
+            Me.cacDesignationIdNo.ReadOnlyCombo = False
+            Me.cacDesignationIdNo.SearchAnywhere = False
+            Me.cacDesignationIdNo.Size = New System.Drawing.Size(223, 24)
+            Me.cacDesignationIdNo.SuggestBoxHeight = 200
+            Me.cacDesignationIdNo.SuggestListOrderRule = Nothing
+            Me.cacDesignationIdNo.TabIndex = 4
+            Me.cacDesignationIdNo.TextToSearch = Nothing
+            Me.cacDesignationIdNo.ValueIsMandatory = False
+            Me.cacDesignationIdNo.ValueIsNullable = False
+            Me.cacDesignationIdNo.ValueIsNumeric = False
+            Me.cacDesignationIdNo.ValueMember = "IdNo"
+            '
+            'lblActive
+            '
+            Me.lblActive.DisplayOnly = True
+            Me.lblActive.EditingMode = False
+            Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblActive.Location = New System.Drawing.Point(4, 108)
+            Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblActive.Name = "lblActive"
+            Me.lblActive.Size = New System.Drawing.Size(175, 24)
+            Me.lblActive.TabIndex = 277
+            Me.lblActive.Text = "Active?"
+            Me.lblActive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'chkActive
+            '
+            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkActive.AutoCheck = False
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = False
+            Me.chkActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.CFlowLayout5.SetFlowBreak(Me.chkActive, True)
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.chkActive.LinkedLabel = Me.lblActive
+            Me.chkActive.Location = New System.Drawing.Point(181, 108)
+            Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.OldValue = ""
+            Me.chkActive.Size = New System.Drawing.Size(25, 21)
+            Me.chkActive.TabIndex = 5
+            Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
+            'tbpPayroll
+            '
+            Me.tbpPayroll.BackgroundImage = CType(resources.GetObject("tbpPayroll.BackgroundImage"), System.Drawing.Image)
+            Me.tbpPayroll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+            Me.tbpPayroll.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            Me.tbpPayroll.Controls.Add(Me.floMainDisplay)
+            Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
+            Me.tbpPayroll.Name = "tbpPayroll"
+            Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(3)
+            Me.tbpPayroll.Size = New System.Drawing.Size(821, 294)
+            Me.tbpPayroll.TabIndex = 2
+            Me.tbpPayroll.Text = "Payroll Information"
+            Me.tbpPayroll.UseVisualStyleBackColor = True
             '
             'lblIdNo
             '
@@ -1629,10 +1879,6 @@ Namespace PresentationLayer.Forms
             Me.txtEmployeeCode.TabIndex = 153
             Me.txtEmployeeCode.ValueIsMandatory = True
             '
-            'EmployeeModelBindingSource
-            '
-            Me.EmployeeModelBindingSource.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeModel)
-            '
             'CFlowLayout2
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
@@ -1641,7 +1887,7 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Left
             Me.CFlowLayout2.Location = New System.Drawing.Point(300, 53)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(839, 592)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(839, 420)
             Me.CFlowLayout2.TabIndex = 6
             '
             'CFlowLayout4
@@ -1663,7 +1909,7 @@ Namespace PresentationLayer.Forms
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1149, 645)
+            Me.ClientSize = New System.Drawing.Size(1149, 473)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.MinimumSize = New System.Drawing.Size(1165, 480)
             Me.Name = "EmployeeEntryTv"
@@ -1671,28 +1917,31 @@ Namespace PresentationLayer.Forms
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floMainDisplay.ResumeLayout(false)
-        Me.floMainDisplay.PerformLayout
-        Me.groupBoxContactInfo.ResumeLayout(false)
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        Me.groupBoxAddress.ResumeLayout(false)
-        Me.floAddress.ResumeLayout(false)
-        Me.floAddress.PerformLayout
-        Me.EmployeeTabControl.ResumeLayout(false)
-        Me.tbpPersonal.ResumeLayout(false)
-        Me.CFlowLayout3.ResumeLayout(false)
-        Me.tbpContact.ResumeLayout(false)
-        Me.tbpContact.PerformLayout
-        Me.tbpOthers.ResumeLayout(false)
-        CType(Me.EmployeeModelBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout2.ResumeLayout(false)
-        Me.CFlowLayout4.ResumeLayout(false)
-        Me.CFlowLayout4.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.floMainDisplay.ResumeLayout(False)
+            Me.floMainDisplay.PerformLayout()
+            Me.groupBoxContactInfo.ResumeLayout(False)
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.groupBoxAddress.ResumeLayout(False)
+            Me.floAddress.ResumeLayout(False)
+            Me.floAddress.PerformLayout()
+            Me.EmployeeTabControl.ResumeLayout(False)
+            Me.tbpPersonal.ResumeLayout(False)
+            Me.CFlowLayout3.ResumeLayout(False)
+            Me.CFlowLayout3.PerformLayout()
+            Me.tbpContact.ResumeLayout(False)
+            Me.tbpContact.PerformLayout()
+            Me.tbpEmployment.ResumeLayout(False)
+            Me.CFlowLayout5.ResumeLayout(False)
+            Me.tbpPayroll.ResumeLayout(False)
+            CType(Me.EmployeeModelBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout4.ResumeLayout(False)
+            Me.CFlowLayout4.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents floMainDisplay As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblEmployeeName As Libraries.CBaseControlsLibrary.CLabel
@@ -1729,14 +1978,6 @@ End Sub
         Friend WithEvents txtPhone2 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmail As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtEmail As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblDepartmentIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblDesignationIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacDesignationIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpHiredDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpReleasedDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblArAccountIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacArAccountIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
@@ -1745,16 +1986,6 @@ End Sub
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblNationalIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtNationalIdNo As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblActive As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents chkActive As Libraries.CBaseControlsLibrary.CCheckBox
-        Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents groupBoxAddress As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents groupBoxContactInfo As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
@@ -1765,12 +1996,40 @@ End Sub
         Friend WithEvents EmployeeTabControl As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tbpPersonal As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents tbpContact As Libraries.CBaseControlsLibrary.CTabPage
-        Friend WithEvents tbpOthers As Libraries.CBaseControlsLibrary.CTabPage
+        Friend WithEvents tbpPayroll As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents CFlowLayout3 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents EmployeeModelBindingSource As BindingSource
         Friend WithEvents CFlowLayout4 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents lblNationalIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtNationalIdNo As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents tbpEmployment As TabPage
+        Friend WithEvents CFlowLayout5 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents lblActive As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents chkActive As Libraries.CBaseControlsLibrary.CCheckBox
+        Friend WithEvents lblDepartmentIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cacDesignationIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblDesignationIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPayFrequency As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblPaySalariedOrHourly As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPaySalariedOrHourly As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblPayRateType As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPayRateType As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblPayRateAmount As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtPayRateAmount As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents dtpHiredDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents dtpReleasedDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
     End Class
 
 End Namespace

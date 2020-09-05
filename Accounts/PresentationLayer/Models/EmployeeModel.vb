@@ -29,6 +29,10 @@
         Public Property NationalityCode As String
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
+        Public Property PayFrequency As String
+        Public Property PaySalariedOrHourly As String
+        Public Property PayRateAmount As Decimal
+        Public Property PayRateType As String
         Public Property Phone1 As String
         Public Property Phone2 As String
         Public Property PoBox As String

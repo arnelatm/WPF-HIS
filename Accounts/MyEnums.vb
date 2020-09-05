@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Diagnostics.Eventing.Reader
 Imports System.Runtime.CompilerServices
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -111,6 +112,33 @@ Public Enum PaymentMethodSelection
     <EnumCode("OT")> Others
 End Enum
 
+Public Enum PaySalariedOrHourlySelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("S")> Salaried
+    <EnumCode("H")> Hourly
+End Enum
+
+
+Public Enum PayFrequencySelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("M")> Monthly
+    <EnumCode("W")> Weekly
+    <EnumCode("B")> BiWeekly
+    <EnumCode("S")> SemiMonthly
+    <EnumCode("Q")> Quarterly
+    <EnumCode("I")> BiYearly
+    <EnumCode("Y")> Yearly
+    <EnumCode("D")> Daily
+    <EnumCode("N")> None
+End Enum
+
+Public Enum PayRateTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("M")> Monthly
+    <EnumCode("H")> Hourly
+    <EnumCode("D")> Daily
+    <EnumCode("W")> Weekly
+End Enum
 
 Public Enum SpecialAccountSelection
     <EnumCode("")> None
@@ -140,7 +168,6 @@ Public Enum TransactionTypeSelection
     <EnumCode("D")> Debit
     <EnumCode("C")> Credit
 End Enum
-
 
 Public Enum YearMonthDaySelection
     <EnumCode("")> NotSpecified
@@ -639,6 +666,69 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
+
+    Public Function PayFrequencyToEnum(value As String) As String
+        Dim retValue As String
+        Select Case value
+            Case Nothing
+                retValue = PayFrequencySelection.NotSpecified
+            Case "D"
+                retValue = PayFrequencySelection.Daily
+            Case "M"
+                retValue = PayFrequencySelection.Monthly
+            Case "W"
+                retValue = PayFrequencySelection.BiWeekly
+            Case "S"
+                retValue = PayFrequencySelection.SemiMonthly
+            Case "Q"
+                retValue = PayFrequencySelection.Quarterly
+            Case "I"
+                retValue = PayFrequencySelection.BiYearly
+            Case "Y"
+                retValue = PayFrequencySelection.Yearly
+            Case "N"
+                retValue = PayFrequencySelection.None
+            Case Else
+                retValue = PayFrequencySelection.NotSpecified
+
+        End Select
+        Return retValue
+    End Function
+
+    Public Function PaySalariedOrHourlyToEnum(value As String) As String
+        Dim retValue As String
+        Select Case value
+            Case ""
+                retValue = PaySalariedOrHourlySelection.NotSpecified
+            Case "S"
+                retValue = PaySalariedOrHourlySelection.Salaried
+            Case "H"
+                retValue = PaySalariedOrHourlySelection.Hourly
+            Case Else
+                retValue = PaySalariedOrHourlySelection.NotSpecified
+        End Select
+        Return retValue
+    End Function
+
+
+    Public Function PayRateTypeToEnum(value As String) As String
+        Dim retValue As String
+        Select Case value
+            Case ""
+                retValue = PayRateTypeSelection.NotSpecified
+            Case "M"
+                retValue = PayRateTypeSelection.Monthly
+            Case "H"
+                retValue = PayRateTypeSelection.Hourly
+            Case "D"
+                retValue = PayRateTypeSelection.Daily
+            Case Else
+                retValue = PayRateTypeSelection.NotSpecified
+        End Select
+        Return retValue
+    End Function
+
+
 
     Public Function ReceiptTypeToEnum(value As String) As String
         Dim retValue As String
