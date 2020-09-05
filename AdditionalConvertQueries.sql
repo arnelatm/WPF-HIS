@@ -18,3 +18,23 @@ go
 
 update apopeninvoice set journalcode = 'BB' where idno < 51
 update apopeninvoice set journalIdNo = journalidno where idno < 51
+
+update EMPLOYEE
+set Employee.OpeningBalance = b.Debit - b.credit
+from Employee e
+left join erJournal a
+on e.idno = a.EmployeeIdNo
+left join erjournalItem b
+on a.IdNo = b.journalIdNo
+where a.ReferenceNo = 'Beg.Bal.' 
+go
+
+delete erjournalitem 
+from erjournalitem 
+left join erjournal
+on erjournalitem.journalidno = erjournal.idno
+where erjournal.ReferenceNo = 'Beg.Bal.' 
+go
+
+delete from erjournal where ReferenceNo = 'Beg.Bal.' 
+go
