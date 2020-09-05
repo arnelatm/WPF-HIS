@@ -17,14 +17,13 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New EmployeeModel()
             DataModel = New EmployeeModel
             TreeViewList = New List(Of EmployeeModel)
-            ea = New EventAggregator()
-            ea.SubscribeEvent(Me)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
-            Return DataModel.OpeningBalance + Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
+            Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
-
 
     End Class
 

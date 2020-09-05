@@ -12,7 +12,6 @@ Namespace PresentationLayer.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -33,6 +32,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property Active As Boolean Implements IEmployeeView.Active
             Get
                 Return chkActive.Checked
@@ -41,7 +41,6 @@ Namespace PresentationLayer.Forms
                 chkActive.Checked = Value
             End Set
         End Property
-
 
         Public Property ArAccountIdNo As Int32? Implements IEmployeeView.ArAccountIdNo
             Get
@@ -52,18 +51,18 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property Balance As Decimal Implements IEmployeeView.Balance
-            Get
-                If txtBalance.Text <> "" Then
-                    Return Convert.ToSingle(txtBalance.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtBalance.Text = Value
-            End Set
-        End Property
+        'Public Property Balance As Decimal Implements IEmployeeView.Balance
+        '    Get
+        '        If txtBalance.Text <> "" Then
+        '            Return Convert.ToSingle(txtBalance.Text)
+        '        Else
+        '            Return 0
+        '        End If
+        '    End Get
+        '    Set
+        '        txtBalance.Text = Value
+        '    End Set
+        'End Property
 
         Public Property BankAccountNo As String Implements IEmployeeView.BankAccountNo
             Get
@@ -386,7 +385,6 @@ Namespace PresentationLayer.Forms
         {
          {"Active", chkActive},
          {"ArAccountIdNo", cacArAccountIdNo},
-         {"Balance", txtBalance},
          {"BankAccountNo", txtBankAccountNo},
          {"BankIdNo", cacBankIdNo},
          {"BirthDate", dtpBirthDate},
@@ -425,13 +423,13 @@ Namespace PresentationLayer.Forms
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
-            If PresenterObj.AddMode Then
-                txtOpeningBalance.DisplayOnly = False
-            Else
-                txtOpeningBalance.DisplayOnly = True
-            End If
-        End Sub
+        'Protected Overrides Sub InputsTurnedOn()
+        '    If PresenterObj.AddMode Then
+        '        txtOpeningBalance.DisplayOnly = False
+        '    Else
+        '        txtOpeningBalance.DisplayOnly = True
+        '    End If
+        'End Sub
 
     End Class
 
