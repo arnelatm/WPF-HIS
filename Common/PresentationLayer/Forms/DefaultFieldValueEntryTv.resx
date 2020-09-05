@@ -259,28 +259,28 @@
     <value>Employee</value>
   </data>
   <data name="cboTableName.Items8" xml:space="preserve">
-    <value>GeneralJournal</value>
+    <value>ErJournal</value>
   </data>
   <data name="cboTableName.Items9" xml:space="preserve">
-    <value>Supplier</value>
+    <value>GeneralJournal</value>
   </data>
   <data name="cboTableName.Items10" xml:space="preserve">
-    <value>Patient</value>
+    <value>Supplier</value>
   </data>
   <data name="cboTableName.Items11" xml:space="preserve">
-    <value>PettyCashJournal</value>
+    <value>Patient</value>
   </data>
   <data name="cboTableName.Items12" xml:space="preserve">
-    <value>SalesJournal</value>
+    <value>PettyCashJournal</value>
   </data>
   <data name="cboTableName.Items13" xml:space="preserve">
-    <value>SecurityGroup</value>
+    <value>SalesJournal</value>
   </data>
   <data name="cboTableName.Items14" xml:space="preserve">
-    <value>User</value>
+    <value>SecurityGroup</value>
   </data>
   <data name="cboTableName.Items15" xml:space="preserve">
-    <value />
+    <value>User</value>
   </data>
   <data name="cboTableName.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 36</value>

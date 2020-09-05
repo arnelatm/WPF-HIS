@@ -71,24 +71,6 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
-        Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
-            TableToGet = "Employee"
-            SortExpression = sortKey
-            DisplayName = "EmployeeName"
-            DisplayNameArabic = "EmployeeNameAra"
-            DisplayCode = "EmployeeCode"
-            Return GetLookupDataByCode()
-        End Function
-
-        Public Function GetEmployeeListByName(Optional ByVal sortKey As String = "EmployeeName")
-            TableToGet = "Employee"
-            SortExpression = sortKey
-            DisplayName = "EmployeeName"
-            DisplayNameArabic = "EmployeeNameAra"
-            DisplayCode = "EmployeeCode"
-            Return GetLookupDataByCode()
-        End Function
-
         Public Function GetCategoryList(Optional ByVal sortKey As String = "CategoryCode")
             TableToGet = "Category"
             SortExpression = sortKey
@@ -176,7 +158,25 @@ Namespace PresentationLayer.Presenters
             DisplayName = "SupplierName"
             DisplayNameArabic = "SupplierNameAra"
             DisplayCode = "SupplierCode"
-            Return GetLookupDataByName()
+            Return GetLookupDataByNameWithCode()
+        End Function
+
+        Public Function GetEmployeeListByName(Optional ByVal sortKey As String = "EmployeeName")
+            TableToGet = "Employee"
+            SortExpression = sortKey
+            DisplayName = "EmployeeName"
+            DisplayNameArabic = "EmployeeNameAra"
+            DisplayCode = "EmployeeCode"
+            Return GetLookupDataByNameWithCode()
+        End Function
+
+        Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
+            TableToGet = "Employee"
+            SortExpression = sortKey
+            DisplayName = "EmployeeName"
+            DisplayNameArabic = "EmployeeNameAra"
+            DisplayCode = "EmployeeCode"
+            Return GetLookupDataByCode()
         End Function
 
         Public Function GetCustomerListByCode(Optional ByVal sortKey As String = "CustomerCode")
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Presenters
             DisplayName = "CustomerName"
             DisplayNameArabic = "CustomerNameAra"
             DisplayCode = "CustomerCode"
-            Return GetLookupDataByName()
+            Return GetLookupDataByNameWithCode()
         End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
