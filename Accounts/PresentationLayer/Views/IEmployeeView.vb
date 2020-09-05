@@ -26,6 +26,10 @@ Namespace PresentationLayer.Views
         Property NationalityCode As String
         Property Notes As String
         Property OpeningBalance As Decimal
+        Property PayFrequency As String
+        Property PaySalariedOrHourly As String
+        Property PayRateAmount As Decimal
+        Property PayRateType As String
         Property Phone1 As String
         Property Phone2 As String
         Property PoBox As String

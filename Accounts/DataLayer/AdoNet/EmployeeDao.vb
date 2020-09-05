@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayFrequency, PaySalariedOrHourly, PayRateAmount, PayRateType, Active" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -72,6 +72,10 @@ Namespace DataLayer.AdoNet
                     " Notes = @Notes," &
                     " OpeningBalance = @OpeningBalance," &
                     " Balance = @Balance," &
+                    " PayFrequency = @PayFrequency," &
+                    " PaySalariedOrHourly = @PaySalariedOrHourly," &
+                    " PayRateAmount = @PayRateAmount," &
+                    " PayRateType = @PayRateType," &
                     " Active = @Active" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(employee))
@@ -82,10 +86,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, Active)" &
+                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, SalariedOrHourly, PayRateType, PayRateAmount, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @Active)"
+                    "         @ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"
             Return Db.Insert(sql, Take(employee))
         End Function
 
@@ -115,6 +119,10 @@ Namespace DataLayer.AdoNet
             .NationalityCode = Extensions.AsString(reader("NationalityCode")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
+            .PayFrequency = Extensions.AsString(reader("PayFrequency")),
+            .PaySalariedOrHourly = Extensions.AsString(reader("PaySalariedOrHourly")),
+            .PayRateType = Extensions.AsString(reader("PayRateType")),
+            .PayRateAmount = Extensions.AsDecimal(reader("PayRateAmount")),
             .Phone1 = Extensions.AsString(reader("Phone1")),
             .Phone2 = Extensions.AsString(reader("Phone2")),
             .PoBox = Extensions.AsString(reader("PoBox")),
@@ -161,6 +169,10 @@ Namespace DataLayer.AdoNet
                                     "@Notes", employee.Notes,
                                     "@OpeningBalance", employee.OpeningBalance,
                                     "@Balance", employee.Balance,
+                                    "@PayFrequency", employee.PayFrequency,
+                                    "@PaySalariedOrHourly", employee.PaySalariedOrHourly,
+                                    "@PayRateType", employee.PayRateType,
+                                    "@PayRateAmount", employee.PayRateAmount,
                                     "@Active", employee.Active
                                 }
         End Function

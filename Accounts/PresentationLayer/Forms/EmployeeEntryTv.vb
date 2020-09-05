@@ -1,7 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
@@ -279,6 +278,44 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+        Public Property PayFrequency As String Implements IEmployeeView.PayFrequency
+            Get
+                Return cboPayFrequency.GetValue()
+            End Get
+            Set
+                cboPayFrequency.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
+            Get
+                Return cboPayFrequency.GetValue()
+            End Get
+            Set
+                cboPayFrequency.SetValue(Value)
+            End Set
+        End Property
+
+
+        Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
+            Get
+                Return txtPayRateAmount.Text
+            End Get
+            Set
+                txtPayRateAmount.Text = Value
+            End Set
+        End Property
+
+        Public Property PayRateType As String Implements IEmployeeView.PayRateType
+            Get
+                Return cboPayRateType.GetValue()
+            End Get
+            Set
+                cboPayRateType.SetValue(Value)
+            End Set
+        End Property
+
+
         Public Property Phone1 As String Implements IEmployeeView.Phone1
             Get
                 Return txtPhone1.Text
@@ -378,6 +415,9 @@ Namespace PresentationLayer.Forms
             cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
             cacNationalityCode.DataSource = PresenterObj.GetCountryList()
             cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
+            cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
+            cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

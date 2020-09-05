@@ -117,307 +117,311 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MaritalStatusSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MaritalStatusSelection_Single" xml:space="preserve">
-    <value>Single</value>
-  </data>
-  <data name="MaritalStatusSelection_Married" xml:space="preserve">
-    <value>Married</value>
-  </data>
-  <data name="MaritalStatusSelection_Widowed" xml:space="preserve">
-    <value>Widowed</value>
-  </data>
-  <data name="MaritalStatusSelection_Divorced" xml:space="preserve">
-    <value>Divorced</value>
-  </data>
-  <data name="MaleFemaleSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MaleFemaleSelection_Male" xml:space="preserve">
-    <value>Male</value>
-  </data>
-  <data name="MaleFemaleSelection_Female" xml:space="preserve">
-    <value>Female</value>
-  </data>
-  <data name="AccountGroupSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="AccountGroupSelection_Asset" xml:space="preserve">
-    <value>Asset</value>
-  </data>
-  <data name="AccountGroupSelection_Liability" xml:space="preserve">
-    <value>Liability</value>
-  </data>
-  <data name="AccountGroupSelection_Equity" xml:space="preserve">
-    <value>Equity</value>
-  </data>
-  <data name="AccountGroupSelection_RevExpSummary" xml:space="preserve">
-    <value>RevExpSummary</value>
-  </data>
-  <data name="AccountGroupSelection_Revenue" xml:space="preserve">
-    <value>Revenue</value>
-  </data>
-  <data name="AccountGroupSelection_Expense" xml:space="preserve">
-    <value>Expenses</value>
-  </data>
-  <data name="AccountStatusSelection_Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="AccountStatusSelection_ExceededCreditLimit" xml:space="preserve">
-    <value>ExceededCreditLimit</value>
-  </data>
-  <data name="AccountStatusSelection_OnHold" xml:space="preserve">
-    <value>OnHold</value>
-  </data>
-  <data name="AccountStatusSelection_CashOnly" xml:space="preserve">
-    <value>CashOnly</value>
-  </data>
-  <data name="AccountStatusSelection_Prospect" xml:space="preserve">
-    <value>Prospect</value>
-  </data>
-  <data name="AccountStatusSelection_NewAccount" xml:space="preserve">
-    <value>NewAccount</value>
-  </data>
-  <data name="AccountStatusSelection_SeeNote" xml:space="preserve">
-    <value>SeeNote</value>
-  </data>
-  <data name="DebitCreditSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="DebitCreditSelection_Debit" xml:space="preserve">
-    <value>Debit</value>
-  </data>
-  <data name="DebitCreditSelection_Credit" xml:space="preserve">
-    <value>Credit</value>
-  </data>
-  <data name="DocumentTypeSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="DocumentTypeSelection_Employee" xml:space="preserve">
+  <data name="PaymentTypeSelection_Employee" xml:space="preserve">
     <value>Employee</value>
   </data>
-  <data name="DocumentTypeSelection_Establishment" xml:space="preserve">
-    <value>Establishment</value>
-  </data>
-  <data name="DocumentTypeSelection_Supplier" xml:space="preserve">
-    <value>Supplier</value>
+  <data name="SpecialAccountSelection_Bank" xml:space="preserve">
+    <value>Bank</value>
   </data>
   <data name="DocumentTypeSelection_Client" xml:space="preserve">
     <value>Client</value>
   </data>
-  <data name="DocumentTypeSelection_Patient" xml:space="preserve">
-    <value>Patient</value>
-  </data>
-  <data name="DocumentTypeSelection_Others" xml:space="preserve">
-    <value>Others</value>
-  </data>
-  <data name="ImageTypeSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="ImageTypeSelection_Jpg" xml:space="preserve">
     <value>Jpg</value>
   </data>
-  <data name="ImageTypeSelection_Pdf" xml:space="preserve">
-    <value>Pdf</value>
+  <data name="PaymentMethodSelection_Paypal" xml:space="preserve">
+    <value>Paypal</value>
   </data>
-  <data name="ImageTypeSelection_Bmp" xml:space="preserve">
-    <value>Bmp</value>
+  <data name="YearMonthDaySelection_Day" xml:space="preserve">
+    <value>Day</value>
   </data>
-  <data name="PayeeTypeSelection_None" xml:space="preserve">
+  <data name="PaymentMethodSelection_MobileTransfer" xml:space="preserve">
+    <value>MobileTransfer</value>
+  </data>
+  <data name="SpecialAccountSelection_AccountsPayable" xml:space="preserve">
+    <value>AccountsPayable</value>
+  </data>
+  <data name="SpecialAccountSelection_AdvancesToSupplier" xml:space="preserve">
+    <value>AdvancesToSupplier</value>
+  </data>
+  <data name="RevCostCenterTypeSelection_Direct" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="SpecialAccountSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ReceiptTypeSelection_Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="AccountStatusSelection_CashOnly" xml:space="preserve">
+    <value>CashOnly</value>
+  </data>
+  <data name="AccountGroupSelection_Revenue" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="PaymentTypeSelection_CustomerRefund" xml:space="preserve">
+    <value>CustomerRefund</value>
+  </data>
+  <data name="PaymentMethodSelection_BitCoin" xml:space="preserve">
+    <value>BitCoin</value>
+  </data>
+  <data name="PaymentMethodSelection_DebitCard" xml:space="preserve">
+    <value>DebitCard</value>
+  </data>
+  <data name="DocumentTypeSelection_Establishment" xml:space="preserve">
+    <value>Establishment</value>
+  </data>
+  <data name="ReceiptTypeSelection_AccountsReceivable" xml:space="preserve">
+    <value>AccountsReceivable</value>
+  </data>
+  <data name="DebitCreditSelection_Credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="PaymentMethodSelection_WireTransfer" xml:space="preserve">
+    <value>WireTransfer</value>
+  </data>
+  <data name="SpecialAccountSelection_AccountsReceivable" xml:space="preserve">
+    <value>AccountsReceivable</value>
+  </data>
+  <data name="PaymentTypeSelection_Supplier" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="SecurityLevelSelection_User2" xml:space="preserve">
+    <value>User2</value>
+  </data>
+  <data name="AccountGroupSelection_Asset" xml:space="preserve">
+    <value>Asset</value>
+  </data>
+  <data name="SecurityLevelSelection_Manager1" xml:space="preserve">
+    <value>Manager1</value>
+  </data>
+  <data name="PaymentMethodSelection_Check" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="AccountGroupSelection_RevExpSummary" xml:space="preserve">
+    <value>RevExpSummary</value>
+  </data>
+  <data name="PaymentMethodSelection_BankTransfer" xml:space="preserve">
+    <value>BankTransfer</value>
+  </data>
+  <data name="SecurityLevelSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="PayeeTypeSelection_Employee" xml:space="preserve">
     <value>Employee</value>
   </data>
-  <data name="PayeeTypeSelection_Customer" xml:space="preserve">
-    <value>Customer</value>
+  <data name="TransactionTypeSelection_Credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="SpecialAccountSelection_Cash" xml:space="preserve">
+    <value>Cash</value>
   </data>
   <data name="PayeeTypeSelection_Supplier" xml:space="preserve">
     <value>Supplier</value>
   </data>
-  <data name="PayeeTypeSelection_Others" xml:space="preserve">
-    <value>Others</value>
+  <data name="DocumentTypeSelection_Patient" xml:space="preserve">
+    <value>Patient</value>
   </data>
-  <data name="PaymentMethodSelection_None" xml:space="preserve">
+  <data name="SpecialAccountSelection_EmployeeLoan" xml:space="preserve">
+    <value>EmployeeLoan</value>
+  </data>
+  <data name="SpecialAccountSelection_AccountsReceivableDiscount" xml:space="preserve">
+    <value>AccountsReceivableDiscount</value>
+  </data>
+  <data name="MaleFemaleSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="PaymentMethodSelection_Cash" xml:space="preserve">
     <value>Cash</value>
   </data>
-  <data name="PaymentMethodSelection_Check" xml:space="preserve">
-    <value>Check</value>
-  </data>
-  <data name="PaymentMethodSelection_CreditCard" xml:space="preserve">
-    <value>CreditCard</value>
-  </data>
-  <data name="PaymentMethodSelection_BankTransfer" xml:space="preserve">
-    <value>BankTransfer</value>
-  </data>
-  <data name="PaymentMethodSelection_DebitCard" xml:space="preserve">
-    <value>DebitCard</value>
-  </data>
-  <data name="PaymentMethodSelection_MobileTransfer" xml:space="preserve">
-    <value>MobileTransfer</value>
-  </data>
-  <data name="PaymentMethodSelection_WireTransfer" xml:space="preserve">
-    <value>WireTransfer</value>
-  </data>
-  <data name="PaymentMethodSelection_Paypal" xml:space="preserve">
-    <value>Paypal</value>
-  </data>
-  <data name="PaymentMethodSelection_BitCoin" xml:space="preserve">
-    <value>BitCoin</value>
-  </data>
-  <data name="PaymentMethodSelection_Mixed" xml:space="preserve">
-    <value>Mixed</value>
-  </data>
-  <data name="PaymentMethodSelection_Others" xml:space="preserve">
-    <value>Others</value>
-  </data>
-  <data name="PaymentTypeSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="PaymentTypeSelection_AccountsPayable" xml:space="preserve">
-    <value>AccountsPayable</value>
-  </data>
-  <data name="PaymentTypeSelection_Employee" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="PaymentTypeSelection_CustomerRefund" xml:space="preserve">
-    <value>CustomerRefund</value>
-  </data>
-  <data name="PaymentTypeSelection_Supplier" xml:space="preserve">
-    <value>Supplier</value>
-  </data>
-  <data name="PaymentTypeSelection_Others" xml:space="preserve">
-    <value>Others</value>
-  </data>
-  <data name="RevCostCenterTypeSelection_Direct" xml:space="preserve">
-    <value>Direct</value>
-  </data>
-  <data name="RevCostCenterTypeSelection_Shared" xml:space="preserve">
-    <value>Shared</value>
-  </data>
-  <data name="ReceiptTypeSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="ReceiptTypeSelection_AccountsReceivable" xml:space="preserve">
-    <value>AccountsReceivable</value>
-  </data>
-  <data name="ReceiptTypeSelection_Employee" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="ReceiptTypeSelection_SupplierRefund" xml:space="preserve">
-    <value>SupplierRefund</value>
+  <data name="MaritalStatusSelection_Divorced" xml:space="preserve">
+    <value>Divorced</value>
   </data>
   <data name="ReceiptTypeSelection_Customer" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="ReceiptTypeSelection_Others" xml:space="preserve">
-    <value>Others</value>
-  </data>
-  <data name="SecurityLevelSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="SecurityLevelSelection_Guest" xml:space="preserve">
-    <value>Guest</value>
-  </data>
-  <data name="SecurityLevelSelection_User1" xml:space="preserve">
-    <value>User1</value>
-  </data>
-  <data name="SecurityLevelSelection_User2" xml:space="preserve">
-    <value>User2</value>
-  </data>
-  <data name="SecurityLevelSelection_User3" xml:space="preserve">
-    <value>User3</value>
-  </data>
-  <data name="SecurityLevelSelection_Manager1" xml:space="preserve">
-    <value>Manager1</value>
-  </data>
-  <data name="SecurityLevelSelection_Manager2" xml:space="preserve">
-    <value>Manager2</value>
-  </data>
-  <data name="SecurityLevelSelection_Manager3" xml:space="preserve">
-    <value>Manager3</value>
-  </data>
-  <data name="SecurityLevelSelection_Administrator1" xml:space="preserve">
-    <value>Administrator1</value>
-  </data>
-  <data name="SecurityLevelSelection_Administrator2" xml:space="preserve">
-    <value>Administrator2</value>
+  <data name="SpecialAccountSelection_PettyCashAccount" xml:space="preserve">
+    <value>PettyCashAccount</value>
   </data>
   <data name="SecurityLevelSelection_Administrator3" xml:space="preserve">
     <value>Administrator3</value>
   </data>
-  <data name="SpecialAccountSelection_None" xml:space="preserve">
-    <value>None</value>
+  <data name="AccountStatusSelection_Prospect" xml:space="preserve">
+    <value>Prospect</value>
   </data>
-  <data name="SpecialAccountSelection_AccountsPayable" xml:space="preserve">
-    <value>AccountsPayable</value>
+  <data name="MaritalStatusSelection_Widowed" xml:space="preserve">
+    <value>Widowed</value>
   </data>
-  <data name="SpecialAccountSelection_AccountsPayableDiscount" xml:space="preserve">
-    <value>AccountsPayableDiscount</value>
-  </data>
-  <data name="SpecialAccountSelection_AccountsReceivable" xml:space="preserve">
-    <value>AccountsReceivable</value>
-  </data>
-  <data name="SpecialAccountSelection_Sales" xml:space="preserve">
-    <value>Sales</value>
-  </data>
-  <data name="SpecialAccountSelection_AccountsReceivableDiscount" xml:space="preserve">
-    <value>AccountsReceivableDiscount</value>
-  </data>
-  <data name="SpecialAccountSelection_Bank" xml:space="preserve">
-    <value>Bank</value>
-  </data>
-  <data name="SpecialAccountSelection_Cash" xml:space="preserve">
-    <value>Cash</value>
-  </data>
-  <data name="SpecialAccountSelection_CheckingAccount" xml:space="preserve">
-    <value>CheckingAccount</value>
-  </data>
-  <data name="SpecialAccountSelection_PettyCashAccount" xml:space="preserve">
-    <value>PettyCashAccount</value>
-  </data>
-  <data name="SpecialAccountSelection_EmployeeLoan" xml:space="preserve">
-    <value>EmployeeLoan</value>
-  </data>
-  <data name="SpecialAccountSelection_VatInput" xml:space="preserve">
-    <value>VatInput</value>
-  </data>
-  <data name="SpecialAccountSelection_VatOutput" xml:space="preserve">
-    <value>VatOutput</value>
-  </data>
-  <data name="SpecialAccountSelection_AdvancesToSupplier" xml:space="preserve">
-    <value>AdvancesToSupplier</value>
-  </data>
-  <data name="SpecialAccountSelection_CustomerAdvances" xml:space="preserve">
-    <value>CustomerAdvances</value>
-  </data>
-  <data name="TransactionTypeSelection_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="TransactionTypeSelection_Invoice" xml:space="preserve">
-    <value>Invoice</value>
-  </data>
-  <data name="TransactionTypeSelection_Debit" xml:space="preserve">
-    <value>Debit</value>
-  </data>
-  <data name="TransactionTypeSelection_Credit" xml:space="preserve">
-    <value>Credit</value>
-  </data>
-  <data name="YearMonthDaySelection_None" xml:space="preserve">
+  <data name="PaymentTypeSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="YearMonthDaySelection_Year" xml:space="preserve">
     <value>Year</value>
   </data>
+  <data name="TransactionTypeSelection_Debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="MaritalStatusSelection_Married" xml:space="preserve">
+    <value>Married</value>
+  </data>
+  <data name="DocumentTypeSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="AccountStatusSelection_NewAccount" xml:space="preserve">
+    <value>NewAccount</value>
+  </data>
+  <data name="SpecialAccountSelection_VatInput" xml:space="preserve">
+    <value>VatInput</value>
+  </data>
+  <data name="PaymentMethodSelection_Mixed" xml:space="preserve">
+    <value>Mixed</value>
+  </data>
+  <data name="SecurityLevelSelection_Manager2" xml:space="preserve">
+    <value>Manager2</value>
+  </data>
+  <data name="SpecialAccountSelection_CheckingAccount" xml:space="preserve">
+    <value>CheckingAccount</value>
+  </data>
+  <data name="DocumentTypeSelection_Supplier" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="AccountStatusSelection_ExceededCreditLimit" xml:space="preserve">
+    <value>ExceededCreditLimit</value>
+  </data>
+  <data name="PaymentTypeSelection_AccountsPayable" xml:space="preserve">
+    <value>AccountsPayable</value>
+  </data>
+  <data name="MaleFemaleSelection_Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="AccountGroupSelection_Expense" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="SpecialAccountSelection_CustomerAdvances" xml:space="preserve">
+    <value>CustomerAdvances</value>
+  </data>
   <data name="YearMonthDaySelection_Month" xml:space="preserve">
     <value>Month</value>
   </data>
-  <data name="YearMonthDaySelection_Day" xml:space="preserve">
-    <value>Day</value>
+  <data name="TransactionTypeSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="PayeeTypeSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="PayeeTypeSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SecurityLevelSelection_Guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="PaymentTypeSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="SecurityLevelSelection_User3" xml:space="preserve">
+    <value>User3</value>
+  </data>
+  <data name="TransactionTypeSelection_Invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="DocumentTypeSelection_Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="ImageTypeSelection_Bmp" xml:space="preserve">
+    <value>Bmp</value>
+  </data>
+  <data name="ImageTypeSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="DebitCreditSelection_Debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="SpecialAccountSelection_VatOutput" xml:space="preserve">
+    <value>VatOutput</value>
+  </data>
+  <data name="ReceiptTypeSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="DebitCreditSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="MaleFemaleSelection_Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="SecurityLevelSelection_Administrator1" xml:space="preserve">
+    <value>Administrator1</value>
+  </data>
+  <data name="RevCostCenterTypeSelection_Shared" xml:space="preserve">
+    <value>Shared</value>
+  </data>
+  <data name="AccountGroupSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="AccountStatusSelection_SeeNote" xml:space="preserve">
+    <value>SeeNote</value>
+  </data>
+  <data name="ReceiptTypeSelection_SupplierRefund" xml:space="preserve">
+    <value>SupplierRefund</value>
+  </data>
+  <data name="SpecialAccountSelection_AccountsPayableDiscount" xml:space="preserve">
+    <value>AccountsPayableDiscount</value>
+  </data>
+  <data name="YearMonthDaySelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ImageTypeSelection_Pdf" xml:space="preserve">
+    <value>Pdf</value>
+  </data>
+  <data name="PaymentMethodSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ReceiptTypeSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="PayeeTypeSelection_Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="PaymentMethodSelection_CreditCard" xml:space="preserve">
+    <value>CreditCard</value>
+  </data>
+  <data name="MaritalStatusSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SecurityLevelSelection_Administrator2" xml:space="preserve">
+    <value>Administrator2</value>
+  </data>
+  <data name="MaritalStatusSelection_Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="AccountStatusSelection_OnHold" xml:space="preserve">
+    <value>OnHold</value>
+  </data>
+  <data name="AccountStatusSelection_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="AccountGroupSelection_Liability" xml:space="preserve">
+    <value>Liability</value>
+  </data>
+  <data name="SecurityLevelSelection_User1" xml:space="preserve">
+    <value>User1</value>
+  </data>
+  <data name="SecurityLevelSelection_Manager3" xml:space="preserve">
+    <value>Manager3</value>
+  </data>
+  <data name="PaymentMethodSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="AccountGroupSelection_Equity" xml:space="preserve">
+    <value>Equity</value>
+  </data>
+  <data name="SpecialAccountSelection_Sales" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="DocumentTypeSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="YellowGradientBackgroundLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\YellowGradientBackgroundLarge.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
