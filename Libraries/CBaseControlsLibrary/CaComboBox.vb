@@ -525,7 +525,7 @@ Public Class CaComboBox
                 If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    If Text <> "" Then
+                    If Text <> vbNullChar And Text <> "" Then
                         Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                     End If
                 Else
