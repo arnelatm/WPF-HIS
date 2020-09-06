@@ -23,8 +23,8 @@
     [Phone1]              VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Phone2]              VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Email]               VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [DepartmentIdNo]      VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [DesignationIdNo]     VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DepartmentIdNo]      SMALLINT      NULL,
+    [DesignationIdNo]     SMALLINT      NULL,
     [HiredDate]           DATE          NULL,
     [ReleasedDate]        DATE          NULL,
     [ArAccountIdNo]       INT           NULL,
@@ -43,6 +43,8 @@
     [DateTimeStamp]       ROWVERSION    NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

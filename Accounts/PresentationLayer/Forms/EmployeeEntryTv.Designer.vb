@@ -527,7 +527,7 @@ Namespace PresentationLayer.Forms
             Me.cboPaySalariedOrHourly.SuggestListOrderRule = Nothing
             Me.cboPaySalariedOrHourly.TabIndex = 8
             Me.cboPaySalariedOrHourly.TextToSearch = Nothing
-            Me.cboPaySalariedOrHourly.ValueIsMandatory = False
+            Me.cboPaySalariedOrHourly.ValueIsMandatory = True
             Me.cboPaySalariedOrHourly.ValueIsNullable = False
             Me.cboPaySalariedOrHourly.ValueIsNumeric = False
             Me.cboPaySalariedOrHourly.ValueMember = "Code"
