@@ -103,7 +103,11 @@ Public Module GlobalFunctions
     End Function
 
     Public Function FormatMoney(ByVal amount As Decimal) As String
-        Return String.Format(CultureInfo.CurrentCulture, "{0:N2}", amount)
+        Return amount.ToString("N", GlobalVariables.DefaultCurrencyFormatInfo)
+    End Function
+
+    Public Function FormatDecimalNumber(ByVal number As Decimal) As String
+        Return number.ToString("N", GlobalVariables.DefaultNumberFormatInfo)
     End Function
 
     Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?

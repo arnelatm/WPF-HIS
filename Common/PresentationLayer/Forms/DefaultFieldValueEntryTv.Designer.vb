@@ -129,12 +129,14 @@ Namespace PresentationLayer.Forms
         Me.lblTableName.EditingMode = false
         resources.ApplyResources(Me.lblTableName, "lblTableName")
         Me.lblTableName.Name = "lblTableName"
-        '
-        'cboTableName
-        '
-        Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cboTableName.BackColor = System.Drawing.Color.White
-        Me.cboTableName.DefaultValue = Nothing
+            '
+            'cboTableName
+            '
+            Me.cboTableName.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("cboTableName.AutoCompleteCustomSource"), resources.GetString("cboTableName.AutoCompleteCustomSource1"), resources.GetString("cboTableName.AutoCompleteCustomSource2"), resources.GetString("cboTableName.AutoCompleteCustomSource3"), resources.GetString("cboTableName.AutoCompleteCustomSource4"), resources.GetString("cboTableName.AutoCompleteCustomSource5"), resources.GetString("cboTableName.AutoCompleteCustomSource6"), resources.GetString("cboTableName.AutoCompleteCustomSource7"), resources.GetString("cboTableName.AutoCompleteCustomSource8"), resources.GetString("cboTableName.AutoCompleteCustomSource9"), resources.GetString("cboTableName.AutoCompleteCustomSource10"), resources.GetString("cboTableName.AutoCompleteCustomSource11"), resources.GetString("cboTableName.AutoCompleteCustomSource12"), resources.GetString("cboTableName.AutoCompleteCustomSource13"), resources.GetString("cboTableName.AutoCompleteCustomSource14"), resources.GetString("cboTableName.AutoCompleteCustomSource15")})
+            Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+            Me.cboTableName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+            Me.cboTableName.BackColor = System.Drawing.Color.White
+            Me.cboTableName.DefaultValue = Nothing
         Me.cboTableName.DisplayOnly = false
         Me.cboTableName.EditingMode = true
         resources.ApplyResources(Me.cboTableName, "cboTableName")

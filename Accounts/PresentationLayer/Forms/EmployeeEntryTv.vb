@@ -9,7 +9,7 @@ Namespace PresentationLayer.Forms
     Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
             MyBase.New()
@@ -22,6 +22,7 @@ Namespace PresentationLayer.Forms
             TvSecondaryFieldName = "EmployeeCode"
             SortOrderKey = "EmployeeName"
             FirstControl = txtEmployeeCode
+            _nfi = GlobalVariables.DefaultNumberFormatInfo
             ' Add any initialization after the InitializeComponent() call.
             EmployeeTabControl.RightToLeftLayout = GlobalVariables.RightToLeftLayout
             EmployeeTabControl.RightToLeft = RightToLeft.Inherit
@@ -274,7 +275,7 @@ Namespace PresentationLayer.Forms
                 End If
             End Get
             Set
-                txtOpeningBalance.Text = Value
+                txtOpeningBalance.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -298,10 +299,10 @@ Namespace PresentationLayer.Forms
 
         Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
             Get
-                Return txtPayRateAmount.Text
+                Return txtPayRateAmount.Text.ToDecimalNumber(_nfi)
             End Get
             Set
-                txtPayRateAmount.Text = Value
+                txtPayRateAmount.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 

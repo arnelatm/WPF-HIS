@@ -228,6 +228,54 @@
   <data name="&gt;&gt;lblTableName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cboTableName.AutoCompleteCustomSource" xml:space="preserve">
+    <value>ApJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource1" xml:space="preserve">
+    <value>ArJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource2" xml:space="preserve">
+    <value>CashDisbursementJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource3" xml:space="preserve">
+    <value>CashReceiptJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource4" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource5" xml:space="preserve">
+    <value>CheckDisbursementJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource6" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource7" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource8" xml:space="preserve">
+    <value>ErJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource9" xml:space="preserve">
+    <value>GeneralJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource10" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource11" xml:space="preserve">
+    <value>Patient</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource12" xml:space="preserve">
+    <value>PettyCashJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource13" xml:space="preserve">
+    <value>SalesJournal</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource14" xml:space="preserve">
+    <value>SecurityGroup</value>
+  </data>
+  <data name="cboTableName.AutoCompleteCustomSource15" xml:space="preserve">
+    <value>User</value>
+  </data>
   <data name="cboTableName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
   </data>

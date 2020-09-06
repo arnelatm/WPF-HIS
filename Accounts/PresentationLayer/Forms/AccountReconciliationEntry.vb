@@ -15,7 +15,7 @@ Namespace PresentationLayer.Forms
         Implements IAccountReconciliationView
 
         Public Report As New ReportDocument
-        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private ReadOnly _nfi As NumberFormatInfo
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
         Private _glSystemBalance As Decimal
         Private _balance As Decimal
@@ -33,7 +33,7 @@ Namespace PresentationLayer.Forms
             MainTableName = "AccountReconciliation"
             SortOrderKey = "IdNo"
             FirstControl = cboAccountIdNo
-            _nfi.NumberDecimalDigits = 2
+            _nfi = GlobalVariables.DefaultNumberFormatInfo
             PresenterObj = New AccountReconciliationPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)

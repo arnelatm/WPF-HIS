@@ -465,6 +465,7 @@ Public Class CaComboBox
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
         PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+        Me.SetStyle(ControlStyles.EnableNotifyMessage, True)
 
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
@@ -825,6 +826,31 @@ Public Class CaComboBox
         End If
         Return True
     End Function
+
+    Private Const WM_MOUSEWHEEL As Integer = &H20A
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        If EditingMode And Not DisplayOnly Then
+            MyBase.WndProc(m)
+        Else
+            If Not m.Msg = WM_MOUSEWHEEL Then MyBase.WndProc(m)
+        End If
+    End Sub
+
+    'Private _selectedIndex As Integer = 0
+    'Private _onMouseWheel As Boolean = False
+
+    'Private Sub OnThisMouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseWheel
+
+    'End Sub
+
+    'Protected Overloads Overrides Sub OnSelectedIndexChanged(ByVal e As EventArgs)
+    '    If _onMouseWheel Then
+    '        If Me.SelectedIndex <> _selectedIndex Then Me.SelectedIndex = _selectedIndex
+    '        _onMouseWheel = False
+    '    End If
+    '    MyBase.OnSelectedIndexChanged(e)
+    'End Sub
 
 End Class
 
