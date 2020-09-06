@@ -66,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		CreateAllViews.sql = CreateAllViews.sql
 		CreateAllViews.txt = CreateAllViews.txt
 		EmployeeFileNDesignations.sql = EmployeeFileNDesignations.sql
+		FringeBenefits.sql = FringeBenefits.sql
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
 		InsertCheckDisbursementJournalItemTVP.sql = InsertCheckDisbursementJournalItemTVP.sql
 		ProfitCenter.sql = ProfitCenter.sql

@@ -10,17 +10,17 @@
     'End Class
 
     Public Class HLookupData
-        Property IdNo As Int32
+        Property IdNo
         Property Name As String
-        Property ParentIdNo As Int32?
+        Property ParentIdNo
         Property Code As String
     End Class
 
     Public Class LookupData
-        Public Property IdNo As Int32
+        Public Property IdNo
         Public Property Name As String
         Public Property Code As String
-        Public Property Index As Nullable(Of Int32)
+        Public Property Index
 
         Public Overrides Function ToString() As String
             Return Name.ToString()

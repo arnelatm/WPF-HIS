@@ -9,6 +9,9 @@ Public Class GlobalVariables
     Private Shared _appCultureInfo As CultureInfo
     Private Shared _appCurrentCultureInfo As CultureInfo
     Private Shared _defaultUnmirroredCultureInfoStr As String
+    Private Shared _defaultNumberFormatInfo As NumberFormatInfo
+    Private Shared _defaultCurrencyFormatInfo As NumberFormatInfo
+
 
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
@@ -391,6 +394,79 @@ Public Class GlobalVariables
             _defaultCountryIsoa3 = value
         End Set
     End Property
+
+    Public Shared Property DefaultCurrencyFormatInfo As NumberFormatInfo
+        Get
+            If _defaultCurrencyFormatInfo Is Nothing Then
+                Dim nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+                Dim currencyDecimalDigits = ConfigurationManager.AppSettings("DefaultCurrencyDecimalDigits")
+                Dim currencyDecimalSeparator = ConfigurationManager.AppSettings("DefaultCurrencyDecimalSeparator")
+                Dim currencyGroupSeparator = ConfigurationManager.AppSettings("DefaultCurrencyGroupSeparator")
+                Dim currencySymbol = ConfigurationManager.AppSettings("DefaultCurrencySymbol")
+                If currencyDecimalDigits Is Nothing Then
+                    nfi.CurrencyDecimalDigits = 2
+                Else
+                    nfi.CurrencyDecimalDigits = currencyDecimalDigits
+                End If
+                If currencyDecimalSeparator Is Nothing Then
+                    nfi.CurrencyDecimalSeparator = "."
+                Else
+                    nfi.CurrencyDecimalSeparator = currencyDecimalSeparator
+                End If
+                If currencyGroupSeparator Is Nothing Then
+                    nfi.CurrencyGroupSeparator = ","
+                Else
+                    nfi.CurrencyGroupSeparator = currencyGroupSeparator
+                End If
+                If currencySymbol Is Nothing Then
+                    nfi.CurrencySymbol = "₱"
+                Else
+                    nfi.CurrencySymbol = currencySymbol
+                End If
+                _defaultCurrencyFormatInfo = nfi
+                Return nfi
+            Else
+                Return _defaultCurrencyFormatInfo
+            End If
+        End Get
+        Set
+            _defaultCurrencyFormatInfo = Value
+        End Set
+    End Property
+
+    Public Shared Property DefaultNumberFormatInfo As NumberFormatInfo
+        Get
+            If _defaultNumberFormatInfo Is Nothing Then
+                Dim nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+                Dim numberDecimalDigits = ConfigurationManager.AppSettings("DefaultNumberDecimalDigits")
+                Dim numberDecimalSeparator = ConfigurationManager.AppSettings("DefaultNumberDecimalSeparator")
+                Dim numberGroupSeparator = ConfigurationManager.AppSettings("DefaultNumberGroupSeparator")
+                If numberDecimalDigits Is Nothing Then
+                    nfi.NumberDecimalDigits = 2
+                Else
+                    nfi.NumberDecimalDigits = numberDecimalDigits
+                End If
+                If numberDecimalSeparator Is Nothing Then
+                    nfi.NumberDecimalSeparator = "."
+                Else
+                    nfi.NumberDecimalSeparator = numberDecimalSeparator
+                End If
+                If numberGroupSeparator Is Nothing Then
+                    nfi.NumberGroupSeparator = ","
+                Else
+                    nfi.NumberGroupSeparator = numberGroupSeparator
+                End If
+                _defaultNumberFormatInfo = nfi
+                Return nfi
+            Else
+                Return _defaultNumberFormatInfo
+            End If
+        End Get
+        Set
+            _defaultNumberFormatInfo = Value
+        End Set
+    End Property
+
 
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then

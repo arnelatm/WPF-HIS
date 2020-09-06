@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[Employee] (
     [IdNo]                INT           IDENTITY (1, 1) NOT NULL,
-    [BranchID]            INT           NOT NULL,
     [EmployeeCode]        VARCHAR (10)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Title]               VARCHAR (25)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [EmployeeName]        VARCHAR (75)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -43,6 +42,8 @@
     [DateTimeStamp]       ROWVERSION    NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
