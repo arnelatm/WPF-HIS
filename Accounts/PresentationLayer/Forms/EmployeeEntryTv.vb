@@ -457,7 +457,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
-            MyBase.RecordPositionChanged(e)
+            'MyBase.RecordPositionChanged(e)
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
