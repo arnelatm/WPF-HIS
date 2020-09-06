@@ -86,7 +86,7 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, SalariedOrHourly, PayRateType, PayRateAmount, Active)" &
+                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, PaySalariedOrHourly, PayRateType, PayRateAmount, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
                     "         @ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"

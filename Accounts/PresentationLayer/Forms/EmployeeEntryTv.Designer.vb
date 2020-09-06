@@ -476,7 +476,7 @@ Namespace PresentationLayer.Forms
             Me.cboPayFrequency.ValueIsMandatory = False
             Me.cboPayFrequency.ValueIsNullable = False
             Me.cboPayFrequency.ValueIsNumeric = False
-            Me.cboPayFrequency.ValueMember = "IdNo"
+            Me.cboPayFrequency.ValueMember = "Code"
             '
             'lblPaySalariedOrHourly
             '
@@ -530,7 +530,7 @@ Namespace PresentationLayer.Forms
             Me.cboPaySalariedOrHourly.ValueIsMandatory = False
             Me.cboPaySalariedOrHourly.ValueIsNullable = False
             Me.cboPaySalariedOrHourly.ValueIsNumeric = False
-            Me.cboPaySalariedOrHourly.ValueMember = "IdNo"
+            Me.cboPaySalariedOrHourly.ValueMember = "Code"
             '
             'lblPayRateType
             '
@@ -584,7 +584,7 @@ Namespace PresentationLayer.Forms
             Me.cboPayRateType.ValueIsMandatory = False
             Me.cboPayRateType.ValueIsNullable = False
             Me.cboPayRateType.ValueIsNumeric = False
-            Me.cboPayRateType.ValueMember = "IdNo"
+            Me.cboPayRateType.ValueMember = "Code"
             '
             'lblPayRateAmount
             '
@@ -618,6 +618,7 @@ Namespace PresentationLayer.Forms
             Me.txtPayRateAmount.MinimumValue = Nothing
             Me.txtPayRateAmount.Name = "txtPayRateAmount"
             Me.txtPayRateAmount.OldValue = Nothing
+            Me.txtPayRateAmount.ReadOnly = True
             Me.txtPayRateAmount.Size = New System.Drawing.Size(200, 23)
             Me.txtPayRateAmount.TabIndex = 10
             Me.txtPayRateAmount.TabStop = False

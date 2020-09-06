@@ -125,7 +125,6 @@ Public Class CFormEntryTv
         _bypassSelectedChange = False
     End Sub
 
-
     'Protected Overrides Sub RecordDeleted()
     '    RemoveCurrentNode(True)
     'End Sub
