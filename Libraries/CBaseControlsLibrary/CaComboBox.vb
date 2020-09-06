@@ -522,10 +522,12 @@ Public Class CaComboBox
                     Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
-                If SelectedItem IsNot Nothing AndAlso SelectedItem.Code <> value Then
+                If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                    If Text <> "" Then
+                        Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                    End If
                 Else
                     If SelectedItem IsNot Nothing Then
                         If SelectedItem.Code <> value Then

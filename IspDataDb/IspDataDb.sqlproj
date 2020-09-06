@@ -214,7 +214,6 @@
     <Build Include="dbo\Stored Procedures\InsertDistributionSchemeItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertEmployeeLoanJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertGeneralJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertPurchaseJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertSalesJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateApJournalItemTVP.sql" />

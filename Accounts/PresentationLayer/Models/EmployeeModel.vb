@@ -8,7 +8,6 @@
         Public Property Errors As List(Of String)
         Public Property Active As Boolean
         Public Property ArAccountIdNo As Int32?
-        Public Property Balance As Decimal
         Public Property BankAccountNo As String
         Public Property BankIdNo As Int16?
         Public Property BirthDate As Date?

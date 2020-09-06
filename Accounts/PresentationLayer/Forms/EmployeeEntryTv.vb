@@ -105,7 +105,7 @@ Namespace PresentationLayer.Forms
 
         Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
-                Return cacDepartmentIdNo.GetNullableValue(Of Int16)
+                Return cacDepartmentIdNo.GetNullableValue(Of Int16?)
             End Get
             Set
                 cacDepartmentIdNo.SetValue(Value)
@@ -289,13 +289,12 @@ Namespace PresentationLayer.Forms
 
         Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
             Get
-                Return cboPayFrequency.GetValue()
+                Return cboPaySalariedOrHourly.GetValue()
             End Get
             Set
-                cboPayFrequency.SetValue(Value)
+                cboPaySalariedOrHourly.SetValue(Value)
             End Set
         End Property
-
 
         Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
             Get
@@ -314,7 +313,6 @@ Namespace PresentationLayer.Forms
                 cboPayRateType.SetValue(Value)
             End Set
         End Property
-
 
         Public Property Phone1 As String Implements IEmployeeView.Phone1
             Get
@@ -459,6 +457,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
+            MyBase.RecordPositionChanged(e)
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
