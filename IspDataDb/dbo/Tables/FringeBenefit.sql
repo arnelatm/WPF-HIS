@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[FringeBenefits] (
+﻿CREATE TABLE [dbo].[FringeBenefit] (
     [IdNo]                 SMALLINT      IDENTITY (1, 1) NOT NULL,
     [FringeBenefitCode]    VARCHAR (10)  NULL,
     [FringeBenefitName]    VARCHAR (50)  NULL,

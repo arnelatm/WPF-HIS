@@ -118,6 +118,7 @@
     <Compile Include="BusinessLayer\DistributionScheme.vb" />
     <Compile Include="BusinessLayer\DistributionSchemeItem.vb" />
     <Compile Include="BusinessLayer\Employee.vb" />
+    <Compile Include="BusinessLayer\FringeBenefit.vb" />
     <Compile Include="BusinessLayer\GeneralJournal.vb" />
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
