@@ -241,7 +241,7 @@
     <value>CashReceiptJournal</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource4" xml:space="preserve">
-    <value>Category</value>
+    <value>ProductCategory</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource5" xml:space="preserve">
     <value>CheckDisbursementJournal</value>
@@ -295,7 +295,7 @@
     <value>CashReceiptJournal</value>
   </data>
   <data name="cboTableName.Items4" xml:space="preserve">
-    <value>Category</value>
+    <value>ProductCategory</value>
   </data>
   <data name="cboTableName.Items5" xml:space="preserve">
     <value>CheckDisbursementJournal</value>

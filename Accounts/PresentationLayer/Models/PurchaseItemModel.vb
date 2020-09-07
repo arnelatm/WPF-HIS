@@ -11,7 +11,7 @@
         Public Property PurchaseItemCode As String
         Public Property PurchaseItemName As String
         Public Property PurchaseItemNameAra As String
-        Public Property CategoryIdNo As Int32
+        Public Property ProductCategoryIdNo As Int32
         Public Property GlAccountIdNo As Int32?
         Public Property VatAccountIdNo As Int32?
         Public Property Unit1 As String

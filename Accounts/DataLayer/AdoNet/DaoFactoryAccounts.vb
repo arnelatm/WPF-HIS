@@ -98,9 +98,9 @@ Namespace DataLayer.AdoNet
         '    End Get
         'End Property
 
-        'Public ReadOnly Property CategoryDao As IDaoAll(Of Category) Implements IDaoFactoryAccounts.CategoryDao
+        'Public ReadOnly Property ProductCategoryDao As IDaoAll(Of ProductCategory) Implements IDaoFactoryAccounts.ProductCategoryDao
         '    Get
-        '        Return New CategoryDao()
+        '        Return New ProductCategoryDao()
         '    End Get
         'End Property
 

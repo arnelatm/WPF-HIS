@@ -41,7 +41,7 @@ Namespace PresentationLayer.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboProductCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblGlAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboGlAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -180,7 +180,7 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
         Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
-        Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
+        Me.CFlowLayout4.Controls.Add(Me.cboProductCategoryIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemCode)
         Me.CFlowLayout4.Controls.Add(Me.txtPurchaseItemCode)
         Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemName)
@@ -248,39 +248,39 @@ Namespace PresentationLayer.Forms
         Me.lblCategoryIdNo.EditingMode = false
         resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
         Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
-        '
-        'cboCategoryIdNo
-        '
-        Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
-        Me.cboCategoryIdNo.ChangingSearchValueOnly = false
-        Me.cboCategoryIdNo.CurrentSearchTerm = ""
-        Me.cboCategoryIdNo.DefaultValue = ""
-        Me.cboCategoryIdNo.DisplayMember = "Name"
-        Me.cboCategoryIdNo.DropDownHeight = 1
-        Me.cboCategoryIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboCategoryIdNo.EditingMode = false
-        Me.cboCategoryIdNo.FilterRule = Nothing
-        resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
-        Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
-        Me.cboCategoryIdNo.Name = "cboCategoryIdNo"
-        Me.cboCategoryIdNo.OldValue = 0
-        Me.cboCategoryIdNo.OriginalDataSource = Nothing
-        Me.cboCategoryIdNo.OriginalList = Nothing
-        Me.cboCategoryIdNo.OverrideDropDownStyleList = false
-        Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
-        Me.cboCategoryIdNo.PreviousSelectedIndex = 0
-        Me.cboCategoryIdNo.PropertySelector = Nothing
-        Me.cboCategoryIdNo.ReadOnlyCombo = false
-        Me.cboCategoryIdNo.SearchAnywhere = false
-        Me.cboCategoryIdNo.SuggestBoxHeight = 200
-        Me.cboCategoryIdNo.SuggestListOrderRule = Nothing
-        Me.cboCategoryIdNo.TextToSearch = Nothing
-        Me.cboCategoryIdNo.ValueIsMandatory = false
-        Me.cboCategoryIdNo.ValueIsNullable = false
-        Me.cboCategoryIdNo.ValueIsNumeric = false
-        Me.cboCategoryIdNo.ValueMember = "IdNo"
+            '
+            'cboProductCategoryIdNo
+            '
+            Me.cboProductCategoryIdNo.BackColor = System.Drawing.Color.White
+            Me.cboProductCategoryIdNo.ChangingSearchValueOnly = False
+            Me.cboProductCategoryIdNo.CurrentSearchTerm = ""
+            Me.cboProductCategoryIdNo.DefaultValue = ""
+            Me.cboProductCategoryIdNo.DisplayMember = "Name"
+            Me.cboProductCategoryIdNo.DropDownHeight = 1
+            Me.cboProductCategoryIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboProductCategoryIdNo.EditingMode = False
+            Me.cboProductCategoryIdNo.FilterRule = Nothing
+            resources.ApplyResources(Me.cboProductCategoryIdNo, "cboProductCategoryIdNo")
+            Me.cboProductCategoryIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboProductCategoryIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboProductCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
+            Me.cboProductCategoryIdNo.Name = "cboProductCategoryIdNo"
+            Me.cboProductCategoryIdNo.OldValue = 0
+            Me.cboProductCategoryIdNo.OriginalDataSource = Nothing
+        Me.cboProductCategoryIdNo.OriginalList = Nothing
+        Me.cboProductCategoryIdNo.OverrideDropDownStyleList = false
+        Me.cboProductCategoryIdNo.PreviousSearchTerm = Nothing
+        Me.cboProductCategoryIdNo.PreviousSelectedIndex = 0
+        Me.cboProductCategoryIdNo.PropertySelector = Nothing
+        Me.cboProductCategoryIdNo.ReadOnlyCombo = false
+        Me.cboProductCategoryIdNo.SearchAnywhere = false
+        Me.cboProductCategoryIdNo.SuggestBoxHeight = 200
+        Me.cboProductCategoryIdNo.SuggestListOrderRule = Nothing
+        Me.cboProductCategoryIdNo.TextToSearch = Nothing
+        Me.cboProductCategoryIdNo.ValueIsMandatory = false
+        Me.cboProductCategoryIdNo.ValueIsNullable = false
+        Me.cboProductCategoryIdNo.ValueIsNumeric = false
+        Me.cboProductCategoryIdNo.ValueMember = "IdNo"
         '
         'lblGlAccountIdNo
         '
@@ -651,6 +651,6 @@ End Sub
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblUnit1 As CLabel
         Friend WithEvents txtUnit1 As CTextBox
-        Friend WithEvents cboCategoryIdNo As CaComboBox
+        Friend WithEvents cboProductCategoryIdNo As CaComboBox
     End Class
 End NameSpace

@@ -71,12 +71,12 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
-        Public Function GetCategoryList(Optional ByVal sortKey As String = "CategoryCode")
-            TableToGet = "Category"
+        Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
+            TableToGet = "ProductCategory"
             SortExpression = sortKey
-            DisplayName = "CategoryName"
-            DisplayNameArabic = "CategoryNameAra"
-            DisplayCode = "CategoryCode"
+            DisplayName = "ProductCategoryName"
+            DisplayNameArabic = "ProductCategoryNameAra"
+            DisplayCode = "ProductCategoryCode"
             Return GetLookupDataByCode()
         End Function
 

@@ -88,9 +88,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property CategoryDao As IDaoAll(Of Category)
+        Private ReadOnly Property ProductCategoryDao As IDaoAll(Of ProductCategory)
             Get
-                Return DaoFactoryAccounts.CreateDao("Category")
+                Return DaoFactoryAccounts.CreateDao("ProductCategory")
             End Get
         End Property
 

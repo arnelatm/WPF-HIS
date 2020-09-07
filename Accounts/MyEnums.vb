@@ -1,8 +1,6 @@
 ﻿Imports System.ComponentModel
-Imports System.Diagnostics.Eventing.Reader
 Imports System.Runtime.CompilerServices
 Imports AATM.Libraries.GlobalFuncNSub
-
 
 Public Enum AccountGroupSelection
     <EnumCode(" ")> None
@@ -14,7 +12,6 @@ Public Enum AccountGroupSelection
     <EnumCode("X")> Expense
 End Enum
 
-
 Public Enum AccountStatusSelection
     <EnumCode("O")> Open
     <EnumCode("E")> ExceededCreditLimit
@@ -25,33 +22,26 @@ Public Enum AccountStatusSelection
     <EnumCode("S")> SeeNote
 End Enum
 
-
-Public Enum PaymentTypeSelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("A")> AccountsPayable
-    <EnumCode("E")> Employee
-    <EnumCode("R")> CustomerRefund
-    <EnumCode("S")> Supplier
-    <EnumCode("O")> Others
+Public Enum DatabaseTableSelection
+    <EnumCode("BN")> Bank
+    <EnumCode("BR")> Branch
+    <EnumCode("PC")> ProductCategory
+    <EnumCode("CH")> ChartOfAccounts
+    <EnumCode("DP")> Department
+    <EnumCode("DG")> Designation
+    <EnumCode("MT")> MobileTransfer
+    <EnumCode("WT")> WireTransfer
+    <EnumCode("PP")> Paypal
+    <EnumCode("BC")> BitCoin
+    <EnumCode("MX")> Mixed
+    <EnumCode("OT")> Others
 End Enum
-
-
-Public Enum ReceiptTypeSelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("A")> AccountsReceivable
-    <EnumCode("E")> Employee
-    <EnumCode("R")> SupplierRefund
-    <EnumCode("C")> Customer
-    <EnumCode("O")> Others
-End Enum
-
 
 Public Enum DebitCreditSelection
     <EnumCode("")> NotSpecified
     <EnumCode("D")> Debit
     <EnumCode("C")> Credit
 End Enum
-
 
 Public Enum DocumentTypeSelection
     NotSpecified
@@ -63,7 +53,6 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
-
 Public Enum ImageTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("J")> Jpg
@@ -71,13 +60,11 @@ Public Enum ImageTypeSelection
     <EnumCode("B")> Bmp
 End Enum
 
-
 Public Enum MaleFemaleSelection
     <EnumCode("")> NotSpecified
     <EnumCode("M")> Male
     <EnumCode("F")> Female
 End Enum
-
 
 Public Enum MaritalStatusSelection
     <EnumCode("")> NotSpecified
@@ -87,7 +74,6 @@ Public Enum MaritalStatusSelection
     <EnumCode("D")> Divorced
 End Enum
 
-
 Public Enum PayeeTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("E")> Employee
@@ -95,7 +81,6 @@ Public Enum PayeeTypeSelection
     <EnumCode("S")> Supplier
     <EnumCode("O")> Others
 End Enum
-
 
 Public Enum PaymentMethodSelection
     <EnumCode("NO")> NotSpecified
@@ -112,12 +97,21 @@ Public Enum PaymentMethodSelection
     <EnumCode("OT")> Others
 End Enum
 
+
+Public Enum PaymentTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("A")> AccountsPayable
+    <EnumCode("E")> Employee
+    <EnumCode("R")> CustomerRefund
+    <EnumCode("S")> Supplier
+    <EnumCode("O")> Others
+End Enum
+
 Public Enum PaySalariedOrHourlySelection
     <EnumCode("")> NotSpecified
     <EnumCode("S")> Salaried
     <EnumCode("H")> Hourly
 End Enum
-
 
 Public Enum PayFrequencySelection
     <EnumCode("")> NotSpecified
@@ -138,6 +132,16 @@ Public Enum PayRateTypeSelection
     <EnumCode("H")> Hourly
     <EnumCode("D")> Daily
     <EnumCode("W")> Weekly
+End Enum
+
+
+Public Enum ReceiptTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("A")> AccountsReceivable
+    <EnumCode("E")> Employee
+    <EnumCode("R")> SupplierRefund
+    <EnumCode("C")> Customer
+    <EnumCode("O")> Others
 End Enum
 
 Public Enum SpecialAccountSelection
@@ -161,7 +165,6 @@ Public Enum SpecialAccountSelection
     <EnumCode("VO")> VatOutput
 End Enum
 
-
 Public Enum TransactionTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("I")> Invoice
@@ -175,7 +178,6 @@ Public Enum YearMonthDaySelection
     <EnumCode("M")> Month
     <EnumCode("D")> Day
 End Enum
-
 
 Public Enum YesNoSelection
     <EnumCode("N")> No = False
@@ -231,6 +233,7 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
+
 
     Public Function DebitCreditToEnum(value As String)
         Dim retValue As String
@@ -550,9 +553,13 @@ Public Module Adapter
         Return retValue
     End Function
 
-    <Extension()>
-    Public Function GetEnumDescription(ByVal enumConstant As [Enum]) As String
-        Dim attr() As DescriptionAttribute = DirectCast(enumConstant.GetType().GetField(enumConstant.ToString()).GetCustomAttributes(GetType(DescriptionAttribute), False), DescriptionAttribute())
+    <Extension>
+    Public Function GetEnumDescription(enumConstant As [Enum]) As String
+        Dim attr =
+                DirectCast(
+                    enumConstant.GetType().GetField(enumConstant.ToString()).GetCustomAttributes(
+                        GetType(DescriptionAttribute), False),
+                    DescriptionAttribute())
         Return If(attr.Length > 0, attr(0).Description, enumConstant.ToString)
     End Function
 
@@ -710,7 +717,6 @@ Public Module Adapter
         Return retValue
     End Function
 
-
     Public Function PayRateTypeToEnum(value As String) As String
         Dim retValue As String
         Select Case value
@@ -727,8 +733,6 @@ Public Module Adapter
         End Select
         Return retValue
     End Function
-
-
 
     Public Function ReceiptTypeToEnum(value As String) As String
         Dim retValue As String
@@ -904,7 +908,11 @@ Public Class DescriptionAttributes(Of T)
     Public Property Descriptions As List(Of String)
 
     Private Sub RetrieveAttributes()
-        For Each attribute As DescriptionAttribute In GetType(T).GetMembers().SelectMany(Function(member) member.GetCustomAttributes(GetType(DescriptionAttribute), True).Cast(Of DescriptionAttribute)())
+        For Each attribute As DescriptionAttribute In
+            GetType(T).GetMembers().SelectMany(
+                Function(member) _
+                                                  member.GetCustomAttributes(GetType(DescriptionAttribute), True).Cast _
+                                                  (Of DescriptionAttribute)())
             Attributes.Add(attribute)
         Next
     End Sub

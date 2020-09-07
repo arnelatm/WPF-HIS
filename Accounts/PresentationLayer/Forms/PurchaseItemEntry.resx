@@ -217,7 +217,7 @@
     <value>270</value>
   </data>
   <data name="lblCategoryIdNo.Text" xml:space="preserve">
-    <value>Category Code</value>
+    <value>Product Category Code</value>
   </data>
   <data name="lblCategoryIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -234,34 +234,34 @@
   <data name="&gt;&gt;lblCategoryIdNo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="cboCategoryIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboProductCategoryIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboCategoryIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboProductCategoryIdNo.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboCategoryIdNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboProductCategoryIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 26</value>
   </data>
-  <data name="cboCategoryIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboProductCategoryIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboCategoryIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboProductCategoryIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboCategoryIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboProductCategoryIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>283</value>
   </data>
-  <data name="&gt;&gt;cboCategoryIdNo.Name" xml:space="preserve">
-    <value>cboCategoryIdNo</value>
+  <data name="&gt;&gt;cboProductCategoryIdNo.Name" xml:space="preserve">
+    <value>cboProductCategoryIdNo</value>
   </data>
-  <data name="&gt;&gt;cboCategoryIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboProductCategoryIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboCategoryIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboProductCategoryIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;cboCategoryIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboProductCategoryIdNo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblPurchaseItemCode.Font" type="System.Drawing.Font, System.Drawing">
