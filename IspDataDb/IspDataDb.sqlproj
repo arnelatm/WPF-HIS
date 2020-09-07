@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\CheckDisbursementJournalItem.sql" />
     <Build Include="dbo\Tables\SJPrefix.sql" />
     <Build Include="dbo\Tables\Branch.sql" />
-    <Build Include="dbo\Tables\Category.sql" />
     <Build Include="dbo\Tables\Establishment.sql" />
     <Build Include="dbo\Tables\countryf.sql" />
     <Build Include="dbo\Tables\CountryMaster.sql" />
@@ -329,6 +328,7 @@
     <Build Include="dbo\Tables\TableName.sql" />
     <Build Include="dbo\Tables\NameTranslation.sql" />
     <Build Include="dbo\Tables\EmployeeFringeBenefit.sql" />
+    <Build Include="dbo\Tables\ProductCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
