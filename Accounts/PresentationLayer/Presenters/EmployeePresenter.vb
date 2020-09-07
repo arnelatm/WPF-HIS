@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
-            Return View.OpeningBalance + Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
+            Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
 
     End Class

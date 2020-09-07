@@ -150,6 +150,27 @@ Public Module GlobalFunctions
         Return Nothing
     End Function
 
+    Public Function GetEnumCodeValue(Of T)(description As String) As T
+        Dim type = GetType(T)
+        If Not type.IsEnum Then
+            Throw New InvalidOperationException()
+        End If
+        For Each fieldInfo In type.GetFields()
+            Dim descriptionAttribute = Attribute.GetCustomAttribute(fieldInfo, GetType(EnumCode))
+            If descriptionAttribute IsNot Nothing Then
+                If DirectCast(descriptionAttribute, AATM.Libraries.GlobalFuncNSub.EnumCode).EnumCode <> description Then
+                    Continue For
+                End If
+                Return DirectCast(fieldInfo.GetValue(Nothing), T)
+            End If
+            If fieldInfo.Name <> description Then
+                Continue For
+            End If
+            Return DirectCast(fieldInfo.GetValue(Nothing), T)
+        Next
+        Return Nothing
+    End Function
+
     Function GetMonthNameInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
                                    ByRef currentCulture As CultureInfo)
         If Mid(currentCulture.Name, 1, 2).ToLower() = Mid(targetCulture.Name, 1, 2).ToLower() Then
@@ -251,7 +272,7 @@ Public Module GlobalFunctions
         Dim value As DateTime
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(nYear,nMonth,nDay)
+        value = DateSerial(nYear, nMonth, nDay)
         CultureInfo.CurrentCulture = curCulture
         Return value
     End Function

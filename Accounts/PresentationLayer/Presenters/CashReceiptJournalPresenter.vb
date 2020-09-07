@@ -226,7 +226,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+            If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                 SetAsideJournalItems()
                 View.UnApplied = 0
                 View.Applied = View.Amount
@@ -234,7 +234,7 @@ Namespace PresentationLayer.Presenters
                 MakeJournalItem()
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
-                If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                     ' if AR Entry generate paid open invoices
                     nRowCount = 1
                     View.TotalDebits = 0
@@ -268,7 +268,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 View.TotalDebits = 0
                 View.TotalCredits = 0
                 For Each ji In View.CsrOiItems
@@ -308,12 +308,12 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                ElseIf ReceiptTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                ElseIf GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
                     End If
-                ElseIf ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                ElseIf GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                     If CsrOiItemDataIsValid() Then
                         retValue = True
                     Else
@@ -343,7 +343,7 @@ Namespace PresentationLayer.Presenters
             Dim chart As ChartModel
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
-                If PaymentTypeToEnum(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
@@ -353,7 +353,7 @@ Namespace PresentationLayer.Presenters
                         retValue = False
                         Exit For
                     End If
-                    If PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.Employee Then
+                    If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
@@ -365,7 +365,7 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         End If
-                    ElseIf PaymentTypeToEnum(View.PayorType) = ReceiptTypeSelection.SupplierRefund Then
+                    ElseIf GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.SupplierRefund Then
                         If specialAccount IsNot Nothing AndAlso "AR|EL".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee")
@@ -396,7 +396,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub MakeJournalItem()
-            If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 Dim aAccountIdNo As Int32() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
@@ -557,7 +557,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
-            If ReceiptTypeToEnum(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If GetEnumCodeValue(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 ' save the generated open invoices
                 retVal = UpdateOpenInvoices()
             End If
@@ -675,7 +675,6 @@ Namespace PresentationLayer.Presenters
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
             End If
         End Function
-
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String

@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -28,7 +29,7 @@ Namespace PresentationLayer.Presenters
                     retVal = False
                     Exit For
                 Else
-                    Dim cPayeeType = PayeeTypeToEnum(Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType"))
+                    Dim cPayeeType = GetEnumCodeValue(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType"))
                     If cPayeeType = PayeeTypeSelection.Employee Or cPayeeType = PayeeTypeSelection.Customer Or cPayeeType = PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error in line {0:N0} Sorry the account entered is either a Customer/Employee/Supplier Account. Such entries are not allowed for General Journal.", item.Sequence))
                         retVal = False

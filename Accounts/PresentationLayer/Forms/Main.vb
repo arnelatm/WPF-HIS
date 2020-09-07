@@ -1092,7 +1092,7 @@ Namespace PresentationLayer.Forms
             Dim x = New OneTimeRun
             Debugger.Break()
             OneTimeRun.CreateAllMessages()
-            OneTimeRun.CreateEnums()
+            'OneTimeRun.CreateEnums()
         End Sub
 
         Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs)
@@ -1180,7 +1180,7 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub StatementOfAccountsReToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub StatementOfAccountsReToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
         End Sub
 
@@ -1203,7 +1203,6 @@ Namespace PresentationLayer.Forms
                 }
             childMdiForm.Show()
         End Sub
-
 
         Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatementOfEmployeeLoansToolStripMenuItem.Click
             Dim childMdiForm As StatementOfEr
@@ -1318,7 +1317,6 @@ Namespace PresentationLayer.Forms
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()
         'End Sub
-
 
     End Class
 

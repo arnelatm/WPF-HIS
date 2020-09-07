@@ -1,5 +1,7 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Linq.Expressions
+Imports System.Reflection
 Imports System.Runtime.CompilerServices
 Imports System.Text.RegularExpressions
 
@@ -160,6 +162,31 @@ Public Module Extensions
 
     '    Return startDate
     'End Function
+
+    <Extension()>
+    Public Function GetAttribute(Of T As Structure)(ByVal enumerationValue As Object) As String
+        Dim type As Type = enumerationValue.[GetType]()
+        If Not type.IsEnum Then Throw New ArgumentException("EnumerationValue must be of Enum type", "enumerationValue")
+        Dim memberInfo As MemberInfo() = type.GetMember(enumerationValue.ToString())
+
+        If memberInfo IsNot Nothing AndAlso memberInfo.Length > 0 Then
+            Dim attrs As Object() = memberInfo(0).GetCustomAttributes(GetType(DescriptionAttribute), False)
+
+            If attrs IsNot Nothing AndAlso attrs.Length > 0 Then
+                Return (CType(attrs(0), DescriptionAttribute)).Description
+            End If
+        End If
+
+        Return enumerationValue.ToString()
+    End Function
+
+    <Extension()>
+    Function GetAttributeOfType(Of T As System.Attribute)(ByVal enumVal As [Enum]) As T
+        Dim type = enumVal.[GetType]()
+        Dim memInfo = type.GetMember(enumVal.ToString())
+        Dim attributes = memInfo(0).GetCustomAttributes(GetType(T), False)
+        Return If((attributes.Length > 0), CType(attributes(0), T), Nothing)
+    End Function
 
 End Module
 
