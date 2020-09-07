@@ -1,9 +1,11 @@
 ﻿CREATE TABLE [dbo].[DataBaseTable] (
-    [Id]            SMALLINT     IDENTITY (1, 1) NOT NULL,
+    [IdNo]          SMALLINT     IDENTITY (1, 1) NOT NULL,
     [TableName]     VARCHAR (30) NULL,
     [TableNameCode] CHAR (3)     NULL,
-    CONSTRAINT [PK__DataBase] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK__DataBase] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
