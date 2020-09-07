@@ -123,7 +123,6 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean
             Dim oldJournalItem As List(Of JournalItemModel)
@@ -141,7 +140,7 @@ Namespace PresentationLayer.Presenters
                         ' delete marker ArOpenInvoice (since no payment exist) as paid invoices cannot be deleted (not allowed in the system) see (userdeletingrow) in ArJournalEntry.vb
                         retVal = DeleteApOpenInvoice(oldItem.OpenInvoiceIdNo)
                     Else
-                        ' don't delete 
+                        ' don't delete
                     End If
                 End If
             Next
@@ -173,7 +172,7 @@ Namespace PresentationLayer.Presenters
                     item.JournalIdNo = View.IdNo
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
-                    Dim tranType As String = TransactionTypeToEnum(View.TransactionType)
+                    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
                         If item.Credit = 0 Then
                             item.Credit = View.Amount
@@ -211,7 +210,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cPayeeType As String
-                Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.Bank) + "|" + EnumToSpecialAccount(SpecialAccountSelection.Cash) + "|" + EnumToSpecialAccount(SpecialAccountSelection.PettyCashAccount)
+                Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
                 Dim chart As ChartModel
                 Dim dateToday As DateTime = Now()
@@ -224,7 +223,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.JournalItems
                         chart = GetChart(item.AccountIdNo)
                         specialAccount = chart.SpecialAccount
-                        If specialAccount = EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable) Then
+                        If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsPayable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "C" Then
                                 nTotalAp = nTotalAp + item.Credit - item.Debit
                             Else
@@ -244,7 +243,7 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                         Else
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso PayeeTypeToEnum(cPayeeType) <> PayeeTypeSelection.Supplier Then
+                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
                                 Dim caption = "Invalid Entry"

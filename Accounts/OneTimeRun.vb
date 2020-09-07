@@ -52,24 +52,24 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Chart of Accounts Entry and declare at least one Petty Cash Account!", "Error")
     End Sub
 
-    Public Shared Sub CreateEnums()
-        ResourceEnumConverter.MakeResource("AccountGroupSelection", GetType(AccountGroupSelection))
-        ResourceEnumConverter.MakeResource("AccountStatusSelection", GetType(AccountStatusSelection))
-        ResourceEnumConverter.MakeResource("DebitCreditSelection", GetType(DebitCreditSelection))
-        ResourceEnumConverter.MakeResource("DocumentTypeSelection", GetType(DocumentTypeSelection))
-        ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
-        ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-        ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
-        ResourceEnumConverter.MakeResource("PaymentMethodSelection", GetType(PaymentMethodSelection))
-        ResourceEnumConverter.MakeResource("PaymentTypeSelection", GetType(PaymentTypeSelection))
-        ResourceEnumConverter.MakeResource("ReceiptTypeSelection", GetType(ReceiptTypeSelection))
-        ResourceEnumConverter.MakeResource("SecurityLevelSelection", GetType(SecurityLevelSelection))
-        ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))
-        ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
-        ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
-        ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
+    'Public Shared Sub CreateEnums()
+    '    ResourceEnumConverter.MakeResource("AccountGroupSelection", GetType(AccountGroupSelection))
+    '    ResourceEnumConverter.MakeResource("AccountStatusSelection", GetType(AccountStatusSelection))
+    '    ResourceEnumConverter.MakeResource("DebitCreditSelection", GetType(DebitCreditSelection))
+    '    ResourceEnumConverter.MakeResource("DocumentTypeSelection", GetType(DocumentTypeSelection))
+    '    ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
+    '    ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
+    '    ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
+    '    ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
+    '    ResourceEnumConverter.MakeResource("PaymentMethodSelection", GetType(PaymentMethodSelection))
+    '    ResourceEnumConverter.MakeResource("PaymentTypeSelection", GetType(PaymentTypeSelection))
+    '    ResourceEnumConverter.MakeResource("ReceiptTypeSelection", GetType(ReceiptTypeSelection))
+    '    ResourceEnumConverter.MakeResource("SecurityLevelSelection", GetType(SecurityLevelSelection))
+    '    ResourceEnumConverter.MakeResource("SpecialAccountSelection", GetType(SpecialAccountSelection))
+    '    ResourceEnumConverter.MakeResource("TransactionTypeSelection", GetType(TransactionTypeSelection))
+    '    ResourceEnumConverter.MakeResource("YearMonthDaySelection", GetType(YearMonthDaySelection))
+    '    ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
 
-    End Sub
+    'End Sub
 
 End Class

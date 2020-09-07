@@ -211,7 +211,6 @@ Namespace PresentationLayer.Forms
         End Property
 
         Protected Overrides Sub CreateDataSources()
-
             cboProductCategoryIdNo.BeginUpdate()
             cboProductCategoryIdNo.DataSource = PresenterObj.GetCategoryList()
             cboProductCategoryIdNo.EndUpdate()
@@ -221,8 +220,6 @@ Namespace PresentationLayer.Forms
             cboVatAccountIdNo.BeginUpdate()
             cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("VI")
             cboVatAccountIdNo.EndUpdate()
-            'ResourceEnumConverter.MakeResource("MaritalStatusSelection", GetType(MaritalStatusSelection))
-            'ResourceEnumConverter.MakeResource("MaleFemaleSelection", GetType(MaleFemaleSelection))
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

@@ -5,7 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Public Class CFormEntryTv
-    Implements ISubscriber(Of RecordPositionChanged)
+    'Implements ISubscriber(Of RecordPositionChanged)
 
     Private _bypassSelectedChange As Boolean = False
     Protected TvMainFieldName As String
@@ -207,13 +207,15 @@ Public Class CFormEntryTv
         End If
     End Sub
 
-    'Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-    '    GotoRecordInTreeView()
-    'End Sub
-
-    Public Sub OEHRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+    Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        MyBase.RecordPositionChanged(e)
         GotoRecordInTreeView()
     End Sub
+
+    'Public Sub OEHRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+
+    '    GotoRecordInTreeView()
+    'End Sub
 
     Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
         DisplayTreeViewData()

@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -22,7 +23,7 @@ Namespace PresentationLayer.Presenters
             Dim paymentTypeEnum As String
             Dim itemPayeeType As String
             For Each item In journalItems
-                paymentTypeEnum = PaymentTypeToEnum(paymentType)
+                paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(paymentType)
                 If item.Debit = 0 And item.Credit = 0 Then
                     MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount.", item.Sequence.ToString()))
                     retVal = False
@@ -33,24 +34,24 @@ Namespace PresentationLayer.Presenters
                     Exit For
                 ElseIf String.IsNullOrEmpty(paymentType) Then
                     ' no need to check for accountTypes
-                ElseIf SpecialAccountToEnum(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Then
+                ElseIf GetEnumCodeValue(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Then
                     MessageBox.Show(String.Format("Error on line {0:N0}. Sorry Accounts Payable accounts not allowed for this entry!", item.Sequence))
                     retVal = False
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
                     itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso PayeeTypeToEnum(itemPayeeType) <> PayeeTypeSelection.Employee Then
+                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Employee Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Employee Payee accounts allowed for this entry!", item.Sequence))
                         retVal = False
                     End If
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
                     itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso PayeeTypeToEnum(itemPayeeType) <> PayeeTypeSelection.Customer Then
+                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Customer Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Customer Payee accounts allowed for this entry!", item.Sequence))
                         retVal = False
                     End If
                     'ElseIf paymentTypeEnum = PaymentTypeSelection.Supplier Then
                     '    itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                    '    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso PayeeTypeToEnum(itemPayeeType) <> PayeeTypeSelection.Supplier Then
+                    '    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso GetEnumCode(itemPayeeType) <> PayeeTypeSelection.Supplier Then
                     '        MessageBox.Show(String.Format("Error on line {0:n0}. Sorry only Supplier Payee accounts allowed for this entry!", item.Sequence))
                     '        retVal = False
                     '    End If

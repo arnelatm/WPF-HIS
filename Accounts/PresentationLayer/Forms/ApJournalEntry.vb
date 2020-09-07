@@ -266,7 +266,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _RevCostCentersByCode = PresenterObj.GetRevCostCenterListByCode()
+            _revCostCentersByCode = PresenterObj.GetRevCostCenterListByCode()
             cboSupplierIdNo.BeginUpdate()
             cboSupplierIdNo.DataSource = PresenterObj.GetSupplierListByCode()
             cboSupplierIdNo.EndUpdate()
@@ -274,7 +274,7 @@ Namespace PresentationLayer.Forms
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.AccountsPayable))
             cboAccountIdNo.EndUpdate()
         End Sub
 
@@ -593,7 +593,7 @@ Namespace PresentationLayer.Forms
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If PresenterObj.ApPaymentExists("AP", jiIdNo) Then
-                    'ElseIf 
+                    'ElseIf
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
                     Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
                     ' Cancel the deletion

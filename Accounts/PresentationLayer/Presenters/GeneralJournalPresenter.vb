@@ -53,10 +53,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
-                Dim cashAccount As String = EnumToSpecialAccount(SpecialAccountSelection.AccountsPayable) + "|" + EnumToSpecialAccount(SpecialAccountSelection.AccountsReceivable) +
-                                            "|" + EnumToSpecialAccount(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToSpecialAccount(SpecialAccountSelection.AccountsPayableDiscount) +
-                                            "|" + EnumToSpecialAccount(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + EnumToSpecialAccount(SpecialAccountSelection.AdvancesToSupplier) +
-                                            "|" + EnumToSpecialAccount(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToSpecialAccount(SpecialAccountSelection.EmployeeLoan)
+                Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.AccountsPayable) + "|" + GetEnumCode(SpecialAccountSelection.AccountsReceivable) +
+                                            "|" + GetEnumCode(SpecialAccountSelection.CustomerAdvances) + "|" + GetEnumCode(SpecialAccountSelection.AccountsPayableDiscount) +
+                                            "|" + GetEnumCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + GetEnumCode(SpecialAccountSelection.AdvancesToSupplier) +
+                                            "|" + GetEnumCode(SpecialAccountSelection.CustomerAdvances) + "|" + GetEnumCode(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
                 Dim chart As ChartModel
                 Dim dateToday As DateTime = Now()
@@ -92,8 +92,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
-
-
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
 
@@ -199,7 +197,6 @@ Namespace PresentationLayer.Presenters
 
             cForm.Show()
         End Sub
-
 
     End Class
 

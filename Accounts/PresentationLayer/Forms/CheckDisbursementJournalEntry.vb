@@ -470,8 +470,8 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub cboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
-            If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Or PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.Supplier Then
-                If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+                If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
                         bsCkdOiItems.Clear()
                         UpdateOiTotals()
@@ -562,7 +562,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub InputsTurnedOff()
             DataGridViewJournalItems.RemoveInsertColumn()
-            If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
             Else
                 btnViewGL.Visible = False
@@ -608,7 +608,7 @@ Namespace PresentationLayer.Forms
             cboPayeeIdNo.DisplayMember = "Name"
             Dim cbDataSource = Nothing
             cboPayeeIdNo.DataSource = cbDataSource
-            Dim paymentTypeEnum = PaymentTypeToEnum(cPaymentType)
+            Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 cbDataSource = PresenterObj.GetSupplierListByCode()
                 DataGridViewJournalItems.Visible = False
@@ -643,7 +643,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub txtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If PaymentTypeToEnum(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If
         End Sub

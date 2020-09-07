@@ -360,10 +360,10 @@ Namespace PresentationLayer.Forms
 
         'Public Property Active As Boolean Implements ICustomerView.Active
         '    Get
-        '        Return EnumToYesNo(tcbActive.Text)
+        '        Return GetEnumCode(tcbActive.Text)
         '    End Get
         '    Set(value As Boolean)
-        '        tcbActive.Text = YesNoToEnum(value)
+        '        tcbActive.Text = GetEnumCode(value)
         '    End Set
         'End Property
 

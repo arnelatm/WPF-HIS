@@ -33,11 +33,11 @@ Namespace PresentationLayer.Forms
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus
             Get
                 Return cacAccountStatus.GetValue()
-                'Return EnumToAccountStatus(cacAccountStatus.Text)
+                'Return GetEnumCode(cacAccountStatus.Text)
             End Get
             Set
                 cacAccountStatus.SetValue(Value)
-                'cacAccountStatus.Text = AccountStatusToEnum(value)
+                'cacAccountStatus.Text = GetEnumCode(value)
             End Set
         End Property
 
@@ -209,10 +209,10 @@ Namespace PresentationLayer.Forms
 
         'Public Property Active As Boolean Implements ISupplierView.Active
         '    Get
-        '        Return EnumToYesNo(tcbActive.Text)
+        '        Return GetEnumCode(tcbActive.Text)
         '    End Get
         '    Set(value As Boolean)
-        '        tcbActive.Text = YesNoToEnum(value)
+        '        tcbActive.Text = GetEnumCode(value)
         '    End Set
         'End Property
         Public Property OpeningBalance As Decimal Implements ISupplierView.OpeningBalance

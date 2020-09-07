@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetRevCostCenterList()
-            cacRcType.DataSource =  PresenterObj.MakeEnumComboList(Of RcTypeSelection)
+            cacRcType.DataSource = PresenterObj.MakeEnumComboList(Of RevCostTypeSelection)
         End Sub
 
 #Region "Fields"
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Forms
                 Return cacRcType.GetValue()
             End Get
             Set
-                cacRCType.SetValue(Value)
+                cacRcType.SetValue(Value)
             End Set
         End Property
 
