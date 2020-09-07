@@ -412,9 +412,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
-            Dim childMdiForm As CategoryEntryTv
+            Dim childMdiForm As ProductCategoryEntryTv
             'Set the Parent Form of the Child window.
-            childMdiForm = New CategoryEntryTv With {
+            childMdiForm = New ProductCategoryEntryTv With {
                 .MdiParent = Me
                 }
             'Display the new form.
@@ -1039,9 +1039,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         'Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem.Click
-        '    Dim childMdiForm As CategoryEntryTv
+        '    Dim childMdiForm As ProductCategoryEntryTv
         '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New CategoryEntryTv With {
+        '    childMdiForm = New ProductCategoryEntryTv With {
         '        .MdiParent = Me
         '        }
         '    'Display the new form.

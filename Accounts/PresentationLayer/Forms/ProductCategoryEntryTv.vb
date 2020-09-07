@@ -4,22 +4,22 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
 
-    Public Class CategoryEntryTv
-        Implements ICategoryView
+    Public Class ProductCategoryEntryTv
+        Implements IProductCategoryView
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "Category"
-            TvMainFieldName = "CategoryName"
-            TvSecondaryFieldName = "CategoryCode"
-            SortOrderKey = "CategoryName"
-            FirstControl = txtCategoryCode
+            MainTableName = "ProductCategory"
+            TvMainFieldName = "ProductCategoryName"
+            TvSecondaryFieldName = "ProductCategoryCode"
+            SortOrderKey = "ProductCategoryName"
+            FirstControl = txtProductCategoryCode
 
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New CategoryPresenter(Me)
+            PresenterObj = New ProductCategoryPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
             'CreateEnumResourceFile()
@@ -31,7 +31,7 @@ Namespace PresentationLayer.Forms
             'ResourceEnumConverter.MakeResource("CategoryTypeSelection", GetType(CategoryTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
-        Public Property IdNo As Int32 Implements ICategoryView.IdNo
+        Public Property IdNo As Int32 Implements IProductCategoryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
@@ -40,34 +40,34 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CategoryCode As String Implements ICategoryView.CategoryCode
+        Public Property ProductCategoryCode As String Implements IProductCategoryView.ProductCategoryCode
             Get
-                Return txtCategoryCode.Text
+                Return txtProductCategoryCode.Text
             End Get
             Set
-                txtCategoryCode.Text = Value
+                txtProductCategoryCode.Text = Value
             End Set
         End Property
 
-        Public Property CategoryName As String Implements ICategoryView.CategoryName
+        Public Property ProductCategoryName As String Implements IProductCategoryView.ProductCategoryName
             Get
-                Return txtCategoryName.Text
+                Return txtProductCategoryName.Text
             End Get
             Set
-                txtCategoryName.Text = Value
+                txtProductCategoryName.Text = Value
             End Set
         End Property
 
-        Public Property CategoryNameAra As String Implements ICategoryView.CategoryNameAra
+        Public Property ProductCategoryNameAra As String Implements IProductCategoryView.ProductCategoryNameAra
             Get
-                Return txtCategoryNameAra.Text
+                Return txtProductCategoryNameAra.Text
             End Get
             Set
-                txtCategoryNameAra.Text = Value
+                txtProductCategoryNameAra.Text = Value
             End Set
         End Property
 
-        Public Property Notes As String Implements ICategoryView.Notes
+        Public Property Notes As String Implements IProductCategoryView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -79,9 +79,9 @@ Namespace PresentationLayer.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                     {
-                    {"CategoryCode", txtCategoryCode},
-                    {"CategoryName", txtCategoryName},
-                    {"CategoryNameAra", txtCategoryNameAra},
+                    {"ProductCategoryCode", txtProductCategoryCode},
+                    {"ProductCategoryName", txtProductCategoryName},
+                    {"ProductCategoryNameAra", txtProductCategoryNameAra},
                     {"IdNo", TxtIdNo},
                     {"Notes", txtNotes}
                     }

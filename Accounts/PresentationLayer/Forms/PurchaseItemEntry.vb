@@ -17,7 +17,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PurchaseItem"
             SortOrderKey = "IdNo"
-            FirstControl = cboCategoryIdNo
+            FirstControl = cboProductCategoryIdNo
             PresenterObj = New PurchaseItemPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
@@ -201,20 +201,20 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property CategoryIdNo As Int32 Implements IPurchaseItemView.CategoryIdNo
+        Public Property ProductCategoryIdNo As Int32 Implements IPurchaseItemView.ProductCategoryIdNo
             Get
-                Return cboCategoryIdNo.GetValue()
+                Return cboProductCategoryIdNo.GetValue()
             End Get
             Set(value As Integer)
-                cboCategoryIdNo.SetValue(value)
+                cboProductCategoryIdNo.SetValue(value)
             End Set
         End Property
 
         Protected Overrides Sub CreateDataSources()
 
-            cboCategoryIdNo.BeginUpdate()
-            cboCategoryIdNo.DataSource = PresenterObj.GetCategoryList()
-            cboCategoryIdNo.EndUpdate()
+            cboProductCategoryIdNo.BeginUpdate()
+            cboProductCategoryIdNo.DataSource = PresenterObj.GetCategoryList()
+            cboProductCategoryIdNo.EndUpdate()
             cboGlAccountIdNo.BeginUpdate()
             cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode()
             cboGlAccountIdNo.EndUpdate()
@@ -232,7 +232,7 @@ Namespace PresentationLayer.Forms
          {"PurchaseItemCode", txtPurchaseItemCode},
          {"PurchaseItemName", txtPurchaseItemName},
          {"PurchaseItemNameAra", txtPurchaseItemNameAra},
-         {"CategoryIdNo", cboCategoryIdNo},
+         {"ProductCategoryIdNo", cboProductCategoryIdNo},
          {"GlAccountIdNo", cboGlAccountIdNo},
          {"VatAccountIdNo", cboVatAccountIdNo},
          {"Unit1", txtUnit1},

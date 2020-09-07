@@ -78,6 +78,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"
 	ProjectSection(SolutionItems) = preProject
 		DataBaseTable.sql = DataBaseTable.sql
+		FringeBenefit.sql = FringeBenefit.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AD3DFDF-C6F0-4B21-8A40-902BAAFF6682}"

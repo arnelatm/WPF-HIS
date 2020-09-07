@@ -6,7 +6,7 @@ INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (1, N'B
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (2, N'Branch', N'BRN')
 GO
-INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (3, N'Category', N'CTG')
+INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (3, N'ProductCategory', N'CTG')
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (4, N'Chart', N'CHR')
 GO

@@ -12,7 +12,7 @@ Namespace DataLayer
 
         'ReadOnly Property BankDao As IDaoAll(Of Bank)
         'ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
-        'ReadOnly Property CategoryDao As IDaoAll(Of Category)
+        'ReadOnly Property ProductCategoryDao As IDaoAll(Of ProductCategory)
         'ReadOnly Property ChartDao As IDaoAll(Of Chart)
         'ReadOnly Property CustomerDao As IDaoAll(Of Customer)
         'ReadOnly Property DesignationDao As IDaoAll(Of Designation)

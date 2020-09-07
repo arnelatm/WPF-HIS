@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
+                    " SELECT IdNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, ProductCategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &
                     "   FROM [PurchaseItem]" &
                     " WHERE IdNo = @IdNo"
@@ -40,7 +40,7 @@ Namespace DataLayer.AdoNet
                     "    SET PurchaseItemCode = @PurchaseItemCode," &
                     "        PurchaseItemName = @PurchaseItemName," &
                     "        PurchaseItemNameAra = @PurchaseItemNameAra," &
-                    "        CategoryIdNo = @CategoryIdNo," &
+                    "        ProductCategoryIdNo = @ProductCategoryIdNo," &
                     "        GlAccountIdNo = @GlAccountIdNo," &
                     "        VatAccountIdNo = @VatAccountIdNo," &
                     "        Unit1 = @Unit1," &
@@ -61,9 +61,9 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef purchaseItem As PurchaseItem) As Integer Implements IDaoAll(Of PurchaseItem).AddRecord
             Dim sql As String =
                     " INSERT INTO [PurchaseItem] " &
-                    " (PurchaseItemCode,PurchaseItemName,PurchaseItemNameAra,CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
+                    " (PurchaseItemCode,PurchaseItemName,PurchaseItemNameAra,ProductCategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active) " &
-                    " VALUES (@PurchaseItemCode,@PurchaseItemName,@PurchaseItemNameAra,@CategoryIdNo, @GlAccountIdNo, @VatAccountIdNo," &
+                    " VALUES (@PurchaseItemCode,@PurchaseItemName,@PurchaseItemNameAra,@ProductCategoryIdNo, @GlAccountIdNo, @VatAccountIdNo," &
                     "   @Unit1, @Unit2, @Unit3, @Unit1Ara, @Unit2Ara, @Unit3Ara, @StdPrice1, @StdPrice2, @StdPrice3, @Active) "
             Return Db.Insert(sql, Take(purchaseItem))
         End Function
@@ -75,7 +75,7 @@ Namespace DataLayer.AdoNet
             .PurchaseItemCode = Extensions.AsString(reader("PurchaseItemCode")),
             .PurchaseItemName = Extensions.AsString(reader("PurchaseItemName")),
             .PurchaseItemNameAra = Extensions.AsString(reader("PurchaseItemNameAra")),
-            .CategoryIdNo = Extensions.AsInt(Of Int32)(reader("CategoryIdNo")),
+            .ProductCategoryIdNo = Extensions.AsInt(Of Int32)(reader("ProductCategoryIdNo")),
             .GlAccountIdNo = Extensions.AsInt(Of Int32)(reader("GlAccountIdNo")),
             .VatAccountIdNo = Extensions.AsInt(Of Int32)(reader("VatAccountIdNo")),
             .Unit1 = Extensions.AsString(reader("Unit1")),
@@ -96,7 +96,7 @@ Namespace DataLayer.AdoNet
                                     "@PurchaseItemCode", purchaseItem.PurchaseItemCode,
                                     "@PurchaseItemName", purchaseItem.PurchaseItemName,
                                     "@PurchaseItemNameAra", purchaseItem.PurchaseItemNameAra,
-                                    "@CategoryIdNo", purchaseItem.CategoryIdNo,
+                                    "@ProductCategoryIdNo", purchaseItem.ProductCategoryIdNo,
                                     "@GlAccountIdNo", purchaseItem.GlAccountIdNo,
                                     "@VatAccountIdNo", purchaseItem.VatAccountIdNo,
                                     "@Unit1", purchaseItem.Unit1,

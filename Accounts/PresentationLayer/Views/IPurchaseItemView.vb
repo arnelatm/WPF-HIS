@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IPurchaseItemView
         Inherits IView
         Property IdNo As Int32
-        Property CategoryIdNo As Int32
+        Property ProductCategoryIdNo As Int32
         Property PurchaseItemCode As String
         Property PurchaseItemName As String
         Property PurchaseItemNameAra As String
