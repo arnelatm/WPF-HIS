@@ -61,6 +61,14 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
+Public Enum FringeBenefitTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("R")> Regular
+    <EnumCode("H")> Hourly
+    <EnumCode("P")> Periodic
+    <EnumCode("O")> Others
+End Enum
+
 Public Enum PayeeTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("E")> Employee

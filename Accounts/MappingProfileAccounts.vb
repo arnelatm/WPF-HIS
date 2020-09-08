@@ -55,6 +55,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
         CreateMap(Of ErJournal, ErJournalModel)().ReverseMap()
         CreateMap(Of ErJournalModel, IErJournalView)().ReverseMap()
+        CreateMap(Of FringeBenefit, FringeBenefitModel)().ReverseMap()
+        CreateMap(Of FringeBenefitModel, IFringeBenefitView)().ReverseMap()
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
         CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap()
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()

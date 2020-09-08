@@ -11,245 +11,10 @@ Namespace ServiceLayer.ActionService
         Inherits ServiceCommon
         Implements IServiceAccounts
 
+        Protected Shared ReadOnly _
+            DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
+
         Protected Service As Object
-
-        Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
-
-        Private ReadOnly Property AccountReconciliationDao As IDao(Of AccountReconciliation)
-            Get
-                Return DaoFactoryAccounts.CreateDao("AccountReconciliation")
-            End Get
-        End Property
-
-        Private ReadOnly Property ApJournalDao As IDao(Of ApJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ApJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property ArJournalDao As IDao(Of ArJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ArJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property ErJournalDao As IDao(Of ErJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ErJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property CashDisbursementJournalDao As IDao(Of CashDisbursementJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property CashReceiptJournalDao As IDao(Of CashReceiptJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CashReceiptJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property CheckDisbursementJournalDao As IDao(Of CheckDisbursementJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("GeneralJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property PettyCashJournalDao As IDao(Of PettyCashJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PettyCashJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property SalesJournalDao As IDao(Of SalesJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("SalesJournal")
-
-            End Get
-        End Property
-
-        Private ReadOnly Property BankDao As IDaoAll(Of Bank)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Bank")
-            End Get
-        End Property
-
-        Private ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CashCode")
-            End Get
-        End Property
-
-        Private ReadOnly Property ProductCategoryDao As IDaoAll(Of ProductCategory)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ProductCategory")
-            End Get
-        End Property
-
-        Private ReadOnly Property ChartDao As IDaoAll(Of Chart)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Chart")
-            End Get
-        End Property
-
-        Private ReadOnly Property CustomerDao As IDaoAll(Of Customer)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Customer")
-            End Get
-        End Property
-
-        Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Supplier")
-            End Get
-        End Property
-
-        Private ReadOnly Property DistributionSchemeDao As IDaoAll(Of DistributionScheme)
-            Get
-                Return DaoFactoryAccounts.CreateDao("DistributionScheme")
-            End Get
-        End Property
-
-        Private ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Employee")
-            End Get
-        End Property
-
-        Private ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PurchaseItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property DesignationDao As IDaoAll(Of Designation)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Designation")
-            End Get
-        End Property
-
-        'Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
-        '    Get
-        '        Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
-        '    End Get
-        'End Property
-
-        Private ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("DistributionSchemeItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property ArJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ArJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property ErJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ErJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property GeneralJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("GeneralJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property JournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CadOiItem")
-            End Get
-        End Property
-        Private ReadOnly Property CashReceiptJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CashReceiptJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property CashDisbursementJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
-            End Get
-        End Property
-
-
-        Private ReadOnly Property PettyCashJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PettyCashJournalItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property CsrOiItemDao As IDaoChild(Of CsrOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CsrOiItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property CkdOiItemDao As IDaoChild(Of CkdOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CkdOiItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property PcsOiItemDao As IDaoChild(Of PcsOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PcsOiItem")
-            End Get
-        End Property
-
-        Private ReadOnly Property ReconciledDao As IDaoChild(Of Reconciled)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Reconciled")
-            End Get
-        End Property
-
-        Private ReadOnly Property SalesCashItemDao As IDaoChild(Of SalesCashItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("SalesCashItem")
-
-            End Get
-        End Property
-
-        Private ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ApOpenInvoice")
-            End Get
-        End Property
-
-        Private ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice)
-            Get
-                Return DaoFactoryAccounts.CreateDao("ArOpenInvoice")
-            End Get
-        End Property
 
         Public Sub New(accountName As String)
             Dim bizObject
@@ -292,12 +57,276 @@ Namespace ServiceLayer.ActionService
             'DataDao = fldInfo.GetValue(Me)
         End Sub
 
-        Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateGlReferenceNumber
+        Private ReadOnly Property AccountReconciliationDao As IDao(Of AccountReconciliation)
+            Get
+                Return DaoFactoryAccounts.CreateDao("AccountReconciliation")
+            End Get
+        End Property
+
+        Private ReadOnly Property ApJournalDao As IDao(Of ApJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property ApJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ApOpenInvoiceDao As IDaoOpenInvoice(Of ApOpenInvoice)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApOpenInvoice")
+            End Get
+        End Property
+
+        Private ReadOnly Property ArJournalDao As IDao(Of ArJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property ArJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ArOpenInvoiceDao As IDaoOpenInvoice(Of ArOpenInvoice)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ArOpenInvoice")
+            End Get
+        End Property
+
+        Private ReadOnly Property BankDao As IDaoAll(Of Bank)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Bank")
+            End Get
+        End Property
+
+        Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CadOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashCode")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashDisbursementJournalDao As IDao(Of CashDisbursementJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashDisbursementJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashDisbursementJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashReceiptJournalDao As IDao(Of CashReceiptJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashReceiptJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CashReceiptJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CashReceiptJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ChartDao As IDaoAll(Of Chart)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Chart")
+            End Get
+        End Property
+
+        Private ReadOnly Property CheckDisbursementJournalDao As IDao(Of CheckDisbursementJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CkdOiItemDao As IDaoChild(Of CkdOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CkdOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CsrOiItemDao As IDaoChild(Of CsrOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CsrOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CustomerDao As IDaoAll(Of Customer)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Customer")
+            End Get
+        End Property
+
+        Private ReadOnly Property DesignationDao As IDaoAll(Of Designation)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Designation")
+            End Get
+        End Property
+
+        Private ReadOnly Property DistributionSchemeDao As IDaoAll(Of DistributionScheme)
+            Get
+                Return DaoFactoryAccounts.CreateDao("DistributionScheme")
+            End Get
+        End Property
+
+        Private ReadOnly Property DistributionSchemeItemDao As IDaoChild(Of DistributionSchemeItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("DistributionSchemeItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Employee")
+            End Get
+        End Property
+
+        Private ReadOnly Property ErJournalDao As IDao(Of ErJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ErJournal")
+            End Get
+        End Property
+
+        'Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
+        '    Get
+        '        Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
+        '    End Get
+        'End Property
+        Private ReadOnly Property ErJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ErJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property FringeBenefitDao As IDaoAll(Of FringeBenefit)
+            Get
+                Return DaoFactoryAccounts.CreateDao("FringeBenefit")
+            End Get
+        End Property
+
+        Private ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("GeneralJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property GeneralJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("GeneralJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property JournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ApJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property PcsOiItemDao As IDaoChild(Of PcsOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcsOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property PettyCashJournalDao As IDao(Of PettyCashJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PettyCashJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property PettyCashJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PettyCashJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ProductCategoryDao As IDaoAll(Of ProductCategory)
+            Get
+                Return DaoFactoryAccounts.CreateDao("ProductCategory")
+            End Get
+        End Property
+
+        Private ReadOnly Property PurchaseItemDao As IDaoAll(Of PurchaseItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PurchaseItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property ReconciledDao As IDaoChild(Of Reconciled)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Reconciled")
+            End Get
+        End Property
+
+        Private ReadOnly Property SalesCashItemDao As IDaoChild(Of SalesCashItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("SalesCashItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property SalesJournalDao As IDao(Of SalesJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("SalesJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Supplier")
+            End Get
+        End Property
+
+        Public Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date,
+                                                  Optional sortOrder As String = Nothing) As List(Of TM) _
+            Implements IServiceAccounts.GetAcctReconItems
+            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
+            Dim model As New List(Of TM)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
+        Public Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) _
+            Implements IServiceAccounts.GetOpenInvoices
+            Dim records = DataDao.GetOpenInvoices(idNo)
+            Dim model As New List(Of TM)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
+        Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Int32,
+                                                             Optional sortOrder As String = Nothing) As List(Of TM) _
+            Implements IServiceAccounts.GetReconciledRecordsWithIdNo
+            Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder)
+        End Function
+
+        Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer _
+                                    Implements IServiceAccounts.UpdateGlReferenceNumber
             GlobalVariables.Mapper.Map(model, DataBo)
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
-        Public Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer Implements IServiceAccounts.UpdateOpeningBalance
+        Public Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer _
+            Implements IServiceAccounts.UpdateOpeningBalance
             GlobalVariables.Mapper.Map(model, DataBo)
             Return DataDao.UpdateOpeningBalance(DataBo)
         End Function
@@ -312,29 +341,9 @@ Namespace ServiceLayer.ActionService
         '    GlobalVariables.Mapper.Map(records, model)
         '    Return model
         'End Function
-
-        Public Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetOpenInvoices
-            Dim records = DataDao.GetOpenInvoices(idNo)
-            Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
-            Return model
-        End Function
-
-        Public Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetAcctReconItems
-            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
-            Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
-            Return model
-        End Function
-
         'Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
         '    Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
         'End Function
-
-        Public Function GetReconciledRecordsWithIdNo(Of TM)(reconciled As Boolean, idNo As Int32, Optional sortOrder As String = Nothing) As List(Of TM) Implements IServiceAccounts.GetReconciledRecordsWithIdNo
-            Return DataDao.GetReconciledRecordsWithIdNo(Of TM)(reconciled, idNo, sortOrder)
-        End Function
-
     End Class
 
     'Public MustInherit Class ServiceOpenInvoice
@@ -374,5 +383,4 @@ Namespace ServiceLayer.ActionService
     '    End Sub
 
     'End Class
-
 End Namespace
