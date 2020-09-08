@@ -1163,10 +1163,10 @@ Namespace PresentationLayer.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1062, 586)
             Me.Controls.Add(Me.floFullEntryArea)
-        Me.MinimumSize = New System.Drawing.Size(1059, 580)
-        Me.Name = "ApJournalEntry"
-        Me.Text = "Accounts Payable Journal Entry"
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            Me.MinimumSize = New System.Drawing.Size(1059, 580)
+            Me.Name = "ApJournalEntry"
+            Me.Text = "Accounts Payable Journal Entry"
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floApJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit

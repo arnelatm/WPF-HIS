@@ -1313,6 +1313,14 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub FringeBenefitsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FringeBenefitsToolStripMenuItem.Click
+            Dim childMdiForm As FringeBenefitEntryTv
+            childMdiForm = New FringeBenefitEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

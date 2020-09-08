@@ -1,5 +1,5 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Forms
@@ -8,18 +8,20 @@ Namespace PresentationLayer.Forms
         Implements IFringeBenefitView
 
         Public Sub New()
+
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            FormTitleCaption = "FringeBenefites Maintenance Form"
+
             MainTableName = "FringeBenefit"
             TvMainFieldName = "FringeBenefitName"
             TvSecondaryFieldName = "FringeBenefitCode"
             SortOrderKey = "FringeBenefitName"
             FirstControl = txtFringeBenefitCode
-            ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New FringeBenefitPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+
         End Sub
 
 #Region "Fields"
@@ -60,6 +62,33 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+        Public Property AccountIdNo As Int32? Implements IFringeBenefitView.AccountIdNo
+            Get
+                Return cboAccountIdNo.GetValue()
+            End Get
+            Set
+                cboAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property DefaultFrequency As Char Implements IFringeBenefitView.DefaultFrequency
+            Get
+                Return cboDefaultFrequency.GetValue()
+            End Get
+            Set
+                cboDefaultFrequency.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property FringeBenefitType As Char Implements IFringeBenefitView.FringeBenefitType
+            Get
+                Return cboFringeBenefitType.GetValue()
+            End Get
+            Set
+                cboFringeBenefitType.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Notes As String Implements IFringeBenefitView.Notes
             Get
                 Return txtNotes.Text
@@ -71,6 +100,12 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Protected Overrides Sub CreateDataSources()
+            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
+            cboDefaultFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cboFringeBenefitType.DataSource = PresenterObj.MakeEnumComboList(Of FringeBenefitTypeSelection)
+        End Sub
+
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -80,6 +115,10 @@ Namespace PresentationLayer.Forms
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
+        End Sub
+
+        Private Sub CaComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFringeBenefitType.SelectedIndexChanged
+
         End Sub
 
     End Class
