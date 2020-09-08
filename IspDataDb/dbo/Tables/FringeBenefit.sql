@@ -6,6 +6,9 @@
     [DefaultFrequency]     CHAR (1)      NULL,
     [AccountIdNo]          INT           NULL,
     [FringeBenefitType]    CHAR (1)      NULL,
+    [DateTimeStamp]        ROWVERSION    NULL,
     CONSTRAINT [PK_FringeBenefits] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
