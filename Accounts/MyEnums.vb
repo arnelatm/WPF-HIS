@@ -116,8 +116,9 @@ Public Enum PayFrequencySelection
     <EnumCode("Q")> Quarterly
     <EnumCode("I")> BiYearly
     <EnumCode("Y")> Yearly
+    <EnumCode("R")> SemiYearly
     <EnumCode("D")> Daily
-    <EnumCode("N")> None
+    <EnumCode("A")> AsNeeded
 End Enum
 
 Public Enum PayRateTypeSelection

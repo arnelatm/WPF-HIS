@@ -3,12 +3,12 @@ Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class ApJournalEntry
         Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -22,12 +22,12 @@ Namespace PresentationLayer.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.components = New System.ComponentModel.Container()
+            Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -1167,20 +1167,20 @@ Namespace PresentationLayer.Forms
             Me.Name = "ApJournalEntry"
             Me.Text = "Accounts Payable Journal Entry"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floApJournalItems.ResumeLayout(false)
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floApJournalHeader.ResumeLayout(false)
-        Me.CFlowLayout3.ResumeLayout(false)
-        Me.CFlowLayout3.PerformLayout
-        Me.CFlowLayout2.ResumeLayout(false)
-        Me.CFlowLayout2.PerformLayout
-        Me.floFullEntryArea.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floApJournalItems.ResumeLayout(False)
+            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floApJournalHeader.ResumeLayout(False)
+            Me.CFlowLayout3.ResumeLayout(False)
+            Me.CFlowLayout3.PerformLayout()
+            Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout2.PerformLayout()
+            Me.floFullEntryArea.ResumeLayout(False)
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents floApJournalItems As CFlowLayout
         Friend WithEvents DataGridViewJournalItems As CDataGridView
         Friend WithEvents lblCancelled As CLabel
