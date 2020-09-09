@@ -150,7 +150,7 @@
     <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>17, 56</value>
   </metadata>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -453,43 +453,43 @@
   <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblDefaultFrequency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 142</value>
   </data>
-  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="lblDefaultFrequency.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 24</value>
   </data>
-  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>270</value>
   </data>
-  <data name="CLabel1.Text" xml:space="preserve">
+  <data name="lblDefaultFrequency.Text" xml:space="preserve">
     <value>Default Frequency</value>
   </data>
-  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblDefaultFrequency.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
-    <value>CLabel1</value>
+  <data name="&gt;&gt;lblDefaultFrequency.Name" xml:space="preserve">
+    <value>lblDefaultFrequency</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblDefaultFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblDefaultFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblDefaultFrequency.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="cboDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
@@ -522,43 +522,43 @@
   <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblFringeBenefitType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFringeBenefitType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFringeBenefitType.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 168</value>
   </data>
-  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblFringeBenefitType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="lblFringeBenefitType.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFringeBenefitType.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 24</value>
   </data>
-  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFringeBenefitType.TabIndex" type="System.Int32, mscorlib">
     <value>272</value>
   </data>
-  <data name="CLabel2.Text" xml:space="preserve">
+  <data name="lblFringeBenefitType.Text" xml:space="preserve">
     <value>Fringe Benefit Type</value>
   </data>
-  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblFringeBenefitType.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
-    <value>CLabel2</value>
+  <data name="&gt;&gt;lblFringeBenefitType.Name" xml:space="preserve">
+    <value>lblFringeBenefitType</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFringeBenefitType.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFringeBenefitType.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFringeBenefitType.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="cboFringeBenefitType.Font" type="System.Drawing.Font, System.Drawing">
@@ -728,9 +728,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>902, 337</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>918, 288</value>
