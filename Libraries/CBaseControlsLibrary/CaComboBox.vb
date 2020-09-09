@@ -67,11 +67,11 @@ Public Class CaComboBox
             If _displayOnly = value Then Exit Property
             _displayOnly = value
             If value Then
-                Me.ReadOnlyCombo = True
+                ReadOnlyCombo = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                Me.ReadOnlyCombo = False
+                ReadOnlyCombo = False
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
@@ -100,18 +100,18 @@ Public Class CaComboBox
             _editingMode = value
             If value Then
                 If DisplayOnly Then
-                    Me.ReadOnlyCombo = True
+                    ReadOnlyCombo = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
-                    Me.ReadOnlyCombo = False
+                    ReadOnlyCombo = False
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
                 DropDownHeight = 200
                 IntegralHeight = True
             Else
-                Me.ReadOnlyCombo = True
+                ReadOnlyCombo = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 DropDownHeight = 1
@@ -397,9 +397,19 @@ Public Class CaComboBox
         If Not Focused Then Return
         _suggestBindingList.Clear()
         _suggestBindingList.RaiseListChangedEvents = False
+        Dim x = PropertySelectorCompiled(Items)
+        Dim y = _filterRuleCompiled
+        Dim z = _suggestListOrderRuleCompiled
+        Dim w = x.OrderBy(y)
+        Dim w1 = w.ToList()
         PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        _suggestBindingList.RaiseListChangedEvents = True
-        _suggestBindingList.ResetBindings()
+        For Each it In PropertySelectorCompiled(Items)
+            '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+            Dim q
+            q = it.ToLower().Contains(Text.Trim().ToLower())
+        Next
+
+        _suggestBindingList.RaiseListChangedEvents = True_suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
         SuggestListForm.Visible = showForm
@@ -409,7 +419,6 @@ Public Class CaComboBox
         Else
             SuggestListForm.Hide()
         End If
-
         If _suggestBindingList.Count = 0 And LimitToList Then
             Beep()
             SendKeys.SendWait("{BACKSPACE}")
@@ -465,7 +474,7 @@ Public Class CaComboBox
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
         PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
-        Me.SetStyle(ControlStyles.EnableNotifyMessage, True)
+        SetStyle(ControlStyles.EnableNotifyMessage, True)
 
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
@@ -623,7 +632,7 @@ Public Class CaComboBox
     End Function
 
     Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
-        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             If DropDownStyle = ComboBoxStyle.DropDown Then
                 ''
             Else
@@ -827,13 +836,13 @@ Public Class CaComboBox
         Return True
     End Function
 
-    Private Const WM_MOUSEWHEEL As Integer = &H20A
+    Private Const WmMousewheel As Integer = &H20A
 
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+    Protected Overrides Sub WndProc(ByRef m As Message)
         If EditingMode And Not DisplayOnly Then
             MyBase.WndProc(m)
         Else
-            If Not m.Msg = WM_MOUSEWHEEL Then MyBase.WndProc(m)
+            If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
         End If
     End Sub
 

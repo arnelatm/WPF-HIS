@@ -415,8 +415,9 @@ Namespace PresentationLayer.Forms
         Me.floHeader1.SetFlowBreak(Me.cboAccountIdNo, true)
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
+            Me.cboAccountIdNo.FormattingEnabled = True
+            Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
         Me.cboAccountIdNo.Name = "cboAccountIdNo"
         Me.cboAccountIdNo.OldValue = 0
         Me.cboAccountIdNo.OriginalDataSource = Nothing
