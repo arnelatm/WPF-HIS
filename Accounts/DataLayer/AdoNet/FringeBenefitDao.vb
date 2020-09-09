@@ -39,11 +39,10 @@ Namespace DataLayer.AdoNet
                     " SET FringeBenefitCode = @FringeBenefitCode," &
                     " FringeBenefitName = @FringeBenefitName," &
                     " FringeBenefitNameAra = @FringeBenefitNameAra," &
-                    " AccountIdNo," &
-                    " DefaultFrequency," &
-                    " FringeBenefitType " &
-                    "  WHERE IdNo = @IdNo"
-
+                    " AccountIdNo = @AccountIdNo," &
+                    " DefaultFrequency = @DefaultFrequency," &
+                    " FringeBenefitType = @FringeBenefitType" &
+                    " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(FringeBenefit))
         End Function
 

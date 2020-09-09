@@ -38,13 +38,13 @@ Namespace PresentationLayer.Forms
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblDefaultFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboDefaultFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblFringeBenefitType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboFringeBenefitType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -165,9 +165,9 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay.Controls.Add(Me.txtFringeBenefitNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.cboAccountIdNo)
-            Me.floDataDisplay.Controls.Add(Me.CLabel1)
+            Me.floDataDisplay.Controls.Add(Me.lblDefaultFrequency)
             Me.floDataDisplay.Controls.Add(Me.cboDefaultFrequency)
-            Me.floDataDisplay.Controls.Add(Me.CLabel2)
+            Me.floDataDisplay.Controls.Add(Me.lblFringeBenefitType)
             Me.floDataDisplay.Controls.Add(Me.cboFringeBenefitType)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
@@ -201,13 +201,6 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblNameAra, "lblNameAra")
             Me.lblNameAra.Name = "lblNameAra"
             '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
-            '
             'lblAccountIdNo
             '
             Me.lblAccountIdNo.DisplayOnly = True
@@ -217,6 +210,7 @@ Namespace PresentationLayer.Forms
             '
             'cboAccountIdNo
             '
+            Me.cboAccountIdNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
             Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
@@ -250,12 +244,12 @@ Namespace PresentationLayer.Forms
             Me.cboAccountIdNo.ValueIsNumeric = False
             Me.cboAccountIdNo.ValueMember = "IdNo"
             '
-            'CLabel1
+            'lblDefaultFrequency
             '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
+            Me.lblDefaultFrequency.DisplayOnly = True
+            Me.lblDefaultFrequency.EditingMode = False
+            resources.ApplyResources(Me.lblDefaultFrequency, "lblDefaultFrequency")
+            Me.lblDefaultFrequency.Name = "lblDefaultFrequency"
             '
             'cboDefaultFrequency
             '
@@ -273,7 +267,7 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.cboDefaultFrequency, "cboDefaultFrequency")
             Me.cboDefaultFrequency.ForeColor = System.Drawing.Color.Black
             Me.cboDefaultFrequency.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultFrequency.LinkedLabel = Me.CLabel1
+            Me.cboDefaultFrequency.LinkedLabel = Me.lblDefaultFrequency
             Me.cboDefaultFrequency.Name = "cboDefaultFrequency"
             Me.cboDefaultFrequency.OldValue = 0
             Me.cboDefaultFrequency.OriginalDataSource = Nothing
@@ -290,14 +284,14 @@ Namespace PresentationLayer.Forms
             Me.cboDefaultFrequency.ValueIsMandatory = False
             Me.cboDefaultFrequency.ValueIsNullable = False
             Me.cboDefaultFrequency.ValueIsNumeric = False
-            Me.cboDefaultFrequency.ValueMember = "IdNo"
+            Me.cboDefaultFrequency.ValueMember = "Code"
             '
-            'CLabel2
+            'lblFringeBenefitType
             '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.Name = "CLabel2"
+            Me.lblFringeBenefitType.DisplayOnly = True
+            Me.lblFringeBenefitType.EditingMode = False
+            resources.ApplyResources(Me.lblFringeBenefitType, "lblFringeBenefitType")
+            Me.lblFringeBenefitType.Name = "lblFringeBenefitType"
             '
             'cboFringeBenefitType
             '
@@ -315,7 +309,7 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.cboFringeBenefitType, "cboFringeBenefitType")
             Me.cboFringeBenefitType.ForeColor = System.Drawing.Color.Black
             Me.cboFringeBenefitType.HideWhenNotEditingOrAdding = False
-            Me.cboFringeBenefitType.LinkedLabel = Me.CLabel2
+            Me.cboFringeBenefitType.LinkedLabel = Me.lblFringeBenefitType
             Me.cboFringeBenefitType.Name = "cboFringeBenefitType"
             Me.cboFringeBenefitType.OldValue = 0
             Me.cboFringeBenefitType.OriginalDataSource = Nothing
@@ -332,7 +326,14 @@ Namespace PresentationLayer.Forms
             Me.cboFringeBenefitType.ValueIsMandatory = False
             Me.cboFringeBenefitType.ValueIsNullable = False
             Me.cboFringeBenefitType.ValueIsNumeric = False
-            Me.cboFringeBenefitType.ValueMember = "IdNo"
+            Me.cboFringeBenefitType.ValueMember = "Code"
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
             '
             'FringeBenefitEntryTv
             '
@@ -361,9 +362,9 @@ Namespace PresentationLayer.Forms
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
-        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents lblDefaultFrequency As CLabel
         Friend WithEvents cboDefaultFrequency As CaComboBox
-        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents lblFringeBenefitType As CLabel
         Friend WithEvents cboFringeBenefitType As CaComboBox
     End Class
 End Namespace
