@@ -245,7 +245,7 @@ Namespace PresentationLayer.Forms
             Get
                 Return TxtTotalCredits
             End Get
-            Set
+            Set(value As Decimal)
                 TxtTotalCredits = Value
             End Set
         End Property
@@ -699,11 +699,16 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If _apFooter IsNot Nothing Then
-                _apFooter.SumAllColumns()
-                Applied = _apFooter.Value("dgvAmount")
-                DiscountTaken = _apFooter.Value("dgvDiscountTaken")
-                UnApplied = Amount - Applied
+            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+                If _apFooter IsNot Nothing Then
+                    _apFooter.SumAllColumns()
+                    Applied = _apFooter.Value("dgvAmount")
+                    DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                    UnApplied = Amount - Applied
+                End If
+            Else
+                Applied = Amount
+                UnApplied = 0
             End If
         End Sub
 

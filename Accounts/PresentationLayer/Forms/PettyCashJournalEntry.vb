@@ -36,7 +36,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PettyCashJournal"
             SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
+            FirstControl = cboPayeeIdNo
 
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
@@ -343,7 +343,7 @@ Namespace PresentationLayer.Forms
                     dgvInvoiceNo.DisplayOnly = True
                     dgvPreviousBalance.DisplayOnly = True
                     dgvBalance.DisplayOnly = True
-                    DgvTransactionDate.DisplayOnly = True
+                    dgvTransactionDate.DisplayOnly = True
                     dgvJournalCode.DisplayOnly = True
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
@@ -400,15 +400,6 @@ Namespace PresentationLayer.Forms
         Private Sub pcsOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcsOiItems.CellEndEdit
             With DataGridViewPcsOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
-                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < JournalItems.Count() Then
-                                JournalItems(nIndex).AccountIdNo = newValue
-                                BindJournalItem()
-                            End If
-                        End If
                     Case $"dgvamount"
                         Dim selectedRow As PcsOiItemView
                         Dim amt = .Value
@@ -449,7 +440,7 @@ Namespace PresentationLayer.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub cboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        Private Sub cboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
