@@ -22,8 +22,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _pettyCashCount As Int16 = 0
         Private ReadOnly _defaultPettyCashAccount As Int32
 
-        Private _oldPcsOiItem As List(Of PcsOiItemModel)
-
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("PettyCashJournal")

@@ -36,7 +36,7 @@ Namespace PresentationLayer.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
+            FirstControl = cboPayeeIdNo
 
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
@@ -438,7 +438,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboAccountIdNo.Validated
+        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated,  cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
@@ -672,11 +672,16 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If _apFooter IsNot Nothing Then
-                _apFooter.SumAllColumns()
-                Applied = _apFooter.Value("dgvAmount")
-                DiscountTaken = _apFooter.Value("dgvDiscountTaken")
-                UnApplied = Amount - Applied
+            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+                If _apFooter IsNot Nothing Then
+                    _apFooter.SumAllColumns()
+                    Applied = _apFooter.Value("dgvAmount")
+                    DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                    UnApplied = Amount - Applied
+                End If
+            Else
+                Applied = Amount
+                UnApplied = 0
             End If
         End Sub
 
