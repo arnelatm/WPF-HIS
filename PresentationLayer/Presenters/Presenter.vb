@@ -366,7 +366,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = Model.InsertTvp(insertTable)
+            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else
@@ -378,18 +378,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
+    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
+        Dim parentIdNo As Integer
         If AddMode Then
-            CallByName(View, IdFieldName, CallType.Set, parentIdNo)
+            parentIdNo = passedValue
         Else
             parentIdNo = CallByName(View, IdFieldName, CallType.Get)
         End If
         updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
-            If parentIdNo <> 0 Then
+            If passedValue <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next

@@ -272,6 +272,11 @@ Public Class CaComboBox
 
     Public Shared Property WmPaint1 As Integer = &HF
 
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Browsable(True)>
     Private Property LimitToList As Boolean = False
 
     'Private Shadows Sub OnKeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
@@ -409,7 +414,8 @@ Public Class CaComboBox
             q = it.ToLower().Contains(Text.Trim().ToLower())
         Next
 
-        _suggestBindingList.RaiseListChangedEvents = True_suggestBindingList.ResetBindings()
+        _suggestBindingList.RaiseListChangedEvents = True
+        _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
         SuggestListForm.Visible = showForm

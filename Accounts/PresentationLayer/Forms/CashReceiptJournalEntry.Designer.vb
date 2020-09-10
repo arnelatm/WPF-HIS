@@ -1097,7 +1097,7 @@ Namespace PresentationLayer.Forms
             Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvBalance.EditingMode = False
             resources.ApplyResources(Me.dgvBalance, "dgvBalance")
-        Me.dgvBalance.Name = "dgvBalance"
+            Me.dgvBalance.Name = "dgvBalance"
         Me.dgvBalance.ReadOnly = true
         '
         'AccountIdNoDataGridViewTextBoxColumn

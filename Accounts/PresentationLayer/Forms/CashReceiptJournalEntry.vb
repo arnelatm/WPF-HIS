@@ -471,7 +471,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboPayorType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectionChangeCommitted
+        Private Sub cboPayorType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedIndexChanged
             SetPayorProperty(cboPayorType.SelectedValue)
         End Sub
 

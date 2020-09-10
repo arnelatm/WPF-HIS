@@ -384,6 +384,9 @@
   <data name="&gt;&gt;lblPaymentType.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cboPaymentType.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
   <data name="cboPaymentType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -925,7 +928,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 40</value>
+    <value>563, 18</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -946,7 +949,7 @@
     <value>8, 8</value>
   </data>
   <data name="floHeader1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 183</value>
+    <value>699, 201</value>
   </data>
   <data name="floHeader1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

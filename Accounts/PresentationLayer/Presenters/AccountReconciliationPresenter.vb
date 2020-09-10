@@ -52,7 +52,7 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        Public Overloads Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim parentIdNo As Integer
             If AddMode Then
                 parentIdNo = retVal
@@ -90,8 +90,7 @@ Namespace PresentationLayer.Presenters
 
             retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "AccountReconciliationIdNo")
 
-            Return retVal
-        End Function
+        End Sub
 
         Public Sub PostReconciliation(ByVal idNo As Int32, ByVal accountReconciliationItems As List(Of AccountReconciliationItemModel))
             Try

@@ -86,19 +86,13 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim parentIdNo As Int32
-            If AddMode Then
-                parentIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_apJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
                 If AddMode Then
-                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     For Each item In newJournalItem
                         If IsAccountsPayableAccount(item.AccountIdNo) Then
                             retVal = AddApOpenInvoice(item, "AP")
@@ -108,7 +102,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                 Else
-                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                    newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     retVal = RemoveDeletedApOpenInvoices(retVal, newJournalItem)
                     If retVal >= 0 Then
                         retVal = AddNewApOpenInvoices(retVal, newJournalItem)
@@ -120,8 +114,7 @@ Namespace PresentationLayer.Presenters
                     retVal = UpdateGlReferenceNumber()
                 End If
             End If
-            Return retVal
-        End Function
+        End Sub
 
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean

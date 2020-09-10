@@ -290,6 +290,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property SalesJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("SalesJournalItem")
+            End Get
+        End Property
+
         Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
             Get
                 Return DaoFactoryAccounts.CreateDao("Supplier")

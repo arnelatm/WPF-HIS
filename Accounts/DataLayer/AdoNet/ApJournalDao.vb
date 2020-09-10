@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class ApJournalDao
-        Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal), IDaoChild(Of JournalItem)
+        Implements IDao(Of ApJournal), IDaoJournals(Of ApJournal) ', IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()
 
@@ -37,7 +37,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            data.JournalItems = GetRecordsWithIdNo(idNo, "Sequence")
+            Dim jiDao = New ApJournalItemDao
+            data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
                 data.TotalDebits += item.Debit
                 data.TotalCredits += item.Credit
@@ -189,20 +190,20 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
-            Dim jiDao = New ApJournalItemDao()
-            Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
-        End Function
+        'Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        '    Dim jiDao = New ApJournalItemDao()
+        '    Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        'End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Dim jiDao = New ApJournalItemDao()
-            Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
-        End Function
+        'Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp
+        '    Dim jiDao = New ApJournalItemDao()
+        '    Return jiDao.DelUpdateTvp(tvpTable, groupIdNo)
+        'End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
-            Dim jiDao = New ApJournalItemDao()
-            Return jiDao.InsertTvp(tvpTable)
-        End Function
+        'Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of JournalItem).InsertTvp
+        '    Dim jiDao = New ApJournalItemDao()
+        '    Return jiDao.InsertTvp(tvpTable)
+        'End Function
 
     End Class
 

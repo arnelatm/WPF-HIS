@@ -19,7 +19,6 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _cadOiItemModel As New ModelAccounts("CadOiItem")
         Private ReadOnly _cadJournalItemModel As New ModelAccounts("CashDisbursementJournalItem")
-        Private _oldCadOiItem As List(Of CadOiItemModel)
 
         Public Sub New(view As ICashDisbursementJournalView)
             MyBase.New(view)
@@ -187,7 +186,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _cadJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
@@ -279,16 +278,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            ' save journal
-            Dim parentIdNo As Integer = retVal
-            If Not AddMode Then
-                _oldCadOiItem = GetCadOiItems(View.IdNo)
-            Else
-                _oldCadOiItem = Nothing
-            End If
-            retVal = UpdateChildData(_cadJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_cadJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_cadOiItemModel, DtCadOiUpdateTable, DtCadOiInsertTable, parentIdNo, "CadIdNo")
+                retVal = UpdateChildData(_cadOiItemModel, DtCadOiUpdateTable, DtCadOiInsertTable, passedValue, "CadIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -312,6 +305,9 @@ Namespace PresentationLayer.Presenters
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
                     End If
+                    If retValue Then
+                        retValue = JournalItemDataIsValid()
+                    End If
                 ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If CadOiItemDataIsValid() Then
                         retValue = True
@@ -330,9 +326,6 @@ Namespace PresentationLayer.Presenters
                         Next
                     End If
                 End If
-                If retValue Then
-                    retValue = JournalItemDataIsValid()
-                End If
             End If
             Return retValue
         End Function
@@ -342,52 +335,50 @@ Namespace PresentationLayer.Presenters
             Dim chart As ChartModel
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
-                If GetEnumCode(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
-                        chart = GetChart(item.AccountIdNo)
-                        specialAccount = chart.SpecialAccount
-                    End If
-                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
+                    chart = GetChart(item.AccountIdNo)
+                    specialAccount = chart.SpecialAccount
+                End If
+                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                    MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                    retValue = False
+                    Exit For
+                End If
+                If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
+                    If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
+                        Dim lineNumber = Format(item.Sequence, "0")
+                        Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
+                        Dim caption = "Invalid Entry"
+                        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
+                        caption = Messaging.TranslateCaption(caption)
+                        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         retValue = False
                         Exit For
                     End If
-                    If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
-                        If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
-                        If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    Else
-                        If specialAccount IsNot Nothing AndAlso "AP|EL|AR".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
+                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
+                    If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
+                        Dim lineNumber = Format(item.Sequence, "0")
+                        Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
+                        Dim caption = "Invalid Entry"
+                        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
+                        caption = Messaging.TranslateCaption(caption)
+                        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        retValue = False
+                        Exit For
+                    End If
+                Else
+                    If specialAccount IsNot Nothing AndAlso "AP|EL|AR".Contains(specialAccount) Then
+                        Dim lineNumber = Format(item.Sequence, "0")
+                        Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
+                        Dim caption = "Invalid Entry"
+                        Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                        Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
+                        caption = Messaging.TranslateCaption(caption)
+                        Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        retValue = False
+                        Exit For
                     End If
                 End If
             Next

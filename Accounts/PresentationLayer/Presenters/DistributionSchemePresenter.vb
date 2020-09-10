@@ -11,6 +11,7 @@ Namespace PresentationLayer.Presenters
         Public ParentViewList As List(Of DistributionSchemeModel)
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private ReadOnly _distributionSchemeItemModel As New ModelAccounts("DistributionSchemeItem")
 
         Public Sub New(view As IDistributionSchemeView)
             MyBase.New(view)
@@ -63,32 +64,10 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("DistributionSchemeIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Int32 = retVal
+            retVal = UpdateChildData(_distributionSchemeItemModel, DtUpdateTable, DtInsertTable, passedValue, "DistributionSchemeIdNo")
+        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
