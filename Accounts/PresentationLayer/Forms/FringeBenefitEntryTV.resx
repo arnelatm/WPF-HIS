@@ -439,7 +439,7 @@
     <value>418, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>267</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
     <value>cboAccountIdNo</value>
@@ -492,34 +492,37 @@
   <data name="&gt;&gt;lblDefaultFrequency.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cboDefaultFrequency1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboDefaultFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
+  <data name="cboDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboDefaultFrequency1.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboDefaultFrequency.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboDefaultFrequency1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 142</value>
   </data>
-  <data name="cboDefaultFrequency1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboDefaultFrequency1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboDefaultFrequency1.TabIndex" type="System.Int32, mscorlib">
-    <value>269</value>
+  <data name="cboDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency1.Name" xml:space="preserve">
-    <value>cboDefaultFrequency1</value>
+  <data name="&gt;&gt;cboDefaultFrequency.Name" xml:space="preserve">
+    <value>cboDefaultFrequency</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboDefaultFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboDefaultFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="lblFringeBenefitType.Font" type="System.Drawing.Font, System.Drawing">
@@ -656,39 +659,6 @@
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="cboDefaultFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>System</value>
-  </data>
-  <data name="cboDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="cboDefaultFrequency.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cboDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 256</value>
-  </data>
-  <data name="cboDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="cboDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 24</value>
-  </data>
-  <data name="cboDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
-    <value>268</value>
-  </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Name" xml:space="preserve">
-    <value>cboDefaultFrequency</value>
-  </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
-    <value>16</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>

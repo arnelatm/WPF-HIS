@@ -41,7 +41,6 @@ Namespace PresentationLayer.Forms
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblDefaultFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDefaultFrequency1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblFringeBenefitType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboFringeBenefitType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -167,12 +166,11 @@ Namespace PresentationLayer.Forms
             Me.floDataDisplay.Controls.Add(Me.lblAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.cboAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblDefaultFrequency)
-            Me.floDataDisplay.Controls.Add(Me.cboDefaultFrequency1)
+            Me.floDataDisplay.Controls.Add(Me.cboDefaultFrequency)
             Me.floDataDisplay.Controls.Add(Me.lblFringeBenefitType)
             Me.floDataDisplay.Controls.Add(Me.cboFringeBenefitType)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Controls.Add(Me.cboDefaultFrequency)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'lblIdNo
@@ -252,41 +250,6 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblDefaultFrequency, "lblDefaultFrequency")
             Me.lblDefaultFrequency.Name = "lblDefaultFrequency"
             '
-            'cboDefaultFrequency1
-            '
-            Me.cboDefaultFrequency1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-            Me.cboDefaultFrequency1.BackColor = System.Drawing.Color.White
-            Me.cboDefaultFrequency1.ChangingSearchValueOnly = False
-            Me.cboDefaultFrequency1.CurrentSearchTerm = ""
-            Me.cboDefaultFrequency1.DefaultValue = ""
-            Me.cboDefaultFrequency1.DisplayMember = "Name"
-            Me.cboDefaultFrequency1.DropDownHeight = 1
-            Me.cboDefaultFrequency1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboDefaultFrequency1.EditingMode = False
-            Me.cboDefaultFrequency1.FilterRule = Nothing
-            Me.floDataDisplay.SetFlowBreak(Me.cboDefaultFrequency1, True)
-            resources.ApplyResources(Me.cboDefaultFrequency1, "cboDefaultFrequency1")
-            Me.cboDefaultFrequency1.ForeColor = System.Drawing.Color.Black
-            Me.cboDefaultFrequency1.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultFrequency1.LinkedLabel = Me.lblDefaultFrequency
-            Me.cboDefaultFrequency1.Name = "cboDefaultFrequency1"
-            Me.cboDefaultFrequency1.OldValue = 0
-            Me.cboDefaultFrequency1.OriginalDataSource = Nothing
-            Me.cboDefaultFrequency1.OriginalList = Nothing
-            Me.cboDefaultFrequency1.OverrideDropDownStyleList = False
-            Me.cboDefaultFrequency1.PreviousSearchTerm = Nothing
-            Me.cboDefaultFrequency1.PreviousSelectedIndex = 0
-            Me.cboDefaultFrequency1.PropertySelector = Nothing
-            Me.cboDefaultFrequency1.ReadOnlyCombo = False
-            Me.cboDefaultFrequency1.SearchAnywhere = False
-            Me.cboDefaultFrequency1.SuggestBoxHeight = 200
-            Me.cboDefaultFrequency1.SuggestListOrderRule = Nothing
-            Me.cboDefaultFrequency1.TextToSearch = Nothing
-            Me.cboDefaultFrequency1.ValueIsMandatory = False
-            Me.cboDefaultFrequency1.ValueIsNullable = False
-            Me.cboDefaultFrequency1.ValueIsNumeric = False
-            Me.cboDefaultFrequency1.ValueMember = "Code"
-            '
             'lblFringeBenefitType
             '
             Me.lblFringeBenefitType.DisplayOnly = True
@@ -351,6 +314,7 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.cboDefaultFrequency, "cboDefaultFrequency")
             Me.floDataDisplay.SetFlowBreak(Me.cboDefaultFrequency, True)
             Me.cboDefaultFrequency.ForeColor = System.Drawing.Color.Black
+            Me.cboDefaultFrequency.FormattingEnabled = True
             Me.cboDefaultFrequency.HideWhenNotEditingOrAdding = False
             Me.cboDefaultFrequency.LinkedLabel = Nothing
             Me.cboDefaultFrequency.Name = "cboDefaultFrequency"
@@ -399,7 +363,6 @@ Namespace PresentationLayer.Forms
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblDefaultFrequency As CLabel
-        Friend WithEvents cboDefaultFrequency1 As CaComboBox
         Friend WithEvents lblFringeBenefitType As CLabel
         Friend WithEvents cboFringeBenefitType As CaComboBox
         Friend WithEvents cboDefaultFrequency As CaComboBox

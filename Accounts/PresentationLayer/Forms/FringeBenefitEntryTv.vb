@@ -102,7 +102,6 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
-            cboDefaultFrequency1.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboDefaultFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboFringeBenefitType.DataSource = PresenterObj.MakeEnumComboList(Of FringeBenefitTypeSelection)
         End Sub
