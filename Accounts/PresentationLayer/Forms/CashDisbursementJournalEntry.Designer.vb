@@ -1177,8 +1177,8 @@ Namespace PresentationLayer.Forms
             Me.floHeader1.PerformLayout()
             Me.floHeader2.ResumeLayout(False)
             Me.floHeader2.PerformLayout()
-            Me.floPurchaseJournalItems.ResumeLayout(false)
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
+            Me.floPurchaseJournalItems.ResumeLayout(False)
+            CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridViewCadOiItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bscadOiItems,System.ComponentModel.ISupportInitialize).EndInit
