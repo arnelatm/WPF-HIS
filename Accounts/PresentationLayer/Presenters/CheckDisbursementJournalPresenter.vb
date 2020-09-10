@@ -20,7 +20,6 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _ckdOiItemModel As New ModelAccounts("CkdOiItem")
         Private ReadOnly _ckdJournalItemModel As New ModelAccounts("CheckDisbursementJournalItem")
-        Private _oldCkdOiItem As List(Of CkdOiItemModel)
 
         Public Sub New(view As ICheckDisbursementJournalView)
             MyBase.New(view)
@@ -188,7 +187,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _ckdJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
@@ -280,16 +279,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            ' save journal entries
-            Dim parentIdNo As Integer = retVal
-            If Not AddMode Then
-                _oldCkdOiItem = GetCKdOiItems(View.IdNo)
-            Else
-                _oldCkdOiItem = Nothing
-            End If
-            retVal = UpdateChildData(_ckdJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_ckdJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_ckdOiItemModel, DtCkdOiUpdateTable, DtCkdOiInsertTable, parentIdNo, "PcsIdNo")
+                retVal = UpdateChildData(_ckdOiItemModel, DtCkdOiUpdateTable, DtCkdOiInsertTable, passedValue, "PcsIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -313,6 +306,9 @@ Namespace PresentationLayer.Presenters
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
                     End If
+                    If retValue Then
+                        retValue = JournalItemDataIsValid()
+                    End If
                 ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If CKdOiItemDataIsValid() Then
                         retValue = True
@@ -331,9 +327,7 @@ Namespace PresentationLayer.Presenters
                         Next
                     End If
                 End If
-                If retValue Then
-                    retValue = JournalItemDataIsValid()
-                End If
+
             End If
             Return retValue
         End Function

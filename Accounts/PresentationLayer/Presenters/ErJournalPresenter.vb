@@ -93,29 +93,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim parentIdNo As Int32
-            If AddMode Then
-                parentIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, parentIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = parentIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_erJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
                 If IsEmpty(View.ReferenceNo) Then
                     UpdateGlReferenceNumber()

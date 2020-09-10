@@ -195,7 +195,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _pcsJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
@@ -288,16 +288,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            ' save journal
-            Dim parentIdNo As Integer = retVal
-            If Not AddMode Then
-                _oldPcsOiItem = GetPcsOiItems(View.IdNo)
-            Else
-                _oldPcsOiItem = Nothing
-            End If
-            retVal = UpdateChildData(_pcsJournalItemModel, DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_pcsJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_pcsOiItemModel, DtPcsOiUpdateTable, DtPcsOiInsertTable, parentIdNo, "PcsIdNo")
+                retVal = UpdateChildData(_pcsOiItemModel, DtPcsOiUpdateTable, DtPcsOiInsertTable, passedValue, "PcsIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -321,6 +315,9 @@ Namespace PresentationLayer.Presenters
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
                     End If
+                    If retValue Then
+                        retValue = JournalItemDataIsValid()
+                    End If
                 ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If PcsOiItemDataIsValid() Then
                         retValue = True
@@ -338,9 +335,6 @@ Namespace PresentationLayer.Presenters
                             index += 1
                         Next
                     End If
-                End If
-                If retValue Then
-                    retValue = JournalItemDataIsValid()
                 End If
             End If
             Return retValue

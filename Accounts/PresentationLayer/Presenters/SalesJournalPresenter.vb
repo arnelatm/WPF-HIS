@@ -18,6 +18,8 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _salesCashItemModel As New ModelAccounts("SalesCashItem")
+        Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
+
         Private _cashCodesModel As List(Of CashCodeModel)
         Private _oldSalesCashItem As List(Of SalesCashItemModel)
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
@@ -80,18 +82,18 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSalesCashItems(salesCashIdNo As Int32) As List(Of SalesCashItemModel)
             Return _salesCashItemModel.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
         End Function
 
-        Public Sub OnAfterSave() Handles MyBase.AfterSave
-            If IsEmpty(View.ReferenceNo) Then
-                UpdateGlReferenceNumber()
-            End If
-        End Sub
+        'Public Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If IsEmpty(View.ReferenceNo) Then
+        '        UpdateGlReferenceNumber()
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -147,25 +149,17 @@ Namespace PresentationLayer.Presenters
             View.TotalCredits = View.TotalDebits
         End Sub
 
-        Private Function SaveChildren(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            Dim retVal As Integer
-            ' save journal entries
-            If Not AddMode Then
-                _oldSalesCashItem = GetSalesCashItems(View.IdNo)
-            Else
-                _oldSalesCashItem = Nothing
-            End If
-            retVal = SaveJournalItems(passedValue)
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = SaveSalesCashItems(passedValue)
+                retVal = UpdateChildData(_salesCashItemModel, DtSalesCashUpdateTable, DtSalesCashInsertTable, passedValue, "SalesJournalIdNo")
             End If
-            Return retVal
-        End Function
-
-        Public Function UpdateGlReferenceNumber() As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
-        End Function
+            If retVal >= 0 Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            End If
+        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -227,62 +221,6 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
-
-        Public Overloads Function SaveSalesCashItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = _salesCashItemModel.DelUpdateTvp(DtSalesCashUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtSalesCashInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtSalesCashInsertTable.Rows
-                    row.Item("SalesJournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = _salesCashItemModel.InsertTvp(DtSalesCashInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
-
-        Public Overloads Function SaveJournalItems(passedValue As Integer) As Integer
-            Dim retVal As Integer
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = passedValue
-                CallByName(View, IdFieldName, CallType.Set, headerIdNo)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            updateReturnValue = Model.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            Return retVal
-        End Function
 
         Private Sub SetAsideJournalItems()
             If DtInsertTable IsNot Nothing Then
@@ -355,7 +293,6 @@ Namespace PresentationLayer.Presenters
             Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
-
 
     End Class
 

@@ -81,18 +81,10 @@ Namespace PresentationLayer
             End If
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim parentIdNo As Int32
-            If AddMode Then
-                parentIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "SecurityGroupIdNo")
-            Return retVal
-        End Function
-
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Int32 = retVal
+            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, passedValue, "SecurityGroupIdNo")
+        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -107,4 +99,5 @@ Namespace PresentationLayer
         End Function
 
     End Class
+
 End Namespace

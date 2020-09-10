@@ -87,19 +87,13 @@ Namespace PresentationLayer.Presenters
             UpdateTotals()
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim parentIdNo As Int32
-            If AddMode Then
-                parentIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-            End If
-            retVal = UpdateDataTables(DtUpdateTable, DtInsertTable, parentIdNo, "JournalIdNo")
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_arJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
+                newJournalItem = _arJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 If AddMode Then
-                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     For Each item In newJournalItem
                         If IsAccountsReceivableAccount(item.AccountIdNo) Then
                             retVal = AddArOpenInvoice(item, "AR")
@@ -109,7 +103,6 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                 Else
-                    newJournalItem = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     retVal = RemoveDeletedArOpenInvoices(retVal, newJournalItem)
                     If retVal >= 0 Then
                         retVal = AddNewArOpenInvoices(retVal, newJournalItem)
@@ -121,8 +114,7 @@ Namespace PresentationLayer.Presenters
                     retVal = UpdateGlReferenceNumber()
                 End If
             End If
-            Return retVal
-        End Function
+        End Sub
 
         Private Function RemoveDeletedArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean

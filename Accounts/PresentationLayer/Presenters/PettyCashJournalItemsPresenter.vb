@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
             Dim paymentTypeEnum As String
             Dim itemPayeeType As String
             For Each item In journalItems
-                paymentTypeEnum = GetEnumCode(paymentType)
+                paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(paymentType)
                 If item.Debit = 0 And item.Credit = 0 Then
                     MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount.", item.Sequence.ToString()))
                     retVal = False

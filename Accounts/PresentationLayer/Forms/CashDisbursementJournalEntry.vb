@@ -438,7 +438,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
@@ -460,7 +460,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted
+        Private Sub cboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
             SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 

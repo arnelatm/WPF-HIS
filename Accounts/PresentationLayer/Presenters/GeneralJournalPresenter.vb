@@ -15,6 +15,7 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private _closingEntry As Boolean
+        Private ReadOnly _gjJournalItemModel As New ModelAccounts("GeneralJournalItem")
 
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
@@ -135,44 +136,14 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim insertReturnValue
-            Dim updateReturnValue
-            Dim headerIdNo As Int32
-            If AddMode Then
-                headerIdNo = retVal
-                CallByName(View, IdFieldName, CallType.Set, retVal)
-            Else
-                headerIdNo = CallByName(View, IdFieldName, CallType.Get)
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_gjJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
             End If
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, headerIdNo)
-            If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-                For Each row As DataRow In DtInsertTable.Rows
-                    row.Item("JournalIdNo") = headerIdNo
-                Next
-                insertReturnValue = Model.InsertTvp(DtInsertTable)
-                If insertReturnValue >= 0 Then
-                    retVal = updateReturnValue + insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
-            Else
-                retVal = updateReturnValue
-            End If
-            If retVal > 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    UpdateGlReferenceNumber()
-                End If
-            End If
-            Return retVal
-        End Function
-
-        Public Function UpdateGlReferenceNumber() As String
-            Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-            Return retValue
-        End Function
+        End Sub
 
         Public Overrides Sub GoPrintRecord()
             Dim totalCreditAmount As String
