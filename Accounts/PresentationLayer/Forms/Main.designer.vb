@@ -79,71 +79,72 @@ Namespace PresentationLayer.Forms
         Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PettyCashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountsPayableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountsReceivableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCashReceiptEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmployeeReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemGeneralJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SalesJournalEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountReconciliationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatementOfEmployeeLoansToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemStateOfEmployeeLoans = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryOfAccountsPayableToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSummaryOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemTrialBalance = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QuarterlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SemestralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.YearlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemBalanceSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.YearlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemIncomeStatementForAGivenYear = New System.Windows.Forms.ToolStripMenuItem()
-        Me.YearlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QuarterlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItemAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.contextMenuStripMember = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.addNewMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.editMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.deleteMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.imageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.contextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.toolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.toolStripMenuItem15 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem16 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem17 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.FringeBenefitsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.EarningsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PettyCashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountsPayableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountsReceivableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCashReceiptEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.EmployeeReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemGeneralJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SalesJournalEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountReconciliationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
+            Me.StatementOfEmployeeLoansToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemStateOfEmployeeLoans = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SummaryOfAccountsPayableToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSummaryOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTrialBalance = New System.Windows.Forms.ToolStripMenuItem()
+            Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.QuarterlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SemestralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.YearlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.CustomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBalanceSheet = New System.Windows.Forms.ToolStripMenuItem()
+            Me.YearlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemIncomeStatementForAGivenYear = New System.Windows.Forms.ToolStripMenuItem()
+            Me.YearlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.QuarterlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+            Me.ToolStripMenuItemAbout = New System.Windows.Forms.ToolStripMenuItem()
+            Me.contextMenuStripMember = New System.Windows.Forms.ContextMenuStrip(Me.components)
+            Me.addNewMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.editMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.deleteMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.imageList1 = New System.Windows.Forms.ImageList(Me.components)
+            Me.contextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+            Me.toolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+            Me.toolStripMenuItem15 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem16 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem17 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+            Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.DeductionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -412,9 +413,14 @@ Namespace PresentationLayer.Forms
             '
             'ToolStripMenuItemPayroll
             '
-            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FringeBenefitsToolStripMenuItem})
+            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem})
             Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
             resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
+            '
+            'EarningsToolStripMenuItem
+            '
+            Me.EarningsToolStripMenuItem.Name = "EarningsToolStripMenuItem"
+            resources.ApplyResources(Me.EarningsToolStripMenuItem, "EarningsToolStripMenuItem")
             '
             'ToolStripMenuItemSupplierVendors
             '
@@ -748,15 +754,15 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'FringeBenefitsToolStripMenuItem
+            'DeductionsToolStripMenuItem
             '
-            Me.FringeBenefitsToolStripMenuItem.Name = "FringeBenefitsToolStripMenuItem"
-            resources.ApplyResources(Me.FringeBenefitsToolStripMenuItem, "FringeBenefitsToolStripMenuItem")
+            Me.DeductionsToolStripMenuItem.Name = "DeductionsToolStripMenuItem"
+            resources.ApplyResources(Me.DeductionsToolStripMenuItem, "DeductionsToolStripMenuItem")
             '
             'Main
             '
-            Me.AllowDrop = true
-        resources.ApplyResources(Me, "$this")
+            Me.AllowDrop = True
+            resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.Account)
@@ -890,6 +896,7 @@ End Sub
         Friend WithEvents QuarterlyToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents SemiAnnuallyToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents CustomRangeToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents FringeBenefitsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents EarningsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents DeductionsToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

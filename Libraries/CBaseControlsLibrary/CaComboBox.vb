@@ -402,17 +402,17 @@ Public Class CaComboBox
         If Not Focused Then Return
         _suggestBindingList.Clear()
         _suggestBindingList.RaiseListChangedEvents = False
-        Dim x = PropertySelectorCompiled(Items)
-        Dim y = _filterRuleCompiled
-        Dim z = _suggestListOrderRuleCompiled
-        Dim w = x.OrderBy(y)
-        Dim w1 = w.ToList()
+        'Dim x = PropertySelectorCompiled(Items)
+        'Dim y = _filterRuleCompiled
+        'Dim z = _suggestListOrderRuleCompiled
+        'Dim w = x.OrderBy(y)
+        'Dim w1 = w.ToList()
         PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        For Each it In PropertySelectorCompiled(Items)
-            '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-            Dim q
-            q = it.ToLower().Contains(Text.Trim().ToLower())
-        Next
+        'For Each it In PropertySelectorCompiled(Items)
+        '    '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+        '    Dim q
+        '    q = it.ToLower().Contains(Text.Trim().ToLower())
+        'Next
 
         _suggestBindingList.RaiseListChangedEvents = True
         _suggestBindingList.ResetBindings()

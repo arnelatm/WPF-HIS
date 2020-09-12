@@ -34,7 +34,7 @@ Public Enum DatabaseTableSelection
     <EnumCode("DS")> DistributionScheme
     <EnumCode("DC")> Document
     <EnumCode("EM")> Employee
-    <EnumCode("FB")> FringeBenefit
+    <EnumCode("FB")> Earning
     <EnumCode("PT")> Patient
     <EnumCode("PH")> Phone
     <EnumCode("PC")> ProductCategory
@@ -61,7 +61,15 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
-Public Enum FringeBenefitTypeSelection
+Public Enum DeductionTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("R")> Regular
+    <EnumCode("H")> Hourly
+    <EnumCode("P")> Periodic
+    <EnumCode("O")> Others
+End Enum
+
+Public Enum EarningTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("R")> Regular
     <EnumCode("H")> Hourly

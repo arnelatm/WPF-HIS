@@ -95,6 +95,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Deduction.vb" />
     <Compile Include="BusinessLayer\ErJournal.vb" />
     <Compile Include="BusinessLayer\ArJournal.vb" />
     <Compile Include="BusinessLayer\ArOpenInvoice.vb" />
@@ -118,7 +119,7 @@
     <Compile Include="BusinessLayer\DistributionScheme.vb" />
     <Compile Include="BusinessLayer\DistributionSchemeItem.vb" />
     <Compile Include="BusinessLayer\Employee.vb" />
-    <Compile Include="BusinessLayer\FringeBenefit.vb" />
+    <Compile Include="BusinessLayer\Earning.vb" />
     <Compile Include="BusinessLayer\GeneralJournal.vb" />
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
@@ -132,7 +133,8 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
-    <Compile Include="DataLayer\AdoNet\FringeBenefitDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DeductionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
@@ -239,10 +241,16 @@
     <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\FringeBenefitEntryTv.designer.vb">
-      <DependentUpon>FringeBenefitEntryTv.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Forms\DeductionEntryTv.designer.vb">
+      <DependentUpon>DeductionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\FringeBenefitEntryTv.vb">
+    <Compile Include="PresentationLayer\Forms\DeductionEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\EarningEntryTv.designer.vb">
+      <DependentUpon>EarningEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\EarningEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\ProductCategoryEntryTv.Designer.vb">
@@ -415,6 +423,7 @@
     <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
     <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ApOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\DeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\ERJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
@@ -423,7 +432,7 @@
     <Compile Include="PresentationLayer\Models\CashCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
-    <Compile Include="PresentationLayer\Models\FringeBenefitModel.vb" />
+    <Compile Include="PresentationLayer\Models\EarningModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductCategoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ChartModel.vb" />
     <Compile Include="PresentationLayer\Models\CheckDisbursementJournalModel.vb" />
@@ -454,12 +463,13 @@
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DeductionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ErJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\FringeBenefitPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EarningPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductCategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalItemPresenter.vb" />
@@ -494,6 +504,7 @@
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\IDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\IErJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IArJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IBankView.vb" />
@@ -503,7 +514,7 @@
     <Compile Include="PresentationLayer\Views\ICashCodeView.vb" />
     <Compile Include="PresentationLayer\Views\ICashDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\ICashReceiptJournalView.vb" />
-    <Compile Include="PresentationLayer\Views\IFringeBenefitView.vb" />
+    <Compile Include="PresentationLayer\Views\IEarningView.vb" />
     <Compile Include="PresentationLayer\Views\IProductCategoryView.vb" />
     <Compile Include="PresentationLayer\Views\IChartView.vb" />
     <Compile Include="PresentationLayer\Views\ICheckDisbursementJournalView.vb" />
@@ -1734,8 +1745,11 @@
     <EmbeddedResource Include="PresentationLayer\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FringeBenefitEntryTv.resx">
-      <DependentUpon>FringeBenefitEntryTv.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Forms\DeductionEntryTv.resx">
+      <DependentUpon>DeductionEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\EarningEntryTv.resx">
+      <DependentUpon>EarningEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
