@@ -20,7 +20,7 @@ INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (8, N'D
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (9, N'Employee', N'EMP')
 GO
-INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (10, N'FringeBenefit', N'FRB')
+INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (10, N'Earning', N'FRB')
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (11, N'Patient', N'PTN')
 GO

@@ -1313,9 +1313,17 @@ Namespace PresentationLayer.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub FringeBenefitsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FringeBenefitsToolStripMenuItem.Click
-            Dim childMdiForm As FringeBenefitEntryTv
-            childMdiForm = New FringeBenefitEntryTv With {
+        Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EarningsToolStripMenuItem.Click
+            Dim childMdiForm As EarningEntryTv
+            childMdiForm = New EarningEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub DeductionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeductionsToolStripMenuItem.Click
+            Dim childMdiForm As DeductionEntryTv
+            childMdiForm = New DeductionEntryTv With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

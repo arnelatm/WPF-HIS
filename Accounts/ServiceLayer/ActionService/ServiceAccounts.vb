@@ -177,6 +177,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property DeductionDao As IDaoAll(Of Deduction)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Deduction")
+            End Get
+        End Property
+
         Private ReadOnly Property DesignationDao As IDaoAll(Of Designation)
             Get
                 Return DaoFactoryAccounts.CreateDao("Designation")
@@ -218,9 +224,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property FringeBenefitDao As IDaoAll(Of FringeBenefit)
+        Private ReadOnly Property EarningDao As IDaoAll(Of Earning)
             Get
-                Return DaoFactoryAccounts.CreateDao("FringeBenefit")
+                Return DaoFactoryAccounts.CreateDao("Earning")
             End Get
         End Property
 

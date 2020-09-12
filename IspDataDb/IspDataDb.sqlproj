@@ -323,12 +323,14 @@
     <Build Include="dbo\Views\ARInvoices_View.sql" />
     <Build Include="dbo\Views\ArCollections_View.sql" />
     <Build Include="dbo\Tables\PayInformation.sql" />
-    <Build Include="dbo\Tables\FringeBenefit.sql" />
     <Build Include="dbo\Tables\DataBaseTable.sql" />
     <Build Include="dbo\Tables\TableName.sql" />
     <Build Include="dbo\Tables\NameTranslation.sql" />
-    <Build Include="dbo\Tables\EmployeeFringeBenefit.sql" />
     <Build Include="dbo\Tables\ProductCategory.sql" />
+    <Build Include="dbo\Tables\Earning.sql" />
+    <Build Include="dbo\Tables\Deduction.sql" />
+    <Build Include="dbo\Tables\EmployeeEarning.sql" />
+    <Build Include="dbo\Tables\EmployeeDeduction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

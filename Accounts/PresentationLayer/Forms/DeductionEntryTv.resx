@@ -228,31 +228,31 @@
   <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtFringeBenefitCode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtDeductionCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtFringeBenefitCode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtDeductionCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 41</value>
   </data>
-  <data name="txtFringeBenefitCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtDeductionCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtFringeBenefitCode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtDeductionCode.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="txtFringeBenefitCode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="txtDeductionCode.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitCode.Name" xml:space="preserve">
-    <value>txtFringeBenefitCode</value>
+  <data name="&gt;&gt;txtDeductionCode.Name" xml:space="preserve">
+    <value>txtDeductionCode</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionCode.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionCode.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblName.Font" type="System.Drawing.Font, System.Drawing">
@@ -291,31 +291,31 @@
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtFringeBenefitName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtDeductionName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtFringeBenefitName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtDeductionName.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 66</value>
   </data>
-  <data name="txtFringeBenefitName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtDeductionName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtFringeBenefitName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtDeductionName.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="txtFringeBenefitName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="txtDeductionName.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitName.Name" xml:space="preserve">
-    <value>txtFringeBenefitName</value>
+  <data name="&gt;&gt;txtDeductionName.Name" xml:space="preserve">
+    <value>txtDeductionName</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitName.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionName.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtFringeBenefitName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="lblNameAra.Font" type="System.Drawing.Font, System.Drawing">
@@ -354,103 +354,103 @@
   <data name="&gt;&gt;lblNameAra.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="txtFringeBenefitNameAra.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtDeductionNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtFringeBenefitNameAra.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtDeductionNameAra.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 91</value>
   </data>
-  <data name="txtFringeBenefitNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtDeductionNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtFringeBenefitNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txtDeductionNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txtFringeBenefitNameAra.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtDeductionNameAra.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="txtFringeBenefitNameAra.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtFringeBenefitNameAra.Name" xml:space="preserve">
-    <value>txtFringeBenefitNameAra</value>
-  </data>
-  <data name="&gt;&gt;txtFringeBenefitNameAra.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtFringeBenefitNameAra.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtFringeBenefitNameAra.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 116</value>
-  </data>
-  <data name="lblAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAccountIdNo.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 24</value>
-  </data>
-  <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>268</value>
-  </data>
-  <data name="lblAccountIdNo.Text" xml:space="preserve">
-    <value>Default Account</value>
-  </data>
-  <data name="lblAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Name" xml:space="preserve">
-    <value>lblAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 116</value>
-  </data>
-  <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
-  </data>
-  <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtDeductionNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
+  <data name="&gt;&gt;txtDeductionNameAra.Name" xml:space="preserve">
+    <value>txtDeductionNameAra</value>
   </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;txtDeductionNameAra.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionNameAra.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtDeductionNameAra.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblDeductionType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDeductionType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDeductionType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 116</value>
+  </data>
+  <data name="lblDeductionType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDeductionType.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="lblDeductionType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
+  </data>
+  <data name="lblDeductionType.TabIndex" type="System.Int32, mscorlib">
+    <value>272</value>
+  </data>
+  <data name="lblDeductionType.Text" xml:space="preserve">
+    <value>Deduction Type</value>
+  </data>
+  <data name="lblDeductionType.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDeductionType.Name" xml:space="preserve">
+    <value>lblDeductionType</value>
+  </data>
+  <data name="&gt;&gt;lblDeductionType.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDeductionType.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDeductionType.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cboDeductionType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboDeductionType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboDeductionType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 116</value>
+  </data>
+  <data name="cboDeductionType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboDeductionType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 24</value>
+  </data>
+  <data name="cboDeductionType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cboDeductionType.Name" xml:space="preserve">
+    <value>cboDeductionType</value>
+  </data>
+  <data name="&gt;&gt;cboDeductionType.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboDeductionType.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cboDeductionType.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="lblDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
@@ -511,7 +511,7 @@
     <value>418, 24</value>
   </data>
   <data name="cboDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;cboDefaultFrequency.Name" xml:space="preserve">
     <value>cboDefaultFrequency</value>
@@ -525,73 +525,76 @@
   <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="lblFringeBenefitType.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblFringeBenefitType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblFringeBenefitType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 168</value>
   </data>
-  <data name="lblFringeBenefitType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblFringeBenefitType.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="lblAccountIdNo.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name="lblFringeBenefitType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 24</value>
   </data>
-  <data name="lblFringeBenefitType.TabIndex" type="System.Int32, mscorlib">
-    <value>272</value>
+  <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>268</value>
   </data>
-  <data name="lblFringeBenefitType.Text" xml:space="preserve">
-    <value>Fringe Benefit Type</value>
+  <data name="lblAccountIdNo.Text" xml:space="preserve">
+    <value>Default Account</value>
   </data>
-  <data name="lblFringeBenefitType.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblFringeBenefitType.Name" xml:space="preserve">
-    <value>lblFringeBenefitType</value>
+  <data name="&gt;&gt;lblAccountIdNo.Name" xml:space="preserve">
+    <value>lblAccountIdNo</value>
   </data>
-  <data name="&gt;&gt;lblFringeBenefitType.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblAccountIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblFringeBenefitType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;lblFringeBenefitType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="cboFringeBenefitType.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboAccountIdNo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
+  <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboFringeBenefitType.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboFringeBenefitType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 168</value>
   </data>
-  <data name="cboFringeBenefitType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboFringeBenefitType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboFringeBenefitType.TabIndex" type="System.Int32, mscorlib">
-    <value>271</value>
+  <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;cboFringeBenefitType.Name" xml:space="preserve">
-    <value>cboFringeBenefitType</value>
+  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
+    <value>cboAccountIdNo</value>
   </data>
-  <data name="&gt;&gt;cboFringeBenefitType.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboFringeBenefitType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboFringeBenefitType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
@@ -646,7 +649,7 @@
     <value>418, 60</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -736,7 +739,7 @@
     <value>918, 288</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Fringe Benefits Maintenance Form</value>
+    <value>Deductions Maintenance Form</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>
@@ -763,7 +766,7 @@
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FringeBenefitEntryTv</value>
+    <value>DeductionEntryTv</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
