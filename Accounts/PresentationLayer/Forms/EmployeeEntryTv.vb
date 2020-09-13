@@ -43,15 +43,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ArAccountIdNo As Int32? Implements IEmployeeView.ArAccountIdNo
-            Get
-                Return CType(cacArAccountIdNo.GetValue(), Int32?)
-            End Get
-            Set
-                cacArAccountIdNo.SetValue(Value)
-            End Set
-        End Property
-
         'Public Property Balance As Decimal Implements IEmployeeView.Balance
         '    Get
         '        If txtBalance.Text <> "" Then
@@ -405,8 +396,38 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Private Sub BindJournalItem()
+            SuspendLayout()
+            bsEarnings.DataSource = Nothing
+            'DataGridViewJournalItems.Refresh()
+            'bsJournalItems.DataSource = JournalItems
+            'bsJournalItems.AllowNew = True
+            'With DataGridViewJournalItems
+            '    .Refresh()
+            '    .AutoGenerateColumns = False
+            '    .DataSource = bsJournalItems
+            '    .Refresh()
+            '    .AllowUserToAddRows = True
+            '    .AllowUserToDeleteRows = True
+            'End With
+            'With DataGridViewJournalItems.Columns
+            '    dgvSequence.DisplayOnly = True
+            '    dgvAccountIdNo.DataSource = _accountsByCode
+            '    dgvAccountIdNo.DisplayMember = "Name"
+            '    dgvAccountIdNo.ValueMember = "IdNo"
+            '    dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+            '    dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+            '    dgvAccountIdNo.AutoComplete = True
+            '    dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+            '    dgvRevCostCenterIdNo.DisplayMember = "Name"
+            '    dgvRevCostCenterIdNo.ValueMember = "idNo"
+            '    dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+            '    dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+            'End With
+            ResumeLayout()
+        End Sub
+
         Protected Overrides Sub CreateDataSources()
-            cacArAccountIdNo.DataSource = PresenterObj.GetChartList()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
             cacDepartmentIdNo.DataSource = PresenterObj.GetDepartmentListByName()
@@ -424,7 +445,6 @@ Namespace PresentationLayer.Forms
             FieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Active", chkActive},
-         {"ArAccountIdNo", cacArAccountIdNo},
          {"BankAccountNo", txtBankAccountNo},
          {"BankIdNo", cacBankIdNo},
          {"BirthDate", dtpBirthDate},
