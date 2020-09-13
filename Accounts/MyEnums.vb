@@ -63,17 +63,40 @@ End Enum
 
 Public Enum DeductionTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("R")> Regular
-    <EnumCode("H")> Hourly
-    <EnumCode("P")> Periodic
+    <EnumCode("M")> Mandatory
+    <EnumCode("G")> Garnishments
+    <EnumCode("V")> Voluntary
+    <EnumCode("F")> Fines
+    <EnumCode("S")> SalaryLoans
+
+    '<EnumCode("T")> IncomeTax
     <EnumCode("O")> Others
+
+End Enum
+
+Public Enum DeductOnSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("B")> BaseEarning
+    <EnumCode("G")> GrossEarning
+    <EnumCode("N")> NetPay
+    '<EnumCode("B")> BeforeTax
+    '<EnumCode("A")> AfterTax
+End Enum
+
+Public Enum DeductionComputation
+    <EnumCode("")> NotSpecified
+    <EnumCode("F")> FixedAmount
+    <EnumCode("P")> FixedPercentage
+    <EnumCode("T")> TabledBased
 End Enum
 
 Public Enum EarningTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("R")> Regular
+    <EnumCode("S")> Salary
     <EnumCode("H")> Hourly
-    <EnumCode("P")> Periodic
+    <EnumCode("E")> Expenses
+    <EnumCode("R")> Redundancy
+    <EnumCode("D")> Holiday
     <EnumCode("O")> Others
 End Enum
 
