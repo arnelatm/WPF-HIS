@@ -9,9 +9,12 @@
     [DeductionPlace]   CHAR (1)       NULL,
     [ComputationType]  CHAR (1)       NULL,
     [Percentage]       DECIMAL (4, 2) NULL,
+    [Notes]            NVARCHAR (100) NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_Deduction] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
