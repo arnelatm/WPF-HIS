@@ -1,12 +1,16 @@
 ﻿CREATE TABLE [dbo].[Leave] (
-    [IdNo]                  SMALLINT      IDENTITY (1, 1) NOT NULL,
-    [AbsenceLeaveName]      VARCHAR (50)  NULL,
-    [AbsenceLeaveNameAra]   NVARCHAR (50) NULL,
-    [PaidDays]              SMALLINT      NULL,
-    [WarningDays]           SMALLINT      NULL,
-    [Cumulative]            BIT           NULL,
-    [WithMaximumCumulative] BIT           NULL,
-    [MaximumCumulativeDays] SMALLINT      NULL,
+    [IdNo]                  SMALLINT       IDENTITY (1, 1) NOT NULL,
+    [LeaveName]             VARCHAR (100)  NOT NULL,
+    [LeaveNameAra]          VARCHAR (100)  NOT NULL,
+    [NumberOfDays]          SMALLINT       NULL,
+    [Percentage]            DECIMAL (5, 2) NULL,
+    [WarningDays]           SMALLINT       NULL,
+    [Cumulative]            BIT            NULL,
+    [WithMaximumCumulative] BIT            NULL,
+    [MaximumCumulativeDays] SMALLINT       NULL,
+    [Notes]                 NVARCHAR (200) NULL,
     CONSTRAINT [PK_AbsenceLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
