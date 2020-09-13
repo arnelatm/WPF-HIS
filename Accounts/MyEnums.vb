@@ -68,20 +68,19 @@ Public Enum DeductionTypeSelection
     <EnumCode("V")> Voluntary
     <EnumCode("F")> Fines
     <EnumCode("S")> SalaryLoans
-
-    '<EnumCode("T")> IncomeTax
+    <EnumCode("E")> EarningsAdjustment
     <EnumCode("O")> Others
-
+    '<EnumCode("T")> IncomeTax
 End Enum
 
-Public Enum DeductOnSelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("B")> BaseEarning
-    <EnumCode("G")> GrossEarning
-    <EnumCode("N")> NetPay
-    '<EnumCode("B")> BeforeTax
-    '<EnumCode("A")> AfterTax
-End Enum
+'Public Enum DeductOnSelection
+'    <EnumCode("")> NotSpecified
+'    <EnumCode("B")> BaseEarning
+'    <EnumCode("G")> GrossEarning
+'    <EnumCode("N")> NetPay
+'    '<EnumCode("B")> BeforeTax
+'    '<EnumCode("A")> AfterTax
+'End Enum
 
 Public Enum DeductionComputation
     <EnumCode("")> NotSpecified

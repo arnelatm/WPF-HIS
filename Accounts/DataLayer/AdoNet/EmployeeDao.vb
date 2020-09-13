@@ -65,7 +65,6 @@ Namespace DataLayer.AdoNet
                     " DesignationIdNo = @DesignationIdNo," &
                     " HiredDate = @HiredDate," &
                     " ReleasedDate = @ReleasedDate," &
-                    " ArAccountIdNo= @ArAccountIdNo," &
                     " BankIdNo = @BankIdNo," &
                     " BankAccountNo = @BankAccountNo," &
                     " Iban = @Iban," &
@@ -86,10 +85,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, PaySalariedOrHourly, PayRateType, PayRateAmount, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, PaySalariedOrHourly, PayRateType, PayRateAmount, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @ArAccountIdNo, @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"
             Return Db.Insert(sql, Take(employee))
         End Function
 
@@ -97,7 +96,6 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Employee() With {
             .Active = Extensions.AsBool(reader("Active")),
-            .ArAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("ArAccountIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
@@ -162,7 +160,6 @@ Namespace DataLayer.AdoNet
                                     "@DesignationIdNo", employee.DesignationIdNo,
                                     "@HiredDate", employee.HiredDate,
                                     "@ReleasedDate", employee.ReleasedDate,
-                                    "@ArAccountIdNo", employee.ArAccountIdNo,
                                     "@BankIdNo", employee.BankIdNo,
                                     "@BankAccountNo", employee.BankAccountNo,
                                     "@Iban", employee.Iban,
