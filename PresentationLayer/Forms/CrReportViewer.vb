@@ -40,31 +40,16 @@ Public Class CrReportViewer
         Dim reportPaths As String = ConfigurationManager.AppSettings.Get("ReportPaths")
         Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
         Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
-        Dim server As String = ConfigurationManager.AppSettings.Get("SERVER")
+        Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
         Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
-        'Dim sqlCon As String = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
 
         Report.Load(reportPaths & ReportFileName)
-
-        'Report.SetDatabaseLogon(uid, pwd, server, database)
-
-        'This line is necessary to replace the dataSource in the report with the one
-        'related to the environment
 
         If Report.DataSourceConnections.Count > 0 Then
 
             Report.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
 
-            '    SetConnection(Server, Database, UID, Pwd)
-
-            'sqlCon = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
-            'Report.DataSourceConnections(0).SetConnection(sqlCon.DataSource,
-            '                                 "",
-            '                                 sqlCon.UserID,
-            '                                 sqlCon.Password)
         End If
-        'This line sets the credentials for the dataSource set in the DataSourceConnections.SetConnection
-        'Report.SetDatabaseLogon(sqlCon.UserID, sqlCon.Password, sqlCon.DataSource, "")
 
     End Sub
 

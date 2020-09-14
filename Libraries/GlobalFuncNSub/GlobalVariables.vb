@@ -1,17 +1,23 @@
 ﻿Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
-Imports AutoMapper
 
 Public Class GlobalVariables
-    Private Shared _useOriginalAppTextLanguageForEnglish As Nullable(Of Boolean)
-    Private Shared _maximumOpenForms As Int16
     Private Shared _appCultureInfo As CultureInfo
     Private Shared _appCurrentCultureInfo As CultureInfo
-    Private Shared _defaultUnmirroredCultureInfoStr As String
-    Private Shared _defaultNumberFormatInfo As NumberFormatInfo
+    Private Shared _dacAccessType As String
+    Private Shared _dacDatabase As String
+    Private Shared _dacFileName As String
+    Private Shared _dacPassword As String
+    Private Shared _dacConnectionString As String
+    Private Shared _dacServer As String
+    Private Shared _dacServerType As String
+    Private Shared _dacUid As String
     Private Shared _defaultCurrencyFormatInfo As NumberFormatInfo
-
+    Private Shared _defaultNumberFormatInfo As NumberFormatInfo
+    Private Shared _defaultUnMirroredCultureInfoStr As String
+    Private Shared _maximumOpenForms As Int16
+    Private Shared _useOriginalAppTextLanguageForEnglish As Nullable(Of Boolean)
 
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
@@ -197,8 +203,175 @@ Public Class GlobalVariables
 #End Region
 
     Public Shared Property Mapper As AutoMapper.Mapper
-    'Public Shared Property Mapper As IMapper
-    'Public Shared Property Mapper As MapperConfiguration
+
+
+    Public Shared Property DacConnectionString As String
+        Get
+            Try
+                If _dacConnectionString Is Nothing Then
+                    _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
+                    If _dacConnectionString Is Nothing Then
+                        Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                        If computerName = $"ISPADMIN2" Then
+                            _dacConnectionString = ConfigurationManager.AppSettings.Get("ISPDATA2")
+                        ElseIf computerName = "MARCELO-DELL" Then
+                            _dacConnectionString = ConfigurationManager.AppSettings.Get("ISPDATA3")
+                        Else
+                            _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
+                        End If
+                    End If
+                End If
+            Catch
+                _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
+            End Try
+            Return _dacConnectionString
+        End Get
+        Set(value As String)
+            _dacConnectionString = value
+        End Set
+    End Property
+
+    Public Shared Property DacAccessType As String
+        Get
+            Try
+                If _dacAccessType Is Nothing Then
+                    _dacAccessType = ConfigurationManager.AppSettings.Get("AccessTypeTranslator") ' "SQL", "MDB", "DBF"
+                    If _dacAccessType Is Nothing Then
+                        _dacAccessType = "SQL"
+                    End If
+                End If
+            Catch
+                _dacAccessType = "SQL"
+            End Try
+            Return _dacAccessType
+        End Get
+        Set(value As String)
+            _dacAccessType = value
+        End Set
+    End Property
+
+    Public Shared Property DacServer As String
+        Get
+            Try
+                _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator") ' SQL only
+                If _dacServer Is Nothing Then
+                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    If computerName = $"ISPADMIN2" Then
+                        _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator2")
+                    ElseIf computerName = "MARCELO-DELL" Then
+                        _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator3")
+                    Else
+                        _dacServer = "IBN-SERVER"
+                    End If
+                End If
+            Catch
+                _dacServer = "IBN-SERVER"
+            End Try
+            Return _dacServer
+        End Get
+        Set(value As String)
+            _dacServer = value
+        End Set
+    End Property
+
+    Public Shared Property DacServerType As String
+        Get
+            Try
+                _dacServerType = ConfigurationManager.AppSettings.Get("ServerType") ' SQL only
+                If _dacServerType Is Nothing Then
+                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    If computerName = $"ISPADMIN2" Then
+                        _dacServerType = ConfigurationManager.AppSettings.Get("ServerType2")
+                    ElseIf computerName = "MARCELO-DELL" Then
+                        _dacServerType = ConfigurationManager.AppSettings.Get("ServerType3")
+                    Else
+                        _dacServerType = "server"
+                    End If
+                End If
+            Catch
+                _dacServerType = "server"
+            End Try
+            Return _dacServerType
+        End Get
+        Set(value As String)
+            _dacServerType = value
+        End Set
+    End Property
+
+    Public Shared Property DacDatabase As String
+        Get
+            Try
+                _dacDatabase = ConfigurationManager.AppSettings.Get("Database")
+                If _dacDatabase Is Nothing Then
+                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    If computerName = $"ISPADMIN2" Then
+                        _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator2")
+                    ElseIf computerName = "MARCELO-DELL" Then
+                        _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator3")
+                    Else
+                        _dacDatabase = "ISPDATA"
+                    End If
+                End If
+            Catch
+                _dacDatabase = "ISPDATA"
+            End Try
+            Return _dacDatabase
+        End Get
+        Set(value As String)
+            _dacDatabase = value
+        End Set
+    End Property
+
+    Public Shared Property DacUid As String
+        Get
+            Try
+                _dacUid = ConfigurationManager.AppSettings.Get("UIDTranslator") ' SQL, MDB
+                If _dacUid Is Nothing Then
+                    _dacUid = "iGroupAdmin"
+                End If
+            Catch
+                _dacUid = "iGroupAdmin"
+            End Try
+            Return _dacUid
+        End Get
+        Set(value As String)
+            _dacUid = value
+        End Set
+    End Property
+
+    Public Shared Property DacPassword As String
+        Get
+            Try
+                _dacPassword = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
+                If _dacPassword Is Nothing Then
+                    _dacPassword = "igss@123"
+                End If
+            Catch
+                _dacPassword = "igss@123"
+            End Try
+            Return _dacPassword
+        End Get
+        Set(value As String)
+            _dacPassword = value
+        End Set
+    End Property
+
+    Public Shared Property DacFileName As String
+        Get
+            Try
+                _dacFileName = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' MDB, DBF
+                If _dacFileName Is Nothing Then
+                    _dacFileName = ""
+                End If
+            Catch
+                _dacFileName = ""
+            End Try
+            Return _dacFileName
+        End Get
+        Set(value As String)
+            _dacFileName = value
+        End Set
+    End Property
 
     Public Shared Property AppCurrentCultureInfo() As CultureInfo
         Get
@@ -299,7 +472,7 @@ Public Class GlobalVariables
         Get
             Dim cultureInfoStr = ""
             Try
-                If _defaultUnmirroredCultureInfoStr Is Nothing Then
+                If _defaultUnMirroredCultureInfoStr Is Nothing Then
                     Dim useComputerCultureInfo As Boolean
 
                     useComputerCultureInfo = ConfigurationManager.AppSettings("UseComputerCultureInfo")
@@ -318,7 +491,7 @@ Public Class GlobalVariables
                     End If
                 Else
                     ' return the stored value
-                    cultureInfoStr = _defaultUnmirroredCultureInfoStr
+                    cultureInfoStr = _defaultUnMirroredCultureInfoStr
                 End If
             Catch
                 ''
@@ -331,11 +504,11 @@ Public Class GlobalVariables
                     End If
                 End If
             End Try
-            _defaultUnmirroredCultureInfoStr = cultureInfoStr
-            Return _defaultUnmirroredCultureInfoStr
+            _defaultUnMirroredCultureInfoStr = cultureInfoStr
+            Return _defaultUnMirroredCultureInfoStr
         End Get
         Set
-            _defaultUnmirroredCultureInfoStr = Value
+            _defaultUnMirroredCultureInfoStr = Value
         End Set
     End Property
 
