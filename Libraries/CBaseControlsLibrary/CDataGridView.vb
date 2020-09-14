@@ -47,7 +47,6 @@ Public Class CDataGridView
     Private Function GetFirstEditableColumn() As Integer
         If _firstEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
-            Dim nFirstEditableColumn As Integer = 0
             For i = 0 To nColumnCount - 1
                 If Columns(i).Name = "dgvInsertColumn" Then
                     'nLastEditableColumn = nLastEditableColumn - 1
@@ -79,7 +78,6 @@ Public Class CDataGridView
     Private Function GetLastEditableColumn() As Integer
         If _lastEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
-            Dim nLastEditableColumn As Integer = nColumnCount
             For i = nColumnCount - 1 To 0 Step -1
                 If Columns(i).Name = "dgvInsertColumn" Then
                     'nLastEditableColumn = nLastEditableColumn - 1

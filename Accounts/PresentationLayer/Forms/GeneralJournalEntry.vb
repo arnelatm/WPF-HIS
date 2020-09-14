@@ -18,7 +18,7 @@ Namespace PresentationLayer.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
-        Private ReadOnly _closingEntry as Boolean
+        Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(ByVal closingEntry As Boolean)
             MyBase.New()
@@ -56,14 +56,13 @@ Namespace PresentationLayer.Forms
         End Property
 
         Public Property ClosingJournal As Boolean Implements IGeneralJournalView.ClosingJournal
-            Get 
-                return chkClosingJournal.Checked
+            Get
+                Return chkClosingJournal.Checked
             End Get
             Set(value As Boolean)
                 chkClosingJournal.Checked = value
             End Set
         End Property
-
 
         Public Property DateCreated As DateTime? Implements IGeneralJournalView.DateCreated
             Get
@@ -301,7 +300,7 @@ Namespace PresentationLayer.Forms
             Dim i = DataGridViewJournalItems.CurrentCell.RowIndex()
             For Each item In JournalItems
                 If item.Sequence > i + 1 Then
-                    item.Sequence = item.Sequence - 1
+                    item.Sequence -= 1
                 End If
             Next
         End Sub
@@ -312,12 +311,12 @@ Namespace PresentationLayer.Forms
                 If item.Sequence = 0 Then
                     item.Sequence = i
                 ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
+                    item.Sequence += 1
                 End If
             Next
         End Sub
 
-        Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewJournalItems IsNot Nothing Then
                 DataGridViewJournalItems.Focus()
             End If

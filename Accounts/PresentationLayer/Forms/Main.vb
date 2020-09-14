@@ -184,36 +184,36 @@ Namespace PresentationLayer.Forms
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-            Dim form As New LoginEntry
-            Try
-                form = New LoginEntry()
-                If form.ShowDialog() = DialogResult.OK Then
-                    If form.LoginOk Then
-                        GlobalVariables.IsUserLoggedIn = True
-                        LogStatus = LoginStatus.LoggedIn
+            Using form As New LoginEntry
+                Try
+                    If form.ShowDialog() = DialogResult.OK Then
+                        If form.LoginOk Then
+                            GlobalVariables.IsUserLoggedIn = True
+                            LogStatus = LoginStatus.LoggedIn
+                        Else
+                            GlobalVariables.IsUserLoggedIn = False
+                            LogStatus = LoginStatus.LoggedOut
+                            ToolStripButtonLogin.Enabled = True
+                        End If
                     Else
                         GlobalVariables.IsUserLoggedIn = False
                         LogStatus = LoginStatus.LoggedOut
                         ToolStripButtonLogin.Enabled = True
                     End If
-                Else
-                    GlobalVariables.IsUserLoggedIn = False
-                    LogStatus = LoginStatus.LoggedOut
-                    ToolStripButtonLogin.Enabled = True
-                End If
-                ToolStripButtonExit.Enabled = True
-            Catch ex As TypeInitializationException
-                MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
-                                "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                ErrLogger.LogError(ex, True)
-            Catch ex As Exception
-                'LogStatus = LoginStatus.LoggedOut
-                GlobalVariables.IsUserLoggedIn = True
-                LogStatus = LoginStatus.LoggedIn
-                'GlobalVariables.IsUserLoggedIn = False
-                'MessageBox.Show("Unsuccessful Login")
-                'Throw ex
-            End Try
+                    ToolStripButtonExit.Enabled = True
+                Catch ex As TypeInitializationException
+                    MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
+                                    "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ErrLogger.LogError(ex, True)
+                Catch ex As Exception
+                    'LogStatus = LoginStatus.LoggedOut
+                    GlobalVariables.IsUserLoggedIn = True
+                    LogStatus = LoginStatus.LoggedIn
+                    'GlobalVariables.IsUserLoggedIn = False
+                    'MessageBox.Show("Unsuccessful Login")
+                    'Throw ex
+                End Try
+            End Using
         End Sub
 
         'End Sub
@@ -393,10 +393,11 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
-            Dim frm As New TranslationTableManager()
-            frm.FormIdNoToTranslate = FormIdNo
-            frm.AppDataDAC = AppDataDAC
-            frm.TranslatorDAC = TranslatorDAC
+            Dim frm As New TranslationTableManager With {
+                .FormIdNoToTranslate = FormIdNo,
+                .AppDataDAC = AppDataDAC,
+                .TranslatorDAC = TranslatorDAC
+            }
             frm.Show()
         End Sub
 
@@ -1100,17 +1101,17 @@ Namespace PresentationLayer.Forms
             Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
         End Sub
 
-        Private Function ShowError(translate As Boolean, key As String, message As String, caption As String, ParamArray variables As String())
-            Dim oldValue As String = ""
-            Dim newValue As String = ""
-            message = Messaging.GetMessage(True, key, message, caption)
-            For i = 0 To variables.Count - 1 Step 2
-                oldValue = "{" & variables(i) & "}"
-                newValue = variables(i + 1)
-                message = Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
-            Next
-            Return Messaging.Show(message, caption)
-        End Function
+        'Private Function ShowError(translate As Boolean, key As String, message As String, caption As String, ParamArray variables As String())
+        '    Dim oldValue As String = ""
+        '    Dim newValue As String = ""
+        '    message = Messaging.GetMessage(True, key, message, caption)
+        '    For i = 0 To variables.Count - 1 Step 2
+        '        oldValue = "{" & variables(i) & "}"
+        '        newValue = variables(i + 1)
+        '        message = Replace(message, oldValue, newValue, 1, -1, CompareMethod.Text)
+        '    Next
+        '    Return Messaging.Show(message, caption)
+        'End Function
 
         Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptionsBatchEdit.Click
             Dim frm As New TranslationTableManager()

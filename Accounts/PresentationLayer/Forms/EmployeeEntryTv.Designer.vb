@@ -23,11 +23,11 @@ Namespace PresentationLayer.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
             Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -48,12 +48,7 @@ Namespace PresentationLayer.Forms
             Me.txtPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayRateType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CFlowLayout8 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-            Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
-            Me.CGroupBox2 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-            Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -114,6 +109,22 @@ Namespace PresentationLayer.Forms
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
+            Me.tbpEarningDeductions = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout8 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+            Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.FrequencyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.RateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CGroupBox2 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+            Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DeductionIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.FrequencyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.RateDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -123,12 +134,7 @@ Namespace PresentationLayer.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floMainDisplay.SuspendLayout()
             Me.CFlowLayout6.SuspendLayout()
-            Me.CFlowLayout8.SuspendLayout()
-            Me.CGroupBox1.SuspendLayout()
-            CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CGroupBox2.SuspendLayout()
-            CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.groupBoxContactInfo.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -141,6 +147,12 @@ Namespace PresentationLayer.Forms
             Me.tbpEmployment.SuspendLayout()
             Me.CFlowLayout5.SuspendLayout()
             Me.tbpPayroll.SuspendLayout()
+            Me.tbpEarningDeductions.SuspendLayout()
+            Me.CFlowLayout8.SuspendLayout()
+            Me.CGroupBox1.SuspendLayout()
+            CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CGroupBox2.SuspendLayout()
+            CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.CFlowLayout4.SuspendLayout()
             Me.SuspendLayout()
@@ -150,7 +162,7 @@ Namespace PresentationLayer.Forms
             Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
             Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
+            Me.TreeViewTableName.Location = New System.Drawing.Point(839, 53)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.TreeViewTableName.Size = New System.Drawing.Size(300, 486)
             '
@@ -159,7 +171,6 @@ Namespace PresentationLayer.Forms
             Me.floMainDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.floMainDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floMainDisplay.Controls.Add(Me.CFlowLayout6)
-            Me.floMainDisplay.Controls.Add(Me.CFlowLayout8)
             Me.floMainDisplay.Location = New System.Drawing.Point(2, 2)
             Me.floMainDisplay.Margin = New System.Windows.Forms.Padding(0)
             Me.floMainDisplay.MinimumSize = New System.Drawing.Size(430, 180)
@@ -191,7 +202,7 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
             Me.CFlowLayout6.Padding = New System.Windows.Forms.Padding(3)
-            Me.CFlowLayout6.Size = New System.Drawing.Size(409, 346)
+            Me.CFlowLayout6.Size = New System.Drawing.Size(806, 346)
             Me.CFlowLayout6.TabIndex = 293
             '
             'lblBankIdNo
@@ -595,98 +606,13 @@ Namespace PresentationLayer.Forms
             Me.cboPayRateType.ValueIsNumeric = False
             Me.cboPayRateType.ValueMember = "Code"
             '
-            'CFlowLayout8
+            'bsEarnings
             '
-            Me.CFlowLayout8.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout8.Controls.Add(Me.CGroupBox1)
-            Me.CFlowLayout8.Controls.Add(Me.CGroupBox2)
-            Me.CFlowLayout8.Location = New System.Drawing.Point(418, 3)
-            Me.CFlowLayout8.Name = "CFlowLayout8"
-            Me.CFlowLayout8.Size = New System.Drawing.Size(391, 346)
-            Me.CFlowLayout8.TabIndex = 295
+            Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel)
             '
-            'CGroupBox1
+            'bsDeductions
             '
-            Me.CGroupBox1.AutoSize = True
-            Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
-            Me.CGroupBox1.Controls.Add(Me.DataGridViewEarnings)
-            Me.CGroupBox1.DisplayOnly = True
-            Me.CGroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CGroupBox1.Location = New System.Drawing.Point(3, 3)
-            Me.CGroupBox1.Name = "CGroupBox1"
-            Me.CGroupBox1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 0)
-            Me.CGroupBox1.Size = New System.Drawing.Size(383, 166)
-            Me.CGroupBox1.TabIndex = 0
-            Me.CGroupBox1.TabStop = False
-            Me.CGroupBox1.Text = "Regular Earnings:"
-            '
-            'DataGridViewEarnings
-            '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DataGridViewEarnings.AutoGenerateColumns = False
-            Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewEarnings.DataInGridChanged = False
-            Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle2
-            Me.DataGridViewEarnings.DisplayOnly = False
-            Me.DataGridViewEarnings.EditingMode = False
-            Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewEarnings.Location = New System.Drawing.Point(6, 17)
-            Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
-            Me.DataGridViewEarnings.ReadOnly = True
-            Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
-            Me.DataGridViewEarnings.Size = New System.Drawing.Size(371, 133)
-            Me.DataGridViewEarnings.StartTrackingChanges = False
-            Me.DataGridViewEarnings.TabIndex = 0
-            '
-            'CGroupBox2
-            '
-            Me.CGroupBox2.AutoSize = True
-            Me.CGroupBox2.BackColor = System.Drawing.Color.Transparent
-            Me.CGroupBox2.Controls.Add(Me.DataGridViewDeductions)
-            Me.CGroupBox2.DisplayOnly = True
-            Me.CGroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CGroupBox2.Location = New System.Drawing.Point(3, 175)
-            Me.CGroupBox2.Name = "CGroupBox2"
-            Me.CGroupBox2.Size = New System.Drawing.Size(383, 183)
-            Me.CGroupBox2.TabIndex = 1
-            Me.CGroupBox2.TabStop = False
-            Me.CGroupBox2.Text = "Regular Deductions:"
-            '
-            'DataGridViewDeductions
-            '
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
-            Me.DataGridViewDeductions.AutoGenerateColumns = False
-            Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewDeductions.DataInGridChanged = False
-            Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle4
-            Me.DataGridViewDeductions.DisplayOnly = False
-            Me.DataGridViewDeductions.EditingMode = False
-            Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewDeductions.Location = New System.Drawing.Point(6, 14)
-            Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
-            Me.DataGridViewDeductions.ReadOnly = True
-            Me.DataGridViewDeductions.SequenceColumn = "dgvSequence"
-            Me.DataGridViewDeductions.Size = New System.Drawing.Size(371, 150)
-            Me.DataGridViewDeductions.StartTrackingChanges = False
-            Me.DataGridViewDeductions.TabIndex = 1
+            Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel)
             '
             'lblEmployeeName
             '
@@ -1422,6 +1348,8 @@ Namespace PresentationLayer.Forms
             Me.EmployeeTabControl.Controls.Add(Me.tbpContact)
             Me.EmployeeTabControl.Controls.Add(Me.tbpEmployment)
             Me.EmployeeTabControl.Controls.Add(Me.tbpPayroll)
+            Me.EmployeeTabControl.Controls.Add(Me.tbpEarningDeductions)
+            Me.EmployeeTabControl.HotTrack = True
             Me.EmployeeTabControl.Location = New System.Drawing.Point(3, 91)
             Me.EmployeeTabControl.Name = "EmployeeTabControl"
             Me.EmployeeTabControl.SelectedIndex = 0
@@ -1868,6 +1796,183 @@ Namespace PresentationLayer.Forms
             Me.tbpPayroll.Text = "Payroll Information"
             Me.tbpPayroll.UseVisualStyleBackColor = True
             '
+            'tbpEarningDeductions
+            '
+            Me.tbpEarningDeductions.Controls.Add(Me.CFlowLayout8)
+            Me.tbpEarningDeductions.Location = New System.Drawing.Point(4, 22)
+            Me.tbpEarningDeductions.Name = "tbpEarningDeductions"
+            Me.tbpEarningDeductions.Size = New System.Drawing.Size(821, 361)
+            Me.tbpEarningDeductions.TabIndex = 4
+            Me.tbpEarningDeductions.Text = "Earnings & Deductions"
+            Me.tbpEarningDeductions.UseVisualStyleBackColor = True
+            '
+            'CFlowLayout8
+            '
+            Me.CFlowLayout8.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout8.Controls.Add(Me.CGroupBox1)
+            Me.CFlowLayout8.Location = New System.Drawing.Point(3, 7)
+            Me.CFlowLayout8.Name = "CFlowLayout8"
+            Me.CFlowLayout8.Size = New System.Drawing.Size(815, 346)
+            Me.CFlowLayout8.TabIndex = 296
+            '
+            'CGroupBox1
+            '
+            Me.CGroupBox1.AutoSize = True
+            Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
+            Me.CGroupBox1.Controls.Add(Me.DataGridViewEarnings)
+            Me.CGroupBox1.Controls.Add(Me.CGroupBox2)
+            Me.CGroupBox1.DisplayOnly = True
+            Me.CGroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CGroupBox1.Location = New System.Drawing.Point(3, 3)
+            Me.CGroupBox1.Name = "CGroupBox1"
+            Me.CGroupBox1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 0)
+            Me.CGroupBox1.Size = New System.Drawing.Size(808, 359)
+            Me.CGroupBox1.TabIndex = 0
+            Me.CGroupBox1.TabStop = False
+            Me.CGroupBox1.Text = "Regular Earnings:"
+            '
+            'DataGridViewEarnings
+            '
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewEarnings.AutoGenerateColumns = False
+            Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EarningIdNoDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.FrequencyDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.RateDataGridViewTextBoxColumn})
+            Me.DataGridViewEarnings.DataInGridChanged = False
+            Me.DataGridViewEarnings.DataSource = Me.bsEarnings
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridViewEarnings.DisplayOnly = False
+            Me.DataGridViewEarnings.EditingMode = False
+            Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewEarnings.Location = New System.Drawing.Point(6, 17)
+            Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
+            Me.DataGridViewEarnings.ReadOnly = True
+            Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(790, 133)
+            Me.DataGridViewEarnings.StartTrackingChanges = False
+            Me.DataGridViewEarnings.TabIndex = 0
+            '
+            'EarningIdNoDataGridViewTextBoxColumn
+            '
+            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
+            Me.EarningIdNoDataGridViewTextBoxColumn.HeaderText = "EarningIdNo"
+            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
+            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Name = "EmployeeIdNoDataGridViewTextBoxColumn"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'FrequencyDataGridViewTextBoxColumn
+            '
+            Me.FrequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency"
+            Me.FrequencyDataGridViewTextBoxColumn.HeaderText = "Frequency"
+            Me.FrequencyDataGridViewTextBoxColumn.Name = "FrequencyDataGridViewTextBoxColumn"
+            Me.FrequencyDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'RateDataGridViewTextBoxColumn
+            '
+            Me.RateDataGridViewTextBoxColumn.DataPropertyName = "Rate"
+            Me.RateDataGridViewTextBoxColumn.HeaderText = "Rate"
+            Me.RateDataGridViewTextBoxColumn.Name = "RateDataGridViewTextBoxColumn"
+            Me.RateDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'CGroupBox2
+            '
+            Me.CGroupBox2.AutoSize = True
+            Me.CGroupBox2.BackColor = System.Drawing.Color.Transparent
+            Me.CGroupBox2.Controls.Add(Me.DataGridViewDeductions)
+            Me.CGroupBox2.DisplayOnly = True
+            Me.CGroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CGroupBox2.Location = New System.Drawing.Point(6, 156)
+            Me.CGroupBox2.Name = "CGroupBox2"
+            Me.CGroupBox2.Size = New System.Drawing.Size(796, 187)
+            Me.CGroupBox2.TabIndex = 1
+            Me.CGroupBox2.TabStop = False
+            Me.CGroupBox2.Text = "Regular Deductions:"
+            '
+            'DataGridViewDeductions
+            '
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            Me.DataGridViewDeductions.AutoGenerateColumns = False
+            Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn1, Me.EmployeeIdNoDataGridViewTextBoxColumn1, Me.DeductionIdNoDataGridViewTextBoxColumn, Me.FrequencyDataGridViewTextBoxColumn1, Me.RateDataGridViewTextBoxColumn1})
+            Me.DataGridViewDeductions.DataInGridChanged = False
+            Me.DataGridViewDeductions.DataSource = Me.bsDeductions
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle4
+            Me.DataGridViewDeductions.DisplayOnly = False
+            Me.DataGridViewDeductions.EditingMode = False
+            Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDeductions.Location = New System.Drawing.Point(0, 14)
+            Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
+            Me.DataGridViewDeductions.ReadOnly = True
+            Me.DataGridViewDeductions.SequenceColumn = "dgvSequence"
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(790, 150)
+            Me.DataGridViewDeductions.StartTrackingChanges = False
+            Me.DataGridViewDeductions.TabIndex = 1
+            '
+            'IdNoDataGridViewTextBoxColumn1
+            '
+            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn1
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.Name = "EmployeeIdNoDataGridViewTextBoxColumn1"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.ReadOnly = True
+            '
+            'DeductionIdNoDataGridViewTextBoxColumn
+            '
+            Me.DeductionIdNoDataGridViewTextBoxColumn.DataPropertyName = "DeductionIdNo"
+            Me.DeductionIdNoDataGridViewTextBoxColumn.HeaderText = "DeductionIdNo"
+            Me.DeductionIdNoDataGridViewTextBoxColumn.Name = "DeductionIdNoDataGridViewTextBoxColumn"
+            Me.DeductionIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'FrequencyDataGridViewTextBoxColumn1
+            '
+            Me.FrequencyDataGridViewTextBoxColumn1.DataPropertyName = "Frequency"
+            Me.FrequencyDataGridViewTextBoxColumn1.HeaderText = "Frequency"
+            Me.FrequencyDataGridViewTextBoxColumn1.Name = "FrequencyDataGridViewTextBoxColumn1"
+            Me.FrequencyDataGridViewTextBoxColumn1.ReadOnly = True
+            '
+            'RateDataGridViewTextBoxColumn1
+            '
+            Me.RateDataGridViewTextBoxColumn1.DataPropertyName = "Rate"
+            Me.RateDataGridViewTextBoxColumn1.HeaderText = "Rate"
+            Me.RateDataGridViewTextBoxColumn1.Name = "RateDataGridViewTextBoxColumn1"
+            Me.RateDataGridViewTextBoxColumn1.ReadOnly = True
+            '
             'lblIdNo
             '
             Me.lblIdNo.DisplayOnly = True
@@ -1950,7 +2055,7 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout2.Controls.Add(Me.CFlowLayout4)
             Me.CFlowLayout2.Controls.Add(Me.EmployeeTabControl)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Left
-            Me.CFlowLayout2.Location = New System.Drawing.Point(300, 53)
+            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 53)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(839, 486)
             Me.CFlowLayout2.TabIndex = 6
@@ -1979,19 +2084,13 @@ Namespace PresentationLayer.Forms
             Me.MinimumSize = New System.Drawing.Size(1165, 480)
             Me.Name = "EmployeeEntryTv"
             Me.Text = "Employee Maintenance Form"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floMainDisplay.ResumeLayout(False)
             Me.CFlowLayout6.ResumeLayout(False)
             Me.CFlowLayout6.PerformLayout()
-            Me.CFlowLayout8.ResumeLayout(False)
-            Me.CFlowLayout8.PerformLayout()
-            Me.CGroupBox1.ResumeLayout(False)
-            CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.CGroupBox2.ResumeLayout(False)
-            CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.groupBoxContactInfo.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
@@ -2008,6 +2107,14 @@ Namespace PresentationLayer.Forms
             Me.tbpEmployment.ResumeLayout(False)
             Me.CFlowLayout5.ResumeLayout(False)
             Me.tbpPayroll.ResumeLayout(False)
+            Me.tbpEarningDeductions.ResumeLayout(False)
+            Me.CFlowLayout8.ResumeLayout(False)
+            Me.CFlowLayout8.PerformLayout()
+            Me.CGroupBox1.ResumeLayout(False)
+            Me.CGroupBox1.PerformLayout()
+            CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CGroupBox2.ResumeLayout(False)
+            CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout2.ResumeLayout(False)
             Me.CFlowLayout4.ResumeLayout(False)
             Me.CFlowLayout4.PerformLayout()
@@ -2101,13 +2208,24 @@ Namespace PresentationLayer.Forms
         Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpReleasedDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CFlowLayout6 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents bsEarnings As BindingSource
+        Friend WithEvents bsDeductions As BindingSource
+        Friend WithEvents tbpEarningDeductions As TabPage
         Friend WithEvents CFlowLayout8 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CGroupBox1 As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents FrequencyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents RateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CGroupBox2 As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents bsEarnings As BindingSource
-        Friend WithEvents bsDeductions As BindingSource
+        Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents DeductionIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents FrequencyDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents RateDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     End Class
 
 End Namespace
