@@ -334,6 +334,8 @@
     <Build Include="dbo\Tables\Leave.sql" />
     <Build Include="dbo\Tables\EmployeeAbsencesLeave.sql" />
     <Build Include="dbo\Tables\EmployeeLeave.sql" />
+    <Build Include="dbo\Views\EmployeeEarning_View.sql" />
+    <Build Include="dbo\Views\EmployeeDeduction_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
