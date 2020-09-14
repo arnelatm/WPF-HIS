@@ -246,7 +246,7 @@ Namespace PresentationLayer.Forms
                 Return TxtTotalCredits
             End Get
             Set(value As Decimal)
-                TxtTotalCredits = Value
+                TxtTotalCredits = value
             End Set
         End Property
 
@@ -411,7 +411,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
@@ -449,8 +449,9 @@ Namespace PresentationLayer.Forms
 
         Private Sub CheckDisbursementJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            _jiFooter = New DgvFooter(DataGridViewJournalItems)
-            _jiFooter.AutoCalc = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
@@ -465,7 +466,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
@@ -487,7 +488,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
             SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
@@ -641,7 +642,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub txtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
+        Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If

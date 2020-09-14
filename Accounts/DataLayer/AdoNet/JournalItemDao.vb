@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
         Inherits DaoAccounts
         Implements IDaoChild(Of JournalItem)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
         Protected TableFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
@@ -40,17 +40,17 @@ Namespace DataLayer.AdoNet
                     " WHERE JournalIdNo = @JournalIdNo" &
                     " ORDER BY " & sortKey
             Dim params() As Object = {"@JournalIdNo", journalIdNo}
-            Return Db.Read(sql, Make, params).ToList()
+            Return _db.Read(sql, Make, params).ToList()
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Int32) As Integer _
             Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
+            Return _db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
             Implements IDaoChild(Of JournalItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =

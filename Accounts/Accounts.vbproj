@@ -96,6 +96,8 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Deduction.vb" />
+    <Compile Include="BusinessLayer\EmployeeDeduction.vb" />
+    <Compile Include="BusinessLayer\EmployeeEarning.vb" />
     <Compile Include="BusinessLayer\ErJournal.vb" />
     <Compile Include="BusinessLayer\ArJournal.vb" />
     <Compile Include="BusinessLayer\ArOpenInvoice.vb" />
@@ -134,6 +136,8 @@
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DeductionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeDeductionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeEarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\EarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
@@ -423,6 +427,8 @@
     <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
     <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ApOpenInvoiceModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeEarningModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeDeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\DeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\ERJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
@@ -505,6 +511,8 @@
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\IApJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\IEmployeeDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\IEmployeeEarningView.vb" />
     <Compile Include="PresentationLayer\Views\IErJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IArJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IBankView.vb" />
@@ -2649,6 +2657,8 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CsrOiItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />

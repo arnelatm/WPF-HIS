@@ -207,6 +207,18 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property EmployeeDeductionDao As IDao(Of EmployeeDeduction)
+            Get
+                Return DaoFactoryAccounts.CreateDao("EmployeeDeduction")
+            End Get
+        End Property
+
+        Private ReadOnly Property EmployeeEarningDao As IDao(Of EmployeeEarning)
+            Get
+                Return DaoFactoryAccounts.CreateDao("EmployeeEarning")
+            End Get
+        End Property
+
         Private ReadOnly Property ErJournalDao As IDao(Of ErJournal)
             Get
                 Return DaoFactoryAccounts.CreateDao("ErJournal")

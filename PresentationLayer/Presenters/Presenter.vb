@@ -444,10 +444,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim dataList As New List(Of ClassesLibrary.LookupData)
         'Dim enumValues = [Enum].GetValues(GetType(TE))
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData
-            data.IdNo = CInt(c)
-            data.Code = GetEnumCode(c)
-            data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
+            Dim data As New ClassesLibrary.LookupData With {
+                .IdNo = CInt(c),
+                .Code = GetEnumCode(c),
+                .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
+            }
             dataList.Add(data)
         Next
         Return dataList
@@ -890,8 +891,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     If result = DialogResult.Yes Then
                         result = Save()
                         If result > 0 Then
-                            Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                            message = message + Environment.NewLine & CompareDifferences
+                            'Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                            'message = message + Environment.NewLine & CompareDifferences
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
@@ -1184,7 +1185,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     nameOfField = dataSortOrder.Substring(0, stringLength - 4)
                 End If
                 If PropertyExists(dModel, nameOfField + "ara") Then
-                    nameOfField = nameOfField + "Ara"
+                    nameOfField += "Ara"
                     translatedSortOrder = nameOfField + suffix
                 End If
             End If
