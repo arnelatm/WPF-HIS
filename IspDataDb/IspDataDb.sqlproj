@@ -336,6 +336,13 @@
     <Build Include="dbo\Tables\EmployeeLeave.sql" />
     <Build Include="dbo\Views\EmployeeEarning_View.sql" />
     <Build Include="dbo\Views\EmployeeDeduction_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeeEarningTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeeEarningTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeeDeductionTVP.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeEarningUpdate.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeEarningInsert.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeDeductionUpdate.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeDeductionInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
