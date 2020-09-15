@@ -44,16 +44,13 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeDeduction) =
                                     Function(reader) _
             New EmployeeDeduction() With {
-            .AccountIdNo = Extensions.AsId(Of Int32)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .DeductionCode = Extensions.AsString(reader("DeductionCode")),
             .DeductionIdNo = Extensions.AsId(Of Int16)(reader("DeductionIdNo")),
             .DeductionName = Extensions.AsString(reader("DeductionCode")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
             .DeductionType = Extensions.AsString(reader("DeductionType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .PayFrequency = Extensions.AsString(reader("PayFrequency")),
-            .Percentage = Extensions.AsDecimal(reader("Percentage"))
+            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo"))
             }
 
     End Class

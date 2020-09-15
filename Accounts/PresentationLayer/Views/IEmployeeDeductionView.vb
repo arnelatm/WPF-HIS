@@ -4,14 +4,15 @@ Namespace PresentationLayer.Views
 
     Public Interface IEmployeeDeductionView
         Inherits IView
-        Property IdNo As Int32
+
+        Property Amount As Decimal
         Property DeductionCode As String
+        Property DeductionIdNo As Int16
         Property DeductionName As String
         Property DeductionNameAra As String
-        Property AccountIdNo As Int32?
-        Property DefaultFrequency As Char
         Property DeductionType As Char
-        Property Notes As String
+        Property IdNo As Int32
+
     End Interface
 
 End Namespace

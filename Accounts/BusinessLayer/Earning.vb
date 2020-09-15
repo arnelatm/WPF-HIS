@@ -16,13 +16,13 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Int32
+        Public Property AccountIdNo As Int32
+        Public Property DefaultFrequency As Char
         Public Property EarningCode As String
         Public Property EarningName As String
         Public Property EarningNameAra As String
-        Public Property AccountIdNo As Int32
-        Public Property DefaultFrequency As Char
         Public Property EarningType As Char
+        Public Property IdNo As Int32
         Public Property Notes As String
     End Class
 

@@ -16,18 +16,14 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT " &
-                    "AccountIdNo" &
-                    "AccountIdNo," &
                     "Amount," &
-                    "DefaultFrequency," &
                     "EarningCode," &
                     "EarningIdNo," &
                     "EarningName," &
                     "EarningNameAra," &
                     "EarningType," &
                     "EmployeeIdNo," &
-                    "PayFrequency," &
-                    "Percentage," &
+                    "Sequence" &
                     " FROM [EmployeeEarning_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -45,18 +41,15 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeEarning) =
                                     Function(reader) _
             New EmployeeEarning() With {
-            .AccountIdNo = Extensions.AsId(Of Int32)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningIdNo = Extensions.AsId(Of Int16)(reader("EarningIdNo")),
             .EarningName = Extensions.AsString(reader("EarningCode")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
             .EarningType = Extensions.AsString(reader("EarningType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .Frequency = Extensions.AsString(reader("DefaultFrequency")),
-            .PayFrequency = Extensions.AsString(reader("PayFrequency")),
-            .Percentage = Extensions.AsDecimal(reader("Percentage"))
-            }
+            .EmployeeIdNo = Extensions.AsId(Of Int16)(reader("EmployeeIdNo")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
+           }
 
     End Class
 
