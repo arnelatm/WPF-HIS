@@ -210,12 +210,12 @@ Public Class GlobalVariables
             Try
                 If _dacConnectionString Is Nothing Then
                     _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
-                    If _dacConnectionString Is Nothing Then
+                    If _dacConnectionString Is Nothing Or _dacConnectionString = "" Then
                         Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
                         If computerName = $"ISPADMIN2" Then
-                            _dacConnectionString = ConfigurationManager.AppSettings.Get("ISPDATA2")
+                            _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA2").ConnectionString
                         ElseIf computerName = "MARCELO-DELL" Then
-                            _dacConnectionString = ConfigurationManager.AppSettings.Get("ISPDATA3")
+                            _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA3").ConnectionString
                         Else
                             _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
                         End If
@@ -254,7 +254,7 @@ Public Class GlobalVariables
         Get
             Try
                 _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator") ' SQL only
-                If _dacServer Is Nothing Then
+                If _dacServer Is Nothing Or _dacServer = "" Then
                     Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
                     If computerName = $"ISPADMIN2" Then
                         _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator2")
@@ -278,7 +278,7 @@ Public Class GlobalVariables
         Get
             Try
                 _dacServerType = ConfigurationManager.AppSettings.Get("ServerType") ' SQL only
-                If _dacServerType Is Nothing Then
+                If _dacServerType Is Nothing Or _dacServerType = "" Then
                     Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
                     If computerName = $"ISPADMIN2" Then
                         _dacServerType = ConfigurationManager.AppSettings.Get("ServerType2")
@@ -302,7 +302,7 @@ Public Class GlobalVariables
         Get
             Try
                 _dacDatabase = ConfigurationManager.AppSettings.Get("Database")
-                If _dacDatabase Is Nothing Then
+                If _dacDatabase Is Nothing Or _dacDatabase = "" Then
                     Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
                     If computerName = $"ISPADMIN2" Then
                         _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator2")

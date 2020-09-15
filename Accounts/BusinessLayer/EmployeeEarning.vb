@@ -16,19 +16,15 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32
         Public Property Amount As Decimal
-        Public Property DefaultFrequency As String
         Public Property EarningCode As String
         Public Property EarningIdNo As Int16
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As String
         Public Property EmployeeIdNo As Int32
-        Public Property Frequency As Char
         Public Property IdNo As Int32
-        Public Property PayFrequency As Char
-        Public Property Percentage As Decimal
+        Public Property Sequence As Int16
 
     End Class
 

@@ -82,8 +82,8 @@ Namespace PresentationLayer.Forms
                                                                           cfg.AddProfile(New MappingProfileAccounts)
                                                                           cfg.AddProfile(New MappingProfileCommon)
                                                                       End Sub)
-            mapperConfigurationAccounts.AssertConfigurationIsValid()
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
+            mapperConfigurationAccounts.AssertConfigurationIsValid()
         End Sub
 
         Public Event FormCultureChanged()

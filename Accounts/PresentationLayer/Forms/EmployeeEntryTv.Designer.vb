@@ -113,18 +113,11 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout8 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.FrequencyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.RateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.CGroupBox2 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DeductionIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.FrequencyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.RateDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -162,9 +155,9 @@ Namespace PresentationLayer.Forms
             Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
             Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.Location = New System.Drawing.Point(839, 53)
+            Me.TreeViewTableName.Location = New System.Drawing.Point(0, 0)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 486)
+            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 539)
             '
             'floMainDisplay
             '
@@ -520,7 +513,7 @@ Namespace PresentationLayer.Forms
             Me.lblPayRateType.EditingMode = False
             Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
+            Me.lblPayRateType.Location = New System.Drawing.Point(4, 183)
             Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateType.Name = "lblPayRateType"
             Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
@@ -540,7 +533,7 @@ Namespace PresentationLayer.Forms
             Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
             Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 182)
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 183)
             Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayRateAmount.MaximumValue = Nothing
             Me.txtPayRateAmount.MinimumValue = Nothing
@@ -558,7 +551,7 @@ Namespace PresentationLayer.Forms
             Me.lblPayRateAmount.EditingMode = False
             Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 207)
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
             Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateAmount.Name = "lblPayRateAmount"
             Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
@@ -584,7 +577,7 @@ Namespace PresentationLayer.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 207)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 208)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -1837,7 +1830,6 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EarningIdNoDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.FrequencyDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.RateDataGridViewTextBoxColumn})
             Me.DataGridViewEarnings.DataInGridChanged = False
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1859,43 +1851,6 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewEarnings.StartTrackingChanges = False
             Me.DataGridViewEarnings.TabIndex = 0
             '
-            'EarningIdNoDataGridViewTextBoxColumn
-            '
-            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
-            Me.EarningIdNoDataGridViewTextBoxColumn.HeaderText = "EarningIdNo"
-            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
-            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'EmployeeIdNoDataGridViewTextBoxColumn
-            '
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.DataPropertyName = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.HeaderText = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.Name = "EmployeeIdNoDataGridViewTextBoxColumn"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'FrequencyDataGridViewTextBoxColumn
-            '
-            Me.FrequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency"
-            Me.FrequencyDataGridViewTextBoxColumn.HeaderText = "Frequency"
-            Me.FrequencyDataGridViewTextBoxColumn.Name = "FrequencyDataGridViewTextBoxColumn"
-            Me.FrequencyDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'IdNoDataGridViewTextBoxColumn
-            '
-            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.IdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'RateDataGridViewTextBoxColumn
-            '
-            Me.RateDataGridViewTextBoxColumn.DataPropertyName = "Rate"
-            Me.RateDataGridViewTextBoxColumn.HeaderText = "Rate"
-            Me.RateDataGridViewTextBoxColumn.Name = "RateDataGridViewTextBoxColumn"
-            Me.RateDataGridViewTextBoxColumn.ReadOnly = True
-            '
             'CGroupBox2
             '
             Me.CGroupBox2.AutoSize = True
@@ -1916,7 +1871,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewDeductions.AutoGenerateColumns = False
             Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn1, Me.EmployeeIdNoDataGridViewTextBoxColumn1, Me.DeductionIdNoDataGridViewTextBoxColumn, Me.FrequencyDataGridViewTextBoxColumn1, Me.RateDataGridViewTextBoxColumn1})
+            Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn1, Me.EmployeeIdNoDataGridViewTextBoxColumn1, Me.DeductionIdNoDataGridViewTextBoxColumn})
             Me.DataGridViewDeductions.DataInGridChanged = False
             Me.DataGridViewDeductions.DataSource = Me.bsDeductions
             DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1958,20 +1913,6 @@ Namespace PresentationLayer.Forms
             Me.DeductionIdNoDataGridViewTextBoxColumn.HeaderText = "DeductionIdNo"
             Me.DeductionIdNoDataGridViewTextBoxColumn.Name = "DeductionIdNoDataGridViewTextBoxColumn"
             Me.DeductionIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'FrequencyDataGridViewTextBoxColumn1
-            '
-            Me.FrequencyDataGridViewTextBoxColumn1.DataPropertyName = "Frequency"
-            Me.FrequencyDataGridViewTextBoxColumn1.HeaderText = "Frequency"
-            Me.FrequencyDataGridViewTextBoxColumn1.Name = "FrequencyDataGridViewTextBoxColumn1"
-            Me.FrequencyDataGridViewTextBoxColumn1.ReadOnly = True
-            '
-            'RateDataGridViewTextBoxColumn1
-            '
-            Me.RateDataGridViewTextBoxColumn1.DataPropertyName = "Rate"
-            Me.RateDataGridViewTextBoxColumn1.HeaderText = "Rate"
-            Me.RateDataGridViewTextBoxColumn1.Name = "RateDataGridViewTextBoxColumn1"
-            Me.RateDataGridViewTextBoxColumn1.ReadOnly = True
             '
             'lblIdNo
             '
@@ -2055,7 +1996,7 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout2.Controls.Add(Me.CFlowLayout4)
             Me.CFlowLayout2.Controls.Add(Me.EmployeeTabControl)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Left
-            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 53)
+            Me.CFlowLayout2.Location = New System.Drawing.Point(300, 53)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(839, 486)
             Me.CFlowLayout2.TabIndex = 6
@@ -2084,8 +2025,8 @@ Namespace PresentationLayer.Forms
             Me.MinimumSize = New System.Drawing.Size(1165, 480)
             Me.Name = "EmployeeEntryTv"
             Me.Text = "Employee Maintenance Form"
-            Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floMainDisplay.ResumeLayout(False)
             Me.CFlowLayout6.ResumeLayout(False)
@@ -2214,10 +2155,7 @@ Namespace PresentationLayer.Forms
         Friend WithEvents CFlowLayout8 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CGroupBox1 As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents FrequencyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents RateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CGroupBox2 As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
