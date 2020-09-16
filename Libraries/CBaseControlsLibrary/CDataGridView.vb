@@ -567,16 +567,27 @@ Public Class CDataGridView
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
-    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T))
+    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
         For Each value In dataItems
-            Dim sequence = CallByName(value, "Sequence", CallType.Get, i)
-
-            '    If Item.Sequence > i + 1 Then
-            '        Item.Sequence -= 1
-            '    End If
-
+            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            If sequence > i + 1 Then
+                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+            End If
         Next
     End Sub
+
+    Private Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+        Dim i = CurrentCell.RowIndex()
+        For Each value In dataItems
+            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            If sequence = 0 Then
+                CallByName(value, sequenceFieldName, CallType.Set, i)
+            ElseIf sequence >= i Then
+                CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
+            End If
+        Next
+    End Sub
+
 
 End Class

@@ -555,37 +555,8 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
-            ReSequenceDgvAfterDelete()
-            'DataGridViewEarnings.ReSequenceDgvAfterDelete(Of EmployeeDeduction)(EmployeeDeductions)
+            DataGridViewEarnings.ReSequenceDgvAfterDelete(Of EmployeeEarningView)(EmployeeEarnings)
         End Sub
-
-        Private Sub ReSequenceDgvAfterDelete()
-            Dim i = DataGridViewEarnings.CurrentCell.RowIndex()
-            For Each item In EmployeeDeductions
-                If item.Sequence > i + 1 Then
-                    item.Sequence -= 1
-                End If
-            Next
-        End Sub
-
-        Private Sub ReSequenceDgvAfterInsert()
-            Dim i = DataGridViewEarnings.CurrentCell.RowIndex()
-            For Each item In EmployeeEarnings
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence += 1
-                End If
-            Next
-        End Sub
-
-        'Protected Overrides Sub InputsTurnedOn()
-        '    If PresenterObj.AddMode Then
-        '        txtOpeningBalance.DisplayOnly = False
-        '    Else
-        '        txtOpeningBalance.DisplayOnly = True
-        '    End If
-        'End Sub
 
         Protected Overrides Sub InputsTurnedOff()
             DataGridViewDeductions.RemoveInsertColumn()

@@ -7,12 +7,13 @@ Namespace PresentationLayer.Views
 
         Public Property Amount As Decimal Implements IEmployeeDeductionView.Amount
         Public Property DeductionCode As String Implements IEmployeeDeductionView.DeductionCode
-        Public Property DeductionIdNo As Short Implements IEmployeeDeductionView.DeductionIdNo
+        Public Property DeductionIdNo As Int16 Implements IEmployeeDeductionView.DeductionIdNo
         Public Property DeductionName As String Implements IEmployeeDeductionView.DeductionName
         Public Property DeductionNameAra As String Implements IEmployeeDeductionView.DeductionNameAra
         Public Property DeductionType As Char Implements IEmployeeDeductionView.DeductionType
-        Public Property IdNo As Integer Implements IEmployeeDeductionView.IdNo
-        Public Property Sequence As Short Implements IEmployeeDeductionView.Sequence
+        Public Property EmployeeIdNo As Int32 Implements IEmployeeDeductionView.EmployeeIdNo
+        Public Property IdNo As Int32 Implements IEmployeeDeductionView.IdNo
+        Public Property Sequence As Int16 Implements IEmployeeDeductionView.Sequence
         Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
