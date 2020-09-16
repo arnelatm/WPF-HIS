@@ -6,11 +6,11 @@ Namespace PresentationLayer.Views
         Inherits IView
         Property Amount As Decimal
         Property EarningCode As String
-        Property EarningIdNo As String
+        Property EarningIdNo As Int16
         Property EarningName As String
         Property EarningNameAra As String
         Property EarningType As Char
-        Property EmployeeIdNo As String
+        Property EmployeeIdNo As Int32
         Property IdNo As Int32
         Property Sequence As Int16
     End Interface

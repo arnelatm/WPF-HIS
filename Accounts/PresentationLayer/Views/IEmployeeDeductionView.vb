@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views
         Property DeductionName As String
         Property DeductionNameAra As String
         Property DeductionType As Char
+        Property EmployeeIdNo As Int32
         Property IdNo As Int32
         Property Sequence As Int16
 
