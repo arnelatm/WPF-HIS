@@ -270,7 +270,6 @@ Namespace PresentationLayer.Forms
         '    fileName = ConfigurationManager.AppSettings.Get("FileNameAppData") ' DBF, MDB
 
         Private Sub ShowEntryForm(Of T As New)(ByRef formEntry As T)
-            Dim childMdiForm = formEntry
             If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
                 Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
@@ -278,7 +277,6 @@ Namespace PresentationLayer.Forms
                 CallByName(formEntry, "MdiParent", CallType.Set, Me)
                 CallByName(formEntry, "Show", CallType.Method)
             End If
-
         End Sub
 
         Private Sub ThreadExceptionHandler(sender As Object, e As ThreadExceptionEventArgs)
@@ -402,9 +400,10 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub TranslationFormToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            Dim frm As New TranslationTableManager
-            frm.AppDataDAC = AppDataDAC
-            frm.TranslatorDAC = TranslatorDAC
+            Dim frm As New TranslationTableManager With {
+                .AppDataDAC = AppDataDAC,
+                .TranslatorDAC = TranslatorDAC
+            }
             frm.Show()
         End Sub
 
@@ -1114,10 +1113,11 @@ Namespace PresentationLayer.Forms
         'End Function
 
         Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptionsBatchEdit.Click
-            Dim frm As New TranslationTableManager()
             'frm.FormIdNoToTranslate = 0
-            frm.AppDataDAC = AppDataDAC
-            frm.TranslatorDAC = TranslatorDAC
+            Dim frm As New TranslationTableManager With {
+                .AppDataDAC = AppDataDAC,
+                .TranslatorDAC = TranslatorDAC
+            }
             frm.Show()
         End Sub
 

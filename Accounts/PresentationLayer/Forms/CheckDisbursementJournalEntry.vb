@@ -456,8 +456,9 @@ Namespace PresentationLayer.Forms
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _apFooter = New DgvFooter(DataGridViewCkdOiItems)
-            _apFooter.AutoCalc = True
+            _apFooter = New DgvFooter(DataGridViewCkdOiItems) With {
+                .AutoCalc = True
+            }
             _apFooter.ColumnToSum("dgvAmount") = True
             _apFooter.ColumnToSum("dgvDiscountTaken") = True
             _apFooter.ColumnToSum("dgvBalance") = True
@@ -470,7 +471,7 @@ Namespace PresentationLayer.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub cboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then

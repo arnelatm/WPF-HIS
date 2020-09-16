@@ -15,6 +15,7 @@
         Public Property EmployeeIdNo As Integer
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
+        Public Property Sequence As Int16
 
     End Class
 

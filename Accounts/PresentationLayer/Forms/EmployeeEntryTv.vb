@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common
@@ -11,6 +12,10 @@ Namespace PresentationLayer.Forms
         Implements IEmployeeView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _employeeDeductions As List(Of EmployeeDeduction)
+        Private _employeeEarnings As List(Of EmployeeEarning)
+        Private _deductionsByCode
+        Private _earningsByCode
 
         Public Sub New()
             MyBase.New()
@@ -394,36 +399,75 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
+        Public Property EmployeeDeductions As List(Of EmployeeDeduction) Implements IEmployeeView.EmployeeDeductions
+            Get
+                Return _employeeDeductions
+            End Get
+            Set
+                _employeeDeductions = Value
+                BindEmployeeDeduction()
+            End Set
+        End Property
+
+        Public Property EmployeeEarnings As List(Of EmployeeEarning) Implements IEmployeeView.EmployeeEarnings
+            Get
+                Return _employeeEarnings
+            End Get
+            Set
+                _employeeEarnings = Value
+                BindEmployeeEarning()
+            End Set
+        End Property
+
 #End Region
 
-        Private Sub BindJournalItem()
+        Private Sub BindEmployeeDeduction()
             SuspendLayout()
             bsEarnings.DataSource = Nothing
-            'DataGridViewJournalItems.Refresh()
-            'bsJournalItems.DataSource = JournalItems
-            'bsJournalItems.AllowNew = True
-            'With DataGridViewJournalItems
-            '    .Refresh()
-            '    .AutoGenerateColumns = False
-            '    .DataSource = bsJournalItems
-            '    .Refresh()
-            '    .AllowUserToAddRows = True
-            '    .AllowUserToDeleteRows = True
-            'End With
-            'With DataGridViewJournalItems.Columns
-            '    dgvSequence.DisplayOnly = True
-            '    dgvAccountIdNo.DataSource = _accountsByCode
-            '    dgvAccountIdNo.DisplayMember = "Name"
-            '    dgvAccountIdNo.ValueMember = "IdNo"
-            '    dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-            '    dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-            '    dgvAccountIdNo.AutoComplete = True
-            '    dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
-            '    dgvRevCostCenterIdNo.DisplayMember = "Name"
-            '    dgvRevCostCenterIdNo.ValueMember = "idNo"
-            '    dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-            '    dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-            'End With
+            DataGridViewDeductions.Refresh()
+            bsDeductions.DataSource = EmployeeDeductions
+            bsDeductions.AllowNew = True
+            With DataGridViewDeductions
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsDeductions
+                .Refresh()
+                .AllowUserToAddRows = True
+                .AllowUserToDeleteRows = True
+            End With
+            With DataGridViewDeductions.Columns
+                dgvDeductionSequence.DisplayOnly = True
+                dgvDeductionIdNo.DataSource = _deductionsByCode
+                dgvDeductionIdNo.DisplayMember = "Name"
+                dgvDeductionIdNo.ValueMember = "IdNo"
+                dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
+        End Sub
+
+        Private Sub BindEmployeeEarning()
+            SuspendLayout()
+            bsEarnings.DataSource = Nothing
+            dataGridViewEarnings.Refresh()
+            bsEarnings.DataSource = EmployeeEarnings
+            bsEarnings.AllowNew = True
+            With DataGridViewDeductions
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsDeductions
+                .Refresh()
+                .AllowUserToAddRows = True
+                .AllowUserToDeleteRows = True
+            End With
+            With DataGridViewDeductions.Columns
+                dgvEarningSequence.DisplayOnly = True
+                dgvEarningIdNo.DataSource = _earningsByCode
+                dgvEarningIdNo.DisplayMember = "Name"
+                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
             ResumeLayout()
         End Sub
 
@@ -439,6 +483,8 @@ Namespace PresentationLayer.Forms
             cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
             cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
+            _deductionsByCode = PresenterObj.GetRegularDeductionListByName()
+            _earningsByCode = PresenterObj.GetRegularEarningListByName()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -482,6 +528,10 @@ Namespace PresentationLayer.Forms
             'MyBase.RecordPositionChanged(e)
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
+        End Sub
+
+        Private Sub EmployeeEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         End Sub
 
         'Protected Overrides Sub InputsTurnedOn()

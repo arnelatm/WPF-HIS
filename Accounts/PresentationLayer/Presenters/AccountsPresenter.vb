@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -97,6 +96,14 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
         End Function
 
+        Public Function GetRegularEarningsByCode()
+            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
+        End Function
+
+        Public Function GetRegularDeductionsByCode()
+            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
+        End Function
+
         Public Function GetChart(idNo As String)
             Dim chartModel As New ModelAccounts("Chart")
             Return chartModel.GetRecordById(Of ChartModel)(idNo)
@@ -105,20 +112,20 @@ Namespace PresentationLayer.Presenters
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
             Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-                .JournalCode = journalCode,
-                .JournalIdNo = journalItem.JournalIdNo,
-                .JournalItemIdNo = journalItem.IdNo
-            }
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
             Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
         End Function
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
             Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-                .JournalCode = journalCode,
-                .JournalIdNo = journalItem.JournalIdNo,
-                .JournalItemIdNo = journalItem.IdNo
-            }
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
             Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
         End Function
 
@@ -137,13 +144,15 @@ Namespace PresentationLayer.Presenters
 
         Public Function ArCollectionExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
             Dim arOpenInvoiceIdNo As Integer
-            arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
+                                                             "JournalItemIdNo", "IdNo")
             Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
         End Function
 
         Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
             Dim apOpenInvoiceIdNo As Integer
-            apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
+                                                             "JournalItemIdNo", "IdNo")
             If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CadOiItem", "ApOpenInvoiceIdNo") > 0 Then
                 Return True
             ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkdOiItem", "ApOpenInvoiceIdNo") > 0 Then
@@ -176,11 +185,34 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+            Return _
+                Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode",
+                                             "IdNo")
         End Function
 
         Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-            Return Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+            Return _
+                Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode",
+                                             "IdNo")
+        End Function
+
+        Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
+            TableToGet = "Deduction"
+            SortExpression = sortKey
+            DisplayName = "DeductionName"
+            DisplayNameArabic = "DeductionNameAra"
+            DisplayCode = "DeductionCode"
+            Return GetLookupDataByNameWithCode()
+        End Function
+
+        Public Function GetRegularEarningListByName(Optional ByVal sortKey As String = "EarningName")
+            TableToGet = "Earning"
+            SortExpression = sortKey
+            DisplayName = "EarningName"
+            DisplayNameArabic = "EarningNameAra"
+            DisplayCode = "EarningCode"
+            'FilterKey = "EarningType = 'R'"
+            Return GetLookupDataByNameWithCode()
         End Function
 
     End Class
