@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
@@ -39,6 +40,8 @@ Namespace PresentationLayer.Views
         Property Title As String
         Property TownCity As String
         Property ZipCode As String
+        Property EmployeeDeductions As List(Of EmployeeDeduction)
+        Property EmployeeEarnings As List(Of EmployeeEarning)
 
     End Interface
 

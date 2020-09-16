@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
                         If unpaidInvoice.JournalCode = "CD" And unpaidInvoice.JournalIdNo = View.IdNo Then
                             ' ignore advance payments if applied to this entry.
                         Else
-                            nSeq = nSeq + 1
+                            nSeq += 1
                             Dim item As New CadOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
@@ -407,7 +407,7 @@ Namespace PresentationLayer.Presenters
                             aAccountIdNo(nSize) = nAccountIdNo
                             aAmount(nSize) = item.Amount
                             aDiscountTaken(nSize) = item.DiscountTaken
-                            nSize = nSize + 1
+                            nSize += 1
                         Else
                             aAmount(nIndex) = aAmount(nIndex) + item.Amount
                             aDiscountTaken(nIndex) = aDiscountTaken(nIndex) + item.DiscountTaken
@@ -432,7 +432,7 @@ Namespace PresentationLayer.Presenters
                         item.RevCostCenterIdNo = 0
                         item.Notes = ""
                     End If
-                    nCounter = nCounter + 1
+                    nCounter += 1
                 Next
                 ' if no existing journal entries, create one for the checking account payment.
                 If View.JournalItems Is Nothing Or View.JournalItems.Count = 0 Then
@@ -507,7 +507,7 @@ Namespace PresentationLayer.Presenters
                                 }
                         View.JournalItems.Add(ji)
                     End If
-                    nCounter = nCounter + 1
+                    nCounter += 1
                 Next
                 If View.UnApplied > 0 Then
                     ' if invoice not yet fully applied, then save the
@@ -658,11 +658,12 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
+        Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Integer) As String
             Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
             If Model.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
             End If
+            Return 0
         End Function
 
         Public Overrides Sub GoPrintRecord()

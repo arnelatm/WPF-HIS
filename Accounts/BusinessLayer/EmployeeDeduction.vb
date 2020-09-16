@@ -23,6 +23,7 @@ Namespace BusinessLayer
         Public Property DeductionType As String
         Public Property EmployeeIdNo As Integer
         Public Property IdNo As Int32
+        Public Property Sequence As Int16
     End Class
 
 End Namespace

@@ -39,11 +39,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
     Private _addMode As Boolean = False
-    Private _debugSwitch As Byte = 0
+    Private ReadOnly _debugSwitch As Byte = 0
     Private _editMode As Boolean = False
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
-    Private _tableColumnPropertyList As List(Of TblColPropModel)
+    Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
 
     'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
@@ -596,7 +596,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function GetTreeNodeText()
         Dim cModel As New TM
-        Dim cText As String = ""
+        Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
             cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String)
@@ -849,10 +849,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Function MakeEnumComboList(Of TE)()
         Dim dataList As New List(Of ClassesLibrary.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData
-            data.IdNo = CInt(c)
-            data.Code = GetEnumCode(c)
-            data.Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            Dim data As New ClassesLibrary.LookupData With {
+                .IdNo = CInt(c),
+                .Code = GetEnumCode(c),
+                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            }
             dataList.Add(data)
         Next
         Return dataList
@@ -975,7 +976,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0
-        Dim continueSave As Boolean = False
         If EditMode AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
             Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Else
@@ -1261,7 +1261,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                         If retVal < 0 Then
                             retValue = retVal
                         Else
-                            retValue = retValue + retVal
+                            retValue += retVal
                         End If
                     End If
                 End If

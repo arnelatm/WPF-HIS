@@ -15,18 +15,15 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of EmployeeDeduction) Implements IDaoChild(Of EmployeeDeduction).GetRecordsWithIdNo
             Dim sql As String =
                     " SELECT " &
-                    "AccountIdNo" &
-                    "AccountIdNo," &
                     "Amount," &
-                    "DefaultFrequency," &
                     "DeductionCode," &
                     "DeductionIdNo," &
                     "DeductionName," &
                     "DeductionNameAra," &
                     "DeductionType," &
                     "EmployeeIdNo," &
-                    "PayFrequency," &
-                    "Percentage," &
+                    "IdNo," &
+                    "Sequence" &
                     " FROM [EmployeeDeduction_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -50,7 +47,9 @@ Namespace DataLayer.AdoNet
             .DeductionName = Extensions.AsString(reader("DeductionCode")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
             .DeductionType = Extensions.AsString(reader("DeductionType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo"))
+            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
             }
 
     End Class

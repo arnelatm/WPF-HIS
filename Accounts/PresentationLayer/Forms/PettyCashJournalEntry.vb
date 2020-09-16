@@ -343,7 +343,7 @@ Namespace PresentationLayer.Forms
                     dgvInvoiceNo.DisplayOnly = True
                     dgvPreviousBalance.DisplayOnly = True
                     dgvBalance.DisplayOnly = True
-                    dgvTransactionDate.DisplayOnly = True
+                    DgvTransactionDate.DisplayOnly = True
                     dgvJournalCode.DisplayOnly = True
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
@@ -383,7 +383,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
@@ -397,7 +397,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub pcsOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcsOiItems.CellEndEdit
+        Private Sub PcsOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcsOiItems.CellEndEdit
             With DataGridViewPcsOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
@@ -421,14 +421,16 @@ Namespace PresentationLayer.Forms
 
         Private Sub PettyCashJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            _jiFooter = New DgvFooter(DataGridViewJournalItems)
-            _jiFooter.AutoCalc = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _apFooter = New DgvFooter(DataGridViewPcsOiItems)
-            _apFooter.AutoCalc = True
+            _apFooter = New DgvFooter(DataGridViewPcsOiItems) With {
+                .AutoCalc = True
+            }
             _apFooter.ColumnToSum("dgvAmount") = True
             _apFooter.ColumnToSum("dgvDiscountTaken") = True
             _apFooter.ColumnToSum("dgvBalance") = True
@@ -436,11 +438,11 @@ Namespace PresentationLayer.Forms
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
-        Private Sub cboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
@@ -458,7 +460,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
             SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
@@ -612,7 +614,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub txtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
+        Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If

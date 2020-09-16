@@ -42,6 +42,8 @@
         Public Property Title As String
         Public Property TownCity As String
         Public Property ZipCode As String
+        Public Property EmployeeDeductions As List(Of EmployeeDeductionModel)
+        Public Property EmployeeEarnings As List(Of EmployeeEarningModel)
     End Class
 
 End Namespace

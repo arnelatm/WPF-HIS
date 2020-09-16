@@ -1,7 +1,6 @@
 ﻿CREATE VIEW dbo.EmployeeDeduction_View
 AS
-SELECT        dbo.EmployeeDeduction.Id, dbo.EmployeeDeduction.EmployeeIdNo, dbo.EmployeeDeduction.DeductionIdNo, dbo.EmployeeDeduction.AccountIdNo, dbo.EmployeeDeduction.Amount, dbo.EmployeeDeduction.EndAmount, 
-                         dbo.EmployeeDeduction.PayFrequency, dbo.EmployeeDeduction.StartDate, dbo.EmployeeDeduction.EndDate, dbo.Deduction.DeductionCode, dbo.Deduction.DeductionName, dbo.Deduction.DeductionNameAra, 
+SELECT        dbo.EmployeeDeduction.Id, dbo.EmployeeDeduction.EmployeeIdNo, dbo.EmployeeDeduction.DeductionIdNo, dbo.EmployeeDeduction.Amount, dbo.Deduction.DeductionCode, dbo.Deduction.DeductionName, dbo.Deduction.DeductionNameAra, 
                          dbo.Deduction.DefaultFrequency, dbo.Deduction.AccountIdNo AS Expr1, dbo.Deduction.DeductionType, dbo.Deduction.DeductionPlace, dbo.Deduction.ComputationType, dbo.Deduction.Percentage, dbo.Deduction.Notes, 
                          dbo.Deduction.DateTimeStamp
 FROM            dbo.EmployeeDeduction INNER JOIN
