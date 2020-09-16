@@ -286,7 +286,7 @@ Namespace PresentationLayer.Forms
                             Else
                                 Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
-                                ReSequenceDgvAfterInsert()
+                                DataGridViewJournalItems.ReSequenceDgvAfterInsert(Of JournalItemView)(JournalItems)
                                 SendKeys.Send("{UP}")
                             End If
                         Else
@@ -298,9 +298,8 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            ReSequenceDgvAfterDelete()
+            DataGridViewJournalItems.ReSequenceDgvAfterDelete(Of JournalItemView)(JournalItems)
             UpdateTotals()
-
         End Sub
 
         Private Overloads Sub Dispose()
@@ -374,26 +373,6 @@ Namespace PresentationLayer.Forms
             End If
             Return retVal
         End Function
-
-        Private Sub ReSequenceDgvAfterDelete()
-            Dim i = DataGridViewJournalItems.CurrentCell.RowIndex()
-            For Each item In bsJournalItems
-                If item.Sequence > i + 1 Then
-                    item.Sequence = item.Sequence - 1
-                End If
-            Next
-        End Sub
-
-        Private Sub ReSequenceDgvAfterInsert()
-            Dim i = DataGridViewJournalItems.CurrentCell.RowIndex()
-            For Each item In bsJournalItems
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
-                End If
-            Next
-        End Sub
 
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewJournalItems IsNot Nothing Then

@@ -577,7 +577,7 @@ Public Class CDataGridView
         Next
     End Sub
 
-    Private Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+    Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
         For Each value In dataItems
             Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
@@ -588,6 +588,5 @@ Public Class CDataGridView
             End If
         Next
     End Sub
-
 
 End Class

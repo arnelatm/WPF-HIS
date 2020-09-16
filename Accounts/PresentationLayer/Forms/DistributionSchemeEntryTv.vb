@@ -296,7 +296,7 @@ Namespace PresentationLayer.Forms
                             Dim selectedRow As New DistributionSchemeItemModel
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             bsDistributionSchemeItems.Remove(selectedRow)
-                            ReSequenceDgvAfterDelete()
+                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
                             UpdateTotals()
                         Else
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
@@ -306,7 +306,7 @@ Namespace PresentationLayer.Forms
                             Dim row = .OwningRow
                             Dim newRow As New DistributionSchemeItemModel
                             bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
-                            ReSequenceDgvAfterInsert()
+                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterInsert(Of DistributionSchemeItemView)(DistributionSchemeItems)
                             SendKeys.Send("{UP}")
                         Else
                             MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
@@ -342,25 +342,6 @@ Namespace PresentationLayer.Forms
             DataGridViewDistributionSchemeItems.Focus()
         End Sub
 
-        Private Sub ReSequenceDgvAfterInsert()
-            Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeItems
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
-                End If
-            Next
-        End Sub
-
-        Private Sub ReSequenceDgvAfterDelete()
-            Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeItems
-                If item.Sequence > i Then
-                    item.Sequence = item.Sequence - 1
-                End If
-            Next
-        End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
             MyBase.RecordSaved(e)
