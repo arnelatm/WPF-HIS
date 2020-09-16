@@ -486,7 +486,7 @@ Namespace PresentationLayer.Forms
                             Else
                                 Dim newRow As New JournalItemView
                                 bsJournalItems.Insert(.RowIndex(), newRow)
-                                ReSequenceDgvAfterInsert(DataGridViewJournalItems, bsJournalItems)
+                                DataGridViewJournalItems.ReSequenceDgvAfterInsert(Of JournalItemView)(JournalItems)
                                 SendKeys.Send("{UP}")
                             End If
                         Else
@@ -560,25 +560,6 @@ Namespace PresentationLayer.Forms
             SetPayorProperty(PayorType)
         End Sub
 
-        Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
-            Dim i = dataGridView.CurrentCell.RowIndex()
-            For Each item In items
-                If item.Sequence > i + 1 Then
-                    item.Sequence = item.Sequence - 1
-                End If
-            Next
-        End Sub
-
-        Private Sub ReSequenceDgvAfterInsert(ByRef dataGridView As DataGridView, ByRef items As Object)
-            Dim i = dataGridView.CurrentCell.RowIndex()
-            For Each item In items
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
-                End If
-            Next
-        End Sub
 
         Private Sub SetPayorProperty(ByVal cPayorType As String)
             SuspendLayout()
@@ -716,7 +697,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewJournalItems, bsJournalItems)
+            DataGridViewJournalItems.ReSequenceDgvAfterDelete(Of JournalItemView)(JournalItems)
             UpdateTotals()
         End Sub
 

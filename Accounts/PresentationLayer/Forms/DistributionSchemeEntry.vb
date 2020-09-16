@@ -124,7 +124,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DistributionSchemeitems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeItems
+        Public Property DistributionSchemeItems As List(Of DistributionSchemeItemView) Implements IDistributionSchemeView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get
@@ -183,7 +183,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDistributionSchemeItems.UserDeletedRow
-            ReSequenceDgvAfterDelete()
+            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
             UpdateTotals()
         End Sub
 
@@ -213,26 +213,6 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub ReSequenceDgvAfterDelete()
-            Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeitems
-                If item.Sequence > i + 1 Then
-                    item.Sequence = item.Sequence - 1
-                End If
-            Next
-        End Sub
-
-        Private Sub ReSequenceDgvAfterInsert()
-            Dim i = DataGridViewDistributionSchemeItems.CurrentCell.RowIndex()
-            For Each item In DistributionSchemeitems
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
-                End If
-            Next
-        End Sub
-
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewDistributionSchemeItems IsNot Nothing Then
                 DataGridViewDistributionSchemeItems.Focus()
@@ -255,7 +235,7 @@ Namespace PresentationLayer.Forms
                             Dim selectedRow As New DistributionSchemeItemModel
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             bsDistributionSchemeItems.Remove(selectedRow)
-                            ReSequenceDgvAfterDelete()
+                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
                             TotalPercentage = DistributionSchemeitems.Sum(Function(totals) totals.Percentage)
                         Else
                             MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
@@ -264,7 +244,7 @@ Namespace PresentationLayer.Forms
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New DistributionSchemeItemModel
                             bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
-                            ReSequenceDgvAfterInsert()
+                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterInsert(Of DistributionSchemeItemView)(DistributionSchemeItems)
                             SendKeys.Send("{UP}")
                         Else
                             MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")

@@ -433,7 +433,7 @@ Namespace PresentationLayer.Forms
                         If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
                             Dim newRow As New SalesCashItemModel
                             bsSalesCashItems.Insert(.RowIndex(), newRow)
-                            ReSequenceDgvAfterInsert(DataGridViewSalesCashItems, SalesCashItems)
+                            DataGridViewSalesCashItems.ReSequenceDgvAfterInsert(Of SalesCashItemView)(SalesCashItems)
                             SendKeys.Send("{UP}")
                         Else
                             Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
@@ -478,17 +478,6 @@ Namespace PresentationLayer.Forms
             Next
         End Sub
 
-        Private Sub ReSequenceDgvAfterInsert(ByRef dataGridView As DataGridView, ByRef items As Object)
-            Dim i = dataGridView.CurrentCell.RowIndex()
-            For Each item In items
-                If item.Sequence = 0 Then
-                    item.Sequence = i
-                ElseIf item.Sequence >= i Then
-                    item.Sequence = item.Sequence + 1
-                End If
-            Next
-        End Sub
-
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewSalesCashItems.Focus()
         End Sub
@@ -517,7 +506,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesCashItems.UserDeletedRow
-            ReSequenceDgvAfterDelete(DataGridViewSalesCashItems, SalesCashItems)
+            DataGridViewSalesCashItems.ReSequenceDgvAfterDelete(Of SalesCashItemView)(SalesCashItems)
             UpdateSlTotals()
         End Sub
 
