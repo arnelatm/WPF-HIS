@@ -247,6 +247,8 @@
     </Compile>
     <Compile Include="FocalPointsConverter.vb" />
     <Compile Include="FocalPtGlyph.vb" />
+    <Compile Include="ICDataGridView.vb" />
+    <Compile Include="ISequencedData.vb" />
     <Compile Include="IEntryControl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

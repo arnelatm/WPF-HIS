@@ -506,6 +506,8 @@
     <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeeDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeeEarningView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemsView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />

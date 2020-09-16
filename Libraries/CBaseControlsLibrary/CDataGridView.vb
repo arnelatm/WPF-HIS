@@ -567,4 +567,16 @@ Public Class CDataGridView
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
+    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T))
+        Dim i = CurrentCell.RowIndex()
+        For Each value In dataItems
+            Dim sequence = CallByName(value, "Sequence", CallType.Get, i)
+
+            '    If Item.Sequence > i + 1 Then
+            '        Item.Sequence -= 1
+            '    End If
+
+        Next
+    End Sub
+
 End Class
