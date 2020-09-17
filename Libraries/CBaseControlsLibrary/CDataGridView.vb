@@ -3,33 +3,67 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
-Imports AATM.Libraries.MessagingLibrary.Messaging
+Imports AATM.PresentationLayer.Events
 
 Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl
 
     Private _editingMode As Boolean
-    Private _firstVisibleColumn As Integer = -1
-    Private _lastEditableColumn As Integer = -1
     Private _firstEditableColumn As Integer = -1
+    Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
+    Private _lastEditableColumn As Integer = -1
+
+    Public Sub New()
+        MyBase.New()
+        DoubleBuffered = True
+        Enabled = True
+        EditMode = DataGridViewEditMode.EditOnKeystroke
+        BackColor = SystemColors.ControlLight
+        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
+        Ea = New EventAggregator()
+        'Ea.SubscribeEvent(Me)
+    End Sub
 
     Public Event ChangesMade As EventHandler
 
     Public Event DeletingRow(ByVal cancel As Boolean)
 
+    Public Property DataInGridChanged As Boolean = False
+
     <Bindable(True)>
     <Category("Properties")>
-    <DefaultValue(GetType(String))>
-    <Description("Enter here the property name for sequence column")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
-    Public Property SequenceColumn As String = "dgvSequence"
+    Public Property DisplayOnly As Boolean
 
-    Public ReadOnly Property LastEditableColumn As Integer
+    Public Property Ea As EventAggregator
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
-            Return GetLastEditableColumn()
+            Return _editingMode
         End Get
+        Set(value As Boolean)
+            _editingMode = value
+            If DisplayOnly OrElse Not value Then
+                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Me.ReadOnly = True
+            Else
+                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                Me.ReadOnly = False
+            End If
+            For Each col In Columns
+                If TypeOf col Is IEntryControl Then
+                    col.EditingMode = value
+                End If
+            Next
+        End Set
     End Property
 
     Public ReadOnly Property FirstEditableColumn As Integer
@@ -43,6 +77,245 @@ Public Class CDataGridView
             Return GetFirstVisibleColumn()
         End Get
     End Property
+
+    Public ReadOnly Property LastEditableColumn As Integer
+        Get
+            Return GetLastEditableColumn()
+        End Get
+    End Property
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(String))>
+    <Description("Enter here the property name for sequence column")>
+    <Browsable(True)>
+    Public Property SequenceColumn As String = "dgvSequence"
+
+    Public Property StartTrackingChanges As Boolean = False
+
+    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return True
+        End Get
+    End Property
+
+    Public Sub AddInsertColumn()
+        With Columns
+            Dim parentForm = FindForm()
+            Dim presenterObj = CallByName(parentForm, "PresenterObj", CallType.Get)
+            Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+            Dim adding As Boolean = CallByName(presenterObj, "AddMode", CallType.Get)
+            If editing Or adding Then
+                Dim dgvInsColumn As New DataGridViewImageColumn
+                .Insert(.Count, dgvInsColumn)
+                dgvInsColumn.Image = Images.InsertRowImage
+                dgvInsColumn.Width = 30
+                dgvInsColumn.Name = "dgvInsertColumn"
+                dgvInsColumn.HeaderText = MessagingLibrary.Messaging.TranslateCaption("Ins.")
+                _insertColumnAdded = True
+            Else
+                _insertColumnAdded = False
+            End If
+        End With
+    End Sub
+
+    Public Sub RemoveInsertColumn()
+        With Columns
+            If _insertColumnAdded Then
+                .Remove("dgvInsertColumn")
+                _insertColumnAdded = False
+            End If
+        End With
+    End Sub
+
+    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+        Dim i = CurrentCell.RowIndex()
+        For Each value In dataItems
+            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            If sequence > i + 1 Then
+                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+            End If
+        Next
+    End Sub
+
+    Public Sub ReSequenceDgvAfterDelete(Optional sequenceFieldName As String = "Sequence")
+        Dim i = CurrentCell.RowIndex()
+        Dim myBindingSource = CType(DataSource, BindingSource)
+        For Each value In myBindingSource
+            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            If sequence > i + 1 Then
+                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+            End If
+        Next
+    End Sub
+
+    Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+        Dim i = CurrentCell.RowIndex()
+        For Each value In dataItems
+            If value IsNot Nothing Then
+                Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+                If sequence = 0 Then
+                    CallByName(value, sequenceFieldName, CallType.Set, i)
+                ElseIf sequence >= i Then
+                    CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub ReSequenceDgvAfterInsert(Optional sequenceFieldName As String = "Sequence")
+        Dim i = CurrentCell.RowIndex()
+        Dim myBindingSource = CType(DataSource, BindingSource)
+        For Each x In myBindingSource
+            If x IsNot Nothing Then
+                Dim sequence = CallByName(x, sequenceFieldName, CallType.Get)
+                If sequence = 0 Then
+                    CallByName(x, sequenceFieldName, CallType.Set, i)
+                ElseIf sequence >= i Then
+                    CallByName(x, sequenceFieldName, CallType.Set, sequence + 1)
+                End If
+            End If
+        Next
+    End Sub
+
+    Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
+        Dim key As Keys = keyData And Keys.KeyCode
+        If key = Keys.Enter Then
+            Dim currrentColumnIndex As Int16
+            currrentColumnIndex = CurrentCell.ColumnIndex()
+            If currrentColumnIndex < LastEditableColumn Then
+                ' Handle the ENTER key as if it were a tab ARROW key
+                Return ProcessTabKey(keyData)
+            ElseIf currrentColumnIndex = LastEditableColumn Then
+                ' go to next row on the first editable column
+                If CurrentCell.RowIndex() >= RowCount() Then
+                    CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
+                Else
+                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
+                End If
+
+            End If
+        End If
+        Return MyBase.ProcessDialogKey(keyData)
+    End Function
+
+    Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
+        If EditMode Then
+            With e.Row
+                .Cells(SequenceColumn).Value = RowCount()
+            End With
+        End If
+    End Sub
+
+    Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
+        DataInGridChanged = True
+        RaiseEvent ChangesMade(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
+        Dim myForm = FindForm()
+        Dim presenterObj = CallByName(myForm, "PresenterObj", CallType.Get)
+        Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
+        Dim adding As Boolean = CallByName(presenterObj, "AddMode", CallType.Get)
+        If Not (editing Or adding) Then
+            MessagingLibrary.Messaging.Show(True, "MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
+            e.Cancel = True
+        End If
+    End Sub
+
+    'Private Sub ReSequenceDgv(Of T)(ByRef ds As T)
+    '    Dim i = Me.CurrentCell.RowIndex()
+    '    For Each r IN ds
+    '        If Item.Sequence = 0 Then
+    '            Item.Sequence = i
+    '        ElseIf Item.Sequence >= i Then
+    '            Item.Sequence = Item.Sequence + 1
+    '        End If
+    '    Next
+    'End Sub
+    Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
+        With CurrentCell
+            Select Case .OwningColumn.Name.ToLower()
+                Case $"dgvinsertcolumn"
+                    If EditMode Then 'OrElse AddMode Then
+                        If (CurrentRow.Index() <> NewRowIndex()) Then
+                            If Ea IsNot Nothing Then
+                                Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index()))
+                            End If
+                            'Dim myBindingSource = CType(DataSource, BindingSource)
+                            'myBindingSource.Insert(.RowIndex(), dataList)
+                            ReSequenceDgvAfterInsert()
+                            SendKeys.Send("{UP}")
+                        End If
+                    Else
+                        MessagingLibrary.Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+                                   "Invalid Insertion")
+                    End If
+            End Select
+        End With
+    End Sub
+
+    Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
+        If StartTrackingChanges Then
+            DataInGridChanged = True
+            RaiseEvent ChangesMade(Me, EventArgs.Empty)
+            CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+        Else
+            DataInGridChanged = False
+        End If
+    End Sub
+
+    Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
+
+        Try
+        Catch ex As Exception
+            If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
+                Debugger.Break()
+                ' ignore error
+            Else
+                Debugger.Break()
+                MessageBox.Show("Error happened " & e.Context.ToString())
+                If (e.Context = DataGridViewDataErrorContexts.Commit) Then
+                    Debugger.Break()
+                    MessageBox.Show("Commit error")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
+                    MessageBox.Show("Cell change")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
+                    MessageBox.Show("parsing error")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
+                    Debugger.Break()
+                    MessageBox.Show("leave control error")
+                End If
+
+                If (TypeOf (e.Exception) Is ConstraintException) Then
+                    Debugger.Break()
+                    Dim view As DataGridView = CType(sender, DataGridView)
+                    view.Rows(e.RowIndex).ErrorText = "an error"
+                    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
+                    e.ThrowException = False
+                End If
+            End If
+        End Try
+    End Sub
+
+    '' Write the method to call the Event, and then use it as you want.
+    'Protected Sub OnParentofGridChanged(ByVal e As EventArgs)
+    '    Dim ParentofGridChangedHandler As EventHandler =
+    '    CType(Me.Events("ParentofGridChangedEvent"), EventHandler)
+    '    If (ParentofGridChangedHandler IsNot Nothing) Then
+    '        ParentofGridChangedHandler.Invoke(Me, e)
+    '    End If
+    'End Sub
+    Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles Me.CurrentCellChanged
+        If StartTrackingChanges Then
+            DataInGridChanged = True
+        Else
+            DataInGridChanged = False
+        End If
+    End Sub
 
     Private Function GetFirstEditableColumn() As Integer
         If _firstEditableColumn < 0 Then
@@ -94,28 +367,6 @@ Public Class CDataGridView
         Return _lastEditableColumn
     End Function
 
-    Public Property DataInGridChanged As Boolean = False
-
-    Public Property StartTrackingChanges As Boolean = False
-
-    Public Sub New()
-        MyBase.New()
-        DoubleBuffered = True
-        Enabled = True
-        EditMode = DataGridViewEditMode.EditOnKeystroke
-        BackColor = SystemColors.ControlLight
-        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
-    End Sub
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control is readonly.")>
-    <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
@@ -132,27 +383,6 @@ Public Class CDataGridView
     '        End If
     '    End With
     'End Sub
-
-    Public Sub AddInsertColumn()
-        With Columns
-            Dim parentForm = FindForm()
-            Dim presenterObj = CallByName(parentForm, "PresenterObj", CallType.Get)
-            Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
-            Dim adding As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
-            If editing Or adding Then
-                Dim dgvInsColumn As New DataGridViewImageColumn
-                .Insert(.Count, dgvInsColumn)
-                dgvInsColumn.Image = Images.InsertRowImage
-                dgvInsColumn.Width = 30
-                dgvInsColumn.Name = "dgvInsertColumn"
-                dgvInsColumn.HeaderText = "Ins."
-                _insertColumnAdded = True
-            Else
-                _insertColumnAdded = False
-            End If
-        End With
-    End Sub
-
     'Public Sub RemoveDeleteColumn()
     '    With Columns
     '        If _deleteColumnAdded Then
@@ -161,40 +391,6 @@ Public Class CDataGridView
     '        End If
     '    End With
     'End Sub
-
-    Public Sub RemoveInsertColumn()
-        With Columns
-            If _insertColumnAdded Then
-                .Remove("dgvInsertColumn")
-                _insertColumnAdded = False
-            End If
-        End With
-    End Sub
-
-    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
-        Get
-            Return _editingMode
-        End Get
-        Set(value As Boolean)
-            _editingMode = value
-            If DisplayOnly OrElse Not value Then
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Me.ReadOnly = True
-            Else
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
-            End If
-            For Each col In Columns
-                If TypeOf col Is IEntryControl Then
-                    col.EditingMode = value
-                End If
-            Next
-
-        End Set
-    End Property
-
     'Private Overloads Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
 
     '    SendKeys.Send("{TAB}")
@@ -282,36 +478,6 @@ Public Class CDataGridView
     '        e.Cancel = False
     '    End If
     'End Sub
-
-    Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
-        If EditMode Then
-            With e.Row
-                .Cells(SequenceColumn).Value = RowCount()
-            End With
-        End If
-    End Sub
-
-    Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
-        Dim key As Keys = keyData And Keys.KeyCode
-        If key = Keys.Enter Then
-            Dim currrentColumnIndex As Int16
-            currrentColumnIndex = CurrentCell.ColumnIndex()
-            If currrentColumnIndex < LastEditableColumn Then
-                ' Handle the ENTER key as if it were a tab ARROW key
-                Return ProcessTabKey(keyData)
-            ElseIf currrentColumnIndex = LastEditableColumn Then
-                ' go to next row on the first editable column
-                If CurrentCell.RowIndex() >= RowCount() Then
-                    CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
-                Else
-                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
-                End If
-
-            End If
-        End If
-        Return MyBase.ProcessDialogKey(keyData)
-    End Function
-
     'Private Sub dataGridView1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
     '    e.SuppressKeyPress = True
     '    Dim iColumn As Integer = CurrentCell.ColumnIndex
@@ -374,43 +540,6 @@ Public Class CDataGridView
     '    'End Try
 
     'End Function
-
-    Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
-
-        Try
-        Catch ex As Exception
-            If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-                Debugger.Break()
-                ' ignore error
-            Else
-                Debugger.Break()
-                MessageBox.Show("Error happened " & e.Context.ToString())
-                If (e.Context = DataGridViewDataErrorContexts.Commit) Then
-                    Debugger.Break()
-                    MessageBox.Show("Commit error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
-                    MessageBox.Show("Cell change")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
-                    MessageBox.Show("parsing error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
-                    Debugger.Break()
-                    MessageBox.Show("leave control error")
-                End If
-
-                If (TypeOf (e.Exception) Is ConstraintException) Then
-                    Debugger.Break()
-                    Dim view As DataGridView = CType(sender, DataGridView)
-                    view.Rows(e.RowIndex).ErrorText = "an error"
-                    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
-                    e.ThrowException = False
-                End If
-            End If
-        End Try
-    End Sub
-
     ''Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
     'Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
     '    if Me.CurrentCell.RowIndex = RowCount Then
@@ -468,39 +597,6 @@ Public Class CDataGridView
     '        CType(Me.Events("ParentofGridChangedEvent"), EventHandler).Invoke(sender, e)
     '    End RaiseEvent
     'End Event
-
-    '' Write the method to call the Event, and then use it as you want.
-    'Protected Sub OnParentofGridChanged(ByVal e As EventArgs)
-    '    Dim ParentofGridChangedHandler As EventHandler =
-    '    CType(Me.Events("ParentofGridChangedEvent"), EventHandler)
-    '    If (ParentofGridChangedHandler IsNot Nothing) Then
-    '        ParentofGridChangedHandler.Invoke(Me, e)
-    '    End If
-    'End Sub
-
-    Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-            RaiseEvent ChangesMade(Me, EventArgs.Empty)
-        Else
-            DataInGridChanged = False
-        End If
-    End Sub
-
-    Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles Me.CurrentCellChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-        Else
-            DataInGridChanged = False
-        End If
-    End Sub
-
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
-        Get
-            Return True
-        End Get
-    End Property
-
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Throw New NotImplementedException()
     'End Sub
@@ -539,54 +635,22 @@ Public Class CDataGridView
     'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
     '    Enabled = selectableControl
     'End Sub
+    'Function Clone(Of T As ICloneable)(ByVal listToClone As IList(Of T)) As IList(Of T)
+    '    Return listToClone.[Select](Function(item) CType(item.Clone(), T)).ToList()
+    'End Function
 
-    'Private Sub ReSequenceDgv(Of T)(ByRef ds As T)
-    '    Dim i = Me.CurrentCell.RowIndex()
-    '    For Each r IN ds
-    '        If Item.Sequence = 0 Then
-    '            Item.Sequence = i
-    '        ElseIf Item.Sequence >= i Then
-    '            Item.Sequence = Item.Sequence + 1
-    '        End If
-    '    Next
-    'End Sub
+    'Private Function ParseDataSource() As Boolean
+    '    If DataSource Is Nothing Then
+    '        Return False
+    '    End If
 
-    Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
-        Dim myForm = FindForm()
-        Dim presenterObj = CallByName(myForm, "PresenterObj", CallType.Get)
-        Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
-        Dim adding As Boolean = CallByName(presenterObj, "AddMode", CallType.Get)
-        If Not (editing Or adding) Then
-            MessagingLibrary.Messaging.Show(True, "MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
-            e.Cancel = True
-        End If
-    End Sub
+    '    If DataSource.[GetType]().Equals(GetType(BindingSource)) Then
+    '        'AssignEvent()
+    '        Dim myBindingSource = CType(DataSource, BindingSource)
 
-    Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
-        DataInGridChanged = True
-        RaiseEvent ChangesMade(Me, EventArgs.Empty)
-    End Sub
+    '    End If
 
-    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-        Dim i = CurrentCell.RowIndex()
-        For Each value In dataItems
-            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-            If sequence > i + 1 Then
-                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
-            End If
-        Next
-    End Sub
-
-    Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-        Dim i = CurrentCell.RowIndex()
-        For Each value In dataItems
-            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-            If sequence = 0 Then
-                CallByName(value, sequenceFieldName, CallType.Set, i)
-            ElseIf sequence >= i Then
-                CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
-            End If
-        Next
-    End Sub
+    '    Return True
+    'End Function
 
 End Class

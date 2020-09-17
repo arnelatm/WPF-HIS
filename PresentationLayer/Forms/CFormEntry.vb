@@ -1027,7 +1027,6 @@ Public Class CFormEntry
 
     '#Region "Temporary Events"
 
-
     '    Public Event InputsTurnedOff()
 
     '    Public Event InputsTurnedOn()
