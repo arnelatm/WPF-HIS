@@ -5,11 +5,13 @@
     [EarningNameAra]   NVARCHAR (50)  NULL,
     [Percentage]       DECIMAL (4, 2) NULL,
     [DefaultFrequency] CHAR (1)       NULL,
-    [AccountIdNo]      INT            NULL,
+    [AccountIdNo]      SMALLINT       NULL,
     [EarningType]      CHAR (1)       NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_Earning] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

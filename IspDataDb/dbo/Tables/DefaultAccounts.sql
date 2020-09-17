@@ -1,8 +1,10 @@
 ﻿CREATE TABLE [dbo].[DefaultAccounts] (
-    [IdNo]           INT      IDENTITY (1, 1) NOT NULL,
-    [AccountIdNo]    INT      NULL,
+    [IdNo]           SMALLINT IDENTITY (1, 1) NOT NULL,
+    [AccountIdNo]    SMALLINT NULL,
     [SpecialAccount] CHAR (2) NULL
 );
+
+
 
 
 GO

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Chart] (
-    [IdNo]               INT           IDENTITY (1, 1) NOT NULL,
-    [ParentIDNo]         INT           NULL,
+    [IdNo]               SMALLINT      IDENTITY (1, 1) NOT NULL,
+    [ParentIDNo]         SMALLINT      NULL,
     [AccountCode]        VARCHAR (5)   NOT NULL,
     [AccountName]        VARCHAR (50)  NOT NULL,
     [AccountNameAra]     NVARCHAR (50) NULL,
@@ -19,7 +19,7 @@
     [IncomeExpSummary]   BIT           NULL,
     [Active]             BIT           NULL,
     [SpecialAccount]     CHAR (2)      NULL,
-    [GroupSortOrder]     INT           NULL,
+    [GroupSortOrder]     SMALLINT      NULL,
     [CreateDate]         DATETIME2 (7) NULL,
     [DateTimeStamp]      ROWVERSION    NULL,
     CONSTRAINT [PK__ChartIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
@@ -28,6 +28,8 @@
     CONSTRAINT [IX_ChartName] UNIQUE NONCLUSTERED ([AccountName] ASC),
     CONSTRAINT [IX_ChartNameAra] UNIQUE NONCLUSTERED ([AccountNameAra] ASC)
 );
+
+
 
 
 

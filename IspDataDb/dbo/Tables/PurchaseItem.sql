@@ -13,12 +13,14 @@
     [StdPrice1]           MONEY          NULL,
     [StdPrice2]           MONEY          NULL,
     [StdPrice3]           MONEY          NULL,
-    [GlAccountIdNo]       INT            NULL,
-    [VatAccountIdNo]      INT            NULL,
+    [GlAccountIdNo]       SMALLINT       NULL,
+    [VatAccountIdNo]      SMALLINT       NULL,
     [Active]              BIT            NULL,
     [DateCreated]         DATE           CONSTRAINT [DF_Purchaseitem_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     [CreatedByIdNo]       SMALLINT       NULL,
     CONSTRAINT [PK_PurchaseItem] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

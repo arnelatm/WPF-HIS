@@ -1,14 +1,14 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntry
-        Implements IDistributionSchemeView
+        Implements IDistributionSchemeView, ISubscriber(Of InsertDgvLine)
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -17,6 +17,7 @@ Namespace PresentationLayer.Forms
         Private _revCostCenterByName
         Private _totalPercentage As Decimal
         Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
+        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New()
 
@@ -35,6 +36,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New DistributionSchemePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _dgvEa = DataGridViewDistributionSchemeItems.Ea
+            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -136,6 +139,10 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsDistributionSchemeItems.Insert(eventType.BsRow, New DistributionSchemeItemView)
+        End Sub
+
         Protected Overrides Sub CreateDataSources()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
@@ -183,7 +190,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDistributionSchemeItems.UserDeletedRow
-            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
             UpdateTotals()
         End Sub
 
@@ -225,72 +231,6 @@ Namespace PresentationLayer.Forms
                 TotalPercentage = _footer.Value("dgvPercentage")
             End If
         End Sub
-
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-                    Handles DataGridViewDistributionSchemeItems.CellClick
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case "dgvdeletecolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim selectedRow As New DistributionSchemeItemModel
-                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-                            bsDistributionSchemeItems.Remove(selectedRow)
-                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
-                            TotalPercentage = DistributionSchemeitems.Sum(Function(totals) totals.Percentage)
-                        Else
-                            MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
-                        End If
-                    Case "dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim newRow As New DistributionSchemeItemModel
-                            bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
-                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterInsert(Of DistributionSchemeItemView)(DistributionSchemeItems)
-                            SendKeys.Send("{UP}")
-                        Else
-                            MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
-                        End If
-                End Select
-            End With
-        End Sub
-
-        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDistributionSchemeItems.CellBeginEdit
-        '    With DataGridViewDistributionSchemeItems.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvRevCostCenterIdNo"
-        '                dgvRevCostCenterIdNo.DisplayMember = "Name"
-        '            Case "dgvRevCostCenterName"
-        '                dgvRevCostCenterName.DisplayMember = "Code"
-        '        End Select
-        '    End With
-        'End Sub
-
-        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-        '    Handles DataGridViewDistributionSchemeItems.CellEndEdit
-        '    With DataGridViewDistributionSchemeItems.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            Case "dgvRevCostCenterIdNo"
-        '                dgvRevCostCenterIdNo.DisplayMember = "Code"
-        '                SendKeys.Send("{TAB}")
-        '            Case "dgvRevCostCenterName"
-        '                dgvRevCostCenterName.DisplayMember = "Name"
-        '                ' repaint grid to reflect changes in the dgvRevCostCenterIdNo
-        '                '(this column and dgvRevCostCenterIdNo have the same source so any changes here must be reflected there)
-        '                DataGridViewDistributionSchemeItems.Refresh()
-        '            Case "dgvpercentage"
-        '                Dim amount = .Value
-        '                If amount <> 0 Then
-        '                    Dim selectedRow As DistributionSchemeItemModel
-        '                    selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-        '                    If amount > 100 Or amount < 0 Then
-        '                        selectedRow.Percentage = 0
-        '                        MessageBox.Show("Percentage value must be between <1-100>.")
-        '                    End If
-        '                End If
-        '                TotalPercentage = DistributionSchemeitems.Sum(Function(totals) totals.Percentage)
-        '                SendKeys.Send("{TAB}")
-        '        End Select
-        '    End With
-        'End Sub
 
     End Class
 

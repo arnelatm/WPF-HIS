@@ -3,7 +3,7 @@
     [TransactionDate]     DATE           NOT NULL,
     [ReferenceNo]         VARCHAR (15)   NULL,
     [Amount]              MONEY          NULL,
-    [AccountIdNo]         INT            NOT NULL,
+    [AccountIdNo]         SMALLINT       NOT NULL,
     [PayorType]           CHAR (1)       NULL,
     [PayorIdNo]           INT            NULL,
     [Payorname]           NVARCHAR (50)  NULL,
@@ -11,7 +11,7 @@
     [CheckDate]           DATE           NULL,
     [ORNumber]            VARCHAR (15)   NULL,
     [DiscountTaken]       MONEY          NULL,
-    [DiscountAccountIdNo] INT            NULL,
+    [DiscountAccountIdNo] SMALLINT       NULL,
     [Applied]             MONEY          NULL,
     [UnApplied]           MONEY          NULL,
     [Notes]               NVARCHAR (255) NULL,
@@ -21,6 +21,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashReceiptJournal] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

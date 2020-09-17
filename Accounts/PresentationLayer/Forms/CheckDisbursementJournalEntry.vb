@@ -12,7 +12,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class CheckDisbursementJournalEntry
-        Implements ICheckDisbursementJournalView, ISubscriber(Of BeforeAssignment)
+        Implements ICheckDisbursementJournalView, ISubscriber(Of BeforeAssignment), ISubscriber(Of InsertDgvLine)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -28,6 +28,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
+        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New()
             MyBase.New()
@@ -43,6 +44,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New CheckDisbursementJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _dgvEa = DataGridViewJournalItems.Ea
+            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -301,6 +304,10 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsJournalItems.Insert(eventType.BsRow, New JournalItemView)
+        End Sub
+
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
             SetPayeeProperty(eventType.Model.PaymentType)
         End Sub
@@ -491,26 +498,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
             SetPayeeProperty(cboPaymentType.SelectedValue)
-        End Sub
-
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellClick
-            With DataGridViewJournalItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            If .RowIndex() = 0 Then
-                                Messaging.Show(True, "MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
-                            Else
-                                Dim newRow As New JournalItemView
-                                bsJournalItems.Insert(.RowIndex(), newRow)
-                                DataGridViewJournalItems.ReSequenceDgvAfterInsert(Of JournalItemView)(JournalItems)
-                                SendKeys.Send("{UP}")
-                            End If
-                        Else
-                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
-                        End If
-                End Select
-            End With
         End Sub
 
         Public Overloads Sub Dispose()
@@ -725,7 +712,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            DataGridViewJournalItems.ReSequenceDgvAfterDelete(Of JournalItemView)(JournalItems)
             UpdateTotals()
             UpdateTotalVatAmount()
         End Sub

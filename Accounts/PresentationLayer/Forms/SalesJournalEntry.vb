@@ -1,20 +1,17 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.My.Resources
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class SalesJournalEntry
-        Implements ISalesJournalView
+        Implements ISalesJournalView, ISubscriber(Of InsertDgvLine)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -34,6 +31,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
+        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New()
             MyBase.New()
@@ -48,6 +46,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New SalesJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _dgvEa = DataGridViewJournalItems.Ea
+            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -215,6 +215,9 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsSalesCashItems.Insert(eventType.BsRow, New SalesCashItemView)
+        End Sub
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
@@ -426,22 +429,6 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub DataGridViewSalesCashItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellClick
-            With DataGridViewSalesCashItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim newRow As New SalesCashItemModel
-                            bsSalesCashItems.Insert(.RowIndex(), newRow)
-                            DataGridViewSalesCashItems.ReSequenceDgvAfterInsert(Of SalesCashItemView)(SalesCashItems)
-                            SendKeys.Send("{UP}")
-                        Else
-                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
-                        End If
-                End Select
-            End With
-        End Sub
-
         Private Sub DataGridViewJournalItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellClick
             With DataGridViewJournalItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
@@ -469,14 +456,6 @@ Namespace PresentationLayer.Forms
             btnViewGL.Visible = False
         End Sub
 
-        Private Sub ReSequenceDgvAfterDelete(ByRef dataGridView As DataGridView, ByRef items As Object)
-            Dim i = dataGridView.CurrentCell.RowIndex()
-            For Each item In items
-                If item.Sequence > i + 1 Then
-                    item.Sequence = item.Sequence - 1
-                End If
-            Next
-        End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewSalesCashItems.Focus()
@@ -506,7 +485,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesCashItems.UserDeletedRow
-            DataGridViewSalesCashItems.ReSequenceDgvAfterDelete(Of SalesCashItemView)(SalesCashItems)
             UpdateSlTotals()
         End Sub
 
