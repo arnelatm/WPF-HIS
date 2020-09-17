@@ -3,6 +3,7 @@ Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -10,13 +11,13 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class EmployeeEntryTv
-        Implements IEmployeeView
+        Implements IEmployeeView, ISubscriber(Of InsertDgvLine)
 
         Private ReadOnly _nfi As NumberFormatInfo
-        Private _employeeDeductions As List(Of EmployeeDeductionView)
-        Private _employeeEarnings As List(Of EmployeeEarningView)
         Private _deductionsByName
         Private _earningsByName
+        Private _employeeDeductions As List(Of EmployeeDeductionView)
+        Private _employeeEarnings As List(Of EmployeeEarningView)
 
         Public Sub New()
             MyBase.New()
@@ -36,7 +37,11 @@ Namespace PresentationLayer.Forms
             PresenterObj = New EmployeePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            DgvEarningsEa = DataGridViewEarnings.Ea
+            DgvEarningsEa.SubscribeEvent(Me)
         End Sub
+
+        Public Property DgvEarningsEa As EventAggregator
 
 #Region "Fields"
 
@@ -144,6 +149,26 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 txtEmployeeCode.Text = Value
+            End Set
+        End Property
+
+        Public Property EmployeeDeductions As List(Of EmployeeDeductionView) Implements IEmployeeView.EmployeeDeductions
+            Get
+                Return _employeeDeductions
+            End Get
+            Set
+                _employeeDeductions = Value
+                BindEmployeeDeduction()
+            End Set
+        End Property
+
+        Public Property EmployeeEarnings As List(Of EmployeeEarningView) Implements IEmployeeView.EmployeeEarnings
+            Get
+                Return _employeeEarnings
+            End Get
+            Set
+                _employeeEarnings = Value
+                BindEmployeeEarning()
             End Set
         End Property
 
@@ -286,15 +311,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
-            Get
-                Return cboPaySalariedOrHourly.GetValue()
-            End Get
-            Set
-                cboPaySalariedOrHourly.SetValue(Value)
-            End Set
-        End Property
-
         Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
             Get
                 Return txtPayRateAmount.Text.ToDecimalNumber(_nfi)
@@ -310,6 +326,15 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cboPayRateType.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
+            Get
+                Return cboPaySalariedOrHourly.GetValue()
+            End Get
+            Set
+                cboPaySalariedOrHourly.SetValue(Value)
             End Set
         End Property
 
@@ -400,77 +425,10 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property EmployeeDeductions As List(Of EmployeeDeductionView) Implements IEmployeeView.EmployeeDeductions
-            Get
-                Return _employeeDeductions
-            End Get
-            Set
-                _employeeDeductions = Value
-                BindEmployeeDeduction()
-            End Set
-        End Property
-
-        Public Property EmployeeEarnings As List(Of EmployeeEarningView) Implements IEmployeeView.EmployeeEarnings
-            Get
-                Return _employeeEarnings
-            End Get
-            Set
-                _employeeEarnings = Value
-                BindEmployeeEarning()
-            End Set
-        End Property
-
 #End Region
 
-        Private Sub BindEmployeeDeduction()
-            SuspendLayout()
-            bsDeductions.DataSource = Nothing
-            DataGridViewDeductions.Refresh()
-            bsDeductions.DataSource = EmployeeDeductions
-            bsDeductions.AllowNew = True
-            With DataGridViewDeductions
-                .Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsDeductions
-                .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
-            End With
-            With DataGridViewDeductions.Columns
-                dgvDeductionSequence.DisplayOnly = True
-                dgvDeductionIdNo.DataSource = _deductionsByName
-                dgvDeductionIdNo.DisplayMember = "Name"
-                dgvDeductionIdNo.ValueMember = "IdNo"
-                dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
-            End With
-            ResumeLayout()
-        End Sub
-
-
-        Private Sub BindEmployeeEarning()
-            SuspendLayout()
-            bsEarnings.DataSource = Nothing
-            DataGridViewEarnings.Refresh()
-            bsEarnings.DataSource = EmployeeEarnings
-            bsEarnings.AllowNew = True
-            With DataGridViewEarnings
-                .Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsEarnings
-                .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
-            End With
-            With DataGridViewEarnings.Columns
-                dgvEarningSequence.DisplayOnly = True
-                dgvEarningIdNo.DataSource = _earningsByName
-                dgvEarningIdNo.DisplayMember = "Name"
-                dgvEarningIdNo.ValueMember = "IdNo"
-                dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
-            End With
-            ResumeLayout()
+        Public Sub OnEventHandler(ByRef e As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsEarnings.Insert(e.BsRow, New EmployeeEarningView)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -525,6 +483,19 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
+        Protected Overrides Sub InputsTurnedOff()
+            DataGridViewDeductions.RemoveInsertColumn()
+            DataGridViewEarnings.RemoveInsertColumn()
+        End Sub
+
+        'Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
+        '    DataGridViewEarnings.ReSequenceDgvAfterDelete(Of EmployeeEarningView)(EmployeeEarnings)
+        'End Sub
+        Protected Overrides Sub InputsTurnedOn()
+            DataGridViewDeductions.AddInsertColumn()
+            DataGridViewEarnings.AddInsertColumn()
+        End Sub
+
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
             'MyBase.RecordPositionChanged(e)
@@ -532,39 +503,81 @@ Namespace PresentationLayer.Forms
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub
 
-
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewEarnings.CellClick, DataGridViewDeductions.CellClick
-            With DataGridViewEarnings.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            DataGridViewEarnings.ReSequenceDgvAfterInsert(Of EmployeeEarningView)(EmployeeEarnings)
-                            SendKeys.Send("{UP}")
-                        Else
-                            Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-                                           "Invalid Insertion")
-                        End If
-                End Select
+        Private Sub BindEmployeeDeduction()
+            SuspendLayout()
+            bsDeductions.DataSource = Nothing
+            DataGridViewDeductions.Refresh()
+            bsDeductions.DataSource = EmployeeDeductions
+            bsDeductions.AllowNew = True
+            With DataGridViewDeductions
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsDeductions
+                .Refresh()
+                .AllowUserToAddRows = True
+                .AllowUserToDeleteRows = True
             End With
+            With DataGridViewDeductions.Columns
+                dgvDeductionSequence.DisplayOnly = True
+                dgvDeductionIdNo.DataSource = _deductionsByName
+                dgvDeductionIdNo.DisplayMember = "Name"
+                dgvDeductionIdNo.ValueMember = "IdNo"
+                dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
         End Sub
+
+        Private Sub BindEmployeeEarning()
+            SuspendLayout()
+            bsEarnings.DataSource = Nothing
+            DataGridViewEarnings.Refresh()
+            bsEarnings.DataSource = EmployeeEarnings
+            bsEarnings.AllowNew = True
+            With DataGridViewEarnings
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsEarnings
+                .Refresh()
+                .AllowUserToAddRows = True
+                .AllowUserToDeleteRows = True
+            End With
+            With DataGridViewEarnings.Columns
+                dgvEarningSequence.DisplayOnly = True
+                dgvEarningIdNo.DataSource = _earningsByName
+                dgvEarningIdNo.DisplayMember = "Name"
+                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
+        End Sub
+
+        'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellClick
+        '    With DataGridViewEarnings.CurrentCell
+        '        Select Case .OwningColumn.Name.ToLower()
+        '            Case $"dgvinsertcolumn"
+        '                If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
+        '                    If (DataGridViewEarnings.CurrentRow.Index() <> DataGridViewEarnings.NewRowIndex()) Then
+        '                        Dim newRow As New EmployeeEarningView
+        '                        bsEarnings.Insert(.RowIndex(), newRow)
+        '                        DataGridViewEarnings.ReSequenceDgvAfterInsert()
+        '                        SendKeys.Send("{UP}")
+        '                    End If
+        '                Else
+        '                    Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+        '                               "Invalid Insertion")
+        '                End If
+        '        End Select
+        '    End With
+        'End Sub
 
         Private Sub DataGridViewDeductions_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDeductions.UserDeletedRow
             DataGridViewDeductions.ReSequenceDgvAfterDelete(Of EmployeeDeductionView)(EmployeeDeductions)
         End Sub
 
         Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
-            DataGridViewEarnings.ReSequenceDgvAfterDelete(Of EmployeeEarningView)(EmployeeEarnings)
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewDeductions.RemoveInsertColumn()
-            DataGridViewEarnings.RemoveInsertColumn()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            DataGridViewDeductions.AddInsertColumn()
-            DataGridViewEarnings.AddInsertColumn()
+            DataGridViewEarnings.ReSequenceDgvAfterDelete()
         End Sub
 
     End Class

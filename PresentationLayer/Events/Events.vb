@@ -34,6 +34,16 @@ Public Class EditModeChanged
 
 End Class
 
+Public Class InsertDgvLine
+
+    Public Sub New(ByVal nRow As Int16)
+        Me.BsRow = nRow
+    End Sub
+
+    Public Property BsRow
+
+End Class
+
 Public Class PassErrorList
 
     Public Sub New(ByRef errors As List(Of String))
