@@ -488,9 +488,6 @@ Namespace PresentationLayer.Forms
             DataGridViewEarnings.RemoveInsertColumn()
         End Sub
 
-        'Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
-        '    DataGridViewEarnings.ReSequenceDgvAfterDelete(Of EmployeeEarningView)(EmployeeEarnings)
-        'End Sub
         Protected Overrides Sub InputsTurnedOn()
             DataGridViewDeductions.AddInsertColumn()
             DataGridViewEarnings.AddInsertColumn()
@@ -572,13 +569,13 @@ Namespace PresentationLayer.Forms
         '    End With
         'End Sub
 
-        Private Sub DataGridViewDeductions_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDeductions.UserDeletedRow
-            DataGridViewDeductions.ReSequenceDgvAfterDelete(Of EmployeeDeductionView)(EmployeeDeductions)
-        End Sub
+        'Private Sub DataGridViewDeductions_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDeductions.UserDeletedRow
+        '    DataGridViewDeductions.ReSequenceDgvAfterDelete(Of EmployeeDeductionView)(EmployeeDeductions)
+        'End Sub
 
-        Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
-            DataGridViewEarnings.ReSequenceDgvAfterDelete()
-        End Sub
+        'Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
+        '    DataGridViewEarnings.ReSequenceDgvAfterDelete()
+        'End Sub
 
     End Class
 
