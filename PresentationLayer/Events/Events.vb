@@ -36,11 +36,13 @@ End Class
 
 Public Class InsertDgvLine
 
-    Public Sub New(ByVal nRow As Int16)
+    Public Sub New(ByVal nRow As Int16, Optional dgvName As String = "")
         Me.BsRow = nRow
+        Me.Name = dgvName
     End Sub
 
     Public Property BsRow
+    Public Property Name
 
 End Class
 

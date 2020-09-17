@@ -244,7 +244,7 @@ Public Class CDataGridView
                     If EditingMode Then
                         If (CurrentRow.Index() <> NewRowIndex()) Then
                             If Ea IsNot Nothing Then
-                                Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index()))
+                                Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
                             End If
                             'Dim myBindingSource = CType(DataSource, BindingSource)
                             'myBindingSource.Insert(.RowIndex(), dataList)

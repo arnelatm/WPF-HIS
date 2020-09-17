@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[ProfitCenter] (
-    [IdNo]                INT           NOT NULL,
+    [IdNo]                SMALLINT      NOT NULL,
     [ProfitCenterCode]    VARCHAR (5)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [ProfitCenterName]    VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [ParentIdNo]          INT           NULL,
+    [ParentIdNo]          SMALLINT      NULL,
     [ProfitCenterNameAra] NVARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [ProfitCenterType]    CHAR (1)      COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Notes]               VARCHAR (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -12,6 +12,8 @@
     CONSTRAINT [IX_ProfitCenterCode] UNIQUE NONCLUSTERED ([ProfitCenterCode] ASC),
     CONSTRAINT [IX_ProfitCenterNameAra] UNIQUE NONCLUSTERED ([ProfitCenterNameAra] ASC)
 );
+
+
 
 
 GO

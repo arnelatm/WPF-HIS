@@ -2,14 +2,14 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class GeneralJournalEntry
-        Implements IGeneralJournalView
+        Implements IGeneralJournalView, ISubscriber(Of InsertDgvLine)
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -19,6 +19,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
+        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New(ByVal closingEntry As Boolean)
             MyBase.New()
@@ -41,6 +42,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _dgvEa = DataGridViewJournalItems.Ea
+            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -179,6 +182,10 @@ Namespace PresentationLayer.Forms
 
 #Region "Methods"
 
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsJournalItems.Insert(eventType.BsRow, New JournalItemView)
+        End Sub
+
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
@@ -232,26 +239,8 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewJournalItems.CellClick
-            With DataGridViewJournalItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim newRow As New JournalItemView
-                            bsJournalItems.Insert(.RowIndex(), newRow)
-                            DataGridViewJournalItems.ReSequenceDgvAfterInsert(Of JournalItemView)(JournalItems)
-                            SendKeys.Send("{UP}")
-                        Else
-                            Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-                                           "Invalid Insertion")
-                        End If
-                End Select
-            End With
-        End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            DataGridViewJournalItems.ReSequenceDgvAfterDelete(Of JournalItemView)(JournalItems)
             UpdateTotals()
         End Sub
 

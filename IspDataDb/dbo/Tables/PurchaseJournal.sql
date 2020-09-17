@@ -4,7 +4,7 @@
     [TransactionDate]    DATE           NULL,
     [ReferenceNo]        VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Amount]             MONEY          NOT NULL,
-    [AccountIdNo]        INT            NOT NULL,
+    [AccountIdNo]        SMALLINT       NOT NULL,
     [DueDate]            DATE           NULL,
     [SettlementDueDate]  DATE           NULL,
     [SettlementDiscount] DECIMAL (5, 2) NULL,
@@ -19,6 +19,8 @@
     [DateTimeStamp]      ROWVERSION     NOT NULL,
     CONSTRAINT [PK_PurchaseIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 GO

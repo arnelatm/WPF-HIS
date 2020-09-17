@@ -21,8 +21,8 @@
     [VATNumber]          VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CRNumber]           VARCHAR (20)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [AccountStatus]      CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [ARAccountIdNo]      INT            NULL,
-    [RevAccountIdNo]     INT            NULL,
+    [ARAccountIdNo]      SMALLINT       NULL,
+    [RevAccountIdNo]     SMALLINT       NULL,
     [DiscountSchemeIdNo] INT            NULL,
     [CreditLimit]        MONEY          NULL,
     [SettlementDueDays]  SMALLINT       NULL,
@@ -31,7 +31,7 @@
     [DateAccountOpen]    DATETIME       NULL,
     [BankAccountName]    NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [BankAccountNo]      VARCHAR (20)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [BankIdNo]           INT            NULL,
+    [BankIdNo]           SMALLINT       NULL,
     [IBAN]               VARCHAR (35)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PaymentMethod]      CHAR (2)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Notes]              NVARCHAR (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -43,4 +43,6 @@
     CONSTRAINT [IX_CustomerName2] UNIQUE NONCLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_CustomerNameAra2] UNIQUE NONCLUSTERED ([IdNo] ASC)
 );
+
+
 

@@ -1,9 +1,11 @@
 ﻿CREATE TABLE [dbo].[FormItems] (
-    [IdNo]        INT IDENTITY (1, 1) NOT NULL,
-    [FormIdNo]    INT NOT NULL,
-    [CaptionIdNo] INT NOT NULL,
+    [IdNo]        INT      IDENTITY (1, 1) NOT NULL,
+    [FormIdNo]    SMALLINT NOT NULL,
+    [CaptionIdNo] INT      NOT NULL,
     CONSTRAINT [PK_FormItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 GO

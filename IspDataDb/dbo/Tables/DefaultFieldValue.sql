@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[DefaultFieldValue] (
-    [IdNo]             INT           IDENTITY (1, 1) NOT NULL,
+    [IdNo]             SMALLINT      IDENTITY (1, 1) NOT NULL,
     [TableName]        VARCHAR (40)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [FieldName]        VARCHAR (40)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [DataType]         TINYINT       NOT NULL,
@@ -12,4 +12,6 @@
     [DateTimeStamp]    ROWVERSION    NULL,
     CONSTRAINT [PK_DefaultFieldValue] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

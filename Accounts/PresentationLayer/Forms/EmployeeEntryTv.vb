@@ -1,11 +1,9 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
@@ -18,6 +16,7 @@ Namespace PresentationLayer.Forms
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
+        'Private ReadOnly _dgvEarningsEa As EventAggregator
 
         Public Sub New()
             MyBase.New()
@@ -37,11 +36,10 @@ Namespace PresentationLayer.Forms
             PresenterObj = New EmployeePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            DgvEarningsEa = DataGridViewEarnings.Ea
-            DgvEarningsEa.SubscribeEvent(Me)
-        End Sub
+            DataGridViewEarnings.Ea.SubscribeEvent(Me)
+            DataGridViewDeductions.Ea.SubscribeEvent(Me)
 
-        Public Property DgvEarningsEa As EventAggregator
+        End Sub
 
 #Region "Fields"
 
@@ -427,8 +425,12 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Public Sub OnEventHandler(ByRef e As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            bsEarnings.Insert(e.BsRow, New EmployeeEarningView)
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            If eventType.Name = "DataGridViewEarnings" Then
+                bsEarnings.Insert(eventType.BsRow, New EmployeeEarningView)
+            ElseIf eventType.Name = "DataGridViewDeductions" Then
+                bsDeductions.Insert(eventType.BsRow, New EmployeeDeductionView)
+            End If
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -549,33 +551,6 @@ Namespace PresentationLayer.Forms
             End With
             ResumeLayout()
         End Sub
-
-        'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellClick
-        '    With DataGridViewEarnings.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            Case $"dgvinsertcolumn"
-        '                If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-        '                    If (DataGridViewEarnings.CurrentRow.Index() <> DataGridViewEarnings.NewRowIndex()) Then
-        '                        Dim newRow As New EmployeeEarningView
-        '                        bsEarnings.Insert(.RowIndex(), newRow)
-        '                        DataGridViewEarnings.ReSequenceDgvAfterInsert()
-        '                        SendKeys.Send("{UP}")
-        '                    End If
-        '                Else
-        '                    Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-        '                               "Invalid Insertion")
-        '                End If
-        '        End Select
-        '    End With
-        'End Sub
-
-        'Private Sub DataGridViewDeductions_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDeductions.UserDeletedRow
-        '    DataGridViewDeductions.ReSequenceDgvAfterDelete(Of EmployeeDeductionView)(EmployeeDeductions)
-        'End Sub
-
-        'Private Sub DataGridViewEarnings_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow
-        '    DataGridViewEarnings.ReSequenceDgvAfterDelete()
-        'End Sub
 
     End Class
 

@@ -1,10 +1,12 @@
 ﻿CREATE TABLE [dbo].[GroupAccess] (
     [IdNo]               INT        IDENTITY (1, 1) NOT NULL,
-    [SecurityGroupIDNo]  INT        NOT NULL,
-    [SecurityObjectIDNo] INT        NOT NULL,
+    [SecurityGroupIDNo]  SMALLINT   NOT NULL,
+    [SecurityObjectIDNo] SMALLINT   NOT NULL,
     [Visible]            BIT        NOT NULL,
     [Editable]           BIT        NOT NULL,
     [DateTimeStamp]      ROWVERSION NULL,
     CONSTRAINT [PK_SecurityGroupAccessIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

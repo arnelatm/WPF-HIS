@@ -1,6 +1,7 @@
 ﻿CREATE VIEW dbo.EmployeeEarning_View
 AS
-SELECT        dbo.EmployeeEarning.IdNo, dbo.EmployeeEarning.EmployeeIdNo, dbo.EmployeeEarning.EarningIdNo, dbo.EmployeeEarning.Amount, dbo.Earning.EarningCode, dbo.Earning.EarningName, dbo.Earning.EarningNameAra, dbo.Earning.DefaultFrequency, dbo.Earning.Percentage, dbo.Earning.EarningType, dbo.Earning.AccountIdNo AS Expr1
+SELECT        dbo.EmployeeEarning.Id, dbo.EmployeeEarning.EmployeeIdNo, dbo.EmployeeEarning.EarningIdNo, dbo.EmployeeEarning.AccountIdNo, dbo.EmployeeEarning.Amount, dbo.EmployeeEarning.PayFrequency, 
+                         dbo.Earning.EarningCode, dbo.Earning.EarningName, dbo.Earning.EarningNameAra, dbo.Earning.DefaultFrequency, dbo.Earning.Percentage, dbo.Earning.EarningType, dbo.Earning.AccountIdNo AS Expr1
 FROM            dbo.EmployeeEarning INNER JOIN
                          dbo.Earning ON dbo.EmployeeEarning.EarningIdNo = dbo.Earning.IdNo
 GO

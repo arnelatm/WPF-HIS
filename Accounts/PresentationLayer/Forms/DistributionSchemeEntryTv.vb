@@ -2,13 +2,14 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntryTv
-        Implements IDistributionSchemeView, IDistributionSchemeItemsView
+        Implements IDistributionSchemeView, IDistributionSchemeItemsView, ISubscriber(Of InsertDgvLine)
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
@@ -17,6 +18,7 @@ Namespace PresentationLayer.Forms
         Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New()
             ' This call is required by the designer.
@@ -35,6 +37,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New DistributionSchemePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _dgvEa = DataGridViewDistributionSchemeItems.Ea
+            _dgvEa.SubscribeEvent(Me)
 
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 
@@ -194,6 +198,11 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
+        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+            bsDistributionSchemeItems.Insert(eventType.BsRow, New JournalItemView)
+        End Sub
+
+
         Protected Overrides Sub AddMandatoryFieldCheck()
             'Add controls one by one in error provider.
             MyErrorProvider.Controls.AddMandatory(txtDistributionSchemeCode, "DistributionScheme Code")
@@ -286,58 +295,6 @@ Namespace PresentationLayer.Forms
             txtTotalPercentage.Text = DistributionSchemeItems.Sum(Function(totals) totals.Percentage)
         End Sub
 
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewDistributionSchemeItems.CellClick
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case "dgvdeletecolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim row = .OwningRow
-                            Dim selectedRow As New DistributionSchemeItemModel
-                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-                            bsDistributionSchemeItems.Remove(selectedRow)
-                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterDelete(Of DistributionSchemeItemView)(DistributionSchemeItems)
-                            UpdateTotals()
-                        Else
-                            MessageBox.Show("Row deletion not allowed while in view mode. Press edit button to enable deletion.")
-                        End If
-                    Case "dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Dim row = .OwningRow
-                            Dim newRow As New DistributionSchemeItemModel
-                            bsDistributionSchemeItems.Insert(.RowIndex(), newRow)
-                            DataGridViewDistributionSchemeItems.ReSequenceDgvAfterInsert(Of DistributionSchemeItemView)(DistributionSchemeItems)
-                            SendKeys.Send("{UP}")
-                        Else
-                            MessageBox.Show("Row insertion not allowed while in view mode. Press edit button to enable insertion.")
-                        End If
-                End Select
-            End With
-        End Sub
-
-        '' PreviewKeyDown is where you preview the key.
-        '' Do not put any logic here, instead use the
-        '' KeyDown event after setting IsInputKey to true.
-        'Private Sub button1_PreviewKeyDown(ByVal sender As Object, ByVal e As PreviewKeyDownEventArgs) Handles DataGridViewDistributionSchemeItems.PreviewKeyDown
-        '    Select Case (e.KeyCode)
-        '        Case Keys.Enter
-        '            Dim x = 0
-        '            x = x + 1
-        '        Case Keys.Down, Keys.Up
-        '            e.IsInputKey = True
-        '    End Select
-        'End Sub
-
-        'Private Sub button2_PreviewKeyDown(ByVal sender As Object, ByVal e As PreviewKeyDownEventArgs) Handles Me.PreviewKeyDown
-        '    Select Case (e.KeyCode)
-        '        Case Keys.Enter
-        '            Dim x = 0
-        '            x = x + 1
-        '        Case Keys.Down, Keys.Up
-        '            e.IsInputKey = True
-        '    End Select
-        'End Sub
-
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewDistributionSchemeItems.Focus()
         End Sub
@@ -349,16 +306,6 @@ Namespace PresentationLayer.Forms
                 btnLast.PerformClick()
             End If
         End Sub
-
-        'Private Sub DataGridViewDistributionSchemeItems_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridViewDistributionSchemeItems.KeyDown
-        '    Dim x = 0
-        '    x = x + 1
-        'End Sub
-
-        'Private Sub DataGridViewDistributionSchemeItems_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DataGridViewDistributionSchemeItems.KeyPress
-        '    Dim x = 0
-        '    x = x + 1
-        'End Sub
 
     End Class
 

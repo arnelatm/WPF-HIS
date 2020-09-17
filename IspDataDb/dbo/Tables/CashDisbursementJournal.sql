@@ -3,7 +3,7 @@
     [TransactionDate]     DATE           NOT NULL,
     [ReferenceNo]         VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Amount]              MONEY          NOT NULL,
-    [AccountIdNo]         INT            NOT NULL,
+    [AccountIdNo]         SMALLINT       NOT NULL,
     [PaymentType]         CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PayeeIdNo]           INT            NULL,
     [PayeeName]           NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -21,6 +21,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashDisbursementJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
