@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Windows
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
@@ -14,13 +15,14 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
+    Private _dgvInsertColumnIndex As Integer = -1
 
     Public Sub New()
         MyBase.New()
         DoubleBuffered = True
         Enabled = True
         EditMode = DataGridViewEditMode.EditOnKeystroke
-        BackColor = SystemColors.ControlLight
+        BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
@@ -113,6 +115,7 @@ Public Class CDataGridView
                 dgvInsColumn.Name = "dgvInsertColumn"
                 dgvInsColumn.HeaderText = MessagingLibrary.Messaging.TranslateCaption("Ins.")
                 _insertColumnAdded = True
+                _dgvInsertColumnIndex = dgvInsColumn.Index
             Else
                 _insertColumnAdded = False
             End If
@@ -128,15 +131,15 @@ Public Class CDataGridView
         End With
     End Sub
 
-    Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-        Dim i = CurrentCell.RowIndex()
-        For Each value In dataItems
-            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-            If sequence > i + 1 Then
-                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
-            End If
-        Next
-    End Sub
+    'Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+    '    Dim i = CurrentCell.RowIndex()
+    '    For Each value In dataItems
+    '        Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+    '        If sequence > i + 1 Then
+    '            CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+    '        End If
+    '    Next
+    'End Sub
 
     Public Sub ReSequenceDgvAfterDelete(Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
@@ -149,30 +152,30 @@ Public Class CDataGridView
         Next
     End Sub
 
-    Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-        Dim i = CurrentCell.RowIndex()
-        For Each value In dataItems
-            If value IsNot Nothing Then
-                Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-                If sequence = 0 Then
-                    CallByName(value, sequenceFieldName, CallType.Set, i)
-                ElseIf sequence >= i Then
-                    CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
-                End If
-            End If
-        Next
-    End Sub
+    'Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
+    '    Dim i = CurrentCell.RowIndex()
+    '    For Each value In dataItems
+    '        If value IsNot Nothing Then
+    '            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+    '            If sequence = 0 Then
+    '                CallByName(value, sequenceFieldName, CallType.Set, i)
+    '            ElseIf sequence >= i Then
+    '                CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
 
     Public Sub ReSequenceDgvAfterInsert(Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
-        For Each x In myBindingSource
-            If x IsNot Nothing Then
-                Dim sequence = CallByName(x, sequenceFieldName, CallType.Get)
+        For Each o In myBindingSource
+            If o IsNot Nothing Then
+                Dim sequence = CallByName(o, sequenceFieldName, CallType.Get)
                 If sequence = 0 Then
-                    CallByName(x, sequenceFieldName, CallType.Set, i)
+                    CallByName(o, sequenceFieldName, CallType.Set, i)
                 ElseIf sequence >= i Then
-                    CallByName(x, sequenceFieldName, CallType.Set, sequence + 1)
+                    CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
                 End If
             End If
         Next
@@ -209,6 +212,7 @@ Public Class CDataGridView
 
     Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
         DataInGridChanged = True
+        ReSequenceDgvAfterDelete()
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
@@ -237,7 +241,7 @@ Public Class CDataGridView
         With CurrentCell
             Select Case .OwningColumn.Name.ToLower()
                 Case $"dgvinsertcolumn"
-                    If EditMode Then 'OrElse AddMode Then
+                    If EditingMode Then
                         If (CurrentRow.Index() <> NewRowIndex()) Then
                             If Ea IsNot Nothing Then
                                 Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index()))
@@ -274,20 +278,20 @@ Public Class CDataGridView
                 ' ignore error
             Else
                 Debugger.Break()
-                MessageBox.Show("Error happened " & e.Context.ToString())
+                Forms.MessageBox.Show("Error happened " & e.Context.ToString())
                 If (e.Context = DataGridViewDataErrorContexts.Commit) Then
                     Debugger.Break()
-                    MessageBox.Show("Commit error")
+                    Forms.MessageBox.Show("Commit error")
                 End If
                 If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
-                    MessageBox.Show("Cell change")
+                    Forms.MessageBox.Show("Cell change")
                 End If
                 If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
-                    MessageBox.Show("parsing error")
+                    Forms.MessageBox.Show("parsing error")
                 End If
                 If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
                     Debugger.Break()
-                    MessageBox.Show("leave control error")
+                    Forms.MessageBox.Show("leave control error")
                 End If
 
                 If (TypeOf (e.Exception) Is ConstraintException) Then
@@ -309,11 +313,15 @@ Public Class CDataGridView
     '        ParentofGridChangedHandler.Invoke(Me, e)
     '    End If
     'End Sub
-    Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles Me.CurrentCellChanged
+    Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
         If StartTrackingChanges Then
             DataInGridChanged = True
         Else
             DataInGridChanged = False
+        End If
+        If _dgvInsertColumnIndex <= 0 Then Exit Sub
+        If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
+            CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
         End If
     End Sub
 
@@ -463,10 +471,15 @@ Public Class CDataGridView
                     e.Handled = False
             End Select
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            Forms.MessageBox.Show(ex.Message)
         End Try
         Return
     End Sub
+
+    'Private Sub DgvRowsAdded(sender As Object, e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles MyBase.RowsAdded
+    '    If _dgvInsertColumnIndex <= 0 Then Exit Sub
+    '    CType(sender, DataGridView).Rows(e.RowIndex).Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
+    'End Sub
 
     'Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
     '    'MyBase.UserDeletingRow()
