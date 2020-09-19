@@ -26,7 +26,7 @@ Namespace PresentationLayer.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CashDisbursementJournalEntry))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CashDisbursementJournalEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -74,7 +74,6 @@ Namespace PresentationLayer.Forms
             Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CCustomDateTimePicker1 = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -192,7 +191,6 @@ Namespace PresentationLayer.Forms
             Me.floHeader1.Controls.Add(Me.cboDiscountAccountIdNo)
             Me.floHeader1.Controls.Add(Me.lblNotes)
             Me.floHeader1.Controls.Add(Me.txtNotes)
-            Me.floHeader1.Controls.Add(Me.CCustomDateTimePicker1)
             resources.ApplyResources(Me.floHeader1, "floHeader1")
             Me.floHeader1.Name = "floHeader1"
             Me.floHeader1.TabStop = True
@@ -594,27 +592,6 @@ Namespace PresentationLayer.Forms
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.ValueIsMandatory = True
             '
-            'CCustomDateTimePicker1
-            '
-            Me.CCustomDateTimePicker1.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.CCustomDateTimePicker1.DefaultValue = Nothing
-            Me.CCustomDateTimePicker1.DisplayOnly = False
-            Me.CCustomDateTimePicker1.DtpDefaultValue = Nothing
-            Me.CCustomDateTimePicker1.EditingMode = False
-            Me.CCustomDateTimePicker1.EditsAllowed = False
-            Me.CCustomDateTimePicker1.ForeColor = System.Drawing.Color.Black
-            Me.CCustomDateTimePicker1.LinkedLabel = Nothing
-            resources.ApplyResources(Me.CCustomDateTimePicker1, "CCustomDateTimePicker1")
-            Me.CCustomDateTimePicker1.Name = "CCustomDateTimePicker1"
-            Me.CCustomDateTimePicker1.ReadOnlyDp = False
-            Me.CCustomDateTimePicker1.SecurityKey = Nothing
-            Me.CCustomDateTimePicker1.ShowLongDate = False
-            Me.CCustomDateTimePicker1.ShowTime = False
-            Me.CCustomDateTimePicker1.TargetCalendar = Nothing
-            Me.CCustomDateTimePicker1.Value = Nothing
-            Me.CCustomDateTimePicker1.ValueIsMandatory = False
-            Me.CCustomDateTimePicker1.ValueIsNullable = False
-            '
             'floHeader2
             '
             Me.floHeader2.BackColor = System.Drawing.Color.Transparent
@@ -798,7 +775,7 @@ Namespace PresentationLayer.Forms
             '
             Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpDateCreated.DefaultValue = Nothing
-            Me.dtpDateCreated.DisplayOnly = False
+            Me.dtpDateCreated.DisplayOnly = True
             Me.dtpDateCreated.DtpDefaultValue = Nothing
             Me.dtpDateCreated.EditingMode = False
             Me.dtpDateCreated.EditsAllowed = False
@@ -1310,7 +1287,6 @@ Namespace PresentationLayer.Forms
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents cboPaymentType As CaComboBox
-        Friend WithEvents CCustomDateTimePicker1 As CCustomDateTimePicker
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
     End Class
 End Namespace
