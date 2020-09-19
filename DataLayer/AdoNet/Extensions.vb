@@ -178,7 +178,7 @@ Namespace AdoNet
             'If obj.Equals(DBNull.Value) Or obj Is Nothing Then
             If obj.HasValue Then
                 Dim result As DateTime
-                Date.TryParse(obj.ToString(), result)
+                DateTime.TryParse(obj.ToString(), result)
                 'Return If((obj Is Nothing), Nothing, CType(Convert.ToDateTime(obj)))
                 Return result
             Else

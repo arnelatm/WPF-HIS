@@ -16,14 +16,14 @@ Public Class CCustomDateTimePicker
     Private _valueIsNullable As Boolean
     Private _displayOnly As Boolean = False
     Private _readOnlyDp As Boolean = False
-    Private _defaultValue As Date? = Nothing
-    Private _dtpDefaultValue As Date? = Nothing
+    Private _defaultValue As DateTime? = Nothing
+    Private _dtpDefaultValue As DateTime? = Nothing
     Private _isMandatory As Boolean
     Private _textToSearch As String
     Private _searchAnywhere As Boolean
     Private _securityKey As String
-    Private _minimumDate As Date?
-    Private _lastDate As Date? = Today()
+    Private _minimumDate As DateTime?
+    Private _lastDate As DateTime? = Today()
     Private _origCultureStr As String
     Private _tmpValueChanged As Boolean = False
     Private _dtpDropCount As Integer = 0
@@ -84,7 +84,7 @@ Public Class CCustomDateTimePicker
 
     Public Sub SetDateEntryMask()
         Dim dateMask As String
-        Dim tempDate As Date
+        Dim tempDate As DateTime
         tempDate = #2018-12-31#
         If _targetCulture.Name = "ar-SA" Then
             dateMask = Regex.Replace(CalendarDateToShortDateString(tempDate, _targetCulture), "\d", "0")
@@ -145,7 +145,7 @@ Public Class CCustomDateTimePicker
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     <Description("The Default Value that this control will have if initialized or cleared.")>
     <Browsable(True)>
-    Public Property DefaultValue As Date?
+    Public Property DefaultValue As DateTime?
         Get
             Return _defaultValue
         End Get
@@ -160,7 +160,7 @@ Public Class CCustomDateTimePicker
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     <Description("The Default Value that the datetimepicker control will show if value is empty or invalid date.")>
     <Browsable(True)>
-    Public Property DtpDefaultValue As Date?
+    Public Property DtpDefaultValue As DateTime?
         Get
             Return _dtpDefaultValue
         End Get
@@ -407,7 +407,7 @@ Public Class CCustomDateTimePicker
                     Else
                         txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
                         If txtTime.Visible Then
-                            txtTime.Text = String.Format("{0:HH:mm:ss}", CType(Value, Date).TimeOfDay.ToString)
+                            txtTime.Text = String.Format("{0:HH:mm:ss}", CType(dValue, DateTime).TimeOfDay.ToString)
                         Else
                             txtTime.Text = ""
                         End If
@@ -491,7 +491,7 @@ Public Class CCustomDateTimePicker
         ToolTip1.Show(
             "You entry [" & txtDate.Text & "] is not a valid date for the " &
             CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
-        Dim dDate As Date? = _lastDate
+        Dim dDate As DateTime? = _lastDate
         If dDate Is Nothing Then
             txtDate.Text = ""
         Else
@@ -509,7 +509,7 @@ Public Class CCustomDateTimePicker
                 _programmaticChange = False
                 Exit Sub
             End If
-            Dim dDate As Date
+            Dim dDate As DateTime
             Dim sTime As String
             dDate = Convert.ToDateTime(txtDate.Text, _targetCulture)
             'Try
@@ -531,12 +531,12 @@ Public Class CCustomDateTimePicker
                 txtDate.Text = ""
                 Exit Sub
             End If
-            txtDate.Text = PadWithZeroSingleDigitDate(Date.Parse(tDate).ToShortDateString())
+            txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString())
             If IsDate(txtDate.Text) Then Exit Sub
             e.Cancel = True
         Catch
             MessageBox.Show("The Value you [" & tDate & "] entered is invalid. Reverting to previous value!")
-            Dim dDate As Date = Value
+            Dim dDate As DateTime = Value
             txtLongDate.Text = dDate.ToLongDateString
             txtLongDate.Focus()
             e.Cancel = True
@@ -548,7 +548,7 @@ Public Class CCustomDateTimePicker
         Dim tDate As String = txtLongDate.Text
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = _targetCulture
-        txtDate.Text = PadWithZeroSingleDigitDate(Date.Parse(tDate).ToShortDateString)
+        txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString)
         CultureInfo.CurrentCulture = curCulture
     End Sub
 
@@ -560,7 +560,7 @@ Public Class CCustomDateTimePicker
 
             SetCalendarLocation(calendarForm)
             retVal = calendarForm.ShowDialog()
-            If (Not EditingMode) And retVal <> DialogResult.Retry Then
+            If ((Not EditingMode) Or Me.DisplayOnly) And retVal <> DialogResult.Retry Then
                 calendarForm.Dispose()
                 Exit Do
             ElseIf retVal = DialogResult.OK Then
