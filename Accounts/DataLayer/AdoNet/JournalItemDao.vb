@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =
                                     Function(reader) _
             New JournalItem() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .AccountName = Extensions.AsString(reader("AccountName")),
             .Credit = Extensions.AsDecimal(reader("Credit")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
             .PaidAmount = Extensions.AsDecimal(reader("PaidAmount")),
             .PayeeType = Extensions.AsString(reader("PayeeType")),
             .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
-            .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
             }
 

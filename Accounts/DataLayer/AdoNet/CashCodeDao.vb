@@ -91,9 +91,9 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CashCode) =
                                     Function(reader) _
             New CashCode() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .BankChargesAccountIdNo = Extensions.AsInt(Of Integer)(reader("BankChargesAccountIdNo")),
-            .BankChargesVatAccountIdNo = Extensions.AsInt(Of Integer)(reader("BankChargesVatAccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
+            .BankChargesAccountIdNo = Extensions.AsInt(Of Int16)(reader("BankChargesAccountIdNo")),
+            .BankChargesVatAccountIdNo = Extensions.AsInt(Of Int16)(reader("BankChargesVatAccountIdNo")),
             .CashCode = Extensions.AsString(reader("CashCode")),
             .CashName = Extensions.AsString(reader("CashName")),
             .CashNameAra = Extensions.AsString(reader("CashNameAra")),

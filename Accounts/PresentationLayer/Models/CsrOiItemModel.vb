@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class CsrOiItemModel
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property ArOpenInvoiceIdNo As Int32
         Public Property Balance As Decimal
@@ -18,7 +18,7 @@
         Public Property JournalCode As String
         Public Property JournalIdNo As Int32
         Public Property PreviousBalance As Decimal
-        Public Property Sequence As Integer
+        Public Property Sequence As Int16
         Public Property TransactionDate As Date?
 
     End Class

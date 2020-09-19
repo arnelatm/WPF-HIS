@@ -22,10 +22,10 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
-        Public Property DateCreated As DateTime
+        Public Property DateCreated As DateTime?
         Public Property DueDate As Date?
         Public Property IdNo As Int32
         Public Property InvoiceNo As String
@@ -39,8 +39,7 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property TransactionType As String
-	    Public Property JournalItems As List(Of JournalItem)
+        Public Property JournalItems As List(Of JournalItem)
     End Class
 
 End Namespace
-

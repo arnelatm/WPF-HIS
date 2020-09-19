@@ -105,7 +105,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
-        Public Function GetGlLedger(ByRef AccountIdNo as Int32, transactionDate As Date, Optional sortExpression As String = "TransactionDate") _
+        Public Function GetGlLedger(ByRef AccountIdNo As Int16, transactionDate As Date, Optional sortExpression As String = "TransactionDate") _
             As List(Of GlLedgerItem)
             Dim sql As String =
                     "SELECT " &
@@ -134,14 +134,14 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GlLedgerItem) =
                                     Function(reader) _
             New GlLedgerItem() With {
-            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
             .Debit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Debit")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .RevCostCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("Sequence"))
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("sequence"))
             }
 
         'Private Function Take(glLedgerItem As GlLedgerItem) As Object()

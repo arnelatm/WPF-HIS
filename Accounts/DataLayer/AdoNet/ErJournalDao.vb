@@ -85,11 +85,11 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ErJournal) =
                                     Function(reader) _
             New ErJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .EmployeeIdNo = Extensions.AsInt(Of Integer)(reader("EmployeeIdNo")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Posted = Extensions.AsBool(reader("Posted")),

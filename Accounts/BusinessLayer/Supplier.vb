@@ -42,8 +42,8 @@ Namespace BusinessLayer
         Public Property VatNumber As String
         Public Property CrNumber As String
         Public Property AccountStatus As String
-        Public Property ApAccountIdNo As Int32?
-        Public Property ExpAccountIdNo As Int32?
+        Public Property ApAccountIdNo As Int16?
+        Public Property ExpAccountIdNo As Int16?
         Public Property CreditLimit As Decimal
         Public Property SettlementDueDays As Int16
         Public Property SettlementDiscount As Decimal

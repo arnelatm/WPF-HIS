@@ -27,22 +27,22 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 

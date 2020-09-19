@@ -141,11 +141,11 @@ Namespace AdoNet
         End Function
 
         <Extension>
-        Public Function AsDateTime(item As Object, Optional ByVal defaultDateTime As Date? = Nothing) As Date?
+        Public Function AsDateTime(item As Object, Optional ByVal defaultDateTime As DateTime? = Nothing) As DateTime?
             If item Is Nothing OrElse String.IsNullOrEmpty(item.ToString()) Then
                 Return defaultDateTime
             End If
-            Dim retDate As Date?
+            Dim retDate As DateTime?
             Try
                 'round datetime values to seconds, ignore milliseconds
                 'date comparison fails sometimes because of difference of milliseconds
@@ -157,17 +157,32 @@ Namespace AdoNet
             Return retDate
         End Function
 
-        ' transform object into DateTime data type.
+        'Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T
+        '    If obj.Equals(DBNull.Value) Or obj Is Nothing Then
+        '        Return Nothing
+        '    End If
+        '    Dim x As Type = GetType(T)
+        '    Dim u As Type = Nullable.GetUnderlyingType(x)
 
+        '    If u IsNot Nothing Then
+        '        Return If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, u), T))
+        '    Else
+        '        Return CType(Convert.ChangeType(obj, x), T)
+        '    End If
+        'End Function
+
+        ' transform object into DateTime data type.
         <Extension>
-        Public Function AsNullableDateTime(item As Object, Optional ByVal defaultDateTime As Date = Nothing) As Date?
+        Public Function AsNullableDateTime(ByVal obj As DateTime?, Optional ByVal defaultDateTime As DateTime? = Nothing) As DateTime?
             'Date.TryParse(item.ToString(), result)
-            If item.Equals(DBNull.Value) Then
-                Return Nothing
-            Else
-                Dim result As Date
-                Date.TryParse(item.ToString(), result)
+            'If obj.Equals(DBNull.Value) Or obj Is Nothing Then
+            If obj.HasValue Then
+                Dim result As DateTime
+                Date.TryParse(obj.ToString(), result)
+                'Return If((obj Is Nothing), Nothing, CType(Convert.ToDateTime(obj)))
                 Return result
+            Else
+                Return Nothing
             End If
         End Function
 

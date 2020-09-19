@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views
 
         Property AccountStatus As String
         Property Active As Boolean
-        Property ApAccountIdNo As Int32?
+        Property ApAccountIdNo As Int16?
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property ContactDesignation As String
@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views
         Property DateAccountOpen As Date?
         Property District As String
         Property Email As String
-        Property ExpAccountIdNo As Int32?
+        Property ExpAccountIdNo As Int16?
         Property Fax As String
         Property Iban As String
         Property IdNo As Int32

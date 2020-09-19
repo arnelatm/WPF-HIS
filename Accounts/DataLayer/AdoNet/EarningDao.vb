@@ -61,7 +61,7 @@ Namespace DataLayer.AdoNet
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .AccountIdNo = Extensions.AsId(Of Int32)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
             .DefaultFrequency = Extensions.AsString(reader("DefaultFrequency")),
             .EarningType = Extensions.AsString(reader("EarningType"))
             }

@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views
 
         Property IdNo As Int32
         Property DistributionSchemeIdNo As Int32
-        Property Sequence As Integer
+        Property Sequence As Int16
         Property RevCostCenterIdNo As Int32
         Property RevCostCenterName As String
         Property Percentage As Decimal

@@ -945,6 +945,30 @@
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="CCustomDateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 176</value>
+  </data>
+  <data name="CCustomDateTimePicker1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CCustomDateTimePicker1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 25</value>
+  </data>
+  <data name="CCustomDateTimePicker1.TabIndex" type="System.Int32, mscorlib">
+    <value>282</value>
+  </data>
+  <data name="&gt;&gt;CCustomDateTimePicker1.Name" xml:space="preserve">
+    <value>CCustomDateTimePicker1</value>
+  </data>
+  <data name="&gt;&gt;CCustomDateTimePicker1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CCustomDateTimePicker1.Parent" xml:space="preserve">
+    <value>floHeader1</value>
+  </data>
+  <data name="&gt;&gt;CCustomDateTimePicker1.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
   <data name="floHeader1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 8</value>
   </data>
@@ -1386,31 +1410,28 @@
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 151</value>
   </data>
-  <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 23</value>
+  <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 25</value>
   </data>
-  <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
+    <value>284</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
-    <value>txtDateCreated</value>
+  <data name="&gt;&gt;dtpDateCreated.Name" xml:space="preserve">
+    <value>dtpDateCreated</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
+    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">

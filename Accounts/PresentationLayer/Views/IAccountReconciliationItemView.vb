@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Interface IAccountReconciliationItemView
         Inherits IView
 
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property AccountReconciliationIdNo As Int32
         Property Cleared As Boolean
         Property Credit As Decimal
@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views
         Property PayDescriptionAra As String
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property Sequence As Integer
+        Property Sequence As Int16
 
     End Interface
 

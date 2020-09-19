@@ -1343,12 +1343,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim dateField As String = Messaging.TranslateCaption(text)
         Dim startDateStr As String = startDate.ToShortDateString()
         Dim endDateStr As String = endDate.ToShortDateString()
-        Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-        Dim message = Messaging.GetMessage(True, "MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} And {endDate}!", "Invalid Date")
-        Dim caption = Messaging.GetCaption("Invalid Date")
         If targetDate < startDate Or targetDate > endDate Then
-            message = Messaging.ReplaceValues(message, variables)
-            Messaging.Show(message, caption)
+            Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
+            Messaging.ShowParametrizedMessage(True, "MsgInvalidDate", variables)
             retValue = DialogResult.No
         Else
             retValue = DialogResult.Yes

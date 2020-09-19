@@ -2,7 +2,7 @@
 Namespace PresentationLayer.Models
 
     Public Class GlLedgerItemModel
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Credit As Decimal
         Public Property Debit As Decimal
         Public Property IdNo As Int32
@@ -14,7 +14,7 @@ Namespace PresentationLayer.Models
         Public Property Posted As Boolean
         Public Property RevCostCenterIdNo As Int32
         Public Property ReferenceNo As String
-        Public Property Sequence As Integer
+        Public Property Sequence As Int16
         Public Property TransactionDate As Date?
 
     End Class

@@ -51,7 +51,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int32? Implements ICheckDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements ICheckDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -139,9 +139,9 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Int32? Implements ICheckDisbursementJournalView.DiscountAccountIdNo
+        Public Property DiscountAccountIdNo As Int16? Implements ICheckDisbursementJournalView.DiscountAccountIdNo
             Get
-                Return CType(cboDiscountAccountIdNo.GetValue(), Int32?)
+                Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)

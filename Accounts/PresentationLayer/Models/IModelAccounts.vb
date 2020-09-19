@@ -19,7 +19,7 @@ Namespace PresentationLayer.Models
 
         Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer
 
-        Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
     End Interface
 

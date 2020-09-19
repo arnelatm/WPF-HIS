@@ -36,35 +36,35 @@ Namespace PresentationLayer.Presenters
 
             CashCodesModel = GetCashCodesModel()
 
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             DtSalesCashInsertTable.Columns.Add("CashCode", GetType(String))
             DtSalesCashInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
             DtSalesCashInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
             DtSalesCashInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtSalesCashInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtSalesCashUpdateTable.Columns.Add("CashCode", GetType(String))
             DtSalesCashUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
             DtSalesCashUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtSalesCashUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
             DtSalesCashUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtSalesCashUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
@@ -198,7 +198,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                     pAccountIdNo As Int32, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
+                                     pAccountIdNo As Int16, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
             If debitAmount <> 0 Or creditAmount <> 0 Then
                 counter = counter + 1
                 If counter <= oldJournalItems.Count() Then

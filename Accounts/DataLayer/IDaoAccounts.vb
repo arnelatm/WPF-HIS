@@ -52,9 +52,9 @@ Namespace DataLayer
 
     Public Interface IDaoAccountReconciliationItem(Of TM)
 
-        Function GetAcctReconItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
-        Function GetGlItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetGlItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) As List(Of TM)
 

@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Country) =
                                     Function(reader) _
             New Country() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .CountryName = Extensions.AsString(reader("CountryName")),
             .CountryNameAra = Extensions.AsString(reader("CountryNameAra")),
             .Nationality = Extensions.AsString(reader("Nationality")),

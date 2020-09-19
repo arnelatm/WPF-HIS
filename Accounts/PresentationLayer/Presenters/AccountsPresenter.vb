@@ -76,15 +76,15 @@ Namespace PresentationLayer.Presenters
             Return Model.GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
         End Function
 
-        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int32)
+        Public Function IsAccountsPayableAccount(ByVal AccountIdNo As Int16)
             Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
         End Function
 
-        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int32)
+        Public Function IsAccountsReceivableAccount(ByVal AccountIdNo As Int16)
             Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
         End Function
 
-        Public Function IsInputVatAccount(ByVal accountIdNo As Int32)
+        Public Function IsInputVatAccount(ByVal AccountIdNo As Int16)
             Return Model.GetRecordFieldWithKey(accountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
         End Function
 
@@ -180,7 +180,7 @@ Namespace PresentationLayer.Presenters
                                  "CashCode", sortKey, "")
         End Function
 
-        Public Function GetEndingGlBalance(ByVal AccountIdNo As Int32, ByVal reconciliationDate As Date) As Decimal
+        Public Function GetEndingGlBalance(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
             Return DataModel.GetEndingGlBalance(AccountIdNo, reconciliationDate)
         End Function
 

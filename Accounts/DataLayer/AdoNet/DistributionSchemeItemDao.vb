@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
             New DistributionSchemeItem() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DistributionSchemeIdNo = Extensions.AsInt(Of Integer)(reader("DistributionSchemeIdNo")),
-            .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Percentage = Extensions.AsString(reader("Percentage"))
             }

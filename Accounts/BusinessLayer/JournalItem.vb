@@ -9,7 +9,7 @@ Namespace BusinessLayer
             ' establish business rules
         End Sub
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property AccountName As String
         Public Property DiscountTaken As Decimal
         Public Property OriginalAmount As Decimal
@@ -23,7 +23,7 @@ Namespace BusinessLayer
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
         Public Property RevCostCenterIdNo As Int32
-        Public Property Sequence As Integer
+        Public Property Sequence As Int16
         Public Property SpecialAccount As String
     End Class
 

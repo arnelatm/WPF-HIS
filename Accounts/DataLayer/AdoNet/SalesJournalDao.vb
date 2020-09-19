@@ -79,9 +79,9 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, SalesJournal) =
                                     Function(reader) _
             New SalesJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Posted = Extensions.AsBool(reader("Posted")),

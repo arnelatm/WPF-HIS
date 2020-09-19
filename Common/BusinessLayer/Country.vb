@@ -15,12 +15,12 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("CountryName"))
                 AddRule(New ValidateLength("ISOA2", 2, 2))
                 AddRule(New ValidateLength("ISOA3", 3, 3))
-                AddRule(New ValidateRegex("ISON", "\d{1,4}"))
-                AddRule(New ValidateRegex("PhoneCode", "\d{1,4}"))
+                AddRule(New ValidateRegex("ISON", "\d{3}"))
+                AddRule(New ValidateRegex("PhoneCode", "\d{1,5}"))
             End If
         End Sub
 
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property ISOA2 As String
         Public Property CountryName As String
         Public Property CountryNameAra As String

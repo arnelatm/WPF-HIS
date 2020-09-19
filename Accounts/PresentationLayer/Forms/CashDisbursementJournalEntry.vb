@@ -51,7 +51,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int32? Implements ICashDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements ICashDisbursementJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -100,23 +100,36 @@ Namespace PresentationLayer.Forms
 
         Public Property DateCreated As DateTime? Implements ICashDisbursementJournalView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return dtpDateCreated.Value
             End Get
-            Set(value As DateTime?)
-                If value Is Nothing Then
-                    txtDateCreated.Text = Nothing
+            Set
+                If Value.HasValue Then
+                    dtpDateCreated.Value = Value
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    dtpDateCreated.Value = Date.Now()
                 End If
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Int32? Implements ICashDisbursementJournalView.DiscountAccountIdNo
+        'Public Property DateCreated As DateTime? Implements ICashDisbursementJournalView.DateCreated
+        '    Get
+        '        If String.IsNullOrEmpty(txtDateCreated.Text) Then
+        '            Return Now()
+        '        End If
+        '        Return Now() 'Convert.ToDateTime(txtDateCreated.Text)
+        '    End Get
+        '    Set(value As DateTime?)
+        '        If value Is Nothing Then
+        '            txtDateCreated.Text = Nothing
+        '        Else
+        '            txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+        '        End If
+        '    End Set
+        'End Property
+
+        Public Property DiscountAccountIdNo As Int16? Implements ICashDisbursementJournalView.DiscountAccountIdNo
             Get
-                Return CType(cboDiscountAccountIdNo.GetValue(), Int32?)
+                Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)
@@ -308,7 +321,7 @@ Namespace PresentationLayer.Forms
          {"Amount", txtAmount},
          {"Applied", txtApplied},
          {"Cancelled", chkCancelled},
-         {"DateCreated", txtDateCreated},
+         {"DateCreated", dtpDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
          {"IdNo", TxtIdNo},
@@ -445,7 +458,7 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated,  cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 

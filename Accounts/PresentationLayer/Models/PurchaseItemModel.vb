@@ -12,8 +12,8 @@
         Public Property PurchaseItemName As String
         Public Property PurchaseItemNameAra As String
         Public Property ProductCategoryIdNo As Int32
-        Public Property GlAccountIdNo As Int32?
-        Public Property VatAccountIdNo As Int32?
+        Public Property GlAccountIdNo As Int16?
+        Public Property VatAccountIdNo As Int16?
         Public Property Unit1 As String
         Public Property Unit2 As String
         Public Property Unit3 As String

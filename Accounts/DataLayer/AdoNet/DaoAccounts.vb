@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
 
         'Private ReadOnly _makeCadOiItem(Of TM) As Func(Of IDataReader, TM) = Function(reader) New TM With
         '    {
-        '    .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+        '    .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
         '    .Balance = Extensions.AsDecimal(reader("Balance")),
         '    .OpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
         '    .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),

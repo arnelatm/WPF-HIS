@@ -50,6 +50,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
         Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
         Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Chart of Accounts Entry and declare at least one Petty Cash Account!", "Error")
+        Messaging.AddMessage("MsgOnlyNumbersAllowed", "The field '<{FieldName}>' must contain numbers only.", "Invalid Entry")
+        Messaging.AddMessage("MsgNumeric0to255Only", "The entered value for '<{FieldName}>' must be between 0-255. Reverting to previous Value.", "Invalid Entry")
     End Sub
 
     'Public Shared Sub CreateEnums()

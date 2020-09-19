@@ -29,9 +29,9 @@
         Public Property VatNumber As String
         Public Property CrNumber As String
         Public Property AccountStatus As String
-        Public Property ArAccountIdNo As Int32?
+        Public Property ArAccountIdNo As Int16?
         Public Property DiscountSchemeIdNo As Int16?
-        Public Property RevAccountIdNo As Int32?
+        Public Property RevAccountIdNo As Int16?
         Public Property CreditLimit As Decimal
         Public Property SettlementDueDays As Int16
         Public Property SettlementDiscount As Decimal

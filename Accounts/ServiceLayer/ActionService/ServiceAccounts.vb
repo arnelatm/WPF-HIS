@@ -320,7 +320,7 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Public Function GetAcctReconItems(Of TM)(accountIdNo As Int32, reconciliationDate As Date,
+        Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date,
                                                   Optional sortOrder As String = Nothing) As List(Of TM) _
             Implements IServiceAccounts.GetAcctReconItems
             Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)

@@ -25,12 +25,13 @@
         Return message
     End Function
 
-    Public Overloads Shared Function GetCaption(ByVal caption As String) As String
-        Return DataAccessControl.GetMessageCaption(caption)
+    Public Overloads Shared Function GetMessageCaption(ByVal key As String) As String
+        Return DataAccessControl.GetMessageCaption(key)
     End Function
 
     Public Overloads Shared Function GetMessage(ByVal translate As Boolean, ByVal key As String, ByRef message As String, ByRef caption As String) As String
         MessageKey = key
+        ' caption is passed by reference and will be changed to the translated value
         DataAccessControl.GetMessage(translate, key, message, caption)
         MessageCaption = caption + " [" + MessageKey + "]"
         Return message
@@ -187,6 +188,29 @@
             result = Replace(result, oldValue, newValue, 1, -1, CompareMethod.Text)
         Next
         Return result
+    End Function
+
+    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As Array, ByVal parametrizedMessage As String, ByVal caption As String)
+        Dim cMessage = Messaging.GetMessage(translate, key, parametrizedMessage, caption)
+        Dim message = Messaging.ReplaceValues(cMessage, variables)
+        ' caption now holds the translated value because GetMessage function above 'caption' parameter is by reference
+        Messaging.Show(message, caption)
+        Return message
+    End Function
+
+    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As Array)
+        Dim cMessage = Messaging.GetMessage(translate, key)
+        Dim cCaption = Messaging.GetMessageCaption(key)
+        Dim message = Messaging.ReplaceValues(cMessage, variables)
+        Dim caption = Messaging.TranslateCaption(cCaption)
+        'for each value in variables
+        '    dim cvalue as string = "{" + value(0) + "}"
+        '    if not message.contains(cvalue) then
+        '        messaging.show(true, "invalid translation for message " & key)
+        '    end if
+        'next
+        Messaging.Show(message, caption)
+        Return message
     End Function
 
     'Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult

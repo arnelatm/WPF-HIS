@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class PcsOiItemView
         Implements IPcsOiItemView
 
-        Public Property AccountIdNo As Int32? Implements IPcsOiItemView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IPcsOiItemView.AccountIdNo
         Public Property Amount As Decimal Implements IPcsOiItemView.Amount
         Public Property ApOpenInvoiceIdNo As Integer Implements IPcsOiItemView.ApOpenInvoiceIdNo
         Public Property Balance As Decimal Implements IPcsOiItemView.Balance
@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views
         Public Property JournalCode As String Implements IPcsOiItemView.JournalCode
         Public Property JournalIdNo As Integer Implements IPcsOiItemView.JournalIdNo
         Public Property PreviousBalance As Decimal Implements IPcsOiItemView.PreviousBalance
-        Public Property Sequence As Integer Implements IPcsOiItemView.Sequence
+        Public Property Sequence As Int16 Implements IPcsOiItemView.Sequence
         Public Property TransactionDate As Date? Implements IPcsOiItemView.TransactionDate
         Public Property Errors As List(Of String) Implements IView.Errors
 

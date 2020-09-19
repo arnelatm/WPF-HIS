@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property DeductionCode As String
         Property DeductionName As String
         Property DeductionNameAra As String
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property DefaultFrequency As Char
         Property DeductionType As Char
         Property Notes As String
