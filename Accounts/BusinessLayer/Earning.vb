@@ -22,7 +22,7 @@ Namespace BusinessLayer
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property Notes As String
     End Class
 

@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PhoneType) =
                                     Function(reader) _
             New PhoneType() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Byte)(reader("IdNo")),
             .PhoneTypeCode = Extensions.AsString(reader("PhoneTypeCode")),
             .PhoneTypeName = Extensions.AsString(reader("PhoneTypeName")),
             .PhoneTypeNameAra = Extensions.AsString(reader("PhoneTypeNameAra")),

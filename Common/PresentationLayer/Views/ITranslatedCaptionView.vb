@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property IdNo As Int32
         Property Caption As String
         Property CaptionIdNo As Int32
-        Property LanguageIdNo As Int32
+        Property LanguageIdNo As Int16
         Property TranslatedCaption As String
     End Interface
 

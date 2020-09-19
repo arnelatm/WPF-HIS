@@ -7,7 +7,7 @@
     Public Class ProductCategoryModel
 
         Public Property Errors As List(Of String)
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property ProductCategoryCode As String
         Public Property ProductCategoryName As String
         Public Property ProductCategoryNameAra As String

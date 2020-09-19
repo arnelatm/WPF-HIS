@@ -88,7 +88,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .EmployeeIdNo = Extensions.AsInt(Of Integer)(reader("EmployeeIdNo")),
+            .EmployeeIdNo = Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),

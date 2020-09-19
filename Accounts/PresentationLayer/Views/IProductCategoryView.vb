@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IProductCategoryView
         Inherits IView
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property ProductCategoryCode As String
         Property ProductCategoryName As String
         Property ProductCategoryNameAra As String

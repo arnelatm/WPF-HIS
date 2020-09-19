@@ -217,7 +217,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        'Public Property BankIdNo As Int32 Implements IEmployeeView.BankIdNo
+        'Public Property BankIdNo As Int16 Implements IEmployeeView.BankIdNo
         '    Get
         '        If tcbBankIdNo.Text <> "" Then
         '            Return Convert.ToInt32(tcbBankIdNo.Text)

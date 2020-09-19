@@ -16,7 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property BranchCode As String
         Public Property BranchName As String
         Public Property BranchNameAra As String

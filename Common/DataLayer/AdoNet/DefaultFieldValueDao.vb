@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, DefaultFieldValue) =
                                     Function(reader) _
             New DefaultFieldValue() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .TableName = Extensions.AsString(reader("TableName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),

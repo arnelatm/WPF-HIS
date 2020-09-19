@@ -13,7 +13,7 @@
         Public Property EarningNameAra As String
         Public Property EarningType As Char
         Public Property Errors As List(Of String)
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property Notes As String
 
     End Class

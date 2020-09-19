@@ -2,6 +2,7 @@
     Public Class UserModel
         Inherits CommonModel
 
+        Public Property IdNo As Int16
         Public Property UserName As String
         Public Property FullName As String
         Public Property FullNameAra As String

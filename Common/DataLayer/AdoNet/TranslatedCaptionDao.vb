@@ -48,8 +48,8 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New TranslatedCaption() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .CaptionIdNo = Extensions.AsInt(Of Integer)(reader("CaptionIdNo")),
-            .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
+            .CaptionIdNo = Extensions.AsInt(Of Int32)(reader("CaptionIdNo")),
+            .LanguageIdNo = Extensions.AsInt(Of Int16)(reader("LanguageIdNo")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
             }
 

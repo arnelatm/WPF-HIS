@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Branch) =
                                     Function(reader) _
             New Branch() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .BranchCode = Extensions.AsString(reader("BranchCode")),
             .BranchName = Extensions.AsString(reader("BranchName")),
             .BranchNameAra = Extensions.AsString(reader("BranchNameAra")),

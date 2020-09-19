@@ -82,10 +82,10 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int32 Implements IChartView.IdNo
+        Public Property IdNo As Int16 Implements IChartView.IdNo
             Get
                 If txtIdNo.Text <> "" Then
-                    Return Convert.ToInt32(txtIdNo.Text)
+                    Return Convert.ToInt16(txtIdNo.Text)
                 Else
                     Return 0
                 End If
@@ -125,11 +125,11 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements IChartView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements IChartView.ParentIdNo
             Get
                 'Return cboParentIdNo.GetValue()
-                Dim value As Int32?
-                value = CType(cboParentIdNo.GetValue(), Integer?)
+                Dim value As Int16?
+                value = CType(cboParentIdNo.GetValue(), Int16?)
                 'If PresenterObj.EditableAccountGroup(value) Then
                 '    cboAccountGroup.DisplayOnly = False
                 'Else

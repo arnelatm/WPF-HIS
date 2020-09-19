@@ -3,7 +3,8 @@
     Public Class RevCostCenterModel
         Inherits CommonModel
 
-        Public Property ParentIdNo As Int32?
+        Public Property IdNo As Int16
+        Public Property ParentIdNo As Int16?
         Public Property RevCostCenterCode As String
         Public Property RevCostCenterName As String
         Public Property RevCostCenterNameAra As String

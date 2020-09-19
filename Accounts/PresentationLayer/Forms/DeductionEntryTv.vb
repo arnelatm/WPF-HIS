@@ -26,9 +26,9 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IDeductionView.IdNo
+        Public Property IdNo As Int16 Implements IDeductionView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)

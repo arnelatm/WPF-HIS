@@ -97,7 +97,7 @@ Namespace DataLayer.AdoNet
             .CashCode = Extensions.AsString(reader("CashCode")),
             .CashName = Extensions.AsString(reader("CashName")),
             .CashNameAra = Extensions.AsString(reader("CashNameAra")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .Rate = Extensions.AsDecimal(reader("Rate"))
             }
 

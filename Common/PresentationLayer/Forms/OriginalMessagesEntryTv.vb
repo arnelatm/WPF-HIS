@@ -45,7 +45,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public ReadOnly Property LanguageIdNo As Int32 Implements IOriginalMessagesView.LanguageIdNo
+        Public ReadOnly Property LanguageIdNo As Int16 Implements IOriginalMessagesView.LanguageIdNo
             Get
                 Return 16
             End Get

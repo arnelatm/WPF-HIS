@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        'Public Overrides Sub Display(messageIdNo As Int32)
+        'Public Overrides Sub Display(messageIdNo As Int16)
         '    Dim idNoTm As Int16
         '    idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
         '    Dim modelData As New TranslatedCaptionModel

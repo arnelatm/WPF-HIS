@@ -102,14 +102,14 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, OriginalMessages) =
                                     Function(reader) _
             New OriginalMessages() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .MessageKey = Extensions.AsString(reader("MessageKey")),
             .Message = Extensions.AsString(reader("Message")),
             .Caption = Extensions.AsString(reader("Caption")),
             .IdNoTranslated = Extensions.AsString(reader("IdNoTranslated")),
             .TranslatedMessage = Extensions.AsString(reader("TranslatedMessage")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption")),
-            .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
+            .LanguageIdNo = Extensions.AsInt(Of Int16)(reader("LanguageIdNo")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
 

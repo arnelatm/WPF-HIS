@@ -58,7 +58,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Deduction) =
                                     Function(reader) _
             New Deduction() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DeductionCode = Extensions.AsString(reader("DeductionCode")),
             .DeductionName = Extensions.AsString(reader("DeductionName")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),

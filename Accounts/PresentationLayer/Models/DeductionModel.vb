@@ -7,7 +7,7 @@
     Public Class DeductionModel
 
         Public Property Errors As List(Of String)
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property DeductionCode As String
         Public Property DeductionName As String
         Public Property DeductionNameAra As String

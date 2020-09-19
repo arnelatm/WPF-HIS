@@ -18,7 +18,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Active As Boolean
-        Public Property ProductCategoryIdNo As Int32
+        Public Property ProductCategoryIdNo As Int16
         Public Property DateCreated As DateTime?
         Public Property GlAccountIdNo As Int16?
         Public Property IdNo As Int32

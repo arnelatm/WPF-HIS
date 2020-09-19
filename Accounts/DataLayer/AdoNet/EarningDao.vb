@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoAll(Of Earning)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As Earning Implements IDaoAll(Of Earning).GetRecordById
             Dim sql As String =
@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
                     "   FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Earning) _
@@ -30,10 +30,10 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EarningCode, EarningName, EarningNameAra" &
                     "   FROM [Earning] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef Earning As Earning) As Integer Implements IDaoAll(Of Earning).UpdateRecord
+        Public Function UpdateRecord(ByRef earning As Earning) As Integer Implements IDaoAll(Of Earning).UpdateRecord
             Dim sql As String =
                     " UPDATE [Earning]" &
                     " SET EarningCode = @EarningCode," &
@@ -43,21 +43,21 @@ Namespace DataLayer.AdoNet
                     " DefaultFrequency = @DefaultFrequency," &
                     " EarningType = @EarningType" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(Earning))
+            Return _db.Update(sql, Take(earning))
         End Function
 
-        Public Function AddRecord(ByRef Earning As Earning) As Integer Implements IDaoAll(Of Earning).AddRecord
+        Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDaoAll(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
                     " (EarningCode,EarningName,EarningNameAra,AccountIdNo,DefaultFrequency,EarningType) " &
                     " VALUES (@EarningCode,@EarningName,@EarningNameAra,@AccountIdNo,@DefaultFrequency,@EarningType) "
-            Return Db.Insert(sql, Take(Earning))
+            Return _db.Insert(sql, Take(earning))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Earning) =
                                     Function(reader) _
             New Earning() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
@@ -66,15 +66,15 @@ Namespace DataLayer.AdoNet
             .EarningType = Extensions.AsString(reader("EarningType"))
             }
 
-        Private Function Take(Earning As Earning) As Object()
+        Private Function Take(earning As Earning) As Object()
             Return New Object() {
-                                    "@IdNo", Earning.IdNo,
-                                    "@EarningCode", Earning.EarningCode,
-                                    "@EarningName", Earning.EarningName,
-                                    "@EarningNameAra", Earning.EarningNameAra,
-                                    "@AccountIdNo", Earning.AccountIdNo,
-                                    "@DefaultFrequency", Earning.DefaultFrequency,
-                                    "@EarningType", Earning.EarningType
+                                    "@IdNo", earning.IdNo,
+                                    "@EarningCode", earning.EarningCode,
+                                    "@EarningName", earning.EarningName,
+                                    "@EarningNameAra", earning.EarningNameAra,
+                                    "@AccountIdNo", earning.AccountIdNo,
+                                    "@DefaultFrequency", earning.DefaultFrequency,
+                                    "@EarningType", earning.EarningType
                                 }
         End Function
 

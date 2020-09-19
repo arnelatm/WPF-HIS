@@ -5,7 +5,7 @@
 
         ' Country business object as seen by the Service client.
         Public Property Isoa2 As String
-
+        Public Property IdNo As Int16
         Public Property CountryName As String
         Public Property CountryNameAra As String
         Public Property Nationality As String

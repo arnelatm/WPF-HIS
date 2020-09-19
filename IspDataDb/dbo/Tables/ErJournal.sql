@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ErJournal] (
     [IDNo]            INT            IDENTITY (1, 1) NOT NULL,
-    [EmployeeIdNo]    SMALLINT       NOT NULL,
+    [EmployeeIdNo]    INT            NOT NULL,
     [TransactionDate] DATE           NULL,
     [ReferenceNo]     VARCHAR (15)   NULL,
     [TransactionType] CHAR (1)       NULL,
@@ -13,6 +13,8 @@
     [DateTimeStamp]   ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ErIdNo] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
+
+
 
 
 

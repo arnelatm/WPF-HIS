@@ -75,7 +75,7 @@ Namespace DataLayer.AdoNet
             .PurchaseItemCode = Extensions.AsString(reader("PurchaseItemCode")),
             .PurchaseItemName = Extensions.AsString(reader("PurchaseItemName")),
             .PurchaseItemNameAra = Extensions.AsString(reader("PurchaseItemNameAra")),
-            .ProductCategoryIdNo = Extensions.AsInt(Of Int32)(reader("ProductCategoryIdNo")),
+            .ProductCategoryIdNo = Extensions.AsInt(Of Int16)(reader("ProductCategoryIdNo")),
             .GlAccountIdNo = Extensions.AsInt(Of Int16)(reader("GlAccountIdNo")),
             .VatAccountIdNo = Extensions.AsInt(Of Int16)(reader("VatAccountIdNo")),
             .Unit1 = Extensions.AsString(reader("Unit1")),

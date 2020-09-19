@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IEarningView
         Inherits IView
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property EarningCode As String
         Property EarningName As String
         Property EarningNameAra As String
