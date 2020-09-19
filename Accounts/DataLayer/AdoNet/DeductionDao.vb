@@ -62,7 +62,7 @@ Namespace DataLayer.AdoNet
             .DeductionCode = Extensions.AsString(reader("DeductionCode")),
             .DeductionName = Extensions.AsString(reader("DeductionName")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
-            .AccountIdNo = Extensions.AsId(Of Int32)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
             .DefaultFrequency = Extensions.AsString(reader("DefaultFrequency")),
             .DeductionType = Extensions.AsString(reader("DeductionType")),
             .Notes = Extensions.AsString(reader("Notes"))

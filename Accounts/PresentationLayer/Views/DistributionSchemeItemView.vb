@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views
 
         Public Property DistributionSchemeIdNo As Int32 Implements IDistributionSchemeItemView.DistributionSchemeIdNo
 
-        Public Property Sequence As Integer Implements IDistributionSchemeItemView.Sequence
+        Public Property Sequence As Int16 Implements IDistributionSchemeItemView.Sequence
 
         Public Property RevCostCenterIdNo As Int32 Implements IDistributionSchemeItemView.RevCostCenterIdNo
 

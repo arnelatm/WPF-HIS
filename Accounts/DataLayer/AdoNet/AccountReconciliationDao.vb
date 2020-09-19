@@ -66,8 +66,8 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, AccountReconciliation) =
                                     Function(reader) _
             New AccountReconciliation() With {
-            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("DateCreated")),
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Balance = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Balance")),
             .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
 
         Public Shared ReadOnly MakeAccountReconciliationItem As Func(Of IDataReader, AccountReconciliationItem) = Function(reader) New AccountReconciliationItem() With
             {
-            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .AccountReconciliationIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("AccountReconciliationIdNo")),
             .Cleared = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cleared")),
             .Credit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Credit")),
@@ -165,7 +165,7 @@ Namespace DataLayer.AdoNet
             Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
-        Public Function GetAcctReconItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetAcctReconItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetAcctReconItems
             Dim sql As String =
                     "SELECT " &
@@ -186,7 +186,7 @@ Namespace DataLayer.AdoNet
                     "Sequence," &
                     "TransactionDate" &
                     " FROM GlReconciliation_View" &
-                    " WHERE AccountIdNo = " & accountIdNo &
+                    " WHERE AccountIdNo = " & AccountIdNo &
                     " and TransactionDate <= '" & DtoS(reconciliationDate) & "'" &
                     " and Reconciled Is Null" &
                     " ORDER BY " & sortExpression
@@ -194,7 +194,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetGlItems(accountIdNo As Int32, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
+        Public Function GetGlItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) _
             As List(Of AccountReconciliationItem) Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetGlItems
             Dim sql As String =
                     "SELECT " &
@@ -213,7 +213,7 @@ Namespace DataLayer.AdoNet
                     "Sequence," &
                     "TransactionDate" &
                     " FROM " & TableFileName &
-                    " WHERE AccountIdNo = " & accountIdNo &
+                    " WHERE AccountIdNo = " & AccountIdNo &
                     " and (Reconciled = 0 OR Reconciled is NULL)" &
                     " and TransactionDate <= '" & DtoS(reconciliationDate) & "'" &
                     " ORDER BY " & sortExpression

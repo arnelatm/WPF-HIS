@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class EarningModel
 
-        Public Property AccountIdNo As Int32
+        Public Property AccountIdNo As Int16
         Public Property DefaultFrequency As Char
         Public Property EarningCode As String
         Public Property EarningName As String

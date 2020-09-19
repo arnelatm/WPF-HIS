@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
         Protected DtPcsOiUpdateTable As New DataTable
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _advancesToSupplierAccountIdNo As Int32
+        Private ReadOnly _advancesToSupplierAccountIdNo As Int16
 
         Private ReadOnly _pcsOiItemModel As New ModelAccounts("PcsOiItem")
         Private ReadOnly _pcsJournalItemModel As New ModelAccounts("PettyCashJournalItem")
@@ -39,35 +39,35 @@ Namespace PresentationLayer.Presenters
 
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
 
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             DtPcsOiInsertTable.Columns.Add("Amount", GetType(Decimal))
             DtPcsOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtPcsOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtPcsOiInsertTable.Columns.Add("PcsIdNo", GetType(Int32))
-            DtPcsOiInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtPcsOiInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtPcsOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
             DtPcsOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtPcsOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtPcsOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtPcsOiUpdateTable.Columns.Add("PcsIdNo", GetType(Int32))
-            DtPcsOiUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtPcsOiUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
@@ -397,7 +397,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MakeJournalItem()
             If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                Dim aAccountIdNo As Int32() = {}
+                Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
                 Dim aDiscountTaken() As Decimal = {}
@@ -405,7 +405,7 @@ Namespace PresentationLayer.Presenters
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
                 For Each item In View.PcsOiItems
-                    Dim nAccountIdNo As Int32?
+                    Dim nAccountIdNo As Int16?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)

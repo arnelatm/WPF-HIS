@@ -28,14 +28,14 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Cleared", GetType(Boolean))
             DtInsertTable.Columns.Add("JournalCode", GetType(String))
             DtInsertTable.Columns.Add("JournalItemIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtUpdateTable.Columns.Add("AccountReconciliationIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Cleared", GetType(Boolean))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalCode", GetType(String))
             DtUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
@@ -138,7 +138,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAcctReconItems(ByVal accountIdNo As Int32, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
+        Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then

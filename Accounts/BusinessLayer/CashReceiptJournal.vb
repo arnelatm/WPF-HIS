@@ -24,7 +24,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property Cancelled As Boolean
@@ -32,7 +32,7 @@ Namespace BusinessLayer
         Public Property CheckNumber As String
         Public Property CsrOiItems As List(Of CsrOiItem)
         Public Property DateCreated As DateTime?
-        Public Property DiscountAccountIdNo As Int32?
+        Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32
         Public Property JournalItems As List(Of JournalItem)

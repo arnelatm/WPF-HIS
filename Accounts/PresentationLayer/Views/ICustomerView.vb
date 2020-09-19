@@ -26,8 +26,8 @@ Namespace PresentationLayer.Views
         Property VatNumber As String
         Property CrNumber As String
         Property AccountStatus As String
-        Property ArAccountIdNo As Int32?
-        Property RevAccountIdNo As Int32?
+        Property ArAccountIdNo As Int16?
+        Property RevAccountIdNo As Int16?
         Property DiscountSchemeIdNo As Int16?
         Property CreditLimit As Decimal
         Property SettlementDueDays As Int16

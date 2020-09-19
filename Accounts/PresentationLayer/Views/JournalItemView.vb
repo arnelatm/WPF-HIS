@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
 
         'Public Property Ea As EventAggregator
 
-        Public Property AccountIdNo As Int32? Implements IJournalItemView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IJournalItemView.AccountIdNo
 
         Public Property AccountName As String Implements IJournalItemView.AccountName
 
@@ -65,7 +65,7 @@ Namespace PresentationLayer.Views
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
 
         Public Property RevCostCenterIdNo As Int32 Implements IJournalItemView.RevCostCenterIdNo
-        Public Property Sequence As Integer Implements IJournalItemView.Sequence
+        Public Property Sequence As Int16 Implements IJournalItemView.Sequence
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount
 

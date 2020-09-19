@@ -113,10 +113,10 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ApJournal) =
                                     Function(reader) _
             New ApJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .DueDate = Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),

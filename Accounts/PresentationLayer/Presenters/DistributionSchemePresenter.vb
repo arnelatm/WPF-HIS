@@ -24,13 +24,13 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
 
             DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Percentage", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 

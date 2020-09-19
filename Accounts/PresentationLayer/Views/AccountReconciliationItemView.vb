@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class AccountReconciliationItemView
         Implements IAccountReconciliationItemView
 
-        Public Property AccountIdNo As Int32? Implements IAccountReconciliationItemView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IAccountReconciliationItemView.AccountIdNo
 
         Public Property AccountReconciliationIdNo As Integer Implements IAccountReconciliationItemView.AccountReconciliationIdNo
 
@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views
 
         Public Property TransactionDate As Date? Implements IAccountReconciliationItemView.TransactionDate
 
-        Public Property Sequence As Integer Implements IAccountReconciliationItemView.Sequence
+        Public Property Sequence As Int16 Implements IAccountReconciliationItemView.Sequence
 
         Public Property Errors As List(Of String) Implements IView.Errors
 

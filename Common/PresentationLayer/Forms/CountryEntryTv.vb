@@ -25,7 +25,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements ICountryView.IdNo
+        Public Property IdNo As Int16 Implements ICountryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get

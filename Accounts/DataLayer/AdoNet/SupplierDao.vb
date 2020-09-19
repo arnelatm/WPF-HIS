@@ -198,7 +198,7 @@ Namespace DataLayer.AdoNet
             New Supplier() With {
             .AccountStatus = Extensions.AsString(reader("AccountStatus")),
             .Active = Extensions.AsBool(reader("Active")),
-            .ApAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("ApAccountIdNo")),
+            .ApAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("ApAccountIdNo")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
             .ContactDesignation = Extensions.AsString(reader("ContactDesignation")),
@@ -209,7 +209,7 @@ Namespace DataLayer.AdoNet
             .DateAccountOpen = Extensions.AsDateTime(reader("DateAccountOpen")),
             .District = Extensions.AsString(reader("District")),
             .Email = Extensions.AsString(reader("Email")),
-            .ExpAccountIdNo = Extensions.AsNullable(Of Int32?)(reader("ExpAccountIdNo")),
+            .ExpAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("ExpAccountIdNo")),
             .Fax = Extensions.AsString(reader("Fax")),
             .Iban = Extensions.AsString(reader("Iban")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),

@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseJournal) =
                                     Function(reader) _
             New PurchaseJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DueDate = Extensions.AsDate(reader("DueDate")),
@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
             .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
             .VatNumber = Extensions.AsString(reader("VatNumber")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .InvoiceDate = Extensions.AsDate(reader("InvoiceDate")),
             .Notes = Extensions.AsString(reader("Notes"))
             }

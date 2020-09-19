@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class AccountReconciliationItemModel
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property AccountReconciliationIdNo As Int32
         Public Property Cleared As Boolean
         Public Property Credit As Decimal
@@ -21,7 +21,7 @@
         Public Property PayDescriptionAra As String
         Public Property ReferenceNo As String
         Public Property TransactionDate As Date?
-        Public Property Sequence As Integer
+        Public Property Sequence As Int16
 
     End Class
 

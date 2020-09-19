@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IJournalItemView
         Inherits IView
 
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property AccountName As String
         Property Cancelled As Boolean
         Property Credit As Decimal
@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views
         Property PaidAmount As Decimal
         Property PayeeType As String
         Property RevCostCenterIdNo As Int32
-        Property Sequence As Integer
+        Property Sequence As Int16
         Property SpecialAccount As String
 
     End Interface

@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IPcsOiItemView
         Inherits IView
 
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property Amount As Decimal
         Property ApOpenInvoiceIdNo As Int32
         Property Balance As Decimal
@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views
         Property JournalCode As String
         Property JournalIdNo As Int32
         Property PreviousBalance As Decimal
-        Property Sequence As Integer
+        Property Sequence As Int16
         Property TransactionDate As Date?
 
     End Interface

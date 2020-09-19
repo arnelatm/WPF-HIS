@@ -44,7 +44,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Int32? Implements IApJournalView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IApJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get

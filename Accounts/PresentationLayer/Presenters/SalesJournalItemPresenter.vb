@@ -74,7 +74,7 @@ Namespace PresentationLayer.Presenters
             View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo as Int32, ByVal totalSales As Decimal)
+        'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo As Int16, ByVal totalSales As Decimal)
         '    Dim oldJournalItems = GetJournalItems(idNo)
         '    Dim counter As Integer = 0
         '    MakeSalesJournal(oldJournalItems, counter, AccountIdNo, 0, totalSales)
@@ -88,7 +88,7 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
         'Private Function MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-        '                                  pAccountIdNo as Int32, debitAmount As Decimal, creditAmount As Decimal) As Integer
+        '                                  pAccountIdNo As Int16, debitAmount As Decimal, creditAmount As Decimal) As Integer
         '    If debitAmount <> 0 Or creditAmount <> 0 Then
         '        counter = counter + 1
         '        If counter <= oldJournalItems.Count() Then

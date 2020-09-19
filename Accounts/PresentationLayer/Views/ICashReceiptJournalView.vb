@@ -4,14 +4,14 @@ Namespace PresentationLayer.Views
 
     Public Interface ICashReceiptJournalView
         Inherits IView
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property Amount As Decimal
         Property Applied As Decimal
         Property Cancelled As Boolean
         Property CheckDate As Date?
         Property CheckNumber As String
         Property DateCreated As DateTime?
-        Property DiscountAccountIdNo As Int32?
+        Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property IdNo As Int32
         Property Notes As String

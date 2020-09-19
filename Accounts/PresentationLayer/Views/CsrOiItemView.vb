@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Class CsrOiItemView
         Implements ICsrOiItemView
 
-        Public Property AccountIdNo As Int32? Implements ICsrOiItemView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements ICsrOiItemView.AccountIdNo
         Public Property Amount As Decimal Implements ICsrOiItemView.Amount
         Public Property ArOpenInvoiceIdNo As Integer Implements ICsrOiItemView.ArOpenInvoiceIdNo
         Public Property Balance As Decimal Implements ICsrOiItemView.Balance
@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views
         Public Property JournalCode As String Implements ICsrOiItemView.JournalCode
         Public Property JournalIdNo As Integer Implements ICsrOiItemView.JournalIdNo
         Public Property PreviousBalance As Decimal Implements ICsrOiItemView.PreviousBalance
-        Public Property Sequence As Integer Implements ICsrOiItemView.Sequence
+        Public Property Sequence As Int16 Implements ICsrOiItemView.Sequence
         Public Property TransactionDate As Date? Implements ICsrOiItemView.TransactionDate
         Public Property Errors As List(Of String) Implements IView.Errors
 

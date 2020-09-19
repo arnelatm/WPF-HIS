@@ -6,9 +6,9 @@
     ''' </summary>
     Public Class CashCodeModel
 
-        Public Property AccountIdNo As Int32?
-        Public Property BankChargesAccountIdNo As Int32?
-        Public Property BankChargesVatAccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
+        Public Property BankChargesAccountIdNo As Int16?
+        Public Property BankChargesVatAccountIdNo As Int16?
         Public Property CashCode As String
         Public Property CashName As String
         Public Property CashNameAra As String

@@ -1,6 +1,7 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Forms
 
@@ -83,13 +84,15 @@ Namespace PresentationLayer.Forms
                     Dim num As Decimal
                     Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                     If Not isNumeric Then
-                        MessageBox.Show($"The entered value for " & originalValue.Name & $" must be a number! Reverting to previous Value.")
+                        Dim variables = {"FieldName", originalValue.name}
+                        Messaging.ShowParametrizedMessage(True, "MsgOnlyNumbersAllowed", variables)
                         Return originalValue.Text
                     End If
                     Select Case x.Name
                         Case "Byte"
                             If num < 0 OrElse num > 255 Then
-                                MessageBox.Show($"The entered value for " & originalValue.Name & $" must be between 0-255. Reverting to previous Value.")
+                                Dim variables = {"FieldName", originalValue.Name}
+                                Messaging.ShowParametrizedMessage(True, "MsgNumeric0to255Only", variables)
                                 Return originalValue.Text
                             End If
                             Return num.ToString()

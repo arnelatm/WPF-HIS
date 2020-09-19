@@ -5,10 +5,10 @@
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class ApJournalModel
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
-        Public Property DateCreated As DateTime
+        Public Property DateCreated As DateTime?
         Public Property DueDate As Date?
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

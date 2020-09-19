@@ -17,7 +17,7 @@ Namespace PresentationLayer.Views
         Property Rate As Decimal
         Property SaleAmount As Decimal
         Property SalesJournalIdNo As Int32
-        Property Sequence As Integer
+        Property Sequence As Int16
 
     End Interface
 

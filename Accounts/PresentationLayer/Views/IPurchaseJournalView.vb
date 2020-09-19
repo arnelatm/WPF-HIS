@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views
     Public Interface IPurchaseJournalView
         Inherits IView
 
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property Amount As Decimal
         Property Cancelled As Boolean
         Property DateCreated As DateTime?

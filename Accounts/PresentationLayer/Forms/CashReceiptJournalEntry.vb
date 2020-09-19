@@ -51,7 +51,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Int32? Implements ICashReceiptJournalView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -139,9 +139,9 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Int32? Implements ICashReceiptJournalView.DiscountAccountIdNo
+        Public Property DiscountAccountIdNo As Int16? Implements ICashReceiptJournalView.DiscountAccountIdNo
             Get
-                Return CType(cboDiscountAccountIdNo.GetValue(), Int32?)
+                Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)
@@ -545,7 +545,6 @@ Namespace PresentationLayer.Forms
             btnViewGL.Visible = False
             SetPayorProperty(PayorType)
         End Sub
-
 
         Private Sub SetPayorProperty(ByVal cPayorType As String)
             SuspendLayout()

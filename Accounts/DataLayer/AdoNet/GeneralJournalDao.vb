@@ -77,7 +77,7 @@ Namespace DataLayer.AdoNet
             New GeneralJournal() With {
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .ClosingJournal = Extensions.AsBool(reader("ClosingJournal")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Posted = Extensions.AsBool(reader("Posted")),

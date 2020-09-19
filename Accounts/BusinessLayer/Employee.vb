@@ -22,7 +22,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Active As Boolean
-        Public Property ArAccountIdNo As Int32?
+        Public Property ArAccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property BankAccountNo As String
         Public Property BankIdNo As Int16?

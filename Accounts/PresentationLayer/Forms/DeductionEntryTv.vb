@@ -62,7 +62,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Int32? Implements IDeductionView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IDeductionView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get

@@ -6,13 +6,13 @@
     ''' </summary>
     Public Class CashDisbursementJournalModel
 
-        Public Property AccountIdNo As Int32?
+        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property CadOiItems As List(Of CadOiItemModel)
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
-        Public Property DiscountAccountIdNo As Int32?
+        Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

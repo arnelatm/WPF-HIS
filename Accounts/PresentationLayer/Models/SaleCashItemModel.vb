@@ -19,7 +19,7 @@
         Public Property Rate As Decimal
         Public Property SaleAmount As Decimal
         Public Property SalesJournalIdNo As Int32
-        Public Property Sequence As Integer
+        Public Property Sequence As Int16
 
     End Class
 

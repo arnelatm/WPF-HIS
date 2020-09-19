@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
             .SalesJournalIdNo = Extensions.AsString(reader("SalesJournalIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Rate = Extensions.AsDecimal(reader("Rate")),
-            .Sequence = Extensions.AsInt(Of Integer)(reader("Sequence"))
+            .Sequence = Extensions.AsInt(Of Int16)(reader("sequence"))
             }
 
     End Class

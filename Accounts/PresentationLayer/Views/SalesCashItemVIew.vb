@@ -68,7 +68,7 @@ Namespace PresentationLayer.Views
 
         Public Property SalesJournalIdNo As Integer Implements ISalesCashItemView.SalesJournalIdNo
 
-        Public Property Sequence As Integer Implements ISalesCashItemView.Sequence
+        Public Property Sequence As Int16 Implements ISalesCashItemView.Sequence
 
         Public Property Errors As List(Of String) Implements IView.Errors
 

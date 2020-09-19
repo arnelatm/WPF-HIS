@@ -42,7 +42,7 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property AccountIdNo As Int32? Implements IAccountReconciliationView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IAccountReconciliationView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get

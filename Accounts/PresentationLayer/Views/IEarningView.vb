@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property EarningCode As String
         Property EarningName As String
         Property EarningNameAra As String
-        Property AccountIdNo As Int32?
+        Property AccountIdNo As Int16?
         Property DefaultFrequency As Char
         Property EarningType As Char
         Property Notes As String

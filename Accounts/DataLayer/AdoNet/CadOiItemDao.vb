@@ -53,7 +53,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CadOiItem) =
                                     Function(reader) _
             New CadOiItem() With {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .ApOpenInvoiceIdNo = Extensions.AsId(Of Int32)(reader("ApOpenInvoiceIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
             .JournalCode = Extensions.AsString(reader("JournalCode")),
             .JournalIdNo = Extensions.AsId(Of Int32)(reader("JournalIdNo")),
             .PreviousBalance = Extensions.AsDecimal(reader("PreviousBalance")),
-            .Sequence = Extensions.AsInt(Of Integer)(reader("sequence")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
 
@@ -88,7 +88,7 @@ Namespace DataLayer.AdoNet
 
         Public Shared ReadOnly MakeCadOiItem As Func(Of IDataReader, CadOiItem) = Function(reader) New CadOiItem() With
             {
-            .AccountIdNo = Extensions.AsInt(Of Integer)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .ApOpenInvoiceIdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .IdNo = Extensions.AsInt(Of Integer)(reader("IdNo")),
