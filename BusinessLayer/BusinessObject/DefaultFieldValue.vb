@@ -12,7 +12,7 @@ Public Class DefaultFieldValue
         AddRule(New ValidateRequired("FieldName"))
     End Sub
 
-    Public Property IdNo As Integer
+    Public Property IdNo As Int16
     Public Property TableName As String
     Public Property FieldName As String
     Public Property DataType As UInt16

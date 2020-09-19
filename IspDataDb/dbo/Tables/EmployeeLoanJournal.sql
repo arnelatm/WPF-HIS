@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[EmployeeLoanJournal] (
     [IdNo]            INT            IDENTITY (1, 1) NOT NULL,
-    [EmployeeIdNo]    SMALLINT       NOT NULL,
+    [EmployeeIdNo]    INT            NOT NULL,
     [TransactionDate] DATE           NULL,
     [ReferenceNo]     VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [TransactionType] CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -13,6 +13,8 @@
     [DateTimeStamp]   ROWVERSION     NOT NULL,
     CONSTRAINT [PK_EmployeeLoanIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -201,11 +201,11 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ProductCategoryIdNo As Int32 Implements IPurchaseItemView.ProductCategoryIdNo
+        Public Property ProductCategoryIdNo As Int16 Implements IPurchaseItemView.ProductCategoryIdNo
             Get
                 Return cboProductCategoryIdNo.GetValue()
             End Get
-            Set(value As Integer)
+            Set(value As Int16)
                 cboProductCategoryIdNo.SetValue(value)
             End Set
         End Property

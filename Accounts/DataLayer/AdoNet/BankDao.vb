@@ -55,7 +55,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Bank) =
                                     Function(reader) _
             New Bank() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .BankCode = Extensions.AsString(reader("BankCode")),
             .BankName = Extensions.AsString(reader("BankName")),
             .BankNameAra = Extensions.AsString(reader("BankNameAra"))

@@ -2,7 +2,7 @@
 
     Public Class ReligionModel
         Inherits CommonModel
-
+        Public Property IdNo As Int16
         Public Property ReligionCode As String
         Public Property ReligionName As String
         Public Property ReligionNameAra As String

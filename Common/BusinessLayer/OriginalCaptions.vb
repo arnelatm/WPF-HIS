@@ -20,7 +20,7 @@ Namespace BusinessLayer
         Public Property Caption As String
         Property TranslatedCaption As String
         Property IdNoTranslated As Integer
-        Property LanguageIdNo As Int32
+        Property LanguageIdNo As Int16
     End Class
 
 End Namespace

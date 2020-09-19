@@ -72,8 +72,8 @@ Namespace PresentationLayer.Forms
             '
             Me.txtIdNo.BackColor = System.Drawing.Color.White
             Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtIdNo.ComputedValue = false
-        Me.txtIdNo.CustomFormat = Nothing
+            Me.txtIdNo.ComputedValue = False
+            Me.txtIdNo.CustomFormat = Nothing
         Me.txtIdNo.DataBoundControl = true
         Me.txtIdNo.DisplayOnly = true
         Me.txtIdNo.EditingMode = true

@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IDesignationView
         Inherits IView
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property DesignationCode As String
         Property DesignationName As String
         Property DesignationNameAra As String

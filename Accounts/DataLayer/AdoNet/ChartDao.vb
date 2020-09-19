@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .AccountNameAra = Extensions.AsString(reader("AccountNameAra")),
             .Active = Extensions.AsBool(reader("Active")),
             .DetailAccount = Extensions.AsBool(reader("DetailAccount")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .NormalBalance = Extensions.AsString(reader("NormalBalance")),
             .Notes = Extensions.AsString(reader("Notes")),

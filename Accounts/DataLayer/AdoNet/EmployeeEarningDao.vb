@@ -48,7 +48,7 @@ Namespace DataLayer.AdoNet
             .EarningName = Extensions.AsString(reader("EarningCode")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
             .EarningType = Extensions.AsString(reader("EarningType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int16)(reader("EmployeeIdNo")),
+            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }

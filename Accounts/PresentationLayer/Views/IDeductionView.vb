@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IDeductionView
         Inherits IView
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property DeductionCode As String
         Property DeductionName As String
         Property DeductionNameAra As String

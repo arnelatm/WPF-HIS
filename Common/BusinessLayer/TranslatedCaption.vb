@@ -16,7 +16,7 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property Caption As String
         Public Property CaptionIdNo As Int32
-        Public Property LanguageIdNo As Int32
+        Public Property LanguageIdNo As Int16
         Public Property TranslatedCaption As String
     End Class
 

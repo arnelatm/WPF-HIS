@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface IPhoneTypeView
         Inherits IView
-        Property IdNo As Int32
+        Property IdNo As Byte
         Property PhoneTypeCode As String
         Property PhoneTypeName As String
         Property PhoneTypeNameAra As String

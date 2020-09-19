@@ -47,8 +47,8 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New TranslatedMessages() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .MessageIdNo = Extensions.AsInt(Of Integer)(reader("MessageIdNo")),
-            .LanguageIdNo = Extensions.AsInt(Of Integer)(reader("LanguageIdNo")),
+            .MessageIdNo = Extensions.AsInt(Of Int16)(reader("MessageIdNo")),
+            .LanguageIdNo = Extensions.AsInt(Of Int16)(reader("LanguageIdNo")),
             .TranslatedMessage = Extensions.AsString(reader("TranslatedMessage")),
             .TranslatedCaption = Extensions.AsString(reader("TranslatedCaption"))
             }

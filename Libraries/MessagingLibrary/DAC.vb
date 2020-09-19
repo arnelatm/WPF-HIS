@@ -11,7 +11,7 @@ Public Class Dac
 
 #Region " Declarations and properties "
 
-    Private ReadOnly _defaultMirroredLanguageIdNo As Int32 = 0
+    Private ReadOnly _defaultMirroredLanguageIdNo As Int16 = 0
     Public Const SqlError = "Error connecting to server"
     Public Const MdbError = "Error opening MDB file"
     Public Const DbfError = "Error with DBF directory or DBC"
@@ -22,7 +22,7 @@ Public Class Dac
     Public Cn As Object
     Public Dc As Object
 
-    'Public Shared DefaultMirroredLanguageIdNo As Int32
+    'Public Shared DefaultMirroredLanguageIdNo As Int16
 
     <Category("AATM")> Public Property DacAccessType As String '= "SQL"
     <Category("AATM")> Public Property DacFileName As String '= $"ISPDATA" '""Translations"
@@ -73,7 +73,7 @@ Public Class Dac
         End Set
     End Property
 
-    Public ReadOnly Property DefaultMirroredLanguageIdNo As Int32
+    Public ReadOnly Property DefaultMirroredLanguageIdNo As Int16
         Get
             If _defaultMirroredLanguageIdNo = 0 Then
                 If Not (System.ComponentModel.LicenseManager.CurrentContext.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
