@@ -1506,31 +1506,28 @@
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 151</value>
   </data>
-  <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 23</value>
+  <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 25</value>
   </data>
-  <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
+  <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
-    <value>txtDateCreated</value>
+  <data name="&gt;&gt;dtpDateCreated.Name" xml:space="preserve">
+    <value>dtpDateCreated</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
+    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">

@@ -844,6 +844,7 @@ Public Class CaComboBox
 
     Private Const WmMousewheel As Integer = &H20A
 
+    <DebuggerStepThrough>
     Protected Overrides Sub WndProc(ByRef m As Message)
         If EditingMode And Not DisplayOnly Then
             MyBase.WndProc(m)

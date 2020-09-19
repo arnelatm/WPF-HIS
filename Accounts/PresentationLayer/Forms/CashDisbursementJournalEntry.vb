@@ -111,22 +111,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        'Public Property DateCreated As DateTime? Implements ICashDisbursementJournalView.DateCreated
-        '    Get
-        '        If String.IsNullOrEmpty(txtDateCreated.Text) Then
-        '            Return Now()
-        '        End If
-        '        Return Now() 'Convert.ToDateTime(txtDateCreated.Text)
-        '    End Get
-        '    Set(value As DateTime?)
-        '        If value Is Nothing Then
-        '            txtDateCreated.Text = Nothing
-        '        Else
-        '            txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
-        '        End If
-        '    End Set
-        'End Property
-
         Public Property DiscountAccountIdNo As Int16? Implements ICashDisbursementJournalView.DiscountAccountIdNo
             Get
                 Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
@@ -210,7 +194,6 @@ Namespace PresentationLayer.Forms
             End Get
             Set
                 cboPaymentType.SetValue(Value)
-                'SetPayeeProperty(Value)
             End Set
         End Property
 
@@ -297,7 +280,12 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-            SetPayeeProperty(eventType.Model.PaymentType)
+            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+            ' the PaymentType so in order to override this part we need to retrieve the PaymentType first
+            ' because when assigning the cboPayeeIdNo the datasource must be correct that is why
+            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+            PaymentType = eventType.Model.PaymentType
+            SetPayeeDataSource(PaymentType)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -340,7 +328,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub
 
@@ -404,7 +391,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
@@ -418,7 +405,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cadOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCadOiItems.CellEndEdit
+        Private Sub CadOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCadOiItems.CellEndEdit
             With DataGridViewCadOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
@@ -442,14 +429,16 @@ Namespace PresentationLayer.Forms
 
         Private Sub CashDisbursementJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            _jiFooter = New DgvFooter(DataGridViewJournalItems)
-            _jiFooter.AutoCalc = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _apFooter = New DgvFooter(DataGridViewCadOiItems)
-            _apFooter.AutoCalc = True
+            _apFooter = New DgvFooter(DataGridViewCadOiItems) With {
+                .AutoCalc = True
+            }
             _apFooter.ColumnToSum("dgvAmount") = True
             _apFooter.ColumnToSum("dgvDiscountTaken") = True
             _apFooter.ColumnToSum("dgvBalance") = True
@@ -458,11 +447,11 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub cboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
-        Private Sub cboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
@@ -480,8 +469,10 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub cboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
-            SetPayeeProperty(cboPaymentType.SelectedValue)
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
+            If cboPaymentType.Focused Then
+                SetPayeeProperty(cboPaymentType.SelectedValue)
+            End If
         End Sub
 
         Public Overloads Sub Dispose()
@@ -546,18 +537,28 @@ Namespace PresentationLayer.Forms
             PresenterObj.AddSupplierOpenInvoices()
             BindCadOiItem()
             btnViewGL.Visible = False
-            SetPayeeProperty(cboPaymentType.SelectedValue)
         End Sub
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
             SuspendLayout()
+            SetPayeeDataSource(cPaymentType)
             Dim savePayeeIdNo = PayeeIdNo
-            txtPayeeName.Visible = False
-            txtPayeeName.Width = 0
+            If savePayeeIdNo Is Nothing Then
+                cboPayeeIdNo.SelectedValue = ""
+            Else
+                cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            End If
+            ResumeLayout()
+        End Sub
+
+        Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
+            SuspendLayout()
             cboPayeeIdNo.Visible = True
             cboPayeeIdNo.Width = _payeeOrigWidth
             cboPayeeIdNo.ValueMember = "IdNo"
             cboPayeeIdNo.DisplayMember = "Name"
+            txtPayeeName.Visible = False
+            txtPayeeName.Width = 0
             Dim cbDataSource = Nothing
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
@@ -586,15 +587,10 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
-            If savePayeeIdNo Is Nothing Then
-                cboPayeeIdNo.SelectedValue = ""
-            Else
-                cboPayeeIdNo.SelectedValue = savePayeeIdNo
-            End If
             ResumeLayout()
         End Sub
 
-        Private Sub txtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
+        Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If
@@ -698,10 +694,6 @@ Namespace PresentationLayer.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
             UpdateTotalVatAmount()
-        End Sub
-
-        Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
-
         End Sub
 
     End Class

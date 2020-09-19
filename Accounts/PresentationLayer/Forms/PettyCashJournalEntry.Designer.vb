@@ -29,83 +29,84 @@ Namespace PresentationLayer.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashJournalEntry))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.floHeader1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataGridViewPcsOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floHeader1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.DataGridViewPcsOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequencePcsOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -122,6 +123,7 @@ Namespace PresentationLayer.Forms
             Me.bsPcsOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -597,7 +599,7 @@ Namespace PresentationLayer.Forms
             Me.floHeader2.Controls.Add(Me.lblPosted)
             Me.floHeader2.Controls.Add(Me.chkPosted)
             Me.floHeader2.Controls.Add(Me.lblDateCreated)
-            Me.floHeader2.Controls.Add(Me.txtDateCreated)
+            Me.floHeader2.Controls.Add(Me.dtpDateCreated)
             Me.floPurchaseJournalHeader.SetFlowBreak(Me.floHeader2, True)
             resources.ApplyResources(Me.floHeader2, "floHeader2")
             Me.floHeader2.Name = "floHeader2"
@@ -760,24 +762,6 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
             '
-            'txtDateCreated
-            '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.EditingMode = False
-            resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Nothing
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.TabStop = False
-            '
             'floPurchaseJournalItems
             '
             Me.floPurchaseJournalItems.BackColor = System.Drawing.Color.Transparent
@@ -808,6 +792,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewJournalItems.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
+            Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
@@ -985,6 +970,7 @@ Namespace PresentationLayer.Forms
             DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPcsOiItems.DefaultCellStyle = DataGridViewCellStyle17
             Me.DataGridViewPcsOiItems.DisplayOnly = False
+            Me.DataGridViewPcsOiItems.Ea = EventAggregator2
             Me.DataGridViewPcsOiItems.EditingMode = False
             Me.DataGridViewPcsOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             resources.ApplyResources(Me.DataGridViewPcsOiItems, "DataGridViewPcsOiItems")
@@ -1162,15 +1148,36 @@ Namespace PresentationLayer.Forms
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
             '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
+            '
             'PettyCashJournalEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floFullEntryArea)
             Me.Name = "PettyCashJournalEntry"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
-            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floFullEntryArea.ResumeLayout(false)
-        Me.floPurchaseJournalHeader.ResumeLayout(false)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floFullEntryArea.ResumeLayout(False)
+            Me.floPurchaseJournalHeader.ResumeLayout(false)
         Me.floHeader1.ResumeLayout(false)
         Me.floHeader1.PerformLayout
         Me.floHeader2.ResumeLayout(false)
@@ -1230,7 +1237,6 @@ End Sub
         Friend WithEvents floHeader2 As CFlowLayout
         Friend WithEvents lblVatAmount As CLabel
         Friend WithEvents txtVatAmount As CTextBox
-        Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents cboPayeeIdNo As CaComboBox
         Friend WithEvents DataGridViewPcsOiItems As CDataGridView
         Friend WithEvents bsPcsOiItems As Windows.Forms.BindingSource
@@ -1274,5 +1280,6 @@ End Sub
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents dtpDateCreated As CCustomDateTimePicker
     End Class
 End Namespace

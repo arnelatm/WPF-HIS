@@ -29,6 +29,7 @@ Namespace PresentationLayer.Forms
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -88,8 +89,8 @@ Namespace PresentationLayer.Forms
             Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floArJournalItems.SuspendLayout()
@@ -132,6 +133,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Dock = System.Windows.Forms.DockStyle.Left
+            Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
@@ -864,7 +866,7 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout2.Controls.Add(Me.lblPosted)
             Me.CFlowLayout2.Controls.Add(Me.chkPosted)
             Me.CFlowLayout2.Controls.Add(Me.lblDateAdded)
-            Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
+            Me.CFlowLayout2.Controls.Add(Me.dtpDateCreated)
             Me.CFlowLayout2.Location = New System.Drawing.Point(772, 3)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Padding = New System.Windows.Forms.Padding(10)
@@ -1009,32 +1011,10 @@ Namespace PresentationLayer.Forms
             Me.lblDateAdded.Location = New System.Drawing.Point(11, 111)
             Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateAdded.Name = "lblDateAdded"
-            Me.lblDateAdded.Size = New System.Drawing.Size(69, 23)
+            Me.lblDateAdded.Size = New System.Drawing.Size(40, 26)
             Me.lblDateAdded.TabIndex = 8
             Me.lblDateAdded.Text = "Date Added:"
-            Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtDateCreated
-            '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.EditingMode = False
-            Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Me.lblInvoiceNo
-            Me.txtDateCreated.Location = New System.Drawing.Point(82, 111)
-            Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.Size = New System.Drawing.Size(150, 20)
-            Me.txtDateCreated.TabIndex = 7
-            Me.txtDateCreated.ValueIsMandatory = True
+            Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             '
             'floFullEntryArea
             '
@@ -1047,6 +1027,30 @@ Namespace PresentationLayer.Forms
             Me.floFullEntryArea.Name = "floFullEntryArea"
             Me.floFullEntryArea.Size = New System.Drawing.Size(1045, 514)
             Me.floFullEntryArea.TabIndex = 0
+            '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            Me.dtpDateCreated.Location = New System.Drawing.Point(53, 111)
+            Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.Size = New System.Drawing.Size(177, 25)
+            Me.dtpDateCreated.TabIndex = 285
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
             '
             'ArJournalEntry
             '
@@ -1096,7 +1100,6 @@ Namespace PresentationLayer.Forms
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents lblPosted As CLabel
         Friend WithEvents lblDateAdded As CLabel
-        Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents chkCancelled As CCheckBox
         Friend WithEvents lblPercent As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
@@ -1106,7 +1109,7 @@ Namespace PresentationLayer.Forms
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents CFlowLayout2 As CFlowLayout
-	    Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblTransactionType As CLabel
         Friend WithEvents cboTransactionType As CaComboBox
         Friend WithEvents CLabel2 As CLabel
@@ -1128,5 +1131,6 @@ Namespace PresentationLayer.Forms
         Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dtpDateCreated As CCustomDateTimePicker
     End Class
 End NameSpace

@@ -73,16 +73,13 @@ Namespace PresentationLayer.Forms
 
         Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return dtpDateCreated.Value
             End Get
-            Set(value As DateTime?)
-                If value Is Nothing Then
-                    txtDateCreated.Text = Nothing
+            Set
+                If Value.HasValue Then
+                    dtpDateCreated.Value = Value
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    dtpDateCreated.Value = Date.Now()
                 End If
             End Set
         End Property
@@ -292,7 +289,7 @@ Namespace PresentationLayer.Forms
          {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
-         {"DateCreated", txtDateCreated},
+         {"DateCreated", dtpDateCreated},
          {"DueDate", dtpDueDate},
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
@@ -315,8 +312,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New DgvFooter(DataGridViewJournalItems)
-            _footer.AutoCalc = True
+            _footer = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
             _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
@@ -355,20 +353,20 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub cboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
+        Private Sub CboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboAccountIdNo.RevertValue()
             End If
         End Sub
 
-        Private Sub cboSupplierIdNo_Validated(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated
+        Private Sub CboSupplierIdNo_Validated(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated
             UpdateDueDate()
             UpdateEarlySettlementValues()
             UpdateVatNumber()
         End Sub
 
-        Private Sub cboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating
+        Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboSupplierIdNo.RevertValue()
@@ -500,7 +498,7 @@ Namespace PresentationLayer.Forms
             Return retVal
         End Function
 
-        Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewJournalItems IsNot Nothing Then
                 DataGridViewJournalItems.Focus()
             End If
@@ -551,7 +549,7 @@ Namespace PresentationLayer.Forms
         Private Sub UpdateTotalVatAmount()
             Dim tVatAmount As Decimal = 0
             For Each row In DataGridViewJournalItems.Rows
-                tVatAmount = tVatAmount + row.cells("ItemVatAmount").Value
+                tVatAmount += row.cells("ItemVatAmount").Value
             Next
             VatAmount = tVatAmount
         End Sub
@@ -588,7 +586,6 @@ Namespace PresentationLayer.Forms
                 End If
             End If
         End Sub
-
 
     End Class
 

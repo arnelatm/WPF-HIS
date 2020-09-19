@@ -244,7 +244,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 23</value>
+    <value>367, 23</value>
   </data>
   <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -271,7 +271,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>660, 1</value>
+    <value>635, 1</value>
   </data>
   <data name="txtReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -380,7 +380,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 23</value>
+    <value>354, 23</value>
   </data>
   <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>166</value>
@@ -455,7 +455,7 @@
     <value>0</value>
   </data>
   <data name="chkClosingJournal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>660, 26</value>
+    <value>635, 26</value>
   </data>
   <data name="chkClosingJournal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -530,7 +530,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 49</value>
+    <value>575, 49</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -551,7 +551,7 @@
     <value>8, 13</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>777, 111</value>
+    <value>747, 111</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -724,38 +724,35 @@
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+  <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 76</value>
   </data>
-  <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 76</value>
+  <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 1, 1, 1</value>
   </data>
-  <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 25</value>
   </data>
-  <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 23</value>
+  <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
+    <value>285</value>
   </data>
-  <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>248</value>
+  <data name="&gt;&gt;dtpDateCreated.Name" xml:space="preserve">
+    <value>dtpDateCreated</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
-    <value>txtDateCreated</value>
+  <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
+    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtDateCreated.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>791, 13</value>
+    <value>761, 13</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 111</value>
+    <value>195, 111</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>247</value>
@@ -779,7 +776,7 @@
     <value>5, 10, 5, 5</value>
   </data>
   <data name="floJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>958, 136</value>
+    <value>969, 136</value>
   </data>
   <data name="floJournalHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -887,7 +884,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>960, 239</value>
+    <value>971, 239</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -911,7 +908,7 @@
     <value>0, 53</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 382</value>
+    <value>985, 382</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -2089,7 +2086,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>979, 453</value>
+    <value>985, 453</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>995, 483</value>
