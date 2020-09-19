@@ -73,16 +73,13 @@ Namespace PresentationLayer.Forms
 
         Public Property DateCreated As DateTime? Implements ISalesJournalView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return dtpDateCreated.Value
             End Get
-            Set(value As DateTime?)
-                If value Is Nothing Then
-                    txtDateCreated.Text = Nothing
+            Set
+                If Value.HasValue Then
+                    dtpDateCreated.Value = Value
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    dtpDateCreated.Value = Date.Now()
                 End If
             End Set
         End Property
@@ -215,6 +212,7 @@ Namespace PresentationLayer.Forms
         End Property
 
 #End Region
+
         Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
             bsSalesCashItems.Insert(eventType.BsRow, New SalesCashItemView)
         End Sub
@@ -233,7 +231,7 @@ Namespace PresentationLayer.Forms
                 {
                 {"AccountIdNo", cboAccountIdNo},
                 {"Cancelled", chkCancelled},
-                {"DateCreated", txtDateCreated},
+                {"DateCreated", dtpDateCreated},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes},
                 {"Posted", chkPosted},
@@ -322,7 +320,7 @@ Namespace PresentationLayer.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub btnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
@@ -370,7 +368,6 @@ Namespace PresentationLayer.Forms
         '    End If
         'End Sub
 
-
         Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit
             UpdateTotals()
             With DataGridViewSalesCashItems.CurrentCell
@@ -409,14 +406,16 @@ Namespace PresentationLayer.Forms
 
         Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
-            _jiFooter = New DgvFooter(DataGridViewJournalItems)
-            _jiFooter.AutoCalc = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
             ' _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _slFooter = New DgvFooter(DataGridViewSalesCashItems)
-            _slFooter.AutoCalc = True
+            _slFooter = New DgvFooter(DataGridViewSalesCashItems) With {
+                .AutoCalc = True
+            }
             _slFooter.ColumnToSum("dgvSaleAmount") = True
             _slFooter.ColumnToSum("dgvDepositAmount") = True
             _slFooter.ColumnToSum("dgvComputedBankCharge") = True
@@ -455,7 +454,6 @@ Namespace PresentationLayer.Forms
             DataGridViewSalesCashItems.AddInsertColumn()
             btnViewGL.Visible = False
         End Sub
-
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewSalesCashItems.Focus()
@@ -558,7 +556,6 @@ Namespace PresentationLayer.Forms
 
         Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
             If pCashCode IsNot Nothing Then
-                Dim nIndex As Integer = 0
                 Dim cashCode As New CashCodeModel
                 For Each item As CashCodeModel In PresenterObj.cashCodesModel
                     If item.CashCode.Trim() = pCashCode.Trim() Then
@@ -566,7 +563,7 @@ Namespace PresentationLayer.Forms
                     End If
                 Next
                 'cashCode = PresenterObj.cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = pCashCode.Trim())
-                nIndex = selectedRow.Index
+                Dim nIndex As Integer = selectedRow.Index
                 bsSalesCashItems(nIndex).Rate = cashCode.Rate
                 'bsSalesCashItems(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, cashCode.Rate)
                 'bsSalesCashItems(nIndex).ComputedBankChargeVat = PresenterObj.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)

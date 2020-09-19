@@ -29,12 +29,14 @@ Namespace PresentationLayer.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CashReceiptJournalEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -85,7 +87,7 @@ Namespace PresentationLayer.Forms
             Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -132,6 +134,14 @@ Namespace PresentationLayer.Forms
             CType(Me.bsCsrOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFooter.SuspendLayout()
             Me.SuspendLayout()
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'floFullEntryArea
             '
@@ -612,7 +622,7 @@ Namespace PresentationLayer.Forms
             Me.floHeader2.Controls.Add(Me.lblPosted)
             Me.floHeader2.Controls.Add(Me.chkPosted)
             Me.floHeader2.Controls.Add(Me.lblDateCreated)
-            Me.floHeader2.Controls.Add(Me.txtDateCreated)
+            Me.floHeader2.Controls.Add(Me.dtpDateCreated)
             Me.floPurchaseJournalHeader.SetFlowBreak(Me.floHeader2, True)
             resources.ApplyResources(Me.floHeader2, "floHeader2")
             Me.floHeader2.Name = "floHeader2"
@@ -749,24 +759,26 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
             '
-            'txtDateCreated
+            'dtpDateCreated
             '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.DisplayOnly = True
-            Me.txtDateCreated.EditingMode = True
-            resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.ValueIsMandatory = True
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
             '
             'floPurchaseJournalItems
             '
@@ -798,6 +810,7 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewJournalItems.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
+            Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
@@ -971,6 +984,7 @@ Namespace PresentationLayer.Forms
             DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewCsrOiItems.DefaultCellStyle = DataGridViewCellStyle17
             Me.DataGridViewCsrOiItems.DisplayOnly = False
+            Me.DataGridViewCsrOiItems.Ea = EventAggregator2
             Me.DataGridViewCsrOiItems.EditingMode = False
             Me.DataGridViewCsrOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             resources.ApplyResources(Me.DataGridViewCsrOiItems, "DataGridViewCsrOiItems")
@@ -1098,47 +1112,47 @@ Namespace PresentationLayer.Forms
             Me.dgvBalance.EditingMode = False
             resources.ApplyResources(Me.dgvBalance, "dgvBalance")
             Me.dgvBalance.Name = "dgvBalance"
-        Me.dgvBalance.ReadOnly = true
-        '
-        'AccountIdNoDataGridViewTextBoxColumn
-        '
-        Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
-        resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
-        Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
-        Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'IdNoDataGridViewTextBoxColumn
-        '
-        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-        resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
-        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-        Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'bsCsrOiItems
-        '
-        Me.bsCsrOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.CsrOiItemModel)
-        '
-        'floFooter
-        '
-        Me.floFooter.BackColor = System.Drawing.Color.Transparent
-        Me.floFooter.Controls.Add(Me.btnViewGL)
-        resources.ApplyResources(Me.floFooter, "floFooter")
-        Me.floFooter.Name = "floFooter"
-        '
-        'btnViewGL
-        '
-        Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
-        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-        Me.btnViewGL.ImageIndex = 0
-        Me.btnViewGL.Name = "btnViewGL"
-        Me.btnViewGL.OriginalImageName = Nothing
-        Me.btnViewGL.SecurityKey = ""
-        '
-        'CashReceiptJournalEntry
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floFullEntryArea)
+            Me.dgvBalance.ReadOnly = True
+            '
+            'AccountIdNoDataGridViewTextBoxColumn
+            '
+            Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
+            resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
+            Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
+            Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'bsCsrOiItems
+            '
+            Me.bsCsrOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.CsrOiItemModel)
+            '
+            'floFooter
+            '
+            Me.floFooter.BackColor = System.Drawing.Color.Transparent
+            Me.floFooter.Controls.Add(Me.btnViewGL)
+            resources.ApplyResources(Me.floFooter, "floFooter")
+            Me.floFooter.Name = "floFooter"
+            '
+            'btnViewGL
+            '
+            Me.btnViewGL.DesignerSelected = False
+            Me.btnViewGL.DisplayOnly = True
+            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+            Me.btnViewGL.ImageIndex = 0
+            Me.btnViewGL.Name = "btnViewGL"
+            Me.btnViewGL.OriginalImageName = Nothing
+            Me.btnViewGL.SecurityKey = ""
+            '
+            'CashReceiptJournalEntry
+            '
+            resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.floFullEntryArea)
         Me.Name = "CashReceiptJournalEntry"
         Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -1185,7 +1199,6 @@ End Sub
         Friend WithEvents lblCancelled As CLabel
         Friend WithEvents chkCancelled As CCheckBox
         Friend WithEvents lblDateCreated As CLabel
-        Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblPosted As CLabel
         Friend WithEvents chkPosted As CCheckBox
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
@@ -1237,5 +1250,6 @@ End Sub
         Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dtpDateCreated As CCustomDateTimePicker
     End Class
 End Namespace

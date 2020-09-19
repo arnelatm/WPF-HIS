@@ -125,16 +125,13 @@ Namespace PresentationLayer.Forms
 
         Public Property DateCreated As DateTime? Implements ICheckDisbursementJournalView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return dtpDateCreated.Value
             End Get
-            Set(value As DateTime?)
-                If value Is Nothing Then
-                    txtDateCreated.Text = Nothing
+            Set
+                If Value.HasValue Then
+                    dtpDateCreated.Value = Value
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    dtpDateCreated.Value = Date.Now()
                 End If
             End Set
         End Property
@@ -309,7 +306,12 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-            SetPayeeProperty(eventType.Model.PaymentType)
+            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+            ' the PaymentType so in order to override this part we need to retrieve the PaymentType first
+            ' because when assigning the cboPayeeIdNo the datasource must be correct that is why
+            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+            PaymentType = eventType.Model.PaymentType
+            SetPayeeDataSource(PaymentType)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -335,7 +337,7 @@ Namespace PresentationLayer.Forms
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
-         {"DateCreated", txtDateCreated},
+         {"DateCreated", dtpDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
          {"IdNo", TxtIdNo},
@@ -354,7 +356,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub
 
@@ -497,7 +498,9 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
-            SetPayeeProperty(cboPaymentType.SelectedValue)
+            If cboPaymentType.Focused Then
+                SetPayeeProperty(cboPaymentType.SelectedValue)
+            End If
         End Sub
 
         Public Overloads Sub Dispose()
@@ -567,13 +570,24 @@ Namespace PresentationLayer.Forms
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
             SuspendLayout()
+            SetPayeeDataSource(cPaymentType)
             Dim savePayeeIdNo = PayeeIdNo
-            txtPayeeName.Visible = False
-            txtPayeeName.Width = 0
+            If savePayeeIdNo Is Nothing Then
+                cboPayeeIdNo.SelectedValue = ""
+            Else
+                cboPayeeIdNo.SelectedValue = savePayeeIdNo
+            End If
+            ResumeLayout()
+        End Sub
+
+        Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
+            SuspendLayout()
             cboPayeeIdNo.Visible = True
             cboPayeeIdNo.Width = _payeeOrigWidth
             cboPayeeIdNo.ValueMember = "IdNo"
             cboPayeeIdNo.DisplayMember = "Name"
+            txtPayeeName.Visible = False
+            txtPayeeName.Width = 0
             Dim cbDataSource = Nothing
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
@@ -602,11 +616,6 @@ Namespace PresentationLayer.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
-            If savePayeeIdNo Is Nothing Then
-                cboPayeeIdNo.SelectedValue = ""
-            Else
-                cboPayeeIdNo.SelectedValue = savePayeeIdNo
-            End If
             ResumeLayout()
         End Sub
 

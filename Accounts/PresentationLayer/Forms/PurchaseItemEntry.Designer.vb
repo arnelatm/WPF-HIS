@@ -267,7 +267,7 @@ Namespace PresentationLayer.Forms
             Me.cboProductCategoryIdNo.Name = "cboProductCategoryIdNo"
             Me.cboProductCategoryIdNo.OldValue = 0
             Me.cboProductCategoryIdNo.OriginalDataSource = Nothing
-        Me.cboProductCategoryIdNo.OriginalList = Nothing
+            Me.cboProductCategoryIdNo.OriginalList = Nothing
         Me.cboProductCategoryIdNo.OverrideDropDownStyleList = false
         Me.cboProductCategoryIdNo.PreviousSearchTerm = Nothing
         Me.cboProductCategoryIdNo.PreviousSelectedIndex = 0

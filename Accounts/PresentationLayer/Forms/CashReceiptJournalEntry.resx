@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 17</value>
+    <value>17, 56</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>281, 17</value>
+    <value>17, 95</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>411, 17</value>
+    <value>17, 134</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>17, 173</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -1368,31 +1368,28 @@
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 126</value>
   </data>
-  <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 20</value>
+  <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 25</value>
   </data>
-  <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
+  <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
-    <value>txtDateCreated</value>
+  <data name="&gt;&gt;dtpDateCreated.Name" xml:space="preserve">
+    <value>dtpDateCreated</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
+    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
-  <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">
@@ -1531,7 +1528,7 @@
     <value>False</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>17, 212</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -1621,7 +1618,7 @@
     <value>False</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>808, 17</value>
+    <value>17, 251</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>968, 3</value>
