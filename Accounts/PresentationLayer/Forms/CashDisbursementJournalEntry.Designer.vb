@@ -824,10 +824,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = True
             resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
             'dgvSequence
@@ -987,6 +990,8 @@ Namespace PresentationLayer.Forms
             '
             'DataGridViewCadOiItems
             '
+            Me.DataGridViewCadOiItems.AllowUserToAddRows = False
+            Me.DataGridViewCadOiItems.AllowUserToDeleteRows = False
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewCadOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewCadOiItems.AutoGenerateColumns = False
@@ -1006,10 +1011,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewCadOiItems.Ea = EventAggregator2
             Me.DataGridViewCadOiItems.EditingMode = False
             Me.DataGridViewCadOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewCadOiItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewCadOiItems.FirstRowInsertionEnabled = True
             resources.ApplyResources(Me.DataGridViewCadOiItems, "DataGridViewCadOiItems")
             Me.DataGridViewCadOiItems.Name = "DataGridViewCadOiItems"
             Me.DataGridViewCadOiItems.ReadOnly = True
             Me.DataGridViewCadOiItems.SequenceColumn = "dgvSequenceCadOi"
+            Me.DataGridViewCadOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewCadOiItems.StartTrackingChanges = False
             '
             'dgvSequenceCadOi

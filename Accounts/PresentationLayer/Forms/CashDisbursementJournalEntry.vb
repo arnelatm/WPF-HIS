@@ -28,7 +28,6 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
-        
 
         Public Sub New()
             MyBase.New()
@@ -336,8 +335,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bscadOiItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewCadOiItems.Columns
                 If dgvSequenceCadOi IsNot Nothing Then
@@ -365,8 +362,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -518,7 +513,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
             Else
@@ -527,7 +521,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddSupplierOpenInvoices()
             BindCadOiItem()
             btnViewGL.Visible = False

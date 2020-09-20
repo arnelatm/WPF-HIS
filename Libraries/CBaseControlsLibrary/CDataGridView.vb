@@ -4,18 +4,18 @@ Imports System.Windows
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl
 
+    Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _firstEditableColumn As Integer = -1
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
-    Private _dgvInsertColumnIndex As Integer = -1
 
     Public Sub New()
         MyBase.New()
@@ -26,8 +26,6 @@ Public Class CDataGridView
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
-        Ea = New EventAggregator()
-        'Ea.SubscribeEvent(Me)
     End Sub
 
     Public Event ChangesMade As EventHandler
@@ -37,25 +35,11 @@ Public Class CDataGridView
     Public Property DataInGridChanged As Boolean = False
 
     <Bindable(True)>
-    <Category("Properties")>
+    <Category("Custom")>
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean = False
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that Deletion of first row is allowed.")>
-    <Browsable(True)>
-    Public Property FirstRowDeletionEnabled As Boolean = True
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that Insertion on first row not allowed.")>
-    <Browsable(True)>
-    Public Property FirstRowInsertionEnabled As Boolean = True
 
     Public Property Ea As EventAggregator
 
@@ -79,6 +63,13 @@ Public Class CDataGridView
                     col.EditingMode = value
                 End If
             Next
+            If value Then
+                If ShowInsertColumnWhenEditing Then
+                    AddInsertColumn()
+                End If
+            Else
+                RemoveInsertColumn()
+            End If
         End Set
     End Property
 
@@ -87,6 +78,20 @@ Public Class CDataGridView
             Return GetFirstEditableColumn()
         End Get
     End Property
+
+    <Bindable(True)>
+    <Category("Custom")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that Deletion of first row is allowed.")>
+    <Browsable(True)>
+    Public Property FirstRowDeletionEnabled As Boolean = True
+
+    <Bindable(True)>
+    <Category("Custom")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that Insertion on first row not allowed.")>
+    <Browsable(True)>
+    Public Property FirstRowInsertionEnabled As Boolean = True
 
     Public ReadOnly Property FirstVisibleColumn As Integer
         Get
@@ -101,11 +106,18 @@ Public Class CDataGridView
     End Property
 
     <Bindable(True)>
-    <Category("Properties")>
+    <Category("Custom")>
     <DefaultValue(GetType(String))>
     <Description("Enter here the property name for sequence column")>
     <Browsable(True)>
     Public Property SequenceColumn As String = "dgvSequence"
+
+    <Bindable(True)>
+    <Category("Custom")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that insert column is visible when editing.")>
+    <Browsable(True)>
+    Public Property ShowInsertColumnWhenEditing As Boolean = True
 
     Public Property StartTrackingChanges As Boolean = False
 
@@ -117,22 +129,14 @@ Public Class CDataGridView
 
     Public Sub AddInsertColumn()
         With Columns
-            Dim parentForm = FindForm()
-            Dim presenterObj = CallByName(parentForm, "PresenterObj", CallType.Get)
-            Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
-            Dim adding As Boolean = CallByName(presenterObj, "AddMode", CallType.Get)
-            If editing Or adding Then
-                Dim dgvInsColumn As New DataGridViewImageColumn
-                .Insert(.Count, dgvInsColumn)
-                dgvInsColumn.Image = Images.InsertRowImage
-                dgvInsColumn.Width = 30
-                dgvInsColumn.Name = "dgvInsertColumn"
-                dgvInsColumn.HeaderText = MessagingLibrary.Messaging.TranslateCaption("Ins.")
-                _insertColumnAdded = True
-                _dgvInsertColumnIndex = dgvInsColumn.Index
-            Else
-                _insertColumnAdded = False
-            End If
+            Dim dgvInsColumn As New DataGridViewImageColumn
+            .Insert(.Count, dgvInsColumn)
+            dgvInsColumn.Image = Images.InsertRowImage
+            dgvInsColumn.Width = 30
+            dgvInsColumn.Name = "dgvInsertColumn"
+            dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
+            _insertColumnAdded = True
+            _dgvInsertColumnIndex = dgvInsColumn.Index
         End With
     End Sub
 
@@ -145,16 +149,6 @@ Public Class CDataGridView
         End With
     End Sub
 
-    'Public Sub ReSequenceDgvAfterDelete(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-    '    Dim i = CurrentCell.RowIndex()
-    '    For Each value In dataItems
-    '        Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-    '        If sequence > i + 1 Then
-    '            CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
-    '        End If
-    '    Next
-    'End Sub
-
     Public Sub ReSequenceDgvAfterDelete(Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
@@ -165,20 +159,6 @@ Public Class CDataGridView
             End If
         Next
     End Sub
-
-    'Public Sub ReSequenceDgvAfterInsert(Of T)(ByRef dataItems As List(Of T), Optional sequenceFieldName As String = "Sequence")
-    '    Dim i = CurrentCell.RowIndex()
-    '    For Each value In dataItems
-    '        If value IsNot Nothing Then
-    '            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
-    '            If sequence = 0 Then
-    '                CallByName(value, sequenceFieldName, CallType.Set, i)
-    '            ElseIf sequence >= i Then
-    '                CallByName(value, sequenceFieldName, CallType.Set, sequence + 1)
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
 
     Public Sub ReSequenceDgvAfterInsert(Optional sequenceFieldName As String = "Sequence")
         Dim i = CurrentCell.RowIndex()
@@ -231,50 +211,32 @@ Public Class CDataGridView
     End Sub
 
     Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
-        Dim myForm = FindForm()
-        Dim presenterObj = CallByName(myForm, "PresenterObj", CallType.Get)
-        Dim editing As Boolean = CallByName(presenterObj, "EditMode", CallType.Get)
-        Dim adding As Boolean = CallByName(presenterObj, "AddMode", CallType.Get)
-        If Not (editing Or adding) Then
-            MessagingLibrary.Messaging.Show(True, "MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in view mode. Press edit button to enable deletion.", "Error")
+        If Not EditingMode Then
+            Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
         End If
     End Sub
 
-    'Private Sub ReSequenceDgv(Of T)(ByRef ds As T)
-    '    Dim i = Me.CurrentCell.RowIndex()
-    '    For Each r IN ds
-    '        If Item.Sequence = 0 Then
-    '            Item.Sequence = i
-    '        ElseIf Item.Sequence >= i Then
-    '            Item.Sequence = Item.Sequence + 1
-    '        End If
-    '    Next
-    'End Sub
     Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
         With CurrentCell
             Select Case .OwningColumn.Name.ToLower()
                 Case $"dgvinsertcolumn"
-                    If EditingMode Then
-                        If (CurrentRow.Index() <> NewRowIndex()) Then
-                            'If Ea IsNot Nothing Then
-                            '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-                            'End If
-                            If .RowIndex() <> 0 And FirstRowInsertionEnabled Then
-                                Dim myBindingSource = CType(DataSource, BindingSource)
-                                Dim current = myBindingSource.Current
-                                Dim dataList = current.BlankCopy()
-                                myBindingSource.Insert(.RowIndex(), dataList)
-                                ReSequenceDgvAfterInsert()
-                                SendKeys.Send("{UP}")
-                            Else
-                                Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
-                                "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
-                            End If
+                    If (CurrentRow.Index() <> NewRowIndex()) Then
+                        'If Ea IsNot Nothing Then
+                        '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                        'End If
+                        If .RowIndex() <> 0 And Not FirstRowInsertionEnabled Then
+                            Dim myBindingSource = CType(DataSource, BindingSource)
+                            Dim current = myBindingSource.Current
+                            Dim dataList = current.BlankCopy()
+                            myBindingSource.Insert(.RowIndex(), dataList)
+                            ReSequenceDgvAfterInsert()
+                            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
                         Else
-                            MessagingLibrary.Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-                                       "Invalid Insertion")
+                            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
                         End If
+                    End If
+
             End Select
         End With
     End Sub
@@ -323,6 +285,11 @@ Public Class CDataGridView
                 End If
             End If
         End Try
+    End Sub
+
+    Private Sub dataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
+        SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
+        Rows(e.RowIndex).Selected = True
     End Sub
 
     '' Write the method to call the Event, and then use it as you want.
@@ -424,47 +391,14 @@ Public Class CDataGridView
     '    SendKeys.Send("{TAB}")
     '    SendKeys.Send("{UP}")
     'End Sub
-
     Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim iColumn As Integer = CurrentCell.ColumnIndex
         Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
         Try
             Select Case e.KeyData
                 Case Keys.Enter
-                    'If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-                    '    Dim r = Math.Min(iRow + 1, RowCount() - 1)
-                    '    Dim c = FirstVisibleColumn
-                    '    CurrentCell = Me(c, r)
-                    'Else
-                    '    If iColumn = ColumnCount() Then
-                    '        iColumn = FirstVisibleColumn
-                    '    End If
-                    '    iRow = Math.Min(iRow, RowCount() - 1)
-                    '    CurrentCell = Me(iColumn, iRow)
-                    'End If
                     SendKeys.Send("{TAB}")
                     e.Handled = True
-                'Case Keys.Down
-                '    If iRow >= RowCount() - 1 Then
-                '        Dim newRow As Integer = iRow - 1
-                '        Dim newColumn As Integer = FirstVisibleColumn
-                '        newRow = Math.Min(newRow, RowCount() - 1)
-                '        CurrentCell = Me(newColumn, newRow)
-                '        e.Handled = True
-                '    Else
-                '        e.Handled = False
-                '        'iRow = Math.Min(iRow + 1, RowCount() - 1)
-                '        'If iRow = RowCount() - 1 And iColumn > 1 Then
-                '        '    Try
-                '        '        CurrentCell = Me(iColumn, iRow)
-                '        '    Catch
-                '        '        iRow = iRow - 1
-                '        '        CurrentCell = Me(iColumn, iRow)
-                '        '        Refresh()
-                '        '    End Try
-                '        'End If
-                '    End If
-
                 Case Keys.Tab
                     If EditingMode Then
                         If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
@@ -475,16 +409,7 @@ Public Class CDataGridView
                             Dim c = If(ec > 0, ec, vc)
                             CurrentCell = Me(c, r)
                             e.Handled = True
-                            'Else
-                            '    iRow = Math.Min(iRow, RowCount() - 1)
-                            '    CurrentCell = Me(iColumn, iRow)
                         End If
-                        'If iRow = RowCount() - 1 And iColumn = ColumnCount - 1 Then
-                        '    CurrentCell = Me(FirstVisibleColumn, Math.Min(iRow, RowCount() - 1))
-                        '    e.Handled = True
-                        'Else
-                        '    e.Handled = False
-                        'End If
                     End If
 
                 Case Else
@@ -495,37 +420,6 @@ Public Class CDataGridView
         End Try
         Return
     End Sub
-
-    'Private Sub DgvRowsAdded(sender As Object, e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles MyBase.RowsAdded
-    '    If _dgvInsertColumnIndex <= 0 Then Exit Sub
-    '    CType(sender, DataGridView).Rows(e.RowIndex).Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
-    'End Sub
-
-    'Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
-    '    'MyBase.UserDeletingRow()
-    '    Dim cancel As Boolean
-    '    RaiseEvent DeletingRow(cancel)
-    '    If cancel Then
-    '        e.Cancel = True
-    '    Else
-    '        e.Cancel = False
-    '    End If
-    'End Sub
-    'Private Sub dataGridView1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
-    '    e.SuppressKeyPress = True
-    '    Dim iColumn As Integer = CurrentCell.ColumnIndex
-    '    Dim iRow As Integer = CurrentCell.RowIndex
-
-    '    If iColumn = Columncount - 1 Then
-
-    '        If RowCount > (iRow + 1) Then
-    '            CurrentCell = Me(FirstVisibleColumn, iRow + 1)
-    '        Else
-    '        End If
-    '    Else
-    '        CurrentCell = Me(iColumn + 1, iRow)
-    '    End If
-    'End Sub
 
     'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
     '    Dim icolumn As Integer = CurrentCell.ColumnIndex + 1
@@ -597,20 +491,6 @@ Public Class CDataGridView
     'End Property
 
     '<Bindable(True)>
-    '<Category("Properties")>
-    '<DefaultValue(GetType(Boolean))>
-    '<Description("Set to True to specify that data in grid has changed.")>
-    '<Browsable(True)>
-    'Public Property DataInGridChanged() As Boolean
-    '    Get
-    '        Return _DataInGridChanged
-    '    End Get
-    '    Set(ByVal value As Boolean)
-    '        _DataInGridChanged = value
-    '    End Set
-    'End Property
-
-    '<Bindable(True)>
     '<Category("Actions")>
     '<Description("Clear the data on the Grid View")>
     '<Browsable(True)>
@@ -630,13 +510,6 @@ Public Class CDataGridView
     '        CType(Me.Events("ParentofGridChangedEvent"), EventHandler).Invoke(sender, e)
     '    End RaiseEvent
     'End Event
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    Throw New NotImplementedException()
-    'End Sub
-
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    Throw New NotImplementedException()
-    'End Sub
 
     'Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
     '    'declare variable(cb) as a combobox

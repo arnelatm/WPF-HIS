@@ -292,8 +292,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -390,14 +388,6 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
-        End Sub
-
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
             UpdateDueDate()
             UpdateEarlySettlementValues()
@@ -453,16 +443,7 @@ Namespace PresentationLayer.Forms
         Private Sub UserDeletingRow(ByVal sender As Object,
                                             ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
-            ' Check if the starting balance row is included in the selected rows
-            Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
-            ElseIf PresenterObj.EditMode Then
+            If PresenterObj.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If PresenterObj.ArCollectionExists("AR", jiIdNo) Then

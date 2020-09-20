@@ -813,9 +813,12 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
             'dgvSequence
@@ -968,6 +971,8 @@ Namespace PresentationLayer.Forms
             '
             'DataGridViewCsrOiItems
             '
+            Me.DataGridViewCsrOiItems.AllowUserToAddRows = False
+            Me.DataGridViewCsrOiItems.AllowUserToDeleteRows = False
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewCsrOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewCsrOiItems.AutoGenerateColumns = False
@@ -987,10 +992,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewCsrOiItems.Ea = EventAggregator2
             Me.DataGridViewCsrOiItems.EditingMode = False
             Me.DataGridViewCsrOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewCsrOiItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewCsrOiItems.FirstRowInsertionEnabled = False
             resources.ApplyResources(Me.DataGridViewCsrOiItems, "DataGridViewCsrOiItems")
             Me.DataGridViewCsrOiItems.Name = "DataGridViewCsrOiItems"
             Me.DataGridViewCsrOiItems.ReadOnly = True
             Me.DataGridViewCsrOiItems.SequenceColumn = "dgvSequenceCsrOi"
+            Me.DataGridViewCsrOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewCsrOiItems.StartTrackingChanges = False
             '
             'dgvSequenceCsrOi
@@ -1153,10 +1161,10 @@ Namespace PresentationLayer.Forms
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floFullEntryArea)
-        Me.Name = "CashReceiptJournalEntry"
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floFullEntryArea.ResumeLayout(false)
+            Me.Name = "CashReceiptJournalEntry"
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floFullEntryArea.ResumeLayout(false)
         Me.floPurchaseJournalHeader.ResumeLayout(false)
         Me.floHeader1.ResumeLayout(false)
         Me.floHeader1.PerformLayout

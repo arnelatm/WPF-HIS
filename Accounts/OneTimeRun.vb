@@ -27,7 +27,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error")
         Messaging.AddMessage("MsgDuplicateKeyValueViolation", "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!", "Unique Key Violation")
         Messaging.AddMessage("MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-        Messaging.AddMessage("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+        Messaging.AddMessage("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed for this transaction!", "Delete Error")
+        Messaging.AddMessage("MsgFirstRowInsertionNotAllowed", "Deletion of the first row Is Not allowed for this transaction!", "Delete Error")
         Messaging.AddMessage("MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} and {endDate}!", "Invalid Date")
         Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
         Messaging.AddMessage("MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
@@ -52,6 +53,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Chart of Accounts Entry and declare at least one Petty Cash Account!", "Error")
         Messaging.AddMessage("MsgOnlyNumbersAllowed", "The field '<{FieldName}>' must contain numbers only.", "Invalid Entry")
         Messaging.AddMessage("MsgNumeric0to255Only", "The entered value for '<{FieldName}>' must be between 0-255. Reverting to previous Value.", "Invalid Entry")
+        Messaging.AddMessage("MsgInvalidPercentageRange", "Percentage value must be between <1-100>.", "Invalid Entry")
     End Sub
 
     'Public Shared Sub CreateEnums()

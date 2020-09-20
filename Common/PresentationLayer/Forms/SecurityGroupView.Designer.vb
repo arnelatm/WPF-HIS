@@ -290,34 +290,40 @@
         Me.txtNotes.ReadOnly = true
         Me.txtNotes.Size = New System.Drawing.Size(437, 60)
         Me.txtNotes.TabIndex = 183
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'DataGridViewGroupAccesses
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewGroupAccesses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewGroupAccesses.AutoGenerateColumns = false
-        Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvIdNo, Me.DgvSecurityGroupIdNo, Me.DgvSecurityObjectIdNo, Me.DgvSecurityObjectName, Me.DgvVisible, Me.DgvEditable})
-        Me.DataGridViewGroupAccesses.DataInGridChanged = false
-        Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewGroupAccesses.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DataGridViewGroupAccesses.DisplayOnly = false
-        Me.DataGridViewGroupAccesses.EditingMode = false
-        Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewGroupAccesses.Location = New System.Drawing.Point(20, 203)
-        Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
-        Me.DataGridViewGroupAccesses.ReadOnly = true
-        Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
-        Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
-        Me.DataGridViewGroupAccesses.StartTrackingChanges = false
+        Me.txtNotes.ValueIsMandatory = True
+            '
+            'DataGridViewGroupAccesses
+            '
+            Me.DataGridViewGroupAccesses.AllowUserToAddRows = False
+            Me.DataGridViewGroupAccesses.AllowUserToDeleteRows = False
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewGroupAccesses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewGroupAccesses.AutoGenerateColumns = False
+            Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvIdNo, Me.DgvSecurityGroupIdNo, Me.DgvSecurityObjectIdNo, Me.DgvSecurityObjectName, Me.DgvVisible, Me.DgvEditable})
+            Me.DataGridViewGroupAccesses.DataInGridChanged = False
+            Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewGroupAccesses.DefaultCellStyle = DataGridViewCellStyle6
+            Me.DataGridViewGroupAccesses.DisplayOnly = False
+            Me.DataGridViewGroupAccesses.Ea = Nothing
+            Me.DataGridViewGroupAccesses.EditingMode = False
+            Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewGroupAccesses.FirstRowDeletionEnabled = False
+            Me.DataGridViewGroupAccesses.FirstRowInsertionEnabled = False
+            Me.DataGridViewGroupAccesses.Location = New System.Drawing.Point(20, 203)
+            Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
+            Me.DataGridViewGroupAccesses.ReadOnly = True
+            Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
+            Me.DataGridViewGroupAccesses.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
+            Me.DataGridViewGroupAccesses.StartTrackingChanges = false
         Me.DataGridViewGroupAccesses.TabIndex = 178
         '
         'DgvIdNo

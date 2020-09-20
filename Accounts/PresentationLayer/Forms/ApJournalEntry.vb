@@ -326,8 +326,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -365,29 +363,6 @@ Namespace PresentationLayer.Forms
                 cboSupplierIdNo.RevertValue()
             End If
         End Sub
-
-        'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
-        '                                                    Handles DataGridViewJournalItems.CellClick
-        '    With DataGridViewJournalItems.CurrentCell
-        '        Select Case .OwningColumn.Name.ToLower()
-        '            Case $"dgvinsertcolumn"
-        '                If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-        '                    If .RowIndex() = 0 Then
-        '                        Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
-        '                                       "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
-        '                    Else
-        '                        Dim newRow As New JournalItemView
-        '                        bsJournalItems.Insert(.RowIndex(), newRow)
-        '                        DataGridViewJournalItems.ReSequenceDgvAfterInsert(Of JournalItemView)(JournalItems)
-        '                        SendKeys.Send("{UP}")
-        '                    End If
-        '                Else
-        '                    Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-        '                                   "Invalid Insertion")
-        '                End If
-        '        End Select
-        '    End With
-        'End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
@@ -467,14 +442,6 @@ Namespace PresentationLayer.Forms
 
                 End Select
             End With
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
         End Sub
 
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
@@ -558,10 +525,7 @@ Namespace PresentationLayer.Forms
         Private Sub UserDeletingRow(ByVal sender As Object,
                                             ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
-            ' Check if the starting balance row is included in the selected rows
             Dim apJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
             If DataGridViewJournalItems.SelectedRows.Contains(apJournalRow) Then
                 ' Do not allow the user to delete the first row.
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")

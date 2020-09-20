@@ -532,7 +532,7 @@ Namespace PresentationLayer.Forms
             Me.lblPayRateType.EditingMode = False
             Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
+            Me.lblPayRateType.Location = New System.Drawing.Point(4, 183)
             Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateType.Name = "lblPayRateType"
             Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
@@ -552,7 +552,7 @@ Namespace PresentationLayer.Forms
             Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
             Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 182)
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 183)
             Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayRateAmount.MaximumValue = Nothing
             Me.txtPayRateAmount.MinimumValue = Nothing
@@ -570,7 +570,7 @@ Namespace PresentationLayer.Forms
             Me.lblPayRateAmount.EditingMode = False
             Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 207)
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
             Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateAmount.Name = "lblPayRateAmount"
             Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
@@ -596,7 +596,7 @@ Namespace PresentationLayer.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 207)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 208)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -1860,6 +1860,7 @@ Namespace PresentationLayer.Forms
             '
             'DataGridViewEarnings
             '
+            Me.DataGridViewEarnings.AllowUserToOrderColumns = True
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewEarnings.AutoGenerateColumns = False
@@ -1879,12 +1880,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewEarnings.FirsRowDeletionEnabled = True
-            Me.DataGridViewEarnings.FirsRowInsertionEnabled = True
+            Me.DataGridViewEarnings.FirstRowDeletionEnabled = True
+            Me.DataGridViewEarnings.FirstRowInsertionEnabled = True
             Me.DataGridViewEarnings.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.SequenceColumn = "dgvEarningSequence"
+            Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
             Me.DataGridViewEarnings.Size = New System.Drawing.Size(403, 333)
             Me.DataGridViewEarnings.StartTrackingChanges = False
             Me.DataGridViewEarnings.TabIndex = 0
@@ -1980,6 +1982,7 @@ Namespace PresentationLayer.Forms
             '
             'DataGridViewDeductions
             '
+            Me.DataGridViewDeductions.AllowUserToOrderColumns = True
             DataGridViewCellStyle5.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
             Me.DataGridViewDeductions.AutoGenerateColumns = False
@@ -1999,12 +2002,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewDeductions.Ea = EventAggregator2
             Me.DataGridViewDeductions.EditingMode = False
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewDeductions.FirsRowDeletionEnabled = True
-            Me.DataGridViewDeductions.FirsRowInsertionEnabled = True
+            Me.DataGridViewDeductions.FirstRowDeletionEnabled = True
+            Me.DataGridViewDeductions.FirstRowInsertionEnabled = True
             Me.DataGridViewDeductions.Location = New System.Drawing.Point(412, 3)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.ReadOnly = True
             Me.DataGridViewDeductions.SequenceColumn = "dgvDeductionSequence"
+            Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = True
             Me.DataGridViewDeductions.Size = New System.Drawing.Size(387, 333)
             Me.DataGridViewDeductions.StartTrackingChanges = False
             Me.DataGridViewDeductions.TabIndex = 1

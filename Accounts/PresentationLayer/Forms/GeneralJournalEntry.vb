@@ -19,7 +19,6 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
-        
 
         Public Sub New(ByVal closingEntry As Boolean)
             MyBase.New()
@@ -177,7 +176,6 @@ Namespace PresentationLayer.Forms
 
 #Region "Methods"
 
-
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
@@ -211,8 +209,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -268,12 +264,7 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
-        End Sub
-
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
             chkClosingJournal.Checked = _closingEntry
         End Sub
 

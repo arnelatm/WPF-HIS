@@ -2,7 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
@@ -485,16 +484,6 @@ Namespace PresentationLayer.Forms
         }
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewDeductions.RemoveInsertColumn()
-            DataGridViewEarnings.RemoveInsertColumn()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            DataGridViewDeductions.AddInsertColumn()
-            DataGridViewEarnings.AddInsertColumn()
-        End Sub
-
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
             'MyBase.RecordPositionChanged(e)
@@ -513,8 +502,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsDeductions
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewDeductions.Columns
                 dgvDeductionSequence.DisplayOnly = True
@@ -538,8 +525,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsEarnings
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewEarnings.Columns
                 dgvEarningSequence.DisplayOnly = True

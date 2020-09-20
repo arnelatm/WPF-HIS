@@ -2,7 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.MessagingLibrary
@@ -258,8 +257,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 If dgvSequence IsNot Nothing Then
@@ -291,8 +288,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsSalesCashItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewSalesCashItems.Columns
                 If dgvCashCode IsNot Nothing Then
@@ -421,30 +416,15 @@ Namespace PresentationLayer.Forms
 
         End Sub
 
-        Private Sub DataGridViewJournalItems_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellClick
-            With DataGridViewJournalItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        If PresenterObj.EditMode OrElse PresenterObj.AddMode Then
-                            Beep()
-                        Else
-                            Messaging.Show(True, "MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.", "Error")
-                        End If
-                End Select
-            End With
-        End Sub
-
         Public Overloads Sub Dispose()
             Close()
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            DataGridViewSalesCashItems.RemoveInsertColumn()
             btnViewGL.Visible = True
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewSalesCashItems.AddInsertColumn()
             btnViewGL.Visible = False
         End Sub
 

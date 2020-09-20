@@ -774,37 +774,43 @@ Namespace PresentationLayer.Forms
         Me.CFlowLayout4.Controls.Add(Me.CFlowLayout3)
         resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
         Me.CFlowLayout4.Name = "CFlowLayout4"
-        '
-        'DataGridViewReconciliationItems
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewReconciliationItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewReconciliationItems.AutoGenerateColumns = false
-        Me.DataGridViewReconciliationItems.BackgroundColor = System.Drawing.SystemColors.Window
-        Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo})
-        Me.DataGridViewReconciliationItems.DataInGridChanged = false
-        Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewReconciliationItems.DefaultCellStyle = DataGridViewCellStyle11
-        Me.DataGridViewReconciliationItems.DisplayOnly = false
-        Me.DataGridViewReconciliationItems.EditingMode = false
-        Me.DataGridViewReconciliationItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        resources.ApplyResources(Me.DataGridViewReconciliationItems, "DataGridViewReconciliationItems")
-        Me.DataGridViewReconciliationItems.Name = "DataGridViewReconciliationItems"
-        Me.DataGridViewReconciliationItems.ReadOnly = true
-        Me.DataGridViewReconciliationItems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewReconciliationItems.StartTrackingChanges = false
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
+            '
+            'DataGridViewReconciliationItems
+            '
+            Me.DataGridViewReconciliationItems.AllowUserToAddRows = False
+            Me.DataGridViewReconciliationItems.AllowUserToDeleteRows = False
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewReconciliationItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewReconciliationItems.AutoGenerateColumns = False
+            Me.DataGridViewReconciliationItems.BackgroundColor = System.Drawing.SystemColors.Window
+            Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo})
+            Me.DataGridViewReconciliationItems.DataInGridChanged = False
+            Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewReconciliationItems.DefaultCellStyle = DataGridViewCellStyle11
+            Me.DataGridViewReconciliationItems.DisplayOnly = False
+            Me.DataGridViewReconciliationItems.Ea = Nothing
+            Me.DataGridViewReconciliationItems.EditingMode = False
+            Me.DataGridViewReconciliationItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewReconciliationItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewReconciliationItems.FirstRowInsertionEnabled = False
+            resources.ApplyResources(Me.DataGridViewReconciliationItems, "DataGridViewReconciliationItems")
+            Me.DataGridViewReconciliationItems.Name = "DataGridViewReconciliationItems"
+            Me.DataGridViewReconciliationItems.ReadOnly = True
+            Me.DataGridViewReconciliationItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewReconciliationItems.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewReconciliationItems.StartTrackingChanges = False
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
