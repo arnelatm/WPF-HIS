@@ -2,7 +2,6 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-
 Public Class TranslationTableManager
 
 #Region " Declarations and Property Procedures "
@@ -121,10 +120,10 @@ Public Class TranslationTableManager
         Editing = False
         Dim nIndex = DataGrid1.CurrentRow.Index
         Dim originalValue As String
-        Dim captionIdNo As Int16
+        Dim captionIdNo As Int32
         originalValue = DataGrid1.Rows(nIndex).Cells(0).Value.TrimEnd
         Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue + "'"
-        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int32)(Cmd)
         Select Case cmbLanguage.SelectedValue
             Case 1
                 Msg = String.Format("Delete {0} for all languages?", originalValue)
@@ -284,7 +283,7 @@ Public Class TranslationTableManager
                     Dim newRow As DataRow = TransTable.NewRow
                     newRow(0) = dr.Item(0)
                     newRow(1) = ""
-                    TransTable.Rows.Add(newrow)
+                    TransTable.Rows.Add(newRow)
                 Next
                 DataGrid1.DataSource = TransTable
                 DataGrid1.Columns(0).Width = 410
@@ -327,9 +326,9 @@ Public Class TranslationTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.TrimEnd()
         Dim translatedValue As String = txtTranslation.Text.TrimEnd()
-        Dim captionIdNo As Int16
+        Dim captionIdNo As Int32
         Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue + "'"
-        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int32)(Cmd)
 
         Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
@@ -364,9 +363,9 @@ Public Class TranslationTableManager
         ' Remove the translated record if it already exists
         Dim originalValue As String = DataGrid1.CurrentRow.Cells(0).Value.ToString().Trim()
         Dim translatedValue As String = DataGrid1.CurrentRow.Cells(1).Value.ToString().Trim()
-        Dim captionIdNo As Int16
+        Dim captionIdNo As Int32
         Cmd = "Select IdNo From OriginalCaptions where Caption ='" + originalValue.Trim() + "'"
-        captionIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+        captionIdNo = TranslatorDAC.ExecScalar(Of Int32)(Cmd)
         Cmd = "DELETE from TranslatedCaption WHERE CaptionIdNo = " + captionIdNo.ToString() +
               " AND languageIdNo = " + cmbLanguage.SelectedValue.ToString()
         Result = TranslatorDAC.ExecCmd(Cmd)

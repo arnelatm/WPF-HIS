@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views
 
     Public Interface ITranslatedMessagesView
         Inherits IView
-        Property TranslatedMessageIdNo As Int32
+        Property IdNo As Int32
         Property MessageIdNo As Int16
         Property LanguageIdNo As Int16
         Property TranslatedMessage As String

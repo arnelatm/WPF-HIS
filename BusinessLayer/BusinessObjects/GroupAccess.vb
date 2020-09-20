@@ -11,8 +11,8 @@ Namespace BusinessObjects
         End Sub
 
         Public Property IdNo As Nullable(Of Int32)
-        Public Property SecurityGroupIdNo As Nullable(Of Int32)
-        Public Property SecurityObjectIdNo As Nullable(Of Int32)
+        Public Property SecurityGroupIdNo As Nullable(Of Int16)
+        Public Property SecurityObjectIdNo As Nullable(Of Int16)
         Public Property SecurityObjectName As String
         Public Property Visible As Boolean
 

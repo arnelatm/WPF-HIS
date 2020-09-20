@@ -51,10 +51,12 @@
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
-    Function GetControlSecurityIdNo(searchValue As String) As String
-    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList
 
-    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList
+    Function GetControlSecurityIdNo(searchValue As String) As String
+
+    Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+
+    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 
     Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
                               Optional timeStampedField As String = "DateTimeStamp") As Boolean

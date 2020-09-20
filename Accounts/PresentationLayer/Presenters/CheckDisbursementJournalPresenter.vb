@@ -38,7 +38,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
@@ -47,7 +47,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             DtCkdOiInsertTable.Columns.Add("Amount", GetType(Decimal))

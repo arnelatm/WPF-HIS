@@ -50,9 +50,9 @@ Public Class GlobalVariables
 
     Public Shared Property RightToLeftLayout As Boolean = False
 
-    Public Shared Property SecurityGroupIdNo As Int32 = 0
+    Public Shared Property SecurityGroupIdNo As Int16 = 0
 
-    Public Shared Property UserIdNo As Int32
+    Public Shared Property UserIdNo As Int16
 
 #Region "Colors"
 
@@ -203,7 +203,6 @@ Public Class GlobalVariables
 #End Region
 
     Public Shared Property Mapper As AutoMapper.Mapper
-
 
     Public Shared Property DacConnectionString As String
         Get
@@ -639,7 +638,6 @@ Public Class GlobalVariables
             _defaultNumberFormatInfo = Value
         End Set
     End Property
-
 
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then

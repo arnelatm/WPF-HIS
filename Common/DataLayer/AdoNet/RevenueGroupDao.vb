@@ -66,8 +66,8 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, RevenueGroup) =
                                     Function(reader) _
             New RevenueGroup() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
             .RevenueGroupCode = Extensions.AsString(reader("RevenueGroupCode")),
             .RevenueGroupName = Extensions.AsString(reader("RevenueGroupName")),
             .RevenueGroupNameAra = Extensions.AsString(reader("RevenueGroupNameAra")),

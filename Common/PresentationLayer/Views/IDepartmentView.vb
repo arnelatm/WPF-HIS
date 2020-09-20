@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Property DepartmentNameAra() As String
         Property ParentIdNo() As Integer?
         Property Notes() As String
-        Property RevCostCenterIdNo() As Integer
+        Property RevCostCenterIdNo() As Int16
         Property SortKey As String
     End Interface
 

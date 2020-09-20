@@ -66,10 +66,10 @@ Public Class LoginEntry
             If PresenterObj.Login() Then
                 _loginOk = True
                 GlobalVariables.UserName = textBoxUserName.Text.Trim()
-                GlobalVariables.UserIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
+                GlobalVariables.UserIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
                                                                                                  "User", "UserName", "IdNo"))
                 GlobalVariables.SecurityGroupIdNo =
-                    Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
+                    Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
                                                                           "SecurityGroupIdNo"))
             Else
                 Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")

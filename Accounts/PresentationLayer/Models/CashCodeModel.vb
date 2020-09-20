@@ -9,7 +9,7 @@
         Public Property AccountIdNo As Int16?
         Public Property BankChargesAccountIdNo As Int16?
         Public Property BankChargesVatAccountIdNo As Int16?
-        Public Property CashCode As String
+        Public Property CashCode As Char
         Public Property CashName As String
         Public Property CashNameAra As String
         Public Property Errors As List(Of String)

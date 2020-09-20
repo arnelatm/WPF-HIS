@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("JournalIdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
-            .RevCostCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
+            .RevCostCenterIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("RevCostCenterIdNo")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("sequence"))
             }
 

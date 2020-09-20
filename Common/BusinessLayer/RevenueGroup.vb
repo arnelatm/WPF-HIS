@@ -16,8 +16,8 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Int32
-        Public Property ParentIdNo As Int32?
+        Public Property IdNo As Int16
+        Public Property ParentIdNo As Int16?
         Public Property RevenueGroupCode As String
         Public Property RevenueGroupName As String
         Public Property RevenueGroupNameAra As String

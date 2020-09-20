@@ -1146,7 +1146,7 @@ Namespace PresentationLayer.Forms
         Public Property FullName As String Implements IUserView.FullName
         Public Property FullNameAra As String Implements IUserView.FullNameAra
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
-        Public Property SecurityGroupIdNo As Int32 Implements IUserView.SecurityGroupIdNo
+        Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
         Public Property IUserView_UserName As String Implements IUserView.UserName
 
         Private Sub ToolStripMenuItemSecurityGroups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityGroups.Click

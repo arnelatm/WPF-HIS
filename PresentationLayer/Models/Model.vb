@@ -353,7 +353,7 @@ Public Class Model
         Return Service.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
     End Function
 
-    'Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
+    'Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
     '    Implements IModel.GetUserSecurity
     '    Return SecurityService.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     'End Function
@@ -411,12 +411,12 @@ Public Class Model
         Return Service.GetControlSecurityIdNo(searchValue)
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
+    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
         Implements IModel.GetUserSecurity
         Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
-    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList _
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList _
         Implements IModel.GetUserSecurityForKey
         Return Service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
@@ -431,4 +431,3 @@ Public Class ModelLogin
     End Sub
 
 End Class
-

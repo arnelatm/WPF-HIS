@@ -4,7 +4,6 @@ Namespace PresentationLayer.Views
 
     Public Class DistributionSchemeItemView
 
-
         Implements IDistributionSchemeItemView
 
         Public Property IdNo As Int32 Implements IDistributionSchemeItemView.IdNo
@@ -13,7 +12,7 @@ Namespace PresentationLayer.Views
 
         Public Property Sequence As Int16 Implements IDistributionSchemeItemView.Sequence
 
-        Public Property RevCostCenterIdNo As Int32 Implements IDistributionSchemeItemView.RevCostCenterIdNo
+        Public Property RevCostCenterIdNo As Int16 Implements IDistributionSchemeItemView.RevCostCenterIdNo
 
         Public Property RevCostCenterName As String Implements IDistributionSchemeItemView.RevCostCenterName
 
@@ -21,6 +20,6 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
 
-
     End Class
+
 End Namespace

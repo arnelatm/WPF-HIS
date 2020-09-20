@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Property BankChargeDifference As Decimal
         Property BankChargeVatDifference As Decimal
         Property DepositAmount As Decimal
-        Property CashCode As String
+        Property CashCode As Char
         Property ComputedBankCharge As Decimal
         Property ComputedBankChargeVat As Decimal
         Property IdNo As Int32
