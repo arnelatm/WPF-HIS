@@ -24,17 +24,19 @@ Namespace PresentationLayer.Forms
             Ea.SubscribeEvent(Me)
 
         End Sub
+
 #Region "Fields"
-        Public Property IdNo As Int32 Implements ISecurityObjectView.IdNo
+
+        Public Property IdNo As Int16 Implements ISecurityObjectView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements ISecurityObjectView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements ISecurityObjectView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get
@@ -78,6 +80,7 @@ Namespace PresentationLayer.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
@@ -105,5 +108,7 @@ Namespace PresentationLayer.Forms
                 {"Notes", txtNotes}
                 }
         End Sub
+
     End Class
-End NameSpace
+
+End Namespace

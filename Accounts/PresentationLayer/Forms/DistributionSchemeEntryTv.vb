@@ -18,7 +18,6 @@ Namespace PresentationLayer.Forms
         Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        
 
         Public Sub New()
             ' This call is required by the designer.
@@ -38,7 +37,6 @@ Namespace PresentationLayer.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
-
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 
             PresenterObj.DistributionSchemeItemsPresenter = _distributionSchemeItemsPresenter
@@ -57,21 +55,6 @@ Namespace PresentationLayer.Forms
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
 
-            'CreateEnumResourceFile()
-
-            'ResourceEnumConverter.MakeResource("DistributionSchemeTypeSelection", GetType(DistributionSchemeTypeSelection))
-        End Sub
-
-        '' The form will handle all key events before the control with
-        '' focus handles them
-        'Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        '    e.Handled = False
-        'End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("DistributionSchemeTypeSelection", GetType(DistributionSchemeTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
 #Region "DistributionSchemeView"
@@ -207,7 +190,6 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub InputsTurnedOn()
             DataGridViewDistributionSchemeItems.StartTrackingChanges = True
-            DataGridViewDistributionSchemeItems.AddInsertColumn()
             If PresenterObj.AddMode Then
                 dtpValidityStartDate.Value = Date.Now()
                 dtpValidityEndDate.Value = Date.Now()
@@ -218,7 +200,6 @@ Namespace PresentationLayer.Forms
 
         Protected Overrides Sub InputsTurnedOff()
             DataGridViewDistributionSchemeItems.StartTrackingChanges = False
-            DataGridViewDistributionSchemeItems.RemoveInsertColumn()
         End Sub
 
         'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
@@ -276,7 +257,7 @@ Namespace PresentationLayer.Forms
                             selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
                             If amount > 100 Or amount < 0 Then
                                 selectedRow.Percentage = 0
-                                MessageBox.Show("Percentage value must be between <1-100>.")
+                                MessagingLibrary.Messaging.Show(True, "MsgInvalidPercentageRange")
                             End If
                         End If
                         UpdateTotals()
@@ -292,7 +273,6 @@ Namespace PresentationLayer.Forms
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             DataGridViewDistributionSchemeItems.Focus()
         End Sub
-
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
             MyBase.RecordSaved(e)

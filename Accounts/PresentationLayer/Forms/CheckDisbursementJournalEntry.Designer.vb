@@ -91,6 +91,7 @@ Namespace PresentationLayer.Forms
             Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -127,7 +128,6 @@ Namespace PresentationLayer.Forms
             Me.bsCkdOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -813,6 +813,27 @@ Namespace PresentationLayer.Forms
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
             '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
+            '
             'floPurchaseJournalItems
             '
             Me.floPurchaseJournalItems.BackColor = System.Drawing.Color.Transparent
@@ -846,9 +867,12 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
             'dgvSequence
@@ -1003,6 +1027,8 @@ Namespace PresentationLayer.Forms
             '
             'DataGridViewCkdOiItems
             '
+            Me.DataGridViewCkdOiItems.AllowUserToAddRows = False
+            Me.DataGridViewCkdOiItems.AllowUserToDeleteRows = False
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewCkdOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewCkdOiItems.AutoGenerateColumns = False
@@ -1022,10 +1048,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewCkdOiItems.Ea = EventAggregator2
             Me.DataGridViewCkdOiItems.EditingMode = False
             Me.DataGridViewCkdOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewCkdOiItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewCkdOiItems.FirstRowInsertionEnabled = False
             resources.ApplyResources(Me.DataGridViewCkdOiItems, "DataGridViewCkdOiItems")
             Me.DataGridViewCkdOiItems.Name = "DataGridViewCkdOiItems"
             Me.DataGridViewCkdOiItems.ReadOnly = True
             Me.DataGridViewCkdOiItems.SequenceColumn = "dgvSequenceCkdOi"
+            Me.DataGridViewCkdOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewCkdOiItems.StartTrackingChanges = False
             '
             'dgvSequenceCkdOi
@@ -1195,35 +1224,14 @@ Namespace PresentationLayer.Forms
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
             '
-            'dtpDateCreated
-            '
-            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpDateCreated.DefaultValue = Nothing
-            Me.dtpDateCreated.DisplayOnly = True
-            Me.dtpDateCreated.DtpDefaultValue = Nothing
-            Me.dtpDateCreated.EditingMode = False
-            Me.dtpDateCreated.EditsAllowed = False
-            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.dtpDateCreated.LinkedLabel = Nothing
-            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
-            Me.dtpDateCreated.Name = "dtpDateCreated"
-            Me.dtpDateCreated.ReadOnlyDp = True
-            Me.dtpDateCreated.SecurityKey = Nothing
-            Me.dtpDateCreated.ShowLongDate = False
-            Me.dtpDateCreated.ShowTime = True
-            Me.dtpDateCreated.TargetCalendar = Nothing
-            Me.dtpDateCreated.Value = Nothing
-            Me.dtpDateCreated.ValueIsMandatory = False
-            Me.dtpDateCreated.ValueIsNullable = False
-            '
             'CheckDisbursementJournalEntry
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floFullEntryArea)
-        Me.Name = "CheckDisbursementJournalEntry"
-        Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floFullEntryArea.ResumeLayout(false)
+            Me.Controls.Add(Me.floFullEntryArea)
+            Me.Name = "CheckDisbursementJournalEntry"
+            Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floFullEntryArea.ResumeLayout(false)
         Me.floPurchaseJournalHeader.ResumeLayout(false)
         Me.floHeader1.ResumeLayout(false)
         Me.floHeader1.PerformLayout

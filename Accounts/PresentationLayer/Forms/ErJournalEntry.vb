@@ -1,11 +1,9 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports System.ComponentModel
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Events
@@ -22,7 +20,6 @@ Namespace PresentationLayer.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
-        
 
         Public Sub New()
             MyBase.New()
@@ -69,15 +66,6 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property EmployeeIdNo As Int32? Implements IErJournalView.EmployeeIdNo
-            Get
-                Return cboEmployeeIdNo.GetValue()
-            End Get
-            Set
-                cboEmployeeIdNo.SetValue(Value)
-            End Set
-        End Property
-
         Public Property DateCreated As DateTime? Implements IErJournalView.DateCreated
             Get
                 Return dtpDateCreated.Value
@@ -88,6 +76,15 @@ Namespace PresentationLayer.Forms
                 Else
                     dtpDateCreated.Value = Date.Now()
                 End If
+            End Set
+        End Property
+
+        Public Property EmployeeIdNo As Int32? Implements IErJournalView.EmployeeIdNo
+            Get
+                Return cboEmployeeIdNo.GetValue()
+            End Get
+            Set
+                cboEmployeeIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -218,17 +215,6 @@ Namespace PresentationLayer.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New DgvFooter(DataGridViewJournalItems) With {
-                .AutoCalc = True
-            }
-            _footer.ColumnToSum("dgvDebit") = True
-            _footer.ColumnToSum("dgvCredit") = True
-            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
-            _footer.SetText("DgvAccountIdNo", "Totals ->")
-        End Sub
-
         Private Sub BindJournalItem()
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
@@ -240,8 +226,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -280,6 +264,17 @@ Namespace PresentationLayer.Forms
 
         Private Overloads Sub Dispose()
             _footer.Dispose()
+        End Sub
+
+        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
@@ -333,14 +328,6 @@ Namespace PresentationLayer.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
-        End Sub
-
         Private Function PaymentOrDiscountMade()
             Dim retVal As Boolean = False
             If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
@@ -367,16 +354,7 @@ Namespace PresentationLayer.Forms
         Private Sub UserDeletingRow(ByVal sender As Object,
                                             ByVal e As DataGridViewRowCancelEventArgs) _
             Handles DataGridViewJournalItems.UserDeletingRow
-            ' Check if the starting balance row is included in the selected rows
-            Dim ErJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(ErJournalRow) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
-            ElseIf PresenterObj.EditMode Then
+            If PresenterObj.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If PresenterObj.ArCollectionExists("ER", jiIdNo) Then

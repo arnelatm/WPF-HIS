@@ -17,7 +17,6 @@ Namespace PresentationLayer.Forms
         Private _revCostCenterByName
         Private _totalPercentage As Decimal
         Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
-        
 
         Public Sub New()
 
@@ -137,7 +136,6 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-
         Protected Overrides Sub CreateDataSources()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
@@ -151,7 +149,7 @@ Namespace PresentationLayer.Forms
          {"DistributionSchemeNameAra", txtDistributionSchemeNameAra},
          {"IdNo", TxtIdNo},
          {"Notes", txtNotes},
-         {"ValididtyEndDate", dtpValidityEndDate},
+         {"ValidityEndDate", dtpValidityEndDate},
          {"ValidityStartDate", dtpValidityStartDate}
         }
         End Sub
@@ -162,15 +160,13 @@ Namespace PresentationLayer.Forms
 
         Private Sub BindDistributionSchemeItem()
             SuspendLayout()
-            bsDistributionSchemeItems.DataSource = DistributionSchemeitems
+            bsDistributionSchemeItems.DataSource = DistributionSchemeItems
             bsDistributionSchemeItems.AllowNew = True
             With DataGridViewDistributionSchemeItems
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsDistributionSchemeItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewDistributionSchemeItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -192,20 +188,7 @@ Namespace PresentationLayer.Forms
             _footer.Dispose()
         End Sub
 
-        'Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        '    _footer = New DgvFooter(Me.DataGridViewDistributionSchemeItems)
-        '    _footer.AutoCalc = True
-        '    _footer.ColumnToSum("dgvPercentage") = True
-        '    _footer.SetAlignment("dgvPercentage", ContentAlignment.MiddleRight)
-        '    _footer.SetText("DgvRevCostCenterIdNo", "Totals ->")
-        'End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewDistributionSchemeItems.RemoveInsertColumn()
-        End Sub
-
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewDistributionSchemeItems.AddInsertColumn()
             If PresenterObj.AddMode Then
                 dtpValidityStartDate.Value = Date.Now()
                 dtpValidityEndDate.Value = Date.Now()

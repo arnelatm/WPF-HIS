@@ -79,8 +79,8 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floErJournalItems.SuspendLayout()
@@ -126,10 +126,13 @@ Namespace PresentationLayer.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
             Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1015, 280)
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             Me.DataGridViewJournalItems.TabIndex = 0
@@ -814,18 +817,6 @@ Namespace PresentationLayer.Forms
             Me.lblDateAdded.Text = "Date Added:"
             Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'floFullEntryArea
-            '
-            Me.floFullEntryArea.BackColor = System.Drawing.Color.Transparent
-            Me.floFullEntryArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.floFullEntryArea.Controls.Add(Me.floErJournalHeader)
-            Me.floFullEntryArea.Controls.Add(Me.floErJournalItems)
-            Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-            Me.floFullEntryArea.Location = New System.Drawing.Point(0, 53)
-            Me.floFullEntryArea.Name = "floFullEntryArea"
-            Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 478)
-            Me.floFullEntryArea.TabIndex = 0
-            '
             'dtpDateCreated
             '
             Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
@@ -850,6 +841,18 @@ Namespace PresentationLayer.Forms
             Me.dtpDateCreated.ValueIsMandatory = False
             Me.dtpDateCreated.ValueIsNullable = False
             '
+            'floFullEntryArea
+            '
+            Me.floFullEntryArea.BackColor = System.Drawing.Color.Transparent
+            Me.floFullEntryArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            Me.floFullEntryArea.Controls.Add(Me.floErJournalHeader)
+            Me.floFullEntryArea.Controls.Add(Me.floErJournalItems)
+            Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
+            Me.floFullEntryArea.Location = New System.Drawing.Point(0, 53)
+            Me.floFullEntryArea.Name = "floFullEntryArea"
+            Me.floFullEntryArea.Size = New System.Drawing.Size(1043, 478)
+            Me.floFullEntryArea.TabIndex = 0
+            '
             'ErJournalEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -868,10 +871,10 @@ Namespace PresentationLayer.Forms
             Me.CFlowLayout3.PerformLayout()
             Me.CFlowLayout2.ResumeLayout(False)
             Me.floFullEntryArea.ResumeLayout(False)
-            Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents floErJournalItems As CFlowLayout
         Friend WithEvents DataGridViewJournalItems As CDataGridView
         Friend WithEvents lblCancelled As CLabel

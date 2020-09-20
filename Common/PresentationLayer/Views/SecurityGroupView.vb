@@ -1,12 +1,13 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
+
     Public Class SecurityGroupView
         Implements ISecurityGroupView
 
-        Public Property IdNo As Int32 Implements ISecurityGroupView.IdNo
+        Public Property IdNo As Int16 Implements ISecurityGroupView.IdNo
 
-        Public Property ParentIdNo As Int32? Implements ISecurityGroupView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements ISecurityGroupView.ParentIdNo
 
         Public Property SecurityGroupName As String Implements ISecurityGroupView.SecurityGroupName
 
@@ -20,4 +21,5 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
     End Class
+
 End Namespace

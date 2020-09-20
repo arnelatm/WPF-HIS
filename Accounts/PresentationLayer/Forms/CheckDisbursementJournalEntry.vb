@@ -28,7 +28,6 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
-        
 
         Public Sub New()
             MyBase.New()
@@ -44,8 +43,6 @@ Namespace PresentationLayer.Forms
             PresenterObj = New CheckDisbursementJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            
-           
 
         End Sub
 
@@ -366,8 +363,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsCkdOiItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewCkdOiItems.Columns
                 If dgvSequenceCkdOi IsNot Nothing Then
@@ -395,8 +390,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
                 .Refresh()
-                .AllowUserToAddRows = True
-                .AllowUserToDeleteRows = True
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -548,7 +541,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            DataGridViewJournalItems.RemoveInsertColumn()
             If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
             Else
@@ -557,7 +549,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewJournalItems.AddInsertColumn()
             PresenterObj.AddSupplierOpenInvoices()
             BindCkdOiItem()
             btnViewGL.Visible = False
@@ -699,21 +690,6 @@ Namespace PresentationLayer.Forms
                 End If
             Next
             VatAmount = tVatAmount
-        End Sub
-
-        Private Sub UserDeletingRow(ByVal sender As Object,
-                                    ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow _
-
-            ' Check if the starting balance row is included in the selected rows
-            Dim checkDisbursementRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(checkDisbursementRowEntry) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed")
-                ' Cancel the deletion
-                e.Cancel = True
-            End If
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow

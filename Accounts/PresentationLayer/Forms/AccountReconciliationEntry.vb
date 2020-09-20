@@ -247,8 +247,6 @@ Namespace PresentationLayer.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsAccountReconciliationItems
                 .Refresh()
-                .AllowUserToAddRows = False
-                .AllowUserToDeleteRows = False
             End With
             With DataGridViewReconciliationItems.Columns
                 dgvSequence.DisplayOnly = True
