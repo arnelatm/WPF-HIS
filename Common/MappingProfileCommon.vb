@@ -20,7 +20,7 @@ Public Class MappingProfileCommon
         CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
         CreateMap(Of GroupAccess, GroupAccessModel).ReverseMap()
         CreateMap(Of GroupAccessModel, GroupAccessView)(MemberList.Source).ReverseMap()
-        CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.TranslatedMessageIdNo))
+        CreateMap(Of ITranslatedMessagesView, TranslatedMessagesModel)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
         CreateMap(Of OriginalCaptions, OriginalCaptionsModel).ReverseMap()
         CreateMap(Of OriginalCaptionsModel, IOriginalCaptionsView).ReverseMap()
         CreateMap(Of OriginalMessages, OriginalMessagesModel).ReverseMap()
@@ -47,7 +47,7 @@ Public Class MappingProfileCommon
         CreateMap(Of TranslatedCaption, TranslatedCaptionModel).ReverseMap()
         CreateMap(Of TranslatedCaptionModel, ITranslatedCaptionView).ReverseMap()
         CreateMap(Of TranslatedMessages, TranslatedMessagesModel).ReverseMap()
-        CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView)().ForMember(Function(dest) dest.TranslatedMessageIdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
+        CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
         CreateMap(Of User, UserModel)().ReverseMap()
         CreateMap(Of UserModel, IUserView).ReverseMap()
 

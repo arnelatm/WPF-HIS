@@ -114,7 +114,6 @@ Namespace PresentationLayer.Forms
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
                 {"RevCostCenterIdNo", cacRevCostCenterIdNo},
-                {"RevCostCenterIdNo", cacRevCostCenterIdNo},
                 {"ParentId", TxtIdNo},
                 {"Notes", txtNotes}
                 }
