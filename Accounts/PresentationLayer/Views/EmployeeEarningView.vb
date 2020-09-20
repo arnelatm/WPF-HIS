@@ -1,9 +1,10 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class EmployeeEarningView
-        Implements IEmployeeEarningView
+        Implements IEmployeeEarningView, ISelfDuplicating
 
         Public Property Amount As Decimal Implements IEmployeeEarningView.Amount
         Public Property EarningCode As String Implements IEmployeeEarningView.EarningCode
@@ -16,6 +17,11 @@ Namespace PresentationLayer.Views
         Public Property Sequence As Int16 Implements IEmployeeEarningView.Sequence
         Public Property Errors As List(Of String) Implements IView.Errors
 
+        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
+            Return New EmployeeEarningView
+        End Function
+
     End Class
+
 
 End Namespace

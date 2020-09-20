@@ -1,13 +1,14 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class SalesCashItemView
-        Implements ISalesCashItemView
+        Implements ISalesCashItemView, ISelfDuplicating
 
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
         Private _computedBankCharge As Decimal = 0D
@@ -80,6 +81,9 @@ Namespace PresentationLayer.Views
         '    Return Math.Round(pBankCharge * _vatRate, 2)
         'End Function
 
+        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
+            Return New SalesCashItemView
+        End Function
     End Class
 
 End Namespace

@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class GeneralJournalEntry
-        Implements IGeneralJournalView, ISubscriber(Of InsertDgvLine)
+        Implements IGeneralJournalView
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -19,7 +19,7 @@ Namespace PresentationLayer.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
-        Private ReadOnly _dgvEa As EventAggregator
+        
 
         Public Sub New(ByVal closingEntry As Boolean)
             MyBase.New()
@@ -42,8 +42,6 @@ Namespace PresentationLayer.Forms
             PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            _dgvEa = DataGridViewJournalItems.Ea
-            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -179,9 +177,6 @@ Namespace PresentationLayer.Forms
 
 #Region "Methods"
 
-        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            bsJournalItems.Insert(eventType.BsRow, New JournalItemView)
-        End Sub
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()

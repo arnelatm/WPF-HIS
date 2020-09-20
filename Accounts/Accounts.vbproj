@@ -519,7 +519,6 @@
     <Compile Include="PresentationLayer\Views\IArJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IBankView.vb" />
     <Compile Include="PresentationLayer\Views\IBranchView.vb" />
-    <Compile Include="PresentationLayer\Views\ICadOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\ICadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\ICashCodeView.vb" />
     <Compile Include="PresentationLayer\Views\ICashDisbursementJournalView.vb" />

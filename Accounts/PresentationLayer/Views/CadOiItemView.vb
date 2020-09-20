@@ -1,10 +1,10 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class CadOiItemView
         Implements ICadOiItemView
-
         Public Property AccountIdNo As Int16? Implements ICadOiItemView.AccountIdNo
         Public Property Amount As Decimal Implements ICadOiItemView.Amount
         Public Property ApOpenInvoiceIdNo As Int32 Implements ICadOiItemView.ApOpenInvoiceIdNo

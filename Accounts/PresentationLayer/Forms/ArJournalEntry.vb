@@ -13,7 +13,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class ArJournalEntry
-        Implements IArJournalView, ISubscriber(Of InsertDgvLine)
+        Implements IArJournalView
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
@@ -22,7 +22,6 @@ Namespace PresentationLayer.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
-        Private ReadOnly _dgvEa As EventAggregator
 
         Public Sub New()
             MyBase.New()
@@ -37,8 +36,6 @@ Namespace PresentationLayer.Forms
             PresenterObj = New ArJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            _dgvEa = DataGridViewJournalItems.Ea
-            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -267,10 +264,6 @@ Namespace PresentationLayer.Forms
          {"TransactionDate", dtpTransactionDate},
          {"TransactionType", cboTransactionType}
         }
-        End Sub
-
-        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            bsJournalItems.Insert(eventType.BsRow, New JournalItemView)
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)

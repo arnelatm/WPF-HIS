@@ -26,10 +26,12 @@ Namespace PresentationLayer.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -1827,9 +1829,9 @@ Namespace PresentationLayer.Forms
             Me.CLabel2.Location = New System.Drawing.Point(412, 0)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(137, 17)
+            Me.CLabel2.Size = New System.Drawing.Size(141, 17)
             Me.CLabel2.TabIndex = 3
-            Me.CLabel2.Text = "Regular Deductions:"
+            Me.CLabel2.Text = "Regular Deductions: "
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'lblEarnings
@@ -1874,8 +1876,11 @@ Namespace PresentationLayer.Forms
             DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle4
             Me.DataGridViewEarnings.DisplayOnly = False
+            Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewEarnings.FirsRowDeletionEnabled = True
+            Me.DataGridViewEarnings.FirsRowInsertionEnabled = True
             Me.DataGridViewEarnings.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
@@ -1991,8 +1996,11 @@ Namespace PresentationLayer.Forms
             DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle8
             Me.DataGridViewDeductions.DisplayOnly = False
+            Me.DataGridViewDeductions.Ea = EventAggregator2
             Me.DataGridViewDeductions.EditingMode = False
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDeductions.FirsRowDeletionEnabled = True
+            Me.DataGridViewDeductions.FirsRowInsertionEnabled = True
             Me.DataGridViewDeductions.Location = New System.Drawing.Point(412, 3)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.ReadOnly = True

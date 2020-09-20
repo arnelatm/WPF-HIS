@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class EmployeeEntryTv
-        Implements IEmployeeView, ISubscriber(Of InsertDgvLine)
+        Implements IEmployeeView
 
         Private ReadOnly _nfi As NumberFormatInfo
         Private _deductionsByName
@@ -36,8 +36,8 @@ Namespace PresentationLayer.Forms
             PresenterObj = New EmployeePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            DataGridViewEarnings.Ea.SubscribeEvent(Me)
-            DataGridViewDeductions.Ea.SubscribeEvent(Me)
+            'DataGridViewEarnings.Ea.SubscribeEvent(Me)
+            'DataGridViewDeductions.Ea.SubscribeEvent(Me)
 
         End Sub
 
@@ -425,13 +425,13 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            If eventType.Name = "DataGridViewEarnings" Then
-                bsEarnings.Insert(eventType.BsRow, New EmployeeEarningView)
-            ElseIf eventType.Name = "DataGridViewDeductions" Then
-                bsDeductions.Insert(eventType.BsRow, New EmployeeDeductionView)
-            End If
-        End Sub
+        'Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
+        '    If eventType.Name = "DataGridViewEarnings" Then
+        '        bsEarnings.Insert(eventType.BsRow, New EmployeeEarningView)
+        '    ElseIf eventType.Name = "DataGridViewDeductions" Then
+        '        bsDeductions.Insert(eventType.BsRow, New EmployeeDeductionView)
+        '    End If
+        'End Sub
 
         Protected Overrides Sub CreateDataSources()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()

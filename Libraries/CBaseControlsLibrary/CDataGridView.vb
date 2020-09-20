@@ -41,7 +41,21 @@ Public Class CDataGridView
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
-    Public Property DisplayOnly As Boolean
+    Public Property DisplayOnly As Boolean = False
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that Deletion of first row is allowed.")>
+    <Browsable(True)>
+    Public Property FirstRowDeletionEnabled As Boolean = True
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that Insertion on first row not allowed.")>
+    <Browsable(True)>
+    Public Property FirstRowInsertionEnabled As Boolean = True
 
     Public Property Ea As EventAggregator
 
@@ -243,18 +257,24 @@ Public Class CDataGridView
                 Case $"dgvinsertcolumn"
                     If EditingMode Then
                         If (CurrentRow.Index() <> NewRowIndex()) Then
-                            If Ea IsNot Nothing Then
-                                Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                            'If Ea IsNot Nothing Then
+                            '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                            'End If
+                            If .RowIndex() <> 0 And FirstRowInsertionEnabled Then
+                                Dim myBindingSource = CType(DataSource, BindingSource)
+                                Dim current = myBindingSource.Current
+                                Dim dataList = current.BlankCopy()
+                                myBindingSource.Insert(.RowIndex(), dataList)
+                                ReSequenceDgvAfterInsert()
+                                SendKeys.Send("{UP}")
+                            Else
+                                Messaging.Show(True, "MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.",
+                                "Invalid Insertion", {"transactionName", "A.P. Journal Entry"})
                             End If
-                            'Dim myBindingSource = CType(DataSource, BindingSource)
-                            'myBindingSource.Insert(.RowIndex(), dataList)
-                            ReSequenceDgvAfterInsert()
-                            SendKeys.Send("{UP}")
+                        Else
+                            MessagingLibrary.Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
+                                       "Invalid Insertion")
                         End If
-                    Else
-                        MessagingLibrary.Messaging.Show(True, "MsgInvalidInsertOnViewMode", "Row insertion not allowed while in view mode. Press edit button to enable insertion.",
-                                   "Invalid Insertion")
-                    End If
             End Select
         End With
     End Sub
