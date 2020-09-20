@@ -1,9 +1,10 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class JournalItemView
-        Implements IJournalItemView
+        Implements IJournalItemView, ISelfDuplicating
 
         Private _debit As Decimal
         Private _credit As Decimal
@@ -71,6 +72,9 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
 
+        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
+            Return New JournalItemView
+        End Function
     End Class
 
     'Public Class GeneralJournalItemView

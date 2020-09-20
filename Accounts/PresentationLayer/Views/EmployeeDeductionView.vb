@@ -1,9 +1,10 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class EmployeeDeductionView
-        Implements IEmployeeDeductionView
+        Implements IEmployeeDeductionView, ISelfDuplicating
 
         Public Property Amount As Decimal Implements IEmployeeDeductionView.Amount
         Public Property DeductionCode As String Implements IEmployeeDeductionView.DeductionCode
@@ -16,5 +17,8 @@ Namespace PresentationLayer.Views
         Public Property Sequence As Int16 Implements IEmployeeDeductionView.Sequence
         Public Property Errors As List(Of String) Implements IView.Errors
 
+        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
+            Return New EmployeeDeductionView
+        End Function
     End Class
 End Namespace

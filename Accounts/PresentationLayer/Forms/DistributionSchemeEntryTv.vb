@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntryTv
-        Implements IDistributionSchemeView, IDistributionSchemeItemsView, ISubscriber(Of InsertDgvLine)
+        Implements IDistributionSchemeView, IDistributionSchemeItemsView
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Protected DtInsertTable As New DataTable
@@ -18,7 +18,7 @@ Namespace PresentationLayer.Forms
         Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private ReadOnly _dgvEa As EventAggregator
+        
 
         Public Sub New()
             ' This call is required by the designer.
@@ -37,8 +37,7 @@ Namespace PresentationLayer.Forms
             PresenterObj = New DistributionSchemePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            _dgvEa = DataGridViewDistributionSchemeItems.Ea
-            _dgvEa.SubscribeEvent(Me)
+
 
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 
@@ -197,11 +196,6 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #End Region
-
-        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            bsDistributionSchemeItems.Insert(eventType.BsRow, New JournalItemView)
-        End Sub
-
 
         Protected Overrides Sub AddMandatoryFieldCheck()
             'Add controls one by one in error provider.

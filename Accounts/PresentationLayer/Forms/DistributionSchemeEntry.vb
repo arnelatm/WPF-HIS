@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Forms
 
     Public Class DistributionSchemeEntry
-        Implements IDistributionSchemeView, ISubscriber(Of InsertDgvLine)
+        Implements IDistributionSchemeView
 
         Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -17,7 +17,7 @@ Namespace PresentationLayer.Forms
         Private _revCostCenterByName
         Private _totalPercentage As Decimal
         Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
-        Private ReadOnly _dgvEa As EventAggregator
+        
 
         Public Sub New()
 
@@ -36,8 +36,6 @@ Namespace PresentationLayer.Forms
             PresenterObj = New DistributionSchemePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            _dgvEa = DataGridViewDistributionSchemeItems.Ea
-            _dgvEa.SubscribeEvent(Me)
 
         End Sub
 
@@ -139,9 +137,6 @@ Namespace PresentationLayer.Forms
 
 #End Region
 
-        Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-            bsDistributionSchemeItems.Insert(eventType.BsRow, New DistributionSchemeItemView)
-        End Sub
 
         Protected Overrides Sub CreateDataSources()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
