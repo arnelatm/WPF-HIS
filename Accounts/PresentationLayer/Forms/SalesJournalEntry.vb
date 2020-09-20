@@ -379,7 +379,7 @@ Namespace PresentationLayer.Forms
                         Dim newValue = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < SalesCashItems.Count() Then
-                                Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code.Trim()
+                                Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
                                 Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                                 Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
                                 SalesCashItems(nIndex).CashCode = newValue
@@ -540,7 +540,7 @@ Namespace PresentationLayer.Forms
         '    _floJournalItemsFooter.Visible = Not display
         'End Sub
 
-        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
+        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pCashCode As Char, pSaleAmount As Decimal, pDepositAmount As Decimal)
             Dim nIndex As Integer = 0
             If selectedRow IsNot Nothing Then
                 nIndex = selectedRow.Index
@@ -554,11 +554,11 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            If pCashCode IsNot Nothing Then
+        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As Char, pSaleAmount As Decimal, pDepositAmount As Decimal)
+            If pCashCode <> Nothing Then
                 Dim cashCode As New CashCodeModel
                 For Each item As CashCodeModel In PresenterObj.cashCodesModel
-                    If item.CashCode.Trim() = pCashCode.Trim() Then
+                    If item.CashCode = pCashCode Then
                         cashCode = item
                     End If
                 Next

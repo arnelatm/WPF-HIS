@@ -23,7 +23,6 @@ Namespace Services
 
         Public Property DataBo As Object
 
-
         'Public Property SecurityDao = Factory.SecurityDao
 
         Private ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
@@ -73,7 +72,6 @@ Namespace Services
         Public Sub New()
         End Sub
 
-
         Public Function GetDefaultFieldValues(ByVal tableName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
         End Function
@@ -106,14 +104,12 @@ Namespace Services
             Return BaseDao.GetControlSecurityIdNo(searchValue)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
             Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
 
-
-
-        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList _
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList _
             Implements IService.GetUserSecurityForKey
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function

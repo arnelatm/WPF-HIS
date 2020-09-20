@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
         Property AccountIdNo As Int16?
         Property BankChargesAccountIdNo As Int16?
         Property BankChargesVatAccountIdNo As Int16?
-        Property CashCode As String
+        Property CashCode As Char
         Property CashName As String
         Property CashNameAra As String
         Property IdNo As Int32

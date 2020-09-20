@@ -1,6 +1,7 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
+
     Public Interface IUserView
         Inherits IView
 
@@ -10,6 +11,7 @@ Namespace PresentationLayer.Views
         Property FullName As String
         Property FullNameAra As String
         Property SecurityLevel As Int16
-        Property SecurityGroupIdNo As Int32
+        Property SecurityGroupIdNo As Int16
     End Interface
-End NameSpace
+
+End Namespace

@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .SettlementDiscount = Extensions.AsDecimal(reader("SettlementDiscount")),
             .SettlementDueDate = Extensions.AsDate(reader("SettlementDueDate")),
-            .SupplierIdNo = Extensions.AsInt(Of Integer)(reader("SupplierIdNo")),
+            .SupplierIdNo = Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
             .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
             .VatNumber = Extensions.AsString(reader("VatNumber")),

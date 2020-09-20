@@ -4,8 +4,8 @@ Namespace PresentationLayer.Views
 
     Public Interface IRevCostCenterView
         Inherits IView
-        Property IdNo As Int32
-        Property ParentIdNo As Int32?
+        Property IdNo As Int16
+        Property ParentIdNo As Int16?
         Property RevCostCenterCode As String
         Property RevCostCenterName As String
         Property RevCostCenterNameAra As String

@@ -30,16 +30,16 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IRevCostCenterView.IdNo
+        Public Property IdNo As Int16 Implements IRevCostCenterView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements IRevCostCenterView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements IRevCostCenterView.ParentIdNo
             Get
                 Return CType(cacParentIdNo.GetValue(), Integer?)
             End Get

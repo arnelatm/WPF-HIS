@@ -12,7 +12,7 @@ Namespace PresentationLayer.Models
         Public Property PayDescription As String
         Public Property PayDescriptionAra As String
         Public Property Posted As Boolean
-        Public Property RevCostCenterIdNo As Int32
+        Public Property RevCostCenterIdNo As Int16
         Public Property ReferenceNo As String
         Public Property Sequence As Int16
         Public Property TransactionDate As Date?

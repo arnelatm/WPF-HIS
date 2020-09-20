@@ -385,7 +385,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
+        Public Property ReligionIdNo As Byte? Implements IEmployeeView.ReligionIdNo
             Get
                 Return cacReligionIdNo.GetNullableValue(Of Int16)
             End Get

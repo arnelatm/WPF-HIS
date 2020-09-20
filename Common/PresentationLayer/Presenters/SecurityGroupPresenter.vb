@@ -29,14 +29,14 @@ Namespace PresentationLayer
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            DtInsertTable.Columns.Add("SecurityGroupIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("SecurityObjectIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("SecurityGroupIdNo", GetType(Int16))
+            DtInsertTable.Columns.Add("SecurityObjectIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Visible", GetType(Boolean))
             DtInsertTable.Columns.Add("Editable", GetType(Boolean))
 
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("SecurityGroupIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("SecurityObjectIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("SecurityGroupIdNo", GetType(Int16))
+            DtUpdateTable.Columns.Add("SecurityObjectIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Visible", GetType(Boolean))
             DtUpdateTable.Columns.Add("Editable", GetType(Boolean))
 

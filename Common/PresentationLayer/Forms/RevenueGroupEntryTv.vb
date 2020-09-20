@@ -25,18 +25,18 @@ Namespace PresentationLayer.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IRevenueGroupView.IdNo
+        Public Property IdNo As Int16 Implements IRevenueGroupView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements IRevenueGroupView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements IRevenueGroupView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Integer?)
+                Return CType(cacParentIdNo.GetValue(), Int16?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

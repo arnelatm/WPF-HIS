@@ -12,7 +12,7 @@ Namespace BusinessLayer
         Public Property BankChargeDifference As Decimal
         Public Property BankChargeVatDifference As Decimal
         Public Property DepositAmount As Decimal
-        Public Property CashCode As String
+        Public Property CashCode As Char
         Public Property ComputedBankCharge As Decimal
         Public Property ComputedBankChargeVat As Decimal
         Public Property IdNo As Int32

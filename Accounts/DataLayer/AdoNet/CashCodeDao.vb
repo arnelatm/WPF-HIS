@@ -94,7 +94,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .BankChargesAccountIdNo = Extensions.AsInt(Of Int16)(reader("BankChargesAccountIdNo")),
             .BankChargesVatAccountIdNo = Extensions.AsInt(Of Int16)(reader("BankChargesVatAccountIdNo")),
-            .CashCode = Extensions.AsString(reader("CashCode")),
+            .CashCode = Extensions.AsChar(reader("CashCode")),
             .CashName = Extensions.AsString(reader("CashName")),
             .CashNameAra = Extensions.AsString(reader("CashNameAra")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),

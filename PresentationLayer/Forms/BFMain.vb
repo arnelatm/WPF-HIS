@@ -502,7 +502,7 @@ Public Class BfMain
             securityIdNo = GetControlSecurityIdNo(controlSecurityKey)
             If securityIdNo <> 0 Then
                 'securityIdNo = Service.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
-                controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt32(securityIdNo),
+                controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt16(securityIdNo),
                                                                 GlobalVariables.SecurityGroupIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array

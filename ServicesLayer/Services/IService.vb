@@ -70,7 +70,7 @@ Namespace Services
 
         Function GetSqlValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
 
-        'Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList
+        'Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
         Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object,
                                   Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 
@@ -89,9 +89,9 @@ Namespace Services
 
         Function GetControlSecurityIdNo(searchValue As String) As String
 
-        Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList
+        Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 
-        Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList
+        Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 
     End Interface
 

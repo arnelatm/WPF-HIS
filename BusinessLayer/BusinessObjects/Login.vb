@@ -12,7 +12,7 @@ Namespace BusinessObjects
 
         Public Property UserName As String
         Public Property Password As String
-        Public Property SecurityGroupIdNo As Int32
+        Public Property SecurityGroupIdNo As Int16
     End Class
 
 End Namespace

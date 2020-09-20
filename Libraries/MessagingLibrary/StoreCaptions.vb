@@ -118,17 +118,15 @@ Public Class StoreCaptions
         End Try
     End Sub
 
-    
     Private Sub TranslateDataGridView(formIdNo As Short, c As DataGridView, obj As Object)
         Dim t As String
         Try
-            For each col As DataGridViewColumn In c.Columns
+            For Each col As DataGridViewColumn In c.Columns
                 t = col.HeaderText
                 Captions.Add(t, c.Name + "." + col.HeaderText)
                 InsertWord(t)
                 InsertFormItem(formIdNo, t)
             Next
-
         Catch ex As Exception
 
         End Try
@@ -195,9 +193,9 @@ Public Class StoreCaptions
 
     Friend Sub InsertFormItem(ByVal formIdNo As Int16, ByVal item As String)
         Dim cmd As String
-        Dim captionIdNo As Int16
+        Dim captionIdNo As Int32
         cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
-        captionIdNo = _dAc1.ExecScalar(Of Int16)(cmd)
+        captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd)
         cmd = "SELECT COUNT(*) FROM FormItems where CaptionIdNo = " + captionIdNo.ToString() + " and FormIdNo = " + formIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then

@@ -1,4 +1,5 @@
 ﻿Namespace PresentationLayer.Models
+
     Public Class UserModel
         Inherits CommonModel
 
@@ -8,8 +9,8 @@
         Public Property FullNameAra As String
         Public Property Password As String
         Public Property SecurityLevel As Int16
-        Public Property SecurityGroupIdNo As Int32
-
+        Public Property SecurityGroupIdNo As Int16
 
     End Class
+
 End Namespace

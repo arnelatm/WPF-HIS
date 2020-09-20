@@ -54,7 +54,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New SalesCashItem() With {
             .DepositAmount = Extensions.AsDecimal(reader("DepositAmount")),
-            .CashCode = Extensions.AsString(reader("CashCode")),
+            .CashCode = Extensions.AsChar(reader("CashCode")),
             .SaleAmount = Extensions.AsDecimal(reader("SaleAmount")),
             .SalesJournalIdNo = Extensions.AsString(reader("SalesJournalIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),

@@ -76,7 +76,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property RevCostCenterIdNo As Int32 Implements IDepartmentView.RevCostCenterIdNo
+        Public Property RevCostCenterIdNo As Int16 Implements IDepartmentView.RevCostCenterIdNo
             Get
                 Return cacRevCostCenterIdNo.GetValue()
             End Get

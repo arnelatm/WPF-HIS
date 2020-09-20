@@ -478,7 +478,7 @@
             Return retVal.ToString()
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int32) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
             Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
                     {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
@@ -487,7 +487,7 @@
             Return _db.SqlRead(sql, params)
         End Function
 
-        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int32) As ArrayList Implements IBaseDao.GetUserSecurityForKey
+        Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IBaseDao.GetUserSecurityForKey
             Dim params() As Object =
                     {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &

@@ -31,6 +31,7 @@ Namespace PresentationLayer.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IdNo As Int32 Implements IUserView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
@@ -76,7 +77,7 @@ Namespace PresentationLayer.Forms
             End Set
         End Property
 
-        Public Property SecurityGroupIdNo As Int32 Implements IUserView.SecurityGroupIdNo
+        Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
             Get
                 Return cacSecurityGroupIdNo.GetValue()
             End Get

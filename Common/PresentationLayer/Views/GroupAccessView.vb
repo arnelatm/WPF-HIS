@@ -7,9 +7,9 @@
 
         Public Property IdNo As Int32 Implements IGroupAccessView.IdNo
 
-        Public Property SecurityGroupIdNo As Int32 Implements IGroupAccessView.SecurityGroupIdNo
+        Public Property SecurityGroupIdNo As Int16 Implements IGroupAccessView.SecurityGroupIdNo
 
-        Public Property SecurityObjectIdNo As Int32 Implements IGroupAccessView.SecurityObjectIdNo
+        Public Property SecurityObjectIdNo As Int16 Implements IGroupAccessView.SecurityObjectIdNo
 
         Public Property Visible As Boolean Implements IGroupAccessView.Visible
             Get
