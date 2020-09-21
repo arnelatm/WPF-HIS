@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
             .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
             .DefaultFrequency = Extensions.AsString(reader("DefaultFrequency")),
-            .EarningType = Extensions.AsString(reader("EarningType"))
+            .EarningType = Extensions.AsChar(reader("EarningType"))
             }
 
         Private Function Take(earning As Earning) As Object()

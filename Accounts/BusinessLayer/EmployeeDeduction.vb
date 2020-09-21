@@ -20,7 +20,7 @@ Namespace BusinessLayer
         Public Property DeductionIdNo As Int16
         Public Property DeductionName As String
         Public Property DeductionNameAra As String
-        Public Property DeductionType As String
+        Public Property DeductionType As Char
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
         Public Property Sequence As Int16

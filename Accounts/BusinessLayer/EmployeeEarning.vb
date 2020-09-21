@@ -21,7 +21,7 @@ Namespace BusinessLayer
         Public Property EarningIdNo As Int16
         Public Property EarningName As String
         Public Property EarningNameAra As String
-        Public Property EarningType As String
+        Public Property EarningType As Char
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
         Public Property Sequence As Int16

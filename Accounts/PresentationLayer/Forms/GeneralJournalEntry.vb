@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.CustomControlsLibrary
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Forms
@@ -28,10 +29,10 @@ Namespace PresentationLayer.Forms
             _closingEntry = closingEntry
             ClosingJournal = _closingEntry
             If Not closingEntry Then
-                Text = "General Journal Entry"
+                Text = Messaging.TranslateCaption("General Journal Entry")
                 MainTableName = "GeneralJournalNormal_View"
             Else
-                Text = "Closing Entry"
+                Text = Messaging.TranslateCaption("Closing Entry")
                 MainTableName = "GeneralJournalClosing_View"
             End If
 
