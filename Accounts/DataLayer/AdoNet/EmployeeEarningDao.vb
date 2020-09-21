@@ -26,7 +26,7 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Sequence" &
                     " FROM [EmployeeEarning_View]" &
-                    " WHERE IdNo = @IdNo"
+                    " WHERE EmployeeIdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
         End Function
@@ -47,7 +47,7 @@ Namespace DataLayer.AdoNet
             .EarningIdNo = Extensions.AsId(Of Int16)(reader("EarningIdNo")),
             .EarningName = Extensions.AsString(reader("EarningCode")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .EarningType = Extensions.AsString(reader("EarningType")),
+            .EarningType = Extensions.AsChar(reader("EarningType")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))

@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoAll(Of Employee)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =
@@ -21,10 +21,14 @@ Namespace DataLayer.AdoNet
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            'Dim x As Employee
-            'x = Db.Read(sql, Make, params).FirstOrDefault()
-            'Return x
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim deductionDao = New EmployeeDeductionDao
+            Dim earningDao = New EmployeeEarningDao
+            Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.EmployeeDeductions = d
+            data.EmployeeEarnings = e
+            Return data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Employee) _
@@ -35,7 +39,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
                     "   FROM [Employee] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
+            Return _db.Read(sql, Make).ToList()
         End Function
 
         Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).UpdateRecord
@@ -77,7 +81,7 @@ Namespace DataLayer.AdoNet
                     " PayRateType = @PayRateType," &
                     " Active = @Active" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(employee))
+            Return _db.Update(sql, Take(employee))
         End Function
 
         Public Function AddRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).AddRecord
@@ -89,7 +93,7 @@ Namespace DataLayer.AdoNet
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
                     "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"
-            Return Db.Insert(sql, Take(employee))
+            Return _db.Insert(sql, Take(employee))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Employee) =

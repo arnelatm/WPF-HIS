@@ -7,10 +7,10 @@
     Public Class EmployeeEarningModel
         Public Property Amount As Decimal
         Public Property EarningCode As String
-        Public Property EarningIdNo As String
+        Public Property EarningIdNo As Int16
         Public Property EarningName As String
         Public Property EarningNameAra As String
-        Public Property EarningType As String
+        Public Property EarningType As Char
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

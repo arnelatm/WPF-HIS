@@ -343,6 +343,7 @@
     <Build Include="dbo\User Defined Types\EmployeeEarningInsert.sql" />
     <Build Include="dbo\User Defined Types\EmployeeDeductionUpdate.sql" />
     <Build Include="dbo\User Defined Types\EmployeeDeductionInsert.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeeDeductionTVP.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

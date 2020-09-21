@@ -121,7 +121,7 @@ Namespace AdoNet
             If item Is Nothing OrElse item.Equals(DBNull.Value) Then
                 Return defaultChar
             End If
-            Return item.ToChar().Trim()
+            Return item
         End Function
 
         ' transform object into DateTime data type.
