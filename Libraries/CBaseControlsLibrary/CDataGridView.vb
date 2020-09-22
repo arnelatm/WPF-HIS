@@ -225,7 +225,7 @@ Public Class CDataGridView
                         'If Ea IsNot Nothing Then
                         '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
                         'End If
-                        If .RowIndex() <> 0 And Not FirstRowInsertionEnabled Then
+                        If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
                             Dim myBindingSource = CType(DataSource, BindingSource)
                             Dim current = myBindingSource.Current
                             Dim dataList = current.BlankCopy()
