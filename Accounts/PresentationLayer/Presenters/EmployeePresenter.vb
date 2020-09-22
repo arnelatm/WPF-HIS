@@ -137,9 +137,18 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        'Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+        '    If Not CancelSave Then
+        '        MakeWorkRow(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable)
+        '        MakeWorkRow(View.EmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable)
+        '    End If
+        'End Sub
+
+        Dim EarningFillData As FillDataFunc
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                MakeWorkRow(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable)
+                MakeWorkRow(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf EarningFillData)
                 MakeWorkRow(View.EmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable)
             End If
         End Sub
@@ -198,7 +207,23 @@ Namespace PresentationLayer.Presenters
         '    Next
         'End Sub
 
-        Private Function MakeWorkRow(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable) As DataRow
+        Delegate Sub FillDataFunc(item As Object, idNo As Integer, workRow As DataRow, nRowCount As Short)
+
+        Dim EarningFillData As
+
+        Public Sub EarningFillData(ByRef item As EmployeeEarningView, ByVal idNo As Integer, ByRef workRow As DataRow)
+            workRow("Amount") = item.Amount
+            workRow("EarningIdNo") = item.EarningIdNo
+            workRow("EmployeeIdNo") = idNo
+        End Sub
+
+        Public Sub DeductionFillData(item As EmployeeDeductionView, idNo As Integer, workRow As DataRow, nRowCount As Short)
+            workRow("Amount") = item.Amount
+            workRow("DeductionIdNo") = item.DeductionIdNo
+            workRow("EmployeeIdNo") = idNo
+        End Sub
+
+        Private Function MakeWorkRow(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, myFunc As FillDataFunc) As DataRow
             If insertTable IsNot Nothing Then
                 insertTable.Clear()
             End If
@@ -215,9 +240,7 @@ Namespace PresentationLayer.Presenters
                     workRow = updateTable.NewRow()
                     workRow("IdNo") = idNo
                 End If
-                workRow("Amount") = CallByName(item, "Amount", CallType.Get)
-                workRow("EarningIdNo") = CallByName(item, "EarningIdNo", CallType.Get)
-                workRow("EmployeeIdNo") = idNo
+                myFunc.Invoke(item, idNo, workRow, nRowCount)
                 workRow("Sequence") = nRowCount
                 If idNo <= 0 Then
                     insertTable.Rows.Add(workRow)
@@ -229,6 +252,13 @@ Namespace PresentationLayer.Presenters
             Next
             Return workRow
         End Function
+
+        Private Sub FillDataRow(item As Object, idNo As Integer, workRow As DataRow, nRowCount As Short)
+            workRow("Amount") = CallByName(item, "Amount", CallType.Get)
+            workRow("EarningIdNo") = CallByName(item, "EarningIdNo", CallType.Get)
+            workRow("EmployeeIdNo") = idNo
+            workRow("Sequence") = nRowCount
+        End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
@@ -255,54 +285,54 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
-    Class MakeDataTables
+    'Class MakeDataTables
 
-        ' Define the delegate function
-        Delegate Function MakeData(ByVal item As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable) As DataRow
+    '    ' Define the delegate function
+    '    Delegate Function MakeData(ByVal item As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable) As DataRow
 
-        ' Display properties in ascending or descending order.
+    '    ' Display properties in ascending or descending order.
 
-        Function MyMakeData(ByVal data As MakeData)
-            Dim workRow As DataRow
-            workRow = data(_item, _insertTable, _updateTable)
-            'workRow = data.Invoke(_item, _insertTable, _updateTable)
-            Return workRow
-        End Function
+    '    Function MyMakeData(ByVal data As MakeData)
+    '        Dim workRow As DataRow
+    '        'workRow = data(_item, _insertTable, _updateTable)
+    '        workRow = data.Invoke(_item, _insertTable, _updateTable)
+    '        Return workRow
+    '    End Function
 
-        Private _insertTable As DataTable
+    '    Private _insertTable As DataTable
 
-        Property InsertTable As DataTable
-            Get
-                Return _insertTable
-            End Get
-            Set(value As DataTable)
-                _insertTable = value
-            End Set
-        End Property
+    '    Property InsertTable As DataTable
+    '        Get
+    '            Return _insertTable
+    '        End Get
+    '        Set(value As DataTable)
+    '            _insertTable = value
+    '        End Set
+    '    End Property
 
-        Private _updateTable As DataTable
+    '    Private _updateTable As DataTable
 
-        Property UpdateTable As DataTable
-            Get
-                Return _updateTable
-            End Get
-            Set(value As DataTable)
-                _updateTable = value
-            End Set
-        End Property
+    '    Property UpdateTable As DataTable
+    '        Get
+    '            Return _updateTable
+    '        End Get
+    '        Set(value As DataTable)
+    '            _updateTable = value
+    '        End Set
+    '    End Property
 
-        Private _item
+    '    Private _item
 
-        Property Item
-            Get
-                Return _item
-            End Get
-            Set
-                _item = Value
-            End Set
-        End Property
+    '    Property Item
+    '        Get
+    '            Return _item
+    '        End Get
+    '        Set
+    '            _item = Value
+    '        End Set
+    '    End Property
 
-    End Class
+    'End Class
 
     'Function Deduction(item As EmployeeDeductionView, insertTable As DataTable, updateTable As DataTable)
     '    Dim workRow As DataRow
