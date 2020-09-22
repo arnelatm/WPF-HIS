@@ -14,6 +14,9 @@ Namespace DataLayer.AdoNet
         Private ReadOnly Db As New Db()
 
         Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
             Dim sql As String =
                     " SELECT " &
                     "Amount," &
@@ -26,7 +29,8 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Sequence" &
                     " FROM [EmployeeEarning_View]" &
-                    " WHERE EmployeeIdNo = @IdNo"
+                    " WHERE EmployeeIdNo = @IdNo" &
+                    " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
         End Function

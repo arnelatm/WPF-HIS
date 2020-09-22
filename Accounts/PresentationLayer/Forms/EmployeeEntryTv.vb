@@ -520,6 +520,7 @@ Namespace PresentationLayer.Forms
             DataGridViewEarnings.Refresh()
             bsEarnings.DataSource = EmployeeEarnings
             bsEarnings.AllowNew = True
+            bsEarnings.Sort = "Sequence"
             With DataGridViewEarnings
                 .Refresh()
                 .AutoGenerateColumns = False

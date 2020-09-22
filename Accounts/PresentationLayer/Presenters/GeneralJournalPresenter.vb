@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms.VisualStyles
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -14,9 +15,8 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private _closingEntry As Boolean
         Private ReadOnly _gjJournalItemModel As New ModelAccounts("GeneralJournalItem")
-
+        Private _closingEntry As Boolean
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
             _closingEntry = closingEntry
@@ -51,6 +51,61 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Overrides Sub GoPrintRecord()
+            Dim totalCreditAmount As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            View.TotalCredits = 0
+            For Each item In View.JournalItems
+                View.TotalCredits = View.TotalCredits + item.Credit
+            Next
+            If language = "ar" Then
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
+
+            Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
+
+            cForm.Show()
+        End Sub
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If Not CancelSave Then
+                ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf JournalItemFilter)
+            End If
+        End Sub
+
+        Private Sub FillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
+            workRow("JournalIdNo") = View.IdNo
+            workRow("AccountIdNo") = item.AccountIdNo
+            workRow("Debit") = item.Debit
+            workRow("Credit") = item.Credit
+            workRow("RevCostCenterIdNo") = item.RevCostCenterIdNo
+            workRow("Notes") = If(item.Notes, "")
+        End Sub
+
+        Public Function JournalItemFilter(ByVal obj As Object) As Boolean
+            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+                Return True
+            End If
+            Return False
+        End Function
+
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_gjJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            End If
+        End Sub
+
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
@@ -82,10 +137,9 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Dim caption = "Invalid Entry!"
                             Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
                             Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.Show(True, "MsgAccountsNotAllowed", variables)
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", variables)
                             retValue = False
                         End If
                     Next
@@ -93,82 +147,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
-
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-
-            If Not CancelSave Then
-                'If AddMode Then
-                '    View.IdNo = passedValue
-                'End If
-                If DtInsertTable IsNot Nothing Then
-                    DtInsertTable.Clear()
-                End If
-                If DtUpdateTable IsNot Nothing Then
-                    DtUpdateTable.Clear()
-                End If
-                Dim nRowCount = 1
-                For Each ji In View.JournalItems
-                    If (ji.AccountIdNo Is Nothing Or ji.AccountIdNo = 0) AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
-                        ' ignore these records (no amount no account)
-                    Else
-                        Dim workRow As DataRow
-                        If ji.IdNo <= 0 Then
-                            workRow = DtInsertTable.NewRow()
-                        Else
-                            workRow = DtUpdateTable.NewRow()
-                            workRow("IdNo") = ji.IdNo
-                        End If
-                        workRow("JournalIdNo") = View.IdNo
-                        workRow("Sequence") = nRowCount
-                        workRow("AccountIdNo") = ji.AccountIdNo
-                        workRow("Debit") = ji.Debit
-                        workRow("Credit") = ji.Credit
-                        workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
-                        workRow("Notes") = If(ji.Notes, "")
-                        If ji.IdNo <= 0 Then
-                            DtInsertTable.Rows.Add(workRow)
-                        Else
-                            DtUpdateTable.Rows.Add(workRow)
-                        End If
-                        nRowCount = nRowCount + 1
-                    End If
-                Next
-            End If
-        End Sub
-
-        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_gjJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
-            If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
-                GlobalVariables.Mapper.Map(View, DataModel)
-                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-            End If
-        End Sub
-
-        Public Overrides Sub GoPrintRecord()
-            Dim totalCreditAmount As String
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalCredits = View.TotalCredits + item.Credit
-            Next
-            If language = "ar" Then
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            Else
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
-            End If
-
-            Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
-
-            cForm.Show()
-        End Sub
-
     End Class
 
 End Namespace
