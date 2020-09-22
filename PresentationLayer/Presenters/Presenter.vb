@@ -1356,7 +1356,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Delegate Sub FillDataFunc(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
 
     Protected Function ViewToDataTables(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
-                                      ByVal filterFunc As Predicate(Of Object), ByVal Optional idNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
+                                      ByVal includeFilter As Predicate(Of Object), ByVal Optional idNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
         If insertTable IsNot Nothing Then
             insertTable.Clear()
         End If
@@ -1366,7 +1366,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim nRowCount As Int16 = 1
         Dim workRow As DataRow = Nothing
         For Each item In myView
-            If filterFunc.Invoke(item) Then
+            If includeFilter.Invoke(item) Then
                 Dim idNo As Integer = CallByName(item, idNoFieldName, CallType.Get)
                 If idNo <= 0 Then
                     workRow = insertTable.NewRow()
@@ -1374,8 +1374,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     workRow = updateTable.NewRow()
                     workRow(idNoFieldName) = idNo
                 End If
-                fillSub.Invoke(item, idNo, workRow)
                 workRow(sequenceFieldName) = nRowCount
+                fillSub.Invoke(item, idNo, workRow)
                 If idNo <= 0 Then
                     insertTable.Rows.Add(workRow)
                 Else
