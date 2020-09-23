@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Http.Headers
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
