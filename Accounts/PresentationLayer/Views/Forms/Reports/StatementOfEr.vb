@@ -1,0 +1,38 @@
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace PresentationLayer.Views.Forms.Reports
+    Public Class StatementOfEr
+
+        Public Property MainTableName As String
+        Protected SortOrderKey As String
+
+        Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+            MainTableName = "ErJournal"
+            SortOrderKey = "IdNo"
+            PresenterObj = New ReportPresenter(Me)
+            cboEmployeeIdNo.DataSource = PresenterObj.GetEmployeeListByName()
+            Dim today = Now()
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
+            dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
+
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+
+            Dim cForm As New ReportForm("Statement of Employee Loans.rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo")
+            cForm.Show()
+        End Sub
+
+        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
+            Close()
+        End Sub
+
+    End Class
+End Namespace

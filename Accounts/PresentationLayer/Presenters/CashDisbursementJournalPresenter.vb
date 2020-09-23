@@ -1,5 +1,5 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces

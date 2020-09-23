@@ -1,7 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms.VisualStyles
 Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -18,6 +18,7 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _gjJournalItemModel As New ModelAccounts("GeneralJournalItem")
         Private _closingEntry As Boolean
+
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
             _closingEntry = closingEntry
@@ -148,6 +149,7 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
     End Class
 
 End Namespace
