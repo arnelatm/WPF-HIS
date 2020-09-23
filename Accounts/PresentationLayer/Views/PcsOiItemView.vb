@@ -1,4 +1,4 @@
-﻿Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views

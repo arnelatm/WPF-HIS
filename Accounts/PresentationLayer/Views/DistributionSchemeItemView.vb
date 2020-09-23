@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
@@ -23,6 +24,7 @@ Namespace PresentationLayer.Views
         Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
             Return New DistributionSchemeItemView
         End Function
+
     End Class
 
 End Namespace
