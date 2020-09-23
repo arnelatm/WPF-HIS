@@ -92,9 +92,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
             If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
-                Return True
+                Return False
             End If
-            Return False
+            Return True
         End Function
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
