@@ -38,17 +38,17 @@
         Me.SecurityGroupView.BackColor = System.Drawing.Color.Transparent
         Me.SecurityGroupView.Errors = Nothing
         Me.SecurityGroupView.GroupAccesses = Nothing
-        Me.SecurityGroupView.IdNo = 0
-        Me.SecurityGroupView.Location = New System.Drawing.Point(306, 53)
-        Me.SecurityGroupView.MainTableName = "SecurityGroup"
-        Me.SecurityGroupView.Name = "SecurityGroupView"
-        Me.SecurityGroupView.Notes = ""
-        Me.SecurityGroupView.ParentIdNo = Nothing
-        Me.SecurityGroupView.SecurityGroupCode = ""
-        Me.SecurityGroupView.SecurityGroupName = ""
-        Me.SecurityGroupView.SecurityGroupNameAra = ""
-        Me.SecurityGroupView.Size = New System.Drawing.Size(694, 581)
-        Me.SecurityGroupView.TabIndex = 3
+            Me.SecurityGroupView.IdNo = CType(0, Short)
+            Me.SecurityGroupView.Location = New System.Drawing.Point(306, 53)
+            Me.SecurityGroupView.MainTableName = "SecurityGroup"
+            Me.SecurityGroupView.Name = "SecurityGroupView"
+            Me.SecurityGroupView.Notes = ""
+            Me.SecurityGroupView.ParentIdNo = Nothing
+            Me.SecurityGroupView.SecurityGroupCode = ""
+            Me.SecurityGroupView.SecurityGroupName = ""
+            Me.SecurityGroupView.SecurityGroupNameAra = ""
+            Me.SecurityGroupView.Size = New System.Drawing.Size(695, 581)
+            Me.SecurityGroupView.TabIndex = 3
         '
         'SecurityGroupEntryTv
         '

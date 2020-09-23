@@ -1231,11 +1231,11 @@ Namespace PresentationLayer.Forms
             Me.Name = "CheckDisbursementJournalEntry"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floFullEntryArea.ResumeLayout(false)
-        Me.floPurchaseJournalHeader.ResumeLayout(false)
-        Me.floHeader1.ResumeLayout(false)
-        Me.floHeader1.PerformLayout
-        Me.floHeader2.ResumeLayout(false)
+            Me.floFullEntryArea.ResumeLayout(False)
+            Me.floPurchaseJournalHeader.ResumeLayout(False)
+            Me.floHeader1.ResumeLayout(False)
+            Me.floHeader1.PerformLayout()
+            Me.floHeader2.ResumeLayout(false)
         Me.floHeader2.PerformLayout
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit

@@ -95,6 +95,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Leave.vb" />
     <Compile Include="BusinessLayer\Deduction.vb" />
     <Compile Include="BusinessLayer\EmployeeDeduction.vb" />
     <Compile Include="BusinessLayer\EmployeeEarning.vb" />
@@ -513,6 +514,7 @@
     <Compile Include="PresentationLayer\Views\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\IApJournalView.vb" />
     <Compile Include="PresentationLayer\Views\IDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\ILeaveView.vb" />
     <Compile Include="PresentationLayer\Views\IEmployeeDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\IEmployeeEarningView.vb" />
     <Compile Include="PresentationLayer\Views\IErJournalView.vb" />
@@ -2656,6 +2658,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CadOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CsrOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
@@ -2767,6 +2770,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PresentationLayer\Views\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
