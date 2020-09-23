@@ -217,7 +217,7 @@ Public Class ResourceEnumConverter
         For Each item In items
             itName = [Enum].GetName(x, i)
             writer.AddResource(enumName & "_" & itName, itName)
-            i = i + 1
+            i += 1
         Next
         writer.Generate()
         writer.Close()

@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
 
         Private _cashCodesModel As List(Of CashCodeModel)
-        Private _oldSalesCashItem As List(Of SalesCashItemModel)
+        Private ReadOnly _oldSalesCashItem As List(Of SalesCashItemModel)
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
@@ -134,7 +134,7 @@ Namespace PresentationLayer.Presenters
                     Else
                         DtSalesCashUpdateTable.Rows.Add(workRow)
                     End If
-                    nRowCount = nRowCount + 1
+                    nRowCount += 1
                     View.TotalDebits += sc.SaleAmount
                 End If
             Next
@@ -201,7 +201,7 @@ Namespace PresentationLayer.Presenters
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
                                      pAccountIdNo As Int16, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
             If debitAmount <> 0 Or creditAmount <> 0 Then
-                counter = counter + 1
+                counter += 1
                 If counter <= oldJournalItems.Count() Then
                     View.JournalItems.Item(counter - 1).AccountIdNo = pAccountIdNo
                     View.JournalItems.Item(counter - 1).Debit = debitAmount
@@ -258,7 +258,7 @@ Namespace PresentationLayer.Presenters
                 Else
                     DtUpdateTable.Rows.Add(workRow)
                 End If
-                nRowCount = nRowCount + 1
+                nRowCount += 1
             Next
         End Sub
 

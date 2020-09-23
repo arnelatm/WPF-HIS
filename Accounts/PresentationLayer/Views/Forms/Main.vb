@@ -4,8 +4,8 @@ Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Forms
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Common.PresentationLayer.Views.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub

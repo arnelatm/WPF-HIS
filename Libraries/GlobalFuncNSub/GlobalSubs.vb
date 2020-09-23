@@ -61,13 +61,13 @@ Public Module GlobalSubs
         For Each propertyInfo As PropertyInfo In tPropertyInfos
             Dim pName = propertyInfo.Name
             tDictionary.Add(pName, i)
-            i = i + 1
+            i += 1
         Next
         i = 1
         For Each propertyInfo As PropertyInfo In sPropertyInfos
             Dim pName = propertyInfo.Name
             sDictionary.Add(pName, i)
-            i = i + 1
+            i += 1
         Next
         Dim sourcePropertyName As String
         Dim targetPropertyName As String = ""

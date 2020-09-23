@@ -79,7 +79,7 @@ Namespace PresentationLayer.Presenters
                     Else
                         DtUpdateTable.Rows.Add(workRow)
                     End If
-                    nRowCount = nRowCount + 1
+                    nRowCount += 1
                 End If
             Next
         End Sub
@@ -159,8 +159,9 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of JournalItemView)
-                    View.JournalItems.Add(NewJournalItem)
+                    View.JournalItems = New List(Of JournalItemView) From {
+                        NewJournalItem()
+                    }
                 End If
                 For Each item In View.JournalItems
                     item.JournalIdNo = View.IdNo

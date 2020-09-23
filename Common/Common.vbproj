@@ -117,88 +117,88 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="MyEnums.vb" />
-    <Compile Include="PresentationLayer\Forms\DefaultFieldValueEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DefaultFieldValueEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\BranchEntryTV.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\BranchEntryTV.Designer.vb">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\BranchEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\BranchEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CommonForm.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CommonForm.Designer.vb">
       <DependentUpon>CommonForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CommonForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CommonForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\RevCostCenterEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.Designer.vb">
       <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\RevCostCenterEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CountryEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CountryEntryTv.Designer.vb">
       <DependentUpon>CountryEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CountryEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CountryEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DepartmentEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DepartmentEntryTv.Designer.vb">
       <DependentUpon>DepartmentEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DepartmentEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DepartmentEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\FormAbout.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\FormAbout.designer.vb">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\FormAbout.vb">
+    <Compile Include="PresentationLayer\Views\Forms\FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\MessagesTableManager.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\MessagesTableManager.Designer.vb">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\MessagesTableManager.vb">
+    <Compile Include="PresentationLayer\Views\Forms\MessagesTableManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalCaptionEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.Designer.vb">
       <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalCaptionEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalMessagesEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.Designer.vb">
       <DependentUpon>OriginalMessagesEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\OriginalMessagesEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PhoneTypeEntryTV.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PhoneTypeEntryTV.Designer.vb">
       <DependentUpon>PhoneTypeEntryTV.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PhoneTypeEntryTV.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PhoneTypeEntryTV.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ReligionEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ReligionEntryTv.Designer.vb">
       <DependentUpon>ReligionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ReligionEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ReligionEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.Designer.vb">
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\RevenueGroupEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.Designer.vb">
       <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\SecurityGroupView.Designer.vb">
@@ -207,16 +207,16 @@
     <Compile Include="PresentationLayer\Views\SecurityGroupView.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.Designer.vb">
       <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\UserEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\UserEntryTv.Designer.vb">
       <DependentUpon>UserEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\UserEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\UserEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Models\DefaultFieldValueModel.vb" />
@@ -295,69 +295,69 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DefaultFieldValueEntryTv.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.ar-SA.resx">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DefaultFieldValueEntryTv.ar.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.ar.resx">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DefaultFieldValueEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.resx">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTv.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\BranchEntryTv.ar-SA.resx">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTv.ar.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\BranchEntryTv.ar.resx">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\BranchEntryTV.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\BranchEntryTV.resx">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\RevCostCenterEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\RevCostCenterEntry.resx">
       <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CountryEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CountryEntryTv.resx">
       <DependentUpon>CountryEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DepartmentEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DepartmentEntryTv.resx">
       <DependentUpon>DepartmentEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\FormAbout.ar-SA.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\FormAbout.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\MessagesTableManager.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\MessagesTableManager.resx">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\OriginalCaptionEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.resx">
       <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\OriginalMessagesEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.resx">
       <DependentUpon>OriginalMessagesEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PhoneTypeEntryTV.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PhoneTypeEntryTV.resx">
       <DependentUpon>PhoneTypeEntryTV.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ReligionEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ReligionEntryTv.resx">
       <DependentUpon>ReligionEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\RevenueGroupEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.resx">
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.resx">
       <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\SecurityGroupView.resx">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.resx">
       <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\UserEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\UserEntryTv.resx">
       <DependentUpon>UserEntryTv.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
