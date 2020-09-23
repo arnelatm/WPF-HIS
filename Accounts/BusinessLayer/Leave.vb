@@ -20,7 +20,6 @@ Namespace BusinessLayer
         Public Property LeaveCode As String
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
-        Public Property LeaveType As Char
         Public Property LeaveAllowed As Byte
         Public Property PaidPercent As Byte
         Public Property Cumulative As Boolean

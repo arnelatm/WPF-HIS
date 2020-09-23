@@ -8,7 +8,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveCode As String
         Property LeaveName As String
         Property LeaveNameAra As String
-        Property LeaveType As Char
         Property LeaveAllowed As Byte
         Property PaidPercent As Byte
         Property Cumulative As Boolean
