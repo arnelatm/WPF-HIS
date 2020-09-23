@@ -342,7 +342,6 @@ Namespace PresentationLayer.Forms
                     dgvInvoiceNo.DisplayOnly = True
                     dgvPreviousBalance.DisplayOnly = True
                     dgvBalance.DisplayOnly = True
-                    dgvTransactionDate.DisplayOnly = True
                     dgvJournalCode.DisplayOnly = True
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
@@ -468,7 +467,7 @@ Namespace PresentationLayer.Forms
             Close()
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
@@ -481,7 +480,7 @@ Namespace PresentationLayer.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
             With DataGridViewJournalItems.CurrentCell
                 Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                 Select Case .OwningColumn.Name.ToLower()
@@ -663,22 +662,7 @@ Namespace PresentationLayer.Forms
             VatAmount = tVatAmount
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object,
-                                    ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow _
-
-            ' Check if the starting balance row is included in the selected rows
-            Dim cashDisbursementRowEntry As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-
-            ' Check if the starting balance row is included in the selected rows
-            If DataGridViewJournalItems.SelectedRows.Contains(cashDisbursementRowEntry) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed")
-                ' Cancel the deletion
-                e.Cancel = True
-            End If
-        End Sub
-
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs)
             UpdateTotals()
             UpdateTotalVatAmount()
         End Sub
