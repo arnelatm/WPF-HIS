@@ -1,5 +1,5 @@
 ﻿Imports System.Transactions
-Imports AATM.Accounts.PresentationLayer.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -143,7 +143,7 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)

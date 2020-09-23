@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Forms
+﻿Imports AATM.Common.PresentationLayer.Views
+
+Namespace PresentationLayer.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class SecurityGroupEntryTv
         Inherits AATM.PresentationLayer.Forms.CFormEntryTv
@@ -20,7 +22,7 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.SecurityGroupView = New AATM.Common.PresentationLayer.Forms.SecurityGroupView()
+        Me.SecurityGroupView = New SecurityGroupView()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '

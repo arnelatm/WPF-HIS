@@ -201,10 +201,10 @@
     <Compile Include="PresentationLayer\Forms\SecurityGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityGroupView.Designer.vb">
+    <Compile Include="PresentationLayer\Views\SecurityGroupView.Designer.vb">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SecurityGroupView.vb">
+    <Compile Include="PresentationLayer\Views\SecurityGroupView.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Forms\SecurityObjectEntryTv.Designer.vb">
@@ -285,7 +285,6 @@
     <Compile Include="PresentationLayer\Views\ITranslatedCaptionView.vb" />
     <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
     <Compile Include="PresentationLayer\Views\IUserView.vb" />
-    <Compile Include="PresentationLayer\Views\SecurityGroupView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
   </ItemGroup>
@@ -352,7 +351,7 @@
     <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupEntryTv.resx">
       <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SecurityGroupView.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\SecurityGroupView.resx">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\SecurityObjectEntryTv.resx">

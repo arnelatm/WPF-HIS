@@ -46,7 +46,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AATM.Accounts.PresentationLayer.Forms.Main</StartupObject>
+    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Main</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -204,224 +204,226 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
-    <Compile Include="PresentationLayer\Forms\AccountReconciliationEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\AccountReconciliationEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ApJournalEntry.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ApJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ArJournalEntry.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.designer.vb">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ArJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ArJournalReport.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ArJournalReport.Designer.vb">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ArJournalReport.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ArJournalReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\BankEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv.Designer.vb">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\BankEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.Designer.vb">
       <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashDisbursementJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.Designer.vb">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CashReceiptJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DeductionEntryTv.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DeductionEntryTv.designer.vb">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DeductionEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DeductionEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\EarningEntryTv.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EarningEntryTv.designer.vb">
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\EarningEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EarningEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ProductCategoryEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.Designer.vb">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ProductCategoryEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ChartEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ChartEntryTv.Designer.vb">
       <DependentUpon>ChartEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ChartEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ChartEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CheckDisbursementJournalEntry.Designer.vb">
       <DependentUpon>CheckDisbursementJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CheckDisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\CustomerEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DesignationEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DesignationEntryTv.Designer.vb">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DesignationEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DesignationEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.Designer.vb">
       <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.Designer.vb">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\DistributionSchemeEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.Designer.vb">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\EmployeeEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ErJournalEntry.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.designer.vb">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\ErJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Form1.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Form1.vb" />
-    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.Designer.vb">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\GeneralJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Main.designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.Designer.vb">
       <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PettyCashJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PostPettyCash.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.Designer.vb">
       <DependentUpon>PostPettyCash.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PostPettyCash.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseItemEntry.Designer.vb">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\PurchaseItemEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseItemEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ApSummary.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ApSummary.designer.vb">
       <DependentUpon>ApSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ApSummary.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ApSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ArSummary.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ArSummary.Designer.vb">
       <DependentUpon>ArSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ArSummary.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ArSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheet.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\BalanceSheet.designer.vb">
       <DependentUpon>BalanceSheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\BalanceSheet.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\BalanceSheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ErSummary.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ErSummary.designer.vb">
       <DependentUpon>ErSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ErSummary.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ErSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\IncomeStatement.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IncomeStatement.designer.vb">
       <DependentUpon>IncomeStatement.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\IncomeStatement.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IncomeStatement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ReportForm.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\ReportForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAr.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.designer.vb">
       <DependentUpon>StatementOfAr.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAr.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfEr.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.designer.vb">
       <DependentUpon>StatementOfEr.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfEr.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\TransactionDetail.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionDetail.designer.vb">
       <DependentUpon>TransactionDetail.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\TransactionDetail.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionDetail.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\TrialBalance.designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TrialBalance.designer.vb">
       <DependentUpon>TrialBalance.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\TrialBalance.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TrialBalance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SalesJournalEntry.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.Designer.vb">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SalesJournalEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAp.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.Designer.vb">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Reports\StatementOfAp.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.Designer.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.Designer.vb">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\SupplierEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
@@ -552,6 +554,12 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISupplierView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\LeaveView.Designer.vb">
+      <DependentUpon>LeaveView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\LeaveView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\PcsOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\SalesCashItemVIew.vb" />
     <Compile Include="Reports\Account Reconciliation Report.vb">
@@ -1735,141 +1743,144 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\AccountReconciliationEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ApJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ApJournalEntry.resx">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ArJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalEntry.resx">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\BankEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.ar-SA.resx">
       <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CashDisbursementJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.resx">
       <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CashReceiptJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DeductionEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DeductionEntryTv.resx">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\EarningEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EarningEntryTv.resx">
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ProductCategoryEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ChartEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ChartEntryTv.resx">
       <DependentUpon>ChartEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CheckDisbursementJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CheckDisbursementJournalEntry.resx">
       <DependentUpon>CheckDisbursementJournalEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\CustomerEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CustomerEntryTv.resx">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DesignationEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DesignationEntryTv.resx">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.ar-SA.resx">
       <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.ar.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.ar.resx">
       <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.resx">
       <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.ar-SA.resx">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.ar.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.ar.resx">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\DistributionSchemeEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.resx">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\EmployeeEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ErJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ErJournalEntry.resx">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\GeneralJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneralJournalEntry.resx">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Main.en-GB.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.en-GB.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Main.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.ar-SA.resx">
       <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PettyCashJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.resx">
       <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PostPettyCash.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PostPettyCash.resx">
       <DependentUpon>PostPettyCash.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\PurchaseItemEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseItemEntry.resx">
       <DependentUpon>PurchaseItemEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\ArJournalReport.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ApSummary.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ApSummary.resx">
       <DependentUpon>ApSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ArSummary.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ArSummary.resx">
       <DependentUpon>ArSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\BalanceSheet.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\BalanceSheet.resx">
       <DependentUpon>BalanceSheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ErSummary.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ErSummary.resx">
       <DependentUpon>ErSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\IncomeStatement.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IncomeStatement.resx">
       <DependentUpon>IncomeStatement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\ReportForm.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfAr.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.resx">
       <DependentUpon>StatementOfAr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfEr.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.resx">
       <DependentUpon>StatementOfEr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\TransactionDetail.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionDetail.resx">
       <DependentUpon>TransactionDetail.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\TrialBalance.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TrialBalance.resx">
       <DependentUpon>TrialBalance.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SalesJournalEntry.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SalesJournalEntry.resx">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Reports\StatementOfAp.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.ar-SA.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.ar-SA.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\SupplierEntryTv.resx">
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
+      <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Reconciliation Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2771,6 +2782,8 @@
   <ItemGroup>
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PresentationLayer\Forms\Reports\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
