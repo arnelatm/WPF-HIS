@@ -101,14 +101,14 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         End If
                     Next
-                    nSeq = nSeq + 1
+                    nSeq += 1
                     If Not found Then
                         AddNewItem(acctReconItem, acctReconItems, nSeq)
                     End If
                 Next
                 For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
                     AddNewItem(reconciledItem, acctReconItems, nSeq)
-                    nSeq = nSeq + 1
+                    nSeq += 1
                 Next
             End If
             Return acctReconItems

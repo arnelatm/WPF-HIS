@@ -1,0 +1,91 @@
+﻿Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace PresentationLayer.Views.Forms
+
+    Public Class OriginalCaptionEntryTv
+        Implements IOriginalCaptionsView
+
+        Public Sub New()
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            MainTableName = "OriginalCaptions"
+            TvMainFieldName = "Caption"
+            TvSecondaryFieldName = "Caption"
+            SortOrderKey = "Caption"
+            FirstControl = txtCaption
+            ' Add any initialization after the InitializeComponent() call.
+            PresenterObj = New OriginalCaptionsPresenter(Me)
+
+            Ea = PresenterObj.Ea
+            Ea.SubscribeEvent(Me)
+        End Sub
+
+#Region "OriginalCaptionFields"
+
+        Public Property IdNo As Int32 Implements IOriginalCaptionsView.IdNo
+            Get
+                Return NumParser(Of Int32)(TxtIdNo.Text)
+            End Get
+            Set
+                TxtIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public Property Caption As String Implements IOriginalCaptionsView.Caption
+            Get
+                Return txtCaption.Text
+            End Get
+            Set
+                txtCaption.Text = Value
+            End Set
+        End Property
+
+        Public Property IdNoTranslated As Integer Implements IOriginalCaptionsView.IdNoTranslated
+            Get
+                Return NumParser(Of Integer)(txtIdNoTranslated.Text)
+            End Get
+            Set(value As Integer)
+                txtIdNoTranslated.Text = value
+            End Set
+        End Property
+
+        Public ReadOnly Property LanguageIdNo As Int16 Implements IOriginalCaptionsView.LanguageIdNo
+            Get
+                Return 16
+            End Get
+        End Property
+
+        Public Property TranslatedCaption As String Implements IOriginalCaptionsView.TranslatedCaption
+            Get
+                Return txtTranslatedCaption.Text
+            End Get
+            Set
+                txtTranslatedCaption.Text = Value
+            End Set
+        End Property
+
+#End Region
+
+        Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            Show()
+            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer",
+                                                                                   GlobalVariables.SecurityGroupIdNo)
+            If _
+                Not _
+                (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso
+                 controlSecurityValues(0)) Then
+                ' Visible property stored in first element of the array
+                HideButton(btnDelete)
+            End If
+        End Sub
+
+        Private Sub OnAfterTranslateForm() Handles MyBase.AfterTranslateForm
+            txtCaption.RightToLeft = RightToLeft.No
+            txtTranslatedCaption.RightToLeft = RightToLeft.Yes
+        End Sub
+
+    End Class
+
+End Namespace

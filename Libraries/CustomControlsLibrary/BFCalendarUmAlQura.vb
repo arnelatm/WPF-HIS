@@ -81,7 +81,7 @@ Public Class BfCalendarUmAlQura
         Dim i = 0
         For Each menuItem As ToolStripMenuItem In MenuMonths.Items()
             Dim cMenuName As String = "ToolStripMenuItem" & i.ToString().Trim()
-            i = i + 1
+            i += 1
             CallByName(menuItem, "Text", CallType.Set, GetMonthName(i, True))
         Next
     End Sub
@@ -101,10 +101,10 @@ Public Class BfCalendarUmAlQura
         m_iDay = Convert.ToInt32(HDate.Substring(0, 2))
         If m_iDay = 30 And HijriDate.Is29(m_iMonth, m_iYear) Then
             m_iDay = 1
-            m_iMonth = m_iMonth + 1
+            m_iMonth += 1
             If m_iMonth = 13 Then
                 m_iMonth = 1
-                m_iYear = m_iYear + 1
+                m_iYear += 1
             End If
         End If
         'm_iDay = Convert.ToInt32(HDate.Substring(0, 2))

@@ -2782,8 +2782,6 @@
   <ItemGroup>
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PresentationLayer\Forms\Reports\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
