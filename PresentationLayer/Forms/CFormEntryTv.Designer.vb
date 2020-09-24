@@ -29,44 +29,44 @@ Partial Class CFormEntryTv
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTv))
         Me.TreeViewTableName = New System.Windows.Forms.TreeView()
         Me.ImageListTreeView = New System.Windows.Forms.ImageList(Me.components)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'TreeViewTableName
         '
-        Me.TreeViewTableName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.TreeViewTableName.BackColor = System.Drawing.Color.Honeydew
+        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
         Me.TreeViewTableName.ImageKey = "TreeNode.ico"
         Me.TreeViewTableName.ImageList = Me.ImageListTreeView
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 61)
+        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
         Me.TreeViewTableName.Name = "TreeViewTableName"
         TreeNode1.Name = "Node0"
         TreeNode1.Tag = "root"
         TreeNode1.Text = "TableName"
         Me.TreeViewTableName.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeViewTableName.SelectedImageKey = "openbriefcase.png"
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 245)
+        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 255)
         Me.TreeViewTableName.TabIndex = 2
         '
         'ImageListTreeView
         '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageListTreeView.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
         '
         'CFormEntryTv
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.ClientSize = New System.Drawing.Size(852, 308)
         Me.Controls.Add(Me.TreeViewTableName)
         Me.Name = "CFormEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
 
     Public WithEvents TreeViewTableName As TreeView
     Friend WithEvents ImageListTreeView As ImageList
