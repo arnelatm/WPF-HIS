@@ -320,10 +320,16 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property LeaveDao As IDaoAll(Of Leave)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Leave")
+            End Get
+        End Property
+
         Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date,
                                                   Optional sortOrder As String = Nothing) As List(Of TM) _
             Implements IServiceAccounts.GetAcctReconItems
-            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
+            Dim records = DataDao.GetAcctReconItems(AccountIdNo, reconciliationDate, sortOrder)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model

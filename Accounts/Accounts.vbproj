@@ -53,6 +53,12 @@
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -136,6 +142,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\LeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\DeductionDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeDeductionDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeEarningDao.vb" />
@@ -248,12 +255,6 @@
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.designer.vb">
-      <DependentUpon>LeaveEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DeductionEntryTv.designer.vb">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
     </Compile>
@@ -264,6 +265,12 @@
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EarningEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.Designer.vb">
+      <DependentUpon>LeaveEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.Designer.vb">
@@ -1772,15 +1779,14 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntryTv.resx">
-      <DependentUpon>LeaveEntryTv.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DeductionEntryTv.resx">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EarningEntryTv.resx">
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntry.resx">
+      <DependentUpon>LeaveEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>

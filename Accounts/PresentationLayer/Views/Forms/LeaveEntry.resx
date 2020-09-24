@@ -117,29 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 276</value>
-  </data>
-  <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
-    <value>TreeViewTableName</value>
-  </data>
-  <data name="&gt;&gt;TreeViewTableName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TreeViewTableName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TreeViewTableName.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
@@ -152,77 +129,4 @@
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>535, 17</value>
   </metadata>
-  <data name="LeaveView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 61</value>
-  </data>
-  <data name="LeaveView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>634, 346</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LeaveView1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;LeaveView1.Name" xml:space="preserve">
-    <value>LeaveView1</value>
-  </data>
-  <data name="&gt;&gt;LeaveView1.Type" xml:space="preserve">
-    <value>AATM.Accounts.PresentationLayer.Views.LeaveView, Accounts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;LeaveView1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LeaveView1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.BackgroundImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>994, 427</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>918, 288</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Leaves Maintenance Form</value>
-  </data>
-  <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
-    <value>StoreCaptions1</value>
-  </data>
-  <data name="&gt;&gt;StoreCaptions1.Type" xml:space="preserve">
-    <value>AATM.Libraries.MessagingLibrary.StoreCaptions, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TranslatorDAC.Name" xml:space="preserve">
-    <value>TranslatorDAC</value>
-  </data>
-  <data name="&gt;&gt;TranslatorDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;AppDataDAC.Name" xml:space="preserve">
-    <value>AppDataDAC</value>
-  </data>
-  <data name="&gt;&gt;AppDataDAC.Type" xml:space="preserve">
-    <value>AATM.Libraries.MessagingLibrary.Dac, MessagingLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;MyErrorProvider.Name" xml:space="preserve">
-    <value>MyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>LeaveEntryTv</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
 </root>

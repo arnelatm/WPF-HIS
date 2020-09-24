@@ -7,6 +7,8 @@ Namespace PresentationLayer.Views
     Public Class LeaveView
         Implements ILeaveView
 
+        Public Property MainTableName As String = "Leave"
+
         Public Property IdNo As Int16 Implements ILeaveView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
@@ -67,28 +69,28 @@ Namespace PresentationLayer.Views
 
         Public Property Cumulative As Boolean Implements ILeaveView.Cumulative
             Get
-                Throw New NotImplementedException()
+                Return chkCumulative.Checked
             End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
+            Set
+                chkCumulative.Checked = Value
             End Set
         End Property
 
         Public Property MaxCarryOver As Short Implements ILeaveView.MaxCarryOver
             Get
-                Throw New NotImplementedException()
+                Return txtMaxCarryOver.Text
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set
+                txtMaxCarryOver.Text = Value
             End Set
         End Property
 
         Public Property MaxLimit As Short Implements ILeaveView.MaxLimit
             Get
-                Throw New NotImplementedException()
+                Return txtMaxLimit.Text
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set
+                txtMaxLimit.Text = Value
             End Set
         End Property
 
