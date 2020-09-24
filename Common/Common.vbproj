@@ -52,9 +52,6 @@
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="GlobalResources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -396,6 +393,10 @@
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\CustomControlsLibrary\CustomControlsLibrary.vbproj">
+      <Project>{37ca633c-5f75-45e4-bb37-d37de1b692b1}</Project>
+      <Name>CustomControlsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\EnumLocalization\EnumLocalization.vbproj">
       <Project>{EFEC4547-2F73-4EAB-8ADC-AFAF596F8288}</Project>
       <Name>EnumLocalization</Name>
@@ -419,6 +420,10 @@
     <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
       <Name>MessagingLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\Events\Events.vbproj">
+      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
+      <Name>Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
       <Project>{51DA927A-505F-49CF-9768-9E401219B91C}</Project>

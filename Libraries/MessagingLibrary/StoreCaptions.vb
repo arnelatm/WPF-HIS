@@ -1,6 +1,4 @@
-﻿Imports AATM.Libraries.CustomControlsLibrary
-
-Public Class StoreCaptions
+﻿Public Class StoreCaptions
     Inherits System.ComponentModel.Component
 
     ' Generated form code omitted, except for the following overloaded
@@ -60,7 +58,6 @@ Public Class StoreCaptions
                 Try
                     If TypeOf cCtrl Is TextBox OrElse
                        TypeOf cCtrl Is ComboBox OrElse
-                       TypeOf cCtrl Is CCustomDateTimePicker OrElse
                        TypeOf cCtrl Is MaskedTextBox OrElse
                        TypeOf cCtrl Is FlowLayoutPanel Then
                         'Debugger.Break()

@@ -71,6 +71,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()
         CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
         CreateMap(Of JournalItemModel, JournalItemView)().ReverseMap()
+        CreateMap(Of Leave, LeaveModel)().ReverseMap()
+        CreateMap(Of LeaveModel, ILeaveView).ReverseMap()
         CreateMap(Of PcsOiItem, PcsOiItemModel)().ReverseMap()
         CreateMap(Of PcsOiItemModel, PcsOiItemView)().ReverseMap()
         CreateMap(Of PettyCashJournal, PettyCashJournalModel)().ReverseMap()
