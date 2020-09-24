@@ -1,219 +1,137 @@
-﻿Imports System.ComponentModel
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class LeaveEntry
-
-        Protected TvMainFieldName As String
-        Protected TvSecondaryFieldName As String
-        Protected TvSortKey As String
-        Private _bypassSelectedChange As Boolean = False
+        Implements ILeaveView
 
         Public Sub New()
 
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            ' Add any initialization after the InitializeComponent() call.
             MainTableName = "Leave"
             TvMainFieldName = "LeaveName"
             TvSecondaryFieldName = "LeaveCode"
-            SortOrderKey = "DeductionName"
-            FirstControl = LeaveView.txtLeaveCode
-            PresenterObj = New LeavePresenter(LeaveView)
+            SortOrderKey = "LeaveName"
+            FirstControl = txtLeaveCode
+            PresenterObj = New LeavePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
         End Sub
 
-        Public Sub DisplayTree(ByRef treeViewData As Object)
-            Dim root As TreeNode = TreeViewLeave.Nodes(0)
-            'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
-            root.Nodes.Clear()
-            ' create the tree
-            If GlobalVariables.RightToLeftLayout Then
-                TreeViewLeave.RightToLeftLayout = True
-            Else
-                TreeViewLeave.RightToLeftLayout = False
-            End If
-            TreeViewLeave.RightToLeft = RightToLeft.Inherit
-            If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-                For Each dataNode In treeViewData
-                    AddRecordToTree(dataNode)
-                Next
-            Else
-                For Each dataNode In treeViewData
-                    AddRecordToTreeHierarchical(dataNode, True)
-                Next
-            End If
-        End Sub
+#Region "Fields"
 
-        Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
-            Dim idNo As Int32 = GetPropertyValue(dataNode, PresenterObj.IdFieldName)
-            Dim mainValue As String = GetPropertyValue(dataNode, "Name")
-            Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
-            Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-            TreeViewLeave.Nodes(0).Nodes.Add(treeNode)
-        End Sub
+        Public Property IdNo As Int16 Implements ILeaveView.IdNo
+            Get
+                Return NumParser(Of Int16)(TxtIdNo.Text)
+            End Get
+            Set
+                TxtIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
 
-        Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean)
-            Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
-            If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-                AddRecordToTree(dataNode) ', "Name")
-            Else
-                Dim idNo As Int32 = GetPropertyValue(dataNode, "IdNo")
-                Dim mainValue As String = GetPropertyValue(dataNode, "Name")
-                Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
-                Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-                If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-                    If parentChanged Then
-                        TreeViewLeave.Nodes(TreeViewLeave.Nodes.Count - 1).Nodes.Add(treeNode)
-                    Else
-                        TreeViewLeave.Nodes(0).Nodes.Add(treeNode)
-                    End If
+        Public Property LeaveCode As String Implements ILeaveView.LeaveCode
+            Get
+                Return txtLeaveCode.Text
+            End Get
+            Set
+                txtLeaveCode.Text = Value
+            End Set
+        End Property
+
+        Public Property LeaveName As String Implements ILeaveView.LeaveName
+            Get
+                Return txtLeaveName.Text
+            End Get
+            Set
+                txtLeaveName.Text = Value
+            End Set
+        End Property
+
+        Public Property LeaveNameAra As String Implements ILeaveView.LeaveNameAra
+            Get
+                Return txtLeaveNameAra.Text
+            End Get
+            Set
+                txtLeaveNameAra.Text = Value
+            End Set
+        End Property
+
+        Public Property LeaveAllowed As Int16 Implements ILeaveView.LeaveAllowed
+            Get
+                Return txtLeaveNameAra.Text
+            End Get
+            Set
+                txtLeaveNameAra.Text = Value
+            End Set
+        End Property
+
+        Public Property PaidPercent As Decimal Implements ILeaveView.PaidPercent
+            Get
+                If txtPaidPercent.Text <> "" Then
+                    Return Convert.ToDecimal(txtPaidPercent.Text)
                 Else
-                    If parentChanged Then
-                        Dim foundNode As TreeNode() = TreeViewLeave.Nodes.Find(parentIdValue.ToString(), True)
-                        If foundNode.Length <> 0 Then
-                            foundNode(0).Nodes.Add(treeNode)
-                        End If
-                    End If
+                    Return 0D
                 End If
-            End If
-        End Sub
+            End Get
+            Set
+                txtPaidPercent.Text = Value
+            End Set
+        End Property
 
-        Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) _
-        Handles TreeViewLeave.AfterSelect
-            If Not _bypassSelectedChange Then
-                Select Case (e.Action)
-                    Case TreeViewAction.ByKeyboard
-                    'MessageBox.Show("You like the keyboard!")
-                    Case TreeViewAction.ByMouse
-                        'MessageBox.Show("You like the mouse!")
-                    Case Else
-                        ' A problem here is causing a windows handle error when executing the below code.
-                        ' Therefore since this is just a selection change during initialization no need
-                        ' to execute the codes below so just exit the sub. This will also make initialization
-                        ' faster because no more need to move the database anyway at initialization the
-                        ' first record will be the one to be shown.
-                        Exit Sub
-                End Select
-                If Not PresenterObj.OkToMove() Then
-                    Exit Sub
-                End If
-                Dim nTag As Integer
-                TreeViewLeave.ImageIndex = 1
-                If TreeViewLeave.SelectedNode.Tag.ToString = "root" Then
-                    PresenterObj.RecordPositionNumber = 1
-                Else
-                    nTag = TreeViewLeave.SelectedNode.Tag
-                    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(nTag)
-                End If
-                If Not TreeViewLeave.SelectedNode.IsVisible Then
-                    TreeViewLeave.SelectedNode.EnsureVisible()
-                End If
-            End If
-        End Sub
+        Public Property Cumulative As Boolean Implements ILeaveView.Cumulative
+            Get
+                Return chkCumulative.Checked
+            End Get
+            Set
+                chkCumulative.Checked = Value
+            End Set
+        End Property
 
-        Protected Sub DisplayTreeViewData()
-            Dim treeViewData = PresenterObj.GetTreeViewDataNew()
-            DisplayTree(treeViewData)
-            TreeViewLeave.ExpandAll()
-            GotoRecordInTreeView()
-        End Sub
+        Public Property MaxCarryOver As Short Implements ILeaveView.MaxCarryOver
+            Get
+                Return txtMaxCarryOver.Text
+            End Get
+            Set
+                txtMaxCarryOver.Text = Value
+            End Set
+        End Property
 
-        Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
-        As TreeNode
-            Dim treeTextDisplay As String
-            treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)
-            Return New TreeNode With {
-            .Text = treeTextDisplay,
-            .Tag = idNo,
-            .Name = idNo
-            }
-        End Function
+        Public Property MaxLimit As Short Implements ILeaveView.MaxLimit
+            Get
+                Return txtMaxLimit.Text
+            End Get
+            Set
+                txtMaxLimit.Text = Value
+            End Set
+        End Property
 
-        Protected Overrides Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-            MyBase.OnTextDisplayLanguageChanged()
-            DisplayTreeViewData()
-        End Sub
+        Public Property Notes As String Implements ILeaveView.Notes
+            Get
+                Return txtNotes.Text
+            End Get
+            Set
+                txtNotes.Text = Value
+            End Set
+        End Property
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
-            GotoRecordInTreeView()
-        End Sub
+#End Region
 
-        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
-            DisplayTreeViewData()
-        End Sub
 
-        Protected Sub RemoveCurrentNode(bypassChange As Boolean)
-            If bypassChange Then
-                _bypassSelectedChange = True
-            End If
-            TreeViewLeave.Nodes.Remove(TreeViewLeave.SelectedNode)
-            _bypassSelectedChange = False
-        End Sub
-
-        Protected Overridable Function TreeNodeTextDisplay(tvName As String, ByVal Optional tvAdditionalText As String = "") _
-        As String
-            Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
-        End Function
-
-        Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-                TreeViewLeave.Nodes(0).Text = MainTableName
-                TreeViewLeave.ExpandAll()
-                DisplayTreeViewData()
-            End If
-        End Sub
-
-        Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            _bypassSelectedChange = True
-            If GlobalVariables.RightToLeftLayout Then
-                RightToLeftLayout = True
-                TreeViewLeave.RightToLeftLayout = True
-                TreeViewLeave.RightToLeft = RightToLeft.Yes
-            Else
-                RightToLeftLayout = False
-                TreeViewLeave.RightToLeftLayout = False
-                TreeViewLeave.RightToLeft = RightToLeft.No
-            End If
-            TreeViewLeave.ExpandAll()
-            _bypassSelectedChange = False
-        End Sub
-
-        ' ReSharper disable once UnusedMember.Local
-        Private Function GetMainFieldName(mainFieldName As String) As String
-            If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-                If GlobalVariables.RightToLeftLayout Then
-                    mainFieldName = mainFieldName + "Ara"
-                End If
-            End If
-            Return mainFieldName
-        End Function
-
-        Private Sub GotoRecordInTreeView()
-            Dim found As TreeNode() = TreeViewLeave.Nodes.Find(PresenterObj.TargetIdNo, True)
-            If found.Length <> 0 Then
-                With TreeViewLeave
-                    _bypassSelectedChange = True
-                    .SelectedNode = found(0)
-                    _bypassSelectedChange = False
-                    .HideSelection = False
-                    .Select()
-                End With
-            End If
-            ' update treeview text if ever name is changed
-            'If Not TreeViewLeave.SelectedNode Is Nothing Then
-            'TreeViewLeave.SelectedNode.Text = TreeNodeText
-            'End If
-            If TreeViewLeave.SelectedNode IsNot Nothing AndAlso TreeViewLeave.SelectedNode.IsVisible Then
-                TreeViewLeave.SelectedNode.EnsureVisible()
-            End If
+        Protected Overrides Sub CreateFieldsDictionary()
+            FieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"LeaveCode", txtLeaveCode},
+                {"LeaveName", txtLeaveName},
+                {"LeaveNameAra", txtLeaveNameAra},
+                {"IdNo", TxtIdNo},
+                {"Notes", txtNotes}
+                }
         End Sub
 
     End Class

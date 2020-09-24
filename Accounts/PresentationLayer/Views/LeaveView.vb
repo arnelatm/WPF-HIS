@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views
         Public Property PaidPercent As Decimal Implements ILeaveView.PaidPercent
             Get
                 If txtPaidPercent.Text <> "" Then
-                    Return Convert.ToByte(txtPaidPercent.Text)
+                    Return Convert.ToDecimal(txtPaidPercent.Text)
                 Else
                     Return 0D
                 End If
