@@ -3,6 +3,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
+
     Public Class LeaveView
         Implements ILeaveView
 
@@ -51,7 +52,7 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property PaidPercent As Byte Implements ILeaveView.PaidPercent
+        Public Property PaidPercent As Decimal Implements ILeaveView.PaidPercent
             Get
                 If txtPaidPercent.Text <> "" Then
                     Return Convert.ToByte(txtPaidPercent.Text)
@@ -60,9 +61,7 @@ Namespace PresentationLayer.Views
                 End If
             End Get
             Set
-                If Value Then
-                    txtPaidPercent.Text = Value
-
+                txtPaidPercent.Text = Value
             End Set
         End Property
 
@@ -105,4 +104,5 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
+
 End Namespace

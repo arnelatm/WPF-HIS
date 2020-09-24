@@ -21,10 +21,11 @@ Namespace BusinessLayer
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
         Public Property LeaveAllowed As Byte
-        Public Property PaidPercent As Byte
+        Public Property PaidPercent As Decimal
         Public Property Cumulative As Boolean
         Public Property MaxCarryOver As Int16
         Public Property MaxLimit As Int16
+        Public Property NoMaxLimit As Boolean
         Public Property Notes As String
     End Class
 

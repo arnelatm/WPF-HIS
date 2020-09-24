@@ -37,15 +37,15 @@
             Me.txtDeductionCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtCumulative = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkCumulative = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -66,7 +66,7 @@
             Me.CFlowLayout1.Controls.Add(Me.txtPaidPercent)
             Me.CFlowLayout1.Controls.Add(Me.lblPercent)
             Me.CFlowLayout1.Controls.Add(Me.CLabel3)
-            Me.CFlowLayout1.Controls.Add(Me.txtCumulative)
+            Me.CFlowLayout1.Controls.Add(Me.chkCumulative)
             Me.CFlowLayout1.Controls.Add(Me.CLabel4)
             Me.CFlowLayout1.Controls.Add(Me.txtMaxCarryOver)
             Me.CFlowLayout1.Controls.Add(Me.CLabel5)
@@ -301,6 +301,21 @@
             Me.txtPaidPercent.TabIndex = 169
             Me.txtPaidPercent.ValueIsMandatory = True
             '
+            'lblPercent
+            '
+            Me.lblPercent.DisplayOnly = True
+            Me.lblPercent.EditingMode = False
+            Me.CFlowLayout1.SetFlowBreak(Me.lblPercent, True)
+            Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPercent.Location = New System.Drawing.Point(231, 135)
+            Me.lblPercent.Margin = New System.Windows.Forms.Padding(0)
+            Me.lblPercent.Name = "lblPercent"
+            Me.lblPercent.Size = New System.Drawing.Size(16, 23)
+            Me.lblPercent.TabIndex = 270
+            Me.lblPercent.Text = "%"
+            Me.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            '
             'CLabel3
             '
             Me.CLabel3.DisplayOnly = True
@@ -314,29 +329,6 @@
             Me.CLabel3.TabIndex = 172
             Me.CLabel3.Text = "Cumulative"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtCumulative
-            '
-            Me.txtCumulative.BackColor = System.Drawing.Color.White
-            Me.txtCumulative.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtCumulative.ComputedValue = False
-            Me.txtCumulative.CustomFormat = Nothing
-            Me.txtCumulative.DataBoundControl = True
-            Me.txtCumulative.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtCumulative, True)
-            Me.txtCumulative.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtCumulative.ForeColor = System.Drawing.Color.Black
-            Me.txtCumulative.LinkedLabel = Nothing
-            Me.txtCumulative.Location = New System.Drawing.Point(168, 161)
-            Me.txtCumulative.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtCumulative.MaximumValue = Nothing
-            Me.txtCumulative.MinimumValue = Nothing
-            Me.txtCumulative.Name = "txtCumulative"
-            Me.txtCumulative.OldValue = Nothing
-            Me.txtCumulative.ReadOnly = True
-            Me.txtCumulative.Size = New System.Drawing.Size(62, 23)
-            Me.txtCumulative.TabIndex = 171
-            Me.txtCumulative.ValueIsMandatory = True
             '
             'CLabel4
             '
@@ -449,20 +441,25 @@
             Me.txtNotes.TabIndex = 177
             Me.txtNotes.ValueIsMandatory = True
             '
-            'lblPercent
+            'chkCumulative
             '
-            Me.lblPercent.DisplayOnly = True
-            Me.lblPercent.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.lblPercent, True)
-            Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPercent.Location = New System.Drawing.Point(231, 135)
-            Me.lblPercent.Margin = New System.Windows.Forms.Padding(0)
-            Me.lblPercent.Name = "lblPercent"
-            Me.lblPercent.Size = New System.Drawing.Size(16, 23)
-            Me.lblPercent.TabIndex = 270
-            Me.lblPercent.Text = "%"
-            Me.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkCumulative.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkCumulative.AutoSize = True
+            Me.chkCumulative.DisplayOnly = False
+            Me.chkCumulative.EditingMode = True
+            Me.chkCumulative.FlatAppearance.BorderSize = 0
+            Me.chkCumulative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.CFlowLayout1.SetFlowBreak(Me.chkCumulative, True)
+            Me.chkCumulative.LinkedLabel = Nothing
+            Me.chkCumulative.Location = New System.Drawing.Point(168, 161)
+            Me.chkCumulative.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkCumulative.Name = "chkCumulative"
+            Me.chkCumulative.OldValue = Nothing
+            Me.chkCumulative.Size = New System.Drawing.Size(23, 23)
+            Me.chkCumulative.TabIndex = 271
+            Me.chkCumulative.Text = "  "
+            Me.chkCumulative.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkCumulative.UseVisualStyleBackColor = True
             '
             'LeaveView
             '
@@ -491,7 +488,6 @@
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPaidPercent As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtCumulative As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtMaxCarryOver As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
@@ -499,5 +495,6 @@
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPercent As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents chkCumulative As Libraries.CBaseControlsLibrary.CCheckBox
     End Class
 End NameSpace
