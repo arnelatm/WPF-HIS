@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Earning Implements IDaoAll(Of Earning).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, EarningCode, EarningName, EarningNameAra, AccountIdNo, DefaultFrequency, EarningType " &
+                    " SELECT IdNo, EarningCode, EarningName, EarningNameAra, Frequency, EarningType " &
                     "   FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -39,8 +39,7 @@ Namespace DataLayer.AdoNet
                     " SET EarningCode = @EarningCode," &
                     " EarningName = @EarningName," &
                     " EarningNameAra = @EarningNameAra," &
-                    " AccountIdNo = @AccountIdNo," &
-                    " DefaultFrequency = @DefaultFrequency," &
+                    " Frequency = @Frequency," &
                     " EarningType = @EarningType" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(earning))
@@ -49,8 +48,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDaoAll(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (EarningCode,EarningName,EarningNameAra,AccountIdNo,DefaultFrequency,EarningType) " &
-                    " VALUES (@EarningCode,@EarningName,@EarningNameAra,@AccountIdNo,@DefaultFrequency,@EarningType) "
+                    " (EarningCode,EarningName,EarningNameAra,Frequency,EarningType) " &
+                    " VALUES (@EarningCode,@EarningName,@EarningNameAra,@Frequency,@EarningType) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -61,8 +60,7 @@ Namespace DataLayer.AdoNet
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
-            .DefaultFrequency = Extensions.AsString(reader("DefaultFrequency")),
+            .Frequency = Extensions.AsString(reader("Frequency")),
             .EarningType = Extensions.AsChar(reader("EarningType"))
             }
 
@@ -72,8 +70,7 @@ Namespace DataLayer.AdoNet
                                     "@EarningCode", earning.EarningCode,
                                     "@EarningName", earning.EarningName,
                                     "@EarningNameAra", earning.EarningNameAra,
-                                    "@AccountIdNo", earning.AccountIdNo,
-                                    "@DefaultFrequency", earning.DefaultFrequency,
+                                    "@Frequency", earning.Frequency,
                                     "@EarningType", earning.EarningType
                                 }
         End Function

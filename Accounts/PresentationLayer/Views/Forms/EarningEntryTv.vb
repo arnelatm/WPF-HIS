@@ -62,21 +62,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Int16? Implements IEarningView.AccountIdNo
+        Public Property Frequency As Char Implements IEarningView.Frequency
             Get
-                Return cboAccountIdNo.GetValue()
+                Return cboFrequency.GetValue()
             End Get
             Set
-                cboAccountIdNo.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property DefaultFrequency As Char Implements IEarningView.DefaultFrequency
-            Get
-                Return cboDefaultFrequency.GetValue()
-            End Get
-            Set
-                cboDefaultFrequency.SetValue(Value)
+                cboFrequency.SetValue(Value)
             End Set
         End Property
 
@@ -101,8 +92,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
-            cboDefaultFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
         End Sub
 
@@ -112,6 +102,8 @@ Namespace PresentationLayer.Views.Forms
                 {"EarningCode", txtEarningCode},
                 {"EarningName", txtEarningName},
                 {"EarningNameAra", txtEarningNameAra},
+                {"EarningType", cboEarningType},
+                {"Frequency", cboFrequency},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
@@ -119,10 +111,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEarningType.SelectedIndexChanged
             If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Others Then
-                cboDefaultFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
-                cboDefaultFrequency.DisplayOnly = True
+                cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
+                cboFrequency.DisplayOnly = True
             Else
-                cboDefaultFrequency.DisplayOnly = False
+                cboFrequency.DisplayOnly = False
             End If
         End Sub
 

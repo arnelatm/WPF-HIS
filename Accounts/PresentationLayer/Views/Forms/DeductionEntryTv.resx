@@ -453,76 +453,76 @@
   <data name="&gt;&gt;cboDeductionType.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblDefaultFrequency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFrequency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 142</value>
   </data>
-  <data name="lblDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblDefaultFrequency.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="lblFrequency.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name="lblDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 24</value>
   </data>
-  <data name="lblDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>270</value>
   </data>
-  <data name="lblDefaultFrequency.Text" xml:space="preserve">
-    <value>Default Frequency</value>
+  <data name="lblFrequency.Text" xml:space="preserve">
+    <value>Frequency</value>
   </data>
-  <data name="lblDefaultFrequency.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblFrequency.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Name" xml:space="preserve">
-    <value>lblDefaultFrequency</value>
+  <data name="&gt;&gt;lblFrequency.Name" xml:space="preserve">
+    <value>lblFrequency</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cboDefaultFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="cboFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <data name="cboDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboDefaultFrequency.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboFrequency.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 142</value>
   </data>
-  <data name="cboDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Name" xml:space="preserve">
-    <value>cboDefaultFrequency</value>
+  <data name="&gt;&gt;cboFrequency.Name" xml:space="preserve">
+    <value>cboFrequency</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="lblAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">

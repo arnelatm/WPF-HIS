@@ -2,29 +2,29 @@
 GO
 SET IDENTITY_INSERT [dbo].[Earning] ON 
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (1, N'OTC', N'Overtime Cost', N'Overtime Cost', N'M', 432, N'H')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (1, N'OTC', N'Overtime Cost', N'Overtime Cost', N'M', 432, N'H')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (2, N'OTE', N'Overtime Expense', N'Overtime Expense', N'M', 512, N'H')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (2, N'OTE', N'Overtime Expense', N'Overtime Expense', N'M', 512, N'H')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (3, N'HAC', N'Housing Allowance Cost', N'Housing Allowance Cost', N'M', 434, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (3, N'HAC', N'Housing Allowance Cost', N'Housing Allowance Cost', N'M', 434, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (4, N'HAE', N'Housing Allowance Expense', N'Housing Allowance Expense', N'M', 538, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (4, N'HAE', N'Housing Allowance Expense', N'Housing Allowance Expense', N'M', 538, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (5, N'TAC', N'Transportation Allowance Cost', N'Transportation Allowance Cost', N'M', 433, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (5, N'TAC', N'Transportation Allowance Cost', N'Transportation Allowance Cost', N'M', 433, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (6, N'TAE', N'Transportation Allowance Expense', N'Transportation Allowance Expense', N'M', 513, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (6, N'TAE', N'Transportation Allowance Expense', N'Transportation Allowance Expense', N'M', 513, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (7, N'FAC', N'Food Allowance Cost', N'Food Allowance Cost', N'M', 433, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (7, N'FAC', N'Food Allowance Cost', N'Food Allowance Cost', N'M', 433, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (8, N'FAE', N'Food Allowance Expense', N'Food Allowance Expense', N'M', 513, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (8, N'FAE', N'Food Allowance Expense', N'Food Allowance Expense', N'M', 513, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (9, N'VPC', N'Vacation Pay Cost', N'Vacation Pay Cost', N'A', 435, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (9, N'VPC', N'Vacation Pay Cost', N'Vacation Pay Cost', N'A', 435, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (10, N'VPE', N'Vacation Pay Expense', N'Vacation Pay Expense', N'Y', 535, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (10, N'VPE', N'Vacation Pay Expense', N'Vacation Pay Expense', N'Y', 535, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (11, N'BNC', N'Bonus Cost', N'Bonus Cost', N'A', 433, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (11, N'BNC', N'Bonus Cost', N'Bonus Cost', N'A', 433, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (12, N'BNE', N'Bonus Expense', N'Bonus Expense', N'A', 513, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Frequency], [AccountIdNo], [EarningType]) VALUES (12, N'BNE', N'Bonus Expense', N'Bonus Expense', N'A', 513, N'O')
 GO
 SET IDENTITY_INSERT [dbo].[Earning] OFF
 GO
@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[Deduction](
 	[DeductionCode] [varchar](10) NULL,
 	[DeductionName] [varchar](50) NULL,
 	[DeductionNameAra] [nvarchar](50) NULL,
-	[DefaultFrequency] [char](1) NULL,
+	[Frequency] [char](1) NULL,
 	[AccountIdNo] [int] NULL,
 	[DeductionType] [char](1) NULL,
 	[DeductionPlace] [char](1) NULL,
@@ -66,7 +66,7 @@ CREATE TABLE [dbo].[Earning](
 	[EarningName] [varchar](50) NULL,
 	[EarningNameAra] [nvarchar](50) NULL,
 	[Percentage] [decimal](4, 2) NULL,
-	[DefaultFrequency] [char](1) NULL,
+	[Frequency] [char](1) NULL,
 	[AccountIdNo] [int] NULL,
 	[EarningType] [char](1) NULL,
 	[DateTimeStamp] [timestamp] NULL,
@@ -100,35 +100,35 @@ CREATE TABLE [dbo].[Leave](
 GO
 SET IDENTITY_INSERT [dbo].[Deduction] ON 
 GO
-INSERT [dbo].[Deduction] ([IdNo], [DeductionCode], [DeductionName], [DeductionNameAra], [DefaultFrequency], [AccountIdNo], [DeductionType], [DeductionPlace], [ComputationType], [Percentage]) VALUES (1, N'PNL', N'Penalties or Fines', N'Penalties or Fines', N'A', 0, N'O', NULL, NULL, NULL)
+INSERT [dbo].[Deduction] ([IdNo], [DeductionCode], [DeductionName], [DeductionNameAra], [Frequency], [AccountIdNo], [DeductionType], [DeductionPlace], [ComputationType], [Percentage]) VALUES (1, N'PNL', N'Penalties or Fines', N'Penalties or Fines', N'A', 0, N'O', NULL, NULL, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Deduction] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Earning] ON 
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (1, N'OTC', N'Overtime Cost', N'Overtime Cost', NULL, N'M', 432, N'H')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (1, N'OTC', N'Overtime Cost', N'Overtime Cost', NULL, N'M', 432, N'H')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (2, N'OTE', N'Overtime Expense', N'Overtime Expense', NULL, N'M', 512, N'H')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (2, N'OTE', N'Overtime Expense', N'Overtime Expense', NULL, N'M', 512, N'H')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (3, N'HAC', N'Housing Allowance Cost', N'Housing Allowance Cost', NULL, N'M', 434, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (3, N'HAC', N'Housing Allowance Cost', N'Housing Allowance Cost', NULL, N'M', 434, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (4, N'HAE', N'Housing Allowance Expense', N'Housing Allowance Expense', NULL, N'M', 538, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (4, N'HAE', N'Housing Allowance Expense', N'Housing Allowance Expense', NULL, N'M', 538, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (5, N'TAC', N'Transportation Allowance Cost', N'Transportation Allowance Cost', NULL, N'M', 433, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (5, N'TAC', N'Transportation Allowance Cost', N'Transportation Allowance Cost', NULL, N'M', 433, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (6, N'TAE', N'Transportation Allowance Expense', N'Transportation Allowance Expense', NULL, N'M', 513, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (6, N'TAE', N'Transportation Allowance Expense', N'Transportation Allowance Expense', NULL, N'M', 513, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (7, N'FAC', N'Food Allowance Cost', N'Food Allowance Cost', NULL, N'M', 433, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (7, N'FAC', N'Food Allowance Cost', N'Food Allowance Cost', NULL, N'M', 433, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (8, N'FAE', N'Food Allowance Expense', N'Food Allowance Expense', NULL, N'M', 513, N'R')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (8, N'FAE', N'Food Allowance Expense', N'Food Allowance Expense', NULL, N'M', 513, N'R')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (9, N'VPC', N'Vacation Pay Cost', N'Vacation Pay Cost', NULL, N'A', 435, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (9, N'VPC', N'Vacation Pay Cost', N'Vacation Pay Cost', NULL, N'A', 435, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (10, N'VPE', N'Vacation Pay Expense', N'Vacation Pay Expense', NULL, N'A', 535, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (10, N'VPE', N'Vacation Pay Expense', N'Vacation Pay Expense', NULL, N'A', 535, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (11, N'BNC', N'Bonus Cost', N'Bonus Cost', NULL, N'A', 433, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (11, N'BNC', N'Bonus Cost', N'Bonus Cost', NULL, N'A', 433, N'O')
 GO
-INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [DefaultFrequency], [AccountIdNo], [EarningType]) VALUES (12, N'BNE', N'Bonus Expense', N'Bonus Expense', NULL, N'A', 513, N'O')
+INSERT [dbo].[Earning] ([IdNo], [EarningCode], [EarningName], [EarningNameAra], [Percentage], [Frequency], [AccountIdNo], [EarningType]) VALUES (12, N'BNE', N'Bonus Expense', N'Bonus Expense', NULL, N'A', 513, N'O')
 GO
 SET IDENTITY_INSERT [dbo].[Earning] OFF
 GO

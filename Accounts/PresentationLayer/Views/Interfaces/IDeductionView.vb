@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DeductionName As String
         Property DeductionNameAra As String
         Property AccountIdNo As Int16?
-        Property DefaultFrequency As Char
+        Property Frequency As Char
         Property DeductionType As Char
         Property Notes As String
     End Interface
