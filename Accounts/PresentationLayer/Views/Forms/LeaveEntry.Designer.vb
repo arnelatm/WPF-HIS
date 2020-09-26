@@ -33,15 +33,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkCumulative = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblCumulative = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDeductionCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLeaveNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.txtLeaveName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -57,8 +57,8 @@ Namespace PresentationLayer.Views.Forms
             '
             'TreeViewTableName
             '
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
             'TranslatorDAC
             '
@@ -82,15 +82,15 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 14)
             Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 15)
             Me.TableLayoutPanel1.Controls.Add(Me.txtMaxLimit, 0, 13)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel5, 0, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblMaxLimit, 0, 12)
             Me.TableLayoutPanel1.Controls.Add(Me.txtMaxCarryOver, 1, 11)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel4, 1, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblMaxCarryOver, 1, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.chkCumulative, 0, 11)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblCumulative, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPaidPercent, 1, 9)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 1, 8)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtDeductionCode, 0, 9)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPaidPercent, 1, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveAllowed, 0, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblLeaveAllowed, 0, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveNameAra, 0, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNameAra, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveName, 0, 5)
@@ -145,12 +145,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxLimit.ReadOnly = True
             Me.txtMaxLimit.ValueIsMandatory = True
             '
-            'CLabel5
+            'lblMaxLimit
             '
-            resources.ApplyResources(Me.CLabel5, "CLabel5")
-            Me.CLabel5.DisplayOnly = True
-            Me.CLabel5.EditingMode = False
-            Me.CLabel5.Name = "CLabel5"
+            resources.ApplyResources(Me.lblMaxLimit, "lblMaxLimit")
+            Me.lblMaxLimit.DisplayOnly = True
+            Me.lblMaxLimit.EditingMode = False
+            Me.lblMaxLimit.Name = "lblMaxLimit"
             '
             'txtMaxCarryOver
             '
@@ -170,12 +170,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxCarryOver.ReadOnly = True
             Me.txtMaxCarryOver.ValueIsMandatory = True
             '
-            'CLabel4
+            'lblMaxCarryOver
             '
-            resources.ApplyResources(Me.CLabel4, "CLabel4")
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Name = "CLabel4"
+            resources.ApplyResources(Me.lblMaxCarryOver, "lblMaxCarryOver")
+            Me.lblMaxCarryOver.DisplayOnly = True
+            Me.lblMaxCarryOver.EditingMode = False
+            Me.lblMaxCarryOver.Name = "lblMaxCarryOver"
             '
             'chkCumulative
             '
@@ -187,16 +187,16 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCumulative.ForeColor = System.Drawing.Color.Black
             Me.chkCumulative.LinkedLabel = Nothing
             Me.chkCumulative.Name = "chkCumulative"
-            Me.chkCumulative.NoLabel = False
+            Me.chkCumulative.NoLabel = True
             Me.chkCumulative.OldValue = Nothing
-            Me.chkCumulative.UseVisualStyleBackColor = True
+            Me.chkCumulative.UseVisualStyleBackColor = False
             '
-            'CLabel3
+            'lblCumulative
             '
-            resources.ApplyResources(Me.CLabel3, "CLabel3")
-            Me.CLabel3.DisplayOnly = True
-            Me.CLabel3.EditingMode = False
-            Me.CLabel3.Name = "CLabel3"
+            resources.ApplyResources(Me.lblCumulative, "lblCumulative")
+            Me.lblCumulative.DisplayOnly = True
+            Me.lblCumulative.EditingMode = False
+            Me.lblCumulative.Name = "lblCumulative"
             '
             'txtPaidPercent
             '
@@ -216,37 +216,37 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPaidPercent.ReadOnly = True
             Me.txtPaidPercent.ValueIsMandatory = True
             '
-            'CLabel2
+            'lblPaidPercent
             '
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Name = "CLabel2"
+            resources.ApplyResources(Me.lblPaidPercent, "lblPaidPercent")
+            Me.lblPaidPercent.DisplayOnly = True
+            Me.lblPaidPercent.EditingMode = False
+            Me.lblPaidPercent.Name = "lblPaidPercent"
             '
-            'txtDeductionCode
+            'txtLeaveAllowed
             '
-            Me.txtDeductionCode.BackColor = System.Drawing.Color.White
-            Me.txtDeductionCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDeductionCode.ComputedValue = False
-            Me.txtDeductionCode.CustomFormat = Nothing
-            Me.txtDeductionCode.DataBoundControl = True
-            Me.txtDeductionCode.EditingMode = True
-            resources.ApplyResources(Me.txtDeductionCode, "txtDeductionCode")
-            Me.txtDeductionCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDeductionCode.LinkedLabel = Nothing
-            Me.txtDeductionCode.MaximumValue = Nothing
-            Me.txtDeductionCode.MinimumValue = Nothing
-            Me.txtDeductionCode.Name = "txtDeductionCode"
-            Me.txtDeductionCode.OldValue = Nothing
-            Me.txtDeductionCode.ReadOnly = True
-            Me.txtDeductionCode.ValueIsMandatory = True
+            Me.txtLeaveAllowed.BackColor = System.Drawing.Color.White
+            Me.txtLeaveAllowed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtLeaveAllowed.ComputedValue = False
+            Me.txtLeaveAllowed.CustomFormat = Nothing
+            Me.txtLeaveAllowed.DataBoundControl = True
+            Me.txtLeaveAllowed.EditingMode = True
+            resources.ApplyResources(Me.txtLeaveAllowed, "txtLeaveAllowed")
+            Me.txtLeaveAllowed.ForeColor = System.Drawing.Color.Black
+            Me.txtLeaveAllowed.LinkedLabel = Nothing
+            Me.txtLeaveAllowed.MaximumValue = Nothing
+            Me.txtLeaveAllowed.MinimumValue = Nothing
+            Me.txtLeaveAllowed.Name = "txtLeaveAllowed"
+            Me.txtLeaveAllowed.OldValue = Nothing
+            Me.txtLeaveAllowed.ReadOnly = True
+            Me.txtLeaveAllowed.ValueIsMandatory = True
             '
-            'CLabel1
+            'lblLeaveAllowed
             '
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Name = "CLabel1"
+            resources.ApplyResources(Me.lblLeaveAllowed, "lblLeaveAllowed")
+            Me.lblLeaveAllowed.DisplayOnly = True
+            Me.lblLeaveAllowed.EditingMode = False
+            Me.lblLeaveAllowed.Name = "lblLeaveAllowed"
             '
             'txtLeaveNameAra
             '
@@ -375,15 +375,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents txtMaxLimit As CTextBox
-        Friend WithEvents CLabel5 As CLabel
+        Friend WithEvents lblMaxLimit As CLabel
         Friend WithEvents txtMaxCarryOver As CTextBox
-        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents lblMaxCarryOver As CLabel
         Friend WithEvents chkCumulative As CCheckBox
-        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents lblCumulative As CLabel
         Friend WithEvents txtPaidPercent As CTextBox
-        Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents txtDeductionCode As CTextBox
-        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents lblPaidPercent As CLabel
+        Friend WithEvents txtLeaveAllowed As CTextBox
+        Friend WithEvents lblLeaveAllowed As CLabel
         Friend WithEvents txtLeaveNameAra As CTextBoxArabic
         Friend WithEvents txtLeaveName As CTextBox
         Friend WithEvents lblNameAra As CLabel

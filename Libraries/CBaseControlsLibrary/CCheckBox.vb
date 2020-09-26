@@ -15,7 +15,6 @@ Public Class CCheckBox
 
     Public Sub New()
         MyBase.New()
-        Text = "  "
         Width = 200
         Margin = New Padding(1)
         UseVisualStyleBackColor = True
@@ -57,20 +56,13 @@ Public Class CCheckBox
     <Browsable(True)>
     Public Property NoLabel As Boolean
         Get
-            Return _displayOnly
+            Return _noLabel
         End Get
         Set(value As Boolean)
-            'If _displayOnly = value Then Exit Property
-            _displayOnly = value
             If value Then
-                Me.Enabled = False
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                Me.Enabled = True
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                Me.Text = " "
             End If
+            _noLabel = value
         End Set
     End Property
 
@@ -161,7 +153,7 @@ Public Class CCheckBox
         End Using
 
         Dim pt As Point = New Point(0, 0)
-        Dim rect As Rectangle = New Rectangle(pt, New Size(22, 20))
+        Dim rect As Rectangle = New Rectangle(pt, New Size(23, 23))
         Dim cForeColor As Color
 
         If Focused Then
