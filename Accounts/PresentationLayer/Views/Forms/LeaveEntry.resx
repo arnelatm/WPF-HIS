@@ -118,19 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 388</value>
   </data>
@@ -175,7 +166,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 265</value>
+    <value>1, 266</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -208,7 +199,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 284</value>
+    <value>1, 285</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -238,7 +229,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 240</value>
+    <value>1, 241</value>
   </data>
   <data name="txtMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -261,43 +252,43 @@
   <data name="&gt;&gt;txtMaxLimit.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="CLabel5.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblMaxLimit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CLabel5.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblMaxLimit.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblMaxLimit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 221</value>
+  <data name="lblMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 222</value>
   </data>
-  <data name="CLabel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblMaxLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
   </data>
-  <data name="CLabel5.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblMaxLimit.TabIndex" type="System.Int32, mscorlib">
     <value>280</value>
   </data>
-  <data name="CLabel5.Text" xml:space="preserve">
+  <data name="lblMaxLimit.Text" xml:space="preserve">
     <value>Maximum Limit</value>
   </data>
-  <data name="CLabel5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblMaxLimit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel5.Name" xml:space="preserve">
-    <value>CLabel5</value>
+  <data name="&gt;&gt;lblMaxLimit.Name" xml:space="preserve">
+    <value>lblMaxLimit</value>
   </data>
-  <data name="&gt;&gt;CLabel5.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxLimit.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxLimit.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CLabel5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxLimit.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="txtMaxCarryOver.Font" type="System.Drawing.Font, System.Drawing">
@@ -327,50 +318,47 @@
   <data name="&gt;&gt;txtMaxCarryOver.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="CLabel4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblMaxCarryOver.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CLabel4.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblMaxCarryOver.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblMaxCarryOver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblMaxCarryOver.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 177</value>
   </data>
-  <data name="CLabel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblMaxCarryOver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblMaxCarryOver.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 17</value>
   </data>
-  <data name="CLabel4.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblMaxCarryOver.TabIndex" type="System.Int32, mscorlib">
     <value>278</value>
   </data>
-  <data name="CLabel4.Text" xml:space="preserve">
+  <data name="lblMaxCarryOver.Text" xml:space="preserve">
     <value>Maximum Carryover</value>
   </data>
-  <data name="CLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblMaxCarryOver.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel4.Name" xml:space="preserve">
-    <value>CLabel4</value>
+  <data name="&gt;&gt;lblMaxCarryOver.Name" xml:space="preserve">
+    <value>lblMaxCarryOver</value>
   </data>
-  <data name="&gt;&gt;CLabel4.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxCarryOver.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxCarryOver.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CLabel4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblMaxCarryOver.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="chkCumulative.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
-  </data>
-  <data name="chkCumulative.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="chkCumulative.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -385,13 +373,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="chkCumulative.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>24, 24</value>
   </data>
   <data name="chkCumulative.TabIndex" type="System.Int32, mscorlib">
     <value>281</value>
   </data>
   <data name="chkCumulative.Text" xml:space="preserve">
-    <value>  </value>
+    <value> </value>
   </data>
   <data name="chkCumulative.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -408,43 +396,43 @@
   <data name="&gt;&gt;chkCumulative.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="CLabel3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCumulative.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CLabel3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblCumulative.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblCumulative.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblCumulative.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 177</value>
   </data>
-  <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblCumulative.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblCumulative.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 17</value>
   </data>
-  <data name="CLabel3.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblCumulative.TabIndex" type="System.Int32, mscorlib">
     <value>276</value>
   </data>
-  <data name="CLabel3.Text" xml:space="preserve">
+  <data name="lblCumulative.Text" xml:space="preserve">
     <value>Cumulative</value>
   </data>
-  <data name="CLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblCumulative.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel3.Name" xml:space="preserve">
-    <value>CLabel3</value>
+  <data name="&gt;&gt;lblCumulative.Name" xml:space="preserve">
+    <value>lblCumulative</value>
   </data>
-  <data name="&gt;&gt;CLabel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblCumulative.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblCumulative.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CLabel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCumulative.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="txtPaidPercent.Font" type="System.Drawing.Font, System.Drawing">
@@ -474,109 +462,109 @@
   <data name="&gt;&gt;txtPaidPercent.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="CLabel2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblPaidPercent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblPaidPercent.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblPaidPercent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblPaidPercent.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 133</value>
   </data>
-  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblPaidPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblPaidPercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 17</value>
   </data>
-  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblPaidPercent.TabIndex" type="System.Int32, mscorlib">
     <value>275</value>
   </data>
-  <data name="CLabel2.Text" xml:space="preserve">
+  <data name="lblPaidPercent.Text" xml:space="preserve">
     <value>Paid Percentage</value>
   </data>
-  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblPaidPercent.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
-    <value>CLabel2</value>
+  <data name="&gt;&gt;lblPaidPercent.Name" xml:space="preserve">
+    <value>lblPaidPercent</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPaidPercent.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPaidPercent.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPaidPercent.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="txtDeductionCode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtLeaveAllowed.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtDeductionCode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtLeaveAllowed.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 152</value>
   </data>
-  <data name="txtDeductionCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtLeaveAllowed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtDeductionCode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtLeaveAllowed.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="txtDeductionCode.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtLeaveAllowed.TabIndex" type="System.Int32, mscorlib">
     <value>272</value>
   </data>
-  <data name="&gt;&gt;txtDeductionCode.Name" xml:space="preserve">
-    <value>txtDeductionCode</value>
+  <data name="&gt;&gt;txtLeaveAllowed.Name" xml:space="preserve">
+    <value>txtLeaveAllowed</value>
   </data>
-  <data name="&gt;&gt;txtDeductionCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtLeaveAllowed.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtDeductionCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtLeaveAllowed.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;txtDeductionCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtLeaveAllowed.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="CLabel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLeaveAllowed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblLeaveAllowed.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLeaveAllowed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLeaveAllowed.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 133</value>
   </data>
-  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblLeaveAllowed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblLeaveAllowed.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 17</value>
   </data>
-  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLeaveAllowed.TabIndex" type="System.Int32, mscorlib">
     <value>273</value>
   </data>
-  <data name="CLabel1.Text" xml:space="preserve">
+  <data name="lblLeaveAllowed.Text" xml:space="preserve">
     <value>Number of Leaves Allowed</value>
   </data>
-  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblLeaveAllowed.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
-    <value>CLabel1</value>
+  <data name="&gt;&gt;lblLeaveAllowed.Name" xml:space="preserve">
+    <value>lblLeaveAllowed</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLeaveAllowed.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLeaveAllowed.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblLeaveAllowed.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="txtLeaveName.Font" type="System.Drawing.Font, System.Drawing">
@@ -871,7 +859,7 @@
     <value>0</value>
   </data>
   <data name="TableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblNotes" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtNotes" Row="15" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtMaxLimit" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CLabel5" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtMaxCarryOver" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CLabel4" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="chkCumulative" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CLabel3" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPaidPercent" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CLabel2" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDeductionCode" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CLabel1" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtLeaveNameAra" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveName" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblName" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblNotes" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtNotes" Row="15" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtMaxLimit" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxLimit" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtMaxCarryOver" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxCarryOver" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="chkCumulative" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCumulative" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPaidPercent" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblPaidPercent" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtLeaveAllowed" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblLeaveAllowed" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtLeaveNameAra" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveName" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblName" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>

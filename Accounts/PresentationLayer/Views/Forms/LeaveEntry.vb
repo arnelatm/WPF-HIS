@@ -64,10 +64,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property LeaveAllowed As Int16 Implements ILeaveView.LeaveAllowed
             Get
-                Return txtLeaveNameAra.Text
+                Return txtLeaveAllowed.Text
             End Get
             Set
-                txtLeaveNameAra.Text = Value
+                txtLeaveAllowed.Text = Value
             End Set
         End Property
 
@@ -122,13 +122,17 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"LeaveCode", txtLeaveCode},
                 {"LeaveName", txtLeaveName},
                 {"LeaveNameAra", txtLeaveNameAra},
+                {"LeaveAllowed", txtLeaveAllowed},
+                {"PaidPercent", txtPaidPercent},
+                {"Cumulative", chkCumulative},
+                {"MaxCarryOver", txtMaxCarryOver},
+                {"MaxLimit", txtMaxLimit},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }

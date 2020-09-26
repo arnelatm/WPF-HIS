@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Runtime.CompilerServices
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
 
 Public Enum AccountGroupSelection
     <EnumCode(" ")> None
@@ -97,6 +95,19 @@ Public Enum EarningTypeSelection
     <EnumCode("R")> Redundancy
     <EnumCode("D")> Holiday
     <EnumCode("O")> Others
+End Enum
+
+Public Enum EmployeeActionSelection
+    <EnumCode("HR")> Hire
+    <EnumCode("PR")> Promote
+    <EnumCode("DE")> Demote
+    <EnumCode("RH")> Rehire
+    <EnumCode("SC")> SalaryChange
+    <EnumCode("AR")> AwardRecognition
+    <EnumCode("SU")> Suspend
+    <EnumCode("WR")> Warning
+    <EnumCode("TE")> Terminate
+    <EnumCode("RS")> Resign
 End Enum
 
 Public Enum PayeeTypeSelection
