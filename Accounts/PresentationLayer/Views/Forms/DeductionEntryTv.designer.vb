@@ -40,8 +40,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDeductionType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboDeductionType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblDefaultFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDefaultFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -165,8 +165,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtDeductionNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblDeductionType)
             Me.floDataDisplay.Controls.Add(Me.cboDeductionType)
-            Me.floDataDisplay.Controls.Add(Me.lblDefaultFrequency)
-            Me.floDataDisplay.Controls.Add(Me.cboDefaultFrequency)
+            Me.floDataDisplay.Controls.Add(Me.lblFrequency)
+            Me.floDataDisplay.Controls.Add(Me.cboFrequency)
             Me.floDataDisplay.Controls.Add(Me.lblAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.cboAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
@@ -243,48 +243,48 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDeductionType.ValueIsNumeric = False
             Me.cboDeductionType.ValueMember = "Code"
             '
-            'lblDefaultFrequency
+            'lblFrequency
             '
-            Me.lblDefaultFrequency.DisplayOnly = True
-            Me.lblDefaultFrequency.EditingMode = False
-            resources.ApplyResources(Me.lblDefaultFrequency, "lblDefaultFrequency")
-            Me.lblDefaultFrequency.Name = "lblDefaultFrequency"
+            Me.lblFrequency.DisplayOnly = True
+            Me.lblFrequency.EditingMode = False
+            resources.ApplyResources(Me.lblFrequency, "lblFrequency")
+            Me.lblFrequency.Name = "lblFrequency"
             '
-            'cboDefaultFrequency
+            'cboFrequency
             '
-            Me.cboDefaultFrequency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-            Me.cboDefaultFrequency.BackColor = System.Drawing.Color.White
-            Me.cboDefaultFrequency.ChangingSearchValueOnly = False
-            Me.cboDefaultFrequency.CurrentSearchTerm = ""
-            Me.cboDefaultFrequency.DefaultValue = Nothing
-            Me.cboDefaultFrequency.DisplayMember = "Name"
-            Me.cboDefaultFrequency.DropDownHeight = 1
-            Me.cboDefaultFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboDefaultFrequency.EditingMode = False
-            Me.cboDefaultFrequency.FilterRule = Nothing
-            resources.ApplyResources(Me.cboDefaultFrequency, "cboDefaultFrequency")
-            Me.floDataDisplay.SetFlowBreak(Me.cboDefaultFrequency, True)
-            Me.cboDefaultFrequency.ForeColor = System.Drawing.Color.Black
-            Me.cboDefaultFrequency.FormattingEnabled = True
-            Me.cboDefaultFrequency.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultFrequency.LinkedLabel = Nothing
-            Me.cboDefaultFrequency.Name = "cboDefaultFrequency"
-            Me.cboDefaultFrequency.OldValue = 0
-            Me.cboDefaultFrequency.OriginalDataSource = Nothing
-            Me.cboDefaultFrequency.OriginalList = Nothing
-            Me.cboDefaultFrequency.OverrideDropDownStyleList = False
-            Me.cboDefaultFrequency.PreviousSearchTerm = Nothing
-            Me.cboDefaultFrequency.PreviousSelectedIndex = -1
-            Me.cboDefaultFrequency.PropertySelector = Nothing
-            Me.cboDefaultFrequency.ReadOnlyCombo = False
-            Me.cboDefaultFrequency.SearchAnywhere = False
-            Me.cboDefaultFrequency.SuggestBoxHeight = 200
-            Me.cboDefaultFrequency.SuggestListOrderRule = Nothing
-            Me.cboDefaultFrequency.TextToSearch = Nothing
-            Me.cboDefaultFrequency.ValueIsMandatory = False
-            Me.cboDefaultFrequency.ValueIsNullable = False
-            Me.cboDefaultFrequency.ValueIsNumeric = False
-            Me.cboDefaultFrequency.ValueMember = "Code"
+            Me.cboFrequency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboFrequency.BackColor = System.Drawing.Color.White
+            Me.cboFrequency.ChangingSearchValueOnly = False
+            Me.cboFrequency.CurrentSearchTerm = ""
+            Me.cboFrequency.DefaultValue = Nothing
+            Me.cboFrequency.DisplayMember = "Name"
+            Me.cboFrequency.DropDownHeight = 1
+            Me.cboFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboFrequency.EditingMode = False
+            Me.cboFrequency.FilterRule = Nothing
+            resources.ApplyResources(Me.cboFrequency, "cboFrequency")
+            Me.floDataDisplay.SetFlowBreak(Me.cboFrequency, True)
+            Me.cboFrequency.ForeColor = System.Drawing.Color.Black
+            Me.cboFrequency.FormattingEnabled = True
+            Me.cboFrequency.HideWhenNotEditingOrAdding = False
+            Me.cboFrequency.LinkedLabel = Nothing
+            Me.cboFrequency.Name = "cboFrequency"
+            Me.cboFrequency.OldValue = 0
+            Me.cboFrequency.OriginalDataSource = Nothing
+            Me.cboFrequency.OriginalList = Nothing
+            Me.cboFrequency.OverrideDropDownStyleList = False
+            Me.cboFrequency.PreviousSearchTerm = Nothing
+            Me.cboFrequency.PreviousSelectedIndex = -1
+            Me.cboFrequency.PropertySelector = Nothing
+            Me.cboFrequency.ReadOnlyCombo = False
+            Me.cboFrequency.SearchAnywhere = False
+            Me.cboFrequency.SuggestBoxHeight = 200
+            Me.cboFrequency.SuggestListOrderRule = Nothing
+            Me.cboFrequency.TextToSearch = Nothing
+            Me.cboFrequency.ValueIsMandatory = False
+            Me.cboFrequency.ValueIsNullable = False
+            Me.cboFrequency.ValueIsNumeric = False
+            Me.cboFrequency.ValueMember = "Code"
             '
             'lblAccountIdNo
             '
@@ -362,10 +362,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents lblDefaultFrequency As CLabel
+        Friend WithEvents lblFrequency As CLabel
         Friend WithEvents lblDeductionType As CLabel
         Friend WithEvents cboDeductionType As CaComboBox
-        Friend WithEvents cboDefaultFrequency As CaComboBox
+        Friend WithEvents cboFrequency As CaComboBox
         Friend WithEvents cboAccountIdNo As CaComboBox
     End Class
 End Namespace

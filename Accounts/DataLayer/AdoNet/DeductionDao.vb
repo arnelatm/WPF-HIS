@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Deduction Implements IDaoAll(Of Deduction).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, DeductionCode, DeductionName, DeductionNameAra, AccountIdNo, DefaultFrequency, DeductionType, Notes " &
+                    " SELECT IdNo, DeductionCode, DeductionName, DeductionNameAra, AccountIdNo, Frequency, DeductionType, Notes " &
                     "   FROM [Deduction]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -40,7 +40,7 @@ Namespace DataLayer.AdoNet
                     " DeductionName = @DeductionName," &
                     " DeductionNameAra = @DeductionNameAra," &
                     " AccountIdNo = @AccountIdNo," &
-                    " DefaultFrequency = @DefaultFrequency," &
+                    " Frequency = @Frequency," &
                     " DeductionType = @DeductionType," &
                     " Notes = @Notes" &
                     " WHERE IdNo = @IdNo"
@@ -50,8 +50,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Deduction As Deduction) As Integer Implements IDaoAll(Of Deduction).AddRecord
             Dim sql As String =
                     " INSERT INTO [Deduction] " &
-                    " (DeductionCode,DeductionName,DeductionNameAra,AccountIdNo,DefaultFrequency,DeductionType,Notes) " &
-                    " VALUES (@DeductionCode,@DeductionName,@DeductionNameAra,@AccountIdNo,@DefaultFrequency,@DeductionType,@Notes) "
+                    " (DeductionCode,DeductionName,DeductionNameAra,AccountIdNo,Frequency,DeductionType,Notes) " &
+                    " VALUES (@DeductionCode,@DeductionName,@DeductionNameAra,@AccountIdNo,@Frequency,@DeductionType,@Notes) "
             Return Db.Insert(sql, Take(Deduction))
         End Function
 
@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
             .DeductionName = Extensions.AsString(reader("DeductionName")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
             .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
-            .DefaultFrequency = Extensions.AsString(reader("DefaultFrequency")),
+            .Frequency = Extensions.AsString(reader("Frequency")),
             .DeductionType = Extensions.AsChar(reader("DeductionType")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
@@ -75,7 +75,7 @@ Namespace DataLayer.AdoNet
                                     "@DeductionName", Deduction.DeductionName,
                                     "@DeductionNameAra", Deduction.DeductionNameAra,
                                     "@AccountIdNo", Deduction.AccountIdNo,
-                                    "@DefaultFrequency", Deduction.DefaultFrequency,
+                                    "@Frequency", Deduction.Frequency,
                                     "@DeductionType", Deduction.DeductionType,
                                     "@Notes", Deduction.Notes
                                 }

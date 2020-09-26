@@ -118,15 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 276</value>
+    <value>300, 249</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -453,149 +450,77 @@
   <data name="&gt;&gt;cboEarningType.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblDefaultFrequency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFrequency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 142</value>
   </data>
-  <data name="lblDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblDefaultFrequency.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="lblFrequency.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name="lblDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 24</value>
   </data>
-  <data name="lblDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>270</value>
   </data>
-  <data name="lblDefaultFrequency.Text" xml:space="preserve">
-    <value>Default Frequency</value>
+  <data name="lblFrequency.Text" xml:space="preserve">
+    <value>Frequency</value>
   </data>
-  <data name="lblDefaultFrequency.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblFrequency.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Name" xml:space="preserve">
-    <value>lblDefaultFrequency</value>
+  <data name="&gt;&gt;lblFrequency.Name" xml:space="preserve">
+    <value>lblFrequency</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;lblDefaultFrequency.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFrequency.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cboDefaultFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="cboFrequency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <data name="cboDefaultFrequency.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboFrequency.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboDefaultFrequency.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboFrequency.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboDefaultFrequency.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 142</value>
   </data>
-  <data name="cboDefaultFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboDefaultFrequency.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboDefaultFrequency.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Name" xml:space="preserve">
-    <value>cboDefaultFrequency</value>
+  <data name="&gt;&gt;cboFrequency.Name" xml:space="preserve">
+    <value>cboFrequency</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboDefaultFrequency.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboFrequency.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="lblAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 168</value>
-  </data>
-  <data name="lblAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAccountIdNo.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 24</value>
-  </data>
-  <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>268</value>
-  </data>
-  <data name="lblAccountIdNo.Text" xml:space="preserve">
-    <value>Default Account</value>
-  </data>
-  <data name="lblAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Name" xml:space="preserve">
-    <value>lblAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="cboAccountIdNo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>System</value>
-  </data>
-  <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 168</value>
-  </data>
-  <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
-  </data>
-  <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>13</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -604,7 +529,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 194</value>
+    <value>1, 168</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -631,13 +556,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 194</value>
+    <value>158, 168</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -661,7 +586,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -676,7 +601,7 @@
     <value>0, 15, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 284</value>
+    <value>596, 249</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -733,7 +658,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>902, 337</value>
+    <value>902, 302</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>918, 288</value>
