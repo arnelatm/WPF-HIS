@@ -260,6 +260,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property PayGroupDao As IDaoAll(Of PayGroup)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PayGroup")
+            End Get
+        End Property
+
         Private ReadOnly Property PcsOiItemDao As IDaoChild(Of PcsOiItem)
             Get
                 Return DaoFactoryAccounts.CreateDao("PcsOiItem")

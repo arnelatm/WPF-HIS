@@ -101,6 +101,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\PayGroup.vb" />
     <Compile Include="BusinessLayer\PayrollEarnAccount.vb" />
     <Compile Include="BusinessLayer\Leave.vb" />
     <Compile Include="BusinessLayer\Deduction.vb" />
@@ -143,6 +144,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\LeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\DeductionDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeDeductionDao.vb" />
@@ -212,8 +214,10 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\PayGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarnAccount.vb" />
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PayGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollEarnAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\LeavePresenter.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
@@ -256,6 +260,12 @@
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
+      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.designer.vb">
@@ -533,6 +543,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ILeaveView.vb" />
@@ -1782,6 +1793,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
+      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntry.resx">
       <DependentUpon>LeaveEntry.vb</DependentUpon>

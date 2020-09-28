@@ -19,7 +19,15 @@ Namespace DataLayer.AdoNet
                     "   FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return _db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            'Dim jiDao = New PayrollEarnAccountDao()
+
+            'data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
+            'For Each item In data.JournalItems
+            '    data.TotalDebits += item.Debit
+            '    data.TotalCredits += item.Credit
+            'Next
+            Return data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Earning) _

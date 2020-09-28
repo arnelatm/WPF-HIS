@@ -9,11 +9,7 @@ Namespace PresentationLayer.Presenters
     Public Class CommonPresenter(Of T As IView, TM As New)
         Inherits Presenter(Of T, TM)
 
-        Private Shared Shadows Property CommonModel As IModelCommon
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
-
-        Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
-
         Shared Sub New()
             CommonModel = New ModelCommon()
             ModelDefaultFieldValue = New ModelDefaultFieldValue
@@ -24,69 +20,24 @@ Namespace PresentationLayer.Presenters
             TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End Sub
 
+        Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
-
-        Public Function GetRecords(ByVal pTableToGet As String, ByVal pDisplayName As String, ByVal pDisplayCode As String, Optional ByVal sortKey As String = "IdNo")
-            TableToGet = pTableToGet
-            SortExpression = sortKey
-            DisplayName = pDisplayName
-            DisplayNameArabic = pDisplayName
-            DisplayCode = pDisplayCode
-            Return GetLookupDataByCode()
-        End Function
-
-        Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
+        Private Shared Shadows Property CommonModel As IModelCommon
+        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
             SortExpression = sortKey
             DisplayName = "AccountName"
             DisplayNameArabic = "AccountNameAra"
             DisplayCode = "AccountCode"
-            Return GetLookupDataByCode()
-        End Function
-
-        Public Function GetRevenueGroupList(Optional ByVal sortKey As String = "RevenueGroupName")
-            TableToGet = "RevenueGroup"
-            SortExpression = sortKey
-            DisplayName = "RevenueGroupName"
-            DisplayNameArabic = "RevenueGroupNameAra"
-            DisplayCode = "RevenueGroupCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
-            TableToGet = "RevCostCenter"
-            SortExpression = sortKey
-            DisplayName = "RevCostCenterName"
-            DisplayNameArabic = "RevCostCenterNameAra"
-            DisplayCode = "RevCostCenterCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetDepartmentList(Optional ByVal sortKey As String = "DepartmentName")
-            TableToGet = "Department"
-            SortExpression = sortKey
-            DisplayName = "DepartmentName"
-            DisplayNameArabic = "DepartmentNameAra"
-            DisplayCode = "DepartmentCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
-            TableToGet = "ProductCategory"
-            SortExpression = sortKey
-            DisplayName = "ProductCategoryName"
-            DisplayNameArabic = "ProductCategoryNameAra"
-            DisplayCode = "ProductCategoryCode"
-            Return GetLookupDataByCode()
-        End Function
-
-        Public Function GetCountryList(Optional ByVal sortKey As String = "CountryName")
-            TableToGet = "Country"
-            SortExpression = sortKey
-            DisplayName = "CountryName"
-            DisplayNameArabic = "CountryNameAra"
-            DisplayCode = "Isoa2"
-            Return GetLookupDataByNameWithCode()
+            Dim values = accountType.Split(",")
+            FilterKey = ""
+            For Each account In values
+                If FilterKey <> "" Then
+                    FilterKey = FilterKey + " Or "
+                End If
+                FilterKey = FilterKey + "SpecialAccount = '" & account & "'"
+            Next
+            Return GetTableListFiltered()
         End Function
 
         Public Function GetBankList(Optional ByVal sortKey As String = "BankName")
@@ -98,85 +49,22 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByNameWithCode()
         End Function
 
-        Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
-            TableToGet = "Religion"
+        Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
+            TableToGet = "Chart"
             SortExpression = sortKey
-            DisplayName = "ReligionName"
-            DisplayNameArabic = "ReligionNameAra"
-            DisplayCode = "ReligionCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetDesignationList(Optional ByVal sortKey As String = "DesignationName")
-            TableToGet = "Designation"
-            SortExpression = sortKey
-            DisplayName = "DesignationName"
-            DisplayNameArabic = "DesignationNameAra"
-            DisplayCode = "DesignationCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetRevCostCenterListByCode(Optional ByVal sortKey As String = "RevCostCenterCode")
-            TableToGet = "RevCostCenter"
-            SortExpression = sortKey
-            DisplayName = "RevCostCenterName"
-            DisplayNameArabic = "RevCostCenterNameAra"
-            DisplayCode = "RevCostCenterCode"
+            DisplayName = "AccountName"
+            DisplayNameArabic = "AccountNameAra"
+            DisplayCode = "AccountCode"
             Return GetLookupDataByCode()
         End Function
 
-        Public Function GetRevCostCenterListByName(Optional ByVal sortKey As String = "RevCostCenterName")
-            TableToGet = "RevCostCenter"
+        Public Function GetCountryList(Optional ByVal sortKey As String = "CountryName")
+            TableToGet = "Country"
             SortExpression = sortKey
-            DisplayName = "RevCostCenterName"
-            DisplayNameArabic = "RevCostCenterNameAra"
-            DisplayCode = "RevCostCenterCode"
-            Return GetLookupDataByName()
-        End Function
-
-        Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
-            TableToGet = "Department"
-            SortExpression = sortKey
-            DisplayName = "DepartmentName"
-            DisplayNameArabic = "DepartmentNameAra"
-            DisplayCode = "DepartmentCode"
-            Return GetLookupDataByName()
-        End Function
-
-        Public Function GetSupplierListByCode(Optional ByVal sortKey As String = "SupplierCode")
-            TableToGet = "Supplier"
-            SortExpression = sortKey
-            DisplayName = "SupplierName"
-            DisplayNameArabic = "SupplierNameAra"
-            DisplayCode = "SupplierCode"
-            Return GetLookupDataByCode()
-        End Function
-
-        Public Function GetSupplierListByName(Optional ByVal sortKey As String = "SupplierName")
-            TableToGet = "Supplier"
-            SortExpression = sortKey
-            DisplayName = "SupplierName"
-            DisplayNameArabic = "SupplierNameAra"
-            DisplayCode = "SupplierCode"
+            DisplayName = "CountryName"
+            DisplayNameArabic = "CountryNameAra"
+            DisplayCode = "Isoa2"
             Return GetLookupDataByNameWithCode()
-        End Function
-
-        Public Function GetEmployeeListByName(Optional ByVal sortKey As String = "EmployeeName")
-            TableToGet = "Employee"
-            SortExpression = sortKey
-            DisplayName = "EmployeeName"
-            DisplayNameArabic = "EmployeeNameAra"
-            DisplayCode = "EmployeeCode"
-            Return GetLookupDataByNameWithCode()
-        End Function
-
-        Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
-            TableToGet = "Employee"
-            SortExpression = sortKey
-            DisplayName = "EmployeeName"
-            DisplayNameArabic = "EmployeeNameAra"
-            DisplayCode = "EmployeeCode"
-            Return GetLookupDataByCode()
         End Function
 
         Public Function GetCustomerListByCode(Optional ByVal sortKey As String = "CustomerCode")
@@ -195,6 +83,33 @@ Namespace PresentationLayer.Presenters
             DisplayNameArabic = "CustomerNameAra"
             DisplayCode = "CustomerCode"
             Return GetLookupDataByNameWithCode()
+        End Function
+
+        Public Function GetDepartmentList(Optional ByVal sortKey As String = "DepartmentName")
+            TableToGet = "Department"
+            SortExpression = sortKey
+            DisplayName = "DepartmentName"
+            DisplayNameArabic = "DepartmentNameAra"
+            DisplayCode = "DepartmentCode"
+            Return GetTableList()
+        End Function
+
+        Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
+            TableToGet = "Department"
+            SortExpression = sortKey
+            DisplayName = "DepartmentName"
+            DisplayNameArabic = "DepartmentNameAra"
+            DisplayCode = "DepartmentCode"
+            Return GetLookupDataByName()
+        End Function
+
+        Public Function GetDesignationList(Optional ByVal sortKey As String = "DesignationName")
+            TableToGet = "Designation"
+            SortExpression = sortKey
+            DisplayName = "DesignationName"
+            DisplayNameArabic = "DesignationNameAra"
+            DisplayCode = "DesignationCode"
+            Return GetTableList()
         End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
@@ -227,23 +142,122 @@ Namespace PresentationLayer.Presenters
             Return GetLookupFilteredDataByName()
         End Function
 
-        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-            TableToGet = "Chart"
+        Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
+            TableToGet = "Employee"
             SortExpression = sortKey
-            DisplayName = "AccountName"
-            DisplayNameArabic = "AccountNameAra"
-            DisplayCode = "AccountCode"
-            Dim values = accountType.Split(",")
-            FilterKey = ""
-            For Each account In values
-                If FilterKey <> "" Then
-                    FilterKey = FilterKey + " Or "
-                End If
-                FilterKey = FilterKey + "SpecialAccount = '" & account & "'"
-            Next
-            Return GetTableListFiltered()
+            DisplayName = "EmployeeName"
+            DisplayNameArabic = "EmployeeNameAra"
+            DisplayCode = "EmployeeCode"
+            Return GetLookupDataByCode()
         End Function
 
+        Public Function GetEmployeeListByName(Optional ByVal sortKey As String = "EmployeeName")
+            TableToGet = "Employee"
+            SortExpression = sortKey
+            DisplayName = "EmployeeName"
+            DisplayNameArabic = "EmployeeNameAra"
+            DisplayCode = "EmployeeCode"
+            Return GetLookupDataByNameWithCode()
+        End Function
+
+        'Public Function GetPayGroupList(Optional ByVal sortKey As String = "PayGroupName")
+        '    TableToGet = "PayGroup"
+        '    SortExpression = sortKey
+        '    DisplayName = "PayGroupName"
+        '    DisplayNameArabic = "PayGroupNameAra"
+        '    DisplayCode = "PayGroupCode"
+        '    Return GetTableList()
+        'End Function
+
+
+        Public Function GetList(listName As String)
+            TableToGet = listName
+            DisplayName = listName + "Name"
+            SortExpression = DisplayName
+            DisplayNameArabic = DisplayName + "Ara"
+            DisplayCode = TableName + "Code"
+            Return GetTableList()
+        End Function
+
+
+        Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
+            TableToGet = "ProductCategory"
+            SortExpression = sortKey
+            DisplayName = "ProductCategoryName"
+            DisplayNameArabic = "ProductCategoryNameAra"
+            DisplayCode = "ProductCategoryCode"
+            Return GetLookupDataByCode()
+        End Function
+
+        Public Function GetRecords(ByVal pTableToGet As String, ByVal pDisplayName As String, ByVal pDisplayCode As String, Optional ByVal sortKey As String = "IdNo")
+            TableToGet = pTableToGet
+            SortExpression = sortKey
+            DisplayName = pDisplayName
+            DisplayNameArabic = pDisplayName
+            DisplayCode = pDisplayCode
+            Return GetLookupDataByCode()
+        End Function
+        Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
+            TableToGet = "Religion"
+            SortExpression = sortKey
+            DisplayName = "ReligionName"
+            DisplayNameArabic = "ReligionNameAra"
+            DisplayCode = "ReligionCode"
+            Return GetTableList()
+        End Function
+
+        Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
+            TableToGet = "RevCostCenter"
+            SortExpression = sortKey
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
+            Return GetTableList()
+        End Function
+
+        Public Function GetRevCostCenterListByCode(Optional ByVal sortKey As String = "RevCostCenterCode")
+            TableToGet = "RevCostCenter"
+            SortExpression = sortKey
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
+            Return GetLookupDataByCode()
+        End Function
+
+        Public Function GetRevCostCenterListByName(Optional ByVal sortKey As String = "RevCostCenterName")
+            TableToGet = "RevCostCenter"
+            SortExpression = sortKey
+            DisplayName = "RevCostCenterName"
+            DisplayNameArabic = "RevCostCenterNameAra"
+            DisplayCode = "RevCostCenterCode"
+            Return GetLookupDataByName()
+        End Function
+
+        Public Function GetRevenueGroupList(Optional ByVal sortKey As String = "RevenueGroupName")
+            TableToGet = "RevenueGroup"
+            SortExpression = sortKey
+            DisplayName = "RevenueGroupName"
+            DisplayNameArabic = "RevenueGroupNameAra"
+            DisplayCode = "RevenueGroupCode"
+            Return GetTableList()
+        End Function
+        Public Function GetSupplierListByCode(Optional ByVal sortKey As String = "SupplierCode")
+            TableToGet = "Supplier"
+            SortExpression = sortKey
+            DisplayName = "SupplierName"
+            DisplayNameArabic = "SupplierNameAra"
+            DisplayCode = "SupplierCode"
+            Return GetLookupDataByCode()
+        End Function
+
+        Public Function GetSupplierListByName(Optional ByVal sortKey As String = "SupplierName")
+            TableToGet = "Supplier"
+            SortExpression = sortKey
+            DisplayName = "SupplierName"
+            DisplayNameArabic = "SupplierNameAra"
+            DisplayCode = "SupplierCode"
+            Return GetLookupDataByNameWithCode()
+        End Function
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
             MakeDefaultValues()
