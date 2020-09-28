@@ -135,6 +135,14 @@ Public Class CFormEntry
         For Each _err In e.Errors
             For Each ctrl In MyErrorProvider.Controls
                 If ctrl.errormessage = _err Then
+                    If DirectCast(ctrl.controlobj, System.Windows.Forms.Control).Dock = DockStyle.Fill Then
+                        MyErrorProvider.SetIconPadding(ctrl.ControlObj, -18)
+                    End If
+                    If GlobalVariables.RightToLeftLayout Then
+                        MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopLeft)
+                    Else
+                        MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopRight)
+                    End If
                     MyErrorProvider.SetError(ctrl.ControlObj, _err)
                 End If
             Next

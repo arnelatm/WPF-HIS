@@ -63,47 +63,52 @@ Public Class ErrorProviderExtended
         End Set
     End Property
 
-    'Following function returns true if all fields on form are entered.
-    'If not all fields are entered, this function displays a message box which contains all those field names
-    'which are empty and returns FALSE.
-    Public Function CheckAndShowSummaryErrorMessage() As Boolean
-        If Controls.Count <= 0 Then
-            Return True
-        End If
-        Dim i As Integer
-        Dim msg As String = SummaryMessage + vbNewLine + vbNewLine
-        Dim bErrors = False
-        For i = 0 To Controls.Count - 1
-            If Controls(i).Validate Then
-                If TypeOf Controls(i).ControlObj Is IEntryControl Then
-                    If TypeOf Controls(i).ControlObj Is CTextBox AndAlso GetPropertyValue(Controls(i).ControlObj, "ComputedValue") Then
-                        ' ignore this also computed values don't need to be validated for empty values
-                    ElseIf TypeOf Controls(i).ControlObj Is CTextBoxArabic OrElse TypeOf Controls(i).ControlObj Is CTextBoxIdNo Then
-                        ' Don't check this fields for mandatory values they are checked later when saving and besides
-                        ' for CTextBoxArabic this controls are automatically filled with their English Counterpart values if empty.
-                        ' and for CTextBoxIdNo this are Identity Columns and are automatically filled by the Server.
-                    Else
-                        If Trim(Controls(i).ControlObj.text) = "" Then
-                            msg &= "> " & Controls(i).DisplayName & vbNewLine
-                            SetError(Controls(i).ControlObj, Controls(i).ErrorMessage)
-                            bErrors = True
-                        Else
-                            SetError(Controls(i).ControlObj, "")
-                        End If
-                    End If
-
-                End If
-            Else
-                SetError(Controls(i).ControlObj, "")
-            End If
-        Next
-        If bErrors Then
-            MessageBox.Show(msg, "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            Return False
-        Else
-            Return True
-        End If
-    End Function
+    ''Following function returns true if all fields on form are entered.
+    ''If not all fields are entered, this function displays a message box which contains all those field names
+    ''which are empty and returns FALSE.
+    'Public Function CheckAndShowSummaryErrorMessage() As Boolean
+    '    If Controls.Count <= 0 Then
+    '        Return True
+    '    End If
+    '    Dim i As Integer
+    '    Dim msg As String = SummaryMessage + vbNewLine + vbNewLine
+    '    Dim bErrors = False
+    '    For i = 0 To Controls.Count - 1
+    '        If Controls(i).Validate Then
+    '            If TypeOf Controls(i).ControlObj Is IEntryControl Then
+    '                If TypeOf Controls(i).ControlObj Is CTextBox AndAlso GetPropertyValue(Controls(i).ControlObj, "ComputedValue") Then
+    '                    ' ignore this also computed values don't need to be validated for empty values
+    '                ElseIf TypeOf Controls(i).ControlObj Is CTextBoxArabic OrElse TypeOf Controls(i).ControlObj Is CTextBoxIdNo Then
+    '                    ' Don't check this fields for mandatory values they are checked later when saving and besides
+    '                    ' for CTextBoxArabic this controls are automatically filled with their English Counterpart values if empty.
+    '                    ' and for CTextBoxIdNo this are Identity Columns and are automatically filled by the Server.
+    '                Else
+    '                    If TypeOf (Controls(i).ControlObj) Is CTextBox Then
+    '                        Dim cControl As CTextBox = Controls(i).ControlObj
+    '                        'If cControl.Dock = DockStyle.Fill Then
+    '                        'SetIconPadding(Controls(i).ControlObj, -20)
+    '                        'End If
+    '                    End If
+    '                    If Trim(Controls(i).ControlObj.text) = "" Then
+    '                        msg &= "> " & Controls(i).DisplayName & vbNewLine
+    '                        SetError(Controls(i).ControlObj, Controls(i).ErrorMessage)
+    '                        bErrors = True
+    '                    Else
+    '                        SetError(Controls(i).ControlObj, "")
+    '                    End If
+    '                End If
+    '            End If
+    '        Else
+    '            SetError(Controls(i).ControlObj, "")
+    '        End If
+    '    Next
+    '    If bErrors Then
+    '        MessageBox.Show(msg, "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+    '        Return False
+    '    Else
+    '        Return True
+    '    End If
+    'End Function
 
     Public Function ShowErrorMessage(msg As String) As Boolean
         MessageBox.Show(msg, "[Error]", MessageBoxButtons.OK, MessageBoxIcon.Stop)
@@ -130,6 +135,7 @@ Public Class ErrorProviderExtended
     'Following event is hooked for all controls, it sets an error message with the use of ErrorProvider.
     Private Sub Validation_Event(sender As Object, e As CancelEventArgs)
         If Controls(sender).Validate Then
+            SetIconAlignment(sender, ErrorIconAlignment.TopLeft)
             If Trim(sender.Text) = "" Then
                 SetError(sender, Controls(sender).ErrorMessage)
             Else

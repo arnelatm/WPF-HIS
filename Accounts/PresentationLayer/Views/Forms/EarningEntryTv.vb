@@ -80,6 +80,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AccountIdNo As Int16 Implements IEarningView.AccountIdNo
+            Get
+                Return cboAccountIdNo.GetValue()
+            End Get
+            Set
+                cboAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Notes As String Implements IEarningView.Notes
             Get
                 Return txtNotes.Text
@@ -94,11 +103,13 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
+            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"AccountIdNo", cboAccountIdNo},
                 {"EarningCode", txtEarningCode},
                 {"EarningName", txtEarningName},
                 {"EarningNameAra", txtEarningNameAra},

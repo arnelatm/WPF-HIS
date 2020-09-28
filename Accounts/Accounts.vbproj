@@ -101,6 +101,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\PayrollEarnAccount.vb" />
     <Compile Include="BusinessLayer\Leave.vb" />
     <Compile Include="BusinessLayer\Deduction.vb" />
     <Compile Include="BusinessLayer\EmployeeDeduction.vb" />
@@ -211,7 +212,9 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\PayrollEarnAccount.vb" />
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PayrollEarnAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\LeavePresenter.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
@@ -531,6 +534,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ILeaveView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeEarningView.vb" />
@@ -1788,6 +1792,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EarningEntryTv.resx">
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
