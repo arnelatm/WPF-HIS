@@ -4,12 +4,13 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IEarningView
         Inherits IView
-        Property IdNo As Int16
+        Property AccountIdNo As Int16
         Property EarningCode As String
         Property EarningName As String
         Property EarningNameAra As String
-        Property Frequency As Char
         Property EarningType As Char
+        Property Frequency As Char
+        Property IdNo As Int16
         Property Notes As String
     End Interface
 

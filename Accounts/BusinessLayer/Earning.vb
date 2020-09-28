@@ -16,6 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
+        Public Property AccountIdNo As Int16
         Public Property Frequency As Char
         Public Property EarningCode As String
         Public Property EarningName As String

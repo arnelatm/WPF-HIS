@@ -171,10 +171,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'TreeViewTableName
             '
-            Me.TreeViewTableName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.TreeViewTableName.Size = New System.Drawing.Size(300, 486)
             '
@@ -1788,6 +1785,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.Location = New System.Drawing.Point(181, 108)
             Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
             Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = False
             Me.chkActive.OldValue = ""
             Me.chkActive.Size = New System.Drawing.Size(25, 21)
             Me.chkActive.TabIndex = 5
