@@ -2806,6 +2806,11 @@
   <ItemGroup>
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\YellowGradientBackgroundLarge1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YellowGradientBackgroundLarge2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
