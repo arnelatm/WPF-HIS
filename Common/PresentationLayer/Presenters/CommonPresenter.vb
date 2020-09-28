@@ -10,6 +10,7 @@ Namespace PresentationLayer.Presenters
         Inherits Presenter(Of T, TM)
 
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+
         Shared Sub New()
             CommonModel = New ModelCommon()
             ModelDefaultFieldValue = New ModelDefaultFieldValue
@@ -23,6 +24,7 @@ Namespace PresentationLayer.Presenters
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
         Private Shared Shadows Property CommonModel As IModelCommon
+
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
             SortExpression = sortKey
@@ -169,16 +171,14 @@ Namespace PresentationLayer.Presenters
         '    Return GetTableList()
         'End Function
 
-
         Public Function GetList(listName As String)
             TableToGet = listName
             DisplayName = listName + "Name"
             SortExpression = DisplayName
             DisplayNameArabic = DisplayName + "Ara"
-            DisplayCode = TableName + "Code"
+            DisplayCode = listName + "Code"
             Return GetTableList()
         End Function
-
 
         Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
             TableToGet = "ProductCategory"
@@ -197,6 +197,7 @@ Namespace PresentationLayer.Presenters
             DisplayCode = pDisplayCode
             Return GetLookupDataByCode()
         End Function
+
         Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
             TableToGet = "Religion"
             SortExpression = sortKey
@@ -241,6 +242,16 @@ Namespace PresentationLayer.Presenters
             DisplayCode = "RevenueGroupCode"
             Return GetTableList()
         End Function
+
+        Public Function GetPayGroupList(Optional ByVal sortKey As String = "PayGroupName")
+            TableToGet = "PayGroup"
+            SortExpression = sortKey
+            DisplayName = "PayGroupName"
+            DisplayNameArabic = "PayGroupNameAra"
+            DisplayCode = "PayGroupCode"
+            Return GetTableList()
+        End Function
+
         Public Function GetSupplierListByCode(Optional ByVal sortKey As String = "SupplierCode")
             TableToGet = "Supplier"
             SortExpression = sortKey
@@ -258,6 +269,7 @@ Namespace PresentationLayer.Presenters
             DisplayCode = "SupplierCode"
             Return GetLookupDataByNameWithCode()
         End Function
+
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
             MakeDefaultValues()

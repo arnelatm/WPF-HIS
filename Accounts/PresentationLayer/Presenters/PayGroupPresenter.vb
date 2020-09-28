@@ -9,7 +9,6 @@ Namespace PresentationLayer.Presenters
     Public Class PayGroupPresenter
         Inherits AccountsPresenter(Of IPayGroupView, PayGroupModel)
 
-
         Public ParentViewList As List(Of PayGroupModel)
 
         Public Sub New(view As IPayGroupView)
