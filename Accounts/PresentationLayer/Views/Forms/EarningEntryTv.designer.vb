@@ -28,6 +28,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EarningEntryTv))
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -35,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tbcEarning = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
-            Me.Main = New System.Windows.Forms.TabPage()
+            Me.tbpMain = New System.Windows.Forms.TabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -50,12 +52,17 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
+            Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
-            Me.Main.SuspendLayout()
+            Me.tbpMain.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
+            Me.tbpAccountPosting.SuspendLayout()
+            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -175,18 +182,20 @@ Namespace PresentationLayer.Views.Forms
             '
             'tbcEarning
             '
-            Me.tbcEarning.Controls.Add(Me.Main)
+            Me.tbcEarning.Controls.Add(Me.tbpMain)
             Me.tbcEarning.Controls.Add(Me.tbpAccountPosting)
             resources.ApplyResources(Me.tbcEarning, "tbcEarning")
             Me.tbcEarning.Name = "tbcEarning"
             Me.tbcEarning.SelectedIndex = 0
             '
-            'Main
+            'tbpMain
             '
-            Me.Main.Controls.Add(Me.CFlowLayout1)
-            resources.ApplyResources(Me.Main, "Main")
-            Me.Main.Name = "Main"
-            Me.Main.UseVisualStyleBackColor = True
+            Me.tbpMain.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            resources.ApplyResources(Me.tbpMain, "tbpMain")
+            Me.tbpMain.Controls.Add(Me.CFlowLayout1)
+            Me.tbpMain.Cursor = System.Windows.Forms.Cursors.Default
+            Me.tbpMain.Name = "tbpMain"
+            Me.tbpMain.UseVisualStyleBackColor = True
             '
             'CFlowLayout1
             '
@@ -380,9 +389,37 @@ Namespace PresentationLayer.Views.Forms
             '
             'tbpAccountPosting
             '
+            Me.tbpAccountPosting.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge2
             resources.ApplyResources(Me.tbpAccountPosting, "tbpAccountPosting")
+            Me.tbpAccountPosting.Controls.Add(Me.CDataGridView1)
             Me.tbpAccountPosting.Name = "tbpAccountPosting"
             Me.tbpAccountPosting.UseVisualStyleBackColor = True
+            '
+            'CDataGridView1
+            '
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.CDataGridView1.DataInGridChanged = False
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+            Me.CDataGridView1.DisplayOnly = False
+            resources.ApplyResources(Me.CDataGridView1, "CDataGridView1")
+            Me.CDataGridView1.Ea = Nothing
+            Me.CDataGridView1.EditingMode = False
+            Me.CDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.CDataGridView1.FirstRowDeletionEnabled = True
+            Me.CDataGridView1.FirstRowInsertionEnabled = True
+            Me.CDataGridView1.Name = "CDataGridView1"
+            Me.CDataGridView1.SequenceColumn = "dgvSequence"
+            Me.CDataGridView1.ShowInsertColumnWhenEditing = True
+            Me.CDataGridView1.StartTrackingChanges = False
             '
             'EarningEntryTv
             '
@@ -394,10 +431,13 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.tbcEarning.ResumeLayout(False)
-            Me.Main.ResumeLayout(False)
+            Me.tbpMain.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            Me.tbpAccountPosting.ResumeLayout(False)
+            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -419,10 +459,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cboFrequency As CaComboBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents tbcEarning As CTabControl
-        Friend WithEvents Main As TabPage
+        Friend WithEvents tbpMain As TabPage
         Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
+        Friend WithEvents CDataGridView1 As CDataGridView
+        Friend WithEvents bsPayrollEarnAccounts As BindingSource
     End Class
 End Namespace
