@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
             ParentFieldName = "ParentIdNo"
             FirstControl = txtPayGroupCode
             PresenterObj = New PayGroupPresenter(Me)
+
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 

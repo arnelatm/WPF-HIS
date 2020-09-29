@@ -174,6 +174,7 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayrollEarnAccountsDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcsOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
@@ -2724,6 +2725,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesCashItemView.datasource" />

@@ -4,10 +4,9 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPayrollEarnAccountView
         Inherits IView
-        Property IdNo As Int16
+        Property IdNo As Int32
         Property EarningIdNo As Int16
-        Property DepartmentIdNo As Int16
-        Property EmployeeIdNo As Int32
+        Property PayGroupIdNo As Int16
     End Interface
 
 End Namespace
