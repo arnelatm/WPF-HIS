@@ -201,6 +201,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property EarningDao As IDaoAll(Of Earning)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Earning")
+            End Get
+        End Property
+
         Private ReadOnly Property EmployeeDao As IDaoAll(Of Employee)
             Get
                 Return DaoFactoryAccounts.CreateDao("Employee")
@@ -236,12 +242,6 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property EarningDao As IDaoAll(Of Earning)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Earning")
-            End Get
-        End Property
-
         Private ReadOnly Property GeneralJournalDao As IDao(Of GeneralJournal)
             Get
                 Return DaoFactoryAccounts.CreateDao("GeneralJournal")
@@ -260,9 +260,21 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property LeaveDao As IDaoAll(Of Leave)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Leave")
+            End Get
+        End Property
+
         Private ReadOnly Property PayGroupDao As IDaoAll(Of PayGroup)
             Get
                 Return DaoFactoryAccounts.CreateDao("PayGroup")
+            End Get
+        End Property
+
+        Private ReadOnly Property PayrollEarnAccountDao As IDaoChild(Of PayrollEarnAccount)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PayrollEarnAccount")
             End Get
         End Property
 
@@ -323,12 +335,6 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
             Get
                 Return DaoFactoryAccounts.CreateDao("Supplier")
-            End Get
-        End Property
-
-        Private ReadOnly Property LeaveDao As IDaoAll(Of Leave)
-            Get
-                Return DaoFactoryAccounts.CreateDao("Leave")
             End Get
         End Property
 

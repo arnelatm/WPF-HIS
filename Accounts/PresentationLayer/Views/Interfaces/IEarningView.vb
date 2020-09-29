@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Frequency As Char
         Property IdNo As Int16
         Property Notes As String
-        Property PayrollEarnAccounts As List(Of IPayrollEarnAccountView)
+        Property PayrollEarnAccounts As List(Of PayrollEarnAccountView)
     End Interface
 
 End Namespace

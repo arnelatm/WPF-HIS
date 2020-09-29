@@ -15,7 +15,7 @@
         Public Property Frequency As Char
         Public Property IdNo As Int16
         Public Property Notes As String
-        Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountModel)
+        Public Property PayrollEarnAccounts As IList(Of PayrollEarnAccountModel)
     End Class
 
 End Namespace
