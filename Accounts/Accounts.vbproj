@@ -550,6 +550,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAcountView.vb" />

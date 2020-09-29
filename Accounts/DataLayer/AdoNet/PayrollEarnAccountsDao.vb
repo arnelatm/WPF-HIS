@@ -12,14 +12,17 @@ Namespace DataLayer.AdoNet
 
         Protected DboTvpInsertFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
-        Protected TableFileName As String = ""
+        Protected TableFileName As String = "PayrollEarnAccount_View"
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollEarnAccount) =
                                     Function(reader) _
             New PayrollEarnAccount() With {
             .EarningIdNo = Extensions.AsInt(Of Int16)(reader("EarningIdNo")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .PayGroupIdNo = Extensions.AsInt(Of Int16)(reader("PayGroupIdNo"))
+            .PayGroupIdNo = Extensions.AsInt(Of Int16)(reader("PayGroupIdNo")),
+            .PayGroupName = Extensions.AsString(reader("PayGroupName")),
+            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("PayGroupIdNo")),
+            .AccountName = Extensions.AsString(reader("AccountName"))
             }
 
         Private ReadOnly _db As New Db()
@@ -37,7 +40,9 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "EarningIdNo," &
                     "PayGroupIdNo," &
+                    "PayGroupName," &
                     "AccountIdNo," &
+                    "AccountName" &
                     " FROM " & TableFileName &
                     " WHERE EarningIdNo = @EarningIdNo" &
                     " ORDER BY " & sortKey

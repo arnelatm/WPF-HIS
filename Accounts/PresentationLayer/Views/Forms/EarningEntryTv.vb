@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -6,6 +7,10 @@ Namespace PresentationLayer.Views.Forms
 
     Public Class EarningEntryTv
         Implements IEarningView
+
+        Private _accountsByCode
+        Private _payGroupsByCode
+        Private _payrollEarnAccounts As List(Of IPayrollEarnAccountView)
 
         Public Sub New()
 
@@ -34,6 +39,8 @@ Namespace PresentationLayer.Views.Forms
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
+
+        Public Property AccountIdNo As Short Implements IEarningView.AccountIdNo
 
         Public Property EarningCode As String Implements IEarningView.EarningCode
             Get
@@ -80,12 +87,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Int16 Implements IEarningView.AccountIdNo
+        Public Property PayrollEarnAccounts As List(Of IPayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
             Get
-                Return cboAccountIdNo.GetValue()
+                Return _payrollEarnAccounts
             End Get
             Set
-                cboAccountIdNo.SetValue(Value)
+                _payrollEarnAccounts = Value
+                BindPayrollEarnAccounts
             End Set
         End Property
 
@@ -104,6 +112,48 @@ Namespace PresentationLayer.Views.Forms
             cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
+            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
+            _payGroupsByCode = PresenterObj.GetList("PayGroup")
+        End Sub
+
+
+        Private Sub BindPayrollEarnAccounts()
+            SuspendLayout()
+            bsPayrollEarnAccounts.DataSource = Nothing
+            DataGridViewPayrollEarnAccounts.Refresh()
+            bsPayrollEarnAccounts.DataSource = PayrollEarnAccounts
+            bsPayrollEarnAccounts.AllowNew = True
+            With DataGridViewPayrollEarnAccounts
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPayrollEarnAccounts
+                .Refresh()
+            End With
+            With DataGridViewPayrollEarnAccounts.Columns
+                dgvPayGroupIdNo.DataSource = _payGroupsByCode
+                dgvPayGroupIdNo.DisplayMember = "Name"
+                dgvPayGroupIdNo.ValueMember = "IdNo"
+                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPayGroupIdNo.AutoComplete = True
+                dgvPayGroupIdNo.DataSource = _accountsByCode
+                dgvPayGroupIdNo.DisplayMember = "Name"
+                dgvPayGroupIdNo.ValueMember = "idNo"
+                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DisplayMember = "Name"
+                dgvAccountIdNo.ValueMember = "IdNo"
+                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvAccountIdNo.AutoComplete = True
+                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DisplayMember = "Name"
+                dgvAccountIdNo.ValueMember = "idNo"
+                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -127,6 +177,34 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboFrequency.DisplayOnly = False
             End If
+        End Sub
+
+        Private Sub BindPayrollEarnAccount()
+            SuspendLayout()
+            bsPayrollEarnAccounts.DataSource = Nothing
+            DataGridViewPayrollEarnAccounts.Refresh()
+            bsPayrollEarnAccounts.DataSource =
+            bsPayrollEarnAccounts.AllowNew = True
+            With DataGridViewPayrollEarnAccounts
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPayrollEarnAccounts
+                .Refresh()
+            End With
+            With DataGridViewPayrollEarnAccounts.Columns
+                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DisplayMember = "Name"
+                dgvAccountIdNo.ValueMember = "IdNo"
+                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvAccountIdNo.AutoComplete = True
+                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DisplayMember = "Name"
+                dgvAccountIdNo.ValueMember = "idNo"
+                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
         End Sub
 
     End Class

@@ -10,6 +10,10 @@
         Public Property IdNo As Int32
         Public Property EarningIdNo As Int16
         Public Property PayGroupIdNo As Int16
+        Public Property PayGroupName As String
+        Public Property AccountIdNo As Int16
+        Public Property AccountName As String
+
 
     End Class
 

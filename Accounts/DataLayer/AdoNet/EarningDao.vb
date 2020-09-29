@@ -20,13 +20,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            'Dim jiDao = New PayrollEarnAccountDao()
-
-            'data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
-            'For Each item In data.JournalItems
-            '    data.TotalDebits += item.Debit
-            '    data.TotalCredits += item.Credit
-            'Next
+            Dim peaDao = New PayrollEarnAccountDao()
+            data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "PayGroupName")
             Return data
         End Function
 
