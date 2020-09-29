@@ -29,6 +29,7 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EarningEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -52,10 +53,14 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
-            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.AccountName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,6 +72,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.tbpAccountPosting.SuspendLayout()
+            Me.CFlowLayout2.SuspendLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -397,9 +403,54 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.tbpAccountPosting.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge2
             resources.ApplyResources(Me.tbpAccountPosting, "tbpAccountPosting")
-            Me.tbpAccountPosting.Controls.Add(Me.DataGridViewPayrollEarnAccounts)
+            Me.tbpAccountPosting.Controls.Add(Me.CFlowLayout2)
             Me.tbpAccountPosting.Name = "tbpAccountPosting"
             Me.tbpAccountPosting.UseVisualStyleBackColor = True
+            '
+            'CFlowLayout2
+            '
+            Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout2.Controls.Add(Me.txtName)
+            Me.CFlowLayout2.Controls.Add(Me.txtNameAra)
+            Me.CFlowLayout2.Controls.Add(Me.DataGridViewPayrollEarnAccounts)
+            resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
+            Me.CFlowLayout2.Name = "CFlowLayout2"
+            '
+            'txtName
+            '
+            Me.txtName.BackColor = System.Drawing.Color.White
+            Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtName.ComputedValue = False
+            Me.txtName.CustomFormat = Nothing
+            Me.txtName.DataBoundControl = True
+            Me.txtName.DisplayOnly = True
+            Me.txtName.EditingMode = True
+            Me.CFlowLayout2.SetFlowBreak(Me.txtName, True)
+            resources.ApplyResources(Me.txtName, "txtName")
+            Me.txtName.ForeColor = System.Drawing.Color.Black
+            Me.txtName.LinkedLabel = Nothing
+            Me.txtName.MaximumValue = Nothing
+            Me.txtName.MinimumValue = Nothing
+            Me.txtName.Name = "txtName"
+            Me.txtName.OldValue = Nothing
+            Me.txtName.ReadOnly = True
+            '
+            'txtNameAra
+            '
+            Me.txtNameAra.BackColor = System.Drawing.Color.White
+            Me.txtNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNameAra.ComputedValue = False
+            Me.txtNameAra.CustomFormat = Nothing
+            Me.txtNameAra.DataBoundControl = True
+            Me.txtNameAra.EditingMode = True
+            Me.txtNameAra.EnglishControl = Me.txtName
+            resources.ApplyResources(Me.txtNameAra, "txtNameAra")
+            Me.txtNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtNameAra.LinkedLabel = Nothing
+            Me.txtNameAra.MaximumValue = Nothing
+            Me.txtNameAra.MinimumValue = Nothing
+            Me.txtNameAra.Name = "txtNameAra"
+            Me.txtNameAra.OldValue = Nothing
             '
             'DataGridViewPayrollEarnAccounts
             '
@@ -407,17 +458,17 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPayrollEarnAccounts.AutoGenerateColumns = False
             Me.DataGridViewPayrollEarnAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.IdNoDataGridViewTextBoxColumn, Me.PayGroupName, Me.AccountName, Me.EarningIdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvPayGroupIdNo, Me.IdNoDataGridViewTextBoxColumn, Me.PayGroupName, Me.AccountName, Me.EarningIdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPayrollEarnAccounts.DataInGridChanged = False
             Me.DataGridViewPayrollEarnAccounts.DataSource = Me.bsPayrollEarnAccounts
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewPayrollEarnAccounts.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewPayrollEarnAccounts, "DataGridViewPayrollEarnAccounts")
             Me.DataGridViewPayrollEarnAccounts.Ea = Nothing
@@ -435,15 +486,16 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
-            'dgvPayGroupIdNo
+            'dgvSequence
             '
-            Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
-            Me.dgvPayGroupIdNo.FillWeight = 45.0!
-            resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
-            Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
-            Me.dgvPayGroupIdNo.ReadOnly = True
-            Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPayGroupIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.EditingMode = False
+            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             '
             'dgvAccountIdNo
             '
@@ -454,6 +506,16 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAccountIdNo.ReadOnly = True
             Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvPayGroupIdNo
+            '
+            Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
+            Me.dgvPayGroupIdNo.FillWeight = 45.0!
+            resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
+            Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
+            Me.dgvPayGroupIdNo.ReadOnly = True
+            Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayGroupIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -498,6 +560,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
             Me.tbpAccountPosting.ResumeLayout(False)
+            Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout2.PerformLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
@@ -528,8 +592,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents DataGridViewPayrollEarnAccounts As CDataGridView
         Friend WithEvents bsPayrollEarnAccounts As BindingSource
-        Friend WithEvents dgvPayGroupIdNo As CaDgvComboBoxColumn
+        Friend WithEvents CFlowLayout2 As CFlowLayout
+        Friend WithEvents txtName As CTextBox
+        Friend WithEvents txtNameAra As CTextBoxArabic
+        Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvPayGroupIdNo As CaDgvComboBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayGroupName As DataGridViewTextBoxColumn
         Friend WithEvents AccountName As DataGridViewTextBoxColumn

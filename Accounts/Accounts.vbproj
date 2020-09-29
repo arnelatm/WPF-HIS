@@ -216,7 +216,7 @@
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\PayGroupModel.vb" />
-    <Compile Include="PresentationLayer\Models\PayrollEarnAccount.vb" />
+    <Compile Include="PresentationLayer\Models\PayrollEarnAccountModel.vb" />
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Presenters\PayGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollEarnAccountPresenter.vb" />
@@ -591,6 +591,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesCashItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISupplierView.vb" />
+    <Compile Include="PresentationLayer\Views\PayrollEarnAccountView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
     <Compile Include="PresentationLayer\Views\LeaveView.Designer.vb">
       <DependentUpon>LeaveView.vb</DependentUpon>

@@ -197,7 +197,7 @@ Public Class CDataGridView
     End Function
 
     Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
-        If EditMode Then
+        If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             With e.Row
                 .Cells(SequenceColumn).Value = RowCount()
             End With
@@ -221,21 +221,21 @@ Public Class CDataGridView
         With CurrentCell
             Select Case .OwningColumn.Name.ToLower()
                 Case $"dgvinsertcolumn"
-                    If (CurrentRow.Index() <> NewRowIndex()) Then
-                        'If Ea IsNot Nothing Then
-                        '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-                        'End If
-                        If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                            Dim myBindingSource = CType(DataSource, BindingSource)
-                            Dim current = myBindingSource.Current
-                            Dim dataList = current.BlankCopy()
-                            myBindingSource.Insert(.RowIndex(), dataList)
-                            ReSequenceDgvAfterInsert()
-                            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                        Else
-                            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                        End If
+                    'If (CurrentRow.Index() <> NewRowIndex()) Then
+                    'If Ea IsNot Nothing Then
+                    '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                    'End If
+                    If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+                        Dim myBindingSource = CType(DataSource, BindingSource)
+                        Dim current = myBindingSource.Current
+                        Dim dataList = current.BlankCopy()
+                        myBindingSource.Insert(.RowIndex(), dataList)
+                        ReSequenceDgvAfterInsert()
+                        CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+                    Else
+                        Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
                     End If
+                    'End If
 
             End Select
         End With

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _accountsByCode
         Private _payGroupsByCode
-        Private _payrollEarnAccounts As List(Of IPayrollEarnAccountView)
+        Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
 
         Public Sub New()
 
@@ -40,7 +40,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Short Implements IEarningView.AccountIdNo
+        Public Property AccountIdNo As Int16 Implements IEarningView.AccountIdNo
+            Get
+                Return cboAccountIdNo.GetValue()
+            End Get
+            Set
+                cboAccountIdNo.SetValue(Value)
+            End Set
+        End Property
 
         Public Property EarningCode As String Implements IEarningView.EarningCode
             Get
@@ -57,6 +64,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtEarningName.Text = Value
+                txtName.Text = Value
             End Set
         End Property
 
@@ -66,6 +74,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtEarningNameAra.Text = Value
+                txtNameAra.Text = Value
             End Set
         End Property
 
@@ -87,13 +96,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollEarnAccounts As List(Of IPayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
+        Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
             Get
                 Return _payrollEarnAccounts
             End Get
             Set
                 _payrollEarnAccounts = Value
-                BindPayrollEarnAccounts
+                BindPayrollEarnAccounts()
             End Set
         End Property
 
@@ -116,7 +125,6 @@ Namespace PresentationLayer.Views.Forms
             _payGroupsByCode = PresenterObj.GetList("PayGroup")
         End Sub
 
-
         Private Sub BindPayrollEarnAccounts()
             SuspendLayout()
             bsPayrollEarnAccounts.DataSource = Nothing
@@ -135,21 +143,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvPayGroupIdNo.ValueMember = "IdNo"
                 dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPayGroupIdNo.AutoComplete = True
-                dgvPayGroupIdNo.DataSource = _accountsByCode
-                dgvPayGroupIdNo.DisplayMember = "Name"
-                dgvPayGroupIdNo.ValueMember = "idNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.AutoComplete = True
-                dgvAccountIdNo.DataSource = _accountsByCode
-                dgvAccountIdNo.DisplayMember = "Name"
-                dgvAccountIdNo.ValueMember = "idNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
             End With
@@ -183,7 +179,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsPayrollEarnAccounts.DataSource = Nothing
             DataGridViewPayrollEarnAccounts.Refresh()
-            bsPayrollEarnAccounts.DataSource =
+            bsPayrollEarnAccounts.DataSource = PayrollEarnAccounts
             bsPayrollEarnAccounts.AllowNew = True
             With DataGridViewPayrollEarnAccounts
                 .Refresh()
@@ -192,20 +188,25 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPayrollEarnAccounts.Columns
+                dgvSequence.DisplayOnly = True
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvAccountIdNo.DataSource = _accountsByCode
-                dgvAccountIdNo.DisplayMember = "Name"
-                dgvAccountIdNo.ValueMember = "idNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPayGroupIdNo.DataSource = _payGroupsByCode
+                dgvPayGroupIdNo.DisplayMember = "Name"
+                dgvPayGroupIdNo.ValueMember = "idNo"
+                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
+
+        'Protected Overrides Sub InputsTurnedOn()
+        '    PresenterObj.UpdateFirstLine()
+        'End Sub
 
     End Class
 
