@@ -24,6 +24,7 @@ Namespace BusinessLayer
         Public Property EarningType As Char
         Public Property IdNo As Int16
         Public Property Notes As String
+        Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
     End Class
 
 End Namespace
