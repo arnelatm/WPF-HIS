@@ -54,6 +54,9 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
             Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayGroupIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
@@ -399,8 +402,11 @@ Namespace PresentationLayer.Views.Forms
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.CDataGridView1.AutoGenerateColumns = False
             Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.EarningIdNoDataGridViewTextBoxColumn, Me.PayGroupIdNoDataGridViewTextBoxColumn})
             Me.CDataGridView1.DataInGridChanged = False
+            Me.CDataGridView1.DataSource = Me.bsPayrollEarnAccounts
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -417,9 +423,35 @@ Namespace PresentationLayer.Views.Forms
             Me.CDataGridView1.FirstRowDeletionEnabled = True
             Me.CDataGridView1.FirstRowInsertionEnabled = True
             Me.CDataGridView1.Name = "CDataGridView1"
+            Me.CDataGridView1.ReadOnly = True
             Me.CDataGridView1.SequenceColumn = "dgvSequence"
             Me.CDataGridView1.ShowInsertColumnWhenEditing = True
             Me.CDataGridView1.StartTrackingChanges = False
+            '
+            'bsPayrollEarnAccounts
+            '
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'EarningIdNoDataGridViewTextBoxColumn
+            '
+            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
+            resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
+            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
+            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PayGroupIdNoDataGridViewTextBoxColumn
+            '
+            Me.PayGroupIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayGroupIdNo"
+            resources.ApplyResources(Me.PayGroupIdNoDataGridViewTextBoxColumn, "PayGroupIdNoDataGridViewTextBoxColumn")
+            Me.PayGroupIdNoDataGridViewTextBoxColumn.Name = "PayGroupIdNoDataGridViewTextBoxColumn"
+            Me.PayGroupIdNoDataGridViewTextBoxColumn.ReadOnly = True
             '
             'EarningEntryTv
             '
@@ -466,5 +498,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents CDataGridView1 As CDataGridView
         Friend WithEvents bsPayrollEarnAccounts As BindingSource
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PayGroupIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace
