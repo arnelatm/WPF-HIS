@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
 
-Public Class CDataGridView
+Public Class CDataGvBs
     Inherits DataGridView
     Implements IEntryControl
 
@@ -183,14 +183,21 @@ Public Class CDataGridView
             If currentColumnIndex < LastEditableColumn Then
                 ' Handle the ENTER key as if it were a tab ARROW key
                 Return ProcessTabKey(keyData)
-            ElseIf currentColumnIndex = LastEditableColumn Then
+            Else  'If currentColumnIndex = LastEditableColumn Then
                 ' go to next row on the first editable column
-                If CurrentCell.RowIndex() >= RowCount() Then
-                    CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
-                Else
-                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
+                Dim row As Integer = CurrentCell.RowIndex()
+                Dim myBindingSource = CType(DataSource, BindingSource)
+                Dim current = myBindingSource.Current
+                Dim isLastRow As Boolean = (CurrentCell.RowIndex = RowCount() - 1)
+                If isLastRow Then
+                    Dim dataList = current.BlankCopy()
+                    Dim obj = myBindingSource.DataSource
+                    Dim myRow = CurrentRow
+                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                    CallByName(dataList, "Sequence", CallType.Set, row + 1)
+                    myBindingSource.Add(dataList)
+                    CurrentCell = Me(FirstEditableColumn, row + 1)
                 End If
-
             End If
         End If
         Return MyBase.ProcessDialogKey(keyData)

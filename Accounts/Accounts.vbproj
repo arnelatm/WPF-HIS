@@ -263,6 +263,12 @@
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EarningEntry2.designer.vb">
+      <DependentUpon>EarningEntry2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EarningEntry2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>
     </Compile>
@@ -1802,6 +1808,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EarningEntry2.resx">
+      <DependentUpon>EarningEntry2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>
