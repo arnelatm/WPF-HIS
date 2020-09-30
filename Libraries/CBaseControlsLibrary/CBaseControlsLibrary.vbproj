@@ -92,6 +92,9 @@
     </Compile>
     <Compile Include="CButtonActionList.vb" />
     <Compile Include="CButtonDesigner.vb" />
+    <Compile Include="CDataGvBs.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CDgvCaComboboxCell.vb" />
     <Compile Include="CDgvCaComboboxEditingControl.vb">
       <SubType>Component</SubType>

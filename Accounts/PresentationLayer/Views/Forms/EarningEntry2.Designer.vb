@@ -3,19 +3,16 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class EarningEntryTv
-        Inherits CFormEntryTv
+    Partial Class EarningEntry2
+        Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            Try
-                If disposing AndAlso components IsNot Nothing Then
-                    components.Dispose()
-                End If
-            Finally
-                MyBase.Dispose(disposing)
-            End Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            MyBase.Dispose(disposing)
         End Sub
 
         'Required by the Windows Form Designer
@@ -27,23 +24,18 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EarningEntryTv))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EarningEntry2))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.tbcEarning = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
-            Me.tbpMain = New System.Windows.Forms.TabPage()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CTabControl1 = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
+            Me.TabPage1 = New System.Windows.Forms.TabPage()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -51,173 +43,58 @@ Namespace PresentationLayer.Views.Forms
             Me.lblFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
-            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TabPage2 = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGvBs()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floDataDisplay.SuspendLayout()
-            Me.tbcEarning.SuspendLayout()
-            Me.tbpMain.SuspendLayout()
-            Me.CFlowLayout1.SuspendLayout()
+            Me.floJournalHeader.SuspendLayout()
+            Me.CTabControl1.SuspendLayout()
+            Me.TabPage1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
-            Me.tbpAccountPosting.SuspendLayout()
-            Me.CFlowLayout2.SuspendLayout()
+            Me.TabPage2.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'floJournalHeader
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            Me.floJournalHeader.BackColor = System.Drawing.Color.Transparent
+            Me.floJournalHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            Me.floJournalHeader.Controls.Add(Me.CTabControl1)
+            resources.ApplyResources(Me.floJournalHeader, "floJournalHeader")
+            Me.floJournalHeader.Name = "floJournalHeader"
             '
-            'TranslatorDAC
+            'CTabControl1
             '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            Me.CTabControl1.Controls.Add(Me.TabPage1)
+            Me.CTabControl1.Controls.Add(Me.TabPage2)
+            resources.ApplyResources(Me.CTabControl1, "CTabControl1")
+            Me.CTabControl1.Name = "CTabControl1"
+            Me.CTabControl1.SelectedIndex = 0
             '
-            'TxtIdNo
+            'TabPage1
             '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = False
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
-            Me.TxtIdNo.TabStop = False
-            Me.TxtIdNo.ValueIsNumeric = True
-            '
-            'txtEarningCode
-            '
-            Me.txtEarningCode.BackColor = System.Drawing.Color.White
-            Me.txtEarningCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtEarningCode.ComputedValue = False
-            Me.txtEarningCode.CustomFormat = Nothing
-            Me.txtEarningCode.DataBoundControl = True
-            Me.txtEarningCode.EditingMode = True
-            resources.ApplyResources(Me.txtEarningCode, "txtEarningCode")
-            Me.txtEarningCode.ForeColor = System.Drawing.Color.Black
-            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningCode, CType(resources.GetObject("txtEarningCode.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
-            Me.MyErrorProvider.SetIconPadding(Me.txtEarningCode, CType(resources.GetObject("txtEarningCode.IconPadding"), Integer))
-            Me.txtEarningCode.LinkedLabel = Nothing
-            Me.txtEarningCode.MaximumValue = Nothing
-            Me.txtEarningCode.MinimumValue = Nothing
-            Me.txtEarningCode.Name = "txtEarningCode"
-            Me.txtEarningCode.OldValue = Nothing
-            Me.txtEarningCode.ReadOnly = True
-            Me.txtEarningCode.ValueIsMandatory = True
-            '
-            'txtEarningName
-            '
-            Me.txtEarningName.BackColor = System.Drawing.Color.White
-            Me.txtEarningName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningName, 2)
-            Me.txtEarningName.ComputedValue = False
-            Me.txtEarningName.CustomFormat = Nothing
-            Me.txtEarningName.DataBoundControl = True
-            resources.ApplyResources(Me.txtEarningName, "txtEarningName")
-            Me.txtEarningName.EditingMode = False
-            Me.txtEarningName.ForeColor = System.Drawing.Color.Black
-            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningName, CType(resources.GetObject("txtEarningName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
-            Me.txtEarningName.LinkedLabel = Nothing
-            Me.txtEarningName.MaximumValue = Nothing
-            Me.txtEarningName.MinimumValue = Nothing
-            Me.txtEarningName.Name = "txtEarningName"
-            Me.txtEarningName.OldValue = Nothing
-            Me.txtEarningName.ReadOnly = True
-            Me.txtEarningName.ValueIsMandatory = True
-            '
-            'txtEarningNameAra
-            '
-            Me.txtEarningNameAra.BackColor = System.Drawing.Color.White
-            Me.txtEarningNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningNameAra, 2)
-            Me.txtEarningNameAra.ComputedValue = False
-            Me.txtEarningNameAra.CustomFormat = Nothing
-            Me.txtEarningNameAra.DataBoundControl = True
-            resources.ApplyResources(Me.txtEarningNameAra, "txtEarningNameAra")
-            Me.txtEarningNameAra.EditingMode = False
-            Me.txtEarningNameAra.EnglishControl = Me.txtEarningName
-            Me.txtEarningNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtEarningNameAra.LinkedLabel = Nothing
-            Me.txtEarningNameAra.MaximumValue = Nothing
-            Me.txtEarningNameAra.MinimumValue = Nothing
-            Me.txtEarningNameAra.Name = "txtEarningNameAra"
-            Me.txtEarningNameAra.OldValue = Nothing
-            Me.txtEarningNameAra.ReadOnly = True
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.EditingMode = False
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.ValueIsMandatory = True
-            '
-            'floDataDisplay
-            '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            Me.floDataDisplay.Controls.Add(Me.tbcEarning)
-            Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'tbcEarning
-            '
-            Me.tbcEarning.Controls.Add(Me.tbpMain)
-            Me.tbcEarning.Controls.Add(Me.tbpAccountPosting)
-            resources.ApplyResources(Me.tbcEarning, "tbcEarning")
-            Me.tbcEarning.Name = "tbcEarning"
-            Me.tbcEarning.SelectedIndex = 0
-            '
-            'tbpMain
-            '
-            Me.tbpMain.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            resources.ApplyResources(Me.tbpMain, "tbpMain")
-            Me.tbpMain.Controls.Add(Me.CFlowLayout1)
-            Me.tbpMain.Cursor = System.Windows.Forms.Cursors.Default
-            Me.tbpMain.Name = "tbpMain"
-            Me.tbpMain.UseVisualStyleBackColor = True
-            '
-            'CFlowLayout1
-            '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.TableLayoutPanel1)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.TabPage1.Controls.Add(Me.TableLayoutPanel1)
+            resources.ApplyResources(Me.TabPage1, "TabPage1")
+            Me.TabPage1.Name = "TabPage1"
+            Me.TabPage1.UseVisualStyleBackColor = True
             '
             'TableLayoutPanel1
             '
@@ -239,6 +116,25 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.txtEarningName, 0, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.ValueIsMandatory = True
             '
             'lblNotes
             '
@@ -373,6 +269,45 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblEarningType, "lblEarningType")
             Me.lblEarningType.Name = "lblEarningType"
             '
+            'txtEarningNameAra
+            '
+            Me.txtEarningNameAra.BackColor = System.Drawing.Color.White
+            Me.txtEarningNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningNameAra, 2)
+            Me.txtEarningNameAra.ComputedValue = False
+            Me.txtEarningNameAra.CustomFormat = Nothing
+            Me.txtEarningNameAra.DataBoundControl = True
+            resources.ApplyResources(Me.txtEarningNameAra, "txtEarningNameAra")
+            Me.txtEarningNameAra.EditingMode = False
+            Me.txtEarningNameAra.EnglishControl = Me.txtEarningName
+            Me.txtEarningNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtEarningNameAra.LinkedLabel = Nothing
+            Me.txtEarningNameAra.MaximumValue = Nothing
+            Me.txtEarningNameAra.MinimumValue = Nothing
+            Me.txtEarningNameAra.Name = "txtEarningNameAra"
+            Me.txtEarningNameAra.OldValue = Nothing
+            Me.txtEarningNameAra.ReadOnly = True
+            '
+            'txtEarningName
+            '
+            Me.txtEarningName.BackColor = System.Drawing.Color.White
+            Me.txtEarningName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningName, 2)
+            Me.txtEarningName.ComputedValue = False
+            Me.txtEarningName.CustomFormat = Nothing
+            Me.txtEarningName.DataBoundControl = True
+            resources.ApplyResources(Me.txtEarningName, "txtEarningName")
+            Me.txtEarningName.EditingMode = False
+            Me.txtEarningName.ForeColor = System.Drawing.Color.Black
+            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningName, CType(resources.GetObject("txtEarningName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
+            Me.txtEarningName.LinkedLabel = Nothing
+            Me.txtEarningName.MaximumValue = Nothing
+            Me.txtEarningName.MinimumValue = Nothing
+            Me.txtEarningName.Name = "txtEarningName"
+            Me.txtEarningName.OldValue = Nothing
+            Me.txtEarningName.ReadOnly = True
+            Me.txtEarningName.ValueIsMandatory = True
+            '
             'lblNameAra
             '
             Me.lblNameAra.DisplayOnly = True
@@ -388,12 +323,52 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblName, "lblName")
             Me.lblName.Name = "lblName"
             '
+            'txtEarningCode
+            '
+            Me.txtEarningCode.BackColor = System.Drawing.Color.White
+            Me.txtEarningCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEarningCode.ComputedValue = False
+            Me.txtEarningCode.CustomFormat = Nothing
+            Me.txtEarningCode.DataBoundControl = True
+            Me.txtEarningCode.EditingMode = True
+            resources.ApplyResources(Me.txtEarningCode, "txtEarningCode")
+            Me.txtEarningCode.ForeColor = System.Drawing.Color.Black
+            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningCode, CType(resources.GetObject("txtEarningCode.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
+            Me.MyErrorProvider.SetIconPadding(Me.txtEarningCode, CType(resources.GetObject("txtEarningCode.IconPadding"), Integer))
+            Me.txtEarningCode.LinkedLabel = Nothing
+            Me.txtEarningCode.MaximumValue = Nothing
+            Me.txtEarningCode.MinimumValue = Nothing
+            Me.txtEarningCode.Name = "txtEarningCode"
+            Me.txtEarningCode.OldValue = Nothing
+            Me.txtEarningCode.ReadOnly = True
+            Me.txtEarningCode.ValueIsMandatory = True
+            '
             'lblCode
             '
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             resources.ApplyResources(Me.lblCode, "lblCode")
             Me.lblCode.Name = "lblCode"
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblIdNo
             '
@@ -402,22 +377,21 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
             '
-            'tbpAccountPosting
+            'TabPage2
             '
-            Me.tbpAccountPosting.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge2
-            resources.ApplyResources(Me.tbpAccountPosting, "tbpAccountPosting")
-            Me.tbpAccountPosting.Controls.Add(Me.CFlowLayout2)
-            Me.tbpAccountPosting.Name = "tbpAccountPosting"
-            Me.tbpAccountPosting.UseVisualStyleBackColor = True
+            Me.TabPage2.Controls.Add(Me.CFlowLayout1)
+            resources.ApplyResources(Me.TabPage2, "TabPage2")
+            Me.TabPage2.Name = "TabPage2"
+            Me.TabPage2.UseVisualStyleBackColor = True
             '
-            'CFlowLayout2
+            'CFlowLayout1
             '
-            Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout2.Controls.Add(Me.txtName)
-            Me.CFlowLayout2.Controls.Add(Me.txtNameAra)
-            Me.CFlowLayout2.Controls.Add(Me.DataGridViewPayrollEarnAccounts)
-            resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
-            Me.CFlowLayout2.Name = "CFlowLayout2"
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.txtName)
+            Me.CFlowLayout1.Controls.Add(Me.txtNameAra)
+            Me.CFlowLayout1.Controls.Add(Me.DataGridViewPayrollEarnAccounts)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
             '
             'txtName
             '
@@ -428,7 +402,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtName.DataBoundControl = True
             Me.txtName.DisplayOnly = True
             Me.txtName.EditingMode = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtName, True)
             resources.ApplyResources(Me.txtName, "txtName")
             Me.txtName.ForeColor = System.Drawing.Color.Black
             Me.txtName.LinkedLabel = Nothing
@@ -462,7 +435,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.AutoGenerateColumns = False
             Me.DataGridViewPayrollEarnAccounts.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewPayrollEarnAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.EarningIdNoDataGridViewTextBoxColumn, Me.PayGroupNameDataGridViewTextBoxColumn})
+            Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvIdNo, Me.AccountIdNoDataGridViewTextBoxColumn, Me.dgvRevCostCenterIdNo})
             Me.DataGridViewPayrollEarnAccounts.DataInGridChanged = False
             Me.DataGridViewPayrollEarnAccounts.DataSource = Me.bsPayrollEarnAccounts
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -510,18 +483,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPayGroupIdNo.ReadOnly = True
             Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             '
-            'dgvAccountIdNo
-            '
-            Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
-            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-            Me.dgvAccountIdNo.ReadOnly = True
-            Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
             'dgvIdNo
             '
             Me.dgvIdNo.DataPropertyName = "IdNo"
@@ -529,87 +490,81 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvIdNo.Name = "dgvIdNo"
             Me.dgvIdNo.ReadOnly = True
             '
-            'AccountNameDataGridViewTextBoxColumn
+            'AccountIdNoDataGridViewTextBoxColumn
             '
-            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayGroupIdNo"
+            resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
+            Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
+            Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'EarningIdNoDataGridViewTextBoxColumn
+            'dgvRevCostCenterIdNo
             '
-            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
-            resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
-            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
-            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'PayGroupNameDataGridViewTextBoxColumn
-            '
-            Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
-            resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
-            Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
-            Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+            Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+            Me.dgvRevCostCenterIdNo.ReadOnly = True
+            Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             '
             'bsPayrollEarnAccounts
             '
             Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
-            'EarningEntryTv
+            'EarningEntry2
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
-            Me.Name = "EarningEntryTv"
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.Add(Me.floJournalHeader)
+            Me.Name = "EarningEntry2"
+            Me.Controls.SetChildIndex(Me.floJournalHeader, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floDataDisplay.ResumeLayout(False)
-            Me.tbcEarning.ResumeLayout(False)
-            Me.tbpMain.ResumeLayout(False)
-            Me.CFlowLayout1.ResumeLayout(False)
+            Me.floJournalHeader.ResumeLayout(False)
+            Me.CTabControl1.ResumeLayout(False)
+            Me.TabPage1.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
-            Me.tbpAccountPosting.ResumeLayout(False)
-            Me.CFlowLayout2.ResumeLayout(False)
-            Me.CFlowLayout2.PerformLayout()
+            Me.TabPage2.ResumeLayout(False)
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
         End Sub
-        Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtEarningCode As CTextBox
-        Friend WithEvents txtEarningName As CTextBox
-        Friend WithEvents txtEarningNameAra As CTextBoxArabic
-        Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents floDataDisplay As CFlowLayout
-        Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblCode As CLabel
-        Friend WithEvents lblName As CLabel
-        Friend WithEvents lblNameAra As CLabel
-        Friend WithEvents lblNotes As CLabel
-        Friend WithEvents lblFrequency As CLabel
-        Friend WithEvents lblEarningType As CLabel
-        Friend WithEvents cboEarningType As CaComboBox
-        Friend WithEvents cboFrequency As CaComboBox
+
+        Friend WithEvents floJournalHeader As CFlowLayout
+        Friend WithEvents DataGridViewPayrollEarnAccounts As CDataGvBs
+        Friend WithEvents bsPayrollEarnAccounts As Windows.Forms.BindingSource
+        Friend WithEvents CTabControl1 As CTabControl
+        Friend WithEvents TabPage1 As TabPage
+        Friend WithEvents TabPage2 As TabPage
         Friend WithEvents CFlowLayout1 As CFlowLayout
-        Friend WithEvents tbcEarning As CTabControl
-        Friend WithEvents tbpMain As TabPage
-        Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents txtNotes As CTextBox
+        Friend WithEvents lblNotes As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents bsPayrollEarnAccounts As BindingSource
-        Friend WithEvents CFlowLayout2 As CFlowLayout
+        Friend WithEvents cboFrequency As CaComboBox
+        Friend WithEvents lblFrequency As CLabel
+        Friend WithEvents cboEarningType As CaComboBox
+        Friend WithEvents lblEarningType As CLabel
+        Friend WithEvents txtEarningNameAra As CTextBoxArabic
+        Friend WithEvents txtEarningName As CTextBox
+        Friend WithEvents lblNameAra As CLabel
+        Friend WithEvents lblName As CLabel
+        Friend WithEvents txtEarningCode As CTextBox
+        Friend WithEvents lblCode As CLabel
+        Friend WithEvents TxtIdNo As CTextBox
+        Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtName As CTextBox
         Friend WithEvents txtNameAra As CTextBoxArabic
-        Friend WithEvents DataGridViewPayrollEarnAccounts As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvPayGroupIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
-        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
     End Class
-End Namespace
+End NameSpace

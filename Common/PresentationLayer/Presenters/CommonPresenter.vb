@@ -134,6 +134,15 @@ Namespace PresentationLayer.Presenters
             Return GetLookupFilteredDataByCode()
         End Function
 
+        Public Function GetPayGroupListByCode(Optional ByVal sortKey As String = "PayGroupCode")
+            TableToGet = "PayGroup"
+            SortExpression = sortKey
+            DisplayName = "PayGroupName"
+            DisplayNameArabic = "PayGroupNameAra"
+            DisplayCode = "PayGroupCode"
+            Return GetLookupDataByCode()
+        End Function
+
         Public Function GetDetailAccountListByName(Optional ByVal sortKey As String = "AccountName")
             TableToGet = "Chart"
             SortExpression = sortKey

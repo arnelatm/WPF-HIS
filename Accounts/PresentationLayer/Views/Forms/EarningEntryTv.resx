@@ -865,16 +865,7 @@
     <value>Seq</value>
   </data>
   <data name="dgvSequence.Width" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <metadata name="dgvAccountIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
-    <value>Account Code - Name</value>
-  </data>
-  <data name="dgvAccountIdNo.Width" type="System.Int32, mscorlib">
-    <value>200</value>
+    <value>30</value>
   </data>
   <metadata name="dgvPayGroupIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -882,53 +873,56 @@
   <data name="dgvPayGroupIdNo.HeaderText" xml:space="preserve">
     <value>Pay Group Code - Name</value>
   </data>
+  <data name="dgvPayGroupIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
   <data name="dgvPayGroupIdNo.Width" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <metadata name="dgvAccountIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
+    <value>Account Code - Name</value>
+  </data>
+  <data name="dgvAccountIdNo.MinimumWidth" type="System.Int32, mscorlib">
     <value>200</value>
   </data>
-  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+  <data name="dgvAccountIdNo.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <metadata name="dgvIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvIdNo.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
-  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+  <data name="dgvIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="PayGroupName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="PayGroupName.HeaderText" xml:space="preserve">
-    <value>PayGroupIdNo</value>
-  </data>
-  <data name="PayGroupName.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="AccountName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="AccountName.HeaderText" xml:space="preserve">
+  <data name="AccountNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountName</value>
-  </data>
-  <data name="AccountName.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="EarningIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>EarningIdNo</value>
   </data>
-  <data name="EarningIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="PayGroupNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>PayGroupName</value>
   </data>
   <metadata name="bsPayrollEarnAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
   </metadata>
-  <data name="DataGridViewPayrollEarnAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
   <data name="DataGridViewPayrollEarnAccounts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
+    <value>1, 51</value>
+  </data>
+  <data name="DataGridViewPayrollEarnAccounts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 299</value>
+    <value>574, 239</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;DataGridViewPayrollEarnAccounts.Name" xml:space="preserve">
     <value>DataGridViewPayrollEarnAccounts</value>
@@ -1095,23 +1089,11 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
-    <value>bsPayrollEarnAccounts</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
-    <value>dgvAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPayGroupIdNo.Name" xml:space="preserve">
     <value>dgvPayGroupIdNo</value>
@@ -1119,22 +1101,22 @@
   <data name="&gt;&gt;dgvPayGroupIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>IdNoDataGridViewTextBoxColumn</value>
+  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
+    <value>dgvAccountIdNo</value>
   </data>
-  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvIdNo.Name" xml:space="preserve">
+    <value>dgvIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PayGroupName.Name" xml:space="preserve">
-    <value>PayGroupName</value>
+  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>AccountNameDataGridViewTextBoxColumn</value>
   </data>
-  <data name="&gt;&gt;PayGroupName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AccountName.Name" xml:space="preserve">
-    <value>AccountName</value>
-  </data>
-  <data name="&gt;&gt;AccountName.Type" xml:space="preserve">
+  <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;EarningIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
@@ -1142,6 +1124,18 @@
   </data>
   <data name="&gt;&gt;EarningIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PayGroupNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>PayGroupNameDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;PayGroupNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
+    <value>bsPayrollEarnAccounts</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EarningEntryTv</value>
