@@ -483,6 +483,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.Name = "DataGridViewPayrollEarnAccounts"
             Me.DataGridViewPayrollEarnAccounts.ReadOnly = True
             Me.DataGridViewPayrollEarnAccounts.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPayrollEarnAccounts.SequenceFieldName = "Sequence"
             Me.DataGridViewPayrollEarnAccounts.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayrollEarnAccounts.StartTrackingChanges = False
             '

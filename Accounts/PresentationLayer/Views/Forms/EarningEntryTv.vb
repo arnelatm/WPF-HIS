@@ -205,10 +205,9 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        'Protected Overrides Sub InputsTurnedOn()
-        '    PresenterObj.UpdateFirstLine()
-        'End Sub
+        Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
 
+        End Sub
     End Class
 
 End Namespace
