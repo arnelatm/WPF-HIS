@@ -114,6 +114,13 @@ Public Class CDataGridView
 
     <Bindable(True)>
     <Category("Custom")>
+    <DefaultValue(GetType(String))>
+    <Description("Enter here the field name for sequence column")>
+    <Browsable(True)>
+    Public Property SequenceFieldName As String = "Sequence"
+
+    <Bindable(True)>
+    <Category("Custom")>
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to specify that insert column is visible when editing.")>
     <Browsable(True)>
@@ -149,27 +156,27 @@ Public Class CDataGridView
         End With
     End Sub
 
-    Public Sub ReSequenceDgvAfterDelete(Optional sequenceFieldName As String = "Sequence")
+    Public Sub ReSequenceDgvAfterDelete()
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
         For Each value In myBindingSource
-            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            Dim sequence = CallByName(value, SequenceFieldName, CallType.Get)
             If sequence > i + 1 Then
-                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+                CallByName(value, SequenceFieldName, CallType.Set, sequence - 1)
             End If
         Next
     End Sub
 
-    Public Sub ReSequenceDgvAfterInsert(Optional sequenceFieldName As String = "Sequence")
+    Public Sub ReSequenceDgvAfterInsert()
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
         For Each o In myBindingSource
             If o IsNot Nothing Then
-                Dim sequence = CallByName(o, sequenceFieldName, CallType.Get)
+                Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
                 If sequence = 0 Then
-                    CallByName(o, sequenceFieldName, CallType.Set, i)
+                    CallByName(o, SequenceFieldName, CallType.Set, i)
                 ElseIf sequence >= i Then
-                    CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
+                    CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
                 End If
             End If
         Next
@@ -239,6 +246,16 @@ Public Class CDataGridView
 
             End Select
         End With
+    End Sub
+
+    Private Sub AddNewRow()
+        Dim myBindingSource = CType(DataSource, BindingSource)
+        If myBindingSource IsNot Nothing Then
+            Dim row = CurrentRow.Index() + 1
+            myBindingSource.AddNew()
+            CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+        End If
     End Sub
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
@@ -455,28 +472,41 @@ Public Class CDataGridView
     '    If e.KeyCode = Keys.Enter Then
     '        'Try
     '        Return Me.ProcessTabKey(e.KeyData)
-    '        'Catch ex As Exception
+    ''        'Catch ex As Exception
 
-    '        'End Try
+    ''        'End Try
 
-    '    End If
-    '    'Try
-    '        Return MyBase.ProcessDataGridViewKey(e)
-    '    'Catch ex As Exception
+    ''    End If
+    ''    'Try
+    ''        Return MyBase.ProcessDataGridViewKey(e)
+    ''    'Catch ex As Exception
 
-    '    'End Try
+    ''    'End Try
 
-    'End Function
-    ''Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
+    ''End Function
+    '''Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
+
     'Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
-    '    if Me.CurrentCell.RowIndex = RowCount Then
-    '        SendKeys.Send("{home}")
-    '        SendKeys.Send("{down}")
-    '    else
-    '        SendKeys.Send("{up}")
-    '        SendKeys.Send("{right}")
+    '    If Me.CurrentCell.RowIndex = RowCount Then 'Or Me.CurrentCell.RowIndex = LastEditableColumn Then
+    '        Me.Rows.Add()
+    '        'SendKeys.Send("{home}")
+    '        'SendKeys.Send("{down}")
+    '    Else
+    '        'SendKeys.Send("{up}")
+    '        'SendKeys.Send("{right}")
     '    End If
     'End Sub
+
+    Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
+        If Me.CurrentCell.RowIndex = RowCount() - 1 Then
+            AddNewRow()
+            'SendKeys.Send("{home}")
+            'SendKeys.Send("{down}")
+        Else
+            'SendKeys.Send("{up}")
+            'SendKeys.Send("{right}")
+        End If
+    End Sub
 
     'Public Property GridParentChanged As Boolean
     '    Set(value As Boolean)
