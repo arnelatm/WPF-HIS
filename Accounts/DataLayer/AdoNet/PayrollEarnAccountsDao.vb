@@ -30,6 +30,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "AccountName," &
                     "EarningIdNo," &
+                    "IdNo," &
                     "PayGroupIdNo," &
                     "PayGroupName," &
                     "Sequence" &

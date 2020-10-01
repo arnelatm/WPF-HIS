@@ -139,6 +139,18 @@
   <data name="dgvSequence.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
+  <metadata name="dgvPayGroupIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvPayGroupIdNo.HeaderText" xml:space="preserve">
+    <value>Pay Group Code - Name</value>
+  </data>
+  <data name="dgvPayGroupIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="dgvPayGroupIdNo.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
   <metadata name="dgvAccountIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -150,18 +162,6 @@
   </data>
   <data name="dgvAccountIdNo.Width" type="System.Int32, mscorlib">
     <value>300</value>
-  </data>
-  <metadata name="dgvPayGroupIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvPayGroupIdNo.HeaderText" xml:space="preserve">
-    <value>Revenue/Cost Center Code-Name</value>
-  </data>
-  <data name="dgvPayGroupIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="dgvPayGroupIdNo.Width" type="System.Int32, mscorlib">
-    <value>200</value>
   </data>
   <metadata name="dgvIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>722, 203</value>
+    <value>684, 203</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -226,13 +226,13 @@
     <value>0</value>
   </data>
   <data name="floJournalHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 423</value>
+    <value>12, 448</value>
   </data>
   <data name="floJournalHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 10, 5, 5</value>
   </data>
   <data name="floJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 222</value>
+    <value>696, 197</value>
   </data>
   <data name="floJournalHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -247,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;floJournalHeader.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="TableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -268,7 +268,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 85</value>
+    <value>684, 85</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -379,7 +379,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 24</value>
+    <value>684, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>273</value>
@@ -409,13 +409,13 @@
     <value>False</value>
   </data>
   <data name="cboFrequency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 177</value>
+    <value>344, 177</value>
   </data>
   <data name="cboFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 24</value>
+    <value>341, 24</value>
   </data>
   <data name="cboFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -439,7 +439,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrequency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 151</value>
+    <value>344, 151</value>
   </data>
   <data name="lblFrequency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -526,7 +526,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboEarningType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
+    <value>341, 24</value>
   </data>
   <data name="cboEarningType.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -562,7 +562,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtEarningName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 23</value>
+    <value>684, 23</value>
   </data>
   <data name="txtEarningName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -592,7 +592,7 @@
     <value>Yes</value>
   </data>
   <data name="txtEarningNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 23</value>
+    <value>684, 23</value>
   </data>
   <data name="txtEarningNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -691,7 +691,7 @@
     <value>-20</value>
   </data>
   <data name="txtEarningCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 26</value>
+    <value>344, 26</value>
   </data>
   <data name="txtEarningCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -721,7 +721,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 1</value>
+    <value>344, 1</value>
   </data>
   <data name="lblCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -820,7 +820,7 @@
     <value>14</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>551, 335</value>
+    <value>686, 335</value>
   </data>
   <data name="TableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>276</value>
@@ -838,13 +838,13 @@
     <value>0</value>
   </data>
   <data name="TableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtNotes" Row="13" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNotes" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="11" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblAccountIdNo" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboFrequency" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFrequency" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboEarningType" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblEarningType" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNameAra" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtEarningCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningName" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtNotes" Row="13" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNotes" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="11" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblAccountIdNo" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboFrequency" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFrequency" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboEarningType" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblEarningType" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNameAra" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtEarningCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningName" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 341</value>
+    <value>693, 341</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -862,10 +862,10 @@
     <value>0</value>
   </data>
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 73</value>
+    <value>12, 73</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 344</value>
+    <value>696, 344</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -880,7 +880,46 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
+  </data>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 421</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>696, 24</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>273</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>Posting Accounts for Pay Groups:</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2043,7 +2082,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>979, 657</value>
+    <value>1065, 657</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>995, 483</value>
@@ -2075,22 +2114,28 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
+    <value>bsPayrollEarnAccounts</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
-    <value>dgvAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvPayGroupIdNo.Name" xml:space="preserve">
     <value>dgvPayGroupIdNo</value>
   </data>
   <data name="&gt;&gt;dgvPayGroupIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
+    <value>dgvAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvIdNo.Name" xml:space="preserve">
@@ -2122,12 +2167,6 @@
   </data>
   <data name="&gt;&gt;PayGroupNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
-    <value>bsPayrollEarnAccounts</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EarningEntry</value>

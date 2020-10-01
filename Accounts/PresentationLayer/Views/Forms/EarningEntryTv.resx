@@ -903,11 +903,20 @@
   <data name="AccountNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountName</value>
   </data>
+  <data name="AccountNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="EarningIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>EarningIdNo</value>
   </data>
+  <data name="EarningIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="PayGroupNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>PayGroupName</value>
+  </data>
+  <data name="PayGroupNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <metadata name="bsPayrollEarnAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
@@ -1089,6 +1098,12 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
+    <value>bsPayrollEarnAccounts</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
@@ -1130,12 +1145,6 @@
   </data>
   <data name="&gt;&gt;PayGroupNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
-    <value>bsPayrollEarnAccounts</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EarningEntryTv</value>

@@ -60,6 +60,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -67,7 +68,6 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
@@ -487,6 +487,10 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayrollEarnAccounts.StartTrackingChanges = False
             '
+            'bsPayrollEarnAccounts
+            '
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+            '
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
@@ -550,10 +554,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
             Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
             Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'bsPayrollEarnAccounts
-            '
-            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
             'EarningEntryTv
             '

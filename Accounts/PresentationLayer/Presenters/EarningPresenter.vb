@@ -24,11 +24,13 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("PayGroupIdNo", GetType(Int16))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("PayGroupIdNo", GetType(Int16))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
@@ -56,43 +58,44 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningIdNo")
         End Sub
 
-        Public Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
-                If View.PayrollEarnAccounts.Count() = 0 Then
-                    View.PayrollEarnAccounts = New List(Of PayrollEarnAccountView) From {
-                        NewPayrollEarnAccount()
-                        }
-                End If
-                'For Each item In View.PayrollEarnAccounts
-                '    item.JournalIdNo = View.IdNo
-                '    item.Sequence = 1
-                '    item.AccountIdNo = View.AccountIdNo
-                '    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
-                '    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                '        If item.Credit = 0 Then
-                '            item.Credit = View.Amount
-                '            item.Debit = 0
-                '        End If
-                '    Else
-                '        If item.Debit = 0 Then
-                '            item.Credit = 0
-                '            item.Debit = View.Amount
-                '        End If
-                '    End If
-                '    item.RevCostCenterIdNo = 0
-                '    Exit For
-                'Next
-            End If
-        End Sub
+        'Public Sub UpdateFirstLine()
+        '    If EditMode Or AddMode Then
+        '        If View.PayrollEarnAccounts.Count() = 0 Then
+        '            View.PayrollEarnAccounts = New List(Of PayrollEarnAccountView) From {
+        '                NewPayrollEarnAccount()
+        '                }
+        '        End If
+        '        'For Each item In View.PayrollEarnAccounts
+        '        '    item.JournalIdNo = View.IdNo
+        '        '    item.Sequence = 1
+        '        '    item.AccountIdNo = View.AccountIdNo
+        '        '    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
+        '        '    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
+        '        '        If item.Credit = 0 Then
+        '        '            item.Credit = View.Amount
+        '        '            item.Debit = 0
+        '        '        End If
+        '        '    Else
+        '        '        If item.Debit = 0 Then
+        '        '            item.Credit = 0
+        '        '            item.Debit = View.Amount
+        '        '        End If
+        '        '    End If
+        '        '    item.RevCostCenterIdNo = 0
+        '        '    Exit For
+        '        'Next
+        '    End If
+        'End Sub
 
-        Private Function NewPayrollEarnAccount()
-            Dim item As New PayrollEarnAccountView With {
-                    .EarningIdNo = View.IdNo,
-                    .AccountIdNo = 0,
-                    .PayGroupIdNo = 0
-                    }
-            Return item
-        End Function
+        'Private Function NewPayrollEarnAccount()
+        '    Dim item As New PayrollEarnAccountView With {
+        '            .EarningIdNo = View.IdNo,
+        '            .AccountIdNo = 0,
+        '            .PayGroupIdNo = 0,
+        '            .Sequence = 0,
+        '            }
+        '    Return item
+        'End Function
 
         'Private Sub OnBeforeSave() Handles MyBase.BeforeSave
         '    If GetEnumCodeValue(Of EarningTypeSelection)(View.EarningType) = EarningTypeSelection.Others Then

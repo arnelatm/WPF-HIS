@@ -167,7 +167,7 @@ Namespace PresentationLayer.Views.Forms
             'End With
             'bsPayrollEarnAccounts.chang
             'bsPayrollEarnAccounts.AddingNew = AddressOf OnAddingNewToBindingSource
-            AddHandler bsPayrollEarnAccounts.AddingNew, AddressOf OnAddingNewToBindingSource
+            'AddHandler bsPayrollEarnAccounts.AddingNew, AddressOf OnAddingNewToBindingSource
 
             With DataGridViewPayrollEarnAccounts.Columns
                 dgvSequence.DisplayOnly = True
