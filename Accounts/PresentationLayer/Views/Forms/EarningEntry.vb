@@ -17,8 +17,8 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
-        Private _PayrollEarnAccounts As List(Of PayrollEarnAccountView)
-        Private _PayGroupByCode
+        Private _payrollEarnAccounts As New List(Of PayrollEarnAccountView)
+        Private _payGroupByCode
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New()
@@ -40,11 +40,11 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property GeneralPayrollEarnAccountsDataSource As List(Of PayrollEarnAccountModel)
+        Public Property PayrollEarnAccountsDataSource As List(Of PayrollEarnAccountModel)
 
         Public Property IdNo As Int16 Implements IEarningView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
@@ -185,11 +185,11 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs)
-            If DataGridViewPayrollEarnAccounts IsNot Nothing Then
-                DataGridViewPayrollEarnAccounts.Focus()
-            End If
-        End Sub
+        'Private Sub TxtNotes_Leave(sender As Object, e As EventArgs)
+        '    If DataGridViewPayrollEarnAccounts IsNot Nothing Then
+        '        DataGridViewPayrollEarnAccounts.Focus()
+        '    End If
+        'End Sub
 
 #End Region
 
