@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("PayrollEarnAccount")
             TableName = "PayrollEarnAccount"
-            SortOrderKey = "AccountIdNo"
+            SortOrderKey = "Sequence"
             DataModel = New PayrollEarnAccountModel
             'Initializer("PayrollEarnAccount")
             'Ea = New EventAggregator()
@@ -24,9 +24,9 @@ Namespace PresentationLayer.Presenters
         ''''     Displays list of  PayrollEarnAccount Items.
         '''' </summary>
         '''' <param name="earningIdNo">EarningIdNo id to display.</param>
-        'Public Overloads Sub Display(earningIdNo As Int32)
-        '    View.PayrollEarnAccounts = Model.GetRecordsWithIdNo(Of PayrollEarnAccountModel)(earningIdNo, "EarningIdNo")
-        'End Sub
+        Public Overloads Sub Display(earningIdNo As Int32)
+            View.PayrollEarnAccounts = Model.GetRecordsWithIdNo(Of PayrollEarnAccountModel)(earningIdNo, "EarningIdNo")
+        End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        earningIdNo As Int32)

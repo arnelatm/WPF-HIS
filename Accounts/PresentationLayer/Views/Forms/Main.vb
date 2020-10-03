@@ -1337,8 +1337,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayGroupsToolStripMenuItem.Click
-            Dim childMdiForm As PayGroupEntry
-            childMdiForm = New PayGroupEntry With {
+            Dim childMdiForm As PayGroupEntryTv
+            childMdiForm = New PayGroupEntryTv With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

@@ -559,7 +559,7 @@ Public Class Dac
             cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             translatedCaption = ExecScalar(Of String)(cmd)
             If translatedCaption Is Nothing Then
-                cmd = "SELECT Caption FROM OriginalMessages where MessageIdNo = " + idNo.ToString()
+                cmd = "SELECT Caption FROM OriginalMessages where IdNo = " + idNo.ToString()
                 translatedCaption = ExecScalar(Of String)(cmd)
             End If
         End If

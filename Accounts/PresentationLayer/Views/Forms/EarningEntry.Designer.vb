@@ -71,6 +71,14 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
             'floJournalHeader
             '
             Me.floJournalHeader.BackColor = System.Drawing.Color.Transparent
