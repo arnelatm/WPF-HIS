@@ -58,6 +58,27 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningIdNo")
         End Sub
 
+        'Public Overrides Sub UpdateViewDisplay(idNo As Int32)
+        '    If idNo <> 0 Then
+        '        Dim modelData As EarningModel
+        '        RecordCount = GetRecordCount()
+        '        'RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
+        '        modelData = ModelPresenter.GetRecordById(Of EarningModel)(idNo)
+        '        'RaiseEvent AfterRecordRetrieval(modelData)
+        '        'If Ea IsNot Nothing Then
+        '        '    Ea.PublishEvent(New BeforeAssignment(modelData))
+        '        'End If
+        '        Dim x As List(Of EmployeeEarningView)
+        '        GlobalVariables.Mapper.Map(modelData.PayrollEarnAccounts, View.PayrollEarnAccounts)
+        '        GlobalVariables.Mapper.Map(modelData, View)
+        '        GlobalVariables.Mapper.Map(modelData, View)
+        '        For Each child In ChildPresenters
+        '            child.UpdateViewDisplay(idNo)
+        '        Next
+        '    End If
+        'End Sub
+
+
         'Public Sub UpdateFirstLine()
         '    If EditMode Or AddMode Then
         '        If View.PayrollEarnAccounts.Count() = 0 Then

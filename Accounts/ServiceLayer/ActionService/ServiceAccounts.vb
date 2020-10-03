@@ -201,7 +201,7 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property EarningDao As IDaoAll(Of Earning)
+        Private ReadOnly Property EarningDao As IDao(Of Earning)
             Get
                 Return DaoFactoryAccounts.CreateDao("Earning")
             End Get

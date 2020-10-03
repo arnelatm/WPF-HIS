@@ -8,12 +8,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class EarningDao
-        Inherits CommonDao
-        Implements IDaoAll(Of Earning)
+        Implements IDao(Of Earning)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As Earning Implements IDaoAll(Of Earning).GetRecordById
+        Public Function GetRecordById(idNo) As Earning Implements IDao(Of Earning).GetRecordById
             Dim sql As String =
                     " SELECT IdNo," &
                     "EarningCode," &
@@ -31,18 +30,8 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Earning) _
-            Implements IDaoAll(Of Earning).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "EarningName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, EarningCode, EarningName, EarningNameAra" &
-                    "   FROM [Earning] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
 
-        Public Function UpdateRecord(ByRef earning As Earning) As Integer Implements IDaoAll(Of Earning).UpdateRecord
+        Public Function UpdateRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).UpdateRecord
             Dim sql As String =
                     " UPDATE [Earning]" &
                     " SET EarningCode = @EarningCode," &
@@ -55,7 +44,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(earning))
         End Function
 
-        Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDaoAll(Of Earning).AddRecord
+        Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
                     " (EarningCode,EarningName,EarningNameAra,Frequency,EarningType,AccountIdNo) " &

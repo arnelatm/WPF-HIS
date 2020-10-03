@@ -11,9 +11,16 @@ Namespace DataLayer.AdoNet
         Implements IDaoChild(Of PayrollEarnAccount)
 
         Private ReadOnly _db As New Db()
-        Protected TableFileName As String = "PayrollEarnAccount_View"
-        Protected DboTvpInsertFileName As String = "dbo.UpdatePayrollEarnAccountTVP"
-        Protected DboTvpUpdateFileName As String = "dbo.InsertPayrollEarnAccountTVP"
+        Protected TableFileName As String = ""
+        Protected DboTvpInsertFileName As String = ""
+        Protected DboTvpUpdateFileName As String = ""
+
+
+        Public Sub New()
+            TableFileName = "PayrollEarnAccount_View"
+            DboTvpUpdateFileName = "dbo.UpdatePayrollEarnAccountTVP"
+            DboTvpInsertFileName = "dbo.InsertPayrollEarnAccountTVP"
+        End Sub
 
         Public Function GetRecordsWithIdNo(earningIdNo As Int32, Optional sortKey As String = Nothing) As List(Of PayrollEarnAccount) Implements IDaoChild(Of PayrollEarnAccount).GetRecordsWithIdNo
             If sortKey Is Nothing Then

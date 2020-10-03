@@ -17,11 +17,11 @@ Namespace BusinessLayer
         End Sub
 
         Public Property AccountIdNo As Int16
-        Public Property Frequency As Char
         Public Property EarningCode As String
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char
+        Public Property Frequency As Char
         Public Property IdNo As Int16
         Public Property Notes As String
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
