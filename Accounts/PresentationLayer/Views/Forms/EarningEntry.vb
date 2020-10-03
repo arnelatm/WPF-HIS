@@ -109,10 +109,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
             Get
-                Return _PayrollEarnAccounts
+                Return _payrollEarnAccounts
             End Get
             Set
-                _PayrollEarnAccounts = Value
+                _payrollEarnAccounts = Value
                 BindPayrollEarnAccount()
             End Set
         End Property
@@ -132,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _PayGroupByCode = PresenterObj.GetPayGroupListByCode()
+            _payGroupByCode = PresenterObj.GetPayGroupListByCode()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -157,17 +157,18 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewPayrollEarnAccounts.Columns
                 dgvSequence.DisplayOnly = True
+                dgvPayGroupIdNo.DataSource = _payGroupByCode
+                dgvPayGroupIdNo.DisplayMember = "Name"
+                dgvPayGroupIdNo.ValueMember = "idNo"
+                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPayGroupIdNo.AutoComplete = True
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvPayGroupIdNo.DataSource = _PayGroupByCode
-                dgvPayGroupIdNo.DisplayMember = "Name"
-                dgvPayGroupIdNo.ValueMember = "idNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -176,9 +177,9 @@ Namespace PresentationLayer.Views.Forms
                     Handles DataGridViewPayrollEarnAccounts.CellEndEdit
             With DataGridViewPayrollEarnAccounts.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
-                        'SendKeys.Send("{TAB}")
-                    Case $"dgvnotes"
+                    Case $"dgvsequence"
+                        SendKeys.Send("{TAB}")
+                    Case $"dgvpaygroupid"
                         SendKeys.Send("{DOWN}")
                 End Select
                 DataGridViewPayrollEarnAccounts.Refresh()

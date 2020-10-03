@@ -24,7 +24,7 @@ Public Interface IDaoChild(Of TBiz)
 
     Function GetRecordsWithIdNo(idNo As Int32, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 
-    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Int32) As Integer
+    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
 
     Function InsertTvp(ByRef tvpTable As DataTable) As Integer
 

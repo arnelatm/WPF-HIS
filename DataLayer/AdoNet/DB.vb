@@ -634,9 +634,9 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function DelUpdateTvp(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
-                                     groupIdNo As Int32) As Integer
-            Dim retValue = 0
+        Public Function DelUpdateTvp(Of TI)(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
+                                     groupIdNo As TI) As Integer
+            Dim retValue As Integer = 0
             Dim tryAgain = False
             '_waitForm.Show()
             Do While True
@@ -650,7 +650,8 @@ Namespace AdoNet
                                 command.Parameters.AddWithValue(mParam, dataTableName)
                                 command.Parameters.AddWithValue("GroupIdNo", groupIdNo)
                                 'connection.Open()
-                                retValue = command.ExecuteNonQuery()
+                                Dim x = command.ExecuteNonQuery()
+                                retValue = x
                                 'connection.Close()
                                 Exit Do
                             Catch ex As Exception
@@ -971,7 +972,6 @@ Namespace AdoNet
 
                     ' Attempt to commit the transaction.
                     transaction.Commit()
-
                 Catch ex As Exception
                     MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
                     MessageBox.Show("  Message: {0}", ex.Message)

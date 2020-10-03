@@ -1,8 +1,7 @@
-﻿
-CREATE VIEW [dbo].[PayrollEarnAccount_View]
+﻿CREATE VIEW dbo.PayrollEarnAccount_View
 AS
 SELECT        dbo.PayrollEarnAccount.IdNo, dbo.PayrollEarnAccount.EarningIdNo, dbo.PayrollEarnAccount.PayGroupIdNo, dbo.PayrollEarnAccount.EmployeeIdNo, dbo.PayrollEarnAccount.AccountIdNo, dbo.Chart.AccountCode, 
-                         dbo.Chart.AccountName, dbo.PayGroup.PayGroupCode, dbo.PayGroup.PayGroupName, dbo.PayGroup.PayGroupNameAra, dbo.Chart.AccountNameAra
+                         dbo.Chart.AccountName, dbo.PayGroup.PayGroupCode, dbo.PayGroup.PayGroupName, dbo.PayGroup.PayGroupNameAra, dbo.Chart.AccountNameAra, dbo.PayrollEarnAccount.Sequence
 FROM            dbo.PayrollEarnAccount INNER JOIN
                          dbo.Chart ON dbo.PayrollEarnAccount.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
                          dbo.PayGroup ON dbo.PayrollEarnAccount.PayGroupIdNo = dbo.PayGroup.IdNo
@@ -82,15 +81,15 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "PayrollEarnAccounts"
+         Begin Table = "PayrollEarnAccount"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 305
+               Bottom = 136
                Right = 208
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 2
          End
          Begin Table = "Chart"
             Begin Extent = 
@@ -139,4 +138,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollEarnAccount_View';
+
+
 

@@ -15,13 +15,19 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Earning Implements IDaoAll(Of Earning).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, EarningCode, EarningName, EarningNameAra, Frequency, EarningType, AccountIdNo" &
-                    "   FROM [Earning]" &
+                    " SELECT IdNo," &
+                    "EarningCode," &
+                    "EarningName," &
+                    "EarningNameAra," &
+                    "Frequency," &
+                    "EarningType," &
+                    "AccountIdNo" &
+                    " FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim peaDao = New PayrollEarnAccountDao()
-            data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "PayGroupName")
+            data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -64,7 +70,7 @@ Namespace DataLayer.AdoNet
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .Frequency = Extensions.AsString(reader("Frequency")),
+            .Frequency = Extensions.AsChar(reader("Frequency")),
             .EarningType = Extensions.AsChar(reader("EarningType")),
             .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo"))
             }
