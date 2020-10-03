@@ -208,6 +208,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
 
         End Sub
+
     End Class
 
 End Namespace

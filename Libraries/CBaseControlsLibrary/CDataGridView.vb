@@ -498,7 +498,7 @@ Public Class CDataGridView
     'End Sub
 
     Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
-        If Me.CurrentCell.RowIndex = RowCount() - 1 Then
+        If Me.CurrentCell.RowIndex = RowCount() Then
             AddNewRow()
             'SendKeys.Send("{home}")
             'SendKeys.Send("{down}")
