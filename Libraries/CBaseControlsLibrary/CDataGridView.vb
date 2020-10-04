@@ -43,6 +43,12 @@ Public Class CDataGridView
 
     Public Property Ea As EventAggregator
 
+    Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
+        If Me.Columns(SequenceColumn) IsNot Nothing Then
+            CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
+        End If
+    End Sub
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -72,6 +78,14 @@ Public Class CDataGridView
             End If
         End Set
     End Property
+
+    Private Sub dataGridView_CellEnter(ByVal sender As Object,
+                                        ByVal e As DataGridViewCellEventArgs) _
+        Handles Me.CellEnter
+        If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
+            SendKeys.Send("{TAB}")
+        End If
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -184,23 +198,36 @@ Public Class CDataGridView
 
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
+        'MyBase.ProcessDialogKey(keyData)
         If key = Keys.Enter Then
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
-            If currentColumnIndex < LastEditableColumn Then
-                ' Handle the ENTER key as if it were a tab ARROW key
-                Return ProcessTabKey(keyData)
-            ElseIf currentColumnIndex = LastEditableColumn Then
-                ' go to next row on the first editable column
-                If CurrentCell.RowIndex() >= RowCount() Then
-                    CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
-                Else
-                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex())
-                End If
-
+            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+                CurrentCell = Me(ColumnCount() - 1, CurrentCell.RowIndex())
+                'ProcessTabKey(keyData)
+                'Return True
             End If
+            ProcessTabKey(keyData)
+            Return True
+            'Dim currentColumnIndex As Int16
+            'currentColumnIndex = CurrentCell.ColumnIndex()
+            'If currentColumnIndex < LastEditableColumn Then
+            '    ' Handle the ENTER key as if it were a tab ARROW key
+            '    Return ProcessTabKey(keyData)
+            'ElseIf currentColumnIndex = LastEditableColumn Then
+            '    ' go to next row on the first editable column
+            '    If CurrentCell.RowIndex() >= RowCount() Then
+            '        CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
+            '    Else
+            '        Return ProcessTabKey(keyData)
+            '    End If
+            '    Return True
+            'Else
+            '    Return MyBase.ProcessDialogKey(keyData)
+            'End If
+        Else
+            Return MyBase.ProcessDialogKey(keyData)
         End If
-        Return MyBase.ProcessDialogKey(keyData)
     End Function
 
     Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
@@ -247,6 +274,13 @@ Public Class CDataGridView
             End Select
         End With
     End Sub
+
+    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
+    '    Dim dgc As DataGridViewCell = Me.Item(e.ColumnIndex, e.RowIndex)
+    '    If dgc IsNot Nothing AndAlso dgc.ReadOnly Then
+    '        SendKeys.Send("{Tab}")
+    '    End If
+    'End Sub
 
     Private Sub AddNewRow()
         Dim myBindingSource = CType(DataSource, BindingSource)
@@ -498,13 +532,8 @@ Public Class CDataGridView
     'End Sub
 
     Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
-        If Me.CurrentCell.RowIndex = RowCount() Then
+        If Me.CurrentCell.RowIndex = RowCount() - 1 Then
             AddNewRow()
-            'SendKeys.Send("{home}")
-            'SendKeys.Send("{down}")
-        Else
-            'SendKeys.Send("{up}")
-            'SendKeys.Send("{right}")
         End If
     End Sub
 

@@ -4,21 +4,12 @@ Public Class CaDgvComboBox
     Inherits CaComboBox
     Implements IDataGridViewEditingControl
 
-    Private WithEvents _dataGridView As DataGridView
-
     Public Sub New()
         MyBase.New()
-        Me.AutoCompleteMode = AutoCompleteMode.None
+        AutoCompleteMode = AutoCompleteMode.None
     End Sub
 
     Public Property EditingControlDataGridView As DataGridView Implements IDataGridViewEditingControl.EditingControlDataGridView
-        Get
-            Return _dataGridView
-        End Get
-        Set(value As DataGridView)
-            _dataGridView = value
-        End Set
-    End Property
 
     Public Property EditingControlFormattedValue As Object Implements IDataGridViewEditingControl.EditingControlFormattedValue
         Get
@@ -29,16 +20,7 @@ Public Class CaDgvComboBox
         End Set
     End Property
 
-    Private _editingControlRowIndex As Integer
-
     Public Property EditingControlRowIndex As Integer Implements IDataGridViewEditingControl.EditingControlRowIndex
-        Get
-            Return _editingControlRowIndex
-        End Get
-        Set(value As Integer)
-            _editingControlRowIndex = value
-        End Set
-    End Property
 
     Private _editingControlValueChanged = False
 
