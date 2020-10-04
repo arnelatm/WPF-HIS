@@ -15,6 +15,8 @@ Namespace PresentationLayer.Views.Forms
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
+        Private _phoneType As List(Of EmployeePhoneView)
+        Private _internationalCodes As List(Of Countries)
         'Private ReadOnly _dgvEarningsEa As EventAggregator
 
         Public Sub New()
@@ -166,6 +168,16 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _employeeEarnings = Value
                 BindEmployeeEarning()
+            End Set
+        End Property
+
+        Public Property EmployeePhones As List(Of EmployeePhoneView) Implements IEmployeeView.EmployeePhones
+            Get
+                Return _employeePhones
+            End Get
+            Set
+                _employeePhones = Value
+                BindEmployeePhone()
             End Set
         End Property
 
@@ -534,6 +546,33 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
+        End Sub
+
+        Private Sub BindEmployeePhone()
+            SuspendLayout()
+            bsPhones.DataSource = Nothing
+            DataGridViewPhones.Refresh()
+            bsPhones.DataSource = EmployeePhones
+            bsPhones.AllowNew = True
+            With DataGridViewPhones
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPhones
+                .Refresh()
+            End With
+            With DataGridViewPhones.Columns
+                dgvPhoneTypeIdNo.DataSource = _employeePhones
+                dgvPhoneTypeIdNo.DisplayMember = "Name"
+                dgvPhoneTypeIdNo.ValueMember = "IdNo"
+                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPhoneTypeIdNo.DataSource = _employeePhones
+                dgvPhoneTypeIdNo.DisplayMember = "Name"
+                dgvPhoneTypeIdNo.ValueMember = "IdNo"
+                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
