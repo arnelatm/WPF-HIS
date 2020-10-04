@@ -363,6 +363,11 @@
     <Build Include="dbo\Tables\EmployeePhone.sql" />
     <Build Include="dbo\Views\Copy of EmployeeDeduction_View.sql" />
     <Build Include="dbo\Views\Copy of EmployeeEarning_View.sql" />
+    <Build Include="dbo\Views\EmployeePhone_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeePhoneTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeePhoneTVP.sql" />
+    <Build Include="dbo\User Defined Types\EmployeePhoneUpdate.sql" />
+    <Build Include="dbo\User Defined Types\EmployeePhoneInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
