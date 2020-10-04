@@ -24,10 +24,13 @@ Namespace DataLayer.AdoNet
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim deductionDao = New EmployeeDeductionDao
             Dim earningDao = New EmployeeEarningDao
+            Dim phoneDao = New EmployeePhoneDao
             Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.EmployeeDeductions = d
             data.EmployeeEarnings = e
+            data.EmployeePhone = p
             Return data
         End Function
 

@@ -225,6 +225,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property EmployeePhoneDao As IDaoChild(Of EmployeePhone)
+            Get
+                Return DaoFactoryAccounts.CreateDao("EmployeePhone")
+            End Get
+        End Property
+
         Private ReadOnly Property ErJournalDao As IDao(Of ErJournal)
             Get
                 Return DaoFactoryAccounts.CreateDao("ErJournal")

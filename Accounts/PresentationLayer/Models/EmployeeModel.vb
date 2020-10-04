@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -44,6 +46,7 @@
         Public Property ZipCode As String
         Public Property EmployeeDeductions As List(Of EmployeeDeductionModel)
         Public Property EmployeeEarnings As List(Of EmployeeEarningModel)
+        Public Property EmployeePhones As List(Of EmployeePhone)
     End Class
 
 End Namespace

@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -41,6 +42,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ZipCode As String
         Property EmployeeDeductions As List(Of EmployeeDeductionView)
         Property EmployeeEarnings As List(Of EmployeeEarningView)
+        Property EmployeePhones As List(Of EmployeePhoneView)
 
     End Interface
 
