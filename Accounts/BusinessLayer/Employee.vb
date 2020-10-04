@@ -60,6 +60,7 @@ Namespace BusinessLayer
         Public Property ZipCode As String
         Public Property EmployeeDeductions As List(Of EmployeeDeduction)
         Public Property EmployeeEarnings As List(Of EmployeeEarning)
+        Public Property EmployeePhones As List(Of EmployeePhone)
 
     End Class
 
