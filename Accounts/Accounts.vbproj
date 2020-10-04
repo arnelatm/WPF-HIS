@@ -2751,6 +2751,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />

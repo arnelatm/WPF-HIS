@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
             Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.EmployeeDeductions = d
             data.EmployeeEarnings = e
-            data.EmployeePhone = p
+            data.EmployeePhones = p
             Return data
         End Function
 
