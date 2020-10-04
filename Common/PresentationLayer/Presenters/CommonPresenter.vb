@@ -180,13 +180,13 @@ Namespace PresentationLayer.Presenters
         '    Return GetTableList()
         'End Function
 
-        Public Function GetList(listName As String)
+        Public Function GetListByCode(listName As String)
             TableToGet = listName
             DisplayName = listName + "Name"
             SortExpression = DisplayName
             DisplayNameArabic = DisplayName + "Ara"
             DisplayCode = listName + "Code"
-            Return GetTableList()
+            Return GetLookupDataByCode()
         End Function
 
         Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")

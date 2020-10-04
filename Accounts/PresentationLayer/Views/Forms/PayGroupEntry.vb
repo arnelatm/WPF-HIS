@@ -92,7 +92,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetList("PayGroup")
+            cboParentIdNo.DataSource = PresenterObj.GetListByCode("PayGroup")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

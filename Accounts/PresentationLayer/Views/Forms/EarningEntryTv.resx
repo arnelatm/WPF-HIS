@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 405</value>
+    <value>300, 397</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -229,7 +229,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 85</value>
+    <value>568, 54</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -754,7 +754,7 @@
     <value>3, 3</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 355</value>
+    <value>576, 343</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -778,7 +778,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 361</value>
+    <value>582, 349</value>
   </data>
   <data name="tbpMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -921,6 +921,9 @@
   <metadata name="bsPayrollEarnAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
   </metadata>
+  <data name="DataGridViewPayrollEarnAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="DataGridViewPayrollEarnAccounts.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 51</value>
   </data>
@@ -928,7 +931,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 239</value>
+    <value>574, 291</value>
   </data>
   <data name="DataGridViewPayrollEarnAccounts.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -952,7 +955,7 @@
     <value>3, 3</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 355</value>
+    <value>576, 343</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -976,7 +979,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpAccountPosting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 361</value>
+    <value>582, 349</value>
   </data>
   <data name="tbpAccountPosting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -996,6 +999,9 @@
   <data name="&gt;&gt;tbpAccountPosting.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="tbcEarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="tbcEarning.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 15</value>
   </data>
@@ -1006,7 +1012,7 @@
     <value>0, 0</value>
   </data>
   <data name="tbcEarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 387</value>
+    <value>590, 375</value>
   </data>
   <data name="tbcEarning.TabIndex" type="System.Int32, mscorlib">
     <value>273</value>
@@ -1027,7 +1033,7 @@
     <value>Right</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 53</value>
+    <value>298, 53</value>
   </data>
   <data name="floDataDisplay.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>430, 180</value>
@@ -1036,7 +1042,7 @@
     <value>0, 15, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 405</value>
+    <value>605, 397</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -1066,7 +1072,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>931, 458</value>
+    <value>903, 450</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>918, 288</value>
@@ -1097,12 +1103,6 @@
   </data>
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
-    <value>bsPayrollEarnAccounts</value>
-  </data>
-  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
@@ -1145,6 +1145,12 @@
   </data>
   <data name="&gt;&gt;PayGroupNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Name" xml:space="preserve">
+    <value>bsPayrollEarnAccounts</value>
+  </data>
+  <data name="&gt;&gt;bsPayrollEarnAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EarningEntryTv</value>

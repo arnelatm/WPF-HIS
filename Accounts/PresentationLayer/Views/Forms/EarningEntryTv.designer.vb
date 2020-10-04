@@ -60,7 +60,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -68,6 +67,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
@@ -474,12 +474,12 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle5
             Me.DataGridViewPayrollEarnAccounts.DisplayOnly = False
+            resources.ApplyResources(Me.DataGridViewPayrollEarnAccounts, "DataGridViewPayrollEarnAccounts")
             Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator1
             Me.DataGridViewPayrollEarnAccounts.EditingMode = False
             Me.DataGridViewPayrollEarnAccounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPayrollEarnAccounts.FirstRowDeletionEnabled = True
             Me.DataGridViewPayrollEarnAccounts.FirstRowInsertionEnabled = True
-            resources.ApplyResources(Me.DataGridViewPayrollEarnAccounts, "DataGridViewPayrollEarnAccounts")
             Me.DataGridViewPayrollEarnAccounts.Name = "DataGridViewPayrollEarnAccounts"
             Me.DataGridViewPayrollEarnAccounts.ReadOnly = True
             Me.DataGridViewPayrollEarnAccounts.SequenceColumn = "dgvSequence"
@@ -487,16 +487,13 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayrollEarnAccounts.StartTrackingChanges = False
             '
-            'bsPayrollEarnAccounts
-            '
-            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
-            '
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
             Me.dgvSequence.Name = "dgvSequence"
@@ -554,6 +551,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
             Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
             Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'bsPayrollEarnAccounts
+            '
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
             'EarningEntryTv
             '

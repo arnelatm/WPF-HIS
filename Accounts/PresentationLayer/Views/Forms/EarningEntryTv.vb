@@ -122,7 +122,7 @@ Namespace PresentationLayer.Views.Forms
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _payGroupsByCode = PresenterObj.GetList("PayGroup")
+            _payGroupsByCode = PresenterObj.GetListByCode("PayGroup")
         End Sub
 
         Private Sub BindPayrollEarnAccounts()
@@ -189,7 +189,6 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPayrollEarnAccounts.Columns
-                dgvSequence.DisplayOnly = True
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
