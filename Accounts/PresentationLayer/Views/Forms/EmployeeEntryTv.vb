@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
-        Private _phoneType As List(Of EmployeePhoneView)
+        Private _phoneTypes
         Private _countryTelCodes As List(Of CountryTelCodeView)
         'Private ReadOnly _dgvEarningsEa As EventAggregator
 
@@ -459,6 +459,7 @@ Namespace PresentationLayer.Views.Forms
             cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
             _deductionsByName = PresenterObj.GetListByCode("Deduction")
             _earningsByName = PresenterObj.GetListByCode("Earning")
+            _phoneTypes = PresenterObj.GetListByCode("PhoneType")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -542,7 +543,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewEarnings.Columns
                 dgvEarningIdNo.DataSource = _earningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
-                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.ValueMember = "Code"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
             End With
@@ -562,12 +563,7 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPhones.Columns
-                dgvPhoneTypeIdNo.DataSource = _employeePhones
-                dgvPhoneTypeIdNo.DisplayMember = "Name"
-                dgvPhoneTypeIdNo.ValueMember = "IdNo"
-                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPhoneTypeIdNo.DataSource = _employeePhones
+                dgvPhoneTypeIdNo.DataSource = _phoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
