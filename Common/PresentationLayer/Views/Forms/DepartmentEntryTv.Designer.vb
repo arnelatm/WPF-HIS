@@ -44,15 +44,15 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
         Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblDepartmentCode)

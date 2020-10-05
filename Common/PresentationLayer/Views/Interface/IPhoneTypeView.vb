@@ -1,6 +1,6 @@
 ﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views
+Namespace PresentationLayer.Views.Interface
 
     Public Interface IPhoneTypeView
         Inherits IView

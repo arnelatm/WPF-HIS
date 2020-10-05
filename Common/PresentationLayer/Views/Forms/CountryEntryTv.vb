@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -98,12 +99,12 @@ Namespace PresentationLayer.Views.Forms
         Public Property Flag32 As String Implements ICountryView.Flag32
         Public Property Flag128 As String Implements ICountryView.Flag128
 
-        Public Property PhoneCode As String Implements ICountryView.PhoneCode
+        Public Property CountryTelCode As String Implements ICountryView.CountryTelCode
             Get
-                Return TxtPhoneCode.Text
+                Return TxtCountryTelCode.Text
             End Get
             Set
-                TxtPhoneCode.Text = Value
+                TxtCountryTelCode.Text = Value
             End Set
         End Property
 
@@ -119,7 +120,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Nationality", txtNationality},
                 {"NationalityAra", txtNationalityAra},
                 {"Isoa3", TxtISOA3},
-                {"PhoneCode", TxtPhoneCode},
+                {"CountryTelCode", TxtCountryTelCode},
                 {"Flag32", TxtFlag32},
                 {"Flag128", TxtFlag128},
                 {"IsoN", TxtISON}

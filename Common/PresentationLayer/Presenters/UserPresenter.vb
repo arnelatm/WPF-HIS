@@ -1,6 +1,8 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views
+Imports AATM.Common.PresentationLayer.Views.Forms
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary

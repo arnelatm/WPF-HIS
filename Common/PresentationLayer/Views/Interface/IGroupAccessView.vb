@@ -1,4 +1,4 @@
-﻿Namespace PresentationLayer.Views
+﻿Namespace PresentationLayer.Views.Interface
 
     Public Interface IGroupAccessView
 

@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Country Implements IDaoAll(Of Country).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
+                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, CountryTelCode" &
                     "   FROM [Country]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "CountryName ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, PhoneCode" &
+                    " SELECT IdNo, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA2, ISOA3, ISON, CountryTelCode" &
                     "   FROM [Country] order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -48,7 +48,7 @@ Namespace DataLayer.AdoNet
                     "        ISOA2 = @ISOA2," &
                     "        ISOA3 = @ISOA3," &
                     "        ISON = @ISON," &
-                    "        PhoneCode = @PhoneCode" &
+                    "        CountryTelCode = @CountryTelCode" &
                     "  WHERE IdNo = @IdNo"
 
             Return _db.Update(sql, Take(country))
@@ -57,8 +57,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef country As Country) As Integer Implements IDaoAll(Of Country).AddRecord
             Dim sql As String =
                     " INSERT INTO [Country] " &
-                    " (CountryName,CountryNameAra,Nationality,NationalityAra,Flag32,Flag128,ISOA2,ISOA3,ISON,PhoneCode) " &
-                    " VALUES (@CountryName,@CountryNameAra,@Nationality,@NationalityAra,@Flag32,@Flag128,@ISOA2,@ISOA3,@ISON,@PhoneCode)"
+                    " (CountryName,CountryNameAra,Nationality,NationalityAra,Flag32,Flag128,ISOA2,ISOA3,ISON,CountryTelCode) " &
+                    " VALUES (@CountryName,@CountryNameAra,@Nationality,@NationalityAra,@Flag32,@Flag128,@ISOA2,@ISOA3,@ISON,@CountryTelCode)"
             Return _db.Insert(sql, Take(country))
         End Function
 
@@ -75,7 +75,7 @@ Namespace DataLayer.AdoNet
             .ISOA2 = Extensions.AsString(reader("ISOA2")),
             .ISOA3 = Extensions.AsString(reader("ISOA3")),
             .ISON = Extensions.AsString(reader("ISON")),
-            .PhoneCode = Extensions.AsString(reader("PhoneCode"))}
+            .CountryTelCode = Extensions.AsString(reader("CountryTelCode"))}
 
         Private Function Take(country As Country) As Object()
             Return New Object() {
@@ -89,7 +89,7 @@ Namespace DataLayer.AdoNet
                                     "@ISOA2", country.ISOA2,
                                     "@ISOA3", country.ISOA3,
                                     "@ISON", country.ISON,
-                                    "@PhoneCode", country.PhoneCode}
+                                    "@CountryTelCode", country.CountryTelCode}
         End Function
 
     End Class

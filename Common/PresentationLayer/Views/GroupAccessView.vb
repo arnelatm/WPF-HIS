@@ -1,4 +1,7 @@
-﻿Namespace PresentationLayer.Views
+﻿Imports AATM.Common.PresentationLayer.Views.Forms
+Imports AATM.Common.PresentationLayer.Views.Interface
+
+Namespace PresentationLayer.Views
 
     Public Class GroupAccessView
         Implements IGroupAccessView

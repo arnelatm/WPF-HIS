@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\Branch.vb" />
+    <Compile Include="BusinessLayer\CountyTelCode.vb" />
     <Compile Include="BusinessLayer\RevCostCenter.vb" />
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\DefaultFieldValue.vb" />
@@ -90,6 +91,7 @@
     <Compile Include="BusinessLayer\RevenueGroup.vb" />
     <Compile Include="BusinessLayer\TranslatedCaption.vb" />
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
+    <Compile Include="DataLayer\AdoNet\CountryTelCode.vb" />
     <Compile Include="DataLayer\AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
@@ -114,6 +116,10 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Models\CountryTelCodeModel.vb" />
+    <Compile Include="PresentationLayer\Views\CountryTelCodeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IInternationalPhoneView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ICountryTelCodeView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>
@@ -266,22 +272,22 @@
     <Compile Include="PresentationLayer\Presenters\SecurityPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
     <Compile Include="PresentationLayer\Views\GroupAccessView.vb" />
-    <Compile Include="PresentationLayer\Views\IDefaultFieldValueView.vb" />
-    <Compile Include="PresentationLayer\Views\IBranchView.vb" />
-    <Compile Include="PresentationLayer\Views\IRevCostCenterView.vb" />
-    <Compile Include="PresentationLayer\Views\ICountryView.vb" />
-    <Compile Include="PresentationLayer\Views\IDepartmentView.vb" />
-    <Compile Include="PresentationLayer\Views\IGroupAccessView.vb" />
-    <Compile Include="PresentationLayer\Views\IOriginalCaptionsView.vb" />
-    <Compile Include="PresentationLayer\Views\IOriginalMessagesView.vb" />
-    <Compile Include="PresentationLayer\Views\IPhoneTypeView.vb" />
-    <Compile Include="PresentationLayer\Views\IReligionView.vb" />
-    <Compile Include="PresentationLayer\Views\IRevenueGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\ISecurityGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\ISecurityObjectView.vb" />
-    <Compile Include="PresentationLayer\Views\ITranslatedCaptionView.vb" />
-    <Compile Include="PresentationLayer\Views\ITranslatedMessagesView.vb" />
-    <Compile Include="PresentationLayer\Views\IUserView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IDefaultFieldValueView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IBranchView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IRevCostCenterView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ICountryView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IDepartmentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IGroupAccessView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IOriginalCaptionsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IOriginalMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IPhoneTypeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IReligionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IRevenueGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ISecurityGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ISecurityObjectView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ITranslatedCaptionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\ITranslatedMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\Interface\IUserView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
   </ItemGroup>
