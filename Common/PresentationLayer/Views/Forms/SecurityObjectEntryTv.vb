@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms

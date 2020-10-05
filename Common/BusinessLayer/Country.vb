@@ -16,7 +16,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateLength("ISOA2", 2, 2))
                 AddRule(New ValidateLength("ISOA3", 3, 3))
                 AddRule(New ValidateRegex("ISON", "\d{3}"))
-                AddRule(New ValidateRegex("PhoneCode", "\d{1,5}"))
+                AddRule(New ValidateRegex("CountryTelCode", "\d{1,5}"))
             End If
         End Sub
 
@@ -30,7 +30,7 @@ Namespace BusinessLayer
         Public Property Flag128 As String
         Public Property ISOA3 As String
         Public Property ISON As String
-        Public Property PhoneCode As String
+        Public Property CountryTelCode As String
     End Class
 
 End Namespace

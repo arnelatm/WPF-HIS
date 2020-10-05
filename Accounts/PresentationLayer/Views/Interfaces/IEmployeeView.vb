@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 

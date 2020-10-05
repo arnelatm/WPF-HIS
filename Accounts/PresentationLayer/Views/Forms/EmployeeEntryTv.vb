@@ -15,8 +15,9 @@ Namespace PresentationLayer.Views.Forms
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
+        Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneType As List(Of EmployeePhoneView)
-        Private _internationalCodes As List(Of Countries)
+        Private _countryTelCodes As List(Of CountryTelCodeView)
         'Private ReadOnly _dgvEarningsEa As EventAggregator
 
         Public Sub New()

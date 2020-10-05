@@ -11,6 +11,15 @@
 
 End Interface
 
+Public Interface IDaoRead(Of TBiz)
+
+    ' gets a specific record data
+    Function GetRecordById(idNo) As TBiz
+
+    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoAll(Of TBiz)
     Inherits IDao(Of TBiz)
 

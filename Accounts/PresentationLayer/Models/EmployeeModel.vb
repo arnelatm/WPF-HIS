@@ -46,7 +46,7 @@ Namespace PresentationLayer.Models
         Public Property ZipCode As String
         Public Property EmployeeDeductions As List(Of EmployeeDeductionModel)
         Public Property EmployeeEarnings As List(Of EmployeeEarningModel)
-        Public Property EmployeePhones As List(Of EmployeePhone)
+        Public Property EmployeePhones As List(Of EmployeePhoneModel)
     End Class
 
 End Namespace

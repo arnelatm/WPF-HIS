@@ -18,7 +18,7 @@ Namespace BusinessLayer
         Public Property AreaCode As String
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
-        Public Property InternationalCode As String
+        Public Property CountryTelCode As String
         Public Property PhoneTypeIdNo As Int16
         Public Property PhoneNumber As String
         Public Property Sequence As Int16

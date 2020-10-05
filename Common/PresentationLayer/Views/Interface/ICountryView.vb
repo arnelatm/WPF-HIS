@@ -1,6 +1,6 @@
 ﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views
+Namespace PresentationLayer.Views.Interface
 
     Public Interface ICountryView
         Inherits IView
@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views
         Property Ison As String
         Property Flag32 As String
         Property Flag128 As String
-        Property PhoneCode As String
+        Property CountryTelCode As String
     End Interface
 
 End Namespace

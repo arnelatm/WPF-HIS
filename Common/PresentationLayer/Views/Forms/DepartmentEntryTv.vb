@@ -1,4 +1,5 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -30,18 +31,18 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IDepartmentView.IdNo
+        Public Property IdNo As Int16 Implements IDepartmentView.IdNo
             Get
-                Return NumParser(Of Int32)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property ParentIdNo As Int32? Implements IDepartmentView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements IDepartmentView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Integer?)
+                Return CType(cacParentIdNo.GetValue(), Int16?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
