@@ -24,7 +24,8 @@ FROM [DBO].PayrollDeductAccount A WHERE A.DeductionIdNo = @GroupIdNo and NOT EXI
 UPDATE A
 SET a.AccountIdNo = B.AccountIdNo,
 	a.DeductionIdNo = @GroupIdNo,
-	a.PayGroupIdNo = B.PayGroupIdNo	
+	a.PayGroupIdNo = B.PayGroupIdNo,
+	a.Sequence = b.Sequence
 from [dbo].PayrollDeductAccount A INNER JOIN @MParam As B
 	ON A.IdNo = B.IdNo
 

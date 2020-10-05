@@ -1,9 +1,10 @@
 ﻿CREATE VIEW dbo.EmployeePhone_View
 AS
-SELECT        dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, dbo.EmployeePhone.PhoneTypeIdNo, dbo.EmployeePhone.InternationalCode, dbo.EmployeePhone.AreaCode, dbo.EmployeePhone.PhoneNumber, 
-                         dbo.Country.ISOA2, dbo.Country.PhoneCode, dbo.Country.CountryName, dbo.Country.CountryNameAra
+SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.PhoneType.PhoneTypeNameAra, dbo.EmployeePhone.CountryTelCode, dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, 
+                         dbo.EmployeePhone.PhoneTypeIdNo, dbo.EmployeePhone.AreaCode, dbo.EmployeePhone.PhoneNumber, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.EmployeePhone.Sequence
 FROM            dbo.EmployeePhone INNER JOIN
-                         dbo.Country ON dbo.EmployeePhone.IdNo = dbo.Country.IDNo
+                         dbo.Employee ON dbo.EmployeePhone.EmployeeIdNo = dbo.Employee.IdNo INNER JOIN
+                         dbo.PhoneType ON dbo.EmployeePhone.PhoneTypeIdNo = dbo.PhoneType.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
 
@@ -80,22 +81,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
+         Begin Table = "Employee"
+            Begin Extent = 
+               Top = 0
+               Left = 334
+               Bottom = 292
+               Right = 532
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "PhoneType"
+            Begin Extent = 
+               Top = 35
+               Left = 1031
+               Bottom = 263
+               Right = 1229
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
          Begin Table = "EmployeePhone"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 250
-               Right = 222
-            End
-            DisplayFlags = 280
-            TopColumn = 2
-         End
-         Begin Table = "Country"
-            Begin Extent = 
-               Top = 6
-               Left = 260
-               Bottom = 277
-               Right = 442
+               Bottom = 304
+               Right = 213
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -127,4 +138,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
+
+
 

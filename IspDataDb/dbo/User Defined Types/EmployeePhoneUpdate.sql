@@ -4,8 +4,13 @@
     [IDNo]              INT          NOT NULL,
     [InternationalCode] VARCHAR (3)  NOT NULL,
     [PhoneIdNo]         SMALLINT     NOT NULL,
-    [PhoneNumber]       VARCHAR (14) NOT NULL,
+    [CountryTelCode]    VARCHAR (14) NOT NULL,
     [PhoneTypeIdNo]     SMALLINT     NOT NULL,
+    [PhoneNumber]       VARCHAR (14) NOT NULL,
     [Sequence]          TINYINT      NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
+
+
+
+
 
