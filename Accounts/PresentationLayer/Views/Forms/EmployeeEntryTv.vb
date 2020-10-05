@@ -457,8 +457,8 @@ Namespace PresentationLayer.Views.Forms
             cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
             cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
-            _deductionsByName = PresenterObj.GetRegularDeductionListByName()
-            _earningsByName = PresenterObj.GetRegularEarningListByName()
+            _deductionsByName = PresenterObj.GetListByCode("Deduction")
+            _earningsByName = PresenterObj.GetListByCode("Earning")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -507,17 +507,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindEmployeeDeduction()
             SuspendLayout()
             bsDeductions.DataSource = Nothing
-            DataGridViewDeductions.Refresh()
+            DataGridVewDeductions.Refresh()
             bsDeductions.DataSource = EmployeeDeductions
             bsDeductions.AllowNew = True
-            With DataGridViewDeductions
+            With DataGridVewDeductions
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsDeductions
                 .Refresh()
             End With
-            With DataGridViewDeductions.Columns
-                dgvDeductionSequence.DisplayOnly = True
+            With DataGridVewDeductions.Columns
                 dgvDeductionIdNo.DataSource = _deductionsByName
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
@@ -541,7 +540,6 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewEarnings.Columns
-                dgvEarningSequence.DisplayOnly = True
                 dgvEarningIdNo.DataSource = _earningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
