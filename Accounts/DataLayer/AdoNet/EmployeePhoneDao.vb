@@ -47,7 +47,7 @@ Namespace DataLayer.AdoNet
             .AreaCode = Extensions.AsString(reader("AreaCode")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .CountryTelIdNo = Extensions.AsId(Of Int32)(reader("CountryTelIdNo")),
+            .CountryTelIdNo = Extensions.AsId(Of Int16)(reader("CountryTelIdNo")),
             .PhoneNumber = Extensions.AsString(reader("PhoneNumber")),
             .PhoneTypeIdNo = Extensions.AsId(Of Int16)(reader("PhoneTypeIdNo")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))

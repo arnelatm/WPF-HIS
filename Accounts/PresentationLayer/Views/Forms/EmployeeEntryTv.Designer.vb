@@ -152,9 +152,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.dgvPhoneSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvSequencePhone = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1550,7 +1550,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPhones.AutoGenerateColumns = False
             Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvPhoneSequence, Me.dgvCountryTelIdNo, Me.dgvPhoneTypeIdNo, Me.dgvAreaCode, Me.dgvPhoneNumber, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePhone, Me.dgvPhoneTypeIdNo, Me.dgvCountryTelIdNo, Me.dgvAreaCode, Me.dgvPhoneNumber, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPhones.DataInGridChanged = False
             Me.DataGridViewPhones.DataSource = Me.bsPhones
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1570,7 +1570,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 219)
             Me.DataGridViewPhones.Name = "DataGridViewPhones"
             Me.DataGridViewPhones.ReadOnly = True
-            Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPhones.SequenceColumn = "dgvSequencePhone"
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPhones.Size = New System.Drawing.Size(686, 105)
@@ -2265,19 +2265,28 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Size = New System.Drawing.Size(829, 82)
             Me.CFlowLayout4.TabIndex = 6
             '
-            'dgvPhoneSequence
+            'dgvSequencePhone
             '
-            Me.dgvPhoneSequence.DataPropertyName = "Sequence"
+            Me.dgvSequencePhone.DataPropertyName = "Sequence"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvPhoneSequence.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvPhoneSequence.EditingMode = False
-            Me.dgvPhoneSequence.HeaderText = "Seq"
-            Me.dgvPhoneSequence.MinimumWidth = 40
-            Me.dgvPhoneSequence.Name = "dgvPhoneSequence"
-            Me.dgvPhoneSequence.ReadOnly = True
-            Me.dgvPhoneSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPhoneSequence.Width = 40
+            Me.dgvSequencePhone.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequencePhone.EditingMode = False
+            Me.dgvSequencePhone.HeaderText = "Seq"
+            Me.dgvSequencePhone.MinimumWidth = 40
+            Me.dgvSequencePhone.Name = "dgvSequencePhone"
+            Me.dgvSequencePhone.ReadOnly = True
+            Me.dgvSequencePhone.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequencePhone.Width = 40
+            '
+            'dgvPhoneTypeIdNo
+            '
+            Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
+            Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type"
+            Me.dgvPhoneTypeIdNo.MinimumWidth = 120
+            Me.dgvPhoneTypeIdNo.Name = "dgvPhoneTypeIdNo"
+            Me.dgvPhoneTypeIdNo.ReadOnly = True
+            Me.dgvPhoneTypeIdNo.Width = 120
             '
             'dgvCountryTelIdNo
             '
@@ -2289,18 +2298,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvCountryTelIdNo.ReadOnly = True
             Me.dgvCountryTelIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvCountryTelIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvPhoneTypeIdNo
-            '
-            Me.dgvPhoneTypeIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
-            Me.dgvPhoneTypeIdNo.FillWeight = 30.0!
-            Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type "
-            Me.dgvPhoneTypeIdNo.MinimumWidth = 200
-            Me.dgvPhoneTypeIdNo.Name = "dgvPhoneTypeIdNo"
-            Me.dgvPhoneTypeIdNo.ReadOnly = True
-            Me.dgvPhoneTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPhoneTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             '
             'dgvAreaCode
             '
@@ -2520,9 +2517,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
-        Friend WithEvents dgvPhoneSequence As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvSequencePhone As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
         Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents dgvPhoneNumber As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
