@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IEmployeePhoneView
         Inherits IView
         Property AreaCode As String
-        Property CountryTelCode As String
+        Property CountryTelIdNo As Int16
         Property PhoneNumber As String
         Property PhoneTypeIdNo As Int16
         Property EmployeeIdNo As Int32

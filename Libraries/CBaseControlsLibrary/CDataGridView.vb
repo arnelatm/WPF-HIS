@@ -82,8 +82,10 @@ Public Class CDataGridView
     Private Sub dataGridView_CellEnter(ByVal sender As Object,
                                         ByVal e As DataGridViewCellEventArgs) _
         Handles Me.CellEnter
-        If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
-            SendKeys.Send("{TAB}")
+        If Columns(SequenceColumn) IsNot Nothing Then
+            If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
+                SendKeys.Send("{TAB}")
+            End If
         End If
     End Sub
 
@@ -173,27 +175,41 @@ Public Class CDataGridView
     Public Sub ReSequenceDgvAfterDelete()
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
-        For Each value In myBindingSource
-            Dim sequence = CallByName(value, SequenceFieldName, CallType.Get)
-            If sequence > i + 1 Then
-                CallByName(value, SequenceFieldName, CallType.Set, sequence - 1)
+        Try
+            If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+                For Each record In myBindingSource
+                    Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
+                    If sequence > i + 1 Then
+                        CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
+                    End If
+                Next
             End If
-        Next
+        Catch
+            ' missing member
+        End Try
+
     End Sub
 
     Public Sub ReSequenceDgvAfterInsert()
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
-        For Each o In myBindingSource
-            If o IsNot Nothing Then
-                Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
-                If sequence = 0 Then
-                    CallByName(o, SequenceFieldName, CallType.Set, i)
-                ElseIf sequence >= i Then
-                    CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
-                End If
+        Try
+            If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+                For Each o In myBindingSource
+                    If o IsNot Nothing Then
+                        Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
+                        If sequence = 0 Then
+                            CallByName(o, SequenceFieldName, CallType.Set, i)
+                        ElseIf sequence >= i Then
+                            CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
+                        End If
+                    End If
+                Next
             End If
-        Next
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
@@ -523,11 +539,6 @@ Public Class CDataGridView
     'Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
     '    If Me.CurrentCell.RowIndex = RowCount Then 'Or Me.CurrentCell.RowIndex = LastEditableColumn Then
     '        Me.Rows.Add()
-    '        'SendKeys.Send("{home}")
-    '        'SendKeys.Send("{down}")
-    '    Else
-    '        'SendKeys.Send("{up}")
-    '        'SendKeys.Send("{right}")
     '    End If
     'End Sub
 

@@ -20,7 +20,7 @@ FROM [DBO].EmployeePhone A WHERE A.EmployeeIdNo = @GroupIdNo and NOT EXISTS (SEL
 UPDATE a 
 SET a.AreaCode = B.AreaCode,
 	a.EmployeeIdNo = @GroupIdNo,
-	a.CountryTelCode = B.CountryTelCode,
+	a.CountryTelIdNo = B.CountryTelIdNo,
 	a.PhoneTypeIdNo = B.PhoneTypeIdNo,
 	a.PhoneNumber = B.PhoneNumber,
 	a.[Sequence] = B.[Sequence]

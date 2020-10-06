@@ -10,14 +10,14 @@ Namespace PresentationLayer.Views.Forms
     Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private ReadOnly _nfi As NumberFormatInfo
+        Private _countryTelIdNos
         Private _deductionsByName
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneTypes
-        Private _countryTelCodes As List(Of CountryTelCodeView)
+        Private ReadOnly _nfi As NumberFormatInfo
         'Private ReadOnly _dgvEarningsEa As EventAggregator
 
         Public Sub New()
@@ -460,6 +460,7 @@ Namespace PresentationLayer.Views.Forms
             _deductionsByName = PresenterObj.GetListByCode("Deduction")
             _earningsByName = PresenterObj.GetListByCode("Earning")
             _phoneTypes = PresenterObj.GetListByCode("PhoneType")
+            _countryTelIdNos = PresenterObj.GetCountryTelIdNoList()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -543,7 +544,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewEarnings.Columns
                 dgvEarningIdNo.DataSource = _earningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
-                dgvEarningIdNo.ValueMember = "Code"
+                dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
             End With
@@ -568,6 +569,13 @@ Namespace PresentationLayer.Views.Forms
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPhoneTypeIdNo.AutoComplete = True
+                dgvCountryTelIdNo.DataSource = _countryTelIdNos
+                dgvCountryTelIdNo.DisplayMember = "Name"
+                dgvCountryTelIdNo.ValueMember = "IdNo"
+                dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvCountryTelIdNo.AutoComplete = True
             End With
             ResumeLayout()
         End Sub

@@ -11,14 +11,14 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("PhoneIdNo"))
+                AddRule(New ValidateRequired("PhoneNumber"))
             End If
         End Sub
 
         Public Property AreaCode As String
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
-        Public Property CountryTelCode As String
+        Public Property CountryTelIdNo As Int16
         Public Property PhoneTypeIdNo As Int16
         Public Property PhoneNumber As String
         Public Property Sequence As Int16
