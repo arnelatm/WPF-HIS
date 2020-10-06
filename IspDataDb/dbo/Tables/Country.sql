@@ -9,13 +9,15 @@
     [Flag128]        VARCHAR (256)  NULL,
     [ISOA3]          VARCHAR (3)    NULL,
     [ISON]           SMALLINT       NULL,
-    [CountryTelCode] VARCHAR (5)    NULL,
+    [CountryTelCode] VARCHAR (7)    NULL,
     [DateTimeStamp]  ROWVERSION     NULL,
     CONSTRAINT [PK_CountryIDNo] PRIMARY KEY CLUSTERED ([IDNo] ASC),
     CONSTRAINT [IX_ISOA2] UNIQUE NONCLUSTERED ([ISOA2] ASC),
     CONSTRAINT [IX_NameAra] UNIQUE NONCLUSTERED ([IDNo] ASC),
     CONSTRAINT [IX_NameEng] UNIQUE NONCLUSTERED ([CountryName] ASC)
 );
+
+
 
 
 

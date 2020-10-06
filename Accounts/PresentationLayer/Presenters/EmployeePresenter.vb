@@ -1,9 +1,7 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
-Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -14,9 +12,12 @@ Namespace PresentationLayer.Presenters
         Protected DtEarnUpdateTable As New DataTable
         Protected DtDeductInsertTable As New DataTable
         Protected DtDeductUpdateTable As New DataTable
+        Protected DtPhoneInsertTable As New DataTable
+        Protected DtPhoneUpdateTable As New DataTable
 
         Private ReadOnly _employeeDeductionModel As New ModelAccounts("EmployeeDeduction")
         Private ReadOnly _employeeEarningModel As New ModelAccounts("EmployeeEarning")
+        Private ReadOnly _employeePhoneModel As New ModelAccounts("EmployeePhone")
 
         Public Sub New(view As IEmployeeView)
             MyBase.New(view)
@@ -46,6 +47,13 @@ Namespace PresentationLayer.Presenters
             DtDeductInsertTable.Columns.Add("EmployeeIdNo", GetType(Int32))
             DtDeductInsertTable.Columns.Add("Sequence", GetType(Int16))
 
+            DtPhoneInsertTable.Columns.Add("AreaCode", GetType(String))
+            DtPhoneInsertTable.Columns.Add("CountryTelIdNo", GetType(Int16))
+            DtPhoneInsertTable.Columns.Add("EmployeeIdNo", GetType(Int32))
+            DtPhoneInsertTable.Columns.Add("PhoneNumber", GetType(String))
+            DtPhoneInsertTable.Columns.Add("PhoneTypeIdNo", GetType(Int16))
+            DtPhoneInsertTable.Columns.Add("Sequence", GetType(Int16))
+
             DtEarnUpdateTable.Columns.Add("Amount", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
@@ -57,6 +65,14 @@ Namespace PresentationLayer.Presenters
             DtDeductUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
             DtDeductUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtDeductUpdateTable.Columns.Add("Sequence", GetType(Int16))
+
+            DtPhoneUpdateTable.Columns.Add("AreaCode", GetType(String))
+            DtPhoneUpdateTable.Columns.Add("CountryTelIdNo", GetType(Int16))
+            DtPhoneUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
+            DtPhoneUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtPhoneUpdateTable.Columns.Add("PhoneNumber", GetType(String))
+            DtPhoneUpdateTable.Columns.Add("PhoneTypeIdNo", GetType(Int16))
+            DtPhoneUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Function
 
@@ -72,10 +88,15 @@ Namespace PresentationLayer.Presenters
             Return _employeeEarningModel.GetRecordsWithIdNo(Of EmployeeEarningModel)(idNo, "Sequence")
         End Function
 
+        Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
+            Return _employeePhoneModel.GetRecordsWithIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
+        End Function
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
                 ViewToDataTables(View.EmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
+                ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
             End If
         End Sub
 
@@ -89,6 +110,14 @@ Namespace PresentationLayer.Presenters
             workRow("Amount") = item.Amount
             workRow("DeductionIdNo") = item.DeductionIdNo
             workRow("EmployeeIdNo") = idNo
+        End Sub
+
+        Public Sub PhoneFillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
+            workRow("AreaCode") = item.AreaCode
+            workRow("CountryTelIdNo") = item.CountryTelIdNo
+            workRow("EmployeeIdNo") = idNo
+            workRow("PhoneNumber") = item.PhoneNumber
+            workRow("PhoneTypeIdNo") = item.PhoneTypeIdNo
         End Sub
 
         Public Function DeductionFilter(ByVal obj As Object) As Boolean
@@ -105,12 +134,19 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        Private Sub FillDataRow(item As Object, idNo As Integer, workRow As DataRow, nRowCount As Short)
-            workRow("Amount") = CallByName(item, "Amount", CallType.Get)
-            workRow("EarningIdNo") = CallByName(item, "EarningIdNo", CallType.Get)
-            workRow("EmployeeIdNo") = idNo
-            workRow("Sequence") = nRowCount
-        End Sub
+        Public Function PhoneFilter(ByVal obj As EmployeePhoneView) As Boolean
+            If obj.PhoneNumber <> "" Then
+                Return True
+            End If
+            Return False
+        End Function
+
+        'Private Sub FillDataRow(item As Object, idNo As Integer, workRow As DataRow, nRowCount As Short)
+        '    workRow("Amount") = CallByName(item, "Amount", CallType.Get)
+        '    workRow("EarningIdNo") = CallByName(item, "EarningIdNo", CallType.Get)
+        '    workRow("EmployeeIdNo") = idNo
+        '    workRow("Sequence") = nRowCount
+        'End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
@@ -118,22 +154,26 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeeEarningModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EmployeeIdNo")
             End If
+            If retVal >= 0 Then
+                retVal = UpdateChildData(_employeePhoneModel, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
+            End If
         End Sub
 
-        Function Func1(item As EmployeeDeductionView)
-            Dim workRow As DataRow
-            If item.IdNo <= 0 Then
-                workRow = DtDeductInsertTable.NewRow()
-            Else
-                workRow = DtDeductUpdateTable.NewRow()
-                workRow("IdNo") = item.IdNo
-            End If
-            workRow("Amount") = item.Amount
-            workRow("DeductionIdNo") = item.DeductionIdNo
-            workRow("EmployeeIdNo") = View.IdNo
-            workRow("Sequence") = 1 ' nRowCount
-            Return workRow
-        End Function
+        'Function Func1(item As EmployeeDeductionView)
+        '    Dim workRow As DataRow
+        '    If item.IdNo <= 0 Then
+        '        workRow = DtDeductInsertTable.NewRow()
+        '    Else
+        '        workRow = DtDeductUpdateTable.NewRow()
+        '        workRow("IdNo") = item.IdNo
+        '    End If
+        '    workRow("Amount") = item.Amount
+        '    workRow("DeductionIdNo") = item.DeductionIdNo
+        '    workRow("EmployeeIdNo") = View.IdNo
+        '    workRow("Sequence") = 1 ' nRowCount
+        '    Return workRow
+        'End Function
 
     End Class
+
 End Namespace

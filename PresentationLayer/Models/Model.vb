@@ -251,7 +251,7 @@ Public Class Model
             Dim tData As New ClassesLibrary.LookupData
             tData.IdNo = data(i * 3 - 3)
             tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
-            tData.Code = data(i * 3 - 1)
+            tData.Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
             tlData.Add(tData)
         Next
         Return tlData

@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\Branch.vb" />
-    <Compile Include="BusinessLayer\CountyTelCode.vb" />
     <Compile Include="BusinessLayer\RevCostCenter.vb" />
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\DefaultFieldValue.vb" />
@@ -91,7 +90,6 @@
     <Compile Include="BusinessLayer\RevenueGroup.vb" />
     <Compile Include="BusinessLayer\TranslatedCaption.vb" />
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
-    <Compile Include="DataLayer\AdoNet\CountryTelCode.vb" />
     <Compile Include="DataLayer\AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
@@ -116,10 +114,6 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="MyEnums.vb" />
-    <Compile Include="PresentationLayer\Models\CountryTelCodeModel.vb" />
-    <Compile Include="PresentationLayer\Views\CountryTelCodeView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IInternationalPhoneView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ICountryTelCodeView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>
