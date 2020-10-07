@@ -1,12 +1,17 @@
 ﻿CREATE TABLE [dbo].[EmployeePhone] (
-    [IdNo]           INT          NULL,
-    [EmployeeIdNo]   INT          NULL,
+    [IdNo]           INT          IDENTITY (1, 1) NOT NULL,
+    [EmployeeIdNo]   INT          NOT NULL,
     [PhoneTypeIdNo]  SMALLINT     NULL,
-    [CountryTelCode] VARCHAR (5)  NULL,
+    [CountryTelIdNo] SMALLINT     NULL,
     [AreaCode]       VARCHAR (5)  NULL,
-    [PhoneNumber]    VARCHAR (14) NULL,
-    [Sequence]       TINYINT      NULL
+    [PhoneNumber]    VARCHAR (14) NOT NULL,
+    [Sequence]       TINYINT      NOT NULL,
+    CONSTRAINT [PK_EmployeePhone] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
+
+
 
 
 

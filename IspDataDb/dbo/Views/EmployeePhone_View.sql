@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.EmployeePhone_View
 AS
-SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.PhoneType.PhoneTypeNameAra, dbo.EmployeePhone.CountryTelCode, dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, 
+SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.PhoneType.PhoneTypeNameAra, dbo.EmployeePhone.CountryTelIdNo, dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, 
                          dbo.EmployeePhone.PhoneTypeIdNo, dbo.EmployeePhone.AreaCode, dbo.EmployeePhone.PhoneNumber, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.EmployeePhone.Sequence
 FROM            dbo.EmployeePhone INNER JOIN
                          dbo.Employee ON dbo.EmployeePhone.EmployeeIdNo = dbo.Employee.IdNo INNER JOIN

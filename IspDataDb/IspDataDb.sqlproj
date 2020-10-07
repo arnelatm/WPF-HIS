@@ -305,8 +305,6 @@
     <Build Include="dbo\Views\CkdJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ARJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ApJournalTransaction_View_1.sql" />
-    <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemUpdatex.sql" />
-    <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemInsertx.sql" />
     <Build Include="dbo\User Defined Types\DistributionSchemeItemUpdatex.sql" />
     <Build Include="dbo\User Defined Types\DistributionSchemeItemMergex.sql" />
     <Build Include="dbo\User Defined Types\DistributionSchemeItemInsertx.sql" />

@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CountryEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,35 +21,35 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCountryName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCountryName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCountryNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCountryNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.LblNationality = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNationality = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblNationalityAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNationalityAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblISOA3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtISOA3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.LblISON = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtISON = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.LblCountryTelCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtCountryTelCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.LblFlag32 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtFlag32 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.LblFlag128 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtFlag128 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.SuspendLayout
+            Me.components = New System.ComponentModel.Container()
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCountryName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCountryName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCountryNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCountryNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.LblNationality = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNationality = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblNationalityAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNationalityAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblISOA3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtISOA3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.LblISON = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtISON = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.LblCountryTelCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtCountryTelCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.LblFlag32 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtFlag32 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.LblFlag128 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtFlag128 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.SuspendLayout()
             '
             'TreeViewTableName
             '
@@ -411,7 +411,7 @@ Namespace PresentationLayer.Views.Forms
             Me.LblCountryTelCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.LblCountryTelCode.Location = New System.Drawing.Point(11, 211)
             Me.LblCountryTelCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblCountryTelCode.Name = "LblCountryTelCode"
+            Me.LblCountryTelCode.Name = "LblCountryTelIdNo"
             Me.LblCountryTelCode.Size = New System.Drawing.Size(184, 23)
             Me.LblCountryTelCode.TabIndex = 169
             Me.LblCountryTelCode.Text = "International Phone Code"
@@ -433,7 +433,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtCountryTelCode.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtCountryTelCode.MaximumValue = Nothing
             Me.TxtCountryTelCode.MinimumValue = Nothing
-            Me.TxtCountryTelCode.Name = "TxtCountryTelCode"
+            Me.TxtCountryTelCode.Name = "TxtCountryTelIdNo"
             Me.TxtCountryTelCode.OldValue = Nothing
             Me.TxtCountryTelCode.ReadOnly = True
             Me.TxtCountryTelCode.Size = New System.Drawing.Size(62, 23)
@@ -518,16 +518,16 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(738, 354)
             Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "CountryEntryTv"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "CountryEntryTv"
+            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
@@ -553,4 +553,4 @@ End Sub
         Friend WithEvents TxtFlag32 As CTextBox
         Friend WithEvents TxtCountryTelCode As CTextBox
     End Class
-End NameSpace
+End Namespace
