@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class EmployeeEntryTest
+    Partial Class EmployeeEntryTvTest
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -22,22 +22,25 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTest))
-            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTvTest))
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -73,30 +76,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.groupBoxContactInfo = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblPhone1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPhone1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPhone2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPhone2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtEmail = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.groupBoxAddress = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-            Me.floAddress = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtStreet = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblDistrict = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDistrict = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblTownCity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtTownCity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblProvinceState = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtProvinceState = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPoBox = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.EmployeeTabControl = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpPersonal = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -105,14 +84,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.tbpEmployment = New System.Windows.Forms.TabPage()
             Me.CFlowLayout5 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -132,6 +103,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEarnings = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout7 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridVewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -142,35 +122,61 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.tbpPhones = New System.Windows.Forms.TabPage()
+            Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.floContactInformation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPoBox = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtProvinceState = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblProvinceState = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTownCity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblTownCity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDistrict = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDistrict = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtStreet = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEmail = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.DataGridViewPhoneDisplay = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.FullPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.FullPhoneAra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.AreaCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.FullPhoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.FullPhoneAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CountryTelIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PhoneNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PhoneTypeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.SequenceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floMainDisplay.SuspendLayout()
             Me.CFlowLayout6.SuspendLayout()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.groupBoxContactInfo.SuspendLayout()
-            Me.CFlowLayout1.SuspendLayout()
-            Me.groupBoxAddress.SuspendLayout()
-            Me.floAddress.SuspendLayout()
             Me.EmployeeTabControl.SuspendLayout()
             Me.tbpPersonal.SuspendLayout()
             Me.CFlowLayout3.SuspendLayout()
-            CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpContact.SuspendLayout()
             Me.tbpEmployment.SuspendLayout()
             Me.CFlowLayout5.SuspendLayout()
@@ -179,8 +185,14 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout7.SuspendLayout()
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridVewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.tbpPhones.SuspendLayout()
+            CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.CFlowLayout4.SuspendLayout()
+            Me.floContactInformation.SuspendLayout()
+            Me.TableLayoutPanel1.SuspendLayout()
+            CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -551,7 +563,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateType.EditingMode = False
             Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 183)
+            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
             Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateType.Name = "lblPayRateType"
             Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
@@ -571,7 +583,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
             Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 183)
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 182)
             Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayRateAmount.MaximumValue = Nothing
             Me.txtPayRateAmount.MinimumValue = Nothing
@@ -589,7 +601,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateAmount.EditingMode = False
             Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 207)
             Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateAmount.Name = "lblPayRateAmount"
             Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
@@ -615,7 +627,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 208)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 207)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -938,441 +950,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacReligionIdNo.ValueIsNumeric = False
             Me.cacReligionIdNo.ValueMember = "IdNo"
             '
-            'groupBoxContactInfo
-            '
-            Me.groupBoxContactInfo.AutoSize = True
-            Me.groupBoxContactInfo.BackColor = System.Drawing.Color.Transparent
-            Me.groupBoxContactInfo.Controls.Add(Me.CFlowLayout1)
-            Me.groupBoxContactInfo.DisplayOnly = True
-            Me.groupBoxContactInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.groupBoxContactInfo.Location = New System.Drawing.Point(6, 15)
-            Me.groupBoxContactInfo.Name = "groupBoxContactInfo"
-            Me.groupBoxContactInfo.Size = New System.Drawing.Size(800, 104)
-            Me.groupBoxContactInfo.TabIndex = 5
-            Me.groupBoxContactInfo.TabStop = False
-            Me.groupBoxContactInfo.Text = "Contact Information:"
-            '
-            'CFlowLayout1
-            '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.lblPhone1)
-            Me.CFlowLayout1.Controls.Add(Me.txtPhone1)
-            Me.CFlowLayout1.Controls.Add(Me.lblPhone2)
-            Me.CFlowLayout1.Controls.Add(Me.txtPhone2)
-            Me.CFlowLayout1.Controls.Add(Me.lblEmail)
-            Me.CFlowLayout1.Controls.Add(Me.txtEmail)
-            Me.CFlowLayout1.Location = New System.Drawing.Point(6, 19)
-            Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(788, 63)
-            Me.CFlowLayout1.TabIndex = 4
-            '
-            'lblPhone1
-            '
-            Me.lblPhone1.DisplayOnly = True
-            Me.lblPhone1.EditingMode = False
-            Me.lblPhone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPhone1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPhone1.Location = New System.Drawing.Point(1, 1)
-            Me.lblPhone1.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPhone1.Name = "lblPhone1"
-            Me.lblPhone1.Size = New System.Drawing.Size(165, 23)
-            Me.lblPhone1.TabIndex = 201
-            Me.lblPhone1.Text = "Main Phone Number"
-            Me.lblPhone1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtPhone1
-            '
-            Me.txtPhone1.BackColor = System.Drawing.Color.White
-            Me.txtPhone1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPhone1.ComputedValue = False
-            Me.txtPhone1.CustomFormat = Nothing
-            Me.txtPhone1.DataBoundControl = True
-            Me.txtPhone1.EditingMode = False
-            Me.txtPhone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPhone1.ForeColor = System.Drawing.Color.Black
-            Me.txtPhone1.LinkedLabel = Me.lblPhone1
-            Me.txtPhone1.Location = New System.Drawing.Point(168, 1)
-            Me.txtPhone1.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPhone1.MaximumValue = Nothing
-            Me.txtPhone1.MinimumValue = Nothing
-            Me.txtPhone1.Name = "txtPhone1"
-            Me.txtPhone1.OldValue = Nothing
-            Me.txtPhone1.ReadOnly = True
-            Me.txtPhone1.Size = New System.Drawing.Size(194, 23)
-            Me.txtPhone1.TabIndex = 1
-            '
-            'lblPhone2
-            '
-            Me.lblPhone2.DisplayOnly = True
-            Me.lblPhone2.EditingMode = False
-            Me.lblPhone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPhone2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPhone2.Location = New System.Drawing.Point(364, 1)
-            Me.lblPhone2.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPhone2.Name = "lblPhone2"
-            Me.lblPhone2.Size = New System.Drawing.Size(199, 23)
-            Me.lblPhone2.TabIndex = 203
-            Me.lblPhone2.Text = "Secondary Phone No."
-            Me.lblPhone2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'txtPhone2
-            '
-            Me.txtPhone2.BackColor = System.Drawing.Color.White
-            Me.txtPhone2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPhone2.ComputedValue = False
-            Me.txtPhone2.CustomFormat = Nothing
-            Me.txtPhone2.DataBoundControl = True
-            Me.txtPhone2.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtPhone2, True)
-            Me.txtPhone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPhone2.ForeColor = System.Drawing.Color.Black
-            Me.txtPhone2.LinkedLabel = Me.lblPhone2
-            Me.txtPhone2.Location = New System.Drawing.Point(565, 1)
-            Me.txtPhone2.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPhone2.MaximumValue = Nothing
-            Me.txtPhone2.MinimumValue = Nothing
-            Me.txtPhone2.Name = "txtPhone2"
-            Me.txtPhone2.OldValue = Nothing
-            Me.txtPhone2.ReadOnly = True
-            Me.txtPhone2.Size = New System.Drawing.Size(222, 23)
-            Me.txtPhone2.TabIndex = 2
-            '
-            'lblEmail
-            '
-            Me.lblEmail.DisplayOnly = True
-            Me.lblEmail.EditingMode = False
-            Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblEmail.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblEmail.Location = New System.Drawing.Point(1, 26)
-            Me.lblEmail.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblEmail.Name = "lblEmail"
-            Me.lblEmail.Size = New System.Drawing.Size(165, 23)
-            Me.lblEmail.TabIndex = 211
-            Me.lblEmail.Text = "E-mail Address"
-            Me.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtEmail
-            '
-            Me.txtEmail.BackColor = System.Drawing.Color.White
-            Me.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtEmail.ComputedValue = False
-            Me.txtEmail.CustomFormat = Nothing
-            Me.txtEmail.DataBoundControl = True
-            Me.txtEmail.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtEmail, True)
-            Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtEmail.ForeColor = System.Drawing.Color.Black
-            Me.txtEmail.LinkedLabel = Me.lblEmail
-            Me.txtEmail.Location = New System.Drawing.Point(168, 26)
-            Me.txtEmail.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtEmail.MaximumValue = Nothing
-            Me.txtEmail.MinimumValue = Nothing
-            Me.txtEmail.Name = "txtEmail"
-            Me.txtEmail.OldValue = Nothing
-            Me.txtEmail.ReadOnly = True
-            Me.txtEmail.Size = New System.Drawing.Size(619, 23)
-            Me.txtEmail.TabIndex = 3
-            '
-            'groupBoxAddress
-            '
-            Me.groupBoxAddress.AutoSize = True
-            Me.groupBoxAddress.BackColor = System.Drawing.Color.Transparent
-            Me.groupBoxAddress.Controls.Add(Me.floAddress)
-            Me.groupBoxAddress.DisplayOnly = True
-            Me.groupBoxAddress.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.groupBoxAddress.Location = New System.Drawing.Point(6, 127)
-            Me.groupBoxAddress.Name = "groupBoxAddress"
-            Me.groupBoxAddress.Size = New System.Drawing.Size(800, 149)
-            Me.groupBoxAddress.TabIndex = 4
-            Me.groupBoxAddress.TabStop = False
-            Me.groupBoxAddress.Text = "Address"
-            '
-            'floAddress
-            '
-            Me.floAddress.BackColor = System.Drawing.Color.Transparent
-            Me.floAddress.Controls.Add(Me.lblStreet)
-            Me.floAddress.Controls.Add(Me.txtStreet)
-            Me.floAddress.Controls.Add(Me.lblDistrict)
-            Me.floAddress.Controls.Add(Me.txtDistrict)
-            Me.floAddress.Controls.Add(Me.lblTownCity)
-            Me.floAddress.Controls.Add(Me.txtTownCity)
-            Me.floAddress.Controls.Add(Me.lblProvinceState)
-            Me.floAddress.Controls.Add(Me.txtProvinceState)
-            Me.floAddress.Controls.Add(Me.lblCountryCode)
-            Me.floAddress.Controls.Add(Me.cacCountryCode)
-            Me.floAddress.Controls.Add(Me.lblPoBox)
-            Me.floAddress.Controls.Add(Me.txtPoBox)
-            Me.floAddress.Controls.Add(Me.lblZipCode)
-            Me.floAddress.Controls.Add(Me.txtZipCode)
-            Me.floAddress.Location = New System.Drawing.Point(6, 19)
-            Me.floAddress.Name = "floAddress"
-            Me.floAddress.Size = New System.Drawing.Size(788, 108)
-            Me.floAddress.TabIndex = 250
-            '
-            'lblStreet
-            '
-            Me.lblStreet.DisplayOnly = True
-            Me.lblStreet.EditingMode = False
-            Me.lblStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblStreet.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblStreet.Location = New System.Drawing.Point(1, 1)
-            Me.lblStreet.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblStreet.Name = "lblStreet"
-            Me.lblStreet.Size = New System.Drawing.Size(165, 23)
-            Me.lblStreet.TabIndex = 197
-            Me.lblStreet.Text = "Street"
-            Me.lblStreet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtStreet
-            '
-            Me.txtStreet.BackColor = System.Drawing.Color.White
-            Me.txtStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtStreet.ComputedValue = False
-            Me.txtStreet.CustomFormat = Nothing
-            Me.txtStreet.DataBoundControl = True
-            Me.txtStreet.EditingMode = False
-            Me.txtStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtStreet.ForeColor = System.Drawing.Color.Black
-            Me.txtStreet.LinkedLabel = Me.lblStreet
-            Me.txtStreet.Location = New System.Drawing.Point(168, 1)
-            Me.txtStreet.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtStreet.MaximumValue = Nothing
-            Me.txtStreet.MinimumValue = Nothing
-            Me.txtStreet.Name = "txtStreet"
-            Me.txtStreet.OldValue = Nothing
-            Me.txtStreet.ReadOnly = True
-            Me.txtStreet.Size = New System.Drawing.Size(278, 23)
-            Me.txtStreet.TabIndex = 4
-            '
-            'lblDistrict
-            '
-            Me.lblDistrict.DisplayOnly = True
-            Me.lblDistrict.EditingMode = False
-            Me.lblDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblDistrict.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDistrict.Location = New System.Drawing.Point(448, 1)
-            Me.lblDistrict.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblDistrict.Name = "lblDistrict"
-            Me.lblDistrict.Size = New System.Drawing.Size(116, 23)
-            Me.lblDistrict.TabIndex = 189
-            Me.lblDistrict.Text = "District"
-            Me.lblDistrict.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'txtDistrict
-            '
-            Me.txtDistrict.BackColor = System.Drawing.Color.White
-            Me.txtDistrict.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDistrict.ComputedValue = False
-            Me.txtDistrict.CustomFormat = Nothing
-            Me.txtDistrict.DataBoundControl = True
-            Me.txtDistrict.EditingMode = False
-            Me.floAddress.SetFlowBreak(Me.txtDistrict, True)
-            Me.txtDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDistrict.ForeColor = System.Drawing.Color.Black
-            Me.txtDistrict.LinkedLabel = Me.lblDistrict
-            Me.txtDistrict.Location = New System.Drawing.Point(566, 1)
-            Me.txtDistrict.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDistrict.MaximumValue = Nothing
-            Me.txtDistrict.MinimumValue = Nothing
-            Me.txtDistrict.Name = "txtDistrict"
-            Me.txtDistrict.OldValue = Nothing
-            Me.txtDistrict.ReadOnly = True
-            Me.txtDistrict.Size = New System.Drawing.Size(221, 23)
-            Me.txtDistrict.TabIndex = 5
-            '
-            'lblTownCity
-            '
-            Me.lblTownCity.DisplayOnly = True
-            Me.lblTownCity.EditingMode = False
-            Me.lblTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblTownCity.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblTownCity.Location = New System.Drawing.Point(1, 26)
-            Me.lblTownCity.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblTownCity.Name = "lblTownCity"
-            Me.lblTownCity.Size = New System.Drawing.Size(165, 23)
-            Me.lblTownCity.TabIndex = 198
-            Me.lblTownCity.Text = "Town/City"
-            Me.lblTownCity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtTownCity
-            '
-            Me.txtTownCity.BackColor = System.Drawing.Color.White
-            Me.txtTownCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtTownCity.ComputedValue = False
-            Me.txtTownCity.CustomFormat = Nothing
-            Me.txtTownCity.DataBoundControl = True
-            Me.txtTownCity.EditingMode = False
-            Me.txtTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtTownCity.ForeColor = System.Drawing.Color.Black
-            Me.txtTownCity.LinkedLabel = Me.lblTownCity
-            Me.txtTownCity.Location = New System.Drawing.Point(168, 26)
-            Me.txtTownCity.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtTownCity.MaximumValue = Nothing
-            Me.txtTownCity.MinimumValue = Nothing
-            Me.txtTownCity.Name = "txtTownCity"
-            Me.txtTownCity.OldValue = Nothing
-            Me.txtTownCity.ReadOnly = True
-            Me.txtTownCity.Size = New System.Drawing.Size(278, 23)
-            Me.txtTownCity.TabIndex = 6
-            '
-            'lblProvinceState
-            '
-            Me.lblProvinceState.DisplayOnly = True
-            Me.lblProvinceState.EditingMode = False
-            Me.lblProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblProvinceState.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblProvinceState.Location = New System.Drawing.Point(448, 26)
-            Me.lblProvinceState.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblProvinceState.Name = "lblProvinceState"
-            Me.lblProvinceState.Size = New System.Drawing.Size(116, 23)
-            Me.lblProvinceState.TabIndex = 193
-            Me.lblProvinceState.Text = "Province/State"
-            Me.lblProvinceState.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'txtProvinceState
-            '
-            Me.txtProvinceState.BackColor = System.Drawing.Color.White
-            Me.txtProvinceState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtProvinceState.ComputedValue = False
-            Me.txtProvinceState.CustomFormat = Nothing
-            Me.txtProvinceState.DataBoundControl = True
-            Me.txtProvinceState.EditingMode = False
-            Me.txtProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtProvinceState.ForeColor = System.Drawing.Color.Black
-            Me.txtProvinceState.LinkedLabel = Me.lblProvinceState
-            Me.txtProvinceState.Location = New System.Drawing.Point(566, 26)
-            Me.txtProvinceState.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtProvinceState.MaximumValue = Nothing
-            Me.txtProvinceState.MinimumValue = Nothing
-            Me.txtProvinceState.Name = "txtProvinceState"
-            Me.txtProvinceState.OldValue = Nothing
-            Me.txtProvinceState.ReadOnly = True
-            Me.txtProvinceState.Size = New System.Drawing.Size(221, 23)
-            Me.txtProvinceState.TabIndex = 7
-            '
-            'lblCountryCode
-            '
-            Me.lblCountryCode.DisplayOnly = True
-            Me.lblCountryCode.EditingMode = False
-            Me.lblCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCountryCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCountryCode.Location = New System.Drawing.Point(1, 51)
-            Me.lblCountryCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblCountryCode.Name = "lblCountryCode"
-            Me.lblCountryCode.Size = New System.Drawing.Size(165, 23)
-            Me.lblCountryCode.TabIndex = 195
-            Me.lblCountryCode.Text = "Country"
-            Me.lblCountryCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'cacCountryCode
-            '
-            Me.cacCountryCode.BackColor = System.Drawing.Color.White
-            Me.cacCountryCode.ChangingSearchValueOnly = False
-            Me.cacCountryCode.CurrentSearchTerm = ""
-            Me.cacCountryCode.DefaultValue = Nothing
-            Me.cacCountryCode.DisplayMember = "Name"
-            Me.cacCountryCode.DropDownHeight = 1
-            Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cacCountryCode.EditingMode = False
-            Me.cacCountryCode.FilterRule = Nothing
-            Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
-            Me.cacCountryCode.FormattingEnabled = True
-            Me.cacCountryCode.HideWhenNotEditingOrAdding = False
-            Me.cacCountryCode.IntegralHeight = False
-            Me.cacCountryCode.LinkedLabel = Me.lblCountryCode
-            Me.cacCountryCode.Location = New System.Drawing.Point(167, 51)
-            Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacCountryCode.Name = "cacCountryCode"
-            Me.cacCountryCode.OldValue = 0
-            Me.cacCountryCode.OriginalDataSource = Nothing
-            Me.cacCountryCode.OriginalList = Nothing
-            Me.cacCountryCode.OverrideDropDownStyleList = False
-            Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PreviousSelectedIndex = -1
-            Me.cacCountryCode.PropertySelector = Nothing
-            Me.cacCountryCode.ReadOnlyCombo = False
-            Me.cacCountryCode.SearchAnywhere = False
-            Me.cacCountryCode.Size = New System.Drawing.Size(279, 24)
-            Me.cacCountryCode.SuggestBoxHeight = 200
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
-            Me.cacCountryCode.TabIndex = 8
-            Me.cacCountryCode.TextToSearch = Nothing
-            Me.cacCountryCode.ValueIsMandatory = False
-            Me.cacCountryCode.ValueIsNullable = False
-            Me.cacCountryCode.ValueIsNumeric = False
-            Me.cacCountryCode.ValueMember = "Code"
-            '
-            'lblPoBox
-            '
-            Me.lblPoBox.DisplayOnly = True
-            Me.lblPoBox.EditingMode = False
-            Me.lblPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPoBox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPoBox.Location = New System.Drawing.Point(447, 51)
-            Me.lblPoBox.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPoBox.Name = "lblPoBox"
-            Me.lblPoBox.Size = New System.Drawing.Size(116, 23)
-            Me.lblPoBox.TabIndex = 199
-            Me.lblPoBox.Text = "P.O. Box No."
-            Me.lblPoBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'txtPoBox
-            '
-            Me.txtPoBox.BackColor = System.Drawing.Color.White
-            Me.txtPoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPoBox.ComputedValue = False
-            Me.txtPoBox.CustomFormat = Nothing
-            Me.txtPoBox.DataBoundControl = True
-            Me.txtPoBox.EditingMode = False
-            Me.txtPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPoBox.ForeColor = System.Drawing.Color.Black
-            Me.txtPoBox.LinkedLabel = Me.lblPoBox
-            Me.txtPoBox.Location = New System.Drawing.Point(565, 51)
-            Me.txtPoBox.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPoBox.MaximumValue = Nothing
-            Me.txtPoBox.MinimumValue = Nothing
-            Me.txtPoBox.Name = "txtPoBox"
-            Me.txtPoBox.OldValue = Nothing
-            Me.txtPoBox.ReadOnly = True
-            Me.txtPoBox.Size = New System.Drawing.Size(72, 23)
-            Me.txtPoBox.TabIndex = 9
-            '
-            'lblZipCode
-            '
-            Me.lblZipCode.DisplayOnly = True
-            Me.lblZipCode.EditingMode = False
-            Me.lblZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblZipCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblZipCode.Location = New System.Drawing.Point(1, 77)
-            Me.lblZipCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblZipCode.Name = "lblZipCode"
-            Me.lblZipCode.Size = New System.Drawing.Size(165, 23)
-            Me.lblZipCode.TabIndex = 200
-            Me.lblZipCode.Text = "Zip Code"
-            Me.lblZipCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtZipCode
-            '
-            Me.txtZipCode.BackColor = System.Drawing.Color.White
-            Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtZipCode.ComputedValue = False
-            Me.txtZipCode.CustomFormat = Nothing
-            Me.txtZipCode.DataBoundControl = True
-            Me.txtZipCode.EditingMode = False
-            Me.txtZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtZipCode.ForeColor = System.Drawing.Color.Black
-            Me.txtZipCode.LinkedLabel = Me.lblZipCode
-            Me.txtZipCode.Location = New System.Drawing.Point(168, 77)
-            Me.txtZipCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtZipCode.MaximumValue = Nothing
-            Me.txtZipCode.MinimumValue = Nothing
-            Me.txtZipCode.Name = "txtZipCode"
-            Me.txtZipCode.OldValue = Nothing
-            Me.txtZipCode.ReadOnly = True
-            Me.txtZipCode.Size = New System.Drawing.Size(138, 23)
-            Me.txtZipCode.TabIndex = 10
-            '
             'EmployeeTabControl
             '
             Me.EmployeeTabControl.Controls.Add(Me.tbpPersonal)
@@ -1380,6 +957,7 @@ Namespace PresentationLayer.Views.Forms
             Me.EmployeeTabControl.Controls.Add(Me.tbpEmployment)
             Me.EmployeeTabControl.Controls.Add(Me.tbpPayroll)
             Me.EmployeeTabControl.Controls.Add(Me.tbpEarningDeductions)
+            Me.EmployeeTabControl.Controls.Add(Me.tbpPhones)
             Me.EmployeeTabControl.HotTrack = True
             Me.EmployeeTabControl.Location = New System.Drawing.Point(3, 91)
             Me.EmployeeTabControl.Name = "EmployeeTabControl"
@@ -1419,7 +997,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout3.Controls.Add(Me.txtNationalIdNo)
             Me.CFlowLayout3.Controls.Add(Me.lblNotes)
             Me.CFlowLayout3.Controls.Add(Me.txtNotes)
-            Me.CFlowLayout3.Controls.Add(Me.DataGridViewPhones)
             Me.CFlowLayout3.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout3.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout3.Margin = New System.Windows.Forms.Padding(0)
@@ -1542,112 +1119,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.TabIndex = 7
             Me.txtNotes.ValueIsMandatory = True
             '
-            'DataGridViewPhones
-            '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DataGridViewPhones.AutoGenerateColumns = False
-            Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPhoneTypeIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
-            Me.DataGridViewPhones.DataInGridChanged = False
-            Me.DataGridViewPhones.DataSource = Me.bsPhones
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle5
-            Me.DataGridViewPhones.DisplayOnly = False
-            Me.DataGridViewPhones.Ea = Nothing
-            Me.DataGridViewPhones.EditingMode = False
-            Me.DataGridViewPhones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewPhones.FirstRowDeletionEnabled = True
-            Me.DataGridViewPhones.FirstRowInsertionEnabled = True
-            Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 219)
-            Me.DataGridViewPhones.Name = "DataGridViewPhones"
-            Me.DataGridViewPhones.ReadOnly = True
-            Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
-            Me.DataGridViewPhones.SequenceFieldName = "Sequence"
-            Me.DataGridViewPhones.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewPhones.Size = New System.Drawing.Size(686, 105)
-            Me.DataGridViewPhones.StartTrackingChanges = False
-            Me.DataGridViewPhones.TabIndex = 272
-            '
-            'dgvSequence
-            '
-            Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvSequence.DisplayOnly = True
-            Me.dgvSequence.EditingMode = False
-            Me.dgvSequence.HeaderText = "Seq"
-            Me.dgvSequence.Name = "dgvSequence"
-            Me.dgvSequence.ReadOnly = True
-            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSequence.Width = 40
-            '
-            'dgvPhoneTypeIdNo
-            '
-            Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
-            Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type Code - Name"
-            Me.dgvPhoneTypeIdNo.Name = "dgvPhoneTypeIdNo"
-            Me.dgvPhoneTypeIdNo.ReadOnly = True
-            Me.dgvPhoneTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPhoneTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvAreaCode
-            '
-            Me.dgvAreaCode.DataPropertyName = "AreaCode"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvAreaCode.EditingMode = False
-            Me.dgvAreaCode.HeaderText = "Area Code"
-            Me.dgvAreaCode.Name = "dgvAreaCode"
-            Me.dgvAreaCode.ReadOnly = True
-            Me.dgvAreaCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'PhoneNumber
-            '
-            Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle4
-            Me.PhoneNumber.EditingMode = False
-            Me.PhoneNumber.HeaderText = "PhoneNumber"
-            Me.PhoneNumber.Name = "PhoneNumber"
-            Me.PhoneNumber.ReadOnly = True
-            '
-            'DataGridViewTextBoxColumn1
-            '
-            Me.DataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-            Me.DataGridViewTextBoxColumn1.ReadOnly = True
-            Me.DataGridViewTextBoxColumn1.Visible = False
-            '
-            'DataGridViewTextBoxColumn2
-            '
-            Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
-            Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
-            Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-            Me.DataGridViewTextBoxColumn2.ReadOnly = True
-            Me.DataGridViewTextBoxColumn2.Visible = False
-            '
-            'bsPhones
-            '
-            Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
-            '
             'tbpContact
             '
             Me.tbpContact.BackgroundImage = CType(resources.GetObject("tbpContact.BackgroundImage"), System.Drawing.Image)
             Me.tbpContact.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpContact.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.tbpContact.Controls.Add(Me.groupBoxAddress)
-            Me.tbpContact.Controls.Add(Me.groupBoxContactInfo)
+            Me.tbpContact.Controls.Add(Me.floContactInformation)
             Me.tbpContact.Location = New System.Drawing.Point(4, 22)
             Me.tbpContact.Name = "tbpContact"
             Me.tbpContact.Padding = New System.Windows.Forms.Padding(3)
@@ -1981,21 +1458,21 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewEarnings
             '
             Me.DataGridViewEarnings.AllowUserToOrderColumns = True
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningAmount, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
             Me.DataGridViewEarnings.DataInGridChanged = False
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
@@ -2012,24 +1489,112 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.StartTrackingChanges = False
             Me.DataGridViewEarnings.TabIndex = 0
             '
+            'dgvSequenceEarning
+            '
+            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvSequenceEarning.EditingMode = False
+            Me.dgvSequenceEarning.HeaderText = "Seq"
+            Me.dgvSequenceEarning.MinimumWidth = 40
+            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
+            Me.dgvSequenceEarning.ReadOnly = True
+            Me.dgvSequenceEarning.Width = 40
+            '
+            'dgvEarningIdNo
+            '
+            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvEarningIdNo.DataPropertyName = "EarningIdNo"
+            Me.dgvEarningIdNo.HeaderText = "EarningIdNo"
+            Me.dgvEarningIdNo.MinimumWidth = 200
+            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
+            Me.dgvEarningIdNo.ReadOnly = True
+            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvEarningAmount
+            '
+            Me.dgvEarningAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle5.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvEarningAmount.EditingMode = False
+            Me.dgvEarningAmount.HeaderText = "Amount"
+            Me.dgvEarningAmount.MinimumWidth = 100
+            Me.dgvEarningAmount.Name = "dgvEarningAmount"
+            Me.dgvEarningAmount.ReadOnly = True
+            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'DataGridViewTextBoxColumn3
+            '
+            Me.DataGridViewTextBoxColumn3.DataPropertyName = "EarningCode"
+            Me.DataGridViewTextBoxColumn3.HeaderText = "EarningCode"
+            Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+            Me.DataGridViewTextBoxColumn3.ReadOnly = True
+            Me.DataGridViewTextBoxColumn3.Visible = False
+            '
+            'DataGridViewTextBoxColumn4
+            '
+            Me.DataGridViewTextBoxColumn4.DataPropertyName = "EarningName"
+            Me.DataGridViewTextBoxColumn4.HeaderText = "EarningName"
+            Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+            Me.DataGridViewTextBoxColumn4.ReadOnly = True
+            Me.DataGridViewTextBoxColumn4.Visible = False
+            '
+            'DataGridViewTextBoxColumn5
+            '
+            Me.DataGridViewTextBoxColumn5.DataPropertyName = "EarningNameAra"
+            Me.DataGridViewTextBoxColumn5.HeaderText = "EarningNameAra"
+            Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+            Me.DataGridViewTextBoxColumn5.ReadOnly = True
+            Me.DataGridViewTextBoxColumn5.Visible = False
+            '
+            'DataGridViewTextBoxColumn6
+            '
+            Me.DataGridViewTextBoxColumn6.DataPropertyName = "EarningType"
+            Me.DataGridViewTextBoxColumn6.HeaderText = "EarningType"
+            Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+            Me.DataGridViewTextBoxColumn6.ReadOnly = True
+            Me.DataGridViewTextBoxColumn6.Visible = False
+            '
+            'DataGridViewTextBoxColumn7
+            '
+            Me.DataGridViewTextBoxColumn7.DataPropertyName = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn7.HeaderText = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+            Me.DataGridViewTextBoxColumn7.ReadOnly = True
+            Me.DataGridViewTextBoxColumn7.Visible = False
+            '
+            'DataGridViewTextBoxColumn8
+            '
+            Me.DataGridViewTextBoxColumn8.DataPropertyName = "IdNo"
+            Me.DataGridViewTextBoxColumn8.HeaderText = "IdNo"
+            Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+            Me.DataGridViewTextBoxColumn8.ReadOnly = True
+            Me.DataGridViewTextBoxColumn8.Visible = False
+            '
             'DataGridVewDeductions
             '
             Me.DataGridVewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridVewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridVewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridVewDeductions.AutoGenerateColumns = False
             Me.DataGridVewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridVewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionAmount, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
             Me.DataGridVewDeductions.DataInGridChanged = False
             Me.DataGridVewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridVewDeductions.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridVewDeductions.DefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridVewDeductions.DisplayOnly = False
             Me.DataGridVewDeductions.Ea = EventAggregator2
             Me.DataGridVewDeductions.EditingMode = False
@@ -2049,9 +1614,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequenceDeduction
             '
             Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvSequenceDeduction.EditingMode = False
             Me.dgvSequenceDeduction.HeaderText = "Seq"
             Me.dgvSequenceDeduction.MinimumWidth = 40
@@ -2074,11 +1639,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionAmount
             '
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle9.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle9
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Amount"
             Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
@@ -2133,6 +1698,118 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn14.Name = "DataGridViewTextBoxColumn14"
             Me.DataGridViewTextBoxColumn14.ReadOnly = True
             Me.DataGridViewTextBoxColumn14.Visible = False
+            '
+            'tbpPhones
+            '
+            Me.tbpPhones.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            Me.tbpPhones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+            Me.tbpPhones.Controls.Add(Me.DataGridViewPhones)
+            Me.tbpPhones.Location = New System.Drawing.Point(4, 22)
+            Me.tbpPhones.Name = "tbpPhones"
+            Me.tbpPhones.Padding = New System.Windows.Forms.Padding(3)
+            Me.tbpPhones.Size = New System.Drawing.Size(821, 361)
+            Me.tbpPhones.TabIndex = 5
+            Me.tbpPhones.Text = "Phones"
+            Me.tbpPhones.UseVisualStyleBackColor = True
+            '
+            'DataGridViewPhones
+            '
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+            Me.DataGridViewPhones.AutoGenerateColumns = False
+            Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPhoneTypeIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
+            Me.DataGridViewPhones.DataInGridChanged = False
+            Me.DataGridViewPhones.DataSource = Me.bsPhones
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle15
+            Me.DataGridViewPhones.DisplayOnly = False
+            Me.DataGridViewPhones.Ea = Nothing
+            Me.DataGridViewPhones.EditingMode = False
+            Me.DataGridViewPhones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPhones.FirstRowDeletionEnabled = True
+            Me.DataGridViewPhones.FirstRowInsertionEnabled = True
+            Me.DataGridViewPhones.Location = New System.Drawing.Point(22, 6)
+            Me.DataGridViewPhones.Name = "DataGridViewPhones"
+            Me.DataGridViewPhones.ReadOnly = True
+            Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPhones.SequenceFieldName = "Sequence"
+            Me.DataGridViewPhones.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPhones.Size = New System.Drawing.Size(686, 105)
+            Me.DataGridViewPhones.StartTrackingChanges = False
+            Me.DataGridViewPhones.TabIndex = 273
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle12
+            Me.dgvSequence.DisplayOnly = True
+            Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.HeaderText = "Seq"
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.Width = 40
+            '
+            'dgvPhoneTypeIdNo
+            '
+            Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
+            Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type Code - Name"
+            Me.dgvPhoneTypeIdNo.Name = "dgvPhoneTypeIdNo"
+            Me.dgvPhoneTypeIdNo.ReadOnly = True
+            Me.dgvPhoneTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPhoneTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvAreaCode
+            '
+            Me.dgvAreaCode.DataPropertyName = "AreaCode"
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle13
+            Me.dgvAreaCode.EditingMode = False
+            Me.dgvAreaCode.HeaderText = "Area Code"
+            Me.dgvAreaCode.Name = "dgvAreaCode"
+            Me.dgvAreaCode.ReadOnly = True
+            Me.dgvAreaCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'PhoneNumber
+            '
+            Me.PhoneNumber.DataPropertyName = "PhoneNumber"
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle14
+            Me.PhoneNumber.EditingMode = False
+            Me.PhoneNumber.HeaderText = "PhoneNumber"
+            Me.PhoneNumber.Name = "PhoneNumber"
+            Me.PhoneNumber.ReadOnly = True
+            '
+            'DataGridViewTextBoxColumn1
+            '
+            Me.DataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+            Me.DataGridViewTextBoxColumn1.ReadOnly = True
+            Me.DataGridViewTextBoxColumn1.Visible = False
+            '
+            'DataGridViewTextBoxColumn2
+            '
+            Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
+            Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
+            Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+            Me.DataGridViewTextBoxColumn2.ReadOnly = True
+            Me.DataGridViewTextBoxColumn2.Visible = False
+            '
+            'bsPhones
+            '
+            Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
             '
             'lblIdNo
             '
@@ -2237,98 +1914,520 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Size = New System.Drawing.Size(829, 82)
             Me.CFlowLayout4.TabIndex = 6
             '
-            'dgvSequenceEarning
+            'floContactInformation
             '
-            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            Me.dgvSequenceEarning.EditingMode = False
-            Me.dgvSequenceEarning.HeaderText = "Seq"
-            Me.dgvSequenceEarning.MinimumWidth = 40
-            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
-            Me.dgvSequenceEarning.ReadOnly = True
-            Me.dgvSequenceEarning.Width = 40
+            Me.floContactInformation.BackColor = System.Drawing.Color.Transparent
+            Me.floContactInformation.Controls.Add(Me.TableLayoutPanel1)
+            Me.floContactInformation.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floContactInformation.Location = New System.Drawing.Point(3, 3)
+            Me.floContactInformation.Name = "floContactInformation"
+            Me.floContactInformation.Size = New System.Drawing.Size(811, 351)
+            Me.floContactInformation.TabIndex = 8
             '
-            'dgvEarningIdNo
+            'TableLayoutPanel1
             '
-            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvEarningIdNo.DataPropertyName = "EarningIdNo"
-            Me.dgvEarningIdNo.HeaderText = "EarningIdNo"
-            Me.dgvEarningIdNo.MinimumWidth = 200
-            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
-            Me.dgvEarningIdNo.ReadOnly = True
-            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.TableLayoutPanel1.ColumnCount = 5
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.95744!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.625!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.75!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.125!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.375!))
+            Me.TableLayoutPanel1.Controls.Add(Me.txtZipCode, 3, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblZipCode, 2, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPoBox, 1, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPoBox, 0, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.cacCountryCode, 3, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblCountryCode, 2, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtProvinceState, 1, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblProvinceState, 0, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtTownCity, 3, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblTownCity, 2, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtDistrict, 1, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblDistrict, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtStreet, 1, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 4, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtEmail, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblEmail, 0, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.DataGridViewPhoneDisplay, 4, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblStreet, 0, 2)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+            Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+            Me.TableLayoutPanel1.RowCount = 7
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 331)
+            Me.TableLayoutPanel1.TabIndex = 274
             '
-            'dgvEarningAmount
+            'txtZipCode
             '
-            Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle7.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle7
-            Me.dgvEarningAmount.EditingMode = False
-            Me.dgvEarningAmount.HeaderText = "Amount"
-            Me.dgvEarningAmount.MinimumWidth = 100
-            Me.dgvEarningAmount.Name = "dgvEarningAmount"
-            Me.dgvEarningAmount.ReadOnly = True
-            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.txtZipCode.BackColor = System.Drawing.Color.White
+            Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtZipCode.ComputedValue = False
+            Me.txtZipCode.CustomFormat = Nothing
+            Me.txtZipCode.DataBoundControl = True
+            Me.txtZipCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtZipCode.EditingMode = False
+            Me.txtZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtZipCode.ForeColor = System.Drawing.Color.Black
+            Me.txtZipCode.LinkedLabel = Nothing
+            Me.txtZipCode.Location = New System.Drawing.Point(403, 127)
+            Me.txtZipCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtZipCode.MaximumValue = Nothing
+            Me.txtZipCode.MinimumValue = Nothing
+            Me.txtZipCode.Name = "txtZipCode"
+            Me.txtZipCode.OldValue = Nothing
+            Me.txtZipCode.ReadOnly = True
+            Me.txtZipCode.Size = New System.Drawing.Size(223, 23)
+            Me.txtZipCode.TabIndex = 290
             '
-            'DataGridViewTextBoxColumn3
+            'lblZipCode
             '
-            Me.DataGridViewTextBoxColumn3.DataPropertyName = "EarningCode"
-            Me.DataGridViewTextBoxColumn3.HeaderText = "EarningCode"
-            Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-            Me.DataGridViewTextBoxColumn3.ReadOnly = True
-            Me.DataGridViewTextBoxColumn3.Visible = False
+            Me.lblZipCode.DisplayOnly = True
+            Me.lblZipCode.EditingMode = False
+            Me.lblZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblZipCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblZipCode.Location = New System.Drawing.Point(293, 127)
+            Me.lblZipCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblZipCode.Name = "lblZipCode"
+            Me.lblZipCode.Size = New System.Drawing.Size(108, 18)
+            Me.lblZipCode.TabIndex = 289
+            Me.lblZipCode.Text = "Zip Code"
+            Me.lblZipCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'DataGridViewTextBoxColumn4
+            'txtPoBox
             '
-            Me.DataGridViewTextBoxColumn4.DataPropertyName = "EarningName"
-            Me.DataGridViewTextBoxColumn4.HeaderText = "EarningName"
-            Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-            Me.DataGridViewTextBoxColumn4.ReadOnly = True
-            Me.DataGridViewTextBoxColumn4.Visible = False
+            Me.txtPoBox.BackColor = System.Drawing.Color.White
+            Me.txtPoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPoBox.ComputedValue = False
+            Me.txtPoBox.CustomFormat = Nothing
+            Me.txtPoBox.DataBoundControl = True
+            Me.txtPoBox.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPoBox.EditingMode = False
+            Me.txtPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPoBox.ForeColor = System.Drawing.Color.Black
+            Me.txtPoBox.LinkedLabel = Nothing
+            Me.txtPoBox.Location = New System.Drawing.Point(128, 127)
+            Me.txtPoBox.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPoBox.MaximumValue = Nothing
+            Me.txtPoBox.MinimumValue = Nothing
+            Me.txtPoBox.Name = "txtPoBox"
+            Me.txtPoBox.OldValue = Nothing
+            Me.txtPoBox.ReadOnly = True
+            Me.txtPoBox.Size = New System.Drawing.Size(163, 23)
+            Me.txtPoBox.TabIndex = 288
             '
-            'DataGridViewTextBoxColumn5
+            'lblPoBox
             '
-            Me.DataGridViewTextBoxColumn5.DataPropertyName = "EarningNameAra"
-            Me.DataGridViewTextBoxColumn5.HeaderText = "EarningNameAra"
-            Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-            Me.DataGridViewTextBoxColumn5.ReadOnly = True
-            Me.DataGridViewTextBoxColumn5.Visible = False
+            Me.lblPoBox.DisplayOnly = True
+            Me.lblPoBox.EditingMode = False
+            Me.lblPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPoBox.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPoBox.Location = New System.Drawing.Point(1, 127)
+            Me.lblPoBox.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPoBox.Name = "lblPoBox"
+            Me.lblPoBox.Size = New System.Drawing.Size(116, 18)
+            Me.lblPoBox.TabIndex = 287
+            Me.lblPoBox.Text = "P.O. Box No."
+            Me.lblPoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'DataGridViewTextBoxColumn6
+            'cacCountryCode
             '
-            Me.DataGridViewTextBoxColumn6.DataPropertyName = "EarningType"
-            Me.DataGridViewTextBoxColumn6.HeaderText = "EarningType"
-            Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-            Me.DataGridViewTextBoxColumn6.ReadOnly = True
-            Me.DataGridViewTextBoxColumn6.Visible = False
+            Me.cacCountryCode.BackColor = System.Drawing.Color.White
+            Me.cacCountryCode.ChangingSearchValueOnly = False
+            Me.cacCountryCode.CurrentSearchTerm = ""
+            Me.cacCountryCode.DefaultValue = Nothing
+            Me.cacCountryCode.DisplayMember = "Name"
+            Me.cacCountryCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cacCountryCode.DropDownHeight = 1
+            Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cacCountryCode.EditingMode = False
+            Me.cacCountryCode.FilterRule = Nothing
+            Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
+            Me.cacCountryCode.FormattingEnabled = True
+            Me.cacCountryCode.HideWhenNotEditingOrAdding = False
+            Me.cacCountryCode.IntegralHeight = False
+            Me.cacCountryCode.LinkedLabel = Nothing
+            Me.cacCountryCode.Location = New System.Drawing.Point(402, 101)
+            Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacCountryCode.Name = "cacCountryCode"
+            Me.cacCountryCode.OldValue = 0
+            Me.cacCountryCode.OriginalDataSource = Nothing
+            Me.cacCountryCode.OriginalList = Nothing
+            Me.cacCountryCode.OverrideDropDownStyleList = False
+            Me.cacCountryCode.PreviousSearchTerm = Nothing
+            Me.cacCountryCode.PreviousSelectedIndex = -1
+            Me.cacCountryCode.PropertySelector = Nothing
+            Me.cacCountryCode.ReadOnlyCombo = False
+            Me.cacCountryCode.SearchAnywhere = False
+            Me.cacCountryCode.Size = New System.Drawing.Size(225, 24)
+            Me.cacCountryCode.SuggestBoxHeight = 200
+            Me.cacCountryCode.SuggestListOrderRule = Nothing
+            Me.cacCountryCode.TabIndex = 286
+            Me.cacCountryCode.TextToSearch = Nothing
+            Me.cacCountryCode.ValueIsMandatory = False
+            Me.cacCountryCode.ValueIsNullable = False
+            Me.cacCountryCode.ValueIsNumeric = False
+            Me.cacCountryCode.ValueMember = "Code"
             '
-            'DataGridViewTextBoxColumn7
+            'lblCountryCode
             '
-            Me.DataGridViewTextBoxColumn7.DataPropertyName = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn7.HeaderText = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-            Me.DataGridViewTextBoxColumn7.ReadOnly = True
-            Me.DataGridViewTextBoxColumn7.Visible = False
+            Me.lblCountryCode.DisplayOnly = True
+            Me.lblCountryCode.EditingMode = False
+            Me.lblCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblCountryCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblCountryCode.Location = New System.Drawing.Point(293, 101)
+            Me.lblCountryCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblCountryCode.Name = "lblCountryCode"
+            Me.lblCountryCode.Size = New System.Drawing.Size(108, 18)
+            Me.lblCountryCode.TabIndex = 285
+            Me.lblCountryCode.Text = "Country"
+            Me.lblCountryCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'DataGridViewTextBoxColumn8
+            'txtProvinceState
             '
-            Me.DataGridViewTextBoxColumn8.DataPropertyName = "IdNo"
-            Me.DataGridViewTextBoxColumn8.HeaderText = "IdNo"
-            Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-            Me.DataGridViewTextBoxColumn8.ReadOnly = True
-            Me.DataGridViewTextBoxColumn8.Visible = False
+            Me.txtProvinceState.BackColor = System.Drawing.Color.White
+            Me.txtProvinceState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProvinceState.ComputedValue = False
+            Me.txtProvinceState.CustomFormat = Nothing
+            Me.txtProvinceState.DataBoundControl = True
+            Me.txtProvinceState.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtProvinceState.EditingMode = False
+            Me.txtProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtProvinceState.ForeColor = System.Drawing.Color.Black
+            Me.txtProvinceState.LinkedLabel = Nothing
+            Me.txtProvinceState.Location = New System.Drawing.Point(128, 101)
+            Me.txtProvinceState.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtProvinceState.MaximumValue = Nothing
+            Me.txtProvinceState.MinimumValue = Nothing
+            Me.txtProvinceState.Name = "txtProvinceState"
+            Me.txtProvinceState.OldValue = Nothing
+            Me.txtProvinceState.ReadOnly = True
+            Me.txtProvinceState.Size = New System.Drawing.Size(163, 23)
+            Me.txtProvinceState.TabIndex = 284
             '
-            'EmployeeEntryTest
+            'lblProvinceState
+            '
+            Me.lblProvinceState.DisplayOnly = True
+            Me.lblProvinceState.EditingMode = False
+            Me.lblProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblProvinceState.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblProvinceState.Location = New System.Drawing.Point(1, 101)
+            Me.lblProvinceState.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblProvinceState.Name = "lblProvinceState"
+            Me.lblProvinceState.Size = New System.Drawing.Size(116, 18)
+            Me.lblProvinceState.TabIndex = 283
+            Me.lblProvinceState.Text = "Province/State"
+            Me.lblProvinceState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtTownCity
+            '
+            Me.txtTownCity.BackColor = System.Drawing.Color.White
+            Me.txtTownCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTownCity.ComputedValue = False
+            Me.txtTownCity.CustomFormat = Nothing
+            Me.txtTownCity.DataBoundControl = True
+            Me.txtTownCity.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtTownCity.EditingMode = False
+            Me.txtTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtTownCity.ForeColor = System.Drawing.Color.Black
+            Me.txtTownCity.LinkedLabel = Nothing
+            Me.txtTownCity.Location = New System.Drawing.Point(403, 76)
+            Me.txtTownCity.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtTownCity.MaximumValue = Nothing
+            Me.txtTownCity.MinimumValue = Nothing
+            Me.txtTownCity.Name = "txtTownCity"
+            Me.txtTownCity.OldValue = Nothing
+            Me.txtTownCity.ReadOnly = True
+            Me.txtTownCity.Size = New System.Drawing.Size(223, 23)
+            Me.txtTownCity.TabIndex = 282
+            '
+            'lblTownCity
+            '
+            Me.lblTownCity.DisplayOnly = True
+            Me.lblTownCity.EditingMode = False
+            Me.lblTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblTownCity.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblTownCity.Location = New System.Drawing.Point(293, 76)
+            Me.lblTownCity.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblTownCity.Name = "lblTownCity"
+            Me.lblTownCity.Size = New System.Drawing.Size(108, 18)
+            Me.lblTownCity.TabIndex = 281
+            Me.lblTownCity.Text = "Town/City"
+            Me.lblTownCity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtDistrict
+            '
+            Me.txtDistrict.BackColor = System.Drawing.Color.White
+            Me.txtDistrict.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDistrict.ComputedValue = False
+            Me.txtDistrict.CustomFormat = Nothing
+            Me.txtDistrict.DataBoundControl = True
+            Me.txtDistrict.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtDistrict.EditingMode = False
+            Me.txtDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDistrict.ForeColor = System.Drawing.Color.Black
+            Me.txtDistrict.LinkedLabel = Nothing
+            Me.txtDistrict.Location = New System.Drawing.Point(128, 76)
+            Me.txtDistrict.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDistrict.MaximumValue = Nothing
+            Me.txtDistrict.MinimumValue = Nothing
+            Me.txtDistrict.Name = "txtDistrict"
+            Me.txtDistrict.OldValue = Nothing
+            Me.txtDistrict.ReadOnly = True
+            Me.txtDistrict.Size = New System.Drawing.Size(163, 23)
+            Me.txtDistrict.TabIndex = 280
+            '
+            'lblDistrict
+            '
+            Me.lblDistrict.DisplayOnly = True
+            Me.lblDistrict.EditingMode = False
+            Me.lblDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblDistrict.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblDistrict.Location = New System.Drawing.Point(1, 76)
+            Me.lblDistrict.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblDistrict.Name = "lblDistrict"
+            Me.lblDistrict.Size = New System.Drawing.Size(116, 18)
+            Me.lblDistrict.TabIndex = 279
+            Me.lblDistrict.Text = "District"
+            Me.lblDistrict.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtStreet
+            '
+            Me.txtStreet.BackColor = System.Drawing.Color.White
+            Me.txtStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtStreet, 3)
+            Me.txtStreet.ComputedValue = False
+            Me.txtStreet.CustomFormat = Nothing
+            Me.txtStreet.DataBoundControl = True
+            Me.txtStreet.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtStreet.EditingMode = False
+            Me.txtStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtStreet.ForeColor = System.Drawing.Color.Black
+            Me.txtStreet.LinkedLabel = Nothing
+            Me.txtStreet.Location = New System.Drawing.Point(128, 51)
+            Me.txtStreet.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtStreet.MaximumValue = Nothing
+            Me.txtStreet.MinimumValue = Nothing
+            Me.txtStreet.Name = "txtStreet"
+            Me.txtStreet.OldValue = Nothing
+            Me.txtStreet.ReadOnly = True
+            Me.txtStreet.Size = New System.Drawing.Size(498, 23)
+            Me.txtStreet.TabIndex = 278
+            '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.CLabel3.EditingMode = False
+            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.CLabel3.Location = New System.Drawing.Point(628, 1)
+            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Size = New System.Drawing.Size(171, 23)
+            Me.CLabel3.TabIndex = 275
+            Me.CLabel3.Text = "Phone Numbers:"
+            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtEmail
+            '
+            Me.txtEmail.BackColor = System.Drawing.Color.White
+            Me.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEmail, 3)
+            Me.txtEmail.ComputedValue = False
+            Me.txtEmail.CustomFormat = Nothing
+            Me.txtEmail.DataBoundControl = True
+            Me.txtEmail.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtEmail.EditingMode = False
+            Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtEmail.ForeColor = System.Drawing.Color.Black
+            Me.txtEmail.LinkedLabel = Nothing
+            Me.txtEmail.Location = New System.Drawing.Point(128, 1)
+            Me.txtEmail.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtEmail.MaximumValue = Nothing
+            Me.txtEmail.MinimumValue = Nothing
+            Me.txtEmail.Name = "txtEmail"
+            Me.txtEmail.OldValue = Nothing
+            Me.txtEmail.ReadOnly = True
+            Me.txtEmail.Size = New System.Drawing.Size(498, 23)
+            Me.txtEmail.TabIndex = 274
+            '
+            'CLabel1
+            '
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel1, 4)
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.CLabel1.Location = New System.Drawing.Point(1, 26)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(625, 23)
+            Me.CLabel1.TabIndex = 213
+            Me.CLabel1.Text = "Home Address"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'lblEmail
+            '
+            Me.lblEmail.DisplayOnly = True
+            Me.lblEmail.EditingMode = False
+            Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblEmail.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblEmail.Location = New System.Drawing.Point(1, 1)
+            Me.lblEmail.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblEmail.Name = "lblEmail"
+            Me.lblEmail.Size = New System.Drawing.Size(125, 23)
+            Me.lblEmail.TabIndex = 212
+            Me.lblEmail.Text = "E-mail Address"
+            Me.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'DataGridViewPhoneDisplay
+            '
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewPhoneDisplay.AutoGenerateColumns = False
+            Me.DataGridViewPhoneDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewPhoneDisplay.ColumnHeadersVisible = False
+            Me.DataGridViewPhoneDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FullPhone, Me.FullPhoneAra, Me.AreaCodeDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn15, Me.FullPhoneDataGridViewTextBoxColumn, Me.FullPhoneAraDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn16, Me.CountryTelIdNoDataGridViewTextBoxColumn, Me.PhoneNumberDataGridViewTextBoxColumn, Me.PhoneTypeIdNoDataGridViewTextBoxColumn, Me.SequenceDataGridViewTextBoxColumn})
+            Me.DataGridViewPhoneDisplay.DataInGridChanged = False
+            Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridViewPhoneDisplay.DisplayOnly = True
+            Me.DataGridViewPhoneDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.DataGridViewPhoneDisplay.Ea = Nothing
+            Me.DataGridViewPhoneDisplay.EditingMode = False
+            Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPhoneDisplay.FirstRowDeletionEnabled = True
+            Me.DataGridViewPhoneDisplay.FirstRowInsertionEnabled = True
+            Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(630, 28)
+            Me.DataGridViewPhoneDisplay.Name = "DataGridViewPhoneDisplay"
+            Me.DataGridViewPhoneDisplay.ReadOnly = True
+            Me.DataGridViewPhoneDisplay.RowHeadersVisible = False
+            Me.TableLayoutPanel1.SetRowSpan(Me.DataGridViewPhoneDisplay, 6)
+            Me.DataGridViewPhoneDisplay.ScrollBars = System.Windows.Forms.ScrollBars.None
+            Me.DataGridViewPhoneDisplay.SequenceColumn = "dgvSequencePhoneDisplay"
+            Me.DataGridViewPhoneDisplay.SequenceFieldName = "Sequence"
+            Me.DataGridViewPhoneDisplay.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(167, 300)
+            Me.DataGridViewPhoneDisplay.StartTrackingChanges = False
+            Me.DataGridViewPhoneDisplay.TabIndex = 273
+            '
+            'FullPhone
+            '
+            Me.FullPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.FullPhone.DataPropertyName = "FullPhone"
+            Me.FullPhone.HeaderText = "FullPhone"
+            Me.FullPhone.Name = "FullPhone"
+            Me.FullPhone.ReadOnly = True
+            '
+            'FullPhoneAra
+            '
+            Me.FullPhoneAra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.FullPhoneAra.DataPropertyName = "FullPhoneAra"
+            Me.FullPhoneAra.HeaderText = "FullPhoneAra"
+            Me.FullPhoneAra.Name = "FullPhoneAra"
+            Me.FullPhoneAra.ReadOnly = True
+            Me.FullPhoneAra.Visible = False
+            '
+            'lblStreet
+            '
+            Me.lblStreet.AutoSize = True
+            Me.lblStreet.DisplayOnly = True
+            Me.lblStreet.EditingMode = False
+            Me.lblStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblStreet.Location = New System.Drawing.Point(1, 51)
+            Me.lblStreet.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblStreet.Name = "lblStreet"
+            Me.lblStreet.Size = New System.Drawing.Size(46, 17)
+            Me.lblStreet.TabIndex = 277
+            Me.lblStreet.Text = "Street"
+            Me.lblStreet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'AreaCodeDataGridViewTextBoxColumn
+            '
+            Me.AreaCodeDataGridViewTextBoxColumn.DataPropertyName = "AreaCode"
+            Me.AreaCodeDataGridViewTextBoxColumn.HeaderText = "AreaCode"
+            Me.AreaCodeDataGridViewTextBoxColumn.Name = "AreaCodeDataGridViewTextBoxColumn"
+            Me.AreaCodeDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'DataGridViewTextBoxColumn15
+            '
+            Me.DataGridViewTextBoxColumn15.DataPropertyName = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn15.HeaderText = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn15.Name = "DataGridViewTextBoxColumn15"
+            Me.DataGridViewTextBoxColumn15.ReadOnly = True
+            '
+            'FullPhoneDataGridViewTextBoxColumn
+            '
+            Me.FullPhoneDataGridViewTextBoxColumn.DataPropertyName = "FullPhone"
+            Me.FullPhoneDataGridViewTextBoxColumn.HeaderText = "FullPhone"
+            Me.FullPhoneDataGridViewTextBoxColumn.Name = "FullPhoneDataGridViewTextBoxColumn"
+            Me.FullPhoneDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'FullPhoneAraDataGridViewTextBoxColumn
+            '
+            Me.FullPhoneAraDataGridViewTextBoxColumn.DataPropertyName = "FullPhoneAra"
+            Me.FullPhoneAraDataGridViewTextBoxColumn.HeaderText = "FullPhoneAra"
+            Me.FullPhoneAraDataGridViewTextBoxColumn.Name = "FullPhoneAraDataGridViewTextBoxColumn"
+            Me.FullPhoneAraDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'DataGridViewTextBoxColumn16
+            '
+            Me.DataGridViewTextBoxColumn16.DataPropertyName = "IdNo"
+            Me.DataGridViewTextBoxColumn16.HeaderText = "IdNo"
+            Me.DataGridViewTextBoxColumn16.Name = "DataGridViewTextBoxColumn16"
+            Me.DataGridViewTextBoxColumn16.ReadOnly = True
+            '
+            'CountryTelIdNoDataGridViewTextBoxColumn
+            '
+            Me.CountryTelIdNoDataGridViewTextBoxColumn.DataPropertyName = "CountryTelIdNo"
+            Me.CountryTelIdNoDataGridViewTextBoxColumn.HeaderText = "CountryTelIdNo"
+            Me.CountryTelIdNoDataGridViewTextBoxColumn.Name = "CountryTelIdNoDataGridViewTextBoxColumn"
+            Me.CountryTelIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PhoneNumberDataGridViewTextBoxColumn
+            '
+            Me.PhoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber"
+            Me.PhoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber"
+            Me.PhoneNumberDataGridViewTextBoxColumn.Name = "PhoneNumberDataGridViewTextBoxColumn"
+            Me.PhoneNumberDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PhoneTypeIdNoDataGridViewTextBoxColumn
+            '
+            Me.PhoneTypeIdNoDataGridViewTextBoxColumn.DataPropertyName = "PhoneTypeIdNo"
+            Me.PhoneTypeIdNoDataGridViewTextBoxColumn.HeaderText = "PhoneTypeIdNo"
+            Me.PhoneTypeIdNoDataGridViewTextBoxColumn.Name = "PhoneTypeIdNoDataGridViewTextBoxColumn"
+            Me.PhoneTypeIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'SequenceDataGridViewTextBoxColumn
+            '
+            Me.SequenceDataGridViewTextBoxColumn.DataPropertyName = "Sequence"
+            Me.SequenceDataGridViewTextBoxColumn.HeaderText = "Sequence"
+            Me.SequenceDataGridViewTextBoxColumn.Name = "SequenceDataGridViewTextBoxColumn"
+            Me.SequenceDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'EmployeeEntryTvTest
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1149, 539)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.MinimumSize = New System.Drawing.Size(1165, 480)
-            Me.Name = "EmployeeEntryTest"
+            Me.Name = "EmployeeEntryTvTest"
             Me.Text = "Employee Maintenance Form"
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
@@ -2338,20 +2437,11 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout6.PerformLayout()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.groupBoxContactInfo.ResumeLayout(False)
-            Me.CFlowLayout1.ResumeLayout(False)
-            Me.CFlowLayout1.PerformLayout()
-            Me.groupBoxAddress.ResumeLayout(False)
-            Me.floAddress.ResumeLayout(False)
-            Me.floAddress.PerformLayout()
             Me.EmployeeTabControl.ResumeLayout(False)
             Me.tbpPersonal.ResumeLayout(False)
             Me.CFlowLayout3.ResumeLayout(False)
             Me.CFlowLayout3.PerformLayout()
-            CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpContact.ResumeLayout(False)
-            Me.tbpContact.PerformLayout()
             Me.tbpEmployment.ResumeLayout(False)
             Me.CFlowLayout5.ResumeLayout(False)
             Me.tbpPayroll.ResumeLayout(False)
@@ -2360,9 +2450,16 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout7.ResumeLayout(False)
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.DataGridVewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tbpPhones.ResumeLayout(False)
+            CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout2.ResumeLayout(False)
             Me.CFlowLayout4.ResumeLayout(False)
             Me.CFlowLayout4.PerformLayout()
+            Me.floContactInformation.ResumeLayout(False)
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout()
+            CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -2382,36 +2479,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents floAddress As Libraries.CBaseControlsLibrary.CFlowLayout
-        Friend WithEvents lblStreet As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtStreet As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblDistrict As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtDistrict As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblTownCity As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtTownCity As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblProvinceState As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtProvinceState As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblCountryCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblPoBox As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtPoBox As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblZipCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtZipCode As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblPhone1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtPhone1 As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblPhone2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtPhone2 As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblEmail As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtEmail As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents groupBoxAddress As Libraries.CBaseControlsLibrary.CGroupBox
-        Friend WithEvents groupBoxContactInfo As Libraries.CBaseControlsLibrary.CGroupBox
-        Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
@@ -2477,16 +2550,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents EarningTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsPhones As BindingSource
         Friend WithEvents dgvInternationalCode As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
         Friend WithEvents dgvPhoneNumber As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-        Friend WithEvents PhoneNumber As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvColumnMoney
@@ -2505,6 +2571,46 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+        Friend WithEvents tbpPhones As TabPage
+        Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents PhoneNumber As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents floContactInformation As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents txtZipCode As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblZipCode As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtPoBox As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblPoBox As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblCountryCode As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtProvinceState As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblProvinceState As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtTownCity As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblTownCity As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtDistrict As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblDistrict As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtStreet As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtEmail As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblEmail As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents DataGridViewPhoneDisplay As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents FullPhone As DataGridViewTextBoxColumn
+        Friend WithEvents FullPhoneAra As DataGridViewTextBoxColumn
+        Friend WithEvents AreaCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn15 As DataGridViewTextBoxColumn
+        Friend WithEvents FullPhoneDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents FullPhoneAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn16 As DataGridViewTextBoxColumn
+        Friend WithEvents CountryTelIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PhoneNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PhoneTypeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents SequenceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents lblStreet As Libraries.CBaseControlsLibrary.CLabel
     End Class
 
 End Namespace
