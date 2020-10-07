@@ -16,8 +16,6 @@ Public Class MappingProfileCommon
         CreateMap(Of BranchModel, IBranchView).ReverseMap()
         CreateMap(Of Country, CountryModel).ReverseMap()
         CreateMap(Of CountryModel, ICountryView).ReverseMap()
-        CreateMap(Of CountryTelCode, CountryTelCodeModel).ReverseMap()
-        CreateMap(Of CountryTelCodeModel, ICountryTelCodeView).ReverseMap()
         CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
         CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
         CreateMap(Of Department, DepartmentModel).ReverseMap()

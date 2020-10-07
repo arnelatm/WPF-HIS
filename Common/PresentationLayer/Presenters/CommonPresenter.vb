@@ -216,6 +216,11 @@ Namespace PresentationLayer.Presenters
             Return GetTableList()
         End Function
 
+        Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
+            Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode",
+                                 "Country", sortKey, "")
+        End Function
+
         Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
             TableToGet = "RevCostCenter"
             SortExpression = sortKey
