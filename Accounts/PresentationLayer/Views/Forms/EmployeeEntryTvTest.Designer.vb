@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class EmployeeEntryTv
+    Partial Class EmployeeEntryTest
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -23,22 +23,21 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTest))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floMainDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -133,15 +132,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEarnings = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout7 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridVewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -158,6 +148,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floMainDisplay.SuspendLayout()
             Me.CFlowLayout6.SuspendLayout()
@@ -552,7 +551,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateType.EditingMode = False
             Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
+            Me.lblPayRateType.Location = New System.Drawing.Point(4, 183)
             Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateType.Name = "lblPayRateType"
             Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
@@ -572,7 +571,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
             Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 182)
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 183)
             Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayRateAmount.MaximumValue = Nothing
             Me.txtPayRateAmount.MinimumValue = Nothing
@@ -590,7 +589,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateAmount.EditingMode = False
             Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 207)
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
             Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateAmount.Name = "lblPayRateAmount"
             Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
@@ -616,7 +615,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 207)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 208)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -1989,14 +1988,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningAmount, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
             Me.DataGridViewEarnings.DataInGridChanged = False
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle8
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
@@ -2013,112 +2012,24 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.StartTrackingChanges = False
             Me.DataGridViewEarnings.TabIndex = 0
             '
-            'dgvSequenceEarning
-            '
-            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle7
-            Me.dgvSequenceEarning.EditingMode = False
-            Me.dgvSequenceEarning.HeaderText = "Seq"
-            Me.dgvSequenceEarning.MinimumWidth = 40
-            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
-            Me.dgvSequenceEarning.ReadOnly = True
-            Me.dgvSequenceEarning.Width = 40
-            '
-            'dgvEarningIdNo
-            '
-            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvEarningIdNo.DataPropertyName = "EarningIdNo"
-            Me.dgvEarningIdNo.HeaderText = "EarningIdNo"
-            Me.dgvEarningIdNo.MinimumWidth = 200
-            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
-            Me.dgvEarningIdNo.ReadOnly = True
-            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'dgvEarningAmount
-            '
-            Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle8
-            Me.dgvEarningAmount.EditingMode = False
-            Me.dgvEarningAmount.HeaderText = "Amount"
-            Me.dgvEarningAmount.MinimumWidth = 100
-            Me.dgvEarningAmount.Name = "dgvEarningAmount"
-            Me.dgvEarningAmount.ReadOnly = True
-            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'DataGridViewTextBoxColumn3
-            '
-            Me.DataGridViewTextBoxColumn3.DataPropertyName = "EarningCode"
-            Me.DataGridViewTextBoxColumn3.HeaderText = "EarningCode"
-            Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-            Me.DataGridViewTextBoxColumn3.ReadOnly = True
-            Me.DataGridViewTextBoxColumn3.Visible = False
-            '
-            'DataGridViewTextBoxColumn4
-            '
-            Me.DataGridViewTextBoxColumn4.DataPropertyName = "EarningName"
-            Me.DataGridViewTextBoxColumn4.HeaderText = "EarningName"
-            Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-            Me.DataGridViewTextBoxColumn4.ReadOnly = True
-            Me.DataGridViewTextBoxColumn4.Visible = False
-            '
-            'DataGridViewTextBoxColumn5
-            '
-            Me.DataGridViewTextBoxColumn5.DataPropertyName = "EarningNameAra"
-            Me.DataGridViewTextBoxColumn5.HeaderText = "EarningNameAra"
-            Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-            Me.DataGridViewTextBoxColumn5.ReadOnly = True
-            Me.DataGridViewTextBoxColumn5.Visible = False
-            '
-            'DataGridViewTextBoxColumn6
-            '
-            Me.DataGridViewTextBoxColumn6.DataPropertyName = "EarningType"
-            Me.DataGridViewTextBoxColumn6.HeaderText = "EarningType"
-            Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-            Me.DataGridViewTextBoxColumn6.ReadOnly = True
-            Me.DataGridViewTextBoxColumn6.Visible = False
-            '
-            'DataGridViewTextBoxColumn7
-            '
-            Me.DataGridViewTextBoxColumn7.DataPropertyName = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn7.HeaderText = "EmployeeIdNo"
-            Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-            Me.DataGridViewTextBoxColumn7.ReadOnly = True
-            Me.DataGridViewTextBoxColumn7.Visible = False
-            '
-            'DataGridViewTextBoxColumn8
-            '
-            Me.DataGridViewTextBoxColumn8.DataPropertyName = "IdNo"
-            Me.DataGridViewTextBoxColumn8.HeaderText = "IdNo"
-            Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-            Me.DataGridViewTextBoxColumn8.ReadOnly = True
-            Me.DataGridViewTextBoxColumn8.Visible = False
-            '
             'DataGridVewDeductions
             '
             Me.DataGridVewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridVewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridVewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridVewDeductions.AutoGenerateColumns = False
             Me.DataGridVewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridVewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionAmount, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
             Me.DataGridVewDeductions.DataInGridChanged = False
             Me.DataGridVewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridVewDeductions.DefaultCellStyle = DataGridViewCellStyle13
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridVewDeductions.DefaultCellStyle = DataGridViewCellStyle12
             Me.DataGridVewDeductions.DisplayOnly = False
             Me.DataGridVewDeductions.Ea = EventAggregator2
             Me.DataGridVewDeductions.EditingMode = False
@@ -2138,9 +2049,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequenceDeduction
             '
             Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvSequenceDeduction.EditingMode = False
             Me.dgvSequenceDeduction.HeaderText = "Seq"
             Me.dgvSequenceDeduction.MinimumWidth = 40
@@ -2163,11 +2074,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionAmount
             '
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Amount"
             Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
@@ -2326,13 +2237,98 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Size = New System.Drawing.Size(829, 82)
             Me.CFlowLayout4.TabIndex = 6
             '
-            'EmployeeEntryTv
+            'dgvSequenceEarning
+            '
+            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
+            Me.dgvSequenceEarning.EditingMode = False
+            Me.dgvSequenceEarning.HeaderText = "Seq"
+            Me.dgvSequenceEarning.MinimumWidth = 40
+            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
+            Me.dgvSequenceEarning.ReadOnly = True
+            Me.dgvSequenceEarning.Width = 40
+            '
+            'dgvEarningIdNo
+            '
+            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvEarningIdNo.DataPropertyName = "EarningIdNo"
+            Me.dgvEarningIdNo.HeaderText = "EarningIdNo"
+            Me.dgvEarningIdNo.MinimumWidth = 200
+            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
+            Me.dgvEarningIdNo.ReadOnly = True
+            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvEarningAmount
+            '
+            Me.dgvEarningAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle7.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvEarningAmount.EditingMode = False
+            Me.dgvEarningAmount.HeaderText = "Amount"
+            Me.dgvEarningAmount.MinimumWidth = 100
+            Me.dgvEarningAmount.Name = "dgvEarningAmount"
+            Me.dgvEarningAmount.ReadOnly = True
+            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'DataGridViewTextBoxColumn3
+            '
+            Me.DataGridViewTextBoxColumn3.DataPropertyName = "EarningCode"
+            Me.DataGridViewTextBoxColumn3.HeaderText = "EarningCode"
+            Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+            Me.DataGridViewTextBoxColumn3.ReadOnly = True
+            Me.DataGridViewTextBoxColumn3.Visible = False
+            '
+            'DataGridViewTextBoxColumn4
+            '
+            Me.DataGridViewTextBoxColumn4.DataPropertyName = "EarningName"
+            Me.DataGridViewTextBoxColumn4.HeaderText = "EarningName"
+            Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+            Me.DataGridViewTextBoxColumn4.ReadOnly = True
+            Me.DataGridViewTextBoxColumn4.Visible = False
+            '
+            'DataGridViewTextBoxColumn5
+            '
+            Me.DataGridViewTextBoxColumn5.DataPropertyName = "EarningNameAra"
+            Me.DataGridViewTextBoxColumn5.HeaderText = "EarningNameAra"
+            Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+            Me.DataGridViewTextBoxColumn5.ReadOnly = True
+            Me.DataGridViewTextBoxColumn5.Visible = False
+            '
+            'DataGridViewTextBoxColumn6
+            '
+            Me.DataGridViewTextBoxColumn6.DataPropertyName = "EarningType"
+            Me.DataGridViewTextBoxColumn6.HeaderText = "EarningType"
+            Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+            Me.DataGridViewTextBoxColumn6.ReadOnly = True
+            Me.DataGridViewTextBoxColumn6.Visible = False
+            '
+            'DataGridViewTextBoxColumn7
+            '
+            Me.DataGridViewTextBoxColumn7.DataPropertyName = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn7.HeaderText = "EmployeeIdNo"
+            Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+            Me.DataGridViewTextBoxColumn7.ReadOnly = True
+            Me.DataGridViewTextBoxColumn7.Visible = False
+            '
+            'DataGridViewTextBoxColumn8
+            '
+            Me.DataGridViewTextBoxColumn8.DataPropertyName = "IdNo"
+            Me.DataGridViewTextBoxColumn8.HeaderText = "IdNo"
+            Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+            Me.DataGridViewTextBoxColumn8.ReadOnly = True
+            Me.DataGridViewTextBoxColumn8.Visible = False
+            '
+            'EmployeeEntryTest
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1149, 539)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.MinimumSize = New System.Drawing.Size(1165, 480)
-            Me.Name = "EmployeeEntryTv"
+            Me.Name = "EmployeeEntryTest"
             Me.Text = "Employee Maintenance Form"
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)

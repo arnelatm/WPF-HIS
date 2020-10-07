@@ -79,7 +79,7 @@ Public Class CDataGridView
         End Set
     End Property
 
-    Private Sub dataGridView_CellEnter(ByVal sender As Object,
+    Private Sub DataGridView_CellEnter(ByVal sender As Object,
                                         ByVal e As DataGridViewCellEventArgs) _
         Handles Me.CellEnter
         If Columns(SequenceColumn) IsNot Nothing Then
@@ -354,7 +354,7 @@ Public Class CDataGridView
         End Try
     End Sub
 
-    Private Sub dataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
+    Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
         SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
         Rows(e.RowIndex).Selected = True
     End Sub
