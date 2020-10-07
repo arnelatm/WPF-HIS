@@ -22,6 +22,8 @@ Namespace BusinessLayer
         Public Property PhoneTypeIdNo As Int16
         Public Property PhoneNumber As String
         Public Property Sequence As Int16
+        Public Property FullPhone As String
+        Public Property FullPhoneAra As String
     End Class
 
 End Namespace

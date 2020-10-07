@@ -348,24 +348,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Phone1 As String Implements IEmployeeView.Phone1
-            Get
-                Return txtPhone1.Text
-            End Get
-            Set
-                txtPhone1.Text = Value
-            End Set
-        End Property
-
-        Public Property Phone2 As String Implements IEmployeeView.Phone2
-            Get
-                Return txtPhone2.Text
-            End Get
-            Set
-                txtPhone2.Text = Value
-            End Set
-        End Property
-
         Public Property PoBox As String Implements IEmployeeView.PoBox
             Get
                 Return txtPoBox.Text
@@ -486,8 +468,6 @@ Namespace PresentationLayer.Views.Forms
          {"NationalityCode", cacNationalityCode},
          {"Notes", txtNotes},
          {"OpeningBalance", txtOpeningBalance},
-         {"Phone1", txtPhone1},
-         {"Phone2", txtPhone2},
          {"PoBox", txtPoBox},
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},

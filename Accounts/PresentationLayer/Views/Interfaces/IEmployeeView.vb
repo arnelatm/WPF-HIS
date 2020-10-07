@@ -29,8 +29,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property PaySalariedOrHourly As String
         Property PayRateAmount As Decimal
         Property PayRateType As String
-        Property Phone1 As String
-        Property Phone2 As String
         Property PoBox As String
         Property ProvinceState As String
         Property ReleasedDate As Date?
