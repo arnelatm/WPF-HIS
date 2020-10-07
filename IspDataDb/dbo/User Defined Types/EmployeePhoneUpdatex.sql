@@ -1,18 +1,10 @@
-﻿CREATE TYPE [dbo].[EmployeePhoneUpdate] AS TABLE (
+﻿CREATE TYPE [dbo].[EmployeePhoneUpdatex] AS TABLE (
     [AreaCode]       VARCHAR (5)  NULL,
-    [CountryTelIdNo] SMALLINT     NULL,
     [EmployeeIdNo]   INT          NOT NULL,
     [IDNo]           INT          NOT NULL,
+    [CountryTelIdNo] SMALLINT     NULL,
     [PhoneNumber]    VARCHAR (14) NOT NULL,
     [PhoneTypeIdNo]  SMALLINT     NOT NULL,
     [Sequence]       TINYINT      NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
-
-
-
-
-
-
-
-
 

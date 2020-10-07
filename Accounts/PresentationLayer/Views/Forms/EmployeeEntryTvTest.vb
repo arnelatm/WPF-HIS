@@ -7,7 +7,7 @@ Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeEntryTest
+    Public Class EmployeeEntryTvTest
         Implements IEmployeeView
 
         Private ReadOnly _nfi As NumberFormatInfo
@@ -467,8 +467,6 @@ Namespace PresentationLayer.Views.Forms
          {"NationalityCode", cacNationalityCode},
          {"Notes", txtNotes},
          {"OpeningBalance", txtOpeningBalance},
-         {"Phone1", txtPhone1},
-         {"Phone2", txtPhone2},
          {"PoBox", txtPoBox},
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
@@ -552,6 +550,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
+        End Sub
+
+        Private Sub txtStreet_TextChanged(sender As Object, e As EventArgs)
+
         End Sub
 
     End Class

@@ -1,9 +1,25 @@
-﻿CREATE VIEW dbo.EmployeePhone_View
+﻿
+
+
+CREATE VIEW [dbo].[EmployeePhone_View]
 AS
 SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.PhoneType.PhoneTypeNameAra, dbo.EmployeePhone.CountryTelIdNo, dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, 
-                         dbo.EmployeePhone.PhoneTypeIdNo, dbo.EmployeePhone.AreaCode, dbo.EmployeePhone.PhoneNumber, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.EmployeePhone.Sequence
+                         dbo.EmployeePhone.PhoneTypeIdNo, dbo.EmployeePhone.AreaCode, dbo.EmployeePhone.PhoneNumber, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.EmployeePhone.Sequence, 
+                         dbo.PhoneType.PhoneTypeName COLLATE SQL_Latin1_General_CP1_CS_AS +
+						 Case 
+							When dbo.EmployeePhone.CountryTelIdNo IS NULL then ' '
+							Else ' ' + Trim(dbo.Country.CountryTelCode)
+						 End +
+						 ' (' + dbo.EmployeePhone.AreaCode + ') ' + dbo.EmployeePhone.PhoneNumber AS FullPhone, 
+                         dbo.PhoneType.PhoneTypeName COLLATE Arabic_CI_AS + 
+						 Case 
+							When dbo.EmployeePhone.CountryTelIdNo IS NULL then ' '
+							Else ' ' + Trim(dbo.Country.CountryTelCode)
+						 End +
+						 ' (' + dbo.EmployeePhone.AreaCode + ') ' + dbo.EmployeePhone.PhoneNumber AS FullPhoneAra, dbo.Country.CountryTelCode
 FROM            dbo.EmployeePhone INNER JOIN
-                         dbo.Employee ON dbo.EmployeePhone.EmployeeIdNo = dbo.Employee.IdNo INNER JOIN
+                         dbo.Employee ON dbo.EmployeePhone.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
+                         dbo.Country ON dbo.EmployeePhone.CountryTelIdNo = dbo.Country.IDNo LEFT OUTER JOIN
                          dbo.PhoneType ON dbo.EmployeePhone.PhoneTypeIdNo = dbo.PhoneType.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
@@ -81,6 +97,16 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
+         Begin Table = "EmployeePhone"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 304
+               Right = 213
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
          Begin Table = "Employee"
             Begin Extent = 
                Top = 0
@@ -101,15 +127,15 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "EmployeePhone"
+         Begin Table = "Country"
             Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 304
-               Right = 213
+               Top = 127
+               Left = 590
+               Bottom = 316
+               Right = 772
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 5
          End
       End
    End
@@ -121,9 +147,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
+         Column = 4815
+         Alias = 1680
+         Table = 5280
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -138,6 +164,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
+
+
 
 
 
