@@ -351,10 +351,10 @@
     <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.Designer.vb">
-      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvOld.Designer.vb">
+      <DependentUpon>EmployeeEntryTvOld.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvOld.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.designer.vb">
@@ -1881,8 +1881,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.resx">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
-      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTvOld.resx">
+      <DependentUpon>EmployeeEntryTvOld.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ErJournalEntry.resx">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
