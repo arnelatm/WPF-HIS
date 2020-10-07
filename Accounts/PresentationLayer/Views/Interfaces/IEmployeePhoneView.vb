@@ -6,10 +6,12 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
         Property AreaCode As String
         Property CountryTelIdNo As Int16
+        Property EmployeeIdNo As Int32
+        Property FullPhone As String
+        Property FullPhoneAra As String
+        Property IdNo As Int32
         Property PhoneNumber As String
         Property PhoneTypeIdNo As Int16
-        Property EmployeeIdNo As Int32
-        Property IdNo As Int32
         Property Sequence As Int16
     End Interface
 
