@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
             Ea.SubscribeEvent(Me)
             'DataGridViewEarnings.Ea.SubscribeEvent(Me)
             'DataGridViewDeductions.Ea.SubscribeEvent(Me)
-
+            EmployeeTabControl.TabPages.Remove(tbpPhoneNumbers)
         End Sub
 
 #Region "Fields"
@@ -558,6 +558,16 @@ Namespace PresentationLayer.Views.Forms
                 dgvCountryTelIdNo.AutoComplete = True
             End With
             ResumeLayout()
+        End Sub
+
+        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
+            EmployeeTabControl.TabPages.Add(tbpPhoneNumbers)
+            EmployeeTabControl.SelectTab(tbpPhoneNumbers)
+        End Sub
+
+        Private Sub DataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
+            EmployeeTabControl.TabPages.Add(tbpPhoneNumbers)
+            EmployeeTabControl.SelectTab(tbpPhoneNumbers)
         End Sub
 
     End Class
