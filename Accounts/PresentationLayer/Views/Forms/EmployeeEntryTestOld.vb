@@ -552,6 +552,10 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
+        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
+
+        End Sub
+
         'Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
         '    EmployeeTabControl.TabPages.Add(tbpPhones)
         '    EmployeeTabControl.SelectTab(tbpPhones)

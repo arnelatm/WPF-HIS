@@ -151,16 +151,18 @@ Public Class CDataGridView
     End Property
 
     Public Sub AddInsertColumn()
-        With Columns
-            Dim dgvInsColumn As New DataGridViewImageColumn
-            .Insert(.Count, dgvInsColumn)
-            dgvInsColumn.Image = Images.InsertRowImage
-            dgvInsColumn.Width = 30
-            dgvInsColumn.Name = "dgvInsertColumn"
-            dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
-            _insertColumnAdded = True
-            _dgvInsertColumnIndex = dgvInsColumn.Index
-        End With
+        If Not DisplayOnly AndAlso Not Me.Columns.Contains("dgvInsertColumn") Then
+            With Columns
+                Dim dgvInsColumn As New DataGridViewImageColumn
+                .Insert(.Count, dgvInsColumn)
+                dgvInsColumn.Image = Images.InsertRowImage
+                dgvInsColumn.Width = 30
+                dgvInsColumn.Name = "dgvInsertColumn"
+                dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
+                _insertColumnAdded = True
+                _dgvInsertColumnIndex = dgvInsColumn.Index
+            End With
+        End If
     End Sub
 
     Public Sub RemoveInsertColumn()
@@ -268,27 +270,29 @@ Public Class CDataGridView
     End Sub
 
     Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
-        With CurrentCell
-            Select Case .OwningColumn.Name.ToLower()
-                Case $"dgvinsertcolumn"
-                    'If (CurrentRow.Index() <> NewRowIndex()) Then
-                    'If Ea IsNot Nothing Then
-                    '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-                    'End If
-                    If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                        Dim myBindingSource = CType(DataSource, BindingSource)
-                        Dim current = myBindingSource.Current
-                        Dim dataList = current.BlankCopy()
-                        myBindingSource.Insert(.RowIndex(), dataList)
-                        ReSequenceDgvAfterInsert()
-                        CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                    Else
-                        Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                    End If
-                    'End If
+        If EditingMode Then
+            With CurrentCell
+                Select Case .OwningColumn.Name.ToLower()
+                    Case $"dgvinsertcolumn"
+                        'If (CurrentRow.Index() <> NewRowIndex()) Then
+                        'If Ea IsNot Nothing Then
+                        '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                        'End If
+                        If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+                            Dim myBindingSource = CType(DataSource, BindingSource)
+                            Dim current = myBindingSource.Current
+                            Dim dataList = current.BlankCopy()
+                            myBindingSource.Insert(.RowIndex(), dataList)
+                            ReSequenceDgvAfterInsert()
+                            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+                        Else
+                            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+                        End If
+                        'End If
 
-            End Select
-        End With
+                End Select
+            End With
+        End If
     End Sub
 
     'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter

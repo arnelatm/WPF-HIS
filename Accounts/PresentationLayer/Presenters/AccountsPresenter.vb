@@ -180,6 +180,11 @@ Namespace PresentationLayer.Presenters
                                  "CashCode", sortKey, "")
         End Function
 
+        Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
+            Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode",
+                                 "Country", sortKey, "")
+        End Function
+
         Public Function GetEndingGlBalance(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
             Return DataModel.GetEndingGlBalance(AccountIdNo, reconciliationDate)
         End Function

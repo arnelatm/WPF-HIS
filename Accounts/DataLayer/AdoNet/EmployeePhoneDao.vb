@@ -20,13 +20,16 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT " &
                     "AreaCode," &
+                    "CountryTelIdNo," &
+                    "CountryTelCode," &
                     "EmployeeIdNo," &
                     "FullPhone," &
                     "FullPhoneAra," &
                     "IdNo," &
-                    "CountryTelIdNo," &
                     "PhoneNumber," &
                     "PhoneTypeIdNo," &
+                    "PhoneTypeName," &
+                    "PhoneTypeNameAra," &
                     "Sequence" &
                     " FROM [EmployeePhone_View]" &
                     " WHERE EmployeeIdNo = @IdNo" &
@@ -50,10 +53,13 @@ Namespace DataLayer.AdoNet
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .CountryTelIdNo = Extensions.AsId(Of Int16)(reader("CountryTelIdNo")),
+            .CountryTelCode = Extensions.AsString(reader("CountryTelCode")),
             .FullPhone = Extensions.AsString(reader("FullPhone")),
             .FullPhoneAra = Extensions.AsString(reader("FullPhoneAra")),
             .PhoneNumber = Extensions.AsString(reader("PhoneNumber")),
             .PhoneTypeIdNo = Extensions.AsId(Of Int16)(reader("PhoneTypeIdNo")),
+            .PhoneTypeName = Extensions.AsString(reader("PhoneTypeName")),
+            .PhoneTypeNameAra = Extensions.AsString(reader("PhoneTypeNameAra")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 
