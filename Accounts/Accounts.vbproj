@@ -285,10 +285,10 @@
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTestOld.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvTest.designer.vb">
-      <DependentUpon>EmployeeEntryTvTest.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvTest.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
@@ -1837,8 +1837,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTestOld.resx">
       <DependentUpon>EmployeeEntryTestOld.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTvTest.resx">
-      <DependentUpon>EmployeeEntryTvTest.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>

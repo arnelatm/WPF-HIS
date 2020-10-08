@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views
 
         Public Property FullPhone As String Implements IEmployeePhoneView.FullPhone
             Get
-                Return PhoneTypeName + " " + CountryTelCode + " (" + AreaCode + ") " + PhoneNumber
+                Return PhoneTypeName + " " + IIf(CountryTelCode = "", "", "+" + CountryTelCode) + " (" + AreaCode + ") " + PhoneNumber
             End Get
             Set(value As String)
                 _fullPhone = value
