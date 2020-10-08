@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
+Imports CrystalDecisions.Shared.Json
 
 Namespace PresentationLayer.Views.Forms
 
@@ -17,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private _employeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneTypes
+        Private _intPhoneCodes
         'Private _countryTelCodes As List(Of CountryTelCodeView)
         'Private ReadOnly _dgvEarningsEa As EventAggregator
 
@@ -442,6 +444,7 @@ Namespace PresentationLayer.Views.Forms
             _deductionsByName = PresenterObj.GetListByCode("Deduction")
             _earningsByName = PresenterObj.GetListByCode("Earning")
             _phoneTypes = PresenterObj.GetListByCode("PhoneType")
+            _intPhoneCodes = PresenterObj.GetIntPhoneCodes()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -523,7 +526,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewEarnings.Columns
                 dgvEarningIdNo.DataSource = _earningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
-                dgvEarningIdNo.ValueMember = "Code"
+                dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
             End With
@@ -543,19 +546,66 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPhones.Columns
+                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvPhoneTypeIdNo.DataSource = _phoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvCountryTelIdNo.DataSource = _intPhoneCodes
+                dgvCountryTelIdNo.DisplayMember = "Name"
+                dgvCountryTelIdNo.ValueMember = "Code"
+                dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
 
-        Private Sub txtStreet_TextChanged(sender As Object, e As EventArgs)
-
+        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
+            If Not EmployeeTabControl.Controls.Contains(tbpPhones) Then
+                tbpPhones.Parent = EmployeeTabControl
+                'EmployeeTabControl.TabPages.Add(tbpPhones)
+                'tbpPhones.Controls.Add(DataGridViewPhones)
+            End If
+            EmployeeTabControl.SelectTab(tbpPhones)
         End Sub
 
+        Private Sub tbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave
+            tbpPhones.Parent = Nothing
+            BindEmployeePhone()
+        End Sub
+
+        Private Sub EmployeeEntryTvTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            tbpPhones.Parent = Nothing
+        End Sub
+
+        Private Sub DataGridViewPhones_Enter(sender As Object, e As EventArgs) Handles DataGridViewPhones.Enter
+            If btnEdit.Enabled Or btnAdd.Enabled Then
+                DataGridViewPhones.EditingMode = False
+            Else
+                DataGridViewPhones.EditingMode = True
+            End If
+        End Sub
+
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhones.CellEndEdit
+
+            'DataGridViewPhones.CurrentRow.Cells("dgvFullPhone").Value = DataGridViewPhones.CurrentRow.DataBoundItem.PhoneTypeIdNo.ToString() + "(" + DataGridViewPhones.CurrentRow.DataBoundItem.AreaCode + ")" + DataGridViewPhones.CurrentRow.DataBoundItem.PhoneNumber
+            With DataGridViewPhones
+                Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                    Case $"dgvcountrytelid"
+                        bsPhones.Current.CountryTelCode = DirectCast(DataGridViewPhones.CurrentCell, System.Windows.Forms.DataGridViewComboBoxCell).DataSource(0).Code
+                    Case Else
+                        'x
+                End Select
+            End With
+        End Sub
+
+        'Private Sub EmployeeEntryTvTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    EmployeeTabControl.TabPages()
+        'End Sub
+
+        '    EmployeeTabControl.TabPages.Add(tbpPhones)
+        '    EmployeeTabControl.SelectTab(tbpPhones)
     End Class
 
 End Namespace
