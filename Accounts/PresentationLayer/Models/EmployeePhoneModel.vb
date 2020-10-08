@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class EmployeePhoneModel
         Public Property AreaCode As String
-        Public Property CountryTelCode As Int16
+        Public Property CountryTelCode As String
         Public Property CountryTelIdNo As Int16
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)

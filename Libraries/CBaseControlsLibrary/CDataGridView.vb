@@ -433,6 +433,23 @@ Public Class CDataGridView
         Return _lastEditableColumn
     End Function
 
+    Public Function GetEditingValue(currentCell As Object, Optional field As String = "")
+        If currentCell IsNot Nothing Then
+            Select Case field.ToLower()
+                Case $"code"
+                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+                Case $"name"
+                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+                Case $"idno"
+                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+                Case Else
+                    Return currentCell.Value
+            End Select
+        End If
+        'DirectCast(currentcell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem
+        'DirectCast(DirectCast(DataGridViewPhones.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+    End Function
+
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
