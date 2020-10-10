@@ -433,21 +433,28 @@ Public Class CDataGridView
         Return _lastEditableColumn
     End Function
 
-    Public Function GetEditingValue(currentCell As Object, Optional field As String = "")
-        If currentCell IsNot Nothing Then
-            Select Case field.ToLower()
-                Case $"code"
-                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
-                Case $"name"
-                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
-                Case $"idno"
-                    Return DirectCast(DirectCast(currentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
-                Case Else
-                    Return currentCell.Value
-            End Select
+    Public Function GetEditingValue(cCurrentCell As Object, Optional field As String = "")
+        If cCurrentCell IsNot Nothing Then
+            Dim dgvControl As Libraries.CBaseControlsLibrary.CaDgvComboboxCell
+            dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
+            If dgvControl IsNot Nothing Then
+                If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
+                    Select Case field.ToLower()
+                        Case $"code"
+                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+                        Case $"name"
+                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+                        Case $"idno"
+                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+                        Case Else
+                            Return cCurrentCell.Value
+                    End Select
+                Else
+                    Return cCurrentCell.Value
+                End If
+            End If
         End If
-        'DirectCast(currentcell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem
-        'DirectCast(DirectCast(DataGridViewPhones.CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+        Return Nothing
     End Function
 
     'Public Sub AddDeleteColumn()

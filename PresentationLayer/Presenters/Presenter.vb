@@ -1338,6 +1338,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     'End Sub
 
+    Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
+        For i = 0 To rowColumns.GetLength(0) - 1
+            dataTable.Columns.Add(rowColumns(i, 0), rowColumns(i, 1))
+        Next
+    End Sub
+
     Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
         Dim retValue As DialogResult
         Dim dateField As String = Messaging.TranslateCaption(text)
