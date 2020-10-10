@@ -35,46 +35,47 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Private Function CreateDataTables()
+        Private Sub CreateDataTables()
 
-            DtEarnInsertTable.Columns.Add("Amount", GetType(Decimal))
-            DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
-            DtEarnInsertTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
+                                             {"EarningIdNo", GetType(Int16)},
+                                             {"EmployeeIdNo", GetType(Int32)},
+                                             {"Sequence", GetType(Int16)}})
 
-            DtDeductInsertTable.Columns.Add("Amount", GetType(Decimal))
-            DtDeductInsertTable.Columns.Add("DeductionIdNo", GetType(Int16))
-            DtDeductInsertTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtDeductInsertTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtDeductInsertTable, {{"Amount", GetType(Decimal)},
+                                              {"DeductionIdNo", GetType(Int16)},
+                                              {"EmployeeIdNo", GetType(Int32)},
+                                              {"Sequence", GetType(Int16)}})
 
-            DtPhoneInsertTable.Columns.Add("AreaCode", GetType(String))
-            DtPhoneInsertTable.Columns.Add("CountryTelIdNo", GetType(Int16))
-            DtPhoneInsertTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtPhoneInsertTable.Columns.Add("PhoneNumber", GetType(String))
-            DtPhoneInsertTable.Columns.Add("PhoneTypeIdNo", GetType(Int16))
-            DtPhoneInsertTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
+                                             {"CountryTelIdNo", GetType(Int16)},
+                                             {"EmployeeIdNo", GetType(Int32)},
+                                             {"PhoneNumber", GetType(String)},
+                                             {"PhoneTypeIdNo", GetType(Int16)},
+                                             {"Sequence", GetType(Int16)}})
 
-            DtEarnUpdateTable.Columns.Add("Amount", GetType(Decimal))
-            DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
-            DtEarnUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtEarnUpdateTable, {{"Amount", GetType(Decimal)},
+                                            {"EarningIdNo", GetType(Int16)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"IdNo", GetType(Int32)},
+                                            {"Sequence", GetType(Int16)}})
 
-            DtDeductUpdateTable.Columns.Add("Amount", GetType(Decimal))
-            DtDeductUpdateTable.Columns.Add("DeductionIdNo", GetType(Int16))
-            DtDeductUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtDeductUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtDeductUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtDeductUpdateTable, {{"Amount", GetType(Decimal)},
+                                              {"DeductionIdNo", GetType(Int16)},
+                                              {"EmployeeIdNo", GetType(Int32)},
+                                              {"IdNo", GetType(Int32)},
+                                              {"Sequence", GetType(Int16)}})
 
-            DtPhoneUpdateTable.Columns.Add("AreaCode", GetType(String))
-            DtPhoneUpdateTable.Columns.Add("CountryTelIdNo", GetType(Int16))
-            DtPhoneUpdateTable.Columns.Add("EmployeeIdNo", GetType(Int32))
-            DtPhoneUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtPhoneUpdateTable.Columns.Add("PhoneNumber", GetType(String))
-            DtPhoneUpdateTable.Columns.Add("PhoneTypeIdNo", GetType(Int16))
-            DtPhoneUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtPhoneUpdateTable, {{"AreaCode", GetType(String)},
+                                             {"CountryTelIdNo", GetType(Int16)},
+                                             {"EmployeeIdNo", GetType(Int32)},
+                                             {"IdNo", GetType(Int32)},
+                                             {"PhoneNumber", GetType(String)},
+                                             {"PhoneTypeIdNo", GetType(Int16)},
+                                             {"Sequence", GetType(Int16)}
+                                            })
 
-        End Function
+        End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
             Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
@@ -141,13 +142,6 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        'Private Sub FillDataRow(item As Object, idNo As Integer, workRow As DataRow, nRowCount As Short)
-        '    workRow("Amount") = CallByName(item, "Amount", CallType.Get)
-        '    workRow("EarningIdNo") = CallByName(item, "EarningIdNo", CallType.Get)
-        '    workRow("EmployeeIdNo") = idNo
-        '    workRow("Sequence") = nRowCount
-        'End Sub
-
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_employeeDeductionModel, DtDeductUpdateTable, DtDeductInsertTable, passedValue, "EmployeeIdNo")
@@ -159,20 +153,88 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'Function Func1(item As EmployeeDeductionView)
-        '    Dim workRow As DataRow
-        '    If item.IdNo <= 0 Then
-        '        workRow = DtDeductInsertTable.NewRow()
-        '    Else
-        '        workRow = DtDeductUpdateTable.NewRow()
-        '        workRow("IdNo") = item.IdNo
-        '    End If
-        '    workRow("Amount") = item.Amount
-        '    workRow("DeductionIdNo") = item.DeductionIdNo
-        '    workRow("EmployeeIdNo") = View.IdNo
-        '    workRow("Sequence") = 1 ' nRowCount
-        '    Return workRow
-        'End Function
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                ' look for duplicate earningidno in bsEarning
+                Dim duplicate = FirstFieldDuplicate(Of EmployeeEarningView, Int16)(View.EmployeeEarnings, "EarningIdNo")
+                If duplicate IsNot Nothing Then
+                    MessageBox.Show("Duplicate earning value found in Employee Earnings. See line <" + (duplicate + 1).ToString() + ">.")
+                Else
+                    duplicate = FirstFieldDuplicate(Of EmployeeDeductionView, Int16)(View.EmployeeDeductions, "DeductionIdNo")
+                    If duplicate IsNot Nothing Then
+                        MessageBox.Show("Duplicate earning value found in Employee Deductions. See line <" + (duplicate + 1).ToString() + ">.")
+                    Else
+                        retValue = True
+                    End If
+                    'For Each item In View.EmployeeEarnings
+                    '    item.EarningIdNo
+
+                    'Next
+                    'If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    '    If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
+                    '        Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                    '        retValue = False
+                    '    End If
+                    '    If retValue Then
+                    '        retValue = JournalItemDataIsValid()
+                    '    End If
+                    'ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                    '    If CadOiItemDataIsValid() Then
+                    '        retValue = True
+                    '    Else
+                    '        retValue = False
+                    '        Dim index As Int16 = 0
+                    '        For Each item In View.CadOiItems
+                    '            If item.Errors IsNot Nothing Then
+                    '                View.CadOiItems(index).Errors = item.Errors
+                    '            Else
+                    '                If View.CadOiItems(index).Errors IsNot Nothing Then
+                    '                    View.CadOiItems(index).Errors.Clear()
+                    '                End If
+                    '            End If
+                    '            index += 1
+                    '        Next
+                    '    End If
+                    'End If
+                End If
+            End If
+            Return retValue
+        End Function
+
+        Private Function hasDuplicates(Of T)(ByVal myList As List(Of T)) As Boolean
+            Dim hs = New HashSet(Of T)()
+            For i = 0 To myList.Count - 1
+                If Not hs.Add(myList(i)) Then Return True
+            Next
+            Return False
+        End Function
+
+        Public Shared Function FirstDuplicate(ByVal items As IEnumerable(Of Integer)) As Integer?
+            Dim [set] As HashSet(Of Integer) = New HashSet(Of Integer)()
+            For Each item As Integer In items
+                If [set].Contains(item) Then
+                    Return item
+                End If
+                [set].Add(item)
+            Next
+            Return Nothing
+        End Function
+
+        Public Shared Function FirstFieldDuplicate(Of T1, T2)(ByRef items As List(Of T1), ByVal fieldName As String) As Integer?
+            Dim [set] As HashSet(Of T2) = New HashSet(Of T2)()
+            Dim i As Integer = 0
+            Dim x As T2
+            For Each item As T1 In items
+                x = CallByName(item, fieldName, CallType.Get)
+                If [set].Contains(x) Then
+                    Return i
+                End If
+                [set].Add(x)
+                i += 1
+            Next
+            Return Nothing
+        End Function
 
     End Class
 

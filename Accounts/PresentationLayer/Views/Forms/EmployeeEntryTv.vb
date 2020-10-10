@@ -566,7 +566,11 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
+        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+            DisplayPhoneTab()
+        End Sub
+
+        Private Sub DisplayPhoneTab()
             If Not EmployeeTabControl.Controls.Contains(tbpPhones) Then
                 tbpPhones.Parent = EmployeeTabControl
                 'EmployeeTabControl.TabPages.Add(tbpPhones)
@@ -599,10 +603,16 @@ Namespace PresentationLayer.Views.Forms
                         bsPhones.Current.PhoneTypeName = DataGridViewPhones.GetEditingValue(.CurrentCell, "Code")
                     Case $"dgvcountrytelidno"
                         bsPhones.Current.CountryTelCode = DataGridViewPhones.GetEditingValue(.CurrentCell, "Code")
-                    Case $"dgvareacode"
-                        bsPhones.Current.AreaCode = DataGridViewPhones.GetEditingValue(.CurrentCell)
                 End Select
             End With
+        End Sub
+
+        Private Sub DataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
+            DisplayPhoneTab()
+        End Sub
+
+        Private Sub DataGridViewPhoneDisplay_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
+            DisplayPhoneTab()
         End Sub
 
     End Class
