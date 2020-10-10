@@ -57,9 +57,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayRateType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayRateType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -227,9 +227,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout6.Controls.Add(Me.lblPaySalariedOrHourly)
             Me.CFlowLayout6.Controls.Add(Me.cboPaySalariedOrHourly)
             Me.CFlowLayout6.Controls.Add(Me.lblPayRateType)
-            Me.CFlowLayout6.Controls.Add(Me.txtPayRateAmount)
-            Me.CFlowLayout6.Controls.Add(Me.lblPayRateAmount)
             Me.CFlowLayout6.Controls.Add(Me.cboPayRateType)
+            Me.CFlowLayout6.Controls.Add(Me.lblPayRateAmount)
+            Me.CFlowLayout6.Controls.Add(Me.txtPayRateAmount)
             Me.CFlowLayout6.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
@@ -362,7 +362,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.OldValue = Nothing
             Me.txtBalance.ReadOnly = True
             Me.txtBalance.Size = New System.Drawing.Size(200, 23)
-            Me.txtBalance.TabIndex = 6
+            Me.txtBalance.TabIndex = 4
             Me.txtBalance.ValueIsNumeric = True
             '
             'lblOpeningBalance
@@ -436,7 +436,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.OldValue = Nothing
             Me.txtIban.ReadOnly = True
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
-            Me.txtIban.TabIndex = 4
+            Me.txtIban.TabIndex = 6
             '
             'lblPayFrequency
             '
@@ -560,44 +560,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateType.Text = "Pay Rate Type"
             Me.lblPayRateType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtPayRateAmount
-            '
-            Me.txtPayRateAmount.BackColor = System.Drawing.Color.White
-            Me.txtPayRateAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayRateAmount.ComputedValue = False
-            Me.txtPayRateAmount.CustomFormat = Nothing
-            Me.txtPayRateAmount.DataBoundControl = True
-            Me.txtPayRateAmount.EditingMode = False
-            Me.CFlowLayout6.SetFlowBreak(Me.txtPayRateAmount, True)
-            Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 182)
-            Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayRateAmount.MaximumValue = Nothing
-            Me.txtPayRateAmount.MinimumValue = Nothing
-            Me.txtPayRateAmount.Name = "txtPayRateAmount"
-            Me.txtPayRateAmount.OldValue = Nothing
-            Me.txtPayRateAmount.ReadOnly = True
-            Me.txtPayRateAmount.Size = New System.Drawing.Size(200, 23)
-            Me.txtPayRateAmount.TabIndex = 10
-            Me.txtPayRateAmount.TabStop = False
-            Me.txtPayRateAmount.ValueIsNumeric = True
-            '
-            'lblPayRateAmount
-            '
-            Me.lblPayRateAmount.DisplayOnly = True
-            Me.lblPayRateAmount.EditingMode = False
-            Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 207)
-            Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayRateAmount.Name = "lblPayRateAmount"
-            Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
-            Me.lblPayRateAmount.TabIndex = 292
-            Me.lblPayRateAmount.Text = "Pay Rate Amount"
-            Me.lblPayRateAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
             'cboPayRateType
             '
             Me.cboPayRateType.BackColor = System.Drawing.Color.White
@@ -616,7 +578,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 207)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 182)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -637,6 +599,44 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayRateType.ValueIsNullable = False
             Me.cboPayRateType.ValueIsNumeric = False
             Me.cboPayRateType.ValueMember = "Code"
+            '
+            'lblPayRateAmount
+            '
+            Me.lblPayRateAmount.DisplayOnly = True
+            Me.lblPayRateAmount.EditingMode = False
+            Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 209)
+            Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayRateAmount.Name = "lblPayRateAmount"
+            Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
+            Me.lblPayRateAmount.TabIndex = 292
+            Me.lblPayRateAmount.Text = "Pay Rate Amount"
+            Me.lblPayRateAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtPayRateAmount
+            '
+            Me.txtPayRateAmount.BackColor = System.Drawing.Color.White
+            Me.txtPayRateAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayRateAmount.ComputedValue = False
+            Me.txtPayRateAmount.CustomFormat = Nothing
+            Me.txtPayRateAmount.DataBoundControl = True
+            Me.txtPayRateAmount.EditingMode = False
+            Me.CFlowLayout6.SetFlowBreak(Me.txtPayRateAmount, True)
+            Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 209)
+            Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayRateAmount.MaximumValue = Nothing
+            Me.txtPayRateAmount.MinimumValue = Nothing
+            Me.txtPayRateAmount.Name = "txtPayRateAmount"
+            Me.txtPayRateAmount.OldValue = Nothing
+            Me.txtPayRateAmount.ReadOnly = True
+            Me.txtPayRateAmount.Size = New System.Drawing.Size(200, 23)
+            Me.txtPayRateAmount.TabIndex = 10
+            Me.txtPayRateAmount.TabStop = False
+            Me.txtPayRateAmount.ValueIsNumeric = True
             '
             'bsEarnings
             '
@@ -1975,10 +1975,10 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvSequenceEarning.EditingMode = False
             Me.dgvSequenceEarning.HeaderText = "Seq"
-            Me.dgvSequenceEarning.MinimumWidth = 40
+            Me.dgvSequenceEarning.MinimumWidth = 30
             Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
             Me.dgvSequenceEarning.ReadOnly = True
-            Me.dgvSequenceEarning.Width = 40
+            Me.dgvSequenceEarning.Width = 30
             '
             'dgvEarningIdNo
             '
@@ -2001,11 +2001,12 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvEarningAmount.EditingMode = False
             Me.dgvEarningAmount.HeaderText = "Amount"
-            Me.dgvEarningAmount.MinimumWidth = 100
+            Me.dgvEarningAmount.MinimumWidth = 80
             Me.dgvEarningAmount.Name = "dgvEarningAmount"
             Me.dgvEarningAmount.ReadOnly = True
             Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningAmount.Width = 80
             '
             'DataGridViewTextBoxColumn3
             '
@@ -2112,11 +2113,11 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvSequenceDeduction.EditingMode = False
             Me.dgvSequenceDeduction.HeaderText = "Seq"
-            Me.dgvSequenceDeduction.MinimumWidth = 40
+            Me.dgvSequenceDeduction.MinimumWidth = 30
             Me.dgvSequenceDeduction.Name = "dgvSequenceDeduction"
             Me.dgvSequenceDeduction.ReadOnly = True
             Me.dgvSequenceDeduction.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSequenceDeduction.Width = 40
+            Me.dgvSequenceDeduction.Width = 30
             '
             'dgvDeductionIdNo
             '
@@ -2139,10 +2140,12 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle9
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Amount"
+            Me.dgvDeductionAmount.MinimumWidth = 80
             Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
             Me.dgvDeductionAmount.ReadOnly = True
             Me.dgvDeductionAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionAmount.Width = 80
             '
             'DataGridViewTextBoxColumn9
             '
@@ -2582,24 +2585,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents bsPhones As BindingSource
         Friend WithEvents dgvInternationalCode As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
         Friend WithEvents dgvPhoneNumber As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvColumnMoney
-        Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvColumnMoney
-        Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
         Friend WithEvents tbpPhones As TabPage
         Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents floContactInformation As Libraries.CBaseControlsLibrary.CFlowLayout
@@ -2643,6 +2628,24 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PhoneTypeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvColumnMoney
+        Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvColumnMoney
+        Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
     End Class
 
 End Namespace
