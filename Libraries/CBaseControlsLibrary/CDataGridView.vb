@@ -433,29 +433,54 @@ Public Class CDataGridView
         Return _lastEditableColumn
     End Function
 
-    Public Function GetEditingValue(cCurrentCell As Object, Optional field As String = "")
-        If cCurrentCell IsNot Nothing Then
+    'Public Function GetEditingValue(cCurrentCell As Object, Optional field As String = "")
+    '    If cCurrentCell IsNot Nothing Then
+    '        Dim dgvControl As Libraries.CBaseControlsLibrary.CaDgvComboboxCell
+    '        dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
+    '        If dgvControl IsNot Nothing Then
+    '            If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
+    '                Select Case field.ToLower()
+    '                    Case $"code"
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+    '                    Case $"name"
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+    '                    Case $"idno"
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+    '                    Case Else
+    '                        Return cCurrentCell.Value
+    '                End Select
+    '            Else
+    '                Return cCurrentCell.Value
+    '            End If
+    '        End If
+    '    End If
+    '    Return Nothing
+    'End Function
+
+    Public Function GetEditingValue(Optional field As String = "")
+        If CurrentCell IsNot Nothing Then
             Dim dgvControl As Libraries.CBaseControlsLibrary.CaDgvComboboxCell
-            dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
+            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
             If dgvControl IsNot Nothing Then
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
                         Case $"name"
-                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
                         Case $"idno"
-                            Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
                         Case Else
-                            Return cCurrentCell.Value
+                            Return CurrentCell.Value
                     End Select
                 Else
-                    Return cCurrentCell.Value
+                    Return CurrentCell.Value
                 End If
             End If
         End If
         Return Nothing
     End Function
+
 
     'Public Sub AddDeleteColumn()
     '    With Columns

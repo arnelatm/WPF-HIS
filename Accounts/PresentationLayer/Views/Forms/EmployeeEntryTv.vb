@@ -600,9 +600,19 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPhones
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvphonetypeidno"
-                        bsPhones.Current.PhoneTypeName = DataGridViewPhones.GetEditingValue(.CurrentCell, "Code")
+                        bsPhones.Current.PhoneTypeName = DataGridViewPhones.GetEditingValue("Code")
                     Case $"dgvcountrytelidno"
-                        bsPhones.Current.CountryTelCode = DataGridViewPhones.GetEditingValue(.CurrentCell, "Code")
+                        bsPhones.Current.CountryTelCode = DataGridViewPhones.GetEditingValue("Code")
+                End Select
+            End With
+        End Sub
+
+        Private Sub EarningsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
+            With DataGridViewEarnings
+                Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                    Case $"dgvearningidno"
+                        bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
+                        bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
                 End Select
             End With
         End Sub
