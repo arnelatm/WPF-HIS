@@ -130,6 +130,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.tbpEarningDeductions = New System.Windows.Forms.TabPage()
             Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+            Me.lblNetTotal = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -152,6 +153,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.lblEarnings = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNetTotal = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -1920,18 +1922,36 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel2.ColumnCount = 2
             Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
             Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+            Me.TableLayoutPanel2.Controls.Add(Me.lblNetTotal, 0, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.DataGridViewEarnings, 0, 1)
             Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 1, 0)
             Me.TableLayoutPanel2.Controls.Add(Me.DataGridViewDeductions, 1, 1)
             Me.TableLayoutPanel2.Controls.Add(Me.lblEarnings, 0, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.txtNetTotal, 1, 2)
             Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
             Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-            Me.TableLayoutPanel2.RowCount = 2
+            Me.TableLayoutPanel2.RowCount = 3
             Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.970179!))
             Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.02982!))
+            Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
             Me.TableLayoutPanel2.Size = New System.Drawing.Size(812, 394)
             Me.TableLayoutPanel2.TabIndex = 4
+            '
+            'lblNetTotal
+            '
+            Me.lblNetTotal.AutoSize = True
+            Me.lblNetTotal.DisplayOnly = True
+            Me.lblNetTotal.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.lblNetTotal.EditingMode = False
+            Me.lblNetTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblNetTotal.Location = New System.Drawing.Point(1, 369)
+            Me.lblNetTotal.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblNetTotal.Name = "lblNetTotal"
+            Me.lblNetTotal.Size = New System.Drawing.Size(404, 24)
+            Me.lblNetTotal.TabIndex = 4
+            Me.lblNetTotal.Text = "Net Total:"
+            Me.lblNetTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             '
             'DataGridViewEarnings
             '
@@ -1960,14 +1980,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewEarnings.FirstRowDeletionEnabled = True
             Me.DataGridViewEarnings.FirstRowInsertionEnabled = True
-            Me.DataGridViewEarnings.Location = New System.Drawing.Point(3, 22)
+            Me.DataGridViewEarnings.Location = New System.Drawing.Point(3, 21)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
             Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewEarnings.Size = New System.Drawing.Size(400, 369)
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(400, 344)
             Me.DataGridViewEarnings.StartTrackingChanges = False
             Me.DataGridViewEarnings.TabIndex = 0
             '
@@ -2069,7 +2089,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.Location = New System.Drawing.Point(407, 1)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(141, 17)
+            Me.CLabel2.Size = New System.Drawing.Size(141, 16)
             Me.CLabel2.TabIndex = 3
             Me.CLabel2.Text = "Regular Deductions: "
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -2100,14 +2120,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewDeductions.FirstRowDeletionEnabled = True
             Me.DataGridViewDeductions.FirstRowInsertionEnabled = True
-            Me.DataGridViewDeductions.Location = New System.Drawing.Point(409, 22)
+            Me.DataGridViewDeductions.Location = New System.Drawing.Point(409, 21)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.ReadOnly = True
             Me.DataGridViewDeductions.SequenceColumn = "dgvSequenceDeduction"
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
             Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewDeductions.Size = New System.Drawing.Size(400, 369)
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(400, 344)
             Me.DataGridViewDeductions.StartTrackingChanges = False
             Me.DataGridViewDeductions.TabIndex = 1
             '
@@ -2210,10 +2230,31 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEarnings.Location = New System.Drawing.Point(1, 1)
             Me.lblEarnings.Margin = New System.Windows.Forms.Padding(1)
             Me.lblEarnings.Name = "lblEarnings"
-            Me.lblEarnings.Size = New System.Drawing.Size(122, 17)
+            Me.lblEarnings.Size = New System.Drawing.Size(122, 16)
             Me.lblEarnings.TabIndex = 2
             Me.lblEarnings.Text = "Regular Earnings:"
             Me.lblEarnings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtNetTotal
+            '
+            Me.txtNetTotal.BackColor = System.Drawing.Color.White
+            Me.txtNetTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNetTotal.ComputedValue = False
+            Me.txtNetTotal.CustomFormat = Nothing
+            Me.txtNetTotal.DataBoundControl = True
+            Me.txtNetTotal.EditingMode = True
+            Me.txtNetTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNetTotal.ForeColor = System.Drawing.Color.Black
+            Me.txtNetTotal.LinkedLabel = Nothing
+            Me.txtNetTotal.Location = New System.Drawing.Point(407, 369)
+            Me.txtNetTotal.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNetTotal.MaximumValue = Nothing
+            Me.txtNetTotal.MinimumValue = Nothing
+            Me.txtNetTotal.Name = "txtNetTotal"
+            Me.txtNetTotal.OldValue = Nothing
+            Me.txtNetTotal.Size = New System.Drawing.Size(100, 23)
+            Me.txtNetTotal.TabIndex = 5
+            Me.txtNetTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             '
             'tbpPhones
             '
@@ -2654,6 +2695,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
+        Friend WithEvents lblNetTotal As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtNetTotal As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 
 End Namespace
