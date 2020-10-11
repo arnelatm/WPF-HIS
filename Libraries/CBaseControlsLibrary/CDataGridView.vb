@@ -26,13 +26,23 @@ Public Class CDataGridView
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
+
     End Sub
 
     Public Event ChangesMade As EventHandler
 
     Public Event DeletingRow(ByVal cancel As Boolean)
 
+    Public Property DgvFooter As DgvFooter
+
     Public Property DataInGridChanged As Boolean = False
+
+    '<Bindable(True)>
+    '<Category("Custom")>
+    '<DefaultValue(GetType(Boolean))>
+    '<Description("Set to True to specify that this control will display a footer.")>
+    '<Browsable(True)>
+    Public Property ShowFooter As Boolean
 
     <Bindable(True)>
     <Category("Custom")>
@@ -46,6 +56,11 @@ Public Class CDataGridView
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Me.Columns(SequenceColumn) IsNot Nothing Then
             CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
+        End If
+        If ShowFooter Then
+            DgvFooter = New DgvFooter(Me) With {
+                .AutoCalc = True
+                }
         End If
     End Sub
 
@@ -75,6 +90,14 @@ Public Class CDataGridView
                 End If
             Else
                 RemoveInsertColumn()
+            End If
+            If ShowFooter Then
+                If DgvFooter Is Nothing Then
+                    DgvFooter = New DgvFooter(Me) With {
+                    .AutoCalc = True
+                }
+                End If
+                DgvFooter.CalculateTotals()
             End If
         End Set
     End Property
@@ -480,7 +503,6 @@ Public Class CDataGridView
         End If
         Return Nothing
     End Function
-
 
     'Public Sub AddDeleteColumn()
     '    With Columns

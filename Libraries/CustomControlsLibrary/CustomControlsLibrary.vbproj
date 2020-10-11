@@ -140,9 +140,6 @@
     <Compile Include="ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="dgvfooter.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="GregorianDates.vb" />
     <Compile Include="HijriDates.vb" />
     <Compile Include="My Project\Application.Designer.vb">

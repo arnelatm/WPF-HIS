@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Globalization
+Imports System.Windows.Forms
 
 '***********************************************************************
 '   Author: Heriberto Lugo
@@ -10,14 +12,14 @@ Imports System.Drawing
 '***********************************************************************
 
 Public Class DgvFooter
-    Inherits System.Windows.Forms.DataGridView
+    Inherits DataGridView
 
 #Region "Private Class Members"
 
     ''' <summary>
     ''' Holds our parent DGV, to which DGVfooter is bound to as footer.
     ''' </summary>
-    Private WithEvents _parentDGV As DataGridView
+    Private WithEvents _parentDgv As DataGridView
 
     ''' <summary>
     ''' Used to store value as to whether or not to kill our parents RowAddedEvent.
@@ -62,7 +64,7 @@ Public Class DgvFooter
     ''' The backcolor of the first cell in footer if used as header cell.
     ''' </summary>
     ''' <remarks></remarks>
-    Private _footerHeaderBackColor As Color = MyBase.DefaultCellStyle.BackColor
+    Private _footerHeaderBackColor As Color = DefaultCellStyle.BackColor
 
     ''' <summary>
     ''' The forecolor of the first cell in footer if used as header cell.
@@ -77,7 +79,7 @@ Public Class DgvFooter
     Private _columnsToSum As New List(Of String)
 
     ''' <summary>
-    ''' Rounds the sum upto the decimalPlaces chosen to display
+    ''' Rounds the sum up to the decimalPlaces chosen to display
     ''' </summary>
     ''' <remarks></remarks>
     Private _roundSum As Boolean = False
@@ -91,7 +93,7 @@ Public Class DgvFooter
     ''' <summary>
     ''' Column collection for footer.
     ''' </summary>
-    ''' <remarks>This columncollection has unique boolean property that must be set whenever columns are manipulated by footer.
+    ''' <remarks>This columnCollection has unique boolean property that must be set whenever columns are manipulated by footer.
     ''' Column manipulation will only occur when this property has been set. This will prevent footer columns from being manipulated by anything other than footer.
     ''' After many trials, it was found columns could be manipulated by simply casting footer into base dgv.
     ''' An override of OnColumnAdded was put to remove column added unless _killAddColumns is set.</remarks>
@@ -104,17 +106,17 @@ Public Class DgvFooter
     ''' <summary>
     ''' Contructor
     ''' </summary>
-    ''' <param name="parentDGV">DataGridView which we will be bound to as a footer.</param>
+    ''' <param name="parentDgv">DataGridView which we will be bound to as a footer.</param>
     ''' <remarks></remarks>
-    Public Sub New(ByRef parentDGV As DataGridView)
+    Public Sub New(ByRef parentDgv As DataGridView)
         InitLayout()
-        Me.Name = parentDGV.Name & "Footer"
+        Name = parentDgv.Name & "Footer"
 
-        _parentDGV = parentDGV
+        _parentDgv = parentDgv
 
         SetBaseProperties()
 
-        parentDGV.Controls.Add(Me)
+        parentDgv.Controls.Add(Me)
 
         OnParentRowsAdded(Nothing, Nothing) 'Just incase footer is added to dgv who already contains rows.
     End Sub
@@ -125,24 +127,24 @@ Public Class DgvFooter
     ''' <remarks></remarks>
     Private Sub SetBaseProperties()
         MyBase.RowHeadersVisible = False
-        MyBase.Height = 22
-        MyBase.Width = _parentDGV.Width
-        MyBase.AllowUserToAddRows = False
-        MyBase.AllowUserToDeleteRows = False
-        MyBase.AllowUserToOrderColumns = False
-        MyBase.AllowUserToResizeColumns = False
-        MyBase.AllowUserToResizeRows = False
-        MyBase.ScrollBars = Windows.Forms.ScrollBars.None
-        MyBase.DefaultCellStyle.SelectionBackColor = Me._parentDGV.DefaultCellStyle.BackColor
-        MyBase.DefaultCellStyle.SelectionForeColor = Me._parentDGV.ForeColor
-        MyBase.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        Height = 22
+        Width = _parentDgv.Width
+        AllowUserToAddRows = False
+        AllowUserToDeleteRows = False
+        AllowUserToOrderColumns = False
+        AllowUserToResizeColumns = False
+        AllowUserToResizeRows = False
+        ScrollBars = ScrollBars.None
+        DefaultCellStyle.SelectionBackColor = _parentDgv.DefaultCellStyle.BackColor
+        DefaultCellStyle.SelectionForeColor = _parentDgv.ForeColor
+        DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-        Me.Width = Me.Width
-        Me.Dock = DockStyle.Bottom
-        Me.Show()
+        Width = Width
+        Dock = DockStyle.Bottom
+        Show()
 
-        If _parentDGV.ColumnCount > 0 Then
-            Me.SetColumns(_parentDGV)
+        If _parentDgv.ColumnCount > 0 Then
+            SetColumns(_parentDgv)
         End If
     End Sub
 
@@ -153,12 +155,12 @@ Public Class DgvFooter
     ''' <remarks></remarks>
     Public Sub SetColumns(ByVal parentsdgv As DataGridView)
 
-        If _parentDGV.Columns.Count > 0 Then
+        If _parentDgv.Columns.Count > 0 Then
             _killAddColumns = False
 
             For Each c As DataGridViewColumn In parentsdgv.Columns
 
-                If Me.Columns.Contains(c.Name & "_footer") Then Continue For
+                If Columns.Contains(c.Name & "_footer") Then Continue For
 
                 Dim childCol As New DataGridViewTextBoxColumn
                 childCol.Name = c.Name & "_footer"
@@ -167,22 +169,22 @@ Public Class DgvFooter
                 childCol.Resizable = DataGridViewTriState.False
                 childCol.HeaderText = c.Name
 
-                'Me.Columns.CalledByFooter = True
+                'Columns.CalledByFooter = True
 
-                MyClass.Columns.Add(childCol)
-                MyClass.Columns(c.Index).Frozen = c.Frozen
-                MyClass.Columns(c.Index).FillWeight = c.FillWeight
+                Columns.Add(childCol)
+                Columns(c.Index).Frozen = c.Frozen
+                Columns(c.Index).FillWeight = c.FillWeight
 
                 'SyncBaseColumns()
-                If Me.RowCount = 0 Then Me.Rows.Add()
+                If RowCount = 0 Then Rows.Add()
 
                 If AutoCalc Then
                     ColumnToSum(c.Name) = True
                 End If
             Next
 
-            MyClass.RowHeadersVisible = _parentDGV.RowHeadersVisible
-            MyClass.ColumnHeadersVisible = False
+            RowHeadersVisible = _parentDgv.RowHeadersVisible
+            ColumnHeadersVisible = False
 
             _killAddColumns = True
         End If
@@ -200,20 +202,20 @@ Public Class DgvFooter
     ''' First cell text and text color set if headercell option is used.
     ''' First cell de-selected, so no cells are selected.
     ''' Footer is set to be uneditable.</remarks>
-    Protected Overrides Sub OnRowsAdded(e As System.Windows.Forms.DataGridViewRowsAddedEventArgs)
-        If Me.RowCount > 1 Then
-            Me.Rows.RemoveAt(Me.Rows.Count - 1)
+    Protected Overrides Sub OnRowsAdded(e As DataGridViewRowsAddedEventArgs)
+        If RowCount > 1 Then
+            Rows.RemoveAt(Rows.Count - 1)
             Exit Sub
         End If
 
         SetHeader()
 
         MyBase.OnRowsAdded(e)
-        MyClass.SelectionMode = DataGridViewSelectionMode.CellSelect
-        MyClass.ClearSelection()
-        MyClass.CurrentCell = MyBase.Rows(0).Cells(0)
-        MyClass.Rows(0).Cells(0).Selected = False
-        MyClass.Enabled = False
+        SelectionMode = DataGridViewSelectionMode.CellSelect
+        ClearSelection()
+        CurrentCell = Rows(0).Cells(0)
+        Rows(0).Cells(0).Selected = False
+        Enabled = False
         MyClass.ReadOnly = True
     End Sub
 
@@ -222,15 +224,16 @@ Public Class DgvFooter
     ''' </summary>
     ''' <param name="e"></param>
     ''' <remarks>If a column is added by outside manipulation (anyone other that footer), the column is removed..</remarks>
-    Protected Overrides Sub OnColumnAdded(e As System.Windows.Forms.DataGridViewColumnEventArgs)
+    Protected Overrides Sub OnColumnAdded(e As DataGridViewColumnEventArgs)
         If Not _killAddColumns Then
             MyBase.OnColumnAdded(e)
         Else
             'Check to see if form is closing
-            Dim parentForm As Form = Me.FindForm
+            Dim parentForm As Form = FindForm()
+
             If Not IsNothing(parentForm) Then
                 'Remove any columns not inserted by our footer class.
-                MyBase.Columns.Remove(e.Column)
+                Columns.Remove(e.Column)
             End If
         End If
     End Sub
@@ -240,15 +243,16 @@ Public Class DgvFooter
     ''' </summary>
     ''' <param name="e"></param>
     ''' <remarks>If a column is removed by outside manipulation (anyone other that footer), the column is re-inserted..</remarks>
-    Protected Overrides Sub OnColumnRemoved(e As System.Windows.Forms.DataGridViewColumnEventArgs)
+    Protected Overrides Sub OnColumnRemoved(e As DataGridViewColumnEventArgs)
         If Not _killRemoveColumns Then
             MyBase.OnColumnRemoved(e)
         Else
             'Check to see if form is closing
-            Dim parentForm As Form = Me.FindForm
+            Dim parentForm As Form = FindForm()
+
             If Not IsNothing(parentForm) Then
                 'Re-Add any column removed by outside manipulation.
-                MyBase.Columns.Insert(e.Column.Index, e.Column)
+                Columns.Insert(e.Column.Index, e.Column)
             End If
         End If
     End Sub
@@ -263,10 +267,10 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks>Only columns of texboxcolumn type will be totalled.</remarks>
-    Private Sub ParentValChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles _parentDGV.CellEndEdit
+    Private Sub ParentValChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles _parentDgv.CellEndEdit
         If Not _autoCalc Then Exit Sub
-        Dim curColumnName As String = _parentDGV.Columns(e.ColumnIndex).Name
-        Dim columnAddable As Boolean = Me._columnsToSum.Contains(curColumnName)
+        Dim curColumnName As String = _parentDgv.Columns(e.ColumnIndex).Name
+        Dim columnAddable As Boolean = _columnsToSum.Contains(curColumnName)
 
         'If _parentDGV.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewTextBoxCell" And columnAddable Then
         If columnAddable Then
@@ -280,10 +284,10 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks>Only columns of texboxcolumn type will be totalled.</remarks>
-    Private Sub ParentValChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsRemovedEventArgs) Handles _parentDGV.RowsRemoved
+    Private Sub ParentValChanged(ByVal sender As Object, ByVal e As DataGridViewRowsRemovedEventArgs) Handles _parentDgv.RowsRemoved
         If Not _autoCalc Then Exit Sub
         For Each c As DataGridViewColumn In CType(sender, DataGridView).Columns.OfType(Of DataGridViewTextBoxColumn)()
-            Dim columnAddable As Boolean = Me._columnsToSum.Contains(c.Name)
+            Dim columnAddable As Boolean = _columnsToSum.Contains(c.Name)
             If Not columnAddable Then Continue For
 
             SumColumn(c.Name)
@@ -298,32 +302,32 @@ Public Class DgvFooter
     ''' <remarks>When the control gets populated with rows to the point where a scrollbar appears, the newly added rows tend to hide behind footer.
     ''' As a fix, we add another row and hide it. When another row is added, a hidden row is deleted.
     ''' To prevent a recursive call when we add a hidden row, we set a sentinel to determine whether we will proceed with hidden row processes.</remarks>
-    Private Sub OnParentRowsAdded(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles _parentDGV.RowsAdded
+    Private Sub OnParentRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles _parentDgv.RowsAdded
 
-        If _parentDGV.Rows.Count < 1 Then Exit Sub
+        If _parentDgv.Rows.Count < 1 Then Exit Sub
 
-        Dim rowY As Integer = (_parentDGV.Rows.Count + 1) * _parentDGV.Rows(0).Height
-        Dim footY As Integer = _parentDGV.Controls(Me.Name).Top
+        Dim rowY As Integer = (_parentDgv.Rows.Count + 1) * _parentDgv.Rows(0).Height
+        Dim footY As Integer = _parentDgv.Controls(Name).Top
 
-        If _parentDGV.Rows.Count = 1 Then
-            Me.SetColumns(_parentDGV)
-            'Me.Rows.Add()
+        If _parentDgv.Rows.Count = 1 Then
+            SetColumns(_parentDgv)
+            'Rows.Add()
         End If
 
-        If rowY >= footY And Not Me._killParentRowAddedEvent Then
+        If rowY >= footY And Not _killParentRowAddedEvent Then
 
-            Me._killParentRowAddedEvent = True
+            _killParentRowAddedEvent = True
 
-            For Each dgvr As DataGridViewRow In _parentDGV.Rows
+            For Each dgvr As DataGridViewRow In _parentDgv.Rows
                 If dgvr.Tag Is Nothing Then Continue For
-                If dgvr.Tag.ToString = "spacer" Then _parentDGV.Rows.Remove(dgvr)
+                If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
             Next
 
             '_parentDGV.Rows.Add(SpacerRow)
 
-            _parentDGV.FirstDisplayedScrollingRowIndex = _parentDGV.Rows.Count - 2
+            _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 2
 
-            Me._killParentRowAddedEvent = False
+            _killParentRowAddedEvent = False
         End If
         CheckParentVScrollBar()
     End Sub
@@ -332,13 +336,13 @@ Public Class DgvFooter
     ''' Resizes footer columns to match _parentDGV columns.
     ''' </summary>
     ''' <remarks></remarks>
-    Private Sub ReSizeCol() Handles _parentDGV.ColumnWidthChanged
-        If Me.Rows.Count < 1 Then Exit Sub
-        If Me.Columns.Count < 1 Then Exit Sub
-        If _parentDGV.Rows.Count < 1 Then Exit Sub
-        If _parentDGV.Columns.Count < 1 Then Exit Sub
-        For Each c As DataGridViewColumn In _parentDGV.Columns
-            Me.Columns(c.Index).Width = c.Width
+    Private Sub ReSizeCol() Handles _parentDgv.ColumnWidthChanged
+        If Rows.Count < 1 Then Exit Sub
+        If Columns.Count < 1 Then Exit Sub
+        If _parentDgv.Rows.Count < 1 Then Exit Sub
+        If _parentDgv.Columns.Count < 1 Then Exit Sub
+        For Each c As DataGridViewColumn In _parentDgv.Columns
+            Columns(c.Index).Width = c.Width
         Next
     End Sub
 
@@ -348,12 +352,12 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks>This will actually call the same Sub which is called during instantiation.</remarks>
-    Private Sub ResetColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewColumnEventArgs) Handles _parentDGV.ColumnAdded
-        SetColumns(_parentDGV)
+    Private Sub ResetColumns(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDgv.ColumnAdded
+        SetColumns(_parentDgv)
 
         If ColumnsOverflow() Then
-            _parentDGV.Size = New Size(_parentDGV.Size.Width + 1, _parentDGV.Size.Height + 1)
-            _parentDGV.Size = New Size(_parentDGV.Size.Width - 1, _parentDGV.Size.Height - 1)
+            _parentDgv.Size = New Size(_parentDgv.Size.Width + 1, _parentDgv.Size.Height + 1)
+            _parentDgv.Size = New Size(_parentDgv.Size.Width - 1, _parentDgv.Size.Height - 1)
         End If
     End Sub
 
@@ -363,11 +367,11 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub RemoveColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewColumnEventArgs) Handles _parentDGV.ColumnRemoved
+    Private Sub RemoveColumns(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDgv.ColumnRemoved
         _killRemoveColumns = False
         ColumnToSum(e.Column.Name) = False
-        Me.Columns.Remove(e.Column.Name & "_footer")
-        If e.Column.DisplayIndex = 0 And Me.Columns.Count > 0 And UseHeader Then SetHeader()
+        Columns.Remove(e.Column.Name & "_footer")
+        If e.Column.DisplayIndex = 0 And Columns.Count > 0 And UseHeader Then SetHeader()
         _killRemoveColumns = True
     End Sub
 
@@ -377,8 +381,8 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ScrollMe(ByVal sender As Object, ByVal e As EventArgs) Handles _parentDGV.Scroll
-        Me.HorizontalScrollingOffset = _parentDGV.HorizontalScrollingOffset
+    Private Sub ScrollMe(ByVal sender As Object, ByVal e As EventArgs) Handles _parentDgv.Scroll
+        HorizontalScrollingOffset = _parentDgv.HorizontalScrollingOffset
     End Sub
 
     ''' <summary>
@@ -387,8 +391,8 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ShiftColumns(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDGV.ColumnDisplayIndexChanged
-        Me.Columns(e.Column.Name & "_footer").DisplayIndex = e.Column.DisplayIndex
+    Private Sub ShiftColumns(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDgv.ColumnDisplayIndexChanged
+        Columns(e.Column.Name & "_footer").DisplayIndex = e.Column.DisplayIndex
     End Sub
 
     ''' <summary>
@@ -397,8 +401,8 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ChangeName(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDGV.ColumnNameChanged
-        Me.Columns(e.Column.DisplayIndex).Name = e.Column.Name & "_footer"
+    Private Sub ChangeName(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDgv.ColumnNameChanged
+        Columns(e.Column.DisplayIndex).Name = e.Column.Name & "_footer"
     End Sub
 
     ''' <summary>
@@ -407,8 +411,8 @@ Public Class DgvFooter
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ResizeRowHeader(ByVal sender As Object, ByVal e As EventArgs) Handles _parentDGV.RowHeadersWidthChanged
-        Me.RowHeadersWidth = _parentDGV.RowHeadersWidth
+    Private Sub ResizeRowHeader(ByVal sender As Object, ByVal e As EventArgs) Handles _parentDgv.RowHeadersWidthChanged
+        RowHeadersWidth = _parentDgv.RowHeadersWidth
     End Sub
 
 #End Region
@@ -423,10 +427,10 @@ Public Class DgvFooter
     Public Sub SumColumn(ByVal columnName As String)
         If Not String.IsNullOrEmpty(columnName) Then
             Dim tally As Double = 0.0
-            Dim nfi As Globalization.NumberFormatInfo = New Globalization.CultureInfo("en-US", False).NumberFormat
+            Dim nfi As NumberFormatInfo = New CultureInfo("en-US", False).NumberFormat
             Dim cVal As String
 
-            For Each r As DataGridViewRow In _parentDGV.Rows
+            For Each r As DataGridViewRow In _parentDgv.Rows
                 If Not String.IsNullOrEmpty(columnName) Then
                     cVal = CStr(r.Cells(columnName).Value)
                     tally += If(Double.TryParse(cVal, Nothing), CDbl(cVal), 0)
@@ -436,7 +440,7 @@ Public Class DgvFooter
             nfi.NumberDecimalDigits = _decimalPlaces
             tally = If(_roundSum, Math.Round(tally, _decimalPlaces, If(_bankersRounding, MidpointRounding.ToEven, MidpointRounding.AwayFromZero)), TruncateToDecimalPlace(tally, _decimalPlaces))
 
-            MyClass.Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
+            Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
         End If
     End Sub
 
@@ -444,18 +448,22 @@ Public Class DgvFooter
     ''' Attempts to add the values in all the cells in all columns in parent, and then displays the total in footer column corresponding to parent column.
     ''' </summary>
     ''' <remarks>If a cell value cannot be parsed to double, no error will be thrown. That cell will be skipped.</remarks>
-    Public Sub SumAllColumns()
+    Public Sub CalculateTotals()
         For Each c As String In _columnsToSum
             SumColumn(c)
         Next
     End Sub
 
     Public Sub SetText(columnName As String, columnText As String)
-        MyClass.Rows(0).Cells(columnName & "_footer").Value = columnText
+        Rows(0).Cells(columnName & "_footer").Value = columnText
+    End Sub
+
+    Public Sub SetTextAuto(columnName As String, columnText As String)
+        Rows(0).Cells(columnName).Value = columnText
     End Sub
 
     Public Sub SetAlignment(columnName As String, colAlignment As ContentAlignment)
-        MyClass.Columns(columnName & "_footer").DefaultCellStyle.Alignment = colAlignment
+        Columns(columnName & "_footer").DefaultCellStyle.Alignment = colAlignment
     End Sub
 
     ''' <summary>
@@ -463,12 +471,12 @@ Public Class DgvFooter
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub CheckParentVScrollBar()
-        Dim DGVVerticalScroll As VScrollBar = _parentDGV.Controls.OfType(Of VScrollBar).SingleOrDefault
+        Dim dgvVerticalScroll As VScrollBar = _parentDgv.Controls.OfType(Of VScrollBar).SingleOrDefault
 
-        If DGVVerticalScroll.Visible Then
-            Me.Width = _parentDGV.Width + DGVVerticalScroll.Width
+        If dgvVerticalScroll.Visible Then
+            Width = _parentDgv.Width + dgvVerticalScroll.Width
         Else
-            Me.Width = _parentDGV.Width
+            Width = _parentDgv.Width
         End If
 
     End Sub
@@ -478,21 +486,21 @@ Public Class DgvFooter
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub SetHeader()
-        If Not Me._footerHeader Then Exit Sub
-        If Me.RowCount < 1 Then Exit Sub
+        If Not _footerHeader Then Exit Sub
+        If RowCount < 1 Then Exit Sub
 
         Dim s As New DataGridViewCellStyle
         s.ForeColor = _footerHeaderForeColor
         s.BackColor = _footerHeaderBackColor
         s.SelectionBackColor = _footerHeaderBackColor
         s.SelectionForeColor = _footerHeaderForeColor
-        s.Font = New Font(MyBase.DefaultCellStyle.Font.FontFamily, MyBase.DefaultCellStyle.Font.Size, FontStyle.Bold)
+        s.Font = New Font(DefaultCellStyle.Font.FontFamily, DefaultCellStyle.Font.Size, FontStyle.Bold)
 
-        Me.Rows(0).Cells(0).Style = s
+        Rows(0).Cells(0).Style = s
 
-        Me.Rows(0).Cells(0).Value = _footerHeaderText
-        MyBase.Rows(0).Cells(0).Style.ForeColor = _footerHeaderForeColor
-        MyBase.Rows(0).Cells(0).Style.BackColor = _footerHeaderBackColor
+        Rows(0).Cells(0).Value = _footerHeaderText
+        Rows(0).Cells(0).Style.ForeColor = _footerHeaderForeColor
+        Rows(0).Cells(0).Style.BackColor = _footerHeaderBackColor
     End Sub
 
     ''' <summary>
@@ -500,29 +508,29 @@ Public Class DgvFooter
     ''' </summary>
     ''' <remarks>This is used when footer header is being disabled</remarks>
     Private Sub UnSetHeader()
-        Console.WriteLine(Me._footerHeader)
-        If Me._footerHeader Then Exit Sub
-        If Me.RowCount < 1 Then Exit Sub
+        Console.WriteLine(_footerHeader)
+        If _footerHeader Then Exit Sub
+        If RowCount < 1 Then Exit Sub
 
-        Dim s As New DataGridViewCellStyle(Me.DefaultCellStyle)
+        Dim s As New DataGridViewCellStyle(DefaultCellStyle)
 
-        Me.Rows(0).Cells(0).Style = s
+        Rows(0).Cells(0).Style = s
 
-        MyBase.Rows(0).Cells(0).Style.ForeColor = s.ForeColor
-        MyBase.Rows(0).Cells(0).Style.BackColor = s.BackColor
+        Rows(0).Cells(0).Style.ForeColor = s.ForeColor
+        Rows(0).Cells(0).Style.BackColor = s.BackColor
     End Sub
 
     ''' <summary>
     ''' Synchronizes the columncollection between our footer class and base class.
     ''' </summary>
-    ''' <remarks>Since using a custom columncollection for footer, the base class for footer never gets updated with column. As a result, even though me.columns.count and
+    ''' <remarks>Since using a custom columncollection for footer, the base class for footer never gets updated with column. As a result, even though columns.count and
     ''' myclass.columns.count both return the value for our column collection, whenever a row is attempted to get added an exception will occur for adding rows without columns.
-    ''' This happenes even if we used me.rows.add or myclass.rows.add. Which honestly makes no sense to me, since both of those return a valid column count.
+    ''' This happenes even if we used rows.add or myclass.rows.add. Which honestly makes no sense to me, since both of those return a valid column count.
     ''' So we add a column by same name to mybase, so we can get our row. I could not find any other way around this. Unless we change mybase.columncount to match, but then
-    ''' event handlers are triggered, and they receive a column with an empty name.</remarks>
+    ''' event handlers are triggered, and they receive a column with an empty na</remarks>
     Private Sub SyncBaseColumns()
         For Each c As DataGridViewColumn In _fColumns
-            MyBase.Columns.Add(c.Name, c.HeaderText)
+            Columns.Add(c.Name, c.HeaderText)
         Next
     End Sub
 
@@ -534,11 +542,11 @@ Public Class DgvFooter
     Private Function SpacerRow() As DataGridViewRow
         Dim sRow As New DataGridViewRow
 
-        sRow.DefaultCellStyle.BackColor = _parentDGV.BackgroundColor
+        sRow.DefaultCellStyle.BackColor = _parentDgv.BackgroundColor
         sRow.Tag = "spacer"
-        sRow.DefaultCellStyle.SelectionBackColor = _parentDGV.BackgroundColor
+        sRow.DefaultCellStyle.SelectionBackColor = _parentDgv.BackgroundColor
         sRow.ReadOnly = True
-        sRow.Height = Me.Height + 2
+        sRow.Height = Height + 2
 
         Return sRow
     End Function
@@ -551,13 +559,13 @@ Public Class DgvFooter
     Private Function ColumnsOverflow() As Boolean
         Dim colSpace As Integer = 0
 
-        For Each col As DataGridViewColumn In _parentDGV.Columns
+        For Each col As DataGridViewColumn In _parentDgv.Columns
             colSpace += col.Width
         Next
 
-        If _parentDGV.RowHeadersVisible Then colSpace += _parentDGV.RowHeadersWidth
+        If _parentDgv.RowHeadersVisible Then colSpace += _parentDgv.RowHeadersWidth
 
-        Return colSpace > _parentDGV.ClientSize.Width
+        Return colSpace > _parentDgv.ClientSize.Width
 
     End Function
 
@@ -567,16 +575,16 @@ Public Class DgvFooter
     ''' <summary>
     ''' Truncates a decimal number to specified decimal places without rounding.
     ''' </summary>
-    ''' <param name="NumToTruncate"></param>
-    ''' <param name="DecimalPlaces"></param>
+    ''' <param name="numToTruncate"></param>
+    ''' <param name="decimalPlaces"></param>
     ''' <returns>A double truncated to the specified decimal places.</returns>
     ''' <remarks>Function provided by Glenn Slayden (http://stackoverflow.com/users/147511/glenn-slayden) on http://stackoverflow.com/questions/329957/truncate-decimal-number-not-round-off</remarks>
-    Private Function TruncateToDecimalPlace(ByVal NumToTruncate As Double, ByVal DecimalPlaces As Integer) As Double
-        If DecimalPlaces < 0 Then Throw New ArgumentException()
-        If DecimalPlaces = 0 Then Return Math.Truncate(NumToTruncate)
+    Private Function TruncateToDecimalPlace(ByVal numToTruncate As Double, ByVal decimalPlaces As Integer) As Double
+        If decimalPlaces < 0 Then Throw New ArgumentException()
+        If decimalPlaces = 0 Then Return Math.Truncate(numToTruncate)
 
-        Dim m As Double = If(DecimalPlaces >= pow10.Length, Math.Pow(10, DecimalPlaces), pow10(DecimalPlaces))
-        Return Math.Truncate(NumToTruncate * m) / m
+        Dim m As Double = If(decimalPlaces >= pow10.Length, Math.Pow(10, decimalPlaces), pow10(decimalPlaces))
+        Return Math.Truncate(numToTruncate * m) / m
     End Function
 
 #End Region
@@ -594,27 +602,25 @@ Public Class DgvFooter
         Get
             Return _autoCalc
         End Get
-        Set(value As Boolean)
-            _autoCalc = value
-
-            SumAllColumns()
+        Set
+            _autoCalc = Value
+            CalculateTotals()
         End Set
     End Property
 
     ''' <summary>
-    ''' The descriptive suffix apended to the end of the totals in footer cells.
+    ''' The descriptive suffix appended to the end of the totals in footer cells.
     ''' </summary>
-    ''' <value>String to be used as the descriptive suffix apended to the end of the totals in footer cells.</value>
-    ''' <returns>The descriptive suffix apended to the end of the totals in footer cells.</returns>
+    ''' <value>String to be used as the descriptive suffix appended to the end of the totals in footer cells.</value>
+    ''' <returns>The descriptive suffix appended to the end of the totals in footer cells.</returns>
     ''' <remarks></remarks>
     Public Property ValueSuffix As String
         Get
             Return _valueSuffix
         End Get
-        Set(value As String)
-            _valueSuffix = value
-
-            SumAllColumns()
+        Set
+            _valueSuffix = Value
+            CalculateTotals()
         End Set
     End Property
 
@@ -628,17 +634,17 @@ Public Class DgvFooter
         Get
             Return _footerHeader
         End Get
-        Set(value As Boolean)
-            _footerHeader = value
+        Set
+            _footerHeader = Value
 
-            If Me.Columns.Count > 0 Then
+            If Columns.Count > 0 Then
 
-                ColumnToSum(0) = Not value
+                ColumnToSum(0) = Not Value
 
-                If Me.RowCount > 0 Then
-                    SumAllColumns()
+                If RowCount > 0 Then
+                    CalculateTotals()
 
-                    If value Then
+                    If Value Then
                         SetHeader()
                     Else
                         UnSetHeader()
@@ -659,8 +665,8 @@ Public Class DgvFooter
         Get
             Return _footerHeaderText
         End Get
-        Set(value As String)
-            _footerHeaderText = value
+        Set
+            _footerHeaderText = Value
             SetHeader()
         End Set
     End Property
@@ -675,8 +681,8 @@ Public Class DgvFooter
         Get
             Return _footerHeaderBackColor
         End Get
-        Set(value As Color)
-            _footerHeaderBackColor = value
+        Set
+            _footerHeaderBackColor = Value
             SetHeader()
         End Set
     End Property
@@ -690,8 +696,8 @@ Public Class DgvFooter
         Get
             Return _footerHeaderForeColor
         End Get
-        Set(value As Color)
-            _footerHeaderForeColor = value
+        Set
+            _footerHeaderForeColor = Value
             SetHeader()
         End Set
     End Property
@@ -706,10 +712,10 @@ Public Class DgvFooter
         Get
             Return _decimalPlaces
         End Get
-        Set(value As Integer)
-            _decimalPlaces = value
+        Set
+            _decimalPlaces = Value
 
-            SumAllColumns()
+            CalculateTotals()
         End Set
     End Property
 
@@ -725,13 +731,13 @@ Public Class DgvFooter
             'If the _columnsToSum contains the name of column, then that column will be totaled.
             Return _columnsToSum.Contains(columnName)
         End Get
-        Set(value As Boolean)
-            If Me.Columns.Count < 1 Then Exit Property
-            If _parentDGV.Columns.Count > 0 Then
-                If UseHeader And _parentDGV.Columns(0).Name = columnName Then value = False
+        Set
+            If Columns.Count < 1 Then Exit Property
+            If _parentDgv.Columns.Count > 0 Then
+                If UseHeader And _parentDgv.Columns(0).Name = columnName Then Value = False
             End If
 
-            If value Then
+            If Value Then
                 'If we are setting a column to be totaled, and it is not in _columnsToSum list, we must add it - so it can be totaled.
                 If Not _columnsToSum.Contains(columnName) Then
                     'Insert the column we are setting to be totaled.
@@ -756,17 +762,17 @@ Public Class DgvFooter
     ''' <returns>Boolean indicating whether column will be totalled.</returns>
     ''' <remarks></remarks>
     Public Property ColumnToSum(ByVal columnIndex As Integer) As Boolean
-        'Lets be a little lazy/smart and just call this property using the name.
+        'Lets be a little lazy/smart and just call this property using the na
         'We could just perform needed actions using the index, but im sure we are getting a displayindex number, and not the actual index.
         'So to be safe, we will get the name from the index passed and call the property using columnName instead.
-        'Besides this avoids recoding the same exact thing more than once, just to use index rather than columnName.
+        'Besides this avoids recoding the same exact thing more than once, just to use index rather than columnNa
         Get
-            Dim columnName As String = Me._parentDGV.Columns(columnIndex).Name
+            Dim columnName As String = _parentDgv.Columns(columnIndex).Name
             Return ColumnToSum(columnName)
         End Get
-        Set(value As Boolean)
-            Dim columnName As String = Me._parentDGV.Columns(columnIndex).Name
-            ColumnToSum(columnName) = value
+        Set
+            Dim columnName As String = _parentDgv.Columns(columnIndex).Name
+            ColumnToSum(columnName) = Value
         End Set
     End Property
 
@@ -780,10 +786,10 @@ Public Class DgvFooter
         Get
             Return _roundSum
         End Get
-        Set(value As Boolean)
-            _roundSum = value
+        Set
+            _roundSum = Value
 
-            SumAllColumns()
+            CalculateTotals()
         End Set
     End Property
 
@@ -800,23 +806,23 @@ Public Class DgvFooter
         Get
             Return _bankersRounding
         End Get
-        Set(value As Boolean)
-            _bankersRounding = value
+        Set
+            _bankersRounding = Value
 
-            SumAllColumns()
+            CalculateTotals()
         End Set
     End Property
 
     ''' <summary>
     ''' Gets the value of the footer cell as a double.
     ''' </summary>
-    ''' <param name="columnName">The name of the column in the parent datagridview to which get the corresponding value from in footer.</param>
+    ''' <param name="columnName">The name of the column in the parent dataGridView to which get the corresponding value from in footer.</param>
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks>Will return 0 if value is not a number</remarks>
     Public ReadOnly Property Value(ByVal columnName As String) As Double
         Get
-            Dim cVal As String = CStr(Me.Rows(0).Cells(columnName & "_footer").Value)
+            Dim cVal As String = CStr(Rows(0).Cells(columnName & "_footer").Value)
             Dim rVal As Double = 0
             cVal = If(cVal.IndexOf(_valueSuffix) > 0, cVal.Substring(0, cVal.IndexOf(_valueSuffix) - 1).Trim, cVal.Trim)
 
@@ -835,7 +841,7 @@ Public Class DgvFooter
     ''' <remarks></remarks>
     Public ReadOnly Property Value(ByVal columnIndex As Integer) As Double
         Get
-            Return Value(_parentDGV.Columns(columnIndex).Name)
+            Return Value(_parentDgv.Columns(columnIndex).Name)
         End Get
     End Property
 
@@ -845,11 +851,11 @@ Public Class DgvFooter
 
     <Browsable(False)>
     <EditorBrowsable(EditorBrowsableState.Never)>
-    Public Overrides Property Dock As System.Windows.Forms.DockStyle
+    Public Overrides Property Dock As DockStyle
         Get
             Return MyBase.Dock
         End Get
-        Set(value As System.Windows.Forms.DockStyle)
+        Set
             MyBase.Dock = DockStyle.Bottom
         End Set
     End Property
@@ -860,8 +866,8 @@ Public Class DgvFooter
         Get
             Return False
         End Get
-        Set(value As Boolean)
-            MyBase.RowHeadersVisible = value
+        Set
+            MyBase.RowHeadersVisible = Value
         End Set
     End Property
 
@@ -871,7 +877,7 @@ Public Class DgvFooter
         Get
             Return False
         End Get
-        Set(value As Boolean)
+        Set
             MyBase.ColumnHeadersVisible = False
         End Set
     End Property
@@ -882,7 +888,7 @@ Public Class DgvFooter
         Get
             Return False
         End Get
-        Set(value As Boolean)
+        Set
 
         End Set
     End Property
@@ -893,7 +899,7 @@ Public Class DgvFooter
         Get
             Return False
         End Get
-        Set(value As Boolean)
+        Set
 
         End Set
     End Property
@@ -904,7 +910,7 @@ Public Class DgvFooter
         Get
             Return False
         End Get
-        Set(value As Boolean)
+        Set
 
         End Set
     End Property
@@ -913,7 +919,7 @@ Public Class DgvFooter
     '<EditorBrowsable(EditorBrowsableState.Never)>
     'Public Shadows ReadOnly Property Columns As FooterColumnCollection
     '    Get
-    '        If IsNothing(Me._fColumns) Then
+    '        If IsNothing(_fColumns) Then
     '            Return MyClass.CreateColumnsInstance
     '        Else
     '            Return MyClass._fColumns
@@ -965,7 +971,7 @@ Public Class FooterColumnCollection
         End If
     End Function
 
-    Public Overrides Function Add(dataGridViewColumn As System.Windows.Forms.DataGridViewColumn) As Integer
+    Public Overrides Function Add(dataGridViewColumn As DataGridViewColumn) As Integer
         If _calledByFooter Then
             _calledByFooter = False
             Return MyBase.Add(dataGridViewColumn)
@@ -974,7 +980,7 @@ Public Class FooterColumnCollection
         End If
     End Function
 
-    Public Overrides Sub AddRange(ParamArray dataGridViewColumns() As System.Windows.Forms.DataGridViewColumn)
+    Public Overrides Sub AddRange(ParamArray dataGridViewColumns() As DataGridViewColumn)
         If _calledByFooter Then
             _calledByFooter = False
             MyBase.AddRange(dataGridViewColumns)
@@ -985,7 +991,7 @@ Public Class FooterColumnCollection
         MyBase.Clear()
     End Sub
 
-    Public Overrides Sub Insert(columnIndex As Integer, dataGridViewColumn As System.Windows.Forms.DataGridViewColumn)
+    Public Overrides Sub Insert(columnIndex As Integer, dataGridViewColumn As DataGridViewColumn)
         If _calledByFooter Then
             _calledByFooter = False
             MyBase.Insert(columnIndex, dataGridViewColumn)
@@ -999,7 +1005,7 @@ Public Class FooterColumnCollection
         End If
     End Sub
 
-    Public Overrides Sub Remove(dataGridViewColumn As System.Windows.Forms.DataGridViewColumn)
+    Public Overrides Sub Remove(dataGridViewColumn As DataGridViewColumn)
         If _calledByFooter Then
             _calledByFooter = False
             MyBase.Remove(dataGridViewColumn)

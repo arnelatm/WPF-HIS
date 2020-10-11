@@ -146,7 +146,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
 
-        Private Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
+        Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
             Get
                 Return _distributionSchemeItems
             End Get

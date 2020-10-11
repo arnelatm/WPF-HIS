@@ -92,6 +92,9 @@
     </Compile>
     <Compile Include="CButtonActionList.vb" />
     <Compile Include="CButtonDesigner.vb" />
+    <Compile Include="cDataGridViewWithFooter.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CDataGvBs.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -234,6 +237,9 @@
     </Compile>
     <Compile Include="DataGridViewCaComboBoxCell.vb" />
     <Compile Include="DataGridViewExtensions.vb" />
+    <Compile Include="dgvfooter.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DropdownColorBlender.designer.vb">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
     </Compile>

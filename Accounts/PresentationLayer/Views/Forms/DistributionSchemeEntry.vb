@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -204,7 +205,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
-                _footer.SumAllColumns()
+                _footer.CalculateTotals()
                 TotalPercentage = _footer.Value("dgvPercentage")
             End If
         End Sub

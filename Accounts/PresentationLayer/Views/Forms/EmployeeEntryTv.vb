@@ -4,21 +4,21 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
-Imports CrystalDecisions.Shared.Json
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeEntryTvTest
+    Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private ReadOnly _nfi As NumberFormatInfo
+        Private _countryTelCodes
         Private _deductionsByName
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
         Private _employeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneTypes
-        Private _countryTelCodes
+
+        Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
             MyBase.New()
@@ -40,6 +40,8 @@ Namespace PresentationLayer.Views.Forms
             Ea.SubscribeEvent(Me)
             'DataGridViewEarnings.Ea.SubscribeEvent(Me)
             'DataGridViewDeductions.Ea.SubscribeEvent(Me)
+            DataGridViewEarnings.ShowFooter = True
+            DataGridViewDeductions.ShowFooter = True
 
         End Sub
 
@@ -76,7 +78,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
+        Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
                 Return cacBankIdNo.GetNullableValue(Of Int16)
             End Get
@@ -479,26 +481,34 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
+        Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
+            DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
+            DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
+            DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
+        End Sub
+
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
             'MyBase.RecordPositionChanged(e)
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
+            'UpdateTotals()
         End Sub
 
         Private Sub BindEmployeeDeduction()
             SuspendLayout()
             bsDeductions.DataSource = Nothing
-            DataGridVewDeductions.Refresh()
+            DataGridViewDeductions.Refresh()
             bsDeductions.DataSource = EmployeeDeductions
             bsDeductions.AllowNew = True
-            With DataGridVewDeductions
+            With DataGridViewDeductions
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsDeductions
                 .Refresh()
             End With
-            With DataGridVewDeductions.Columns
+            With DataGridViewDeductions.Columns
                 dgvDeductionIdNo.DataSource = _deductionsByName
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
@@ -613,6 +623,9 @@ Namespace PresentationLayer.Views.Forms
                     Case $"dgvearningidno"
                         bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
                         bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
+                        'Case $"dgvearningamount"
+                        '    'UpdateTotals()
+                        '    SendKeys.Send("{DOWN}")
                 End Select
             End With
         End Sub

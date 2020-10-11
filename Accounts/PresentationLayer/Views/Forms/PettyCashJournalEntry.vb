@@ -628,7 +628,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
-                _jiFooter.SumAllColumns()
+                _jiFooter.CalculateTotals()
                 TotalDebits = _jiFooter.Value("dgvDebit")
                 TotalCredits = _jiFooter.Value("dgvCredit")
             End If
@@ -637,7 +637,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateOiTotals()
             If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
                 If _apFooter IsNot Nothing Then
-                    _apFooter.SumAllColumns()
+                    _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")
                     DiscountTaken = _apFooter.Value("dgvDiscountTaken")
                     UnApplied = Amount - Applied

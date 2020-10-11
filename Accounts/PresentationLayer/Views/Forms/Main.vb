@@ -585,7 +585,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            Dim myForm = New EmployeeEntryTvTest
+            Dim myForm = New EmployeeEntryTv
             myForm.Show()
         End Sub
 
