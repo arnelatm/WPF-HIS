@@ -444,6 +444,11 @@ Public Class DgvFooter
         End If
     End Sub
 
+    Public Function GetColumnTotal(ByVal ColumnName As String)
+        SumColumn(ColumnName)
+        Return Rows(0).Cells(ColumnName & "_footer").Value
+    End Function
+
     ''' <summary>
     ''' Attempts to add the values in all the cells in all columns in parent, and then displays the total in footer column corresponding to parent column.
     ''' </summary>
