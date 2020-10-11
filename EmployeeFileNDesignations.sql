@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[Designation](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[DesignationCode] [varchar](5) NOT NULL,
 	[DesignationName] [varchar](50) NOT NULL,
-	[DesignationNameAra] [varchar](50) NULL,
+	[DesignationNameAra] [nvarchar](50) NULL,
 	[Description] [varchar](50) NULL,
 	[DateTimeStamp] [timestamp] NULL,
 	[Notes] [nvarchar](255) NULL,

@@ -345,7 +345,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
-                _footer.SumAllColumns()
+                _footer.CalculateTotals()
                 'TotalDebits = _footer.Value("dgvDebit")
                 'TotalCredits = _footer.Value("dgvCredit")
             End If

@@ -434,7 +434,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
-                _jiFooter.SumAllColumns()
+                _jiFooter.CalculateTotals()
                 TotalDebits = _jiFooter.Value("dgvDebit")
                 TotalCredits = _jiFooter.Value("dgvCredit")
             End If
@@ -442,7 +442,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateSlTotals()
             If _slFooter IsNot Nothing Then
-                _slFooter.SumAllColumns()
+                _slFooter.CalculateTotals()
                 TotalSales = _slFooter.Value("DgvSaleAmount")
                 'Applied = _apFooter.Value("dgvAmount")
                 'DiscountTaken = _apFooter.Value("dgvDiscountTaken")

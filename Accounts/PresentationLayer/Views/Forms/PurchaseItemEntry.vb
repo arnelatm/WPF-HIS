@@ -161,7 +161,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private Property StdPrice3 As Decimal Implements IPurchaseItemView.StdPrice3
+        Public Property StdPrice3 As Decimal Implements IPurchaseItemView.StdPrice3
             Get
                 If txtStdPrice3.Text <> "" Then
                     Return Convert.ToSingle(txtStdPrice3.Text)

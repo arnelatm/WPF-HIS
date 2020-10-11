@@ -2,7 +2,7 @@
     [IdNo]            SMALLINT      IDENTITY (1, 1) NOT NULL,
     [DocumentCode]    VARCHAR (5)   COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [DocumentName]    VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-    [DocumentNameAra] VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DocumentNameAra] NVARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Description]     VARCHAR (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [DateTimeStamp]   ROWVERSION    NULL,
     [DocumentType]    CHAR (1)      COLLATE SQL_Latin1_General_CP1_CI_AS NULL,

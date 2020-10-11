@@ -2,7 +2,7 @@
     [IdNo]          SMALLINT       IDENTITY (1, 1) NOT NULL,
     [LeaveCode]     VARCHAR (3)    NULL,
     [LeaveName]     VARCHAR (100)  NOT NULL,
-    [LeaveNameAra]  VARCHAR (100)  NOT NULL,
+    [LeaveNameAra]  NVARCHAR (100) NOT NULL,
     [NumberOfDays]  SMALLINT       NULL,
     [PaidPercent]   DECIMAL (5, 2) NULL,
     [MaxCarryOver]  SMALLINT       NULL,

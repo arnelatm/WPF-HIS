@@ -84,7 +84,7 @@ GO
 CREATE TABLE [dbo].[Leave](
 	[IdNo] [smallint] IDENTITY(1,1) NOT NULL,
 	[LeaveName] [varchar](100) NOT NULL,
-	[LeaveNameAra] [varchar](100) NOT NULL,
+	[LeaveNameAra] [nvarchar](100) NOT NULL,
 	[NumberOfDays] [smallint] NULL,
 	[Percentage] [decimal](5, 2) NULL,
 	[WarningDays] [smallint] NULL,
