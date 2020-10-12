@@ -315,6 +315,12 @@
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollEntry.Designer.vb">
+      <DependentUpon>PayrollEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.Designer.vb">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
     </Compile>
@@ -1848,6 +1854,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntryTv.resx">
       <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollEntry.resx">
+      <DependentUpon>PayrollEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
