@@ -118,6 +118,10 @@ Public Class CDataGridView
         End Get
     End Property
 
+    Public Function GetColumnTotal(ByVal columnName As String)
+        Return DgvFooter.GetColumnTotal(columnName)
+    End Function
+
     <Bindable(True)>
     <Category("Custom")>
     <DefaultValue(GetType(Boolean))>
