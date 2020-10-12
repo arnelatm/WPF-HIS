@@ -1,4 +1,4 @@
-﻿neraljournalentry-- Drop function if exists
+﻿-- Drop function if exists
 --
 --IF EXISTS (SELECT *
 --             FROM dbo.sysobjects
