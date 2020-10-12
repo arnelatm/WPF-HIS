@@ -486,14 +486,21 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
             DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
             DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
+            DisplayNetEarnings()
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
-            'MyBase.RecordPositionChanged(e)
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
-            'UpdateTotals()
+            DisplayNetEarnings()
+        End Sub
+
+        Private Sub DisplayNetEarnings()
+            Dim nTotal As Decimal
+            nTotal = DataGridViewEarnings.GetColumnTotal("dgvEarningAmount") -
+                     DataGridViewDeductions.GetColumnTotal("dgvDeductionAmount")
+            txtNetTotal.Text = nTotal.ToString("N", _nfi)
         End Sub
 
         Private Sub BindEmployeeDeduction()
@@ -618,17 +625,27 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EarningsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
-            With DataGridViewEarnings
-                Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                    Case $"dgvearningidno"
-                        bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
-                        bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
-                        'Case $"dgvearningamount"
-                        '    'UpdateTotals()
-                        '    SendKeys.Send("{DOWN}")
-                End Select
-            End With
+            DisplayNetEarnings()
+            'With DataGridViewEarnings
+            '    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+            '        Case $"dgvearningidno"
+            '            bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
+            '            bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
+            '    End Select
+            'End With
         End Sub
+
+        Private Sub DeductionsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
+            DisplayNetEarnings()
+            'With DataGridViewEarnings
+            '    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+            '        Case $"dgvearningidno"
+            '            bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
+            '            bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
+            '    End Select
+            'End With
+        End Sub
+
 
         Private Sub DataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
             DisplayPhoneTab()
