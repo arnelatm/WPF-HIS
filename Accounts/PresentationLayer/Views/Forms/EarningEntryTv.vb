@@ -168,7 +168,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEarningType.SelectedIndexChanged
-            If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Others Then
+            If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
                 cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
                 cboFrequency.DisplayOnly = True
             Else

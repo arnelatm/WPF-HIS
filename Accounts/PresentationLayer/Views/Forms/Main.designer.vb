@@ -81,6 +81,7 @@ Namespace PresentationLayer.Views.Forms
             Me.EarningsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.DeductionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.LeavesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
@@ -145,7 +146,8 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -414,7 +416,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayroll
             '
-            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem})
+            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayPeriodsToolStripMenuItem})
             Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
             resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
             '
@@ -432,6 +434,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.LeavesToolStripMenuItem.Name = "LeavesToolStripMenuItem"
             resources.ApplyResources(Me.LeavesToolStripMenuItem, "LeavesToolStripMenuItem")
+            '
+            'PayGroupsToolStripMenuItem
+            '
+            Me.PayGroupsToolStripMenuItem.Name = "PayGroupsToolStripMenuItem"
+            resources.ApplyResources(Me.PayGroupsToolStripMenuItem, "PayGroupsToolStripMenuItem")
             '
             'ToolStripMenuItemSupplierVendors
             '
@@ -765,10 +772,15 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'PayGroupsToolStripMenuItem
+            'PayCyclesToolStripMenuItem
             '
-            Me.PayGroupsToolStripMenuItem.Name = "PayGroupsToolStripMenuItem"
-            resources.ApplyResources(Me.PayGroupsToolStripMenuItem, "PayGroupsToolStripMenuItem")
+            Me.PayCyclesToolStripMenuItem.Name = "PayCyclesToolStripMenuItem"
+            resources.ApplyResources(Me.PayCyclesToolStripMenuItem, "PayCyclesToolStripMenuItem")
+            '
+            'PayPeriodsToolStripMenuItem
+            '
+            Me.PayPeriodsToolStripMenuItem.Name = "PayPeriodsToolStripMenuItem"
+            resources.ApplyResources(Me.PayPeriodsToolStripMenuItem, "PayPeriodsToolStripMenuItem")
             '
             'Main
             '
@@ -776,7 +788,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me, "$this")
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.Account)
+            Me.Controls.Add(Me.Account)
         Me.IsMdiContainer = true
         Me.Name = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -911,5 +923,7 @@ End Sub
         Friend WithEvents DeductionsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents LeavesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayGroupsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayCyclesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayPeriodsToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

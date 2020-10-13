@@ -1345,6 +1345,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub PayCyclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayCyclesToolStripMenuItem.Click
+            Dim childMdiForm As PayCycleEntryTv
+            childMdiForm = New PayCycleEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()
