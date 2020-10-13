@@ -89,12 +89,14 @@ End Enum
 
 Public Enum EarningTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("S")> Salary
-    <EnumCode("H")> Hourly
+    <EnumCode("R")> Regular
+    <EnumCode("O")> Overtime
+    <EnumCode("S")> SickPay
+    <EnumCode("V")> VacationPay
+    <EnumCode("H")> HolidayPay
     <EnumCode("E")> Expenses
-    <EnumCode("R")> Redundancy
-    <EnumCode("D")> Holiday
-    <EnumCode("O")> Others
+    <EnumCode("D")> Redundancy
+    <EnumCode("M")> Miscellaneous
 End Enum
 
 Public Enum EmployeeActionSelection
