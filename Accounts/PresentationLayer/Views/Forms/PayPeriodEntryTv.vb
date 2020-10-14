@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
             TvSecondaryFieldName = "PayPeriodCode"
             SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
-            FirstControl = txtPayPeriodCode
+            FirstControl = txtDescription
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PayPeriodPresenter(Me)
             Ea = PresenterObj.Ea
@@ -26,12 +26,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetPayPeriodList()
+            CacPayCycleIdNo.DataSource = PresenterObj.GetPayPeriodList()
         End Sub
 
 #Region "Fields"
 
-        Public Property IdNo As Int16 Implements IPayPeriodView.IdNo
+        Public Property IdNo As Int32 Implements IPayPeriodView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -40,80 +40,52 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Int16? Implements IPayPeriodView.ParentIdNo
+        Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Integer?)
+                Return CType(CacPayCycleIdNo.GetValue(), Integer?)
             End Get
             Set
-                cacParentIdNo.SetValue(Value)
+                CacPayCycleIdNo.SetValue(Value)
             End Set
         End Property
 
-        Public Property PayPeriodCode As String Implements IPayPeriodView.PayPeriodCode
+        Public Property StartDate As Date Implements IPayPeriodView.StartDate
             Get
-                Return txtPayPeriodCode.Text
+                Return dtpStartDate.Value
             End Get
             Set
-                txtPayPeriodCode.Text = Value
+                dtpStartDate.Value = Value
             End Set
         End Property
 
-        Public Property PayPeriodName As String Implements IPayPeriodView.PayPeriodName
+        Public Property EndDate As Date Implements IPayPeriodView.EndDate
             Get
-                Return txtPayPeriodName.Text
+                Return dtpEndDate.Value
             End Get
             Set
-                txtPayPeriodName.Text = Value
+                dtpEndDate.Value = Value
             End Set
         End Property
 
-        Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
+        Public Property Description As String Implements IPayPeriodView.Description
             Get
-                Return txtPayPeriodNameAra.Text
+                Return txtDescription.Text
             End Get
             Set
-                txtPayPeriodNameAra.Text = Value
+                txtDescription.Text = Value
             End Set
         End Property
-
-        Public Property Notes As String Implements IPayPeriodView.Notes
-            Get
-                Return txtNotes.Text
-            End Get
-            Set
-                txtNotes.Text = Value
-            End Set
-        End Property
-
-        'Public Property SortKey As String Implements IPayPeriodView.SortKey
-        '    Get
-        '        Return txtSortKey.Text
-        '    End Get
-        '    Set
-        '        txtSortKey.Text = Value
-        '    End Set
-        'End Property
-
-        'Public Property LevelNumber As Int16 Implements IPayPeriodView.LevelNumber
-        '    Get
-        '        Return NumParser(Of Int16)(txtLevelNumber.Text)
-        '    End Get
-        '    Set(value As Int16)
-        '        txtLevelNumber.Text = value
-        '    End Set
-        'End Property
 
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"PayPeriodCode", txtPayPeriodCode},
-                {"PayPeriodName", txtPayPeriodName},
-                {"PayPeriodNameAra", txtPayPeriodNameAra},
+                {"StartDate", dtpStartDate},
+                {"EndDate", dtpEndDate},
+                {"Description", txtDescription},
                 {"IdNo", TxtIdNo},
-                {"ParentIdNo", cacParentIdNo},
-                {"Notes", txtNotes}
+                {"PayCycleIdNo", CacPayCycleIdNo}
                 }
         End Sub
 
