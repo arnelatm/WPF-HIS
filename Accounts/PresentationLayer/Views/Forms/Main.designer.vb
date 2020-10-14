@@ -82,6 +82,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DeductionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.LeavesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
@@ -146,8 +148,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -439,6 +439,16 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.PayGroupsToolStripMenuItem.Name = "PayGroupsToolStripMenuItem"
             resources.ApplyResources(Me.PayGroupsToolStripMenuItem, "PayGroupsToolStripMenuItem")
+            '
+            'PayCyclesToolStripMenuItem
+            '
+            Me.PayCyclesToolStripMenuItem.Name = "PayCyclesToolStripMenuItem"
+            resources.ApplyResources(Me.PayCyclesToolStripMenuItem, "PayCyclesToolStripMenuItem")
+            '
+            'PayPeriodsToolStripMenuItem
+            '
+            Me.PayPeriodsToolStripMenuItem.Name = "PayPeriodsToolStripMenuItem"
+            resources.ApplyResources(Me.PayPeriodsToolStripMenuItem, "PayPeriodsToolStripMenuItem")
             '
             'ToolStripMenuItemSupplierVendors
             '
@@ -772,16 +782,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'PayCyclesToolStripMenuItem
-            '
-            Me.PayCyclesToolStripMenuItem.Name = "PayCyclesToolStripMenuItem"
-            resources.ApplyResources(Me.PayCyclesToolStripMenuItem, "PayCyclesToolStripMenuItem")
-            '
-            'PayPeriodsToolStripMenuItem
-            '
-            Me.PayPeriodsToolStripMenuItem.Name = "PayPeriodsToolStripMenuItem"
-            resources.ApplyResources(Me.PayPeriodsToolStripMenuItem, "PayPeriodsToolStripMenuItem")
-            '
             'Main
             '
             Me.AllowDrop = True
@@ -789,7 +789,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.Account)
-        Me.IsMdiContainer = true
+            Me.IsMdiContainer = true
         Me.Name = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

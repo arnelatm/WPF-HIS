@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class PayGroupEntryTv
+    Partial Class PayPeriodEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -25,22 +25,18 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayPeriodEntryTv))
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtDescription = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayPeriodCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CacPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -66,7 +62,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.Location = New System.Drawing.Point(213, 11)
+            Me.TxtIdNo.Location = New System.Drawing.Point(161, 11)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -78,99 +74,28 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.TabStop = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
-            'txtPayGroupCode
+            'txtDescription
             '
-            Me.txtPayGroupCode.BackColor = System.Drawing.Color.White
-            Me.txtPayGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayGroupCode.ComputedValue = False
-            Me.txtPayGroupCode.CustomFormat = Nothing
-            Me.txtPayGroupCode.DataBoundControl = True
-            Me.txtPayGroupCode.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupCode, True)
-            Me.txtPayGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayGroupCode.ForeColor = System.Drawing.Color.Black
-            Me.txtPayGroupCode.LinkedLabel = Nothing
-            Me.txtPayGroupCode.Location = New System.Drawing.Point(213, 36)
-            Me.txtPayGroupCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayGroupCode.MaximumValue = Nothing
-            Me.txtPayGroupCode.MinimumValue = Nothing
-            Me.txtPayGroupCode.Name = "txtPayGroupCode"
-            Me.txtPayGroupCode.OldValue = Nothing
-            Me.txtPayGroupCode.ReadOnly = True
-            Me.txtPayGroupCode.Size = New System.Drawing.Size(62, 23)
-            Me.txtPayGroupCode.TabIndex = 0
-            Me.txtPayGroupCode.ValueIsMandatory = True
-            '
-            'txtPayGroupName
-            '
-            Me.txtPayGroupName.BackColor = System.Drawing.Color.White
-            Me.txtPayGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayGroupName.ComputedValue = False
-            Me.txtPayGroupName.CustomFormat = Nothing
-            Me.txtPayGroupName.DataBoundControl = True
-            Me.txtPayGroupName.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupName, True)
-            Me.txtPayGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayGroupName.ForeColor = System.Drawing.Color.Black
-            Me.txtPayGroupName.LinkedLabel = Nothing
-            Me.txtPayGroupName.Location = New System.Drawing.Point(213, 61)
-            Me.txtPayGroupName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayGroupName.MaximumValue = Nothing
-            Me.txtPayGroupName.MinimumValue = Nothing
-            Me.txtPayGroupName.Name = "txtPayGroupName"
-            Me.txtPayGroupName.OldValue = Nothing
-            Me.txtPayGroupName.ReadOnly = True
-            Me.txtPayGroupName.Size = New System.Drawing.Size(418, 23)
-            Me.txtPayGroupName.TabIndex = 1
-            Me.txtPayGroupName.ValueIsMandatory = True
-            '
-            'txtPayGroupNameAra
-            '
-            Me.txtPayGroupNameAra.BackColor = System.Drawing.Color.White
-            Me.txtPayGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayGroupNameAra.ComputedValue = False
-            Me.txtPayGroupNameAra.CustomFormat = Nothing
-            Me.txtPayGroupNameAra.DataBoundControl = True
-            Me.txtPayGroupNameAra.EditingMode = False
-            Me.txtPayGroupNameAra.EnglishControl = Me.txtPayGroupName
-            Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupNameAra, True)
-            Me.txtPayGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayGroupNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtPayGroupNameAra.LinkedLabel = Nothing
-            Me.txtPayGroupNameAra.Location = New System.Drawing.Point(213, 86)
-            Me.txtPayGroupNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayGroupNameAra.MaximumValue = Nothing
-            Me.txtPayGroupNameAra.MinimumValue = Nothing
-            Me.txtPayGroupNameAra.Name = "txtPayGroupNameAra"
-            Me.txtPayGroupNameAra.OldValue = Nothing
-            Me.txtPayGroupNameAra.ReadOnly = True
-            Me.txtPayGroupNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-            Me.txtPayGroupNameAra.Size = New System.Drawing.Size(418, 23)
-            Me.txtPayGroupNameAra.TabIndex = 2
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtNotes, True)
-            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(213, 165)
-            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Multiline = True
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.Size = New System.Drawing.Size(418, 60)
-            Me.txtNotes.TabIndex = 6
-            Me.txtNotes.ValueIsMandatory = True
+            Me.txtDescription.BackColor = System.Drawing.Color.White
+            Me.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDescription.ComputedValue = False
+            Me.txtDescription.CustomFormat = Nothing
+            Me.txtDescription.DataBoundControl = True
+            Me.txtDescription.EditingMode = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtDescription, True)
+            Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDescription.ForeColor = System.Drawing.Color.Black
+            Me.txtDescription.LinkedLabel = Nothing
+            Me.txtDescription.Location = New System.Drawing.Point(161, 36)
+            Me.txtDescription.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDescription.MaximumValue = Nothing
+            Me.txtDescription.MinimumValue = Nothing
+            Me.txtDescription.Name = "txtDescription"
+            Me.txtDescription.OldValue = Nothing
+            Me.txtDescription.ReadOnly = True
+            Me.txtDescription.Size = New System.Drawing.Size(418, 23)
+            Me.txtDescription.TabIndex = 0
+            Me.txtDescription.ValueIsMandatory = True
             '
             'floDataDisplay
             '
@@ -178,25 +103,20 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-            Me.floDataDisplay.Controls.Add(Me.lblPayGroupCode)
-            Me.floDataDisplay.Controls.Add(Me.txtPayGroupCode)
-            Me.floDataDisplay.Controls.Add(Me.lblPayGroupName)
-            Me.floDataDisplay.Controls.Add(Me.txtPayGroupName)
-            Me.floDataDisplay.Controls.Add(Me.lblPayGroupNameAra)
-            Me.floDataDisplay.Controls.Add(Me.txtPayGroupNameAra)
-            Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
-            Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
-            Me.floDataDisplay.Controls.Add(Me.lblLevelNumber)
-            Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
-            Me.floDataDisplay.Controls.Add(Me.lblNotes)
-            Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Controls.Add(Me.txtSortKey)
+            Me.floDataDisplay.Controls.Add(Me.CLabel1)
+            Me.floDataDisplay.Controls.Add(Me.txtDescription)
+            Me.floDataDisplay.Controls.Add(Me.lblPayPeriodCode)
+            Me.floDataDisplay.Controls.Add(Me.CacPayCycleIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblStartDate)
+            Me.floDataDisplay.Controls.Add(Me.dtpStartDate)
+            Me.floDataDisplay.Controls.Add(Me.lblEndDate)
+            Me.floDataDisplay.Controls.Add(Me.dtpEndDate)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
             Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(654, 227)
+            Me.floDataDisplay.Size = New System.Drawing.Size(597, 180)
             Me.floDataDisplay.TabIndex = 147
             '
             'lblIdNo
@@ -207,188 +127,159 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(200, 23)
+            Me.lblIdNo.Size = New System.Drawing.Size(148, 23)
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'lblPayGroupCode
+            'CLabel1
             '
-            Me.lblPayGroupCode.DisplayOnly = True
-            Me.lblPayGroupCode.EditingMode = False
-            Me.lblPayGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayGroupCode.Location = New System.Drawing.Point(11, 36)
-            Me.lblPayGroupCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayGroupCode.Name = "lblPayGroupCode"
-            Me.lblPayGroupCode.Size = New System.Drawing.Size(200, 23)
-            Me.lblPayGroupCode.TabIndex = 156
-            Me.lblPayGroupCode.Text = "Code"
-            Me.lblPayGroupCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(11, 36)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(148, 23)
+            Me.CLabel1.TabIndex = 164
+            Me.CLabel1.Text = "Description"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'lblPayGroupName
+            'lblPayPeriodCode
             '
-            Me.lblPayGroupName.DisplayOnly = True
-            Me.lblPayGroupName.EditingMode = False
-            Me.lblPayGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayGroupName.Location = New System.Drawing.Point(11, 61)
-            Me.lblPayGroupName.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayGroupName.Name = "lblPayGroupName"
-            Me.lblPayGroupName.Size = New System.Drawing.Size(200, 23)
-            Me.lblPayGroupName.TabIndex = 157
-            Me.lblPayGroupName.Text = "Name"
-            Me.lblPayGroupName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayPeriodCode.DisplayOnly = True
+            Me.lblPayPeriodCode.EditingMode = False
+            Me.lblPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayPeriodCode.Location = New System.Drawing.Point(11, 61)
+            Me.lblPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayPeriodCode.Name = "lblPayPeriodCode"
+            Me.lblPayPeriodCode.Size = New System.Drawing.Size(148, 23)
+            Me.lblPayPeriodCode.TabIndex = 156
+            Me.lblPayPeriodCode.Text = "Pay Cycle "
+            Me.lblPayPeriodCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'lblPayGroupNameAra
+            'CacPayCycleIdNo
             '
-            Me.lblPayGroupNameAra.DisplayOnly = True
-            Me.lblPayGroupNameAra.EditingMode = False
-            Me.lblPayGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayGroupNameAra.Location = New System.Drawing.Point(11, 86)
-            Me.lblPayGroupNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayGroupNameAra.Name = "lblPayGroupNameAra"
-            Me.lblPayGroupNameAra.Size = New System.Drawing.Size(200, 23)
-            Me.lblPayGroupNameAra.TabIndex = 158
-            Me.lblPayGroupNameAra.Text = "Name (Arabic)"
-            Me.lblPayGroupNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CacPayCycleIdNo.BackColor = System.Drawing.Color.White
+            Me.CacPayCycleIdNo.ChangingSearchValueOnly = False
+            Me.CacPayCycleIdNo.CurrentSearchTerm = ""
+            Me.CacPayCycleIdNo.DefaultValue = Nothing
+            Me.CacPayCycleIdNo.DisplayMember = "Name"
+            Me.CacPayCycleIdNo.DropDownHeight = 200
+            Me.CacPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.CacPayCycleIdNo.EditingMode = True
+            Me.CacPayCycleIdNo.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.CacPayCycleIdNo, True)
+            Me.CacPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CacPayCycleIdNo.ForeColor = System.Drawing.Color.Black
+            Me.CacPayCycleIdNo.FormattingEnabled = True
+            Me.CacPayCycleIdNo.HideWhenNotEditingOrAdding = False
+            Me.CacPayCycleIdNo.LinkedLabel = Nothing
+            Me.CacPayCycleIdNo.Location = New System.Drawing.Point(161, 61)
+            Me.CacPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.CacPayCycleIdNo.Name = "CacPayCycleIdNo"
+            Me.CacPayCycleIdNo.OldValue = 0
+            Me.CacPayCycleIdNo.OriginalDataSource = Nothing
+            Me.CacPayCycleIdNo.OriginalList = Nothing
+            Me.CacPayCycleIdNo.OverrideDropDownStyleList = False
+            Me.CacPayCycleIdNo.PreviousSearchTerm = Nothing
+            Me.CacPayCycleIdNo.PreviousSelectedIndex = -1
+            Me.CacPayCycleIdNo.PropertySelector = Nothing
+            Me.CacPayCycleIdNo.ReadOnlyCombo = False
+            Me.CacPayCycleIdNo.SearchAnywhere = False
+            Me.CacPayCycleIdNo.Size = New System.Drawing.Size(418, 24)
+            Me.CacPayCycleIdNo.SuggestBoxHeight = 200
+            Me.CacPayCycleIdNo.SuggestListOrderRule = Nothing
+            Me.CacPayCycleIdNo.TabIndex = 165
+            Me.CacPayCycleIdNo.TextToSearch = Nothing
+            Me.CacPayCycleIdNo.ValueIsMandatory = False
+            Me.CacPayCycleIdNo.ValueIsNullable = False
+            Me.CacPayCycleIdNo.ValueIsNumeric = False
+            Me.CacPayCycleIdNo.ValueMember = "IdNo"
             '
-            'lblParentIdNo
+            'lblStartDate
             '
-            Me.lblParentIdNo.DisplayOnly = True
-            Me.lblParentIdNo.EditingMode = False
-            Me.lblParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblParentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblParentIdNo.Location = New System.Drawing.Point(11, 111)
-            Me.lblParentIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblParentIdNo.Name = "lblParentIdNo"
-            Me.lblParentIdNo.Size = New System.Drawing.Size(200, 23)
-            Me.lblParentIdNo.TabIndex = 161
-            Me.lblParentIdNo.Text = "Parent "
-            Me.lblParentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblStartDate.DisplayOnly = True
+            Me.lblStartDate.EditingMode = False
+            Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblStartDate.Location = New System.Drawing.Point(11, 87)
+            Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblStartDate.Name = "lblStartDate"
+            Me.lblStartDate.Size = New System.Drawing.Size(148, 23)
+            Me.lblStartDate.TabIndex = 157
+            Me.lblStartDate.Text = "Start Date"
+            Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'cacParentIdNo
+            'dtpStartDate
             '
-            Me.cacParentIdNo.BackColor = System.Drawing.Color.White
-            Me.cacParentIdNo.ChangingSearchValueOnly = False
-            Me.cacParentIdNo.CurrentSearchTerm = ""
-            Me.cacParentIdNo.DefaultValue = Nothing
-            Me.cacParentIdNo.DisplayMember = "Name"
-            Me.cacParentIdNo.DropDownHeight = 200
-            Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cacParentIdNo.EditingMode = True
-            Me.cacParentIdNo.FilterRule = Nothing
-            Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, True)
-            Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacParentIdNo.FormattingEnabled = True
-            Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacParentIdNo.IntegralHeight = False
-            Me.cacParentIdNo.LinkedLabel = Nothing
-            Me.cacParentIdNo.Location = New System.Drawing.Point(213, 111)
-            Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cacParentIdNo.Name = "cacParentIdNo"
-            Me.cacParentIdNo.OldValue = 0
-            Me.cacParentIdNo.OriginalDataSource = Nothing
-            Me.cacParentIdNo.OriginalList = Nothing
-            Me.cacParentIdNo.OverrideDropDownStyleList = False
-            Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PreviousSelectedIndex = -1
-            Me.cacParentIdNo.PropertySelector = Nothing
-            Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.SearchAnywhere = False
-            Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
-            Me.cacParentIdNo.SuggestBoxHeight = 200
-            Me.cacParentIdNo.SuggestListOrderRule = Nothing
-            Me.cacParentIdNo.TabIndex = 3
-            Me.cacParentIdNo.TextToSearch = Nothing
-            Me.cacParentIdNo.ValueIsMandatory = False
-            Me.cacParentIdNo.ValueIsNullable = False
-            Me.cacParentIdNo.ValueIsNumeric = False
-            Me.cacParentIdNo.ValueMember = "IdNo"
+            Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpStartDate.DefaultValue = Nothing
+            Me.dtpStartDate.DisplayOnly = False
+            Me.dtpStartDate.DtpDefaultValue = Nothing
+            Me.dtpStartDate.EditingMode = True
+            Me.dtpStartDate.EditsAllowed = False
+            Me.floDataDisplay.SetFlowBreak(Me.dtpStartDate, True)
+            Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpStartDate.LinkedLabel = Nothing
+            Me.dtpStartDate.Location = New System.Drawing.Point(161, 87)
+            Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpStartDate.Name = "dtpStartDate"
+            Me.dtpStartDate.ReadOnlyDp = False
+            Me.dtpStartDate.SecurityKey = Nothing
+            Me.dtpStartDate.ShowLongDate = False
+            Me.dtpStartDate.ShowTime = False
+            Me.dtpStartDate.Size = New System.Drawing.Size(107, 25)
+            Me.dtpStartDate.TabIndex = 162
+            Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpStartDate.Value = Nothing
+            Me.dtpStartDate.ValueIsMandatory = False
+            Me.dtpStartDate.ValueIsNullable = False
             '
-            'lblLevelNumber
+            'lblEndDate
             '
-            Me.lblLevelNumber.DisplayOnly = True
-            Me.lblLevelNumber.EditingMode = False
-            Me.lblLevelNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblLevelNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblLevelNumber.Location = New System.Drawing.Point(11, 137)
-            Me.lblLevelNumber.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblLevelNumber.Name = "lblLevelNumber"
-            Me.lblLevelNumber.Size = New System.Drawing.Size(200, 26)
-            Me.lblLevelNumber.TabIndex = 160
-            Me.lblLevelNumber.Text = "Level"
-            Me.lblLevelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEndDate.DisplayOnly = True
+            Me.lblEndDate.EditingMode = False
+            Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblEndDate.Location = New System.Drawing.Point(11, 114)
+            Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblEndDate.Name = "lblEndDate"
+            Me.lblEndDate.Size = New System.Drawing.Size(148, 23)
+            Me.lblEndDate.TabIndex = 161
+            Me.lblEndDate.Text = "End Date"
+            Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtLevelNumber
+            'dtpEndDate
             '
-            Me.txtLevelNumber.BackColor = System.Drawing.Color.White
-            Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLevelNumber.ComputedValue = False
-            Me.txtLevelNumber.CustomFormat = Nothing
-            Me.txtLevelNumber.DataBoundControl = True
-            Me.txtLevelNumber.DisplayOnly = True
-            Me.txtLevelNumber.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.txtLevelNumber, True)
-            Me.txtLevelNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
-            Me.txtLevelNumber.IgnoreNullCheck = True
-            Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
-            Me.txtLevelNumber.Location = New System.Drawing.Point(213, 137)
-            Me.txtLevelNumber.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtLevelNumber.MaximumValue = Nothing
-            Me.txtLevelNumber.MinimumValue = Nothing
-            Me.txtLevelNumber.Name = "txtLevelNumber"
-            Me.txtLevelNumber.OldValue = Nothing
-            Me.txtLevelNumber.ReadOnly = True
-            Me.txtLevelNumber.Size = New System.Drawing.Size(72, 23)
-            Me.txtLevelNumber.TabIndex = 4
-            Me.txtLevelNumber.ValueIsMandatory = True
-            Me.txtLevelNumber.ValueIsNumeric = True
+            Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndDate.DefaultValue = Nothing
+            Me.dtpEndDate.DisplayOnly = False
+            Me.dtpEndDate.DtpDefaultValue = Nothing
+            Me.dtpEndDate.EditingMode = True
+            Me.dtpEndDate.EditsAllowed = False
+            Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndDate.LinkedLabel = Nothing
+            Me.dtpEndDate.Location = New System.Drawing.Point(161, 114)
+            Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpEndDate.Name = "dtpEndDate"
+            Me.dtpEndDate.ReadOnlyDp = False
+            Me.dtpEndDate.SecurityKey = Nothing
+            Me.dtpEndDate.ShowLongDate = False
+            Me.dtpEndDate.ShowTime = False
+            Me.dtpEndDate.Size = New System.Drawing.Size(107, 25)
+            Me.dtpEndDate.TabIndex = 163
+            Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndDate.Value = Nothing
+            Me.dtpEndDate.ValueIsMandatory = False
+            Me.dtpEndDate.ValueIsNullable = False
             '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblNotes.Location = New System.Drawing.Point(11, 165)
-            Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Size = New System.Drawing.Size(200, 23)
-            Me.lblNotes.TabIndex = 159
-            Me.lblNotes.Text = "Notes"
-            Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtSortKey
-            '
-            Me.txtSortKey.BackColor = System.Drawing.Color.White
-            Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtSortKey.ComputedValue = False
-            Me.txtSortKey.CustomFormat = Nothing
-            Me.txtSortKey.DataBoundControl = True
-            Me.txtSortKey.EditingMode = False
-            Me.txtSortKey.Enabled = False
-            Me.txtSortKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-            Me.txtSortKey.LinkedLabel = Nothing
-            Me.txtSortKey.Location = New System.Drawing.Point(13, 230)
-            Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-            Me.txtSortKey.MaximumValue = Nothing
-            Me.txtSortKey.MinimumValue = Nothing
-            Me.txtSortKey.Name = "txtSortKey"
-            Me.txtSortKey.OldValue = Nothing
-            Me.txtSortKey.ReadOnly = True
-            Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
-            Me.txtSortKey.TabIndex = 164
-            Me.txtSortKey.ValueIsMandatory = True
-            Me.txtSortKey.Visible = False
-            '
-            'PayGroupEntryTv
+            'PayPeriodEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(955, 280)
+            Me.ClientSize = New System.Drawing.Size(898, 206)
             Me.Controls.Add(Me.floDataDisplay)
-            Me.Name = "PayGroupEntryTv"
-            Me.Text = "Pay Groups Maintenance Form"
+            Me.Name = "PayPeriodEntryTv"
+            Me.Text = "Pay Period Maintenance Form"
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -399,23 +290,18 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtPayGroupCode As CTextBox
-        Friend WithEvents txtPayGroupName As CTextBox
-        Friend WithEvents txtPayGroupNameAra As CTextBoxArabic
-        Friend WithEvents txtNotes As CTextBox
+        Friend WithEvents txtDescription As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblPayGroupCode As CLabel
-        Friend WithEvents lblPayGroupName As CLabel
-        Friend WithEvents lblPayGroupNameAra As CLabel
-        Friend WithEvents lblNotes As CLabel
-        Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents lblLevelNumber As CLabel
-        Friend WithEvents txtLevelNumber As CTextBox
-        Friend WithEvents _MBPayGroupCannotBeParentToItself As LocalizableMessageBox
+        Friend WithEvents lblPayPeriodCode As CLabel
+        Friend WithEvents lblStartDate As CLabel
+        Friend WithEvents lblEndDate As CLabel
+        Friend WithEvents _MBPayPeriodCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
-        Friend WithEvents txtSortKey As CTextBox
-        Friend WithEvents cacParentIdNo As CaComboBox
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents CacPayCycleIdNo As CaComboBox
+        Friend WithEvents dtpStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
     End Class
 End Namespace

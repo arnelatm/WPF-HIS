@@ -4,74 +4,72 @@ Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
-    ' Data access object for PayGroup
+    ' Data access object for PayPeriod
     ' ** DAO Pattern
 
-    Public Class PayGroupDao
+    Public Class PayPeriodDao
         Inherits CommonDao
-        Implements IDaoAll(Of PayGroup)
+        Implements IDaoAll(Of PayPeriod)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordById
+        Public Function GetRecordById(idNo) As PayPeriod Implements IDaoAll(Of PayPeriod).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, PayGroupCode, PayGroupName, PayGroupNameAra, ParentIdNo, Notes " &
-                    "   FROM [PayGroup_View]" &
+                    " SELECT IdNo, Description, StartDate, EndDate, PayCycleIdNo" &
+                    "   FROM [PayPeriod_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayGroup) _
-            Implements IDaoAll(Of PayGroup).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayPeriod) _
+            Implements IDaoAll(Of PayPeriod).GetAll
             If sortExpression = Nothing Then
-                sortExpression = "PayGroupName ASC"
+                sortExpression = "StartDate ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, PayGroupCode, PayGroupName, PayGroupNameAra" &
-                    "   FROM [PayGroup] " & "order by " & sortExpression
+                    " SELECT IdNo, Description, StartDate, EndDate" &
+                    "   FROM [PayPeriod] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef PayGroup As PayGroup) As Integer Implements IDaoAll(Of PayGroup).UpdateRecord
+        Public Function UpdateRecord(ByRef PayPeriod As PayPeriod) As Integer Implements IDaoAll(Of PayPeriod).UpdateRecord
             Dim sql As String =
-                    " UPDATE [PayGroup]" &
-                    " SET PayGroupCode = @PayGroupCode," &
-                    " PayGroupName = @PayGroupName," &
-                    " PayGroupNameAra = @PayGroupNameAra," &
-                    " ParentIdNo = @ParentIdNo," &
-                    " Notes = @Notes" &
+                    " UPDATE [PayPeriod]" &
+                    " SET Description = @Description," &
+                    " StartDate = @StartDate," &
+                    " EndDate = @EndDate," &
+                    " PayCycleIdNo = @PayCycleIdNo," &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(PayGroup))
+            Return Db.Update(sql, Take(PayPeriod))
         End Function
 
-        Public Function AddRecord(ByRef PayGroup As PayGroup) As Integer Implements IDaoAll(Of PayGroup).AddRecord
+        Public Function AddRecord(ByRef PayPeriod As PayPeriod) As Integer Implements IDaoAll(Of PayPeriod).AddRecord
             Dim sql As String =
-                    " INSERT INTO [PayGroup] " &
-                    " (PayGroupCode,PayGroupName,PayGroupNameAra,ParentIdNo,Notes) " &
-                    " VALUES (@PayGroupCode,@PayGroupName,@PayGroupNameAra,@ParentIdNo,@Notes) "
-            Return Db.Insert(sql, Take(PayGroup))
+                    " INSERT INTO [PayPeriod] " &
+                    " (Description,StartDate,EndDate,PayCycleIdNo" &
+                    " VALUES (@Description,@StartDate,@EndDate,@PayCycleIdNo) "
+            Return Db.Insert(sql, Take(PayPeriod))
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, PayGroup) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, PayPeriod) =
                                     Function(reader) _
-            New PayGroup() With {
+            New PayPeriod() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .PayGroupCode = Extensions.AsString(reader("PayGroupCode")),
-            .PayGroupName = Extensions.AsString(reader("PayGroupName")),
-            .PayGroupNameAra = Extensions.AsString(reader("PayGroupNameAra")),
-            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo"))
+            .Description = Extensions.AsString(reader("Description")),
+            .StartDate = Extensions.AsDate(reader("StartDate")),
+            .EndDate = Extensions.AsDate(reader("EndDate")),
+            .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo"))
             }
 
-        Private Function Take(PayGroup As PayGroup) As Object()
+        Private Function Take(PayPeriod As PayPeriod) As Object()
             Return New Object() {
-                                    "@IdNo", PayGroup.IdNo,
-                                    "@PayGroupCode", PayGroup.PayGroupCode,
-                                    "@PayGroupName", PayGroup.PayGroupName,
-                                    "@PayGroupNameAra", PayGroup.PayGroupNameAra,
-                                    "@ParentIdNo", PayGroup.ParentIdNo,
-                                    "@Notes", PayGroup.Notes
-                                }
+                                 "@IdNo", PayPeriod.IdNo,
+                                 "@Description", PayPeriod.Description,
+                                 "@StartDate", PayPeriod.StartDate,
+                                 "@EndDate", PayPeriod.EndDate,
+                                 "@PayCycleIdNo", PayPeriod.PayCycleIdNo
+                                 }
         End Function
 
     End Class
