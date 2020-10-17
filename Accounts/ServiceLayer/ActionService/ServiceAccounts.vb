@@ -284,9 +284,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property PayPeriodroupDao As IDaoAll(Of PayGroup)
+        Private ReadOnly Property PayPeriodDao As IDaoAll(Of PayPeriod)
             Get
-                Return DaoFactoryAccounts.CreateDao("PayGroup")
+                Return DaoFactoryAccounts.CreateDao("PayPeriod")
             End Get
         End Property
 
