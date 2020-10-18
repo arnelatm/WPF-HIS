@@ -9,10 +9,6 @@
 
         Private _lastFindParms As Object
 
-        Public Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object _
-            Implements IBaseDao.GetFilteredRecords
-            Throw New NotImplementedException
-        End Function
 
         Public Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String,
                                            returnFieldsArray As Array) As ArrayList _
@@ -25,6 +21,10 @@
             retVal = _db.SqlRead(sql, params)
             Return retVal
         End Function
+
+        'Public Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object Implements IBaseDao.GetFilteredRecords
+        '    Throw New NotImplementedException()
+        'End Function
 
         'Public  Function GetRecordValues(ByVal SearchValue As String, TableName As String, ByVal SearchString As String, ReturnFieldsArray As Array) As ArrayList
         '    Dim params() As Object = {"@SearchValue", SearchValue}
@@ -248,13 +248,12 @@
             Return Not nCount > 0
         End Function
 
-        Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
-            Implements IBaseDao.GetRecordWithIdNo
+        Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
                     " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where IdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
-            Return _db.Scalar(sql, params).ToString()
+            Return _db.Scalar(sql, params)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
@@ -497,6 +496,9 @@
             Return _db.SqlRead(sql, params)
         End Function
 
+        Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IBaseDao.GetMaxValueFiltered
+            Throw New NotImplementedException()
+        End Function
     End Class
 
 End Namespace

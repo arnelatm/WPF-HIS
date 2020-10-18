@@ -532,6 +532,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    Public Function GetMaxValueFiltered(Of TT)(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As TT
+        Try
+            Return Model.GetMaxValueFiltered(Of TT)(searchFieldName, cTableName, returnFieldName, filter)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function GetRecordFieldWithKeyG(Of TT)(searchValue As String, cTableName As String, searchFieldName As String, returnFieldName As String) As TT
         Try
             Return Model.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
@@ -548,9 +556,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetRecordWithIdNo(idNo As Int32, returnFieldName As String) As String
+    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
         Try
-            Return Model.GetRecordWithIdNo(idNo, TableName, returnFieldName)
+            Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try

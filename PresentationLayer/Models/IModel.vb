@@ -83,7 +83,7 @@ Public Interface IModel
     Function GetRecordsWithIdNo(Of TM As New)(idNo As Int32, Optional ByRef sortExpression As String = Nothing) _
         As List(Of TM)
 
-    Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String
+    Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
@@ -114,5 +114,5 @@ Public Interface IModel
     Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
-
+    Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
 End Interface

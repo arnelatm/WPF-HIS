@@ -28,7 +28,7 @@ Namespace Services
 
         Function GetDefaultFieldValues(ByVal tableName As String)
 
-        Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) As Object
+        'Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) As Object
 
         Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String
 
@@ -51,6 +51,8 @@ Namespace Services
         Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
                                        returnFieldName As String) As T
 
+        Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
+
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
         Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) _
@@ -62,7 +64,7 @@ Namespace Services
         Function GetRecordsWithIdNo(Of TM)(ByVal idNo As Int32, Optional ByRef sortKey As String = Nothing) _
             As List(Of TM)
 
-        Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String
+        Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
         Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
