@@ -17,8 +17,7 @@ Namespace PresentationLayer.Views.Forms
             TvMainFieldName = "PayPeriodName"
             TvSecondaryFieldName = "PayPeriodCode"
             SortOrderKey = "SortKey"
-            ParentFieldName = "ParentIdNo"
-            FirstControl = txtDescription
+            FirstControl = txtPayPeriodName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PayPeriodPresenter(Me)
             Ea = PresenterObj.Ea
@@ -26,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CacPayCycleIdNo.DataSource = PresenterObj.GetPayPeriodList()
+            CacPayCycleIdNo.DataSource = PresenterObj.GetListByCode("PayCycle")
         End Sub
 
 #Region "Fields"
@@ -42,7 +41,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
             Get
-                Return CType(CacPayCycleIdNo.GetValue(), Integer?)
+                Return CType(CacPayCycleIdNo.GetValue(), Int16)
             End Get
             Set
                 CacPayCycleIdNo.SetValue(Value)
@@ -67,12 +66,30 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Description As String Implements IPayPeriodView.Description
+        Public Property PayPeriodName As String Implements IPayPeriodView.PayPeriodName
             Get
-                Return txtDescription.Text
+                Return txtPayPeriodName.Text
             End Get
-            Set
-                txtDescription.Text = Value
+            Set(value As String)
+                txtPayPeriodName.Text = value
+            End Set
+        End Property
+
+        Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
+            Get
+                Return txtPayPeriodNameAra.Text
+            End Get
+            Set(value As String)
+                txtPayPeriodNameAra.Text = value
+            End Set
+        End Property
+
+        Public Property PayPeriodCode As String Implements IPayPeriodView.PayPeriodCode
+            Get
+                Return txtPayPeriodCode.Text
+            End Get
+            Set(value As String)
+                txtPayPeriodCode.Text = value
             End Set
         End Property
 
@@ -83,10 +100,21 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"StartDate", dtpStartDate},
                 {"EndDate", dtpEndDate},
-                {"Description", txtDescription},
+                {"Description", txtPayPeriodName},
                 {"IdNo", TxtIdNo},
                 {"PayCycleIdNo", CacPayCycleIdNo}
                 }
+        End Sub
+
+        Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CacPayCycleIdNo.SelectedIndexChanged
+            If PresenterObj.AddMode Then
+                Dim payFrequency As String
+                payFrequency = PresenterObj.GetRecordWithIdNo(PayCycleIdNo, "PayFrequency")
+                Select Case payFrequency
+                    Case PayFrequencySelection.Monthly
+
+                End Select
+            End If
         End Sub
 
     End Class

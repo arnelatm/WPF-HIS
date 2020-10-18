@@ -69,6 +69,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayFrequency As Char Implements IPayCycleView.PayFrequency
+            Get
+                Return cboPayFrequency.GetValue()
+            End Get
+            Set
+                cboPayFrequency.SetValue(Value)
+            End Set
+        End Property
+
         'Public Property SortKey As String Implements IPayCycleView.SortKey
         '    Get
         '        Return txtSortKey.Text
@@ -88,6 +97,10 @@ Namespace PresentationLayer.Views.Forms
         'End Property
 
 #End Region
+
+        Protected Overrides Sub CreateDataSources()
+            cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+        End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From

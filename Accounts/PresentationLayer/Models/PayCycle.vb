@@ -7,6 +7,7 @@
     Public Class PayCycleModel
 
         Public Property Errors As List(Of String)
+        Public Property PayFrequency As Char
         Public Property IdNo As Int16
         Public Property PayCycleCode As String
         Public Property PayCycleName As String

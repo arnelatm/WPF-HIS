@@ -554,7 +554,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateType.EditingMode = False
             Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 183)
+            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
             Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateType.Name = "lblPayRateType"
             Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
@@ -580,7 +580,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayRateType.HideWhenNotEditingOrAdding = False
             Me.cboPayRateType.IntegralHeight = False
             Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 183)
+            Me.cboPayRateType.Location = New System.Drawing.Point(190, 182)
             Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayRateType.Name = "cboPayRateType"
             Me.cboPayRateType.OldValue = 0
@@ -608,7 +608,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayRateAmount.EditingMode = False
             Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 210)
+            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
             Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayRateAmount.Name = "lblPayRateAmount"
             Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
@@ -628,7 +628,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
             Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 210)
+            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 208)
             Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayRateAmount.MaximumValue = Nothing
             Me.txtPayRateAmount.MinimumValue = Nothing

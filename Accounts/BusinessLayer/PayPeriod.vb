@@ -16,11 +16,13 @@ Namespace BusinessLayer
             End If
         End Sub
 
+        Public Property EndDate As Date
         Public Property IdNo As Int32
         Public Property PayCycleIdNo As Int16
+        Public Property PayPeriodCode As String
+        Public Property PayPeriodName As String
+        Public Property PayPeriodNameAra As String
         Public Property StartDate As Date
-        Public Property EndDate As Date
-        Public Property Description As String
     End Class
 
 End Namespace

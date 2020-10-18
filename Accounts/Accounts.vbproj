@@ -593,7 +593,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePhoneView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPayPeriod.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayPeriodView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayCycleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayGroupView.vb" />
@@ -2791,6 +2791,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayPeriodModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
