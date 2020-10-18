@@ -16,7 +16,7 @@
 
     Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 
-    Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object
+    'Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object
 
     Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String,
                                 returnFieldsArray As Array) As ArrayList
@@ -46,7 +46,7 @@
     Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                 ParamArray fieldNames() As String) As Object
 
-    Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String
+    Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
@@ -67,5 +67,5 @@
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer
-
+    Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
 End Interface

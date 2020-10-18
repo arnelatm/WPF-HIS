@@ -316,6 +316,10 @@ Public Class Model
         Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
+    Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IModel.GetMaxValueFiltered
+        Return Service.GetMaxValueFiltered(Of T)(searchFieldName, tableName, returnFieldName, filter)
+    End Function
+
     Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                            searchFieldName1 As String,
                                            searchFieldName2 As String, returnFieldName As String) As String _
@@ -336,9 +340,8 @@ Public Class Model
         Return Service.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
     End Function
 
-    Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
-        Implements IModel.GetRecordWithIdNo
-        Return Service.GetRecordWithIdNo(idNo, tableName, returnFieldName)
+    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) Implements IModel.GetFieldWithIdNo
+        Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
     Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,

@@ -272,7 +272,7 @@ Namespace PresentationLayer.Views.Forms
                 cboAccountGroup.DisplayOnly = True
             End If
             If cboParentIdNo.SelectedValue IsNot Nothing Then
-                cboAccountGroup.SelectedValue = PresenterObj.GetRecordWithIdNo(cboParentIdNo.SelectedValue, "AccountGroup")
+                cboAccountGroup.SelectedValue = PresenterObj.GetFieldWithIdNo(cboParentIdNo.SelectedValue, "Chart", "AccountGroup")
                 txtLevelNumber.Text = PresenterObj.GetRecordFieldWithKeyG(Of Integer)(cboParentIdNo.SelectedValue, "Chart_View", "IdNo", "LevelNumber") + 1
             End If
             If PresenterObj.AccountHasChildren(IdNo) Then

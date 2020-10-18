@@ -201,6 +201,10 @@ Namespace PresentationLayer.Presenters
                                              "IdNo")
         End Function
 
+        Public Function GetLastPayDate(ByVal payCycle As Int16)
+            Model.GetMaxValueFiltered(Of Date)("EndDate", "PayPeriod", "EndDate", "PayFrequency=[M]")
+        End Function
+
         Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
             TableToGet = "Deduction"
             SortExpression = sortKey

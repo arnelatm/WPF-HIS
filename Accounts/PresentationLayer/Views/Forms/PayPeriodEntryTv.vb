@@ -1,4 +1,7 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
@@ -108,13 +111,24 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CacPayCycleIdNo.SelectedIndexChanged
             If PresenterObj.AddMode Then
-                Dim payFrequency As String
-                payFrequency = PresenterObj.GetRecordWithIdNo(PayCycleIdNo, "PayFrequency")
+                Dim payFrequency As PayFrequencySelection
+                Dim payCycleDaoObject As New PayCycleDao
+                Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
+                'payFrequency = GetEnumCodeValue(Of PayFrequencySelection)(PresenterObj.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
+                payFrequency = GetEnumCodeValue(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
                 Select Case payFrequency
                     Case PayFrequencySelection.Monthly
-
+                        InitializeMonthlyPayroll(payCycleRecord)
                 End Select
             End If
+        End Sub
+
+        Private Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
+            Dim dStartDate As Date
+            If payCycleRecord.
+            'Dim lastPayPeriodDate As Date
+            'Dim sqlState
+            'lastPayPeriodDate = PresenterObj.GetSqlValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
         End Sub
 
     End Class

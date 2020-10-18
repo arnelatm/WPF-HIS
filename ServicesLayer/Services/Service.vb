@@ -227,11 +227,11 @@ Namespace Services
             Return BaseDao.FindFieldContinue(tableName, idNo)
         End Function
 
-        Public Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) _
-            As Object _
-            Implements IService.GetFilteredRecords
-            Return BaseDao.GetFilteredRecords(filterExpression, sortKey)
-        End Function
+        'Public Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) _
+        '    As Object _
+        '    Implements IService.GetFilteredRecords
+        '    Return BaseDao.GetFilteredRecords(filterExpression, sortKey)
+        'End Function
 
         Public Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String _
             Implements IService.GetLastSortKey
@@ -261,6 +261,10 @@ Namespace Services
             Return BaseDao.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
+        Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IService.GetMaxValueFiltered
+            Return BaseDao.GetMaxValueFiltered(Of T)(searchFieldName, tableName, returnFieldName, filter)
+        End Function
+
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                                searchFieldName1 As String, searchFieldName2 As String,
                                                returnFieldName As String) As String _
@@ -287,9 +291,8 @@ Namespace Services
             Return BaseDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
         End Function
 
-        Public Function GetRecordWithIdNo(idNo As Int32, tableName As String, returnFieldName As String) As String _
-            Implements IService.GetRecordWithIdNo
-            Return BaseDao.GetRecordWithIdNo(idNo, tableName, returnFieldName)
+        Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IService.GetFieldWithIdNo
+            Return BaseDao.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) _
@@ -308,6 +311,8 @@ Namespace Services
             Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
+
+
 
 #End Region
 
