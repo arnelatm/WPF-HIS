@@ -17,6 +17,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property IdNo As Int16
+        Public Property PayFrequency As Char
         Public Property PayCycleCode As String
         Public Property PayCycleName As String
         Public Property PayCycleNameAra As String

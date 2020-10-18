@@ -36,7 +36,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayCycleNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
@@ -102,7 +103,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleCode.OldValue = Nothing
             Me.txtPayCycleCode.ReadOnly = True
             Me.txtPayCycleCode.Size = New System.Drawing.Size(62, 23)
-            Me.txtPayCycleCode.TabIndex = 0
+            Me.txtPayCycleCode.TabIndex = 1
             Me.txtPayCycleCode.ValueIsMandatory = True
             '
             'txtPayCycleName
@@ -125,7 +126,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleName.OldValue = Nothing
             Me.txtPayCycleName.ReadOnly = True
             Me.txtPayCycleName.Size = New System.Drawing.Size(418, 23)
-            Me.txtPayCycleName.TabIndex = 1
+            Me.txtPayCycleName.TabIndex = 2
             Me.txtPayCycleName.ValueIsMandatory = True
             '
             'txtPayCycleNameAra
@@ -141,7 +142,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayCycleNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPayCycleNameAra.LinkedLabel = Nothing
-            Me.txtPayCycleNameAra.Location = New System.Drawing.Point(213, 86)
+            Me.txtPayCycleNameAra.Location = New System.Drawing.Point(213, 112)
             Me.txtPayCycleNameAra.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayCycleNameAra.MaximumValue = Nothing
             Me.txtPayCycleNameAra.MinimumValue = Nothing
@@ -150,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleNameAra.ReadOnly = True
             Me.txtPayCycleNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
             Me.txtPayCycleNameAra.Size = New System.Drawing.Size(418, 23)
-            Me.txtPayCycleNameAra.TabIndex = 2
+            Me.txtPayCycleNameAra.TabIndex = 4
             '
             'txtNotes
             '
@@ -164,7 +165,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(213, 111)
+            Me.txtNotes.Location = New System.Drawing.Point(213, 137)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
@@ -173,7 +174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.Size = New System.Drawing.Size(418, 60)
-            Me.txtNotes.TabIndex = 6
+            Me.txtNotes.TabIndex = 5
             Me.txtNotes.ValueIsMandatory = True
             '
             'floDataDisplay
@@ -186,17 +187,18 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtPayCycleCode)
             Me.floDataDisplay.Controls.Add(Me.lblPayCycleName)
             Me.floDataDisplay.Controls.Add(Me.txtPayCycleName)
+            Me.floDataDisplay.Controls.Add(Me.lblPayFrequency)
+            Me.floDataDisplay.Controls.Add(Me.cboPayFrequency)
             Me.floDataDisplay.Controls.Add(Me.lblPayCycleNameAra)
             Me.floDataDisplay.Controls.Add(Me.txtPayCycleNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Controls.Add(Me.txtSortKey)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
             Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(654, 182)
+            Me.floDataDisplay.Size = New System.Drawing.Size(654, 207)
             Me.floDataDisplay.TabIndex = 147
             '
             'lblIdNo
@@ -243,7 +245,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleNameAra.DisplayOnly = True
             Me.lblPayCycleNameAra.EditingMode = False
             Me.lblPayCycleNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayCycleNameAra.Location = New System.Drawing.Point(11, 86)
+            Me.lblPayCycleNameAra.Location = New System.Drawing.Point(11, 112)
             Me.lblPayCycleNameAra.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayCycleNameAra.Name = "lblPayCycleNameAra"
             Me.lblPayCycleNameAra.Size = New System.Drawing.Size(200, 23)
@@ -256,7 +258,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblNotes.Location = New System.Drawing.Point(11, 111)
+            Me.lblNotes.Location = New System.Drawing.Point(11, 137)
             Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Size = New System.Drawing.Size(200, 23)
@@ -264,34 +266,64 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.Text = "Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtSortKey
+            'lblPayFrequency
             '
-            Me.txtSortKey.BackColor = System.Drawing.Color.White
-            Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtSortKey.ComputedValue = False
-            Me.txtSortKey.CustomFormat = Nothing
-            Me.txtSortKey.DataBoundControl = True
-            Me.txtSortKey.EditingMode = False
-            Me.txtSortKey.Enabled = False
-            Me.txtSortKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-            Me.txtSortKey.LinkedLabel = Nothing
-            Me.txtSortKey.Location = New System.Drawing.Point(13, 176)
-            Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-            Me.txtSortKey.MaximumValue = Nothing
-            Me.txtSortKey.MinimumValue = Nothing
-            Me.txtSortKey.Name = "txtSortKey"
-            Me.txtSortKey.OldValue = Nothing
-            Me.txtSortKey.ReadOnly = True
-            Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
-            Me.txtSortKey.TabIndex = 164
-            Me.txtSortKey.ValueIsMandatory = True
-            Me.txtSortKey.Visible = False
+            Me.lblPayFrequency.DisplayOnly = True
+            Me.lblPayFrequency.EditingMode = False
+            Me.lblPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayFrequency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPayFrequency.Location = New System.Drawing.Point(11, 86)
+            Me.lblPayFrequency.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayFrequency.Name = "lblPayFrequency"
+            Me.lblPayFrequency.Size = New System.Drawing.Size(200, 23)
+            Me.lblPayFrequency.TabIndex = 288
+            Me.lblPayFrequency.Text = "Pay Frequency"
+            Me.lblPayFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cboPayFrequency
+            '
+            Me.cboPayFrequency.BackColor = System.Drawing.Color.White
+            Me.cboPayFrequency.ChangingSearchValueOnly = False
+            Me.cboPayFrequency.CurrentSearchTerm = ""
+            Me.cboPayFrequency.DefaultValue = Nothing
+            Me.cboPayFrequency.DisplayMember = "Name"
+            Me.cboPayFrequency.DropDownHeight = 1
+            Me.cboPayFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayFrequency.EditingMode = False
+            Me.cboPayFrequency.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboPayFrequency, True)
+            Me.cboPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayFrequency.ForeColor = System.Drawing.Color.Black
+            Me.cboPayFrequency.FormattingEnabled = True
+            Me.cboPayFrequency.HideWhenNotEditingOrAdding = False
+            Me.cboPayFrequency.IntegralHeight = False
+            Me.cboPayFrequency.LinkedLabel = Me.lblPayFrequency
+            Me.cboPayFrequency.Location = New System.Drawing.Point(212, 86)
+            Me.cboPayFrequency.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPayFrequency.Name = "cboPayFrequency"
+            Me.cboPayFrequency.OldValue = 0
+            Me.cboPayFrequency.OriginalDataSource = Nothing
+            Me.cboPayFrequency.OriginalList = Nothing
+            Me.cboPayFrequency.OverrideDropDownStyleList = False
+            Me.cboPayFrequency.PreviousSearchTerm = Nothing
+            Me.cboPayFrequency.PreviousSelectedIndex = -1
+            Me.cboPayFrequency.PropertySelector = Nothing
+            Me.cboPayFrequency.ReadOnlyCombo = False
+            Me.cboPayFrequency.SearchAnywhere = False
+            Me.cboPayFrequency.Size = New System.Drawing.Size(202, 24)
+            Me.cboPayFrequency.SuggestBoxHeight = 200
+            Me.cboPayFrequency.SuggestListOrderRule = Nothing
+            Me.cboPayFrequency.TabIndex = 3
+            Me.cboPayFrequency.TextToSearch = Nothing
+            Me.cboPayFrequency.ValueIsMandatory = False
+            Me.cboPayFrequency.ValueIsNullable = False
+            Me.cboPayFrequency.ValueIsNumeric = False
+            Me.cboPayFrequency.ValueMember = "Code"
             '
             'PayCycleEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(955, 235)
+            Me.ClientSize = New System.Drawing.Size(955, 260)
             Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "PayCycleEntryTv"
             Me.Text = "Pay Cycles Maintenance Form"
@@ -318,6 +350,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBPayCycleCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
-        Friend WithEvents txtSortKey As CTextBox
+        Friend WithEvents lblPayFrequency As CLabel
+        Friend WithEvents cboPayFrequency As CaComboBox
     End Class
 End Namespace

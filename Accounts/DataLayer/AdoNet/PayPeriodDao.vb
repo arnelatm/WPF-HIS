@@ -15,8 +15,8 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As PayPeriod Implements IDaoAll(Of PayPeriod).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, Description, StartDate, EndDate, PayCycleIdNo" &
-                    "   FROM [PayPeriod_View]" &
+                    " SELECT IdNo, PayPeriodCode, PayPeriodName, PayPeriodNameAra, StartDate, EndDate, PayCycleIdNo" &
+                    "   FROM [PayPeriod]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -28,18 +28,20 @@ Namespace DataLayer.AdoNet
                 sortExpression = "StartDate ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, Description, StartDate, EndDate" &
+                    " SELECT IdNo, PayPeriodName, PayPeriodNameAra, StartDate, EndDate" &
                     "   FROM [PayPeriod] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
         Public Function UpdateRecord(ByRef PayPeriod As PayPeriod) As Integer Implements IDaoAll(Of PayPeriod).UpdateRecord
             Dim sql As String =
-                    " UPDATE [PayPeriod]" &
-                    " SET Description = @Description," &
-                    " StartDate = @StartDate," &
+                    " UPDATE [PayPeriod] SET " &
                     " EndDate = @EndDate," &
                     " PayCycleIdNo = @PayCycleIdNo," &
+                    " PayPeriodCode = @PayPeriodCode," &
+                    " PayPeriodName = @PayPeriodName," &
+                    " PayPeriodNameAra = @PayPeriodNameAra," &
+                    " StartDate = @StartDate" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(PayPeriod))
         End Function
@@ -47,8 +49,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PayPeriod As PayPeriod) As Integer Implements IDaoAll(Of PayPeriod).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayPeriod] " &
-                    " (Description,StartDate,EndDate,PayCycleIdNo" &
-                    " VALUES (@Description,@StartDate,@EndDate,@PayCycleIdNo) "
+                    " (PayPeriodCode,PayPeriodName,PayPeriodNameAra,StartDate,EndDate,PayCycleIdNo)" &
+                    " VALUES (@PayPeriodCode,@PayPeriodName,@PayPeriodNameAra,@StartDate,@EndDate,@PayCycleIdNo) "
             Return Db.Insert(sql, Take(PayPeriod))
         End Function
 
@@ -56,7 +58,9 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New PayPeriod() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .Description = Extensions.AsString(reader("Description")),
+            .PayPeriodCode = Extensions.AsString(reader("PayPeriodCode")),
+            .PayPeriodName = Extensions.AsString(reader("PayPeriodName")),
+            .PayPeriodNameAra = Extensions.AsString(reader("PayPeriodNameAra")),
             .StartDate = Extensions.AsDate(reader("StartDate")),
             .EndDate = Extensions.AsDate(reader("EndDate")),
             .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo"))
@@ -65,7 +69,9 @@ Namespace DataLayer.AdoNet
         Private Function Take(PayPeriod As PayPeriod) As Object()
             Return New Object() {
                                  "@IdNo", PayPeriod.IdNo,
-                                 "@Description", PayPeriod.Description,
+                                 "@PayPeriodCode", PayPeriod.PayPeriodCode,
+                                 "@PayPeriodName", PayPeriod.PayPeriodName,
+                                 "@PayPeriodNameAra", PayPeriod.PayPeriodNameAra,
                                  "@StartDate", PayPeriod.StartDate,
                                  "@EndDate", PayPeriod.EndDate,
                                  "@PayCycleIdNo", PayPeriod.PayCycleIdNo

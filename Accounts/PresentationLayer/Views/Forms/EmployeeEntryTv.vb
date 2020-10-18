@@ -646,7 +646,6 @@ Namespace PresentationLayer.Views.Forms
             'End With
         End Sub
 
-
         Private Sub DataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
             DisplayPhoneTab()
         End Sub

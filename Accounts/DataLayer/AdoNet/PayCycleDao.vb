@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As PayCycle Implements IDaoAll(Of PayCycle).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, PayCycleCode, PayCycleName, PayCycleNameAra, Notes " &
+                    " SELECT IdNo, PayFrequency, PayCycleCode, PayCycleName, PayCycleNameAra, Notes " &
                     "   FROM [PayCycle]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -35,8 +35,9 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef PayCycle As PayCycle) As Integer Implements IDaoAll(Of PayCycle).UpdateRecord
             Dim sql As String =
-                    " UPDATE [PayCycle]" &
-                    " SET PayCycleCode = @PayCycleCode," &
+                    " UPDATE [PayCycle] Set " &
+                    " PayFrequency = @PayFrequency," &
+                    " PayCycleCode = @PayCycleCode," &
                     " PayCycleName = @PayCycleName," &
                     " PayCycleNameAra = @PayCycleNameAra," &
                     " Notes = @Notes" &
@@ -47,14 +48,15 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PayCycle As PayCycle) As Integer Implements IDaoAll(Of PayCycle).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayCycle] " &
-                    " (PayCycleCode,PayCycleName,PayCycleNameAra,Notes) " &
-                    " VALUES (@PayCycleCode,@PayCycleName,@PayCycleNameAra,@Notes) "
+                    " (PayFrequency,PayCycleCode,PayCycleName,PayCycleNameAra,Notes) " &
+                    " VALUES (@PayFrequency,@PayCycleCode,@PayCycleName,@PayCycleNameAra,@Notes) "
             Return Db.Insert(sql, Take(PayCycle))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayCycle) =
                                     Function(reader) _
             New PayCycle() With {
+            .PayFrequency = Extensions.AsChar(reader("PayFrequency")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .PayCycleCode = Extensions.AsString(reader("PayCycleCode")),
             .PayCycleName = Extensions.AsString(reader("PayCycleName")),
@@ -64,6 +66,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(PayCycle As PayCycle) As Object()
             Return New Object() {
+                                    "PayFrequency", PayCycle.PayFrequency,
                                     "@IdNo", PayCycle.IdNo,
                                     "@PayCycleCode", PayCycle.PayCycleCode,
                                     "@PayCycleName", PayCycle.PayCycleName,

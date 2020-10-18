@@ -12,7 +12,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPayPeriodView)
             MyBase.New(view)
-            TreeViewParentIdField = "ParentIdNo"
             InitializerWithTv("PayPeriod")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
