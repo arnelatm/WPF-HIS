@@ -118,19 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 299</value>
   </data>
@@ -295,39 +286,48 @@
     <value>CashReceiptJournal</value>
   </data>
   <data name="cboTableName.Items4" xml:space="preserve">
-    <value>ProductCategory</value>
-  </data>
-  <data name="cboTableName.Items5" xml:space="preserve">
     <value>CheckDisbursementJournal</value>
   </data>
-  <data name="cboTableName.Items6" xml:space="preserve">
+  <data name="cboTableName.Items5" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="cboTableName.Items7" xml:space="preserve">
+  <data name="cboTableName.Items6" xml:space="preserve">
     <value>Employee</value>
   </data>
-  <data name="cboTableName.Items8" xml:space="preserve">
+  <data name="cboTableName.Items7" xml:space="preserve">
     <value>ErJournal</value>
   </data>
-  <data name="cboTableName.Items9" xml:space="preserve">
+  <data name="cboTableName.Items8" xml:space="preserve">
     <value>GeneralJournal</value>
   </data>
-  <data name="cboTableName.Items10" xml:space="preserve">
-    <value>Supplier</value>
-  </data>
-  <data name="cboTableName.Items11" xml:space="preserve">
+  <data name="cboTableName.Items9" xml:space="preserve">
     <value>Patient</value>
   </data>
+  <data name="cboTableName.Items10" xml:space="preserve">
+    <value>PayCycle</value>
+  </data>
+  <data name="cboTableName.Items11" xml:space="preserve">
+    <value>PayGroup</value>
+  </data>
   <data name="cboTableName.Items12" xml:space="preserve">
-    <value>PettyCashJournal</value>
+    <value>PayPeriod</value>
   </data>
   <data name="cboTableName.Items13" xml:space="preserve">
-    <value>SalesJournal</value>
+    <value>PettyCashJournal</value>
   </data>
   <data name="cboTableName.Items14" xml:space="preserve">
-    <value>SecurityGroup</value>
+    <value>ProductCategory</value>
   </data>
   <data name="cboTableName.Items15" xml:space="preserve">
+    <value>SalesJournal</value>
+  </data>
+  <data name="cboTableName.Items16" xml:space="preserve">
+    <value>SecurityGroup</value>
+  </data>
+  <data name="cboTableName.Items17" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="cboTableName.Items18" xml:space="preserve">
     <value>User</value>
   </data>
   <data name="cboTableName.Location" type="System.Drawing.Point, System.Drawing">

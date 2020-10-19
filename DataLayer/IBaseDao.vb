@@ -30,6 +30,8 @@
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                    returnFieldName As String) As String
 
+    Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+
     Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
                                    returnFieldName As String) As T
 
