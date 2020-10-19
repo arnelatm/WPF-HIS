@@ -67,5 +67,7 @@
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer
-    Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
+
+    Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
+
 End Interface

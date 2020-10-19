@@ -9,7 +9,6 @@
 
         Private _lastFindParms As Object
 
-
         Public Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String,
                                            returnFieldsArray As Array) As ArrayList _
             Implements IBaseDao.GetFilteredRecords
@@ -496,9 +495,16 @@
             Return _db.SqlRead(sql, params)
         End Function
 
-        Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IBaseDao.GetMaxValueFiltered
-            Throw New NotImplementedException()
+        Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IBaseDao.GetMaxValueFiltered
+            Dim sql As String
+            If filter Is Nothing Or filter = "" Then
+                sql = " SELECT Top 1 " & returnFieldName & " from " & tableName & " order by " & searchFieldName & " Desc"
+            Else
+                sql = " SELECT Top 1 " & returnFieldName & " from " & tableName & " where " & filter & " order by " & searchFieldName & " Desc"
+            End If
+            Return _db.Scalar(sql)
         End Function
+
     End Class
 
 End Namespace

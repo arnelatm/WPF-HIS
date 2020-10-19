@@ -187,8 +187,7 @@ Public Module GlobalFunctions
         End If
     End Function
 
-    Function GetMonthNamesInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
-                                    ByRef currentCulture As CultureInfo)
+    Function GetMonthNamesInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo)
         Return targetCulture.DateTimeFormat.MonthGenitiveNames()
     End Function
 

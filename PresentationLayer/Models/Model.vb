@@ -316,8 +316,8 @@ Public Class Model
         Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
-    Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IModel.GetMaxValueFiltered
-        Return Service.GetMaxValueFiltered(Of T)(searchFieldName, tableName, returnFieldName, filter)
+    Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IModel.GetMaxValueFiltered
+        Return Service.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
     End Function
 
     Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
@@ -340,9 +340,9 @@ Public Class Model
         Return Service.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
     End Function
 
-    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) Implements IModel.GetFieldWithIdNo
-        Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
-    End Function
+    'Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) Implements IModel.GetFieldWithIdNo
+    '    Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
+    'End Function
 
     Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
                                            Optional dateTimeStampField As String = "DateTimeStamp") As Object _
@@ -422,6 +422,10 @@ Public Class Model
     Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList _
         Implements IModel.GetUserSecurityForKey
         Return Service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+    End Function
+
+    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IModel.GetFieldWithIdNo
+        Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
 End Class

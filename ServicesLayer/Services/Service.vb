@@ -261,8 +261,8 @@ Namespace Services
             Return BaseDao.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
-        Public Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T Implements IService.GetMaxValueFiltered
-            Return BaseDao.GetMaxValueFiltered(Of T)(searchFieldName, tableName, returnFieldName, filter)
+        Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IService.GetMaxValueFiltered
+            Return BaseDao.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
         End Function
 
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
@@ -311,8 +311,6 @@ Namespace Services
             Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
-
-
 
 #End Region
 

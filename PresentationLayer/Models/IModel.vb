@@ -114,5 +114,7 @@ Public Interface IModel
     Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
-    Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
+
+    Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
+
 End Interface

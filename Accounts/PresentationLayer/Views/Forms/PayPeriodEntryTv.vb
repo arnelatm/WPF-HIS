@@ -1,10 +1,6 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -118,18 +114,34 @@ Namespace PresentationLayer.Views.Forms
                 payFrequency = GetEnumCodeValue(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
                 Select Case payFrequency
                     Case PayFrequencySelection.Monthly
-                        InitializeMonthlyPayroll(payCycleRecord)
+                        PresenterObj.InitializeMonthlyPayroll(payCycleRecord)
                 End Select
             End If
         End Sub
 
-        Private Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
-            Dim dStartDate As Date
-            If payCycleRecord.
-            'Dim lastPayPeriodDate As Date
-            'Dim sqlState
-            'lastPayPeriodDate = PresenterObj.GetSqlValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
-        End Sub
+        'Private Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
+        '    Dim dStartDate As Date
+        '    If StartDate = Nothing And EndDate = Nothing Then
+        '        Dim nIdNoMax As Int32
+        '        Dim maxRecord As New PayPeriod
+        '        nIdNoMax = PresenterObj.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+        '        maxRecord = Model.GetRecordById(nIdNoMax)
+        '        StartDate = maxRecord.StartDate.AddDays(1)
+        '        Dim arabicCulture As New CultureInfo("ar-sa", False)
+        '        If StartDate.Day = 1 Then
+        '            EndDate = StartDate.AddMonths(1).AddDays(-1)
+        '            PayPeriodName = "Payroll for the Month of " & MonthName(Month(EndDate)) & " " & Year(EndDate).ToString()
+        '            PayPeriodNameAra = " رواتب الشهر" & GetMonthNamesInCulture(Month(EndDate), arabicCulture)
+        '        Else
+        '            EndDate = maxRecord.EndDate.AddMonths(1)
+        '            PayPeriodName = "Payroll for the Period " & StartDate.ToString() & " to " & EndDate.ToString()
+        '            PayPeriodNameAra = " رواتب الشهر" & GetMonthNamesInCulture(Month(EndDate), arabicCulture)
+        '        End If
+        '    End If
+        '    'Dim lastPayPeriodDate As Date
+        '    'Dim sqlState
+        '    'lastPayPeriodDate = PresenterObj.GetSqlValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
+        'End Sub
 
     End Class
 
