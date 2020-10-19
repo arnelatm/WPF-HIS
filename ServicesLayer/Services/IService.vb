@@ -51,7 +51,7 @@ Namespace Services
         Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
                                        returnFieldName As String) As T
 
-        Function GetMaxValueFiltered(Of T)(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As T
+        Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
