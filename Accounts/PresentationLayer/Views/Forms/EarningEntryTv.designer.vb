@@ -68,6 +68,12 @@ Namespace PresentationLayer.Views.Forms
             Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
+            Me.tbpComputation = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
@@ -78,6 +84,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.tbpComputation.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
+            Me.TableLayoutPanel2.SuspendLayout()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -199,6 +208,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.tbcEarning.Controls.Add(Me.tbpMain)
             Me.tbcEarning.Controls.Add(Me.tbpAccountPosting)
+            Me.tbcEarning.Controls.Add(Me.tbpComputation)
             resources.ApplyResources(Me.tbcEarning, "tbcEarning")
             Me.tbcEarning.Name = "tbcEarning"
             Me.tbcEarning.SelectedIndex = 0
@@ -281,7 +291,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.ValueIsMandatory = False
             Me.cboAccountIdNo.ValueIsNullable = False
             Me.cboAccountIdNo.ValueIsNumeric = False
-            Me.cboAccountIdNo.ValueMember = "Code"
+            Me.cboAccountIdNo.ValueMember = "IdNo"
             '
             'lblAccountIdNo
             '
@@ -473,6 +483,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle5
+            Me.DataGridViewPayrollEarnAccounts.DgvFooter = Nothing
             Me.DataGridViewPayrollEarnAccounts.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewPayrollEarnAccounts, "DataGridViewPayrollEarnAccounts")
             Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator1
@@ -484,6 +495,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.ReadOnly = True
             Me.DataGridViewPayrollEarnAccounts.SequenceColumn = "dgvSequence"
             Me.DataGridViewPayrollEarnAccounts.SequenceFieldName = "Sequence"
+            Me.DataGridViewPayrollEarnAccounts.ShowFooter = False
             Me.DataGridViewPayrollEarnAccounts.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayrollEarnAccounts.StartTrackingChanges = False
             '
@@ -556,6 +568,74 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
+            'tbpComputation
+            '
+            Me.tbpComputation.Controls.Add(Me.CFlowLayout3)
+            resources.ApplyResources(Me.tbpComputation, "tbpComputation")
+            Me.tbpComputation.Name = "tbpComputation"
+            Me.tbpComputation.UseVisualStyleBackColor = True
+            '
+            'CFlowLayout3
+            '
+            Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout3.Controls.Add(Me.TableLayoutPanel2)
+            resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
+            Me.CFlowLayout3.Name = "CFlowLayout3"
+            '
+            'TableLayoutPanel2
+            '
+            resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
+            Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 1)
+            Me.TableLayoutPanel2.Controls.Add(Me.CLabel1, 0, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 0)
+            Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+            '
+            'CLabel1
+            '
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Name = "CLabel1"
+            '
+            'cboCalculationType
+            '
+            Me.cboCalculationType.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.cboCalculationType.ChangingSearchValueOnly = False
+            Me.cboCalculationType.CurrentSearchTerm = ""
+            Me.cboCalculationType.DefaultValue = Nothing
+            Me.cboCalculationType.DisplayMember = "Name"
+            Me.cboCalculationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboCalculationType.EditingMode = True
+            Me.cboCalculationType.FilterRule = Nothing
+            resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
+            Me.cboCalculationType.FormattingEnabled = True
+            Me.cboCalculationType.HideWhenNotEditingOrAdding = False
+            Me.cboCalculationType.LinkedLabel = Nothing
+            Me.cboCalculationType.Name = "cboCalculationType"
+            Me.cboCalculationType.OldValue = 0
+            Me.cboCalculationType.OriginalDataSource = Nothing
+            Me.cboCalculationType.OriginalList = Nothing
+            Me.cboCalculationType.OverrideDropDownStyleList = False
+            Me.cboCalculationType.PreviousSearchTerm = Nothing
+            Me.cboCalculationType.PreviousSelectedIndex = -1
+            Me.cboCalculationType.PropertySelector = Nothing
+            Me.cboCalculationType.ReadOnlyCombo = False
+            Me.cboCalculationType.SearchAnywhere = False
+            Me.cboCalculationType.SuggestBoxHeight = 200
+            Me.cboCalculationType.SuggestListOrderRule = Nothing
+            Me.cboCalculationType.TextToSearch = Nothing
+            Me.cboCalculationType.ValueIsMandatory = False
+            Me.cboCalculationType.ValueIsNullable = False
+            Me.cboCalculationType.ValueIsNumeric = False
+            Me.cboCalculationType.ValueMember = "IdNo"
+            '
+            'CLabel2
+            '
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Name = "CLabel2"
+            '
             'EarningEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -575,6 +655,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.PerformLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tbpComputation.ResumeLayout(False)
+            Me.CFlowLayout3.ResumeLayout(False)
+            Me.TableLayoutPanel2.ResumeLayout(False)
+            Me.TableLayoutPanel2.PerformLayout()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -613,5 +697,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents tbpComputation As TabPage
+        Friend WithEvents CFlowLayout3 As CFlowLayout
+        Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents cboCalculationType As CaComboBox
+        Friend WithEvents CLabel2 As CLabel
     End Class
 End Namespace

@@ -271,42 +271,8 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboAccountGroup.DisplayOnly = True
             End If
-            If cboParentIdNo.SelectedValue IsNot Nothing Then
-                cboAccountGroup.SelectedValue = PresenterObj.GetFieldWithIdNo(cboParentIdNo.SelectedValue, "Chart", "AccountGroup")
-                txtLevelNumber.Text = PresenterObj.GetRecordFieldWithKeyG(Of Integer)(cboParentIdNo.SelectedValue, "Chart_View", "IdNo", "LevelNumber") + 1
-            End If
-            If PresenterObj.AccountHasChildren(IdNo) Then
-                chkDetailAccount.Checked = False
-            Else
-                chkDetailAccount.Checked = True
-            End If
-            '    cboAccountGroup.DisplayOnly = False
-            'Else
-            '    Dim parentAccount As ChartModel
-            '    parentAccount = PresenterObj.ModelPresenter.GetRecordById(Of ChartModel)(cboParentIdNo.SelectedValue)
-            '    If parentAccount.AccountGroup Is Nothing Then
-            '        cboAccountGroup.SelectedValue = ""
-            '        txtLevelNumber.Text = 0
-            '        cboAccountGroup.DisplayOnly = True
-            '    Else
-            '        cboAccountGroup.SelectedValue = parentAccount.AccountGroup
-            '        txtLevelNumber.Text = parentAccount.LevelNumber + 1
-            '        If parentAccount.AccountGroup = "S" Then
-            '            cboAccountGroup.DisplayOnly = False
-            '        Else
-            '            cboAccountGroup.DisplayOnly = True
-            '        End If
-            '    End If
-            'End If
+            PresenterObj.ParentIdUpdated()
         End Sub
-
-        'Public Sub OnBeforeEdit() Handles MyBase.BeforeEdit
-        '    If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
-        '        cboAccountGroup.DisplayOnly = False
-        '    Else
-        '        cboAccountGroup.DisplayOnly = True
-        '    End If
-        'End Sub
 
     End Class
 

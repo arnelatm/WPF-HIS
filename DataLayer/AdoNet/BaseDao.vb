@@ -198,6 +198,18 @@
             Return retVal
         End Function
 
+        'Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) Implements IBaseDao.GetRecordFieldWithKeyG
+        '    Dim sql As String =
+        '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+        '            " Where " & searchFieldName & " = @SearchValue "
+        '    Dim params() As Object = {"@SearchValue", searchValue}
+        '    Dim retVal = _db.Scalar(sql, params)
+        '    If retVal Is Nothing Or IsDBNull(retVal) Then
+        '        Return Nothing
+        '    End If
+        '    Return retVal
+        'End Function
+
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                                searchFieldName1 As String, searchFieldName2 As String,
                                                returnFieldName As String) As String _
@@ -503,6 +515,18 @@
                 sql = " SELECT Top 1 " & returnFieldName & " from " & tableName & " where " & filter & " order by " & searchFieldName & " Desc"
             End If
             Return _db.Scalar(sql)
+        End Function
+
+        Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object Implements IBaseDao.GetField
+            Dim sql As String =
+                    " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Where " & searchFieldName & " = @SearchValue "
+            Dim params() As Object = {"@SearchValue", searchValue}
+            Dim retVal = _db.Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
         End Function
 
     End Class

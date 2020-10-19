@@ -535,7 +535,9 @@ Public Class CaComboBox
                 If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                    If value <> 0 Then
+                        Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+                    End If
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then

@@ -80,6 +80,17 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
+        Public Sub ParentIdUpdated()
+            If View.ParentIdNo IsNot Nothing Then
+                View.AccountGroup = GetFieldWithIdNo(View.ParentIdNo, "Chart", "AccountGroup")
+                View.LevelNumber = GetRecordFieldWithKeyG(Of Integer)(View.ParentIdNo, "Chart_View", "IdNo", "LevelNumber") + 1
+            End If
+            If AccountHasChildren(View.IdNo) Then
+                View.DetailAccount = False
+            Else
+                View.DetailAccount = True
+            End If
+        End Sub
 
     End Class
 

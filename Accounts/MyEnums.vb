@@ -20,6 +20,14 @@ Public Enum AccountStatusSelection
     <EnumCode("S")> SeeNote
 End Enum
 
+Public Enum CalculationTypeSelection
+    <EnumCode("F")> Factor
+    <EnumCode("X")> Fixed
+    <EnumCode("G")> [Global]
+    <EnumCode("V")> Variable
+End Enum
+
+
 Public Enum DatabaseTableSelection
     <EnumCode("BN")> Bank
     <EnumCode("BR")> Branch
@@ -94,6 +102,8 @@ Public Enum EarningTypeSelection
     <EnumCode("S")> SickPay
     <EnumCode("V")> VacationPay
     <EnumCode("H")> HolidayPay
+    <EnumCode("B")> Bonus
+    <EnumCode("C")> Commission
     <EnumCode("E")> Expenses
     <EnumCode("D")> Redundancy
     <EnumCode("M")> Miscellaneous

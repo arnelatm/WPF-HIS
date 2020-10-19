@@ -165,3 +165,24 @@ Namespace PresentationLayer.Views.Forms
     End Class
 
 End Namespace
+
+
+'ApJournal
+'ArJournal
+'CashDisbursementJournal
+'CashReceiptJournal
+'CheckDisbursementJournal
+'Customer
+'Employee
+'ErJournal
+'GeneralJournal
+'Patient
+'PayCycle
+'PayGroup
+'PayPeriod
+'PettyCashJournal
+'ProductCategory
+'SalesJournal
+'SecurityGroup
+'Supplier
+'User

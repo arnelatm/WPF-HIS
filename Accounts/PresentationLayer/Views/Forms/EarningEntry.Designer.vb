@@ -105,6 +105,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle5
+            Me.DataGridViewPayrollEarnAccounts.DgvFooter = Nothing
             Me.DataGridViewPayrollEarnAccounts.DisplayOnly = False
             Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator1
             Me.DataGridViewPayrollEarnAccounts.EditingMode = False
@@ -116,6 +117,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.ReadOnly = True
             Me.DataGridViewPayrollEarnAccounts.SequenceColumn = "dgvSequence"
             Me.DataGridViewPayrollEarnAccounts.SequenceFieldName = "Sequence"
+            Me.DataGridViewPayrollEarnAccounts.ShowFooter = False
             Me.DataGridViewPayrollEarnAccounts.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayrollEarnAccounts.StartTrackingChanges = False
             '
@@ -125,6 +127,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
             Me.dgvSequence.Name = "dgvSequence"
