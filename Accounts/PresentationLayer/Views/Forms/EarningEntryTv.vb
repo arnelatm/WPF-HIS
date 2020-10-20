@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _accountsByCode
         Private _payGroupsByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
+        Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
 
@@ -40,12 +42,52 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property IncludeInEos As Boolean Implements IEarningView.IncludeInEos
+            Get
+                Return chkIncludeInEOS.Checked
+            End Get
+            Set
+                chkIncludeInEOS.Checked = Value
+            End Set
+        End Property
+
+        Public Property IncludeInPension As Boolean Implements IEarningView.IncludeInPension
+            Get
+                Return chkIncludeInPension.Checked
+            End Get
+            Set
+                chkIncludeInPension.Checked = Value
+            End Set
+        End Property
+
+        Public Property Multiplier As Decimal Implements IEarningView.Multiplier
+
+        Public Property MultiplierType As Char Implements IEarningView.MultiplierType
+
         Public Property AccountIdNo As Int16 Implements IEarningView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property BasePaymentIdNo As Short Implements IEarningView.BasePaymentIdNo
+            Get
+                Return cboBasePaymentIdNo.GetValue()
+            End Get
+            Set
+                cboBasePaymentIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property CalculationType As Char Implements IEarningView.CalculationType
+            Get
+                Return cboCalculationType.GetValue()
+            End Get
+            Set
+                cboCalculationType.SetValue(Value)
             End Set
         End Property
 
@@ -96,6 +138,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Unit As Char Implements IEarningView.Unit
+            Get
+                Return cboUnit.GetValue()
+            End Get
+            Set
+                cboUnit.SetValue(Value)
+            End Set
+        End Property
+
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
             Get
                 Return _payrollEarnAccounts
@@ -115,12 +166,33 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Rate As Decimal Implements IEarningView.Rate
+            Get
+                Return txtRate.Text.ToDecimalNumber(_nfi)
+            End Get
+            Set
+                txtRate.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
+        Public ReadOnly Property EarningIdNoDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
+            Get
+                Return EarningIdNoDataGridViewTextBoxColumn
+            End Get
+        End Property
+
+        Public Property Taxable As Boolean Implements IEarningView.Taxable
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
             cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
+            cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
+            cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
+            cboBasePaymentIdNo.DataSource = PresenterObj.GetListByCode("Earning")
+            cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
             _payGroupsByCode = PresenterObj.GetListByCode("PayGroup")
         End Sub
@@ -167,7 +239,7 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEarningType.SelectedIndexChanged
+        Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs)
             If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
                 cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
                 cboFrequency.DisplayOnly = True
@@ -202,6 +274,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
+        End Sub
+
+        Private Sub CLabel4_Click(sender As Object, e As EventArgs)
+
         End Sub
 
     End Class

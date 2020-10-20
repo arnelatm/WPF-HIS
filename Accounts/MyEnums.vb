@@ -27,6 +27,17 @@ Public Enum CalculationTypeSelection
     <EnumCode("V")> Variable
 End Enum
 
+'Public Enum PayRateTypeSelection
+'    <EnumCode("H")> Hour
+'    <EnumCode("D")> Day
+'    <EnumCode("W")> Week
+'    <EnumCode("B")> BiWeekly
+'    <EnumCode("M")> Month
+'    <EnumCode("Q")> Quarterly
+'    <EnumCode("R")> SemiMonthly
+'    <EnumCode("Y")> Yearly
+'    <EnumCode("F")> FixedAmount
+'End Enum
 
 Public Enum DatabaseTableSelection
     <EnumCode("BN")> Bank
@@ -122,6 +133,11 @@ Public Enum EmployeeActionSelection
     <EnumCode("RS")> Resign
 End Enum
 
+Public Enum MultiplierTypeSelection
+    <EnumCode("X")> TimesBasePaymentRate
+    <EnumCode("P")> PercentOfBasePaymentRate
+End Enum
+
 Public Enum PayeeTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("E")> Employee
@@ -174,12 +190,17 @@ Public Enum PayFrequencySelection
     <EnumCode("A")> AsNeeded
 End Enum
 
-Public Enum PayRateTypeSelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("M")> Monthly
-    <EnumCode("H")> Hourly
-    <EnumCode("D")> Daily
-    <EnumCode("W")> Weekly
+Public Enum PayRateUnitSelection
+    <EnumCode("M")> Hour
+    <EnumCode("W")> Day
+    <EnumCode("B")> Week
+    <EnumCode("S")> BiWeek
+    <EnumCode("Q")> SemiMonth
+    <EnumCode("I")> Month
+    <EnumCode("Y")> Quarter
+    <EnumCode("R")> SemiYear
+    <EnumCode("D")> Year
+    <EnumCode("U")> Unit
 End Enum
 
 Public Enum ReceiptTypeSelection

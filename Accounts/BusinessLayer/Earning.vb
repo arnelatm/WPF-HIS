@@ -17,14 +17,24 @@ Namespace BusinessLayer
         End Sub
 
         Public Property AccountIdNo As Int16
+        Public Property BasePaymentIdNo As Int16
+        Public Property CalculationType As Char
         Public Property EarningCode As String
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char
         Public Property Frequency As Char
         Public Property IdNo As Int16
+        Public Property IncludeInEos As Boolean
+        Public Property IncludeInPension As Boolean
+        Public Property Multiplier As Decimal
+        Public Property MultiplierType As Char
         Public Property Notes As String
+        Public Property Rate As Decimal
+        Public Property Taxable As Boolean
+        Public Property Unit As Char
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
+
     End Class
 
 End Namespace

@@ -24,23 +24,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator3 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -54,12 +54,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaySalariedOrHourly = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPayRateType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayRateType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayRateAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -226,12 +220,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout6.Controls.Add(Me.txtIban)
             Me.CFlowLayout6.Controls.Add(Me.lblPayFrequency)
             Me.CFlowLayout6.Controls.Add(Me.cboPayFrequency)
-            Me.CFlowLayout6.Controls.Add(Me.lblPaySalariedOrHourly)
-            Me.CFlowLayout6.Controls.Add(Me.cboPaySalariedOrHourly)
-            Me.CFlowLayout6.Controls.Add(Me.lblPayRateType)
-            Me.CFlowLayout6.Controls.Add(Me.cboPayRateType)
-            Me.CFlowLayout6.Controls.Add(Me.lblPayRateAmount)
-            Me.CFlowLayout6.Controls.Add(Me.txtPayRateAmount)
             Me.CFlowLayout6.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
@@ -493,152 +481,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.ValueIsNullable = False
             Me.cboPayFrequency.ValueIsNumeric = False
             Me.cboPayFrequency.ValueMember = "Code"
-            '
-            'lblPaySalariedOrHourly
-            '
-            Me.lblPaySalariedOrHourly.DisplayOnly = True
-            Me.lblPaySalariedOrHourly.EditingMode = False
-            Me.lblPaySalariedOrHourly.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPaySalariedOrHourly.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPaySalariedOrHourly.Location = New System.Drawing.Point(4, 156)
-            Me.lblPaySalariedOrHourly.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPaySalariedOrHourly.Name = "lblPaySalariedOrHourly"
-            Me.lblPaySalariedOrHourly.Size = New System.Drawing.Size(185, 23)
-            Me.lblPaySalariedOrHourly.TabIndex = 287
-            Me.lblPaySalariedOrHourly.Text = "Salaried or Hourly"
-            Me.lblPaySalariedOrHourly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'cboPaySalariedOrHourly
-            '
-            Me.cboPaySalariedOrHourly.BackColor = System.Drawing.Color.White
-            Me.cboPaySalariedOrHourly.ChangingSearchValueOnly = False
-            Me.cboPaySalariedOrHourly.CurrentSearchTerm = ""
-            Me.cboPaySalariedOrHourly.DefaultValue = Nothing
-            Me.cboPaySalariedOrHourly.DisplayMember = "Name"
-            Me.cboPaySalariedOrHourly.DropDownHeight = 1
-            Me.cboPaySalariedOrHourly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboPaySalariedOrHourly.EditingMode = False
-            Me.cboPaySalariedOrHourly.FilterRule = Nothing
-            Me.CFlowLayout6.SetFlowBreak(Me.cboPaySalariedOrHourly, True)
-            Me.cboPaySalariedOrHourly.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboPaySalariedOrHourly.ForeColor = System.Drawing.Color.Black
-            Me.cboPaySalariedOrHourly.FormattingEnabled = True
-            Me.cboPaySalariedOrHourly.HideWhenNotEditingOrAdding = False
-            Me.cboPaySalariedOrHourly.IntegralHeight = False
-            Me.cboPaySalariedOrHourly.LinkedLabel = Me.lblPaySalariedOrHourly
-            Me.cboPaySalariedOrHourly.Location = New System.Drawing.Point(190, 156)
-            Me.cboPaySalariedOrHourly.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboPaySalariedOrHourly.Name = "cboPaySalariedOrHourly"
-            Me.cboPaySalariedOrHourly.OldValue = 0
-            Me.cboPaySalariedOrHourly.OriginalDataSource = Nothing
-            Me.cboPaySalariedOrHourly.OriginalList = Nothing
-            Me.cboPaySalariedOrHourly.OverrideDropDownStyleList = False
-            Me.cboPaySalariedOrHourly.PreviousSearchTerm = Nothing
-            Me.cboPaySalariedOrHourly.PreviousSelectedIndex = -1
-            Me.cboPaySalariedOrHourly.PropertySelector = Nothing
-            Me.cboPaySalariedOrHourly.ReadOnlyCombo = False
-            Me.cboPaySalariedOrHourly.SearchAnywhere = False
-            Me.cboPaySalariedOrHourly.Size = New System.Drawing.Size(201, 24)
-            Me.cboPaySalariedOrHourly.SuggestBoxHeight = 200
-            Me.cboPaySalariedOrHourly.SuggestListOrderRule = Nothing
-            Me.cboPaySalariedOrHourly.TabIndex = 8
-            Me.cboPaySalariedOrHourly.TextToSearch = Nothing
-            Me.cboPaySalariedOrHourly.ValueIsMandatory = True
-            Me.cboPaySalariedOrHourly.ValueIsNullable = False
-            Me.cboPaySalariedOrHourly.ValueIsNumeric = False
-            Me.cboPaySalariedOrHourly.ValueMember = "Code"
-            '
-            'lblPayRateType
-            '
-            Me.lblPayRateType.DisplayOnly = True
-            Me.lblPayRateType.EditingMode = False
-            Me.lblPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayRateType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateType.Location = New System.Drawing.Point(4, 182)
-            Me.lblPayRateType.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayRateType.Name = "lblPayRateType"
-            Me.lblPayRateType.Size = New System.Drawing.Size(185, 23)
-            Me.lblPayRateType.TabIndex = 288
-            Me.lblPayRateType.Text = "Pay Rate Type"
-            Me.lblPayRateType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'cboPayRateType
-            '
-            Me.cboPayRateType.BackColor = System.Drawing.Color.White
-            Me.cboPayRateType.ChangingSearchValueOnly = False
-            Me.cboPayRateType.CurrentSearchTerm = ""
-            Me.cboPayRateType.DefaultValue = Nothing
-            Me.cboPayRateType.DisplayMember = "Name"
-            Me.cboPayRateType.DropDownHeight = 1
-            Me.cboPayRateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboPayRateType.EditingMode = False
-            Me.cboPayRateType.FilterRule = Nothing
-            Me.CFlowLayout6.SetFlowBreak(Me.cboPayRateType, True)
-            Me.cboPayRateType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboPayRateType.ForeColor = System.Drawing.Color.Black
-            Me.cboPayRateType.FormattingEnabled = True
-            Me.cboPayRateType.HideWhenNotEditingOrAdding = False
-            Me.cboPayRateType.IntegralHeight = False
-            Me.cboPayRateType.LinkedLabel = Me.lblPayRateType
-            Me.cboPayRateType.Location = New System.Drawing.Point(190, 182)
-            Me.cboPayRateType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboPayRateType.Name = "cboPayRateType"
-            Me.cboPayRateType.OldValue = 0
-            Me.cboPayRateType.OriginalDataSource = Nothing
-            Me.cboPayRateType.OriginalList = Nothing
-            Me.cboPayRateType.OverrideDropDownStyleList = False
-            Me.cboPayRateType.PreviousSearchTerm = Nothing
-            Me.cboPayRateType.PreviousSelectedIndex = -1
-            Me.cboPayRateType.PropertySelector = Nothing
-            Me.cboPayRateType.ReadOnlyCombo = False
-            Me.cboPayRateType.SearchAnywhere = False
-            Me.cboPayRateType.Size = New System.Drawing.Size(201, 24)
-            Me.cboPayRateType.SuggestBoxHeight = 200
-            Me.cboPayRateType.SuggestListOrderRule = Nothing
-            Me.cboPayRateType.TabIndex = 9
-            Me.cboPayRateType.TextToSearch = Nothing
-            Me.cboPayRateType.ValueIsMandatory = False
-            Me.cboPayRateType.ValueIsNullable = False
-            Me.cboPayRateType.ValueIsNumeric = False
-            Me.cboPayRateType.ValueMember = "Code"
-            '
-            'lblPayRateAmount
-            '
-            Me.lblPayRateAmount.DisplayOnly = True
-            Me.lblPayRateAmount.EditingMode = False
-            Me.lblPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayRateAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayRateAmount.Location = New System.Drawing.Point(4, 208)
-            Me.lblPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayRateAmount.Name = "lblPayRateAmount"
-            Me.lblPayRateAmount.Size = New System.Drawing.Size(185, 23)
-            Me.lblPayRateAmount.TabIndex = 292
-            Me.lblPayRateAmount.Text = "Pay Rate Amount"
-            Me.lblPayRateAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtPayRateAmount
-            '
-            Me.txtPayRateAmount.BackColor = System.Drawing.Color.White
-            Me.txtPayRateAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayRateAmount.ComputedValue = False
-            Me.txtPayRateAmount.CustomFormat = Nothing
-            Me.txtPayRateAmount.DataBoundControl = True
-            Me.txtPayRateAmount.EditingMode = False
-            Me.CFlowLayout6.SetFlowBreak(Me.txtPayRateAmount, True)
-            Me.txtPayRateAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayRateAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtPayRateAmount.LinkedLabel = Me.lblPayRateAmount
-            Me.txtPayRateAmount.Location = New System.Drawing.Point(191, 208)
-            Me.txtPayRateAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayRateAmount.MaximumValue = Nothing
-            Me.txtPayRateAmount.MinimumValue = Nothing
-            Me.txtPayRateAmount.Name = "txtPayRateAmount"
-            Me.txtPayRateAmount.OldValue = Nothing
-            Me.txtPayRateAmount.ReadOnly = True
-            Me.txtPayRateAmount.Size = New System.Drawing.Size(200, 23)
-            Me.txtPayRateAmount.TabIndex = 10
-            Me.txtPayRateAmount.TabStop = False
-            Me.txtPayRateAmount.ValueIsNumeric = True
             '
             'bsEarnings
             '
@@ -1180,8 +1022,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhoneDisplay.AllowUserToAddRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToDeleteRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToResizeColumns = False
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewPhoneDisplay.AutoGenerateColumns = False
             Me.DataGridViewPhoneDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPhoneDisplay.ColumnHeadersVisible = False
@@ -1189,14 +1031,14 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPhoneDisplay, 2)
             Me.DataGridViewPhoneDisplay.DataInGridChanged = False
             Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle17
             Me.DataGridViewPhoneDisplay.DgvFooter = Nothing
             Me.DataGridViewPhoneDisplay.DisplayOnly = True
             Me.DataGridViewPhoneDisplay.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1956,26 +1798,26 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewEarnings
             '
             Me.DataGridViewEarnings.AllowUserToOrderColumns = True
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.BackgroundColor = System.Drawing.Color.White
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningAmount, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
             Me.DataGridViewEarnings.DataInGridChanged = False
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle19
             Me.DataGridViewEarnings.DgvFooter = Nothing
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewEarnings.Ea = EventAggregator1
+            Me.DataGridViewEarnings.Ea = EventAggregator3
             Me.DataGridViewEarnings.EditingMode = False
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewEarnings.FirstRowDeletionEnabled = True
@@ -1994,9 +1836,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequenceEarning
             '
             Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequenceEarning.EditingMode = False
             Me.dgvSequenceEarning.HeaderText = "Seq"
             Me.dgvSequenceEarning.MinimumWidth = 30
@@ -2018,11 +1860,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvEarningAmount
             '
             Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle18.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle18
             Me.dgvEarningAmount.EditingMode = False
             Me.dgvEarningAmount.HeaderText = "Amount"
             Me.dgvEarningAmount.MinimumWidth = 80
@@ -2097,25 +1939,25 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewDeductions
             '
             Me.DataGridViewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewDeductions.AutoGenerateColumns = False
             Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionAmount, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
             Me.DataGridViewDeductions.DataInGridChanged = False
             Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle21
             Me.DataGridViewDeductions.DgvFooter = Nothing
             Me.DataGridViewDeductions.DisplayOnly = False
             Me.DataGridViewDeductions.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewDeductions.Ea = EventAggregator2
+            Me.DataGridViewDeductions.Ea = EventAggregator1
             Me.DataGridViewDeductions.EditingMode = False
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewDeductions.FirstRowDeletionEnabled = True
@@ -2134,9 +1976,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequenceDeduction
             '
             Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvSequenceDeduction.EditingMode = False
             Me.dgvSequenceDeduction.HeaderText = "Seq"
             Me.dgvSequenceDeduction.MinimumWidth = 30
@@ -2159,11 +2001,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionAmount
             '
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle20.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle20
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Amount"
             Me.dgvDeductionAmount.MinimumWidth = 80
@@ -2271,21 +2113,21 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewPhones
             '
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewPhones.AutoGenerateColumns = False
             Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPhoneTypeIdNo, Me.dgvCountryTelIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.dgvFullPhone, Me.dgvFullPhoneAra, Me.dgvCountryTelCode, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
             Me.DataGridViewPhones.DataInGridChanged = False
             Me.DataGridViewPhones.DataSource = Me.bsPhones
-            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle15
+            DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle24
             Me.DataGridViewPhones.DgvFooter = Nothing
             Me.DataGridViewPhones.DisplayOnly = False
             Me.DataGridViewPhones.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2308,9 +2150,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.HeaderText = "Seq"
@@ -2340,9 +2182,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvAreaCode
             '
             Me.dgvAreaCode.DataPropertyName = "AreaCode"
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle13
+            DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle22
             Me.dgvAreaCode.EditingMode = False
             Me.dgvAreaCode.HeaderText = "Area Code"
             Me.dgvAreaCode.Name = "dgvAreaCode"
@@ -2353,9 +2195,9 @@ Namespace PresentationLayer.Views.Forms
             'PhoneNumber
             '
             Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle14
+            DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
+            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle23
             Me.PhoneNumber.EditingMode = False
             Me.PhoneNumber.HeaderText = "PhoneNumber"
             Me.PhoneNumber.Name = "PhoneNumber"
@@ -2597,12 +2439,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPayFrequency As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblPaySalariedOrHourly As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPaySalariedOrHourly As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblPayRateType As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPayRateType As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblPayRateAmount As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtPayRateAmount As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpHiredDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel

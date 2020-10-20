@@ -220,7 +220,7 @@ Namespace AdoNet
                                     tryAgain = True
                                 Case Else
                                     Debugger.Break()
-                                    MessageBox.Show(ex.Message)
+                                    MessageBox.Show("Missing Field " + ex.Message)
                                     Throw
                             End Select
                         Finally

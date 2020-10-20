@@ -323,32 +323,32 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
-            Get
-                Return txtPayRateAmount.Text.ToDecimalNumber(_nfi)
-            End Get
-            Set
-                txtPayRateAmount.Text = FormatDecimalNumber(Value)
-            End Set
-        End Property
+        'Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
+        '    Get
+        '        Return txtPayRateAmount.Text.ToDecimalNumber(_nfi)
+        '    End Get
+        '    Set
+        '        txtPayRateAmount.Text = FormatDecimalNumber(Value)
+        '    End Set
+        'End Property
 
-        Public Property PayRateType As String Implements IEmployeeView.PayRateType
-            Get
-                Return cboPayRateType.GetValue()
-            End Get
-            Set
-                cboPayRateType.SetValue(Value)
-            End Set
-        End Property
+        'Public Property PayRateType As String Implements IEmployeeView.PayRateType
+        '    Get
+        '        Return cboPayRateType.GetValue()
+        '    End Get
+        '    Set
+        '        cboPayRateType.SetValue(Value)
+        '    End Set
+        'End Property
 
-        Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
-            Get
-                Return cboPaySalariedOrHourly.GetValue()
-            End Get
-            Set
-                cboPaySalariedOrHourly.SetValue(Value)
-            End Set
-        End Property
+        'Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
+        '    Get
+        '        Return cboPaySalariedOrHourly.GetValue()
+        '    End Get
+        '    Set
+        '        cboPaySalariedOrHourly.SetValue(Value)
+        '    End Set
+        'End Property
 
         Public Property PoBox As String Implements IEmployeeView.PoBox
             Get
@@ -439,8 +439,8 @@ Namespace PresentationLayer.Views.Forms
             cacNationalityCode.DataSource = PresenterObj.GetCountryList()
             cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
             cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
-            cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
-            cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
+            'cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
+            'cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
             _deductionsByName = PresenterObj.GetListByCode("Deduction")
             _earningsByName = PresenterObj.GetListByCode("Earning")
             _phoneTypes = PresenterObj.GetListByCode("PhoneType")

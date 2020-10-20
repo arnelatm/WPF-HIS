@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayFrequency, PaySalariedOrHourly, PayRateAmount, PayRateType, Active" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayFrequency, Active" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -79,9 +79,6 @@ Namespace DataLayer.AdoNet
                     " OpeningBalance = @OpeningBalance," &
                     " Balance = @Balance," &
                     " PayFrequency = @PayFrequency," &
-                    " PaySalariedOrHourly = @PaySalariedOrHourly," &
-                    " PayRateAmount = @PayRateAmount," &
-                    " PayRateType = @PayRateType," &
                     " Active = @Active" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(employee))
@@ -92,10 +89,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, PaySalariedOrHourly, PayRateType, PayRateAmount, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance,  PayFrequency, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @PaySalariedOrHourly, @PayRateType, @PayRateAmount, @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayFrequency, @Active)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -125,9 +122,6 @@ Namespace DataLayer.AdoNet
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
             .PayFrequency = Extensions.AsString(reader("PayFrequency")),
-            .PaySalariedOrHourly = Extensions.AsString(reader("PaySalariedOrHourly")),
-            .PayRateType = Extensions.AsString(reader("PayRateType")),
-            .PayRateAmount = Extensions.AsDecimal(reader("PayRateAmount")),
             .Phone1 = Extensions.AsString(reader("Phone1")),
             .Phone2 = Extensions.AsString(reader("Phone2")),
             .PoBox = Extensions.AsString(reader("PoBox")),
@@ -174,9 +168,6 @@ Namespace DataLayer.AdoNet
                                     "@OpeningBalance", employee.OpeningBalance,
                                     "@Balance", employee.Balance,
                                     "@PayFrequency", employee.PayFrequency,
-                                    "@PaySalariedOrHourly", employee.PaySalariedOrHourly,
-                                    "@PayRateType", employee.PayRateType,
-                                    "@PayRateAmount", employee.PayRateAmount,
                                     "@Active", employee.Active
                                 }
         End Function

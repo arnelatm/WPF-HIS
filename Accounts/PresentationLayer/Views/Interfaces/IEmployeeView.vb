@@ -26,10 +26,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property Notes As String
         Property OpeningBalance As Decimal
         Property PayFrequency As String
-        Property PaySalariedOrHourly As String
-        Property PayRateAmount As Decimal
-        Property PayRateType As String
+
+        'Property PaySalariedOrHourly As String
+        'Property PayRateAmount As Decimal
+        'Property PayRateType As String
         Property PoBox As String
+
         Property ProvinceState As String
         Property ReleasedDate As Date?
         Property ReligionIdNo As Byte?
