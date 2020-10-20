@@ -34,16 +34,23 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEarningCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
             Me.tbcEarning = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpMain = New System.Windows.Forms.TabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -51,14 +58,30 @@ Namespace PresentationLayer.Views.Forms
             Me.lblFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.tbpCalculation = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+            Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblDefaultQty = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblIncludeInGosi = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkIncludeInPension = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.CTextBox3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.txtName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -67,26 +90,21 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
-            Me.tbpComputation = New System.Windows.Forms.TabPage()
-            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout4.SuspendLayout()
             Me.floDataDisplay.SuspendLayout()
+            Me.TableLayoutPanel3.SuspendLayout()
             Me.tbcEarning.SuspendLayout()
             Me.tbpMain.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
+            Me.tbpCalculation.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
+            Me.TableLayoutPanel2.SuspendLayout()
             Me.tbpAccountPosting.SuspendLayout()
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.tbpComputation.SuspendLayout()
-            Me.CFlowLayout3.SuspendLayout()
-            Me.TableLayoutPanel2.SuspendLayout()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -98,25 +116,78 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
-            'TxtIdNo
+            'bsPayrollEarnAccounts
             '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = False
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
-            Me.TxtIdNo.TabStop = False
-            Me.TxtIdNo.ValueIsNumeric = True
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+            '
+            'CFlowLayout4
+            '
+            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout4.Controls.Add(Me.TableLayoutPanel3)
+            Me.CFlowLayout4.Controls.Add(Me.tbcEarning)
+            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+            Me.CFlowLayout4.Name = "CFlowLayout4"
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'txtEarningNameAra
+            '
+            Me.txtEarningNameAra.BackColor = System.Drawing.Color.White
+            Me.txtEarningNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel3.SetColumnSpan(Me.txtEarningNameAra, 3)
+            Me.txtEarningNameAra.ComputedValue = False
+            Me.txtEarningNameAra.CustomFormat = Nothing
+            Me.txtEarningNameAra.DataBoundControl = True
+            resources.ApplyResources(Me.txtEarningNameAra, "txtEarningNameAra")
+            Me.txtEarningNameAra.EditingMode = False
+            Me.txtEarningNameAra.EnglishControl = Me.txtEarningName
+            Me.txtEarningNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtEarningNameAra.LinkedLabel = Nothing
+            Me.txtEarningNameAra.MaximumValue = Nothing
+            Me.txtEarningNameAra.MinimumValue = Nothing
+            Me.txtEarningNameAra.Name = "txtEarningNameAra"
+            Me.txtEarningNameAra.OldValue = Nothing
+            Me.txtEarningNameAra.ReadOnly = True
+            '
+            'txtEarningName
+            '
+            Me.txtEarningName.BackColor = System.Drawing.Color.White
+            Me.txtEarningName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel3.SetColumnSpan(Me.txtEarningName, 3)
+            Me.txtEarningName.ComputedValue = False
+            Me.txtEarningName.CustomFormat = Nothing
+            Me.txtEarningName.DataBoundControl = True
+            resources.ApplyResources(Me.txtEarningName, "txtEarningName")
+            Me.txtEarningName.EditingMode = False
+            Me.txtEarningName.ForeColor = System.Drawing.Color.Black
+            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningName, CType(resources.GetObject("txtEarningName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
+            Me.txtEarningName.LinkedLabel = Nothing
+            Me.txtEarningName.MaximumValue = Nothing
+            Me.txtEarningName.MinimumValue = Nothing
+            Me.txtEarningName.Name = "txtEarningName"
+            Me.txtEarningName.OldValue = Nothing
+            Me.txtEarningName.ReadOnly = True
+            Me.txtEarningName.ValueIsMandatory = True
+            '
+            'lblNameAra
+            '
+            Me.lblNameAra.DisplayOnly = True
+            Me.lblNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+            Me.lblNameAra.Name = "lblNameAra"
+            '
+            'lblName
+            '
+            Me.lblName.DisplayOnly = True
+            Me.lblName.EditingMode = False
+            resources.ApplyResources(Me.lblName, "lblName")
+            Me.lblName.Name = "lblName"
             '
             'txtEarningCode
             '
@@ -138,77 +209,58 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEarningCode.ReadOnly = True
             Me.txtEarningCode.ValueIsMandatory = True
             '
-            'txtEarningName
+            'TxtIdNo
             '
-            Me.txtEarningName.BackColor = System.Drawing.Color.White
-            Me.txtEarningName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningName, 2)
-            Me.txtEarningName.ComputedValue = False
-            Me.txtEarningName.CustomFormat = Nothing
-            Me.txtEarningName.DataBoundControl = True
-            resources.ApplyResources(Me.txtEarningName, "txtEarningName")
-            Me.txtEarningName.EditingMode = False
-            Me.txtEarningName.ForeColor = System.Drawing.Color.Black
-            Me.MyErrorProvider.SetIconAlignment(Me.txtEarningName, CType(resources.GetObject("txtEarningName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
-            Me.txtEarningName.LinkedLabel = Nothing
-            Me.txtEarningName.MaximumValue = Nothing
-            Me.txtEarningName.MinimumValue = Nothing
-            Me.txtEarningName.Name = "txtEarningName"
-            Me.txtEarningName.OldValue = Nothing
-            Me.txtEarningName.ReadOnly = True
-            Me.txtEarningName.ValueIsMandatory = True
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
             '
-            'txtEarningNameAra
+            'lblCode
             '
-            Me.txtEarningNameAra.BackColor = System.Drawing.Color.White
-            Me.txtEarningNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtEarningNameAra, 2)
-            Me.txtEarningNameAra.ComputedValue = False
-            Me.txtEarningNameAra.CustomFormat = Nothing
-            Me.txtEarningNameAra.DataBoundControl = True
-            resources.ApplyResources(Me.txtEarningNameAra, "txtEarningNameAra")
-            Me.txtEarningNameAra.EditingMode = False
-            Me.txtEarningNameAra.EnglishControl = Me.txtEarningName
-            Me.txtEarningNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtEarningNameAra.LinkedLabel = Nothing
-            Me.txtEarningNameAra.MaximumValue = Nothing
-            Me.txtEarningNameAra.MinimumValue = Nothing
-            Me.txtEarningNameAra.Name = "txtEarningNameAra"
-            Me.txtEarningNameAra.OldValue = Nothing
-            Me.txtEarningNameAra.ReadOnly = True
+            Me.lblCode.DisplayOnly = True
+            Me.lblCode.EditingMode = False
+            resources.ApplyResources(Me.lblCode, "lblCode")
+            Me.lblCode.Name = "lblCode"
             '
-            'txtNotes
+            'CLabel1
             '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.EditingMode = False
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.ValueIsMandatory = True
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
             '
-            'floDataDisplay
+            'TableLayoutPanel3
             '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            Me.floDataDisplay.Controls.Add(Me.tbcEarning)
-            Me.floDataDisplay.Name = "floDataDisplay"
+            resources.ApplyResources(Me.TableLayoutPanel3, "TableLayoutPanel3")
+            Me.TableLayoutPanel3.Controls.Add(Me.txtEarningNameAra, 1, 2)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblName, 0, 1)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtEarningCode, 3, 0)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblCode, 2, 0)
+            Me.TableLayoutPanel3.Controls.Add(Me.TxtIdNo, 1, 0)
+            Me.TableLayoutPanel3.Controls.Add(Me.CLabel1, 0, 0)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtEarningName, 1, 1)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblNameAra, 0, 2)
+            Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
             '
             'tbcEarning
             '
             Me.tbcEarning.Controls.Add(Me.tbpMain)
+            Me.tbcEarning.Controls.Add(Me.tbpCalculation)
             Me.tbcEarning.Controls.Add(Me.tbpAccountPosting)
-            Me.tbcEarning.Controls.Add(Me.tbpComputation)
             resources.ApplyResources(Me.tbcEarning, "tbcEarning")
             Me.tbcEarning.Name = "tbcEarning"
             Me.tbcEarning.SelectedIndex = 0
@@ -240,15 +292,26 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblFrequency, 1, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.cboEarningType, 0, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEarningType, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtEarningNameAra, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblNameAra, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblName, 0, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtEarningCode, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblCode, 1, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 0, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtEarningName, 0, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.ValueIsMandatory = True
             '
             'lblNotes
             '
@@ -383,34 +446,339 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblEarningType, "lblEarningType")
             Me.lblEarningType.Name = "lblEarningType"
             '
-            'lblNameAra
+            'tbpCalculation
             '
-            Me.lblNameAra.DisplayOnly = True
-            Me.lblNameAra.EditingMode = False
-            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
-            Me.lblNameAra.Name = "lblNameAra"
+            Me.tbpCalculation.Controls.Add(Me.CFlowLayout3)
+            resources.ApplyResources(Me.tbpCalculation, "tbpCalculation")
+            Me.tbpCalculation.Name = "tbpCalculation"
+            Me.tbpCalculation.UseVisualStyleBackColor = True
             '
-            'lblName
+            'CFlowLayout3
             '
-            Me.TableLayoutPanel1.SetColumnSpan(Me.lblName, 2)
-            Me.lblName.DisplayOnly = True
-            Me.lblName.EditingMode = False
-            resources.ApplyResources(Me.lblName, "lblName")
-            Me.lblName.Name = "lblName"
+            Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout3.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
+            Me.CFlowLayout3.Controls.Add(Me.TableLayoutPanel2)
+            Me.CFlowLayout3.Name = "CFlowLayout3"
             '
-            'lblCode
+            'TableLayoutPanel2
             '
-            Me.lblCode.DisplayOnly = True
-            Me.lblCode.EditingMode = False
-            resources.ApplyResources(Me.lblCode, "lblCode")
-            Me.lblCode.Name = "lblCode"
+            resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
+            Me.TableLayoutPanel2.Controls.Add(Me.lblTaxable, 0, 8)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblDefaultQty, 0, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 1)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblCalculationType, 0, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 1)
+            Me.TableLayoutPanel2.Controls.Add(Me.CTextBox2, 1, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblBasePayment, 0, 4)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboBasePaymentIdNo, 1, 4)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblIncludeInGosi, 0, 7)
+            Me.TableLayoutPanel2.Controls.Add(Me.chkIncludeInPension, 1, 7)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblIncludeInEos, 0, 6)
+            Me.TableLayoutPanel2.Controls.Add(Me.chkIncludeInEOS, 1, 6)
+            Me.TableLayoutPanel2.Controls.Add(Me.CTextBox3, 1, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboMultiplierType, 2, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.chkTaxable, 2, 8)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 1)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 1)
+            Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
             '
-            'lblIdNo
+            'lblTaxable
             '
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-            Me.lblIdNo.Name = "lblIdNo"
+            resources.ApplyResources(Me.lblTaxable, "lblTaxable")
+            Me.TableLayoutPanel2.SetColumnSpan(Me.lblTaxable, 2)
+            Me.lblTaxable.DisplayOnly = True
+            Me.lblTaxable.EditingMode = False
+            Me.lblTaxable.Name = "lblTaxable"
+            '
+            'lblMultiplier
+            '
+            resources.ApplyResources(Me.lblMultiplier, "lblMultiplier")
+            Me.lblMultiplier.DisplayOnly = True
+            Me.lblMultiplier.EditingMode = False
+            Me.lblMultiplier.Name = "lblMultiplier"
+            '
+            'lblDefaultQty
+            '
+            resources.ApplyResources(Me.lblDefaultQty, "lblDefaultQty")
+            Me.lblDefaultQty.DisplayOnly = True
+            Me.lblDefaultQty.EditingMode = False
+            Me.lblDefaultQty.Name = "lblDefaultQty"
+            '
+            'lblRate
+            '
+            resources.ApplyResources(Me.lblRate, "lblRate")
+            Me.lblRate.DisplayOnly = True
+            Me.lblRate.EditingMode = False
+            Me.lblRate.Name = "lblRate"
+            '
+            'lblCalculationType
+            '
+            resources.ApplyResources(Me.lblCalculationType, "lblCalculationType")
+            Me.lblCalculationType.DisplayOnly = True
+            Me.lblCalculationType.EditingMode = False
+            Me.lblCalculationType.Name = "lblCalculationType"
+            '
+            'cboCalculationType
+            '
+            Me.cboCalculationType.BackColor = System.Drawing.Color.White
+            Me.cboCalculationType.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel2.SetColumnSpan(Me.cboCalculationType, 3)
+            Me.cboCalculationType.CurrentSearchTerm = ""
+            Me.cboCalculationType.DefaultValue = Nothing
+            Me.cboCalculationType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
+            Me.cboCalculationType.DropDownHeight = 200
+            Me.cboCalculationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboCalculationType.EditingMode = True
+            Me.cboCalculationType.FilterRule = Nothing
+            Me.cboCalculationType.ForeColor = System.Drawing.Color.Black
+            Me.cboCalculationType.FormattingEnabled = True
+            Me.cboCalculationType.HideWhenNotEditingOrAdding = False
+            Me.cboCalculationType.LinkedLabel = Me.lblCalculationType
+            Me.cboCalculationType.Name = "cboCalculationType"
+            Me.cboCalculationType.OldValue = 0
+            Me.cboCalculationType.OriginalDataSource = Nothing
+            Me.cboCalculationType.OriginalList = Nothing
+            Me.cboCalculationType.OverrideDropDownStyleList = False
+            Me.cboCalculationType.PreviousSearchTerm = Nothing
+            Me.cboCalculationType.PreviousSelectedIndex = -1
+            Me.cboCalculationType.PropertySelector = Nothing
+            Me.cboCalculationType.ReadOnlyCombo = False
+            Me.cboCalculationType.SearchAnywhere = False
+            Me.cboCalculationType.SuggestBoxHeight = 200
+            Me.cboCalculationType.SuggestListOrderRule = Nothing
+            Me.cboCalculationType.TextToSearch = Nothing
+            Me.cboCalculationType.ValueIsMandatory = False
+            Me.cboCalculationType.ValueIsNullable = False
+            Me.cboCalculationType.ValueIsNumeric = False
+            Me.cboCalculationType.ValueMember = "Code"
+            '
+            'txtRate
+            '
+            Me.txtRate.BackColor = System.Drawing.Color.White
+            Me.txtRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtRate.ComputedValue = False
+            Me.txtRate.CustomFormat = Nothing
+            Me.txtRate.DataBoundControl = True
+            resources.ApplyResources(Me.txtRate, "txtRate")
+            Me.txtRate.EditingMode = True
+            Me.txtRate.ForeColor = System.Drawing.Color.Black
+            Me.txtRate.LinkedLabel = Nothing
+            Me.txtRate.MaximumValue = Nothing
+            Me.txtRate.MinimumValue = Nothing
+            Me.txtRate.Name = "txtRate"
+            Me.txtRate.OldValue = Nothing
+            '
+            'CTextBox2
+            '
+            Me.CTextBox2.BackColor = System.Drawing.Color.White
+            Me.CTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.CTextBox2.ComputedValue = False
+            Me.CTextBox2.CustomFormat = Nothing
+            Me.CTextBox2.DataBoundControl = True
+            resources.ApplyResources(Me.CTextBox2, "CTextBox2")
+            Me.CTextBox2.EditingMode = True
+            Me.CTextBox2.ForeColor = System.Drawing.Color.Black
+            Me.CTextBox2.LinkedLabel = Me.lblDefaultQty
+            Me.CTextBox2.MaximumValue = Nothing
+            Me.CTextBox2.MinimumValue = Nothing
+            Me.CTextBox2.Name = "CTextBox2"
+            Me.CTextBox2.OldValue = Nothing
+            '
+            'lblBasePayment
+            '
+            resources.ApplyResources(Me.lblBasePayment, "lblBasePayment")
+            Me.lblBasePayment.DisplayOnly = True
+            Me.lblBasePayment.EditingMode = False
+            Me.lblBasePayment.Name = "lblBasePayment"
+            '
+            'cboBasePaymentIdNo
+            '
+            Me.cboBasePaymentIdNo.BackColor = System.Drawing.Color.White
+            Me.cboBasePaymentIdNo.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel2.SetColumnSpan(Me.cboBasePaymentIdNo, 3)
+            Me.cboBasePaymentIdNo.CurrentSearchTerm = ""
+            Me.cboBasePaymentIdNo.DefaultValue = Nothing
+            Me.cboBasePaymentIdNo.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboBasePaymentIdNo, "cboBasePaymentIdNo")
+            Me.cboBasePaymentIdNo.DropDownHeight = 200
+            Me.cboBasePaymentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboBasePaymentIdNo.EditingMode = True
+            Me.cboBasePaymentIdNo.FilterRule = Nothing
+            Me.cboBasePaymentIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboBasePaymentIdNo.FormattingEnabled = True
+            Me.cboBasePaymentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboBasePaymentIdNo.LinkedLabel = Me.lblBasePayment
+            Me.cboBasePaymentIdNo.Name = "cboBasePaymentIdNo"
+            Me.cboBasePaymentIdNo.OldValue = 0
+            Me.cboBasePaymentIdNo.OriginalDataSource = Nothing
+            Me.cboBasePaymentIdNo.OriginalList = Nothing
+            Me.cboBasePaymentIdNo.OverrideDropDownStyleList = False
+            Me.cboBasePaymentIdNo.PreviousSearchTerm = Nothing
+            Me.cboBasePaymentIdNo.PreviousSelectedIndex = -1
+            Me.cboBasePaymentIdNo.PropertySelector = Nothing
+            Me.cboBasePaymentIdNo.ReadOnlyCombo = False
+            Me.cboBasePaymentIdNo.SearchAnywhere = False
+            Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
+            Me.cboBasePaymentIdNo.SuggestListOrderRule = Nothing
+            Me.cboBasePaymentIdNo.TextToSearch = Nothing
+            Me.cboBasePaymentIdNo.ValueIsMandatory = False
+            Me.cboBasePaymentIdNo.ValueIsNullable = False
+            Me.cboBasePaymentIdNo.ValueIsNumeric = False
+            Me.cboBasePaymentIdNo.ValueMember = "IdNo"
+            '
+            'lblIncludeInGosi
+            '
+            resources.ApplyResources(Me.lblIncludeInGosi, "lblIncludeInGosi")
+            Me.TableLayoutPanel2.SetColumnSpan(Me.lblIncludeInGosi, 2)
+            Me.lblIncludeInGosi.DisplayOnly = True
+            Me.lblIncludeInGosi.EditingMode = False
+            Me.lblIncludeInGosi.Name = "lblIncludeInGosi"
+            '
+            'chkIncludeInPension
+            '
+            resources.ApplyResources(Me.chkIncludeInPension, "chkIncludeInPension")
+            Me.chkIncludeInPension.BackColor = System.Drawing.Color.White
+            Me.chkIncludeInPension.DisplayOnly = False
+            Me.chkIncludeInPension.EditingMode = True
+            Me.chkIncludeInPension.FlatAppearance.BorderSize = 0
+            Me.chkIncludeInPension.ForeColor = System.Drawing.Color.Black
+            Me.chkIncludeInPension.LinkedLabel = Me.lblIncludeInGosi
+            Me.chkIncludeInPension.Name = "chkIncludeInPension"
+            Me.chkIncludeInPension.NoLabel = False
+            Me.chkIncludeInPension.OldValue = Nothing
+            Me.chkIncludeInPension.UseVisualStyleBackColor = True
+            '
+            'lblIncludeInEos
+            '
+            resources.ApplyResources(Me.lblIncludeInEos, "lblIncludeInEos")
+            Me.TableLayoutPanel2.SetColumnSpan(Me.lblIncludeInEos, 2)
+            Me.lblIncludeInEos.DisplayOnly = True
+            Me.lblIncludeInEos.EditingMode = False
+            Me.lblIncludeInEos.Name = "lblIncludeInEos"
+            '
+            'chkIncludeInEOS
+            '
+            resources.ApplyResources(Me.chkIncludeInEOS, "chkIncludeInEOS")
+            Me.chkIncludeInEOS.BackColor = System.Drawing.Color.White
+            Me.chkIncludeInEOS.DisplayOnly = False
+            Me.chkIncludeInEOS.EditingMode = True
+            Me.chkIncludeInEOS.FlatAppearance.BorderSize = 0
+            Me.chkIncludeInEOS.ForeColor = System.Drawing.Color.Black
+            Me.chkIncludeInEOS.LinkedLabel = Me.lblIncludeInEos
+            Me.chkIncludeInEOS.Name = "chkIncludeInEOS"
+            Me.chkIncludeInEOS.NoLabel = False
+            Me.chkIncludeInEOS.OldValue = Nothing
+            Me.chkIncludeInEOS.UseVisualStyleBackColor = True
+            '
+            'CTextBox3
+            '
+            Me.CTextBox3.BackColor = System.Drawing.Color.White
+            Me.CTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.CTextBox3.ComputedValue = False
+            Me.CTextBox3.CustomFormat = Nothing
+            Me.CTextBox3.DataBoundControl = True
+            resources.ApplyResources(Me.CTextBox3, "CTextBox3")
+            Me.CTextBox3.EditingMode = True
+            Me.CTextBox3.ForeColor = System.Drawing.Color.Black
+            Me.CTextBox3.LinkedLabel = Me.lblMultiplier
+            Me.CTextBox3.MaximumValue = Nothing
+            Me.CTextBox3.MinimumValue = Nothing
+            Me.CTextBox3.Name = "CTextBox3"
+            Me.CTextBox3.OldValue = Nothing
+            '
+            'cboMultiplierType
+            '
+            Me.cboMultiplierType.BackColor = System.Drawing.Color.White
+            Me.cboMultiplierType.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel2.SetColumnSpan(Me.cboMultiplierType, 2)
+            Me.cboMultiplierType.CurrentSearchTerm = ""
+            Me.cboMultiplierType.DefaultValue = Nothing
+            Me.cboMultiplierType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboMultiplierType, "cboMultiplierType")
+            Me.cboMultiplierType.DropDownHeight = 200
+            Me.cboMultiplierType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboMultiplierType.EditingMode = True
+            Me.cboMultiplierType.FilterRule = Nothing
+            Me.cboMultiplierType.ForeColor = System.Drawing.Color.Black
+            Me.cboMultiplierType.FormattingEnabled = True
+            Me.cboMultiplierType.HideWhenNotEditingOrAdding = False
+            Me.cboMultiplierType.LinkedLabel = Nothing
+            Me.cboMultiplierType.Name = "cboMultiplierType"
+            Me.cboMultiplierType.OldValue = 0
+            Me.cboMultiplierType.OriginalDataSource = Nothing
+            Me.cboMultiplierType.OriginalList = Nothing
+            Me.cboMultiplierType.OverrideDropDownStyleList = False
+            Me.cboMultiplierType.PreviousSearchTerm = Nothing
+            Me.cboMultiplierType.PreviousSelectedIndex = -1
+            Me.cboMultiplierType.PropertySelector = Nothing
+            Me.cboMultiplierType.ReadOnlyCombo = False
+            Me.cboMultiplierType.SearchAnywhere = False
+            Me.cboMultiplierType.SuggestBoxHeight = 200
+            Me.cboMultiplierType.SuggestListOrderRule = Nothing
+            Me.cboMultiplierType.TextToSearch = Nothing
+            Me.cboMultiplierType.ValueIsMandatory = False
+            Me.cboMultiplierType.ValueIsNullable = False
+            Me.cboMultiplierType.ValueIsNumeric = False
+            Me.cboMultiplierType.ValueMember = "Code"
+            '
+            'chkTaxable
+            '
+            resources.ApplyResources(Me.chkTaxable, "chkTaxable")
+            Me.chkTaxable.BackColor = System.Drawing.Color.White
+            Me.chkTaxable.DisplayOnly = False
+            Me.chkTaxable.EditingMode = True
+            Me.chkTaxable.FlatAppearance.BorderSize = 0
+            Me.chkTaxable.ForeColor = System.Drawing.Color.Black
+            Me.chkTaxable.LinkedLabel = Me.lblTaxable
+            Me.chkTaxable.Name = "chkTaxable"
+            Me.chkTaxable.NoLabel = False
+            Me.chkTaxable.OldValue = Nothing
+            Me.chkTaxable.UseVisualStyleBackColor = True
+            '
+            'cboUnit
+            '
+            Me.cboUnit.BackColor = System.Drawing.Color.White
+            Me.cboUnit.ChangingSearchValueOnly = False
+            Me.cboUnit.CurrentSearchTerm = ""
+            Me.cboUnit.DefaultValue = Nothing
+            Me.cboUnit.DisplayMember = "Name"
+            Me.cboUnit.DropDownHeight = 200
+            Me.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboUnit.EditingMode = True
+            Me.cboUnit.FilterRule = Nothing
+            resources.ApplyResources(Me.cboUnit, "cboUnit")
+            Me.cboUnit.ForeColor = System.Drawing.Color.Black
+            Me.cboUnit.FormattingEnabled = True
+            Me.cboUnit.HideWhenNotEditingOrAdding = False
+            Me.cboUnit.LinkedLabel = Me.lblRate
+            Me.cboUnit.Name = "cboUnit"
+            Me.cboUnit.OldValue = 0
+            Me.cboUnit.OriginalDataSource = Nothing
+            Me.cboUnit.OriginalList = Nothing
+            Me.cboUnit.OverrideDropDownStyleList = False
+            Me.cboUnit.PreviousSearchTerm = Nothing
+            Me.cboUnit.PreviousSelectedIndex = -1
+            Me.cboUnit.PropertySelector = Nothing
+            Me.cboUnit.ReadOnlyCombo = False
+            Me.cboUnit.SearchAnywhere = False
+            Me.cboUnit.SuggestBoxHeight = 200
+            Me.cboUnit.SuggestListOrderRule = Nothing
+            Me.cboUnit.TextToSearch = Nothing
+            Me.cboUnit.ValueIsMandatory = False
+            Me.cboUnit.ValueIsNullable = False
+            Me.cboUnit.ValueIsNumeric = False
+            Me.cboUnit.ValueMember = "Code"
+            '
+            'lblPayRate
+            '
+            resources.ApplyResources(Me.lblPayRate, "lblPayRate")
+            Me.lblPayRate.DisplayOnly = True
+            Me.lblPayRate.EditingMode = False
+            Me.lblPayRate.Name = "lblPayRate"
             '
             'tbpAccountPosting
             '
@@ -423,47 +791,9 @@ Namespace PresentationLayer.Views.Forms
             'CFlowLayout2
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout2.Controls.Add(Me.txtName)
-            Me.CFlowLayout2.Controls.Add(Me.txtNameAra)
             Me.CFlowLayout2.Controls.Add(Me.DataGridViewPayrollEarnAccounts)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            '
-            'txtName
-            '
-            Me.txtName.BackColor = System.Drawing.Color.White
-            Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtName.ComputedValue = False
-            Me.txtName.CustomFormat = Nothing
-            Me.txtName.DataBoundControl = True
-            Me.txtName.DisplayOnly = True
-            Me.txtName.EditingMode = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtName, True)
-            resources.ApplyResources(Me.txtName, "txtName")
-            Me.txtName.ForeColor = System.Drawing.Color.Black
-            Me.txtName.LinkedLabel = Nothing
-            Me.txtName.MaximumValue = Nothing
-            Me.txtName.MinimumValue = Nothing
-            Me.txtName.Name = "txtName"
-            Me.txtName.OldValue = Nothing
-            Me.txtName.ReadOnly = True
-            '
-            'txtNameAra
-            '
-            Me.txtNameAra.BackColor = System.Drawing.Color.White
-            Me.txtNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNameAra.ComputedValue = False
-            Me.txtNameAra.CustomFormat = Nothing
-            Me.txtNameAra.DataBoundControl = True
-            Me.txtNameAra.EditingMode = True
-            Me.txtNameAra.EnglishControl = Me.txtName
-            resources.ApplyResources(Me.txtNameAra, "txtNameAra")
-            Me.txtNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtNameAra.LinkedLabel = Nothing
-            Me.txtNameAra.MaximumValue = Nothing
-            Me.txtNameAra.MinimumValue = Nothing
-            Me.txtNameAra.Name = "txtNameAra"
-            Me.txtNameAra.OldValue = Nothing
             '
             'DataGridViewPayrollEarnAccounts
             '
@@ -564,78 +894,6 @@ Namespace PresentationLayer.Views.Forms
             Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
             Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'bsPayrollEarnAccounts
-            '
-            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
-            '
-            'tbpComputation
-            '
-            Me.tbpComputation.Controls.Add(Me.CFlowLayout3)
-            resources.ApplyResources(Me.tbpComputation, "tbpComputation")
-            Me.tbpComputation.Name = "tbpComputation"
-            Me.tbpComputation.UseVisualStyleBackColor = True
-            '
-            'CFlowLayout3
-            '
-            Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout3.Controls.Add(Me.TableLayoutPanel2)
-            resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
-            Me.CFlowLayout3.Name = "CFlowLayout3"
-            '
-            'TableLayoutPanel2
-            '
-            resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
-            Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 1)
-            Me.TableLayoutPanel2.Controls.Add(Me.CLabel1, 0, 0)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 0)
-            Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-            '
-            'CLabel1
-            '
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Name = "CLabel1"
-            '
-            'cboCalculationType
-            '
-            Me.cboCalculationType.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.cboCalculationType.ChangingSearchValueOnly = False
-            Me.cboCalculationType.CurrentSearchTerm = ""
-            Me.cboCalculationType.DefaultValue = Nothing
-            Me.cboCalculationType.DisplayMember = "Name"
-            Me.cboCalculationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboCalculationType.EditingMode = True
-            Me.cboCalculationType.FilterRule = Nothing
-            resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
-            Me.cboCalculationType.FormattingEnabled = True
-            Me.cboCalculationType.HideWhenNotEditingOrAdding = False
-            Me.cboCalculationType.LinkedLabel = Nothing
-            Me.cboCalculationType.Name = "cboCalculationType"
-            Me.cboCalculationType.OldValue = 0
-            Me.cboCalculationType.OriginalDataSource = Nothing
-            Me.cboCalculationType.OriginalList = Nothing
-            Me.cboCalculationType.OverrideDropDownStyleList = False
-            Me.cboCalculationType.PreviousSearchTerm = Nothing
-            Me.cboCalculationType.PreviousSelectedIndex = -1
-            Me.cboCalculationType.PropertySelector = Nothing
-            Me.cboCalculationType.ReadOnlyCombo = False
-            Me.cboCalculationType.SearchAnywhere = False
-            Me.cboCalculationType.SuggestBoxHeight = 200
-            Me.cboCalculationType.SuggestListOrderRule = Nothing
-            Me.cboCalculationType.TextToSearch = Nothing
-            Me.cboCalculationType.ValueIsMandatory = False
-            Me.cboCalculationType.ValueIsNullable = False
-            Me.cboCalculationType.ValueIsNumeric = False
-            Me.cboCalculationType.ValueMember = "IdNo"
-            '
-            'CLabel2
-            '
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Name = "CLabel2"
-            '
             'EarningEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -644,51 +902,74 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout4.ResumeLayout(False)
             Me.floDataDisplay.ResumeLayout(False)
+            Me.TableLayoutPanel3.ResumeLayout(False)
+            Me.TableLayoutPanel3.PerformLayout()
             Me.tbcEarning.ResumeLayout(False)
             Me.tbpMain.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
-            Me.tbpAccountPosting.ResumeLayout(False)
-            Me.CFlowLayout2.ResumeLayout(False)
-            Me.CFlowLayout2.PerformLayout()
-            CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.tbpComputation.ResumeLayout(False)
+            Me.tbpCalculation.ResumeLayout(False)
             Me.CFlowLayout3.ResumeLayout(False)
             Me.TableLayoutPanel2.ResumeLayout(False)
             Me.TableLayoutPanel2.PerformLayout()
+            Me.tbpAccountPosting.ResumeLayout(False)
+            Me.CFlowLayout2.ResumeLayout(False)
+            CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
         End Sub
-        Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtEarningCode As CTextBox
-        Friend WithEvents txtEarningName As CTextBox
+        Friend WithEvents bsPayrollEarnAccounts As BindingSource
+        Friend WithEvents CFlowLayout4 As CFlowLayout
+        Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
         Friend WithEvents txtEarningNameAra As CTextBoxArabic
-        Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents floDataDisplay As CFlowLayout
-        Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblCode As CLabel
+        Friend WithEvents txtEarningName As CTextBox
         Friend WithEvents lblName As CLabel
+        Friend WithEvents txtEarningCode As CTextBox
+        Friend WithEvents lblCode As CLabel
+        Friend WithEvents TxtIdNo As CTextBox
+        Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblNameAra As CLabel
-        Friend WithEvents lblNotes As CLabel
-        Friend WithEvents lblFrequency As CLabel
-        Friend WithEvents lblEarningType As CLabel
-        Friend WithEvents cboEarningType As CaComboBox
-        Friend WithEvents cboFrequency As CaComboBox
-        Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents tbcEarning As CTabControl
         Friend WithEvents tbpMain As TabPage
-        Friend WithEvents tbpAccountPosting As TabPage
+        Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents txtNotes As CTextBox
+        Friend WithEvents lblNotes As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents bsPayrollEarnAccounts As BindingSource
+        Friend WithEvents cboFrequency As CaComboBox
+        Friend WithEvents lblFrequency As CLabel
+        Friend WithEvents cboEarningType As CaComboBox
+        Friend WithEvents lblEarningType As CLabel
+        Friend WithEvents tbpCalculation As TabPage
+        Friend WithEvents CFlowLayout3 As CFlowLayout
+        Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+        Friend WithEvents lblTaxable As CLabel
+        Friend WithEvents lblMultiplier As CLabel
+        Friend WithEvents lblDefaultQty As CLabel
+        Friend WithEvents lblRate As CLabel
+        Friend WithEvents lblCalculationType As CLabel
+        Friend WithEvents cboCalculationType As CaComboBox
+        Friend WithEvents txtRate As CTextBox
+        Friend WithEvents CTextBox2 As CTextBox
+        Friend WithEvents lblBasePayment As CLabel
+        Friend WithEvents cboBasePaymentIdNo As CaComboBox
+        Friend WithEvents lblIncludeInGosi As CLabel
+        Friend WithEvents chkIncludeInPension As CCheckBox
+        Friend WithEvents lblIncludeInEos As CLabel
+        Friend WithEvents chkIncludeInEOS As CCheckBox
+        Friend WithEvents CTextBox3 As CTextBox
+        Friend WithEvents cboMultiplierType As CaComboBox
+        Friend WithEvents chkTaxable As CCheckBox
+        Friend WithEvents cboUnit As CaComboBox
+        Friend WithEvents lblPayRate As CLabel
+        Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents txtName As CTextBox
-        Friend WithEvents txtNameAra As CTextBoxArabic
         Friend WithEvents DataGridViewPayrollEarnAccounts As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvPayGroupIdNo As CaDgvComboBoxColumn
@@ -697,11 +978,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EarningIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents tbpComputation As TabPage
-        Friend WithEvents CFlowLayout3 As CFlowLayout
-        Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-        Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboCalculationType As CaComboBox
-        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents floDataDisplay As CFlowLayout
     End Class
 End Namespace

@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -31,9 +29,6 @@ Namespace PresentationLayer.Models
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
         Public Property PayFrequency As Char
-        Public Property PaySalariedOrHourly As String
-        Public Property PayRateAmount As Decimal
-        Public Property PayRateType As String
         Public Property Phone1 As String
         Public Property Phone2 As String
         Public Property PoBox As String

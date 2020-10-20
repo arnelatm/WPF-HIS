@@ -14,13 +14,24 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Earning Implements IDao(Of Earning).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo," &
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "BasePaymentIdNo," &
+                    "CalculationType," &
                     "EarningCode," &
                     "EarningName," &
                     "EarningNameAra," &
-                    "Frequency," &
                     "EarningType," &
-                    "AccountIdNo" &
+                    "Frequency," &
+                    "IdNo," &
+                    "IncludeInEOS," &
+                    "IncludeInPension," &
+                    "Multiplier," &
+                    "MultiplierType," &
+                    "Notes," &
+                    "Rate," &
+                    "Taxable," &
+                    "Unit" &
                     " FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -30,16 +41,24 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-
         Public Function UpdateRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).UpdateRecord
-            Dim sql As String =
-                    " UPDATE [Earning]" &
-                    " SET EarningCode = @EarningCode," &
+            Dim sql As String = " UPDATE [Earning] Set" &
+                    " AccountIdNo = @AccountIdNo," &
+                    " BasePaymentIdNo = @BasePaymentIdNo," &
+                    " CalculationType = @CalculationType," &
+                    " EarningCode = @EarningCode," &
                     " EarningName = @EarningName," &
                     " EarningNameAra = @EarningNameAra," &
-                    " Frequency = @Frequency," &
                     " EarningType = @EarningType," &
-                    " AccountIdNo = @AccountIdNo" &
+                    " Frequency = @Frequency," &
+                    " IncludeInEos = @IncludeInEos," &
+                    " IncludeInPension = @IncludeInPension," &
+                    " Multiplier = @Multiplier," &
+                    " MultiplierType = @MultiplierType," &
+                    " Notes = @Notes," &
+                    " Rate = @Rate," &
+                    " Taxable = @Taxable," &
+                    " Unit = @Unit" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(earning))
         End Function
@@ -47,32 +66,52 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (EarningCode,EarningName,EarningNameAra,Frequency,EarningType,AccountIdNo) " &
-                    " VALUES (@EarningCode,@EarningName,@EarningNameAra,@Frequency,@EarningType,@AccountIdNo) "
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,EarningCode,EarningName,EarningNameAra,EarningType,Frequency,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@EarningCode,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Earning) =
                                     Function(reader) _
             New Earning() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
+            .BasePaymentIdNo = Extensions.AsId(Of Int16)(reader("BasePaymentIdNo")),
+            .CalculationType = Extensions.AsChar(reader("CalculationType")),
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .Frequency = Extensions.AsChar(reader("Frequency")),
             .EarningType = Extensions.AsChar(reader("EarningType")),
-            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo"))
+            .Frequency = Extensions.AsChar(reader("Frequency")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .IncludeInEos = Extensions.AsBool(reader("IncludeInEos")),
+            .IncludeInPension = Extensions.AsBool(reader("IncludeInPension")),
+            .Multiplier = Extensions.AsDouble(reader("Multiplier")),
+            .MultiplierType = Extensions.AsString(reader("MultiplierType")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .Rate = Extensions.AsDouble(reader("Rate")),
+            .Taxable = Extensions.AsBool(reader("Taxable")),
+            .Unit = Extensions.AsChar(reader("Unit"))
             }
 
         Private Function Take(earning As Earning) As Object()
             Return New Object() {
-                                    "@IdNo", earning.IdNo,
+                                    "@AccountIdNo", earning.AccountIdNo,
+                                    "@BasePaymentIdNo", earning.BasePaymentIdNo,
+                                    "@CalculationType", earning.CalculationType,
                                     "@EarningCode", earning.EarningCode,
                                     "@EarningName", earning.EarningName,
                                     "@EarningNameAra", earning.EarningNameAra,
-                                    "@Frequency", earning.Frequency,
                                     "@EarningType", earning.EarningType,
-                                    "@AccountIdNo", earning.AccountIdNo
+                                    "@Frequency", earning.Frequency,
+                                    "@IdNo", earning.IdNo,
+                                    "@IncludeInEos", earning.IncludeInEos,
+                                    "@IncludeInPension", earning.IncludeInPension,
+                                    "@Multiplier", earning.Multiplier,
+                                    "@MultiplierType", earning.MultiplierType,
+                                    "@Notes", earning.Notes,
+                                    "@Rate", earning.Rate,
+                                    "@Taxable", earning.Taxable,
+                                    "@Unit", earning.Unit
                                 }
         End Function
 
