@@ -8,6 +8,7 @@
     [AccountIdNo]      SMALLINT       NULL,
     [BasePaymentidNo]  SMALLINT       NULL,
     [CalculationType]  CHAR (1)       NULL,
+    [DefaultQuantity]  DECIMAL (8, 2) NULL,
     [IncludeInEos]     BIT            NULL,
     [IncludeInPension] BIT            NULL,
     [Multiplier]       DECIMAL (6, 2) NULL,
@@ -19,6 +20,8 @@
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_Earning] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

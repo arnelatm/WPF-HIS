@@ -106,7 +106,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtEarningName.Text = Value
-                txtName.Text = Value
             End Set
         End Property
 
@@ -116,7 +115,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtEarningNameAra.Text = Value
-                txtNameAra.Text = Value
             End Set
         End Property
 
@@ -182,6 +180,15 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Taxable As Boolean Implements IEarningView.Taxable
+
+        Public Property DefaultQuantity As Decimal Implements IEarningView.DefaultQuantity
+            Get
+                Return txtDefaultQuantity.Text.ToDecimalNumber(_nfi)
+            End Get
+            Set
+                txtDefaultQuantity.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
 
 #End Region
 
@@ -276,8 +283,46 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub CLabel4_Click(sender As Object, e As EventArgs)
-
+        Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+            Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+            Select Case curCalculationType
+                Case CalculationTypeSelection.Fixed
+                    cboUnit.Visible = False
+                    txtDefaultQuantity.Visible = False
+                    lblDefaultQty.Visible = False
+                    lblBasePayment.Visible = False
+                    lblMultiplier.Visible = False
+                    cboBasePaymentIdNo.Visible = False
+                    cboMultiplierType.Visible = False
+                    txtMultiplier.Visible = False
+                Case CalculationTypeSelection.Factor
+                    cboUnit.Visible = True
+                    txtDefaultQuantity.Visible = True
+                    lblDefaultQty.Visible = True
+                    lblBasePayment.Visible = True
+                    lblMultiplier.Visible = True
+                    cboBasePaymentIdNo.Visible = True
+                    cboMultiplierType.Visible = True
+                    txtMultiplier.Visible = True
+                Case CalculationTypeSelection.Variable
+                    cboUnit.Visible = True
+                    txtDefaultQuantity.Visible = True
+                    lblDefaultQty.Visible = True
+                    lblBasePayment.Visible = False
+                    lblMultiplier.Visible = False
+                    cboBasePaymentIdNo.Visible = False
+                    cboMultiplierType.Visible = False
+                    txtMultiplier.Visible = False
+                Case CalculationTypeSelection.Global
+                    cboUnit.Visible = True
+                    txtDefaultQuantity.Visible = True
+                    lblDefaultQty.Visible = True
+                    lblBasePayment.Visible = False
+                    lblMultiplier.Visible = False
+                    cboBasePaymentIdNo.Visible = False
+                    cboMultiplierType.Visible = False
+                    txtMultiplier.Visible = False
+            End Select
         End Sub
 
     End Class

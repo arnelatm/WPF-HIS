@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "BasePaymentIdNo," &
                     "CalculationType," &
+                    "DefaultQuantity," &
                     "EarningCode," &
                     "EarningName," &
                     "EarningNameAra," &
@@ -46,6 +47,7 @@ Namespace DataLayer.AdoNet
                     " AccountIdNo = @AccountIdNo," &
                     " BasePaymentIdNo = @BasePaymentIdNo," &
                     " CalculationType = @CalculationType," &
+                    " DefaultQuantity = @DefaultQuantity," &
                     " EarningCode = @EarningCode," &
                     " EarningName = @EarningName," &
                     " EarningNameAra = @EarningNameAra," &
@@ -66,8 +68,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (AccountIdNo,BasePaymentIdNo,CalculationType,EarningCode,EarningName,EarningNameAra,EarningType,Frequency,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@EarningCode,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit) "
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,EarningName,EarningNameAra,EarningType,Frequency,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -77,6 +79,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
             .BasePaymentIdNo = Extensions.AsId(Of Int16)(reader("BasePaymentIdNo")),
             .CalculationType = Extensions.AsChar(reader("CalculationType")),
+            .DefaultQuantity = Extensions.AsDecimal(reader("DefaultQuantity")),
             .EarningCode = Extensions.AsString(reader("EarningCode")),
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
@@ -98,6 +101,7 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", earning.AccountIdNo,
                                     "@BasePaymentIdNo", earning.BasePaymentIdNo,
                                     "@CalculationType", earning.CalculationType,
+                                    "@DefaultQuantity", earning.DefaultQuantity,
                                     "@EarningCode", earning.EarningCode,
                                     "@EarningName", earning.EarningName,
                                     "@EarningNameAra", earning.EarningNameAra,
