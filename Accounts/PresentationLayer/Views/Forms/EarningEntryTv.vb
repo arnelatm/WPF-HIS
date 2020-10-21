@@ -61,6 +61,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Multiplier As Decimal Implements IEarningView.Multiplier
+            Get
+                Return txtMultiplier.Text
+            End Get
+            Set
+                txtMultiplier.Text = Value
+            End Set
+        End Property
 
         Public Property MultiplierType As Char Implements IEarningView.MultiplierType
 
@@ -100,25 +107,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EarningName As String Implements IEarningView.EarningName
-            Get
-                Return txtEarningName.Text
-            End Get
-            Set
-                txtEarningName.Text = Value
-                txtName.Text = Value
-            End Set
-        End Property
-
-        Public Property EarningNameAra As String Implements IEarningView.EarningNameAra
-            Get
-                Return txtEarningNameAra.Text
-            End Get
-            Set
-                txtEarningNameAra.Text = Value
-                txtNameAra.Text = Value
-            End Set
-        End Property
 
         Public Property Frequency As Char Implements IEarningView.Frequency
             Get
@@ -182,6 +170,24 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Taxable As Boolean Implements IEarningView.Taxable
+
+        Public Property EarningName As String Implements IEarningView.EarningName
+            Get
+                Return txtEarningName.Text
+            End Get
+            Set(value As String)
+                txtEarningName.Text = Value
+            End Set
+        End Property
+
+        Public Property EarningNameAra As String Implements IEarningView.EarningNameAra
+            Get
+                Return txtEarningNameAra.Text
+            End Get
+            Set(value As String)
+                txtEarningNameAra.Text = Value
+            End Set
+        End Property
 
 #End Region
 
@@ -276,10 +282,19 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub CLabel4_Click(sender As Object, e As EventArgs)
+        Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+            Dim eCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+            Select Case eCalculationType 
+                Case CalculationTypeSelection.Fixed
+                    lblMultiplier.Visible = False
+                    txtMultiplier.Visible = False
+                    lblBasePayment.Visible = False
+                    cboBasePaymentIdNo.Visible = False
+                    lblMul
+                Case Else
 
+            End Select
         End Sub
-
     End Class
 
 End Namespace
