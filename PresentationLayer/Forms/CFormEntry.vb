@@ -342,16 +342,17 @@ Public Class CFormEntry
             Dim x As Type = y.PropertyType
             Dim u As Type = Nullable.GetUnderlyingType(x)
             If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
-                If u IsNot Nothing Then
-                    Return True
-                Else
-                    If Type.GetTypeCode(x) = TypeCode.String Then
-                        Return True
-                    Else
-                        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
-                        Return False
-                    End If
-                End If
+                Return True
+                'If u IsNot Nothing Then
+                '    Return True
+                'Else
+                '    If Type.GetTypeCode(x) = TypeCode.String Then
+                '        Return True
+                '    Else
+                '        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                '        Return True
+                '    End If
+                'End If
             Else
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)

@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AccountIdNo As Int16
         Property BasePaymentIdNo As Int16
         Property CalculationType As Char
+        Property DefaultQuantity As Decimal
         Property EarningCode As String
         Property EarningName As String
         Property EarningNameAra As String

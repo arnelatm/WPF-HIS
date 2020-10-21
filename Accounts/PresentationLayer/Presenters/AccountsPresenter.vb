@@ -201,8 +201,9 @@ Namespace PresentationLayer.Presenters
                                              "IdNo")
         End Function
 
-        Public Function GetLastPayDate(ByVal payCycle As Int16)
-            Model.GetMaxValueFiltered("EndDate", "PayPeriod", "EndDate", "PayFrequency=[M]")
+        Public Function GetLastPayroll(ByVal payCycle As Int16) As PayPeriodModel
+            Dim idNo As Int32
+            idNo = Model.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayFrequency=[M]")
         End Function
 
         Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")

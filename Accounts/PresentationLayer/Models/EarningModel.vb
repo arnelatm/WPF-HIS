@@ -9,6 +9,7 @@
         Public Property AccountIdNo As Int16
         Public Property BasePaymentIdNo As Int16
         Public Property CalculationType As Char
+        Public Property DefaultQuantity As Decimal
         Public Property EarningCode As String
         Public Property EarningName As String
         Public Property EarningNameAra As String
