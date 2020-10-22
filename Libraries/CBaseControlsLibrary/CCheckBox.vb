@@ -15,14 +15,13 @@ Public Class CCheckBox
 
     Public Sub New()
         MyBase.New()
-        Width = 200
         Margin = New Padding(1)
         UseVisualStyleBackColor = True
-        Appearance = Appearance.Button
+        'Appearance = Appearance.Button
         FlatStyle = FlatStyle.Flat
         TextAlign = ContentAlignment.MiddleRight
         FlatAppearance.BorderSize = 0
-        AutoSize = False
+        AutoSize = True
     End Sub
 
     <Bindable(True)>
