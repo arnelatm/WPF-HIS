@@ -12,7 +12,10 @@ Namespace PresentationLayer.Views.Forms
         Private _accountsByCode
         Private _payGroupsByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
+        Private _useRevCostCenters As Nullable(Of Boolean)
+        Private _useDepartments As Nullable(Of Boolean)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
+
 
         Public Sub New()
 
@@ -347,6 +350,16 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub EarningEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _useDepartments = PresenterObj.GetDepartmentUseSetting()
+            If _useDepartments Is Nothing Then
+                _useDepartments = False
+            End If
+            _useRevCostCenters = PresenterObj.GetRevCostCenterUseSetting()
+            If _useRevCostCenters Is Nothing Then
+                _useRevCostCenters = False
+            End If
+        End Sub
     End Class
 
 End Namespace

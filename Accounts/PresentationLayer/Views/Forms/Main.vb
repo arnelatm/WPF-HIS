@@ -1089,7 +1089,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
             Dim x = New OneTimeRun
-            Debugger.Break()
+            'Debugger.Break()
             OneTimeRun.CreateAllMessages()
             'OneTimeRun.CreateEnums()
         End Sub
