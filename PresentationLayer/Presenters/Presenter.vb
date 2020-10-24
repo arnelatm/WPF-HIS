@@ -1335,6 +1335,36 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
+    Public Function GetDepartmentUseSetting()
+        Dim retValue = Model.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
+            Dim groupSetting As String = Messaging.TranslateCaption("Company")
+            Messaging.ShowParametrizedMessage(True,"MsgSettingNotSet",{"setupName", setupName, "groupSetting", groupSetting})
+            Return nothing
+        End If
+        If retValue = "0" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetRevCostCenterUseSetting()
+        Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Departments")
+            Dim groupSetting As String = Messaging.TranslateCaption("Company")
+            Messaging.ShowParametrizedMessage(True,"MsgSettingNotSet",{"setupName", setupName, "groupSetting", groupSetting})
+            Return nothing
+        End If
+        If retValue = "0" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     'Public Sub OnBeforeEdit() Handles BeforeEdit()
     '    Dim type As Type = View.GetType
     '    If type.GetProperty("Posted") IsNot Nothing Then

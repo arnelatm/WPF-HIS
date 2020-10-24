@@ -49,6 +49,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgOnlyNumbersAllowed", "The field '<{FieldName}>' must contain numbers only.", "Invalid Entry")
         Messaging.AddMessage("MsgNumeric0to255Only", "The entered value for '<{FieldName}>' must be between 0-255. Reverting to previous Value.", "Invalid Entry")
         Messaging.AddMessage("MsgInvalidPercentageRange", "Percentage value must be between <1-100>.", "Invalid Entry")
+        Messaging.AddMessage("MsgSettingNotSet","Sorry you have not yet setup the [{setupName}] in the [{groupSetting}] setup!","Invalid Setup")
     End Sub
 
     'Public Shared Sub CreateEnums()

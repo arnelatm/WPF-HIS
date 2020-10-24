@@ -413,6 +413,22 @@ Public Class Dac
             Finally
                 If conn.State = ConnectionState.Open Then conn.Close()
             End Try
+        Else
+            Cs = BuildConnString()
+            Dim conn As SqlConnection = New SqlConnection(Cs)
+            Dim sqlCommand As New SqlCommand("Update OriginalMessages set message = @message, caption = @caption", conn)
+            Try
+                conn.Open()
+                sqlCommand.Parameters.Add("@message", SqlDbType.VarChar).Value = message
+                sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption
+                sqlCommand.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                ErrorMessage(ex, SqlError)
+                status = False
+            Finally
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End Try
         End If
         Return status
     End Function
