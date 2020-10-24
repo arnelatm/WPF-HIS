@@ -49,14 +49,14 @@ Namespace PresentationLayer.Views.Forms
         Me.tbpMain = New System.Windows.Forms.TabPage()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblPostToSingleAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkPostToSingleAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.tbpCalculation = New System.Windows.Forms.TabPage()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -276,15 +276,22 @@ Namespace PresentationLayer.Views.Forms
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 13)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 12)
-        Me.TableLayoutPanel1.Controls.Add(Me.cboAccountIdNo, 0, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblAccountIdNo, 0, 10)
-        Me.TableLayoutPanel1.Controls.Add(Me.cboFrequency, 1, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblFrequency, 1, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.cboEarningType, 0, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblEarningType, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblPostToSingleAccount, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.cboAccountIdNo, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblAccountIdNo, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.cboEarningType, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblEarningType, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkPostToSingleAccount, 1, 1)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        '
+        'lblPostToSingleAccount
+        '
+        Me.lblPostToSingleAccount.DisplayOnly = true
+        resources.ApplyResources(Me.lblPostToSingleAccount, "lblPostToSingleAccount")
+        Me.lblPostToSingleAccount.EditingMode = false
+        Me.lblPostToSingleAccount.Name = "lblPostToSingleAccount"
         '
         'txtNotes
         '
@@ -351,51 +358,9 @@ Namespace PresentationLayer.Views.Forms
         'lblAccountIdNo
         '
         Me.lblAccountIdNo.DisplayOnly = true
-        Me.lblAccountIdNo.EditingMode = false
         resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
+        Me.lblAccountIdNo.EditingMode = false
         Me.lblAccountIdNo.Name = "lblAccountIdNo"
-        '
-        'cboFrequency
-        '
-        Me.cboFrequency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboFrequency.BackColor = System.Drawing.Color.White
-        Me.cboFrequency.ChangingSearchValueOnly = false
-        Me.cboFrequency.CurrentSearchTerm = ""
-        Me.cboFrequency.DefaultValue = Nothing
-        Me.cboFrequency.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboFrequency, "cboFrequency")
-        Me.cboFrequency.DropDownHeight = 1
-        Me.cboFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboFrequency.EditingMode = false
-        Me.cboFrequency.FilterRule = Nothing
-        Me.cboFrequency.ForeColor = System.Drawing.Color.Black
-        Me.cboFrequency.FormattingEnabled = true
-        Me.cboFrequency.HideWhenNotEditingOrAdding = false
-        Me.cboFrequency.LinkedLabel = Nothing
-        Me.cboFrequency.Name = "cboFrequency"
-        Me.cboFrequency.OldValue = 0
-        Me.cboFrequency.OriginalDataSource = Nothing
-        Me.cboFrequency.OriginalList = Nothing
-        Me.cboFrequency.OverrideDropDownStyleList = false
-        Me.cboFrequency.PreviousSearchTerm = Nothing
-        Me.cboFrequency.PreviousSelectedIndex = -1
-        Me.cboFrequency.PropertySelector = Nothing
-        Me.cboFrequency.ReadOnlyCombo = false
-        Me.cboFrequency.SearchAnywhere = false
-        Me.cboFrequency.SuggestBoxHeight = 200
-        Me.cboFrequency.SuggestListOrderRule = Nothing
-        Me.cboFrequency.TextToSearch = Nothing
-        Me.cboFrequency.ValueIsMandatory = false
-        Me.cboFrequency.ValueIsNullable = false
-        Me.cboFrequency.ValueIsNumeric = false
-        Me.cboFrequency.ValueMember = "Code"
-        '
-        'lblFrequency
-        '
-        Me.lblFrequency.DisplayOnly = true
-        Me.lblFrequency.EditingMode = false
-        resources.ApplyResources(Me.lblFrequency, "lblFrequency")
-        Me.lblFrequency.Name = "lblFrequency"
         '
         'cboEarningType
         '
@@ -405,11 +370,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEarningType.CurrentSearchTerm = ""
         Me.cboEarningType.DefaultValue = ""
         Me.cboEarningType.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
         Me.cboEarningType.DropDownHeight = 1
         Me.cboEarningType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboEarningType.EditingMode = false
         Me.cboEarningType.FilterRule = Nothing
+        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
         Me.cboEarningType.ForeColor = System.Drawing.Color.Black
         Me.cboEarningType.HideWhenNotEditingOrAdding = false
         Me.cboEarningType.LinkedLabel = Me.lblEarningType
@@ -437,6 +402,20 @@ Namespace PresentationLayer.Views.Forms
         Me.lblEarningType.EditingMode = false
         resources.ApplyResources(Me.lblEarningType, "lblEarningType")
         Me.lblEarningType.Name = "lblEarningType"
+        '
+        'chkPostToSingleAccount
+        '
+        Me.chkPostToSingleAccount.BackColor = System.Drawing.Color.White
+        Me.chkPostToSingleAccount.DisplayOnly = false
+        Me.chkPostToSingleAccount.EditingMode = true
+        Me.chkPostToSingleAccount.FlatAppearance.BorderSize = 0
+        resources.ApplyResources(Me.chkPostToSingleAccount, "chkPostToSingleAccount")
+        Me.chkPostToSingleAccount.ForeColor = System.Drawing.Color.Black
+        Me.chkPostToSingleAccount.LinkedLabel = Me.lblPostToSingleAccount
+        Me.chkPostToSingleAccount.Name = "chkPostToSingleAccount"
+        Me.chkPostToSingleAccount.NoLabel = true
+        Me.chkPostToSingleAccount.OldValue = Nothing
+        Me.chkPostToSingleAccount.UseVisualStyleBackColor = true
         '
         'tbpCalculation
         '
@@ -632,7 +611,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkIncludeInPension.ForeColor = System.Drawing.Color.Black
         Me.chkIncludeInPension.LinkedLabel = Me.lblIncludeInGosi
         Me.chkIncludeInPension.Name = "chkIncludeInPension"
-        Me.chkIncludeInPension.NoLabel = false
+        Me.chkIncludeInPension.NoLabel = true
         Me.chkIncludeInPension.OldValue = Nothing
         Me.chkIncludeInPension.UseVisualStyleBackColor = true
         '
@@ -654,7 +633,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkIncludeInEOS.ForeColor = System.Drawing.Color.Black
         Me.chkIncludeInEOS.LinkedLabel = Me.lblIncludeInEos
         Me.chkIncludeInEOS.Name = "chkIncludeInEOS"
-        Me.chkIncludeInEOS.NoLabel = false
+        Me.chkIncludeInEOS.NoLabel = true
         Me.chkIncludeInEOS.OldValue = Nothing
         Me.chkIncludeInEOS.UseVisualStyleBackColor = true
         '
@@ -719,7 +698,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkTaxable.ForeColor = System.Drawing.Color.Black
         Me.chkTaxable.LinkedLabel = Me.lblTaxable
         Me.chkTaxable.Name = "chkTaxable"
-        Me.chkTaxable.NoLabel = false
+        Me.chkTaxable.NoLabel = true
         Me.chkTaxable.OldValue = Nothing
         Me.chkTaxable.UseVisualStyleBackColor = true
         '
@@ -942,10 +921,7 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboFrequency As CaComboBox
-        Friend WithEvents lblFrequency As CLabel
         Friend WithEvents cboEarningType As CaComboBox
-        Friend WithEvents lblEarningType As CLabel
         Friend WithEvents tbpCalculation As TabPage
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
@@ -979,5 +955,8 @@ End Sub
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents chkTaxable As CCheckBox
         Friend WithEvents lblTaxable As CLabel
+        Friend WithEvents lblPostToSingleAccount As CLabel
+        Friend WithEvents lblEarningType As CLabel
+        Friend WithEvents chkPostToSingleAccount As CCheckBox
     End Class
 End Namespace

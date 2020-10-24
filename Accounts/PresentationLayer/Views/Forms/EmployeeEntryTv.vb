@@ -314,7 +314,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayFrequency As String Implements IEmployeeView.PayFrequency
+        Public Property PayFrequency As Char Implements IEmployeeView.PayFrequency
             Get
                 Return cboPayFrequency.GetValue()
             End Get
