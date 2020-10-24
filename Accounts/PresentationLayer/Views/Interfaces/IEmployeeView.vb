@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property NationalityCode As String
         Property Notes As String
         Property OpeningBalance As Decimal
-        Property PayFrequency As String
+        Property PayFrequency As Char
 
         'Property PaySalariedOrHourly As String
         'Property PayRateAmount As Decimal

@@ -12,18 +12,30 @@ Public Class CCheckBox
     Private _editingMode As Boolean = True
     Private _noLabel As Boolean
     Private _oldValue As String
+    Private _autoSize As Boolean
 
     Public Sub New()
         MyBase.New()
-        Width = 200
-        Margin = New Padding(1)
+        AutoSize = False
+        Appearance = Appearance.Normal
         UseVisualStyleBackColor = True
-        Appearance = Appearance.Button
         FlatStyle = FlatStyle.Flat
         TextAlign = ContentAlignment.MiddleRight
+        Size = New Size(24, 24)
+        Margin = New Padding(1)
         FlatAppearance.BorderSize = 0
-        AutoSize = False
+        NoLabel = True
+        Text = ""
     End Sub
+
+    Public Overrides Property AutoSize As Boolean
+        Get
+            Return _autoSize
+        End Get
+        Set(value As Boolean)
+            _autoSize = False
+        End Set
+    End Property
 
     <Bindable(True)>
     <Category("Custom Properties")>

@@ -1,8 +1,8 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _accountsByCode
         Private _payGroupsByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
-        Private ReadOnly _nfi As NumberFormatInfo
+        Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
 
         Public Sub New()
 
@@ -118,14 +118,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Frequency As Char Implements IEarningView.Frequency
-            Get
-                Return cboFrequency.GetValue()
-            End Get
-            Set
-                cboFrequency.SetValue(Value)
-            End Set
-        End Property
+        'Public Property Frequency As Char Implements IEarningView.Frequency
+        '    Get
+        '        Return cboFrequency.GetValue()
+        '    End Get
+        '    Set
+        '        cboFrequency.SetValue(Value)
+        '    End Set
+        'End Property
 
         Public Property EarningType As Char Implements IEarningView.EarningType
             Get
@@ -193,7 +193,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
@@ -240,20 +240,19 @@ Namespace PresentationLayer.Views.Forms
                 {"EarningName", txtEarningName},
                 {"EarningNameAra", txtEarningNameAra},
                 {"EarningType", cboEarningType},
-                {"Frequency", cboFrequency},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub
 
-        Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs)
-            If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
-                cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
-                cboFrequency.DisplayOnly = True
-            Else
-                cboFrequency.DisplayOnly = False
-            End If
-        End Sub
+        'Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs)
+        '    If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
+        '        cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
+        '        cboFrequency.DisplayOnly = True
+        '    Else
+        '        cboFrequency.DisplayOnly = False
+        '    End If
+        'End Sub
 
         Private Sub BindPayrollEarnAccount()
             SuspendLayout()
@@ -323,6 +322,29 @@ Namespace PresentationLayer.Views.Forms
                     cboMultiplierType.Visible = False
                     txtMultiplier.Visible = False
             End Select
+        End Sub
+
+        Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs) Handles chkPostToSingleAccount.CheckedChanged
+            If chkPostToSingleAccount.Checked Then
+                lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                'tbpAccountPosting.Enabled = False
+            Else
+                lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+                'tbpAccountPosting.Enabled = True
+            End If
+        End Sub
+
+        Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
+            If Not chkPostToSingleAccount.Checked Then
+                If tbcEarning.SelectedTab Is tbpAccountPosting Then
+                    tbcEarning.SelectedTab = tbpAccountPosting
+                End If
+            Else
+                If tbcEarning.SelectedTab Is tbpAccountPosting Then
+                    tbcEarning.SelectedTab = tbpMain
+                    cboAccountIdNo.Select()
+                End If
+            End If
         End Sub
 
     End Class
