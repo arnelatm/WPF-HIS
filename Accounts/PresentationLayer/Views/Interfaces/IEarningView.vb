@@ -24,6 +24,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Rate As Decimal
         Property Taxable As Boolean
         Property Unit As Char
+        Property UsePayGroups As Boolean
         Property PayrollEarnAccounts As List(Of PayrollEarnAccountView)
     End Interface
 

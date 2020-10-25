@@ -14,8 +14,8 @@ Namespace PresentationLayer.Views.Forms
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
+        Private _usePayGroups As Nullable(Of Boolean)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
-
 
         Public Sub New()
 
@@ -145,6 +145,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboUnit.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property UsePayGroups As Boolean Implements IEarningView.UsePayGroups
+            Get
+                Return chkUsePayGroups.Checked
+            End Get
+            Set
+                chkUsePayGroups.Checked = Value
             End Set
         End Property
 
@@ -338,9 +347,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
-            If Not chkPostToSingleAccount.Checked Then
+            SuspendLayout()
+            ' prevent flicker
+            floPostingAccounts.Visible = False
+            If _usePayGroups And chkUsePayGroups.Checked Then
                 If tbcEarning.SelectedTab Is tbpAccountPosting Then
                     tbcEarning.SelectedTab = tbpAccountPosting
+                    cboAccountIdNo.Select()
                 End If
             Else
                 If tbcEarning.SelectedTab Is tbpAccountPosting Then
@@ -348,6 +361,8 @@ Namespace PresentationLayer.Views.Forms
                     cboAccountIdNo.Select()
                 End If
             End If
+            floPostingAccounts.Visible = True
+            ResumeLayout()
         End Sub
 
         Private Sub EarningEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -359,7 +374,37 @@ Namespace PresentationLayer.Views.Forms
             If _useRevCostCenters Is Nothing Then
                 _useRevCostCenters = False
             End If
+            _usePayGroups = PresenterObj.GetPayGroupUseSetting()
+            If _usePayGroups Is Nothing Then
+                _usePayGroups = False
+            End If
+            If Not (_useDepartments Or _useRevCostCenters) Then
+                If _usePayGroups Then
+                    chkUsePayGroups.Visible = True
+                    lblUsePayGroups.Visible = True
+                Else
+                    chkUsePayGroups.Visible = False
+                    lblUsePayGroups.Visible = False
+                End If
+            End If
         End Sub
+
+        Private Sub ChkUsePayGroups_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsePayGroups.CheckedChanged
+            If _usePayGroups IsNot Nothing And _usePayGroups Then
+                DataGridViewPayrollEarnAccounts.Visible = True
+                lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+            Else
+                If _usePayGroups Is Nothing Then
+                    _usePayGroups = False
+                End If
+                chkUsePayGroups.Visible = False
+                lblUsePayGroups.Visible = False
+                chkPostToSingleAccount.Visible = False
+                lblPostToSingleAccount.Visible = False
+                lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+            End If
+        End Sub
+
     End Class
 
 End Namespace

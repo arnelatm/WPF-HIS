@@ -416,11 +416,12 @@ Public Class Dac
         Else
             Cs = BuildConnString()
             Dim conn As SqlConnection = New SqlConnection(Cs)
-            Dim sqlCommand As New SqlCommand("Update OriginalMessages set message = @message, caption = @caption", conn)
+            Dim sqlCommand As New SqlCommand("Update OriginalMessages set message = @message, caption = @caption where MessageKey = @Key", conn)
             Try
                 conn.Open()
                 sqlCommand.Parameters.Add("@message", SqlDbType.VarChar).Value = message
                 sqlCommand.Parameters.Add("@caption", SqlDbType.VarChar).Value = caption
+                sqlCommand.Parameters.Add("@key", SqlDbType.VarChar).Value = key
                 sqlCommand.ExecuteNonQuery()
                 conn.Close()
             Catch ex As Exception

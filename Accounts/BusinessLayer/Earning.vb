@@ -34,6 +34,7 @@ Namespace BusinessLayer
         Public Property Rate As Decimal
         Public Property Taxable As Boolean
         Public Property Unit As Char
+        Public Property UsePayGroups As Boolean
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
 
     End Class

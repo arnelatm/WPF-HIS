@@ -26,6 +26,7 @@
         Public Property Rate As Decimal
         Public Property Taxable As Boolean
         Public Property Unit As Char
+        Public Property UsePayGroups As Boolean
         Property Errors As List(Of String)
         Public Property PayrollEarnAccounts As IList(Of PayrollEarnAccountModel)
     End Class

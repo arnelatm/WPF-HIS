@@ -31,7 +31,8 @@ Namespace DataLayer.AdoNet
                     "Notes," &
                     "Rate," &
                     "Taxable," &
-                    "Unit" &
+                    "Unit," &
+                    "UsePayGroups" &
                     " FROM [Earning]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -58,7 +59,8 @@ Namespace DataLayer.AdoNet
                     " Notes = @Notes," &
                     " Rate = @Rate," &
                     " Taxable = @Taxable," &
-                    " Unit = @Unit" &
+                    " Unit = @Unit," &
+                    " UsePayGroups = @UsePayGroups" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(earning))
         End Function
@@ -66,8 +68,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,EarningName,EarningNameAra,EarningType,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@EarningName,@EarningNameAra,@EarningType,IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit) "
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,EarningName,EarningNameAra,EarningType,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@EarningName,@EarningNameAra,@EarningType,IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -90,7 +92,8 @@ Namespace DataLayer.AdoNet
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),
             .Taxable = Extensions.AsBool(reader("Taxable")),
-            .Unit = Extensions.AsChar(reader("Unit"))
+            .Unit = Extensions.AsChar(reader("Unit")),
+            .UsePayGroups = Extensions.AsBool(reader("UsePayGroups"))
             }
 
         Private Function Take(earning As Earning) As Object()
@@ -111,7 +114,8 @@ Namespace DataLayer.AdoNet
                                     "@Notes", earning.Notes,
                                     "@Rate", earning.Rate,
                                     "@Taxable", earning.Taxable,
-                                    "@Unit", earning.Unit
+                                    "@Unit", earning.Unit,
+                                    "@UsePayGroups", earning.UsePayGroups
                                 }
         End Function
 
