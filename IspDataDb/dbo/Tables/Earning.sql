@@ -16,10 +16,13 @@
     [Rate]             MONEY          NULL,
     [Taxable]          BIT            NULL,
     [Unit]             CHAR (1)       NULL,
+    [UsePayGroups]     BIT            NULL,
     [Notes]            NVARCHAR (100) NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_Earning] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

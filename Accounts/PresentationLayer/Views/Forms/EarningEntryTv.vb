@@ -374,7 +374,7 @@ Namespace PresentationLayer.Views.Forms
             If _useRevCostCenters Is Nothing Then
                 _useRevCostCenters = False
             End If
-            _usePayGroups = PresenterObj.GetPayGroupUseSetting()
+            _usePayGroups = PresenterObj.UsePayGroups()
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
