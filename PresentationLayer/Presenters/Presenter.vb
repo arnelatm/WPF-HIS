@@ -1365,7 +1365,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Function GetPayGroupUseSetting()
+    Public Function UsePayGroups()
         Dim retValue = Model.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")

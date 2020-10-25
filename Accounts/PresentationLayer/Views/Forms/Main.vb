@@ -166,6 +166,11 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonLogin.Enabled = True
             ToolStripButtonLogin.PerformClick()
             ToolStripButtonExit.Enabled = True
+            If PresenterObj.UsePayGroups() Then
+                PayGroupsToolStripMenuItem.Visible = True
+            Else
+                PayGroupsToolStripMenuItem.Visible = False
+            End If
         End Sub
 
         ''' <summary>

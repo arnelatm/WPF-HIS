@@ -43,6 +43,16 @@ Public Class CrReportViewer
         Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
         Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
 
+        If reportPaths Is Nothing Or reportPaths = "" Then
+            Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+            If computerName = $"ISPADMIN2" Then
+                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths2")
+            ElseIf computerName = "MARCELO-DELL" Then
+                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths3")
+            Else
+                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths1")
+            End If
+        End If
         Report.Load(reportPaths & ReportFileName)
 
         If Report.DataSourceConnections.Count > 0 Then
