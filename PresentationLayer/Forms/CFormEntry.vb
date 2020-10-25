@@ -39,6 +39,7 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
+        DoubleBuffered = True
 
         ' Add any initialization after the InitializeComponent() call.
 

@@ -50,40 +50,40 @@
 
                     Case ValidationDataType.Decimal
 
-                        Dim cval As Decimal = Decimal.Parse(propValue)
+                        Dim cVal As Decimal = Decimal.Parse(propValue)
 
                         Select Case pOperator
                             Case ValidationOperator.Equal
-                                Return cval = pValue
+                                Return cVal = pValue
                             Case ValidationOperator.NotEqual
-                                Return cval <> pValue
+                                Return cVal <> pValue
                             Case ValidationOperator.GreaterThan
-                                Return cval > pValue
+                                Return cVal > pValue
                             Case ValidationOperator.GreaterThanOrEqual
-                                Return cval >= pValue
+                                Return cVal >= pValue
                             Case ValidationOperator.LessThan
-                                Return cval < pValue
+                                Return cVal < pValue
                             Case ValidationOperator.LessThanOrEqual
-                                Return cval <= pValue
+                                Return cVal <= pValue
                         End Select
 
                     Case ValidationDataType.Date
 
-                        Dim tval As Date = Date.Parse(propValue)
+                        Dim tVal As Date = Date.Parse(propValue)
 
                         Select Case [Operator]
                             Case ValidationOperator.Equal
-                                Return tval = pValue
+                                Return tVal = pValue
                             Case ValidationOperator.NotEqual
-                                Return tval <> pValue
+                                Return tVal <> pValue
                             Case ValidationOperator.GreaterThan
-                                Return tval > pValue
+                                Return tVal > pValue
                             Case ValidationOperator.GreaterThanOrEqual
-                                Return tval >= pValue
+                                Return tVal >= pValue
                             Case ValidationOperator.LessThan
-                                Return tval < pValue
+                                Return tVal < pValue
                             Case ValidationOperator.LessThanOrEqual
-                                Return tval <= pValue
+                                Return tVal <= pValue
                         End Select
 
                     Case ValidationDataType.String
@@ -105,6 +105,18 @@
                                 Return result <= 0
                         End Select
 
+                    Case ValidationDataType.Boolean
+
+                        Dim bVal As Boolean = Boolean.Parse(propValue)
+
+                        Select Case pOperator
+                            Case ValidationOperator.Equal
+                                Return If(pValue, bVal, Not bVal)
+                            Case ValidationOperator.NotEqual
+                                Return If(pValue, Not bVal, bVal)
+                            Case Else
+                                Return True
+                        End Select
                 End Select
                 Return False
             Catch

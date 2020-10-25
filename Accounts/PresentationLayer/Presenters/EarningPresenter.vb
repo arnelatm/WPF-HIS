@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -78,7 +79,6 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-
         'Public Sub UpdateFirstLine()
         '    If EditMode Or AddMode Then
         '        If View.PayrollEarnAccounts.Count() = 0 Then
@@ -124,15 +124,18 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        'Protected Overrides Function IsBizDataValid() As Boolean
-        '    Dim retValue = False
-        '    If MyBase.IsBizDataValid() Then
-        '        If View.EarningType = EnumCode(EarningTypeSelection.Others) Then
-        '            View.EarningType =
-        '        End If
-        '    End If
-        '    Return retValue
-        'End Function
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                If Not GetPayGroupUseSetting() Then
+                    If View.AccountIdNo <= 0 Then
+                        Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
+                        retValue = False
+                    End If
+                End If
+            End If
+            Return retValue
+        End Function
 
     End Class
 

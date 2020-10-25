@@ -7,6 +7,7 @@
         [Double]
         [Decimal]
         [Date]
+        [Boolean]
     End Enum
 
 End Namespace

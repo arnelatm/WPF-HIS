@@ -28,8 +28,8 @@ Namespace BusinessRules
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Dim retVal = True
             If _
-                ValidateExpression(businessObject, _conditionPropertyName, _conditionDataType, _conditionOperator,
-                                   _conditionValue) Then
+            ValidateExpression(businessObject, _conditionPropertyName, _conditionDataType, _conditionOperator,
+                               _conditionValue) Then
                 retVal = MyBase.Validate(businessObject)
             End If
             Return retVal

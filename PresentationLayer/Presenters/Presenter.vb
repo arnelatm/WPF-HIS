@@ -1339,9 +1339,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retValue = Model.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
-            Dim groupSetting As String = Messaging.TranslateCaption("Company")
-            Messaging.ShowParametrizedMessage(True,"MsgSettingNotSet",{"setupName", setupName, "groupSetting", groupSetting})
-            Return nothing
+            Dim groupSetting As String = "Company"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
         End If
         If retValue = "0" Then
             Return True
@@ -1354,11 +1354,26 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Departments")
-            Dim groupSetting As String = Messaging.TranslateCaption("Company")
-            Messaging.ShowParametrizedMessage(True,"MsgSettingNotSet",{"setupName", setupName, "groupSetting", groupSetting})
-            Return nothing
+            Dim groupSetting As String = "Company"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
         End If
         If retValue = "0" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetPayGroupUseSetting()
+        Dim retValue = Model.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+            Dim groupSetting As String = "Payroll"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
+        End If
+        If retValue = "1" Then
             Return True
         Else
             Return False
