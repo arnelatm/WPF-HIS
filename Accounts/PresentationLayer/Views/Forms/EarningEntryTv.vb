@@ -64,6 +64,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Multiplier As Decimal Implements IEarningView.Multiplier
+            Get
+                Return txtMultiplier.Text
+            End Get
+            Set
+                txtMultiplier.Text = Value
+            End Set
+        End Property
 
         Public Property MultiplierType As Char Implements IEarningView.MultiplierType
 
@@ -185,13 +192,20 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property EarningIdNoDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
-            Get
-                Return EarningIdNoDataGridViewTextBoxColumn
-            End Get
-        End Property
+        'Public ReadOnly Property EarningIdNoDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
+        '    Get
+        '        Return EarningIdNoDataGridViewTextBoxColumn
+        '    End Get
+        'End Property
 
         Public Property Taxable As Boolean Implements IEarningView.Taxable
+            Get
+                Return chkTaxable.Checked
+            End Get
+            Set
+                chkTaxable.Checked = Value
+            End Set
+        End Property
 
         Public Property DefaultQuantity As Decimal Implements IEarningView.DefaultQuantity
             Get
@@ -306,6 +320,8 @@ Namespace PresentationLayer.Views.Forms
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     txtMultiplier.Visible = False
+                    lblRate.Text = Messaging.TranslateCaption("Amount")
+                    lblPayRate.Text = ""
                 Case CalculationTypeSelection.Factor
                     cboUnit.Visible = True
                     txtDefaultQuantity.Visible = True
@@ -315,6 +331,8 @@ Namespace PresentationLayer.Views.Forms
                     cboBasePaymentIdNo.Visible = True
                     cboMultiplierType.Visible = True
                     txtMultiplier.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                    lblPayRate.Text = Messaging.TranslateCaption("/")
                 Case CalculationTypeSelection.Variable
                     cboUnit.Visible = True
                     txtDefaultQuantity.Visible = True
@@ -324,6 +342,8 @@ Namespace PresentationLayer.Views.Forms
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     txtMultiplier.Visible = False
+                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                    lblPayRate.Text = Messaging.TranslateCaption("/")
                 Case CalculationTypeSelection.Global
                     cboUnit.Visible = True
                     txtDefaultQuantity.Visible = True
@@ -333,6 +353,8 @@ Namespace PresentationLayer.Views.Forms
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     txtMultiplier.Visible = False
+                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                    lblPayRate.Text = Messaging.TranslateCaption("/")
             End Select
         End Sub
 
@@ -378,14 +400,14 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
-            If Not (_useDepartments Or _useRevCostCenters) Then
-                If _usePayGroups Then
-                    chkUsePayGroups.Visible = True
-                    lblUsePayGroups.Visible = True
-                Else
-                    chkUsePayGroups.Visible = False
-                    lblUsePayGroups.Visible = False
-                End If
+            If _usePayGroups Then
+                chkUsePayGroups.Visible = True
+                lblUsePayGroups.Visible = True
+                DataGridViewPayrollEarnAccounts.Visible = True
+            Else
+                chkUsePayGroups.Visible = False
+                lblUsePayGroups.Visible = False
+                DataGridViewPayrollEarnAccounts.Visible = False
             End If
         End Sub
 
@@ -394,7 +416,12 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewPayrollEarnAccounts.Visible = True
                 lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
                 chkUsePayGroups.Visible = True
-                lblUsePayGroups.Visible = True               
+                lblUsePayGroups.Visible = True
+                If chkUsePayGroups.Checked Then
+                    DataGridViewPayrollEarnAccounts.Visible = True
+                Else
+                    DataGridViewPayrollEarnAccounts.Visible = False
+                End If
             Else
                 If _usePayGroups Is Nothing Then
                     _usePayGroups = False
@@ -405,6 +432,7 @@ Namespace PresentationLayer.Views.Forms
                 'chkPostToSingleAccount.Visible = False
                 'lblPostToSingleAccount.Visible = False
                 lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                DataGridViewPayrollEarnAccounts.Visible = False
             End If
         End Sub
 

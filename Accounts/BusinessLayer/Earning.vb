@@ -13,6 +13,8 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("EarningName"))
                 AddRule(New ValidateRequired("EarningCode"))
+                AddRule(New ValidateRequired("EarningType"))      
+                AddRule(New ValidateRequired("CalculationType"))  
             End If
         End Sub
 
