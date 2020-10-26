@@ -336,34 +336,34 @@ Namespace PresentationLayer.Views.Forms
             End Select
         End Sub
 
-        Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs) Handles chkPostToSingleAccount.CheckedChanged
-            If chkPostToSingleAccount.Checked Then
-                lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
-                'tbpAccountPosting.Enabled = False
-            Else
-                lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
-                'tbpAccountPosting.Enabled = True
-            End If
-        End Sub
+        'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs) 
+        '    If chkPostToSingleAccount.Checked Then
+        '        lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+        '        'tbpAccountPosting.Enabled = False
+        '    Else
+        '        lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+        '        'tbpAccountPosting.Enabled = True
+        '    End If
+        'End Sub
 
-        Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
-            SuspendLayout()
-            ' prevent flicker
-            floPostingAccounts.Visible = False
-            If _usePayGroups And chkUsePayGroups.Checked Then
-                If tbcEarning.SelectedTab Is tbpAccountPosting Then
-                    tbcEarning.SelectedTab = tbpAccountPosting
-                    cboAccountIdNo.Select()
-                End If
-            Else
-                If tbcEarning.SelectedTab Is tbpAccountPosting Then
-                    tbcEarning.SelectedTab = tbpMain
-                    cboAccountIdNo.Select()
-                End If
-            End If
-            floPostingAccounts.Visible = True
-            ResumeLayout()
-        End Sub
+        'Private Sub tbcEarning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcEarning.SelectedIndexChanged
+        '    SuspendLayout()
+        '    ' prevent flicker
+        '    floPostingAccounts.Visible = False
+        '    If _usePayGroups And chkUsePayGroups.Checked Then
+        '        If tbcEarning.SelectedTab Is tbpAccountPosting Then
+        '            tbcEarning.SelectedTab = tbpAccountPosting
+        '            cboAccountIdNo.Select()
+        '        End If
+        '    Else
+        '        If tbcEarning.SelectedTab Is tbpAccountPosting Then
+        '            tbcEarning.SelectedTab = tbpMain
+        '            cboAccountIdNo.Select()
+        '        End If
+        '    End If
+        '    floPostingAccounts.Visible = True
+        '    ResumeLayout()
+        'End Sub
 
         Private Sub EarningEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             _useDepartments = PresenterObj.GetDepartmentUseSetting()
@@ -393,14 +393,17 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups IsNot Nothing And _usePayGroups Then
                 DataGridViewPayrollEarnAccounts.Visible = True
                 lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+                chkUsePayGroups.Visible = True
+                lblUsePayGroups.Visible = True               
             Else
                 If _usePayGroups Is Nothing Then
                     _usePayGroups = False
                 End If
+                DataGridViewPayrollEarnAccounts.Visible = False
                 chkUsePayGroups.Visible = False
                 lblUsePayGroups.Visible = False
-                chkPostToSingleAccount.Visible = False
-                lblPostToSingleAccount.Visible = False
+                'chkPostToSingleAccount.Visible = False
+                'lblPostToSingleAccount.Visible = False
                 lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
             End If
         End Sub

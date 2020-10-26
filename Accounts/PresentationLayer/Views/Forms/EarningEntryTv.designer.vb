@@ -49,20 +49,14 @@ Namespace PresentationLayer.Views.Forms
         Me.tbpMain = New System.Windows.Forms.TabPage()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblPostToSingleAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkPostToSingleAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.tbpCalculation = New System.Windows.Forms.TabPage()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDefaultQty = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -77,11 +71,15 @@ Namespace PresentationLayer.Views.Forms
         Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblPayRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
         Me.floPostingAccounts = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tloPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.DataGridViewPayrollEarnAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -248,8 +246,8 @@ Namespace PresentationLayer.Views.Forms
         'lblNameAra
         '
         Me.lblNameAra.DisplayOnly = true
-        Me.lblNameAra.EditingMode = false
         resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+        Me.lblNameAra.EditingMode = false
         Me.lblNameAra.Name = "lblNameAra"
         '
         'tbcEarning
@@ -280,22 +278,9 @@ Namespace PresentationLayer.Views.Forms
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.lblPostToSingleAccount, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.cboAccountIdNo, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblAccountIdNo, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.cboEarningType, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblEarningType, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkPostToSingleAccount, 1, 1)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        '
-        'lblPostToSingleAccount
-        '
-        Me.lblPostToSingleAccount.DisplayOnly = true
-        resources.ApplyResources(Me.lblPostToSingleAccount, "lblPostToSingleAccount")
-        Me.lblPostToSingleAccount.EditingMode = false
-        Me.lblPostToSingleAccount.Name = "lblPostToSingleAccount"
         '
         'txtNotes
         '
@@ -323,104 +308,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
-        'cboAccountIdNo
-        '
-        Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
-        Me.cboAccountIdNo.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel1.SetColumnSpan(Me.cboAccountIdNo, 2)
-        Me.cboAccountIdNo.CurrentSearchTerm = ""
-        Me.cboAccountIdNo.DefaultValue = Nothing
-        Me.cboAccountIdNo.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
-        Me.cboAccountIdNo.DropDownHeight = 1
-        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboAccountIdNo.EditingMode = false
-        Me.cboAccountIdNo.FilterRule = Nothing
-        Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboAccountIdNo.FormattingEnabled = true
-        Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
-        Me.cboAccountIdNo.Name = "cboAccountIdNo"
-        Me.cboAccountIdNo.OldValue = 0
-        Me.cboAccountIdNo.OriginalDataSource = Nothing
-        Me.cboAccountIdNo.OriginalList = Nothing
-        Me.cboAccountIdNo.OverrideDropDownStyleList = false
-        Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PreviousSelectedIndex = -1
-        Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SearchAnywhere = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboAccountIdNo.TextToSearch = Nothing
-        Me.cboAccountIdNo.ValueIsMandatory = false
-        Me.cboAccountIdNo.ValueIsNullable = false
-        Me.cboAccountIdNo.ValueIsNumeric = false
-        Me.cboAccountIdNo.ValueMember = "IdNo"
-        '
-        'lblAccountIdNo
-        '
-        Me.lblAccountIdNo.DisplayOnly = true
-        resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
-        Me.lblAccountIdNo.EditingMode = false
-        Me.lblAccountIdNo.Name = "lblAccountIdNo"
-        '
-        'cboEarningType
-        '
-        Me.cboEarningType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboEarningType.BackColor = System.Drawing.Color.White
-        Me.cboEarningType.ChangingSearchValueOnly = false
-        Me.cboEarningType.CurrentSearchTerm = ""
-        Me.cboEarningType.DefaultValue = ""
-        Me.cboEarningType.DisplayMember = "Name"
-        Me.cboEarningType.DropDownHeight = 1
-        Me.cboEarningType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboEarningType.EditingMode = false
-        Me.cboEarningType.FilterRule = Nothing
-        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
-        Me.cboEarningType.ForeColor = System.Drawing.Color.Black
-        Me.cboEarningType.HideWhenNotEditingOrAdding = false
-        Me.cboEarningType.LinkedLabel = Me.lblEarningType
-        Me.cboEarningType.Name = "cboEarningType"
-        Me.cboEarningType.OldValue = 0
-        Me.cboEarningType.OriginalDataSource = Nothing
-        Me.cboEarningType.OriginalList = Nothing
-        Me.cboEarningType.OverrideDropDownStyleList = false
-        Me.cboEarningType.PreviousSearchTerm = Nothing
-        Me.cboEarningType.PreviousSelectedIndex = 0
-        Me.cboEarningType.PropertySelector = Nothing
-        Me.cboEarningType.ReadOnlyCombo = false
-        Me.cboEarningType.SearchAnywhere = false
-        Me.cboEarningType.SuggestBoxHeight = 200
-        Me.cboEarningType.SuggestListOrderRule = Nothing
-        Me.cboEarningType.TextToSearch = Nothing
-        Me.cboEarningType.ValueIsMandatory = false
-        Me.cboEarningType.ValueIsNullable = false
-        Me.cboEarningType.ValueIsNumeric = false
-        Me.cboEarningType.ValueMember = "Code"
-        '
-        'lblEarningType
-        '
-        Me.lblEarningType.DisplayOnly = true
-        Me.lblEarningType.EditingMode = false
-        resources.ApplyResources(Me.lblEarningType, "lblEarningType")
-        Me.lblEarningType.Name = "lblEarningType"
-        '
-        'chkPostToSingleAccount
-        '
-        Me.chkPostToSingleAccount.BackColor = System.Drawing.Color.White
-        Me.chkPostToSingleAccount.DisplayOnly = false
-        Me.chkPostToSingleAccount.EditingMode = true
-        Me.chkPostToSingleAccount.FlatAppearance.BorderSize = 0
-        resources.ApplyResources(Me.chkPostToSingleAccount, "chkPostToSingleAccount")
-        Me.chkPostToSingleAccount.ForeColor = System.Drawing.Color.Black
-        Me.chkPostToSingleAccount.LinkedLabel = Me.lblPostToSingleAccount
-        Me.chkPostToSingleAccount.Name = "chkPostToSingleAccount"
-        Me.chkPostToSingleAccount.NoLabel = true
-        Me.chkPostToSingleAccount.OldValue = Nothing
-        Me.chkPostToSingleAccount.UseVisualStyleBackColor = true
-        '
         'tbpCalculation
         '
         Me.tbpCalculation.Controls.Add(Me.CFlowLayout3)
@@ -439,12 +326,12 @@ Namespace PresentationLayer.Views.Forms
         'TableLayoutPanel2
         '
         resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
+        Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 5)
         Me.TableLayoutPanel2.Controls.Add(Me.lblDefaultQty, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblCalculationType, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.lblCalculationType, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.txtDefaultQuantity, 1, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.lblBasePayment, 0, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.cboBasePaymentIdNo, 1, 4)
@@ -455,10 +342,19 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel2.Controls.Add(Me.txtMultiplier, 1, 5)
         Me.TableLayoutPanel2.Controls.Add(Me.cboMultiplierType, 2, 5)
         Me.TableLayoutPanel2.Controls.Add(Me.chkTaxable, 2, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.lblTaxable, 0, 8)
+        Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.cboEarningType, 1, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        '
+        'CLabel2
+        '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.Name = "CLabel2"
         '
         'lblMultiplier
         '
@@ -473,13 +369,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDefaultQty.DisplayOnly = true
         Me.lblDefaultQty.EditingMode = false
         Me.lblDefaultQty.Name = "lblDefaultQty"
-        '
-        'lblRate
-        '
-        resources.ApplyResources(Me.lblRate, "lblRate")
-        Me.lblRate.DisplayOnly = true
-        Me.lblRate.EditingMode = false
-        Me.lblRate.Name = "lblRate"
         '
         'lblCalculationType
         '
@@ -714,6 +603,20 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTaxable.EditingMode = false
         Me.lblTaxable.Name = "lblTaxable"
         '
+        'lblPayRate
+        '
+        resources.ApplyResources(Me.lblPayRate, "lblPayRate")
+        Me.lblPayRate.DisplayOnly = true
+        Me.lblPayRate.EditingMode = false
+        Me.lblPayRate.Name = "lblPayRate"
+        '
+        'lblRate
+        '
+        resources.ApplyResources(Me.lblRate, "lblRate")
+        Me.lblRate.DisplayOnly = true
+        Me.lblRate.EditingMode = false
+        Me.lblRate.Name = "lblRate"
+        '
         'cboUnit
         '
         Me.cboUnit.BackColor = System.Drawing.Color.White
@@ -748,12 +651,39 @@ Namespace PresentationLayer.Views.Forms
         Me.cboUnit.ValueIsNumeric = false
         Me.cboUnit.ValueMember = "Code"
         '
-        'lblPayRate
+        'cboEarningType
         '
-        resources.ApplyResources(Me.lblPayRate, "lblPayRate")
-        Me.lblPayRate.DisplayOnly = true
-        Me.lblPayRate.EditingMode = false
-        Me.lblPayRate.Name = "lblPayRate"
+        Me.cboEarningType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboEarningType.BackColor = System.Drawing.Color.White
+        Me.cboEarningType.ChangingSearchValueOnly = false
+        Me.cboEarningType.CurrentSearchTerm = ""
+        Me.cboEarningType.DefaultValue = ""
+        Me.cboEarningType.DisplayMember = "Name"
+        Me.cboEarningType.DropDownHeight = 1
+        Me.cboEarningType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboEarningType.EditingMode = false
+        Me.cboEarningType.FilterRule = Nothing
+        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
+        Me.cboEarningType.ForeColor = System.Drawing.Color.Black
+        Me.cboEarningType.HideWhenNotEditingOrAdding = false
+        Me.cboEarningType.LinkedLabel = Nothing
+        Me.cboEarningType.Name = "cboEarningType"
+        Me.cboEarningType.OldValue = 0
+        Me.cboEarningType.OriginalDataSource = Nothing
+        Me.cboEarningType.OriginalList = Nothing
+        Me.cboEarningType.OverrideDropDownStyleList = false
+        Me.cboEarningType.PreviousSearchTerm = Nothing
+        Me.cboEarningType.PreviousSelectedIndex = 0
+        Me.cboEarningType.PropertySelector = Nothing
+        Me.cboEarningType.ReadOnlyCombo = false
+        Me.cboEarningType.SearchAnywhere = false
+        Me.cboEarningType.SuggestBoxHeight = 200
+        Me.cboEarningType.SuggestListOrderRule = Nothing
+        Me.cboEarningType.TextToSearch = Nothing
+        Me.cboEarningType.ValueIsMandatory = false
+        Me.cboEarningType.ValueIsNullable = false
+        Me.cboEarningType.ValueIsNumeric = false
+        Me.cboEarningType.ValueMember = "Code"
         '
         'tbpAccountPosting
         '
@@ -773,10 +703,55 @@ Namespace PresentationLayer.Views.Forms
         'tloPostingAccounts
         '
         resources.ApplyResources(Me.tloPostingAccounts, "tloPostingAccounts")
-        Me.tloPostingAccounts.Controls.Add(Me.DataGridViewPayrollEarnAccounts, 0, 1)
+        Me.tloPostingAccounts.Controls.Add(Me.lblAccountIdNo, 0, 1)
+        Me.tloPostingAccounts.Controls.Add(Me.cboAccountIdNo, 0, 1)
+        Me.tloPostingAccounts.Controls.Add(Me.DataGridViewPayrollEarnAccounts, 0, 2)
         Me.tloPostingAccounts.Controls.Add(Me.lblUsePayGroups, 0, 0)
-        Me.tloPostingAccounts.Controls.Add(Me.chkUsePayGroups, 1, 0)
+        Me.tloPostingAccounts.Controls.Add(Me.chkUsePayGroups, 2, 0)
         Me.tloPostingAccounts.Name = "tloPostingAccounts"
+        '
+        'lblAccountIdNo
+        '
+        Me.lblAccountIdNo.DisplayOnly = true
+        resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
+        Me.lblAccountIdNo.EditingMode = false
+        Me.lblAccountIdNo.Name = "lblAccountIdNo"
+        '
+        'cboAccountIdNo
+        '
+        Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
+        Me.cboAccountIdNo.ChangingSearchValueOnly = false
+        Me.tloPostingAccounts.SetColumnSpan(Me.cboAccountIdNo, 2)
+        Me.cboAccountIdNo.CurrentSearchTerm = ""
+        Me.cboAccountIdNo.DefaultValue = Nothing
+        Me.cboAccountIdNo.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
+        Me.cboAccountIdNo.DropDownHeight = 1
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAccountIdNo.EditingMode = false
+        Me.cboAccountIdNo.FilterRule = Nothing
+        Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboAccountIdNo.FormattingEnabled = true
+        Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboAccountIdNo.LinkedLabel = Nothing
+        Me.cboAccountIdNo.Name = "cboAccountIdNo"
+        Me.cboAccountIdNo.OldValue = 0
+        Me.cboAccountIdNo.OriginalDataSource = Nothing
+        Me.cboAccountIdNo.OriginalList = Nothing
+        Me.cboAccountIdNo.OverrideDropDownStyleList = false
+        Me.cboAccountIdNo.PreviousSearchTerm = Nothing
+        Me.cboAccountIdNo.PreviousSelectedIndex = -1
+        Me.cboAccountIdNo.PropertySelector = Nothing
+        Me.cboAccountIdNo.ReadOnlyCombo = false
+        Me.cboAccountIdNo.SearchAnywhere = false
+        Me.cboAccountIdNo.SuggestBoxHeight = 200
+        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
+        Me.cboAccountIdNo.TextToSearch = Nothing
+        Me.cboAccountIdNo.ValueIsMandatory = false
+        Me.cboAccountIdNo.ValueIsNullable = false
+        Me.cboAccountIdNo.ValueIsNumeric = false
+        Me.cboAccountIdNo.ValueMember = "IdNo"
         '
         'DataGridViewPayrollEarnAccounts
         '
@@ -786,7 +761,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollEarnAccounts.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewPayrollEarnAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.EarningIdNoDataGridViewTextBoxColumn, Me.PayGroupNameDataGridViewTextBoxColumn})
-        Me.tloPostingAccounts.SetColumnSpan(Me.DataGridViewPayrollEarnAccounts, 2)
+        Me.tloPostingAccounts.SetColumnSpan(Me.DataGridViewPayrollEarnAccounts, 3)
         Me.DataGridViewPayrollEarnAccounts.DataInGridChanged = false
         Me.DataGridViewPayrollEarnAccounts.DataSource = Me.bsPayrollEarnAccounts
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -881,6 +856,7 @@ Namespace PresentationLayer.Views.Forms
         'lblUsePayGroups
         '
         resources.ApplyResources(Me.lblUsePayGroups, "lblUsePayGroups")
+        Me.tloPostingAccounts.SetColumnSpan(Me.lblUsePayGroups, 2)
         Me.lblUsePayGroups.DisplayOnly = true
         Me.lblUsePayGroups.EditingMode = false
         Me.lblUsePayGroups.Name = "lblUsePayGroups"
@@ -955,9 +931,6 @@ End Sub
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
-        Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboEarningType As CaComboBox
         Friend WithEvents tbpCalculation As TabPage
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
@@ -983,9 +956,6 @@ End Sub
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents chkTaxable As CCheckBox
         Friend WithEvents lblTaxable As CLabel
-        Friend WithEvents lblPostToSingleAccount As CLabel
-        Friend WithEvents lblEarningType As CLabel
-        Friend WithEvents chkPostToSingleAccount As CCheckBox
         Friend WithEvents tloPostingAccounts As TableLayoutPanel
         Friend WithEvents DataGridViewPayrollEarnAccounts As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText
@@ -997,5 +967,9 @@ End Sub
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents lblUsePayGroups As CLabel
         Friend WithEvents chkUsePayGroups As CCheckBox
+        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents cboEarningType As CaComboBox
+        Friend WithEvents lblAccountIdNo As CLabel
+        Friend WithEvents cboAccountIdNo As CaComboBox
     End Class
 End Namespace
