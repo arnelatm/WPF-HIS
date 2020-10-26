@@ -107,7 +107,6 @@ Public Enum DeductionComputation
 End Enum
 
 Public Enum EarningTypeSelection
-    <EnumCode("")> NotSpecified
     <EnumCode("R")> Regular
     <EnumCode("O")> Overtime
     <EnumCode("S")> SickPay

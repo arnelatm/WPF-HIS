@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tlpEarning = New System.Windows.Forms.TableLayoutPanel()
         Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtEarningName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -94,7 +94,7 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout4.SuspendLayout
-        Me.TableLayoutPanel3.SuspendLayout
+        Me.tlpEarning.SuspendLayout
         Me.tbcEarning.SuspendLayout
         Me.tbpMain.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -125,29 +125,29 @@ Namespace PresentationLayer.Views.Forms
         'CFlowLayout4
         '
         Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout4.Controls.Add(Me.TableLayoutPanel3)
+        Me.CFlowLayout4.Controls.Add(Me.tlpEarning)
         Me.CFlowLayout4.Controls.Add(Me.tbcEarning)
         resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
         Me.CFlowLayout4.Name = "CFlowLayout4"
         '
-        'TableLayoutPanel3
+        'tlpEarning
         '
-        resources.ApplyResources(Me.TableLayoutPanel3, "TableLayoutPanel3")
-        Me.TableLayoutPanel3.Controls.Add(Me.txtEarningNameAra, 1, 2)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblName, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.txtEarningCode, 3, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblCode, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.TxtIdNo, 1, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.CLabel1, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.txtEarningName, 1, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblNameAra, 0, 2)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        resources.ApplyResources(Me.tlpEarning, "tlpEarning")
+        Me.tlpEarning.Controls.Add(Me.txtEarningNameAra, 1, 2)
+        Me.tlpEarning.Controls.Add(Me.lblName, 0, 1)
+        Me.tlpEarning.Controls.Add(Me.txtEarningCode, 3, 0)
+        Me.tlpEarning.Controls.Add(Me.lblCode, 2, 0)
+        Me.tlpEarning.Controls.Add(Me.TxtIdNo, 1, 0)
+        Me.tlpEarning.Controls.Add(Me.CLabel1, 0, 0)
+        Me.tlpEarning.Controls.Add(Me.txtEarningName, 1, 1)
+        Me.tlpEarning.Controls.Add(Me.lblNameAra, 0, 2)
+        Me.tlpEarning.Name = "tlpEarning"
         '
         'txtEarningNameAra
         '
         Me.txtEarningNameAra.BackColor = System.Drawing.Color.White
         Me.txtEarningNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel3.SetColumnSpan(Me.txtEarningNameAra, 3)
+        Me.tlpEarning.SetColumnSpan(Me.txtEarningNameAra, 3)
         Me.txtEarningNameAra.ComputedValue = false
         Me.txtEarningNameAra.CustomFormat = Nothing
         Me.txtEarningNameAra.DataBoundControl = true
@@ -166,7 +166,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.txtEarningName.BackColor = System.Drawing.Color.White
         Me.txtEarningName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel3.SetColumnSpan(Me.txtEarningName, 3)
+        Me.tlpEarning.SetColumnSpan(Me.txtEarningName, 3)
         Me.txtEarningName.ComputedValue = false
         Me.txtEarningName.CustomFormat = Nothing
         Me.txtEarningName.DataBoundControl = true
@@ -704,7 +704,7 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.tloPostingAccounts, "tloPostingAccounts")
         Me.tloPostingAccounts.Controls.Add(Me.lblAccountIdNo, 0, 1)
-        Me.tloPostingAccounts.Controls.Add(Me.cboAccountIdNo, 0, 1)
+        Me.tloPostingAccounts.Controls.Add(Me.cboAccountIdNo, 1, 1)
         Me.tloPostingAccounts.Controls.Add(Me.DataGridViewPayrollEarnAccounts, 0, 2)
         Me.tloPostingAccounts.Controls.Add(Me.lblUsePayGroups, 0, 0)
         Me.tloPostingAccounts.Controls.Add(Me.chkUsePayGroups, 2, 0)
@@ -893,8 +893,8 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
-        Me.TableLayoutPanel3.ResumeLayout(false)
-        Me.TableLayoutPanel3.PerformLayout
+        Me.tlpEarning.ResumeLayout(false)
+        Me.tlpEarning.PerformLayout
         Me.tbcEarning.ResumeLayout(false)
         Me.tbpMain.ResumeLayout(false)
         Me.CFlowLayout1.ResumeLayout(false)
@@ -916,7 +916,7 @@ Namespace PresentationLayer.Views.Forms
 End Sub
         Friend WithEvents bsPayrollEarnAccounts As BindingSource
         Friend WithEvents CFlowLayout4 As CFlowLayout
-        Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+        Friend WithEvents tlpEarning As TableLayoutPanel
         Friend WithEvents txtEarningNameAra As CTextBoxArabic
         Friend WithEvents txtEarningName As CTextBox
         Friend WithEvents lblName As CLabel

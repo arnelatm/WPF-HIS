@@ -127,6 +127,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
+                retValue = True
                 If Not UsePayGroups() Then
                     If View.AccountIdNo <= 0 Then
                         Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
@@ -134,7 +135,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             End If
-            Return retValue
+                Return retValue
         End Function
 
     End Class
