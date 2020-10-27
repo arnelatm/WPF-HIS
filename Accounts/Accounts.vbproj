@@ -144,6 +144,7 @@
     <Compile Include="BusinessLayer\Reconciled.vb" />
     <Compile Include="BusinessLayer\SalesCashItem.vb" />
     <Compile Include="BusinessLayer\SalesJournal.vb" />
+    <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
@@ -191,6 +192,7 @@
     <Compile Include="DataLayer\AdoNet\SalesCashItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\SalesJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\SalesJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PensionProviderDao.vb" />
     <Compile Include="DataLayer\AdoNet\SupplierDao.vb" />
     <Compile Include="DataLayer\DaoFactoriesAccounts.vb" />
     <Compile Include="DataLayer\AdoNet\ArJournalDao.vb" />
@@ -227,11 +229,13 @@
     <Compile Include="PresentationLayer\Models\PayPeriodModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarnAccountModel.vb" />
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
+    <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Presenters\PayPeriodPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayCyclePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollEarnAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\LeavePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
@@ -327,6 +331,12 @@
       <DependentUpon>PayrollEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayrollEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.designer.vb">
+      <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.Designer.vb">
@@ -623,6 +633,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesCashItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesCashItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPensionProviderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISupplierView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarnAccountView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
@@ -1867,6 +1878,12 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollEntry.resx">
       <DependentUpon>PayrollEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.ar-SA.resx">
+      <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.resx">
+      <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1880,6 +1897,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CustomerEntryTv.resx">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DesignationEntryTv.resx">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>

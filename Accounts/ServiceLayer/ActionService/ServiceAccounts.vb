@@ -350,6 +350,12 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property PensionProviderDao As IDaoAll(Of PensionProvider)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PensionProvider")
+            End Get
+        End Property
+
         Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
             Get
                 Return DaoFactoryAccounts.CreateDao("Supplier")
