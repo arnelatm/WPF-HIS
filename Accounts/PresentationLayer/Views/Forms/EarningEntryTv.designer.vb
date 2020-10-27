@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.tbpCalculation = New System.Windows.Forms.TabPage()
-        Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -100,7 +100,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.SuspendLayout
         Me.TableLayoutPanel1.SuspendLayout
         Me.tbpCalculation.SuspendLayout
-        Me.CFlowLayout3.SuspendLayout
+        Me.floCalculation.SuspendLayout
         Me.TableLayoutPanel2.SuspendLayout
         Me.tbpAccountPosting.SuspendLayout
         Me.floPostingAccounts.SuspendLayout
@@ -310,18 +310,18 @@ Namespace PresentationLayer.Views.Forms
         '
         'tbpCalculation
         '
-        Me.tbpCalculation.Controls.Add(Me.CFlowLayout3)
+        Me.tbpCalculation.Controls.Add(Me.floCalculation)
         resources.ApplyResources(Me.tbpCalculation, "tbpCalculation")
         Me.tbpCalculation.Name = "tbpCalculation"
         Me.tbpCalculation.UseVisualStyleBackColor = true
         '
-        'CFlowLayout3
+        'floCalculation
         '
-        Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout3.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-        resources.ApplyResources(Me.CFlowLayout3, "CFlowLayout3")
-        Me.CFlowLayout3.Controls.Add(Me.TableLayoutPanel2)
-        Me.CFlowLayout3.Name = "CFlowLayout3"
+        Me.floCalculation.BackColor = System.Drawing.Color.Transparent
+        Me.floCalculation.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+        resources.ApplyResources(Me.floCalculation, "floCalculation")
+        Me.floCalculation.Controls.Add(Me.TableLayoutPanel2)
+        Me.floCalculation.Name = "floCalculation"
         '
         'TableLayoutPanel2
         '
@@ -624,11 +624,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboUnit.CurrentSearchTerm = ""
         Me.cboUnit.DefaultValue = Nothing
         Me.cboUnit.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboUnit, "cboUnit")
         Me.cboUnit.DropDownHeight = 200
         Me.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboUnit.EditingMode = true
         Me.cboUnit.FilterRule = Nothing
-        resources.ApplyResources(Me.cboUnit, "cboUnit")
         Me.cboUnit.ForeColor = System.Drawing.Color.Black
         Me.cboUnit.FormattingEnabled = true
         Me.cboUnit.HideWhenNotEditingOrAdding = false
@@ -656,14 +656,15 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEarningType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboEarningType.BackColor = System.Drawing.Color.White
         Me.cboEarningType.ChangingSearchValueOnly = false
+        Me.TableLayoutPanel2.SetColumnSpan(Me.cboEarningType, 3)
         Me.cboEarningType.CurrentSearchTerm = ""
         Me.cboEarningType.DefaultValue = ""
         Me.cboEarningType.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
         Me.cboEarningType.DropDownHeight = 1
         Me.cboEarningType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboEarningType.EditingMode = false
         Me.cboEarningType.FilterRule = Nothing
-        resources.ApplyResources(Me.cboEarningType, "cboEarningType")
         Me.cboEarningType.ForeColor = System.Drawing.Color.Black
         Me.cboEarningType.HideWhenNotEditingOrAdding = false
         Me.cboEarningType.LinkedLabel = Nothing
@@ -901,7 +902,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
         Me.tbpCalculation.ResumeLayout(false)
-        Me.CFlowLayout3.ResumeLayout(false)
+        Me.floCalculation.ResumeLayout(false)
         Me.TableLayoutPanel2.ResumeLayout(false)
         Me.TableLayoutPanel2.PerformLayout
         Me.tbpAccountPosting.ResumeLayout(false)
@@ -932,7 +933,7 @@ End Sub
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpCalculation As TabPage
-        Friend WithEvents CFlowLayout3 As CFlowLayout
+        Friend WithEvents floCalculation As CFlowLayout
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
         Friend WithEvents lblMultiplier As CLabel
         Friend WithEvents lblDefaultQty As CLabel

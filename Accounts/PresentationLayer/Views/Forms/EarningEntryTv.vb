@@ -309,56 +309,72 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+            Me.DoubleBuffered = True
+            SuspendLayout()
+            floCalculation.Visible = False
+            UpdateCalculationTabDisplay()
+            floCalculation.Visible = True
+            ResumeLayout()
+        End Sub
+
+        Private Sub UpdateCalculationTabDisplay()
             Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             Select Case curCalculationType
                 Case CalculationTypeSelection.Fixed
-                    cboUnit.Visible = False
-                    txtDefaultQuantity.Visible = False
-                    lblDefaultQty.Visible = False
-                    lblBasePayment.Visible = False
-                    lblMultiplier.Visible = False
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
-                    txtMultiplier.Visible = False
-                    lblRate.Text = Messaging.TranslateCaption("Amount")
-                    lblPayRate.Text = ""
-                Case CalculationTypeSelection.Factor
                     cboUnit.Visible = True
-                    txtDefaultQuantity.Visible = True
-                    lblDefaultQty.Visible = True
-                    lblBasePayment.Visible = True
-                    lblMultiplier.Visible = True
+                    lblBasePayment.Visible = False
+                    lblDefaultQty.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = True
+                Case CalculationTypeSelection.Factor
                     cboBasePaymentIdNo.Visible = True
                     cboMultiplierType.Visible = True
+                    cboUnit.Visible = False
+                    lblBasePayment.Visible = True
+                    lblDefaultQty.Visible = True
+                    lblMultiplier.Visible = True
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    lblPayRate.Text = Messaging.TranslateCaption("/")
+                    txtRate.Visible = False
                 Case CalculationTypeSelection.Variable
-                    cboUnit.Visible = True
-                    txtDefaultQuantity.Visible = True
-                    lblDefaultQty.Visible = True
-                    lblBasePayment.Visible = False
-                    lblMultiplier.Visible = False
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
-                    txtMultiplier.Visible = False
+                    cboUnit.Visible = True
+                    lblBasePayment.Visible = False
+                    lblDefaultQty.Visible = True
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = True
+                    lblRate.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    lblPayRate.Text = Messaging.TranslateCaption("/")
+                    txtDefaultQuantity.Visible = True
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = True
                 Case CalculationTypeSelection.Global
-                    cboUnit.Visible = True
-                    txtDefaultQuantity.Visible = True
-                    lblDefaultQty.Visible = True
-                    lblBasePayment.Visible = False
-                    lblMultiplier.Visible = False
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
-                    txtMultiplier.Visible = False
+                    cboUnit.Visible = True
+                    lblBasePayment.Visible = False
+                    lblDefaultQty.Visible = True
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = True
+                    lblRate.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    lblPayRate.Text = Messaging.TranslateCaption("/")
+                    txtDefaultQuantity.Visible = True
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = True
             End Select
         End Sub
 
-        'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs) 
+        'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)
         '    If chkPostToSingleAccount.Checked Then
         '        lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
         '        'tbpAccountPosting.Enabled = False
@@ -400,27 +416,32 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
-            If _usePayGroups Then
-                chkUsePayGroups.Visible = True
-                lblUsePayGroups.Visible = True
-                DataGridViewPayrollEarnAccounts.Visible = True
-            Else
-                chkUsePayGroups.Visible = False
-                lblUsePayGroups.Visible = False
-                DataGridViewPayrollEarnAccounts.Visible = False
-            End If
+            'If _usePayGroups Then
+            '    chkUsePayGroups.Visible = True
+            '    lblUsePayGroups.Visible = True
+            '    DataGridViewPayrollEarnAccounts.Visible = True
+            'Else
+            '    chkUsePayGroups.Visible = False
+            '    lblUsePayGroups.Visible = False
+            '    DataGridViewPayrollEarnAccounts.Visible = False
+            'End If
         End Sub
 
         Private Sub ChkUsePayGroups_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsePayGroups.CheckedChanged
+            UpdatePostingTabDisplay()
+        End Sub
+
+        Private Sub UpdatePostingTabDisplay()
             If _usePayGroups IsNot Nothing And _usePayGroups Then
                 DataGridViewPayrollEarnAccounts.Visible = True
-                lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
                 chkUsePayGroups.Visible = True
                 lblUsePayGroups.Visible = True
                 If chkUsePayGroups.Checked Then
                     DataGridViewPayrollEarnAccounts.Visible = True
+                    lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
                 Else
                     DataGridViewPayrollEarnAccounts.Visible = False
+                    lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
                 End If
             Else
                 If _usePayGroups Is Nothing Then
@@ -429,11 +450,17 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewPayrollEarnAccounts.Visible = False
                 chkUsePayGroups.Visible = False
                 lblUsePayGroups.Visible = False
-                'chkPostToSingleAccount.Visible = False
-                'lblPostToSingleAccount.Visible = False
                 lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
                 DataGridViewPayrollEarnAccounts.Visible = False
             End If
+        End Sub
+
+        Private Sub tbpCalculation_Enter(sender As Object, e As EventArgs) Handles tbpCalculation.Enter
+            UpdateCalculationTabDisplay()
+        End Sub
+
+        Private Sub tbpAccountPosting_Enter(sender As Object, e As EventArgs) Handles tbpAccountPosting.Enter
+            UpdatePostingTabDisplay()
         End Sub
 
     End Class
