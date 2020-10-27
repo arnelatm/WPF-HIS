@@ -80,7 +80,7 @@ End Enum
 
 Public Enum DeductionTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("M")> Mandatory
+    <EnumCode("R")> Pension
     <EnumCode("G")> Garnishments
     <EnumCode("V")> Voluntary
     <EnumCode("F")> Fines
