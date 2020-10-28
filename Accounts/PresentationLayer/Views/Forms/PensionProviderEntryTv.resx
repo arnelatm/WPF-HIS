@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 409</value>
+    <value>300, 375</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -171,7 +171,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 366</value>
+    <value>166, 339</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -196,7 +196,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>51</value>
+    <value>49</value>
   </data>
   <data name="lblPaymentMethod.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -205,7 +205,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPaymentMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 314</value>
+    <value>363, 288</value>
   </data>
   <data name="lblPaymentMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -232,7 +232,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblPaymentMethod.ZOrder" xml:space="preserve">
-    <value>46</value>
+    <value>44</value>
   </data>
   <data name="txtIban.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -244,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIban.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 314</value>
+    <value>11, 288</value>
   </data>
   <data name="lblIban.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -271,10 +271,10 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblIban.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>42</value>
   </data>
   <data name="txtIban.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 314</value>
+    <value>166, 288</value>
   </data>
   <data name="txtIban.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -295,7 +295,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtIban.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>43</value>
   </data>
   <data name="txtBankAccountNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBankAccountNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 288</value>
+    <value>363, 262</value>
   </data>
   <data name="lblBankAccountNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -334,10 +334,10 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblBankAccountNo.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>40</value>
   </data>
   <data name="txtBankAccountNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 288</value>
+    <value>513, 262</value>
   </data>
   <data name="txtBankAccountNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -358,7 +358,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtBankAccountNo.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>41</value>
   </data>
   <data name="lblBankIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -367,7 +367,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBankIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 288</value>
+    <value>11, 262</value>
   </data>
   <data name="lblBankIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -394,7 +394,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblBankIdNo.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>38</value>
   </data>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -1578,72 +1578,6 @@
   <data name="&gt;&gt;lblWebsite.ZOrder" xml:space="preserve">
     <value>36</value>
   </data>
-  <data name="lblApAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblApAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblApAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 262</value>
-  </data>
-  <data name="lblApAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblApAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 23</value>
-  </data>
-  <data name="lblApAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>234</value>
-  </data>
-  <data name="lblApAccountIdNo.Text" xml:space="preserve">
-    <value>Posting Acccount</value>
-  </data>
-  <data name="lblApAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblApAccountIdNo.Name" xml:space="preserve">
-    <value>lblApAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblApAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblApAccountIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblApAccountIdNo.ZOrder" xml:space="preserve">
-    <value>38</value>
-  </data>
-  <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 262</value>
-  </data>
-  <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 24</value>
-  </data>
-  <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>39</value>
-  </data>
   <data name="cacBankIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1651,7 +1585,7 @@
     <value>False</value>
   </data>
   <data name="cacBankIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 288</value>
+    <value>166, 262</value>
   </data>
   <data name="cacBankIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1672,7 +1606,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cacBankIdNo.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>39</value>
   </data>
   <data name="cacPaymentMethod.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1681,7 +1615,7 @@
     <value>False</value>
   </data>
   <data name="cacPaymentMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 314</value>
+    <value>513, 288</value>
   </data>
   <data name="cacPaymentMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1702,7 +1636,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cacPaymentMethod.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>45</value>
   </data>
   <data name="lblActive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1711,7 +1645,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 341</value>
+    <value>11, 314</value>
   </data>
   <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1738,7 +1672,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblActive.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>46</value>
   </data>
   <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1750,7 +1684,7 @@
     <value>Flat</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 341</value>
+    <value>166, 314</value>
   </data>
   <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1777,7 +1711,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
-    <value>49</value>
+    <value>47</value>
   </data>
   <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1786,7 +1720,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 366</value>
+    <value>11, 339</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1813,7 +1747,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
-    <value>50</value>
+    <value>48</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -1828,7 +1762,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>733, 409</value>
+    <value>733, 375</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3033,10 +2967,10 @@
 </value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1030, 462</value>
+    <value>1030, 428</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1046, 501</value>
+    <value>1046, 467</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pension Provider Maintenance Form</value>

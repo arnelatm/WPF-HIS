@@ -78,8 +78,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -94,6 +92,14 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'LocalizableContent1
         '
@@ -691,8 +697,6 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.txtEmail)
         Me.floDataDisplay.Controls.Add(Me.lblWebsite)
         Me.floDataDisplay.Controls.Add(Me.txtWebsite)
-        Me.floDataDisplay.Controls.Add(Me.lblApAccountIdNo)
-        Me.floDataDisplay.Controls.Add(Me.cboAccountIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblBankIdNo)
         Me.floDataDisplay.Controls.Add(Me.cacBankIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblBankAccountNo)
@@ -741,48 +745,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacCountryCode.ValueIsNullable = false
         Me.cacCountryCode.ValueIsNumeric = false
         Me.cacCountryCode.ValueMember = "Code"
-        '
-        'lblApAccountIdNo
-        '
-        Me.lblApAccountIdNo.DisplayOnly = true
-        Me.lblApAccountIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblApAccountIdNo, "lblApAccountIdNo")
-        Me.lblApAccountIdNo.Name = "lblApAccountIdNo"
-        '
-        'cboAccountIdNo
-        '
-        Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
-        Me.cboAccountIdNo.ChangingSearchValueOnly = false
-        Me.cboAccountIdNo.CurrentSearchTerm = ""
-        Me.cboAccountIdNo.DefaultValue = Nothing
-        Me.cboAccountIdNo.DisplayMember = "Name"
-        Me.cboAccountIdNo.DropDownHeight = 1
-        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboAccountIdNo.EditingMode = false
-        Me.cboAccountIdNo.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboAccountIdNo, true)
-        resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
-        Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboAccountIdNo.FormattingEnabled = true
-        Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboAccountIdNo.LinkedLabel = Nothing
-        Me.cboAccountIdNo.Name = "cboAccountIdNo"
-        Me.cboAccountIdNo.OldValue = 0
-        Me.cboAccountIdNo.OriginalDataSource = Nothing
-        Me.cboAccountIdNo.OriginalList = Nothing
-        Me.cboAccountIdNo.OverrideDropDownStyleList = false
-        Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PreviousSelectedIndex = -1
-        Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SearchAnywhere = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboAccountIdNo.TextToSearch = Nothing
-        Me.cboAccountIdNo.ValueIsMandatory = false
-        Me.cboAccountIdNo.ValueIsNullable = false
-        Me.cboAccountIdNo.ValueIsNumeric = false
-        Me.cboAccountIdNo.ValueMember = "IdNo"
         '
         'cacBankIdNo
         '
@@ -949,9 +911,7 @@ End Sub
         Friend WithEvents lblActive As CLabel
         Friend WithEvents cacCountryCode As CaComboBox
         Friend WithEvents cacBankIdNo As CaComboBox
-        Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents cacPaymentMethod As CaComboBox
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents lblApAccountIdNo As CLabel
     End Class
 End Namespace

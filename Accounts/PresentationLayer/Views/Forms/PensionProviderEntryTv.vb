@@ -38,15 +38,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Int16? Implements IPensionProviderView.AccountIdNo
-            Get
-                Return CType(cboAccountIdNo.GetValue(), Int16?)
-            End Get
-            Set
-                cboAccountIdNo.SetValue(Value)
-            End Set
-        End Property
-
         Public Property BankAccountNo As String Implements IPensionProviderView.BankAccountNo
             Get
                 Return txtBankAccountNo.Text
@@ -272,7 +263,6 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()
-            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
         End Sub
 
@@ -280,7 +270,6 @@ Namespace PresentationLayer.Views.Forms
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                  {"Active", chkActive},
-                 {"AccountIdNo", cboAccountIdNo},
                  {"BankAccountNo", txtBankAccountNo},
                  {"BankIdNo", cacBankIdNo},
                  {"ContactDesignation", txtContactDesignation},

@@ -237,11 +237,6 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        'Private ReadOnly Property AccountReconciliationItemDao As IDaoChild(Of AccountReconciliationItem)
-        '    Get
-        '        Return DaoFactoryAccounts.CreateDao("AccountReconciliationItem")
-        '    End Get
-        'End Property
         Private ReadOnly Property ErJournalItemDao As IDaoChild(Of JournalItem)
             Get
                 Return DaoFactoryAccounts.CreateDao("ErJournalItem")
@@ -302,6 +297,24 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property PensionProviderDao As IDaoAll(Of PensionProvider)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PensionProvider")
+            End Get
+        End Property
+
+        Private ReadOnly Property PensionRateDao As IDaoChild(Of PensionRate)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PensionRate")
+            End Get
+        End Property
+
+        Private ReadOnly Property PensionSchemeDao As IDaoAll(Of PensionScheme)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PensionScheme")
+            End Get
+        End Property
+
         Private ReadOnly Property PettyCashJournalDao As IDao(Of PettyCashJournal)
             Get
                 Return DaoFactoryAccounts.CreateDao("PettyCashJournal")
@@ -350,22 +363,16 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property PensionProviderDao As IDaoAll(Of PensionProvider)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PensionProvider")
-            End Get
-        End Property
-
         Private ReadOnly Property SupplierDao As IDaoAll(Of Supplier)
             Get
                 Return DaoFactoryAccounts.CreateDao("Supplier")
             End Get
         End Property
 
-        Public Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date,
+        Public Function GetAcctReconItems(Of TM)(accountIdNo As Int16, reconciliationDate As Date,
                                                   Optional sortOrder As String = Nothing) As List(Of TM) _
             Implements IServiceAccounts.GetAcctReconItems
-            Dim records = DataDao.GetAcctReconItems(AccountIdNo, reconciliationDate, sortOrder)
+            Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model
