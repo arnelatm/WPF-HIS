@@ -369,8 +369,9 @@
     <Build Include="dbo\Tables\PayPeriod.sql" />
     <Build Include="dbo\Tables\PayCycle.sql" />
     <Build Include="dbo\Tables\Setting.sql" />
-    <Build Include="dbo\Tables\PensionSchemes.sql" />
     <Build Include="dbo\Tables\PensionProvider.sql" />
+    <Build Include="dbo\Tables\PensionScheme.sql" />
+    <Build Include="dbo\Tables\PensionRate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
