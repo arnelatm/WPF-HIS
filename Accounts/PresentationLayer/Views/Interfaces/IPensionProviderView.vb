@@ -5,7 +5,6 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPensionProviderView
         Inherits IView
         Property Active As Boolean
-        Property AccountIdNo As Int16?
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property ContactDesignation As String

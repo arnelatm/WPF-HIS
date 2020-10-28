@@ -13,8 +13,8 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("EarningName"))
                 AddRule(New ValidateRequired("EarningCode"))
-                AddRule(New ValidateRequired("EarningType"))      
-                AddRule(New ValidateRequired("CalculationType"))  
+                AddRule(New ValidateRequired("EarningType"))
+                AddRule(New ValidateRequired("CalculationType"))
             End If
         End Sub
 
@@ -31,6 +31,7 @@ Namespace BusinessLayer
         Public Property IncludeInEos As Boolean
         Public Property IncludeInPension As Boolean
         Public Property Multiplier As Decimal
+
         Public Property MultiplierType As Char
         Public Property Notes As String
         Public Property Rate As Decimal

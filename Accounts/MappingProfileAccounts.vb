@@ -85,6 +85,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of PayrollEarnAccountModel, PayrollEarnAccountView)()
         CreateMap(Of PcsOiItem, PcsOiItemModel)().ReverseMap()
         CreateMap(Of PcsOiItemModel, PcsOiItemView)().ReverseMap()
+        CreateMap(Of PensionScheme, PensionSchemeModel)().ReverseMap()
+        CreateMap(Of PensionSchemeModel, IPensionSchemeView)().ReverseMap()
         CreateMap(Of PensionProvider, PensionProviderModel)().ReverseMap()
         CreateMap(Of PensionProviderModel, IPensionProviderView)().ReverseMap()
         CreateMap(Of PettyCashJournal, PettyCashJournalModel)().ReverseMap()

@@ -16,7 +16,6 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordById(idNo) As PensionProvider Implements IDaoAll(Of PensionProvider).GetRecordById
             Dim sql As String =
                     "SELECT " &
-                    "AccountIdNo," &
                     "Active," &
                     "BankAccountNo," &
                     "BankIdNo," &
@@ -65,7 +64,6 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef pensionProvider As PensionProvider) As Integer Implements IDaoAll(Of PensionProvider).UpdateRecord
             Dim sql As String =
                     "UPDATE [PensionProvider] SET " &
-                    "AccountIdNo = @AccountIdNo," &
                     "Active = @Active," &
                     "BankAccountNo = @BankAccountNo," &
                     "BankIdNo = @BankIdNo," &
@@ -97,7 +95,6 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef pensionProvider As PensionProvider) As Integer Implements IDaoAll(Of PensionProvider).AddRecord
             Dim sql As String =
                     "INSERT INTO [PensionProvider] (" &
-                    "AccountIdNo," &
                     "Active," &
                     "BankAccountNo," &
                     "BankIdNo," &
@@ -123,7 +120,6 @@ Namespace DataLayer.AdoNet
                     "Website," &
                     "ZipCode" &
                     ") VALUES (" &
-                    "@AccountIdNo," &
                     "@Active," &
                     "@BankAccountNo," &
                     "@BankIdNo," &
@@ -155,7 +151,6 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PensionProvider) =
                                     Function(reader) _
             New PensionProvider() With {
-            .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Active = Extensions.AsBool(reader("Active")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
@@ -185,7 +180,6 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(pensionProvider As PensionProvider) As Object()
             Return New Object() {
-                                    "@AccountIdNo", pensionProvider.AccountIdNo,
                                     "@Active", pensionProvider.Active,
                                     "@BankAccountNo", pensionProvider.BankAccountNo,
                                     "@BankIdNo", pensionProvider.BankIdNo,

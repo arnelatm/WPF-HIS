@@ -8,39 +8,21 @@ Namespace DataLayer
 
     End Interface
 
-    'Public Interface IDaoJournalItems
-
-    '    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Int32) As Integer
-
-    '    Function GetRecordsWithIdNo(idNo As Int32, ByRef Optional sortKey As String = Nothing) As Object
-
-    '    Function InsertTvp(ByRef tvpTable As DataTable) As Integer
-
-    'End Interface
-
     Public Interface IDaoContacts(Of TBiz)
 
         Function UpdateOpeningBalance(ByRef bizObj As TBiz) As Integer
-        
+
     End Interface
 
-    
     Public Interface IDaoJournals(Of TBiz)
 
         Function UpdateGlReferenceNumber(ByRef bizObj As TBiz) As Integer
 
     End Interface
 
-    
     Public Interface IDaoOpenInvoice(Of TBiz)
 
         Function AddRecord(ByRef openInvoice As TBiz) As Integer
-
-        'Function AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-
-        'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) As Integer
-
-        'Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
     End Interface
 

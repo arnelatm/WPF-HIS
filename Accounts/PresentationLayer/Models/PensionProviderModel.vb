@@ -6,7 +6,6 @@
     ''' </summary>
     Public Class PensionProviderModel
         Public Property Active As Boolean
-        Public Property AccountIdNo As Int16?
         Public Property BankAccountNo As String
         Public Property BankIdNo As Int16?
         Public Property ContactDesignation As String
