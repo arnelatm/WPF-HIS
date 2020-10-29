@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PensionScheme As PensionScheme) As Integer Implements IDao(Of PensionScheme).AddRecord
             Dim sql As String =
                     " INSERT INTO [PensionScheme] " &
-                    " (AccountIdNo,PensionProviderIdNo,PensionSchemeCode,PensionSchemeName,PensionSchemeNameAra) " &
+                    " (AccountIdNo,PensionProviderIdNo,PensionSchemeCode,PensionSchemeName,PensionSchemeNameAra,Notes) " &
                     " VALUES (@AccountIdNo,@PensionProviderIdNo,@PensionSchemeCode,@PensionSchemeName,@PensionSchemeNameAra,@Notes) "
             Return _db.Insert(sql, Take(PensionScheme))
         End Function

@@ -12,10 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EarningName As String
         Property EarningNameAra As String
         Property EarningType As Char
-
-        'Property Frequency As Char
         Property IdNo As Int16
-
         Property IncludeInEos As Boolean
         Property IncludeInPension As Boolean
         Property Multiplier As Decimal
