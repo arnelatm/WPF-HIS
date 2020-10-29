@@ -11,9 +11,9 @@ Namespace DataLayer.AdoNet
         Implements IDaoChild(Of PensionRate)
 
         Private ReadOnly _db As New Db()
-        Protected TableFileName As String = ""
-        Protected DboTvpUpdateFileName As String = ""
-        Protected DboTvpInsertFileName As String = ""
+        Protected TableFileName As String = "PensionRate"
+        Protected DboTvpUpdateFileName As String = "UpdatePensionRateTvp"
+        Protected DboTvpInsertFileName As String = "InsertPensionRateTvp"
 
         Public Function GetRecordsWithIdNo(pensionSchemeIdNo As Int32, Optional sortKey As String = Nothing) As List(Of PensionRate) Implements IDaoChild(Of PensionRate).GetRecordsWithIdNo
             If sortKey Is Nothing Then

@@ -21,10 +21,11 @@ Namespace BusinessLayer
 
         Public Property IdNo As Int16
         Public Property Notes As String
-        Public Property PensionProviderIdNo As Int16?
+        Public Property PensionProviderIdNo As Int16
         Public Property PensionSchemeCode As String
         Public Property PensionSchemeName As String
         Public Property PensionSchemeNameAra As String
+        Public Property PensionRates As List(Of PensionRate)
 
     End Class
 

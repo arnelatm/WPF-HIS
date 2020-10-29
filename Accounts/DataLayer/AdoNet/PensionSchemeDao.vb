@@ -21,13 +21,13 @@ Namespace DataLayer.AdoNet
                     "PensionSchemeName," &
                     "PensionSchemeNameAra," &
                     "IdNo," &
-                    "Notes," &
+                    "Notes" &
                     " FROM [PensionScheme]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            'Dim peaDao = New PayrollEarnAccountDao()
-            'data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            Dim prDao = New PensionRateDao()
+            data.PensionRates = prDao.GetRecordsWithIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -38,7 +38,7 @@ Namespace DataLayer.AdoNet
                     " PensionSchemeCode = @PensionSchemeCode," &
                     " PensionSchemeName = @PensionSchemeName," &
                     " PensionSchemeNameAra = @PensionSchemeNameAra," &
-                    " Notes = @Notes," &
+                    " Notes = @Notes" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(pensionScheme))
         End Function

@@ -1374,6 +1374,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub PensionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PensionSchemesToolStripMenuItem.Click
+            Dim childMdiForm As PensionSchemeEntryTv
+            childMdiForm = New PensionSchemeEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

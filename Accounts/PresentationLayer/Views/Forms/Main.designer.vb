@@ -84,6 +84,7 @@ Namespace PresentationLayer.Views.Forms
         Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PensionProvidersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
@@ -148,7 +149,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PensionProvidersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PensionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.Account.SuspendLayout
@@ -417,7 +418,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPayroll
         '
-        Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayPeriodsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem})
+        Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayPeriodsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem, Me.PensionSchemesToolStripMenuItem})
         Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
         resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
         '
@@ -450,6 +451,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.PayPeriodsToolStripMenuItem.Name = "PayPeriodsToolStripMenuItem"
         resources.ApplyResources(Me.PayPeriodsToolStripMenuItem, "PayPeriodsToolStripMenuItem")
+        '
+        'PensionProvidersToolStripMenuItem
+        '
+        Me.PensionProvidersToolStripMenuItem.Name = "PensionProvidersToolStripMenuItem"
+        resources.ApplyResources(Me.PensionProvidersToolStripMenuItem, "PensionProvidersToolStripMenuItem")
         '
         'ToolStripMenuItemSupplierVendors
         '
@@ -783,10 +789,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'PensionProvidersToolStripMenuItem
+        'PensionSchemesToolStripMenuItem
         '
-        Me.PensionProvidersToolStripMenuItem.Name = "PensionProvidersToolStripMenuItem"
-        resources.ApplyResources(Me.PensionProvidersToolStripMenuItem, "PensionProvidersToolStripMenuItem")
+        Me.PensionSchemesToolStripMenuItem.Name = "PensionSchemesToolStripMenuItem"
+        resources.ApplyResources(Me.PensionSchemesToolStripMenuItem, "PensionSchemesToolStripMenuItem")
         '
         'Main
         '
@@ -932,5 +938,6 @@ End Sub
         Friend WithEvents PayCyclesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayPeriodsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionProvidersToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PensionSchemesToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

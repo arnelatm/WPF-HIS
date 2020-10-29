@@ -5,10 +5,10 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPensionSchemeView
         Inherits IView
 
-        Property AccountIdNo As Int16?
+        Property AccountIdNo As Int16
         Property IdNo As Int16
         Property Notes As String
-        Property PensionProviderIdNo As Int16?
+        Property PensionProviderIdNo As Int16
         Property PensionSchemeCode As String
         Property PensionSchemeName As String
         Property PensionSchemeNameAra As String
