@@ -6,7 +6,10 @@
     [MaxAmount]         MONEY          NULL,
     [EmployeeShare]     DECIMAL (8, 2) NULL,
     [EmployerShare]     DECIMAL (8, 2) NULL,
+    [Sequence]          SMALLINT       NULL,
     [DateTimeStamp]     ROWVERSION     NULL,
     CONSTRAINT [PK_PensionRates] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
