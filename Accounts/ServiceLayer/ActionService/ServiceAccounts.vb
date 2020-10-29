@@ -309,7 +309,7 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property PensionSchemeDao As IDaoAll(Of PensionScheme)
+        Private ReadOnly Property PensionSchemeDao As IDao(Of PensionScheme)
             Get
                 Return DaoFactoryAccounts.CreateDao("PensionScheme")
             End Get

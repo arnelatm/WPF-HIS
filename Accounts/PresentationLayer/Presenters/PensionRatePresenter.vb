@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
             DataModel = New PensionRateModel
         End Sub
 
-        Public Property ChangesMadeInPensionRate As Boolean = False
+        'Public Property ChangesMadeInPensionRate As Boolean = False
 
         ''' <summary>
         '''     Displays list of Pension Scheme Rates.

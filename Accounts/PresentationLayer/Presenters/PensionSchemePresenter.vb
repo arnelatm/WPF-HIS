@@ -1,20 +1,107 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class PensionSchemePresenter
         Inherits AccountsPresenter(Of IPensionSchemeView, PensionSchemeModel)
 
-        Public ParentViewList As List(Of PensionSchemeModel)
+        'Public ParentViewList As List(Of PensionSchemeModel)
+        Protected DtInsertTable As New DataTable
+
+        Protected DtUpdateTable As New DataTable
+
+        Private ReadOnly _pensionRateModel As New ModelAccounts("PensionRate")
 
         Public Sub New(view As IPensionSchemeView)
             MyBase.New(view)
             InitializerWithTv("PensionScheme")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+
+            DtInsertTable.Columns.Add("EmployeeShare", GetType(Decimal))
+            DtInsertTable.Columns.Add("EmployerShare", GetType(Decimal))
+            DtInsertTable.Columns.Add("HighRange", GetType(Decimal))
+            DtInsertTable.Columns.Add("LowRange", GetType(Decimal))
+            DtInsertTable.Columns.Add("MaxAmount", GetType(Decimal))
+            DtInsertTable.Columns.Add("PensionSchemeIdNo", GetType(Int16))
+            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+
+            DtUpdateTable.Columns.Add("EmployeeShare", GetType(Decimal))
+            DtUpdateTable.Columns.Add("EmployerShare", GetType(Decimal))
+            DtUpdateTable.Columns.Add("HighRange", GetType(Decimal))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("LowRange", GetType(Decimal))
+            DtUpdateTable.Columns.Add("MaxAmount", GetType(Decimal))
+            DtUpdateTable.Columns.Add("PensionSchemeIdNo", GetType(Int16))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
         End Sub
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If Not CancelSave Then
+                ViewToDataTables(View.PensionRates, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PensionRateFilter)
+            End If
+        End Sub
+
+        Private Sub FillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
+            workRow("EmployeeShare") = item.EmployeeShare
+            workRow("EmployerShare") = item.EmployerShare
+            workRow("LowRange") = item.LowRange
+            workRow("HighRange") = item.HighRange
+            workRow("MaxAmount") = item.MaxAmount
+            workRow("PensionSchemeIdNo") = View.IdNo
+        End Sub
+
+        Public Function PensionRateFilter(ByVal obj As Object) As Boolean
+            If (obj.LowRange = 0 And obj.HighRange = 0) Then
+                Return False
+            End If
+            Return True
+        End Function
+
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_pensionRateModel, DtUpdateTable, DtInsertTable, passedValue, "PensionSchemeIdNo")
+        End Sub
+
+        'Protected Overrides Function IsBizDataValid() As Boolean
+        '    Dim retValue = False
+        '    If MyBase.IsBizDataValid() Then
+        '        retValue = True
+        '        If Not UsePayGroups() Then
+        '            If View.AccountIdNo <= 0 Then
+        '                Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
+        '                retValue = False
+        '            End If
+        '        End If
+        '    End If
+        '    Return retValue
+        'End Function
+
+        'Public Function GetPensionRates(pensionSchemeIdNo As Int32) As List(Of PensionRateModel)
+        '    Return _pensionRateModel.GetRecordsWithIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
+        'End Function
+
+        'Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        '    If View.PensionRates IsNot Nothing Then
+        '        View.PensionRates.Clear()
+        '    Else
+        '        View.PensionRates = New List(Of PensionRateView)
+        '    End If
+        '    Dim item As New PensionRateView With {
+        '            .PensionSchemeIdNo = View.IdNo,
+        '            .Sequence = 1,
+        '            .EmployeeShare = 0,
+        '            .EmployerShare = 0,
+        '            .LowRange = 0,
+        '            .HighRange = 0,
+        '            .MaxAmount = 0
+        '            }
+        '    View.PensionRates.Add(item)
+        'End Sub
 
     End Class
 

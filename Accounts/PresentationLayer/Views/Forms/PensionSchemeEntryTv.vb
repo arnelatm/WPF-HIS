@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountIdNo As Int16? Implements IPensionSchemeView.AccountIdNo
+        Public Property AccountIdNo As Int16 Implements IPensionSchemeView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetValue()
             End Get
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PensionProviderIdNo As Int16? Implements IPensionSchemeView.PensionProviderIdNo
+        Public Property PensionProviderIdNo As Int16 Implements IPensionSchemeView.PensionProviderIdNo
             Get
                 Return cboPensionProviderIdNo.GetValue()
             End Get
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollEarnAccounts As List(Of PensionRateView) Implements IPensionSchemeView.PensionRates
+        Public Property PensionRates As List(Of PensionRateView) Implements IPensionSchemeView.PensionRates
             Get
                 Return _pensionRates
             End Get
@@ -105,27 +105,20 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
-            cboPensionProviderIdNo.DataSource = PresenterObj.GetListByCode("PensionScheme")
+            cboPensionProviderIdNo.DataSource = PresenterObj.GetListByCode("PensionProvider")
         End Sub
 
         Private Sub BindPensionRates()
             SuspendLayout()
             bsPensionRates.DataSource = Nothing
-            DataGridViewPayrollEarnAccounts.Refresh()
-            bsPensionRates.DataSource = PayrollEarnAccounts
-            With DataGridViewPayrollEarnAccounts
+            DataGridViewPensionRates.Refresh()
+            bsPensionRates.DataSource = PensionRates
+            With DataGridViewPensionRates
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = Nothing
                 .DataSource = bsPensionRates
                 .Refresh()
-            End With
-            With DataGridViewPayrollEarnAccounts.Columns
-                dgvPayGroupIdNo.DataSource = _pensionRates
-                dgvPayGroupIdNo.DisplayMember = "Name"
-                dgvPayGroupIdNo.ValueMember = "IdNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -134,6 +127,7 @@ Namespace PresentationLayer.Views.Forms
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"AccountIdNo", cboAccountIdNo},
+                {"PensionProviderIdNo", cboPensionProviderIdNo},
                 {"PensionSchemeCode", txtPensionSchemeCode},
                 {"PensionSchemeName", txtPensionSchemeName},
                 {"PensionSchemeNameAra", txtPensionSchemeNameAra},
