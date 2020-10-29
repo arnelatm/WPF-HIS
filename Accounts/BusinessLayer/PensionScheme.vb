@@ -13,6 +13,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PensionSchemeName"))
                 AddRule(New ValidateRequired("PensionSchemeCode"))
                 AddRule(New ValidateRequired("AccountIdNo"))
+                AddRule(New ValidateRequired("PensionProviderIdNo"))
             End If
         End Sub
 
