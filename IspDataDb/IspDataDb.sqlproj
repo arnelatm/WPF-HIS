@@ -376,6 +376,7 @@
     <Build Include="dbo\Stored Procedures\InsertPensionRateTVP.sql" />
     <Build Include="dbo\User Defined Types\PensionRateUpdate.sql" />
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
+    <Build Include="dbo\Views\PayrollDeductAccount_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
