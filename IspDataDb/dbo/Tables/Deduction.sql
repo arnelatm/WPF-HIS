@@ -3,16 +3,24 @@
     [DeductionCode]    VARCHAR (10)   NULL,
     [DeductionName]    VARCHAR (50)   NULL,
     [DeductionNameAra] NVARCHAR (50)  NULL,
-    [DefaultFrequency] CHAR (1)       NULL,
+    [Frequency]        CHAR (1)       NULL,
     [AccountIdNo]      SMALLINT       NULL,
     [DeductionType]    CHAR (1)       NULL,
     [DeductionPlace]   CHAR (1)       NULL,
-    [ComputationType]  CHAR (1)       NULL,
-    [Percentage]       DECIMAL (4, 2) NULL,
+    [BasePaymentIdNo]  SMALLINT       NULL,
+    [CalculationType]  CHAR (1)       NULL,
+    [DefaultQuantity]  DECIMAL (8, 2) NULL,
+    [Multiplier]       DECIMAL (8, 2) NULL,
+    [MultiplierType]   CHAR (1)       NULL,
+    [Rate]             MONEY          NULL,
+    [Unit]             CHAR (1)       NULL,
+    [UsePayGroups]     BIT            NULL,
     [Notes]            NVARCHAR (100) NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_Deduction] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
