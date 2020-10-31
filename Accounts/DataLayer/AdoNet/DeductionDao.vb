@@ -8,76 +8,102 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DeductionDao
-        Inherits CommonDao
-        Implements IDaoAll(Of Deduction)
+        Implements IDao(Of Deduction)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As Deduction Implements IDaoAll(Of Deduction).GetRecordById
+        Public Function GetRecordById(idNo) As Deduction Implements IDao(Of Deduction).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, DeductionCode, DeductionName, DeductionNameAra, AccountIdNo, Frequency, DeductionType, Notes " &
-                    "   FROM [Deduction]" &
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "BasePaymentIdNo," &
+                    "CalculationType," &
+                    "DefaultQuantity," &
+                    "DeductionCode," &
+                    "DeductionName," &
+                    "DeductionNameAra," &
+                    "DeductionType," &
+                    "IdNo," &
+                    "Multiplier," &
+                    "MultiplierType," &
+                    "Notes," &
+                    "Rate," &
+                    "Unit," &
+                    "UsePayGroups" &
+                    " FROM [Deduction]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim pdaDao = New PayrollDeductAccountDao()
+            data.PayrollDeductAccounts = pdaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            Return data
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Deduction) _
-            Implements IDaoAll(Of Deduction).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "DeductionName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, DeductionCode, DeductionName, DeductionNameAra" &
-                    "   FROM [Deduction] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef Deduction As Deduction) As Integer Implements IDaoAll(Of Deduction).UpdateRecord
-            Dim sql As String =
-                    " UPDATE [Deduction]" &
-                    " SET DeductionCode = @DeductionCode," &
+        Public Function UpdateRecord(ByRef deduction As Deduction) As Integer Implements IDao(Of Deduction).UpdateRecord
+            Dim sql As String = " UPDATE [Deduction] Set" &
+                    " AccountIdNo = @AccountIdNo," &
+                    " BasePaymentIdNo = @BasePaymentIdNo," &
+                    " CalculationType = @CalculationType," &
+                    " DefaultQuantity = @DefaultQuantity," &
+                    " DeductionCode = @DeductionCode," &
                     " DeductionName = @DeductionName," &
                     " DeductionNameAra = @DeductionNameAra," &
-                    " AccountIdNo = @AccountIdNo," &
-                    " Frequency = @Frequency," &
                     " DeductionType = @DeductionType," &
-                    " Notes = @Notes" &
+                    " Multiplier = @Multiplier," &
+                    " MultiplierType = @MultiplierType," &
+                    " Notes = @Notes," &
+                    " Rate = @Rate," &
+                    " Unit = @Unit," &
+                    " UsePayGroups = @UsePayGroups" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(Deduction))
+            Return _db.Update(sql, Take(deduction))
         End Function
 
-        Public Function AddRecord(ByRef Deduction As Deduction) As Integer Implements IDaoAll(Of Deduction).AddRecord
+        Public Function AddRecord(ByRef deduction As Deduction) As Integer Implements IDao(Of Deduction).AddRecord
             Dim sql As String =
                     " INSERT INTO [Deduction] " &
-                    " (DeductionCode,DeductionName,DeductionNameAra,AccountIdNo,Frequency,DeductionType,Notes) " &
-                    " VALUES (@DeductionCode,@DeductionName,@DeductionNameAra,@AccountIdNo,@Frequency,@DeductionType,@Notes) "
-            Return Db.Insert(sql, Take(Deduction))
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,DeductionCode,DeductionName,DeductionNameAra,DeductionType,Multiplier,MultiplierType,Notes,Rate,Unit,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@DeductionCode,@DeductionName,@DeductionNameAra,@DeductionType,@Multiplier,@MultiplierType,@Notes,@Rate,@Unit,@UsePayGroups) "
+            Return _db.Insert(sql, Take(deduction))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Deduction) =
                                     Function(reader) _
             New Deduction() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
+            .BasePaymentIdNo = Extensions.AsId(Of Int16)(reader("BasePaymentIdNo")),
+            .CalculationType = Extensions.AsChar(reader("CalculationType")),
+            .DefaultQuantity = Extensions.AsDecimal(reader("DefaultQuantity")),
             .DeductionCode = Extensions.AsString(reader("DeductionCode")),
             .DeductionName = Extensions.AsString(reader("DeductionName")),
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
-            .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
-            .Frequency = Extensions.AsString(reader("Frequency")),
             .DeductionType = Extensions.AsChar(reader("DeductionType")),
-            .Notes = Extensions.AsString(reader("Notes"))
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .Multiplier = Extensions.AsDouble(reader("Multiplier")),
+            .MultiplierType = Extensions.AsString(reader("MultiplierType")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .Rate = Extensions.AsDouble(reader("Rate")),
+            .Unit = Extensions.AsChar(reader("Unit")),
+            .UsePayGroups = Extensions.AsBool(reader("UsePayGroups"))
             }
 
         Private Function Take(Deduction As Deduction) As Object()
             Return New Object() {
-                                    "@IdNo", Deduction.IdNo,
+                                    "@AccountIdNo", Deduction.AccountIdNo,
+                                    "@BasePaymentIdNo", Deduction.BasePaymentIdNo,
+                                    "@CalculationType", Deduction.CalculationType,
+                                    "@DefaultQuantity", Deduction.DefaultQuantity,
                                     "@DeductionCode", Deduction.DeductionCode,
                                     "@DeductionName", Deduction.DeductionName,
                                     "@DeductionNameAra", Deduction.DeductionNameAra,
-                                    "@AccountIdNo", Deduction.AccountIdNo,
-                                    "@Frequency", Deduction.Frequency,
                                     "@DeductionType", Deduction.DeductionType,
-                                    "@Notes", Deduction.Notes
+                                    "@IdNo", Deduction.IdNo,
+                                    "@Multiplier", Deduction.Multiplier,
+                                    "@MultiplierType", Deduction.MultiplierType,
+                                    "@Notes", Deduction.Notes,
+                                    "@Rate", Deduction.Rate,
+                                    "@Unit", Deduction.Unit,
+                                    "@UsePayGroups", Deduction.UsePayGroups
                                 }
         End Function
 

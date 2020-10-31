@@ -31,7 +31,6 @@ Namespace BusinessLayer
         Public Property IncludeInEos As Boolean
         Public Property IncludeInPension As Boolean
         Public Property Multiplier As Decimal
-
         Public Property MultiplierType As Char
         Public Property Notes As String
         Public Property Rate As Decimal

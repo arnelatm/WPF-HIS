@@ -177,7 +177,7 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property DeductionDao As IDaoAll(Of Deduction)
+        Private ReadOnly Property DeductionDao As IDao(Of Deduction)
             Get
                 Return DaoFactoryAccounts.CreateDao("Deduction")
             End Get
@@ -282,6 +282,12 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property PayPeriodDao As IDaoAll(Of PayPeriod)
             Get
                 Return DaoFactoryAccounts.CreateDao("PayPeriod")
+            End Get
+        End Property
+
+        Private ReadOnly Property PayrollDeductAccountDao As IDaoChild(Of PayrollDeductAccount)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PayrollDeductAccount")
             End Get
         End Property
 
