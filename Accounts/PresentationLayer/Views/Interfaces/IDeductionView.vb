@@ -18,7 +18,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property MultiplierType As Char
         Property Notes As String
         Property Rate As Decimal
-        Property Taxable As Boolean
         Property Unit As Char
         Property UsePayGroups As Boolean
         Property PayrollDeductAccounts As List(Of PayrollDeductAccountView)

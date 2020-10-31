@@ -14,10 +14,7 @@
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char
-
-        'Public Property Frequency As Char
         Public Property IdNo As Int16
-
         Public Property IncludeInEos As Boolean
         Public Property IncludeInPension As Boolean
         Public Property Multiplier As Decimal
