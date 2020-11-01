@@ -15,6 +15,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("DeductionCode"))
                 AddRule(New ValidateRequired("DeductionType"))
                 AddRule(New ValidateRequired("CalculationType"))
+                AddRule(New ValidateRequired("AccountIdNo"))
             End If
         End Sub
 
