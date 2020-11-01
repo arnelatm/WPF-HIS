@@ -15,6 +15,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeName"))
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("EmployeeCode"))
+                AddRule(New ValidateRequired("PaymentMethod"))
                 AddRule(New ValidateEmail("Email"))
                 'AddRule(New ValidateUnique("EmployeeCode"))
                 'AddRule(New ValidateUnique("EmployeeName"))
@@ -45,7 +46,8 @@ Namespace BusinessLayer
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
         Public Property PayFrequency As Char
-        Public Property PaySalariedOrHourly As Char
+        Public Property PaymentMethod As Char
+        'Public Property PaySalariedOrHourly As Char
         Public Property PayRateAmount As Decimal
         Public Property PayRateType As Char
         Public Property Phone1 As String

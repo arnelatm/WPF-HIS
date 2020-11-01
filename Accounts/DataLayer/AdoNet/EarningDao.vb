@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " INSERT INTO [Earning] " &
                     " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,EarningName,EarningNameAra,EarningType,IncludeInEos,IncludeInPension,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@EarningName,@EarningNameAra,@EarningType,IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@EarningName,@EarningNameAra,@EarningType,@IncludeInEos,@IncludeInPension,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(earning))
         End Function
 

@@ -61,6 +61,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidInsertOnFirstRow", "Sorry, insertion on first row not allowed for {transactionName}.", "Invalid Insertion")
         Messaging.AddMessage("MsgValidationCompareNotEqual", "{propertyName} must not be equal to {otherPropertyName}", "Validation Error")
         Messaging.AddMessage("MsgPostingAccountMustNotBeBlank", "Please enter the posting account for this earning.", "Required Entry")
+        Messaging.AddMessage("MsgInvalidValue", "Invalid value <{fieldValue}> for field <{fieldDescription}>.", "Invalid Value")
     End Sub
 
     'Public Shared Sub CreateEnums()

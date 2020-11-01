@@ -47,39 +47,40 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).UpdateRecord
             Dim sql As String =
-                    " UPDATE [Employee]" &
-                    " SET EmployeeCode = @EmployeeCode," &
-                    " Title = @Title," &
+                    " UPDATE [Employee] SET " &
+                    " Active = @Active," &
+                    " Balance = @Balance," &
+                    " BankAccountNo = @BankAccountNo," &
+                    " BankIdNo = @BankIdNo," &
+                    " BirthDate = @BirthDate," &
+                    " CountryCode = @CountryCode," &
+                    " DepartmentIdNo = @DepartmentIdNo," &
+                    " DesignationIdNo = @DesignationIdNo," &
+                    " District = @District," &
+                    " Email = @Email," &
+                    " EmployeeCode = @EmployeeCode," &
                     " EmployeeName = @EmployeeName," &
                     " EmployeeNameAra = @EmployeeNameAra," &
                     " Gender = @Gender," &
-                    " BirthDate = @BirthDate," &
-                    " MaritalStatus = @MaritalStatus," &
-                    " NationalityCode = @NationalityCode," &
-                    " ReligionIdNo = @ReligionIdNo," &
-                    " NationalIdNo = @NationalIdNo," &
-                    " Street = @Street," &
-                    " District = @District," &
-                    " TownCity = @TownCity," &
-                    " ProvinceState = @ProvinceState," &
-                    " CountryCode = @CountryCode," &
-                    " PoBox = @PoBox," &
-                    " ZipCode = @ZipCode," &
-                    " Phone1 = @Phone1," &
-                    " Phone2 = @Phone2," &
-                    " Email = @Email," &
-                    " DepartmentIdNo = @DepartmentIdNo," &
-                    " DesignationIdNo = @DesignationIdNo," &
                     " HiredDate = @HiredDate," &
-                    " ReleasedDate = @ReleasedDate," &
-                    " BankIdNo = @BankIdNo," &
-                    " BankAccountNo = @BankAccountNo," &
                     " Iban = @Iban," &
+                    " MaritalStatus = @MaritalStatus," &
+                    " NationalIdNo = @NationalIdNo," &
+                    " NationalityCode = @NationalityCode," &
                     " Notes = @Notes," &
                     " OpeningBalance = @OpeningBalance," &
-                    " Balance = @Balance," &
                     " PayFrequency = @PayFrequency," &
-                    " Active = @Active" &
+                    " PaymentMethod = @PaymentMethod," &
+                    " Phone1 = @Phone1," &
+                    " Phone2 = @Phone2," &
+                    " PoBox = @PoBox," &
+                    " ProvinceState = @ProvinceState," &
+                    " ReleasedDate = @ReleasedDate," &
+                    " ReligionIdNo = @ReligionIdNo," &
+                    " Street = @Street," &
+                    " Title = @Title," &
+                    " TownCity = @TownCity," &
+                    " ZipCode = @ZipCode" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(employee))
         End Function
@@ -122,6 +123,7 @@ Namespace DataLayer.AdoNet
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
             .PayFrequency = Extensions.AsString(reader("PayFrequency")),
+            .PaymentMethod = Extensions.AsChar(reader("PaymentMethod")),
             .Phone1 = Extensions.AsString(reader("Phone1")),
             .Phone2 = Extensions.AsString(reader("Phone2")),
             .PoBox = Extensions.AsString(reader("PoBox")),
@@ -136,39 +138,40 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(ByRef employee As Employee) As Object()
             Return New Object() {
-                                    "@IdNo", employee.IdNo,
+                                    "@Active", employee.Active,
+                                    "@Balance", employee.Balance,
+                                    "@BankAccountNo", employee.BankAccountNo,
+                                    "@BankIdNo", employee.BankIdNo,
+                                    "@BirthDate", employee.BirthDate,
+                                    "@CountryCode", employee.CountryCode,
+                                    "@DepartmentIdNo", employee.DepartmentIdNo,
+                                    "@DesignationIdNo", employee.DesignationIdNo,
+                                    "@District", employee.District,
+                                    "@Email", employee.Email,
                                     "@EmployeeCode", employee.EmployeeCode,
-                                    "@Title", employee.Title,
                                     "@EmployeeName", employee.EmployeeName,
                                     "@EmployeeNameAra", employee.EmployeeNameAra,
                                     "@Gender", employee.Gender,
-                                    "@BirthDate", employee.BirthDate,
-                                    "@MaritalStatus", employee.MaritalStatus,
-                                    "@NationalityCode", employee.NationalityCode,
-                                    "@ReligionIdNo", employee.ReligionIdNo,
-                                    "@NationalIdNo", employee.NationalIdNo,
-                                    "@Street", employee.Street,
-                                    "@District", employee.District,
-                                    "@TownCity", employee.TownCity,
-                                    "@ProvinceState", employee.ProvinceState,
-                                    "@CountryCode", employee.CountryCode,
-                                    "@PoBox", employee.PoBox,
-                                    "@ZipCode", employee.ZipCode,
-                                    "@Phone1", employee.Phone1,
-                                    "@Phone2", employee.Phone2,
-                                    "@Email", employee.Email,
-                                    "@DepartmentIdNo", employee.DepartmentIdNo,
-                                    "@DesignationIdNo", employee.DesignationIdNo,
                                     "@HiredDate", employee.HiredDate,
-                                    "@ReleasedDate", employee.ReleasedDate,
-                                    "@BankIdNo", employee.BankIdNo,
-                                    "@BankAccountNo", employee.BankAccountNo,
                                     "@Iban", employee.Iban,
+                                    "@IdNo", employee.IdNo,
+                                    "@MaritalStatus", employee.MaritalStatus,
+                                    "@NationalIdNo", employee.NationalIdNo,
+                                    "@NationalityCode", employee.NationalityCode,
                                     "@Notes", employee.Notes,
                                     "@OpeningBalance", employee.OpeningBalance,
-                                    "@Balance", employee.Balance,
                                     "@PayFrequency", employee.PayFrequency,
-                                    "@Active", employee.Active
+                                    "@PaymentMethod", employee.PaymentMethod,
+                                    "@Phone1", employee.Phone1,
+                                    "@Phone2", employee.Phone2,
+                                    "@PoBox", employee.PoBox,
+                                    "@ProvinceState", employee.ProvinceState,
+                                    "@ReleasedDate", employee.ReleasedDate,
+                                    "@ReligionIdNo", employee.ReligionIdNo,
+                                    "@Street", employee.Street,
+                                    "@Title", employee.Title,
+                                    "@TownCity", employee.TownCity,
+                                    "@ZipCode", employee.ZipCode
                                 }
         End Function
 
