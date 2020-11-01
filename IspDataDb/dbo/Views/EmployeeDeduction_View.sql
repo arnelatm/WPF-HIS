@@ -1,8 +1,8 @@
 ﻿CREATE VIEW dbo.EmployeeDeduction_View
 AS
 SELECT        dbo.EmployeeDeduction.IdNo, dbo.EmployeeDeduction.EmployeeIdNo, dbo.EmployeeDeduction.DeductionIdNo, dbo.EmployeeDeduction.Amount, dbo.Deduction.DeductionCode, dbo.Deduction.DeductionName, 
-                         dbo.Deduction.DeductionNameAra, dbo.Deduction.DefaultFrequency, dbo.Deduction.AccountIdNo AS Expr1, dbo.Deduction.DeductionType, dbo.Deduction.DeductionPlace, dbo.Deduction.ComputationType, 
-                         dbo.Deduction.Percentage, dbo.Deduction.Notes, dbo.Deduction.DateTimeStamp, dbo.EmployeeDeduction.Sequence
+                         dbo.Deduction.DeductionNameAra, dbo.Deduction.AccountIdNo AS Expr1, dbo.Deduction.DeductionType, dbo.Deduction.DeductionPlace, dbo.EmployeeDeduction.Sequence, dbo.Deduction.BasePaymentIdNo, 
+                         dbo.Deduction.CalculationType, dbo.Deduction.DefaultQuantity, dbo.Deduction.Multiplier, dbo.Deduction.Rate, dbo.Deduction.MultiplierType, dbo.Deduction.Unit, dbo.Deduction.UsePayGroups
 FROM            dbo.EmployeeDeduction INNER JOIN
                          dbo.Deduction ON dbo.EmployeeDeduction.DeductionIdNo = dbo.Deduction.IdNo
 GO
@@ -95,7 +95,7 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 6
                Left = 255
-               Bottom = 317
+               Bottom = 335
                Right = 440
             End
             DisplayFlags = 280
@@ -111,9 +111,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
+         Column = 3240
          Alias = 900
-         Table = 1170
+         Table = 3525
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -128,4 +128,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeDeduction_View';
+
+
 

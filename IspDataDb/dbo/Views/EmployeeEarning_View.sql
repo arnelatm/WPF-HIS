@@ -1,7 +1,8 @@
 ﻿CREATE VIEW dbo.EmployeeEarning_View
 AS
 SELECT        dbo.EmployeeEarning.IdNo, dbo.EmployeeEarning.EmployeeIdNo, dbo.EmployeeEarning.EarningIdNo, dbo.EmployeeEarning.Amount, dbo.Earning.EarningCode, dbo.Earning.EarningName, dbo.Earning.EarningNameAra, 
-                         dbo.Earning.Frequency, dbo.Earning.EarningType, dbo.EmployeeEarning.Sequence
+                         dbo.Earning.Frequency, dbo.Earning.EarningType, dbo.EmployeeEarning.Sequence, dbo.Earning.CalculationType, dbo.Earning.DefaultQuantity, dbo.Earning.Multiplier, dbo.Earning.MultiplierType, 
+                         dbo.Earning.BasePaymentIdNo, dbo.Earning.IncludeInEos, dbo.Earning.IncludeInPension, dbo.Earning.Rate, dbo.Earning.Taxable, dbo.Earning.Unit, dbo.Earning.UsePayGroups, dbo.Earning.AccountIdNo
 FROM            dbo.EmployeeEarning INNER JOIN
                          dbo.Earning ON dbo.EmployeeEarning.EarningIdNo = dbo.Earning.IdNo
 GO
@@ -95,7 +96,7 @@ Begin DesignProperties =
                Top = 6
                Left = 246
                Bottom = 272
-               Right = 428
+               Right = 427
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -127,4 +128,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeEarning_View';
+
+
 
