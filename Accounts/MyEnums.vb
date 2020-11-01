@@ -169,11 +169,11 @@ Public Enum PaymentTypeSelection
     <EnumCode("O")> Others
 End Enum
 
-Public Enum PaySalariedOrHourlySelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("S")> Salaried
-    <EnumCode("H")> Hourly
-End Enum
+'Public Enum PaySalariedOrHourlySelection
+'    <EnumCode("")> NotSpecified
+'    <EnumCode("S")> Salaried
+'    <EnumCode("H")> Hourly
+'End Enum
 
 Public Enum PayFrequencySelection
     <EnumCode("")> NotSpecified
@@ -200,6 +200,12 @@ Public Enum PayRateUnitSelection
     <EnumCode("R")> SemiYear
     <EnumCode("D")> Year
     <EnumCode("U")> Unit
+End Enum
+
+Public Enum PayrollPaymentMethodSelection
+    <EnumCode("B")> BankTransfer
+    <EnumCode("C")> Cash
+    <EnumCode("K")> Check
 End Enum
 
 Public Enum ReceiptTypeSelection

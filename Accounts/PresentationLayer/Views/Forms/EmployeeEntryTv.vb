@@ -323,14 +323,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property PayRateAmount As Decimal Implements IEmployeeView.PayRateAmount
-        '    Get
-        '        Return txtPayRateAmount.Text.ToDecimalNumber(_nfi)
-        '    End Get
-        '    Set
-        '        txtPayRateAmount.Text = FormatDecimalNumber(Value)
-        '    End Set
-        'End Property
+        Public Property PaymentMethod As Char Implements IEmployeeView.PaymentMethod
+            Get
+                Return cboPaymentMethod.GetValue()
+            End Get
+            Set
+                cboPaymentMethod.SetValue(Value)
+            End Set
+        End Property
 
         'Public Property PayRateType As String Implements IEmployeeView.PayRateType
         '    Get
@@ -439,6 +439,7 @@ Namespace PresentationLayer.Views.Forms
             cacNationalityCode.DataSource = PresenterObj.GetCountryList()
             cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
             cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
             'cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
             'cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
             _deductionsByName = PresenterObj.GetListByCode("Deduction")

@@ -29,6 +29,7 @@
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
         Public Property PayFrequency As Char
+        Public Property PaymentMethod As Char
         Public Property Phone1 As String
         Public Property Phone2 As String
         Public Property PoBox As String

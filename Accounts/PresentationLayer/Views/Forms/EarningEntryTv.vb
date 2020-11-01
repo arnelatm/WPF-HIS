@@ -65,10 +65,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Multiplier As Decimal Implements IEarningView.Multiplier
             Get
-                Return txtMultiplier.Text
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)
             End Get
             Set
-                txtMultiplier.Text = Value
+                txtMultiplier.Text = Value.ToString("F4")
             End Set
         End Property
 
@@ -327,9 +327,10 @@ Namespace PresentationLayer.Views.Forms
                     lblBasePayment.Visible = False
                     lblDefaultQty.Visible = False
                     lblMultiplier.Visible = False
-                    lblPayRate.Visible = False
+                    lblPayRate.Visible = True
                     lblRate.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                    'lblPayRate.Text = Messaging.TranslateCaption("/")
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
                     txtRate.Visible = True

@@ -110,6 +110,10 @@ Public Module GlobalFunctions
         Return number.ToString("N", GlobalVariables.DefaultNumberFormatInfo)
     End Function
 
+    Public Function FormatDecimalNumber(ByVal number As Decimal, ByVal decimalPlaces As Int16) As String
+        Return number.ToString("F" + decimalPlaces.ToString().Trim) 
+    End Function
+
     Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
         Dim value As Date?
         Dim curCulture = CultureInfo.CurrentCulture
