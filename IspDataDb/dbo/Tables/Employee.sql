@@ -33,6 +33,7 @@
     [Notes]               VARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [OpeningBalance]      MONEY         NULL,
     [Balance]             MONEY         NULL,
+    [PaymentMethod]       CHAR (1)      NULL,
     [PayFrequency]        CHAR (1)      NULL,
     [PaySalariedOrHourly] CHAR (1)      NULL,
     [PayRateType]         CHAR (1)      NULL,
@@ -42,6 +43,8 @@
     [DateTimeStamp]       ROWVERSION    NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
