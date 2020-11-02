@@ -16,7 +16,7 @@ Public Class EventAggregator
         PublishTheEvent(eventToPublish, True)
     End Sub
 
-    Private Sub PublishTheEvent(Of TEventType)(eventToPublish As TEventType, asynchronous As Boolean)
+    Private Sub PublishTheEvent(Of TEventType)(ByRef eventToPublish As TEventType, asynchronous As Boolean)
 
         Dim subscriberType = GetType(ISubscriber(Of)).MakeGenericType(GetType(TEventType))
         Dim subscribers = GetSubscriberList(subscriberType)
@@ -60,16 +60,18 @@ Public Class EventAggregator
         End SyncLock
     End Sub
 
-    Private Sub InvokeSubscriberEvent(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType), ByVal asynchronous As Boolean)
+    Private Sub InvokeSubscriberEvent(Of TEventType)(ByRef eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType), ByVal asynchronous As Boolean)
         Dim syncContext As SynchronizationContext = SynchronizationContext.Current
         If syncContext Is Nothing Then
             syncContext = New SynchronizationContext()
         End If
+        Dim lEventToPublish = eventToPublish
         If Not asynchronous Then
-            syncContext.Send(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+            syncContext.Send(Sub(s) subscriber.OnEventHandler(lEventToPublish), Nothing)
         Else
-            syncContext.Post(Sub(s) subscriber.OnEventHandler(eventToPublish), Nothing)
+            syncContext.Post(Sub(s) subscriber.OnEventHandler(lEventToPublish), Nothing)
         End If
+        eventToPublish = lEventToPublish
     End Sub
 
     Private Function GetSubscriberList(ByVal subscriberType As Type) As List(Of WeakReference)
