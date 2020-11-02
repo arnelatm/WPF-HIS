@@ -588,6 +588,9 @@
   <data name="chkCancelled.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="chkCancelled.Text" xml:space="preserve">
+    <value> </value>
+  </data>
   <data name="chkCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
@@ -662,6 +665,9 @@
   </data>
   <data name="chkPosted.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="chkPosted.Text" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="chkPosted.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -927,8 +933,14 @@
   <data name="dgvSequenceSc.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="dgvCashCode.HeaderText" xml:space="preserve">
-    <value>Cash Code</value>
+  <metadata name="dgvCashCodeIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvCashCodeIdNo.HeaderText" xml:space="preserve">
+    <value>Cash Code - Name</value>
+  </data>
+  <data name="dgvCashCodeIdNo.Width" type="System.Int32, mscorlib">
+    <value>225</value>
   </data>
   <data name="dgvSaleAmount.HeaderText" xml:space="preserve">
     <value>Sale Amount</value>
@@ -89522,16 +89534,22 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bsSalesCashItems.Name" xml:space="preserve">
+    <value>bsSalesCashItems</value>
+  </data>
+  <data name="&gt;&gt;bsSalesCashItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceSc.Name" xml:space="preserve">
     <value>dgvSequenceSc</value>
   </data>
   <data name="&gt;&gt;dgvSequenceSc.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvCashCode.Name" xml:space="preserve">
-    <value>dgvCashCode</value>
+  <data name="&gt;&gt;dgvCashCodeIdNo.Name" xml:space="preserve">
+    <value>dgvCashCodeIdNo</value>
   </data>
-  <data name="&gt;&gt;dgvCashCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvCashCodeIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvSaleAmount.Name" xml:space="preserve">
@@ -89599,12 +89617,6 @@
   </data>
   <data name="&gt;&gt;DgvSalesJournalIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsSalesCashItems.Name" xml:space="preserve">
-    <value>bsSalesCashItems</value>
-  </data>
-  <data name="&gt;&gt;bsSalesCashItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SalesJournalEntry</value>

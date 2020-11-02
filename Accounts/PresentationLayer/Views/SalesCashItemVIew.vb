@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views
 
         Public Property DepositAmount As Decimal Implements ISalesCashItemView.DepositAmount
 
-        Public Property CashCode As Char Implements ISalesCashItemView.CashCode
+        Public Property CashCodeIdNo As Int16 Implements ISalesCashItemView.CashCodeIdNo
 
         Public Property ComputedBankCharge As Decimal Implements ISalesCashItemView.ComputedBankCharge
             Get

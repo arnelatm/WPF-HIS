@@ -124,7 +124,7 @@ Namespace PresentationLayer.Presenters
                         workRow = DtSalesCashUpdateTable.NewRow()
                         workRow("IdNo") = sc.IdNo
                     End If
-                    workRow("CashCode") = sc.CashCode
+                    workRow("CashCodeIdNo") = sc.CashCodeIdNo
                     workRow("SalesJournalIdNo") = View.IdNo
                     workRow("Sequence") = nRowCount
                     workRow("SaleAmount") = sc.SaleAmount
@@ -184,8 +184,8 @@ Namespace PresentationLayer.Presenters
             Next
             MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
             For Each item As SalesCashItemView In View.SalesCashItems
-                If item.CashCode <> Nothing Then
-                    Dim cashCode = _cashCodesModel.Find(Function(c) c.CashCode = item.CashCode())
+                If item.CashCodeIdNo <> 0 Then
+                    Dim cashCode = _cashCodesModel.Find(Function(c) c.IdNo = item.CashCodeIdNo())
                     MakeSalesJournal(oldJournalItems, counter, cashCode.AccountIdNo, item.DepositAmount, 0, cashCode.CashName, cashCode.CashNameAra)
                     MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesAccountIdNo, item.ActualBankCharge, 0, cashCode.CashName, cashCode.CashNameAra)
                     MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, cashCode.CashName, cashCode.CashNameAra)

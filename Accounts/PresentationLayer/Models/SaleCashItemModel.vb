@@ -11,7 +11,7 @@
         Public Property BankChargeDifference As Decimal
         Public Property BankChargeVatDifference As Decimal
         Public Property DepositAmount As Decimal
-        Public Property CashCode As Char
+        Public Property CashCodeIdNo As Int16
         Public Property ComputedBankCharge As Decimal
         Public Property ComputedBankChargeVat As Decimal
         Public Property Errors As List(Of String)

@@ -211,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _cashCodes = PresenterObj.GetCashCodes()
+            _cashCodes = PresenterObj.GetListByCode("CashCode")
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
@@ -290,13 +290,13 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewSalesCashItems.Columns
-                If dgvCashCode IsNot Nothing Then
-                    dgvCashCode.DataSource = _cashCodes
-                    dgvCashCode.DisplayMember = "Name"
-                    dgvCashCode.ValueMember = "Code"
-                    dgvCashCode.AutoComplete = AutoCompleteMode.SuggestAppend
-                    dgvCashCode.DisplayStyleForCurrentCellOnly = True
-                    dgvCashCode.AutoComplete = True
+                If dgvCashCodeIdNo IsNot Nothing Then
+                    dgvCashCodeIdNo.DataSource = _cashCodes
+                    dgvCashCodeIdNo.DisplayMember = "Name"
+                    dgvCashCodeIdNo.ValueMember = "IdNo"
+                    dgvCashCodeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                    dgvCashCodeIdNo.DisplayStyleForCurrentCellOnly = True
+                    dgvCashCodeIdNo.AutoComplete = True
                     dgvComputedBankCharge.DisplayOnly = True
                     dgvComputedVat.DisplayOnly = True
                     dgvRate.DisplayOnly = True
@@ -370,7 +370,7 @@ Namespace PresentationLayer.Views.Forms
                                 Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
                                 Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                                 Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                                SalesCashItems(nIndex).CashCode = newValue
+                                SalesCashItems(nIndex).CashCodeIdNo = newValue
                                 RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
                                 UpdateTotals()
                                 BindSalesCashItem()
@@ -383,10 +383,10 @@ Namespace PresentationLayer.Views.Forms
                         RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
                         UpdateTotals()
                     Case $"dgvdepositamount"
-                        Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
+                        'Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                         Dim pDepositAmount As Decimal = .Value
-                        RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+                        RecomputeActualBankCharges(selectedRow, pSaleAmount, pDepositAmount)
                         UpdateTotals()
                 End Select
             End With
@@ -412,7 +412,7 @@ Namespace PresentationLayer.Views.Forms
             _slFooter.ColumnToSum("dgvActualVat") = True
             _slFooter.ColumnToSum("dgvBankChargeDifference") = True
             _slFooter.ColumnToSum("dgvVatDifference") = True
-            _slFooter.SetText("dgvCashCode", "Totals")
+            _slFooter.SetText("dgvCashCodeIdNo", "Totals")
 
         End Sub
 
@@ -513,7 +513,7 @@ Namespace PresentationLayer.Views.Forms
         '    _floJournalItemsFooter.Visible = Not display
         'End Sub
 
-        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pCashCode As Char, pSaleAmount As Decimal, pDepositAmount As Decimal)
+        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pSaleAmount As Decimal, pDepositAmount As Decimal)
             Dim nIndex As Integer = 0
             If selectedRow IsNot Nothing Then
                 nIndex = selectedRow.Index
@@ -527,11 +527,11 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCode As Char, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            If pCashCode <> Nothing Then
+        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCodeIdNo As Int16, pSaleAmount As Decimal, pDepositAmount As Decimal)
+            If pCashCodeIdNo <> 0 Then
                 Dim cashCode As New CashCodeModel
                 For Each item As CashCodeModel In PresenterObj.cashCodesModel
-                    If item.CashCode = pCashCode Then
+                    If item.IdNo = pCashCodeIdNo Then
                         cashCode = item
                     End If
                 Next
@@ -541,7 +541,7 @@ Namespace PresentationLayer.Views.Forms
                 'bsSalesCashItems(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, cashCode.Rate)
                 'bsSalesCashItems(nIndex).ComputedBankChargeVat = PresenterObj.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)
                 bsSalesCashItems(nIndex).DepositAmount = pSaleAmount - bsSalesCashItems(nIndex).ComputedBankCharge - bsSalesCashItems(nIndex).ComputedBankChargeVat
-                RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)
+                RecomputeActualBankCharges(selectedRow, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)
                 DataGridViewSalesCashItems.Refresh()
             End If
         End Sub

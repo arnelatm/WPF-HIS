@@ -176,8 +176,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
-            Return GetLookupData("CashName", "CashNameAra", "CashCode",
-                                 "CashCode", sortKey, "")
+            Return GetLookupData("CashName", "CashNameAra", "CashCode","CashCode", sortKey, "")
         End Function
 
         Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")

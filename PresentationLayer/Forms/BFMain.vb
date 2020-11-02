@@ -546,7 +546,7 @@ Public Class BfMain
             DoubleBuffered = True
             Dim cmd As String
             RaiseEvent BeforeLoad()
-            CaptionCollection = StoreCaptions1.StoreCaptions(Me)
+                                CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             cmd = "SELECT IdNo FROM SystemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
