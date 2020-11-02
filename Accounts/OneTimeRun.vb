@@ -62,6 +62,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgValidationCompareNotEqual", "{propertyName} must not be equal to {otherPropertyName}", "Validation Error")
         Messaging.AddMessage("MsgPostingAccountMustNotBeBlank", "Please enter the posting account for this earning.", "Required Entry")
         Messaging.AddMessage("MsgInvalidValue", "Invalid value <{fieldValue}> for field <{fieldDescription}>.", "Invalid Value")
+        Messaging.AddMessage("MsgDuplicateValuesNotAllowed", "A record with the value <{fieldValue}> entered in field <{fieldDescription}> already exists on file, duplicate values not allowed.", "Duplicate Value")
     End Sub
 
     'Public Shared Sub CreateEnums()
