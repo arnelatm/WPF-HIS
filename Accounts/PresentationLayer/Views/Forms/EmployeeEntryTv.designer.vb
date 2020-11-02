@@ -584,6 +584,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeName.Size = New System.Drawing.Size(620, 23)
         Me.txtEmployeeName.TabIndex = 2
         Me.txtEmployeeName.ValueIsMandatory = true
+        Me.txtEmployeeName.ValueIsUnique = true
         '
         'lblEmployeeNameAra
         '
@@ -623,6 +624,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeNameAra.Size = New System.Drawing.Size(620, 23)
         Me.txtEmployeeNameAra.TabIndex = 3
         Me.txtEmployeeNameAra.ValueIsMandatory = true
+        Me.txtEmployeeNameAra.ValueIsUnique = true
         '
         'lblGender
         '
@@ -971,6 +973,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNationalIdNo.ReadOnly = true
         Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
         Me.txtNationalIdNo.TabIndex = 6
+        Me.txtNationalIdNo.ValueIsNumeric = true
+        Me.txtNationalIdNo.ValueIsUniqueBlanksAllowed = true
         '
         'lblNotes
         '
