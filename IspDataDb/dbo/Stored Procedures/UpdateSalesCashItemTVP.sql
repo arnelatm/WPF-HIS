@@ -17,7 +17,7 @@ FROM [DBO].SalesCashItem A WHERE A.SalesJournalIdNo = @GroupIdNo and NOT EXISTS 
 
 -- Update existing SalesCashItems
 UPDATE a 
-SET a.CashCode = B.CashCode,
+SET a.CashCodeIdNo = B.CashCodeIdNo,
 	a.DepositAmount = b.DepositAmount,
 	a.SaleAmount = B.SaleAmount,
 	a.SalesJournalIdNo = B.SalesJournalIdNo,
