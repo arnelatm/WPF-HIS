@@ -377,6 +377,9 @@
     <Build Include="dbo\User Defined Types\PensionRateUpdate.sql" />
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
     <Build Include="dbo\Views\PayrollDeductAccount_View.sql" />
+    <Build Include="dbo\Tables\PaymentType.sql" />
+    <Build Include="dbo\User Defined Types\SalesCashItemUpdate2.sql" />
+    <Build Include="dbo\User Defined Types\SalesCashItemInsert2.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
