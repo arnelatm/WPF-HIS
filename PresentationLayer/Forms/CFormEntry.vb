@@ -293,8 +293,8 @@ Public Class CFormEntry
                     If thisControl.ValueIsNumeric Then
                         If Not ValidateNumber(cCtrl) Then
                             validationsPassed = False
-                        Else
-                            validationsPassed = True
+                            'Else
+                            '    validationsPassed = True
                         End If
                     ElseIf GetPropertyValue(cCtrl, "ValueIsUnique") Then
                         Dim fldName As String = cCtrl.Name.Substring(3)
@@ -323,6 +323,7 @@ Public Class CFormEntry
                         If recordIsNotUnique Then
                             _MBUniqueConstraintViolated.Show(Me, {cCtrl.Text, fieldDescription})
                             validationsPassed = False
+                            Exit For
                         End If
                     End If
                 End If

@@ -995,7 +995,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 If Ea IsNot Nothing Then
                     Ea.PublishEvent(New ValidatingData(viewIsValid))
                 End If
-                If viewIsValid AndAlso IsBizDataValid() Then
+                If AutoValidationsPassed And IsBizDataValid() Then
                     RaiseEvent BeforeSave()
                     retVal = InitiateSave()
                     If retVal < 0 Then
@@ -1295,7 +1295,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Private Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
+    Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
         If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
             Return False
         End If
