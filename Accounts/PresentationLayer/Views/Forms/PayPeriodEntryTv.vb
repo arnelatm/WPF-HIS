@@ -118,6 +118,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
+
+        End Sub
     End Class
 
 End Namespace

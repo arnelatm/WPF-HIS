@@ -293,42 +293,54 @@ Public Class CFormEntry
                     If thisControl.ValueIsNumeric Then
                         If Not ValidateNumber(cCtrl) Then
                             validationsPassed = False
-                        Else
-                            validationsPassed = True
                         End If
-                    ElseIf GetPropertyValue(cCtrl, "ValueIsUnique") Then
-                        Dim fldName As String = cCtrl.Name.Substring(3)
-                        Dim fieldDescription As String
-                        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                            fieldDescription = fldName
-                        Else
-                            Dim cTextCtrl As CTextBox
-                            cTextCtrl = cCtrl
-                            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
-                        End If
-                        Dim recordIsNotUnique = False
-                        If PresenterObj.AddMode Then
-                            If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                                recordIsNotUnique = True
-                            End If
-                        Else
-                            originalValue = PresenterObj.GetOriginalValue(cCtrl)
-                            ' if value did not change no need to check for duplicate values.
-                            If cCtrl.Text <> originalValue Then
-                                If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                                    recordIsNotUnique = True
-                                End If
-                            End If
-                        End If
-                        If recordIsNotUnique Then
-                            _MBUniqueConstraintViolated.Show(Me, {cCtrl.Text, fieldDescription})
-                            validationsPassed = False
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+                            validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
                         End If
                     End If
                 End If
             End If
         Next
         PresenterObj.AutoValidationsPassed = validationsPassed
+        Return validationsPassed
+    End Function
+
+    Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
+        Dim originalValue As String
+
+        Dim fldName As String = cCtrl.Name.Substring(3)
+        Dim fieldDescription As String
+        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+            fieldDescription = fldName
+        Else
+            Dim cTextCtrl As CTextBox
+            cTextCtrl = cCtrl
+            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
+        End If
+        Dim recordIsNotUnique = False
+        If PresenterObj.AddMode Then
+            If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
+                recordIsNotUnique = True
+            End If
+        Else
+            originalValue = PresenterObj.GetOriginalValue(cCtrl)
+            ' if value did not change no need to check for duplicate values.
+            If cCtrl.Text <> originalValue Then
+                If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
+                    recordIsNotUnique = True
+                End If
+            End If
+        End If
+        If recordIsNotUnique Then
+            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", fieldDescription})
+            validationsPassed = False
+            Return validationsPassed
+        End If
         Return validationsPassed
     End Function
 

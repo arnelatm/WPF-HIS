@@ -122,5 +122,4 @@ Public Class ValidatingData
     End Sub
 
     Public Property Validated
-
 End Class

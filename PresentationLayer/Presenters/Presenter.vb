@@ -992,10 +992,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
             Else
                 Dim viewIsValid As Boolean = True
+                Dim validatingObject = New ValidatingData(viewIsValid)
                 If Ea IsNot Nothing Then
-                    Ea.PublishEvent(New ValidatingData(viewIsValid))
+                    Ea.PublishEvent(validatingObject)
+                    'Ea.PublishEvent(New ValidatingData(viewIsValid))
                 End If
-                If viewIsValid AndAlso IsBizDataValid() Then
+                If validatingObject.Validated AndAlso IsBizDataValid() Then
                     RaiseEvent BeforeSave()
                     retVal = InitiateSave()
                     If retVal < 0 Then
@@ -1295,7 +1297,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Private Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
+    Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
         If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
             Return False
         End If
