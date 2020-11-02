@@ -1,4 +1,6 @@
-﻿Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.BusinessLayer.BusinessRules
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace BusinessLayer
 
@@ -16,8 +18,11 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("EmployeeCode"))
                 AddRule(New ValidateRequired("PaymentMethod"))
+                AddRule(New ValidateRequired("PayFrequency"))
+                AddRule(New ValidateRequired("NationalIdNo"))
                 AddRule(New ValidateEmail("Email"))
-                'AddRule(New ValidateUnique("EmployeeCode"))
+                AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
+                AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
                 'AddRule(New ValidateUnique("EmployeeName"))
             End If
         End Sub
@@ -47,8 +52,10 @@ Namespace BusinessLayer
         Public Property OpeningBalance As Decimal
         Public Property PayFrequency As Char
         Public Property PaymentMethod As Char
+
         'Public Property PaySalariedOrHourly As Char
         Public Property PayRateAmount As Decimal
+
         Public Property PayRateType As Char
         Public Property Phone1 As String
         Public Property Phone2 As String

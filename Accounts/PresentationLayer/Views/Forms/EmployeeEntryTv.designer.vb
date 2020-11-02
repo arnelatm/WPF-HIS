@@ -42,6 +42,8 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -166,8 +168,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout6.SuspendLayout
         CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).BeginInit
@@ -231,6 +231,60 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout6.Size = New System.Drawing.Size(802, 384)
         Me.CFlowLayout6.TabIndex = 293
         '
+        'lblPaymentMethod
+        '
+        Me.lblPaymentMethod.DisplayOnly = true
+        Me.lblPaymentMethod.EditingMode = false
+        Me.lblPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPaymentMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPaymentMethod.Location = New System.Drawing.Point(4, 4)
+        Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPaymentMethod.Name = "lblPaymentMethod"
+        Me.lblPaymentMethod.Size = New System.Drawing.Size(185, 23)
+        Me.lblPaymentMethod.TabIndex = 288
+        Me.lblPaymentMethod.Text = "Payment Method"
+        Me.lblPaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboPaymentMethod
+        '
+        Me.cboPaymentMethod.BackColor = System.Drawing.Color.White
+        Me.cboPaymentMethod.ChangingSearchValueOnly = false
+        Me.cboPaymentMethod.CurrentSearchTerm = ""
+        Me.cboPaymentMethod.DefaultValue = Nothing
+        Me.cboPaymentMethod.DisplayMember = "Name"
+        Me.cboPaymentMethod.DropDownHeight = 1
+        Me.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPaymentMethod.EditingMode = false
+        Me.cboPaymentMethod.FilterRule = Nothing
+        Me.CFlowLayout6.SetFlowBreak(Me.cboPaymentMethod, true)
+        Me.cboPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboPaymentMethod.ForeColor = System.Drawing.Color.Black
+        Me.cboPaymentMethod.FormattingEnabled = true
+        Me.cboPaymentMethod.HideWhenNotEditingOrAdding = false
+        Me.cboPaymentMethod.IntegralHeight = false
+        Me.cboPaymentMethod.LinkedLabel = Me.lblPaymentMethod
+        Me.cboPaymentMethod.Location = New System.Drawing.Point(190, 4)
+        Me.cboPaymentMethod.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.cboPaymentMethod.Name = "cboPaymentMethod"
+        Me.cboPaymentMethod.OldValue = 0
+        Me.cboPaymentMethod.OriginalDataSource = Nothing
+        Me.cboPaymentMethod.OriginalList = Nothing
+        Me.cboPaymentMethod.OverrideDropDownStyleList = false
+        Me.cboPaymentMethod.PreviousSearchTerm = Nothing
+        Me.cboPaymentMethod.PreviousSelectedIndex = -1
+        Me.cboPaymentMethod.PropertySelector = Nothing
+        Me.cboPaymentMethod.ReadOnlyCombo = false
+        Me.cboPaymentMethod.SearchAnywhere = false
+        Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
+        Me.cboPaymentMethod.SuggestBoxHeight = 200
+        Me.cboPaymentMethod.SuggestListOrderRule = Nothing
+        Me.cboPaymentMethod.TabIndex = 287
+        Me.cboPaymentMethod.TextToSearch = Nothing
+        Me.cboPaymentMethod.ValueIsMandatory = false
+        Me.cboPaymentMethod.ValueIsNullable = false
+        Me.cboPaymentMethod.ValueIsNumeric = false
+        Me.cboPaymentMethod.ValueMember = "Code"
+        '
         'lblBankIdNo
         '
         Me.lblBankIdNo.DisplayOnly = true
@@ -275,7 +329,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacBankIdNo.PropertySelector = Nothing
         Me.cacBankIdNo.ReadOnlyCombo = false
         Me.cacBankIdNo.SearchAnywhere = false
-        Me.cacBankIdNo.Size = New System.Drawing.Size(201, 24)
+        Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
         Me.cacBankIdNo.SuggestBoxHeight = 200
         Me.cacBankIdNo.SuggestListOrderRule = Nothing
         Me.cacBankIdNo.TabIndex = 2
@@ -355,7 +409,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtBalance.Name = "txtBalance"
         Me.txtBalance.OldValue = Nothing
         Me.txtBalance.ReadOnly = true
-        Me.txtBalance.Size = New System.Drawing.Size(200, 23)
+        Me.txtBalance.Size = New System.Drawing.Size(93, 23)
         Me.txtBalance.TabIndex = 4
         Me.txtBalance.ValueIsNumeric = true
         '
@@ -392,7 +446,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtOpeningBalance.Name = "txtOpeningBalance"
         Me.txtOpeningBalance.OldValue = Nothing
         Me.txtOpeningBalance.ReadOnly = true
-        Me.txtOpeningBalance.Size = New System.Drawing.Size(200, 23)
+        Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
         Me.txtOpeningBalance.TabIndex = 5
         Me.txtOpeningBalance.ValueIsNumeric = true
         '
@@ -2324,6 +2378,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeCode.Size = New System.Drawing.Size(66, 23)
         Me.txtEmployeeCode.TabIndex = 153
         Me.txtEmployeeCode.ValueIsMandatory = true
+        Me.txtEmployeeCode.ValueIsUnique = true
         '
         'floMain
         '
@@ -2351,60 +2406,6 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout4.Name = "CFlowLayout4"
         Me.CFlowLayout4.Size = New System.Drawing.Size(820, 82)
         Me.CFlowLayout4.TabIndex = 6
-        '
-        'lblPaymentMethod
-        '
-        Me.lblPaymentMethod.DisplayOnly = true
-        Me.lblPaymentMethod.EditingMode = false
-        Me.lblPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPaymentMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPaymentMethod.Location = New System.Drawing.Point(4, 4)
-        Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPaymentMethod.Name = "lblPaymentMethod"
-        Me.lblPaymentMethod.Size = New System.Drawing.Size(185, 23)
-        Me.lblPaymentMethod.TabIndex = 288
-        Me.lblPaymentMethod.Text = "Payment Method"
-        Me.lblPaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cboPaymentMethod
-        '
-        Me.cboPaymentMethod.BackColor = System.Drawing.Color.White
-        Me.cboPaymentMethod.ChangingSearchValueOnly = false
-        Me.cboPaymentMethod.CurrentSearchTerm = ""
-        Me.cboPaymentMethod.DefaultValue = Nothing
-        Me.cboPaymentMethod.DisplayMember = "Name"
-        Me.cboPaymentMethod.DropDownHeight = 1
-        Me.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPaymentMethod.EditingMode = false
-        Me.cboPaymentMethod.FilterRule = Nothing
-        Me.CFlowLayout6.SetFlowBreak(Me.cboPaymentMethod, true)
-        Me.cboPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboPaymentMethod.ForeColor = System.Drawing.Color.Black
-        Me.cboPaymentMethod.FormattingEnabled = true
-        Me.cboPaymentMethod.HideWhenNotEditingOrAdding = false
-        Me.cboPaymentMethod.IntegralHeight = false
-        Me.cboPaymentMethod.LinkedLabel = Me.lblPaymentMethod
-        Me.cboPaymentMethod.Location = New System.Drawing.Point(190, 4)
-        Me.cboPaymentMethod.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.cboPaymentMethod.Name = "cboPaymentMethod"
-        Me.cboPaymentMethod.OldValue = 0
-        Me.cboPaymentMethod.OriginalDataSource = Nothing
-        Me.cboPaymentMethod.OriginalList = Nothing
-        Me.cboPaymentMethod.OverrideDropDownStyleList = false
-        Me.cboPaymentMethod.PreviousSearchTerm = Nothing
-        Me.cboPaymentMethod.PreviousSelectedIndex = -1
-        Me.cboPaymentMethod.PropertySelector = Nothing
-        Me.cboPaymentMethod.ReadOnlyCombo = false
-        Me.cboPaymentMethod.SearchAnywhere = false
-        Me.cboPaymentMethod.Size = New System.Drawing.Size(201, 24)
-        Me.cboPaymentMethod.SuggestBoxHeight = 200
-        Me.cboPaymentMethod.SuggestListOrderRule = Nothing
-        Me.cboPaymentMethod.TabIndex = 287
-        Me.cboPaymentMethod.TextToSearch = Nothing
-        Me.cboPaymentMethod.ValueIsMandatory = false
-        Me.cboPaymentMethod.ValueIsNullable = false
-        Me.cboPaymentMethod.ValueIsNumeric = false
-        Me.cboPaymentMethod.ValueMember = "Code"
         '
         'EmployeeEntryTv
         '
