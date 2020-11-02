@@ -10,7 +10,7 @@ Namespace BusinessLayer
 
         Public Property BankChargesAccountIdNo As Int16?
         Public Property BankChargesVatAccountIdNo As Int16?
-        Public Property CashCode As Char
+        Public Property CashCode As String
         Public Property CashName As String
         Public Property CashNameAra As String
         Public Property IdNo As Int16
