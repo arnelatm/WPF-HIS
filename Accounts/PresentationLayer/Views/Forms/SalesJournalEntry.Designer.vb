@@ -77,18 +77,18 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewSalesCashItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.floSalesCashItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvPaymentTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -109,12 +109,20 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.SuspendLayout
         Me.floPurchaseJournalItems.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewSalesCashItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalItemsFooter.SuspendLayout
         Me.floSalesCashItemsFooter.SuspendLayout
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'floFullEntryArea
         '
@@ -554,20 +562,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo.ReadOnly = true
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'DataGridViewCheckBoxColumn3
-        '
-        Me.DataGridViewCheckBoxColumn3.DataPropertyName = "Posted"
-        resources.ApplyResources(Me.DataGridViewCheckBoxColumn3, "DataGridViewCheckBoxColumn3")
-        Me.DataGridViewCheckBoxColumn3.Name = "DataGridViewCheckBoxColumn3"
-        Me.DataGridViewCheckBoxColumn3.ReadOnly = true
-        '
-        'DataGridViewCheckBoxColumn2
-        '
-        Me.DataGridViewCheckBoxColumn2.DataPropertyName = "Cancelled"
-        resources.ApplyResources(Me.DataGridViewCheckBoxColumn2, "DataGridViewCheckBoxColumn2")
-        Me.DataGridViewCheckBoxColumn2.Name = "DataGridViewCheckBoxColumn2"
-        Me.DataGridViewCheckBoxColumn2.ReadOnly = true
-        '
         'dgvJournalIdNo
         '
         Me.dgvJournalIdNo.DataPropertyName = "JournalIdNo"
@@ -580,10 +574,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.ItemVatAmount, "ItemVatAmount")
         Me.ItemVatAmount.Name = "ItemVatAmount"
         Me.ItemVatAmount.ReadOnly = true
-        '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
         '
         'DataGridViewSalesCashItems
         '
@@ -617,10 +607,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesCashItems.ShowFooter = false
         Me.DataGridViewSalesCashItems.ShowInsertColumnWhenEditing = true
         Me.DataGridViewSalesCashItems.StartTrackingChanges = false
-        '
-        'bsSalesCashItems
-        '
-        Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesCashItemView)
         '
         'floJournalItemsFooter
         '
@@ -664,6 +650,28 @@ Namespace PresentationLayer.Views.Forms
         Me.btnHideJournalEntries.OriginalImageName = Nothing
         Me.btnHideJournalEntries.SecurityKey = ""
         '
+        'DataGridViewCheckBoxColumn3
+        '
+        Me.DataGridViewCheckBoxColumn3.DataPropertyName = "Posted"
+        resources.ApplyResources(Me.DataGridViewCheckBoxColumn3, "DataGridViewCheckBoxColumn3")
+        Me.DataGridViewCheckBoxColumn3.Name = "DataGridViewCheckBoxColumn3"
+        Me.DataGridViewCheckBoxColumn3.ReadOnly = true
+        '
+        'DataGridViewCheckBoxColumn2
+        '
+        Me.DataGridViewCheckBoxColumn2.DataPropertyName = "Cancelled"
+        resources.ApplyResources(Me.DataGridViewCheckBoxColumn2, "DataGridViewCheckBoxColumn2")
+        Me.DataGridViewCheckBoxColumn2.Name = "DataGridViewCheckBoxColumn2"
+        Me.DataGridViewCheckBoxColumn2.ReadOnly = true
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
+        '
+        'bsSalesCashItems
+        '
+        Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesCashItemView)
+        '
         'dgvSequenceSc
         '
         Me.dgvSequenceSc.DataPropertyName = "Sequence"
@@ -679,6 +687,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvPaymentTypeIdNo
         '
+        Me.dgvPaymentTypeIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvPaymentTypeIdNo.DataPropertyName = "PaymentTypeIdNo"
         resources.ApplyResources(Me.dgvPaymentTypeIdNo, "dgvPaymentTypeIdNo")
         Me.dgvPaymentTypeIdNo.Name = "dgvPaymentTypeIdNo"
@@ -848,11 +857,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.ResumeLayout(false)
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridViewSalesCashItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.floJournalItemsFooter.ResumeLayout(false)
         Me.floSalesCashItemsFooter.ResumeLayout(false)
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 

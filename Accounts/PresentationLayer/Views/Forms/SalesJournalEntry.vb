@@ -376,13 +376,12 @@ Namespace PresentationLayer.Views.Forms
                             End If
                         End If
                     Case $"dgvsaleamount"
-                        Dim pPaymentType = selectedRow.Cells("dgvPaymentType").Value
+                        Dim pPaymentType = selectedRow.Cells("dgvPaymentTypeIdNo").Value
                         Dim pSaleAmount As Decimal = .Value
                         Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
                         RecomputeBankCharges(selectedRow, pPaymentType, pSaleAmount, pDepositAmount)
                         UpdateTotals()
                     Case $"dgvdepositamount"
-                        'Dim pPaymentType = selectedRow.Cells("dgvPaymentType").Value
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                         Dim pDepositAmount As Decimal = .Value
                         RecomputeActualBankCharges(selectedRow, pSaleAmount, pDepositAmount)
