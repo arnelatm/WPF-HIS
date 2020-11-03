@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[PaymentType] (
     [IdNo]                      SMALLINT       IDENTITY (1, 1) NOT NULL,
-    [PaymentTypeCode]           VARCHAR (5)    NULL,
+    [PaymentTypeCode]           CHAR (1)       NULL,
     [PaymentTypeName]           NVARCHAR (30)  NULL,
     [PaymentTypeNameAra]        NVARCHAR (30)  NULL,
     [AccountIdNo]               SMALLINT       NULL,
@@ -11,6 +11,8 @@
     [Notes]                     NVARCHAR (255) NULL,
     CONSTRAINT [PK_PaymentType] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
