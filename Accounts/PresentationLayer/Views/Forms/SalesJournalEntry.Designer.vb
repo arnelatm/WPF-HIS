@@ -921,7 +921,6 @@ End Sub
         Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
         Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
-        Friend WithEvents dgvPaymentType As CaDgvComboBoxColumn
         Friend WithEvents dgvSequenceSc As CdgvColumnText
         Friend WithEvents dgvPaymentTypeIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney

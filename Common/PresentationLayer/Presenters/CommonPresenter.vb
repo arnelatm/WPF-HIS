@@ -239,6 +239,16 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByCode()
         End Function
 
+        
+        Public Function GetPaymentTypeList(Optional ByVal sortKey As String = "PaymentTypeCode")
+            TableToGet = "PaymentType"
+            SortExpression = sortKey
+            DisplayName = "PaymentTypeName"
+            DisplayNameArabic = "PaymentTypeNameAra"
+            DisplayCode = "PaymentTypeCode"
+            Return GetLookupDataByCode()
+        End Function
+
         Public Function GetRevCostCenterListByName(Optional ByVal sortKey As String = "RevCostCenterName")
             TableToGet = "RevCostCenter"
             SortExpression = sortKey

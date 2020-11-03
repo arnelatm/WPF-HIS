@@ -210,7 +210,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _paymentTypesByCode = PresenterObj.GetListByCode("PaymentType")
+            _paymentTypesByCode = PresenterObj.GetPaymentTypeList()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
@@ -290,7 +290,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewSalesCashItems.Columns
                 If dgvPaymentTypeIdNo IsNot Nothing Then
-                    dgvPaymentTypeIdNo.DataSource = _accountsByCode
+                    dgvPaymentTypeIdNo.DataSource = _paymentTypesByCode
                     dgvPaymentTypeIdNo.DisplayMember = "Name"
                     dgvPaymentTypeIdNo.ValueMember = "IdNo"
                     dgvPaymentTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -361,7 +361,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim selectedRow As DataGridViewRow
                 selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvPaymentType"
+                    Case $"dgvpaymenttypeidno"
                         Dim nIndex = DataGridViewSalesCashItems.CurrentRow.Index
                         Dim newValue = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
