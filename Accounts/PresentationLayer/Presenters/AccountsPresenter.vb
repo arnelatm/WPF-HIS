@@ -170,13 +170,13 @@ Namespace PresentationLayer.Presenters
             End If
         End Function
 
-        Public Function GetCashCodesModel() As List(Of CashCodeModel)
-            Dim modelCashCode As New ModelAccounts("CashCode")
-            Return modelCashCode.GetAll(Of CashCodeModel)("CashName")
+        Public Function GetPaymentTypeModel() As List(Of PaymentTypeModel)
+            Dim modelPaymentType As New ModelAccounts("PaymentType")
+            Return modelPaymentType.GetAll(Of PaymentTypeModel)("PaymentTypeName")
         End Function
 
-        Public Function GetCashCodes(Optional ByVal sortKey As String = "CashName")
-            Return GetLookupData("CashName", "CashNameAra", "CashCode","CashCode", sortKey, "")
+        Public Function GetPaymentTypes(Optional ByVal sortKey As String = "PaymentTypeName")
+            Return GetLookupData("PaymentTypeName", "PaymentTypeNameAra", "PaymentTypeCode", "PaymentType", sortKey, "")
         End Function
 
         Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")

@@ -11,7 +11,8 @@ Namespace PresentationLayer.Presenters
 
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GetVatPercentage()
-        Private _cashCodesModel As List(Of CashCodeModel)
+
+        'Private _paymentTypesModel As List(Of PaymentTypeModel)
         Private _modelReconciled
 
         Public Sub New(view As IAccountReconciliationItemsView)
@@ -20,7 +21,7 @@ Namespace PresentationLayer.Presenters
             TableName = "AccountReconciliationItem"
             SortOrderKey = "Sequence"
             DataModel = New AccountReconciliationItemModel
-            _cashCodesModel = GetCashCodesModel()
+            '_paymentTypesModel = GetPaymentTypesModel()
             _modelReconciled = New ModelAccounts("Reconciled")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
@@ -77,14 +78,14 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="accountIdNo">Account Id to display.</param>
         Public Overloads Sub Display(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, Optional ByVal sortOrder As String = Nothing)
-            View.AccountReconciliationItems = GetAcctReconItems(accountIdNo, reconciliationDate, idNo, "TransactionDate")
+            View.AccountReconciliationItems = GetAcctReconItems(AccountIdNo, reconciliationDate, idNo, "TransactionDate")
         End Sub
 
         Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = ModelPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
@@ -176,11 +177,11 @@ Namespace PresentationLayer.Presenters
         'Private Sub RecomputeBankCharges(bsAccountReconciliationItem As List(Of AccountReconciliationItemModel), pCashCode As String, pSaleAmount As Decimal, pDepositAmount As Decimal)
         '    If pCashCode IsNot Nothing Then
         '        Dim nIndex As Integer = 0
-        '        Dim cashCode As Object
-        '        cashCode = _cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = pCashCode.Trim())
+        '        Dim paymentType As Object
+        '        paymentType = _paymentTypesModel.Find(Function(cc As PaymentTypeModel) cc.CashCode.Trim() = pCashCode.Trim())
         '        nIndex = selectedRow.Index
-        '        bsAccountReconciliationItem(nIndex).Rate = cashCode.Rate
-        '        bsAccountReconciliationItem(nIndex).ComputedBankCharge = Math.Round(cashCode.Rate * pSaleAmount / 100, 2)
+        '        bsAccountReconciliationItem(nIndex).Rate = paymentType.Rate
+        '        bsAccountReconciliationItem(nIndex).ComputedBankCharge = Math.Round(paymentType.Rate * pSaleAmount / 100, 2)
         '        bsAccountReconciliationItem(nIndex).ComputedBankChargeVat = Math.Round(bsAccountReconciliationItem(nIndex).ComputedBankCharge * _vatRate, 2)
         '        bsAccountReconciliationItem(nIndex).DepositAmount = pSaleAmount - bsAccountReconciliationItem(nIndex).ComputedBankCharge - bsAccountReconciliationItem(nIndex).ComputedBankChargeVat
         '        RecomputeActualBankCharges(selectedRow, pCashCode, pSaleAmount, bsAccountReconciliationItem(nIndex).DepositAmount)

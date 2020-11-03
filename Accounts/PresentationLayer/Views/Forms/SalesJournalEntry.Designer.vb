@@ -90,7 +90,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvCashCodeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvPaymentTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -591,7 +591,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesCashItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewSalesCashItems.AutoGenerateColumns = false
         Me.DataGridViewSalesCashItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewSalesCashItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvCashCodeIdNo, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
+        Me.DataGridViewSalesCashItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvPaymentTypeIdNo, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
         Me.DataGridViewSalesCashItems.DataInGridChanged = false
         Me.DataGridViewSalesCashItems.DataSource = Me.bsSalesCashItems
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -677,14 +677,14 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequenceSc.ReadOnly = true
         Me.dgvSequenceSc.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'dgvCashCodeIdNo
+        'dgvPaymentTypeIdNo
         '
-        Me.dgvCashCodeIdNo.DataPropertyName = "CashCodeIdNo"
-        resources.ApplyResources(Me.dgvCashCodeIdNo, "dgvCashCodeIdNo")
-        Me.dgvCashCodeIdNo.Name = "dgvCashCodeIdNo"
-        Me.dgvCashCodeIdNo.ReadOnly = true
-        Me.dgvCashCodeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCashCodeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvPaymentTypeIdNo.DataPropertyName = "PaymentTypeIdNo"
+        resources.ApplyResources(Me.dgvPaymentTypeIdNo, "dgvPaymentTypeIdNo")
+        Me.dgvPaymentTypeIdNo.Name = "dgvPaymentTypeIdNo"
+        Me.dgvPaymentTypeIdNo.ReadOnly = true
+        Me.dgvPaymentTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPaymentTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvSaleAmount
         '
@@ -921,9 +921,9 @@ End Sub
         Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
         Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
-        Friend WithEvents dgvCashCode As CaDgvComboBoxColumn
+        Friend WithEvents dgvPaymentType As CaDgvComboBoxColumn
         Friend WithEvents dgvSequenceSc As CdgvColumnText
-        Friend WithEvents dgvCashCodeIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvPaymentTypeIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney
         Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
         Friend WithEvents dgvActualVat As CdgvColumnMoney
