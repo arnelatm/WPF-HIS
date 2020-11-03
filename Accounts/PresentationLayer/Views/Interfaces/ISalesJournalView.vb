@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalDeposits As Decimal
         Property DateCreated As DateTime?
         Property Posted As Boolean
-        Property SalesCashItems As List(Of SalesCashItemVIew)
+        Property SalesCashItems As List(Of SalesCashItemView)
         Property JournalItems As List(Of JournalItemView)
 
     End Interface

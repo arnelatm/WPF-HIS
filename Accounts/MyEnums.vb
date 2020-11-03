@@ -42,7 +42,7 @@ End Enum
 Public Enum DatabaseTableSelection
     <EnumCode("BN")> Bank
     <EnumCode("BR")> Branch
-    <EnumCode("CC")> CashCode
+    <EnumCode("PY")> PaymentType
     <EnumCode("CH")> Chart
     <EnumCode("CT")> Country
     <EnumCode("CU")> Customer

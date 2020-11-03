@@ -1,8 +1,8 @@
-﻿' CashCode business object
+﻿' PaymentType business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Namespace BusinessLayer
 
-    Public Class CashCode
+    Public Class PaymentType
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -10,9 +10,9 @@ Namespace BusinessLayer
 
         Public Property BankChargesAccountIdNo As Int16?
         Public Property BankChargesVatAccountIdNo As Int16?
-        Public Property CashCode As String
-        Public Property CashName As String
-        Public Property CashNameAra As String
+        Public Property PaymentTypeCode As String
+        Public Property PaymentTypeName As String
+        Public Property PaymentTypeNameAra As String
         Public Property IdNo As Int16
         Public Property Rate As Decimal
 

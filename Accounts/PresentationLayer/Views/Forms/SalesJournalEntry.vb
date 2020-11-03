@@ -21,8 +21,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
-
-        Private _cashCodes
+        Private _paymentTypesByCode
 
         Private _slFooter As DgvFooter
         Private _salesCashItems As List(Of SalesCashItemView)
@@ -211,7 +210,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _cashCodes = PresenterObj.GetListByCode("CashCode")
+            _paymentTypesByCode = PresenterObj.GetListByCode("PaymentType")
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
@@ -290,13 +289,13 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewSalesCashItems.Columns
-                If dgvCashCodeIdNo IsNot Nothing Then
-                    dgvCashCodeIdNo.DataSource = _cashCodes
-                    dgvCashCodeIdNo.DisplayMember = "Name"
-                    dgvCashCodeIdNo.ValueMember = "IdNo"
-                    dgvCashCodeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                    dgvCashCodeIdNo.DisplayStyleForCurrentCellOnly = True
-                    dgvCashCodeIdNo.AutoComplete = True
+                If dgvPaymentTypeIdNo IsNot Nothing Then
+                    dgvPaymentTypeIdNo.DataSource = _accountsByCode
+                    dgvPaymentTypeIdNo.DisplayMember = "Name"
+                    dgvPaymentTypeIdNo.ValueMember = "IdNo"
+                    dgvPaymentTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                    dgvPaymentTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                    dgvPaymentTypeIdNo.AutoComplete = True
                     dgvComputedBankCharge.DisplayOnly = True
                     dgvComputedVat.DisplayOnly = True
                     dgvRate.DisplayOnly = True
@@ -328,7 +327,7 @@ Namespace PresentationLayer.Views.Forms
                     Dim selectedRow As DataGridViewRow
                     selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
                     '    Select Case .OwningColumn.Name.ToLower()
-                    '        Case $"dgvcashcode"
+                    '        Case $"dgvPaymentType"
                     'selectedRow.Cells("dgvInteractiveChange").Value = True
                     'If cColumnName = $"dgvsaleamount" Then
                     '    Beep()
@@ -345,7 +344,7 @@ Namespace PresentationLayer.Views.Forms
         '            Dim selectedRow As DataGridViewRow
         '            selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
         '            '    Select Case .OwningColumn.Name.ToLower()
-        '            '        Case $"dgvcashcode"
+        '            '        Case $"dgvPaymentType"
         '            'selectedRow.Cells("dgvInteractiveChange").Value = True
         '            'If cColumnName = $"dgvsaleamount" Then
         '            '    Beep()
@@ -362,28 +361,28 @@ Namespace PresentationLayer.Views.Forms
                 Dim selectedRow As DataGridViewRow
                 selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvcashcode"
+                    Case $"dgvPaymentType"
                         Dim nIndex = DataGridViewSalesCashItems.CurrentRow.Index
                         Dim newValue = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < SalesCashItems.Count() Then
-                                Dim pCashCode = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
+                                Dim pPaymentType = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
                                 Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                                 Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                                SalesCashItems(nIndex).CashCodeIdNo = newValue
-                                RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+                                SalesCashItems(nIndex).PaymentTypeIdNo = newValue
+                                RecomputeBankCharges(selectedRow, pPaymentType, pSaleAmount, pDepositAmount)
                                 UpdateTotals()
                                 BindSalesCashItem()
                             End If
                         End If
                     Case $"dgvsaleamount"
-                        Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
+                        Dim pPaymentType = selectedRow.Cells("dgvPaymentType").Value
                         Dim pSaleAmount As Decimal = .Value
                         Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                        RecomputeBankCharges(selectedRow, pCashCode, pSaleAmount, pDepositAmount)
+                        RecomputeBankCharges(selectedRow, pPaymentType, pSaleAmount, pDepositAmount)
                         UpdateTotals()
                     Case $"dgvdepositamount"
-                        'Dim pCashCode = selectedRow.Cells("dgvCashCode").Value
+                        'Dim pPaymentType = selectedRow.Cells("dgvPaymentType").Value
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                         Dim pDepositAmount As Decimal = .Value
                         RecomputeActualBankCharges(selectedRow, pSaleAmount, pDepositAmount)
@@ -412,7 +411,7 @@ Namespace PresentationLayer.Views.Forms
             _slFooter.ColumnToSum("dgvActualVat") = True
             _slFooter.ColumnToSum("dgvBankChargeDifference") = True
             _slFooter.ColumnToSum("dgvVatDifference") = True
-            _slFooter.SetText("dgvCashCodeIdNo", "Totals")
+            _slFooter.SetText("dgvPaymentTypeIdNo", "Totals")
 
         End Sub
 
@@ -527,18 +526,18 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pCashCodeIdNo As Int16, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            If pCashCodeIdNo <> 0 Then
-                Dim cashCode As New CashCodeModel
-                For Each item As CashCodeModel In PresenterObj.cashCodesModel
-                    If item.IdNo = pCashCodeIdNo Then
-                        cashCode = item
+        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pPaymentTypeIdNo As Int16, pSaleAmount As Decimal, pDepositAmount As Decimal)
+            If pPaymentTypeIdNo <> 0 Then
+                Dim paymentType As New PaymentTypeModel
+                For Each item As PaymentTypeModel In PresenterObj.PaymentTypesModel
+                    If item.IdNo = pPaymentTypeIdNo Then
+                        paymentType = item
                     End If
                 Next
-                'cashCode = PresenterObj.cashCodesModel.Find(Function(cc As CashCodeModel) cc.CashCode.Trim() = pCashCode.Trim())
+                'PaymentType = PresenterObj.PaymentTypesModel.Find(Function(cc As PaymentTypeModel) cc.PaymentType.Trim() = pPaymentType.Trim())
                 Dim nIndex As Integer = selectedRow.Index
-                bsSalesCashItems(nIndex).Rate = cashCode.Rate
-                'bsSalesCashItems(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, cashCode.Rate)
+                bsSalesCashItems(nIndex).Rate = paymentType.Rate
+                'bsSalesCashItems(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, PaymentType.Rate)
                 'bsSalesCashItems(nIndex).ComputedBankChargeVat = PresenterObj.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)
                 bsSalesCashItems(nIndex).DepositAmount = pSaleAmount - bsSalesCashItems(nIndex).ComputedBankCharge - bsSalesCashItems(nIndex).ComputedBankChargeVat
                 RecomputeActualBankCharges(selectedRow, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)

@@ -111,9 +111,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property CashCodeDao As IDaoAll(Of CashCode)
+        Private ReadOnly Property PaymentTypeDao As IDaoAll(Of PaymentType)
             Get
-                Return DaoFactoryAccounts.CreateDao("CashCode")
+                Return DaoFactoryAccounts.CreateDao("PaymentType")
             End Get
         End Property
 

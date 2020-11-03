@@ -14,15 +14,15 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of ISalesJournalView, SalesJournalModel)
 
         Protected DtInsertTable As New DataTable
-        Protected DtSalesCashInsertTable As New DataTable
-        Protected DtSalesCashUpdateTable As New DataTable
+        Protected DtSalesPaymentTypeInsertTable As New DataTable
+        Protected DtSalesPaymentTypeUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _salesCashItemModel As New ModelAccounts("SalesCashItem")
         Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
 
-        Private _cashCodesModel As List(Of CashCodeModel)
-        Private ReadOnly _oldSalesCashItem As List(Of SalesCashItemModel)
+        Private _paymentTypesModel As List(Of PaymentTypeModel)
+        Private ReadOnly _oldSalesPaymentTypeItem As List(Of SalesCashItemModel)
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            CashCodesModel = GetCashCodesModel()
+            PaymentTypesModel = GetPaymentTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
@@ -54,31 +54,31 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtSalesCashInsertTable.Columns.Add("CashCode", GetType(String))
-            DtSalesCashInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesCashInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesCashInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesPaymentTypeInsertTable.Columns.Add("PaymentTypeIdNo", GetType(Int16))
+            DtSalesPaymentTypeInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesPaymentTypeInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesPaymentTypeInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesPaymentTypeInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtSalesCashUpdateTable.Columns.Add("CashCode", GetType(String))
-            DtSalesCashUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesCashUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtSalesCashUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesCashUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesCashUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("PaymentTypeIdNo", GetType(Int16))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesPaymentTypeUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
-        Public Property CashCodesModel As List(Of CashCodeModel)
+        Public Property PaymentTypesModel As List(Of PaymentTypeModel)
             Get
-                Return _cashCodesModel
+                Return _paymentTypesModel
             End Get
             Set
-                _cashCodesModel = Value
+                _paymentTypesModel = Value
             End Set
         End Property
 
-        'Public Function SalesCashItemDataIsValid() As Boolean
+        'Public Function SalesPaymentTypeItemDataIsValid() As Boolean
         '    Return True
         'End Function
 
@@ -86,8 +86,8 @@ Namespace PresentationLayer.Presenters
             Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetSalesCashItems(salesCashIdNo As Int32) As List(Of SalesCashItemModel)
-            Return _salesCashItemModel.GetRecordsWithIdNo(Of SalesCashItemModel)(salesCashIdNo, "Sequence")
+        Public Function GetSalesCashItems(salesPaymentTypeIdNo As Int32) As List(Of SalesCashItemModel)
+            Return _salesCashItemModel.GetRecordsWithIdNo(Of SalesCashItemModel)(salesPaymentTypeIdNo, "Sequence")
         End Function
 
         'Public Sub OnAfterSave() Handles MyBase.AfterSave
@@ -119,20 +119,20 @@ Namespace PresentationLayer.Presenters
                 If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
                     Dim workRow As DataRow
                     If sc.IdNo <= 0 Then
-                        workRow = DtSalesCashInsertTable.NewRow()
+                        workRow = DtSalesPaymentTypeInsertTable.NewRow()
                     Else
-                        workRow = DtSalesCashUpdateTable.NewRow()
+                        workRow = DtSalesPaymentTypeUpdateTable.NewRow()
                         workRow("IdNo") = sc.IdNo
                     End If
-                    workRow("CashCodeIdNo") = sc.CashCodeIdNo
+                    workRow("PaymentTypeIdNo") = sc.PaymentTypeIdNo
                     workRow("SalesJournalIdNo") = View.IdNo
                     workRow("Sequence") = nRowCount
                     workRow("SaleAmount") = sc.SaleAmount
                     workRow("DepositAmount") = sc.DepositAmount
                     If sc.IdNo <= 0 Then
-                        DtSalesCashInsertTable.Rows.Add(workRow)
+                        DtSalesPaymentTypeInsertTable.Rows.Add(workRow)
                     Else
-                        DtSalesCashUpdateTable.Rows.Add(workRow)
+                        DtSalesPaymentTypeUpdateTable.Rows.Add(workRow)
                     End If
                     nRowCount += 1
                     View.TotalDebits += sc.SaleAmount
@@ -154,7 +154,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = UpdateChildData(_salesCashItemModel, DtSalesCashUpdateTable, DtSalesCashInsertTable, passedValue, "SalesJournalIdNo")
+                retVal = UpdateChildData(_salesCashItemModel, DtSalesPaymentTypeUpdateTable, DtSalesPaymentTypeInsertTable, passedValue, "SalesJournalIdNo")
             End If
             If retVal >= 0 Then
                 GlobalVariables.Mapper.Map(View, DataModel)
@@ -184,11 +184,11 @@ Namespace PresentationLayer.Presenters
             Next
             MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
             For Each item As SalesCashItemView In View.SalesCashItems
-                If item.CashCodeIdNo <> 0 Then
-                    Dim cashCode = _cashCodesModel.Find(Function(c) c.IdNo = item.CashCodeIdNo())
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.AccountIdNo, item.DepositAmount, 0, cashCode.CashName, cashCode.CashNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesAccountIdNo, item.ActualBankCharge, 0, cashCode.CashName, cashCode.CashNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, cashCode.CashName, cashCode.CashNameAra)
+                If item.PaymentTypeIdNo <> 0 Then
+                    Dim paymentType = _paymentTypesModel.Find(Function(c) c.IdNo = item.PaymentTypeIdNo())
+                    MakeSalesJournal(oldJournalItems, counter, paymentType.AccountIdNo, item.DepositAmount, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
+                    MakeSalesJournal(oldJournalItems, counter, paymentType.BankChargesAccountIdNo, item.ActualBankCharge, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
+                    MakeSalesJournal(oldJournalItems, counter, paymentType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
                 End If
             Next
             If counter < View.JournalItems.Count() Then
@@ -230,11 +230,11 @@ Namespace PresentationLayer.Presenters
             If DtUpdateTable IsNot Nothing Then
                 DtUpdateTable.Clear()
             End If
-            If DtSalesCashInsertTable IsNot Nothing Then
-                DtSalesCashInsertTable.Clear()
+            If DtSalesPaymentTypeInsertTable IsNot Nothing Then
+                DtSalesPaymentTypeInsertTable.Clear()
             End If
-            If DtSalesCashUpdateTable IsNot Nothing Then
-                DtSalesCashUpdateTable.Clear()
+            If DtSalesPaymentTypeUpdateTable IsNot Nothing Then
+                DtSalesPaymentTypeUpdateTable.Clear()
             End If
             Dim nRowCount As Integer = 1
             For Each ji In View.JournalItems

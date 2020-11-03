@@ -120,7 +120,7 @@
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
     <Compile Include="BusinessLayer\CadOiItem.vb" />
-    <Compile Include="BusinessLayer\CashCode.vb" />
+    <Compile Include="BusinessLayer\PaymentType.vb" />
     <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\ProductCategory.vb" />
@@ -167,7 +167,7 @@
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashCodeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PaymentTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
@@ -531,7 +531,7 @@
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
     <Compile Include="PresentationLayer\Models\BankModel.vb" />
     <Compile Include="PresentationLayer\Models\CadOiItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\CashCodeModel.vb" />
+    <Compile Include="PresentationLayer\Models\PaymentTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\EarningModel.vb" />
@@ -627,7 +627,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IBankView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICadOiItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICashCodeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPaymentTypeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashReceiptJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningView.vb" />
