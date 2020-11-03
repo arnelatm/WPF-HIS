@@ -937,10 +937,7 @@
     <value>True</value>
   </metadata>
   <data name="dgvPaymentTypeIdNo.HeaderText" xml:space="preserve">
-    <value>Cash Code - Name</value>
-  </data>
-  <data name="dgvPaymentTypeIdNo.Width" type="System.Int32, mscorlib">
-    <value>225</value>
+    <value>Payment Type Name - Code</value>
   </data>
   <data name="dgvSaleAmount.HeaderText" xml:space="preserve">
     <value>Sale Amount</value>
