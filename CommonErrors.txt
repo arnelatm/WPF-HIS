@@ -1,0 +1,1 @@
+1. In combobox (caDgvCombobox) do not use TinyInt for sql data problem with display of vales in datagrid.

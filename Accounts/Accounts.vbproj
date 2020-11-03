@@ -239,6 +239,7 @@
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PaymentTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDeductAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionRatePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayPeriodPresenter.vb" />
