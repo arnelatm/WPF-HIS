@@ -1,9 +1,10 @@
 ﻿CREATE VIEW dbo.SalesCashItem_View
 AS
-SELECT        dbo.SalesCashItem.IdNo, dbo.SalesCashItem.SalesJournalIdNo, dbo.SalesCashItem.Sequence, dbo.SalesCashItem.SaleAmount, dbo.SalesCashItem.DepositAmount, dbo.CashCode.CashName, dbo.CashCode.CashNameAra, 
-                         dbo.CashCode.Rate, dbo.CashCode.BankChargesAccountIdNo, dbo.CashCode.BankChargesVatAccountIdNo, dbo.CashCode.AccountIdNo, dbo.SalesCashItem.CashCodeIdNo, dbo.CashCode.CashCode
-FROM            dbo.SalesCashItem LEFT OUTER JOIN
-                         dbo.CashCode ON dbo.SalesCashItem.CashCodeIdNo = dbo.CashCode.IdNo
+SELECT        dbo.SalesCashItem.IdNo, dbo.SalesCashItem.SalesJournalIdNo, dbo.SalesCashItem.Sequence, dbo.SalesCashItem.SaleAmount, dbo.SalesCashItem.DepositAmount, dbo.SalesCashItem.PaymentTypeIdNo, 
+                         dbo.PaymentType.PaymentTypeCode, dbo.PaymentType.PaymentTypeName, dbo.PaymentType.AccountIdNo, dbo.PaymentType.Rate, dbo.PaymentType.BankChargesAccountIdNo, 
+                         dbo.PaymentType.BankChargesVatAccountIdNo, dbo.PaymentType.PaymentTypeNameAra
+FROM            dbo.SalesCashItem INNER JOIN
+                         dbo.PaymentType ON dbo.SalesCashItem.PaymentTypeIdNo = dbo.PaymentType.IdNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesCashItem_View';
@@ -81,22 +82,22 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "CashCode"
-            Begin Extent = 
-               Top = 5
-               Left = 350
-               Bottom = 335
-               Right = 596
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "SalesCashItem"
             Begin Extent = 
                Top = 6
                Left = 38
                Bottom = 335
                Right = 217
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "PaymentType"
+            Begin Extent = 
+               Top = 19
+               Left = 574
+               Bottom = 265
+               Right = 820
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -111,9 +112,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
+         Column = 3090
          Alias = 900
-         Table = 1170
+         Table = 3300
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -128,4 +129,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesCashItem_View';
+
+
 

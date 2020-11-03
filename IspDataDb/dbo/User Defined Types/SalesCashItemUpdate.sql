@@ -1,11 +1,13 @@
 ﻿CREATE TYPE [dbo].[SalesCashItemUpdate] AS TABLE (
-    [CashCodeIdNo]     TINYINT NOT NULL,
+    [PaymentTypeIdNo]  TINYINT NOT NULL,
     [DepositAmount]    MONEY   NULL,
-    [IDNo]             INT     NOT NULL,
+    [IdNo]             INT     NOT NULL,
     [SaleAmount]       MONEY   NULL,
     [SalesJournalIdNo] INT     NOT NULL,
     [Sequence]         INT     NOT NULL,
-    PRIMARY KEY CLUSTERED ([IDNo] ASC));
+    PRIMARY KEY CLUSTERED ([IdNo] ASC));
+
+
 
 
 
