@@ -6,18 +6,18 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SalesCashItemsPresenter
-        Inherits AccountsPresenter(Of ISalesCashItemsView, SalesCashItemModel)
+    Public Class SalesDepositsPresenter
+        Inherits AccountsPresenter(Of ISalesDepositsView, SalesDepositModel)
 
-        Public ParentViewList As List(Of SalesCashItemModel)
+        Public ParentViewList As List(Of SalesDepositModel)
         Private ReadOnly _vatRate As Decimal = GetVatPercentage()
 
-        Public Sub New(view As ISalesCashItemsView)
+        Public Sub New(view As ISalesDepositsView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("SalesCashItem")
-            TableName = "SalesCashItem"
+            ModelPresenter = New ModelAccounts("SalesDeposit")
+            TableName = "SalesDeposit"
             SortOrderKey = "Sequence"
-            DataModel = New SalesCashItemModel
+            DataModel = New SalesDepositModel
             '_cashCodesModel = GetCashCodesModel()
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)

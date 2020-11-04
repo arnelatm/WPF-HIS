@@ -400,8 +400,8 @@ CREATE TYPE [dbo].[ReconciledInsert] AS TABLE(
 	[ReconciliationIdNo] [int] NULL
 )
 GO
-/****** Object:  UserDefinedTableType [dbo].[SalesCashItemInsert]    Script Date: 3/28/2020 6:33:04 AM ******/
-CREATE TYPE [dbo].[SalesCashItemInsert] AS TABLE(
+/****** Object:  UserDefinedTableType [dbo].[SalesDepositInsert]    Script Date: 3/28/2020 6:33:04 AM ******/
+CREATE TYPE [dbo].[SalesDepositInsert] AS TABLE(
 	[CashCode] [char](1) NOT NULL,
 	[DepositAmount] [money] NULL,
 	[SaleAmount] [money] NULL,
@@ -409,8 +409,8 @@ CREATE TYPE [dbo].[SalesCashItemInsert] AS TABLE(
 	[Sequence] [int] NOT NULL
 )
 GO
-/****** Object:  UserDefinedTableType [dbo].[SalesCashItemUpdate]    Script Date: 3/28/2020 6:33:04 AM ******/
-CREATE TYPE [dbo].[SalesCashItemUpdate] AS TABLE(
+/****** Object:  UserDefinedTableType [dbo].[SalesDepositUpdate]    Script Date: 3/28/2020 6:33:04 AM ******/
+CREATE TYPE [dbo].[SalesDepositUpdate] AS TABLE(
 	[CashCode] [char](1) NOT NULL,
 	[DepositAmount] [money] NULL,
 	[IdNo] [int] NOT NULL,
@@ -4079,12 +4079,12 @@ CREATE TABLE [dbo].[Religion](
 	[DateTimeStamp] [timestamp] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SalesCashItem]    Script Date: 3/28/2020 6:33:05 AM ******/
+/****** Object:  Table [dbo].[SalesDeposit]    Script Date: 3/28/2020 6:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[SalesCashItem](
+CREATE TABLE [dbo].[SalesDeposit](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[SalesJournalIdNo] [int] NOT NULL,
 	[Sequence] [int] NOT NULL,
@@ -4557,9 +4557,9 @@ ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_
 GO
 ALTER TABLE [dbo].[PurchaseJournalItem] ADD  CONSTRAINT [DF_PurchaseJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
-ALTER TABLE [dbo].[SalesCashItem] ADD  CONSTRAINT [DF_SalesDetailItem_SaleAmount]  DEFAULT ((0)) FOR [SaleAmount]
+ALTER TABLE [dbo].[SalesDeposit] ADD  CONSTRAINT [DF_SalesDetailItem_SaleAmount]  DEFAULT ((0)) FOR [SaleAmount]
 GO
-ALTER TABLE [dbo].[SalesCashItem] ADD  CONSTRAINT [DF_SalesDetailItem_CashAmount]  DEFAULT ((0)) FOR [DepositAmount]
+ALTER TABLE [dbo].[SalesDeposit] ADD  CONSTRAINT [DF_SalesDetailItem_CashAmount]  DEFAULT ((0)) FOR [DepositAmount]
 GO
 ALTER TABLE [dbo].[SalesJournal] ADD  CONSTRAINT [DF_SalesJournal_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
@@ -4955,19 +4955,19 @@ INSERT  INTO Reconciled ( JournalCode, JournalItemIdNo, ReconciliationIdNo)
 SET IDENTITY_INSERT DBO.Reconciled ON;
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsertSalesCashItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
+/****** Object:  StoredProcedure [dbo].[InsertSalesDepositTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROC [dbo].[InsertSalesCashItemTVP]
-  @MParam SalesCashItemInsert READONLY
+CREATE PROC [dbo].[InsertSalesDepositTVP]
+  @MParam SalesDepositInsert READONLY
 AS 
-INSERT  INTO SalesCashItem ( CashCode, DepositAmount, SaleAmount, SalesJournalIdNo, Sequence )
+INSERT  INTO SalesDeposit ( CashCode, DepositAmount, SaleAmount, SalesJournalIdNo, Sequence )
         SELECT  CashCode, DepositAmount, SaleAmount, SalesJournalIdNo, Sequence
         FROM    @MParam
-SET IDENTITY_INSERT DBO.SalesCashItem ON;
+SET IDENTITY_INSERT DBO.SalesDeposit ON;
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsertSalesJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
@@ -5590,7 +5590,7 @@ on a.IdNo = b.IdNo
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateSalesCashItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
+/****** Object:  StoredProcedure [dbo].[UpdateSalesDepositTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5602,24 +5602,24 @@ GO
 
 
 
-CREATE PROCEDURE  [dbo].[UpdateSalesCashItemTVP]
-  @MParam SalesCashItemUpdate READONLY, @GroupIdNo as INT
+CREATE PROCEDURE  [dbo].[UpdateSalesDepositTVP]
+  @MParam SalesDepositUpdate READONLY, @GroupIdNo as INT
 AS 
 
 BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].SalesCashItem A WHERE A.SalesJournalIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].SalesDeposit A WHERE A.SalesJournalIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
--- Update existing SalesCashItems
+-- Update existing SalesDeposits
 UPDATE a 
 SET a.CashCode = B.CashCode,
 	a.DepositAmount = b.DepositAmount,
 	a.SaleAmount = B.SaleAmount,
 	a.SalesJournalIdNo = B.SalesJournalIdNo,
     a.[Sequence] = B.[Sequence]
-from SalesCashItem a INNER JOIN @MParam As b
+from SalesDeposit a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
 
 END

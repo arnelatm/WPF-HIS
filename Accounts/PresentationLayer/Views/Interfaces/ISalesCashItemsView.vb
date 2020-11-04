@@ -3,10 +3,10 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface ISalesCashItemsView
+    Public Interface ISalesDepositsView
         Inherits IView
 
-        Property SalesCashItems As IList(Of SalesCashItemModel)
+        Property SalesDeposits As IList(Of SalesDepositModel)
 
     End Interface
 

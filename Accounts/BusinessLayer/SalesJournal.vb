@@ -33,7 +33,7 @@ Namespace BusinessLayer
         Public Property TotalDeposits As Decimal
         Public Property TotalSales As Decimal
         Public Property TransactionDate As Date?
-        Public Property SalesCashItems As List(Of SalesCashItem)
+        Public Property SalesDeposits As List(Of SalesDeposit)
         Public Property JournalItems As List(Of JournalItem)
     End Class
 

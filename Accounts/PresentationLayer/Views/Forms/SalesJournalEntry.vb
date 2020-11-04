@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         Private _paymentTypesByCode
 
         Private _slFooter As DgvFooter
-        Private _salesCashItems As List(Of SalesCashItemView)
+        Private _SalesDeposits As List(Of SalesDepositView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
@@ -129,13 +129,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SalesCashItems As List(Of SalesCashItemView) Implements ISalesJournalView.SalesCashItems
+        Public Property SalesDeposits As List(Of SalesDepositView) Implements ISalesJournalView.SalesDeposits
             Get
-                Return _salesCashItems
+                Return _SalesDeposits
             End Get
             Set
-                _salesCashItems = Value
-                BindSalesCashItem()
+                _SalesDeposits = Value
+                BindSalesDeposit()
             End Set
         End Property
 
@@ -240,7 +240,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             SuspendLayout()
             DataGridViewJournalItems.Visible = False
-            DataGridViewSalesCashItems.Visible = True
+            DataGridViewSalesDeposits.Visible = True
             ResumeLayout()
             UpdateTotals()
         End Sub
@@ -276,19 +276,19 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub BindSalesCashItem()
+        Private Sub BindSalesDeposit()
             SuspendLayout()
-            bsSalesCashItems.DataSource = Nothing
-            DataGridViewSalesCashItems.Refresh()
-            bsSalesCashItems.DataSource = SalesCashItems
-            bsSalesCashItems.AllowNew = True
-            With DataGridViewSalesCashItems
+            bsSalesDeposits.DataSource = Nothing
+            DataGridViewSalesDeposits.Refresh()
+            bsSalesDeposits.DataSource = SalesDeposits
+            bsSalesDeposits.AllowNew = True
+            With DataGridViewSalesDeposits
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsSalesCashItems
+                .DataSource = bsSalesDeposits
                 .Refresh()
             End With
-            With DataGridViewSalesCashItems.Columns
+            With DataGridViewSalesDeposits.Columns
                 If dgvPaymentTypeIdNo IsNot Nothing Then
                     dgvPaymentTypeIdNo.DataSource = _paymentTypesByCode
                     dgvPaymentTypeIdNo.DisplayMember = "Name"
@@ -311,12 +311,12 @@ Namespace PresentationLayer.Views.Forms
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
-                DataGridViewSalesCashItems.Visible = True
+                DataGridViewSalesDeposits.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
             Else
                 _viewGl = True
                 DataGridViewJournalItems.Visible = True
-                DataGridViewSalesCashItems.Visible = False
+                DataGridViewSalesDeposits.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
             End If
         End Sub
@@ -325,7 +325,7 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim selectedRow As DataGridViewRow
-                    selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+                    selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
                     '    Select Case .OwningColumn.Name.ToLower()
                     '        Case $"dgvPaymentType"
                     'selectedRow.Cells("dgvInteractiveChange").Value = True
@@ -338,11 +338,11 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        'Private Sub SjOnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewSalesCashItems.CellBeginEdit
-        '    If DataGridViewSalesCashItems.CurrentCell.RowIndex() = 0 Then
+        'Private Sub SjOnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewSalesDeposits.CellBeginEdit
+        '    If DataGridViewSalesDeposits.CurrentCell.RowIndex() = 0 Then
         '        With DataGridViewJournalItems.CurrentCell
         '            Dim selectedRow As DataGridViewRow
-        '            selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+        '            selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
         '            '    Select Case .OwningColumn.Name.ToLower()
         '            '        Case $"dgvPaymentType"
         '            'selectedRow.Cells("dgvInteractiveChange").Value = True
@@ -355,24 +355,24 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub SalesCashItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesCashItems.CellEndEdit
+        Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
             UpdateTotals()
-            With DataGridViewSalesCashItems.CurrentCell
+            With DataGridViewSalesDeposits.CurrentCell
                 Dim selectedRow As DataGridViewRow
-                selectedRow = DataGridViewSalesCashItems.Rows(.RowIndex)
+                selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvpaymenttypeidno"
-                        Dim nIndex = DataGridViewSalesCashItems.CurrentRow.Index
-                        Dim newValue = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        Dim nIndex = DataGridViewSalesDeposits.CurrentRow.Index
+                        Dim newValue = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < SalesCashItems.Count() Then
-                                Dim pPaymentType = DirectCast(DataGridViewSalesCashItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
+                            If nIndex < SalesDeposits.Count() Then
+                                Dim pPaymentType = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
                                 Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
                                 Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                                SalesCashItems(nIndex).PaymentTypeIdNo = newValue
+                                SalesDeposits(nIndex).PaymentTypeIdNo = newValue
                                 RecomputeBankCharges(selectedRow, pPaymentType, pSaleAmount, pDepositAmount)
                                 UpdateTotals()
-                                BindSalesCashItem()
+                                BindSalesDeposit()
                             End If
                         End If
                     Case $"dgvsaleamount"
@@ -399,7 +399,7 @@ Namespace PresentationLayer.Views.Forms
             _jiFooter.ColumnToSum("dgvCredit") = True
             ' _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _slFooter = New DgvFooter(DataGridViewSalesCashItems) With {
+            _slFooter = New DgvFooter(DataGridViewSalesDeposits) With {
                 .AutoCalc = True
             }
             _slFooter.ColumnToSum("dgvSaleAmount") = True
@@ -427,7 +427,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            DataGridViewSalesCashItems.Focus()
+            DataGridViewSalesDeposits.Focus()
         End Sub
 
         Private Sub UpdateJiTotals()
@@ -453,16 +453,16 @@ Namespace PresentationLayer.Views.Forms
             UpdateSlTotals()
         End Sub
 
-        Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesCashItems.UserDeletedRow
+        Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesDeposits.UserDeletedRow
             UpdateSlTotals()
         End Sub
 
         'Private Sub UpdateSlTotals()
-        '    If SalesCashItems IsNot Nothing Then
-        '        TotalBankChargesVat = SalesCashItems.Sum(Function(totals) totals.ActualBankChargeVat)
-        '        TotalBankCharges = SalesCashItems.Sum(Function(totals) totals.ActualBankCharge)
-        '        TotalDeposits = SalesCashItems.Sum(Function(totals) totals.DepositAmount)
-        '        TotalSales = SalesCashItems.Sum(Function(totals) totals.SaleAmount)
+        '    If SalesDeposits IsNot Nothing Then
+        '        TotalBankChargesVat = SalesDeposits.Sum(Function(totals) totals.ActualBankChargeVat)
+        '        TotalBankCharges = SalesDeposits.Sum(Function(totals) totals.ActualBankCharge)
+        '        TotalDeposits = SalesDeposits.Sum(Function(totals) totals.DepositAmount)
+        '        TotalSales = SalesDeposits.Sum(Function(totals) totals.SaleAmount)
         '    Else
         '        TotalBankChargesVat = 0
         '        TotalBankCharges = 0
@@ -481,7 +481,7 @@ Namespace PresentationLayer.Views.Forms
         '    nRowCount = 1
 
         '    ' save the generated open invoices
-        '    _salesCashItemsPresenter.Save(DtSalesCashInsertTable, DtSalesCashUpdateTable, IdNo)
+        '    _SalesDepositsPresenter.Save(DtSalesCashInsertTable, DtSalesCashUpdateTable, IdNo)
         'End Sub
 
         'Protected Overrides Function DataIsValid() As Boolean
@@ -496,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
         '    MyBase.DisplayView(idNoOfRecord)
         '    _journalItemsPresenter.Display(idNoOfRecord)
         '    UpdateTotals()
-        '    _salesCashItemsPresenter.Display(idNoOfRecord)
+        '    _SalesDepositsPresenter.Display(idNoOfRecord)
         '    UpdateSalesDepositsTotal()
         'End Sub
 
@@ -506,8 +506,8 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Sub DisplayJournalItems(display As Boolean)
         '    DataGridViewJournalItems.Visible = display
-        '    DataGridViewSalesCashItems.Visible = Not display
-        '    _floSalesCashItemsFooter.Visible = display
+        '    DataGridViewSalesDeposits.Visible = Not display
+        '    _floSalesDepositsFooter.Visible = display
         '    _floJournalItemsFooter.Visible = Not display
         'End Sub
 
@@ -516,11 +516,11 @@ Namespace PresentationLayer.Views.Forms
             If selectedRow IsNot Nothing Then
                 nIndex = selectedRow.Index
             End If
-            If nIndex < bsSalesCashItems.Count() Then
-                bsSalesCashItems(nIndex).ActualBankCharge = PresenterObj.GetActualBankCharge(pSaleAmount, pDepositAmount)
-                bsSalesCashItems(nIndex).ActualBankChargeVat = PresenterObj.GetActualBankChargeVat(pSaleAmount, pDepositAmount, bsSalesCashItems(nIndex).ActualBankCharge)
-                bsSalesCashItems(nIndex).BankChargeDifference = bsSalesCashItems(nIndex).ActualBankCharge - bsSalesCashItems(nIndex).ComputedBankCharge
-                bsSalesCashItems(nIndex).BankChargeVatDifference = bsSalesCashItems(nIndex).ActualBankChargeVat - bsSalesCashItems(nIndex).ComputedBankChargeVat
+            If nIndex < bsSalesDeposits.Count() Then
+                bsSalesDeposits(nIndex).ActualBankCharge = PresenterObj.GetActualBankCharge(pSaleAmount, pDepositAmount)
+                bsSalesDeposits(nIndex).ActualBankChargeVat = PresenterObj.GetActualBankChargeVat(pSaleAmount, pDepositAmount, bsSalesDeposits(nIndex).ActualBankCharge)
+                bsSalesDeposits(nIndex).BankChargeDifference = bsSalesDeposits(nIndex).ActualBankCharge - bsSalesDeposits(nIndex).ComputedBankCharge
+                bsSalesDeposits(nIndex).BankChargeVatDifference = bsSalesDeposits(nIndex).ActualBankChargeVat - bsSalesDeposits(nIndex).ComputedBankChargeVat
                 'UpdateSalesDepositsTotal()
             End If
         End Sub
@@ -535,12 +535,12 @@ Namespace PresentationLayer.Views.Forms
                 Next
                 'PaymentType = PresenterObj.PaymentTypesModel.Find(Function(cc As PaymentTypeModel) cc.PaymentType.Trim() = pPaymentType.Trim())
                 Dim nIndex As Integer = selectedRow.Index
-                bsSalesCashItems(nIndex).Rate = paymentType.Rate
-                'bsSalesCashItems(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, PaymentType.Rate)
-                'bsSalesCashItems(nIndex).ComputedBankChargeVat = PresenterObj.GetComputedBankChargeVat(bsSalesCashItems(nIndex).ComputedBankCharge)
-                bsSalesCashItems(nIndex).DepositAmount = pSaleAmount - bsSalesCashItems(nIndex).ComputedBankCharge - bsSalesCashItems(nIndex).ComputedBankChargeVat
-                RecomputeActualBankCharges(selectedRow, pSaleAmount, bsSalesCashItems(nIndex).DepositAmount)
-                DataGridViewSalesCashItems.Refresh()
+                bsSalesDeposits(nIndex).Rate = paymentType.Rate
+                'bsSalesDeposits(nIndex).ComputedBankCharge = PresenterObj.GetComputedBankCharge(pSaleAmount, PaymentType.Rate)
+                'bsSalesDeposits(nIndex).ComputedBankChargeVat = PresenterObj.GetComputedBankChargeVat(bsSalesDeposits(nIndex).ComputedBankCharge)
+                bsSalesDeposits(nIndex).DepositAmount = pSaleAmount - bsSalesDeposits(nIndex).ComputedBankCharge - bsSalesDeposits(nIndex).ComputedBankChargeVat
+                RecomputeActualBankCharges(selectedRow, pSaleAmount, bsSalesDeposits(nIndex).DepositAmount)
+                DataGridViewSalesDeposits.Refresh()
             End If
         End Sub
 

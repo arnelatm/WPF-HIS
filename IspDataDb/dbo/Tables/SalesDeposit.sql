@@ -8,9 +8,3 @@
     CONSTRAINT [PK_SalesDetailItemIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
-
-
-
-
-
-

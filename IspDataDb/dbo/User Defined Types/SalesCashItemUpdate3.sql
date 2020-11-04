@@ -1,4 +1,4 @@
-﻿CREATE TYPE [dbo].[SalesCashItemUpdate3] AS TABLE (
+﻿CREATE TYPE [dbo].[SalesDepositUpdate3] AS TABLE (
     [CashCodeIdNo]     TINYINT NOT NULL,
     [DepositAmount]    MONEY   NULL,
     [IDNo]             INT     NOT NULL,

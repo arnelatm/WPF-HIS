@@ -29,12 +29,12 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New SalesJournalItemDao
-            Dim sdDao = New SalesCashItemDao
+            Dim sdDao = New SalesDepositDao
             Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim sd = sdDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
-            data.SalesCashItems = sd
-            'For Each item In data.SalesCashItems
+            data.SalesDeposits = sd
+            'For Each item In data.SalesDeposits
             '    item.ComputedBankCharge = item.SaleAmount *
             'Next
             Return data

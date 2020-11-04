@@ -4,7 +4,7 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class SalesCashItemModel
+    Public Class SalesDepositModel
 
         Public Property ActualBankCharge As Decimal
         Public Property ActualBankChargeVat As Decimal

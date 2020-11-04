@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface ISalesCashItemView
+    Public Interface ISalesDepositView
         Inherits IView
 
         Property ActualBankCharge As Decimal
