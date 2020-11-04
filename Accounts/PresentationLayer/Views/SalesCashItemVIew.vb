@@ -6,8 +6,8 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
-    Public Class SalesCashItemView
-        Implements ISalesCashItemView, ISelfDuplicating
+    Public Class SalesDepositView
+        Implements ISalesDepositView, ISelfDuplicating
 
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
         Private _computedBankCharge As Decimal = 0D
@@ -16,11 +16,11 @@ Namespace PresentationLayer.Views
         Private _bankChargeVatDifference As Decimal = 0D
         Private ReadOnly _modelPaymentType As New ModelAccounts("PaymentType")
         Private ReadOnly _paymentTypesModel As List(Of PaymentTypeModel) = _modelPaymentType.GetAll(Of PaymentTypeModel)("PaymentTypeName")
-        Public Property ActualBankCharge As Decimal Implements ISalesCashItemView.ActualBankCharge
+        Public Property ActualBankCharge As Decimal Implements ISalesDepositView.ActualBankCharge
 
-        Public Property ActualBankChargeVat As Decimal Implements ISalesCashItemView.ActualBankChargeVat
+        Public Property ActualBankChargeVat As Decimal Implements ISalesDepositView.ActualBankChargeVat
 
-        Public Property BankChargeDifference As Decimal Implements ISalesCashItemView.BankChargeDifference
+        Public Property BankChargeDifference As Decimal Implements ISalesDepositView.BankChargeDifference
             Get
                 Return ActualBankCharge - ComputedBankCharge
             End Get
@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property BankChargeVatDifference As Decimal Implements ISalesCashItemView.BankChargeVatDifference
+        Public Property BankChargeVatDifference As Decimal Implements ISalesDepositView.BankChargeVatDifference
             Get
                 Return ActualBankChargeVat - ComputedBankChargeVat
             End Get
@@ -38,11 +38,11 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property DepositAmount As Decimal Implements ISalesCashItemView.DepositAmount
+        Public Property DepositAmount As Decimal Implements ISalesDepositView.DepositAmount
 
-        Public Property PaymentTypeIdNo As Int16 Implements ISalesCashItemView.PaymentTypeIdNo
+        Public Property PaymentTypeIdNo As Int16 Implements ISalesDepositView.PaymentTypeIdNo
 
-        Public Property ComputedBankCharge As Decimal Implements ISalesCashItemView.ComputedBankCharge
+        Public Property ComputedBankCharge As Decimal Implements ISalesDepositView.ComputedBankCharge
             Get
                 Return Math.Round(Rate * SaleAmount / 100, 2)
             End Get
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property ComputedBankChargeVat As Decimal Implements ISalesCashItemView.ComputedBankChargeVat
+        Public Property ComputedBankChargeVat As Decimal Implements ISalesDepositView.ComputedBankChargeVat
             Get
                 Return Math.Round(ComputedBankCharge * _vatRate, 2)
             End Get
@@ -60,15 +60,15 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements ISalesCashItemView.IdNo
+        Public Property IdNo As Integer Implements ISalesDepositView.IdNo
 
-        Public Property Rate As Decimal Implements ISalesCashItemView.Rate
+        Public Property Rate As Decimal Implements ISalesDepositView.Rate
 
-        Public Property SaleAmount As Decimal Implements ISalesCashItemView.SaleAmount
+        Public Property SaleAmount As Decimal Implements ISalesDepositView.SaleAmount
 
-        Public Property SalesJournalIdNo As Integer Implements ISalesCashItemView.SalesJournalIdNo
+        Public Property SalesJournalIdNo As Integer Implements ISalesDepositView.SalesJournalIdNo
 
-        Public Property Sequence As Int16 Implements ISalesCashItemView.Sequence
+        Public Property Sequence As Int16 Implements ISalesDepositView.Sequence
 
         Public Property Errors As List(Of String) Implements IView.Errors
 
@@ -81,7 +81,7 @@ Namespace PresentationLayer.Views
         'End Function
 
         Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New SalesCashItemView
+            Return New SalesDepositView
         End Function
 
     End Class

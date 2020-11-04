@@ -24178,35 +24178,35 @@ INSERT [dbo].[RevenueGroup] ([IdNo], [RevenueGroupCode], [RevenueGroupName], [Pa
 GO
 SET IDENTITY_INSERT [dbo].[RevenueGroup] OFF
 GO
-SET IDENTITY_INSERT [dbo].[SalesCashItem] ON 
+SET IDENTITY_INSERT [dbo].[SalesDeposit] ON 
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (12, 4, 1, N'1', 5.0000, 5.0000)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (12, 4, 1, N'1', 5.0000, 5.0000)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (13, 4, 2, N'2', 20.0000, 19.8700)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (13, 4, 2, N'2', 20.0000, 19.8700)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (14, 4, 3, N'3', 25.0000, 24.5200)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (14, 4, 3, N'3', 25.0000, 24.5200)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (15, 4, 4, N'4', 222.0000, 217.6800)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (15, 4, 4, N'4', 222.0000, 217.6800)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (16, 5, 1, N'1', 50.0000, 50.0000)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (16, 5, 1, N'1', 50.0000, 50.0000)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (17, 5, 2, N'2', 6000.0000, 5962.2000)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (17, 5, 2, N'2', 6000.0000, 5962.2000)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (18, 6, 1, N'1', 500.0000, 500.0000)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (18, 6, 1, N'1', 500.0000, 500.0000)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (19, 6, 2, N'2', 300.0000, 298.1100)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (19, 6, 2, N'2', 300.0000, 298.1100)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (20, 6, 3, N'3', 200.0000, 196.1200)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (20, 6, 3, N'3', 200.0000, 196.1200)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (21, 7, 1, N'1', 1.0000, 1.0000)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (21, 7, 1, N'1', 1.0000, 1.0000)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (22, 7, 2, N'2', 2.0000, 1.9900)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (22, 7, 2, N'2', 2.0000, 1.9900)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (23, 7, 3, N'3', 3.0000, 2.9400)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (23, 7, 3, N'3', 3.0000, 2.9400)
 GO
-INSERT [dbo].[SalesCashItem] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (24, 7, 4, N'4', 4.0000, 3.9300)
+INSERT [dbo].[SalesDeposit] ([IdNo], [SalesJournalIdNo], [Sequence], [CashCode], [SaleAmount], [DepositAmount]) VALUES (24, 7, 4, N'4', 4.0000, 3.9300)
 GO
-SET IDENTITY_INSERT [dbo].[SalesCashItem] OFF
+SET IDENTITY_INSERT [dbo].[SalesDeposit] OFF
 GO
 SET IDENTITY_INSERT [dbo].[SalesJournal] ON 
 GO

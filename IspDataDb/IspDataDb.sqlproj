@@ -131,7 +131,7 @@
     <Build Include="dbo\Tables\SystemForms.sql" />
     <Build Include="dbo\Tables\SecurityGroup.sql" />
     <Build Include="dbo\Tables\SecurityObject.sql" />
-    <Build Include="dbo\Tables\SalesCashItem.sql" />
+    <Build Include="dbo\Tables\SalesDeposit.sql" />
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\AccountReconciliation.sql" />
     <Build Include="dbo\Tables\RevenueGroup.sql" />
@@ -151,7 +151,7 @@
     <Build Include="dbo\Tables\CashDisbursementJournalItem.sql" />
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
     <Build Include="dbo\Views\Chart_View.sql" />
-    <Build Include="dbo\Views\SalesCashItem_View.sql" />
+    <Build Include="dbo\Views\SalesDeposit_View.sql" />
     <Build Include="dbo\Views\CheckDisbursementJournalItem_View.sql" />
     <Build Include="dbo\Views\GlLedgers_View.sql" />
     <Build Include="dbo\Views\CheckDisbursementJournal_View.sql" />
@@ -236,8 +236,8 @@
     <Build Include="dbo\Stored Procedures\UpdatePettyCashJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertPcsOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdatePcsOiItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertSalesCashItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateSalesCashItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertReconciledTVP.sql" />
     <Build Include="dbo\User Defined Types\CadOiItemInsert.sql" />
     <Build Include="dbo\User Defined Types\CadOiItemUpdate.sql" />
@@ -255,8 +255,8 @@
     <Build Include="dbo\User Defined Types\JournalItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemInsert.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemUpdate.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemInsert.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemUpdate.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositInsert.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositUpdate.sql" />
     <Build Include="dbo\User Defined Types\GroupAccessInsert.sql" />
     <Build Include="dbo\User Defined Types\GroupAccessUpdate.sql" />
     <Build Include="dbo\User Defined Types\PcsOiItemInsert.sql" />
@@ -378,10 +378,16 @@
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
     <Build Include="dbo\Views\PayrollDeductAccount_View.sql" />
     <Build Include="dbo\Tables\PaymentType.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemUpdate2.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemInsert2.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemUpdate3.sql" />
-    <Build Include="dbo\User Defined Types\SalesCashItemInsert3.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositUpdate2.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositInsert2.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositUpdate3.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositInsert3.sql" />
+    <Build Include="dbo\Tables\SalesDeposit.sql" />
+    <Build Include="dbo\Views\SalesDeposit_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositUpdate.sql" />
+    <Build Include="dbo\User Defined Types\SalesDepositInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

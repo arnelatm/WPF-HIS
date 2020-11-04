@@ -5,7 +5,3 @@
     [SalesJournalIdNo] INT     NULL,
     [Sequence]         INT     NOT NULL);
 
-
-
-
-

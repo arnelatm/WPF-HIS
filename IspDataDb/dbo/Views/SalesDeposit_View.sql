@@ -1,11 +1,11 @@
-﻿CREATE VIEW dbo.SalesDeposit_View
+﻿
+CREATE VIEW [dbo].[SalesDeposit_View]
 AS
 SELECT        dbo.SalesDeposit.IdNo, dbo.SalesDeposit.SalesJournalIdNo, dbo.SalesDeposit.Sequence, dbo.SalesDeposit.SaleAmount, dbo.SalesDeposit.DepositAmount, dbo.SalesDeposit.PaymentTypeIdNo, 
                          dbo.PaymentType.PaymentTypeCode, dbo.PaymentType.PaymentTypeName, dbo.PaymentType.AccountIdNo, dbo.PaymentType.Rate, dbo.PaymentType.BankChargesAccountIdNo, 
                          dbo.PaymentType.BankChargesVatAccountIdNo, dbo.PaymentType.PaymentTypeNameAra
 FROM            dbo.SalesDeposit INNER JOIN
                          dbo.PaymentType ON dbo.SalesDeposit.PaymentTypeIdNo = dbo.PaymentType.IdNo
-
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesDeposit_View';
 
@@ -129,6 +129,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesDeposit_View';
-
-
 

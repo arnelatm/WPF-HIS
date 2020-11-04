@@ -18,11 +18,11 @@ Namespace PresentationLayer.Presenters
         Protected DtSalesPaymentTypeUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private ReadOnly _salesCashItemModel As New ModelAccounts("SalesCashItem")
+        Private ReadOnly _SalesDepositModel As New ModelAccounts("SalesDeposit")
         Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
 
         Private _paymentTypesModel As List(Of PaymentTypeModel)
-        Private ReadOnly _oldSalesPaymentTypeItem As List(Of SalesCashItemModel)
+        Private ReadOnly _oldSalesPaymentTypeItem As List(Of SalesDepositModel)
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
@@ -86,8 +86,8 @@ Namespace PresentationLayer.Presenters
             Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetSalesCashItems(salesPaymentTypeIdNo As Int32) As List(Of SalesCashItemModel)
-            Return _salesCashItemModel.GetRecordsWithIdNo(Of SalesCashItemModel)(salesPaymentTypeIdNo, "Sequence")
+        Public Function GetSalesDeposits(salesPaymentTypeIdNo As Int32) As List(Of SalesDepositModel)
+            Return _SalesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesPaymentTypeIdNo, "Sequence")
         End Function
 
         'Public Sub OnAfterSave() Handles MyBase.AfterSave
@@ -103,10 +103,10 @@ Namespace PresentationLayer.Presenters
             Else
                 View.JournalItems = New List(Of JournalItemView)
             End If
-            If View.SalesCashItems IsNot Nothing Then
-                View.SalesCashItems.Clear()
+            If View.SalesDeposits IsNot Nothing Then
+                View.SalesDeposits.Clear()
             Else
-                View.SalesCashItems = New List(Of SalesCashItemView)
+                View.SalesDeposits = New List(Of SalesDepositView)
             End If
         End Sub
 
@@ -115,7 +115,7 @@ Namespace PresentationLayer.Presenters
             SetAsideJournalItems()
             Dim nRowCount As Integer
             nRowCount = 1
-            For Each sc In View.SalesCashItems
+            For Each sc In View.SalesDeposits
                 If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
                     Dim workRow As DataRow
                     If sc.IdNo <= 0 Then
@@ -144,7 +144,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             View.TotalDebits = 0
             View.TotalCredits = 0
-            For Each ji In View.SalesCashItems
+            For Each ji In View.SalesDeposits
                 View.TotalDebits += ji.DepositAmount
             Next
             View.TotalCredits = View.TotalDebits
@@ -154,7 +154,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = UpdateChildData(_salesCashItemModel, DtSalesPaymentTypeUpdateTable, DtSalesPaymentTypeInsertTable, passedValue, "SalesJournalIdNo")
+                retVal = UpdateChildData(_SalesDepositModel, DtSalesPaymentTypeUpdateTable, DtSalesPaymentTypeInsertTable, passedValue, "SalesJournalIdNo")
             End If
             If retVal >= 0 Then
                 GlobalVariables.Mapper.Map(View, DataModel)
@@ -179,11 +179,11 @@ Namespace PresentationLayer.Presenters
             Dim oldJournalItems = GetJournalItems(View.IdNo)
             Dim counter As Integer = 0
             View.TotalSales = 0
-            For Each item In View.SalesCashItems
+            For Each item In View.SalesDeposits
                 View.TotalSales = View.TotalSales + item.SaleAmount
             Next
             MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
-            For Each item As SalesCashItemView In View.SalesCashItems
+            For Each item As SalesDepositView In View.SalesDeposits
                 If item.PaymentTypeIdNo <> 0 Then
                     Dim paymentType = _paymentTypesModel.Find(Function(c) c.IdNo = item.PaymentTypeIdNo())
                     MakeSalesJournal(oldJournalItems, counter, paymentType.AccountIdNo, item.DepositAmount, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
@@ -270,7 +270,7 @@ Namespace PresentationLayer.Presenters
             Return (saleAmount - depositAmount - actualBankCharge)
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesCashItemModel)
+        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 

@@ -7,7 +7,3 @@
     [Sequence]         INT     NOT NULL,
     PRIMARY KEY CLUSTERED ([IdNo] ASC));
 
-
-
-
-

@@ -2,7 +2,7 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Namespace BusinessLayer
 
-    Public Class SalesCashItem
+    Public Class SalesDeposit
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern

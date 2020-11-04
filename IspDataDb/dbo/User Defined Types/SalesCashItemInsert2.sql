@@ -1,4 +1,4 @@
-﻿CREATE TYPE [dbo].[SalesCashItemInsert2] AS TABLE (
+﻿CREATE TYPE [dbo].[SalesDepositInsert2] AS TABLE (
     [CashCode]         CHAR (1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [DepositAmount]    MONEY    NULL,
     [SaleAmount]       MONEY    NULL,

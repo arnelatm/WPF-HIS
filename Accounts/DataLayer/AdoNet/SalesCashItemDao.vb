@@ -4,20 +4,20 @@ Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
-    ' Data access object for SalesCashItem
+    ' Data access object for SalesDeposit
     ' ** DAO Pattern
 
-    Public Class SalesCashItemDao
+    Public Class SalesDepositDao
         Inherits CommonDao
-        Implements IDaoChild(Of SalesCashItem)
+        Implements IDaoChild(Of SalesDeposit)
 
         Private Shared ReadOnly Db As New Db()
-        Protected TableFileName As String = "SalesCashItem"
-        Protected DboTvpUpdateFileName As String = "dbo.UpdateSalesCashItemTVP"
-        Protected DboTvpInsertFileName As String = "dbo.InsertSalesCashItemTVP"
+        Protected TableFileName As String = "SalesDeposit"
+        Protected DboTvpUpdateFileName As String = "dbo.UpdateSalesDepositTVP"
+        Protected DboTvpInsertFileName As String = "dbo.InsertSalesDepositTVP"
 
         Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
-            As List(Of SalesCashItem) Implements IDaoChild(Of SalesCashItem).GetRecordsWithIdNo
+            As List(Of SalesDeposit) Implements IDaoChild(Of SalesDeposit).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
                     "SaleAmount," &
                     "SalesJournalIdNo," &
                     "Sequence" &
-                    " FROM SalesCashItem_View" &
+                    " FROM SalesDeposit_View" &
                     " WHERE SalesJournalIdNo = " & idNo &
                     " ORDER BY " & sortExpression
             Dim x = Db.Read(sql, Make).ToList()
@@ -42,17 +42,17 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, salesJournalIdNo As Int32) As Integer _
-            Implements IDaoChild(Of SalesCashItem).DelUpdateTvp
+            Implements IDaoChild(Of SalesDeposit).DelUpdateTvp
             Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", salesJournalIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of SalesCashItem).InsertTvp
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of SalesDeposit).InsertTvp
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, SalesCashItem) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, SalesDeposit) =
                                     Function(reader) _
-            New SalesCashItem() With {
+            New SalesDeposit() With {
             .DepositAmount = Extensions.AsDecimal(reader("DepositAmount")),
             .PaymentTypeIdNo = Extensions.AsInt(Of Int16)(reader("PaymentTypeIdNo")),
             .SaleAmount = Extensions.AsDecimal(reader("SaleAmount")),

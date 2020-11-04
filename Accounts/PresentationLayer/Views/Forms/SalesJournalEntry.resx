@@ -1005,28 +1005,28 @@
   <data name="DgvSalesJournalIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="bsSalesCashItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="bsSalesDeposits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 17</value>
   </metadata>
-  <data name="DataGridViewSalesCashItems.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="DataGridViewSalesDeposits.Location" type="System.Drawing.Point, System.Drawing">
     <value>989, 3</value>
   </data>
-  <data name="DataGridViewSalesCashItems.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DataGridViewSalesDeposits.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 305</value>
   </data>
-  <data name="DataGridViewSalesCashItems.TabIndex" type="System.Int32, mscorlib">
+  <data name="DataGridViewSalesDeposits.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;DataGridViewSalesCashItems.Name" xml:space="preserve">
-    <value>DataGridViewSalesCashItems</value>
+  <data name="&gt;&gt;DataGridViewSalesDeposits.Name" xml:space="preserve">
+    <value>DataGridViewSalesDeposits</value>
   </data>
-  <data name="&gt;&gt;DataGridViewSalesCashItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewSalesDeposits.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DataGridViewSalesCashItems.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewSalesDeposits.Parent" xml:space="preserve">
     <value>floPurchaseJournalItems</value>
   </data>
-  <data name="&gt;&gt;DataGridViewSalesCashItems.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewSalesDeposits.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="floPurchaseJournalItems.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
@@ -1132,7 +1132,7 @@
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
-    <value>floSalesCashItemsFooter</value>
+    <value>floSalesDepositsFooter</value>
   </data>
   <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1159,30 +1159,30 @@
     <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnHideJournalEntries.Parent" xml:space="preserve">
-    <value>floSalesCashItemsFooter</value>
+    <value>floSalesDepositsFooter</value>
   </data>
   <data name="&gt;&gt;btnHideJournalEntries.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="floSalesCashItemsFooter.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="floSalesDepositsFooter.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 455</value>
   </data>
-  <data name="floSalesCashItemsFooter.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="floSalesDepositsFooter.Size" type="System.Drawing.Size, System.Drawing">
     <value>987, 26</value>
   </data>
-  <data name="floSalesCashItemsFooter.TabIndex" type="System.Int32, mscorlib">
+  <data name="floSalesDepositsFooter.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;floSalesCashItemsFooter.Name" xml:space="preserve">
-    <value>floSalesCashItemsFooter</value>
+  <data name="&gt;&gt;floSalesDepositsFooter.Name" xml:space="preserve">
+    <value>floSalesDepositsFooter</value>
   </data>
-  <data name="&gt;&gt;floSalesCashItemsFooter.Type" xml:space="preserve">
+  <data name="&gt;&gt;floSalesDepositsFooter.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;floSalesCashItemsFooter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;floSalesDepositsFooter.Parent" xml:space="preserve">
     <value>floFullEntryArea</value>
   </data>
-  <data name="&gt;&gt;floSalesCashItemsFooter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;floSalesDepositsFooter.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="floFullEntryArea.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -89534,10 +89534,10 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bsSalesCashItems.Name" xml:space="preserve">
-    <value>bsSalesCashItems</value>
+  <data name="&gt;&gt;bsSalesDeposits.Name" xml:space="preserve">
+    <value>bsSalesDeposits</value>
   </data>
-  <data name="&gt;&gt;bsSalesCashItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;bsSalesDeposits.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequenceSc.Name" xml:space="preserve">

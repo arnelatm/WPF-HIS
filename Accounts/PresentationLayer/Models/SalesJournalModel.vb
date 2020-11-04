@@ -21,7 +21,7 @@
         Public Property TotalBankChargesVat As Decimal
         Public Property TotalSales As Decimal
         Public Property TransactionDate As Date?
-        Public Property SalesCashItems As List(Of SalesCashItemModel)
+        Public Property SalesDeposits As List(Of SalesDepositModel)
         Public Property JournalItems As List(Of JournalItemModel)
     End Class
 

@@ -351,9 +351,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property SalesCashItemDao As IDaoChild(Of SalesCashItem)
+        Private ReadOnly Property SalesDepositDao As IDaoChild(Of SalesDeposit)
             Get
-                Return DaoFactoryAccounts.CreateDao("SalesCashItem")
+                Return DaoFactoryAccounts.CreateDao("SalesDeposit")
             End Get
         End Property
 

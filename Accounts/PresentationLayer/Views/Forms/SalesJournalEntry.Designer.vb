@@ -79,16 +79,16 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewSalesCashItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewSalesDeposits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.floSalesCashItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.floSalesDepositsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.bsSalesCashItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsSalesDeposits = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvPaymentTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -109,11 +109,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.SuspendLayout
         Me.floPurchaseJournalItems.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridViewSalesCashItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DataGridViewSalesDeposits,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalItemsFooter.SuspendLayout
-        Me.floSalesCashItemsFooter.SuspendLayout
+        Me.floSalesDepositsFooter.SuspendLayout
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -131,7 +131,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalHeader)
         Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalItems)
         Me.floFullEntryArea.Controls.Add(Me.floJournalItemsFooter)
-        Me.floFullEntryArea.Controls.Add(Me.floSalesCashItemsFooter)
+        Me.floFullEntryArea.Controls.Add(Me.floSalesDepositsFooter)
         resources.ApplyResources(Me.floFullEntryArea, "floFullEntryArea")
         Me.floFullEntryArea.Name = "floFullEntryArea"
         '
@@ -439,7 +439,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floPurchaseJournalItems.BackColor = System.Drawing.Color.Transparent
         Me.floPurchaseJournalItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.floPurchaseJournalItems.Controls.Add(Me.DataGridViewJournalItems)
-        Me.floPurchaseJournalItems.Controls.Add(Me.DataGridViewSalesCashItems)
+        Me.floPurchaseJournalItems.Controls.Add(Me.DataGridViewSalesDeposits)
         Me.floFullEntryArea.SetFlowBreak(Me.floPurchaseJournalItems, true)
         resources.ApplyResources(Me.floPurchaseJournalItems, "floPurchaseJournalItems")
         Me.floPurchaseJournalItems.Name = "floPurchaseJournalItems"
@@ -575,15 +575,15 @@ Namespace PresentationLayer.Views.Forms
         Me.ItemVatAmount.Name = "ItemVatAmount"
         Me.ItemVatAmount.ReadOnly = true
         '
-        'DataGridViewSalesCashItems
+        'DataGridViewSalesDeposits
         '
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewSalesCashItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
-        Me.DataGridViewSalesCashItems.AutoGenerateColumns = false
-        Me.DataGridViewSalesCashItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewSalesCashItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvPaymentTypeIdNo, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
-        Me.DataGridViewSalesCashItems.DataInGridChanged = false
-        Me.DataGridViewSalesCashItems.DataSource = Me.bsSalesCashItems
+        Me.DataGridViewSalesDeposits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.DataGridViewSalesDeposits.AutoGenerateColumns = false
+        Me.DataGridViewSalesDeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvPaymentTypeIdNo, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
+        Me.DataGridViewSalesDeposits.DataInGridChanged = false
+        Me.DataGridViewSalesDeposits.DataSource = Me.bsSalesDeposits
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle18.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -591,22 +591,22 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewSalesCashItems.DefaultCellStyle = DataGridViewCellStyle18
-        Me.DataGridViewSalesCashItems.DgvFooter = Nothing
-        Me.DataGridViewSalesCashItems.DisplayOnly = false
-        Me.DataGridViewSalesCashItems.Ea = EventAggregator2
-        Me.DataGridViewSalesCashItems.EditingMode = false
-        Me.DataGridViewSalesCashItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewSalesCashItems.FirstRowDeletionEnabled = true
-        Me.DataGridViewSalesCashItems.FirstRowInsertionEnabled = true
-        resources.ApplyResources(Me.DataGridViewSalesCashItems, "DataGridViewSalesCashItems")
-        Me.DataGridViewSalesCashItems.Name = "DataGridViewSalesCashItems"
-        Me.DataGridViewSalesCashItems.ReadOnly = true
-        Me.DataGridViewSalesCashItems.SequenceColumn = "dgvSequenceSc"
-        Me.DataGridViewSalesCashItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewSalesCashItems.ShowFooter = false
-        Me.DataGridViewSalesCashItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewSalesCashItems.StartTrackingChanges = false
+        Me.DataGridViewSalesDeposits.DefaultCellStyle = DataGridViewCellStyle18
+        Me.DataGridViewSalesDeposits.DgvFooter = Nothing
+        Me.DataGridViewSalesDeposits.DisplayOnly = false
+        Me.DataGridViewSalesDeposits.Ea = EventAggregator2
+        Me.DataGridViewSalesDeposits.EditingMode = false
+        Me.DataGridViewSalesDeposits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewSalesDeposits.FirstRowDeletionEnabled = true
+        Me.DataGridViewSalesDeposits.FirstRowInsertionEnabled = true
+        resources.ApplyResources(Me.DataGridViewSalesDeposits, "DataGridViewSalesDeposits")
+        Me.DataGridViewSalesDeposits.Name = "DataGridViewSalesDeposits"
+        Me.DataGridViewSalesDeposits.ReadOnly = true
+        Me.DataGridViewSalesDeposits.SequenceColumn = "dgvSequenceSc"
+        Me.DataGridViewSalesDeposits.SequenceFieldName = "Sequence"
+        Me.DataGridViewSalesDeposits.ShowFooter = false
+        Me.DataGridViewSalesDeposits.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewSalesDeposits.StartTrackingChanges = false
         '
         'floJournalItemsFooter
         '
@@ -625,13 +625,13 @@ Namespace PresentationLayer.Views.Forms
         Me.btnViewGL.OriginalImageName = Nothing
         Me.btnViewGL.SecurityKey = ""
         '
-        'floSalesCashItemsFooter
+        'floSalesDepositsFooter
         '
-        Me.floSalesCashItemsFooter.BackColor = System.Drawing.Color.Transparent
-        Me.floSalesCashItemsFooter.Controls.Add(Me.CLabel1)
-        Me.floSalesCashItemsFooter.Controls.Add(Me.btnHideJournalEntries)
-        resources.ApplyResources(Me.floSalesCashItemsFooter, "floSalesCashItemsFooter")
-        Me.floSalesCashItemsFooter.Name = "floSalesCashItemsFooter"
+        Me.floSalesDepositsFooter.BackColor = System.Drawing.Color.Transparent
+        Me.floSalesDepositsFooter.Controls.Add(Me.CLabel1)
+        Me.floSalesDepositsFooter.Controls.Add(Me.btnHideJournalEntries)
+        resources.ApplyResources(Me.floSalesDepositsFooter, "floSalesDepositsFooter")
+        Me.floSalesDepositsFooter.Name = "floSalesDepositsFooter"
         '
         'CLabel1
         '
@@ -668,9 +668,9 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
         '
-        'bsSalesCashItems
+        'bsSalesDeposits
         '
-        Me.bsSalesCashItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesCashItemView)
+        Me.bsSalesDeposits.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesDepositView)
         '
         'dgvSequenceSc
         '
@@ -857,11 +857,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.ResumeLayout(false)
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridViewSalesCashItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DataGridViewSalesDeposits,System.ComponentModel.ISupportInitialize).EndInit
         Me.floJournalItemsFooter.ResumeLayout(false)
-        Me.floSalesCashItemsFooter.ResumeLayout(false)
+        Me.floSalesDepositsFooter.ResumeLayout(false)
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsSalesCashItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -890,7 +890,7 @@ End Sub
         Friend WithEvents txtPayeeName As CTextBox
         Friend WithEvents floHeader1 As CFlowLayout
         Friend WithEvents floHeader2 As CFlowLayout
-        Friend WithEvents bsSalesCashItems As Windows.Forms.BindingSource
+        Friend WithEvents bsSalesDeposits As Windows.Forms.BindingSource
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
@@ -914,10 +914,10 @@ End Sub
         Friend WithEvents SalesJournalIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
-        Friend WithEvents floSalesCashItemsFooter As CFlowLayout
+        Friend WithEvents floSalesDepositsFooter As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnHideJournalEntries As CButton
-        Public WithEvents DataGridViewSalesCashItems As CDataGridView
+        Public WithEvents DataGridViewSalesDeposits As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvColumnMoney
