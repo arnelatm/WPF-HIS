@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
 
         Private _depositTypesModel As List(Of DepositTypeModel)
         Private ReadOnly _oldSalesDepositTypeItem As List(Of SalesDepositModel)
-        Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
+        Private ReadOnly _vatRate As Decimal '= GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
             MyBase.New(view)
@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             DataModel = New SalesJournalModel
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
-
+            _vatRate = GetAppSetting("VATR","VAT","VAT Percentage Rate")/100D
             DepositTypesModel = GetDepositTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))

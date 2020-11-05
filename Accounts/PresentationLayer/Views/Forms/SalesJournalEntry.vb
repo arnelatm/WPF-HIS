@@ -362,7 +362,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim selectedRow As DataGridViewRow
                 selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvpaymenttypeidno"
+                    Case $"dgvdeposittypeidno"
                         Dim nIndex = DataGridViewSalesDeposits.CurrentRow.Index
                         Dim newValue = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
@@ -390,7 +390,7 @@ Namespace PresentationLayer.Views.Forms
                         UpdateTotals()
                     Case $"dgvactualvat"
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount ").Value
+                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
                         Dim pRate As Decimal = selectedRow.Cells("dgvRate").Value
                         RecomputeActualBankCharge(selectedRow, pSaleAmount, pDepositAmount, pRate)
                         UpdateTotals()
@@ -521,7 +521,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow, pSaleAmount As Decimal, pDepositAmount As Decimal, pRate As Decimal)
             Dim nIndex As Integer = 0
-            If selectedRow IsNot Nothing Then
+                    If selectedRow IsNot Nothing Then
                 nIndex = selectedRow.Index
             End If
             If nIndex < bsSalesDeposits.Count() Then
@@ -569,7 +569,7 @@ Namespace PresentationLayer.Views.Forms
                     .DepositAmount = pSaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
                     '.ActualBankCharge = .ComputedBankCharge
                     '.ActualBankChargeVat = .ComputedBankChargeVat
-                    RecomputeActualBankCharges(selectedRow, pSaleAmount, .DepositAmount, depositType.Rate)
+                    RecomputeActualBankCharges(selectedRow, pSaleAmount, pDepositAmount, depositType.Rate)
                 End With
                 DataGridViewSalesDeposits.Refresh()
             End If

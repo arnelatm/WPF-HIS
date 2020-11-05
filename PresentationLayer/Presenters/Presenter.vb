@@ -1352,6 +1352,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
+    Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
+        Dim retValue = Model.GetRecordFieldWithKey(settingCode,"Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption(description)
+            Dim groupSetting As String = group
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
+        End If
+        Return retValue
+    End Function
+
     Public Function GetRevCostCenterUseSetting()
         Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then

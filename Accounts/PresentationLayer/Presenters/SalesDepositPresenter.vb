@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of ISalesDepositsView, SalesDepositModel)
 
         Public ParentViewList As List(Of SalesDepositModel)
-        Private ReadOnly _vatRate As Decimal = GetVatPercentage()
+        Private ReadOnly _vatRate As Decimal 
 
         Public Sub New(view As ISalesDepositsView)
             MyBase.New(view)
@@ -21,6 +21,7 @@ Namespace PresentationLayer.Presenters
             '_cashCodesModel = GetCashCodesModel()
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+            _vatRate = GetAppSetting("VATR","VAT","VAT Percentage Rate")/100D
         End Sub
 
     End Class

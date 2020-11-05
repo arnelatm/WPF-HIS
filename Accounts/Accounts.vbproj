@@ -600,7 +600,6 @@
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SalesDepositPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
