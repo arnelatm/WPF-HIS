@@ -104,7 +104,6 @@
     <Build Include="dbo\Tables\ApOpenInvoice.sql" />
     <Build Include="dbo\Tables\CashReceiptJournalItem.sql" />
     <Build Include="dbo\Tables\xxxLoginxxx.sql" />
-    <Build Include="dbo\Tables\BankCharges.sql" />
     <Build Include="dbo\Tables\Chart.sql" />
     <Build Include="dbo\Tables\CashCode.sql" />
     <Build Include="dbo\Tables\CashReceiptJournal.sql" />
@@ -378,10 +377,6 @@
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
     <Build Include="dbo\Views\PayrollDeductAccount_View.sql" />
     <Build Include="dbo\Tables\PaymentType.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositUpdate2.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositInsert2.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositUpdate3.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositInsert3.sql" />
     <Build Include="dbo\Tables\SalesDeposit.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />

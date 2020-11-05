@@ -77,24 +77,24 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewSalesDeposits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsSalesDeposits = New System.Windows.Forms.BindingSource(Me.components)
         Me.floJournalItemsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.floSalesDepositsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsSalesDeposits = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvDepositTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -109,11 +109,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.SuspendLayout
         Me.floPurchaseJournalItems.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewSalesDeposits,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalItemsFooter.SuspendLayout
         Me.floSalesDepositsFooter.SuspendLayout
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -562,20 +562,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo.ReadOnly = true
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'DataGridViewCheckBoxColumn3
-        '
-        Me.DataGridViewCheckBoxColumn3.DataPropertyName = "Posted"
-        resources.ApplyResources(Me.DataGridViewCheckBoxColumn3, "DataGridViewCheckBoxColumn3")
-        Me.DataGridViewCheckBoxColumn3.Name = "DataGridViewCheckBoxColumn3"
-        Me.DataGridViewCheckBoxColumn3.ReadOnly = true
-        '
-        'DataGridViewCheckBoxColumn2
-        '
-        Me.DataGridViewCheckBoxColumn2.DataPropertyName = "Cancelled"
-        resources.ApplyResources(Me.DataGridViewCheckBoxColumn2, "DataGridViewCheckBoxColumn2")
-        Me.DataGridViewCheckBoxColumn2.Name = "DataGridViewCheckBoxColumn2"
-        Me.DataGridViewCheckBoxColumn2.ReadOnly = true
-        '
         'dgvJournalIdNo
         '
         Me.dgvJournalIdNo.DataPropertyName = "JournalIdNo"
@@ -589,17 +575,13 @@ Namespace PresentationLayer.Views.Forms
         Me.ItemVatAmount.Name = "ItemVatAmount"
         Me.ItemVatAmount.ReadOnly = true
         '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
-        '
         'DataGridViewSalesDeposits
         '
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
         Me.DataGridViewSalesDeposits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewSalesDeposits.AutoGenerateColumns = false
         Me.DataGridViewSalesDeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvDepositTypeIdNo, Me.dgvSaleAmount, Me.dgvDepositAmount, Me.dgvActualVat, Me.dgvActualBankCharge, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
+        Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvDepositTypeIdNo, Me.dgvSaleAmount, Me.dgvActualBankCharge, Me.dgvActualVat, Me.dgvDepositAmount, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
         Me.DataGridViewSalesDeposits.DataInGridChanged = false
         Me.DataGridViewSalesDeposits.DataSource = Me.bsSalesDeposits
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -625,10 +607,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.ShowFooter = false
         Me.DataGridViewSalesDeposits.ShowInsertColumnWhenEditing = true
         Me.DataGridViewSalesDeposits.StartTrackingChanges = false
-        '
-        'bsSalesDeposits
-        '
-        Me.bsSalesDeposits.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesDepositView)
         '
         'floJournalItemsFooter
         '
@@ -672,6 +650,28 @@ Namespace PresentationLayer.Views.Forms
         Me.btnHideJournalEntries.OriginalImageName = Nothing
         Me.btnHideJournalEntries.SecurityKey = ""
         '
+        'DataGridViewCheckBoxColumn3
+        '
+        Me.DataGridViewCheckBoxColumn3.DataPropertyName = "Posted"
+        resources.ApplyResources(Me.DataGridViewCheckBoxColumn3, "DataGridViewCheckBoxColumn3")
+        Me.DataGridViewCheckBoxColumn3.Name = "DataGridViewCheckBoxColumn3"
+        Me.DataGridViewCheckBoxColumn3.ReadOnly = true
+        '
+        'DataGridViewCheckBoxColumn2
+        '
+        Me.DataGridViewCheckBoxColumn2.DataPropertyName = "Cancelled"
+        resources.ApplyResources(Me.DataGridViewCheckBoxColumn2, "DataGridViewCheckBoxColumn2")
+        Me.DataGridViewCheckBoxColumn2.Name = "DataGridViewCheckBoxColumn2"
+        Me.DataGridViewCheckBoxColumn2.ReadOnly = true
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
+        '
+        'bsSalesDeposits
+        '
+        Me.bsSalesDeposits.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesDepositView)
+        '
         'dgvSequenceSc
         '
         Me.dgvSequenceSc.DataPropertyName = "Sequence"
@@ -710,19 +710,20 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSaleAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvSaleAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'dgvDepositAmount
+        'dgvActualBankCharge
         '
-        Me.dgvDepositAmount.DataPropertyName = "DepositAmount"
+        Me.dgvActualBankCharge.DataPropertyName = "ActualBankCharge"
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle10.Format = "###,##0.00"
-        Me.dgvDepositAmount.DefaultCellStyle = DataGridViewCellStyle10
-        Me.dgvDepositAmount.EditingMode = false
-        resources.ApplyResources(Me.dgvDepositAmount, "dgvDepositAmount")
-        Me.dgvDepositAmount.Name = "dgvDepositAmount"
-        Me.dgvDepositAmount.ReadOnly = true
-        Me.dgvDepositAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvActualBankCharge.DefaultCellStyle = DataGridViewCellStyle10
+        Me.dgvActualBankCharge.EditingMode = false
+        resources.ApplyResources(Me.dgvActualBankCharge, "dgvActualBankCharge")
+        Me.dgvActualBankCharge.Name = "dgvActualBankCharge"
+        Me.dgvActualBankCharge.ReadOnly = true
+        Me.dgvActualBankCharge.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvActualBankCharge.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvActualVat
         '
@@ -739,20 +740,19 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvActualVat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvActualVat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'dgvActualBankCharge
+        'dgvDepositAmount
         '
-        Me.dgvActualBankCharge.DataPropertyName = "ActualBankCharge"
+        Me.dgvDepositAmount.DataPropertyName = "DepositAmount"
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle12.Format = "###,##0.00"
-        Me.dgvActualBankCharge.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvActualBankCharge.EditingMode = false
-        resources.ApplyResources(Me.dgvActualBankCharge, "dgvActualBankCharge")
-        Me.dgvActualBankCharge.Name = "dgvActualBankCharge"
-        Me.dgvActualBankCharge.ReadOnly = true
-        Me.dgvActualBankCharge.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvActualBankCharge.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDepositAmount.DefaultCellStyle = DataGridViewCellStyle12
+        Me.dgvDepositAmount.EditingMode = false
+        resources.ApplyResources(Me.dgvDepositAmount, "dgvDepositAmount")
+        Me.dgvDepositAmount.Name = "dgvDepositAmount"
+        Me.dgvDepositAmount.ReadOnly = true
+        Me.dgvDepositAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'dgvRate
         '
@@ -857,11 +857,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.ResumeLayout(false)
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridViewSalesDeposits,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).EndInit
         Me.floJournalItemsFooter.ResumeLayout(false)
         Me.floSalesDepositsFooter.ResumeLayout(false)
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsSalesDeposits,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -933,9 +933,9 @@ End Sub
         Friend WithEvents dgvSequenceSc As CdgvColumnText
         Friend WithEvents dgvDepositTypeIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney
-        Friend WithEvents dgvDepositAmount As CdgvColumnMoney
-        Friend WithEvents dgvActualVat As CdgvColumnMoney
         Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
+        Friend WithEvents dgvActualVat As CdgvColumnMoney
+        Friend WithEvents dgvDepositAmount As CdgvColumnMoney
         Friend WithEvents dgvRate As CdgvColumnMoney
         Friend WithEvents dgvComputedBankCharge As CdgvColumnMoney
         Friend WithEvents dgvComputedVat As CdgvColumnMoney

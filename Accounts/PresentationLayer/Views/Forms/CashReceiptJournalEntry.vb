@@ -282,7 +282,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the PaymentType so in order to override this part we need to retrieve the PaymentType first
+            ' the DepositType so in order to override this part we need to retrieve the DepositType first
             ' because when assigning the cboPayeeIdNo the datasource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             PayorType = eventType.Model.PayorType

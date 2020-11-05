@@ -135,7 +135,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             End If
-                Return retValue
+            Return retValue
         End Function
 
     End Class

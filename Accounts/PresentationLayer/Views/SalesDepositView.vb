@@ -14,8 +14,7 @@ Namespace PresentationLayer.Views
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
         Private _bankChargeVatDifference As Decimal = 0D
-        Private ReadOnly _modelPaymentType As New ModelAccounts("PaymentType")
-        Private ReadOnly _paymentTypesModel As List(Of PaymentTypeModel) = _modelPaymentType.GetAll(Of PaymentTypeModel)("PaymentTypeName")
+        Private ReadOnly _modelDepositType As New ModelAccounts("DepositType")
         Public Property ActualBankCharge As Decimal Implements ISalesDepositView.ActualBankCharge
 
         Public Property ActualBankChargeVat As Decimal Implements ISalesDepositView.ActualBankChargeVat
@@ -40,7 +39,7 @@ Namespace PresentationLayer.Views
 
         Public Property DepositAmount As Decimal Implements ISalesDepositView.DepositAmount
 
-        Public Property PaymentTypeIdNo As Int16 Implements ISalesDepositView.PaymentTypeIdNo
+        Public Property DepositTypeIdNo As Int16 Implements ISalesDepositView.DepositTypeIdNo
 
         Public Property ComputedBankCharge As Decimal Implements ISalesDepositView.ComputedBankCharge
             Get

@@ -1382,6 +1382,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesDepositTypesToolStripMenuItem.Click
+            Dim childMdiForm As DepositTypeEntryTv
+            childMdiForm = New DepositTypeEntryTv With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

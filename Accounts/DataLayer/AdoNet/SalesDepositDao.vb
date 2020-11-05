@@ -24,7 +24,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "SELECT " &
                     "DepositAmount," &
-                    "PaymentTypeIdNo," &
+                    "DepositTypeIdNo," &
                     "IdNo," &
                     "Rate," &
                     "SaleAmount," &
@@ -54,7 +54,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New SalesDeposit() With {
             .DepositAmount = Extensions.AsDecimal(reader("DepositAmount")),
-            .PaymentTypeIdNo = Extensions.AsInt(Of Int16)(reader("PaymentTypeIdNo")),
+            .DepositTypeIdNo = Extensions.AsInt(Of Int16)(reader("DepositTypeIdNo")),
             .SaleAmount = Extensions.AsDecimal(reader("SaleAmount")),
             .SalesJournalIdNo = Extensions.AsString(reader("SalesJournalIdNo")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
