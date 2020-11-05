@@ -18,7 +18,7 @@ FROM [DBO].SalesDeposit A WHERE A.SalesJournalIdNo = @GroupIdNo and NOT EXISTS (
 
 -- Update existing SalesDeposits
 UPDATE a 
-SET a.PaymentTypeIdNo = B.PaymentTypeIdNo,
+SET a.DepositTypeIdNo = B.DepositTypeIdNo,
 	a.DepositAmount = b.DepositAmount,
 	a.SaleAmount = B.SaleAmount,
 	a.SalesJournalIdNo = B.SalesJournalIdNo,

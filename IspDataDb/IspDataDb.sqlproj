@@ -376,7 +376,6 @@
     <Build Include="dbo\User Defined Types\PensionRateUpdate.sql" />
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
     <Build Include="dbo\Views\PayrollDeductAccount_View.sql" />
-    <Build Include="dbo\Tables\PaymentType.sql" />
     <Build Include="dbo\Tables\SalesDeposit.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
@@ -384,6 +383,7 @@
     <Build Include="dbo\User Defined Types\SalesDepositUpdate.sql" />
     <Build Include="dbo\User Defined Types\SalesDepositInsert.sql" />
     <Build Include="dbo\Tables\BankCharge.sql" />
+    <Build Include="dbo\Tables\DepositType.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
