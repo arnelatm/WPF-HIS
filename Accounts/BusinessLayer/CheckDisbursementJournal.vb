@@ -14,7 +14,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
                 AddRule(New ValidateRequired("Notes"))
-                AddRule(New ValidateRequired("PaymentType"))
+                AddRule(New ValidateRequired("DepositType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("CheckNumber"))
                 'AddRule(New ValidateRange("CheckDate", Date.MinValue , Date.Today.AddDays(366), ValidationOperator.LessThanOrEqual, ValidationDataType.Date))

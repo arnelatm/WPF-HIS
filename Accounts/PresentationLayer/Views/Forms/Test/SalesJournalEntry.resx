@@ -945,10 +945,10 @@
   <data name="dgvSaleAmount.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <data name="dgvDepositAmount.HeaderText" xml:space="preserve">
-    <value>Actual Bank Debit</value>
+  <data name="dgvActualBankCharge.HeaderText" xml:space="preserve">
+    <value>Actual Bank Charges</value>
   </data>
-  <data name="dgvDepositAmount.Width" type="System.Int32, mscorlib">
+  <data name="dgvActualBankCharge.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
   <data name="dgvActualVat.HeaderText" xml:space="preserve">
@@ -957,10 +957,10 @@
   <data name="dgvActualVat.Width" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
-  <data name="dgvActualBankCharge.HeaderText" xml:space="preserve">
-    <value>Actual Bank Charges</value>
+  <data name="dgvDepositAmount.HeaderText" xml:space="preserve">
+    <value>Bank Debit</value>
   </data>
-  <data name="dgvActualBankCharge.Width" type="System.Int32, mscorlib">
+  <data name="dgvDepositAmount.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
   <data name="dgvRate.HeaderText" xml:space="preserve">
@@ -89429,6 +89429,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1016, 519</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1032, 558</value>
   </data>
@@ -89501,18 +89504,6 @@
   <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DataGridViewCheckBoxColumn3.Name" xml:space="preserve">
-    <value>DataGridViewCheckBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCheckBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCheckBoxColumn2.Name" xml:space="preserve">
-    <value>DataGridViewCheckBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCheckBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvJournalIdNo.Name" xml:space="preserve">
     <value>dgvJournalIdNo</value>
   </data>
@@ -89524,6 +89515,18 @@
   </data>
   <data name="&gt;&gt;ItemVatAmount.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewCheckBoxColumn3.Name" xml:space="preserve">
+    <value>DataGridViewCheckBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewCheckBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewCheckBoxColumn2.Name" xml:space="preserve">
+    <value>DataGridViewCheckBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewCheckBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
     <value>bsJournalItems</value>
@@ -89555,10 +89558,10 @@
   <data name="&gt;&gt;dgvSaleAmount.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvDepositAmount.Name" xml:space="preserve">
-    <value>dgvDepositAmount</value>
+  <data name="&gt;&gt;dgvActualBankCharge.Name" xml:space="preserve">
+    <value>dgvActualBankCharge</value>
   </data>
-  <data name="&gt;&gt;dgvDepositAmount.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvActualBankCharge.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvActualVat.Name" xml:space="preserve">
@@ -89567,10 +89570,10 @@
   <data name="&gt;&gt;dgvActualVat.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvActualBankCharge.Name" xml:space="preserve">
-    <value>dgvActualBankCharge</value>
+  <data name="&gt;&gt;dgvDepositAmount.Name" xml:space="preserve">
+    <value>dgvDepositAmount</value>
   </data>
-  <data name="&gt;&gt;dgvActualBankCharge.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvDepositAmount.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRate.Name" xml:space="preserve">

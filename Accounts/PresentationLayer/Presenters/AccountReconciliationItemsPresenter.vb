@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GetVatPercentage()
 
-        'Private _paymentTypesModel As List(Of PaymentTypeModel)
+        'Private _paymentTypesModel As List(Of DepositTypeModel)
         Private _modelReconciled
 
         Public Sub New(view As IAccountReconciliationItemsView)
@@ -178,7 +178,7 @@ Namespace PresentationLayer.Presenters
         '    If pCashCode IsNot Nothing Then
         '        Dim nIndex As Integer = 0
         '        Dim paymentType As Object
-        '        paymentType = _paymentTypesModel.Find(Function(cc As PaymentTypeModel) cc.CashCode.Trim() = pCashCode.Trim())
+        '        paymentType = _paymentTypesModel.Find(Function(cc As DepositTypeModel) cc.CashCode.Trim() = pCashCode.Trim())
         '        nIndex = selectedRow.Index
         '        bsAccountReconciliationItem(nIndex).Rate = paymentType.Rate
         '        bsAccountReconciliationItem(nIndex).ComputedBankCharge = Math.Round(paymentType.Rate * pSaleAmount / 100, 2)

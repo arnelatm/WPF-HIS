@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SalesDepositsPresenter
+    Public Class SalesDepositPresenter
         Inherits AccountsPresenter(Of ISalesDepositsView, SalesDepositModel)
 
         Public ParentViewList As List(Of SalesDepositModel)

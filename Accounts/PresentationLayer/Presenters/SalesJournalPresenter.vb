@@ -14,15 +14,15 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of ISalesJournalView, SalesJournalModel)
 
         Protected DtInsertTable As New DataTable
-        Protected DtSalesPaymentTypeInsertTable As New DataTable
-        Protected DtSalesPaymentTypeUpdateTable As New DataTable
+        Protected DtSalesDepositTypeInsertTable As New DataTable
+        Protected DtSalesDepositTypeUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private ReadOnly _SalesDepositModel As New ModelAccounts("SalesDeposit")
+        Private ReadOnly _salesDepositModel As New ModelAccounts("SalesDeposit")
         Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
 
-        Private _paymentTypesModel As List(Of PaymentTypeModel)
-        Private ReadOnly _oldSalesPaymentTypeItem As List(Of SalesDepositModel)
+        Private _depositTypesModel As List(Of DepositTypeModel)
+        Private ReadOnly _oldSalesDepositTypeItem As List(Of SalesDepositModel)
         Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
 
         Public Sub New(view As ISalesJournalView)
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            PaymentTypesModel = GetPaymentTypeModel()
+            DepositTypesModel = GetDepositTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
@@ -54,31 +54,31 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtSalesPaymentTypeInsertTable.Columns.Add("PaymentTypeIdNo", GetType(Int16))
-            DtSalesPaymentTypeInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesPaymentTypeInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesPaymentTypeInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesPaymentTypeInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositTypeInsertTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
+            DtSalesDepositTypeInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesDepositTypeInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesDepositTypeInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesDepositTypeInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtSalesPaymentTypeUpdateTable.Columns.Add("PaymentTypeIdNo", GetType(Int16))
-            DtSalesPaymentTypeUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesPaymentTypeUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtSalesPaymentTypeUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesPaymentTypeUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesPaymentTypeUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositTypeUpdateTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
+            DtSalesDepositTypeUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesDepositTypeUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtSalesDepositTypeUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesDepositTypeUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesDepositTypeUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
-        Public Property PaymentTypesModel As List(Of PaymentTypeModel)
+        Public Property DepositTypesModel As List(Of DepositTypeModel)
             Get
-                Return _paymentTypesModel
+                Return _depositTypesModel
             End Get
             Set
-                _paymentTypesModel = Value
+                _depositTypesModel = Value
             End Set
         End Property
 
-        'Public Function SalesPaymentTypeItemDataIsValid() As Boolean
+        'Public Function SalesDepositTypeItemDataIsValid() As Boolean
         '    Return True
         'End Function
 
@@ -86,8 +86,8 @@ Namespace PresentationLayer.Presenters
             Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetSalesDeposits(salesPaymentTypeIdNo As Int32) As List(Of SalesDepositModel)
-            Return _SalesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesPaymentTypeIdNo, "Sequence")
+        Public Function GetSalesDeposits(salesDepositTypeIdNo As Int32) As List(Of SalesDepositModel)
+            Return _salesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
         End Function
 
         'Public Sub OnAfterSave() Handles MyBase.AfterSave
@@ -119,20 +119,20 @@ Namespace PresentationLayer.Presenters
                 If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
                     Dim workRow As DataRow
                     If sc.IdNo <= 0 Then
-                        workRow = DtSalesPaymentTypeInsertTable.NewRow()
+                        workRow = DtSalesDepositTypeInsertTable.NewRow()
                     Else
-                        workRow = DtSalesPaymentTypeUpdateTable.NewRow()
+                        workRow = DtSalesDepositTypeUpdateTable.NewRow()
                         workRow("IdNo") = sc.IdNo
                     End If
-                    workRow("PaymentTypeIdNo") = sc.PaymentTypeIdNo
+                    workRow("DepositTypeIdNo") = sc.DepositTypeIdNo
                     workRow("SalesJournalIdNo") = View.IdNo
                     workRow("Sequence") = nRowCount
                     workRow("SaleAmount") = sc.SaleAmount
                     workRow("DepositAmount") = sc.DepositAmount
                     If sc.IdNo <= 0 Then
-                        DtSalesPaymentTypeInsertTable.Rows.Add(workRow)
+                        DtSalesDepositTypeInsertTable.Rows.Add(workRow)
                     Else
-                        DtSalesPaymentTypeUpdateTable.Rows.Add(workRow)
+                        DtSalesDepositTypeUpdateTable.Rows.Add(workRow)
                     End If
                     nRowCount += 1
                     View.TotalDebits += sc.SaleAmount
@@ -154,7 +154,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = UpdateChildData(_SalesDepositModel, DtSalesPaymentTypeUpdateTable, DtSalesPaymentTypeInsertTable, passedValue, "SalesJournalIdNo")
+                retVal = UpdateChildData(_salesDepositModel, DtSalesDepositTypeUpdateTable, DtSalesDepositTypeInsertTable, passedValue, "SalesJournalIdNo")
             End If
             If retVal >= 0 Then
                 GlobalVariables.Mapper.Map(View, DataModel)
@@ -184,11 +184,11 @@ Namespace PresentationLayer.Presenters
             Next
             MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
             For Each item As SalesDepositView In View.SalesDeposits
-                If item.PaymentTypeIdNo <> 0 Then
-                    Dim paymentType = _paymentTypesModel.Find(Function(c) c.IdNo = item.PaymentTypeIdNo())
-                    MakeSalesJournal(oldJournalItems, counter, paymentType.AccountIdNo, item.DepositAmount, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, paymentType.BankChargesAccountIdNo, item.ActualBankCharge, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, paymentType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, paymentType.PaymentTypeName, paymentType.PaymentTypeNameAra)
+                If item.DepositTypeIdNo <> 0 Then
+                    Dim depositType = _depositTypesModel.Find(Function(c) c.IdNo = item.DepositTypeIdNo())
+                    MakeSalesJournal(oldJournalItems, counter, depositType.AccountIdNo, item.DepositAmount, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                    MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesAccountIdNo, item.ActualBankCharge, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                    MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
                 End If
             Next
             If counter < View.JournalItems.Count() Then
@@ -230,11 +230,11 @@ Namespace PresentationLayer.Presenters
             If DtUpdateTable IsNot Nothing Then
                 DtUpdateTable.Clear()
             End If
-            If DtSalesPaymentTypeInsertTable IsNot Nothing Then
-                DtSalesPaymentTypeInsertTable.Clear()
+            If DtSalesDepositTypeInsertTable IsNot Nothing Then
+                DtSalesDepositTypeInsertTable.Clear()
             End If
-            If DtSalesPaymentTypeUpdateTable IsNot Nothing Then
-                DtSalesPaymentTypeUpdateTable.Clear()
+            If DtSalesDepositTypeUpdateTable IsNot Nothing Then
+                DtSalesDepositTypeUpdateTable.Clear()
             End If
             Dim nRowCount As Integer = 1
             For Each ji In View.JournalItems
@@ -268,6 +268,14 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
             Return (saleAmount - depositAmount - actualBankCharge)
+        End Function
+
+        Public Function GetComputedBankCharge(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
+            Return Math.Round(saleAmount * rate / 100D, 2)
+        End Function
+
+        Public Function GetComputedBankChargeVat(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
+            Return Math.Floor((GetComputedBankCharge(saleAmount, rate / 100D) * _vatRate / 100D) * 100D) / 100D
         End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)

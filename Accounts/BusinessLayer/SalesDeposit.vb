@@ -1,20 +1,20 @@
-﻿Namespace PresentationLayer.Models
+﻿' Category business object
+' ** Enterprise Design Pattern: Domain Model, Identity Field
+Namespace BusinessLayer
 
-    ''' <summary>
-    '''     The Model in MVP design pattern.
-    '''     Implements IModel and communicates with WCF Service.
-    ''' </summary>
-    Public Class SalesDepositModel
+    Public Class SalesDeposit
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        ' ** Enterprise Design Pattern: Identity field pattern
 
         Public Property ActualBankCharge As Decimal
         Public Property ActualBankChargeVat As Decimal
         Public Property BankChargeDifference As Decimal
         Public Property BankChargeVatDifference As Decimal
         Public Property DepositAmount As Decimal
-        Public Property PaymentTypeIdNo As Int16
+        Public Property DepositTypeIdNo As Int16
         Public Property ComputedBankCharge As Decimal
         Public Property ComputedBankChargeVat As Decimal
-        Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property Rate As Decimal
         Public Property SaleAmount As Decimal

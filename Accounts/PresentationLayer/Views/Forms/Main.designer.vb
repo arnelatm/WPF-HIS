@@ -85,6 +85,7 @@ Namespace PresentationLayer.Views.Forms
         Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PensionProvidersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PensionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
@@ -149,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PensionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesDepositTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.Account.SuspendLayout
@@ -279,7 +280,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem, Me.SalesDepositTypesToolStripMenuItem})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -456,6 +457,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.PensionProvidersToolStripMenuItem.Name = "PensionProvidersToolStripMenuItem"
         resources.ApplyResources(Me.PensionProvidersToolStripMenuItem, "PensionProvidersToolStripMenuItem")
+        '
+        'PensionSchemesToolStripMenuItem
+        '
+        Me.PensionSchemesToolStripMenuItem.Name = "PensionSchemesToolStripMenuItem"
+        resources.ApplyResources(Me.PensionSchemesToolStripMenuItem, "PensionSchemesToolStripMenuItem")
         '
         'ToolStripMenuItemSupplierVendors
         '
@@ -789,10 +795,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'PensionSchemesToolStripMenuItem
+        'SalesDepositTypesToolStripMenuItem
         '
-        Me.PensionSchemesToolStripMenuItem.Name = "PensionSchemesToolStripMenuItem"
-        resources.ApplyResources(Me.PensionSchemesToolStripMenuItem, "PensionSchemesToolStripMenuItem")
+        Me.SalesDepositTypesToolStripMenuItem.Name = "SalesDepositTypesToolStripMenuItem"
+        resources.ApplyResources(Me.SalesDepositTypesToolStripMenuItem, "SalesDepositTypesToolStripMenuItem")
         '
         'Main
         '
@@ -939,5 +945,6 @@ End Sub
         Friend WithEvents PayPeriodsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionProvidersToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionSchemesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents SalesDepositTypesToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

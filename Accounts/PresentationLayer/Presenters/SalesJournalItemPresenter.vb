@@ -50,12 +50,6 @@ Namespace PresentationLayer.Presenters
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Customer Payee accounts allowed for this entry!", item.Sequence))
                         retVal = False
                     End If
-                    'ElseIf paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    '    itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
-                    '    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso GetEnumCode(itemPayeeType) <> PayeeTypeSelection.Supplier Then
-                    '        MessageBox.Show(String.Format("Error on line {0:n0}. Sorry only Supplier Payee accounts allowed for this entry!", item.Sequence))
-                    '        retVal = False
-                    '    End If
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Others Or paymentTypeEnum = PaymentTypeSelection.Supplier Then
                     itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
                     If Not String.IsNullOrEmpty(itemPayeeType) Then
