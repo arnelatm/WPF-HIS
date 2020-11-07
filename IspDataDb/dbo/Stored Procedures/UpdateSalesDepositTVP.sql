@@ -22,7 +22,8 @@ SET a.DepositTypeIdNo = B.DepositTypeIdNo,
 	a.DepositAmount = b.DepositAmount,
 	a.SaleAmount = B.SaleAmount,
 	a.SalesJournalIdNo = B.SalesJournalIdNo,
-    a.[Sequence] = B.[Sequence]
+    a.[Sequence] = B.[Sequence],
+	a.VatAmount = B.VatAmount
 from SalesDeposit a INNER JOIN @MParam As b
 on a.IDNo = b.IDNo
 

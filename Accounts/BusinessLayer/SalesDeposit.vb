@@ -8,7 +8,6 @@ Namespace BusinessLayer
         ' ** Enterprise Design Pattern: Identity field pattern
 
         Public Property ActualBankCharge As Decimal
-        Public Property ActualBankChargeVat As Decimal
         Public Property BankChargeDifference As Decimal
         Public Property BankChargeVatDifference As Decimal
         Public Property DepositAmount As Decimal
@@ -20,7 +19,7 @@ Namespace BusinessLayer
         Public Property SaleAmount As Decimal
         Public Property SalesJournalIdNo As Int32
         Public Property Sequence As Int16
-
+        Public Property VatAmount As Decimal
     End Class
 
 End Namespace

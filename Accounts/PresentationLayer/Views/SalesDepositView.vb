@@ -14,10 +14,10 @@ Namespace PresentationLayer.Views
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
         Private _bankChargeVatDifference As Decimal = 0D
+        Private _saleAmount As Decimal = 0D
         Private ReadOnly _modelDepositType As New ModelAccounts("DepositType")
         Public Property ActualBankCharge As Decimal Implements ISalesDepositView.ActualBankCharge
 
-        Public Property ActualBankChargeVat As Decimal Implements ISalesDepositView.ActualBankChargeVat
 
         Public Property BankChargeDifference As Decimal Implements ISalesDepositView.BankChargeDifference
             Get
@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views
 
         Public Property BankChargeVatDifference As Decimal Implements ISalesDepositView.BankChargeVatDifference
             Get
-                Return ActualBankChargeVat - ComputedBankChargeVat
+                Return VatAmount - ComputedBankChargeVat
             End Get
             Set(value As Decimal)
                 _bankChargeVatDifference = value
@@ -64,10 +64,39 @@ Namespace PresentationLayer.Views
         Public Property Rate As Decimal Implements ISalesDepositView.Rate
 
         Public Property SaleAmount As Decimal Implements ISalesDepositView.SaleAmount
+            Get
+                Return _saleAmount
+            End Get
+            Set(value As Decimal)
+                If value <> _saleAmount Then
+                    _saleAmount = value
+                    ComputedBankCharge = Math.Round(Rate * value / 100D, 2)
+                    ComputedBankChargeVat = Math.Floor(ComputedBankCharge * _vatRate) / 100D
+                    ActualBankCharge = ComputedBankCharge
+                    VatAmount = ComputedBankChargeVat
+                    DepositAmount = value - ActualBankCharge - VatAmount
+                End If
+            End Set
+        End Property
 
         Public Property SalesJournalIdNo As Integer Implements ISalesDepositView.SalesJournalIdNo
+        '    Get
+        '        Return _saleAmount
+        '    End Get
+        '    Set(value As Integer)
+        '        If value <> _saleAmount Then
+        '            _saleAmount = value
+        '            ComputedBankCharge = Math.Round(Rate * value / 100D, 2)
+        '            ComputedBankChargeVat = Math.Floor(ComputedBankCharge * _vatRate) / 100D
+        '            ActualBankCharge = ComputedBankCharge
+        '            VatAmount = ComputedBankChargeVat
+        '            DepositAmount = value - ActualBankCharge - VatAmount
+        '        End If
+        '    End Set
+        'End Property
 
         Public Property Sequence As Int16 Implements ISalesDepositView.Sequence
+        Public Property VatAmount As Decimal Implements ISalesDepositView.VatAmount
 
         Public Property Errors As List(Of String) Implements IView.Errors
 

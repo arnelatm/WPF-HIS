@@ -13,8 +13,8 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of ISalesJournalView, SalesJournalModel)
 
         Protected DtInsertTable As New DataTable
-        Protected DtSalesDepositTypeInsertTable As New DataTable
-        Protected DtSalesDepositTypeUpdateTable As New DataTable
+        Protected DtSalesDepositInsertTable As New DataTable
+        Protected DtSalesDepositUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _salesDepositModel As New ModelAccounts("SalesDeposit")
@@ -43,6 +43,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Notes", GetType(String))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
@@ -52,19 +53,22 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
 
-            DtSalesDepositTypeInsertTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
-            DtSalesDepositTypeInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesDepositTypeInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesDepositTypeInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesDepositTypeInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositInsertTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
+            DtSalesDepositInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesDepositInsertTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesDepositInsertTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesDepositInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositInsertTable.Columns.Add("VatAmount", GetType(Decimal))
 
-            DtSalesDepositTypeUpdateTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
-            DtSalesDepositTypeUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
-            DtSalesDepositTypeUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtSalesDepositTypeUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
-            DtSalesDepositTypeUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
-            DtSalesDepositTypeUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositUpdateTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
+            DtSalesDepositUpdateTable.Columns.Add("DepositAmount", GetType(Decimal))
+            DtSalesDepositUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtSalesDepositUpdateTable.Columns.Add("SaleAmount", GetType(Decimal))
+            DtSalesDepositUpdateTable.Columns.Add("SalesJournalIdNo", GetType(Int32))
+            DtSalesDepositUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtSalesDepositUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
 
         End Sub
 
@@ -119,9 +123,9 @@ Namespace PresentationLayer.Presenters
                 If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
                     Dim workRow As DataRow
                     If sc.IdNo <= 0 Then
-                        workRow = DtSalesDepositTypeInsertTable.NewRow()
+                        workRow = DtSalesDepositInsertTable.NewRow()
                     Else
-                        workRow = DtSalesDepositTypeUpdateTable.NewRow()
+                        workRow = DtSalesDepositUpdateTable.NewRow()
                         workRow("IdNo") = sc.IdNo
                     End If
                     workRow("DepositTypeIdNo") = sc.DepositTypeIdNo
@@ -130,9 +134,9 @@ Namespace PresentationLayer.Presenters
                     workRow("SaleAmount") = sc.SaleAmount
                     workRow("DepositAmount") = sc.DepositAmount
                     If sc.IdNo <= 0 Then
-                        DtSalesDepositTypeInsertTable.Rows.Add(workRow)
+                        DtSalesDepositInsertTable.Rows.Add(workRow)
                     Else
-                        DtSalesDepositTypeUpdateTable.Rows.Add(workRow)
+                        DtSalesDepositUpdateTable.Rows.Add(workRow)
                     End If
                     nRowCount += 1
                     View.TotalDebits += sc.SaleAmount
@@ -154,7 +158,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = UpdateChildData(_salesDepositModel, DtSalesDepositTypeUpdateTable, DtSalesDepositTypeInsertTable, passedValue, "SalesJournalIdNo")
+                retVal = UpdateChildData(_salesDepositModel, DtSalesDepositUpdateTable, DtSalesDepositInsertTable, passedValue, "SalesJournalIdNo")
             End If
             If retVal >= 0 Then
                 GlobalVariables.Mapper.Map(View, DataModel)
@@ -189,7 +193,7 @@ Namespace PresentationLayer.Presenters
                     MakeSalesJournal(oldJournalItems, counter, depositType.AccountIdNo, item.DepositAmount, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
                     If depositType.WithBankCharges Then
                         MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesAccountIdNo, item.ActualBankCharge, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
-                        MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                        MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesVatAccountIdNo, item.VatAmount, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
                     End If
                 End If
             Next
@@ -232,11 +236,11 @@ Namespace PresentationLayer.Presenters
             If DtUpdateTable IsNot Nothing Then
                 DtUpdateTable.Clear()
             End If
-            If DtSalesDepositTypeInsertTable IsNot Nothing Then
-                DtSalesDepositTypeInsertTable.Clear()
+            If DtSalesDepositInsertTable IsNot Nothing Then
+                DtSalesDepositInsertTable.Clear()
             End If
-            If DtSalesDepositTypeUpdateTable IsNot Nothing Then
-                DtSalesDepositTypeUpdateTable.Clear()
+            If DtSalesDepositUpdateTable IsNot Nothing Then
+                DtSalesDepositUpdateTable.Clear()
             End If
             Dim nRowCount As Integer = 1
             For Each ji In View.JournalItems
