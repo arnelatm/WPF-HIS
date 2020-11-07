@@ -3,7 +3,10 @@
     [DepositAmount]    MONEY   NULL,
     [SaleAmount]       MONEY   NULL,
     [SalesJournalIdNo] INT     NULL,
-    [Sequence]         INT     NOT NULL);
+    [Sequence]         INT     NOT NULL,
+    [VatAmount]        MONEY   NULL);
+
+
 
 
 

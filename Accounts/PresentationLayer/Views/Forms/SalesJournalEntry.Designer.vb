@@ -726,7 +726,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvActualVat
         '
-        Me.dgvActualVat.DataPropertyName = "ActualBankChargeVat"
+        Me.dgvActualVat.DataPropertyName = "ActualVatAmount"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black

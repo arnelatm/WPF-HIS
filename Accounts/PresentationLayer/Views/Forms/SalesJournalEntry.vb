@@ -337,11 +337,6 @@ Namespace PresentationLayer.Views.Forms
                                 RecomputeBankCharges(selectedRow, pDepositType, pSaleAmount)
                             End If
                         End If
-                    Case $"dgvsaleamount"
-                        Dim pDepositType = selectedRow.Cells("dgvDepositTypeIdNo").Value
-                        Dim pSaleAmount As Decimal = .Value
-                        Dim pDepositAmount As Decimal = selectedRow.Cells("dgvDepositAmount").Value
-                        RecomputeBankCharges(selectedRow, pDepositType, pSaleAmount, pDepositAmount)
                     Case $"dgvdepositamount"
                         Dim pDepositType = selectedRow.Cells("dgvDepositTypeIdNo").Value
                         Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
@@ -433,7 +428,7 @@ Namespace PresentationLayer.Views.Forms
             If nIndex < bsSalesDeposits.Count() Then
                 With bsSalesDeposits(nIndex)
                     .ActualBankCharge = .ComputedBankCharge
-                    .ActualBankChargeVat = .ComputedBankChargeVat
+                    .VatAmount = .ComputedBankChargeVat
                 End With
             End If
         End Sub
@@ -444,7 +439,7 @@ Namespace PresentationLayer.Views.Forms
                 nIndex = selectedRow.Index
             End If
             If nIndex < bsSalesDeposits.Count() Then
-                bsSalesDeposits(nIndex).ActualBankCharge = pSaleAmount - pDepositAmount - bsSalesDeposits(nIndex).ActualBankChargeVat
+                bsSalesDeposits(nIndex).ActualBankCharge = pSaleAmount - pDepositAmount - bsSalesDeposits(nIndex).VatAmount
             End If
         End Sub
 
@@ -485,8 +480,8 @@ Namespace PresentationLayer.Views.Forms
                 With bsSalesDeposits(nIndex)
                     .Rate = depositType.Rate
                     .ActualBankCharge = .computedBankCharge
-                    .ActualBankChargeVat = .computedBankChargeVat
-                    .DepositAmount = pSaleAmount - .actualBankCharge - .actualBankChargeVat
+                    .VatAmount = .computedBankChargeVat
+                    .DepositAmount = pSaleAmount - .actualBankCharge - .VatAmount
                 End With
                 DataGridViewSalesDeposits.Refresh()
             End If

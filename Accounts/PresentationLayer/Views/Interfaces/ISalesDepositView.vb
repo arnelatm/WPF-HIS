@@ -6,7 +6,6 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property ActualBankCharge As Decimal
-        Property ActualBankChargeVat As Decimal
         Property BankChargeDifference As Decimal
         Property BankChargeVatDifference As Decimal
         Property DepositAmount As Decimal
@@ -18,6 +17,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property SaleAmount As Decimal
         Property SalesJournalIdNo As Int32
         Property Sequence As Int16
+        Property VatAmount As Decimal
 
     End Interface
 

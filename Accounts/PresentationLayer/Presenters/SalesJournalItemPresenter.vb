@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
         '        Dim cashCode = _cashCodesModel.Find(Function(c) c.CashCode.Trim() = item.CashCode.Trim())
         '        MakeSalesJournal(oldJournalItems, counter, cashCode.AccountIdNo, item.DepositAmount, 0)
         '        MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesAccountIdNo, item.ActualBankCharge, 0)
-        '        MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0)
+        '        MakeSalesJournal(oldJournalItems, counter, cashCode.BankChargesVatAccountIdNo, item.VatAmount, 0)
         '    Next
         '    UpdateTotals()
         'End Sub
