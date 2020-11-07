@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -34,7 +33,7 @@ Namespace PresentationLayer.Presenters
             DataModel = New SalesJournalModel
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
-            _vatRate = GetAppSetting($"VATR", $"VAT", "VAT Percentage Rate") / 100D
+            _vatRate = My.Settings.VatRate / 100D
             DepositTypesModel = GetDepositTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
@@ -78,10 +77,6 @@ Namespace PresentationLayer.Presenters
             End Set
         End Property
 
-        'Public Function SalesDepositTypeItemDataIsValid() As Boolean
-        '    Return True
-        'End Function
-
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
             Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
@@ -90,11 +85,16 @@ Namespace PresentationLayer.Presenters
             Return _salesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
         End Function
 
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
+        Public Function GetDepositType(ByVal pDepositTypeIdNo As Int16)
+            Dim depositType As New DepositTypeModel
+            For Each item As DepositTypeModel In DepositTypesModel
+                If item.IdNo = pDepositTypeIdNo Then
+                    depositType = item
+                    Exit For
+                End If
+            Next
+            Return depositType
+        End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.TransactionDate = Date.Now()
@@ -187,8 +187,10 @@ Namespace PresentationLayer.Presenters
                 If item.DepositTypeIdNo <> 0 Then
                     Dim depositType = _depositTypesModel.Find(Function(c) c.IdNo = item.DepositTypeIdNo())
                     MakeSalesJournal(oldJournalItems, counter, depositType.AccountIdNo, item.DepositAmount, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesAccountIdNo, item.ActualBankCharge, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
-                    MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                    If depositType.WithBankCharges Then
+                        MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesAccountIdNo, item.ActualBankCharge, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                        MakeSalesJournal(oldJournalItems, counter, depositType.BankChargesVatAccountIdNo, item.ActualBankChargeVat, 0, depositType.DepositTypeName, depositType.DepositTypeNameAra)
+                    End If
                 End If
             Next
             If counter < View.JournalItems.Count() Then
@@ -269,24 +271,6 @@ Namespace PresentationLayer.Presenters
         Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
             Return (saleAmount - depositAmount - actualBankCharge)
         End Function
-
-        'Public Function GetComputedBankCharge(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
-        '    Return Math.Round(saleAmount * rate / 100D, 2)
-        'End Function
-
-        'Public Function GetComputedBankChargeVat(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
-        '    Dim bankCharge = GetComputedBankCharge(saleAmount, rate)
-        '    Dim vat = bankCharge * _vatRate
-        '    Return Math.Floor(vat * 100D) / 100D
-        'End Function
-
-        'Public Function GetComputedDeposit(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
-        '    Dim bankCharges As Decimal
-        '    Dim vat As Decimal
-        '    bankCharges = GetComputedBankCharge(saleAmount, rate)
-        '    vat = GetComputedBankChargeVat(saleAmount, rate)
-        '    Return saleAmount - bankCharges - vat
-        'End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
