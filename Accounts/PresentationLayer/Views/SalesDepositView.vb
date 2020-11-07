@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views
     Public Class SalesDepositView
         Implements ISalesDepositView, ISelfDuplicating
 
-        Private ReadOnly _vatRate As Decimal = GlobalFunctions.GetVatPercentage()
+        Private ReadOnly _vatRate As Decimal = My.Settings.VatRate
         Private _computedBankCharge As Decimal = 0D
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
@@ -43,7 +43,7 @@ Namespace PresentationLayer.Views
 
         Public Property ComputedBankCharge As Decimal Implements ISalesDepositView.ComputedBankCharge
             Get
-                Return Math.Round(Rate * SaleAmount / 100, 2)
+                Return Math.Round(Rate * SaleAmount / 100D, 2)
             End Get
             Set(value As Decimal)
                 _computedBankCharge = value
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views
 
         Public Property ComputedBankChargeVat As Decimal Implements ISalesDepositView.ComputedBankChargeVat
             Get
-                Return Math.Round(ComputedBankCharge * _vatRate, 2)
+                Return Math.Floor(ComputedBankCharge * _vatRate) / 100D
             End Get
             Set(value As Decimal)
                 _computedBankChargeVat = value
