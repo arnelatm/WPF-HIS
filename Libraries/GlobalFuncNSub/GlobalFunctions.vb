@@ -111,7 +111,7 @@ Public Module GlobalFunctions
     End Function
 
     Public Function FormatDecimalNumber(ByVal number As Decimal, ByVal decimalPlaces As Int16) As String
-        Return number.ToString("F" + decimalPlaces.ToString().Trim) 
+        Return number.ToString("F" + decimalPlaces.ToString().Trim)
     End Function
 
     Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
@@ -232,7 +232,7 @@ Public Module GlobalFunctions
     End Function
 
     Public Function GetVatPercentage()
-        Return 0.05D
+        Return 0.15D
     End Function
 
     Public Function GregorianDay(ByVal pDate As Date?) As Int16

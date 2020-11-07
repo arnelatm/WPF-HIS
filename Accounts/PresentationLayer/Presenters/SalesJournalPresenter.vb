@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             DataModel = New SalesJournalModel
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
-            _vatRate = GetAppSetting("VATR","VAT","VAT Percentage Rate")/100D
+            _vatRate = GetAppSetting($"VATR", $"VAT", "VAT Percentage Rate") / 100D
             DepositTypesModel = GetDepositTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
@@ -270,13 +270,23 @@ Namespace PresentationLayer.Presenters
             Return (saleAmount - depositAmount - actualBankCharge)
         End Function
 
-        Public Function GetComputedBankCharge(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
-            Return Math.Round(saleAmount * rate / 100D, 2)
-        End Function
+        'Public Function GetComputedBankCharge(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
+        '    Return Math.Round(saleAmount * rate / 100D, 2)
+        'End Function
 
-        Public Function GetComputedBankChargeVat(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
-            Return Math.Floor((GetComputedBankCharge(saleAmount, rate / 100D) * _vatRate / 100D) * 100D) / 100D
-        End Function
+        'Public Function GetComputedBankChargeVat(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
+        '    Dim bankCharge = GetComputedBankCharge(saleAmount, rate)
+        '    Dim vat = bankCharge * _vatRate
+        '    Return Math.Floor(vat * 100D) / 100D
+        'End Function
+
+        'Public Function GetComputedDeposit(ByVal saleAmount As Decimal, ByVal rate As Decimal) As Decimal
+        '    Dim bankCharges As Decimal
+        '    Dim vat As Decimal
+        '    bankCharges = GetComputedBankCharge(saleAmount, rate)
+        '    vat = GetComputedBankChargeVat(saleAmount, rate)
+        '    Return saleAmount - bankCharges - vat
+        'End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)

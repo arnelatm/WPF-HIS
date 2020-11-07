@@ -135,13 +135,13 @@ Namespace PresentationLayer.Presenters
             actualReconItems.Add(item)
         End Sub
 
-        Public Function GetComputedBankCharge(ByRef saleAmount As Decimal, ByRef rate As Decimal)
-            Return Math.Round(rate * saleAmount / 100, 2)
-        End Function
+        'Public Function GetComputedBankCharge(ByRef saleAmount As Decimal, ByRef rate As Decimal)
+        '    Return Math.Round(rate * saleAmount / 100, 2)
+        'End Function
 
-        Public Function GetComputedBankChargeVat(computedBankCharge)
-            Return Math.Round(computedBankCharge * _vatRate, 2)
-        End Function
+        'Public Function GetComputedBankChargeVat(computedBankCharge)
+        '    Return Math.Round(computedBankCharge * _vatRate, 2)
+        'End Function
 
         Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
             Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
