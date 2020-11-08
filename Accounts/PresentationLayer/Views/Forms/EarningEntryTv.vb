@@ -15,6 +15,8 @@ Namespace PresentationLayer.Views.Forms
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)
+        Private _unit As Char
+        Private _unitPosition As TableLayoutPanelCellPosition 
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
 
         Public Sub New()
@@ -73,6 +75,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property MultiplierType As Char Implements IEarningView.MultiplierType
+            Get
+                Return cboMultiplierType.GetValue()
+            End Get
+            Set
+                cboMultiplierType.SetValue(Value)
+            End Set
+        End Property
 
         Public Property AccountIdNo As Int16 Implements IEarningView.AccountIdNo
             Get
@@ -318,14 +327,21 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateCalculationTabDisplay()
+            SuspendLayout()
+            floCalculation.Visible = False
+            tlpCalculation.Visible = False
             Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+            'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
+            Dim cellPosOrig As TableLayoutPanelCellPosition = new TableLayoutPanelCellPosition(3,2)
+            Dim cellPos As TableLayoutPanelCellPosition = new TableLayoutPanelCellPosition(1,3)
+            lblFactoredUnit.Visible = False
             Select Case curCalculationType
                 Case CalculationTypeSelection.Fixed
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
-                    lblDefaultQty.Visible = False
+                    lblDefaultQuantity.Visible = False
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
                     lblRate.Visible = True
@@ -334,16 +350,20 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
                 Case CalculationTypeSelection.Factor
                     cboBasePaymentIdNo.Visible = True
                     cboMultiplierType.Visible = True
                     cboUnit.Visible = True
                     lblBasePayment.Visible = True
-                    lblDefaultQty.Visible = True
+                    lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = True
-                    lblPayRate.Visible = True
+                    lblPayRate.Visible = False
                     lblRate.Visible = False
-                    lblPayRate.Text = Messaging.TranslateCaption("Unit")
+                    lblFactoredUnit.Visible = True
+                    tlpCalculation.SetCellPosition(cboUnit, cellPos )
+                    cboUnit.Visible = True
+                    'SwapPosition(cboFactoredUnit,cboUnit)
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = True
                     txtRate.Visible = False
@@ -352,7 +372,7 @@ Namespace PresentationLayer.Views.Forms
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
-                    lblDefaultQty.Visible = True
+                    lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
                     lblRate.Visible = True
@@ -360,12 +380,13 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig )
                 Case CalculationTypeSelection.Global
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
-                    lblDefaultQty.Visible = True
+                    lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
                     lblRate.Visible = True
@@ -373,7 +394,11 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig )
             End Select
+            tlpCalculation.Visible = True
+            floCalculation.Visible = True
+            ResumeLayout
         End Sub
 
         'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)
@@ -418,6 +443,7 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
+            _unitPosition = tlpCalculation.GetCellPosition(cboUnit)           
             'If _usePayGroups Then
             '    chkUsePayGroups.Visible = True
             '    lblUsePayGroups.Visible = True
@@ -463,6 +489,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub tbpAccountPosting_Enter(sender As Object, e As EventArgs) Handles tbpAccountPosting.Enter
             UpdatePostingTabDisplay()
+        End Sub
+
+        Private Sub SwapPosition(c1 As Control, c2 As Control)
+            Dim tlp As TableLayoutPanel = TryCast(c1.Parent, TableLayoutPanel)
+            If tlpCalculation Is c2.Parent AndAlso tlp IsNot Nothing Then
+                Dim posC1 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c1)
+                Dim posC2 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c2)
+                tlp.SetCellPosition(c2, posC1)
+                tlp.SetCellPosition(c1, posC2)
+            End If
         End Sub
 
     End Class

@@ -34,7 +34,6 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tlpEarning = New System.Windows.Forms.TableLayoutPanel()
         Me.txtEarningNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -53,10 +52,12 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.tbpCalculation = New System.Windows.Forms.TabPage()
         Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblFactoredUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblDefaultQty = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -72,7 +73,6 @@ Namespace PresentationLayer.Views.Forms
         Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblPayRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
@@ -85,14 +85,14 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout4.SuspendLayout
         Me.tlpEarning.SuspendLayout
         Me.tbcEarning.SuspendLayout
@@ -101,12 +101,13 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.SuspendLayout
         Me.tbpCalculation.SuspendLayout
         Me.floCalculation.SuspendLayout
-        Me.TableLayoutPanel2.SuspendLayout
+        Me.tlpCalculation.SuspendLayout
         Me.tbpAccountPosting.SuspendLayout
         Me.floPostingAccounts.SuspendLayout
         Me.tloPostingAccounts.SuspendLayout
         CType(Me.DataGridViewPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
+        CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TreeViewTableName
@@ -118,9 +119,9 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
-        'bsPayrollEarnAccounts
+        'AppDataDAC
         '
-        Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'CFlowLayout4
         '
@@ -320,34 +321,49 @@ Namespace PresentationLayer.Views.Forms
         Me.floCalculation.BackColor = System.Drawing.Color.Transparent
         Me.floCalculation.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
         resources.ApplyResources(Me.floCalculation, "floCalculation")
-        Me.floCalculation.Controls.Add(Me.TableLayoutPanel2)
+        Me.floCalculation.Controls.Add(Me.tlpCalculation)
         Me.floCalculation.Name = "floCalculation"
         '
-        'TableLayoutPanel2
+        'tlpCalculation
         '
-        resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
-        Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblDefaultQty, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblCalculationType, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtDefaultQuantity, 1, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblBasePayment, 0, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboBasePaymentIdNo, 1, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblIncludeInGosi, 0, 7)
-        Me.TableLayoutPanel2.Controls.Add(Me.chkIncludeInPension, 1, 7)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblIncludeInEos, 0, 6)
-        Me.TableLayoutPanel2.Controls.Add(Me.chkIncludeInEOS, 1, 6)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtMultiplier, 1, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboMultiplierType, 2, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.chkTaxable, 2, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblTaxable, 0, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.cboEarningType, 1, 0)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        resources.ApplyResources(Me.tlpCalculation, "tlpCalculation")
+        Me.tlpCalculation.Controls.Add(Me.lblFactoredUnit, 0, 3)
+        Me.tlpCalculation.Controls.Add(Me.CLabel2, 0, 0)
+        Me.tlpCalculation.Controls.Add(Me.lblMultiplier, 0, 6)
+        Me.tlpCalculation.Controls.Add(Me.lblDefaultQuantity, 0, 4)
+        Me.tlpCalculation.Controls.Add(Me.lblCalculationType, 0, 1)
+        Me.tlpCalculation.Controls.Add(Me.cboCalculationType, 1, 1)
+        Me.tlpCalculation.Controls.Add(Me.txtRate, 1, 2)
+        Me.tlpCalculation.Controls.Add(Me.txtDefaultQuantity, 1, 4)
+        Me.tlpCalculation.Controls.Add(Me.lblBasePayment, 0, 5)
+        Me.tlpCalculation.Controls.Add(Me.cboBasePaymentIdNo, 1, 5)
+        Me.tlpCalculation.Controls.Add(Me.lblIncludeInGosi, 0, 8)
+        Me.tlpCalculation.Controls.Add(Me.chkIncludeInPension, 1, 8)
+        Me.tlpCalculation.Controls.Add(Me.lblIncludeInEos, 0, 7)
+        Me.tlpCalculation.Controls.Add(Me.chkIncludeInEOS, 1, 7)
+        Me.tlpCalculation.Controls.Add(Me.txtMultiplier, 1, 6)
+        Me.tlpCalculation.Controls.Add(Me.cboMultiplierType, 2, 6)
+        Me.tlpCalculation.Controls.Add(Me.chkTaxable, 2, 9)
+        Me.tlpCalculation.Controls.Add(Me.lblTaxable, 0, 9)
+        Me.tlpCalculation.Controls.Add(Me.lblPayRate, 2, 2)
+        Me.tlpCalculation.Controls.Add(Me.lblRate, 0, 2)
+        Me.tlpCalculation.Controls.Add(Me.cboUnit, 3, 2)
+        Me.tlpCalculation.Controls.Add(Me.cboEarningType, 1, 0)
+        Me.tlpCalculation.Name = "tlpCalculation"
+        '
+        'lblRate
+        '
+        resources.ApplyResources(Me.lblRate, "lblRate")
+        Me.lblRate.DisplayOnly = true
+        Me.lblRate.EditingMode = false
+        Me.lblRate.Name = "lblRate"
+        '
+        'lblFactoredUnit
+        '
+        resources.ApplyResources(Me.lblFactoredUnit, "lblFactoredUnit")
+        Me.lblFactoredUnit.DisplayOnly = true
+        Me.lblFactoredUnit.EditingMode = false
+        Me.lblFactoredUnit.Name = "lblFactoredUnit"
         '
         'CLabel2
         '
@@ -363,12 +379,12 @@ Namespace PresentationLayer.Views.Forms
         Me.lblMultiplier.EditingMode = false
         Me.lblMultiplier.Name = "lblMultiplier"
         '
-        'lblDefaultQty
+        'lblDefaultQuantity
         '
-        resources.ApplyResources(Me.lblDefaultQty, "lblDefaultQty")
-        Me.lblDefaultQty.DisplayOnly = true
-        Me.lblDefaultQty.EditingMode = false
-        Me.lblDefaultQty.Name = "lblDefaultQty"
+        resources.ApplyResources(Me.lblDefaultQuantity, "lblDefaultQuantity")
+        Me.lblDefaultQuantity.DisplayOnly = true
+        Me.lblDefaultQuantity.EditingMode = false
+        Me.lblDefaultQuantity.Name = "lblDefaultQuantity"
         '
         'lblCalculationType
         '
@@ -381,7 +397,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.cboCalculationType.BackColor = System.Drawing.Color.White
         Me.cboCalculationType.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel2.SetColumnSpan(Me.cboCalculationType, 3)
+        Me.tlpCalculation.SetColumnSpan(Me.cboCalculationType, 3)
         Me.cboCalculationType.CurrentSearchTerm = ""
         Me.cboCalculationType.DefaultValue = Nothing
         Me.cboCalculationType.DisplayMember = "Name"
@@ -438,7 +454,7 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.txtDefaultQuantity, "txtDefaultQuantity")
         Me.txtDefaultQuantity.EditingMode = true
         Me.txtDefaultQuantity.ForeColor = System.Drawing.Color.Black
-        Me.txtDefaultQuantity.LinkedLabel = Me.lblDefaultQty
+        Me.txtDefaultQuantity.LinkedLabel = Me.lblDefaultQuantity
         Me.txtDefaultQuantity.MaximumValue = Nothing
         Me.txtDefaultQuantity.MinimumValue = Nothing
         Me.txtDefaultQuantity.Name = "txtDefaultQuantity"
@@ -455,7 +471,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.cboBasePaymentIdNo.BackColor = System.Drawing.Color.White
         Me.cboBasePaymentIdNo.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel2.SetColumnSpan(Me.cboBasePaymentIdNo, 3)
+        Me.tlpCalculation.SetColumnSpan(Me.cboBasePaymentIdNo, 3)
         Me.cboBasePaymentIdNo.CurrentSearchTerm = ""
         Me.cboBasePaymentIdNo.DefaultValue = Nothing
         Me.cboBasePaymentIdNo.DisplayMember = "Name"
@@ -489,7 +505,7 @@ Namespace PresentationLayer.Views.Forms
         'lblIncludeInGosi
         '
         resources.ApplyResources(Me.lblIncludeInGosi, "lblIncludeInGosi")
-        Me.TableLayoutPanel2.SetColumnSpan(Me.lblIncludeInGosi, 2)
+        Me.tlpCalculation.SetColumnSpan(Me.lblIncludeInGosi, 2)
         Me.lblIncludeInGosi.DisplayOnly = true
         Me.lblIncludeInGosi.EditingMode = false
         Me.lblIncludeInGosi.Name = "lblIncludeInGosi"
@@ -511,7 +527,7 @@ Namespace PresentationLayer.Views.Forms
         'lblIncludeInEos
         '
         resources.ApplyResources(Me.lblIncludeInEos, "lblIncludeInEos")
-        Me.TableLayoutPanel2.SetColumnSpan(Me.lblIncludeInEos, 2)
+        Me.tlpCalculation.SetColumnSpan(Me.lblIncludeInEos, 2)
         Me.lblIncludeInEos.DisplayOnly = true
         Me.lblIncludeInEos.EditingMode = false
         Me.lblIncludeInEos.Name = "lblIncludeInEos"
@@ -550,7 +566,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.cboMultiplierType.BackColor = System.Drawing.Color.White
         Me.cboMultiplierType.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel2.SetColumnSpan(Me.cboMultiplierType, 2)
+        Me.tlpCalculation.SetColumnSpan(Me.cboMultiplierType, 2)
         Me.cboMultiplierType.CurrentSearchTerm = ""
         Me.cboMultiplierType.DefaultValue = Nothing
         Me.cboMultiplierType.DisplayMember = "Name"
@@ -598,7 +614,7 @@ Namespace PresentationLayer.Views.Forms
         'lblTaxable
         '
         resources.ApplyResources(Me.lblTaxable, "lblTaxable")
-        Me.TableLayoutPanel2.SetColumnSpan(Me.lblTaxable, 2)
+        Me.tlpCalculation.SetColumnSpan(Me.lblTaxable, 2)
         Me.lblTaxable.DisplayOnly = true
         Me.lblTaxable.EditingMode = false
         Me.lblTaxable.Name = "lblTaxable"
@@ -609,13 +625,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayRate.DisplayOnly = true
         Me.lblPayRate.EditingMode = false
         Me.lblPayRate.Name = "lblPayRate"
-        '
-        'lblRate
-        '
-        resources.ApplyResources(Me.lblRate, "lblRate")
-        Me.lblRate.DisplayOnly = true
-        Me.lblRate.EditingMode = false
-        Me.lblRate.Name = "lblRate"
         '
         'cboUnit
         '
@@ -656,7 +665,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEarningType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboEarningType.BackColor = System.Drawing.Color.White
         Me.cboEarningType.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel2.SetColumnSpan(Me.cboEarningType, 3)
+        Me.tlpCalculation.SetColumnSpan(Me.cboEarningType, 3)
         Me.cboEarningType.CurrentSearchTerm = ""
         Me.cboEarningType.DefaultValue = ""
         Me.cboEarningType.DisplayMember = "Name"
@@ -833,27 +842,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo.Name = "dgvIdNo"
         Me.dgvIdNo.ReadOnly = true
         '
-        'AccountNameDataGridViewTextBoxColumn
-        '
-        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'EarningIdNoDataGridViewTextBoxColumn
-        '
-        Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
-        resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
-        Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
-        Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PayGroupNameDataGridViewTextBoxColumn
-        '
-        Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
-        resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
-        Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
-        Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = true
-        '
         'lblUsePayGroups
         '
         resources.ApplyResources(Me.lblUsePayGroups, "lblUsePayGroups")
@@ -884,6 +872,31 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
+        'AccountNameDataGridViewTextBoxColumn
+        '
+        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
+        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'EarningIdNoDataGridViewTextBoxColumn
+        '
+        Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
+        resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
+        Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
+        Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'PayGroupNameDataGridViewTextBoxColumn
+        '
+        Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
+        resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
+        Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
+        Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'bsPayrollEarnAccounts
+        '
+        Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+        '
         'EarningEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -892,7 +905,6 @@ Namespace PresentationLayer.Views.Forms
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
         Me.tlpEarning.ResumeLayout(false)
         Me.tlpEarning.PerformLayout
@@ -903,14 +915,15 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.PerformLayout
         Me.tbpCalculation.ResumeLayout(false)
         Me.floCalculation.ResumeLayout(false)
-        Me.TableLayoutPanel2.ResumeLayout(false)
-        Me.TableLayoutPanel2.PerformLayout
+        Me.tlpCalculation.ResumeLayout(false)
+        Me.tlpCalculation.PerformLayout
         Me.tbpAccountPosting.ResumeLayout(false)
         Me.floPostingAccounts.ResumeLayout(false)
         Me.tloPostingAccounts.ResumeLayout(false)
         Me.tloPostingAccounts.PerformLayout
         CType(Me.DataGridViewPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
+        CType(Me.bsPayrollEarnAccounts,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -934,9 +947,9 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpCalculation As TabPage
         Friend WithEvents floCalculation As CFlowLayout
-        Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+        Friend WithEvents tlpCalculation As TableLayoutPanel
         Friend WithEvents lblMultiplier As CLabel
-        Friend WithEvents lblDefaultQty As CLabel
+        Friend WithEvents lblDefaultQuantity As CLabel
         Friend WithEvents lblRate As CLabel
         Friend WithEvents lblCalculationType As CLabel
         Friend WithEvents cboCalculationType As CaComboBox
@@ -972,5 +985,6 @@ End Sub
         Friend WithEvents cboEarningType As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents lblFactoredUnit As CLabel
     End Class
 End Namespace

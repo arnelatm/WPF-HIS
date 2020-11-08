@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Private _deductionsByName
         Private _earningsByName
         Private _employeeDeductions As List(Of EmployeeDeductionView)
-        Private _employeeEarnings As List(Of EmployeeEarningView)
+        Private _RegularEmployeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneTypes
 
@@ -80,7 +80,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-                Return cacBankIdNo.GetNullableValue(Of Int16)
+                Return cacBankIdNo.GetNullableValue(Of Int16?)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -164,12 +164,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeEarnings As List(Of EmployeeEarningView) Implements IEmployeeView.EmployeeEarnings
+        Public Property RegularEmployeeEarnings As List(Of EmployeeEarningView) Implements IEmployeeView.RegularEmployeeEarnings
             Get
-                Return _employeeEarnings
+                Return _RegularEmployeeEarnings
             End Get
             Set
-                _employeeEarnings = Value
+                _RegularEmployeeEarnings = Value
                 BindEmployeeEarning()
             End Set
         End Property
@@ -491,6 +491,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+            MyBase.RecordPositionChanged(e)
             Dim value As Double
             value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
@@ -530,7 +531,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsEarnings.DataSource = Nothing
             DataGridViewEarnings.Refresh()
-            bsEarnings.DataSource = EmployeeEarnings
+            bsEarnings.DataSource = RegularEmployeeEarnings
             bsEarnings.AllowNew = True
             'bsEarnings.Sort = "Sequence"
             With DataGridViewEarnings

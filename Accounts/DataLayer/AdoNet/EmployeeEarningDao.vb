@@ -28,8 +28,8 @@ Namespace DataLayer.AdoNet
                     "EmployeeIdNo," &
                     "IdNo," &
                     "Sequence" &
-                    " FROM [EmployeeEarning_View]" &
-                    " WHERE EmployeeIdNo = @IdNo" &
+                    " FROM [EmployeeEarning_View]" &                   
+                    " WHERE EmployeeIdNo = @IdNo and EarningType = 'R'" &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
