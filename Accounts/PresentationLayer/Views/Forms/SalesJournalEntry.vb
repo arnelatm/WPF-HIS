@@ -1,9 +1,7 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -22,13 +20,12 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _depositTypesByCode
-
         Private _slFooter As DgvFooter
         Private _salesDeposits As List(Of SalesDepositView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
-        Private _viewGl As Boolean = False
+        Private _journalMode As Boolean = False
 
         Public Sub New()
             MyBase.New()
@@ -238,10 +235,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            SuspendLayout()
-            DataGridViewJournalItems.Visible = False
-            DataGridViewSalesDeposits.Visible = True
-            ResumeLayout()
+            'SuspendLayout()
+            'DataGridViewJournalItems.Visible = False
+            'DataGridViewSalesDeposits.Visible = True
+            'ResumeLayout()
             UpdateTotals()
         End Sub
 
@@ -308,16 +305,19 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            If _viewGl Then
-                _viewGl = False
-                DataGridViewJournalItems.Visible = False
-                DataGridViewSalesDeposits.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-            Else
-                _viewGl = True
+            _journalMode = Not _journalMode
+            ShowJournalItems()
+        End Sub
+
+        Private Sub ShowJournalItems()
+            If _journalMode Then
                 DataGridViewJournalItems.Visible = True
                 DataGridViewSalesDeposits.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+            Else
+                DataGridViewJournalItems.Visible = False
+                DataGridViewSalesDeposits.Visible = True
+                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
             End If
         End Sub
 
@@ -328,9 +328,7 @@ Namespace PresentationLayer.Views.Forms
                 selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvdeposittypeidno"
-                        Dim editControl = DirectCast(DataGridViewSalesDeposits.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl
-                        Dim value = editControl.GetValue()
-                        Dim nIndex = DataGridViewSalesDeposits.CurrentRow.Index
+                        Dim value = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
                     Case $"dgvsaleamount"
                         Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
@@ -365,7 +363,6 @@ Namespace PresentationLayer.Views.Forms
             _slFooter.ColumnToSum("dgvBankChargeDifference") = True
             _slFooter.ColumnToSum("dgvVatDifference") = True
             _slFooter.SetText("dgvDepositTypeIdNo", "Totals")
-
         End Sub
 
         Public Overloads Sub Dispose()
@@ -374,10 +371,14 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub InputsTurnedOff()
             btnViewGL.Visible = True
+            '_journalMode = True
+            ShowJournalItems()
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
+            _journalMode = False
             btnViewGL.Visible = False
+            ShowJournalItems()
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave

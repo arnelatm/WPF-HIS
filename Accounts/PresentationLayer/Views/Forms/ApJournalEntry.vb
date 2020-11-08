@@ -419,7 +419,7 @@ Namespace PresentationLayer.Views.Forms
                                     .Cells("ItemVatAmount").Value = currentVatAmount
                                 End With
                                 UpdateTotalVatAmount()
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"
