@@ -82,7 +82,7 @@ Public Class DgvFooter
     ''' Rounds the sum up to the decimalPlaces chosen to display
     ''' </summary>
     ''' <remarks></remarks>
-    Private _roundSum As Boolean = False
+    Private _roundSum As Boolean = True
 
     ''' <summary>
     ''' Whether to use AwayFromZero rounding or ToEven (bankers) rounding.
@@ -426,7 +426,7 @@ Public Class DgvFooter
     ''' <remarks>If a cell value cannot be parsed to double, no error will be thrown. That cell will be skipped.</remarks>
     Public Sub SumColumn(ByVal columnName As String)
         If Not String.IsNullOrEmpty(columnName) Then
-            Dim tally As Double = 0.0
+            Dim tally As Double = 0.00D
             Dim nfi As NumberFormatInfo = New CultureInfo("en-US", False).NumberFormat
             Dim cVal As String
 

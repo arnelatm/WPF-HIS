@@ -120,6 +120,7 @@ Namespace PresentationLayer.Presenters
                     workRow("Sequence") = nRowCount
                     workRow("SaleAmount") = sc.SaleAmount
                     workRow("DepositAmount") = sc.DepositAmount
+                    workRow("VatAmount") = sc.VatAmount
                     If sc.IdNo <= 0 Then
                         DtSalesDepositInsertTable.Rows.Add(workRow)
                     Else
@@ -255,13 +256,13 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
-            Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
-        End Function
+        'Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
+        '    Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
+        'End Function
 
-        Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
-            Return (saleAmount - depositAmount - actualBankCharge)
-        End Function
+        'Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
+        '    Return (saleAmount - depositAmount - actualBankCharge)
+        'End Function
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
@@ -312,12 +313,6 @@ Namespace PresentationLayer.Presenters
             Next
             Return depositType
         End Function
-
-        Public Sub RecomputeActualBankCharge(nIndex As Int16)
-            If nIndex < View.SalesDeposits.Count Then
-                View.SalesDeposits(nIndex).ActualBankCharge = View.SalesDeposits(nIndex).SaleAmount - View.SalesDeposits(nIndex).DepositAmount - View.SalesDeposits(nIndex).VatAmount
-            End If
-        End Sub
 
     End Class
 

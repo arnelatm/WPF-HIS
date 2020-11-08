@@ -14,11 +14,19 @@ Namespace PresentationLayer.Views
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D
         Private _bankChargeVatDifference As Decimal = 0D
+        Private _actualBankCharge As Decimal = 0D
 
         'Private _saleAmount As Decimal = 0D
         Private ReadOnly _modelDepositType As New ModelAccounts("DepositType")
 
         Public Property ActualBankCharge As Decimal Implements ISalesDepositView.ActualBankCharge
+            Get
+                Return (SaleAmount - DepositAmount - VatAmount)
+            End Get
+            Set(value As Decimal)
+                _actualBankCharge = value
+            End Set
+        End Property
 
         Public Property BankChargeDifference As Decimal Implements ISalesDepositView.BankChargeDifference
             Get
@@ -53,7 +61,7 @@ Namespace PresentationLayer.Views
 
         Public Property ComputedBankChargeVat As Decimal Implements ISalesDepositView.ComputedBankChargeVat
             Get
-                Return Math.Floor(ComputedBankCharge * _vatRate) / 100D
+                Return Math.Round(Math.Floor(ComputedBankCharge * _vatRate) / 100D, 2)
             End Get
             Set(value As Decimal)
                 _computedBankChargeVat = value
