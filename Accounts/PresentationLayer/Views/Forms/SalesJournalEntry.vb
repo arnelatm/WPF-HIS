@@ -335,10 +335,6 @@ Namespace PresentationLayer.Views.Forms
                     Case $"dgvsaleamount"
                         Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
                         PresenterObj.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
-                    Case $"dgvdepositamount"
-                        PresenterObj.RecomputeActualBankCharge(selectedRow.Index)
-                    Case $"dgvvatamount"
-                        PresenterObj.RecomputeActualBankCharge(selectedRow.Index)
                     Case Else
                         updateTotalNeeded = False
                 End Select
@@ -411,6 +407,34 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesDeposits.UserDeletedRow
             UpdateSlTotals()
         End Sub
+
+        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewSalesDeposits.CellFormatting
+            For Each myRow As DataGridViewRow In DataGridViewSalesDeposits.Rows
+                'Here 2 cell is target value and 1 cell is Volume
+                If Math.Round(Convert.ToDecimal(myRow.Cells("dgvBankChargeDifference").Value), 2) <> 0 Then
+                    myRow.Cells("dgvBankChargeDifference").Style.ForeColor = Color.Red
+                    myRow.Cells("dgvBankChargeDifference").Style.BackColor = Color.Yellow
+                Else
+                    myRow.Cells("dgvBankChargeDifference").Style.ForeColor = OrigForeColor("dgvBankChargeDifference")
+                    myRow.Cells("dgvBankChargeDifference").Style.BackColor = OrigBackColor("dgvBankChargeDifference")
+                End If
+                If Math.Round(Convert.ToDecimal(myRow.Cells("dgvVatDifference").Value), 2) <> 0 Then
+                    myRow.Cells("dgvVatDifference").Style.ForeColor = Color.Red
+                    myRow.Cells("dgvVatDifference").Style.BackColor = Color.Yellow
+                Else
+                    myRow.Cells("dgvVatDifference").Style.ForeColor = OrigForeColor("dgvVatDifference")
+                    myRow.Cells("dgvVatDifference").Style.BackColor = OrigBackColor("dgvVatDifference")
+                End If
+            Next
+        End Sub
+
+        Private Function OrigForeColor(columnName As String) As Color
+            Return DataGridViewSalesDeposits.Columns(columnName).DefaultCellStyle.ForeColor
+        End Function
+
+        Private Function OrigBackColor(columnName As String) As Color
+            Return DataGridViewSalesDeposits.Columns(columnName).DefaultCellStyle.BackColor
+        End Function
 
     End Class
 
