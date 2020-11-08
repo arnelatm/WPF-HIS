@@ -1,1 +1,2 @@
-1. In combobox (caDgvCombobox) do not use TinyInt for sql data problem with display of vales in datagrid.
+1. ' this is already proven false. It was the bs???????? (bind source) present in the cellEndEdit which was the culprit
+   ' In combobox (caDgvCombobox) do not use TinyInt for sql data problem with display of vales in datagrid.
