@@ -384,6 +384,10 @@
     <Build Include="dbo\User Defined Types\SalesDepositInsert.sql" />
     <Build Include="dbo\Tables\BankCharge.sql" />
     <Build Include="dbo\Tables\DepositType.sql" />
+    <Build Include="dbo\Tables\PatientNoGaps.sql" />
+    <Build Include="dbo\Tables\EmpEarnings.sql" />
+    <Build Include="dbo\Tables\BasicPay.sql" />
+    <Build Include="dbo\Views\EmployeeEarning_View2.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

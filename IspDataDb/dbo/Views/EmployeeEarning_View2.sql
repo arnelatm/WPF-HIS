@@ -1,16 +1,11 @@
-CREATE VIEW dbo.SalesDeposit_View
+﻿CREATE VIEW dbo.EmployeeEarning_View2
 AS
-SELECT        dbo.SalesDeposit.IdNo, dbo.SalesDeposit.SalesJournalIdNo, dbo.SalesDeposit.Sequence, dbo.SalesDeposit.SaleAmount, dbo.SalesDeposit.DepositAmount, dbo.SalesDeposit.DepositTypeIdNo, 
-                         dbo.DepositType.DepositTypeCode, dbo.DepositType.DepositTypeName, dbo.DepositType.AccountIdNo, dbo.DepositType.Rate, dbo.DepositType.BankChargesAccountIdNo, dbo.DepositType.BankChargesVatAccountIdNo, 
-                         dbo.DepositType.DepositTypeNameAra, dbo.SalesDeposit.VatAmount
-FROM            dbo.SalesDeposit INNER JOIN
-                         dbo.DepositType ON dbo.SalesDeposit.DepositTypeIdNo = dbo.DepositType.IdNo
+SELECT        dbo.EmployeeEarning.EarningIdNo, dbo.Earning.EarningCode, dbo.Earning.EarningName, dbo.Earning.EarningNameAra, dbo.Earning.EarningType, dbo.EmployeeEarning.Amount, dbo.EmployeeEarning.Sequence, 
+                         dbo.EmployeeEarning.EmployeeIdNo, dbo.EmployeeEarning.IdNo, dbo.Earning.Unit
+FROM            dbo.EmployeeEarning LEFT OUTER JOIN
+                         dbo.Earning ON dbo.EmployeeEarning.EarningIdNo = dbo.Earning.IdNo
 GO
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesDeposit_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeEarning_View2';
 
 
 GO
@@ -85,25 +80,25 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "SalesDeposit"
+         Begin Table = "EmployeeEarning"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 292
-               Right = 218
+               Bottom = 335
+               Right = 211
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "DepositType"
+         Begin Table = "Earning"
             Begin Extent = 
-               Top = 8
-               Left = 319
-               Bottom = 138
-               Right = 565
+               Top = 6
+               Left = 249
+               Bottom = 333
+               Right = 435
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 5
          End
       End
    End
@@ -131,5 +126,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SalesDeposit_View';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeEarning_View2';
 
