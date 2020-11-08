@@ -96,7 +96,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
-                ViewToDataTables(View.EmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
+                ViewToDataTables(View.RegularEmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
             End If
         End Sub
@@ -157,7 +157,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 ' look for duplicate earningidno in bsEarning
-                Dim duplicate = FirstFieldDuplicate(Of EmployeeEarningView, Int16)(View.EmployeeEarnings, "EarningIdNo")
+                Dim duplicate = FirstFieldDuplicate(Of EmployeeEarningView, Int16)(View.RegularEmployeeEarnings, "EarningIdNo")
                 If duplicate IsNot Nothing Then
                     MessageBox.Show("Duplicate earning value found in Employee Earnings. See line <" + (duplicate + 1).ToString() + ">.")
                 Else
