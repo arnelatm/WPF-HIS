@@ -135,22 +135,6 @@ Namespace PresentationLayer.Presenters
             actualReconItems.Add(item)
         End Sub
 
-        'Public Function GetComputedBankCharge(ByRef saleAmount As Decimal, ByRef rate As Decimal)
-        '    Return Math.Round(rate * saleAmount / 100, 2)
-        'End Function
-
-        'Public Function GetComputedBankChargeVat(computedBankCharge)
-        '    Return Math.Round(computedBankCharge * _vatRate, 2)
-        'End Function
-
-        Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
-            Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
-        End Function
-
-        Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
-            Return (saleAmount - depositAmount - actualBankCharge)
-        End Function
-
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        accountReconciliationIdNo As Int32)
             Dim insertReturnValue
