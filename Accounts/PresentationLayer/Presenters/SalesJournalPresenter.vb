@@ -256,14 +256,6 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        'Public Function GetActualBankCharge(ByVal saleAmount As Decimal, ByVal depositAmount As Decimal) As Decimal
-        '    Return Math.Round((saleAmount - depositAmount) / (1D + _vatRate), 2)
-        'End Function
-
-        'Public Function GetActualBankChargeVat(saleAmount As Decimal, depositAmount As Decimal, actualBankCharge As Decimal) As Decimal
-        '    Return (saleAmount - depositAmount - actualBankCharge)
-        'End Function
-
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
             Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
