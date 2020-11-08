@@ -68,4 +68,8 @@ Public Class CaDgvComboboxCell
         End If
     End Sub
 
+    'Public Function GetValue()
+
+    'End Function
+
 End Class

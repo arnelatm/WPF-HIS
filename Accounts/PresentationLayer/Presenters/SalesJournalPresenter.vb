@@ -43,7 +43,6 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Notes", GetType(String))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
-            DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
@@ -53,7 +52,6 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Notes", GetType(String))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
-            DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
 
             DtSalesDepositInsertTable.Columns.Add("DepositTypeIdNo", GetType(Int16))
             DtSalesDepositInsertTable.Columns.Add("DepositAmount", GetType(Decimal))
@@ -87,17 +85,6 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetSalesDeposits(salesDepositTypeIdNo As Int32) As List(Of SalesDepositModel)
             Return _salesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
-        End Function
-
-        Public Function GetDepositType(ByVal pDepositTypeIdNo As Int16)
-            Dim depositType As New DepositTypeModel
-            For Each item As DepositTypeModel In DepositTypesModel
-                If item.IdNo = pDepositTypeIdNo Then
-                    depositType = item
-                    Exit For
-                End If
-            Next
-            Return depositType
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
@@ -299,6 +286,37 @@ Namespace PresentationLayer.Presenters
             Next
             Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Public Sub RecomputeBankCharges(ByVal pDepositTypeIdNo As Int16, ByVal index As Integer)
+            If pDepositTypeIdNo <> 0 Then
+                Dim depositType As New DepositTypeModel
+                depositType = GetDepositType(pDepositTypeIdNo)
+                Dim item As SalesDepositView = View.SalesDeposits(index)
+                With item
+                    .Rate = depositType.Rate
+                    .DepositAmount = .SaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
+                    .ActualBankCharge = .ComputedBankCharge
+                    .VatAmount = .ComputedBankChargeVat
+                End With
+            End If
+        End Sub
+
+        Public Function GetDepositType(ByVal pDepositTypeIdNo As Int16)
+            Dim depositType As New DepositTypeModel
+            For Each item As DepositTypeModel In DepositTypesModel
+                If item.IdNo = pDepositTypeIdNo Then
+                    depositType = item
+                    Exit For
+                End If
+            Next
+            Return depositType
+        End Function
+
+        Public Sub RecomputeActualBankCharge(nIndex As Int16)
+            If nIndex < View.SalesDeposits.Count Then
+                View.SalesDeposits(nIndex).ActualBankCharge = View.SalesDeposits(nIndex).SaleAmount - View.SalesDeposits(nIndex).DepositAmount - View.SalesDeposits(nIndex).VatAmount
+            End If
         End Sub
 
     End Class

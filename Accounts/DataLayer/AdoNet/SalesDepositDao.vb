@@ -29,16 +29,16 @@ Namespace DataLayer.AdoNet
                     "Rate," &
                     "SaleAmount," &
                     "SalesJournalIdNo," &
-                    "Sequence," &                   
+                    "Sequence," &
                     "VatAmount" &
                     " FROM SalesDeposit_View" &
                     " WHERE SalesJournalIdNo = " & idNo &
                     " ORDER BY " & sortExpression
             Dim x = Db.Read(sql, Make).ToList()
-            For Each item In x
-                item.VatAmount = Math.Round((item.SaleAmount - item.DepositAmount) / 1.05D * 0.05, 2)
-                item.ActualBankCharge = item.SaleAmount - item.DepositAmount - item.VatAmount
-            Next
+            'For Each item In x
+            '    item.VatAmount = Math.Round((item.SaleAmount - item.DepositAmount) / 1.05D * 0.05, 2)
+            '    item.ActualBankCharge = item.SaleAmount - item.DepositAmount - item.VatAmount
+            'Next
             Return x
         End Function
 

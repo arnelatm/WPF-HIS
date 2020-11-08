@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDepositTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvActualVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -599,7 +599,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewSalesDeposits.AutoGenerateColumns = false
         Me.DataGridViewSalesDeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvDepositTypeIdNo, Me.dgvSaleAmount, Me.dgvDepositAmount, Me.dgvActualVat, Me.dgvActualBankCharge, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
+        Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvDepositTypeIdNo, Me.dgvSaleAmount, Me.dgvDepositAmount, Me.dgvVatAmount, Me.dgvActualBankCharge, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
         Me.DataGridViewSalesDeposits.DataInGridChanged = false
         Me.DataGridViewSalesDeposits.DataSource = Me.bsSalesDeposits
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -724,20 +724,18 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDepositAmount.ReadOnly = true
         Me.dgvDepositAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
-        'dgvActualVat
+        'dgvVatAmount
         '
-        Me.dgvActualVat.DataPropertyName = "ActualVatAmount"
+        Me.dgvVatAmount.DataPropertyName = "VatAmount"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle11.Format = "###,##0.00"
-        Me.dgvActualVat.DefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvActualVat.EditingMode = false
-        resources.ApplyResources(Me.dgvActualVat, "dgvActualVat")
-        Me.dgvActualVat.Name = "dgvActualVat"
-        Me.dgvActualVat.ReadOnly = true
-        Me.dgvActualVat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvActualVat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvVatAmount.DefaultCellStyle = DataGridViewCellStyle11
+        Me.dgvVatAmount.EditingMode = false
+        resources.ApplyResources(Me.dgvVatAmount, "dgvVatAmount")
+        Me.dgvVatAmount.Name = "dgvVatAmount"
+        Me.dgvVatAmount.ReadOnly = true
         '
         'dgvActualBankCharge
         '
@@ -934,7 +932,7 @@ End Sub
         Friend WithEvents dgvDepositTypeIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvSaleAmount As CdgvColumnMoney
         Friend WithEvents dgvDepositAmount As CdgvColumnMoney
-        Friend WithEvents dgvActualVat As CdgvColumnMoney
+        Friend WithEvents dgvVatAmount As CdgvColumnMoney
         Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
         Friend WithEvents dgvRate As CdgvColumnMoney
         Friend WithEvents dgvComputedBankCharge As CdgvColumnMoney
