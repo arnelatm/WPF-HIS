@@ -328,25 +328,17 @@ Namespace PresentationLayer.Views.Forms
                 selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvdeposittypeidno"
+                        Dim editControl = DirectCast(DataGridViewSalesDeposits.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl
+                        Dim value = editControl.GetValue()
                         Dim nIndex = DataGridViewSalesDeposits.CurrentRow.Index
-                        Dim newValue = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < SalesDeposits.Count() Then
-                                Dim pDepositType = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.SelectedItem.Code
-                                Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                                RecomputeBankCharges(selectedRow, pDepositType, pSaleAmount)
-                            End If
-                        End If
+                        PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
+                    Case $"dgvsaleamount"
+                        Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
+                        PresenterObj.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
                     Case $"dgvdepositamount"
-                        Dim pDepositType = selectedRow.Cells("dgvDepositTypeIdNo").Value
-                        Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pDepositAmount As Decimal = .Value
-                        AdjustBankCharge1(selectedRow, pSaleAmount, pDepositAmount)
-                    Case $"dgvactualvat"
-                        Dim pSaleAmount As Decimal = selectedRow.Cells("dgvSaleAmount").Value
-                        Dim pActualVat As Decimal = .Value
-                        Dim pRate As Decimal = selectedRow.Cells("dgvRate").Value
-                        AdjustBankCharge2(selectedRow, pSaleAmount, pActualVat)
+                        PresenterObj.RecomputeActualBankCharge(selectedRow.Index)
+                    Case $"dgvvatamount"
+                        PresenterObj.RecomputeActualBankCharge(selectedRow.Index)
                     Case Else
                         updateTotalNeeded = False
                 End Select
@@ -373,7 +365,7 @@ Namespace PresentationLayer.Views.Forms
             _slFooter.ColumnToSum("dgvComputedBankCharge") = True
             _slFooter.ColumnToSum("dgvComputedVat") = True
             _slFooter.ColumnToSum("dgvActualBankCharge") = True
-            _slFooter.ColumnToSum("dgvActualVat") = True
+            _slFooter.ColumnToSum("dgvVatAmount") = True
             _slFooter.ColumnToSum("dgvBankChargeDifference") = True
             _slFooter.ColumnToSum("dgvVatDifference") = True
             _slFooter.SetText("dgvDepositTypeIdNo", "Totals")
@@ -418,73 +410,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewSalesDeposits.UserDeletedRow
             UpdateSlTotals()
-        End Sub
-
-        Private Sub RecomputeActualBankCharges(selectedRow As DataGridViewRow) ', pSaleAmount As Decimal, pDepositAmount As Decimal, pRate As Decimal)
-            Dim nIndex As Integer = 0
-            If selectedRow IsNot Nothing Then
-                nIndex = selectedRow.Index
-            End If
-            If nIndex < bsSalesDeposits.Count() Then
-                With bsSalesDeposits(nIndex)
-                    .ActualBankCharge = .ComputedBankCharge
-                    .VatAmount = .ComputedBankChargeVat
-                End With
-            End If
-        End Sub
-
-        Private Sub AdjustBankCharge1(selectedRow As DataGridViewRow, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            Dim nIndex As Integer = 0
-            If selectedRow IsNot Nothing Then
-                nIndex = selectedRow.Index
-            End If
-            If nIndex < bsSalesDeposits.Count() Then
-                bsSalesDeposits(nIndex).ActualBankCharge = pSaleAmount - pDepositAmount - bsSalesDeposits(nIndex).VatAmount
-            End If
-        End Sub
-
-        Private Sub AdjustBankCharge2(selectedRow As DataGridViewRow, pSaleAmount As Decimal, pVatAmount As Decimal)
-            Dim nIndex As Integer = 0
-            If selectedRow IsNot Nothing Then
-                nIndex = selectedRow.Index
-            End If
-            If nIndex < bsSalesDeposits.Count() Then
-                bsSalesDeposits(nIndex).ActualBankCharge = pSaleAmount - bsSalesDeposits(nIndex).DepositAmount - pVatAmount
-            End If
-        End Sub
-
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pDepositTypeIdNo As Int16, pSaleAmount As Decimal, pDepositAmount As Decimal)
-            If pDepositTypeIdNo <> 0 Then
-                Dim depositType As New DepositTypeModel
-                For Each item As DepositTypeModel In PresenterObj.DepositTypesModel
-                    If item.IdNo = pDepositTypeIdNo Then
-                        depositType = item
-                        Exit For
-                    End If
-                Next
-                Dim nIndex As Integer = selectedRow.Index
-                With bsSalesDeposits(nIndex)
-                    .Rate = depositType.Rate
-                    .DepositAmount = pSaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
-                    RecomputeActualBankCharges(selectedRow)
-                End With
-                DataGridViewSalesDeposits.Refresh()
-            End If
-        End Sub
-
-        Private Sub RecomputeBankCharges(selectedRow As DataGridViewRow, pDepositTypeIdNo As Int16, pSaleAmount As Decimal)
-            If pDepositTypeIdNo <> 0 Then
-                Dim depositType As New DepositTypeModel 
-                depositType = PresenterObj.GetDepositType(pDepositTypeIdNo)
-                Dim nIndex As Integer = selectedRow.Index
-                With bsSalesDeposits(nIndex)
-                    .Rate = depositType.Rate
-                    .ActualBankCharge = .computedBankCharge
-                    .VatAmount = .computedBankChargeVat
-                    .DepositAmount = pSaleAmount - .actualBankCharge - .VatAmount
-                End With
-                DataGridViewSalesDeposits.Refresh()
-            End If
         End Sub
 
     End Class

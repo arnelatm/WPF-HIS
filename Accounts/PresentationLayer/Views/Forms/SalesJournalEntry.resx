@@ -951,11 +951,11 @@
   <data name="dgvDepositAmount.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <data name="dgvActualVat.HeaderText" xml:space="preserve">
-    <value>Actual Vat</value>
-  </data>
-  <data name="dgvActualVat.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+  <metadata name="dgvVatAmount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvVatAmount.HeaderText" xml:space="preserve">
+    <value>Vat Amount</value>
   </data>
   <data name="dgvActualBankCharge.HeaderText" xml:space="preserve">
     <value>Actual Bank Charges</value>
@@ -89561,10 +89561,10 @@
   <data name="&gt;&gt;dgvDepositAmount.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvActualVat.Name" xml:space="preserve">
-    <value>dgvActualVat</value>
+  <data name="&gt;&gt;dgvVatAmount.Name" xml:space="preserve">
+    <value>dgvVatAmount</value>
   </data>
-  <data name="&gt;&gt;dgvActualVat.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvVatAmount.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvActualBankCharge.Name" xml:space="preserve">
