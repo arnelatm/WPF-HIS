@@ -190,15 +190,15 @@ Public Enum PayFrequencySelection
 End Enum
 
 Public Enum PayRateUnitSelection
-    <EnumCode("M")> Hour
-    <EnumCode("W")> Day
-    <EnumCode("B")> Week
-    <EnumCode("S")> BiWeek
-    <EnumCode("Q")> SemiMonth
-    <EnumCode("I")> Month
-    <EnumCode("Y")> Quarter
+    <EnumCode("H")> Hour
+    <EnumCode("D")> Day
+    <EnumCode("W")> Week
+    <EnumCode("B")> BiWeek
+    <EnumCode("S")> SemiMonth
+    <EnumCode("M")> Month
+    <EnumCode("Q")> Quarter
     <EnumCode("R")> SemiYear
-    <EnumCode("D")> Year
+    <EnumCode("Y")> Year
     <EnumCode("U")> Unit
 End Enum
 
