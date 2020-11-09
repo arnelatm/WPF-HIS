@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
             Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            data.EmployeeDeductions = d
+            data.RegularEmployeeDeductions = d
             data.RegularEmployeeEarnings = e
             data.EmployeePhones = p
             Return data

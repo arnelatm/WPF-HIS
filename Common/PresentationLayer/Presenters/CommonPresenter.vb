@@ -180,7 +180,16 @@ Namespace PresentationLayer.Presenters
         '    Return GetTableList()
         'End Function
 
-        Public Function GetListByCode(listName As String)
+        Public Function GetListByCode(listName As String, Optional filter As String = Nothing)
+            TableToGet = listName
+            DisplayName = listName + "Name"
+            SortExpression = DisplayName
+            DisplayNameArabic = DisplayName + "Ara"
+            DisplayCode = listName + "Code"
+            Return GetLookupDataByCode(filter)
+        End Function
+
+        Public Function GetFilteredListByCode(listName As String, filter As String)
             TableToGet = listName
             DisplayName = listName + "Name"
             SortExpression = DisplayName
@@ -239,7 +248,6 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByCode()
         End Function
 
-        
         Public Function GetPaymentTypeList(Optional ByVal sortKey As String = "PaymentTypeCode")
             TableToGet = "PaymentType"
             SortExpression = sortKey

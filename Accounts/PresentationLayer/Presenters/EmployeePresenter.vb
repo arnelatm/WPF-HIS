@@ -95,7 +95,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.EmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
+                ViewToDataTables(View.RegularEmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
                 ViewToDataTables(View.RegularEmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
             End If
@@ -161,7 +161,7 @@ Namespace PresentationLayer.Presenters
                 If duplicate IsNot Nothing Then
                     MessageBox.Show("Duplicate earning value found in Employee Earnings. See line <" + (duplicate + 1).ToString() + ">.")
                 Else
-                    duplicate = FirstFieldDuplicate(Of EmployeeDeductionView, Int16)(View.EmployeeDeductions, "DeductionIdNo")
+                    duplicate = FirstFieldDuplicate(Of EmployeeDeductionView, Int16)(View.RegularEmployeeDeductions, "DeductionIdNo")
                     If duplicate IsNot Nothing Then
                         MessageBox.Show("Duplicate earning value found in Employee Deductions. See line <" + (duplicate + 1).ToString() + ">.")
                     Else

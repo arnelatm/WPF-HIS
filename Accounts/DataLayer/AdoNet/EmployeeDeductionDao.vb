@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for EmployeeDeduction
@@ -16,6 +17,7 @@ Namespace DataLayer.AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
+            Dim filter = "DeductionType='" + GlobalFunctions.GetEnumCode(DeductionTypeSelection.Regular) + "'"
             Dim sql As String =
                     " SELECT " &
                     "Amount," &
@@ -28,7 +30,7 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Sequence" &
                     " FROM [EmployeeDeduction_View]" &
-                    " WHERE EmployeeIdNo = @IdNo" &
+                    " WHERE EmployeeIdNo = @IdNo And " & filter &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).ToList()
@@ -45,15 +47,15 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeDeduction) =
                                     Function(reader) _
             New EmployeeDeduction() With {
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .DeductionCode = Extensions.AsString(reader("DeductionCode")),
-            .DeductionIdNo = Extensions.AsId(Of Int16)(reader("DeductionIdNo")),
-            .DeductionName = Extensions.AsString(reader("DeductionCode")),
-            .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
-            .DeductionType = Extensions.AsChar(reader("DeductionType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
+            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            .DeductionCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DeductionCode")),
+            .DeductionIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("DeductionIdNo")),
+            .DeductionName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DeductionCode")),
+            .DeductionNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DeductionNameAra")),
+            .DeductionType = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("DeductionType")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
             }
 
     End Class
