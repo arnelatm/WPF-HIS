@@ -40,7 +40,7 @@
         Public Property Title As String
         Public Property TownCity As String
         Public Property ZipCode As String
-        Public Property EmployeeDeductions As List(Of EmployeeDeductionModel)
+        Public Property RegularEmployeeDeductions As List(Of EmployeeDeductionModel)
         Public Property RegularEmployeeEarnings As List(Of EmployeeEarningModel)
         Public Property EmployeePhones As List(Of EmployeePhoneModel)
     End Class

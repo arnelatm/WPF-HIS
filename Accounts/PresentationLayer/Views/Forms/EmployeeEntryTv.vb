@@ -13,8 +13,8 @@ Namespace PresentationLayer.Views.Forms
         Private _countryTelCodes
         Private _deductionsByName
         Private _earningsByName
-        Private _employeeDeductions As List(Of EmployeeDeductionView)
-        Private _RegularEmployeeEarnings As List(Of EmployeeEarningView)
+        Private _regularEmployeeDeductions As List(Of EmployeeDeductionView)
+        Private _regularEmployeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _phoneTypes
 
@@ -154,22 +154,22 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeDeductions As List(Of EmployeeDeductionView) Implements IEmployeeView.EmployeeDeductions
+        Public Property RegularEmployeeDeductions As List(Of EmployeeDeductionView) Implements IEmployeeView.RegularEmployeeDeductions
             Get
-                Return _employeeDeductions
+                Return _regularEmployeeDeductions
             End Get
             Set
-                _employeeDeductions = Value
+                _regularEmployeeDeductions = Value
                 BindEmployeeDeduction()
             End Set
         End Property
 
         Public Property RegularEmployeeEarnings As List(Of EmployeeEarningView) Implements IEmployeeView.RegularEmployeeEarnings
             Get
-                Return _RegularEmployeeEarnings
+                Return _regularEmployeeEarnings
             End Get
             Set
-                _RegularEmployeeEarnings = Value
+                _regularEmployeeEarnings = Value
                 BindEmployeeEarning()
             End Set
         End Property
@@ -442,8 +442,8 @@ Namespace PresentationLayer.Views.Forms
             cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
             'cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
             'cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)
-            _deductionsByName = PresenterObj.GetListByCode("Deduction")
-            _earningsByName = PresenterObj.GetListByCode("Earning")
+            _deductionsByName = PresenterObj.GetListByCode("Deduction", "DeductionType='" + GetEnumCode(DeductionTypeSelection.Regular) + "'")
+            _earningsByName = PresenterObj.GetListByCode("Earning", "EarningType='" + GetEnumCode(EarningTypeSelection.Regular) + "'")
             _phoneTypes = PresenterObj.GetListByCode("PhoneType")
             _countryTelCodes = PresenterObj.GetIntPhoneCodes()
         End Sub
@@ -509,7 +509,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsDeductions.DataSource = Nothing
             DataGridViewDeductions.Refresh()
-            bsDeductions.DataSource = EmployeeDeductions
+            bsDeductions.DataSource = RegularEmployeeDeductions
             bsDeductions.AllowNew = True
             With DataGridViewDeductions
                 .Refresh()

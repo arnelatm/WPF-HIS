@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for EmployeeEarning
@@ -17,6 +18,7 @@ Namespace DataLayer.AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
+            Dim filter = "EarningType='" + GlobalFunctions.GetEnumCode(EarningTypeSelection.Regular) + "'"
             Dim sql As String =
                     " SELECT " &
                     "Amount," &
@@ -28,8 +30,8 @@ Namespace DataLayer.AdoNet
                     "EmployeeIdNo," &
                     "IdNo," &
                     "Sequence" &
-                    " FROM [EmployeeEarning_View]" &                   
-                    " WHERE EmployeeIdNo = @IdNo and EarningType = 'R'" &
+                    " FROM [EmployeeEarning_View]" &
+                    " WHERE EmployeeIdNo = @IdNo and " & filter &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
@@ -46,15 +48,15 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeEarning) =
                                     Function(reader) _
             New EmployeeEarning() With {
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .EarningCode = Extensions.AsString(reader("EarningCode")),
-            .EarningIdNo = Extensions.AsId(Of Int16)(reader("EarningIdNo")),
-            .EarningName = Extensions.AsString(reader("EarningName")),
-            .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
-            .EarningType = Extensions.AsChar(reader("EarningType")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
+            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            .EarningCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EarningCode")),
+            .EarningIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningIdNo")),
+            .EarningName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EarningName")),
+            .EarningNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EarningNameAra")),
+            .EarningType = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("EarningType")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 
     End Class

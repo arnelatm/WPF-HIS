@@ -80,13 +80,14 @@ End Enum
 
 Public Enum DeductionTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("R")> Pension
+    <EnumCode("R")> Regular
     <EnumCode("G")> Garnishments
     <EnumCode("V")> Voluntary
     <EnumCode("F")> Fines
     <EnumCode("S")> SalaryLoans
     <EnumCode("E")> EarningsAdjustment
     <EnumCode("O")> Others
+    <EnumCode("P")> Pension
     '<EnumCode("T")> IncomeTax
 End Enum
 

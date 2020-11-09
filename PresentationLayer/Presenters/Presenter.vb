@@ -1141,9 +1141,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetLookupFilteredDataByCode(pTableToGet, pSortExpression, pFilterKey, FieldsToShow)
     End Function
 
-    Protected Function GetLookupDataByCode()
+    Protected Function GetLookupDataByCode(Optional filter As String = Nothing)
         FormatFields()
-        Return Model.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
+        If filter IsNot Nothing Then
+            Return Model.GetLookupFilteredDataByCode(TableToGet, SortExpression, filter, FieldsToShow)
+        Else
+            Return Model.GetLookupDataByCode(TableToGet, SortExpression, FieldsToShow)
+        End If
     End Function
 
     Protected Function GetLookupDataByName()
@@ -1353,7 +1357,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
-        Dim retValue = Model.GetRecordFieldWithKey(settingCode,"Setting", "SettingCode", "Value")
+        Dim retValue = Model.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption(description)
             Dim groupSetting As String = group
