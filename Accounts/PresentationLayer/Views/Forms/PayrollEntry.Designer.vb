@@ -1,24 +1,25 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class PayrollEntry
-    Inherits AATM.PresentationLayer.Forms.CFormEntry
+﻿Namespace PresentationLayer.Views.Forms
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+    Partial Class PayrollEntry
+        Inherits AATM.PresentationLayer.Forms.CFormEntry
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        If disposing AndAlso components IsNot Nothing Then
-            components.Dispose()
-        End If
-        MyBase.Dispose(disposing)
-    End Sub
+        'Form overrides dispose to clean up the component list.
+        <System.Diagnostics.DebuggerNonUserCode()>
+        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            MyBase.Dispose(disposing)
+        End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+        'Required by the Windows Form Designer
+        Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
-    Private Sub InitializeComponent()
+        'NOTE: The following procedure is required by the Windows Form Designer
+        'It can be modified using the Windows Form Designer.  
+        'Do not modify it using the code editor.
+        <System.Diagnostics.DebuggerStepThrough()>
+        Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollEntry))
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -294,9 +295,9 @@ Partial Class PayrollEntry
         Me.lblNotes.Location = New System.Drawing.Point(1, 26)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Size = New System.Drawing.Size(60, 17)
+        Me.lblNotes.Size = New System.Drawing.Size(70, 17)
         Me.lblNotes.TabIndex = 4
-        Me.lblNotes.Text = "CLabel1"
+        Me.lblNotes.Text = "Pay Cycle"
         Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblPayrollDate
@@ -420,6 +421,7 @@ Partial Class PayrollEntry
         Me.cboPayType.CurrentSearchTerm = ""
         Me.cboPayType.DefaultValue = Nothing
         Me.cboPayType.DisplayMember = "Name"
+        Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboPayType.DropDownHeight = 200
         Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPayType.EditingMode = true
@@ -441,7 +443,7 @@ Partial Class PayrollEntry
         Me.cboPayType.PropertySelector = Nothing
         Me.cboPayType.ReadOnlyCombo = false
         Me.cboPayType.SearchAnywhere = false
-        Me.cboPayType.Size = New System.Drawing.Size(121, 24)
+        Me.cboPayType.Size = New System.Drawing.Size(171, 24)
         Me.cboPayType.SuggestBoxHeight = 200
         Me.cboPayType.SuggestListOrderRule = Nothing
         Me.cboPayType.TabIndex = 10
@@ -513,7 +515,7 @@ Partial Class PayrollEntry
         Me.tpgDeductions.Location = New System.Drawing.Point(4, 22)
         Me.tpgDeductions.Name = "tpgDeductions"
         Me.tpgDeductions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpgDeductions.Size = New System.Drawing.Size(557, 322)
+        Me.tpgDeductions.Size = New System.Drawing.Size(557, 321)
         Me.tpgDeductions.TabIndex = 2
         Me.tpgDeductions.Text = "Deductions"
         Me.tpgDeductions.UseVisualStyleBackColor = true
@@ -539,29 +541,30 @@ Partial Class PayrollEntry
 
 End Sub
 
-    Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
-    Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents trvPayroll As Libraries.CBaseControlsLibrary.CTreeView
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-    Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
-    Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents lblPayrollDate As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
-    Friend WithEvents lblPayrollIdNo As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents CCustomDateTimePicker1 As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-    Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents cboPayType As Libraries.CBaseControlsLibrary.CaComboBox
-    Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
-    Friend WithEvents CTextBox3 As Libraries.CBaseControlsLibrary.CTextBox
-    Friend WithEvents CLabel11 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents CTextBox2 As Libraries.CBaseControlsLibrary.CTextBox
-    Friend WithEvents CLabel10 As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents tbcPayroll As Libraries.CBaseControlsLibrary.CTabControl
-    Friend WithEvents tpgEarnings As TabPage
-    Friend WithEvents tpgDeductions As TabPage
-End Class
+        Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents SplitContainer1 As SplitContainer
+        Friend WithEvents trvPayroll As Libraries.CBaseControlsLibrary.CTreeView
+        Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblPayrollDate As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblPayrollIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CCustomDateTimePicker1 As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPayType As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CTextBox3 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel11 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CTextBox2 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel10 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents tbcPayroll As Libraries.CBaseControlsLibrary.CTabControl
+        Friend WithEvents tpgEarnings As TabPage
+        Friend WithEvents tpgDeductions As TabPage
+    End Class
+End Namespace
