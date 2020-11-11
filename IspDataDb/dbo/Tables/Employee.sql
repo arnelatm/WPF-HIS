@@ -34,7 +34,8 @@
     [OpeningBalance]      MONEY         NULL,
     [Balance]             MONEY         NULL,
     [PaymentMethod]       CHAR (1)      NULL,
-    [PayFrequency]        CHAR (1)      NULL,
+    [PayCycleIdNo]        TINYINT       NULL,
+    [PayGroupIdNo]        SMALLINT      NULL,
     [PaySalariedOrHourly] CHAR (1)      NULL,
     [PayRateType]         CHAR (1)      NULL,
     [PayRateAmount]       MONEY         NULL,
@@ -43,6 +44,8 @@
     [DateTimeStamp]       ROWVERSION    NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
