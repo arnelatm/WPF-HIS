@@ -1,2 +1,4 @@
-1. ' this is already proven false. It was the bs???????? (bind source) present in the cellEndEdit which was the culprit
+1. ' Below problem is already proven false. It was the bs???????? (bind source) present in the cellEndEdit which was the culprit
    ' In combobox (caDgvCombobox) do not use TinyInt for sql data problem with display of vales in datagrid.
+   ' Problem in the TreeView, sort order must be 'SortKey' you must provide the table name for the program
+   ' Use the Optional parameter for InitializerWithTV(classname, tablename (optional))

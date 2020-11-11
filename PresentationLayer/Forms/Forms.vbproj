@@ -121,6 +121,12 @@
     <Compile Include="CFormEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CFormTvEntry.designer.vb">
+      <DependentUpon>CFormTvEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormTvEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CModalForm.Designer.vb">
       <DependentUpon>CModalForm.vb</DependentUpon>
     </Compile>
@@ -184,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFormTvEntry.resx">
+      <DependentUpon>CFormTvEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CrReportViewer.resx">
       <DependentUpon>CrReportViewer.vb</DependentUpon>

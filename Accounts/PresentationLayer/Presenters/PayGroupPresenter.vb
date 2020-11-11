@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IPayGroupView)
             MyBase.New(view)
             TreeViewParentIdField = "ParentIdNo"
-            InitializerWithTv("PayGroup")
+            InitializerWithTv("PayGroup","PayGroup_View")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub

@@ -628,6 +628,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
             End If
         Else
+            newSortOrderKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
             Else

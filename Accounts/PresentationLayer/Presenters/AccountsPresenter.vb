@@ -16,9 +16,9 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
         End Sub
 
-        Public Sub Initializer(baseClassName As String)
+        Public Sub Initializer(baseClassName As String, Optional tableName As String = Nothing)
             Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
-            TableName = baseClassName
+            TableName = Iif(tableName Is Nothing,baseClassName,tableName)
             SortOrderKey = baseClassName + "Name"
             Dim args As Object() = {baseClassName}
             Dim t As Type = Type.GetType(presenterModelName)
@@ -30,11 +30,11 @@ Namespace PresentationLayer.Presenters
             'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
         End Sub
 
-        Public Sub InitializerWithTv(baseClassName As String)
+        Public Sub InitializerWithTv(baseClassName As String, Optional tableName As String=Nothing)
             TreeViewMainField = baseClassName + "Name"
             TreeViewSecondaryField = baseClassName + "Code"
             TreeViewList = New List(Of TM)
-            Initializer(baseClassName)
+            Initializer(baseClassName,tableName)
         End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit

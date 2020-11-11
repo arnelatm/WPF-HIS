@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class RevCostCenterEntryTv
+    Partial Class PayGroupEntry
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -26,20 +26,20 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtRevCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtRevCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.txtPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblRevCostCenterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblRevCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacRcType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -80,75 +80,75 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.TabStop = false
         Me.TxtIdNo.ValueIsNumeric = true
         '
-        'txtRevCostCenterCode
+        'txtPayGroupCode
         '
-        Me.txtRevCostCenterCode.BackColor = System.Drawing.Color.White
-        Me.txtRevCostCenterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRevCostCenterCode.ComputedValue = false
-        Me.txtRevCostCenterCode.CustomFormat = Nothing
-        Me.txtRevCostCenterCode.DataBoundControl = true
-        Me.txtRevCostCenterCode.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterCode, true)
-        Me.txtRevCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtRevCostCenterCode.ForeColor = System.Drawing.Color.Black
-        Me.txtRevCostCenterCode.LinkedLabel = Nothing
-        Me.txtRevCostCenterCode.Location = New System.Drawing.Point(213, 36)
-        Me.txtRevCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtRevCostCenterCode.MaximumValue = Nothing
-        Me.txtRevCostCenterCode.MinimumValue = Nothing
-        Me.txtRevCostCenterCode.Name = "txtRevCostCenterCode"
-        Me.txtRevCostCenterCode.OldValue = Nothing
-        Me.txtRevCostCenterCode.ReadOnly = true
-        Me.txtRevCostCenterCode.Size = New System.Drawing.Size(62, 23)
-        Me.txtRevCostCenterCode.TabIndex = 0
-        Me.txtRevCostCenterCode.ValueIsMandatory = true
+        Me.txtPayGroupCode.BackColor = System.Drawing.Color.White
+        Me.txtPayGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPayGroupCode.ComputedValue = false
+        Me.txtPayGroupCode.CustomFormat = Nothing
+        Me.txtPayGroupCode.DataBoundControl = true
+        Me.txtPayGroupCode.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupCode, true)
+        Me.txtPayGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayGroupCode.ForeColor = System.Drawing.Color.Black
+        Me.txtPayGroupCode.LinkedLabel = Nothing
+        Me.txtPayGroupCode.Location = New System.Drawing.Point(213, 36)
+        Me.txtPayGroupCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayGroupCode.MaximumValue = Nothing
+        Me.txtPayGroupCode.MinimumValue = Nothing
+        Me.txtPayGroupCode.Name = "txtPayGroupCode"
+        Me.txtPayGroupCode.OldValue = Nothing
+        Me.txtPayGroupCode.ReadOnly = true
+        Me.txtPayGroupCode.Size = New System.Drawing.Size(62, 23)
+        Me.txtPayGroupCode.TabIndex = 0
+        Me.txtPayGroupCode.ValueIsMandatory = true
         '
-        'txtRevCostCenterName
+        'txtPayGroupName
         '
-        Me.txtRevCostCenterName.BackColor = System.Drawing.Color.White
-        Me.txtRevCostCenterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRevCostCenterName.ComputedValue = false
-        Me.txtRevCostCenterName.CustomFormat = Nothing
-        Me.txtRevCostCenterName.DataBoundControl = true
-        Me.txtRevCostCenterName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterName, true)
-        Me.txtRevCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtRevCostCenterName.ForeColor = System.Drawing.Color.Black
-        Me.txtRevCostCenterName.LinkedLabel = Nothing
-        Me.txtRevCostCenterName.Location = New System.Drawing.Point(213, 61)
-        Me.txtRevCostCenterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtRevCostCenterName.MaximumValue = Nothing
-        Me.txtRevCostCenterName.MinimumValue = Nothing
-        Me.txtRevCostCenterName.Name = "txtRevCostCenterName"
-        Me.txtRevCostCenterName.OldValue = Nothing
-        Me.txtRevCostCenterName.ReadOnly = true
-        Me.txtRevCostCenterName.Size = New System.Drawing.Size(418, 23)
-        Me.txtRevCostCenterName.TabIndex = 1
-        Me.txtRevCostCenterName.ValueIsMandatory = true
+        Me.txtPayGroupName.BackColor = System.Drawing.Color.White
+        Me.txtPayGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPayGroupName.ComputedValue = false
+        Me.txtPayGroupName.CustomFormat = Nothing
+        Me.txtPayGroupName.DataBoundControl = true
+        Me.txtPayGroupName.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupName, true)
+        Me.txtPayGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayGroupName.ForeColor = System.Drawing.Color.Black
+        Me.txtPayGroupName.LinkedLabel = Nothing
+        Me.txtPayGroupName.Location = New System.Drawing.Point(213, 61)
+        Me.txtPayGroupName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayGroupName.MaximumValue = Nothing
+        Me.txtPayGroupName.MinimumValue = Nothing
+        Me.txtPayGroupName.Name = "txtPayGroupName"
+        Me.txtPayGroupName.OldValue = Nothing
+        Me.txtPayGroupName.ReadOnly = true
+        Me.txtPayGroupName.Size = New System.Drawing.Size(418, 23)
+        Me.txtPayGroupName.TabIndex = 1
+        Me.txtPayGroupName.ValueIsMandatory = true
         '
-        'txtRevCostCenterNameAra
+        'txtPayGroupNameAra
         '
-        Me.txtRevCostCenterNameAra.BackColor = System.Drawing.Color.White
-        Me.txtRevCostCenterNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRevCostCenterNameAra.ComputedValue = false
-        Me.txtRevCostCenterNameAra.CustomFormat = Nothing
-        Me.txtRevCostCenterNameAra.DataBoundControl = true
-        Me.txtRevCostCenterNameAra.EditingMode = false
-        Me.txtRevCostCenterNameAra.EnglishControl = Me.txtRevCostCenterName
-        Me.floDataDisplay.SetFlowBreak(Me.txtRevCostCenterNameAra, true)
-        Me.txtRevCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtRevCostCenterNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtRevCostCenterNameAra.LinkedLabel = Nothing
-        Me.txtRevCostCenterNameAra.Location = New System.Drawing.Point(213, 86)
-        Me.txtRevCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtRevCostCenterNameAra.MaximumValue = Nothing
-        Me.txtRevCostCenterNameAra.MinimumValue = Nothing
-        Me.txtRevCostCenterNameAra.Name = "txtRevCostCenterNameAra"
-        Me.txtRevCostCenterNameAra.OldValue = Nothing
-        Me.txtRevCostCenterNameAra.ReadOnly = true
-        Me.txtRevCostCenterNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.txtRevCostCenterNameAra.Size = New System.Drawing.Size(418, 23)
-        Me.txtRevCostCenterNameAra.TabIndex = 2
+        Me.txtPayGroupNameAra.BackColor = System.Drawing.Color.White
+        Me.txtPayGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPayGroupNameAra.ComputedValue = false
+        Me.txtPayGroupNameAra.CustomFormat = Nothing
+        Me.txtPayGroupNameAra.DataBoundControl = true
+        Me.txtPayGroupNameAra.EditingMode = false
+        Me.txtPayGroupNameAra.EnglishControl = Me.txtPayGroupName
+        Me.floDataDisplay.SetFlowBreak(Me.txtPayGroupNameAra, true)
+        Me.txtPayGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayGroupNameAra.ForeColor = System.Drawing.Color.Black
+        Me.txtPayGroupNameAra.LinkedLabel = Nothing
+        Me.txtPayGroupNameAra.Location = New System.Drawing.Point(213, 86)
+        Me.txtPayGroupNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayGroupNameAra.MaximumValue = Nothing
+        Me.txtPayGroupNameAra.MinimumValue = Nothing
+        Me.txtPayGroupNameAra.Name = "txtPayGroupNameAra"
+        Me.txtPayGroupNameAra.OldValue = Nothing
+        Me.txtPayGroupNameAra.ReadOnly = true
+        Me.txtPayGroupNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtPayGroupNameAra.Size = New System.Drawing.Size(418, 23)
+        Me.txtPayGroupNameAra.TabIndex = 2
         '
         'txtNotes
         '
@@ -180,17 +180,17 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterCode)
-        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterCode)
-        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterName)
-        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterName)
-        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterNameAra)
-        Me.floDataDisplay.Controls.Add(Me.txtRevCostCenterNameAra)
+        Me.floDataDisplay.Controls.Add(Me.lblPayGroupCode)
+        Me.floDataDisplay.Controls.Add(Me.txtPayGroupCode)
+        Me.floDataDisplay.Controls.Add(Me.lblPayGroupName)
+        Me.floDataDisplay.Controls.Add(Me.txtPayGroupName)
+        Me.floDataDisplay.Controls.Add(Me.lblPayGroupNameAra)
+        Me.floDataDisplay.Controls.Add(Me.txtPayGroupNameAra)
         Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblLevelNumber)
         Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
-        Me.floDataDisplay.Controls.Add(Me.lblRevCostCenterIdNo)
+        Me.floDataDisplay.Controls.Add(Me.lblPayGroupIdNo)
         Me.floDataDisplay.Controls.Add(Me.cacRcType)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
@@ -216,44 +216,44 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo.Text = "ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblRevCostCenterCode
+        'lblPayGroupCode
         '
-        Me.lblRevCostCenterCode.DisplayOnly = true
-        Me.lblRevCostCenterCode.EditingMode = false
-        Me.lblRevCostCenterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblRevCostCenterCode.Location = New System.Drawing.Point(11, 36)
-        Me.lblRevCostCenterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblRevCostCenterCode.Name = "lblRevCostCenterCode"
-        Me.lblRevCostCenterCode.Size = New System.Drawing.Size(200, 23)
-        Me.lblRevCostCenterCode.TabIndex = 156
-        Me.lblRevCostCenterCode.Text = "Code"
-        Me.lblRevCostCenterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayGroupCode.DisplayOnly = true
+        Me.lblPayGroupCode.EditingMode = false
+        Me.lblPayGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayGroupCode.Location = New System.Drawing.Point(11, 36)
+        Me.lblPayGroupCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayGroupCode.Name = "lblPayGroupCode"
+        Me.lblPayGroupCode.Size = New System.Drawing.Size(200, 23)
+        Me.lblPayGroupCode.TabIndex = 156
+        Me.lblPayGroupCode.Text = "Code"
+        Me.lblPayGroupCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblRevCostCenterName
+        'lblPayGroupName
         '
-        Me.lblRevCostCenterName.DisplayOnly = true
-        Me.lblRevCostCenterName.EditingMode = false
-        Me.lblRevCostCenterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblRevCostCenterName.Location = New System.Drawing.Point(11, 61)
-        Me.lblRevCostCenterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblRevCostCenterName.Name = "lblRevCostCenterName"
-        Me.lblRevCostCenterName.Size = New System.Drawing.Size(200, 23)
-        Me.lblRevCostCenterName.TabIndex = 157
-        Me.lblRevCostCenterName.Text = "Name"
-        Me.lblRevCostCenterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayGroupName.DisplayOnly = true
+        Me.lblPayGroupName.EditingMode = false
+        Me.lblPayGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayGroupName.Location = New System.Drawing.Point(11, 61)
+        Me.lblPayGroupName.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayGroupName.Name = "lblPayGroupName"
+        Me.lblPayGroupName.Size = New System.Drawing.Size(200, 23)
+        Me.lblPayGroupName.TabIndex = 157
+        Me.lblPayGroupName.Text = "Name"
+        Me.lblPayGroupName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblRevCostCenterNameAra
+        'lblPayGroupNameAra
         '
-        Me.lblRevCostCenterNameAra.DisplayOnly = true
-        Me.lblRevCostCenterNameAra.EditingMode = false
-        Me.lblRevCostCenterNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblRevCostCenterNameAra.Location = New System.Drawing.Point(11, 86)
-        Me.lblRevCostCenterNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblRevCostCenterNameAra.Name = "lblRevCostCenterNameAra"
-        Me.lblRevCostCenterNameAra.Size = New System.Drawing.Size(200, 23)
-        Me.lblRevCostCenterNameAra.TabIndex = 158
-        Me.lblRevCostCenterNameAra.Text = "Name (Arabic)"
-        Me.lblRevCostCenterNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayGroupNameAra.DisplayOnly = true
+        Me.lblPayGroupNameAra.EditingMode = false
+        Me.lblPayGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayGroupNameAra.Location = New System.Drawing.Point(11, 86)
+        Me.lblPayGroupNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayGroupNameAra.Name = "lblPayGroupNameAra"
+        Me.lblPayGroupNameAra.Size = New System.Drawing.Size(200, 23)
+        Me.lblPayGroupNameAra.TabIndex = 158
+        Me.lblPayGroupNameAra.Text = "Name (Arabic)"
+        Me.lblPayGroupNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblParentIdNo
         '
@@ -349,19 +349,19 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLevelNumber.ValueIsMandatory = true
         Me.txtLevelNumber.ValueIsNumeric = true
         '
-        'lblRevCostCenterIdNo
+        'lblPayGroupIdNo
         '
-        Me.lblRevCostCenterIdNo.DisplayOnly = true
-        Me.lblRevCostCenterIdNo.EditingMode = false
-        Me.lblRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblRevCostCenterIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRevCostCenterIdNo.Location = New System.Drawing.Point(11, 165)
-        Me.lblRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
-        Me.lblRevCostCenterIdNo.Size = New System.Drawing.Size(200, 23)
-        Me.lblRevCostCenterIdNo.TabIndex = 166
-        Me.lblRevCostCenterIdNo.Text = "Revenue or Cost Center?"
-        Me.lblRevCostCenterIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayGroupIdNo.DisplayOnly = true
+        Me.lblPayGroupIdNo.EditingMode = false
+        Me.lblPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayGroupIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPayGroupIdNo.Location = New System.Drawing.Point(11, 165)
+        Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
+        Me.lblPayGroupIdNo.Size = New System.Drawing.Size(200, 23)
+        Me.lblPayGroupIdNo.TabIndex = 166
+        Me.lblPayGroupIdNo.Text = "Revenue or Cost Center?"
+        Me.lblPayGroupIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cacRcType
         '
@@ -440,12 +440,12 @@ Namespace PresentationLayer.Views.Forms
         Me.txtSortKey.ValueIsMandatory = true
         Me.txtSortKey.Visible = false
         '
-        'RevCostCenterEntryTv
+        'PayGroupEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(955, 310)
         Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "RevCostCenterEntryTv"
+        Me.Name = "PayGroupEntry"
         Me.Text = "Revenue/Cost Centers Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
@@ -457,25 +457,25 @@ Namespace PresentationLayer.Views.Forms
 
 End Sub
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtRevCostCenterCode As CTextBox
-        Friend WithEvents txtRevCostCenterName As CTextBox
-        Friend WithEvents txtRevCostCenterNameAra As CTextBoxArabic
+        Friend WithEvents txtPayGroupCode As CTextBox
+        Friend WithEvents txtPayGroupName As CTextBox
+        Friend WithEvents txtPayGroupNameAra As CTextBoxArabic
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents lblRevCostCenterCode As CLabel
-        Friend WithEvents lblRevCostCenterName As CLabel
-        Friend WithEvents lblRevCostCenterNameAra As CLabel
+        Friend WithEvents lblPayGroupCode As CLabel
+        Friend WithEvents lblPayGroupName As CLabel
+        Friend WithEvents lblPayGroupNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents lblLevelNumber As CLabel
         Friend WithEvents txtLevelNumber As CTextBox
-        Friend WithEvents _MBRevCostCenterCannotBeParentToItself As LocalizableMessageBox
+        Friend WithEvents _MBPayGroupCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
         Friend WithEvents cacParentIdNo As CaComboBox
-        Friend WithEvents lblRevCostCenterIdNo As CLabel
+        Friend WithEvents lblPayGroupIdNo As CLabel
         Friend WithEvents cacRcType As CaComboBox
     End Class
 End Namespace

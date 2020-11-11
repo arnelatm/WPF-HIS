@@ -304,6 +304,18 @@
     <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
+      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollTvEntry.designer.vb">
+      <DependentUpon>PayrollTvEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollTvEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.designer.vb">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
     </Compile>
@@ -322,10 +334,10 @@
     <Compile Include="PresentationLayer\Views\Forms\PayCycleEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.designer.vb">
+      <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.designer.vb">
@@ -338,12 +350,6 @@
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EarningEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.designer.vb">
-      <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.designer.vb">
@@ -1879,6 +1885,12 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.resx">
       <DependentUpon>DepositTypeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
+      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollTvEntry.resx">
+      <DependentUpon>PayrollTvEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.resx">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1889,8 +1901,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayCycleEntryTv.resx">
       <DependentUpon>PayCycleEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntryTv.resx">
+      <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntry.resx">
@@ -1900,9 +1912,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EarningEntryTv.resx">
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntryTv.resx">
-      <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.resx">
       <DependentUpon>PayPeriodEntryTv.vb</DependentUpon>
