@@ -1,7 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -10,23 +9,22 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayGroupView
 
         Public Sub New()
+
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
 
             MainTableName = "PayGroup"
             TvMainFieldName = "PayGroupName"
             TvSecondaryFieldName = "PayGroupCode"
-            SortOrderKey = "SortKey"
+            SortOrderKey = "PayGroupName"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtPayGroupCode
-            ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PayGroupPresenter(Me)
+
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-        End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetPayGroupList()
         End Sub
 
 #Region "Fields"
@@ -42,10 +40,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IPayGroupView.ParentIdNo
             Get
-                Return cacParentIdNo.GetNullableValue(Of Int16)
+                Return cboParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
-                cacParentIdNo.SetValue(Value)
+                cboParentIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -85,25 +83,29 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property SortKey As String Implements IPayGroupView.SortKey
-        '    Get
-        '        Return txtSortKey.Text
-        '    End Get
-        '    Set
-        '        txtSortKey.Text = Value
-        '    End Set
-        'End Property
+        Public Property LevelNumber As Int16 Implements IPayGroupView.LevelNumber
+            Get
+                Return NumParser(Of Int16)(txtLevelNumber.Text)
+            End Get
+            Set(value As Int16)
+                txtLevelNumber.Text = value
+            End Set
+        End Property
 
-        'Public Property LevelNumber As Int16 Implements IPayGroupView.LevelNumber
-        '    Get
-        '        Return NumParser(Of Int16)(txtLevelNumber.Text)
-        '    End Get
-        '    Set(value As Int16)
-        '        txtLevelNumber.Text = value
-        '    End Set
-        'End Property
+        Public Property SortKey As String Implements IPayGroupView.SortKey
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
 #End Region
+
+        Protected Overrides Sub CreateDataSources()
+            cboParentIdNo.DataSource = PresenterObj.GetListByCode("PayGroup")
+        End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -111,8 +113,8 @@ Namespace PresentationLayer.Views.Forms
                 {"PayGroupCode", txtPayGroupCode},
                 {"PayGroupName", txtPayGroupName},
                 {"PayGroupNameAra", txtPayGroupNameAra},
+                {"ParentIdNo", cboParentIdNo},
                 {"IdNo", TxtIdNo},
-                {"ParentIdNo", cacParentIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

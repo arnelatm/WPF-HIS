@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -13,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "PayGroup_View"
+            MainTableName = "PayGroup"
             TvMainFieldName = "PayGroupName"
             TvSecondaryFieldName = "PayGroupCode"
             SortOrderKey = "SortKey"
@@ -27,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetPayGroupList()
+            cacRcType.DataSource = PresenterObj.MakeEnumComboList(Of RevCostTypeSelection)
         End Sub
 
 #Region "Fields"

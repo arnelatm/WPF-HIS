@@ -1,21 +1,18 @@
 ﻿Imports System.ComponentModel
-Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PayrollEntry
-        Implements IPayPeriodView
+    Public Class CFormTvEntry
 
         Protected TvMainFieldName As String
         Protected TvSecondaryFieldName As String
         Protected TvSortKey As String
         Private _bypassSelectedChange As Boolean = False
-        Private _employees
-        Private _payGroups 
+        Public WithEvents trvTreeView As New TreeView
 
         Public Sub New()
 
@@ -23,44 +20,20 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "PayPeriod"
-            TvMainFieldName = "PayPeriodName"
-            TvSecondaryFieldName = "PayPeriodCode"
-            SortOrderKey = "SortKey"
-            FirstControl = txtPayrollIdNo
-            ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PayPeriodPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-            _employees = PresenterObj.GetListByName("Employee")
-            _payGroups = PresenterObj.GetListByName("PayGroups")
+            
         End Sub
 
-#Region "Fields"
-
-        Public Property EndDate As Date Implements IPayPeriodView.EndDate
-        Public Property IdNo As Int32 Implements IPayPeriodView.IdNo
-
-        Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
-
-        Public Property PayPeriodCode As String Implements IPayPeriodView.PayPeriodCode
-        Public Property PayPeriodName As String Implements IPayPeriodView.PayPeriodName
-        Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
-        Public Property StartDate As Date Implements IPayPeriodView.StartDate
-
-#End Region
-
         Public Sub DisplayTree(ByRef treeViewData As Object)
-            Dim root As TreeNode = trvPayroll.Nodes(0)
+            Dim root As TreeNode = trvTreeView.Nodes(0)
             'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
             root.Nodes.Clear()
             ' create the tree
             If GlobalVariables.RightToLeftLayout Then
-                trvPayroll.RightToLeftLayout = True
+                trvTreeView.RightToLeftLayout = True
             Else
-                trvPayroll.RightToLeftLayout = False
+                trvTreeView.RightToLeftLayout = False
             End If
-            trvPayroll.RightToLeft = RightToLeft.Inherit
+            trvTreeView.RightToLeft = RightToLeft.Inherit
             If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
                 For Each dataNode In treeViewData
                     AddRecordToTree(dataNode)
@@ -72,32 +45,12 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub LoadPayGroups(ByRef node As TreeNode)
-            For Each payGroup In _payGroups
-                node.Nodes.Add(New TreeNode With { .Text = payGroup.Name,
-                                                   .Tag = payGroup.idNo,
-                                                   .Name = payGroup.idNo
-                                                 }
-                              )
-            Next payGroup
-        End Sub
-
-        Private Sub LoadEmployees(ByRef node As TreeNode)
-            For Each employee In _employees
-                node.Nodes.Add(New TreeNode With { .Text = employee.Name,
-                                                   .Tag = employee.idNo,
-                                                   .Name = employee.idNo
-                                                 }
-                              )
-            Next employee
-        End Sub
-
         Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
             Dim idNo As Int32 = GetPropertyValue(dataNode, PresenterObj.IdFieldName)
             Dim mainValue As String = GetPropertyValue(dataNode, "Name")
             Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
             Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-            trvPayroll.Nodes(0).Nodes.Add(treeNode)
+            trvTreeView.Nodes(0).Nodes.Add(treeNode)
         End Sub
 
         Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean)
@@ -111,13 +64,13 @@ Namespace PresentationLayer.Views.Forms
                 Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
                 If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
                     If parentChanged Then
-                        trvPayroll.Nodes(trvPayroll.Nodes.Count - 1).Nodes.Add(treeNode)
+                        trvTreeView.Nodes(trvTreeView.Nodes.Count - 1).Nodes.Add(treeNode)
                     Else
-                        trvPayroll.Nodes(0).Nodes.Add(treeNode)
+                        trvTreeView.Nodes(0).Nodes.Add(treeNode)
                     End If
                 Else
                     If parentChanged Then
-                        Dim foundNode As TreeNode() = trvPayroll.Nodes.Find(parentIdValue.ToString(), True)
+                        Dim foundNode As TreeNode() = trvTreeView.Nodes.Find(parentIdValue.ToString(), True)
                         If foundNode.Length <> 0 Then
                             foundNode(0).Nodes.Add(treeNode)
                         End If
@@ -126,8 +79,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) _
-            Handles trvPayroll.AfterSelect
+        Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs)           
             If Not _bypassSelectedChange Then
                 Select Case (e.Action)
                     Case TreeViewAction.ByKeyboard
@@ -146,15 +98,15 @@ Namespace PresentationLayer.Views.Forms
                     Exit Sub
                 End If
                 Dim nTag As Integer
-                trvPayroll.ImageIndex = 1
-                If trvPayroll.SelectedNode.Tag.ToString = "root" Then
+                trvTreeView.ImageIndex = 1
+                If trvTreeView.SelectedNode.Tag.ToString = "root" Then
                     PresenterObj.RecordPositionNumber = 1
                 Else
-                    nTag = trvPayroll.SelectedNode.Tag
+                    nTag = trvTreeView.SelectedNode.Tag
                     PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(nTag)
                 End If
-                If Not trvPayroll.SelectedNode.IsVisible Then
-                    trvPayroll.SelectedNode.EnsureVisible()
+                If Not trvTreeView.SelectedNode.IsVisible Then
+                    trvTreeView.SelectedNode.EnsureVisible()
                 End If
             End If
         End Sub
@@ -162,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Sub DisplayTreeViewData()
             Dim treeViewData = PresenterObj.GetTreeViewDataNew()
             DisplayTree(treeViewData)
-            trvPayroll.ExpandAll()
+            trvTreeView.ExpandAll()
             GotoRecordInTreeView()
         End Sub
 
@@ -195,7 +147,7 @@ Namespace PresentationLayer.Views.Forms
             If bypassChange Then
                 _bypassSelectedChange = True
             End If
-            trvPayroll.Nodes.Remove(trvPayroll.SelectedNode)
+            trvTreeView.Nodes.Remove(trvTreeView.SelectedNode)
             _bypassSelectedChange = False
         End Sub
 
@@ -206,8 +158,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-                trvPayroll.Nodes(0).Text = MainTableName
-                trvPayroll.ExpandAll()
+                trvTreeView.Nodes(0).Text = MainTableName
+                trvTreeView.ExpandAll()
                 DisplayTreeViewData()
             End If
         End Sub
@@ -216,14 +168,14 @@ Namespace PresentationLayer.Views.Forms
             _bypassSelectedChange = True
             If GlobalVariables.RightToLeftLayout Then
                 RightToLeftLayout = True
-                trvPayroll.RightToLeftLayout = True
-                trvPayroll.RightToLeft = RightToLeft.Yes
+                trvTreeView.RightToLeftLayout = True
+                trvTreeView.RightToLeft = RightToLeft.Yes
             Else
                 RightToLeftLayout = False
-                trvPayroll.RightToLeftLayout = False
-                trvPayroll.RightToLeft = RightToLeft.No
+                trvTreeView.RightToLeftLayout = False
+                trvTreeView.RightToLeft = RightToLeft.No
             End If
-            trvPayroll.ExpandAll()
+            trvTreeView.ExpandAll()
             _bypassSelectedChange = False
         End Sub
 
@@ -237,9 +189,9 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub GotoRecordInTreeView()
-            Dim found As TreeNode() = trvPayroll.Nodes.Find(PresenterObj.TargetIdNo, True)
+            Dim found As TreeNode() = trvTreeView.Nodes.Find(PresenterObj.TargetIdNo, True)
             If found.Length <> 0 Then
-                With trvPayroll
+                With trvTreeView
                     _bypassSelectedChange = True
                     .SelectedNode = found(0)
                     _bypassSelectedChange = False
@@ -251,8 +203,8 @@ Namespace PresentationLayer.Views.Forms
             'If Not TreeViewTableName.SelectedNode Is Nothing Then
             'TreeViewTableName.SelectedNode.Text = TreeNodeText
             'End If
-            If trvPayroll.SelectedNode IsNot Nothing AndAlso trvPayroll.SelectedNode.IsVisible Then
-                trvPayroll.SelectedNode.EnsureVisible()
+            If trvTreeView.SelectedNode IsNot Nothing AndAlso trvTreeView.SelectedNode.IsVisible Then
+                trvTreeView.SelectedNode.EnsureVisible()
             End If
         End Sub
 

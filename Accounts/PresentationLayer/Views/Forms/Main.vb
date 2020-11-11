@@ -1343,8 +1343,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayGroupsToolStripMenuItem.Click
-            Dim childMdiForm As PayGroupEntryTv
-            childMdiForm = New PayGroupEntryTv With {
+            Dim childMdiForm As PayGroupEntry
+            childMdiForm = New PayGroupEntry With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()
@@ -1391,8 +1391,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayrollEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem.Click
-            Dim childMdiForm As PayrollEntry
-            childMdiForm = New PayrollEntry With {
+            Dim childMdiForm As PayrollTvEntry
+            childMdiForm = New PayrollTvEntry With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()
