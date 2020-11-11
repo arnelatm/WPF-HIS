@@ -54,8 +54,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboPayCycleidNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
         Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -168,6 +168,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout6.SuspendLayout
         CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).BeginInit
@@ -222,8 +224,10 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout6.Controls.Add(Me.txtOpeningBalance)
         Me.CFlowLayout6.Controls.Add(Me.lblIban)
         Me.CFlowLayout6.Controls.Add(Me.txtIban)
-        Me.CFlowLayout6.Controls.Add(Me.lblPayFrequency)
-        Me.CFlowLayout6.Controls.Add(Me.cboPayFrequency)
+        Me.CFlowLayout6.Controls.Add(Me.lblPayCycleIdNo)
+        Me.CFlowLayout6.Controls.Add(Me.cboPayCycleidNo)
+        Me.CFlowLayout6.Controls.Add(Me.lblPayGroupIdNo)
+        Me.CFlowLayout6.Controls.Add(Me.cboPayGroupIdNo)
         Me.CFlowLayout6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
         Me.CFlowLayout6.Name = "CFlowLayout6"
@@ -486,59 +490,59 @@ Namespace PresentationLayer.Views.Forms
         Me.txtIban.Size = New System.Drawing.Size(200, 23)
         Me.txtIban.TabIndex = 6
         '
-        'lblPayFrequency
+        'lblPayCycleIdNo
         '
-        Me.lblPayFrequency.DisplayOnly = true
-        Me.lblPayFrequency.EditingMode = false
-        Me.lblPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPayFrequency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPayFrequency.Location = New System.Drawing.Point(4, 156)
-        Me.lblPayFrequency.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPayFrequency.Name = "lblPayFrequency"
-        Me.lblPayFrequency.Size = New System.Drawing.Size(185, 23)
-        Me.lblPayFrequency.TabIndex = 286
-        Me.lblPayFrequency.Text = "Pay Frequency"
-        Me.lblPayFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayCycleIdNo.DisplayOnly = true
+        Me.lblPayCycleIdNo.EditingMode = false
+        Me.lblPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayCycleIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPayCycleIdNo.Location = New System.Drawing.Point(4, 156)
+        Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
+        Me.lblPayCycleIdNo.Size = New System.Drawing.Size(185, 23)
+        Me.lblPayCycleIdNo.TabIndex = 286
+        Me.lblPayCycleIdNo.Text = "Pay Cycle"
+        Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'cboPayFrequency
+        'cboPayCycleidNo
         '
-        Me.cboPayFrequency.BackColor = System.Drawing.Color.White
-        Me.cboPayFrequency.ChangingSearchValueOnly = false
-        Me.cboPayFrequency.CurrentSearchTerm = ""
-        Me.cboPayFrequency.DefaultValue = Nothing
-        Me.cboPayFrequency.DisplayMember = "Name"
-        Me.cboPayFrequency.DropDownHeight = 1
-        Me.cboPayFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPayFrequency.EditingMode = false
-        Me.cboPayFrequency.FilterRule = Nothing
-        Me.CFlowLayout6.SetFlowBreak(Me.cboPayFrequency, true)
-        Me.cboPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboPayFrequency.ForeColor = System.Drawing.Color.Black
-        Me.cboPayFrequency.FormattingEnabled = true
-        Me.cboPayFrequency.HideWhenNotEditingOrAdding = false
-        Me.cboPayFrequency.IntegralHeight = false
-        Me.cboPayFrequency.LinkedLabel = Me.lblPayFrequency
-        Me.cboPayFrequency.Location = New System.Drawing.Point(190, 156)
-        Me.cboPayFrequency.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.cboPayFrequency.Name = "cboPayFrequency"
-        Me.cboPayFrequency.OldValue = 0
-        Me.cboPayFrequency.OriginalDataSource = Nothing
-        Me.cboPayFrequency.OriginalList = Nothing
-        Me.cboPayFrequency.OverrideDropDownStyleList = false
-        Me.cboPayFrequency.PreviousSearchTerm = Nothing
-        Me.cboPayFrequency.PreviousSelectedIndex = -1
-        Me.cboPayFrequency.PropertySelector = Nothing
-        Me.cboPayFrequency.ReadOnlyCombo = false
-        Me.cboPayFrequency.SearchAnywhere = false
-        Me.cboPayFrequency.Size = New System.Drawing.Size(201, 24)
-        Me.cboPayFrequency.SuggestBoxHeight = 200
-        Me.cboPayFrequency.SuggestListOrderRule = Nothing
-        Me.cboPayFrequency.TabIndex = 7
-        Me.cboPayFrequency.TextToSearch = Nothing
-        Me.cboPayFrequency.ValueIsMandatory = false
-        Me.cboPayFrequency.ValueIsNullable = false
-        Me.cboPayFrequency.ValueIsNumeric = false
-        Me.cboPayFrequency.ValueMember = "Code"
+        Me.cboPayCycleidNo.BackColor = System.Drawing.Color.White
+        Me.cboPayCycleidNo.ChangingSearchValueOnly = false
+        Me.cboPayCycleidNo.CurrentSearchTerm = ""
+        Me.cboPayCycleidNo.DefaultValue = Nothing
+        Me.cboPayCycleidNo.DisplayMember = "Name"
+        Me.cboPayCycleidNo.DropDownHeight = 1
+        Me.cboPayCycleidNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPayCycleidNo.EditingMode = false
+        Me.cboPayCycleidNo.FilterRule = Nothing
+        Me.CFlowLayout6.SetFlowBreak(Me.cboPayCycleidNo, true)
+        Me.cboPayCycleidNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboPayCycleidNo.ForeColor = System.Drawing.Color.Black
+        Me.cboPayCycleidNo.FormattingEnabled = true
+        Me.cboPayCycleidNo.HideWhenNotEditingOrAdding = false
+        Me.cboPayCycleidNo.IntegralHeight = false
+        Me.cboPayCycleidNo.LinkedLabel = Me.lblPayCycleIdNo
+        Me.cboPayCycleidNo.Location = New System.Drawing.Point(190, 156)
+        Me.cboPayCycleidNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.cboPayCycleidNo.Name = "cboPayCycleidNo"
+        Me.cboPayCycleidNo.OldValue = 0
+        Me.cboPayCycleidNo.OriginalDataSource = Nothing
+        Me.cboPayCycleidNo.OriginalList = Nothing
+        Me.cboPayCycleidNo.OverrideDropDownStyleList = false
+        Me.cboPayCycleidNo.PreviousSearchTerm = Nothing
+        Me.cboPayCycleidNo.PreviousSelectedIndex = -1
+        Me.cboPayCycleidNo.PropertySelector = Nothing
+        Me.cboPayCycleidNo.ReadOnlyCombo = false
+        Me.cboPayCycleidNo.SearchAnywhere = false
+        Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
+        Me.cboPayCycleidNo.SuggestBoxHeight = 200
+        Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
+        Me.cboPayCycleidNo.TabIndex = 7
+        Me.cboPayCycleidNo.TextToSearch = Nothing
+        Me.cboPayCycleidNo.ValueIsMandatory = false
+        Me.cboPayCycleidNo.ValueIsNullable = true
+        Me.cboPayCycleidNo.ValueIsNumeric = false
+        Me.cboPayCycleidNo.ValueMember = "IdNo"
         '
         'bsEarnings
         '
@@ -2411,6 +2415,60 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout4.Size = New System.Drawing.Size(820, 82)
         Me.CFlowLayout4.TabIndex = 6
         '
+        'lblPayGroupIdNo
+        '
+        Me.lblPayGroupIdNo.DisplayOnly = true
+        Me.lblPayGroupIdNo.EditingMode = false
+        Me.lblPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayGroupIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 182)
+        Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
+        Me.lblPayGroupIdNo.Size = New System.Drawing.Size(185, 23)
+        Me.lblPayGroupIdNo.TabIndex = 290
+        Me.lblPayGroupIdNo.Text = "Pay Group"
+        Me.lblPayGroupIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboPayGroupIdNo
+        '
+        Me.cboPayGroupIdNo.BackColor = System.Drawing.Color.White
+        Me.cboPayGroupIdNo.ChangingSearchValueOnly = false
+        Me.cboPayGroupIdNo.CurrentSearchTerm = ""
+        Me.cboPayGroupIdNo.DefaultValue = Nothing
+        Me.cboPayGroupIdNo.DisplayMember = "Name"
+        Me.cboPayGroupIdNo.DropDownHeight = 1
+        Me.cboPayGroupIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPayGroupIdNo.EditingMode = false
+        Me.cboPayGroupIdNo.FilterRule = Nothing
+        Me.CFlowLayout6.SetFlowBreak(Me.cboPayGroupIdNo, true)
+        Me.cboPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboPayGroupIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboPayGroupIdNo.FormattingEnabled = true
+        Me.cboPayGroupIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboPayGroupIdNo.IntegralHeight = false
+        Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
+        Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 182)
+        Me.cboPayGroupIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.cboPayGroupIdNo.Name = "cboPayGroupIdNo"
+        Me.cboPayGroupIdNo.OldValue = 0
+        Me.cboPayGroupIdNo.OriginalDataSource = Nothing
+        Me.cboPayGroupIdNo.OriginalList = Nothing
+        Me.cboPayGroupIdNo.OverrideDropDownStyleList = false
+        Me.cboPayGroupIdNo.PreviousSearchTerm = Nothing
+        Me.cboPayGroupIdNo.PreviousSelectedIndex = -1
+        Me.cboPayGroupIdNo.PropertySelector = Nothing
+        Me.cboPayGroupIdNo.ReadOnlyCombo = false
+        Me.cboPayGroupIdNo.SearchAnywhere = false
+        Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
+        Me.cboPayGroupIdNo.SuggestBoxHeight = 200
+        Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
+        Me.cboPayGroupIdNo.TabIndex = 289
+        Me.cboPayGroupIdNo.TextToSearch = Nothing
+        Me.cboPayGroupIdNo.ValueIsMandatory = false
+        Me.cboPayGroupIdNo.ValueIsNullable = true
+        Me.cboPayGroupIdNo.ValueIsNumeric = false
+        Me.cboPayGroupIdNo.ValueMember = "IdNo"
+        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -2500,8 +2558,8 @@ End Sub
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPayFrequency As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblPayCycleIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPayCycleidNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpHiredDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
@@ -2598,6 +2656,8 @@ End Sub
         Friend WithEvents txtNetTotal As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPaymentMethod As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblPayGroupIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CaComboBox
     End Class
 
 End Namespace

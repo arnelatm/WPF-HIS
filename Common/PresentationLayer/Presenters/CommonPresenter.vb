@@ -65,7 +65,7 @@ Namespace PresentationLayer.Presenters
             SortExpression = sortKey
             DisplayName = "CountryName"
             DisplayNameArabic = "CountryNameAra"
-            DisplayCode = "Isoa2"
+            DisplayCode = "CountryCode"
             Return GetLookupDataByNameWithCode()
         End Function
 
@@ -87,32 +87,32 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByNameWithCode()
         End Function
 
-        Public Function GetDepartmentList(Optional ByVal sortKey As String = "DepartmentName")
-            TableToGet = "Department"
-            SortExpression = sortKey
-            DisplayName = "DepartmentName"
-            DisplayNameArabic = "DepartmentNameAra"
-            DisplayCode = "DepartmentCode"
-            Return GetTableList()
-        End Function
+        'Public Function GetDepartmentList(Optional ByVal sortKey As String = "DepartmentName")
+        '    TableToGet = "Department"
+        '    SortExpression = sortKey
+        '    DisplayName = "DepartmentName"
+        '    DisplayNameArabic = "DepartmentNameAra"
+        '    DisplayCode = "DepartmentCode"
+        '    Return GetTableList()
+        'End Function
 
-        Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
-            TableToGet = "Department"
-            SortExpression = sortKey
-            DisplayName = "DepartmentName"
-            DisplayNameArabic = "DepartmentNameAra"
-            DisplayCode = "DepartmentCode"
-            Return GetLookupDataByName()
-        End Function
+        'Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
+        '    TableToGet = "Department"
+        '    SortExpression = sortKey
+        '    DisplayName = "DepartmentName"
+        '    DisplayNameArabic = "DepartmentNameAra"
+        '    DisplayCode = "DepartmentCode"
+        '    Return GetLookupDataByName()
+        'End Function
 
-        Public Function GetDesignationList(Optional ByVal sortKey As String = "DesignationName")
-            TableToGet = "Designation"
-            SortExpression = sortKey
-            DisplayName = "DesignationName"
-            DisplayNameArabic = "DesignationNameAra"
-            DisplayCode = "DesignationCode"
-            Return GetTableList()
-        End Function
+        'Public Function GetDesignationList(Optional ByVal sortKey As String = "DesignationName")
+        '    TableToGet = "Designation"
+        '    SortExpression = sortKey
+        '    DisplayName = "DesignationName"
+        '    DisplayNameArabic = "DesignationNameAra"
+        '    DisplayCode = "DesignationCode"
+        '    Return GetTableList()
+        'End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
             TableToGet = "Chart"
@@ -189,6 +189,15 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByCode(filter)
         End Function
 
+        Public Function GetListByName(listName As String, Optional filter As String = Nothing)
+            TableToGet = listName
+            DisplayName = listName + "Name"
+            SortExpression = DisplayName
+            DisplayNameArabic = DisplayName + "Ara"
+            DisplayCode = listName + "Code"
+            Return GetLookupDataByName(filter)
+        End Function
+
         Public Function GetFilteredListByCode(listName As String, filter As String)
             TableToGet = listName
             DisplayName = listName + "Name"
@@ -216,14 +225,14 @@ Namespace PresentationLayer.Presenters
             Return GetLookupDataByCode()
         End Function
 
-        Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
-            TableToGet = "Religion"
-            SortExpression = sortKey
-            DisplayName = "ReligionName"
-            DisplayNameArabic = "ReligionNameAra"
-            DisplayCode = "ReligionCode"
-            Return GetTableList()
-        End Function
+        'Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
+        '    TableToGet = "Religion"
+        '    SortExpression = sortKey
+        '    DisplayName = "ReligionName"
+        '    DisplayNameArabic = "ReligionNameAra"
+        '    DisplayCode = "ReligionCode"
+        '    Return GetTableList()
+        'End Function
 
         Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
             Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode",

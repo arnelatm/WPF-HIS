@@ -393,7 +393,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnInitialize
         '
-        Me.btnInitialize.DesignerSelected = true
+        Me.btnInitialize.DesignerSelected = false
         Me.btnInitialize.DisplayOnly = true
         Me.btnInitialize.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnInitialize.ImageIndex = 0

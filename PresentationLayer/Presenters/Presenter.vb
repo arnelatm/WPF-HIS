@@ -1150,9 +1150,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Protected Function GetLookupDataByName()
+    Protected Function GetLookupDataByName(Optional filter As String = Nothing)
         FormatFields()
-        Return Model.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
+        If filter IsNot Nothing Then
+            Return Model.GetLookupFilteredDataByName(TableToGet, SortExpression, filter, FieldsToShow)
+        Else
+            Return Model.GetLookupDataByName(TableToGet, SortExpression, FieldsToShow)
+        End If
     End Function
 
     Protected Function GetLookupDataByNameWithCode()

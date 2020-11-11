@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IEarningView
         Inherits IView
         Property AccountIdNo As Int16
-        Property BasePaymentIdNo As Int16
+        Property BasePaymentIdNo As Int16?
         Property CalculationType As Char
         Property DefaultQuantity As Decimal
         Property EarningCode As String

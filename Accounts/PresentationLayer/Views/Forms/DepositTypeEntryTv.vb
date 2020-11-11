@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankChargesAccountIdNo As Int16? Implements IDepositTypeView.BankChargesAccountIdNo
             Get
-                Return cboBankChargesAccountIdNo.GetValue()
+                Return cboBankChargesAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboBankChargesAccountIdNo.SetValue(Value)
@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankChargesVatAccountIdNo As Int16? Implements IDepositTypeView.BankChargesVatAccountIdNo
             Get
-                Return cboBankChargesVatAccountIdNo.GetValue()
+                Return cboBankChargesVatAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboBankChargesVatAccountIdNo.SetValue(Value)

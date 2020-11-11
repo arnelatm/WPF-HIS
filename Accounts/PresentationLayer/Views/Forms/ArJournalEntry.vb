@@ -41,7 +41,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AccountIdNo As Int16? Implements IArJournalView.AccountIdNo
             Get
-                Return cboAccountIdNo.GetValue()
+                Return cboAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)
@@ -68,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CustomerIdNo As Int32? Implements IArJournalView.CustomerIdNo
             Get
-                Return cboCustomerIdNo.GetValue()
+                Return cboCustomerIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboCustomerIdNo.SetValue(Value)

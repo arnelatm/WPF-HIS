@@ -29,8 +29,8 @@ Partial Class CFormEntryTv
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTv))
         Me.TreeViewTableName = New System.Windows.Forms.TreeView()
         Me.ImageListTreeView = New System.Windows.Forms.ImageList(Me.components)
-        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'TreeViewTableName
         '
@@ -50,23 +50,23 @@ Partial Class CFormEntryTv
         '
         'ImageListTreeView
         '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
         Me.ImageListTreeView.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
         '
         'CFormEntryTv
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(852, 308)
         Me.Controls.Add(Me.TreeViewTableName)
         Me.Name = "CFormEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Public WithEvents TreeViewTableName As TreeView
     Friend WithEvents ImageListTreeView As ImageList

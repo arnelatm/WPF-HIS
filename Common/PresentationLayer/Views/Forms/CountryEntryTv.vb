@@ -13,9 +13,9 @@ Namespace PresentationLayer.Views.Forms
 
             MainTableName = "Country"
             TvMainFieldName = "CountryName"
-            TvSecondaryFieldName = "ISOA2"
+            TvSecondaryFieldName = "CountryCode"
             SortOrderKey = "SortKey"
-            FirstControl = txtIsoA2
+            FirstControl = txtCountryCode
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CountryPresenter(Me)
             Ea = PresenterObj.Ea
@@ -33,12 +33,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Isoa2 As String Implements ICountryView.Isoa2
+        Public Property CountryCode As String Implements ICountryView.CountryCode
             Get
-                Return txtIsoA2.Text
+                Return txtCountryCode.Text
             End Get
             Set
-                txtIsoA2.Text = Value
+                txtCountryCode.Text = Value
             End Set
         End Property
 
@@ -113,7 +113,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"CountryCode", txtIsoA2},
+                {"CountryCode", txtCountryCode},
                 {"CountryName", txtCountryName},
                 {"CountryNameAra", txtCountryNameAra},
                 {"IdNo", TxtIdNo},

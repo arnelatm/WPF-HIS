@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IRevenueGroupView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Int16?)
+                Return cacParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

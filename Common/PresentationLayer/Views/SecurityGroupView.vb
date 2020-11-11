@@ -60,21 +60,12 @@ Namespace PresentationLayer.Views
 
         Public Property ParentIdNo As Int16? Implements ISecurityGroupView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Integer?)
+                Return cacParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
             End Set
         End Property
-
-        'Public Property ParentIdNo As Int32? Implements ISecurityGroupView.ParentIdNo
-        '    Get
-        '        Return cacParentIdNo.GetValue()
-        '    End Get
-        '    Set
-        '        cacParentIdNo.SetValue(Value)
-        '    End Set
-        'End Property
 
         Public Property Notes As String Implements ISecurityGroupView.Notes
             Get

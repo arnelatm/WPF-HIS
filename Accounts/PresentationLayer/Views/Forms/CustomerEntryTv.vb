@@ -252,7 +252,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ArAccountIdNo As Int16? Implements ICustomerView.ArAccountIdNo
             Get
-                Return CType(cacArAccountIdNo.GetValue(), Int32?)
+                Return cacArAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacArAccountIdNo.SetValue(Value)
@@ -261,7 +261,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property RevAccountIdNo As Int16? Implements ICustomerView.RevAccountIdNo
             Get
-                Return CType(cacRevAccountIdNo.GetValue(), Int16?)
+                Return cacRevAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacRevAccountIdNo.SetValue(Value)
@@ -270,7 +270,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DiscountSchemeIdNo As Int16? Implements ICustomerView.DiscountSchemeIdNo
             Get
-                Return CType(cacDiscountSchemeIdNo.GetValue(), Int16?)
+                Return cacDiscountSchemeIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacDiscountSchemeIdNo.SetValue(Value)

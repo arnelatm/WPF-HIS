@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)
         Private _unit As Char
-        Private _unitPosition As TableLayoutPanelCellPosition 
+        Private _unitPosition As TableLayoutPanelCellPosition
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
 
         Public Sub New()
@@ -92,7 +92,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BasePaymentIdNo As Short Implements IEarningView.BasePaymentIdNo
+        Public Property BasePaymentIdNo As Int16? Implements IEarningView.BasePaymentIdNo
             Get
                 Return cboBasePaymentIdNo.GetValue()
             End Get
@@ -136,15 +136,6 @@ Namespace PresentationLayer.Views.Forms
                 txtEarningNameAra.Text = Value
             End Set
         End Property
-
-        'Public Property Frequency As Char Implements IEarningView.Frequency
-        '    Get
-        '        Return cboFrequency.GetValue()
-        '    End Get
-        '    Set
-        '        cboFrequency.SetValue(Value)
-        '    End Set
-        'End Property
 
         Public Property EarningType As Char Implements IEarningView.EarningType
             Get
@@ -332,8 +323,8 @@ Namespace PresentationLayer.Views.Forms
             tlpCalculation.Visible = False
             Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrig As TableLayoutPanelCellPosition = new TableLayoutPanelCellPosition(3,2)
-            Dim cellPos As TableLayoutPanelCellPosition = new TableLayoutPanelCellPosition(1,3)
+            Dim cellPosOrig As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+            Dim cellPos As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
             lblFactoredUnit.Visible = False
             Select Case curCalculationType
                 Case CalculationTypeSelection.Fixed
@@ -361,7 +352,7 @@ Namespace PresentationLayer.Views.Forms
                     lblPayRate.Visible = False
                     lblRate.Visible = False
                     lblFactoredUnit.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPos )
+                    tlpCalculation.SetCellPosition(cboUnit, cellPos)
                     cboUnit.Visible = True
                     'SwapPosition(cboFactoredUnit,cboUnit)
                     txtDefaultQuantity.Visible = True
@@ -380,7 +371,7 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig )
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
                 Case CalculationTypeSelection.Global
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
@@ -394,11 +385,11 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig )
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
             End Select
             tlpCalculation.Visible = True
             floCalculation.Visible = True
-            ResumeLayout
+            ResumeLayout()
         End Sub
 
         'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)
@@ -443,7 +434,7 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
-            _unitPosition = tlpCalculation.GetCellPosition(cboUnit)           
+            _unitPosition = tlpCalculation.GetCellPosition(cboUnit)
             'If _usePayGroups Then
             '    chkUsePayGroups.Visible = True
             '    lblUsePayGroups.Visible = True

@@ -21,18 +21,19 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Payroll")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollEntry))
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.trvPayroll = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
+        Me.trvPayroll = New System.Windows.Forms.TreeView()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CTextBox3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblPayrollDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -95,6 +96,9 @@
         Me.trvPayroll.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trvPayroll.Location = New System.Drawing.Point(0, 0)
         Me.trvPayroll.Name = "trvPayroll"
+        TreeNode1.Name = "Nodes()"
+        TreeNode1.Text = "Payroll"
+        Me.trvPayroll.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.trvPayroll.Size = New System.Drawing.Size(287, 515)
         Me.trvPayroll.TabIndex = 0
         '
@@ -105,13 +109,13 @@
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.37752!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.06585!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.06585!))
+        Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodName, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.CTextBox3, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel11, 2, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.CTextBox2, 3, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.cboEmployeeIdNo, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel4, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblPayrollDate, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollIdNo, 1, 0)
@@ -135,8 +139,33 @@
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(571, 515)
         Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'txtPayPeriodName
+        '
+        Me.txtPayPeriodName.BackColor = System.Drawing.Color.White
+        Me.txtPayPeriodName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodName, 3)
+        Me.txtPayPeriodName.ComputedValue = false
+        Me.txtPayPeriodName.CustomFormat = Nothing
+        Me.txtPayPeriodName.DataBoundControl = true
+        Me.txtPayPeriodName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPayPeriodName.EditingMode = false
+        Me.txtPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayPeriodName.ForeColor = System.Drawing.Color.Black
+        Me.txtPayPeriodName.LinkedLabel = Nothing
+        Me.txtPayPeriodName.Location = New System.Drawing.Point(112, 51)
+        Me.txtPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayPeriodName.MaximumValue = Nothing
+        Me.txtPayPeriodName.MinimumValue = Nothing
+        Me.txtPayPeriodName.Name = "txtPayPeriodName"
+        Me.txtPayPeriodName.OldValue = Nothing
+        Me.txtPayPeriodName.ReadOnly = true
+        Me.txtPayPeriodName.Size = New System.Drawing.Size(458, 23)
+        Me.txtPayPeriodName.TabIndex = 35
+        Me.txtPayPeriodName.ValueIsMandatory = true
         '
         'CTextBox3
         '
@@ -263,28 +292,6 @@
         Me.CLabel4.TabIndex = 11
         Me.CLabel4.Text = "CLabel4"
         Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 3)
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtNotes.EditingMode = true
-        Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(112, 51)
-        Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.Size = New System.Drawing.Size(458, 23)
-        Me.txtNotes.TabIndex = 9
         '
         'lblNotes
         '
@@ -543,11 +550,9 @@ End Sub
 
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents SplitContainer1 As SplitContainer
-        Friend WithEvents trvPayroll As Libraries.CBaseControlsLibrary.CTreeView
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPayrollDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
@@ -566,5 +571,7 @@ End Sub
         Friend WithEvents tbcPayroll As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tpgEarnings As TabPage
         Friend WithEvents tpgDeductions As TabPage
+        Friend WithEvents trvPayroll As TreeView
+        Friend WithEvents txtPayPeriodName As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End Namespace
