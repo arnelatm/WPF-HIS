@@ -13,23 +13,23 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 ' establish business rules
                 AddRule(New ValidateRequired("CountryName"))
-                AddRule(New ValidateLength("ISOA2", 2, 2))
-                AddRule(New ValidateLength("ISOA3", 3, 3))
-                AddRule(New ValidateRegex("ISON", "\d{3}"))
+                AddRule(New ValidateLength("CountryCode", 2, 2))
+                AddRule(New ValidateLength("IsoA3", 3, 3))
+                AddRule(New ValidateRegex("IsoN", "\d{3}"))
                 AddRule(New ValidateRegex("CountryTelIdNo", "\d{1,7}"))
             End If
         End Sub
 
         Public Property IdNo As Int16
-        Public Property ISOA2 As String
+        Public Property CountryCode As String
         Public Property CountryName As String
         Public Property CountryNameAra As String
         Public Property Nationality As String
         Public Property NationalityAra As String
         Public Property Flag32 As String
         Public Property Flag128 As String
-        Public Property ISOA3 As String
-        Public Property ISON As String
+        Public Property IsoA3 As String
+        Public Property IsoN As String
         Public Property CountryTelCode As String
     End Class
 

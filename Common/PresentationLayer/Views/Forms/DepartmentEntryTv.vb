@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetDepartmentList()
+            cacParentIdNo.DataSource = PresenterObj.GetListByName("Department")
             cacRevCostCenterIdNo.DataSource = PresenterObj.GetRevCostCenterList()
             cacRevCostCenterIdNo.DataSource = PresenterObj.GetRevCostCenterList()
         End Sub
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IDepartmentView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Int16?)
+                Return cacParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

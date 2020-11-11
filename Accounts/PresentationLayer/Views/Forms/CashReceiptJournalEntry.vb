@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
             Get
-                Return cboAccountIdNo.GetValue()
+                Return cboAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)
@@ -135,7 +135,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DiscountAccountIdNo As Int16? Implements ICashReceiptJournalView.DiscountAccountIdNo
             Get
-                Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
+                Return cboDiscountAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
             Get
-                Return cboPayorIdNo.GetValue()
+                Return cboPayorIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboPayorIdNo.SetValue(Value)

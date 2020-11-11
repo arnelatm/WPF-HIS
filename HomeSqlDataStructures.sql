@@ -3548,7 +3548,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Country](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
-	[ISOA2] [varchar](2) NOT NULL,
+	[CountryCode] [varchar](2) NOT NULL,
 	[CountryName] [varchar](100) NOT NULL,
 	[CountryNameAra] [varchar](100) NOT NULL,
 	[Nationality] [varchar](100) NOT NULL,
@@ -3563,9 +3563,9 @@ CREATE TABLE [dbo].[Country](
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_ISOA2] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_CountryCode] UNIQUE NONCLUSTERED 
 (
-	[ISOA2] ASC
+	[CountryCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_NameAra] UNIQUE NONCLUSTERED 
 (
@@ -4467,7 +4467,7 @@ ALTER TABLE [dbo].[CkdOiItem] ADD  CONSTRAINT [DF_CkdOiItem_Amount]  DEFAULT ((0
 GO
 ALTER TABLE [dbo].[CkdOiItem] ADD  CONSTRAINT [DF_CkdOiItem_DiscountTaken]  DEFAULT ((0)) FOR [DiscountTaken]
 GO
-ALTER TABLE [dbo].[Country] ADD  CONSTRAINT [DF__Countries__count__2A4B4B5E]  DEFAULT ('') FOR [ISOA2]
+ALTER TABLE [dbo].[Country] ADD  CONSTRAINT [DF__Countries__count__2A4B4B5E]  DEFAULT ('') FOR [CountryCode]
 GO
 ALTER TABLE [dbo].[Country] ADD  CONSTRAINT [DF__Countries__count__2B3F6F97]  DEFAULT ('') FOR [CountryName]
 GO

@@ -65,6 +65,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCategories = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefaultFieldValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesDepositTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurity = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
@@ -150,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SalesDepositTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.Account.SuspendLayout
@@ -354,6 +355,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DefaultFieldValuesToolStripMenuItem.Name = "DefaultFieldValuesToolStripMenuItem"
         resources.ApplyResources(Me.DefaultFieldValuesToolStripMenuItem, "DefaultFieldValuesToolStripMenuItem")
         '
+        'SalesDepositTypesToolStripMenuItem
+        '
+        Me.SalesDepositTypesToolStripMenuItem.Name = "SalesDepositTypesToolStripMenuItem"
+        resources.ApplyResources(Me.SalesDepositTypesToolStripMenuItem, "SalesDepositTypesToolStripMenuItem")
+        '
         'ToolStripMenuItemSecurity
         '
         Me.ToolStripMenuItemSecurity.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSecurityGroups, Me.ToolStripMenuItemSecurityObjects, Me.ToolStripMenuItemUsers})
@@ -475,7 +481,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemTransactions
         '
-        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItem8, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem})
+        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItem8, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem, Me.PayrollEntryToolStripMenuItem})
         Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
         resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
         '
@@ -795,10 +801,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'SalesDepositTypesToolStripMenuItem
+        'PayrollEntryToolStripMenuItem
         '
-        Me.SalesDepositTypesToolStripMenuItem.Name = "SalesDepositTypesToolStripMenuItem"
-        resources.ApplyResources(Me.SalesDepositTypesToolStripMenuItem, "SalesDepositTypesToolStripMenuItem")
+        Me.PayrollEntryToolStripMenuItem.Name = "PayrollEntryToolStripMenuItem"
+        resources.ApplyResources(Me.PayrollEntryToolStripMenuItem, "PayrollEntryToolStripMenuItem")
         '
         'Main
         '
@@ -946,5 +952,6 @@ End Sub
         Friend WithEvents PensionProvidersToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionSchemesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents SalesDepositTypesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayrollEntryToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

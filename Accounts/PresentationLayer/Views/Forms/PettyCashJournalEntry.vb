@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AccountIdNo As Int16? Implements IPettyCashJournalView.AccountIdNo
             Get
-                Return cboAccountIdNo.GetValue()
+                Return cboAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)
@@ -100,7 +100,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DiscountAccountIdNo As Int16? Implements IPettyCashJournalView.DiscountAccountIdNo
             Get
-                Return CType(cboDiscountAccountIdNo.GetValue(), Int16?)
+                Return cboDiscountAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboDiscountAccountIdNo.SetValue(Value)
@@ -159,7 +159,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayeeIdNo As Int32? Implements IPettyCashJournalView.PayeeIdNo
             Get
-                Return cboPayeeIdNo.GetValue()
+                Return cboPayeeIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboPayeeIdNo.SetValue(Value)

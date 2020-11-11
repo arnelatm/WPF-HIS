@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IPensionProviderView.BankIdNo
             Get
-                Return CType(cacBankIdNo.GetValue(), Int16?)
+                Return cacBankIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)

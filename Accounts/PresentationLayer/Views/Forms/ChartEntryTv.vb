@@ -127,34 +127,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IChartView.ParentIdNo
             Get
-                'Return cboParentIdNo.GetValue()
-                Dim value As Int16?
-                value = CType(cboParentIdNo.GetValue(), Int16?)
-                'If PresenterObj.EditableAccountGroup(value) Then
-                '    cboAccountGroup.DisplayOnly = False
-                'Else
-                '    cboAccountGroup.DisplayOnly = True
-                'End If
-                Return value
+                Return cboParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboParentIdNo.SetValue(Value)
-                'If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
-                '    cboAccountGroup.DisplayOnly = False
-                'Else
-                '    cboAccountGroup.DisplayOnly = True
-                'End If
-                'If PresenterObj.EditableAccountGroup(Value) Then
-                '    cboAccountGroup.DisplayOnly = False
-                '    Dim parentAccountGroup = PresenterObj.GetParentAccountGroup(Value)
-                '    If parentAccountGroup Is Nothing Then
-                '        cboAccountGroup.SelectedValue = ""
-                '    Else
-                '        cboAccountGroup.SelectedValue = parentAccountGroup
-                '    End If
-                'Else
-                '    cboAccountGroup.DisplayOnly = True
-                'End If
             End Set
         End Property
 

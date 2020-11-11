@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ApAccountIdNo As Int16? Implements ISupplierView.ApAccountIdNo
             Get
-                Return CType(cacApAccountIdNo.GetValue(), Int16?)
+                Return cacApAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacApAccountIdNo.SetValue(Value)
@@ -69,7 +69,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements ISupplierView.BankIdNo
             Get
-                Return CType(cacBankIdNo.GetValue(), Int16?)
+                Return cacBankIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ExpAccountIdNo As Int16? Implements ISupplierView.ExpAccountIdNo
             Get
-                Return CType(cacExpAccountIdNo.GetValue(), Int16?)
+                Return cacExpAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacExpAccountIdNo.SetValue(Value)

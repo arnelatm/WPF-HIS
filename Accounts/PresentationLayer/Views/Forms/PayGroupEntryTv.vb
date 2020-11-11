@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IPayGroupView.ParentIdNo
             Get
-                Return CType(cacParentIdNo.GetValue(), Integer?)
+                Return cacParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

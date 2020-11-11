@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property GlAccountIdNo As Int16? Implements IPurchaseItemView.GlAccountIdNo
             Get
-                Return cboGlAccountIdNo.GetValue()
+                Return cboGlAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboGlAccountIdNo.SetValue(Value)
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property VatAccountIdNo As Int16? Implements IPurchaseItemView.VatAccountIdNo
             Get
-                Return cboVatAccountIdNo.GetValue()
+                Return cboVatAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboVatAccountIdNo.SetValue(Value)

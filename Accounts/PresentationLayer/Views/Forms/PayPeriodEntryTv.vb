@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
             Get
-                Return CType(CacPayCycleIdNo.GetValue(), Int16)
+                Return CacPayCycleIdNo.GetValue()
             End Get
             Set
                 CacPayCycleIdNo.SetValue(Value)
@@ -121,6 +121,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
 
         End Sub
+
     End Class
 
 End Namespace

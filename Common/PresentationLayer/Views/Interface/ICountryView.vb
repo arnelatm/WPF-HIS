@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interface
         Inherits IView
 
         Property IdNo As Int16
-        Property Isoa2 As String
+        Property CountryCode As String
         Property CountryName As String
         Property CountryNameAra As String
         Property Nationality As String

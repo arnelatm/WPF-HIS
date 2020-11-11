@@ -80,7 +80,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-                Return cacBankIdNo.GetNullableValue(Of Int16?)
+                Return cacBankIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -111,7 +111,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
-                Return cacDepartmentIdNo.GetNullableValue(Of Int16?)
+                Return cacDepartmentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacDepartmentIdNo.SetValue(Value)
@@ -314,12 +314,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayFrequency As Char Implements IEmployeeView.PayFrequency
+        Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
             Get
-                Return cboPayFrequency.GetValue()
+                Return cboPayCycleidNo.GetNullableValue(Of Int16)
             End Get
             Set
-                cboPayFrequency.SetValue(Value)
+                cboPayCycleidNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PayGroupIdNo As Int16? Implements IEmployeeView.PayGroupIdNo
+            Get
+                Return cboPayGroupIdNo.GetNullableValue(Of Int16)
+            End Get
+            Set
+                cboPayGroupIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -432,13 +441,14 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             cacBankIdNo.DataSource = PresenterObj.GetBankList()
             cacCountryCode.DataSource = PresenterObj.GetCountryList()
-            cacDepartmentIdNo.DataSource = PresenterObj.GetDepartmentListByName()
-            cacDesignationIdNo.DataSource = PresenterObj.GetDesignationList()
+            cacDepartmentIdNo.DataSource = PresenterObj.GetListByCode("Department")
+            cacDesignationIdNo.DataSource = PresenterObj.GetListByName("Designation")
             cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
             cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
             cacNationalityCode.DataSource = PresenterObj.GetCountryList()
-            cacReligionIdNo.DataSource = PresenterObj.GetReligionList()
-            cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cacReligionIdNo.DataSource = PresenterObj.GetListByName("Religion")
+            cboPayCycleidNo.DataSource = PresenterObj.GetListByCode("PayCycle")
+            cboPayGroupIdNo.DataSource = PresenterObj.GetListByCode("PayGroup")
             cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
             'cboPayRateType.DataSource = PresenterObj.MakeEnumComboList(Of PayRateTypeSelection)
             'cboPaySalariedOrHourly.DataSource = PresenterObj.MakeEnumComboList(Of PaySalariedOrHourlySelection)

@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property AccountIdNo As Int16
-        Property BasePaymentIdNo As Int16
+        Property BasePaymentIdNo As Int16?
         Property CalculationType As Char
         Property DeductionCode As String
         Property DeductionName As String

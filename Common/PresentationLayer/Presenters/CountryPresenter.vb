@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"
-            TreeViewSecondaryField = "Isoa2"
+            TreeViewSecondaryField = "CountryCode"
             OriginalModel = New CountryModel()
             DataModel = New CountryModel
             TreeViewList = New List(Of CountryModel)

@@ -27,8 +27,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtIsoA2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCountryCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCountryName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCountryName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCountryNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -64,8 +64,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-            Me.floDataDisplay.Controls.Add(Me.lblIsoA2)
-            Me.floDataDisplay.Controls.Add(Me.txtIsoA2)
+            Me.floDataDisplay.Controls.Add(Me.lblCountryCode)
+            Me.floDataDisplay.Controls.Add(Me.txtCountryCode)
             Me.floDataDisplay.Controls.Add(Me.lblCountryName)
             Me.floDataDisplay.Controls.Add(Me.txtCountryName)
             Me.floDataDisplay.Controls.Add(Me.lblCountryNameAra)
@@ -129,44 +129,44 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
             '
-            'lblIsoA2
+            'lblCountryCode
             '
-            Me.lblIsoA2.DisplayOnly = True
-            Me.lblIsoA2.EditingMode = False
-            Me.lblIsoA2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.lblIsoA2, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.lblIsoA2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblIsoA2.Location = New System.Drawing.Point(11, 36)
-            Me.lblIsoA2.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblIsoA2.Name = "lblIsoA2"
-            Me.lblIsoA2.Size = New System.Drawing.Size(184, 23)
-            Me.lblIsoA2.TabIndex = 151
-            Me.lblIsoA2.Text = "ISO Code 2 Letter"
-            Me.lblIsoA2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCountryCode.DisplayOnly = True
+            Me.lblCountryCode.EditingMode = False
+            Me.lblCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblCountryCode, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblCountryCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblCountryCode.Location = New System.Drawing.Point(11, 36)
+            Me.lblCountryCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblCountryCode.Name = "lblCountryCode"
+            Me.lblCountryCode.Size = New System.Drawing.Size(184, 23)
+            Me.lblCountryCode.TabIndex = 151
+            Me.lblCountryCode.Text = "ISO Code 2 Letter"
+            Me.lblCountryCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtIsoA2
+            'txtCountryCode
             '
-            Me.txtIsoA2.BackColor = System.Drawing.Color.White
-            Me.txtIsoA2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtIsoA2.ComputedValue = False
-            Me.txtIsoA2.CustomFormat = Nothing
-            Me.txtIsoA2.DataBoundControl = True
-            Me.txtIsoA2.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtIsoA2, True)
-            Me.txtIsoA2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtIsoA2.ForeColor = System.Drawing.Color.Gray
-            Me.MyErrorProvider.SetIconAlignment(Me.txtIsoA2, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.txtIsoA2.LinkedLabel = Nothing
-            Me.txtIsoA2.Location = New System.Drawing.Point(197, 36)
-            Me.txtIsoA2.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtIsoA2.MaximumValue = Nothing
-            Me.txtIsoA2.MinimumValue = Nothing
-            Me.txtIsoA2.Name = "txtIsoA2"
-            Me.txtIsoA2.OldValue = Nothing
-            Me.txtIsoA2.ReadOnly = True
-            Me.txtIsoA2.Size = New System.Drawing.Size(62, 23)
-            Me.txtIsoA2.TabIndex = 1
-            Me.txtIsoA2.ValueIsMandatory = True
+            Me.txtCountryCode.BackColor = System.Drawing.Color.White
+            Me.txtCountryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCountryCode.ComputedValue = False
+            Me.txtCountryCode.CustomFormat = Nothing
+            Me.txtCountryCode.DataBoundControl = True
+            Me.txtCountryCode.EditingMode = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtCountryCode, True)
+            Me.txtCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtCountryCode.ForeColor = System.Drawing.Color.Gray
+            Me.MyErrorProvider.SetIconAlignment(Me.txtCountryCode, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.txtCountryCode.LinkedLabel = Nothing
+            Me.txtCountryCode.Location = New System.Drawing.Point(197, 36)
+            Me.txtCountryCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtCountryCode.MaximumValue = Nothing
+            Me.txtCountryCode.MinimumValue = Nothing
+            Me.txtCountryCode.Name = "txtCountryCode"
+            Me.txtCountryCode.OldValue = Nothing
+            Me.txtCountryCode.ReadOnly = True
+            Me.txtCountryCode.Size = New System.Drawing.Size(62, 23)
+            Me.txtCountryCode.TabIndex = 1
+            Me.txtCountryCode.ValueIsMandatory = True
             '
             'lblCountryName
             '
@@ -532,8 +532,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents lblIsoA2 As CLabel
-        Friend WithEvents txtIsoA2 As CTextBox
+        Friend WithEvents lblCountryCode As CLabel
+        Friend WithEvents txtCountryCode As CTextBox
         Friend WithEvents lblCountryName As CLabel
         Friend WithEvents txtCountryName As CTextBox
         Friend WithEvents lblCountryNameAra As CLabel

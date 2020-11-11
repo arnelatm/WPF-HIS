@@ -1390,6 +1390,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub PayrollEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem.Click
+            Dim childMdiForm As PayrollEntry
+            childMdiForm = New PayrollEntry With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

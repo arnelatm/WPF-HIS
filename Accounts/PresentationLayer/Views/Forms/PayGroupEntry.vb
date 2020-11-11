@@ -40,13 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IPayGroupView.ParentIdNo
             Get
-                'Dim value As Int16?
-                Dim value As Int16
-                value = CType(cboParentIdNo.GetValue(), Int16)
-                If value = 0 Then
-                    Return Nothing
-                End If
-                Return CType(value, Int16?)
+                Return cboParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboParentIdNo.SetValue(Value)

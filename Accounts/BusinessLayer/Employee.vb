@@ -18,12 +18,9 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("EmployeeCode"))
                 AddRule(New ValidateRequired("PaymentMethod"))
-                AddRule(New ValidateRequired("PayFrequency"))
-                'AddRule(New ValidateRequired("NationalIdNo"))
                 AddRule(New ValidateEmail("Email"))
                 AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
                 AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
-                'AddRule(New ValidateUnique("EmployeeName"))
             End If
         End Sub
 
@@ -50,12 +47,10 @@ Namespace BusinessLayer
         Public Property NationalityCode As String
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
-        Public Property PayFrequency As Char
+        Public Property PayCycleIdNo As Int16?
+        Public Property PayGroupIdNo As Int16?
         Public Property PaymentMethod As Char
-
-        'Public Property PaySalariedOrHourly As Char
         Public Property PayRateAmount As Decimal
-
         Public Property PayRateType As Char
         Public Property Phone1 As String
         Public Property Phone2 As String

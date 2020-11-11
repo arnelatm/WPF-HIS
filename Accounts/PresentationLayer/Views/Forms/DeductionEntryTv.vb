@@ -65,9 +65,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BasePaymentIdNo As Short Implements IDeductionView.BasePaymentIdNo
+        Public Property BasePaymentIdNo As Int16? Implements IDeductionView.BasePaymentIdNo
             Get
-                Return cboBasePaymentIdNo.GetValue()
+                Return cboBasePaymentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboBasePaymentIdNo.SetValue(Value)
@@ -109,15 +109,6 @@ Namespace PresentationLayer.Views.Forms
                 txtDeductionNameAra.Text = Value
             End Set
         End Property
-
-        'Public Property Frequency As Char Implements IDeductionView.Frequency
-        '    Get
-        '        Return cboFrequency.GetValue()
-        '    End Get
-        '    Set
-        '        cboFrequency.SetValue(Value)
-        '    End Set
-        'End Property
 
         Public Property DeductionType As Char Implements IDeductionView.DeductionType
             Get

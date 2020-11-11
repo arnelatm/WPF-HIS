@@ -1372,497 +1372,497 @@ SET IDENTITY_INSERT [dbo].[RevCostCenter] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Country] ON 
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (2, N'AA', N'United Arab Emirates ', N'???????? ??????? ???????', N'Emirati', N'???????', N'AE-32.pngs', N'AE-128.png', N'ARE', 78, N'971')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (2, N'AA', N'United Arab Emirates ', N'???????? ??????? ???????', N'Emirati', N'???????', N'AE-32.pngs', N'AE-128.png', N'ARE', 78, N'971')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (3, N'AF', N'Afghanistan', N'?????????', N'Afghan', N'??????????', N'AF-32.png', N'AF-128.png', N'AFG', 4, N'93')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (3, N'AF', N'Afghanistan', N'?????????', N'Afghan', N'??????????', N'AF-32.png', N'AF-128.png', N'AFG', 4, N'93')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (4, N'AG', N'Antigua and Barbuda', N'??????? ???????', N'Antiguan', N'??????', N'AG-32.png', N'AG-128.png', N'ATG', 28, N'1268')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (4, N'AG', N'Antigua and Barbuda', N'??????? ???????', N'Antiguan', N'??????', N'AG-32.png', N'AG-128.png', N'ATG', 28, N'1268')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (5, N'AI', N'Anguilla', N'???????', N'Anguillan', N'???????', N'AI-32.png', N'AI-128.png', N'AIA', 660, N'1264')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (5, N'AI', N'Anguilla', N'???????', N'Anguillan', N'???????', N'AI-32.png', N'AI-128.png', N'AIA', 660, N'1264')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (6, N'AL', N'Albania', N'???????', N'Albanian', N'??????', N'AL-32.png', N'AL-128.png', N'ALB', 8, N'355')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (6, N'AL', N'Albania', N'???????', N'Albanian', N'??????', N'AL-32.png', N'AL-128.png', N'ALB', 8, N'355')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (7, N'AM', N'Armenia', N'???????', N'Armenian', N'??????', N'AM-32.png', N'AM-128.png', N'ARM', 51, N'374')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (7, N'AM', N'Armenia', N'???????', N'Armenian', N'??????', N'AM-32.png', N'AM-128.png', N'ARM', 51, N'374')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (8, N'AN', N'Netherlands Antilles', N'??? ??????? ????????', N'Dutch Antilier', N'??????', NULL, NULL, N'ANT', 530, N'599')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (8, N'AN', N'Netherlands Antilles', N'??? ??????? ????????', N'Dutch Antilier', N'??????', NULL, NULL, N'ANT', 530, N'599')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (9, N'AO', N'Angola', N'??????', N'Angolan', N'??????', N'AO-32.png', N'AO-128.png', N'AGO', 24, N'244')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (9, N'AO', N'Angola', N'??????', N'Angolan', N'??????', N'AO-32.png', N'AO-128.png', N'AGO', 24, N'244')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (10, N'AQ', N'Antarctica', N'??????????', N'Antarctican', N'??????????', N'AQ-32.png', N'AQ-128.png', N'ATA', 10, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (10, N'AQ', N'Antarctica', N'??????????', N'Antarctican', N'??????????', N'AQ-32.png', N'AQ-128.png', N'ATA', 10, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (11, N'AR', N'Argentina', N'?????????', N'Argentinian', N'????????', N'AR-32.png', N'AR-128.png', N'ARG', 32, N'54')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (11, N'AR', N'Argentina', N'?????????', N'Argentinian', N'????????', N'AR-32.png', N'AR-128.png', N'ARG', 32, N'54')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (12, N'AS', N'American Samoa', N'?????-????????', N'American Samoan', N'?????? ???????', N'AS-32.png', N'AS-128.png', N'ASM', 16, N'1684')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (12, N'AS', N'American Samoa', N'?????-????????', N'American Samoan', N'?????? ???????', N'AS-32.png', N'AS-128.png', N'ASM', 16, N'1684')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (13, N'AT', N'Austria', N'??????', N'Austrian', N'??????', N'AT-32.png', N'AT-128.png', N'AUT', 40, N'43')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (13, N'AT', N'Austria', N'??????', N'Austrian', N'??????', N'AT-32.png', N'AT-128.png', N'AUT', 40, N'43')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (14, N'AU', N'Australia', N'????????', N'Australian', N'???????', N'AU-32.png', N'AU-128.png', N'AUS', 36, N'61')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (14, N'AU', N'Australia', N'????????', N'Australian', N'???????', N'AU-32.png', N'AU-128.png', N'AUS', 36, N'61')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (15, N'AW', N'Aruba', N'?????', N'Aruban', N'?????????', N'AW-32.png', N'AW-128.png', N'ABW', 533, N'297')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (15, N'AW', N'Aruba', N'?????', N'Aruban', N'?????????', N'AW-32.png', N'AW-128.png', N'ABW', 533, N'297')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (16, N'AX', N'Aland Islands', N'??? ?????', N'Aland Islander', N'??????', N'AX-32.png', N'AX-128.png', NULL, NULL, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (16, N'AX', N'Aland Islands', N'??? ?????', N'Aland Islander', N'??????', N'AX-32.png', N'AX-128.png', NULL, NULL, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (17, N'AZ', N'Azerbaijan', N'????????', N'Azerbaijani', N'?????????', N'AZ-32.png', N'AZ-128.png', N'AZE', 31, N'994')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (17, N'AZ', N'Azerbaijan', N'????????', N'Azerbaijani', N'?????????', N'AZ-32.png', N'AZ-128.png', N'AZE', 31, N'994')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (18, N'BA', N'Bosnia and Herzegovina', N'??????? ? ??????', N'Bosnian / Herzegovinian', N'?????/?????', N'BA-32.png', N'BA-128.png', N'BIH', 70, N'387')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (18, N'BA', N'Bosnia and Herzegovina', N'??????? ? ??????', N'Bosnian / Herzegovinian', N'?????/?????', N'BA-32.png', N'BA-128.png', N'BIH', 70, N'387')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (19, N'BB', N'Barbados', N'???????', N'Barbadian', N'????????', N'BB-32.png', N'BB-128.png', N'BRB', 52, N'1246')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (19, N'BB', N'Barbados', N'???????', N'Barbadian', N'????????', N'BB-32.png', N'BB-128.png', N'BRB', 52, N'1246')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (20, N'BD', N'Bangladesh', N'????????', N'Bangladeshi', N'?????????', N'BD-32.png', N'BD-128.png', N'BGD', 50, N'880')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (20, N'BD', N'Bangladesh', N'????????', N'Bangladeshi', N'?????????', N'BD-32.png', N'BD-128.png', N'BGD', 50, N'880')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (21, N'BE', N'Belgium', N'??????', N'Belgian', N'??????', N'BE-32.png', N'BE-128.png', N'BEL', 56, N'32')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (21, N'BE', N'Belgium', N'??????', N'Belgian', N'??????', N'BE-32.png', N'BE-128.png', N'BEL', 56, N'32')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (22, N'BF', N'Burkina Faso', N'??????? ????', N'Burkinabe', N'???????', N'BF-32.png', N'BF-128.png', N'BFA', 854, N'226')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (22, N'BF', N'Burkina Faso', N'??????? ????', N'Burkinabe', N'???????', N'BF-32.png', N'BF-128.png', N'BFA', 854, N'226')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (23, N'BG', N'Bulgaria', N'???????', N'Bulgarian', N'??????', N'BG-32.png', N'BG-128.png', N'BGR', 100, N'359')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (23, N'BG', N'Bulgaria', N'???????', N'Bulgarian', N'??????', N'BG-32.png', N'BG-128.png', N'BGR', 100, N'359')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (24, N'BH', N'Bahrain', N'???????', N'Bahraini', N'??????', N'BH-32.png', N'BH-128.png', N'BHR', 48, N'973')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (24, N'BH', N'Bahrain', N'???????', N'Bahraini', N'??????', N'BH-32.png', N'BH-128.png', N'BHR', 48, N'973')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (25, N'BI', N'Burundi', N'???????', N'Burundian', N'????????', N'BI-32.png', N'BI-128.png', N'BDI', 108, N'257')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (25, N'BI', N'Burundi', N'???????', N'Burundian', N'????????', N'BI-32.png', N'BI-128.png', N'BDI', 108, N'257')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (26, N'BJ', N'Benin', N'????', N'Beninese', N'?????', N'BJ-32.png', N'BJ-128.png', N'BEN', 204, N'229')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (26, N'BJ', N'Benin', N'????', N'Beninese', N'?????', N'BJ-32.png', N'BJ-128.png', N'BEN', 204, N'229')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (27, N'BL', N'Saint Barthelemy1', N'??? ????????', N'Saint Barthelmian', N'??? ????????', N'BL-32.png', N'BL-128.png', N'BLM', 652, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (27, N'BL', N'Saint Barthelemy1', N'??? ????????', N'Saint Barthelmian', N'??? ????????', N'BL-32.png', N'BL-128.png', N'BLM', 652, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (28, N'BM', N'Bermuda', N'??? ??????', N'Bermudan', N'??????', N'BM-32.png', N'BM-128.png', N'BMU', 60, N'1441')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (28, N'BM', N'Bermuda', N'??? ??????', N'Bermudan', N'??????', N'BM-32.png', N'BM-128.png', N'BMU', 60, N'1441')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (29, N'BN', N'Brunei Darussalam', N'?????', N'Bruneian', N'?????', N'BN-32.png', N'BN-128.png', N'BRN', 96, N'673')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (29, N'BN', N'Brunei Darussalam', N'?????', N'Bruneian', N'?????', N'BN-32.png', N'BN-128.png', N'BRN', 96, N'673')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (30, N'BO', N'Bolivia', N'???????', N'Bolivian', N'??????', N'BO-32.png', N'BO-128.png', N'BOL', 68, N'591')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (30, N'BO', N'Bolivia', N'???????', N'Bolivian', N'??????', N'BO-32.png', N'BO-128.png', N'BOL', 68, N'591')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (31, N'BR', N'Brazil', N'????????', N'Brazilian', N'???????', N'BR-32.png', N'BR-128.png', N'BRA', 76, N'55')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (31, N'BR', N'Brazil', N'????????', N'Brazilian', N'???????', N'BR-32.png', N'BR-128.png', N'BRA', 76, N'55')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (32, N'BS', N'Bahamas', N'?????????', N'Bahamian', N'????????', N'BS-32.png', N'BS-128.png', N'BHS', 44, N'1242')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (32, N'BS', N'Bahamas', N'?????????', N'Bahamian', N'????????', N'BS-32.png', N'BS-128.png', N'BHS', 44, N'1242')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (33, N'BT', N'Bhutan', N'?????', N'Bhutanese', N'??????', N'BT-32.png', N'BT-128.png', N'BTN', 64, N'975')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (33, N'BT', N'Bhutan', N'?????', N'Bhutanese', N'??????', N'BT-32.png', N'BT-128.png', N'BTN', 64, N'975')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (34, N'BV', N'Bouvet Island', N'????? ?????', N'Bouvetian', N'??????', N'BV-32.png', N'BV-128.png', N'BVT', 74, N'0')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (34, N'BV', N'Bouvet Island', N'????? ?????', N'Bouvetian', N'??????', N'BV-32.png', N'BV-128.png', N'BVT', 74, N'0')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (35, N'BW', N'Botswana', N'????????', N'Botswanan', N'????????', N'BW-32.png', N'BW-128.png', N'BWA', 72, N'267')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (35, N'BW', N'Botswana', N'????????', N'Botswanan', N'????????', N'BW-32.png', N'BW-128.png', N'BWA', 72, N'267')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (36, N'BY', N'Belarus', N'????? ???????', N'Belarusian', N'????', N'BY-32.png', N'BY-128.png', N'BLR', 112, N'375')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (36, N'BY', N'Belarus', N'????? ???????', N'Belarusian', N'????', N'BY-32.png', N'BY-128.png', N'BLR', 112, N'375')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (37, N'BZ', N'Belize', N'?????', N'Belizean', N'??????', N'BZ-32.png', N'BZ-128.png', N'BLZ', 84, N'501')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (37, N'BZ', N'Belize', N'?????', N'Belizean', N'??????', N'BZ-32.png', N'BZ-128.png', N'BLZ', 84, N'501')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (38, N'CA', N'Canada', N'????', N'Canadian', N'????', N'CA-32.png', N'CA-128.png', N'CAN', 124, N'1')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (38, N'CA', N'Canada', N'????', N'Canadian', N'????', N'CA-32.png', N'CA-128.png', N'CAN', 124, N'1')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (39, N'CC', N'Cocos (Keeling) Islands', N'??? ?????', N'Cocos Islander', N'??? ?????', N'CC-32.png', N'CC-128.png', NULL, NULL, N'672')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (39, N'CC', N'Cocos (Keeling) Islands', N'??? ?????', N'Cocos Islander', N'??? ?????', N'CC-32.png', N'CC-128.png', NULL, NULL, N'672')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (40, N'CF', N'Central African Republic', N'??????? ??????? ??????', N'Central African', N'??????', N'CF-32.png', N'CF-128.png', N'CAF', 140, N'236')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (40, N'CF', N'Central African Republic', N'??????? ??????? ??????', N'Central African', N'??????', N'CF-32.png', N'CF-128.png', N'CAF', 140, N'236')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (41, N'CG', N'Congo', N'???????', N'Congolese', N'?????', N'CG-32.png', N'CG-128.png', N'COG', 178, N'242')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (41, N'CG', N'Congo', N'???????', N'Congolese', N'?????', N'CG-32.png', N'CG-128.png', N'COG', 178, N'242')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (42, N'CH', N'Switzerland', N'??????', N'Swiss', N'??????', N'CH-32.png', N'CH-128.png', N'CHE', 756, N'41')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (42, N'CH', N'Switzerland', N'??????', N'Swiss', N'??????', N'CH-32.png', N'CH-128.png', N'CHE', 756, N'41')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (43, N'CI', N'Ivory Coast', N'???? ?????', N'Ivory Coastian', N'???? ?????', N'CI-32.png', N'CI-128.png', N'CIV', 384, N'225')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (43, N'CI', N'Ivory Coast', N'???? ?????', N'Ivory Coastian', N'???? ?????', N'CI-32.png', N'CI-128.png', N'CIV', 384, N'225')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (44, N'CK', N'Cook Islands', N'??? ???', N'Cook Islander', N'??? ???', N'CK-32.png', N'CK-128.png', N'COK', 184, N'682')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (44, N'CK', N'Cook Islands', N'??? ???', N'Cook Islander', N'??? ???', N'CK-32.png', N'CK-128.png', N'COK', 184, N'682')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (45, N'CL', N'Chile', N'????', N'Chilean', N'????', N'CL-32.png', N'CL-128.png', N'CHL', 152, N'56')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (45, N'CL', N'Chile', N'????', N'Chilean', N'????', N'CL-32.png', N'CL-128.png', N'CHL', 152, N'56')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (46, N'CM', N'Cameroon', N'???????', N'Cameroonian', N'????????', N'CM-32.png', N'CM-128.png', N'CMR', 120, N'237')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (46, N'CM', N'Cameroon', N'???????', N'Cameroonian', N'????????', N'CM-32.png', N'CM-128.png', N'CMR', 120, N'237')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (47, N'CN', N'China', N'?????', N'Chinese', N'????', N'CN-32.png', N'CN-128.png', N'CHN', 156, N'86')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (47, N'CN', N'China', N'?????', N'Chinese', N'????', N'CN-32.png', N'CN-128.png', N'CHN', 156, N'86')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (48, N'CO', N'Colombia', N'????????', N'Colombian', N'???????', N'CO-32.png', N'CO-128.png', N'COL', 170, N'57')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (48, N'CO', N'Colombia', N'????????', N'Colombian', N'???????', N'CO-32.png', N'CO-128.png', N'COL', 170, N'57')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (49, N'CR', N'Costa Rica', N'?????????', N'Costa Rican', N'?????????', N'CR-32.png', N'CR-128.png', N'CRI', 188, N'506')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (49, N'CR', N'Costa Rica', N'?????????', N'Costa Rican', N'?????????', N'CR-32.png', N'CR-128.png', N'CRI', 188, N'506')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (50, N'CU', N'Cuba', N'????', N'Cuban', N'????', N'CU-32.png', N'CU-128.png', N'CUB', 192, N'53')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (50, N'CU', N'Cuba', N'????', N'Cuban', N'????', N'CU-32.png', N'CU-128.png', N'CUB', 192, N'53')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (51, N'CV', N'Cape Verde', N'????? ??????', N'Cape Verdean', N'????? ??????', N'CV-32.png', N'CV-128.png', N'CPV', 132, N'238')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (51, N'CV', N'Cape Verde', N'????? ??????', N'Cape Verdean', N'????? ??????', N'CV-32.png', N'CV-128.png', N'CPV', 132, N'238')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (52, N'CW', N'Curaçao', N'???????', N'Curacian', N'????????', N'CW-32.png', N'CW-128.png', NULL, NULL, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (52, N'CW', N'Curaçao', N'???????', N'Curacian', N'????????', N'CW-32.png', N'CW-128.png', NULL, NULL, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (53, N'CX', N'Christmas Island', N'????? ??? ???????', N'Christmas Islander', N'????? ??? ???????', N'CX-32.png', N'CX-128.png', N'CXR', 162, N'61')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (53, N'CX', N'Christmas Island', N'????? ??? ???????', N'Christmas Islander', N'????? ??? ???????', N'CX-32.png', N'CX-128.png', N'CXR', 162, N'61')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (54, N'CY', N'Cyprus', N'????', N'Cypriot', N'?????', N'CY-32.png', N'CY-128.png', N'CYP', 196, N'357')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (54, N'CY', N'Cyprus', N'????', N'Cypriot', N'?????', N'CY-32.png', N'CY-128.png', N'CYP', 196, N'357')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (55, N'CZ', N'Czech Republic', N'????????? ????????', N'Czech', N'?????', N'CZ-32.png', N'CZ-128.png', N'CZE', 203, N'420')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (55, N'CZ', N'Czech Republic', N'????????? ????????', N'Czech', N'?????', N'CZ-32.png', N'CZ-128.png', N'CZE', 203, N'420')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (56, N'DE', N'Germany', N'???????', N'German', N'??????', N'DE-32.png', N'DE-128.png', N'DEU', 276, N'49')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (56, N'DE', N'Germany', N'???????', N'German', N'??????', N'DE-32.png', N'DE-128.png', N'DEU', 276, N'49')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (57, N'DJ', N'Djibouti', N'??????', N'Djiboutian', N'??????', N'DJ-32.png', N'DJ-128.png', N'DJI', 262, N'253')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (57, N'DJ', N'Djibouti', N'??????', N'Djiboutian', N'??????', N'DJ-32.png', N'DJ-128.png', N'DJI', 262, N'253')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (58, N'DK', N'Denmark', N'?????????', N'Danish', N'???????', N'DK-32.png', N'DK-128.png', N'DNK', 208, N'45')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (58, N'DK', N'Denmark', N'?????????', N'Danish', N'???????', N'DK-32.png', N'DK-128.png', N'DNK', 208, N'45')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (59, N'DM', N'Dominica', N'????????', N'Dominican', N'????????', N'DM-32.png', N'DM-128.png', N'DMA', 212, N'1767')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (59, N'DM', N'Dominica', N'????????', N'Dominican', N'????????', N'DM-32.png', N'DM-128.png', N'DMA', 212, N'1767')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (60, N'DO', N'Dominican Republic', N'????????? ???????????', N'Dominican', N'????????', N'DO-32.png', N'DO-128.png', N'DOM', 214, N'1809')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (60, N'DO', N'Dominican Republic', N'????????? ???????????', N'Dominican', N'????????', N'DO-32.png', N'DO-128.png', N'DOM', 214, N'1809')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (61, N'DZ', N'Algeria', N'???????', N'Algerian', N'??????', N'DZ-32.png', N'DZ-128.png', N'DZA', 12, N'213')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (61, N'DZ', N'Algeria', N'???????', N'Algerian', N'??????', N'DZ-32.png', N'DZ-128.png', N'DZA', 12, N'213')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (62, N'EC', N'Ecuador', N'???????', N'Ecuadorian', N'????????', N'EC-32.png', N'EC-128.png', N'ECU', 218, N'593')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (62, N'EC', N'Ecuador', N'???????', N'Ecuadorian', N'????????', N'EC-32.png', N'EC-128.png', N'ECU', 218, N'593')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (63, N'EE', N'Estonia', N'???????', N'Estonian', N'??????', N'EE-32.png', N'EE-128.png', N'EST', 233, N'372')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (63, N'EE', N'Estonia', N'???????', N'Estonian', N'??????', N'EE-32.png', N'EE-128.png', N'EST', 233, N'372')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (64, N'EG', N'Egypt', N'???', N'Egyptian', N'????', N'EG-32.png', N'EG-128.png', N'EGY', 818, N'20')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (64, N'EG', N'Egypt', N'???', N'Egyptian', N'????', N'EG-32.png', N'EG-128.png', N'EGY', 818, N'20')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (65, N'EH', N'Western Sahara', N'??????? ???????', N'Sahrawian', N'??????', N'EH-32.png', N'EH-128.png', N'ESH', 732, N'212')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (65, N'EH', N'Western Sahara', N'??????? ???????', N'Sahrawian', N'??????', N'EH-32.png', N'EH-128.png', N'ESH', 732, N'212')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (66, N'ER', N'Eritrea', N'???????', N'Eritrean', N'???????', N'ER-32.png', N'ER-128.png', N'ERI', 232, N'291')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (66, N'ER', N'Eritrea', N'???????', N'Eritrean', N'???????', N'ER-32.png', N'ER-128.png', N'ERI', 232, N'291')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (67, N'ES', N'Spain', N'???????', N'Spanish', N'??????', N'ES-32.png', N'ES-128.png', N'ESP', 724, N'34')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (67, N'ES', N'Spain', N'???????', N'Spanish', N'??????', N'ES-32.png', N'ES-128.png', N'ESP', 724, N'34')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (68, N'ET', N'Ethiopia', N'???????', N'Ethiopian', N'??????', N'ET-32.png', N'ET-128.png', N'ETH', 231, N'251')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (68, N'ET', N'Ethiopia', N'???????', N'Ethiopian', N'??????', N'ET-32.png', N'ET-128.png', N'ETH', 231, N'251')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (69, N'FI', N'Finland', N'??????', N'Finnish', N'??????', N'FI-32.png', N'FI-128.png', N'FIN', 246, N'358')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (69, N'FI', N'Finland', N'??????', N'Finnish', N'??????', N'FI-32.png', N'FI-128.png', N'FIN', 246, N'358')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (70, N'FJ', N'Fiji', N'????', N'Fijian', N'????', N'FJ-32.png', N'FJ-128.png', N'FJI', 242, N'679')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (70, N'FJ', N'Fiji', N'????', N'Fijian', N'????', N'FJ-32.png', N'FJ-128.png', N'FJI', 242, N'679')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (71, N'FK', N'Falkland Islands (Malvinas)', N'??? ???????', N'Falkland Islander', N'????????', N'FK-32.png', N'FK-128.png', N'FLK', 238, N'500')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (71, N'FK', N'Falkland Islands (Malvinas)', N'??? ???????', N'Falkland Islander', N'????????', N'FK-32.png', N'FK-128.png', N'FLK', 238, N'500')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (72, N'FM', N'Micronesia', N'???????????', N'Micronesian', N'???????????', N'FM-32.png', N'FM-128.png', N'FSM', 583, N'691')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (72, N'FM', N'Micronesia', N'???????????', N'Micronesian', N'???????????', N'FM-32.png', N'FM-128.png', N'FSM', 583, N'691')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (73, N'FO', N'Faroe Islands', N'??? ????', N'Faroese', N'??? ????', N'FO-32.png', N'FO-128.png', N'FRO', 234, N'298')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (73, N'FO', N'Faroe Islands', N'??? ????', N'Faroese', N'??? ????', N'FO-32.png', N'FO-128.png', N'FRO', 234, N'298')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (74, N'FR', N'France', N'?????', N'French', N'?????', N'FR-32.png', N'FR-128.png', N'FRA', 250, N'33')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (74, N'FR', N'France', N'?????', N'French', N'?????', N'FR-32.png', N'FR-128.png', N'FRA', 250, N'33')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (75, N'GA', N'Gabon', N'???????', N'Gabonese', N'??????', N'GA-32.png', N'GA-128.png', N'GAB', 266, N'241')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (75, N'GA', N'Gabon', N'???????', N'Gabonese', N'??????', N'GA-32.png', N'GA-128.png', N'GAB', 266, N'241')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (76, N'GB', N'United Kingdom', N'??????? ???????', N'British', N'???????', N'GB-32.png', N'GB-128.png', N'GBR', 826, N'44')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (76, N'GB', N'United Kingdom', N'??????? ???????', N'British', N'???????', N'GB-32.png', N'GB-128.png', N'GBR', 826, N'44')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (77, N'GD', N'Grenada', N'???????', N'Grenadian', N'???????', N'GD-32.png', N'GD-128.png', N'GRD', 308, N'1473')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (77, N'GD', N'Grenada', N'???????', N'Grenadian', N'???????', N'GD-32.png', N'GD-128.png', N'GRD', 308, N'1473')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (78, N'GE', N'Georgia', N'???????', N'Georgian', N'??????', N'GE-32.png', N'GE-128.png', N'GEO', 268, N'995')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (78, N'GE', N'Georgia', N'???????', N'Georgian', N'??????', N'GE-32.png', N'GE-128.png', N'GEO', 268, N'995')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (79, N'GF', N'French Guiana', N'?????? ????????', N'French Guianese', N'?????? ????????', N'GF-32.png', N'GF-128.png', N'GUF', 254, N'594')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (79, N'GF', N'French Guiana', N'?????? ????????', N'French Guianese', N'?????? ????????', N'GF-32.png', N'GF-128.png', N'GUF', 254, N'594')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (80, N'GG', N'Guernsey', N'??????', N'Guernsian', N'??????', N'GG-32.png', N'GG-128.png', N'GGY', 831, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (80, N'GG', N'Guernsey', N'??????', N'Guernsian', N'??????', N'GG-32.png', N'GG-128.png', N'GGY', 831, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (81, N'GH', N'Ghana', N'????', N'Ghanaian', N'????', N'GH-32.png', N'GH-128.png', N'GHA', 288, N'233')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (81, N'GH', N'Ghana', N'????', N'Ghanaian', N'????', N'GH-32.png', N'GH-128.png', N'GHA', 288, N'233')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (82, N'GI', N'Gibraltar', N'??? ????', N'Gibraltar', N'??? ????', N'GI-32.png', N'GI-128.png', N'GIB', 292, N'350')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (82, N'GI', N'Gibraltar', N'??? ????', N'Gibraltar', N'??? ????', N'GI-32.png', N'GI-128.png', N'GIB', 292, N'350')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (83, N'GL', N'Greenland', N'????????', N'Greenlandic', N'?????????', N'GL-32.png', N'GL-128.png', N'GRL', 304, N'299')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (83, N'GL', N'Greenland', N'????????', N'Greenlandic', N'?????????', N'GL-32.png', N'GL-128.png', N'GRL', 304, N'299')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (84, N'GM', N'Gambia', N'??????', N'Gambian', N'?????', N'GM-32.png', N'GM-128.png', N'GMB', 270, N'220')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (84, N'GM', N'Gambia', N'??????', N'Gambian', N'?????', N'GM-32.png', N'GM-128.png', N'GMB', 270, N'220')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (85, N'GN', N'Guinea', N'?????', N'Guinean', N'????', N'GN-32.png', N'GN-128.png', N'GIN', 324, N'224')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (85, N'GN', N'Guinea', N'?????', N'Guinean', N'????', N'GN-32.png', N'GN-128.png', N'GIN', 324, N'224')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (86, N'GP', N'Guadeloupe', N'??? ???????', N'Guadeloupe', N'??? ???????', N'GP-32.png', N'GP-128.png', N'GLP', 312, N'590')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (86, N'GP', N'Guadeloupe', N'??? ???????', N'Guadeloupe', N'??? ???????', N'GP-32.png', N'GP-128.png', N'GLP', 312, N'590')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (87, N'GQ', N'Equatorial Guinea', N'????? ?????????', N'Equatorial Guinean', N'????', N'GQ-32.png', N'GQ-128.png', N'GNQ', 226, N'240')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (87, N'GQ', N'Equatorial Guinea', N'????? ?????????', N'Equatorial Guinean', N'????', N'GQ-32.png', N'GQ-128.png', N'GNQ', 226, N'240')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (88, N'GR', N'Greece', N'???????', N'Greek', N'??????', N'GR-32.png', N'GR-128.png', N'GRC', 300, N'30')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (88, N'GR', N'Greece', N'???????', N'Greek', N'??????', N'GR-32.png', N'GR-128.png', N'GRC', 300, N'30')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (89, N'GS', N'South Georgia and the South Sandwich', N'??????? ??????? ????????', N'South Georgia and the South Sandwich', N'?????? ??????? ????????', N'GS-32.png', N'GS-128.png', N'SGS', 239, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (89, N'GS', N'South Georgia and the South Sandwich', N'??????? ??????? ????????', N'South Georgia and the South Sandwich', N'?????? ??????? ????????', N'GS-32.png', N'GS-128.png', N'SGS', 239, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (90, N'GT', N'Guatemala', N'????????', N'Guatemalan', N'?????????', N'GT-32.png', N'GT-128.png', N'GTM', 320, N'502')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (90, N'GT', N'Guatemala', N'????????', N'Guatemalan', N'?????????', N'GT-32.png', N'GT-128.png', N'GTM', 320, N'502')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (91, N'GU', N'Guam', N'????', N'Guamanian', N'?????', N'GU-32.png', N'GU-128.png', N'GUM', 316, N'1671')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (91, N'GU', N'Guam', N'????', N'Guamanian', N'?????', N'GU-32.png', N'GU-128.png', N'GUM', 316, N'1671')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (92, N'GW', N'Guinea-Bissau', N'?????-?????', N'Guinea-Bissauan', N'????', N'GW-32.png', N'GW-128.png', N'GNB', 624, N'245')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (92, N'GW', N'Guinea-Bissau', N'?????-?????', N'Guinea-Bissauan', N'????', N'GW-32.png', N'GW-128.png', N'GNB', 624, N'245')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (93, N'GY', N'Guyana', N'?????', N'Guyanese', N'?????', N'GY-32.png', N'GY-128.png', N'GUY', 328, N'592')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (93, N'GY', N'Guyana', N'?????', N'Guyanese', N'?????', N'GY-32.png', N'GY-128.png', N'GUY', 328, N'592')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (94, N'HK', N'Hong Kong', N'???? ????', N'Hongkongese', N'???? ?????', N'HK-32.png', N'HK-128.png', N'HKG', 344, N'852')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (94, N'HK', N'Hong Kong', N'???? ????', N'Hongkongese', N'???? ?????', N'HK-32.png', N'HK-128.png', N'HKG', 344, N'852')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (95, N'HM', N'Heard and Mc Donald Islands', N'????? ???? ???? ?????????', N'Heard and Mc Donald Islanders', N'????? ???? ???? ?????????', N'HM-32.png', N'HM-128.png', N'HMD', 334, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (95, N'HM', N'Heard and Mc Donald Islands', N'????? ???? ???? ?????????', N'Heard and Mc Donald Islanders', N'????? ???? ???? ?????????', N'HM-32.png', N'HM-128.png', N'HMD', 334, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (96, N'HN', N'Honduras', N'???????', N'Honduran', N'????????', N'HN-32.png', N'HN-128.png', N'HND', 340, N'504')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (96, N'HN', N'Honduras', N'???????', N'Honduran', N'????????', N'HN-32.png', N'HN-128.png', N'HND', 340, N'504')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (97, N'HR', N'Croatia', N'???????', N'Croatian', N'??????', N'HR-32.png', N'HR-128.png', N'HRV', 191, N'385')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (97, N'HR', N'Croatia', N'???????', N'Croatian', N'??????', N'HR-32.png', N'HR-128.png', N'HRV', 191, N'385')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (98, N'HT', N'Haiti', N'?????', N'Haitian', N'?????', N'HT-32.png', N'HT-128.png', N'HTI', 332, N'509')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (98, N'HT', N'Haiti', N'?????', N'Haitian', N'?????', N'HT-32.png', N'HT-128.png', N'HTI', 332, N'509')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (99, N'HU', N'Hungary', N'?????', N'Hungarian', N'????', N'HU-32.png', N'HU-128.png', N'HUN', 348, N'36')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (99, N'HU', N'Hungary', N'?????', N'Hungarian', N'????', N'HU-32.png', N'HU-128.png', N'HUN', 348, N'36')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (100, N'ID', N'Indonesia', N'?????????', N'Indonesian', N'?????????', N'ID-32.png', N'ID-128.png', N'IDN', 360, N'62')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (100, N'ID', N'Indonesia', N'?????????', N'Indonesian', N'?????????', N'ID-32.png', N'ID-128.png', N'IDN', 360, N'62')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (101, N'IE', N'Ireland', N'???????', N'Irish', N'???????', N'IE-32.png', N'IE-128.png', N'IRL', 372, N'353')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (101, N'IE', N'Ireland', N'???????', N'Irish', N'???????', N'IE-32.png', N'IE-128.png', N'IRL', 372, N'353')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (102, N'IL', N'Israel', N'???????', N'Israeli', N'????????', N'IL-32.png', N'IL-128.png', N'ISR', 376, N'972')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (102, N'IL', N'Israel', N'???????', N'Israeli', N'????????', N'IL-32.png', N'IL-128.png', N'ISR', 376, N'972')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (103, N'IM', N'Isle of Man', N'????? ???', N'Manx', N'????', N'IM-32.png', N'IM-128.png', N'IMN', 833, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (103, N'IM', N'Isle of Man', N'????? ???', N'Manx', N'????', N'IM-32.png', N'IM-128.png', N'IMN', 833, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (104, N'IN', N'India', N'?????', N'Indian', N'????', N'IN-32.png', N'IN-128.png', N'IND', 356, N'91')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (104, N'IN', N'India', N'?????', N'Indian', N'????', N'IN-32.png', N'IN-128.png', N'IND', 356, N'91')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (105, N'IO', N'British Indian Ocean Territory', N'????? ?????? ?????? ?????????', N'British Indian Ocean Territory', N'????? ?????? ?????? ?????????', N'IO-32.png', N'IO-128.png', N'IOT', 86, N'246')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (105, N'IO', N'British Indian Ocean Territory', N'????? ?????? ?????? ?????????', N'British Indian Ocean Territory', N'????? ?????? ?????? ?????????', N'IO-32.png', N'IO-128.png', N'IOT', 86, N'246')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (106, N'IQ', N'Iraq', N'??????', N'Iraqi', N'?????', N'IQ-32.png', N'IQ-128.png', N'IRQ', 368, N'964')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (106, N'IQ', N'Iraq', N'??????', N'Iraqi', N'?????', N'IQ-32.png', N'IQ-128.png', N'IRQ', 368, N'964')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (107, N'IR', N'Iran', N'?????', N'Iranian', N'??????', N'IR-32.png', N'IR-128.png', N'IRN', 364, N'98')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (107, N'IR', N'Iran', N'?????', N'Iranian', N'??????', N'IR-32.png', N'IR-128.png', N'IRN', 364, N'98')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (108, N'IS', N'Iceland', N'???????', N'Icelandic', N'???????', N'IS-32.png', N'IS-128.png', N'ISL', 352, N'354')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (108, N'IS', N'Iceland', N'???????', N'Icelandic', N'???????', N'IS-32.png', N'IS-128.png', N'ISL', 352, N'354')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (109, N'IT', N'Italy', N'???????', N'Italian', N'??????', N'IT-32.png', N'IT-128.png', N'ITA', 380, N'39')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (109, N'IT', N'Italy', N'???????', N'Italian', N'??????', N'IT-32.png', N'IT-128.png', N'ITA', 380, N'39')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (110, N'JE', N'Jersey', N'?????', N'Jersian', N'?????', N'JE-32.png', N'JE-128.png', N'JEY', 832, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (110, N'JE', N'Jersey', N'?????', N'Jersian', N'?????', N'JE-32.png', N'JE-128.png', N'JEY', 832, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (111, N'JM', N'Jamaica', N'??????', N'Jamaican', N'??????', N'JM-32.png', N'JM-128.png', N'JAM', 388, N'1876')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (111, N'JM', N'Jamaica', N'??????', N'Jamaican', N'??????', N'JM-32.png', N'JM-128.png', N'JAM', 388, N'1876')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (112, N'JO', N'Jordan', N'??????', N'Jordanian', N'?????', N'JO-32.png', N'JO-128.png', N'JOR', 400, N'962')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (112, N'JO', N'Jordan', N'??????', N'Jordanian', N'?????', N'JO-32.png', N'JO-128.png', N'JOR', 400, N'962')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (113, N'JP', N'Japan', N'???????', N'Japanese', N'??????', N'JP-32.png', N'JP-128.png', N'JPN', 392, N'81')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (113, N'JP', N'Japan', N'???????', N'Japanese', N'??????', N'JP-32.png', N'JP-128.png', N'JPN', 392, N'81')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (114, N'KE', N'Kenya', N'?????', N'Kenyan', N'????', N'KE-32.png', N'KE-128.png', N'KEN', 404, N'254')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (114, N'KE', N'Kenya', N'?????', N'Kenyan', N'????', N'KE-32.png', N'KE-128.png', N'KEN', 404, N'254')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (115, N'KG', N'Kyrgyzstan', N'??????????', N'Kyrgyzstani', N'???????????', N'KG-32.png', N'KG-128.png', N'KGZ', 417, N'996')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (115, N'KG', N'Kyrgyzstan', N'??????????', N'Kyrgyzstani', N'???????????', N'KG-32.png', N'KG-128.png', N'KGZ', 417, N'996')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (116, N'KH', N'Cambodia', N'???????', N'Cambodian', N'??????', N'KH-32.png', N'KH-128.png', N'KHM', 116, N'855')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (116, N'KH', N'Cambodia', N'???????', N'Cambodian', N'??????', N'KH-32.png', N'KH-128.png', N'KHM', 116, N'855')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (117, N'KI', N'Kiribati', N'????????', N'I-Kiribati', N'????????', N'KI-32.png', N'KI-128.png', N'KIR', 296, N'686')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (117, N'KI', N'Kiribati', N'????????', N'I-Kiribati', N'????????', N'KI-32.png', N'KI-128.png', N'KIR', 296, N'686')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (118, N'KM', N'Comoros', N'??? ?????', N'Comorian', N'??? ?????', N'KM-32.png', N'KM-128.png', N'COM', 174, N'269')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (118, N'KM', N'Comoros', N'??? ?????', N'Comorian', N'??? ?????', N'KM-32.png', N'KM-128.png', N'COM', 174, N'269')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (119, N'KN', N'Saint Kitts and Nevis', N'???? ???? ?????,', N'Kittitian/Nevisian', N'???? ???? ?????', N'KN-32.png', N'KN-128.png', N'KNA', 659, N'1869')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (119, N'KN', N'Saint Kitts and Nevis', N'???? ???? ?????,', N'Kittitian/Nevisian', N'???? ???? ?????', N'KN-32.png', N'KN-128.png', N'KNA', 659, N'1869')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (120, N'KP', N'Korea(North Korea)', N'????? ????????', N'North Korean', N'????', N'KP-32.png', N'KP-128.png', N'PRK', 408, N'850')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (120, N'KP', N'Korea(North Korea)', N'????? ????????', N'North Korean', N'????', N'KP-32.png', N'KP-128.png', N'PRK', 408, N'850')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (121, N'KR', N'Korea(South Korea)', N'????? ????????', N'South Korean', N'????', N'KR-32.png', N'KR-128.png', N'KOR', 410, N'82')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (121, N'KR', N'Korea(South Korea)', N'????? ????????', N'South Korean', N'????', N'KR-32.png', N'KR-128.png', N'KOR', 410, N'82')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (122, N'KW', N'Kuwait', N'??????', N'Kuwaiti', N'?????', N'KW-32.png', N'KW-128.png', N'KWT', 414, N'965')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (122, N'KW', N'Kuwait', N'??????', N'Kuwaiti', N'?????', N'KW-32.png', N'KW-128.png', N'KWT', 414, N'965')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (123, N'KY', N'Cayman Islands', N'??? ??????', N'Caymanian', N'???????', N'KY-32.png', N'KY-128.png', N'CYM', 136, N'1345')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (123, N'KY', N'Cayman Islands', N'??? ??????', N'Caymanian', N'???????', N'KY-32.png', N'KY-128.png', N'CYM', 136, N'1345')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (124, N'KZ', N'Kazakhstan', N'?????????', N'Kazakh', N'??????????', N'KZ-32.png', N'KZ-128.png', N'KAZ', 398, N'7')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (124, N'KZ', N'Kazakhstan', N'?????????', N'Kazakh', N'??????????', N'KZ-32.png', N'KZ-128.png', N'KAZ', 398, N'7')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (125, N'LA', N'Lao PDR', N'????', N'Laotian', N'?????', N'LA-32.png', N'LA-128.png', N'LAO', 418, N'856')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (125, N'LA', N'Lao PDR', N'????', N'Laotian', N'?????', N'LA-32.png', N'LA-128.png', N'LAO', 418, N'856')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (126, N'LB', N'Lebanon', N'?????', N'Lebanese', N'??????', N'LB-32.png', N'LB-128.png', N'LBN', 422, N'961')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (126, N'LB', N'Lebanon', N'?????', N'Lebanese', N'??????', N'LB-32.png', N'LB-128.png', N'LBN', 422, N'961')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (127, N'LC', N'Saint Pierre and Miquelon', N'??? ???? ???????', N'St. Pierre and Miquelon', N'??? ???? ????????', N'LC-32.png', N'LC-128.png', N'LCA', 662, N'1758')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (127, N'LC', N'Saint Pierre and Miquelon', N'??? ???? ???????', N'St. Pierre and Miquelon', N'??? ???? ????????', N'LC-32.png', N'LC-128.png', N'LCA', 662, N'1758')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (128, N'LI', N'Liechtenstein', N'?????????', N'Liechtenstein', N'??????????', N'LI-32.png', N'LI-128.png', N'LIE', 438, N'423')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (128, N'LI', N'Liechtenstein', N'?????????', N'Liechtenstein', N'??????????', N'LI-32.png', N'LI-128.png', N'LIE', 438, N'423')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (129, N'LK', N'Sri Lanka', N'????????', N'Sri Lankian', N'????????', N'LK-32.png', N'LK-128.png', N'LKA', 144, N'94')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (129, N'LK', N'Sri Lanka', N'????????', N'Sri Lankian', N'????????', N'LK-32.png', N'LK-128.png', N'LKA', 144, N'94')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (130, N'LR', N'Liberia', N'???????', N'Liberian', N'??????', N'LR-32.png', N'LR-128.png', N'LBR', 430, N'231')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (130, N'LR', N'Liberia', N'???????', N'Liberian', N'??????', N'LR-32.png', N'LR-128.png', N'LBR', 430, N'231')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (131, N'LS', N'Lesotho', N'??????', N'Basotho', N'???????', N'LS-32.png', N'LS-128.png', N'LSO', 426, N'266')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (131, N'LS', N'Lesotho', N'??????', N'Basotho', N'???????', N'LS-32.png', N'LS-128.png', N'LSO', 426, N'266')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (132, N'LT', N'Lithuania', N'???????', N'Lithuanian', N'???????', N'LT-32.png', N'LT-128.png', N'LTU', 440, N'370')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (132, N'LT', N'Lithuania', N'???????', N'Lithuanian', N'???????', N'LT-32.png', N'LT-128.png', N'LTU', 440, N'370')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (133, N'LU', N'Luxembourg', N'?????????', N'Luxembourger', N'??????????', N'LU-32.png', N'LU-128.png', N'LUX', 442, N'352')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (133, N'LU', N'Luxembourg', N'?????????', N'Luxembourger', N'??????????', N'LU-32.png', N'LU-128.png', N'LUX', 442, N'352')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (134, N'LV', N'Latvia', N'??????', N'Latvian', N'??????', N'LV-32.png', N'LV-128.png', N'LVA', 428, N'371')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (134, N'LV', N'Latvia', N'??????', N'Latvian', N'??????', N'LV-32.png', N'LV-128.png', N'LVA', 428, N'371')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (135, N'LY', N'Libya', N'?????', N'Libyan', N'????', N'LY-32.png', N'LY-128.png', N'LBY', 434, N'218')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (135, N'LY', N'Libya', N'?????', N'Libyan', N'????', N'LY-32.png', N'LY-128.png', N'LBY', 434, N'218')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (136, N'MA', N'Morocco', N'??????', N'Moroccan', N'?????', N'MA-32.png', N'MA-128.png', N'MAR', 504, N'212')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (136, N'MA', N'Morocco', N'??????', N'Moroccan', N'?????', N'MA-32.png', N'MA-128.png', N'MAR', 504, N'212')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (137, N'MC', N'Monaco', N'??????', N'Monacan', N'??????', N'MC-32.png', N'MC-128.png', N'MCO', 492, N'377')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (137, N'MC', N'Monaco', N'??????', N'Monacan', N'??????', N'MC-32.png', N'MC-128.png', N'MCO', 492, N'377')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (138, N'MD', N'Moldova', N'????????', N'Moldovan', N'???????', N'MD-32.png', N'MD-128.png', N'MDA', 498, N'373')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (138, N'MD', N'Moldova', N'????????', N'Moldovan', N'???????', N'MD-32.png', N'MD-128.png', N'MDA', 498, N'373')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (139, N'ME', N'Montenegro', N'????? ??????', N'Montenegrin', N'????? ??????', N'ME-32.png', N'ME-128.png', N'MNE', 499, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (139, N'ME', N'Montenegro', N'????? ??????', N'Montenegrin', N'????? ??????', N'ME-32.png', N'ME-128.png', N'MNE', 499, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (140, N'MF', N'Saint Martin (French part)', N'????? ????? ?????', N'St. Martian(French)', N'????? ?????? ?????', N'MF-32.png', N'MF-128.png', N'MAF', 663, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (140, N'MF', N'Saint Martin (French part)', N'????? ????? ?????', N'St. Martian(French)', N'????? ?????? ?????', N'MF-32.png', N'MF-128.png', N'MAF', 663, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (141, N'MG', N'Madagascar', N'??????', N'Malagasy', N'???????', N'MG-32.png', N'MG-128.png', N'MDG', 450, N'261')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (141, N'MG', N'Madagascar', N'??????', N'Malagasy', N'???????', N'MG-32.png', N'MG-128.png', N'MDG', 450, N'261')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (142, N'MH', N'Marshall Islands', N'??? ??????', N'Marshallese', N'???????', N'MH-32.png', N'MH-128.png', N'MHL', 584, N'692')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (142, N'MH', N'Marshall Islands', N'??? ??????', N'Marshallese', N'???????', N'MH-32.png', N'MH-128.png', N'MHL', 584, N'692')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (143, N'MK', N'Macedonia', N'???????', N'Macedonian', N'??????', N'MK-32.png', N'MK-128.png', N'MKD', 807, N'389')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (143, N'MK', N'Macedonia', N'???????', N'Macedonian', N'??????', N'MK-32.png', N'MK-128.png', N'MKD', 807, N'389')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (144, N'ML', N'Mali', N'????', N'Malian', N'????', N'ML-32.png', N'ML-128.png', N'MLI', 466, N'223')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (144, N'ML', N'Mali', N'????', N'Malian', N'????', N'ML-32.png', N'ML-128.png', N'MLI', 466, N'223')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (145, N'MM', N'Myanmar', N'???????', N'Myanmarian', N'????????', N'MM-32.png', N'MM-128.png', N'MMR', 104, N'95')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (145, N'MM', N'Myanmar', N'???????', N'Myanmarian', N'????????', N'MM-32.png', N'MM-128.png', N'MMR', 104, N'95')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (146, N'MN', N'Mongolia', N'???????', N'Mongolian', N'??????', N'MN-32.png', N'MN-128.png', N'MNG', 496, N'976')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (146, N'MN', N'Mongolia', N'???????', N'Mongolian', N'??????', N'MN-32.png', N'MN-128.png', N'MNG', 496, N'976')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (147, N'MO', N'Macau', N'?????', N'Macanese', N'??????', N'MO-32.png', N'MO-128.png', N'MAC', 446, N'853')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (147, N'MO', N'Macau', N'?????', N'Macanese', N'??????', N'MO-32.png', N'MO-128.png', N'MAC', 446, N'853')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (148, N'MP', N'Northern Mariana Islands', N'??? ??????? ????????', N'Northern Marianan', N'??????', N'MP-32.png', N'MP-128.png', N'MNP', 580, N'1670')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (148, N'MP', N'Northern Mariana Islands', N'??? ??????? ????????', N'Northern Marianan', N'??????', N'MP-32.png', N'MP-128.png', N'MNP', 580, N'1670')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (149, N'MQ', N'Martinique', N'????????', N'Martiniquais', N'?????????', N'MQ-32.png', N'MQ-128.png', N'MTQ', 474, N'596')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (149, N'MQ', N'Martinique', N'????????', N'Martiniquais', N'?????????', N'MQ-32.png', N'MQ-128.png', N'MTQ', 474, N'596')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (150, N'MR', N'Mauritania', N'?????????', N'Mauritanian', N'?????????', N'MR-32.png', N'MR-128.png', N'MRT', 478, N'222')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (150, N'MR', N'Mauritania', N'?????????', N'Mauritanian', N'?????????', N'MR-32.png', N'MR-128.png', N'MRT', 478, N'222')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (151, N'MS', N'Montserrat', N'?????????', N'Montserratian', N'??????????', N'MS-32.png', N'MS-128.png', N'MSR', 500, N'1664')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (151, N'MS', N'Montserrat', N'?????????', N'Montserratian', N'??????????', N'MS-32.png', N'MS-128.png', N'MSR', 500, N'1664')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (152, N'MT', N'Malta', N'?????', N'Maltese', N'?????', N'MT-32.png', N'MT-128.png', N'MLT', 470, N'356')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (152, N'MT', N'Malta', N'?????', N'Maltese', N'?????', N'MT-32.png', N'MT-128.png', N'MLT', 470, N'356')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (153, N'MU', N'Mauritius', N'????????', N'Mauritian', N'?????????', N'MU-32.png', N'MU-128.png', N'MUS', 480, N'230')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (153, N'MU', N'Mauritius', N'????????', N'Mauritian', N'?????????', N'MU-32.png', N'MU-128.png', N'MUS', 480, N'230')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (154, N'MV', N'Maldives', N'????????', N'Maldivian', N'???????', N'MV-32.png', N'MV-128.png', N'MDV', 462, N'960')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (154, N'MV', N'Maldives', N'????????', N'Maldivian', N'???????', N'MV-32.png', N'MV-128.png', N'MDV', 462, N'960')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (155, N'MW', N'Malawi', N'??????', N'Malawian', N'??????', N'MW-32.png', N'MW-128.png', N'MWI', 454, N'265')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (155, N'MW', N'Malawi', N'??????', N'Malawian', N'??????', N'MW-32.png', N'MW-128.png', N'MWI', 454, N'265')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (156, N'MX', N'Mexico', N'???????', N'Mexican', N'??????', N'MX-32.png', N'MX-128.png', N'MEX', 484, N'52')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (156, N'MX', N'Mexico', N'???????', N'Mexican', N'??????', N'MX-32.png', N'MX-128.png', N'MEX', 484, N'52')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (157, N'MY', N'Malaysia', N'???????', N'Malaysian', N'??????', N'MY-32.png', N'MY-128.png', N'MYS', 458, N'60')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (157, N'MY', N'Malaysia', N'???????', N'Malaysian', N'??????', N'MY-32.png', N'MY-128.png', N'MYS', 458, N'60')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (158, N'MZ', N'Mozambique', N'???????', N'Mozambican', N'????????', N'MZ-32.png', N'MZ-128.png', N'MOZ', 508, N'258')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (158, N'MZ', N'Mozambique', N'???????', N'Mozambican', N'????????', N'MZ-32.png', N'MZ-128.png', N'MOZ', 508, N'258')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (159, N'NA', N'Namibia', N'???????', N'Namibian', N'??????', N'NA-32.png', N'NA-128.png', N'NAM', 516, N'264')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (159, N'NA', N'Namibia', N'???????', N'Namibian', N'??????', N'NA-32.png', N'NA-128.png', N'NAM', 516, N'264')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (160, N'NC', N'New Caledonia', N'????????? ???????', N'New Caledonian', N'????????', N'NC-32.png', N'NC-128.png', N'NCL', 540, N'687')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (160, N'NC', N'New Caledonia', N'????????? ???????', N'New Caledonian', N'????????', N'NC-32.png', N'NC-128.png', N'NCL', 540, N'687')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (161, N'NE', N'Niger', N'??????', N'Nigerien', N'??????', N'NE-32.png', N'NE-128.png', N'NER', 562, N'227')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (161, N'NE', N'Niger', N'??????', N'Nigerien', N'??????', N'NE-32.png', N'NE-128.png', N'NER', 562, N'227')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (162, N'NF', N'Norfolk Island', N'????? ???????', N'Norfolk Islander', N'?????????', N'NF-32.png', N'NF-128.png', N'NFK', 574, N'672')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (162, N'NF', N'Norfolk Island', N'????? ???????', N'Norfolk Islander', N'?????????', N'NF-32.png', N'NF-128.png', N'NFK', 574, N'672')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (163, N'NG', N'Nigeria', N'???????', N'Nigerian', N'??????', N'NG-32.png', N'NG-128.png', N'NGA', 566, N'234')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (163, N'NG', N'Nigeria', N'???????', N'Nigerian', N'??????', N'NG-32.png', N'NG-128.png', N'NGA', 566, N'234')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (164, N'NI', N'Nicaragua', N'?????????', N'Nicaraguan', N'?????????', N'NI-32.png', N'NI-128.png', N'NIC', 558, N'505')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (164, N'NI', N'Nicaragua', N'?????????', N'Nicaraguan', N'?????????', N'NI-32.png', N'NI-128.png', N'NIC', 558, N'505')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (165, N'NL', N'Netherlands', N'??????', N'Dutch', N'??????', N'NL-32.png', N'NL-128.png', N'NLD', 528, N'31')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (165, N'NL', N'Netherlands', N'??????', N'Dutch', N'??????', N'NL-32.png', N'NL-128.png', N'NLD', 528, N'31')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (166, N'NO', N'Norway', N'???????', N'Norwegian', N'??????', N'NO-32.png', N'NO-128.png', N'NOR', 578, N'47')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (166, N'NO', N'Norway', N'???????', N'Norwegian', N'??????', N'NO-32.png', N'NO-128.png', N'NOR', 578, N'47')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (167, N'NP', N'Nepal', N'?????', N'Nepalese', N'??????', N'NP-32.png', N'NP-128.png', N'NPL', 524, N'977')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (167, N'NP', N'Nepal', N'?????', N'Nepalese', N'??????', N'NP-32.png', N'NP-128.png', N'NPL', 524, N'977')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (168, N'NR', N'Nauru', N'????', N'Nauruan', N'????', N'NR-32.png', N'NR-128.png', N'NRU', 520, N'674')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (168, N'NR', N'Nauru', N'????', N'Nauruan', N'????', N'NR-32.png', N'NR-128.png', N'NRU', 520, N'674')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (169, N'NU', N'Niue', N'??', N'Niuean', N'??', N'NU-32.png', N'NU-128.png', N'NIU', 570, N'683')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (169, N'NU', N'Niue', N'??', N'Niuean', N'??', N'NU-32.png', N'NU-128.png', N'NIU', 570, N'683')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (170, N'NZ', N'New Zealand', N'?????????', N'New Zealander', N'?????????', N'NZ-32.png', N'NZ-128.png', N'NZL', 554, N'64')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (170, N'NZ', N'New Zealand', N'?????????', N'New Zealander', N'?????????', N'NZ-32.png', N'NZ-128.png', N'NZL', 554, N'64')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (171, N'OM', N'Oman', N'????', N'Omani', N'?????', N'OM-32.png', N'OM-128.png', N'OMN', 512, N'968')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (171, N'OM', N'Oman', N'????', N'Omani', N'?????', N'OM-32.png', N'OM-128.png', N'OMN', 512, N'968')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (172, N'PA', N'Panama', N'????', N'Panamanian', N'????', N'PA-32.png', N'PA-128.png', N'PAN', 591, N'507')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (172, N'PA', N'Panama', N'????', N'Panamanian', N'????', N'PA-32.png', N'PA-128.png', N'PAN', 591, N'507')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (173, N'PE', N'Peru', N'????', N'Peruvian', N'????', N'PE-32.png', N'PE-128.png', N'PER', 604, N'51')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (173, N'PE', N'Peru', N'????', N'Peruvian', N'????', N'PE-32.png', N'PE-128.png', N'PER', 604, N'51')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (174, N'PF', N'French Polynesia', N'????????? ????????', N'French Polynesian', N'?????????', N'PF-32.png', N'PF-128.png', N'PYF', 258, N'689')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (174, N'PF', N'French Polynesia', N'????????? ????????', N'French Polynesian', N'?????????', N'PF-32.png', N'PF-128.png', N'PYF', 258, N'689')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (175, N'PG', N'Papua New Guinea', N'????? ????? ???????', N'Papua New Guinean', N'?????', N'PG-32.png', N'PG-128.png', N'PNG', 598, N'675')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (175, N'PG', N'Papua New Guinea', N'????? ????? ???????', N'Papua New Guinean', N'?????', N'PG-32.png', N'PG-128.png', N'PNG', 598, N'675')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (176, N'PH', N'Philippines', N'????????', N'Filipino', N'??????', N'PH-32.png', N'PH-128.png', N'PHL', 608, N'63')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (176, N'PH', N'Philippines', N'????????', N'Filipino', N'??????', N'PH-32.png', N'PH-128.png', N'PHL', 608, N'63')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (177, N'PK', N'Pakistan', N'???????', N'Pakistani', N'????????', N'PK-32.png', N'PK-128.png', N'PAK', 586, N'92')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (177, N'PK', N'Pakistan', N'???????', N'Pakistani', N'????????', N'PK-32.png', N'PK-128.png', N'PAK', 586, N'92')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (178, N'PL', N'Poland', N'???????', N'Polish', N'??????', N'PL-32.png', N'PL-128.png', N'POL', 616, N'48')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (178, N'PL', N'Poland', N'???????', N'Polish', N'??????', N'PL-32.png', N'PL-128.png', N'POL', 616, N'48')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (179, N'PN', N'Pitcairn', N'???????', N'Pitcairn Islander', N'????????', N'PN-32.png', N'PN-128.png', N'PCN', 612, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (179, N'PN', N'Pitcairn', N'???????', N'Pitcairn Islander', N'????????', N'PN-32.png', N'PN-128.png', N'PCN', 612, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (180, N'PR', N'Puerto Rico', N'????? ????', N'Puerto Rican', N'?????', N'PR-32.png', N'PR-128.png', N'PRI', 630, N'1787')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (180, N'PR', N'Puerto Rico', N'????? ????', N'Puerto Rican', N'?????', N'PR-32.png', N'PR-128.png', N'PRI', 630, N'1787')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (181, N'PS', N'Palestine', N'??????', N'Palestinian', N'???????', N'PS-32.png', N'PS-128.png', N'PSE', 275, N'970')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (181, N'PS', N'Palestine', N'??????', N'Palestinian', N'???????', N'PS-32.png', N'PS-128.png', N'PSE', 275, N'970')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (182, N'PT', N'Portugal', N'????????', N'Portuguese', N'???????', N'PT-32.png', N'PT-128.png', N'PRT', 620, N'351')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (182, N'PT', N'Portugal', N'????????', N'Portuguese', N'???????', N'PT-32.png', N'PT-128.png', N'PRT', 620, N'351')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (183, N'PW', N'Palau', N'?????', N'Palauan', N'??????', N'PW-32.png', N'PW-128.png', N'PLW', 585, N'680')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (183, N'PW', N'Palau', N'?????', N'Palauan', N'??????', N'PW-32.png', N'PW-128.png', N'PLW', 585, N'680')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (184, N'PY', N'Paraguay', N'????????', N'Paraguayan', N'???????', N'PY-32.png', N'PY-128.png', N'PRY', 600, N'595')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (184, N'PY', N'Paraguay', N'????????', N'Paraguayan', N'???????', N'PY-32.png', N'PY-128.png', N'PRY', 600, N'595')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (185, N'QA', N'Qatar', N'???', N'Qatari', N'????', N'QA-32.png', N'QA-128.png', N'QAT', 634, N'974')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (185, N'QA', N'Qatar', N'???', N'Qatari', N'????', N'QA-32.png', N'QA-128.png', N'QAT', 634, N'974')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (186, N'RE', N'Reunion Island', N'???????', N'Reunionese', N'????????', N'RE-32.png', N'RE-128.png', N'REU', 638, N'262')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (186, N'RE', N'Reunion Island', N'???????', N'Reunionese', N'????????', N'RE-32.png', N'RE-128.png', N'REU', 638, N'262')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (187, N'RO', N'Romania', N'???????', N'Romanian', N'??????', N'RO-32.png', N'RO-128.png', N'ROM', 642, N'40')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (187, N'RO', N'Romania', N'???????', N'Romanian', N'??????', N'RO-32.png', N'RO-128.png', N'ROM', 642, N'40')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (188, N'RS', N'Serbia', N'?????', N'Serbian', N'????', N'RS-32.png', N'RS-128.png', N'SRB', 688, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (188, N'RS', N'Serbia', N'?????', N'Serbian', N'????', N'RS-32.png', N'RS-128.png', N'SRB', 688, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (189, N'RU', N'Russian', N'?????', N'Russian', N'????', N'RU-32.png', N'RU-128.png', N'RUS', 643, N'70')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (189, N'RU', N'Russian', N'?????', N'Russian', N'????', N'RU-32.png', N'RU-128.png', N'RUS', 643, N'70')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (190, N'RW', N'Rwanda', N'??????', N'Rwandan', N'??????', N'RW-32.png', N'RW-128.png', N'RWA', 646, N'250')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (190, N'RW', N'Rwanda', N'??????', N'Rwandan', N'??????', N'RW-32.png', N'RW-128.png', N'RWA', 646, N'250')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (191, N'SA', N'Saudi Arabia', N'??????? ??????? ????????', N'Saudi', N'??????? ??????? ????????', N'SA-32.png', N'SA-128.png', N'SAU', 682, N'966')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (191, N'SA', N'Saudi Arabia', N'??????? ??????? ????????', N'Saudi', N'??????? ??????? ????????', N'SA-32.png', N'SA-128.png', N'SAU', 682, N'966')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (192, N'SB', N'Solomon Islands', N'??? ??????', N'Solomon Island', N'??? ??????', N'SB-32.png', N'SB-128.png', N'SLB', 90, N'677')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (192, N'SB', N'Solomon Islands', N'??? ??????', N'Solomon Island', N'??? ??????', N'SB-32.png', N'SB-128.png', N'SLB', 90, N'677')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (193, N'SC', N'Seychelles', N'?????', N'Seychellois', N'??????', N'SC-32.png', N'SC-128.png', N'SYC', 690, N'248')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (193, N'SC', N'Seychelles', N'?????', N'Seychellois', N'??????', N'SC-32.png', N'SC-128.png', N'SYC', 690, N'248')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (194, N'SD', N'Sudan', N'???????', N'Sudanese', N'??????', N'SD-32.png', N'SD-128.png', N'SDN', 736, N'249')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (194, N'SD', N'Sudan', N'???????', N'Sudanese', N'??????', N'SD-32.png', N'SD-128.png', N'SDN', 736, N'249')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (195, N'SE', N'Sweden', N'??????', N'Swedish', N'?????', N'SE-32.png', N'SE-128.png', N'SWE', 752, N'46')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (195, N'SE', N'Sweden', N'??????', N'Swedish', N'?????', N'SE-32.png', N'SE-128.png', N'SWE', 752, N'46')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (196, N'SG', N'Singapore', N'????????', N'Singaporean', N'????????', N'SG-32.png', N'SG-128.png', N'SGP', 702, N'65')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (196, N'SG', N'Singapore', N'????????', N'Singaporean', N'????????', N'SG-32.png', N'SG-128.png', N'SGP', 702, N'65')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (197, N'SH', N'Saint Helena', N'???? ??????', N'St. Helenian', N'??????', N'SH-32.png', N'SH-128.png', N'SHN', 654, N'290')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (197, N'SH', N'Saint Helena', N'???? ??????', N'St. Helenian', N'??????', N'SH-32.png', N'SH-128.png', N'SHN', 654, N'290')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (198, N'SI', N'Slovenia', N'????????', N'Slovenian', N'???????', N'SI-32.png', N'SI-128.png', N'SVN', 705, N'386')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (198, N'SI', N'Slovenia', N'????????', N'Slovenian', N'???????', N'SI-32.png', N'SI-128.png', N'SVN', 705, N'386')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (199, N'SJ', N'Svalbard and Jan Mayen', N'???????? ???? ????', N'Svalbardian/Jan Mayenian', N'???????? ???? ????', N'SJ-32.png', N'SJ-128.png', N'SJM', 744, N'47')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (199, N'SJ', N'Svalbard and Jan Mayen', N'???????? ???? ????', N'Svalbardian/Jan Mayenian', N'???????? ???? ????', N'SJ-32.png', N'SJ-128.png', N'SJM', 744, N'47')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (200, N'SK', N'Slovakia', N'????????', N'Slovak', N'???????', N'SK-32.png', N'SK-128.png', N'SVK', 703, N'421')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (200, N'SK', N'Slovakia', N'????????', N'Slovak', N'???????', N'SK-32.png', N'SK-128.png', N'SVK', 703, N'421')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (201, N'SL', N'Sierra Leone', N'????????', N'Sierra Leonean', N'?????????', N'SL-32.png', N'SL-128.png', N'SLE', 694, N'232')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (201, N'SL', N'Sierra Leone', N'????????', N'Sierra Leonean', N'?????????', N'SL-32.png', N'SL-128.png', N'SLE', 694, N'232')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (202, N'SM', N'San Marino', N'??? ??????', N'Sammarinese', N'??????', N'SM-32.png', N'SM-128.png', N'SMR', 674, N'378')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (202, N'SM', N'San Marino', N'??? ??????', N'Sammarinese', N'??????', N'SM-32.png', N'SM-128.png', N'SMR', 674, N'378')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (203, N'SN', N'Senegal', N'???????', N'Senegalese', N'??????', N'SN-32.png', N'SN-128.png', N'SEN', 686, N'221')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (203, N'SN', N'Senegal', N'???????', N'Senegalese', N'??????', N'SN-32.png', N'SN-128.png', N'SEN', 686, N'221')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (204, N'SO', N'Somalia', N'???????', N'Somali', N'??????', N'SO-32.png', N'SO-128.png', N'SOM', 706, N'252')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (204, N'SO', N'Somalia', N'???????', N'Somali', N'??????', N'SO-32.png', N'SO-128.png', N'SOM', 706, N'252')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (205, N'SR', N'Suriname', N'???????', N'Surinamese', N'????????', N'SR-32.png', N'SR-128.png', N'SUR', 740, N'597')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (205, N'SR', N'Suriname', N'???????', N'Surinamese', N'????????', N'SR-32.png', N'SR-128.png', N'SUR', 740, N'597')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (206, N'SS', N'South Sudan', N'??????? ???????', N'South Sudanese', N'?????? ?????', N'SS-32.png', N'SS-128.png', N'SSD', 736, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (206, N'SS', N'South Sudan', N'??????? ???????', N'South Sudanese', N'?????? ?????', N'SS-32.png', N'SS-128.png', N'SSD', 736, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (207, N'ST', N'Sao Tome and Principe', N'??? ???? ?????????', N'Sao Tomean', N'??? ???? ?????????', N'ST-32.png', N'ST-128.png', N'STP', 678, N'239')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (207, N'ST', N'Sao Tome and Principe', N'??? ???? ?????????', N'Sao Tomean', N'??? ???? ?????????', N'ST-32.png', N'ST-128.png', N'STP', 678, N'239')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (208, N'SV', N'El Salvador', N'?????????', N'Salvadoran', N'????????', N'SV-32.png', N'SV-128.png', N'SLV', 222, N'503')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (208, N'SV', N'El Salvador', N'?????????', N'Salvadoran', N'????????', N'SV-32.png', N'SV-128.png', N'SLV', 222, N'503')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (209, N'SX', N'Sint Maarten (Dutch part)', N'????? ????? ??????', N'St. Martian(Dutch)', N'????? ?????? ??????', N'SX-32.png', N'SX-128.png', NULL, NULL, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (209, N'SX', N'Sint Maarten (Dutch part)', N'????? ????? ??????', N'St. Martian(Dutch)', N'????? ?????? ??????', N'SX-32.png', N'SX-128.png', NULL, NULL, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (210, N'SY', N'Syria', N'?????', N'Syrian', N'????', N'SY-32.png', N'SY-128.png', N'SYR', 760, N'963')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (210, N'SY', N'Syria', N'?????', N'Syrian', N'????', N'SY-32.png', N'SY-128.png', N'SYR', 760, N'963')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (211, N'SZ', N'Swaziland', N'????????', N'Swazi', N'?????????', N'SZ-32.png', N'SZ-128.png', N'SWZ', 748, N'268')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (211, N'SZ', N'Swaziland', N'????????', N'Swazi', N'?????????', N'SZ-32.png', N'SZ-128.png', N'SWZ', 748, N'268')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (212, N'TC', N'Turks and Caicos Islands', N'??? ????? ???????', N'Turks and Caicos Islands', N'??? ????? ???????', N'TC-32.png', N'TC-128.png', N'TCA', 796, N'1649')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (212, N'TC', N'Turks and Caicos Islands', N'??? ????? ???????', N'Turks and Caicos Islands', N'??? ????? ???????', N'TC-32.png', N'TC-128.png', N'TCA', 796, N'1649')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (213, N'TD', N'Chad', N'????', N'Chadian', N'?????', N'TD-32.png', N'TD-128.png', N'TCD', 148, N'235')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (213, N'TD', N'Chad', N'????', N'Chadian', N'?????', N'TD-32.png', N'TD-128.png', N'TCD', 148, N'235')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (214, N'TF', N'French Southern and Antarctic Lands', N'???? ?????? ?????? ???????????', N'French', N'???? ?????? ?????? ???????????', N'TF-32.png', N'TF-128.png', N'ATF', 260, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (214, N'TF', N'French Southern and Antarctic Lands', N'???? ?????? ?????? ???????????', N'French', N'???? ?????? ?????? ???????????', N'TF-32.png', N'TF-128.png', N'ATF', 260, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (215, N'TG', N'Togo', N'????', N'Togolese', N'????', N'TG-32.png', N'TG-128.png', N'TGO', 768, N'228')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (215, N'TG', N'Togo', N'????', N'Togolese', N'????', N'TG-32.png', N'TG-128.png', N'TGO', 768, N'228')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (216, N'TH', N'Thailand', N'???????', N'Thai', N'???????', N'TH-32.png', N'TH-128.png', N'THA', 764, N'66')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (216, N'TH', N'Thailand', N'???????', N'Thai', N'???????', N'TH-32.png', N'TH-128.png', N'THA', 764, N'66')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (217, N'TJ', N'Tajikistan', N'?????????', N'Tajikistani', N'??????????', N'TJ-32.png', N'TJ-128.png', N'TJK', 762, N'992')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (217, N'TJ', N'Tajikistan', N'?????????', N'Tajikistani', N'??????????', N'TJ-32.png', N'TJ-128.png', N'TJK', 762, N'992')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (218, N'TK', N'Tokelau', N'???????', N'Tokelaian', N'????????', N'TK-32.png', N'TK-128.png', N'TKL', 772, N'690')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (218, N'TK', N'Tokelau', N'???????', N'Tokelaian', N'????????', N'TK-32.png', N'TK-128.png', N'TKL', 772, N'690')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (219, N'TL', N'Timor-Leste', N'????? ???????', N'Timor-Lestian', N'??????', N'TL-32.png', N'TL-128.png', N'TLS', 626, N'670')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (219, N'TL', N'Timor-Leste', N'????? ???????', N'Timor-Lestian', N'??????', N'TL-32.png', N'TL-128.png', N'TLS', 626, N'670')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (220, N'TM', N'Turkmenistan', N'??????????', N'Turkmen', N'???????????', N'TM-32.png', N'TM-128.png', N'TKM', 795, N'7370')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (220, N'TM', N'Turkmenistan', N'??????????', N'Turkmen', N'???????????', N'TM-32.png', N'TM-128.png', N'TKM', 795, N'7370')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (221, N'TN', N'Tunisia', N'????', N'Tunisian', N'?????', N'TN-32.png', N'TN-128.png', N'TUN', 788, N'216')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (221, N'TN', N'Tunisia', N'????', N'Tunisian', N'?????', N'TN-32.png', N'TN-128.png', N'TUN', 788, N'216')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (222, N'TO', N'Tonga', N'?????', N'Tongan', N'?????', N'TO-32.png', N'TO-128.png', N'TON', 776, N'676')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (222, N'TO', N'Tonga', N'?????', N'Tongan', N'?????', N'TO-32.png', N'TO-128.png', N'TON', 776, N'676')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (223, N'TR', N'Turkey', N'?????', N'Turkish', N'????', N'TR-32.png', N'TR-128.png', N'TUR', 792, N'90')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (223, N'TR', N'Turkey', N'?????', N'Turkish', N'????', N'TR-32.png', N'TR-128.png', N'TUR', 792, N'90')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (224, N'TT', N'Trinidad and Tobago', N'???????? ???????', N'Trinidadian/Tobagonian', N'???????? ???????', N'TT-32.png', N'TT-128.png', N'TTO', 780, N'1868')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (224, N'TT', N'Trinidad and Tobago', N'???????? ???????', N'Trinidadian/Tobagonian', N'???????? ???????', N'TT-32.png', N'TT-128.png', N'TTO', 780, N'1868')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (225, N'TV', N'Tuvalu', N'??????', N'Tuvaluan', N'??????', N'TV-32.png', N'TV-128.png', N'TUV', 798, N'688')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (225, N'TV', N'Tuvalu', N'??????', N'Tuvaluan', N'??????', N'TV-32.png', N'TV-128.png', N'TUV', 798, N'688')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (226, N'TW', N'Taiwan', N'??????', N'Taiwanese', N'???????', N'TW-32.png', N'TW-128.png', N'TWN', 158, N'886')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (226, N'TW', N'Taiwan', N'??????', N'Taiwanese', N'???????', N'TW-32.png', N'TW-128.png', N'TWN', 158, N'886')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (227, N'TZ', N'Tanzania', N'???????', N'Tanzanian', N'???????', N'TZ-32.png', N'TZ-128.png', N'TZA', 834, N'255')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (227, N'TZ', N'Tanzania', N'???????', N'Tanzanian', N'???????', N'TZ-32.png', N'TZ-128.png', N'TZA', 834, N'255')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (228, N'UA', N'Ukraine', N'????????', N'Ukrainian', N'???????', N'UA-32.png', N'UA-128.png', N'UKR', 804, N'380')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (228, N'UA', N'Ukraine', N'????????', N'Ukrainian', N'???????', N'UA-32.png', N'UA-128.png', N'UKR', 804, N'380')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (229, N'UG', N'Uganda', N'??????', N'Ugandan', N'??????', N'UG-32.png', N'UG-128.png', N'UGA', 800, N'256')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (229, N'UG', N'Uganda', N'??????', N'Ugandan', N'??????', N'UG-32.png', N'UG-128.png', N'UGA', 800, N'256')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (230, N'UM', N'US Minor Outlying Islands', N'????? ???????? ???????? ?????????', N'US Minor Outlying Islander', N'??????', N'UM-32.png', N'UM-128.png', N'UMI', 581, N'1')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (230, N'UM', N'US Minor Outlying Islands', N'????? ???????? ???????? ?????????', N'US Minor Outlying Islander', N'??????', N'UM-32.png', N'UM-128.png', N'UMI', 581, N'1')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (231, N'US', N'United States', N'???????? ???????', N'American', N'??????', N'US-32.png', N'US-128.png', N'USA', 840, N'1')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (231, N'US', N'United States', N'???????? ???????', N'American', N'??????', N'US-32.png', N'US-128.png', N'USA', 840, N'1')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (232, N'UY', N'Uruguay', N'???????', N'Uruguayan', N'???????', N'UY-32.png', N'UY-128.png', N'URY', 858, N'598')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (232, N'UY', N'Uruguay', N'???????', N'Uruguayan', N'???????', N'UY-32.png', N'UY-128.png', N'URY', 858, N'598')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (233, N'UZ', N'Uzbekistan', N'??????????', N'Uzbek', N'???????????', N'UZ-32.png', N'UZ-128.png', N'UZB', 860, N'998')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (233, N'UZ', N'Uzbekistan', N'??????????', N'Uzbek', N'???????????', N'UZ-32.png', N'UZ-128.png', N'UZB', 860, N'998')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (234, N'VA', N'Vatican City', N'???????', N'Vatican', N'????????', N'VA-32.png', N'VA-128.png', N'VAT', 336, N'39')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (234, N'VA', N'Vatican City', N'???????', N'Vatican', N'????????', N'VA-32.png', N'VA-128.png', N'VAT', 336, N'39')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (235, N'VC', N'Saint Vincent and the Grenadines', N'???? ????? ???? ????????', N'Saint Vincent and the Grenadines', N'???? ????? ???? ????????', N'VC-32.png', N'VC-128.png', N'VCT', 670, N'1784')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (235, N'VC', N'Saint Vincent and the Grenadines', N'???? ????? ???? ????????', N'Saint Vincent and the Grenadines', N'???? ????? ???? ????????', N'VC-32.png', N'VC-128.png', N'VCT', 670, N'1784')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (236, N'VE', N'Venezuela', N'???????', N'Venezuelan', N'???????', N'VE-32.png', N'VE-128.png', N'VEN', 862, N'58')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (236, N'VE', N'Venezuela', N'???????', N'Venezuelan', N'???????', N'VE-32.png', N'VE-128.png', N'VEN', 862, N'58')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (237, N'VI', N'Virgin Islands (U.S.)', N'????? ??????? ????????', N'American Virgin Islander', N'??????', N'VI-32.png', N'VI-128.png', N'VIR', 850, N'1340')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (237, N'VI', N'Virgin Islands (U.S.)', N'????? ??????? ????????', N'American Virgin Islander', N'??????', N'VI-32.png', N'VI-128.png', N'VIR', 850, N'1340')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (238, N'VN', N'Vietnam', N'??????', N'Vietnamese', N'???????', N'VN-32.png', N'VN-128.png', N'VNM', 704, N'84')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (238, N'VN', N'Vietnam', N'??????', N'Vietnamese', N'???????', N'VN-32.png', N'VN-128.png', N'VNM', 704, N'84')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (239, N'VU', N'Vanuatu', N'???????', N'Vanuatuan', N'???????', N'VU-32.png', N'VU-128.png', N'VUT', 548, N'678')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (239, N'VU', N'Vanuatu', N'???????', N'Vanuatuan', N'???????', N'VU-32.png', N'VU-128.png', N'VUT', 548, N'678')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (240, N'WF', N'Wallis and Futuna Islands', N'???? ???????', N'Wallisian/Futunan', N'??????', N'WF-32.png', N'WF-128.png', N'WLF', 876, N'681')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (240, N'WF', N'Wallis and Futuna Islands', N'???? ???????', N'Wallisian/Futunan', N'??????', N'WF-32.png', N'WF-128.png', N'WLF', 876, N'681')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (241, N'WS', N'Samoa', N'?????', N'Samoan', N'?????', N'WS-32.png', N'WS-128.png', N'WSM', 882, N'684')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (241, N'WS', N'Samoa', N'?????', N'Samoan', N'?????', N'WS-32.png', N'WS-128.png', N'WSM', 882, N'684')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (242, N'XK', N'Kosovo', N'??????', N'Kosovar', N'??????', NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (242, N'XK', N'Kosovo', N'??????', N'Kosovar', N'??????', NULL, NULL, NULL, NULL, NULL)
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (243, N'YE', N'Yemen', N'?????', N'Yemeni', N'????', N'YE-32.png', N'YE-128.png', N'YEM', 887, N'967')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (243, N'YE', N'Yemen', N'?????', N'Yemeni', N'????', N'YE-32.png', N'YE-128.png', N'YEM', 887, N'967')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (244, N'YT', N'Mayotte', N'?????', N'Mahoran', N'??????', N'YT-32.png', N'YT-128.png', N'MYT', 175, N'269')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (244, N'YT', N'Mayotte', N'?????', N'Mahoran', N'??????', N'YT-32.png', N'YT-128.png', N'MYT', 175, N'269')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (245, N'ZA', N'South Africa', N'???? ???????', N'South African', N'??????', N'ZA-32.png', N'ZA-128.png', N'ZAF', 710, N'27')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (245, N'ZA', N'South Africa', N'???? ???????', N'South African', N'??????', N'ZA-32.png', N'ZA-128.png', N'ZAF', 710, N'27')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (246, N'ZM', N'Zambia', N'??????', N'Zambian', N'????????', N'ZM-32.png', N'ZM-128.png', N'ZMB', 894, N'260')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (246, N'ZM', N'Zambia', N'??????', N'Zambian', N'????????', N'ZM-32.png', N'ZM-128.png', N'ZMB', 894, N'260')
 GO
-INSERT [dbo].[Country] ([IdNo], [ISOA2], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (247, N'ZW', N'Zimbabwe', N'???????', N'Zimbabwean', N'???????', N'ZW-32.png', N'ZW-128.png', N'ZWE', 716, N'263')
+INSERT [dbo].[Country] ([IdNo], [CountryCode], [CountryName], [CountryNameAra], [Nationality], [NationalityAra], [Flag32], [Flag128], [ISOA3], [ISON], [PhoneCode]) VALUES (247, N'ZW', N'Zimbabwe', N'???????', N'Zimbabwean', N'???????', N'ZW-32.png', N'ZW-128.png', N'ZWE', 716, N'263')
 GO
 SET IDENTITY_INSERT [dbo].[Country] OFF
 GO
