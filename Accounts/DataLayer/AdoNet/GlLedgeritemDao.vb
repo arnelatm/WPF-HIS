@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
-        Private Function GetRecordsWithIdNo(journalIdNo As Int32, Optional sortExpression As String = Nothing) As List(Of GlLedgerItem) Implements IDaoChild(Of GlLedgerItem).GetRecordsWithIdNo
+        Private Function GetRecordsWithIdNo(journalIdNo, Optional sortExpression = Nothing) As List(Of GlLedgerItem) Implements IDaoChild(Of GlLedgerItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

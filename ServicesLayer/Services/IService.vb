@@ -61,7 +61,7 @@ Namespace Services
         Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String,
                                     ByVal ParamArray fields() As String) As Object
 
-        Function GetRecordsWithIdNo(Of TM)(ByVal idNo As Int32, Optional ByRef sortKey As String = Nothing) _
+        Function GetRecordsWithIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) _
             As List(Of TM)
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object

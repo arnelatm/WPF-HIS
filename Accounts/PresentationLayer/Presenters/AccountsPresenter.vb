@@ -16,9 +16,9 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
         End Sub
 
-        Public Sub Initializer(baseClassName As String, Optional tableName As String = Nothing)
+        Public Overrides Sub Initializer(baseClassName As String, Optional tableOrViewName As String = Nothing)
             Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
-            TableName = Iif(tableName Is Nothing,baseClassName,tableName)
+            TableName = IIf(tableOrViewName Is Nothing, baseClassName, tableOrViewName)
             SortOrderKey = baseClassName + "Name"
             Dim args As Object() = {baseClassName}
             Dim t As Type = Type.GetType(presenterModelName)
@@ -30,11 +30,11 @@ Namespace PresentationLayer.Presenters
             'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
         End Sub
 
-        Public Sub InitializerWithTv(baseClassName As String, Optional tableName As String=Nothing)
+        Public Overrides Sub InitializerWithTv(baseClassName As String, Optional tableOrViewName As String = Nothing)
             TreeViewMainField = baseClassName + "Name"
             TreeViewSecondaryField = baseClassName + "Code"
             TreeViewList = New List(Of TM)
-            Initializer(baseClassName,tableName)
+            Initializer(baseClassName, tableOrViewName)
         End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
@@ -175,13 +175,12 @@ Namespace PresentationLayer.Presenters
             Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
         End Function
 
-        Public Function GetPaymentTypes(Optional ByVal sortKey As String = "PaymentTypeName")
-            Return GetLookupData("PaymentTypeName", "PaymentTypeNameAra", "PaymentTypeCode", "DepositType", sortKey, "")
-        End Function
+        'Public Function GetPaymentTypes(Optional ByVal sortKey As String = "PaymentTypeName")
+        '    Return GetLookupData("PaymentTypeName", "PaymentTypeNameAra", "PaymentTypeCode", "DepositType", sortKey, "")
+        'End Function
 
         Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
-            Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode",
-                                 "Country", sortKey, "")
+            Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
         End Function
 
         Public Function GetEndingGlBalance(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
@@ -206,22 +205,22 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
-            TableToGet = "Deduction"
-            SortExpression = sortKey
-            DisplayName = "DeductionName"
-            DisplayNameArabic = "DeductionNameAra"
-            DisplayCode = "DeductionCode"
-            Return GetLookupDataByNameWithCode()
+            LookUpTableToGet = "Deduction"
+            LookUpSortExpression = sortKey
+            LookUpDisplayName = "DeductionName"
+            LookUpDisplayNameArabic = "DeductionNameAra"
+            LookUpDisplayCode = "DeductionCode"
+            Return GetLookupByNameCode()
         End Function
 
         Public Function GetRegularEarningListByName(Optional ByVal sortKey As String = "EarningName")
-            TableToGet = "Earning"
-            SortExpression = sortKey
-            DisplayName = "EarningName"
-            DisplayNameArabic = "EarningNameAra"
-            DisplayCode = "EarningCode"
-            'FilterKey = "EarningType = 'R'"
-            Return GetLookupDataByNameWithCode()
+            LookUpTableToGet = "Earning"
+            LookUpSortExpression = sortKey
+            LookUpDisplayName = "EarningName"
+            LookUpDisplayNameArabic = "EarningNameAra"
+            LookUpDisplayCode = "EarningCode"
+            'LookUpFilterKey = "EarningType = 'R'"
+            Return GetLookupByNameCode()
         End Function
 
     End Class

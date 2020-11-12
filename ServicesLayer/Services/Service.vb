@@ -114,7 +114,7 @@ Namespace Services
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function
 
-        Public Function GetRecordsWithIdNo(Of TM)(idNo As Int32, Optional ByRef sortKey As String = Nothing) _
+        Public Function GetRecordsWithIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) _
             As List(Of TM) Implements IService.GetRecordsWithIdNo
             Dim bizData = DataDao.GetRecordsWithIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)

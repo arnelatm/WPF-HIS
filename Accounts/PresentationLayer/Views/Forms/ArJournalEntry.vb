@@ -68,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CustomerIdNo As Int32? Implements IArJournalView.CustomerIdNo
             Get
-                Return cboCustomerIdNo.GetNullableValue(Of Int16)
+                Return cboCustomerIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cboCustomerIdNo.SetValue(Value)

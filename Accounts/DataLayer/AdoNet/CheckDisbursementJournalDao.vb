@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
                     "ORNumber," &
                     "PayeeIdNo," &
                     "PayeeName," &
-                    "DepositType," &
+                    "PaymentType," &
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate," &
@@ -66,7 +66,7 @@ Namespace DataLayer.AdoNet
                     "ORNumber      = @ORNumber," &
                     "PayeeIdNo     = @PayeeIdNo," &
                     "PayeeName     = @PayeeName," &
-                    "DepositType   = @DepositType," &
+                    "PaymentType   = @PaymentType," &
                     "Posted        = @Posted," &
                     "ReferenceNo   = @ReferenceNo," &
                     "TransactionDate = @TransactionDate," &
@@ -92,7 +92,7 @@ Namespace DataLayer.AdoNet
                     "ORNumber," &
                     "PayeeIdNo," &
                     "PayeeName," &
-                    "DepositType," &
+                    "PaymentType," &
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate," &
@@ -112,7 +112,7 @@ Namespace DataLayer.AdoNet
                     "@ORNumber," &
                     "@PayeeIdNo," &
                     "@PayeeName," &
-                    "@DepositType," &
+                    "@PaymentType," &
                     "@Posted," &
                     "@ReferenceNo," &
                     "@TransactionDate," &
@@ -140,7 +140,7 @@ Namespace DataLayer.AdoNet
             .OrNumber = Extensions.AsString(reader("ORNumber")),
             .PayeeIdNo = Extensions.AsNullable(Of Int32)(reader("PayeeIdNo")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
-            .PaymentType = Extensions.AsString(reader("DepositType")),
+            .PaymentType = Extensions.AsString(reader("PaymentType")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
@@ -165,7 +165,7 @@ Namespace DataLayer.AdoNet
                                     "@ORNumber", checkDisbursementJournal.OrNumber,
                                     "@PayeeIdNo", checkDisbursementJournal.PayeeIdNo,
                                     "@PayeeName", checkDisbursementJournal.PayeeName,
-                                    "@DepositType", checkDisbursementJournal.PaymentType,
+                                    "@PaymentType", checkDisbursementJournal.PaymentType,
                                     "@Posted", checkDisbursementJournal.Posted,
                                     "@ReferenceNo", checkDisbursementJournal.ReferenceNo,
                                     "@TransactionDate", checkDisbursementJournal.TransactionDate,

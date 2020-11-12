@@ -85,8 +85,11 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of AccountReconciliationItem) _
+        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of AccountReconciliationItem) _
             Implements IDaoChild(Of AccountReconciliationItem).GetRecordsWithIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

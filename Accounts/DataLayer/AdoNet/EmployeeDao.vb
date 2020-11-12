@@ -70,6 +70,7 @@ Namespace DataLayer.AdoNet
                     " Notes = @Notes," &
                     " OpeningBalance = @OpeningBalance," &
                     " PayCycleIdNo = @PayCycleIdNo," &
+                    " PayGroupIdNo = @PayGroupIdNo," &
                     " PaymentMethod = @PaymentMethod," &
                     " Phone1 = @Phone1," &
                     " Phone2 = @Phone2," &
@@ -90,10 +91,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, Paymentmethod, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayCycleIdNo, @Paymentmethod,  @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -123,7 +124,7 @@ Namespace DataLayer.AdoNet
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
             .PayCycleIdNo = Extensions.AsNullable(Of Int16?)(reader("PayCycleIdNo")),
-            .PayGroupIdNo = Extensions.AsNullable(Of Int16?)(reader("PayGroupidNo")),
+            .PayGroupIdNo = Extensions.AsNullable(Of Int16?)(reader("PayGroupIdNo")),
             .PaymentMethod = Extensions.AsChar(reader("PaymentMethod")),
             .Phone1 = Extensions.AsString(reader("Phone1")),
             .Phone2 = Extensions.AsString(reader("Phone2")),
@@ -162,8 +163,8 @@ Namespace DataLayer.AdoNet
                                     "@Notes", employee.Notes,
                                     "@OpeningBalance", employee.OpeningBalance,
                                     "@PayCycleIdNo", employee.PayCycleIdNo,
-                                    "@PaymentMethod", employee.PaymentMethod,
                                     "@PayGroupIdNo", employee.PayGroupIdNo,
+                                    "@PaymentMethod", employee.PaymentMethod,
                                     "@Phone1", employee.Phone1,
                                     "@Phone2", employee.Phone2,
                                     "@PoBox", employee.PoBox,

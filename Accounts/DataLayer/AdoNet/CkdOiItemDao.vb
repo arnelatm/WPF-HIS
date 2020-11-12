@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCkdOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCkdOiItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) _
+        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
             As List(Of CkdOiItem) Implements IDaoChild(Of CkdOiItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"

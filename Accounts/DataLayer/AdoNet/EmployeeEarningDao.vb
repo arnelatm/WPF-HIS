@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
