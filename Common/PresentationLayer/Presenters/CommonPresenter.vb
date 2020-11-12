@@ -135,7 +135,7 @@ Namespace PresentationLayer.Presenters
             LookUpDisplayNameArabic = "AccountNameAra"
             LookUpDisplayCode = "AccountCode"
             LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupFilteredDataByCode()
+            Return GetLookupByCodeNameFiltered()
         End Function
 
         Public Function GetDetailAccountListByName(Optional ByVal sortKey As String = "AccountName")
@@ -145,7 +145,7 @@ Namespace PresentationLayer.Presenters
             LookUpDisplayNameArabic = "AccountNameAra"
             LookUpDisplayCode = "AccountCode"
             LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupFilteredDataByName()
+            Return GetLookupByNameFiltered()
         End Function
 
         Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
@@ -175,7 +175,7 @@ Namespace PresentationLayer.Presenters
         '    Return GetLookupByCodeName()
         'End Function
 
-        Public Function GetListByCode(listName As String, Optional filter As String = Nothing)
+        Public Function GetListByCodeName(listName As String, Optional filter As String = Nothing)
             LookUpTableToGet = listName
             LookUpDisplayName = listName + "Name"
             LookUpSortExpression = LookUpDisplayName
@@ -184,14 +184,6 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByCodeName(filter)
         End Function
 
-        'Public Function GetPayGroupList(Optional ByVal sortKey As String = "PayGroupName")
-        '    LookUpTableToGet = "PayGroup"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "PayGroupName"
-        '    LookUpDisplayNameArabic = "PayGroupNameAra"
-        '    LookUpDisplayCode = "PayGroupCode"
-        '    Return GetTableList()
-        'End Function
         Public Function GetListByName(listName As String, Optional filter As String = Nothing)
             LookUpTableToGet = listName
             LookUpDisplayName = listName + "Name"
@@ -201,6 +193,14 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByName(filter)
         End Function
 
+        Public Function GetListByNameCode(listName As String, Optional filter As String = Nothing)
+            LookUpTableToGet = listName
+            LookUpDisplayName = listName + "Name"
+            LookUpSortExpression = LookUpDisplayName
+            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+            LookUpDisplayCode = listName + "Code"
+            Return GetLookupByNameCode(filter)
+        End Function
         Public Function GetPayGroupList(Optional ByVal sortKey As String = "PayGroupName")
             LookUpTableToGet = "PayGroup"
             LookUpSortExpression = sortKey
@@ -218,15 +218,6 @@ Namespace PresentationLayer.Presenters
             LookUpDisplayCode = "PayGroupCode"
             Return GetLookupByCodeName()
         End Function
-
-        'Public Function GetPaymentTypeList(Optional ByVal sortKey As String = "PaymentTypeCode")
-        '    LookUpTableToGet = "PaymentType"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "PaymentTypeName"
-        '    LookUpDisplayNameArabic = "PaymentTypeNameAra"
-        '    LookUpDisplayCode = "PaymentTypeCode"
-        '    Return GetLookupByCodeName()
-        'End Function
 
         Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
             LookUpTableToGet = "ProductCategory"
@@ -246,14 +237,6 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByCodeName()
         End Function
 
-        'Public Function GetReligionList(Optional ByVal sortKey As String = "ReligionName")
-        '    LookUpTableToGet = "Religion"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "ReligionName"
-        '    LookUpDisplayNameArabic = "ReligionNameAra"
-        '    LookUpDisplayCode = "ReligionCode"
-        '    Return GetTableList()
-        'End Function
         Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
             LookUpTableToGet = "RevCostCenter"
             LookUpSortExpression = sortKey

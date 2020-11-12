@@ -110,7 +110,7 @@ Public Class CFormEntryTv
     End Sub
 
     Protected Sub DisplayTreeViewData()
-        Dim treeViewData = PresenterObj.GetTreeViewDataNew()
+        Dim treeViewData = PresenterObj.GetTreeViewData()
         DisplayTree(treeViewData)
         TreeViewTableName.ExpandAll()
         GotoRecordInTreeView()
