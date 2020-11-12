@@ -18,7 +18,10 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCadOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCadOiItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of CadOiItem) Implements IDaoChild(Of CadOiItem).GetRecordsWithIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

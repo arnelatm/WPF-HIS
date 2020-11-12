@@ -159,7 +159,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayeeIdNo As Int32? Implements IPettyCashJournalView.PayeeIdNo
             Get
-                Return cboPayeeIdNo.GetNullableValue(Of Int16)
+                Return cboPayeeIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cboPayeeIdNo.SetValue(Value)

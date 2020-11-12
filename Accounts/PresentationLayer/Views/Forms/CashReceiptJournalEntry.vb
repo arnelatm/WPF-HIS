@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
             Get
-                Return cboPayorIdNo.GetNullableValue(Of Int16)
+                Return cboPayorIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cboPayorIdNo.SetValue(Value)

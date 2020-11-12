@@ -192,7 +192,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SupplierIdNo As Int32? Implements IApJournalView.SupplierIdNo
             Get
-                Return cboSupplierIdNo.GetNullableValue(Of Int16)
+                Return cboSupplierIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cboSupplierIdNo.SetValue(Value)

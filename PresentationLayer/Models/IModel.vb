@@ -29,13 +29,13 @@ Public Interface IModel
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetLookupDataByCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
+    Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupDataByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
+    Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupDataByNameWithCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
+    Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
     Function GetLookupFilteredDataByCode(tableName As String, sortKey As String, filterKey As String,
@@ -80,7 +80,7 @@ Public Interface IModel
     Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
                                 ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecordsWithIdNo(Of TM As New)(idNo As Int32, Optional ByRef sortExpression As String = Nothing) _
+    Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) _
         As List(Of TM)
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object

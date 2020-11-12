@@ -14,8 +14,10 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _revCostCenterByCode
         Private _footer As DgvFooter
-        Private _revCostCenterByName
+
+        'Private _revCostCenterByName
         Private _totalPercentage As Decimal
+
         Private _distributionSchemeItems As List(Of DistributionSchemeItemView)
 
         Public Sub New()
@@ -138,7 +140,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
-            _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
+            '_revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

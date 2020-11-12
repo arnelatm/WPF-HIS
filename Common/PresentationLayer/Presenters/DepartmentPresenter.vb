@@ -13,18 +13,22 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("Department")
-            TableName = "Department_View"
-            SortOrderKey = "SortKey"
-            TreeViewMainField = "DepartmentName"
-            TreeViewSecondaryField = "DepartmentCode"
             TreeViewParentIdField = "ParentIdNo"
-            OriginalModel = New DepartmentModel()
-            DataModel = New DepartmentModel
-            TreeViewList = New List(Of DepartmentModel)
-            ParentViewList = New List(Of DepartmentModel)
+            InitializerWithTv("Department", "Department_View")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+            'ModelPresenter = New ModelCommon("Department")
+            'TableName = "Department_View"
+            'SortOrderKey = "SortKey"
+            'TreeViewMainField = "DepartmentName"
+            'TreeViewSecondaryField = "DepartmentCode"
+            'TreeViewParentIdField = "ParentIdNo"
+            'OriginalModel = New DepartmentModel()
+            'DataModel = New DepartmentModel
+            'TreeViewList = New List(Of DepartmentModel)
+            'ParentViewList = New List(Of DepartmentModel)
+            'Ea = New EventAggregator()
+            'Ea.SubscribeEvent(Me)
         End Sub
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String

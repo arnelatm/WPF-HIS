@@ -43,11 +43,16 @@ Namespace PresentationLayer.Views.Forms
         Public Property StartDate As Date Implements IPayPeriodView.StartDate
 
 #End Region
+
         Protected Sub PayrollTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles trvTreeView.AfterSelect
             Dim currentNode = trvTreeView.SelectedNode
-            If currentNode.Parent.Level = 0 Then
+            If currentNode.Parent.Level = 0 And currentNode.Nodes.Count = 0 Then
                 LoadPayGroups(currentNode)
-                currentNode.ExpandAll
+                currentNode.ExpandAll()
+            End If
+            If currentNode.Parent.Level = 1 And currentNode.Nodes.Count = 0 Then
+                LoadEmployees(currentNode, 1)
+                currentNode.ExpandAll()
             End If
         End Sub
 
@@ -61,14 +66,16 @@ Namespace PresentationLayer.Views.Forms
             Next payGroup
         End Sub
 
-        Private Sub LoadEmployees(ByRef node As TreeNode)
-            For Each employee In _employees
-                node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-                                                   .Tag = employee.idNo,
-                                                   .Name = employee.idNo
-                                                 }
-                              )
-            Next employee
+        Private Sub LoadEmployees(ByRef node As TreeNode, ByVal payGroupIdNo As Int16?)
+            If payGroupIdNo IsNot Nothing Then
+                For Each employee In _employees
+                    node.Nodes.Add(New TreeNode With {.Text = employee.Name,
+                                                       .Tag = employee.idNo,
+                                                       .Name = employee.idNo
+                                                     }
+                                  )
+                Next employee
+            End If
         End Sub
 
     End Class

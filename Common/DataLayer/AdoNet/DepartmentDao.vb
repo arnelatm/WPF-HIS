@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Department Implements IDaoAll(Of Department).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, RevCostCenterIdNo, SortKey" &
+                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "SortKey ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, RevCostCenterIdNo, SortKey" &
+                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, SortKey" &
                     "   FROM [Department_View] order by '" + sortExpression + "'"
             Return db.Read(sql, _make).ToList()
         End Function
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " INSERT INTO [Department] " &
                     " (DepartmentCode,DepartmentName,DepartmentNameAra,ParentIdNo,Notes,RevCostCenterIdNo,RevCostCenterIdNo) " &
-                    " VALUES (@DepartmentCode,@DepartmentName,@DepartmentNameAra,@ParentIdNo,@Notes,@RevCostCenterIdNo,@RevCostCenterIdNo) "
+                    " VALUES (@DepartmentCode,@DepartmentName,@DepartmentNameAra,@ParentIdNo,@Notes,@RevCostCenterIdNo) "
             Return db.Insert(sql, Take(department))
         End Function
 
@@ -57,7 +57,6 @@ Namespace DataLayer.AdoNet
                     "        DepartmentNameAra = @DepartmentNameAra," &
                     "        ParentIdNo = @ParentIdNo," &
                     "        Notes = @Notes," &
-                    "        RevCostCenterIdNo = @RevCostCenterIdNo," &
                     "        RevCostCenterIdNo = @RevCostCenterIdNo" &
                     "  WHERE IdNo = @IdNo"
 

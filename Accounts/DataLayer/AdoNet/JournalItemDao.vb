@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = ""
         Protected DboTvpInsertFileName As String = ""
 
-        Public Function GetRecordsWithIdNo(journalIdNo As Int32, Optional sortKey As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -38,7 +38,7 @@ Namespace DataLayer.AdoNet
                     "SpecialAccount" &
                     " FROM " & TableFileName &
                     " WHERE JournalIdNo = @JournalIdNo" &
-                    " ORDER BY " & sortKey
+                    " ORDER BY " & sortKey.ToString()
             Dim params() As Object = {"@JournalIdNo", journalIdNo}
             Return _db.Read(sql, Make, params).ToList()
         End Function

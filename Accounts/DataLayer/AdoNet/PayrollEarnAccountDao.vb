@@ -15,14 +15,13 @@ Namespace DataLayer.AdoNet
         Protected DboTvpInsertFileName As String = ""
         Protected DboTvpUpdateFileName As String = ""
 
-
         Public Sub New()
             TableFileName = "PayrollEarnAccount_View"
             DboTvpUpdateFileName = "dbo.UpdatePayrollEarnAccountTVP"
             DboTvpInsertFileName = "dbo.InsertPayrollEarnAccountTVP"
         End Sub
 
-        Public Function GetRecordsWithIdNo(earningIdNo As Int32, Optional sortKey As String = Nothing) As List(Of PayrollEarnAccount) Implements IDaoChild(Of PayrollEarnAccount).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(earningIdNo, Optional sortKey = Nothing) As List(Of PayrollEarnAccount) Implements IDaoChild(Of PayrollEarnAccount).GetRecordsWithIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If

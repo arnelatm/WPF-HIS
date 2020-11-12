@@ -12,7 +12,7 @@ Namespace ServiceLayer
         'Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer
         'Function UpdateRecord(Of TBiz)(ByRef model As TBiz) As Integer
         'Function UpdateTvp(dtTable As DataTable) As Integer
-        'Function GetRecordsWithIdNo(idNo As Int32, ByRef Optional sortKey As String = Nothing) As Object
+        'Function GetRecordsWithIdNo(idNo, ByRef Optional sortKey = Nothing) As Object
     End Interface
 
 End Namespace

@@ -81,7 +81,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EmployeeIdNo As Int32? Implements IErJournalView.EmployeeIdNo
             Get
-                Return cboEmployeeIdNo.GetNullableValue(Of Int16)
+                Return cboEmployeeIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cboEmployeeIdNo.SetValue(Value)

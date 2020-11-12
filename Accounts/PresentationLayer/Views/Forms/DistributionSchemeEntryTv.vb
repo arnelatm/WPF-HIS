@@ -14,8 +14,10 @@ Namespace PresentationLayer.Views.Forms
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _revCostCenterByCode
-        Private ReadOnly _revCostCenterByName
+
+        'Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Public Sub New()
@@ -52,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
             _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
-            _revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
+            '_revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
 
         End Sub
 
