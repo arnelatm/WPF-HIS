@@ -105,7 +105,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = PresenterObj.GetChartList()
-            cboPensionProviderIdNo.DataSource = PresenterObj.GetListByCode("PensionProvider")
+            cboPensionProviderIdNo.DataSource = PresenterObj.GetListByCodeName("PensionProvider")
         End Sub
 
         Private Sub BindPensionRates()

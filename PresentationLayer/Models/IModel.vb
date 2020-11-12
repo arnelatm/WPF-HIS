@@ -38,10 +38,10 @@ Public Interface IModel
     Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupFilteredDataByCode(tableName As String, sortKey As String, filterKey As String,
+    Function GetLookupByCodeNameFiltered(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupFilteredDataByName(tableName As String, sortKey As String, filterKey As String,
+    Function GetLookupByNameFiltered(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function GetRecordById(Of TM As New)(idNo As Int32) As TM
@@ -68,11 +68,11 @@ Public Interface IModel
     Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecords2Columns(tableName As String, sortKey As String, ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData)
+    'Function GetRecords2Columns(tableName As String, sortKey As String, ParamArray fields() As String) _
+    '    As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecords2ColumnsFiltered(tableName As String, sortKey As String, filterKey As String,
-                                        ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    'Function GetRecords2ColumnsFiltered(tableName As String, sortKey As String, filterKey As String,
+    '                                    ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer

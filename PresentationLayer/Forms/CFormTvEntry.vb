@@ -112,7 +112,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Sub DisplayTreeViewData()
-            Dim treeViewData = PresenterObj.GetTreeViewDataNew()
+            Dim treeViewData = PresenterObj.GetTreeViewData()
             DisplayTree(treeViewData)
             trvTreeView.ExpandAll()
             GotoRecordInTreeView()
