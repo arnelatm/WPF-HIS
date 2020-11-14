@@ -2,6 +2,7 @@
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class StatementOfEr
 
         Public Property MainTableName As String
@@ -17,7 +18,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "ErJournal"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
-            cboEmployeeIdNo.DataSource = PresenterObj.GetEmployeeListByName()
+            cboEmployeeIdNo.DataSource = PresenterObj.GetListByNameCode("Employee")
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
@@ -35,4 +36,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
     End Class
+
 End Namespace

@@ -32,180 +32,180 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floDataDisplay.SuspendLayout()
-            Me.SuspendLayout()
-            '
-            'TreeViewTableName
-            '
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            '
-            'TxtIdNo
-            '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = False
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
-            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
-            Me.TxtIdNo.TabStop = False
-            Me.TxtIdNo.ValueIsNumeric = True
-            '
-            'txtProductCategoryCode
-            '
-            Me.txtProductCategoryCode.BackColor = System.Drawing.Color.White
-            Me.txtProductCategoryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtProductCategoryCode.ComputedValue = False
-            Me.txtProductCategoryCode.CustomFormat = Nothing
-            Me.txtProductCategoryCode.DataBoundControl = True
-            Me.txtProductCategoryCode.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryCode, True)
-            resources.ApplyResources(Me.txtProductCategoryCode, "txtProductCategoryCode")
-            Me.txtProductCategoryCode.ForeColor = System.Drawing.Color.Black
-            Me.txtProductCategoryCode.LinkedLabel = Nothing
-            Me.txtProductCategoryCode.MaximumValue = Nothing
-            Me.txtProductCategoryCode.MinimumValue = Nothing
-            Me.txtProductCategoryCode.Name = "txtProductCategoryCode"
-            Me.txtProductCategoryCode.OldValue = Nothing
-            Me.txtProductCategoryCode.ReadOnly = True
-            Me.txtProductCategoryCode.ValueIsMandatory = True
-            '
-            'txtProductCategoryName
-            '
-            Me.txtProductCategoryName.BackColor = System.Drawing.Color.White
-            Me.txtProductCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtProductCategoryName.ComputedValue = False
-            Me.txtProductCategoryName.CustomFormat = Nothing
-            Me.txtProductCategoryName.DataBoundControl = True
-            Me.txtProductCategoryName.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryName, True)
-            resources.ApplyResources(Me.txtProductCategoryName, "txtProductCategoryName")
-            Me.txtProductCategoryName.ForeColor = System.Drawing.Color.Black
-            Me.txtProductCategoryName.LinkedLabel = Nothing
-            Me.txtProductCategoryName.MaximumValue = Nothing
-            Me.txtProductCategoryName.MinimumValue = Nothing
-            Me.txtProductCategoryName.Name = "txtProductCategoryName"
-            Me.txtProductCategoryName.OldValue = Nothing
-            Me.txtProductCategoryName.ReadOnly = True
-            Me.txtProductCategoryName.ValueIsMandatory = True
-            '
-            'txtProductCategoryNameAra
-            '
-            Me.txtProductCategoryNameAra.BackColor = System.Drawing.Color.White
-            Me.txtProductCategoryNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtProductCategoryNameAra.ComputedValue = False
-            Me.txtProductCategoryNameAra.CustomFormat = Nothing
-            Me.txtProductCategoryNameAra.DataBoundControl = True
-            Me.txtProductCategoryNameAra.EditingMode = False
-            Me.txtProductCategoryNameAra.EnglishControl = Me.txtProductCategoryName
-            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryNameAra, True)
-            resources.ApplyResources(Me.txtProductCategoryNameAra, "txtProductCategoryNameAra")
-            Me.txtProductCategoryNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtProductCategoryNameAra.LinkedLabel = Nothing
-            Me.txtProductCategoryNameAra.MaximumValue = Nothing
-            Me.txtProductCategoryNameAra.MinimumValue = Nothing
-            Me.txtProductCategoryNameAra.Name = "txtProductCategoryNameAra"
-            Me.txtProductCategoryNameAra.OldValue = Nothing
-            Me.txtProductCategoryNameAra.ReadOnly = True
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = False
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.ValueIsMandatory = True
-            '
-            'floDataDisplay
-            '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-            Me.floDataDisplay.Controls.Add(Me.lblCode)
-            Me.floDataDisplay.Controls.Add(Me.txtProductCategoryCode)
-            Me.floDataDisplay.Controls.Add(Me.lblName)
-            Me.floDataDisplay.Controls.Add(Me.txtProductCategoryName)
-            Me.floDataDisplay.Controls.Add(Me.lblNameAra)
-            Me.floDataDisplay.Controls.Add(Me.txtProductCategoryNameAra)
-            Me.floDataDisplay.Controls.Add(Me.lblNotes)
-            Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'lblIdNo
-            '
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-            Me.lblIdNo.Name = "lblIdNo"
-            '
-            'lblCode
-            '
-            Me.lblCode.DisplayOnly = True
-            Me.lblCode.EditingMode = False
-            resources.ApplyResources(Me.lblCode, "lblCode")
-            Me.lblCode.Name = "lblCode"
-            '
-            'lblName
-            '
-            Me.lblName.DisplayOnly = True
-            Me.lblName.EditingMode = False
-            resources.ApplyResources(Me.lblName, "lblName")
-            Me.lblName.Name = "lblName"
-            '
-            'lblNameAra
-            '
-            Me.lblNameAra.DisplayOnly = True
-            Me.lblNameAra.EditingMode = False
-            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
-            Me.lblNameAra.Name = "lblNameAra"
-            '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
-            '
-            'ProductCategoryEntryTv
-            '
-            resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
-            Me.Name = "ProductCategoryEntryTv"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floDataDisplay.ResumeLayout(False)
-            Me.floDataDisplay.PerformLayout()
-            Me.ResumeLayout(False)
-            Me.PerformLayout()
+        Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.floDataDisplay.SuspendLayout
+        Me.SuspendLayout
+        '
+        'TreeViewTableName
+        '
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        '
+        'TxtIdNo
+        '
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = false
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.TabStop = false
+        Me.TxtIdNo.ValueIsNumeric = true
+        '
+        'txtProductCategoryCode
+        '
+        Me.txtProductCategoryCode.BackColor = System.Drawing.Color.White
+        Me.txtProductCategoryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProductCategoryCode.ComputedValue = false
+        Me.txtProductCategoryCode.CustomFormat = Nothing
+        Me.txtProductCategoryCode.DataBoundControl = true
+        Me.txtProductCategoryCode.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryCode, true)
+        resources.ApplyResources(Me.txtProductCategoryCode, "txtProductCategoryCode")
+        Me.txtProductCategoryCode.ForeColor = System.Drawing.Color.Black
+        Me.txtProductCategoryCode.LinkedLabel = Nothing
+        Me.txtProductCategoryCode.MaximumValue = Nothing
+        Me.txtProductCategoryCode.MinimumValue = Nothing
+        Me.txtProductCategoryCode.Name = "txtProductCategoryCode"
+        Me.txtProductCategoryCode.OldValue = Nothing
+        Me.txtProductCategoryCode.ReadOnly = true
+        Me.txtProductCategoryCode.ValueIsMandatory = true
+        '
+        'txtProductCategoryName
+        '
+        Me.txtProductCategoryName.BackColor = System.Drawing.Color.White
+        Me.txtProductCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProductCategoryName.ComputedValue = false
+        Me.txtProductCategoryName.CustomFormat = Nothing
+        Me.txtProductCategoryName.DataBoundControl = true
+        Me.txtProductCategoryName.EditingMode = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryName, true)
+        resources.ApplyResources(Me.txtProductCategoryName, "txtProductCategoryName")
+        Me.txtProductCategoryName.ForeColor = System.Drawing.Color.Black
+        Me.txtProductCategoryName.LinkedLabel = Nothing
+        Me.txtProductCategoryName.MaximumValue = Nothing
+        Me.txtProductCategoryName.MinimumValue = Nothing
+        Me.txtProductCategoryName.Name = "txtProductCategoryName"
+        Me.txtProductCategoryName.OldValue = Nothing
+        Me.txtProductCategoryName.ReadOnly = true
+        Me.txtProductCategoryName.ValueIsMandatory = true
+        '
+        'txtProductCategoryNameAra
+        '
+        Me.txtProductCategoryNameAra.BackColor = System.Drawing.Color.White
+        Me.txtProductCategoryNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProductCategoryNameAra.ComputedValue = false
+        Me.txtProductCategoryNameAra.CustomFormat = Nothing
+        Me.txtProductCategoryNameAra.DataBoundControl = true
+        Me.txtProductCategoryNameAra.EditingMode = false
+        Me.txtProductCategoryNameAra.EnglishControl = Me.txtProductCategoryName
+        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryNameAra, true)
+        resources.ApplyResources(Me.txtProductCategoryNameAra, "txtProductCategoryNameAra")
+        Me.txtProductCategoryNameAra.ForeColor = System.Drawing.Color.Black
+        Me.txtProductCategoryNameAra.LinkedLabel = Nothing
+        Me.txtProductCategoryNameAra.MaximumValue = Nothing
+        Me.txtProductCategoryNameAra.MinimumValue = Nothing
+        Me.txtProductCategoryNameAra.Name = "txtProductCategoryNameAra"
+        Me.txtProductCategoryNameAra.OldValue = Nothing
+        Me.txtProductCategoryNameAra.ReadOnly = true
+        '
+        'txtNotes
+        '
+        Me.txtNotes.BackColor = System.Drawing.Color.White
+        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtNotes.ComputedValue = false
+        Me.txtNotes.CustomFormat = Nothing
+        Me.txtNotes.DataBoundControl = true
+        Me.txtNotes.EditingMode = false
+        resources.ApplyResources(Me.txtNotes, "txtNotes")
+        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+        Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
+        Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
+        Me.txtNotes.ValueIsMandatory = true
+        '
+        'floDataDisplay
+        '
+        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+        Me.floDataDisplay.Controls.Add(Me.lblCode)
+        Me.floDataDisplay.Controls.Add(Me.txtProductCategoryCode)
+        Me.floDataDisplay.Controls.Add(Me.lblName)
+        Me.floDataDisplay.Controls.Add(Me.txtProductCategoryName)
+        Me.floDataDisplay.Controls.Add(Me.lblNameAra)
+        Me.floDataDisplay.Controls.Add(Me.txtProductCategoryNameAra)
+        Me.floDataDisplay.Controls.Add(Me.lblNotes)
+        Me.floDataDisplay.Controls.Add(Me.txtNotes)
+        Me.floDataDisplay.Name = "floDataDisplay"
+        '
+        'lblIdNo
+        '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+        Me.lblIdNo.Name = "lblIdNo"
+        '
+        'lblCode
+        '
+        Me.lblCode.DisplayOnly = true
+        Me.lblCode.EditingMode = false
+        resources.ApplyResources(Me.lblCode, "lblCode")
+        Me.lblCode.Name = "lblCode"
+        '
+        'lblName
+        '
+        Me.lblName.DisplayOnly = true
+        Me.lblName.EditingMode = false
+        resources.ApplyResources(Me.lblName, "lblName")
+        Me.lblName.Name = "lblName"
+        '
+        'lblNameAra
+        '
+        Me.lblNameAra.DisplayOnly = true
+        Me.lblNameAra.EditingMode = false
+        resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+        Me.lblNameAra.Name = "lblNameAra"
+        '
+        'lblNotes
+        '
+        Me.lblNotes.DisplayOnly = true
+        Me.lblNotes.EditingMode = false
+        resources.ApplyResources(Me.lblNotes, "lblNotes")
+        Me.lblNotes.Name = "lblNotes"
+        '
+        'ProductCategoryEntryTv
+        '
+        resources.ApplyResources(Me, "$this")
+        Me.Controls.Add(Me.floDataDisplay)
+        Me.Name = "ProductCategoryEntryTv"
+        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
+        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        Me.floDataDisplay.ResumeLayout(false)
+        Me.floDataDisplay.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-        End Sub
+End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtProductCategoryCode As CTextBox
         Friend WithEvents txtProductCategoryName As CTextBox

@@ -1115,7 +1115,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return 0
     End Function
 
-    Protected Sub FormatFields()
+    Private Sub ProcessLookupFields()
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
             If LookUpSortExpression = LookUpDisplayName Then
@@ -1139,55 +1139,56 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             dFieldName = pDisplayName
         End If
         LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-        Return Model.GetLookupByCodeNameFiltered(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
+        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetLookupByCodeName(Optional filter As String = Nothing)
-        FormatFields()
-        If filter IsNot Nothing Then
-            Return Model.GetLookupByCodeNameFiltered(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
-        Else
-            Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-        End If
+    Protected Function GetLookupByCodeName()
+        ProcessLookupFields()
+        Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
+    End Function
+
+    Protected Function GetFilteredLookupByCodeName(filter As String)
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
     End Function
 
     Protected Function GetLookupByName(Optional filter As String = Nothing)
-        FormatFields()
+        ProcessLookupFields()
         If filter IsNot Nothing Then
-            Return Model.GetLookupByNameFiltered(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
+            Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
         Else
             Return Model.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
         End If
     End Function
 
     Protected Function GetLookupByNameCode()
-        FormatFields()
+        ProcessLookupFields()
         Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
     End Function
 
     Protected Function GetLookupFilteredData()
-        FormatFields()
-        Return Model.GetLookupByNameFiltered(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetLookupByCodeNameFiltered()
-        FormatFields()
-        Return Model.GetLookupByCodeNameFiltered(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    Protected Function GetFilteredLookupByCodeName()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetLookupByNameFiltered()
-        FormatFields()
-        Return Model.GetLookupByNameFiltered(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetTableList()
-        FormatFields()
+        ProcessLookupFields()
         Return Model.GetRecords(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
     End Function
 
     Protected Function GetTableListFiltered()
-        FormatFields()
-        Return Model.GetRecordsFiltered(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        ProcessLookupFields()
+        Return Model.GetFilteredRecords(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String

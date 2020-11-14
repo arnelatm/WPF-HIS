@@ -212,10 +212,10 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboProductCategoryIdNo.BeginUpdate()
-            cboProductCategoryIdNo.DataSource = PresenterObj.GetCategoryList()
+            cboProductCategoryIdNo.DataSource = PresenterObj.GetListByCodeName("ProductCategory")
             cboProductCategoryIdNo.EndUpdate()
             cboGlAccountIdNo.BeginUpdate()
-            cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode()
+            cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboGlAccountIdNo.EndUpdate()
             cboVatAccountIdNo.BeginUpdate()
             cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("VI")

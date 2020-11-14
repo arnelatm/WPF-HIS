@@ -18,26 +18,35 @@
 
     'Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object
 
-    Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String,
-                                returnFieldsArray As Array) As ArrayList
+    Function GetControlSecurityIdNo(searchValue As String) As String
+
+    Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+
+    Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
+
+    'Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String, returnFieldsArray As Array) As ArrayList
+
+    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ParamArray fieldNames() As String) As Object
+
+    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
+
+    Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
     Function GetRecordCount(tableName As String) As Integer
 
     Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) As Object
 
-    Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
-                                   returnFieldName As String) As String
-
-    Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
-
-    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-                                   returnFieldName As String) As T
-
     Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String
+
+    Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
+                                       returnFieldName As String) As String
+
+    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
+                                   returnFieldName As String) As T
 
     Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
@@ -45,16 +54,9 @@
 
     Function GetRecords(tableName As String, sortKey As String, ParamArray fieldNames() As String) As Object
 
-    Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
-                                ParamArray fieldNames() As String) As Object
-
-    Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
-
-    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
-
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
-    Function GetControlSecurityIdNo(searchValue As String) As String
+    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
     Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 
@@ -65,11 +67,7 @@
 
     Function IsFieldUnique(tableName As String, fieldName As String) As Boolean
 
-    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
-
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer
-
-    Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
 End Interface

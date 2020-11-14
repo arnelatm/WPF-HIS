@@ -178,8 +178,8 @@ Namespace PresentationLayer.Views.Forms
 #Region "Methods"
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

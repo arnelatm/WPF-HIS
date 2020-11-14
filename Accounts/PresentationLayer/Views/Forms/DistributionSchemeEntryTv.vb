@@ -53,8 +53,7 @@ Namespace PresentationLayer.Views.Forms
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
-            '_revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
 
         End Sub
 

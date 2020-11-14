@@ -439,13 +439,13 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacBankIdNo.DataSource = PresenterObj.GetBankList()
-            cacCountryCode.DataSource = PresenterObj.GetCountryList()
+            cacBankIdNo.DataSource = PresenterObj.GetListByCodeName("Bank")
+            cacCountryCode.DataSource = PresenterObj.GetListByCodeName("Country")
             cacDepartmentIdNo.DataSource = PresenterObj.GetListByCodeName("Department")
             cacDesignationIdNo.DataSource = PresenterObj.GetListByName("Designation")
             cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
             cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = PresenterObj.GetCountryList()
+            cacNationalityCode.DataSource = PresenterObj.GetListByCodeName("Country")
             cacReligionIdNo.DataSource = PresenterObj.GetListByName("Religion")
             cboPayCycleidNo.DataSource = PresenterObj.GetListByCodeName("PayCycle")
             cboPayGroupIdNo.DataSource = PresenterObj.GetListByCodeName("PayGroup")

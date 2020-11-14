@@ -290,8 +290,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("CS,CK,BA")
             cboAccountIdNo.EndUpdate()
@@ -561,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayorIdNo.DataSource = cbDataSource
             Dim payorTypeEnum = GetEnumCodeValue(Of ReceiptTypeSelection)(cPayorType)
             If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
-                cbDataSource = PresenterObj.GetCustomerListByCode()
+                cbDataSource = PresenterObj.GetListByCodeName("Customer")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCsrOiItems.Visible = True
             Else
@@ -571,11 +571,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If payorTypeEnum = ReceiptTypeSelection.Customer Then
-                    cbDataSource = PresenterObj.GetCustomerListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Customer")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetEmployeeListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Employee")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-                    cbDataSource = PresenterObj.GetSupplierListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Supplier")
                 Else
                     txtPayorName.Visible = True
                     txtPayorName.Width = _payorOrigWidth

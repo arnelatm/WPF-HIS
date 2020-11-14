@@ -221,12 +221,12 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
-            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode
+            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
             cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetListByCodeName("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetListByCodeName("PayGroup")
         End Sub
 

@@ -285,10 +285,9 @@ Namespace Services
             Return BaseDao.GetRecords(tableName, sortKey, fields)
         End Function
 
-        Public Overloads Function GetRecordsFiltered(ByVal tableName As String, ByVal sortKey As String,
-                                                     ByVal filterKey As String, ByVal ParamArray fields() As String) _
-            As Object Implements IService.GetRecordsFiltered
-            Return BaseDao.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
+        Public Overloads Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) _
+            As Object Implements IService.GetFilteredRecords
+            Return BaseDao.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         End Function
 
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IService.GetFieldWithIdNo

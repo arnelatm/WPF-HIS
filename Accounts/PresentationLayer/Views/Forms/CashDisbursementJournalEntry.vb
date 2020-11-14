@@ -282,8 +282,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
             cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
@@ -549,7 +549,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = PresenterObj.GetSupplierListByCode()
+                cbDataSource = PresenterObj.GetListByCodeName("Supplier")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCadOiItems.Visible = True
             Else
@@ -559,11 +559,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = PresenterObj.GetSupplierListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Supplier")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetEmployeeListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Employee")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = PresenterObj.GetCustomerListByCode()
+                    cbDataSource = PresenterObj.GetListByCodeName("Customer")
                 Else
                     txtPayeeName.Visible = True
                     txtPayeeName.Width = _payeeOrigWidth

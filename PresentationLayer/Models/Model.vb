@@ -11,6 +11,7 @@ Public Class Model
 
     Private Shared ReadOnly LoginService As New ServiceLogin()
     Private Shared ReadOnly Service As New Service()
+
     Public Sub New(accountName As String)
         DataService = New Service(accountName)
     End Sub
@@ -19,6 +20,7 @@ Public Class Model
     End Sub
 
     Public Property DataService As Object
+
     Public Function AddRecord(Of TM)(ByRef dataModel As TM) As Integer Implements IModel.AddRecord
         Dim newlyAddedRecordIdNo As Int32
         newlyAddedRecordIdNo = DataService.AddRecord(dataModel)
@@ -92,8 +94,36 @@ Public Class Model
         Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
+    Public Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) _
+        As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByCodeName
+        Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Return ProcessLookupDataByCodeName(data)
+    End Function
+
+    Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String,
+                                                ByVal ParamArray fields() As String) _
+        As List(Of ClassesLibrary.LookupData) _
+        Implements IModel.GetFilteredLookupByName
+        Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Dim tlData = New List(Of ClassesLibrary.LookupData)
+        For i = 1 To Int(data.Count / 3)
+            Dim tData As New ClassesLibrary.LookupData
+            tData.IdNo = data(i * 3 - 3)
+            tData.Name = data(i * 3 - 2)
+            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
+            tlData.Add(tData)
+        Next
+        Return tlData
+    End Function
+
+    Public Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) _
+        As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByNameCode
+        Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Return ProcessLookupDataByNameCode(data)
+    End Function
+
     Public Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.HLookupData) _
+                As List(Of ClassesLibrary.HLookupData) _
         Implements IModel.GetHRecords
         Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.HLookupData)
@@ -119,39 +149,9 @@ Public Class Model
     End Function
 
     Public Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetLookupByCodeName
+        As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByCodeName
         Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            Dim x = data(i * 3 - 1)
-            tData.IdNo = data(i * 3 - 3) ' IdNo
-            tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2) ' Code & Name
-            If x.Equals(DBNull.Value) Then
-                tData.Code = ""
-            Else
-                tData.Code = data(i * 3 - 1)
-            End If
-            tlData.Add(tData)
-        Next
-        Return tlData
-    End Function
-
-    Public Function GetLookupByCodeNameFiltered(tableName As String, sortKey As String, filterKey As String,
-                                                ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetLookupByCodeNameFiltered
-        Dim data = Service.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
-            tData.Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-            tlData.Add(tData)
-        Next
-        Return tlData
+        Return ProcessLookupDataByCodeName(data)
     End Function
 
     Public Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
@@ -170,36 +170,10 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function GetLookupByNameCode(tableName As String, sortKey As String,
-                                                ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetLookupByNameCode
+    Public Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
+        As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByNameCode
         Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 2) & " | " & data(i * 3 - 1)
-            tData.Code = data(i * 3 - 1)
-            tlData.Add(tData)
-        Next
-        Return tlData
-    End Function
-
-    Public Function GetLookupByNameFiltered(tableName As String, sortKey As String, filterKey As String,
-                                                ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetLookupByNameFiltered
-        Dim data = Service.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 2)
-            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
-            tlData.Add(tData)
-        Next
-        Return tlData
+        Return ProcessLookupByNameCode(data)
     End Function
 
     Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IModel.GetMaxValueFiltered
@@ -214,6 +188,7 @@ Public Class Model
         End If
         Return modelData
     End Function
+
     Public Function GetRecordCount(tableName As String) As Integer Implements IModel.GetRecordCount
         Try
             Return Service.GetRecordCount(tableName)
@@ -278,10 +253,10 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
+    Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String,
                                        ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetRecordsFiltered
-        Dim data = DataService.GetRecordsFiltered(tableName, sortKey, filterKey, fields)
+        Implements IModel.GetFilteredRecords
+        Dim data = DataService.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
             Dim tData As New ClassesLibrary.LookupData
@@ -365,6 +340,30 @@ Public Class Model
 
     Public Function UpdateTvp(ByRef dtTable As DataTable) As Integer Implements IModel.UpdateTvp
         Return DataService.UpdateTvp(dtTable)
+    End Function
+
+    Private Function ProcessLookupByNameCode(data As Object) As List(Of ClassesLibrary.LookupData)
+        Dim tlData = New List(Of ClassesLibrary.LookupData)
+        For i = 1 To Int(data.Count / 3)
+            Dim tData As New ClassesLibrary.LookupData
+            tData.IdNo = data(i * 3 - 3)
+            tData.Name = data(i * 3 - 2) & " | " & data(i * 3 - 1)
+            tData.Code = data(i * 3 - 1)
+            tlData.Add(tData)
+        Next
+        Return tlData
+    End Function
+
+    Private Function ProcessLookupDataByCodeName(data As Object) As List(Of ClassesLibrary.LookupData)
+        Dim tlData As New List(Of ClassesLibrary.LookupData)
+        For i = 1 To Int(data.Count / 3)
+            Dim tData As New ClassesLibrary.LookupData
+            tData.IdNo = data(i * 3 - 3)
+            tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
+            tData.Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+            tlData.Add(tData)
+        Next
+        Return tlData
     End Function
 
 End Class
