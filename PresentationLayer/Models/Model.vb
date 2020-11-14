@@ -27,46 +27,35 @@ Public Class Model
         Return newlyAddedRecordIdNo
     End Function
 
-    Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
-        As Boolean _
-        Implements IModel.CheckIfUnique
+    Public Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean Implements IModel.CheckIfUnique
         Return Service.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
     End Function
 
-    Public Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
-                                        searchFieldName1 As String, searchFieldName2 As String) As Integer _
-        Implements IModel.CountRecordWith2Key
+    Public Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer Implements IModel.CountRecordWith2Key
         Return Service.CountRecordWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2)
     End Function
 
-    Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer _
-        Implements IModel.CountRecordWithKey
+    Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer Implements IModel.CountRecordWithKey
         Return Service.CountRecordWithKey(searchValue, tableName, searchFieldName)
     End Function
 
-    Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
-        Implements IModel.DeleteRecord
+    Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer Implements IModel.DeleteRecord
         Return Service.DeleteRecord(idNo, tableName)
     End Function
 
-    Public Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer _
-        Implements IModel.DelUpdateTvp
+    Public Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer Implements IModel.DelUpdateTvp
         Return DataService.DelUpdateTvp(dtTable, groupKey)
     End Function
 
-    Public Function FindField(tableName As String, fieldName As String, searchString As String,
-                              searchAnywhere As Boolean) As Integer _
-        Implements IModel.FindField
+    Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer Implements IModel.FindField
         Return Service.FindField(tableName, fieldName, searchString, searchAnywhere)
     End Function
 
-    Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer _
-        Implements IModel.FindFieldContinue
+    Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IModel.FindFieldContinue
         Return Service.FindFieldContinue(tableName, idNo)
     End Function
 
-    Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) _
-        Implements IModel.GetAll
+    Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) Implements IModel.GetAll
         Dim bizData = DataService.GetAll(sortExpression)
         Dim modelObject As New List(Of TM)
         For Each bObject In bizData
@@ -94,36 +83,39 @@ Public Class Model
         Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
-    Public Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByCodeName
+    Public Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByCodeName
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
-        Return ProcessLookupDataByCodeName(data)
+        Return ProcessLookupByCodeName(data)
     End Function
 
-    Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String,
-                                                ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
+    Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
         Implements IModel.GetFilteredLookupByName
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Dim tlData = New List(Of ClassesLibrary.LookupData)
+        Return ProcessLookupByName(data)
+    End Function
+
+    
+    Public Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByNameCode
+        Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Return ProcessLookupByNameCode(data)
+    End Function
+
+    Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredRecords
+        Dim data = DataService.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
             Dim tData As New ClassesLibrary.LookupData
             tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 2)
-            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
+            tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
+            tData.Code = data(i * 3 - 1)
             tlData.Add(tData)
         Next
         Return tlData
     End Function
 
-    Public Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByNameCode
-        Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
-        Return ProcessLookupDataByNameCode(data)
-    End Function
-
     Public Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-                As List(Of ClassesLibrary.HLookupData) _
+                    As List(Of ClassesLibrary.HLookupData) _
         Implements IModel.GetHRecords
         Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.HLookupData)
@@ -148,30 +140,17 @@ Public Class Model
         Return Service.GetLastSortKey(searchValue, tableName)
     End Function
 
-    Public Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByCodeName
+    Public Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByCodeName
         Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Return ProcessLookupDataByCodeName(data)
+        Return ProcessLookupByCodeName(data)
     End Function
 
-    Public Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetLookupByName
+    Public Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByName
         Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 2)
-            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
-            tData.Index = Convert.ChangeType(i, GetType(Integer))
-            tlData.Add(tData)
-        Next
-        Return tlData
+        Return ProcessLookupByName(data)
     End Function
 
-    Public Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByNameCode
+    Public Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByNameCode
         Dim data = Service.GetRecords(tableName, sortKey, fields)
         Return ProcessLookupByNameCode(data)
     End Function
@@ -180,8 +159,7 @@ Public Class Model
         Return Service.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
     End Function
 
-    Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM _
-                                                                                                Implements IModel.GetRecordById
+    Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM Implements IModel.GetRecordById
         Dim modelData As New TM
         If idNo <> 0 Then
             modelData = DataService.GetRecordById(Of TM)(idNo)
@@ -197,40 +175,29 @@ Public Class Model
         End Try
     End Function
 
-    Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
-                                           Optional dateTimeStampField As String = "DateTimeStamp") As Object _
-        Implements IModel.GetRecordDateTimeStamp
+    Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional dateTimeStampField As String = "DateTimeStamp") As Object Implements IModel.GetRecordDateTimeStamp
         Return Service.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
     End Function
 
-    Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
-                                           searchFieldName1 As String,
-                                           searchFieldName2 As String, returnFieldName As String) As String _
-        Implements IModel.GetRecordFieldWith2Key
+    Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String Implements IModel.GetRecordFieldWith2Key
         Return _
             Service.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2,
                                            returnFieldName)
     End Function
 
-    Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
-                                          returnFieldName As String) As String _
-        Implements IModel.GetRecordFieldWithKey
+    Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String Implements IModel.GetRecordFieldWithKey
         Return Service.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
-    Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-                                          returnFieldName As String) As T _
-        Implements IModel.GetRecordFieldWithKeyG
+    Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T Implements IModel.GetRecordFieldWithKeyG
         Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
-    Public Function GetRecordPosition(tableName As String, dno As Integer) As Integer _
-        Implements IModel.GetRecordPosition
+    Public Function GetRecordPosition(tableName As String, dno As Integer) As Integer Implements IModel.GetRecordPosition
         Return Service.GetRecordPosition(tableName, dno)
     End Function
 
-    Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData) _
+    Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
         Implements IModel.GetRecords
         Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
@@ -253,29 +220,12 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String,
-                                       ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetFilteredRecords
-        Dim data = DataService.GetFilteredRecords(tableName, sortKey, filterKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
-        For i = 1 To Int(data.Count / 3)
-            Dim tData As New ClassesLibrary.LookupData
-            tData.IdNo = data(i * 3 - 3)
-            tData.Name = data(i * 3 - 1) & " | " & data(i * 3 - 2)
-            tData.Code = data(i * 3 - 1)
-            tlData.Add(tData)
-        Next
-        Return tlData
-    End Function
-
-    Public Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) _
-                                        Implements IModel.GetRecordsWithIdNo
+    Public Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IModel.GetRecordsWithIdNo
         Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
         Return data
     End Function
 
-    Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrderKey As String) As Integer _
-        Implements IModel.GetSortedRecordPosition
+    Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrderKey As String) As Integer Implements IModel.GetSortedRecordPosition
         Return Service.GetSortedRecordPosition(idNo, tableName, sortOrderKey)
     End Function
 
@@ -342,6 +292,18 @@ Public Class Model
         Return DataService.UpdateTvp(dtTable)
     End Function
 
+    Private Function ProcessLookupByName(data As Object) As List(Of ClassesLibrary.LookupData)
+        Dim tlData = New List(Of ClassesLibrary.LookupData)
+        For i = 1 To Int(data.Count / 3)
+            Dim tData As New ClassesLibrary.LookupData
+            tData.IdNo = data(i * 3 - 3)
+            tData.Name = data(i * 3 - 2)
+            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
+            tlData.Add(tData)
+        Next
+        Return tlData
+    End Function
+
     Private Function ProcessLookupByNameCode(data As Object) As List(Of ClassesLibrary.LookupData)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
@@ -354,7 +316,7 @@ Public Class Model
         Return tlData
     End Function
 
-    Private Function ProcessLookupDataByCodeName(data As Object) As List(Of ClassesLibrary.LookupData)
+    Private Function ProcessLookupByCodeName(data As Object) As List(Of ClassesLibrary.LookupData)
         Dim tlData As New List(Of ClassesLibrary.LookupData)
         For i = 1 To Int(data.Count / 3)
             Dim tData As New ClassesLibrary.LookupData
@@ -365,7 +327,6 @@ Public Class Model
         Next
         Return tlData
     End Function
-
 End Class
 
 Public Class ModelLogin

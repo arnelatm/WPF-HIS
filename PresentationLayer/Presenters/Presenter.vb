@@ -38,13 +38,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected TreeViewMainField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
-    Private _addMode As Boolean = False
     Private ReadOnly _debugSwitch As Byte = 0
+    Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
+    Private _addMode As Boolean = False
     Private _editMode As Boolean = False
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
-    Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
-
     'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
 
@@ -74,6 +73,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             'TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End If
     End Sub
+
+    Delegate Sub FillDataFunc(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
 
     Public Event AddingRecordChanged(adding As Boolean)
 
@@ -237,14 +238,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected Property LookUpDisplayNameArabic As String
     Protected Property LookUpFieldsToShow As String()
     Protected Property LookUpFilterKey As String = Nothing
+    Protected Property LookUpSortExpression As String
+    Protected Property LookUpTableToGet As String
     Protected Shared Property Model As New Model()
 
     Protected Shared Property ModelTblColProp As IModelTblColProp
-
-    Protected Property LookUpSortExpression As String
-
-    Protected Property LookUpTableToGet As String
-
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 
         Dim myDomain As AppDomain = AppDomain.CurrentDomain
@@ -287,6 +285,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return myType.CreateType()
     End Function
 
+    Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
+        Dim retValue As DialogResult
+        Dim dateField As String = Messaging.TranslateCaption(text)
+        Dim startDateStr As String = startDate.ToShortDateString()
+        Dim endDateStr As String = endDate.ToShortDateString()
+        If targetDate < startDate Or targetDate > endDate Then
+            Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
+            Messaging.ShowParametrizedMessage(True, "MsgInvalidDate", variables)
+            retValue = DialogResult.No
+        Else
+            retValue = DialogResult.Yes
+        End If
+        Return retValue
+    End Function
+
     Public Sub AddChildPresenter(obj As Object)
         ChildPresenters.Add(obj)
     End Sub
@@ -324,6 +337,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
+        For i = 0 To rowColumns.GetLength(0) - 1
+            dataTable.Columns.Add(rowColumns(i, 0), rowColumns(i, 1))
+        Next
+    End Sub
+
     Public Function DeleteRecord(idNo As Int32) As Integer
         Dim retValue As Integer
         Try
@@ -355,58 +374,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Protected Function UpdateDataTables(updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
-        Dim retVal As Integer
-        Dim updateReturnValue As Object
-        Dim insertReturnValue As Object
-        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
-        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
-            If parentIdNo <> 0 Then
-                For Each row As DataRow In insertTable.Rows
-                    row.Item(parentIdFieldName) = parentIdNo
-                Next
-            End If
-            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
-            If insertReturnValue >= 0 Then
-                retVal = updateReturnValue + insertReturnValue
-            Else
-                retVal = insertReturnValue
-            End If
-        Else
-            retVal = updateReturnValue
-        End If
-        Return retVal
-    End Function
-
-    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
-        Dim retVal As Integer
-        Dim updateReturnValue As Object
-        Dim insertReturnValue As Object
-        Dim parentIdNo As Integer
-        If AddMode Then
-            parentIdNo = passedValue
-        Else
-            parentIdNo = CallByName(View, IdFieldName, CallType.Get)
-        End If
-        updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
-        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
-            If passedValue <> 0 Then
-                For Each row As DataRow In insertTable.Rows
-                    row.Item(parentIdFieldName) = parentIdNo
-                Next
-            End If
-            insertReturnValue = childDataModel.InsertTvp(insertTable)
-            If insertReturnValue >= 0 Then
-                retVal = updateReturnValue + insertReturnValue
-            Else
-                retVal = insertReturnValue
-            End If
-        Else
-            retVal = updateReturnValue
-        End If
-        Return retVal
-    End Function
-
     Public Overridable Sub Display(idNo As Int32)
         '
     End Sub
@@ -428,6 +395,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return idNoOfFoundRecord
     End Function
 
+    Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
+        Dim retValue = Model.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption(description)
+            Dim groupSetting As String = group
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
+        End If
+        Return retValue
+    End Function
+
     Public Function GetBizObjectErrors() As List(Of String)
         Return Model.GetBizObjectErrors()
     End Function
@@ -435,6 +413,29 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     'Public Shared SecurityModel As New Model
     Public Function GetBizObjectRules()
         Return Model.GetBizObjectRules()
+    End Function
+
+    Public Function GetControlSecurityIdNo(searchValue As String) As String
+        Try
+            Return Model.GetControlSecurityIdNo(searchValue)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function GetDepartmentUseSetting()
+        Dim retValue = Model.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
+            Dim groupSetting As String = "Company"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
+        End If
+        If retValue = "0" Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
     Public Function GetEnumList(Of TE)()
@@ -452,6 +453,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             dataList.Add(data)
         Next
         Return dataList
+    End Function
+
+    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
+        Try
+            Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
@@ -516,12 +525,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    'Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-    '                                             returnFieldName As String) As T _
-    '    Implements IModel.GetRecordFieldWithKeyG
-    '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
-    'End Function
-
     Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
                                           returnFieldName As String) _
         As String
@@ -532,14 +535,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    'Public Function GetMaxValueFiltered(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
-    '    Try
-    '        Return Model.GetMaxValueFiltered(searchFieldName, cTableName, returnFieldName, filter)
-    '    Catch ex As Exception
-    '        Return Nothing
-    '    End Try
-    'End Function
-
     Public Function GetRecordFieldWithKeyG(Of TT)(searchValue As String, cTableName As String, searchFieldName As String, returnFieldName As String) As TT
         Try
             Return Model.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
@@ -548,6 +543,18 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    'Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
+    '                                             returnFieldName As String) As T _
+    '    Implements IModel.GetRecordFieldWithKeyG
+    '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
+    'End Function
+    'Public Function GetMaxValueFiltered(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
+    '    Try
+    '        Return Model.GetMaxValueFiltered(searchFieldName, cTableName, returnFieldName, filter)
+    '    Catch ex As Exception
+    '        Return Nothing
+    '    End Try
+    'End Function
     Public Function GetRecordPosition(idNo As Int32)
         Try
             Return Model.GetRecordPosition(TableName, idNo) + 1
@@ -556,12 +563,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
-        Try
-            Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
-        Catch ex As Exception
+    Public Function GetRevCostCenterUseSetting()
+        Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Departments")
+            Dim groupSetting As String = "Company"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
-        End Try
+        End If
+        If retValue = "0" Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
     Public Function GetSecurityGroupList(Optional ByVal sortKey As String = "SecurityGroupName")
@@ -636,6 +650,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                                       {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
+    End Function
+
+    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+        Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+    End Function
+
+    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
+        Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
     Public Overridable Sub GoAddRecord()
@@ -747,6 +769,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
+    Public Overridable Sub GoPrintRecord()
+
+    End Sub
+
     Public Sub GoQuit()
         If OkToMove() Then
             If Ea IsNot Nothing Then
@@ -784,8 +810,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Overridable Sub GoPrintRecord()
-
+    Public Sub GoTranslate()
+        'Dim frm As New TranslationTableManager()
+        'frm.FormIdNoToTranslate = FormIdNo
+        'frm.AppDataDAC = AppDataDAC
+        'frm.TranslatorDAC = TranslatorDAC
+        'frm.Show()
     End Sub
 
     Public Sub GoUndoChanges()
@@ -811,49 +841,12 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    'Public Sub MakeDefaultValues()
-    '    For Each item In TableDefaultFieldValues
-    '        Select Case item.DataType
-    '            Case DataTypeSelection.StringType
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.CharType
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.IntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
-    '            Case DataTypeSelection.BooleanType
-    '                CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
-    '            Case DataTypeSelection.SingleType
-    '                CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
-    '            Case DataTypeSelection.DoubleType
-    '                CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
-    '            Case DataTypeSelection.DecimalType
-    '                CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
-    '            Case DataTypeSelection.LongType
-    '                CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
-    '            Case DataTypeSelection.DateType
-    '                If item.DefaultValue = "today" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, Today())
-    '                ElseIf item.DefaultValue = "yesterday" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
-    '                ElseIf item.DefaultValue = "tomorrow" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
-    '                Else
-    '                    CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
-    '                End If
-    '            Case DataTypeSelection.ShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
-    '            Case DataTypeSelection.UIntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
-    '            Case DataTypeSelection.ULongType
-    '                CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
-    '            Case DataTypeSelection.UShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
-    '            Case Else
-    '                MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
-    '        End Select
-    '    Next item
-    '    Return
-    'End Sub
+    Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
+        If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
+            Return False
+        End If
+        Return True
+    End Function
 
     Public Function MakeEnumComboList(Of TE)()
         Dim dataList As New List(Of ClassesLibrary.LookupData)
@@ -867,27 +860,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Next
         Return dataList
     End Function
-
-    'Public Function MakeEnumComboList(Of TE)()
-    '    If EnumConverter Is Nothing Then
-    '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-    '    End If
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-    '    'Dim enumValues = [Enum].GetValues(GetType(TE))
-    '    'Dim x As Object
-    '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData
-    '        'dim code As String
-    '        data.IdNo = CInt(c)
-    '        'code = GlobalFunctions.GetDescription(c,"")
-    '        data.Code = GetEnumCode(c)
-    '        'x = Adapter.GetEnumDescription(c)
-    '        'data.Code = Adaptor.GetEnumDescription(c)
-    '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-    '        dataList.Add(data)
-    '    Next
-    '    Return dataList
-    'End Function
 
     Public Overridable Function OkToMove() As Boolean
         Dim retValue As Boolean = False
@@ -944,6 +916,69 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
+    'Public Sub MakeDefaultValues()
+    '    For Each item In TableDefaultFieldValues
+    '        Select Case item.DataType
+    '            Case DataTypeSelection.StringType
+    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+    '            Case DataTypeSelection.CharType
+    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+    '            Case DataTypeSelection.IntegerType
+    '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
+    '            Case DataTypeSelection.BooleanType
+    '                CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
+    '            Case DataTypeSelection.SingleType
+    '                CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
+    '            Case DataTypeSelection.DoubleType
+    '                CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
+    '            Case DataTypeSelection.DecimalType
+    '                CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
+    '            Case DataTypeSelection.LongType
+    '                CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
+    '            Case DataTypeSelection.DateType
+    '                If item.DefaultValue = "today" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, Today())
+    '                ElseIf item.DefaultValue = "yesterday" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
+    '                ElseIf item.DefaultValue = "tomorrow" Then
+    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
+    '                Else
+    '                    CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
+    '                End If
+    '            Case DataTypeSelection.ShortType
+    '                CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
+    '            Case DataTypeSelection.UIntegerType
+    '                CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
+    '            Case DataTypeSelection.ULongType
+    '                CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
+    '            Case DataTypeSelection.UShortType
+    '                CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
+    '            Case Else
+    '                MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
+    '        End Select
+    '    Next item
+    '    Return
+    'End Sub
+    'Public Function MakeEnumComboList(Of TE)()
+    '    If EnumConverter Is Nothing Then
+    '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+    '    End If
+    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    'Dim enumValues = [Enum].GetValues(GetType(TE))
+    '    'Dim x As Object
+    '    For Each c In [Enum].GetValues(GetType(TE))
+    '        Dim data As New ClassesLibrary.LookupData
+    '        'dim code As String
+    '        data.IdNo = CInt(c)
+    '        'code = GlobalFunctions.GetDescription(c,"")
+    '        data.Code = GetEnumCode(c)
+    '        'x = Adapter.GetEnumDescription(c)
+    '        'data.Code = Adaptor.GetEnumDescription(c)
+    '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
+    '        dataList.Add(data)
+    '    Next
+    '    Return dataList
+    'End Function
     Public Sub OnEventHandler(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
         Select Case e.ClickedButton
             Case ButtonClicked.First
@@ -973,14 +1008,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Case ButtonClicked.Translate
                 GoTranslate()
         End Select
-    End Sub
-
-    Public Sub GoTranslate()
-        'Dim frm As New TranslationTableManager()
-        'frm.FormIdNoToTranslate = FormIdNo
-        'frm.AppDataDAC = AppDataDAC
-        'frm.TranslatorDAC = TranslatorDAC
-        'frm.Show()
     End Sub
 
     Public Overridable Function Save()
@@ -1099,6 +1126,21 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
+    Public Function UsePayGroups()
+        Dim retValue = Model.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
+        If retValue Is Nothing Then
+            Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+            Dim groupSetting As String = "Payroll"
+            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Return Nothing
+        End If
+        If retValue = "1" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Protected Overridable Function AdditionalChangesMadeCheck()
         Return False
     End Function
@@ -1115,41 +1157,24 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return 0
     End Function
 
-    Private Sub ProcessLookupFields()
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = LookUpDisplayName Then
-                LookUpSortExpression = LookUpDisplayNameArabic
-            End If
-            dFieldName = LookUpDisplayNameArabic
-        Else
-            dFieldName = LookUpDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
-    End Sub
+    Protected Function GetFilteredLookupByCodeName()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    End Function
 
-    Protected Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = pDisplayName Then
-                LookUpSortExpression = pDisplayNameArabic
-            End If
-            dFieldName = pDisplayNameArabic
-        Else
-            dFieldName = pDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
+    Protected Function GetFilteredLookupByName()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    End Function
+
+    Protected Function GetFilteredLookupByNameCode()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetLookupByCodeName()
         ProcessLookupFields()
         Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetFilteredLookupByCodeName(filter As String)
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
     End Function
 
     Protected Function GetLookupByName(Optional filter As String = Nothing)
@@ -1166,29 +1191,28 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetLookupFilteredData()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetFilteredLookupByCodeName()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
     Protected Function GetLookupByNameFiltered()
         ProcessLookupFields()
         Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetTableList()
-        ProcessLookupFields()
-        Return Model.GetRecords(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
+    Protected Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = pDisplayName Then
+                LookUpSortExpression = pDisplayNameArabic
+            End If
+            dFieldName = pDisplayNameArabic
+        Else
+            dFieldName = pDisplayName
+        End If
+        LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
+        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetTableListFiltered()
+    Protected Function GetLookupFilteredData()
         ProcessLookupFields()
-        Return Model.GetFilteredRecords(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
@@ -1253,8 +1277,101 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return translatedField
     End Function
 
+    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
+        Dim retVal As Integer
+        Dim updateReturnValue As Object
+        Dim insertReturnValue As Object
+        Dim parentIdNo As Integer
+        If AddMode Then
+            parentIdNo = passedValue
+        Else
+            parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+        End If
+        updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
+        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+            If passedValue <> 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
+                Next
+            End If
+            insertReturnValue = childDataModel.InsertTvp(insertTable)
+            If insertReturnValue >= 0 Then
+                retVal = updateReturnValue + insertReturnValue
+            Else
+                retVal = insertReturnValue
+            End If
+        Else
+            retVal = updateReturnValue
+        End If
+        Return retVal
+    End Function
+
+    Protected Function UpdateDataTables(updateTable As DataTable, insertTable As DataTable, parentIdNo As Integer, parentIdFieldName As String) As Integer
+        Dim retVal As Integer
+        Dim updateReturnValue As Object
+        Dim insertReturnValue As Object
+        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+            If parentIdNo <> 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
+                Next
+            End If
+            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
+            If insertReturnValue >= 0 Then
+                retVal = updateReturnValue + insertReturnValue
+            Else
+                retVal = insertReturnValue
+            End If
+        Else
+            retVal = updateReturnValue
+        End If
+        Return retVal
+    End Function
     Protected Overridable Function UpdateRecord(record As TM) As Integer
         Return Model.UpdateRecord(record)
+    End Function
+
+    'Public Sub OnBeforeEdit() Handles BeforeEdit()
+    '    Dim type As Type = View.GetType
+    '    If type.GetProperty("Posted") IsNot Nothing Then
+    '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
+    '        If cPosted Then
+    '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
+    '            CancelEdit = True
+    '        End If
+    '    End If
+    'End Sub
+    Protected Function ViewToDataTables(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
+                                      ByVal includeFilter As Predicate(Of Object), ByVal Optional idNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
+        If insertTable IsNot Nothing Then
+            insertTable.Clear()
+        End If
+        If updateTable IsNot Nothing Then
+            updateTable.Clear()
+        End If
+        Dim nRowCount As Int16 = 1
+        Dim workRow As DataRow = Nothing
+        For Each item In myView
+            If includeFilter.Invoke(item) Then
+                Dim idNo As Integer = CallByName(item, idNoFieldName, CallType.Get)
+                If idNo <= 0 Then
+                    workRow = insertTable.NewRow()
+                Else
+                    workRow = updateTable.NewRow()
+                    workRow(idNoFieldName) = idNo
+                End If
+                workRow(sequenceFieldName) = nRowCount
+                fillSub.Invoke(item, idNo, workRow)
+                If idNo <= 0 Then
+                    insertTable.Rows.Add(workRow)
+                Else
+                    updateTable.Rows.Add(workRow)
+                End If
+                nRowCount += 1
+            End If
+        Next
+        Return workRow
     End Function
 
     Private Function InitiateSave() As Integer
@@ -1307,13 +1424,18 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
-        If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
-            Return False
+    Private Sub ProcessLookupFields()
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = LookUpDisplayName Then
+                LookUpSortExpression = LookUpDisplayNameArabic
+            End If
+            dFieldName = LookUpDisplayNameArabic
+        Else
+            dFieldName = LookUpDisplayName
         End If
-        Return True
-    End Function
-
+        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
+    End Sub
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
         Try
@@ -1330,143 +1452,4 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
         Return retValue
     End Function
-
-    Public Function GetControlSecurityIdNo(searchValue As String) As String
-        Try
-            Return Model.GetControlSecurityIdNo(searchValue)
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
-
-    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
-        Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
-    End Function
-
-    Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
-        Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
-    End Function
-
-    Public Function GetDepartmentUseSetting()
-        Dim retValue = Model.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
-        If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
-            Dim groupSetting As String = "Company"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
-            Return Nothing
-        End If
-        If retValue = "0" Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
-        Dim retValue = Model.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
-        If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption(description)
-            Dim groupSetting As String = group
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
-            Return Nothing
-        End If
-        Return retValue
-    End Function
-
-    Public Function GetRevCostCenterUseSetting()
-        Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
-        If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Departments")
-            Dim groupSetting As String = "Company"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
-            Return Nothing
-        End If
-        If retValue = "0" Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Public Function UsePayGroups()
-        Dim retValue = Model.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
-        If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
-            Dim groupSetting As String = "Payroll"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
-            Return Nothing
-        End If
-        If retValue = "1" Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    'Public Sub OnBeforeEdit() Handles BeforeEdit()
-    '    Dim type As Type = View.GetType
-    '    If type.GetProperty("Posted") IsNot Nothing Then
-    '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
-    '        If cPosted Then
-    '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-    '            CancelEdit = True
-    '        End If
-    '    End If
-    'End Sub
-
-    Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
-        For i = 0 To rowColumns.GetLength(0) - 1
-            dataTable.Columns.Add(rowColumns(i, 0), rowColumns(i, 1))
-        Next
-    End Sub
-
-    Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
-        Dim retValue As DialogResult
-        Dim dateField As String = Messaging.TranslateCaption(text)
-        Dim startDateStr As String = startDate.ToShortDateString()
-        Dim endDateStr As String = endDate.ToShortDateString()
-        If targetDate < startDate Or targetDate > endDate Then
-            Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-            Messaging.ShowParametrizedMessage(True, "MsgInvalidDate", variables)
-            retValue = DialogResult.No
-        Else
-            retValue = DialogResult.Yes
-        End If
-        Return retValue
-    End Function
-
-    Delegate Sub FillDataFunc(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-
-    Protected Function ViewToDataTables(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
-                                      ByVal includeFilter As Predicate(Of Object), ByVal Optional idNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
-        If insertTable IsNot Nothing Then
-            insertTable.Clear()
-        End If
-        If updateTable IsNot Nothing Then
-            updateTable.Clear()
-        End If
-        Dim nRowCount As Int16 = 1
-        Dim workRow As DataRow = Nothing
-        For Each item In myView
-            If includeFilter.Invoke(item) Then
-                Dim idNo As Integer = CallByName(item, idNoFieldName, CallType.Get)
-                If idNo <= 0 Then
-                    workRow = insertTable.NewRow()
-                Else
-                    workRow = updateTable.NewRow()
-                    workRow(idNoFieldName) = idNo
-                End If
-                workRow(sequenceFieldName) = nRowCount
-                fillSub.Invoke(item, idNo, workRow)
-                If idNo <= 0 Then
-                    insertTable.Rows.Add(workRow)
-                Else
-                    updateTable.Rows.Add(workRow)
-                End If
-                nRowCount += 1
-            End If
-        Next
-        Return workRow
-    End Function
-
 End Class

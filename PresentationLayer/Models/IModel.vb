@@ -17,71 +17,49 @@ Public Interface IModel
 
     Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer
 
-    Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) _
-        As Integer
+    Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer
 
     Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 
     Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
 
-    Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.HLookupData)
+    Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.HLookupData)
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData)
+    Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData)
+    Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData)
+    Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String,
-                                         ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String,
-                                         ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+
+    Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function GetRecordById(Of TM As New)(idNo As Int32) As TM
 
-    'Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
-
     Function GetRecordCount(tableName As String) As Integer
 
-    Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
-                                    Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
+    Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
-    Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
-                                   returnFieldName As String) As String
+    Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
-    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-                                   returnFieldName As String) As T
+    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
 
-    Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
-                                    searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
-        As String
+    Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
 
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
-    Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
-        As List(Of ClassesLibrary.LookupData)
+    Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    'Function GetRecords2Columns(tableName As String, sortKey As String, ParamArray fields() As String) _
-    '    As List(Of ClassesLibrary.LookupData)
+    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
-    'Function GetRecords2ColumnsFiltered(tableName As String, sortKey As String, filterKey As String,
-    '                                    ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
-        As Integer
-
-    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String,
-                                ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
-
-    Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) _
-        As List(Of TM)
+    Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
@@ -89,10 +67,7 @@ Public Interface IModel
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
-    'Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
-
-    Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object,
-                              Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
+    Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 
     Function InsertTvp(dtTable As DataTable) As Integer
 
