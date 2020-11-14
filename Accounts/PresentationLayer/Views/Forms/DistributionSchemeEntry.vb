@@ -139,8 +139,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
-            '_revCostCenterByName = PresenterObj.GetRevCostCenterListByName()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

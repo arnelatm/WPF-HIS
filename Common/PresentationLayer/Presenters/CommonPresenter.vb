@@ -26,11 +26,10 @@ Namespace PresentationLayer.Presenters
         Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-            LookUpTableToGet = "Chart"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "AccountName"
-            LookUpDisplayNameArabic = "AccountNameAra"
-            LookUpDisplayCode = "AccountCode"
+            ComposeLookupParameters("Chart", "Account")
+            If sortKey IsNot Nothing Then
+                LookUpSortExpression = sortKey
+            End If
             Dim values = accountType.Split(",")
             LookUpFilterKey = ""
             For Each account In values
@@ -42,190 +41,45 @@ Namespace PresentationLayer.Presenters
             Return GetTableListFiltered()
         End Function
 
-        Public Function GetBankList(Optional ByVal sortKey As String = "BankName")
-            LookUpTableToGet = "Bank"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "BankName"
-            LookUpDisplayNameArabic = "BankNameAra"
-            LookUpDisplayCode = "BankCode"
-            Return GetLookupByNameCode()
-        End Function
-
-        Public Function GetChartList(Optional ByVal sortKey As String = "AccountName")
-            LookUpTableToGet = "Chart"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "AccountName"
-            LookUpDisplayNameArabic = "AccountNameAra"
-            LookUpDisplayCode = "AccountCode"
-            Return GetLookupByCodeName()
-        End Function
-
-        Public Function GetCountryList(Optional ByVal sortKey As String = "CountryName")
-            LookUpTableToGet = "Country"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "CountryName"
-            LookUpDisplayNameArabic = "CountryNameAra"
-            LookUpDisplayCode = "CountryCode"
-            Return GetLookupByNameCode()
-        End Function
-
-        Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
-            Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
-        End Function
-
-        Public Function GetCustomerListByCode(Optional ByVal sortKey As String = "CustomerCode")
-            LookUpTableToGet = "Customer"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "CustomerName"
-            LookUpDisplayNameArabic = "CustomerNameAra"
-            LookUpDisplayCode = "CustomerCode"
-            Return GetLookupByCodeName()
-        End Function
-
-        Public Function GetCustomerListByName(Optional ByVal sortKey As String = "CustomerName")
-            LookUpTableToGet = "Customer"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "CustomerName"
-            LookUpDisplayNameArabic = "CustomerNameAra"
-            LookUpDisplayCode = "CustomerCode"
-            Return GetLookupByNameCode()
-        End Function
-
-        'Public Function GetDepartmentList(Optional ByVal sortKey As String = "DepartmentName")
-        '    LookUpTableToGet = "Department"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "DepartmentName"
-        '    LookUpDisplayNameArabic = "DepartmentNameAra"
-        '    LookUpDisplayCode = "DepartmentCode"
-        '    Return GetTableList()
-        'End Function
-
-        'Public Function GetDepartmentListByName(Optional ByVal sortKey As String = "DepartmentName")
-        '    LookUpTableToGet = "Department"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "DepartmentName"
-        '    LookUpDisplayNameArabic = "DepartmentNameAra"
-        '    LookUpDisplayCode = "DepartmentCode"
-        '    Return GetLookupByName()
-        'End Function
-
-        'Public Function GetDesignationList(Optional ByVal sortKey As String = "DesignationName")
-        '    LookUpTableToGet = "Designation"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "DesignationName"
-        '    LookUpDisplayNameArabic = "DesignationNameAra"
-        '    LookUpDisplayCode = "DesignationCode"
-        '    Return GetTableList()
+        'Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
+        '    Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
         'End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
-            LookUpTableToGet = "Chart"
+            ComposeLookupParameters("Chart", "AccountName")
             LookUpSortExpression = sortKey
-            LookUpDisplayName = "AccountName"
-            LookUpDisplayNameArabic = "AccountNameAra"
-            LookUpDisplayCode = "AccountCode"
             LookUpFilterKey = "DetailAccount=1"
             Return GetLookupFilteredData()
         End Function
 
-        Public Function GetDetailAccountListByCode(Optional ByVal sortKey As String = "AccountCode")
-            LookUpTableToGet = "Chart"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "AccountName"
-            LookUpDisplayNameArabic = "AccountNameAra"
-            LookUpDisplayCode = "AccountCode"
-            LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupByCodeNameFiltered()
-        End Function
+        'Public Function GetDetailAccountListByName(Optional ByVal sortKey As String = "AccountName")
+        '    LookUpTableToGet = "Chart"
+        '    LookUpSortExpression = sortKey
+        '    LookUpDisplayName = "AccountName"
+        '    LookUpDisplayNameArabic = "AccountNameAra"
+        '    LookUpDisplayCode = "AccountCode"
+        '    LookUpFilterKey = "DetailAccount=1"
+        '    Return GetFilteredLookupByName()
+        'End Function
 
-        Public Function GetDetailAccountListByName(Optional ByVal sortKey As String = "AccountName")
-            LookUpTableToGet = "Chart"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "AccountName"
-            LookUpDisplayNameArabic = "AccountNameAra"
-            LookUpDisplayCode = "AccountCode"
-            LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupByNameFiltered()
-        End Function
-
-        Public Function GetEmployeeListByCode(Optional ByVal sortKey As String = "EmployeeName")
-            LookUpTableToGet = "Employee"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "EmployeeName"
-            LookUpDisplayNameArabic = "EmployeeNameAra"
-            LookUpDisplayCode = "EmployeeCode"
+        Public Function GetListByCodeName(listName As String)
+            ComposeLookupParameters(listName)
             Return GetLookupByCodeName()
         End Function
 
-        Public Function GetEmployeeListByName(Optional ByVal sortKey As String = "EmployeeName")
-            LookUpTableToGet = "Employee"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "EmployeeName"
-            LookUpDisplayNameArabic = "EmployeeNameAra"
-            LookUpDisplayCode = "EmployeeCode"
-            Return GetLookupByNameCode()
-        End Function
-
-        'Public Function GetFilteredListByCode(listName As String, filter As String)
-        '    LookUpTableToGet = listName
-        '    LookUpDisplayName = listName + "Name"
-        '    LookUpSortExpression = LookUpDisplayName
-        '    LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-        '    LookUpDisplayCode = listName + "Code"
-        '    Return GetLookupByCodeName()
-        'End Function
-
-        Public Function GetListByCodeName(listName As String, Optional filter As String = Nothing)
-            LookUpTableToGet = listName
-            LookUpDisplayName = listName + "Name"
-            LookUpSortExpression = LookUpDisplayName
-            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = listName + "Code"
-            Return GetLookupByCodeName(filter)
+        Public Function GetFilteredListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
+            ComposeLookupParameters(listName)
+            Return GetFilteredLookupByCodeName(filter)
         End Function
 
         Public Function GetListByName(listName As String, Optional filter As String = Nothing)
-            LookUpTableToGet = listName
-            LookUpDisplayName = listName + "Name"
-            LookUpSortExpression = LookUpDisplayName
-            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = listName + "Code"
+            ComposeLookupParameters(listName)
             Return GetLookupByName(filter)
         End Function
 
         Public Function GetListByNameCode(listName As String, Optional filter As String = Nothing)
-            LookUpTableToGet = listName
-            LookUpDisplayName = listName + "Name"
-            LookUpSortExpression = LookUpDisplayName
-            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = listName + "Code"
+            ComposeLookupParameters(listName)
             Return GetLookupByNameCode(filter)
-        End Function
-        Public Function GetPayGroupList(Optional ByVal sortKey As String = "PayGroupName")
-            LookUpTableToGet = "PayGroup"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "PayGroupName"
-            LookUpDisplayNameArabic = "PayGroupNameAra"
-            LookUpDisplayCode = "PayGroupCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetPayGroupListByCode(Optional ByVal sortKey As String = "PayGroupCode")
-            LookUpTableToGet = "PayGroup"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "PayGroupName"
-            LookUpDisplayNameArabic = "PayGroupNameAra"
-            LookUpDisplayCode = "PayGroupCode"
-            Return GetLookupByCodeName()
-        End Function
-
-        Public Function GetProductCategoryList(Optional ByVal sortKey As String = "ProductCategoryCode")
-            LookUpTableToGet = "ProductCategory"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "ProductCategoryName"
-            LookUpDisplayNameArabic = "ProductCategoryNameAra"
-            LookUpDisplayCode = "ProductCategoryCode"
-            Return GetLookupByCodeName()
         End Function
 
         Public Function GetRecords(ByVal pLookUpTableToGet As String, ByVal pDisplayName As String, ByVal pDisplayCode As String, Optional ByVal sortKey As String = "IdNo")
@@ -237,59 +91,16 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByCodeName()
         End Function
 
-        Public Function GetRevCostCenterList(Optional ByVal sortKey As String = "RevCostCenterName")
-            LookUpTableToGet = "RevCostCenter"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "RevCostCenterName"
-            LookUpDisplayNameArabic = "RevCostCenterNameAra"
-            LookUpDisplayCode = "RevCostCenterCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetRevCostCenterListByCode(Optional ByVal sortKey As String = "RevCostCenterCode")
-            LookUpTableToGet = "RevCostCenter"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "RevCostCenterName"
-            LookUpDisplayNameArabic = "RevCostCenterNameAra"
-            LookUpDisplayCode = "RevCostCenterCode"
-            Return GetLookupByCodeName()
-        End Function
-
-        Public Function GetRevCostCenterListByName(Optional ByVal sortKey As String = "RevCostCenterName")
-            LookUpTableToGet = "RevCostCenter"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "RevCostCenterName"
-            LookUpDisplayNameArabic = "RevCostCenterNameAra"
-            LookUpDisplayCode = "RevCostCenterCode"
-            Return GetLookupByName()
-        End Function
-
-        Public Function GetRevenueGroupList(Optional ByVal sortKey As String = "RevenueGroupName")
-            LookUpTableToGet = "RevenueGroup"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "RevenueGroupName"
-            LookUpDisplayNameArabic = "RevenueGroupNameAra"
-            LookUpDisplayCode = "RevenueGroupCode"
-            Return GetTableList()
-        End Function
-
-        Public Function GetSupplierListByCode(Optional ByVal sortKey As String = "SupplierCode")
-            LookUpTableToGet = "Supplier"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "SupplierName"
-            LookUpDisplayNameArabic = "SupplierNameAra"
-            LookUpDisplayCode = "SupplierCode"
-            Return GetLookupByCodeName()
-        End Function
-
-        Public Function GetSupplierListByName(Optional ByVal sortKey As String = "SupplierName")
-            LookUpTableToGet = "Supplier"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "SupplierName"
-            LookUpDisplayNameArabic = "SupplierNameAra"
-            LookUpDisplayCode = "SupplierCode"
-            Return GetLookupByNameCode()
-        End Function
+        Private Sub ComposeLookupParameters(tableName As String, Optional fieldName As String = Nothing)
+            If fieldName Is Nothing Then
+                fieldName = tableName
+            End If
+            LookUpTableToGet = tableName
+            LookUpDisplayName = fieldName + "Name"
+            LookUpSortExpression = LookUpDisplayName
+            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+            LookUpDisplayCode = fieldName + "Code"
+        End Sub
 
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()

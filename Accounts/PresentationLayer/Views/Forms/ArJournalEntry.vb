@@ -230,10 +230,10 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
-            _revCostCenterByCode = PresenterObj.GetRevCostCenterListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
+            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
             cboCustomerIdNo.BeginUpdate()
-            cboCustomerIdNo.DataSource = PresenterObj.GetCustomerListByCode()
+            cboCustomerIdNo.DataSource = PresenterObj.GetListByCodeName("Customer")
             cboCustomerIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)

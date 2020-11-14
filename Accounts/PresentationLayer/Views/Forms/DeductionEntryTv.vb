@@ -190,7 +190,7 @@ Namespace PresentationLayer.Views.Forms
             cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetListByCodeName("Deduction")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
-            _accountsByCode = PresenterObj.GetDetailAccountListByCode()
+            _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetListByCodeName("PayGroup")
         End Sub
 

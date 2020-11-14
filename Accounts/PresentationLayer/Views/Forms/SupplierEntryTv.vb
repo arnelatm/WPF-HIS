@@ -370,8 +370,8 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cacCountryCode.DataSource = PresenterObj.GetCountryList()
-            cacBankIdNo.DataSource = PresenterObj.GetBankList()
+            cacCountryCode.DataSource = PresenterObj.GetListByCodeName("Country")
+            cacBankIdNo.DataSource = PresenterObj.GetListByCodeName("Bank")
             cacApAccountIdNo.DataSource = PresenterObj.GetChartList()
             cacExpAccountIdNo.DataSource = PresenterObj.GetChartList()
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)

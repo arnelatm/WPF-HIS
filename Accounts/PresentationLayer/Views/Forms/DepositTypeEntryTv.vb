@@ -128,9 +128,9 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode()
-            cboBankChargesAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode()
-            cboBankChargesVatAccountIdNo.DataSource = PresenterObj.GetDetailAccountListByCode()
+            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
+            cboBankChargesAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
+            cboBankChargesVatAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

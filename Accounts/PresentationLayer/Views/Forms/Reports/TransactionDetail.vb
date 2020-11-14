@@ -18,8 +18,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "Chart"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
-            cboStartAccountCode.DataSource = PresenterObj.GetDetailAccountListByCode()
-            cboEndAccountCode.DataSource = PresenterObj.GetDetailAccountListByCode()
+            cboStartAccountCode.DataSource = PresenterObj.GetDetailAccountList()
+            cboEndAccountCode.DataSource = PresenterObj.GetDetailAccountList()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
 

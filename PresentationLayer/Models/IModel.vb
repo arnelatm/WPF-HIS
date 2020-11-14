@@ -38,10 +38,10 @@ Public Interface IModel
     Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
         As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupByCodeNameFiltered(tableName As String, sortKey As String, filterKey As String,
+    Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupByNameFiltered(tableName As String, sortKey As String, filterKey As String,
+    Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String,
                                          ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function GetRecordById(Of TM As New)(idNo As Int32) As TM
@@ -77,7 +77,7 @@ Public Interface IModel
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
         As Integer
 
-    Function GetRecordsFiltered(tableName As String, sortKey As String, filterKey As String,
+    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String,
                                 ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) _

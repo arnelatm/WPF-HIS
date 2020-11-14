@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetPayGroupList()
+            cacParentIdNo.DataSource = PresenterObj.GetListByCodeName("PayGroup")
         End Sub
 
 #Region "Fields"
