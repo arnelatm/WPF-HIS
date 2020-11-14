@@ -16,15 +16,11 @@
 
     Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 
-    'Function GetFilteredRecords(filterExpression As String, sortKey As String) As Object
-
     Function GetControlSecurityIdNo(searchValue As String) As String
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
-
-    'Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String, returnFieldsArray As Array) As ArrayList
 
     Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ParamArray fieldNames() As String) As Object
 

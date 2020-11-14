@@ -38,7 +38,7 @@ Namespace PresentationLayer.Presenters
                 End If
                 LookUpFilterKey = LookUpFilterKey + "SpecialAccount = '" & account & "'"
             Next
-            Return GetTableListFiltered()
+            Return GetFilteredLookupByCodeName()
         End Function
 
         'Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
@@ -69,7 +69,8 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetFilteredListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
             ComposeLookupParameters(listName)
-            Return GetFilteredLookupByCodeName(filter)
+            LookUpFilterKey = filter
+            Return GetFilteredLookupByCodeName()
         End Function
 
         Public Function GetListByName(listName As String, Optional filter As String = Nothing)

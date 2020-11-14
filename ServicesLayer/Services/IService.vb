@@ -4,14 +4,11 @@ Namespace Services
 
     Public Interface IService
 
-        'Function GetRecordById(tableName As String, idNo As Int32)
         Function AddRecord(ByRef model As Object) As Integer
 
-        Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) _
-            As Boolean
+        Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
 
-        Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
-                                     searchFieldName1 As String, searchFieldName2 As String) As Integer
+        Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer
 
         Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
 
@@ -19,16 +16,13 @@ Namespace Services
 
         Function DelUpdateTvp(dtTable As DataTable, groupKey As Integer) As Integer
 
-        Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) _
-            As Integer
+        Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer
 
         Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 
         Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
 
         Function GetDefaultFieldValues(ByVal tableName As String)
-
-        'Function GetFilteredRecords(filterExpression As String, Optional ByRef sortKey As String = Nothing) As Object
 
         Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String
 
@@ -38,30 +32,23 @@ Namespace Services
 
         Function GetRecordCount(tableName As String) As Integer
 
-        Function GetRecordDateTimeStamp(idNo As Int32, tableName As String,
-                                        Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
+        Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
-        Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
-                                        searchFieldName1 As String, searchFieldName2 As String,
-                                        returnFieldName As String) As String
+        Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
 
-        Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
-                                       returnFieldName As String) As String
+        Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
-        Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-                                       returnFieldName As String) As T
+        Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
 
         Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
-        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) _
-            As Object
+        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
 
         Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object
 
-        Function GetRecordsWithIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) _
-            As List(Of TM)
+        Function GetRecordsWithIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
@@ -70,10 +57,8 @@ Namespace Services
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
         Function GetSqlValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
-
-        'Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
-        Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object,
-                                  Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
+        
+        Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 
         Function InsertTvp(dtTable As DataTable) As Integer
 
@@ -81,8 +66,7 @@ Namespace Services
 
         Function UpdateRecord(ByVal model) As Integer
 
-        Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, ByRef value As T) _
-            As Integer
+        Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, ByRef value As T) As Integer
 
         Function UpdateTvp(dtTable As DataTable) As Integer
 

@@ -128,19 +128,7 @@
             Return _db.Scalar(sql, params)
         End Function
 
-        'Public Function GetFilteredRecords(searchValue As String, tableName As String, searchField As String, returnFieldsArray As Array) As ArrayList _
-        '                                                                            Implements IBaseDao.GetFilteredRecords
-        '    Dim params() As Object = {"@SearchValue", searchValue}
-        '    Dim returnFields = ""
-        '    Dim retVal As ArrayList
-        '    Dim sql As String = " SELECT " & returnFields & " FROM " & tableName & " where " & searchField &
-        '                        " = @SearchValue "
-        '    retVal = _db.SqlRead(sql, params)
-        '    Return retVal
-        'End Function
-
-        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) _
-            Implements IBaseDao.GetFilteredRecords
+        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFilteredRecords
             Dim fields = String.Join(",", fieldNames)
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
@@ -310,8 +298,7 @@
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) _
-            Implements IBaseDao.GetRecords
+        Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
             If Strings.Right(fields, 1) = "," Then
                 fields = Strings.Left(fields, Len(fields) - 1)
