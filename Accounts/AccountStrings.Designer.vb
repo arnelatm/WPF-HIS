@@ -139,18 +139,18 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Child Account Found.
         '''</summary>
-        Friend Shared ReadOnly Property ChartEntryTv_OnBeforeSave_Child_Account_Found() As String
+        Friend Shared ReadOnly Property AccountEntryTv_OnBeforeSave_Child_Account_Found() As String
             Get
-                Return ResourceManager.GetString("ChartEntryTv_OnBeforeSave_Child_Account_Found", resourceCulture)
+                Return ResourceManager.GetString("AccountEntryTv_OnBeforeSave_Child_Account_Found", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Account with child account can not be made a Detail Account. See this account .
         '''</summary>
-        Friend Shared ReadOnly Property ChartEntryTv_OnBeforeSave_Child_Account_Found_Message() As String
+        Friend Shared ReadOnly Property AccountEntryTv_OnBeforeSave_Child_Account_Found_Message() As String
             Get
-                Return ResourceManager.GetString("ChartEntryTv_OnBeforeSave_Child_Account_Found_Message", resourceCulture)
+                Return ResourceManager.GetString("AccountEntryTv_OnBeforeSave_Child_Account_Found_Message", resourceCulture)
             End Get
         End Property
         

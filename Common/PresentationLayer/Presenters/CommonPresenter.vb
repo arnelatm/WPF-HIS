@@ -13,6 +13,7 @@ Namespace PresentationLayer.Presenters
         Inherits Presenter(Of T, TM)
 
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+
         Shared Sub New()
             CommonModel = New ModelCommon()
             ModelDefaultFieldValue = New ModelDefaultFieldValue
@@ -35,7 +36,7 @@ Namespace PresentationLayer.Presenters
         Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-            ComposeLookupParameters("Chart", "Account")
+            ComposeLookupParameters("Account")
             If sortKey IsNot Nothing Then
                 LookUpSortExpression = sortKey
             End If
@@ -51,7 +52,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
-            ComposeLookupParameters("Chart", "Account")
+            ComposeLookupParameters("Account")
             LookUpSortExpression = sortKey
             LookUpFilterKey = "DetailAccount=1"
             Return GetFilteredLookupByCodeName()
@@ -128,7 +129,7 @@ Namespace PresentationLayer.Presenters
                 Select Case item.DataType
                     Case DataTypeSelection.StringType
                         CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-                    Case DataTypeSelection.CharType
+                    Case DataTypeSelection.Accountype
                         CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
                     Case DataTypeSelection.IntegerType
                         CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
@@ -195,15 +196,12 @@ Namespace PresentationLayer.Presenters
             Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
         End Function
 
-        Private Sub ComposeLookupParameters(listName As String, Optional fieldName As String = Nothing)
-            If fieldName Is Nothing Then
-                fieldName = listName
-            End If
+        Private Sub ComposeLookupParameters(listName As String)
             LookUpTableToGet = listName
-            LookUpDisplayName = fieldName + "Name"
+            LookUpDisplayName = listName + "Name"
             LookUpSortExpression = LookUpDisplayName
             LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = fieldName + "Code"
+            LookUpDisplayCode = listName + "Code"
         End Sub
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit

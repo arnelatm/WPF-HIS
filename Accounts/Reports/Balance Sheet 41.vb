@@ -214,7 +214,7 @@ Public Class Balance_Sheet_41
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_ChartBalanceYear() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_AccountBalanceYear() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(3)
         End Get

@@ -198,7 +198,7 @@ Public Class General_Ledger_Detail_8
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_ChartBalanceYear() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_AccountBalanceYear() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(4)
         End Get
@@ -206,7 +206,7 @@ Public Class General_Ledger_Detail_8
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_BegChartAccountIdNo() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_BegAccountAccountIdNo() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(5)
         End Get
@@ -222,7 +222,7 @@ Public Class General_Ledger_Detail_8
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_EndChartAccountIdNo() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_EndAccountAccountIdNo() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(7)
         End Get

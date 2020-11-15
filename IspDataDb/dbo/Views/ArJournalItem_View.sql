@@ -24,7 +24,7 @@ SELECT  a.IdNo,
 		c.PayeeType, 
 		a.Sequence
 FROM    dbo.ArJournalItem a
-		LEFT OUTER JOIN dbo.Chart c
+		LEFT OUTER JOIN dbo.Account c
 		ON a.AccountIdNo = c.IDNo 
 		LEFT OUTER JOIN dbo.ArOpenInvoice o
 		ON a.IdNo = o.JournalItemIdNo AND o.JournalCode = 'AR'

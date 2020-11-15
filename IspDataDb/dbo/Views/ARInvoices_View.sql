@@ -28,7 +28,7 @@ CREATE VIEW [dbo].[ARInvoices_View]
   FROM [dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IDNo 
-  LEFT Outer Join [dbo].[Chart] c
+  LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
   where c.SpecialAccount='AR'
 )
@@ -45,7 +45,7 @@ UNION
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
-  LEFT Outer Join [dbo].[Chart] c
+  LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno 
   WHERE PayorType='A' AND B.UnApplied<>0 and (c.SpecialAccount='CA' OR c.SpecialAccount='AR')
 )
@@ -62,7 +62,7 @@ UNION
   FROM [dbo].[CheckDisbursementJournalItem] A
   LEFT OUTER JOIN dbo.CheckDisbursementJournal b
   on a.JournalIdNo = b.IDNo
-  LEFT Outer Join [dbo].[Chart] c
+  LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
   WHERE PaymentType='R' AND C.SpecialAccount='AR'
 )
@@ -79,7 +79,7 @@ UNION
   FROM [dbo].[CashDisbursementJournalItem] A
   LEFT OUTER JOIN dbo.CashDisbursementJournal b
   on a.JournalIdNo = b.IDNo
-  LEFT Outer Join [dbo].[Chart] c
+  LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
   WHERE PaymentType='R' AND c.SpecialAccount='AR'
 )
@@ -96,7 +96,7 @@ UNION
   FROM [dbo].[PettyCashJournalItem] A
   LEFT OUTER JOIN dbo.PettyCashJournal b
   on a.JournalIdNo = b.IDNo
-  LEFT Outer Join [dbo].[Chart] c
+  LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
   WHERE PaymentType='R' AND c.SpecialAccount='AR'
 )

@@ -2,15 +2,15 @@
 AS
 SELECT        dbo.CashDisbursementJournal.IdNo, dbo.CashDisbursementJournal.TransactionDate, dbo.CashDisbursementJournal.ReferenceNo, dbo.CashDisbursementJournal.Amount, dbo.CashDisbursementJournal.PayeeIdNo, 
                          dbo.CashDisbursementJournal.PaymentType, dbo.CashDisbursementJournal.PayeeName, dbo.CashDisbursementJournalItem.Sequence, dbo.CashDisbursementJournalItem.Debit, dbo.CashDisbursementJournalItem.Credit, 
-                         dbo.CashDisbursementJournalItem.RevCostCenterIdNo, dbo.CashDisbursementJournalItem.Notes, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Customer.CustomerCode, 
+                         dbo.CashDisbursementJournalItem.RevCostCenterIdNo, dbo.CashDisbursementJournalItem.Notes, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, dbo.Customer.CustomerCode, 
                          dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra, dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, 
                          dbo.Employee.EmployeeNameAra, dbo.RevCostCenter.RevCostCenterCode, dbo.RevCostCenter.RevCostCenterName, dbo.CashDisbursementJournal.Notes AS CdNote, dbo.BankAccount.BranchName, dbo.Bank.BankCode, 
                          dbo.Bank.BankName, dbo.Bank.BankNameAra
 FROM            dbo.BankAccount LEFT OUTER JOIN
                          dbo.Bank ON dbo.BankAccount.BankIdNo = dbo.Bank.IdNo RIGHT OUTER JOIN
                          dbo.CashDisbursementJournal ON dbo.BankAccount.AccountIdNo = dbo.CashDisbursementJournal.AccountIdNo LEFT OUTER JOIN
-                         dbo.Chart RIGHT OUTER JOIN
-                         dbo.CashDisbursementJournalItem ON dbo.Chart.IdNo = dbo.CashDisbursementJournalItem.AccountIdNo LEFT OUTER JOIN
+                         dbo.Account RIGHT OUTER JOIN
+                         dbo.CashDisbursementJournalItem ON dbo.Account.IdNo = dbo.CashDisbursementJournalItem.AccountIdNo LEFT OUTER JOIN
                          dbo.RevCostCenter ON dbo.CashDisbursementJournalItem.RevCostCenterIdNo = dbo.RevCostCenter.IDNo ON dbo.CashDisbursementJournal.IdNo = dbo.CashDisbursementJournalItem.JournalIdNo LEFT OUTER JOIN
                          dbo.Customer ON dbo.CashDisbursementJournal.PayeeIdNo = dbo.Customer.IdNo LEFT OUTER JOIN
                          dbo.Supplier ON dbo.CashDisbursementJournal.PayeeIdNo = dbo.Supplier.IdNo LEFT OUTER JOIN
@@ -175,7 +175,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 4
                Left = 528

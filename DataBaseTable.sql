@@ -8,7 +8,7 @@ INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (2, N'B
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (3, N'ProductCategory', N'CTG')
 GO
-INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (4, N'Chart', N'CHR')
+INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (4, N'Account', N'CHR')
 GO
 INSERT [dbo].[DataBaseTable] ([Id], [TableName], [TableNameCode]) VALUES (5, N'Department', N'DEP')
 GO

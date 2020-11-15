@@ -151,7 +151,7 @@ Namespace PresentationLayer.Presenters
                 Dim cPayeeType As String
                 Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
-                Dim chart As ChartModel
+                Dim Account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -159,8 +159,8 @@ Namespace PresentationLayer.Presenters
                     retValue = False
                 Else
                     For Each item In View.JournalItems
-                        chart = GetChart(item.AccountIdNo)
-                        specialAccount = chart.SpecialAccount
+                        Account = GetAccount(item.AccountIdNo)
+                        specialAccount = Account.SpecialAccount
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
@@ -173,7 +173,7 @@ Namespace PresentationLayer.Presenters
                             Messaging.Show(message, caption)
                             retValue = False
                         Else
-                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
+                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
                             If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Employee Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")

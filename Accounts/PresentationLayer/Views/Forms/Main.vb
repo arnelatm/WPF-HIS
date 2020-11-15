@@ -522,9 +522,9 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(CashReceiptJournalEntry)
         End Sub
 
-        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemChartOfAccounts.Click
-            ShowEntryForm(ChartEntryTv)
+        Private Sub AccountOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemAccountOfAccounts.Click
+            ShowEntryForm(AccountEntryTv)
         End Sub
 
         Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _

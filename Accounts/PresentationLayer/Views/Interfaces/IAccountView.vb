@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IChartView
+    Public Interface IAccountView
         Inherits IView
         Property AccountCode As String
         Property AccountGroup As String

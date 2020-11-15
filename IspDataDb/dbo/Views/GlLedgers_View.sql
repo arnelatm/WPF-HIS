@@ -28,7 +28,7 @@ CREATE VIEW [dbo].[GlLedgers_View]
   FROM [dbo].[GeneralJournalItem] a
   LEFT OUTER JOIN dbo.GeneralJournal b
   on a.JournalIdNo = b.IdNo
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -54,7 +54,7 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Supplier] c
   on b.SupplierIdNo = c.IdNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -80,7 +80,7 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Customer] c
   on b.CustomerIdNo = c.IdNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -106,7 +106,7 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.EmployeeIdNO = e.IdNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -150,7 +150,7 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -194,7 +194,7 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -242,7 +242,7 @@ UNION
   on b.PayorIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayorIdNo = e.IDNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -286,7 +286,7 @@ UNION
   on b.PayeeIdNo = s.IdNo 
   LEFT OUTER JOIN dbo.[Employee] e
   on b.PayeeIdNo = e.IDNo 
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
@@ -310,6 +310,6 @@ UNION
   FROM [dbo].[SalesJournalItem] a
   LEFT OUTER JOIN dbo.SalesJournal b
   on a.JournalIdNo = b.Idno
-  LEFT OUTER JOIN dbo.Chart ch
+  LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
 )

@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
             cboDeductionType.DataSource = PresenterObj.MakeEnumComboList(Of DeductionTypeSelection)
-            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountList()
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
             cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Deduction")

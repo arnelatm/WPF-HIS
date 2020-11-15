@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class IncomeStatement
 
         Public Property MainTableName As String
@@ -16,7 +17,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "Chart"
+            MainTableName = "Account"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
             _period = period
@@ -28,10 +29,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date
             Dim lastFiscalYearDate As Date
-            Dim chartBalanceYear As Integer
+            Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
 
             Select Case _period
                 Case "Y"
@@ -58,11 +59,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                     beginningDate = dtpBeginningDate.Value
             End Select
             If beginningDate < lastFiscalYearDate Then
-                chartBalanceYear = Year(beginningDate)
+                AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
             Else
-                chartBalanceYear = Year(lastFiscalYearDate)
-                begDataDate =  DateSerial(chartBalanceYear, 1, 1)
+                AccountBalanceYear = Year(lastFiscalYearDate)
+                begDataDate = DateSerial(AccountBalanceYear, 1, 1)
             End If
             Dim cForm As New ReportForm("Income Statement.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", language, "Language", _period, "Period")
             cForm.Show()
@@ -70,7 +71,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
-
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
@@ -111,10 +111,12 @@ Namespace PresentationLayer.Views.Forms.Reports
                     Text = "Income Statement for Custom Period"
                     lblEndDateCaption.Text = "Period Beginning Date:"
                     lblEndDateCaption.Text = "Period End Date:"
-                    
+
             End Select
             lblTitle.Text = Text
             dtpEndingDate.Value = endDate
         End Sub
+
     End Class
+
 End Namespace

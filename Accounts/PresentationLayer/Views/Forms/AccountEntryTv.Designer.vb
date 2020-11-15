@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class ChartEntryTv
+    Partial Class AccountEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -24,54 +24,54 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ChartEntryTv))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountEntryTv))
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-            Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtAccountCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblAccountCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtAccountName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblAccountName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.lblAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floDataDisplay.SuspendLayout()
-            Me.SuspendLayout()
-            '
-            'TreeViewTableName
-            '
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            '
-            'txtIdNo
-            '
-            Me.txtIdNo.BackColor = System.Drawing.Color.White
-            Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtIdNo.ComputedValue = False
-            Me.txtIdNo.CustomFormat = Nothing
+        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtAccountCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblAccountCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtAccountName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblAccountName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.lblAccountNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.floDataDisplay.SuspendLayout
+        Me.SuspendLayout
+        '
+        'TreeViewTableName
+        '
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        '
+        'txtIdNo
+        '
+        Me.txtIdNo.BackColor = System.Drawing.Color.White
+        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIdNo.ComputedValue = false
+        Me.txtIdNo.CustomFormat = Nothing
         Me.txtIdNo.DataBoundControl = true
         Me.txtIdNo.DisplayOnly = true
         Me.txtIdNo.EditingMode = true
@@ -398,6 +398,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkDetailAccount.ForeColor = System.Drawing.Color.Black
         Me.chkDetailAccount.LinkedLabel = Nothing
         Me.chkDetailAccount.Name = "chkDetailAccount"
+        Me.chkDetailAccount.NoLabel = true
         Me.chkDetailAccount.OldValue = Nothing
         Me.chkDetailAccount.UseVisualStyleBackColor = true
         '
@@ -421,6 +422,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkWithReconciliation.ForeColor = System.Drawing.Color.Black
         Me.chkWithReconciliation.LinkedLabel = Nothing
         Me.chkWithReconciliation.Name = "chkWithReconciliation"
+        Me.chkWithReconciliation.NoLabel = true
         Me.chkWithReconciliation.OldValue = Nothing
         Me.chkWithReconciliation.UseVisualStyleBackColor = false
         '
@@ -441,6 +443,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.LinkedLabel = Nothing
         Me.chkActive.Name = "chkActive"
+        Me.chkActive.NoLabel = true
         Me.chkActive.OldValue = Nothing
         Me.chkActive.UseVisualStyleBackColor = true
         '
@@ -554,11 +557,11 @@ Namespace PresentationLayer.Views.Forms
         Me.txtSortKey.TabStop = false
         Me.txtSortKey.ValueIsMandatory = true
         '
-        'ChartEntryTv
+        'AccountEntryTv
         '
         resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "ChartEntryTv"
+        Me.Name = "AccountEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

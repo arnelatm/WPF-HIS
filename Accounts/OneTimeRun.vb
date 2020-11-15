@@ -30,7 +30,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
         Messaging.AddMessage("MsgMemberCannotBeAParentToItself", "Sorry a member cannot be a parent to itself.", "Invalid Parent")
         Messaging.AddMessage("MsgNoChangesMadeNothingToSave", "No changes made or changes have equivalent values as the original values, nothing to save!", "Nothing to save.")
-        Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Chart of Accounts Entry and declare at least one Petty Cash Account!", "Error")
+        Messaging.AddMessage("MsgNoPettyCashAccount", "Sorry, you don't have a Petty Cash account. Please go to Account of Accounts Entry and declare at least one Petty Cash Account!", "Error")
         Messaging.AddMessage("MsgNumeric0to255Only", "The entered value for '<{FieldName}>' must be between 0-255. Reverting to previous Value.", "Invalid Entry")
         Messaging.AddMessage("MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
         Messaging.AddMessage("MsgOnlyNumbersAllowed", "The field '<{FieldName}>' must contain numbers only.", "Invalid Entry")

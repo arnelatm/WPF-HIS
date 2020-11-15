@@ -4,16 +4,16 @@ Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
-    ' Data access object for Chart
+    ' Data access object for Account
     ' ** DAO Pattern
 
-    Public Class ChartDao
+    Public Class AccountDao
         Inherits CommonDao
-        Implements IDaoAll(Of Chart), IDaoChart
+        Implements IDaoAll(Of Account), IDaoAccount
 
         Private Db As New Db()
 
-        Public Function GetRecordById(idNo) As Chart Implements IDaoAll(Of Chart).GetRecordById
+        Public Function GetRecordById(idNo) As Account Implements IDaoAll(Of Account).GetRecordById
             Dim sql As String =
                     "SELECT " &
                     "AccountCode," &
@@ -31,15 +31,15 @@ Namespace DataLayer.AdoNet
                     "SortKey," &
                     "SpecialAccount," &
                     "WithReconciliation" &
-                    " FROM [Chart_View]" &
+                    " FROM [Account_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim x = Db.Read(sql, Make, params).FirstOrDefault()
             Return x
         End Function
 
-        Public Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Chart) _
-            Implements IDaoChart.GetDetailAccounts
+        Public Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Account) _
+            Implements IDaoAccount.GetDetailAccounts
             If sortExpression Is Nothing Then
                 sortExpression = "AccountName"
             End If
@@ -60,29 +60,29 @@ Namespace DataLayer.AdoNet
                   "a.SortKey," &
                   "a.SpecialAccount," &
                   "a.WithReconciliation" &
-                  " from Chart_View as a" &
-                  " LEFT JOIN chart b" &
+                  " from Account_View as a" &
+                  " LEFT JOIN Account b" &
                   " ON a.IdNo = b.ParentIdNo" &
                   " WHERE b.IdNo IS NULL " &
                   " order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Chart) _
-            Implements IDaoAll(Of Chart).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Account) _
+            Implements IDaoAll(Of Account).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "AccountName Asc"
             End If
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, AccountCode, AccountName, AccountNameAra, AccountGroup, DetailAccount, NormalBalance, " &
                     " PayeeType, WithReconciliation, Active, Notes, LevelNumber, SortKey" &
-                    "   FROM [Chart_View] order by sortKey"
+                    "   FROM [Account_View] order by sortKey"
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef chart As Chart) As Integer Implements IDaoAll(Of Chart).UpdateRecord
+        Public Function UpdateRecord(ByRef Account As Account) As Integer Implements IDaoAll(Of Account).UpdateRecord
             Dim sql As String =
-                    "UPDATE [Chart] SET " &
+                    "UPDATE [Account] SET " &
                     "AccountCode = @AccountCode," &
                     "AccountGroup = @AccountGroup," &
                     "AccountName = @AccountName," &
@@ -96,12 +96,12 @@ Namespace DataLayer.AdoNet
                     "SpecialAccount = @SpecialAccount," &
                     "WithReconciliation = @WithReconciliation" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(chart))
+            Return Db.Update(sql, Take(Account))
         End Function
 
-        Public Function AddRecord(ByRef chart As Chart) As Integer Implements IDaoAll(Of Chart).AddRecord
+        Public Function AddRecord(ByRef Account As Account) As Integer Implements IDaoAll(Of Account).AddRecord
             Dim sql As String =
-                    "INSERT INTO [Chart] (" &
+                    "INSERT INTO [Account] (" &
                     "AccountCode," &
                     "AccountGroup," &
                     "AccountName," &
@@ -128,12 +128,12 @@ Namespace DataLayer.AdoNet
                     "@SpecialAccount," &
                     "@WithReconciliation" &
                     ")"
-            Return Db.Insert(sql, Take(chart))
+            Return Db.Insert(sql, Take(Account))
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, Chart) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, Account) =
                                     Function(reader) _
-            New Chart() With {
+            New Account() With {
             .AccountCode = Extensions.AsString(reader("AccountCode")),
             .AccountGroup = Extensions.AsString(reader("AccountGroup")),
             .AccountName = Extensions.AsString(reader("AccountName")),
@@ -151,23 +151,23 @@ Namespace DataLayer.AdoNet
             .WithReconciliation = Extensions.AsBool(reader("WithReconciliation"))
             }
 
-        Private Function Take(chart As Chart) As Object()
+        Private Function Take(Account As Account) As Object()
             Return New Object() {
-                                    "@AccountCode", chart.AccountCode,
-                                    "@AccountGroup", chart.AccountGroup,
-                                    "@AccountName", chart.AccountName,
-                                    "@AccountNameAra", chart.AccountNameAra,
-                                    "@Active", chart.Active,
-                                    "@DetailAccount", chart.DetailAccount,
-                                    "@IdNo", chart.IdNo,
-                                    "@LevelNumber", chart.LevelNumber,
-                                    "@NormalBalance", chart.NormalBalance,
-                                    "@Notes", chart.Notes,
-                                    "@ParentIdNo", chart.ParentIdNo,
-                                    "@PayeeType", chart.PayeeType,
-                                    "@SortKey", chart.SortKey,
-                                    "@SpecialAccount", chart.SpecialAccount,
-                                    "@WithReconciliation", chart.WithReconciliation
+                                    "@AccountCode", Account.AccountCode,
+                                    "@AccountGroup", Account.AccountGroup,
+                                    "@AccountName", Account.AccountName,
+                                    "@AccountNameAra", Account.AccountNameAra,
+                                    "@Active", Account.Active,
+                                    "@DetailAccount", Account.DetailAccount,
+                                    "@IdNo", Account.IdNo,
+                                    "@LevelNumber", Account.LevelNumber,
+                                    "@NormalBalance", Account.NormalBalance,
+                                    "@Notes", Account.Notes,
+                                    "@ParentIdNo", Account.ParentIdNo,
+                                    "@PayeeType", Account.PayeeType,
+                                    "@SortKey", Account.SortKey,
+                                    "@SpecialAccount", Account.SpecialAccount,
+                                    "@WithReconciliation", Account.WithReconciliation
                                 }
         End Function
 

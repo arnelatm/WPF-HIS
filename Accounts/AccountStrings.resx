@@ -141,11 +141,11 @@
     <value>No GeneralJournal entries found. Do you still want to save this entry?</value>
     <comment>Message to display if there is no GeneralJournal entries.</comment>
   </data>
-  <data name="ChartEntryTv_OnBeforeSave_Child_Account_Found" xml:space="preserve">
+  <data name="AccountEntryTv_OnBeforeSave_Child_Account_Found" xml:space="preserve">
     <value>Child Account Found</value>
     <comment>Caption for child account found message.</comment>
   </data>
-  <data name="ChartEntryTv_OnBeforeSave_Child_Account_Found_Message" xml:space="preserve">
+  <data name="AccountEntryTv_OnBeforeSave_Child_Account_Found_Message" xml:space="preserve">
     <value>Account with child account can not be made a Detail Account. See this account </value>
     <comment>Message to display if a child account has been found (save not allowed).</comment>
   </data>

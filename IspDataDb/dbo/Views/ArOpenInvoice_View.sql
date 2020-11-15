@@ -26,7 +26,7 @@ FROM        dbo.ArOpenInvoice a
 			ON d.IdNo = a.JournalItemIdNo AND a.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = d.JournalCode 
 			Left Join dbo.Customer cs
 			ON d.CustomerIdNo = cs.IdNo
-			Left Join dbo.Chart c	
+			Left Join dbo.Account c	
 			ON d.AccountIdNo = c.IDNo)
 
 GO

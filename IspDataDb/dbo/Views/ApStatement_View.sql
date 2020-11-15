@@ -4,10 +4,10 @@ CREATE VIEW [dbo].[ApStatement_View]
 AS
 SELECT        dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.IdNo, dbo.ApDetails_View.Sequence, dbo.ApDetails_View.JournalIdNo, dbo.ApDetails_View.AccountIdNo, dbo.ApDetails_View.Debit, dbo.ApDetails_View.Credit, 
                          dbo.ApDetails_View.RevCostCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
-                         dbo.ApDetails_View.TransactionType, dbo.Chart.SpecialAccount, dbo.APDetails_View.MainNote
+                         dbo.ApDetails_View.TransactionType, dbo.Account.SpecialAccount, dbo.APDetails_View.MainNote
 FROM            dbo.ApDetails_View INNER JOIN
-                         dbo.Chart ON dbo.ApDetails_View.AccountIdNo = dbo.Chart.IDNo
-WHERE        (dbo.Chart.SpecialAccount = 'AP')
+                         dbo.Account ON dbo.ApDetails_View.AccountIdNo = dbo.Account.IDNo
+WHERE        (dbo.Account.SpecialAccount = 'AP')
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -91,7 +91,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 6
                Left = 255

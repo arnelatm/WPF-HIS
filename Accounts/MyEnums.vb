@@ -43,7 +43,7 @@ Public Enum DatabaseTableSelection
     <EnumCode("BN")> Bank
     <EnumCode("BR")> Branch
     <EnumCode("PY")> PaymentType
-    <EnumCode("CH")> Chart
+    <EnumCode("CH")> Account
     <EnumCode("CT")> Country
     <EnumCode("CU")> Customer
     <EnumCode("DP")> Department

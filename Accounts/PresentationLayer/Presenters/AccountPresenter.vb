@@ -8,23 +8,23 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ChartPresenter
-        Inherits AccountsPresenter(Of IChartView, ChartModel)
+    Public Class AccountPresenter
+        Inherits AccountsPresenter(Of IAccountView, AccountModel)
 
-        Public ParentViewList As List(Of ChartModel)
+        Public ParentViewList As List(Of AccountModel)
 
-        Public Sub New(view As IChartView)
+        Public Sub New(view As IAccountView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("Chart")
-            TableName = "Chart_View"
+            ModelPresenter = New ModelAccounts("Account")
+            TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
             TreeViewSecondaryField = "AccountCode"
             TreeViewParentIdField = "ParentIdNo"
-            OriginalModel = New ChartModel()
-            DataModel = New ChartModel
-            TreeViewList = New List(Of ChartModel)
-            ParentViewList = New List(Of ChartModel)
+            OriginalModel = New AccountModel()
+            DataModel = New AccountModel
+            TreeViewList = New List(Of AccountModel)
+            ParentViewList = New List(Of AccountModel)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -33,8 +33,8 @@ Namespace PresentationLayer.Presenters
             If AccountHasChildren(idNo) Then
                 Return False
             Else
-                Dim parentAccount As ChartModel
-                parentAccount = ModelPresenter.GetRecordById(Of ChartModel)(parentIdNo)
+                Dim parentAccount As AccountModel
+                parentAccount = ModelPresenter.GetRecordById(Of AccountModel)(parentIdNo)
                 If parentAccount.AccountGroup Is Nothing Then
                     Return False
                 Else
@@ -49,7 +49,7 @@ Namespace PresentationLayer.Presenters
             'If idNo Is Nothing Then
             '    Return True
             'End If
-            'accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Chart", "IdNo", "AccountGroup")
+            'accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Account", "IdNo", "AccountGroup")
             'If accountGroup = "S" Then
             '    Return True
             'End If
@@ -60,13 +60,12 @@ Namespace PresentationLayer.Presenters
             If idNo Is Nothing Then
                 Return True
             End If
-            Return Model.CountRecordWithKey(idNo, "Chart", "ParentIdNo") > 0
+            Return Model.CountRecordWithKey(idNo, "Account", "ParentIdNo") > 0
         End Function
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
-            Return Model.GetRecordFieldWithKey(idNoToSearch, "Chart", "ParentIdNo", "AccountName")
+            Return Model.GetRecordFieldWithKey(idNoToSearch, "Account", "ParentIdNo", "AccountName")
         End Function
-
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -82,8 +81,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub ParentIdUpdated()
             If View.ParentIdNo IsNot Nothing Then
-                View.AccountGroup = GetFieldWithIdNo(View.ParentIdNo, "Chart", "AccountGroup")
-                View.LevelNumber = GetRecordFieldWithKeyG(Of Integer)(View.ParentIdNo, "Chart_View", "IdNo", "LevelNumber") + 1
+                View.AccountGroup = GetFieldWithIdNo(View.ParentIdNo, "Account", "AccountGroup")
+                View.LevelNumber = GetRecordFieldWithKeyG(Of Integer)(View.ParentIdNo, "Account_View", "IdNo", "LevelNumber") + 1
             End If
             If AccountHasChildren(View.IdNo) Then
                 View.DetailAccount = False
