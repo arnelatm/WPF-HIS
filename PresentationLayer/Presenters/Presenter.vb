@@ -44,6 +44,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _editMode As Boolean = False
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
+
     'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
 
@@ -243,6 +244,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Protected Shared Property Model As New Model()
 
     Protected Shared Property ModelTblColProp As IModelTblColProp
+
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 
         Dim myDomain As AppDomain = AppDomain.CurrentDomain
@@ -1191,12 +1193,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
     End Function
 
-    Protected Function GetLookupByNameFiltered()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
+    Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
             If LookUpSortExpression = pDisplayName Then
@@ -1208,11 +1205,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
         Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetLookupFilteredData()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
@@ -1328,6 +1320,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         Return retVal
     End Function
+
     Protected Overridable Function UpdateRecord(record As TM) As Integer
         Return Model.UpdateRecord(record)
     End Function
@@ -1436,6 +1429,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
     End Sub
+
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
         Try
@@ -1452,4 +1446,5 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
         Return retValue
     End Function
+
 End Class

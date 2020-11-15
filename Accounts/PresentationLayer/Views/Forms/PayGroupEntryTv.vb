@@ -104,7 +104,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetListByCodeName("PayGroup")
+            cboParentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("PayGroup")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

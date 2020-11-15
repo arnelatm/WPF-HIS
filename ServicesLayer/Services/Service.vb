@@ -13,11 +13,12 @@ Namespace Services
     Public Class Service
         Implements IService
 
+        Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
+        Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
-        Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
-        Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+
         Public Sub New(accountName As String)
             Dim securityGroup As New SecurityGroup
             Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + accountName
@@ -58,6 +59,7 @@ Namespace Services
                 Return Factory.CreateDao("User")
             End Get
         End Property
+
         Public Function GetBizObjectErrors()
             Return DataBo.GetErrors()
         End Function
@@ -79,6 +81,7 @@ Namespace Services
             Next
             Return Nothing
         End Function
+
         Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) Implements IService.GetMainTableColumnProperties
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
@@ -86,6 +89,7 @@ Namespace Services
         Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Int32, ByRef dataModel As TM, ByRef dbDataDao As TD, ByRef externalService As Object) As TM
             Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
         End Function
+
 #Region "Current Service Function"
 
         Public Function AddRecord(ByRef model) As Integer Implements IService.AddRecord
@@ -128,6 +132,7 @@ Namespace Services
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurityForKey
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function
+
         'Public Shadows Function GetRecordById(idNo) Implements IService.GetRecordById
         '    Return DataDao.GetRecordById(Convert.ToInt32(idNo))
         'End Function
@@ -157,6 +162,7 @@ Namespace Services
         Public Function UpdateTvp(dtTable As DataTable) As Integer Implements IService.UpdateTvp
             Return DataDao.UpdateTvp(dtTable)
         End Function
+
 #End Region
 
 #Region "BaseDao Functions"
@@ -242,6 +248,7 @@ Namespace Services
         Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
             Return BaseDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
         End Function
+
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function

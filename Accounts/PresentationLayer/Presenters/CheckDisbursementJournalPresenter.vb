@@ -193,7 +193,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
             Dim retVal As String
-            retVal = Model.GetRecordFieldWithKey(idNo, "CheckDisbursementJournal", "IdNo", "DepositType")
+            retVal = Model.GetRecordFieldWithKey(idNo, "CheckDisbursementJournal", "IdNo", "PaymentType")
             Return retVal
         End Function
 

@@ -88,14 +88,12 @@ Public Class Model
         Return ProcessLookupByCodeName(data)
     End Function
 
-    Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetFilteredLookupByName
+    Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByName
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         Return ProcessLookupByName(data)
     End Function
 
-    
     Public Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByNameCode
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         Return ProcessLookupByNameCode(data)
@@ -197,8 +195,7 @@ Public Class Model
         Return Service.GetRecordPosition(tableName, dno)
     End Function
 
-    Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) _
-        Implements IModel.GetRecords
+    Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetRecords
         Dim data = DataService.GetRecords(tableName, sortKey, fields)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         If fields.Count = 3 Then
@@ -327,6 +324,7 @@ Public Class Model
         Next
         Return tlData
     End Function
+
 End Class
 
 Public Class ModelLogin

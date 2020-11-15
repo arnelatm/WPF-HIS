@@ -282,7 +282,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
+            ' the PaymentType so in order to override this part we need to retrieve the PaymentType first
             ' because when assigning the cboPayeeIdNo the datasource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             PayorType = eventType.Model.PayorType
@@ -291,7 +291,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("CS,CK,BA")
             cboAccountIdNo.EndUpdate()
@@ -561,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayorIdNo.DataSource = cbDataSource
             Dim payorTypeEnum = GetEnumCodeValue(Of ReceiptTypeSelection)(cPayorType)
             If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
-                cbDataSource = PresenterObj.GetListByCodeName("Customer")
+                cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCsrOiItems.Visible = True
             Else
@@ -571,11 +571,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If payorTypeEnum = ReceiptTypeSelection.Customer Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Customer")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Employee")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Employee")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Supplier")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
                 Else
                     txtPayorName.Visible = True
                     txtPayorName.Width = _payorOrigWidth

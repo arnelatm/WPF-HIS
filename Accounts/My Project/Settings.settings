@@ -5,5 +5,8 @@
     <Setting Name="VatRate" Type="System.Decimal" Scope="Application">
       <Value Profile="(Default)">15</Value>
     </Setting>
+    <Setting Name="Lookup" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">CodeName</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
