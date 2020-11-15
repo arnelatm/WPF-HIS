@@ -131,7 +131,7 @@ Namespace DataLayer.AdoNet
             .PoBox = Extensions.AsString(reader("PoBox")),
             .ProvinceState = Extensions.AsString(reader("ProvinceState")),
             .ReleasedDate = Extensions.AsNullable(Of Date?)(reader("ReleasedDate")),
-            .ReligionIdNo = Extensions.AsNullable(Of Byte?)(reader("ReligionIdNo")),
+            .ReligionIdNo = Extensions.AsNullable(Of Int16?)(reader("ReligionIdNo")),
             .Street = Extensions.AsString(reader("Street")),
             .Title = Extensions.AsString(reader("Title")),
             .TownCity = Extensions.AsString(reader("TownCity")),

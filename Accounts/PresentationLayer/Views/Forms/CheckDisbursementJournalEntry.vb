@@ -309,7 +309,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
@@ -579,7 +579,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
+                cbDataSource = PresenterObj.GetLookup("Supplier")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCkdOiItems.Visible = True
             Else
@@ -589,11 +589,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
+                    cbDataSource = PresenterObj.GetLookup("Supplier")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Employee")
+                    cbDataSource = PresenterObj.GetLookup("Employee")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
+                    cbDataSource = PresenterObj.GetLookup("Customer")
                 Else
                     txtPayeeName.Visible = True
                     txtPayeeName.Width = _payeeOrigWidth

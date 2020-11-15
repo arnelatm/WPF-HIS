@@ -224,10 +224,10 @@ Namespace PresentationLayer.Views.Forms
             cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
             cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
-            cboBasePaymentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Earning")
+            cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _payGroupsByCode = PresenterObj.GetLookupListByCodeName("PayGroup")
+            _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
         End Sub
 
         Private Sub BindPayrollEarnAccounts()

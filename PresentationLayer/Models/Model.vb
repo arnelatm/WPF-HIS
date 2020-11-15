@@ -138,19 +138,18 @@ Public Class Model
         Return Service.GetLastSortKey(searchValue, tableName)
     End Function
 
-    Public Function GetLookupByCodeName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByCodeName
+    Public Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookup
         Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Return ProcessLookupByCodeName(data)
-    End Function
-
-    Public Function GetLookupByName(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByName
-        Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Return ProcessLookupByName(data)
-    End Function
-
-    Public Function GetLookupByNameCode(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupByNameCode
-        Dim data = Service.GetRecords(tableName, sortKey, fields)
-        Return ProcessLookupByNameCode(data)
+        Dim lookupSetting = GlobalVariables.LookupSetting()
+        If lookupSetting = "CodeAndName" Then
+            Return ProcessLookupByCodeName(data)
+        ElseIf lookupSetting = "NameAndCode" Then
+            Return ProcessLookupByNameCode(data)
+        ElseIf lookupSetting = "Name" Then
+            Return ProcessLookupByName(data)
+        Else
+            Return ProcessLookupByCodeName(data)
+        End If
     End Function
 
     Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IModel.GetMaxValueFiltered
@@ -295,7 +294,7 @@ Public Class Model
             Dim tData As New ClassesLibrary.LookupData
             tData.IdNo = data(i * 3 - 3)
             tData.Name = data(i * 3 - 2)
-            tData.Code = data(i * 3 - 2) & " | " & data(i * 3 - 1)
+            tData.Code = data(i * 3 - 1)
             tlData.Add(tData)
         Next
         Return tlData

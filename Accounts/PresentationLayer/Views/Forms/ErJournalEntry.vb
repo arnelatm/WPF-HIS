@@ -182,9 +182,9 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboEmployeeIdNo.BeginUpdate()
-            cboEmployeeIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Employee")
+            cboEmployeeIdNo.DataSource = PresenterObj.GetLookup("Employee")
             cboEmployeeIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)

@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PoBox As String
         Property ProvinceState As String
         Property ReleasedDate As Date?
-        Property ReligionIdNo As Byte?
+        Property ReligionIdNo As Int16?
         Property Street As String
         Property Title As String
         Property TownCity As String

@@ -390,7 +390,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ReligionIdNo As Byte? Implements IEmployeeView.ReligionIdNo
+        Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
             Get
                 Return cacReligionIdNo.GetNullableValue(Of Int16)
             End Get
@@ -439,20 +439,20 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacBankIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Bank")
-            cacCountryCode.DataSource = PresenterObj.GetLookupListByCodeName("Country")
-            cacDepartmentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Department")
-            cacDesignationIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Designation")
+            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
+            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
+            cacDepartmentIdNo.DataSource = PresenterObj.GetLookup("Department")
+            cacDesignationIdNo.DataSource = PresenterObj.GetLookup("Designation")
             cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
             cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = PresenterObj.GetLookupListByCodeName("Country")
-            cacReligionIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Religion")
-            cboPayCycleidNo.DataSource = PresenterObj.GetLookupListByCodeName("PayCycle")
-            cboPayGroupIdNo.DataSource = PresenterObj.GetLookupListByCodeName("PayGroup")
+            cacNationalityCode.DataSource = PresenterObj.GetLookup("Country")
+            cacReligionIdNo.DataSource = PresenterObj.GetLookup("Religion")
+            cboPayCycleidNo.DataSource = PresenterObj.GetLookup("PayCycle")
+            cboPayGroupIdNo.DataSource = PresenterObj.GetLookup("PayGroup")
             cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
             _deductionsByName = PresenterObj.GetFilteredLookupListByCodeName("Deduction", "DeductionType='" + GetEnumCode(DeductionTypeSelection.Regular) + "'")
             _earningsByName = PresenterObj.GetFilteredLookupListByCodeName("Earning", "EarningType='" + GetEnumCode(EarningTypeSelection.Regular) + "'")
-            _phoneTypes = PresenterObj.GetLookupListByCodeName("PhoneType")
+            _phoneTypes = PresenterObj.GetLookup("PhoneType")
             _countryTelCodes = PresenterObj.GetIntPhoneCodes()
         End Sub
 

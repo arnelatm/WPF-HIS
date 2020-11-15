@@ -34,7 +34,6 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New ApJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Fields"
@@ -262,9 +261,9 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCentersByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            _revCostCentersByCode = PresenterObj.GetLookup("RevCostCenter")
             cboSupplierIdNo.BeginUpdate()
-            cboSupplierIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Supplier")
+            cboSupplierIdNo.DataSource = PresenterObj.GetLookup("Supplier")
             cboSupplierIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)

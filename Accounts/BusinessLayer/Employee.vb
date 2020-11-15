@@ -57,7 +57,7 @@ Namespace BusinessLayer
         Public Property PoBox As String
         Public Property ProvinceState As String
         Public Property ReleasedDate As Date?
-        Public Property ReligionIdNo As Byte?
+        Public Property ReligionIdNo As Int16?
         Public Property Street As String
         Public Property Title As String
         Public Property TownCity As String
