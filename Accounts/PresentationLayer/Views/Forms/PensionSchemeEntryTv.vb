@@ -104,7 +104,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetChartList()
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountList()
             cboPensionProviderIdNo.DataSource = PresenterObj.GetLookup("PensionProvider")
         End Sub
 

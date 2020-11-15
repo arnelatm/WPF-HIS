@@ -140,7 +140,7 @@
     <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\ProductCategory.vb" />
-    <Compile Include="BusinessLayer\Chart.vb" />
+    <Compile Include="BusinessLayer\Account.vb" />
     <Compile Include="BusinessLayer\CheckDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CkdOiItem.vb" />
     <Compile Include="BusinessLayer\Commands\CommandBase.vb" />
@@ -188,7 +188,7 @@
     <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\ChartDao.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CheckDisbursementJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
@@ -392,10 +392,10 @@
     <Compile Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ChartEntryTv.Designer.vb">
-      <DependentUpon>ChartEntryTv.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.Designer.vb">
+      <DependentUpon>AccountEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ChartEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CheckDisbursementJournalEntry.Designer.vb">
@@ -559,7 +559,7 @@
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\EarningModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductCategoryModel.vb" />
-    <Compile Include="PresentationLayer\Models\ChartModel.vb" />
+    <Compile Include="PresentationLayer\Models\AccountModel.vb" />
     <Compile Include="PresentationLayer\Models\CheckDisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CkdOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
@@ -596,7 +596,7 @@
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EarningPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductCategoryPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ChartPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CkdOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
@@ -655,7 +655,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionSchemeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductCategoryView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IChartView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IAccountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICheckDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICkdOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICkdOiItemView.vb" />
@@ -1946,8 +1946,8 @@
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\ChartEntryTv.resx">
-      <DependentUpon>ChartEntryTv.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountEntryTv.resx">
+      <DependentUpon>AccountEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CheckDisbursementJournalEntry.resx">
       <DependentUpon>CheckDisbursementJournalEntry.vb</DependentUpon>

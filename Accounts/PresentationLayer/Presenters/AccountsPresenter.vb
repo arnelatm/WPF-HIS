@@ -77,36 +77,36 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function IsAccountsPayableAccount(ByVal AccountIdNo As Int16)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AP"
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "AP"
         End Function
 
         Public Function IsAccountsReceivableAccount(ByVal AccountIdNo As Int16)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "AR"
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
         End Function
 
         Public Function IsInputVatAccount(ByVal AccountIdNo As Int16)
-            Return Model.GetRecordFieldWithKey(AccountIdNo, "Chart", "IdNo", "SpecialAccount") = "VI"
+            Return Model.GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
         End Function
 
         Public Function GetAdvancesToSupplierAccountIdNo()
-            Return Model.GetRecordFieldWithKey("AS", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("AS", "Account", "SpecialAccount", "IdNo")
         End Function
 
         Public Function GetCustomerAdvancesAccountIdNo()
-            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
         End Function
 
         Public Function GetRegularEarningsByCode()
-            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
         End Function
 
         Public Function GetRegularDeductionsByCode()
-            Return Model.GetRecordFieldWithKey("CA", "Chart", "SpecialAccount", "IdNo")
+            Return Model.GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
         End Function
 
-        Public Function GetChart(idNo As String)
-            Dim chartModel As New ModelAccounts("Chart")
-            Return chartModel.GetRecordById(Of ChartModel)(idNo)
+        Public Function GetAccount(idNo As String)
+            Dim AccountModel As New ModelAccounts("Account")
+            Return AccountModel.GetRecordById(Of AccountModel)(idNo)
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer

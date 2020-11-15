@@ -432,7 +432,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-
     Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
         Try
             Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
@@ -849,8 +848,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return True
     End Function
 
-
-
     Public Overridable Function OkToMove() As Boolean
         Dim retValue As Boolean = False
         If Not (EditMode OrElse AddMode) Then
@@ -911,7 +908,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '        Select Case item.DataType
     '            Case DataTypeSelection.StringType
     '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.CharType
+    '            Case DataTypeSelection.Accountype
     '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
     '            Case DataTypeSelection.IntegerType
     '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))

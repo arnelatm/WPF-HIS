@@ -141,9 +141,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property ChartDao As IDaoAll(Of Chart)
+        Private ReadOnly Property AccountDao As IDaoAll(Of Account)
             Get
-                Return DaoFactoryAccounts.CreateDao("Chart")
+                Return DaoFactoryAccounts.CreateDao("Account")
             End Get
         End Property
 

@@ -26,9 +26,9 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoChart
+    Public Interface IDaoAccount
 
-        Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Chart)
+        Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Account)
 
     End Interface
 

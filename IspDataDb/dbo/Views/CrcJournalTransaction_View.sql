@@ -8,7 +8,7 @@ SELECT        dbo.CashReceiptJournal.TransactionDate, dbo.CashReceiptJournal.Ref
                          dbo.CashReceiptJournalItem.Sequence, dbo.CashReceiptJournalItem.Debit, dbo.CashReceiptJournalItem.Credit, dbo.CashReceiptJournalItem.Notes AS CrNotes, dbo.CashReceiptJournal.ORNumber,
                          dbo.BankAccount.BranchName, dbo.Bank.BankName, dbo.Bank.BankNameAra, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Employee.EmployeeCode, dbo.Supplier.SupplierNameAra, 
                          dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeName, dbo.RevCostCenter.RevCostCenterCode, dbo.RevCostCenter.RevCostCenterName, dbo.CashReceiptJournal.IdNo, dbo.Customer.CustomerCode, 
-                         dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra
+                         dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra
 FROM            dbo.CashReceiptJournal 
 				LEFT OUTER JOIN dbo.CashReceiptJournalItem 
 					ON dbo.CashReceiptJournal.IdNo = dbo.CashReceiptJournalItem.JournalIdNo 
@@ -20,8 +20,8 @@ FROM            dbo.CashReceiptJournal
 					ON dbo.CashReceiptJournal.PayorIdNo = dbo.Employee.IdNo 
 				Left Outer Join dbo.BankAccount 
 					ON dbo.CashReceiptJournal.AccountIdNo = dbo.BankAccount.AccountIdNo 
-				LEFT OUTER JOIN dbo.Chart 
-					ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Chart.IdNo 
+				LEFT OUTER JOIN dbo.Account 
+					ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Account.IdNo 
 				LEFT OUTER JOIN dbo.Bank 
 					ON dbo.BankAccount.BankIdNo = dbo.Bank.IdNo 
 				Left Outer Join dbo.RevCostCenter

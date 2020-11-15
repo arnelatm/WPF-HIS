@@ -1,11 +1,11 @@
 ﻿
 CREATE VIEW [dbo].[GeneralLedger_View]
 AS
-SELECT        dbo.Chart_View.IdNo, dbo.Chart_View.AccountCode, dbo.Chart_View.AccountName, dbo.Chart_View.AccountNameAra, dbo.GlLedgers_View.Debit, dbo.GlLedgers_View.Credit, dbo.GlLedgers_View.TransactionDate, 
-                         dbo.GlLedgers_View.Posted, dbo.GlLedgers_View.JournalCode, dbo.GlLedgers_View.IdNo AS JournalItemIdNo, dbo.GlLedgers_View.JournalIdNo, dbo.Chart_View.SortKey, 
-                         dbo.GlLedgers_View.ClosingJournal,dbo.Chart_View.SpecialAccount
-FROM            dbo.Chart_View LEFT OUTER JOIN
-                         dbo.GlLedgers_View ON dbo.Chart_View.IdNo = dbo.GlLedgers_View.AccountIdNo
+SELECT        dbo.Account_View.IdNo, dbo.Account_View.AccountCode, dbo.Account_View.AccountName, dbo.Account_View.AccountNameAra, dbo.GlLedgers_View.Debit, dbo.GlLedgers_View.Credit, dbo.GlLedgers_View.TransactionDate, 
+                         dbo.GlLedgers_View.Posted, dbo.GlLedgers_View.JournalCode, dbo.GlLedgers_View.IdNo AS JournalItemIdNo, dbo.GlLedgers_View.JournalIdNo, dbo.Account_View.SortKey, 
+                         dbo.GlLedgers_View.ClosingJournal,dbo.Account_View.SpecialAccount
+FROM            dbo.Account_View LEFT OUTER JOIN
+                         dbo.GlLedgers_View ON dbo.Account_View.IdNo = dbo.GlLedgers_View.AccountIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'GeneralLedger_View';
 
@@ -82,7 +82,7 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "Chart_View"
+         Begin Table = "Account_View"
             Begin Extent = 
                Top = 6
                Left = 38

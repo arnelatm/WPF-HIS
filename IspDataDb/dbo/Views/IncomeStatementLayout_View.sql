@@ -9,7 +9,7 @@
   CREATE VIEW [dbo].[IncomeStatementLayout_View] as
   (SELECT IdNo,ParentIDNo,AccountCode,AccountName,AccountNameAra,DetailAccount,AccountGroup,ByDebit,BYCredit,Debit,Credit,NormalBalance,CloseDebit,CloseCredit,PayeeType,
 		  WithReconciliation,IncomeExpSummary,SpecialAccount,Active,LevelNumber,Path,SortKey	  
-		  FROM Chart_View)
+		  FROM Account_View)
   UNION
   (SELECT [IdNo]
       ,[ParentIdNo]
@@ -33,4 +33,4 @@
       ,[LevelNumber]+1 AS 'LevelNumber'
       ,[path]+'-A'
 	  ,REPLACE(RTRIM(REPLACE(SortKey, '0', ' ')), ' ', '0')+'999'  
-  FROM [dbo].[Chart_View] WHERE NOT DetailAccount=1)
+  FROM [dbo].[Account_View] WHERE NOT DetailAccount=1)

@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemMasters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBranches = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemAccountOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
@@ -281,7 +281,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem, Me.SalesDepositTypesToolStripMenuItem})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemAccountOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.DefaultFieldValuesToolStripMenuItem, Me.SalesDepositTypesToolStripMenuItem})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -290,10 +290,10 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemBranches.Name = "ToolStripMenuItemBranches"
         resources.ApplyResources(Me.ToolStripMenuItemBranches, "ToolStripMenuItemBranches")
         '
-        'ToolStripMenuItemChartOfAccounts
+        'ToolStripMenuItemAccountOfAccounts
         '
-        Me.ToolStripMenuItemChartOfAccounts.Name = "ToolStripMenuItemChartOfAccounts"
-        resources.ApplyResources(Me.ToolStripMenuItemChartOfAccounts, "ToolStripMenuItemChartOfAccounts")
+        Me.ToolStripMenuItemAccountOfAccounts.Name = "ToolStripMenuItemAccountOfAccounts"
+        resources.ApplyResources(Me.ToolStripMenuItemAccountOfAccounts, "ToolStripMenuItemAccountOfAccounts")
         '
         'ToolStripMenuItemDepartments
         '
@@ -890,7 +890,7 @@ End Sub
         Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
         Friend WithEvents ToolStripMenuItemDepartments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRevCostCenters As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemChartOfAccounts As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemAccountOfAccounts As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierVendors As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCustomerClients As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneralJournalEntry As ToolStripMenuItem

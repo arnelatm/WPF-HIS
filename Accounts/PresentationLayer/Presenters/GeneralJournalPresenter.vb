@@ -116,7 +116,7 @@ Namespace PresentationLayer.Presenters
                                             "|" + GetEnumCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + GetEnumCode(SpecialAccountSelection.AdvancesToSupplier) +
                                             "|" + GetEnumCode(SpecialAccountSelection.CustomerAdvances) + "|" + GetEnumCode(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
-                Dim chart As ChartModel
+                Dim Account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -130,8 +130,8 @@ Namespace PresentationLayer.Presenters
                         If item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0 Then
                             specialAccount = Nothing
                         Else
-                            chart = GetChart(item.AccountIdNo)
-                            specialAccount = chart.SpecialAccount
+                            Account = GetAccount(item.AccountIdNo)
+                            specialAccount = Account.SpecialAccount
                         End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))

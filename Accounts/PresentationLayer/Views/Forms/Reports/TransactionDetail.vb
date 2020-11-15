@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class TransactionDetail
 
         Public Property MainTableName As String
@@ -15,7 +16,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "Chart"
+            MainTableName = "Account"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
             cboStartAccountCode.DataSource = PresenterObj.GetDetailAccountList()
@@ -30,11 +31,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date
             Dim lastFiscalYearDate As Date
-            Dim chartBalanceYear As Integer
+            Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
             Dim language As String
-            Dim cTemp as String
-            Dim dDate as Date
+            Dim cTemp As String
+            Dim dDate As Date
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
@@ -42,32 +43,31 @@ Namespace PresentationLayer.Views.Forms.Reports
             'dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
 
             If beginningDate < lastFiscalYearDate Then
-                chartBalanceYear = Year(beginningDate)
+                AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
             Else
-                chartBalanceYear = Year(lastFiscalYearDate)
-                begDataDate = DateSerial(chartBalanceYear, 1, 1)
+                AccountBalanceYear = Year(lastFiscalYearDate)
+                begDataDate = DateSerial(AccountBalanceYear, 1, 1)
             End If
 
-            if dtpBeginningDate.Value > dtpEndingDate.Value then
+            If dtpBeginningDate.Value > dtpEndingDate.Value Then
                 dDate = dtpBeginningDate.Value
                 dtpBeginningDate.Value = dtpEndingDate.Value
                 dtpEndingDate.Value = dDate
             End If
-            if cboStartAccountCode.SelectedValue > cboEndAccountCode.SelectedValue then
+            If cboStartAccountCode.SelectedValue > cboEndAccountCode.SelectedValue Then
                 cTemp = cboStartAccountCode.SelectedValue
                 cboStartAccountCode.SelectedValue = cboEndAccountCode.SelectedValue
                 cboEndAccountCode.SelectedValue = cTemp
             End If
 
             Refresh()
-            Dim cForm As New ReportForm("Transaction Detail.Rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode", language, "Language")
+            Dim cForm As New ReportForm("Transaction Detail.Rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode", language, "Language")
             cForm.Show()
 
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
-
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
@@ -99,4 +99,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents cboStartAccountCode As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents cboEndAccountCode As Libraries.CBaseControlsLibrary.CaComboBox
     End Class
+
 End Namespace

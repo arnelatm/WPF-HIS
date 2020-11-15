@@ -3,21 +3,21 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class ChartEntryTv
-        Implements IChartView
+    Public Class AccountEntryTv
+        Implements IAccountView
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "Chart_View"
+            MainTableName = "Account_View"
             TvMainFieldName = "AccountName"
             TvSecondaryFieldName = "AccountCode"
             SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtAccountCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New ChartPresenter(Me)
+            PresenterObj = New AccountPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
             'ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
         End Sub
 
-        Public Property AccountCode As String Implements IChartView.AccountCode
+        Public Property AccountCode As String Implements IAccountView.AccountCode
             Get
                 Return txtAccountCode.Text
             End Get
@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountGroup As String Implements IChartView.AccountGroup
+        Public Property AccountGroup As String Implements IAccountView.AccountGroup
             Get
                 Return cboAccountGroup.GetValue()
             End Get
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountName As String Implements IChartView.AccountName
+        Public Property AccountName As String Implements IAccountView.AccountName
             Get
                 Return txtAccountName.Text
             End Get
@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AccountNameAra As String Implements IChartView.AccountNameAra
+        Public Property AccountNameAra As String Implements IAccountView.AccountNameAra
             Get
                 Return txtAccountNameAra.Text
             End Get
@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Active As Boolean Implements IChartView.Active
+        Public Property Active As Boolean Implements IAccountView.Active
             Get
                 Return chkActive.Checked
             End Get
@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DetailAccount As Boolean Implements IChartView.DetailAccount
+        Public Property DetailAccount As Boolean Implements IAccountView.DetailAccount
             Get
                 Return chkDetailAccount.Checked
             End Get
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int16 Implements IChartView.IdNo
+        Public Property IdNo As Int16 Implements IAccountView.IdNo
             Get
                 If txtIdNo.Text <> "" Then
                     Return Convert.ToInt16(txtIdNo.Text)
@@ -95,7 +95,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LevelNumber As Int16 Implements IChartView.LevelNumber
+        Public Property LevelNumber As Int16 Implements IAccountView.LevelNumber
             Get
                 If (txtLevelNumber.Text) Is Nothing Or txtLevelNumber.Text = "" Then
                     Return 0
@@ -107,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NormalBalance As String Implements IChartView.NormalBalance
+        Public Property NormalBalance As String Implements IAccountView.NormalBalance
             Get
                 Return cboNormalBalance.GetValue()
             End Get
@@ -116,7 +116,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Notes As String Implements IChartView.Notes
+        Public Property Notes As String Implements IAccountView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -125,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Int16? Implements IChartView.ParentIdNo
+        Public Property ParentIdNo As Int16? Implements IAccountView.ParentIdNo
             Get
                 Return cboParentIdNo.GetNullableValue(Of Int16)
             End Get
@@ -134,7 +134,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayeeType As String Implements IChartView.PayeeType
+        Public Property PayeeType As String Implements IAccountView.PayeeType
             Get
                 Return cboPayeeType.GetValue()
             End Get
@@ -143,7 +143,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SortKey As String Implements IChartView.SortKey
+        Public Property SortKey As String Implements IAccountView.SortKey
             Get
                 Return txtSortKey.Text
             End Get
@@ -152,7 +152,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property WithReconciliation As Boolean Implements IChartView.WithReconciliation
+        Public Property WithReconciliation As Boolean Implements IAccountView.WithReconciliation
             Get
                 Return chkWithReconciliation.Checked
             End Get
@@ -161,7 +161,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SpecialAccount As String Implements IChartView.SpecialAccount
+        Public Property SpecialAccount As String Implements IAccountView.SpecialAccount
             Get
                 Return cboSpecialAccount.GetValue()
             End Get
@@ -179,12 +179,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub CreateEnumResourceFile()
             'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("ChartTypeSelection", GetType(ChartTypeSelection))
+            'ResourceEnumConverter.MakeResource("AccountTypeSelection", GetType(AccountTypeSelection))
             'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetLookup("Chart")
+            cboParentIdNo.DataSource = PresenterObj.GetLookup("Account")
             cboAccountGroup.DataSource = PresenterObj.MakeEnumComboList(Of AccountGroupSelection)
             cboPayeeType.DataSource = PresenterObj.MakeEnumComboList(Of PayeeTypeSelection)
             cboNormalBalance.DataSource = PresenterObj.MakeEnumComboList(Of DebitCreditSelection)

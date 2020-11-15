@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
                     retVal = False
                     Exit For
                 Else
-                    cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
+                    cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
                     If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Supplier/Vendor accounts allowed for this entry!", item.Sequence))
                         retVal = False
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overloads Function IsInputVatAccount(ByVal AccountIdNo As Int16)
-            If Model.CountRecordWith2Key(accountIdNo, "VI", "AccountTypes", "AccountIdNo", "AccountTypes") > 0 Then
+            If Model.CountRecordWith2Key(AccountIdNo, "VI", "AccountTypes", "AccountIdNo", "AccountTypes") > 0 Then
                 Return True
             End If
             Return False

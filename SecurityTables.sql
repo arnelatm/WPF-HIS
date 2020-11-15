@@ -825,7 +825,7 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (39, N'Main.ToolStrip.Translate', NULL, NULL, N's')
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (42, N'Main.Account.Masters.General.ChartOfAccounts', NULL, 11, NULL)
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (42, N'Main.Account.Masters.General.AccountOfAccounts', NULL, 11, NULL)
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [Notes]) VALUES (44, N'Translators', NULL, NULL, N'Users who are allowed to translate captions and messages.')
 GO

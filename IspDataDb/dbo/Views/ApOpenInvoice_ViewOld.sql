@@ -19,12 +19,12 @@ SELECT			dbo.ApOpenInvoice.IdNo,
 				dbo.APDetails_View.TransactionDate, 
 				dbo.APDetails_View.InvoiceNo, 
 				dbo.APDetails_View.Notes, 
-				dbo.Chart.AccountCode, 
-				dbo.Chart.AccountName, 
-				dbo.Chart.AccountNameAra, 
-                dbo.Chart.SpecialAccount
+				dbo.Account.AccountCode, 
+				dbo.Account.AccountName, 
+				dbo.Account.AccountNameAra, 
+                dbo.Account.SpecialAccount
 FROM            dbo.ApOpenInvoice 
 				LEFT OUTER JOIN dbo.APDetails_View 
 				ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode Collate SQL_Latin1_General_CP1_CI_AS
-				LEFT OUTER JOIN dbo.Chart 
-				ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
+				LEFT OUTER JOIN dbo.Account 
+				ON dbo.APDetails_View.AccountIdNo = dbo.Account.IDNo

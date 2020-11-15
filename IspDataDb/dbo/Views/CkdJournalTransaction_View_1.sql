@@ -7,7 +7,7 @@ SELECT        dbo.CheckDisbursementJournal.TransactionDate, dbo.CheckDisbursemen
                          dbo.CheckDisbursementJournalItem.Sequence, dbo.CheckDisbursementJournalItem.Debit, dbo.CheckDisbursementJournalItem.Credit, dbo.CheckDisbursementJournalItem.Notes AS CkNotes, 
                          dbo.BankAccount.BranchName, dbo.Bank.BankName, dbo.Bank.BankNameAra, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Employee.EmployeeCode, dbo.Supplier.SupplierNameAra, 
                          dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeName, dbo.RevCostCenter.RevCostCenterCode, dbo.RevCostCenter.RevCostCenterName, dbo.CheckDisbursementJournal.IdNo, dbo.Customer.CustomerCode, 
-                         dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra
+                         dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra
 FROM            dbo.CheckDisbursementJournal 
 				LEFT OUTER JOIN dbo.CheckDisbursementJournalItem 
 					ON dbo.CheckDisbursementJournal.IdNo = dbo.CheckDisbursementJournalItem.JournalIdNo 
@@ -19,8 +19,8 @@ FROM            dbo.CheckDisbursementJournal
 					ON dbo.CheckDisbursementJournal.PayeeIdNo = dbo.Employee.IdNo 
 				Left Outer Join dbo.BankAccount 
 					ON dbo.CheckDisbursementJournal.AccountIdNo = dbo.BankAccount.AccountIdNo 
-				LEFT OUTER JOIN dbo.Chart 
-					ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Chart.IdNo 
+				LEFT OUTER JOIN dbo.Account 
+					ON dbo.CheckDisbursementJournalItem.AccountIdNo = dbo.Account.IdNo 
 				LEFT OUTER JOIN dbo.Bank 
 					ON dbo.BankAccount.BankIdNo = dbo.Bank.IdNo 
 				Left Outer Join dbo.RevCostCenter
@@ -44,7 +44,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'          
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 324
                Left = 1060

@@ -2,11 +2,11 @@
 CREATE VIEW [dbo].[ErJournalTransaction_View]
 AS
 SELECT        dbo.ErJournalItem.Sequence, dbo.ErJournalItem.JournalIdNo, dbo.ErJournalItem.Debit, dbo.ErJournalItem.Credit, dbo.ErJournalItem.Notes, dbo.ErJournalItem.Posted, dbo.Employee.EmployeeCode, 
-                         dbo.ErJournal.TransactionDate, dbo.ErJournal.ReferenceNo, dbo.ErJournal.Amount, dbo.ErJournal.Notes AS ErNotes, dbo.ErJournal.Cancelled, dbo.Chart.AccountCode, dbo.Chart.AccountName, 
-                         dbo.Chart.AccountNameAra, dbo.RevCostCenter.RevCostCenterCode, dbo.Employee.EmployeeNameAra, dbo.Employee.Title, dbo.Employee.EmployeeName
+                         dbo.ErJournal.TransactionDate, dbo.ErJournal.ReferenceNo, dbo.ErJournal.Amount, dbo.ErJournal.Notes AS ErNotes, dbo.ErJournal.Cancelled, dbo.Account.AccountCode, dbo.Account.AccountName, 
+                         dbo.Account.AccountNameAra, dbo.RevCostCenter.RevCostCenterCode, dbo.Employee.EmployeeNameAra, dbo.Employee.Title, dbo.Employee.EmployeeName
 FROM            dbo.RevCostCenter RIGHT OUTER JOIN
                          dbo.ErJournalItem ON dbo.RevCostCenter.IdNo = dbo.ErJournalItem.RevCostCenterIdNo LEFT OUTER JOIN
-                         dbo.Chart ON dbo.ErJournalItem.AccountIdNo = dbo.Chart.IdNo LEFT OUTER JOIN
+                         dbo.Account ON dbo.ErJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
                          dbo.ErJournal LEFT OUTER JOIN
                          dbo.Employee ON dbo.ErJournal.EmployeeIdNo = dbo.Employee.IdNo ON dbo.ErJournalItem.JournalIdNo = dbo.ErJournal.IDNo
 GO
@@ -113,7 +113,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 138
                Left = 38

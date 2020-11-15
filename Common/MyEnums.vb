@@ -44,7 +44,7 @@ End Enum
 Public Enum DataTypeSelection
     BooleanType = 0
     ByteType = 1
-    CharType = 2
+    Accountype = 2
     DateType = 3
     DecimalType = 4
     DoubleType = 5

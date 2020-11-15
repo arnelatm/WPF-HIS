@@ -3,11 +3,11 @@ CREATE VIEW [dbo].[PettyCashJournalTransaction_View]
 AS
 SELECT        dbo.PettyCashJournal.IdNo, dbo.PettyCashJournal.TransactionDate, dbo.PettyCashJournal.ReferenceNo, dbo.PettyCashJournal.Amount, dbo.PettyCashJournal.PayeeIdNo, dbo.PettyCashJournal.PaymentType, 
                          dbo.PettyCashJournal.PayeeName, dbo.PettyCashJournalItem.Sequence, dbo.PettyCashJournalItem.Debit, dbo.PettyCashJournalItem.Credit, dbo.PettyCashJournalItem.RevCostCenterIdNo, 
-                         dbo.PettyCashJournalItem.Notes, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.Customer.CustomerCode, dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, 
+                         dbo.PettyCashJournalItem.Notes, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, dbo.Customer.CustomerCode, dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, 
                          dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra, dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, 
                          dbo.RevCostCenter.RevCostCenterCode, dbo.RevCostCenter.RevCostCenterName, dbo.PettyCashJournal.Notes AS PcNote
-FROM            dbo.Chart RIGHT OUTER JOIN
-                         dbo.PettyCashJournalItem ON dbo.Chart.IdNo = dbo.PettyCashJournalItem.AccountIdNo LEFT OUTER JOIN
+FROM            dbo.Account RIGHT OUTER JOIN
+                         dbo.PettyCashJournalItem ON dbo.Account.IdNo = dbo.PettyCashJournalItem.AccountIdNo LEFT OUTER JOIN
                          dbo.RevCostCenter ON dbo.PettyCashJournalItem.RevCostCenterIdNo = dbo.RevCostCenter.IdNo RIGHT OUTER JOIN
                          dbo.PettyCashJournal ON dbo.PettyCashJournalItem.JournalIdNo = dbo.PettyCashJournal.IdNo LEFT OUTER JOIN
                          dbo.Customer ON dbo.PettyCashJournal.PayeeIdNo = dbo.Customer.IdNo LEFT OUTER JOIN
@@ -153,7 +153,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 315
                Left = 899

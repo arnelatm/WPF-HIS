@@ -207,7 +207,7 @@ Namespace PresentationLayer.Presenters
                 Dim cPayeeType As String
                 Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
-                Dim chart As ChartModel
+                Dim Account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AR Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -216,8 +216,8 @@ Namespace PresentationLayer.Presenters
                 Else
                     Dim nTotalAr As Decimal = 0
                     For Each item In View.JournalItems
-                        chart = GetChart(item.AccountIdNo)
-                        specialAccount = chart.SpecialAccount
+                        Account = GetAccount(item.AccountIdNo)
+                        specialAccount = Account.SpecialAccount
                         If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsReceivable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "D" Then
                                 nTotalAr = nTotalAr + item.Debit - item.Credit
@@ -237,7 +237,7 @@ Namespace PresentationLayer.Presenters
                             Messaging.Show(message, caption)
                             retValue = False
                         Else
-                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Chart", "IdNo", "PayeeType")
+                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
                             If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Customer Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")

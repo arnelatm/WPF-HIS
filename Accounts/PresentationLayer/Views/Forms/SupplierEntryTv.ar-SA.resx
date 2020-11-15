@@ -241,7 +241,7 @@
   <data name="tcbActive.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="lblChartNotes.Text" xml:space="preserve">
+  <data name="lblAccountNotes.Text" xml:space="preserve">
     <value>وصف</value>
   </data>
   <data name="txtSortKey.Error" xml:space="preserve">

@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class TrialBalance
 
         Public Property MainTableName As String
@@ -16,7 +17,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "Chart"
+            MainTableName = "Account"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
             _period = period
@@ -28,10 +29,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date
             Dim lastFiscalYearDate As Date
-            Dim chartBalanceYear As Integer
+            Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
             Dim language As String
-            language = Strings.Left(curCulture.Name,curculture.name.Indexof("-"))
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
 
             lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
@@ -59,14 +60,14 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Case "C"
                     beginningDate = dtpBeginningDate.Value
             End Select
-            If beginningDate < LastFiscalYearDate Then
-                chartBalanceYear = Year(beginningDate)
+            If beginningDate < lastFiscalYearDate Then
+                AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
             Else
-                chartBalanceYear = Year(LastFiscalYearDate)
-                begDataDate = LastFiscalYearDate
+                AccountBalanceYear = Year(lastFiscalYearDate)
+                begDataDate = lastFiscalYearDate
             End If
-            Dim cForm As New ReportForm("Trial Balance.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", chartBalanceYear, "ChartBalanceYear", lastFiscalYearDate, "lastFiscalYearDate", _period, "Period", language, "Language")
+            Dim cForm As New ReportForm("Trial Balance.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", lastFiscalYearDate, "lastFiscalYearDate", _period, "Period", language, "Language")
             cForm.Show()
 
             CultureInfo.CurrentCulture = curCulture
@@ -112,10 +113,12 @@ Namespace PresentationLayer.Views.Forms.Reports
                     Text = "Trial Balance for Custom Period"
                     lblEndDateCaption.Text = "Period Beginning Date:"
                     lblEndDateCaption.Text = "Period End Date:"
-                    
+
             End Select
             lblTitle.Text = Text
             dtpEndingDate.Value = endDate
         End Sub
+
     End Class
+
 End Namespace

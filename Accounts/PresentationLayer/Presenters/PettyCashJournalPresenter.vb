@@ -33,7 +33,7 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            _pettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Chart", "SpecialAccount")
+            _pettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Account", "SpecialAccount")
             If _pettyCashCount = 0 Then
                 Messaging.Show(True, "MsgNoPettyCashAccount")
             End If
@@ -341,13 +341,13 @@ Namespace PresentationLayer.Presenters
 
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
-            Dim chart As ChartModel
+            Dim Account As AccountModel
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
                 If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
-                        chart = GetChart(item.AccountIdNo)
-                        specialAccount = chart.SpecialAccount
+                        Account = GetAccount(item.AccountIdNo)
+                        specialAccount = Account.SpecialAccount
                     End If
                     If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                         MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))

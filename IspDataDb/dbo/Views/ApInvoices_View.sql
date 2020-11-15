@@ -2,14 +2,14 @@
 CREATE VIEW [dbo].[ApInvoices_View]
 AS
 SELECT        dbo.ApOpenInvoice.JournalCode, dbo.ApOpenInvoice.JournalItemIdNo, dbo.APDetails_View.AccountIdNo, dbo.APDetails_View.Debit, dbo.APDetails_View.Credit, dbo.APDetails_View.RevCostCenterIdNo, 
-                         dbo.APDetails_View.Notes, dbo.APDetails_View.Posted, dbo.Chart.AccountCode, dbo.Chart.AccountName, dbo.Chart.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, 
-                         dbo.APDetails_View.TransactionDate, dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Chart.SpecialAccount, 
+                         dbo.APDetails_View.Notes, dbo.APDetails_View.Posted, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, dbo.APDetails_View.SupplierIdNo, dbo.APDetails_View.InvoiceNo, 
+                         dbo.APDetails_View.TransactionDate, dbo.APDetails_View.ReferenceNo, dbo.APDetails_View.TransactionType, dbo.ApOpenInvoice.PaidAmount, dbo.ApOpenInvoice.DiscountTaken, dbo.Account.SpecialAccount, 
                          dbo.ApOpenInvoice.IdNo, dbo.ApOpenInvoice.JournalIdNo, dbo.Supplier.SupplierCode
 FROM            dbo.Supplier RIGHT OUTER JOIN
                          dbo.APDetails_View ON dbo.Supplier.IdNo = dbo.APDetails_View.SupplierIdNo RIGHT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.APDetails_View.IdNo = dbo.ApOpenInvoice.JournalItemIdNo AND 
                          dbo.APDetails_View.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.ApOpenInvoice.JournalCode LEFT OUTER JOIN
-                         dbo.Chart ON dbo.APDetails_View.AccountIdNo = dbo.Chart.IDNo
+                         dbo.Account ON dbo.APDetails_View.AccountIdNo = dbo.Account.IDNo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -103,7 +103,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Chart"
+         Begin Table = "Account"
             Begin Extent = 
                Top = 6
                Left = 603
