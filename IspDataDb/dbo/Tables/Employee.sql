@@ -9,7 +9,7 @@
     [MaritalStatus]       CHAR (1)      COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [NationalityCode]     CHAR (2)      COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [NationalityId]       VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [ReligionIdNo]        INT           NULL,
+    [ReligionIdNo]        SMALLINT      NULL,
     [ReligionId]          VARCHAR (15)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [NationalIdNo]        VARCHAR (10)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Street]              NVARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -44,6 +44,8 @@
     [DateTimeStamp]       ROWVERSION    NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
