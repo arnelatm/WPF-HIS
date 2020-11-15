@@ -184,7 +184,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetListByCodeName("Chart")
+            cboParentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Chart")
             cboAccountGroup.DataSource = PresenterObj.MakeEnumComboList(Of AccountGroupSelection)
             cboPayeeType.DataSource = PresenterObj.MakeEnumComboList(Of PayeeTypeSelection)
             cboNormalBalance.DataSource = PresenterObj.MakeEnumComboList(Of DebitCreditSelection)

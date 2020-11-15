@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PettyCashJournal"
             SortOrderKey = "IdNo"
-            FirstControl = cboPayeeIdNo
+            FirstControl = cboPaymentType
 
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
@@ -283,7 +283,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
             cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
@@ -550,7 +550,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = PresenterObj.GetListByCodeName("Supplier")
+                cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewPcsOiItems.Visible = True
             Else
@@ -560,11 +560,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Supplier")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Employee")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Employee")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Customer")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
                 Else
                     txtPayeeName.Visible = True
                     txtPayeeName.Width = _payeeOrigWidth

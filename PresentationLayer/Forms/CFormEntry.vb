@@ -868,12 +868,12 @@ Public Class CFormEntry
                 SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
-        FirstControl.Focus()
         If onOff Then
             InputsTurnedOn()
         Else
             InputsTurnedOff()
         End If
+        FirstControl.Focus()
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad

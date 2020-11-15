@@ -41,62 +41,39 @@ Namespace PresentationLayer.Presenters
             Return GetFilteredLookupByCodeName()
         End Function
 
-        'Public Function GetCountryTelIdNoList(Optional ByVal sortKey As String = "CountryName")
-        '    Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
-        'End Function
-
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
-            ComposeLookupParameters("Chart", "AccountName")
+            ComposeLookupParameters("Chart", "Account")
             LookUpSortExpression = sortKey
             LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupFilteredData()
+            Return GetFilteredLookupByCodeName()
         End Function
 
-        'Public Function GetDetailAccountListByName(Optional ByVal sortKey As String = "AccountName")
-        '    LookUpTableToGet = "Chart"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "AccountName"
-        '    LookUpDisplayNameArabic = "AccountNameAra"
-        '    LookUpDisplayCode = "AccountCode"
-        '    LookUpFilterKey = "DetailAccount=1"
-        '    Return GetFilteredLookupByName()
-        'End Function
-
-        Public Function GetListByCodeName(listName As String)
+        Public Function GetLookupListByCodeName(listName As String)
             ComposeLookupParameters(listName)
             Return GetLookupByCodeName()
         End Function
 
-        Public Function GetFilteredListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
+        Public Function GetFilteredLookupListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
             ComposeLookupParameters(listName)
             LookUpFilterKey = filter
             Return GetFilteredLookupByCodeName()
         End Function
 
-        Public Function GetListByName(listName As String, Optional filter As String = Nothing)
+        Public Function GetLookupListByName(listName As String, Optional filter As String = Nothing)
             ComposeLookupParameters(listName)
             Return GetLookupByName(filter)
         End Function
 
-        Public Function GetListByNameCode(listName As String, Optional filter As String = Nothing)
+        Public Function GetLookupListByNameCode(listName As String, Optional filter As String = Nothing)
             ComposeLookupParameters(listName)
             Return GetLookupByNameCode(filter)
         End Function
 
-        Public Function GetRecords(ByVal pLookUpTableToGet As String, ByVal pDisplayName As String, ByVal pDisplayCode As String, Optional ByVal sortKey As String = "IdNo")
-            LookUpTableToGet = pLookUpTableToGet
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = pDisplayName
-            LookUpDisplayNameArabic = pDisplayName
-            LookUpDisplayCode = pDisplayCode
-            Return GetLookupByCodeName()
-        End Function
-
-        Private Sub ComposeLookupParameters(tableName As String, Optional fieldName As String = Nothing)
+        Private Sub ComposeLookupParameters(listName As String, Optional fieldName As String = Nothing)
             If fieldName Is Nothing Then
-                fieldName = tableName
+                fieldName = listName
             End If
-            LookUpTableToGet = tableName
+            LookUpTableToGet = listName
             LookUpDisplayName = fieldName + "Name"
             LookUpSortExpression = LookUpDisplayName
             LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
@@ -117,9 +94,6 @@ Namespace PresentationLayer.Presenters
             ModelPresenter = Activator.CreateInstance(t, args)
             OriginalModel = New TM
             DataModel = New TM
-            'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
-            'OriginalModel = Activator.CreateInstance(Type.GetType(presenterModelName))
-            'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
         End Sub
 
         Public Overridable Sub InitializerWithTv(baseClassName As String, Optional tableOrViewName As String = Nothing)

@@ -175,16 +175,12 @@ Namespace PresentationLayer.Presenters
             Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
         End Function
 
-        'Public Function GetPaymentTypes(Optional ByVal sortKey As String = "PaymentTypeName")
-        '    Return GetLookupData("PaymentTypeName", "PaymentTypeNameAra", "PaymentTypeCode", "DepositType", sortKey, "")
-        'End Function
-
         Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
             Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
         End Function
 
-        Public Function GetEndingGlBalance(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
-            Return DataModel.GetEndingGlBalance(AccountIdNo, reconciliationDate)
+        Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
+            Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         End Function
 
         Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
@@ -199,29 +195,30 @@ Namespace PresentationLayer.Presenters
                                              "IdNo")
         End Function
 
-        Public Function GetLastPayroll(ByVal payCycle As Int16) As PayPeriodModel
-            Dim idNo As Int32
-            idNo = Model.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayFrequency=[M]")
-        End Function
+        'Public Function GetLastPayroll(ByVal payCycle As Int16) As PayPeriodModel
+        '    Dim idNo As Int32
+        '    idNo = Model.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayFrequency=[M]")
+        '    Return
+        'End Function
 
-        Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
-            LookUpTableToGet = "Deduction"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "DeductionName"
-            LookUpDisplayNameArabic = "DeductionNameAra"
-            LookUpDisplayCode = "DeductionCode"
-            Return GetLookupByNameCode()
-        End Function
+        'Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
+        '    LookUpTableToGet = "Deduction"
+        '    LookUpSortExpression = sortKey
+        '    LookUpDisplayName = "DeductionName"
+        '    LookUpDisplayNameArabic = "DeductionNameAra"
+        '    LookUpDisplayCode = "DeductionCode"
+        '    Return GetLookupByNameCode()
+        'End Function
 
-        Public Function GetRegularEarningListByName(Optional ByVal sortKey As String = "EarningName")
-            LookUpTableToGet = "Earning"
-            LookUpSortExpression = sortKey
-            LookUpDisplayName = "EarningName"
-            LookUpDisplayNameArabic = "EarningNameAra"
-            LookUpDisplayCode = "EarningCode"
-            'LookUpFilterKey = "EarningType = 'R'"
-            Return GetLookupByNameCode()
-        End Function
+        'Public Function GetRegularEarningListByName(Optional ByVal sortKey As String = "EarningName")
+        '    LookUpTableToGet = "Earning"
+        '    LookUpSortExpression = sortKey
+        '    LookUpDisplayName = "EarningName"
+        '    LookUpDisplayNameArabic = "EarningNameAra"
+        '    LookUpDisplayCode = "EarningCode"
+        '    'LookUpFilterKey = "EarningType = 'R'"
+        '    Return GetLookupByNameCode()
+        'End Function
 
     End Class
 

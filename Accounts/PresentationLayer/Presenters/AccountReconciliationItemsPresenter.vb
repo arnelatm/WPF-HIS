@@ -11,8 +11,6 @@ Namespace PresentationLayer.Presenters
 
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GetVatPercentage()
-
-        'Private _paymentTypesModel As List(Of DepositTypeModel)
         Private _modelReconciled
 
         Public Sub New(view As IAccountReconciliationItemsView)

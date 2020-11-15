@@ -24,8 +24,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetListByCodeName("Department")
-            cacRevCostCenterIdNo.DataSource = PresenterObj.GetListByCodeName("RevCostCenterName")
+            cacParentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Department")
+            cacRevCostCenterIdNo.DataSource = PresenterObj.GetLookupListByCodeName("RevCostCenterName")
         End Sub
 
 #Region "Fields"

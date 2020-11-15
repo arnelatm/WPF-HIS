@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
+
     Public Class PostPettyCash
 
         Public Property MainTableName As String
@@ -15,13 +16,14 @@ Namespace PresentationLayer.Views.Forms
             SortOrderKey = "IdNo"
             PresenterObj = New PostPettyCashPresenter(Me)
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CS,CK")
-            cboStartIdNo.DataSource = PresenterObj.GetRecords("PettyCashJournal", "ReferenceNo", "TransactionDate")
-            cboEndIdNo.DataSource = PresenterObj.GetRecords("PettyCashJournal", "ReferenceNo", "TransactionDate")
+            cboStartIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PettyCashJournal", "ReferenceNo", "Posted=0")
+            cboEndIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PettyCashJournal", "ReferenceNo", "Posted=0")
+            'cboStartIdNo.DataSource = PresenterObj.GetRecords("PettyCashJournal", "ReferenceNo", "TransactionDate")
+            'cboEndIdNo.DataSource = PresenterObj.GetRecords("PettyCashJournal", "ReferenceNo", "TransactionDate")
             ' Add any initialization after the InitializeComponent() call.
 
         End Sub
-        Private Sub cboStartIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStartIdNo.SelectedIndexChanged
 
-        End Sub
     End Class
+
 End Namespace

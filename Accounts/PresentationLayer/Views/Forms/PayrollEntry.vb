@@ -32,8 +32,8 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New PayPeriodPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            _employees = PresenterObj.GetListByCodeName("Employee")
-            _payGroups = PresenterObj.GetListByCodeName("PayGroups")
+            _employees = PresenterObj.GetLookupListByCodeName("Employee")
+            _payGroups = PresenterObj.GetLookupListByCodeName("PayGroups")
         End Sub
 
 #Region "Fields"

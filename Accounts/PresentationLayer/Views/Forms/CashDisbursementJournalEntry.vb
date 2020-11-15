@@ -36,8 +36,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
-            FirstControl = cboPayeeIdNo
-
+            FirstControl = cboPaymentType
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New CashDisbursementJournalPresenter(Me)
@@ -274,7 +273,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
+            ' the PaymentType so in order to override this part we need to retrieve the PaymentType first
             ' because when assigning the cboPayeeIdNo the datasource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             PaymentType = eventType.Model.PaymentType
@@ -283,7 +282,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
             cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
@@ -308,7 +307,7 @@ Namespace PresentationLayer.Views.Forms
          {"IdNo", TxtIdNo},
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
-         {"DepositType", cboPaymentType},
+         {"PaymentType", cboPaymentType},
          {"PayeeIdNo", cboPayeeIdNo},
          {"PayeeName", txtPayeeName},
          {"Posted", chkPosted},
@@ -549,7 +548,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = PresenterObj.GetListByCodeName("Supplier")
+                cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCadOiItems.Visible = True
             Else
@@ -559,11 +558,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Supplier")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Employee")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Employee")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = PresenterObj.GetListByCodeName("Customer")
+                    cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
                 Else
                     txtPayeeName.Visible = True
                     txtPayeeName.Width = _payeeOrigWidth
