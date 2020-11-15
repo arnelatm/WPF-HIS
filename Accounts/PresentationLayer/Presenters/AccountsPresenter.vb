@@ -195,31 +195,6 @@ Namespace PresentationLayer.Presenters
                                              "IdNo")
         End Function
 
-        'Public Function GetLastPayroll(ByVal payCycle As Int16) As PayPeriodModel
-        '    Dim idNo As Int32
-        '    idNo = Model.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayFrequency=[M]")
-        '    Return
-        'End Function
-
-        'Public Function GetRegularDeductionListByName(Optional ByVal sortKey As String = "DeductionName")
-        '    LookUpTableToGet = "Deduction"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "DeductionName"
-        '    LookUpDisplayNameArabic = "DeductionNameAra"
-        '    LookUpDisplayCode = "DeductionCode"
-        '    Return GetLookupByNameCode()
-        'End Function
-
-        'Public Function GetRegularEarningListByName(Optional ByVal sortKey As String = "EarningName")
-        '    LookUpTableToGet = "Earning"
-        '    LookUpSortExpression = sortKey
-        '    LookUpDisplayName = "EarningName"
-        '    LookUpDisplayNameArabic = "EarningNameAra"
-        '    LookUpDisplayCode = "EarningCode"
-        '    'LookUpFilterKey = "EarningType = 'R'"
-        '    Return GetLookupByNameCode()
-        'End Function
-
     End Class
 
 End Namespace

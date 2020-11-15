@@ -207,8 +207,8 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _depositTypesByCode = PresenterObj.GetLookupListByCodeName("DepositType")
-            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            _depositTypesByCode = PresenterObj.GetLookup("DepositType")
+            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
             cboAccountIdNo.EndUpdate()

@@ -291,7 +291,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("CS,CK,BA")
             cboAccountIdNo.EndUpdate()
@@ -561,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayorIdNo.DataSource = cbDataSource
             Dim payorTypeEnum = GetEnumCodeValue(Of ReceiptTypeSelection)(cPayorType)
             If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
-                cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
+                cbDataSource = PresenterObj.GetLookup("Customer")
                 DataGridViewJournalItems.Visible = False
                 DataGridViewCsrOiItems.Visible = True
             Else
@@ -571,11 +571,11 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
                 If payorTypeEnum = ReceiptTypeSelection.Customer Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Customer")
+                    cbDataSource = PresenterObj.GetLookup("Customer")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Employee")
+                    cbDataSource = PresenterObj.GetLookup("Employee")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-                    cbDataSource = PresenterObj.GetLookupListByCodeName("Supplier")
+                    cbDataSource = PresenterObj.GetLookup("Supplier")
                 Else
                     txtPayorName.Visible = True
                     txtPayorName.Width = _payorOrigWidth

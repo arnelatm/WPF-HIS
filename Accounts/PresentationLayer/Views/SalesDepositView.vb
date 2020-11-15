@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views
     Public Class SalesDepositView
         Implements ISalesDepositView, ISelfDuplicating
 
-        Private ReadOnly _vatRate As Decimal = My.Settings.VatRate
+        Private ReadOnly _vatRate As Decimal = GlobalVariables.VatRate() / 100D
         Private _computedBankCharge As Decimal = 0D
         Private _computedBankChargeVat As Decimal = 0D
         Private _bankChargeDifference As Decimal = 0D

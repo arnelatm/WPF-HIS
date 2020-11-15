@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateParentIdData()
-            SecurityGroupView.cacParentIdNo.DataSource = PresenterObj.GetSecurityGroupList()
+            SecurityGroupView.cacParentIdNo.DataSource = PresenterObj.GetLookup("SecurityGroup")
         End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)

@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("RevCostCenter")
+            cacParentIdNo.DataSource = PresenterObj.GetLookup("RevCostCenter")
             cacRcType.DataSource = PresenterObj.MakeEnumComboList(Of RevCostTypeSelection)
         End Sub
 

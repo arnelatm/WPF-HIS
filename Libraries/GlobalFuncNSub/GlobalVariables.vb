@@ -18,6 +18,8 @@ Public Class GlobalVariables
     Private Shared _defaultUnMirroredCultureInfoStr As String
     Private Shared _maximumOpenForms As Int16
     Private Shared _useOriginalAppTextLanguageForEnglish As Nullable(Of Boolean)
+    Private Shared _lookupSetting As String = "CodeAndName"
+    Private Shared _vatRate As Decimal = 0D
 
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
@@ -413,6 +415,20 @@ Public Class GlobalVariables
         End Get
     End Property
 
+    Public Shared ReadOnly Property LookupSetting() As String
+        Get
+            Try
+                If _lookupSetting = "" Then
+                    Return "CodeAndName"
+                End If
+                Return ConfigurationManager.AppSettings("Lookup")
+            Catch
+                _lookupSetting = "CodeAndName"
+                Return _lookupSetting
+            End Try
+        End Get
+    End Property
+
     Public Shared ReadOnly Property UseOriginalAppTextLanguageForEnglish() As Boolean
         Get
             Try
@@ -423,6 +439,20 @@ Public Class GlobalVariables
                 _useOriginalAppTextLanguageForEnglish = True
             End Try
             Return True
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property VatRate() As Decimal
+        Get
+            Try
+                If _vatRate > 0 Then
+                    Return _vatRate
+                End If
+                Return Convert.ToDecimal(ConfigurationManager.AppSettings("VatRate"))
+            Catch
+                _vatRate = 8
+                Return _vatRate
+            End Try
         End Get
     End Property
 

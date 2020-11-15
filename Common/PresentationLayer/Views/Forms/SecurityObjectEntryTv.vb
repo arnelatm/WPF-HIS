@@ -88,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateParentIdData()
-            cacParentIdNo.DataSource = PresenterObj.GetSecurityObjectList()
+            cacParentIdNo.DataSource = PresenterObj.GetLookup("SecurityObject") 
         End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)

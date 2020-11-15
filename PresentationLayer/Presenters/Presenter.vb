@@ -219,8 +219,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Property View As T
 
-    Protected Property LookUpDisplayCode As String
-
     'Public Sub FindFieldContinue(recIdKey As Integer)
     '    If _debugSwitch Then
     '        Debugger.Break()
@@ -234,13 +232,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '        CancelClose = True
     '    End If
     'End Sub
-    Protected Property LookUpDisplayName As String
 
-    Protected Property LookUpDisplayNameArabic As String
-    Protected Property LookUpFieldsToShow As String()
-    Protected Property LookUpFilterKey As String = Nothing
-    Protected Property LookUpSortExpression As String
-    Protected Property LookUpTableToGet As String
     Protected Shared Property Model As New Model()
 
     Protected Shared Property ModelTblColProp As IModelTblColProp
@@ -440,22 +432,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Function GetEnumList(Of TE)()
-        If EnumConverter Is Nothing Then
-            EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-        End If
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
-        'Dim enumValues = [Enum].GetValues(GetType(TE))
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
-                .IdNo = CInt(c),
-                .Code = GetEnumCode(c),
-                .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-            }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
 
     Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
         Try
@@ -580,24 +556,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Function GetSecurityGroupList(Optional ByVal sortKey As String = "SecurityGroupName")
-        LookUpTableToGet = "SecurityGroup"
-        LookUpSortExpression = sortKey
-        LookUpDisplayName = "SecurityGroupName"
-        LookUpDisplayNameArabic = "SecurityGroupNameAra"
-        LookUpDisplayCode = "SecurityGroupCode"
-        Return GetLookupByCodeName()
-    End Function
-
-    Public Function GetSecurityObjectList(Optional ByVal sortKey As String = "SecurityObjectName")
-        LookUpTableToGet = "SecurityObject"
-        LookUpSortExpression = sortKey
-        LookUpDisplayName = "SecurityObjectName"
-        LookUpDisplayNameArabic = "SecurityObjectNameAra"
-        LookUpDisplayCode = "IdNo"
-        Return GetLookupByCodeName()
-    End Function
-
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
             Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey)
@@ -652,6 +610,47 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                                       {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
+    End Function
+
+    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = SortOrderKey.Length
+                Dim suffix = ""
+                Dim nameOfField As String = sortKey
+                If stringLength > 4 And
+                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = SortOrderKey.Substring(stringLength - 4)
+                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
+                End If
+                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
+                sortKey = nameOfField + suffix
+            End If
+        End If
+        Return sortKey
+    End Function
+
+    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
+        Dim translatedSortOrder As String = dataSortOrder
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = dataSortOrder.Length
+                Dim suffix = ""
+                Dim nameOfField As String = dataSortOrder
+                If stringLength > 4 And
+                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = dataSortOrder.Substring(stringLength - 4)
+                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
+                End If
+                If PropertyExists(dModel, nameOfField + "ara") Then
+                    nameOfField += "Ara"
+                    translatedSortOrder = nameOfField + suffix
+                End If
+            End If
+        End If
+        Return translatedSortOrder
     End Function
 
     Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
@@ -850,18 +849,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return True
     End Function
 
-    Public Function MakeEnumComboList(Of TE)()
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
-                .IdNo = CInt(c),
-                .Code = GetEnumCode(c),
-                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-            }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
+
 
     Public Overridable Function OkToMove() As Boolean
         Dim retValue As Boolean = False
@@ -1159,95 +1147,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return 0
     End Function
 
-    Protected Function GetFilteredLookupByCodeName()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetFilteredLookupByName()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetFilteredLookupByNameCode()
-        ProcessLookupFields()
-        Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetLookupByCodeName()
-        ProcessLookupFields()
-        Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetLookupByName(Optional filter As String = Nothing)
-        ProcessLookupFields()
-        If filter IsNot Nothing Then
-            Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, filter, LookUpFieldsToShow)
-        Else
-            Return Model.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-        End If
-    End Function
-
-    Protected Function GetLookupByNameCode()
-        ProcessLookupFields()
-        Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-    End Function
-
-    Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = pDisplayName Then
-                LookUpSortExpression = pDisplayNameArabic
-            End If
-            dFieldName = pDisplayNameArabic
-        Else
-            dFieldName = pDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
-        Dim translatedSortOrder As String = dataSortOrder
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = dataSortOrder.Length
-                Dim suffix = ""
-                Dim nameOfField As String = dataSortOrder
-                If stringLength > 4 And
-                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = dataSortOrder.Substring(stringLength - 4)
-                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
-                End If
-                If PropertyExists(dModel, nameOfField + "ara") Then
-                    nameOfField += "Ara"
-                    translatedSortOrder = nameOfField + suffix
-                End If
-            End If
-        End If
-        Return translatedSortOrder
-    End Function
-
-    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = SortOrderKey.Length
-                Dim suffix = ""
-                Dim nameOfField As String = sortKey
-                If stringLength > 4 And
-                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = SortOrderKey.Substring(stringLength - 4)
-                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
-                End If
-                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
-                sortKey = nameOfField + suffix
-            End If
-        End If
-        Return sortKey
-    End Function
-
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = False
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
@@ -1416,19 +1315,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
         Return retValue
     End Function
-
-    Private Sub ProcessLookupFields()
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = LookUpDisplayName Then
-                LookUpSortExpression = LookUpDisplayNameArabic
-            End If
-            dFieldName = LookUpDisplayNameArabic
-        Else
-            dFieldName = LookUpDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
-    End Sub
 
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False

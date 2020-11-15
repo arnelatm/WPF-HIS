@@ -100,7 +100,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetLookupListByCodeName("RevenueGroup")
+            cacParentIdNo.DataSource = PresenterObj.GetLookup("RevenueGroup")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

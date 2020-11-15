@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacSecurityGroupIdNo.DataSource = PresenterObj.GetSecurityGroupList()
+            cacSecurityGroupIdNo.DataSource = PresenterObj.GetLookup("SecurityGroup")
             cacSecurityLevel.DataSource = PresenterObj.MakeEnumComboList(Of SecurityLevelSelection)
         End Sub
 

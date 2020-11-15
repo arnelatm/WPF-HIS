@@ -261,8 +261,8 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cacCountryCode.DataSource = PresenterObj.GetLookupListByCodeName("Country")
-            cacBankIdNo.DataSource = PresenterObj.GetLookupListByCodeName("Bank")
+            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
+            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
         End Sub
 

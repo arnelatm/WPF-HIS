@@ -53,24 +53,6 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("15")>  _
-        Public ReadOnly Property VatRate() As Decimal
-            Get
-                Return CType(Me("VatRate"),Decimal)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("CodeName")>  _
-        Public ReadOnly Property Lookup() As String
-            Get
-                Return CType(Me("Lookup"),String)
-            End Get
-        End Property
     End Class
 End Namespace
 

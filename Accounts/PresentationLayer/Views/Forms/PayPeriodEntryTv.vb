@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CacPayCycleIdNo.DataSource = PresenterObj.GetLookupListByCodeName("PayCycle")
+            CacPayCycleIdNo.DataSource = PresenterObj.GetLookup("PayCycle")
         End Sub
 
 #Region "Fields"

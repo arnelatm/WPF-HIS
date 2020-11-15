@@ -1,4 +1,7 @@
-﻿Imports AATM.Common.PresentationLayer.Models
+﻿Imports System.ComponentModel
+Imports System.Globalization
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
@@ -10,7 +13,6 @@ Namespace PresentationLayer.Presenters
         Inherits Presenter(Of T, TM)
 
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
-
         Shared Sub New()
             CommonModel = New ModelCommon()
             ModelDefaultFieldValue = New ModelDefaultFieldValue
@@ -23,6 +25,13 @@ Namespace PresentationLayer.Presenters
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
+        Protected Property LookUpDisplayCode As String
+        Protected Property LookUpDisplayName As String
+        Protected Property LookUpDisplayNameArabic As String
+        Protected Property LookUpFieldsToShow As String()
+        Protected Property LookUpFilterKey As String = Nothing
+        Protected Property LookUpSortExpression As String
+        Protected Property LookUpTableToGet As String
         Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
@@ -48,9 +57,21 @@ Namespace PresentationLayer.Presenters
             Return GetFilteredLookupByCodeName()
         End Function
 
-        Public Function GetLookupListByCodeName(listName As String)
-            ComposeLookupParameters(listName)
-            Return GetLookupByCodeName()
+        Public Function GetEnumList(Of TE)()
+            If EnumConverter Is Nothing Then
+                EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+            End If
+            Dim dataList As New List(Of ClassesLibrary.LookupData)
+            'Dim enumValues = [Enum].GetValues(GetType(TE))
+            For Each c In [Enum].GetValues(GetType(TE))
+                Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = GetEnumCode(c),
+                    .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
+                }
+                dataList.Add(data)
+            Next
+            Return dataList
         End Function
 
         Public Function GetFilteredLookupListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
@@ -59,26 +80,25 @@ Namespace PresentationLayer.Presenters
             Return GetFilteredLookupByCodeName()
         End Function
 
-        Public Function GetLookupListByName(listName As String, Optional filter As String = Nothing)
+        Public Function GetLookup(listName As String)
             ComposeLookupParameters(listName)
-            Return GetLookupByName(filter)
+            ProcessLookupFields()
+            Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
         End Function
 
-        Public Function GetLookupListByNameCode(listName As String, Optional filter As String = Nothing)
-            ComposeLookupParameters(listName)
-            Return GetLookupByNameCode(filter)
-        End Function
-
-        Private Sub ComposeLookupParameters(listName As String, Optional fieldName As String = Nothing)
-            If fieldName Is Nothing Then
-                fieldName = listName
+        Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
+            Dim dFieldName As String
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                If LookUpSortExpression = pDisplayName Then
+                    LookUpSortExpression = pDisplayNameArabic
+                End If
+                dFieldName = pDisplayNameArabic
+            Else
+                dFieldName = pDisplayName
             End If
-            LookUpTableToGet = listName
-            LookUpDisplayName = fieldName + "Name"
-            LookUpSortExpression = LookUpDisplayName
-            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = fieldName + "Code"
-        End Sub
+            LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
+            Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
+        End Function
 
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
@@ -147,6 +167,45 @@ Namespace PresentationLayer.Presenters
             Return
         End Sub
 
+        Public Function MakeEnumComboList(Of TE)()
+            Dim dataList As New List(Of ClassesLibrary.LookupData)
+            For Each c In [Enum].GetValues(GetType(TE))
+                Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = GetEnumCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                }
+                dataList.Add(data)
+            Next
+            Return dataList
+        End Function
+
+        Protected Function GetFilteredLookupByCodeName()
+            ProcessLookupFields()
+            Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        End Function
+
+        Protected Function GetFilteredLookupByName()
+            ProcessLookupFields()
+            Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        End Function
+
+        Protected Function GetFilteredLookupByNameCode()
+            ProcessLookupFields()
+            Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        End Function
+
+        Private Sub ComposeLookupParameters(listName As String, Optional fieldName As String = Nothing)
+            If fieldName Is Nothing Then
+                fieldName = listName
+            End If
+            LookUpTableToGet = listName
+            LookUpDisplayName = fieldName + "Name"
+            LookUpSortExpression = LookUpDisplayName
+            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+            LookUpDisplayCode = fieldName + "Code"
+        End Sub
+
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
             If type.GetProperty("Posted") IsNot Nothing Then
@@ -156,6 +215,19 @@ Namespace PresentationLayer.Presenters
                     CancelEdit = True
                 End If
             End If
+        End Sub
+
+        Private Sub ProcessLookupFields()
+            Dim dFieldName As String
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                If LookUpSortExpression = LookUpDisplayName Then
+                    LookUpSortExpression = LookUpDisplayNameArabic
+                End If
+                dFieldName = LookUpDisplayNameArabic
+            Else
+                dFieldName = LookUpDisplayName
+            End If
+            LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
         End Sub
 
     End Class
