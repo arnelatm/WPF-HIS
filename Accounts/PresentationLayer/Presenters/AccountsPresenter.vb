@@ -105,8 +105,8 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetAccount(idNo As String)
-            Dim AccountModel As New ModelAccounts("Account")
-            Return AccountModel.GetRecordById(Of AccountModel)(idNo)
+            Dim accountModel As New ModelAccounts("Account")
+            Return accountModel.GetRecordById(Of AccountModel)(idNo)
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
