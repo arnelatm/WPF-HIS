@@ -691,7 +691,7 @@
     <value>108, 23</value>
   </data>
   <data name="txtORNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;txtORNumber.Name" xml:space="preserve">
     <value>txtORNumber</value>
@@ -793,7 +793,7 @@
     <value>127, 23</value>
   </data>
   <data name="txtVatNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;txtVatNumber.Name" xml:space="preserve">
     <value>txtVatNumber</value>
@@ -928,7 +928,7 @@
     <value>563, 40</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -1254,6 +1254,9 @@
   <data name="chkCancelled.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
+  <data name="chkCancelled.Text" xml:space="preserve">
+    <value> </value>
+  </data>
   <data name="chkCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
@@ -1331,6 +1334,9 @@
   </data>
   <data name="chkPosted.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
+  </data>
+  <data name="chkPosted.Text" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="chkPosted.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>

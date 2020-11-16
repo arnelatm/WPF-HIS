@@ -279,7 +279,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
             PresenterObj.UpdateFirstLine()
-            BindJournalItem()
+            'BindJournalItem()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -314,7 +314,7 @@ Namespace PresentationLayer.Views.Forms
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < JournalItems.Count() Then
                                 JournalItems(nIndex).AccountIdNo = newValue
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"

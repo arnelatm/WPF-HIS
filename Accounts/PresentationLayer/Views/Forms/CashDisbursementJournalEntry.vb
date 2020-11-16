@@ -62,7 +62,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtAmount.Text = FormatMoney(Value)
-
             End Set
         End Property
 
@@ -190,6 +189,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPaymentType.SetValue(Value)
+                SetPayeeProperty(Value)
             End Set
         End Property
 
@@ -350,7 +350,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindJournalItem()
-            SuspendLayout()
+                    SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
@@ -587,7 +587,9 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
             Else
                 DataGridViewCadOiItems.Focus()
-                DataGridViewCadOiItems.CurrentCell = DataGridViewCadOiItems(DataGridViewCadOiItems.Columns("dgvAmount").Index(), 0)
+                If DataGridViewCadOiItems.CurrentCell IsNot Nothing Then
+                    DataGridViewCadOiItems.CurrentCell = DataGridViewCadOiItems(DataGridViewCadOiItems.Columns("dgvAmount").Index(), 0)
+                End If
             End If
         End Sub
 
@@ -619,7 +621,7 @@ Namespace PresentationLayer.Views.Forms
                         Next
                     End If
                 End If
-                BindJournalItem()
+                'BindJournalItem()
                 UpdateJiTotals()
             End If
         End Sub
@@ -633,7 +635,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+           If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
                 If _apFooter IsNot Nothing Then
                     _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")

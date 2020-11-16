@@ -373,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
             PresenterObj.UpdateFirstLine()
-            BindJournalItem()
+            'BindJournalItem()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
