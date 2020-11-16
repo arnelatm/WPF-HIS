@@ -271,7 +271,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            DataGridViewDistributionSchemeItems.Focus()
+            If DataGridViewDistributionSchemeItems IsNot Nothing Then
+                DataGridViewDistributionSchemeItems.Focus()
+            End If
         End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)

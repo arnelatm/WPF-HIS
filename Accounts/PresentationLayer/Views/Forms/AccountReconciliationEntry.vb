@@ -214,7 +214,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            PresenterObj.GetDetailAccountList()
+            'cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CK,CS")
             cboAccountIdNo.EndUpdate()

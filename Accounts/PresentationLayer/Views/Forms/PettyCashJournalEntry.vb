@@ -308,7 +308,7 @@ Namespace PresentationLayer.Views.Forms
          {"IdNo", TxtIdNo},
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
-         {"DepositType", cboPaymentType},
+         {"PaymentType", cboPaymentType},
          {"PayeeIdNo", cboPayeeIdNo},
          {"PayeeName", txtPayeeName},
          {"Posted", chkPosted},
@@ -496,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
                                 JournalItems(nIndex).PayeeType = Account.PayeeType
                                 JournalItems(nIndex).AccountName = Account.AccountName
                                 UpdateTotalVatAmount()
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"
@@ -584,12 +584,18 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.Visible Then
-                DataGridViewJournalItems.Focus()
-                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
-            Else
-                DataGridViewPcsOiItems.Focus()
-                DataGridViewPcsOiItems.CurrentCell = DataGridViewPcsOiItems(DataGridViewPcsOiItems.Columns("dgvAmount").Index(), 0)
+            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                If DataGridViewJournalItems.Visible Then
+                    DataGridViewJournalItems.Focus()
+                    If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                    End If
+                Else
+                    DataGridViewPcsOiItems.Focus()
+                    If DataGridViewPcsOiItems.CurrentCell IsNot Nothing Then
+                        DataGridViewPcsOiItems.CurrentCell = DataGridViewPcsOiItems(DataGridViewPcsOiItems.Columns("dgvAmount").Index(), 0)
+                    End If
+                End If
             End If
         End Sub
 
@@ -621,7 +627,7 @@ Namespace PresentationLayer.Views.Forms
                         Next
                     End If
                 End If
-                BindJournalItem()
+                'BindJournalItem()
                 UpdateJiTotals()
             End If
         End Sub

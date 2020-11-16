@@ -411,7 +411,7 @@ Namespace PresentationLayer.Views.Forms
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < JournalItems.Count() Then
                                 JournalItems(nIndex).AccountIdNo = newValue
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvamount"
@@ -509,7 +509,7 @@ Namespace PresentationLayer.Views.Forms
                                 JournalItems(nIndex).SpecialAccount = Account.SpecialAccount
                                 JournalItems(nIndex).PayeeType = Account.PayeeType
                                 JournalItems(nIndex).AccountName = Account.AccountName
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"
@@ -595,12 +595,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.Visible Then
-                DataGridViewJournalItems.Focus()
-                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(1, 0)
-            Else
-                DataGridViewCsrOiItems.Focus()
-                DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
+            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                If DataGridViewJournalItems.Visible Then
+                    DataGridViewJournalItems.Focus()
+                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(1, 0)
+                Else
+                    DataGridViewCsrOiItems.Focus()
+                    DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
+                End If
             End If
         End Sub
 
@@ -632,7 +634,7 @@ Namespace PresentationLayer.Views.Forms
                         Next
                     End If
                 End If
-                BindJournalItem()
+                'BindJournalItem()
                 UpdateJiTotals()
             End If
         End Sub

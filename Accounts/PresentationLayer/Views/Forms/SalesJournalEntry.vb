@@ -383,7 +383,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            DataGridViewSalesDeposits.Focus()
+            If DataGridViewSalesDeposits IsNot Nothing Then
+                DataGridViewSalesDeposits.Focus()
+            End If
         End Sub
 
         Private Sub UpdateJiTotals()

@@ -524,7 +524,7 @@ Namespace PresentationLayer.Views.Forms
                                 JournalItems(nIndex).PayeeType = Account.PayeeType
                                 JournalItems(nIndex).AccountName = Account.AccountName
                                 UpdateTotalVatAmount()
-                                BindJournalItem()
+                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"
@@ -613,12 +613,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.Visible Then
-                DataGridViewJournalItems.Focus()
-                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
-            Else
-                DataGridViewCkdOiItems.Focus()
-                DataGridViewCkdOiItems.CurrentCell = DataGridViewCkdOiItems(DataGridViewCkdOiItems.Columns("dgvAmount").Index(), 0)
+            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                If DataGridViewJournalItems.Visible Then
+                    DataGridViewJournalItems.Focus()
+                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                Else
+                    DataGridViewCkdOiItems.Focus()
+                    DataGridViewCkdOiItems.CurrentCell = DataGridViewCkdOiItems(DataGridViewCkdOiItems.Columns("dgvAmount").Index(), 0)
+                End If
             End If
         End Sub
 
@@ -650,7 +652,7 @@ Namespace PresentationLayer.Views.Forms
                         Next
                     End If
                 End If
-                BindJournalItem()
+                'BindJournalItem()
                 UpdateJiTotals()
             End If
         End Sub

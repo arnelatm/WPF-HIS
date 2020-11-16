@@ -373,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
             cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
             cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
             cacApAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.AccountsPayable))
-            cacExpAccountIdNo.DataSource = PresenterObj.GetAccountList()
+            cacExpAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
         End Sub
