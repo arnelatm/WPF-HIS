@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -210,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
             _depositTypesByCode = PresenterObj.GetLookup("DepositType")
             _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("SL")
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GlobalFunctions.GetEnumCode(SpecialAccountSelection.Sales))
             cboAccountIdNo.EndUpdate()
         End Sub
 

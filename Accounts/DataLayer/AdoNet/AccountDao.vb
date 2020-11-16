@@ -80,7 +80,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef Account As Account) As Integer Implements IDaoAll(Of Account).UpdateRecord
+        Public Function UpdateRecord(ByRef account As Account) As Integer Implements IDaoAll(Of Account).UpdateRecord
             Dim sql As String =
                     "UPDATE [Account] SET " &
                     "AccountCode = @AccountCode," &
@@ -96,10 +96,10 @@ Namespace DataLayer.AdoNet
                     "SpecialAccount = @SpecialAccount," &
                     "WithReconciliation = @WithReconciliation" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(Account))
+            Return Db.Update(sql, Take(account))
         End Function
 
-        Public Function AddRecord(ByRef Account As Account) As Integer Implements IDaoAll(Of Account).AddRecord
+        Public Function AddRecord(ByRef account As Account) As Integer Implements IDaoAll(Of Account).AddRecord
             Dim sql As String =
                     "INSERT INTO [Account] (" &
                     "AccountCode," &
@@ -128,7 +128,7 @@ Namespace DataLayer.AdoNet
                     "@SpecialAccount," &
                     "@WithReconciliation" &
                     ")"
-            Return Db.Insert(sql, Take(Account))
+            Return Db.Insert(sql, Take(account))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Account) =

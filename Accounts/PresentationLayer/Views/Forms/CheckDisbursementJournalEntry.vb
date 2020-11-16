@@ -314,10 +314,10 @@ Namespace PresentationLayer.Views.Forms
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("CK")
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.CheckingAccount))
             cboAccountIdNo.EndUpdate()
             cboDiscountAccountIdNo.BeginUpdate()
-            cboDiscountAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PD")
+            cboDiscountAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboDiscountAccountIdNo.EndUpdate()
         End Sub
 

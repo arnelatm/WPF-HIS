@@ -288,7 +288,7 @@ Namespace PresentationLayer.Views.Forms
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             cboPaymentType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PC")
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.PettyCashAccount))
             cboAccountIdNo.EndUpdate()
             cboDiscountAccountIdNo.BeginUpdate()
             cboDiscountAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PD")

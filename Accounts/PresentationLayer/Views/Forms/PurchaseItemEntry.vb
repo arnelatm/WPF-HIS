@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
@@ -218,7 +219,7 @@ Namespace PresentationLayer.Views.Forms
             cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboGlAccountIdNo.EndUpdate()
             cboVatAccountIdNo.BeginUpdate()
-            cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("VI")
+            cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.VatInput))
             cboVatAccountIdNo.EndUpdate()
         End Sub
 
