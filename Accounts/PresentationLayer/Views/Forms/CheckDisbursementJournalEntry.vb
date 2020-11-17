@@ -557,8 +557,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
             SuspendLayout()
-            SetPayeeDataSource(cPaymentType)
             Dim savePayeeIdNo = PayeeIdNo
+            SetPayeeDataSource(cPaymentType)
             If savePayeeIdNo Is Nothing Then
                 cboPayeeIdNo.SelectedValue = ""
             Else
@@ -613,12 +613,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
-                If DataGridViewJournalItems.Visible Then
-                    DataGridViewJournalItems.Focus()
+            If DataGridViewJournalItems.Visible Then
+                DataGridViewJournalItems.Focus()
+                If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
                     DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
-                Else
-                    DataGridViewCkdOiItems.Focus()
+                End If
+            Else
+                DataGridViewCkdOiItems.Focus()
+                If DataGridViewCkdOiItems.CurrentCell IsNot Nothing Then
                     DataGridViewCkdOiItems.CurrentCell = DataGridViewCkdOiItems(DataGridViewCkdOiItems.Columns("dgvAmount").Index(), 0)
                 End If
             End If

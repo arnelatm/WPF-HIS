@@ -532,7 +532,7 @@ Public Class CaComboBox
             DisplayMember = ValueMember
             Text = value
             DisplayMember = saveDisplayMember
-            'SelectedValue = value
+            SelectedValue = value
             If ValueMember.ToLower() = "idno" Then
                 If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
                     SelectedIndex = -1

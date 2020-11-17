@@ -411,7 +411,7 @@ Namespace PresentationLayer.Views.Forms
                         selectedRow = DataGridViewPcsOiItems.Rows(.RowIndex).DataBoundItem
                         selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
                         UpdateOiTotals()
-                        SendKeys.Send("{HOME}{DOWN}{TAB}{TAB}{TAB}")
+                        'SendKeys.Send("{HOME}{DOWN}{TAB}{TAB}{TAB}")
                     Case $"dgvbalance"
                         SendKeys.Send("{DOWN}")
                 End Select
@@ -535,8 +535,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
             SuspendLayout()
-            SetPayeeDataSource(cPaymentType)
             Dim savePayeeIdNo = PayeeIdNo
+            SetPayeeDataSource(cPaymentType)
             If savePayeeIdNo Is Nothing Then
                 cboPayeeIdNo.SelectedValue = ""
             Else
@@ -597,8 +597,6 @@ Namespace PresentationLayer.Views.Forms
                     If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
                         DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
                     End If
-                Else
-                    Dim x = 0
                 End If
             Else
                 If DataGridViewPcsOiItems IsNot Nothing Then
@@ -606,8 +604,6 @@ Namespace PresentationLayer.Views.Forms
                         DataGridViewPcsOiItems.Focus()
                         DataGridViewPcsOiItems.CurrentCell = DataGridViewPcsOiItems(DataGridViewPcsOiItems.Columns("dgvAmount").Index(), 0)
                     End If
-                Else
-                    Dim x = 0
                 End If
             End If
         End Sub

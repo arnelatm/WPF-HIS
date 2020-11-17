@@ -595,12 +595,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
-                If DataGridViewJournalItems.Visible Then
-                    DataGridViewJournalItems.Focus()
-                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(1, 0)
-                Else
-                    DataGridViewCsrOiItems.Focus()
+
+            If DataGridViewJournalItems.Visible Then
+                DataGridViewJournalItems.Focus()
+                If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                End If
+            Else
+                DataGridViewCsrOiItems.Focus()
+                If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
                     DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
                 End If
             End If

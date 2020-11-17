@@ -102,15 +102,15 @@ Public Class CDataGridView
         End Set
     End Property
 
-    Private Sub DataGridView_CellEnter(ByVal sender As Object,
-                                        ByVal e As DataGridViewCellEventArgs) _
-        Handles Me.CellEnter
-        If Columns(SequenceColumn) IsNot Nothing Then
-            If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
-                SendKeys.Send("{TAB}")
-            End If
-        End If
-    End Sub
+    'Private Sub DataGridView_CellEnter(ByVal sender As Object,
+    '                                    ByVal e As DataGridViewCellEventArgs) _
+    '    Handles Me.CellEnter
+    '    If Columns(SequenceColumn) IsNot Nothing Then
+    '        If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
+    '            SendKeys.Send("{TAB}")
+    '        End If
+    '    End If
+    'End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -248,11 +248,12 @@ Public Class CDataGridView
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
             If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-                CurrentCell = Me(ColumnCount() - 1, CurrentCell.RowIndex())
-                'ProcessTabKey(keyData)
-                'Return True
+                If CurrentCell.RowIndex()+1 < RowCount() Then
+                    CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+                    Return True
+                End If
             End If
-            ProcessTabKey(keyData)
+            Me.ProcessTabKey(keyData)
             Return True
             'Dim currentColumnIndex As Int16
             'currentColumnIndex = CurrentCell.ColumnIndex()
@@ -623,7 +624,9 @@ Public Class CDataGridView
 
     Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
         If Me.CurrentCell.RowIndex = RowCount() - 1 Then
-            AddNewRow()
+            If Me.AllowUserToAddRows Then
+                AddNewRow()
+            End If
         End If
     End Sub
 
