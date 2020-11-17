@@ -779,6 +779,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpDateCreated.SecurityKey = Nothing
         Me.dtpDateCreated.ShowLongDate = false
         Me.dtpDateCreated.ShowTime = true
+        Me.dtpDateCreated.TabStop = false
         Me.dtpDateCreated.TargetCalendar = Nothing
         Me.dtpDateCreated.Value = Nothing
         Me.dtpDateCreated.ValueIsMandatory = false
