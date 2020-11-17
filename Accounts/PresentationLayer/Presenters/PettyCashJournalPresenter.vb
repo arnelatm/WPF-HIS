@@ -20,8 +20,9 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _pcsOiItemModel As New ModelAccounts("PcsOiItem")
         Private ReadOnly _pcsJournalItemModel As New ModelAccounts("PettyCashJournalItem")
-        Private ReadOnly _pettyCashCount As Int16 = 0
-        Private ReadOnly _defaultPettyCashAccount As Int32
+
+        'Private ReadOnly _pettyCashCount As Int16 = 0
+        Private ReadOnly _defaultPettyCashAccount As Int16
 
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
@@ -33,9 +34,11 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
-            _pettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Account", "SpecialAccount")
-            If _pettyCashCount = 0 Then
+            PettyCashCount = ModelPresenter.CountRecordWithKey("PC", "Account", "SpecialAccount")
+
+            If PettyCashCount = 0 Then
                 Messaging.Show(True, "MsgNoPettyCashAccount")
+                GoQuit()
             End If
 
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
@@ -121,6 +124,14 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
         End Sub
+
+        Friend ReadOnly Property PettyCashCount As Int16
+
+        Public ReadOnly Property DefaultPettyCashAccount As Int16
+            Get
+                Return GetRecordFieldWithKey(GetEnumCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+            End Get
+        End Property
 
         Public Function PcsOiItemDataIsValid() As Boolean
             Dim retVal = True

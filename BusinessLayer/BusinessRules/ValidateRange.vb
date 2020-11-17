@@ -32,45 +32,45 @@ Namespace BusinessRules
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
-                Dim value As String = GetPropertyValue(businessObject).ToString()
+                Dim value = GetPropertyValue(businessObject)
 
                 Select Case DataType
                     Case ValidationDataType.Integer
 
-                        Dim imin As Integer = Integer.Parse(Min.ToString())
-                        Dim imax As Integer = Integer.Parse(Max.ToString())
-                        Dim ival As Integer = Integer.Parse(value)
+                        Dim iMin As Integer = Integer.Parse(Min.ToString())
+                        Dim iMax As Integer = Integer.Parse(Max.ToString())
+                        Dim iVal As Integer = IIf(value Is Nothing, 0, Integer.Parse(value.ToString()))
 
-                        Return (ival >= imin AndAlso ival <= imax)
+                        Return (iVal >= iMin AndAlso iVal <= iMax)
 
                     Case ValidationDataType.Double
-                        Dim dmin As Double = Double.Parse(Min.ToString())
-                        Dim dmax As Double = Double.Parse(Max.ToString())
-                        Dim dval As Double = Double.Parse(value)
+                        Dim dMin As Double = Double.Parse(Min.ToString())
+                        Dim dMax As Double = Double.Parse(Max.ToString())
+                        Dim dVal As Double = IIf(value Is Nothing, 0, Double.Parse(value))
 
-                        Return (dval >= dmin AndAlso dval <= dmax)
+                        Return (dVal >= dMin AndAlso dVal <= dMax)
 
                     Case ValidationDataType.Decimal
-                        Dim cmin As Decimal = Decimal.Parse(Min.ToString())
-                        Dim cmax As Decimal = Decimal.Parse(Max.ToString())
-                        Dim cval As Decimal = Decimal.Parse(value)
+                        Dim cMin As Decimal = Decimal.Parse(Min.ToString())
+                        Dim cMax As Decimal = Decimal.Parse(Max.ToString())
+                        Dim cVal As Decimal = IIf(value Is Nothing, 0, Decimal.Parse(value))
 
-                        Return (cval >= cmin AndAlso cval <= cmax)
+                        Return (cVal >= cMin AndAlso cVal <= cMax)
 
                     Case ValidationDataType.Date
-                        Dim tmin As Date = Date.Parse(Min.ToString())
-                        Dim tmax As Date = Date.Parse(Max.ToString())
-                        Dim tval As Date = Date.Parse(value)
+                        Dim tMin As Date = Date.Parse(Min.ToString())
+                        Dim tMax As Date = Date.Parse(Max.ToString())
+                        Dim tVal As Date = IIf(value Is Nothing, Date.MinValue, Date.Parse(value))
 
-                        Return (tval.TrimMilliseconds() >= tmin.TrimMilliseconds() AndAlso tval.TrimMilliseconds() <= tmax.TrimMilliseconds())
+                        Return (tVal.TrimMilliseconds() >= tMin.TrimMilliseconds() AndAlso tVal.TrimMilliseconds() <= tMax.TrimMilliseconds())
 
                     Case ValidationDataType.String
 
-                        Dim smin As String = Min.ToString()
-                        Dim smax As String = Max.ToString()
+                        Dim sMin As String = Min.ToString()
+                        Dim sMax As String = Max.ToString()
 
-                        Dim result1 As Integer = String.Compare(smin, value)
-                        Dim result2 As Integer = String.Compare(value, smax)
+                        Dim result1 As Integer = String.Compare(sMin, IIf(value Is Nothing, "", value))
+                        Dim result2 As Integer = String.Compare(IIf(value Is Nothing, "", value), sMax)
 
                         Return result1 >= 0 AndAlso result2 <= 0
                 End Select

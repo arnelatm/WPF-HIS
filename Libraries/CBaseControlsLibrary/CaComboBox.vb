@@ -68,10 +68,12 @@ Public Class CaComboBox
             _displayOnly = value
             If value Then
                 ReadOnlyCombo = True
+                DropDownStyle = ComboBoxStyle.Simple
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
                 ReadOnlyCombo = False
+                DropDownStyle = ComboBoxStyle.DropDownList
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
@@ -536,7 +538,7 @@ Public Class CaComboBox
                     SelectedIndex = -1
                     Text = value.ToString()
                     If value IsNot Nothing And value > 0 Then
-                        MessagingLibrary.Messaging.ShowParametrizedMessage(True,"MsgInvalidValue",{"fieldValue",value.ToString(),"fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+                        MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
                         'Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                     End If
                 End If
@@ -545,7 +547,7 @@ Public Class CaComboBox
                     SelectedIndex = -1
                     Text = value.ToString()
                     If value <> vbNullChar And Text <> "" Then
-                        MessagingLibrary.Messaging.ShowParametrizedMessage(True,"MsgInvalidValue",{"fieldValue",Text,"fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+                        MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", Text, "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
                         'Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                     End If
                 Else
