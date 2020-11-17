@@ -1582,7 +1582,7 @@
     <value>3, 3</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>973, 305</value>
+    <value>963, 295</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1687,10 +1687,10 @@
     <value>808, 17</value>
   </metadata>
   <data name="DataGridViewPcsOiItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>982, 3</value>
+    <value>972, 3</value>
   </data>
   <data name="DataGridViewPcsOiItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>953, 305</value>
+    <value>953, 295</value>
   </data>
   <data name="DataGridViewPcsOiItems.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

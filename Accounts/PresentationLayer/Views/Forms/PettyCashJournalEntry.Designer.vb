@@ -985,6 +985,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.DataGridViewPcsOiItems.AllowUserToAddRows = false
         Me.DataGridViewPcsOiItems.AllowUserToDeleteRows = false
+        Me.DataGridViewPcsOiItems.AllowUserToResizeRows = false
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
         Me.DataGridViewPcsOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewPcsOiItems.AutoGenerateColumns = false

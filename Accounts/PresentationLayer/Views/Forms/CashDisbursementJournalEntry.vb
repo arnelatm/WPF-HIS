@@ -350,7 +350,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindJournalItem()
-                    SuspendLayout()
+            SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
@@ -526,8 +526,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
             SuspendLayout()
-            SetPayeeDataSource(cPaymentType)
             Dim savePayeeIdNo = PayeeIdNo
+            SetPayeeDataSource(cPaymentType)
             If savePayeeIdNo Is Nothing Then
                 cboPayeeIdNo.SelectedValue = ""
             Else
@@ -583,8 +583,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewJournalItems.Visible Then
-                DataGridViewJournalItems.Focus()
-                DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                    DataGridViewJournalItems.Focus()
+                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                End If
             Else
                 DataGridViewCadOiItems.Focus()
                 If DataGridViewCadOiItems.CurrentCell IsNot Nothing Then
@@ -635,7 +637,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-           If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
                 If _apFooter IsNot Nothing Then
                     _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")
