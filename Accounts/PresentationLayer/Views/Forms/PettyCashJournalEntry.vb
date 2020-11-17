@@ -28,6 +28,7 @@ Namespace PresentationLayer.Views.Forms
         Private _pcsOiItems As List(Of PcsOiItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
+        Public Property MyPresenter As PettyCashJournalPresenter
 
         Public Sub New()
             MyBase.New()
@@ -37,10 +38,10 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "PettyCashJournal"
             SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
-
             _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New PettyCashJournalPresenter(Me)
+            MyPresenter = PresenterObj
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
@@ -434,6 +435,12 @@ Namespace PresentationLayer.Views.Forms
             _apFooter.ColumnToSum("dgvBalance") = True
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
+            If MyPresenter.PettyCashCount = 1 Then
+                cboAccountIdNo.DisplayOnly = True
+                cboAccountIdNo.TabStop = False
+                cboAccountIdNo.SelectedValue = MyPresenter.DefaultPettyCashAccount
+            End If
+
         End Sub
 
         Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated

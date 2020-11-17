@@ -427,15 +427,15 @@ Public Class CCustomDateTimePicker
         End Set
     End Property
 
-    Private Sub txtTime_GotFocus(sender As Object, e As EventArgs) Handles txtTime.GotFocus
-        If txtDate.Text <> "" And txtDate.Text <> EmptyMask Then
-            If txtTime.Text = "" OrElse txtTime.Text = "  :  :" Then
-                txtTime.Text = "000000"
-            End If
-        End If
-        txtTime.SelectionStart = 0
-        txtTime.SelectionLength = 8
-    End Sub
+    'Private Sub txtTime_GotFocus(sender As Object, e As EventArgs) Handles txtTime.GotFocus
+    '    If txtDate.Text <> "" And txtDate.Text <> EmptyMask Then
+    '        If txtTime.Text = "" OrElse txtTime.Text = "  :  :" Then
+    '            txtTime.Text = "000000"
+    '        End If
+    '    End If
+    '    txtTime.SelectionStart = 0
+    '    txtTime.SelectionLength = 8
+    'End Sub
 
     Private Sub txtTime_Validating(sender As Object, e As CancelEventArgs) Handles txtTime.Validating
         If _

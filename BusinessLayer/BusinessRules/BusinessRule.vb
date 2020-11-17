@@ -45,7 +45,8 @@ Namespace BusinessRules
             If businessObject.GetType().GetProperty([Property]) Is Nothing Then
                 Return Nothing
             Else
-                Return businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
+                Dim retValue = businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
+                Return retValue
             End If
         End Function
 

@@ -69,7 +69,7 @@ Public Class BfMain
     Public Property CancelClose As Boolean
 
     'Public Shadows Event Load(sender As Object, e As EventArgs)
-    Public Property PresenterObj As Object
+    Public Property PresenterObj
 
     Public Property Errors As List(Of String) Implements IView.Errors
 
@@ -546,7 +546,7 @@ Public Class BfMain
             DoubleBuffered = True
             Dim cmd As String
             RaiseEvent BeforeLoad()
-                                CaptionCollection = StoreCaptions1.StoreCaptions(Me)
+            CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             cmd = "SELECT IdNo FROM SystemForms where FormName ='" + Name + "'"
             FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
