@@ -284,15 +284,15 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
-            cboPaymentType.BeginUpdate()
+            'cboPaymentType.BeginUpdate()
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
-            cboPaymentType.EndUpdate()
-            cboAccountIdNo.BeginUpdate()
+            'cboPaymentType.EndUpdate()
+            'cboAccountIdNo.BeginUpdate()
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.PettyCashAccount))
-            cboAccountIdNo.EndUpdate()
-            cboDiscountAccountIdNo.BeginUpdate()
+            'cboAccountIdNo.EndUpdate()
+            'cboDiscountAccountIdNo.BeginUpdate()
             cboDiscountAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PD")
-            cboDiscountAccountIdNo.EndUpdate()
+            'cboDiscountAccountIdNo.EndUpdate()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -584,17 +584,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
-                If DataGridViewJournalItems.Visible Then
+            If DataGridViewJournalItems.Visible Then
+                If DataGridViewJournalItems IsNot Nothing Then
                     DataGridViewJournalItems.Focus()
                     If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
                         DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
                     End If
                 Else
-                    DataGridViewPcsOiItems.Focus()
+                    Dim x = 0
+                End If
+            Else
+                If DataGridViewPcsOiItems IsNot Nothing Then
                     If DataGridViewPcsOiItems.CurrentCell IsNot Nothing Then
+                        DataGridViewPcsOiItems.Focus()
                         DataGridViewPcsOiItems.CurrentCell = DataGridViewPcsOiItems(DataGridViewPcsOiItems.Columns("dgvAmount").Index(), 0)
                     End If
+                Else
+                    Dim x = 0
                 End If
             End If
         End Sub
