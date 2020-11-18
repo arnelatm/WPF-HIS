@@ -352,13 +352,13 @@ Namespace PresentationLayer.Presenters
 
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
-            Dim Account As AccountModel
+            Dim account As AccountModel
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
                 If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
-                        Account = GetAccount(item.AccountIdNo)
-                        specialAccount = Account.SpecialAccount
+                        account = GetAccount(item.AccountIdNo)
+                        specialAccount = account.SpecialAccount
                     End If
                     If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                         MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
@@ -369,11 +369,7 @@ Namespace PresentationLayer.Presenters
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                             retValue = False
                             Exit For
                         End If
@@ -381,11 +377,7 @@ Namespace PresentationLayer.Presenters
                         If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                             retValue = False
                             Exit For
                         End If
@@ -393,11 +385,7 @@ Namespace PresentationLayer.Presenters
                         If specialAccount IsNot Nothing AndAlso "AP|EL|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                             retValue = False
                             Exit For
                         End If

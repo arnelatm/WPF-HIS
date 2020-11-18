@@ -96,13 +96,13 @@ Namespace PresentationLayer.Presenters
             Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
         End Function
 
-        Public Function GetRegularEarningsByCode()
-            Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        End Function
+        'Public Function GetRegularEarningsByCode()
+        '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
+        'End Function
 
-        Public Function GetRegularDeductionsByCode()
-            Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        End Function
+        'Public Function GetRegularDeductionsByCode()
+        '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
+        'End Function
 
         Public Function GetAccount(idNo As String)
             Dim accountModel As New ModelAccounts("Account")

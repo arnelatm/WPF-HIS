@@ -151,7 +151,7 @@ Namespace PresentationLayer.Presenters
                 Dim cPayeeType As String
                 Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
-                Dim Account As AccountModel
+                Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -159,8 +159,8 @@ Namespace PresentationLayer.Presenters
                     retValue = False
                 Else
                     For Each item In View.JournalItems
-                        Account = GetAccount(item.AccountIdNo)
-                        specialAccount = Account.SpecialAccount
+                        account = GetAccount(item.AccountIdNo)
+                        specialAccount = account.SpecialAccount
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
@@ -168,7 +168,7 @@ Namespace PresentationLayer.Presenters
                         ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Dim caption = "Invalid Entry!"
-                            Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
+                            Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed")
                             message = message.Interpolate(Function(x) lineNumber)
                             Messaging.Show(message, caption)
                             retValue = False
@@ -177,11 +177,7 @@ Namespace PresentationLayer.Presenters
                             If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Employee Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
-                                Dim caption = "Invalid Entry"
-                                Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                                Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
-                                caption = Messaging.TranslateCaption(caption)
-                                Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                                 retValue = False
                             End If
                         End If

@@ -198,7 +198,7 @@
         Return message
     End Function
 
-    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As Array)
+    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As String())
         Dim cMessage = Messaging.GetMessage(translate, key)
         Dim cCaption = Messaging.GetMessageCaption(key)
         Dim message = Messaging.ReplaceValues(cMessage, variables)
