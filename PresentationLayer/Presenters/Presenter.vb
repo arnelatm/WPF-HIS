@@ -958,7 +958,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '        'dim code As String
     '        data.IdNo = CInt(c)
     '        'code = GlobalFunctions.GetDescription(c,"")
-    '        data.Code = GetEnumCode(c)
+    '        data.Code = EnumToCode(c)
     '        'x = Adapter.GetEnumDescription(c)
     '        'data.Code = Adaptor.GetEnumDescription(c)
     '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)

@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         'Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        '    If GetEnumCodeValue(Of PayGroupTypeSelection)(View.PayGroupType) = PayGroupTypeSelection.Others Then
+        '    If CodeToEnum(Of PayGroupTypeSelection)(View.PayGroupType) = PayGroupTypeSelection.Others Then
 
         '    End If
         'End Sub

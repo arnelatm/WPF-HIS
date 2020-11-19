@@ -190,7 +190,7 @@ Namespace PresentationLayer.Views.Forms
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.EmployeeLoan))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.EmployeeLoan))
             cboAccountIdNo.EndUpdate()
         End Sub
 

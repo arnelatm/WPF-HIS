@@ -33,7 +33,7 @@ Namespace PresentationLayer.Presenters
                     Exit For
                 Else
                     cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
+                    If Not String.IsNullOrEmpty(cPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Supplier/Vendor accounts allowed for this entry!", item.Sequence))
                         retVal = False
                     End If

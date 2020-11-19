@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
-            Dim filter = "DeductionType='" + GlobalFunctions.GetEnumCode(DeductionTypeSelection.Regular) + "'"
+            Dim filter = "DeductionType='" + GlobalFunctions.EnumToCode(DeductionTypeSelection.Regular) + "'"
             Dim sql As String =
                     " SELECT " &
                     "Amount," &

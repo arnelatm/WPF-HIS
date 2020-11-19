@@ -141,7 +141,7 @@ Public Module GlobalFunctions
         Return defDesc
     End Function
 
-    Public Function GetEnumCode(ByVal enumValue As Object) As String
+    Public Function EnumToCode(ByVal enumValue As Object) As String
         If enumValue Is Nothing Then
             Return Nothing
         End If
@@ -154,7 +154,7 @@ Public Module GlobalFunctions
         Return Nothing
     End Function
 
-    Public Function GetEnumCodeValue(Of T)(description As String) As T
+    Public Function CodeToEnum(Of T)(description As String) As T
         Dim type = GetType(T)
         If Not type.IsEnum Then
             Throw New InvalidOperationException()
@@ -868,7 +868,7 @@ Public Module GlobalFunctions
     '    End Try
     '    Return retDate
     'End Function
-    'Public Function GetEnumCode(ByVal enumValue As Type) As EnumCode
+    'Public Function EnumToCode(ByVal enumValue As Type) As EnumCode
     '    If enumValue Is Nothing Then
     '        Return Nothing
     '    End If
@@ -877,7 +877,7 @@ Public Module GlobalFunctions
     '    Return myAtt
     'End Function
 
-    'Public Function GetEnumCode(T As Type)
+    'Public Function EnumToCode(T As Type)
     '    Dim myAttribute As EnumCode = CType(Attribute.GetCustomAttribute(t, GetType(EnumCode)), EnumCode)
     '    If myAttribute Is Nothing Then
     '        Return Nothing
@@ -885,7 +885,7 @@ Public Module GlobalFunctions
     '    Return MyAttribute.EnumCode
     'End Function
 
-    'Public Function GetEnumCode(Of T)(ByVal enumValue As Object, ByVal defDesc As String) As String
+    'Public Function EnumToCode(Of T)(ByVal enumValue As Object, ByVal defDesc As String) As String
 
     '    Dim enumAtt As Attribute
     '    enumAtt = CType(tmpInfo.GetCustomAttributes(GetType(PositionAttribute), True)(0), PositionAttribute)

@@ -439,8 +439,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-                If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
                         bscadOiItems.Clear()
                         UpdateOiTotals()
@@ -511,7 +511,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
             Else
                 btnViewGL.Visible = False
@@ -546,7 +546,7 @@ Namespace PresentationLayer.Views.Forms
             txtPayeeName.Width = 0
             Dim cbDataSource = Nothing
             cboPayeeIdNo.DataSource = cbDataSource
-            Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 cbDataSource = PresenterObj.GetLookup("Supplier")
                 DataGridViewJournalItems.Visible = False
@@ -576,7 +576,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If
         End Sub
@@ -637,7 +637,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+            If PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Then
                 If _apFooter IsNot Nothing Then
                     _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")

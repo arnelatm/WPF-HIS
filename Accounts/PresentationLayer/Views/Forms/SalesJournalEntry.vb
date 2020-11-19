@@ -211,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
             _depositTypesByCode = PresenterObj.GetLookup("DepositType")
             _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GlobalFunctions.GetEnumCode(SpecialAccountSelection.Sales))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GlobalFunctions.EnumToCode(SpecialAccountSelection.Sales))
             cboAccountIdNo.EndUpdate()
         End Sub
 

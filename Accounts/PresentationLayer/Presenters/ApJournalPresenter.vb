@@ -167,7 +167,7 @@ Namespace PresentationLayer.Presenters
                     item.JournalIdNo = View.IdNo
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
-                    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
+                    Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
                         If item.Credit = 0 Then
                             item.Credit = View.Amount
@@ -205,7 +205,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cPayeeType As String
-                Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount)
+                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
                 Dim Account As AccountModel
                 Dim dateToday As DateTime = Now()
@@ -218,7 +218,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.JournalItems
                         Account = GetAccount(item.AccountIdNo)
                         specialAccount = Account.SpecialAccount
-                        If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsPayable) Then
+                        If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "C" Then
                                 nTotalAp = nTotalAp + item.Credit - item.Debit
                             Else
@@ -238,7 +238,7 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                         Else
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso GetEnumCodeValue(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
+                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
                                 Dim caption = "Invalid Entry"

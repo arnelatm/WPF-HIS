@@ -19,8 +19,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeCode"))
                 AddRule(New ValidateRequired("PaymentMethod"))
                 AddRule(New ValidateEmail("Email"))
-                AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
-                AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.GetEnumCode(PayrollPaymentMethodSelection.BankTransfer)))
+                AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
+                AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
             End If
         End Sub
 

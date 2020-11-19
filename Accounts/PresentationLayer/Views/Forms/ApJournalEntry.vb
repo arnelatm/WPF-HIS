@@ -269,7 +269,7 @@ Namespace PresentationLayer.Views.Forms
             cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.AccountsPayable))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
             cboAccountIdNo.EndUpdate()
         End Sub
 

@@ -272,8 +272,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         'Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs)
-        '    If GetEnumCodeValue(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
-        '        cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
+        '    If CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Miscellaneous Then
+        '        cboFrequency.SelectedValue = EnumToCode(PayFrequencySelection.AsNeeded)
         '        cboFrequency.DisplayOnly = True
         '    Else
         '        cboFrequency.DisplayOnly = False
@@ -321,7 +321,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             floCalculation.Visible = False
             tlpCalculation.Visible = False
-            Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+            Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
             Dim cellPosOrig As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
             Dim cellPos As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)

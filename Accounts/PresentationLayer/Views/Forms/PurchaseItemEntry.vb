@@ -219,7 +219,7 @@ Namespace PresentationLayer.Views.Forms
             cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboGlAccountIdNo.EndUpdate()
             cboVatAccountIdNo.BeginUpdate()
-            cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.VatInput))
+            cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.VatInput))
             cboVatAccountIdNo.EndUpdate()
         End Sub
 

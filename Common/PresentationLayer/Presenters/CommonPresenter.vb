@@ -67,7 +67,7 @@ Namespace PresentationLayer.Presenters
             For Each c In [Enum].GetValues(GetType(TE))
                 Dim data As New ClassesLibrary.LookupData With {
                     .IdNo = CInt(c),
-                    .Code = GetEnumCode(c),
+                    .Code = EnumToCode(c),
                     .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
                 }
                 dataList.Add(data)
@@ -173,7 +173,7 @@ Namespace PresentationLayer.Presenters
             For Each c In [Enum].GetValues(GetType(TE))
                 Dim data As New ClassesLibrary.LookupData With {
                     .IdNo = CInt(c),
-                    .Code = GetEnumCode(c),
+                    .Code = EnumToCode(c),
                     .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
                 }
                 dataList.Add(data)
