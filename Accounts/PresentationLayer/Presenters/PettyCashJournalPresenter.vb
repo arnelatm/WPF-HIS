@@ -129,7 +129,7 @@ Namespace PresentationLayer.Presenters
 
         Public ReadOnly Property DefaultPettyCashAccount As Int16
             Get
-                Return GetRecordFieldWithKey(GetEnumCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+                Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
             End Get
         End Property
 
@@ -244,7 +244,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                 SetAsideJournalItems()
                 View.UnApplied = 0
                 View.Applied = View.Amount
@@ -252,7 +252,7 @@ Namespace PresentationLayer.Presenters
                 MakeJournalItem()
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
-                If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     ' if AP Entry generate paid open invoices
                     nRowCount = 1
                     View.TotalDebits = 0
@@ -286,7 +286,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 View.TotalDebits = 0
                 View.TotalCredits = 0
                 For Each ji In View.PcsOiItems
@@ -320,7 +320,7 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Petty Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
@@ -328,7 +328,7 @@ Namespace PresentationLayer.Presenters
                     If retValue Then
                         retValue = JournalItemDataIsValid()
                     End If
-                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If PcsOiItemDataIsValid() Then
                         retValue = True
                     Else
@@ -355,7 +355,7 @@ Namespace PresentationLayer.Presenters
             Dim Account As AccountModel
             Dim specialAccount As String = ""
             For Each item In View.JournalItems
-                If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
                         Account = GetAccount(item.AccountIdNo)
                         specialAccount = Account.SpecialAccount
@@ -365,7 +365,7 @@ Namespace PresentationLayer.Presenters
                         retValue = False
                         Exit For
                     End If
-                    If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
+                    If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
                         If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
@@ -377,7 +377,7 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         End If
-                    ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
+                    ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
                         If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
@@ -408,7 +408,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub MakeJournalItem()
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
@@ -569,7 +569,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 ' save the generated open invoices
                 retVal = UpdateOpenInvoices()
             End If
@@ -724,6 +724,30 @@ Namespace PresentationLayer.Presenters
                 DtUpdateTable.Clear()
                 _pcsJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
+        End Sub
+
+        Public Sub AutoApplyAmount()
+            Dim amountToApply = View.Amount
+            Dim appliedAmount As Decimal = 0D
+            For Each item In View.PcsOiItems
+                If amountToApply = 0D Then
+                    item.Amount = 0D
+                    item.DiscountTaken = 0D
+                    item.Balance = item.PreviousBalance
+                Else
+                    If item.PreviousBalance <= amountToApply Then
+                        amountToApply -= item.PreviousBalance
+                        item.Amount = item.PreviousBalance
+                        item.DiscountTaken = 0D
+                        item.Balance = 0D
+                    Else
+                        item.Amount = amountToApply
+                        item.DiscountTaken = 0D
+                        item.Balance = item.PreviousBalance - amountToApply
+                        amountToApply = 0D
+                    End If
+                End If
+            Next item            
         End Sub
 
     End Class

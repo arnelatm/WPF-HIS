@@ -236,8 +236,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         'Private Sub OnDeductionTypeSelectedIndexChanged(sender As Object, e As EventArgs)
-        '    If GetEnumCodeValue(Of DeductionTypeSelection)(cboDeductionType.SelectedValue) = DeductionTypeSelection.Miscellaneous Then
-        '        cboFrequency.SelectedValue = GetEnumCode(PayFrequencySelection.AsNeeded)
+        '    If CodeToEnum(Of DeductionTypeSelection)(cboDeductionType.SelectedValue) = DeductionTypeSelection.Miscellaneous Then
+        '        cboFrequency.SelectedValue = EnumToCode(PayFrequencySelection.AsNeeded)
         '        cboFrequency.DisplayOnly = True
         '    Else
         '        cboFrequency.DisplayOnly = False
@@ -282,7 +282,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateCalculationTabDisplay()
-            Dim curCalculationType = GetEnumCodeValue(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+            Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             Select Case curCalculationType
                 Case CalculationTypeSelection.Fixed
                     cboBasePaymentIdNo.Visible = False

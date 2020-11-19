@@ -265,6 +265,8 @@
     <Compile Include="PresentationLayer\Presenters\LeavePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter2.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>

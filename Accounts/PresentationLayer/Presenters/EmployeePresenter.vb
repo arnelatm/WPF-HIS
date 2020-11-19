@@ -171,7 +171,7 @@ Namespace PresentationLayer.Presenters
                     '    item.EarningIdNo
 
                     'Next
-                    'If GetEnumCodeValue(Of PaymentTypeSelection)(View.DepositType) <> PaymentTypeSelection.AccountsPayable Then
+                    'If CodeToEnum(Of PaymentTypeSelection)(View.DepositType) <> PaymentTypeSelection.AccountsPayable Then
                     '    If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                     '        Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                     '        retValue = False
@@ -179,7 +179,7 @@ Namespace PresentationLayer.Presenters
                     '    If retValue Then
                     '        retValue = JournalItemDataIsValid()
                     '    End If
-                    'ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.DepositType) = PaymentTypeSelection.AccountsPayable Then
+                    'ElseIf CodeToEnum(Of PaymentTypeSelection)(View.DepositType) = PaymentTypeSelection.AccountsPayable Then
                     '    If CadOiItemDataIsValid() Then
                     '        retValue = True
                     '    Else

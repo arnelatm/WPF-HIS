@@ -110,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim payFrequency As PayFrequencySelection
                 Dim payCycleDaoObject As New PayCycleDao
                 Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
-                payFrequency = GetEnumCodeValue(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
+                payFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
                 Select Case payFrequency
                     Case PayFrequencySelection.Monthly
                         PresenterObj.InitializeMonthlyPayroll(payCycleRecord)

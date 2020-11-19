@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
                     retVal = False
                     Exit For
                 Else
-                    Dim enumPayeeType = GetEnumCodeValue(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType"))
+                    Dim enumPayeeType = CodeToEnum(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType"))
                     If enumPayeeType = PayeeTypeSelection.Employee Or enumPayeeType = PayeeTypeSelection.Customer Or enumPayeeType = PayeeTypeSelection.Supplier Then
                         MessageBox.Show(String.Format("Error in line {0:N0} Sorry the account entered is either a Customer/Employee/Supplier Account. Such entries are not allowed for General Journal.", item.Sequence))
                         retVal = False

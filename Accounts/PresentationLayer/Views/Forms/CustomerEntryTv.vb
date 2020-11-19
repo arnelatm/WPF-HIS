@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
             cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacArAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.AccountsReceivable))
+            cacArAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
             cacRevAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
@@ -360,10 +360,10 @@ Namespace PresentationLayer.Views.Forms
 
         'Public Property Active As Boolean Implements ICustomerView.Active
         '    Get
-        '        Return GetEnumCode(tcbActive.Text)
+        '        Return EnumToCode(tcbActive.Text)
         '    End Get
         '    Set(value As Boolean)
-        '        tcbActive.Text = GetEnumCode(value)
+        '        tcbActive.Text = EnumToCode(value)
         '    End Set
         'End Property
 

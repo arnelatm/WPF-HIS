@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
         '        '    item.JournalIdNo = View.IdNo
         '        '    item.Sequence = 1
         '        '    item.AccountIdNo = View.AccountIdNo
-        '        '    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
+        '        '    Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
         '        '    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
         '        '        If item.Credit = 0 Then
         '        '            item.Credit = View.Amount
@@ -119,7 +119,7 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         'Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        '    If GetEnumCodeValue(Of EarningTypeSelection)(View.EarningType) = EarningTypeSelection.Others Then
+        '    If CodeToEnum(Of EarningTypeSelection)(View.EarningType) = EarningTypeSelection.Others Then
 
         '    End If
         'End Sub

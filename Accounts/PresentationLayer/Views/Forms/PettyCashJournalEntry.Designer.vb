@@ -29,22 +29,22 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.floHeader1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -89,6 +89,20 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
         Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewPcsOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.dgvSequencePcsOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
@@ -106,23 +120,10 @@ Namespace PresentationLayer.Views.Forms
         Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataGridViewPcsOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequencePcsOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PcsIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsPcsOiItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFullEntryArea.SuspendLayout
         Me.floPurchaseJournalHeader.SuspendLayout
@@ -130,11 +131,19 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.SuspendLayout
         Me.floPurchaseJournalItems.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewPcsOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsPcsOiItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFooter.SuspendLayout
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsPcsOiItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'floFullEntryArea
         '
@@ -829,6 +838,193 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
         Me.DataGridViewJournalItems.StartTrackingChanges = false
         '
+        'DataGridViewPcsOiItems
+        '
+        Me.DataGridViewPcsOiItems.AllowUserToAddRows = false
+        Me.DataGridViewPcsOiItems.AllowUserToDeleteRows = false
+        Me.DataGridViewPcsOiItems.AllowUserToResizeRows = false
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewPcsOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.DataGridViewPcsOiItems.AutoGenerateColumns = false
+        Me.DataGridViewPcsOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewPcsOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePcsOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.PcsIdNoDataGridViewTextBoxColumn, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
+        Me.DataGridViewPcsOiItems.DataInGridChanged = false
+        Me.DataGridViewPcsOiItems.DataSource = Me.bsPcsOiItems
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewPcsOiItems.DefaultCellStyle = DataGridViewCellStyle17
+        Me.DataGridViewPcsOiItems.DgvFooter = Nothing
+        Me.DataGridViewPcsOiItems.DisplayOnly = false
+        Me.DataGridViewPcsOiItems.Ea = EventAggregator2
+        Me.DataGridViewPcsOiItems.EditingMode = false
+        Me.DataGridViewPcsOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewPcsOiItems.FirstRowDeletionEnabled = false
+        Me.DataGridViewPcsOiItems.FirstRowInsertionEnabled = false
+        resources.ApplyResources(Me.DataGridViewPcsOiItems, "DataGridViewPcsOiItems")
+        Me.DataGridViewPcsOiItems.Name = "DataGridViewPcsOiItems"
+        Me.DataGridViewPcsOiItems.ReadOnly = true
+        Me.DataGridViewPcsOiItems.SequenceColumn = "dgvSequencePcsOi"
+        Me.DataGridViewPcsOiItems.SequenceFieldName = "Sequence"
+        Me.DataGridViewPcsOiItems.ShowFooter = false
+        Me.DataGridViewPcsOiItems.ShowInsertColumnWhenEditing = false
+        Me.DataGridViewPcsOiItems.StartTrackingChanges = false
+        '
+        'dgvSequencePcsOi
+        '
+        Me.dgvSequencePcsOi.DataPropertyName = "Sequence"
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequencePcsOi.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvSequencePcsOi.DisplayOnly = true
+        Me.dgvSequencePcsOi.EditingMode = false
+        resources.ApplyResources(Me.dgvSequencePcsOi, "dgvSequencePcsOi")
+        Me.dgvSequencePcsOi.Name = "dgvSequencePcsOi"
+        Me.dgvSequencePcsOi.ReadOnly = true
+        '
+        'dgvInvoiceNo
+        '
+        Me.dgvInvoiceNo.DataPropertyName = "InvoiceNo"
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle9
+        Me.dgvInvoiceNo.EditingMode = false
+        resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
+        Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
+        Me.dgvInvoiceNo.ReadOnly = true
+        Me.dgvInvoiceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvJournalCode
+        '
+        Me.dgvJournalCode.DataPropertyName = "JournalCode"
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+        Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle11
+        Me.dgvJournalCode.EditingMode = false
+        resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
+        Me.dgvJournalCode.Name = "dgvJournalCode"
+        Me.dgvJournalCode.ReadOnly = true
+        Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvJournalIdNoAp
+        '
+        Me.dgvJournalIdNoAp.DataPropertyName = "JournalIdNo"
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+        Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle12
+        Me.dgvJournalIdNoAp.EditingMode = false
+        resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
+        Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
+        Me.dgvJournalIdNoAp.ReadOnly = true
+        Me.dgvJournalIdNoAp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvPreviousBalance
+        '
+        Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle13.Format = "###,##0.00"
+        Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle13
+        Me.dgvPreviousBalance.EditingMode = false
+        resources.ApplyResources(Me.dgvPreviousBalance, "dgvPreviousBalance")
+        Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
+        Me.dgvPreviousBalance.ReadOnly = true
+        Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'dgvAmount
+        '
+        Me.dgvAmount.DataPropertyName = "Amount"
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.Format = "###,##0.00"
+        Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle14
+        Me.dgvAmount.EditingMode = false
+        resources.ApplyResources(Me.dgvAmount, "dgvAmount")
+        Me.dgvAmount.Name = "dgvAmount"
+        Me.dgvAmount.ReadOnly = true
+        Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'dgvDiscountTaken
+        '
+        Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle15.Format = "###,##0.00"
+        Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle15
+        Me.dgvDiscountTaken.EditingMode = false
+        resources.ApplyResources(Me.dgvDiscountTaken, "dgvDiscountTaken")
+        Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
+        Me.dgvDiscountTaken.ReadOnly = true
+        Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'dgvBalance
+        '
+        Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvBalance.DataPropertyName = "Balance"
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle16.Format = "###,##0.00"
+        Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle16
+        Me.dgvBalance.EditingMode = false
+        resources.ApplyResources(Me.dgvBalance, "dgvBalance")
+        Me.dgvBalance.Name = "dgvBalance"
+        Me.dgvBalance.ReadOnly = true
+        Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'JournalItemIdNo
+        '
+        Me.JournalItemIdNo.DataPropertyName = "JournalItemIdNo"
+        resources.ApplyResources(Me.JournalItemIdNo, "JournalItemIdNo")
+        Me.JournalItemIdNo.Name = "JournalItemIdNo"
+        Me.JournalItemIdNo.ReadOnly = true
+        '
+        'OpenInvoiceIdNo
+        '
+        Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
+        resources.ApplyResources(Me.OpenInvoiceIdNo, "OpenInvoiceIdNo")
+        Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
+        Me.OpenInvoiceIdNo.ReadOnly = true
+        '
+        'floFooter
+        '
+        Me.floFooter.BackColor = System.Drawing.Color.Transparent
+        Me.floFooter.Controls.Add(Me.btnViewGL)
+        Me.floFooter.Controls.Add(Me.btnAutoApply)
+        resources.ApplyResources(Me.floFooter, "floFooter")
+        Me.floFooter.Name = "floFooter"
+        '
+        'btnViewGL
+        '
+        Me.btnViewGL.DesignerSelected = false
+        Me.btnViewGL.DisplayOnly = true
+        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+        Me.btnViewGL.ImageIndex = 0
+        Me.btnViewGL.Name = "btnViewGL"
+        Me.btnViewGL.OriginalImageName = Nothing
+        Me.btnViewGL.SecurityKey = ""
+        '
+        'btnAutoApply
+        '
+        Me.btnAutoApply.DesignerSelected = false
+        Me.btnAutoApply.DisplayOnly = true
+        resources.ApplyResources(Me.btnAutoApply, "btnAutoApply")
+        Me.btnAutoApply.ImageIndex = 0
+        Me.btnAutoApply.Name = "btnAutoApply"
+        Me.btnAutoApply.OriginalImageName = Nothing
+        Me.btnAutoApply.SecurityKey = ""
+        '
         'dgvSequence
         '
         Me.dgvSequence.DataPropertyName = "Sequence"
@@ -981,65 +1177,6 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
         '
-        'DataGridViewPcsOiItems
-        '
-        Me.DataGridViewPcsOiItems.AllowUserToAddRows = false
-        Me.DataGridViewPcsOiItems.AllowUserToDeleteRows = false
-        Me.DataGridViewPcsOiItems.AllowUserToResizeRows = false
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewPcsOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
-        Me.DataGridViewPcsOiItems.AutoGenerateColumns = false
-        Me.DataGridViewPcsOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewPcsOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePcsOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.PcsIdNoDataGridViewTextBoxColumn, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
-        Me.DataGridViewPcsOiItems.DataInGridChanged = false
-        Me.DataGridViewPcsOiItems.DataSource = Me.bsPcsOiItems
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewPcsOiItems.DefaultCellStyle = DataGridViewCellStyle17
-        Me.DataGridViewPcsOiItems.DgvFooter = Nothing
-        Me.DataGridViewPcsOiItems.DisplayOnly = false
-        Me.DataGridViewPcsOiItems.Ea = EventAggregator2
-        Me.DataGridViewPcsOiItems.EditingMode = false
-        Me.DataGridViewPcsOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewPcsOiItems.FirstRowDeletionEnabled = false
-        Me.DataGridViewPcsOiItems.FirstRowInsertionEnabled = false
-        resources.ApplyResources(Me.DataGridViewPcsOiItems, "DataGridViewPcsOiItems")
-        Me.DataGridViewPcsOiItems.Name = "DataGridViewPcsOiItems"
-        Me.DataGridViewPcsOiItems.ReadOnly = true
-        Me.DataGridViewPcsOiItems.SequenceColumn = "dgvSequencePcsOi"
-        Me.DataGridViewPcsOiItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewPcsOiItems.ShowFooter = false
-        Me.DataGridViewPcsOiItems.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewPcsOiItems.StartTrackingChanges = false
-        '
-        'dgvSequencePcsOi
-        '
-        Me.dgvSequencePcsOi.DataPropertyName = "Sequence"
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequencePcsOi.DefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvSequencePcsOi.EditingMode = false
-        resources.ApplyResources(Me.dgvSequencePcsOi, "dgvSequencePcsOi")
-        Me.dgvSequencePcsOi.Name = "dgvSequencePcsOi"
-        Me.dgvSequencePcsOi.ReadOnly = true
-        '
-        'dgvInvoiceNo
-        '
-        Me.dgvInvoiceNo.DataPropertyName = "InvoiceNo"
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle9
-        Me.dgvInvoiceNo.EditingMode = false
-        resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
-        Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
-        Me.dgvInvoiceNo.ReadOnly = true
-        Me.dgvInvoiceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
         'DgvTransactionDate
         '
         Me.DgvTransactionDate.DataPropertyName = "TransactionDate"
@@ -1051,91 +1188,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DgvTransactionDate.Name = "DgvTransactionDate"
         Me.DgvTransactionDate.ReadOnly = true
         Me.DgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvJournalCode
-        '
-        Me.dgvJournalCode.DataPropertyName = "JournalCode"
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-        Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvJournalCode.EditingMode = false
-        resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
-        Me.dgvJournalCode.Name = "dgvJournalCode"
-        Me.dgvJournalCode.ReadOnly = true
-        Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvJournalIdNoAp
-        '
-        Me.dgvJournalIdNoAp.DataPropertyName = "JournalIdNo"
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-        Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvJournalIdNoAp.EditingMode = false
-        resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
-        Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
-        Me.dgvJournalIdNoAp.ReadOnly = true
-        Me.dgvJournalIdNoAp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvPreviousBalance
-        '
-        Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.Format = "###,##0.00"
-        Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle13
-        Me.dgvPreviousBalance.EditingMode = false
-        resources.ApplyResources(Me.dgvPreviousBalance, "dgvPreviousBalance")
-        Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
-        Me.dgvPreviousBalance.ReadOnly = true
-        Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvAmount
-        '
-        Me.dgvAmount.DataPropertyName = "Amount"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.Format = "###,##0.00"
-        Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle14
-        Me.dgvAmount.EditingMode = false
-        resources.ApplyResources(Me.dgvAmount, "dgvAmount")
-        Me.dgvAmount.Name = "dgvAmount"
-        Me.dgvAmount.ReadOnly = true
-        Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvDiscountTaken
-        '
-        Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle15.Format = "###,##0.00"
-        Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle15
-        Me.dgvDiscountTaken.EditingMode = false
-        resources.ApplyResources(Me.dgvDiscountTaken, "dgvDiscountTaken")
-        Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
-        Me.dgvDiscountTaken.ReadOnly = true
-        Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvBalance
-        '
-        Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvBalance.DataPropertyName = "Balance"
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle16.Format = "###,##0.00"
-        Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle16
-        Me.dgvBalance.EditingMode = false
-        resources.ApplyResources(Me.dgvBalance, "dgvBalance")
-        Me.dgvBalance.Name = "dgvBalance"
-        Me.dgvBalance.ReadOnly = true
-        Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DataGridViewTextBoxColumn6
         '
@@ -1151,40 +1203,9 @@ Namespace PresentationLayer.Views.Forms
         Me.PcsIdNoDataGridViewTextBoxColumn.Name = "PcsIdNoDataGridViewTextBoxColumn"
         Me.PcsIdNoDataGridViewTextBoxColumn.ReadOnly = true
         '
-        'JournalItemIdNo
-        '
-        Me.JournalItemIdNo.DataPropertyName = "JournalItemIdNo"
-        resources.ApplyResources(Me.JournalItemIdNo, "JournalItemIdNo")
-        Me.JournalItemIdNo.Name = "JournalItemIdNo"
-        Me.JournalItemIdNo.ReadOnly = true
-        '
-        'OpenInvoiceIdNo
-        '
-        Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
-        resources.ApplyResources(Me.OpenInvoiceIdNo, "OpenInvoiceIdNo")
-        Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
-        Me.OpenInvoiceIdNo.ReadOnly = true
-        '
         'bsPcsOiItems
         '
         Me.bsPcsOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcsOiItemModel)
-        '
-        'floFooter
-        '
-        Me.floFooter.BackColor = System.Drawing.Color.Transparent
-        Me.floFooter.Controls.Add(Me.btnViewGL)
-        resources.ApplyResources(Me.floFooter, "floFooter")
-        Me.floFooter.Name = "floFooter"
-        '
-        'btnViewGL
-        '
-        Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
-        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-        Me.btnViewGL.ImageIndex = 0
-        Me.btnViewGL.Name = "btnViewGL"
-        Me.btnViewGL.OriginalImageName = Nothing
-        Me.btnViewGL.SecurityKey = ""
         '
         'PettyCashJournalEntry
         '
@@ -1201,10 +1222,10 @@ Namespace PresentationLayer.Views.Forms
         Me.floHeader2.PerformLayout
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridViewPcsOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPcsOiItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.floFooter.ResumeLayout(false)
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsPcsOiItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -1298,5 +1319,6 @@ End Sub
         Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
+        Friend WithEvents btnAutoApply As CButton
     End Class
 End Namespace

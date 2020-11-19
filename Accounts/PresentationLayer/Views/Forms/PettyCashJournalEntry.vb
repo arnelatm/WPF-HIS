@@ -289,7 +289,7 @@ Namespace PresentationLayer.Views.Forms
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
             'cboPaymentType.EndUpdate()
             'cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.PettyCashAccount))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.PettyCashAccount))
             'cboAccountIdNo.EndUpdate()
             'cboDiscountAccountIdNo.BeginUpdate()
             cboDiscountAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PD")
@@ -448,8 +448,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-                If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
                         bsPcsOiItems.Clear()
                         UpdateOiTotals()
@@ -520,17 +520,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnViewGL.Visible = True
             Else
                 btnViewGL.Visible = False
             End If
+            btnAutoApply.Visible = False
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
             PresenterObj.AddSupplierOpenInvoices()
             BindPcsOiItem()
             btnViewGL.Visible = False
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                btnAutoApply.Visible = True
+            Else
+                btnAutoApply.Visible = False
+            End If
         End Sub
 
         Private Sub SetPayeeProperty(ByVal cPaymentType As String)
@@ -555,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
             txtPayeeName.Width = 0
             Dim cbDataSource = Nothing
             cboPayeeIdNo.DataSource = cbDataSource
-            Dim paymentTypeEnum = GetEnumCodeValue(Of PaymentTypeSelection)(cPaymentType)
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 cbDataSource = PresenterObj.GetLookup("Supplier")
                 DataGridViewJournalItems.Visible = False
@@ -585,7 +591,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If GetEnumCodeValue(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If
         End Sub
@@ -650,7 +656,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If PaymentType = GetEnumCode(PaymentTypeSelection.AccountsPayable) Then
+            If PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Then
                 If _apFooter IsNot Nothing Then
                     _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")
@@ -681,6 +687,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
             UpdateTotalVatAmount()
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+            MyPresenter.AutoApplyAmount()
+            DataGridViewPcsOiItems.Refresh()
+            UpdateOiTotals()
         End Sub
 
     End Class

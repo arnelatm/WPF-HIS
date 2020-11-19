@@ -226,7 +226,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                 SetAsideJournalItems()
                 View.UnApplied = 0
                 View.Applied = View.Amount
@@ -234,7 +234,7 @@ Namespace PresentationLayer.Presenters
                 MakeJournalItem()
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
-                If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     ' if AP Entry generate paid open invoices
                     nRowCount = 1
                     View.TotalDebits = 0
@@ -268,7 +268,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 View.TotalDebits = 0
                 View.TotalCredits = 0
                 For Each ji In View.CadOiItems
@@ -302,7 +302,7 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
-                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                         Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
@@ -310,7 +310,7 @@ Namespace PresentationLayer.Presenters
                     If retValue Then
                         retValue = JournalItemDataIsValid()
                     End If
-                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If CadOiItemDataIsValid() Then
                         retValue = True
                     Else
@@ -346,7 +346,7 @@ Namespace PresentationLayer.Presenters
                     retValue = False
                     Exit For
                 End If
-                If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
+                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
                     If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
                         Dim lineNumber = Format(item.Sequence, "0")
                         Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
@@ -358,7 +358,7 @@ Namespace PresentationLayer.Presenters
                         retValue = False
                         Exit For
                     End If
-                ElseIf GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
+                ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
                     If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
                         Dim lineNumber = Format(item.Sequence, "0")
                         Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
@@ -388,7 +388,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub MakeJournalItem()
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
@@ -549,7 +549,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function SaveOpenInvoices()
             Dim retVal As Integer = 0
-            If GetEnumCodeValue(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 ' save the generated open invoices
                 retVal = UpdateOpenInvoices()
             End If

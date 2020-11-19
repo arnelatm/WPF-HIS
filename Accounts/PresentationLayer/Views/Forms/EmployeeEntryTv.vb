@@ -450,8 +450,8 @@ Namespace PresentationLayer.Views.Forms
             cboPayCycleidNo.DataSource = PresenterObj.GetLookup("PayCycle")
             cboPayGroupIdNo.DataSource = PresenterObj.GetLookup("PayGroup")
             cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
-            _deductionsByName = PresenterObj.GetFilteredLookupListByCodeName("Deduction", "DeductionType='" + GetEnumCode(DeductionTypeSelection.Regular) + "'")
-            _earningsByName = PresenterObj.GetFilteredLookupListByCodeName("Earning", "EarningType='" + GetEnumCode(EarningTypeSelection.Regular) + "'")
+            _deductionsByName = PresenterObj.GetFilteredLookupListByCodeName("Deduction", "DeductionType='" + EnumToCode(DeductionTypeSelection.Regular) + "'")
+            _earningsByName = PresenterObj.GetFilteredLookupListByCodeName("Earning", "EarningType='" + EnumToCode(EarningTypeSelection.Regular) + "'")
             _phoneTypes = PresenterObj.GetLookup("PhoneType")
             _countryTelCodes = PresenterObj.GetIntPhoneCodes()
         End Sub

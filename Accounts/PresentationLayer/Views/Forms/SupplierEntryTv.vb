@@ -32,11 +32,11 @@ Namespace PresentationLayer.Views.Forms
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus
             Get
                 Return cacAccountStatus.GetValue()
-                'Return GetEnumCode(cacAccountStatus.Text)
+                'Return EnumToCode(cacAccountStatus.Text)
             End Get
             Set
                 cacAccountStatus.SetValue(Value)
-                'cacAccountStatus.Text = GetEnumCode(value)
+                'cacAccountStatus.Text = EnumToCode(value)
             End Set
         End Property
 
@@ -208,10 +208,10 @@ Namespace PresentationLayer.Views.Forms
 
         'Public Property Active As Boolean Implements ISupplierView.Active
         '    Get
-        '        Return GetEnumCode(tcbActive.Text)
+        '        Return EnumToCode(tcbActive.Text)
         '    End Get
         '    Set(value As Boolean)
-        '        tcbActive.Text = GetEnumCode(value)
+        '        tcbActive.Text = EnumToCode(value)
         '    End Set
         'End Property
         Public Property OpeningBalance As Decimal Implements ISupplierView.OpeningBalance
@@ -372,7 +372,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
             cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacApAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GetEnumCode(SpecialAccountSelection.AccountsPayable))
+            cacApAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
             cacExpAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)

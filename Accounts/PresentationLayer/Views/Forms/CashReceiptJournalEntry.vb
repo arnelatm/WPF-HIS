@@ -458,8 +458,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated
-            If GetEnumCodeValue(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Or GetEnumCodeValue(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.Customer Then
-                If GetEnumCodeValue(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Or CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.Customer Then
+                If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                     If cboPayorIdNo.PreviousSelectedIndex <> cboPayorIdNo.SelectedIndex Then
                         bsCsrOiItems.Clear()
                         UpdateOiTotals()
@@ -524,7 +524,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
-            If GetEnumCodeValue(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 btnViewGL.Visible = True
             Else
                 btnViewGL.Visible = False
@@ -559,7 +559,7 @@ Namespace PresentationLayer.Views.Forms
             txtPayorName.Width = 0
             Dim cbDataSource = Nothing
             cboPayorIdNo.DataSource = cbDataSource
-            Dim payorTypeEnum = GetEnumCodeValue(Of ReceiptTypeSelection)(cPayorType)
+            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cPayorType)
             If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
                 cbDataSource = PresenterObj.GetLookup("Customer")
                 DataGridViewJournalItems.Visible = False
@@ -589,7 +589,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If GetEnumCodeValue(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 UpdateOiTotals()
             End If
         End Sub
@@ -651,7 +651,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOiTotals()
-            If PayorType = GetEnumCode(ReceiptTypeSelection.AccountsReceivable) Then
+            If PayorType = EnumToCode(ReceiptTypeSelection.AccountsReceivable) Then
                 If _apFooter IsNot Nothing Then
                     _apFooter.CalculateTotals()
                     Applied = _apFooter.Value("dgvAmount")

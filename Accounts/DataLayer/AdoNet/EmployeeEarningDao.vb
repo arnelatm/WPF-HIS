@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
-            Dim filter = "EarningType='" + GlobalFunctions.GetEnumCode(EarningTypeSelection.Regular) + "'"
+            Dim filter = "EarningType='" + GlobalFunctions.EnumToCode(EarningTypeSelection.Regular) + "'"
             Dim sql As String =
                     " SELECT " &
                     "Amount," &

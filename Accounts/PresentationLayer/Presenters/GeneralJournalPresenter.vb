@@ -111,10 +111,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
-                Dim cashAccount As String = GetEnumCode(SpecialAccountSelection.AccountsPayable) + "|" + GetEnumCode(SpecialAccountSelection.AccountsReceivable) +
-                                            "|" + GetEnumCode(SpecialAccountSelection.CustomerAdvances) + "|" + GetEnumCode(SpecialAccountSelection.AccountsPayableDiscount) +
-                                            "|" + GetEnumCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + GetEnumCode(SpecialAccountSelection.AdvancesToSupplier) +
-                                            "|" + GetEnumCode(SpecialAccountSelection.CustomerAdvances) + "|" + GetEnumCode(SpecialAccountSelection.EmployeeLoan)
+                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivable) +
+                                            "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) +
+                                            "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AdvancesToSupplier) +
+                                            "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToCode(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
                 Dim Account As AccountModel
                 Dim dateToday As DateTime = Now()
