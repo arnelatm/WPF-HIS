@@ -12,19 +12,18 @@ Namespace PresentationLayer.Presenters
     Public Class PettyCashJournalPresenter2
         Inherits CashJournalPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
 
-        Private ReadOnly _pcsOiItemModel As New ModelAccounts("PcsOiItem")
-        Private ReadOnly _pcsJournalItemModel As New ModelAccounts("PettyCashJournalItem")
-
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
-            _oiItemModel = New ModelAccounts("PcsOiItem")
-            _journalItemModel = New ModelAccounts("PettyCashJournalItem")
+
+            OiItemModel = New ModelAccounts("PcsOiItem")
+            JournalItemModel = New ModelAccounts("PettyCashJournalItem")
             ModelPresenter = New ModelAccounts("PettyCashJournal")
             TableName = "PettyCashJournal"
             OriginalModel = New PettyCashJournalModel()
             DataModel = New PettyCashJournalModel
-
+            CashIdNo = "PcsIdNo"
             CashCount = ModelPresenter.CountRecordWithKey("PC", "Account", "SpecialAccount")
+            OiItemView = view.PcsOiItems
 
             If CashCount = 0 Then
                 Messaging.Show(True, "MsgNoPettyCashAccount")
@@ -34,7 +33,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overloads Sub AddSupplierOpenInvoices()
-            AddSupplierOpenInvoices(view)
+            AddSupplierOpenInvoices(View)
             If View.PayeeIdNo <> 0 Then
                 Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
                 Dim nSeq As Integer
@@ -706,7 +705,7 @@ Namespace PresentationLayer.Presenters
                         amountToApply = 0D
                     End If
                 End If
-            Next item            
+            Next item
         End Sub
 
     End Class

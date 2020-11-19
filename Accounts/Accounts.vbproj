@@ -117,6 +117,8 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\DisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CjOiItem.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
     <Compile Include="BusinessLayer\PensionScheme.vb" />
@@ -167,6 +169,9 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CjOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionRateDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionSchemeDao.vb" />
@@ -245,6 +250,9 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CjOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductAccountModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionRateModel.vb" />
@@ -267,6 +275,12 @@
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter2.vb" />
+    <Compile Include="PresentationLayer\Views\CjOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICadOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\OpInvItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>

@@ -735,7 +735,7 @@ Namespace PresentationLayer.Presenters
                         amountToApply = 0D
                     End If
                 End If
-            Next item            
+            Next item
         End Sub
 
     End Class
