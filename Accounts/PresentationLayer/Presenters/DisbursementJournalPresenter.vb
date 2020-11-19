@@ -10,7 +10,7 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public MustInherit Class CashJournalPresenter(Of T As IView, TM As New)
+    Public MustInherit Class DisbursementJournalPresenter(Of T As IView, TM As New)
         Inherits AccountsPresenter(Of T, TM)
 
         Protected DtOiInsertTable As New DataTable
@@ -18,10 +18,12 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Protected CashIdNo As String
+        Protected JournalCode As String
+        Protected ReportName As String
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
 
-        Protected OiItemModel 'As New ModelAccounts("PcsOiItem")
-        Protected JournalItemModel 'As New ModelAccounts("PettyCashJournalItem")
+        Protected OiItemModel 
+        Protected JournalItemModel 
         Protected OiItemView
 
         Private ReadOnly _defaultPettyCashAccount As Int16
@@ -57,14 +59,14 @@ Namespace PresentationLayer.Presenters
             DtOiInsertTable.Columns.Add("Amount", GetType(Decimal))
             DtOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtOiInsertTable.Columns.Add(CashIdNo, GetType(Int32))
+            DtOiInsertTable.Columns.Add("CjIdNo", GetType(Int32))
             DtOiInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
             DtOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
             DtOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtOiUpdateTable.Columns.Add(CashIdNo, GetType(Int32))
+            DtOiUpdateTable.Columns.Add("CjIdNo", GetType(Int32))
             DtOiUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
@@ -96,7 +98,7 @@ Namespace PresentationLayer.Presenters
                             ' ignore advance payments if applied to this entry.
                         Else
                             nSeq += 1
-                            Dim item As New PcsOiItemView With {
+                            Dim item As New CjOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
                                     .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
@@ -110,7 +112,7 @@ Namespace PresentationLayer.Presenters
                                     .TransactionDate = unpaidInvoice.TransactionDate
                                     }
                             If OiItemView Is Nothing Then
-                                OiItemView = New List(Of PcsOiItemView)
+                                OiItemView = New List(Of CjOiItemView)                      
                             End If
                             OiItemView.Add(item)
                         End If
@@ -127,7 +129,7 @@ Namespace PresentationLayer.Presenters
             End Get
         End Property
 
-        Public Function PcsOiItemDataIsValid() As Boolean
+        Public Function OiItemDataIsValid() As Boolean
             Dim retVal = True
             Dim index As Int16 = 0
             For Each item In OiItemView
@@ -194,8 +196,8 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetPcsOiItems(pcsOiIdNo As Int32) As List(Of PcsOiItemModel)
-            Return OiItemModel.GetRecordsWithIdNo(Of PcsOiItemModel)(pcsOiIdNo, "Sequence")
+        Public Function GetCjOiItems(cjOiIdNo As Int32) As List(Of CjOiItemModel)
+            Return OiItemModel.GetRecordsWithIdNo(Of CjOiItemModel)(cjOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
@@ -208,8 +210,8 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of PcsOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(Of PcsOiItemModel)(supplierIdNo)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of CjOiItemModel)(supplierIdNo)
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
@@ -232,7 +234,7 @@ Namespace PresentationLayer.Presenters
             If OiItemView IsNot Nothing Then
                 OiItemView.Clear()
             Else
-                OiItemView = New List(Of PcsOiItemView)
+                OiItemView = New List(Of CjOiItemView)
             End If
 
         End Sub
@@ -262,7 +264,7 @@ Namespace PresentationLayer.Presenters
                             End If
                             workRow("Amount") = ji.Amount
                             workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
-                            workRow("pcsIdNo") = _myView.IdNo
+                            workRow("CjIdNo") = _myView.IdNo
                             workRow("DiscountTaken") = ji.DiscountTaken
                             workRow("Sequence") = nRowCount
                             If ji.IdNo <= 0 Then
@@ -295,7 +297,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(JournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "PcsIdNo")
+                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "CjIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -323,7 +325,7 @@ Namespace PresentationLayer.Presenters
                         retValue = JournalItemDataIsValid()
                     End If
                 ElseIf CodeToEnum(Of PaymentTypeSelection)(_myView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                    If PcsOiItemDataIsValid() Then
+                    If OiItemDataIsValid() Then
                         retValue = True
                     Else
                         retValue = False
@@ -653,11 +655,11 @@ Namespace PresentationLayer.Presenters
                     Next
                     Dim lOpenInvIdNo As Int32
                     ' check if the AdvancePayment OpenInvoice already created
-                    lOpenInvIdNo = CInt(GetAdvancePaymentOpenInvoice("PC", ji.IdNo))
+                    lOpenInvIdNo = CInt(GetAdvancePaymentOpenInvoice(JournalCode, ji.IdNo))
                     If lOpenInvIdNo = 0 Then
                         ' no previous entry
                         ' add the open invoice
-                        retVal = AddApOpenInvoice(ji, "CD")
+                        retVal = AddApOpenInvoice(ji, JournalCode)
                     Else
                         ' already added, nothing to do
                     End If
@@ -665,7 +667,7 @@ Namespace PresentationLayer.Presenters
                     ' get the OpenInvoice IdNo
                     ' check if the AdvancePayment OpenInvoice already created
                     Dim lOpenInvoiceIdNo As Int32
-                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo("PC", _myView.IdNo))
+                    lOpenInvoiceIdNo = CInt(GetAdvancePaymentOpenIdNo(JournalCode, _myView.IdNo))
                     If lOpenInvoiceIdNo > 0 Then
                         retVal = DeleteAdvancePaymentOpenInvoice(lOpenInvoiceIdNo)
                     End If
@@ -705,7 +707,7 @@ Namespace PresentationLayer.Presenters
             Else
                 totalLineAmountInWords = New ToWord(_myView.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Petty Cash Disbursement Journal.Rpt", _myView.IdNo, "PCJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm(ReportName, _myView.IdNo, "PCJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
