@@ -218,7 +218,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.JournalItems
                         account = IIf(item.AccountIdNo Is Nothing, Nothing, GetAccount(item.AccountIdNo))
                         specialAccount = IIf(account Is Nothing, Nothing, account.SpecialAccount)
-                        If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsReceivable) Then
+                        If specialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "D" Then
                                 nTotalAr = nTotalAr + item.Debit - item.Credit
                             Else

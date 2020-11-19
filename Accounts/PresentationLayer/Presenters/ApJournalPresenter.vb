@@ -167,7 +167,7 @@ Namespace PresentationLayer.Presenters
                     item.JournalIdNo = View.IdNo
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
-                    Dim tranType As String = GetEnumCodeValue(Of TransactionTypeSelection)(View.TransactionType)
+                    Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
                         If item.Credit = 0 Then
                             item.Credit = View.Amount
@@ -205,7 +205,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cPayeeType As String
-                Dim cashAccounts As String = GetEnumCode(SpecialAccountSelection.Bank) + "|" + GetEnumCode(SpecialAccountSelection.Cash) + "|" + GetEnumCode(SpecialAccountSelection.PettyCashAccount) + "|" + GetEnumCode(SpecialAccountSelection.CheckingAccount)
+                Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + GetEnumCode(SpecialAccountSelection.CheckingAccount)
                 Dim specialAccount As String
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
@@ -216,9 +216,9 @@ Namespace PresentationLayer.Presenters
                 Else
                     Dim nTotalAp As Decimal = 0
                     For Each item In View.JournalItems
-                        Account = GetAccount(item.AccountIdNo)
-                        specialAccount = Account.SpecialAccount
-                        If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsPayable) Then
+                        account = GetAccount(item.AccountIdNo)
+                        specialAccount = account.SpecialAccount
+                        If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "C" Then
                                 nTotalAp = nTotalAp + item.Credit - item.Debit
                             Else

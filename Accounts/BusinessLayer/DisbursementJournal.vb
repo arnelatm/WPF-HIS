@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class CheckDisbursementJournal
+    Public Class DisbursementJournal
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -16,7 +16,6 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("PaymentType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
-                AddRule(New ValidateRequired("CheckNumber"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
@@ -30,10 +29,8 @@ Namespace BusinessLayer
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
-        Public Property CkdOiItems As List(Of CkdOiItem)
+        Public Property CjOiItems As List(Of CjOiItem)
         Public Property Cancelled As Boolean
-        Public Property CheckDate As Date?
-        Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
