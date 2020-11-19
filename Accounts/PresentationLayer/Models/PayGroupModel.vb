@@ -13,7 +13,7 @@
         Public Property PayGroupCode As String
         Public Property PayGroupName As String
         Public Property PayGroupNameAra As String
-        Public Property Sortkey As String
+        Public Property SortKey As String
         Public Property Notes As String
     End Class
 
