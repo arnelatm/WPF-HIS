@@ -385,6 +385,11 @@
     <Build Include="dbo\Tables\BasicPay.sql" />
     <Build Include="dbo\Views\EmployeeEarning_View2.sql" />
     <Build Include="dbo\Views\Payroll_View.sql" />
+    <Build Include="dbo\Views\CdJournal_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateCdOiItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertCdOiItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\CdOiItemUpdate.sql" />
+    <Build Include="dbo\User Defined Types\CdOiItemInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
