@@ -10,7 +10,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class PettyCashJournalPresenter2
-        Inherits CashJournalPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
+        Inherits DisbursementJournalPresenter(Of IPettyCashJournalView, PettyCashJournalModel)
 
         Public Sub New(view As IPettyCashJournalView)
             MyBase.New(view)
