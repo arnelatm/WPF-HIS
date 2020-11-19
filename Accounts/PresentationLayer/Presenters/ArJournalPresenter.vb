@@ -207,7 +207,7 @@ Namespace PresentationLayer.Presenters
                 Dim cPayeeType As String
                 Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
                 Dim specialAccount As String
-                Dim Account As AccountModel
+                Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AR Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -216,9 +216,9 @@ Namespace PresentationLayer.Presenters
                 Else
                     Dim nTotalAr As Decimal = 0
                     For Each item In View.JournalItems
-                        Account = GetAccount(item.AccountIdNo)
-                        specialAccount = Account.SpecialAccount
-                        If specialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
+                        account = IIf(item.AccountIdNo Is Nothing, Nothing, GetAccount(item.AccountIdNo))
+                        specialAccount = IIf(account Is Nothing, Nothing, account.SpecialAccount)
+                        If specialAccount = GetEnumCode(SpecialAccountSelection.AccountsReceivable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "D" Then
                                 nTotalAr = nTotalAr + item.Debit - item.Credit
                             Else
@@ -226,26 +226,22 @@ Namespace PresentationLayer.Presenters
                             End If
                         End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Messaging.ShowParametrizedMessage(True, "MsgCannotSaveBlankAccountID", {lineNumber, "lineNumber"})
+
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Dim caption = "Invalid Entry!"
-                            Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
-                            message = message.Interpolate(Function(x) lineNumber)
-                            Messaging.Show(message, caption)
+                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {lineNumber, "lineNumber"})
                             retValue = False
                         Else
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
                             If Not String.IsNullOrEmpty(cPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Customer Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
-                                Dim caption = "Invalid Entry"
-                                Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                                Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} not allowed for this transaction!", caption)
-                                caption = Messaging.TranslateCaption(caption)
-                                Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                                 retValue = False
                             End If
                         End If

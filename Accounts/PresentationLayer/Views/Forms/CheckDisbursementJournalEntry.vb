@@ -515,14 +515,14 @@ Namespace PresentationLayer.Views.Forms
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        Dim Account As AccountModel
-                        Account = PresenterObj.GetAccount(newValue)
+                        Dim account As AccountModel
+                        account = PresenterObj.GetAccount(newValue)
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < JournalItems.Count() Then
                                 JournalItems(nIndex).AccountIdNo = newValue
-                                JournalItems(nIndex).SpecialAccount = Account.SpecialAccount
-                                JournalItems(nIndex).PayeeType = Account.PayeeType
-                                JournalItems(nIndex).AccountName = Account.AccountName
+                                JournalItems(nIndex).SpecialAccount = account.SpecialAccount
+                                JournalItems(nIndex).PayeeType = account.PayeeType
+                                JournalItems(nIndex).AccountName = account.AccountName
                                 UpdateTotalVatAmount()
                                 'BindJournalItem()
                             End If
