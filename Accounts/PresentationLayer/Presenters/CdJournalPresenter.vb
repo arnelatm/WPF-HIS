@@ -7,7 +7,7 @@ Public Class CdJournalPresenter
 
     Public Sub New(View As IDisbursementJournalView)
         MyBase.New(View)
-        ModelPresenter = New ModelAccounts("CashDisbursementJournal")
+        ModelPresenter = New ModelAccounts("CdJournal")
         TableName = "CashDisbursementJournal"
         SortOrderKey = "IdNo"
         JournalCode = "CD"

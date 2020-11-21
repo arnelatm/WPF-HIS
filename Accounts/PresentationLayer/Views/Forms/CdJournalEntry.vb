@@ -286,7 +286,7 @@ Namespace PresentationLayer.Views.Forms
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
             cboPaymentType.DataSource = PresenterObj.MakeEnumComboList(Of PaymentTypeSelection)
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank+","+SpecialAccountSelection.Cash+","))
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash))
             cboDiscountAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("PD")
         End Sub
 

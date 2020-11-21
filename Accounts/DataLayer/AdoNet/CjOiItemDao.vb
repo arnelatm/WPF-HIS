@@ -7,12 +7,11 @@ Namespace DataLayer.AdoNet
     ' Data access object for CjOiItem
     ' ** DAO Pattern
 
-    Public MustInherit Class CjOiItemDao
+    Public Class CjOiItemDao
         Inherits CommonDao
         Implements IDaoChild(Of CjOiItem), IDaoOiItem(Of CjOiItem)
 
-        ' ReSharper disable once InconsistentNaming
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
         Protected TableFileName As String
         Protected DboTvpUpdateFileName As String
@@ -40,17 +39,17 @@ Namespace DataLayer.AdoNet
                     " FROM " & TableFileName &
                     " WHERE CadIdNo = " & idNo &
                     " ORDER BY " & sortExpression
-            Dim x = Db.Read(sql, Make).ToList()
+            Dim x = _db.Read(sql, Make).ToList()
             Return x
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cadIdNo As Int32) As Integer _
             Implements IDaoChild(Of CjOiItem).DelUpdateTvp
-            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", cadIdNo)
+            Return _db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", cadIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of CjOiItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CjOiItem) =
@@ -85,7 +84,7 @@ Namespace DataLayer.AdoNet
                     " FROM ApOpenInvoice_View " &
                     " WHERE Balance <> 0 and SupplierIdNo = " & idNo.ToString() &
                     " ORDER BY TransactionDate"
-            Dim x = Db.Read(sql, MakeCjOiItem).ToList()
+            Dim x = _db.Read(sql, MakeCjOiItem).ToList()
             Return x
         End Function
 

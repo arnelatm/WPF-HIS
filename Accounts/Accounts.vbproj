@@ -289,7 +289,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDisbursementJournalView.vb" />
-    <Compile Include="PresentationLayer\Views\OpInvItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>

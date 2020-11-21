@@ -13,7 +13,7 @@ BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].CdOiItem A WHERE A.CdIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].CdOiItem A WHERE A.CjIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
 -- Update existing CdOiItems
 UPDATE a 
