@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
 
         Protected MustOverride Function GetCjOiItemDao()
 
-        Public Function CdUpdateRecord(ByRef journal As DisbursementJournal) As Integer
+        Public Function CdUpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer
             Dim sql As String =
                     " UPDATE " & TableName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
@@ -80,10 +80,10 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, CdTake(journal))
+            Return _db.Update(sql, CdTake(disbursementJournal))
         End Function
 
-        Public Function CdAddRecord()
+        Public Function CdAddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer
             Dim sql As String = " INSERT INTO " & TableName &
                     "AccountIdNo," &
                     "Amount," &
@@ -121,7 +121,7 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return sql
+            Return _db.Insert(sql, CdTake(DisbursementJournal))
         End Function
 
         Private Shared ReadOnly CdMake As Func(Of IDataReader, DisbursementJournal) =

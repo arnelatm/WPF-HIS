@@ -13,14 +13,6 @@ Namespace DataLayer.AdoNet
         Inherits DisbursementJournalDao
         Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoOiItem(Of CjOiItem)
 
-        'Protected Property TableName = "CashDisbursementJournal"
-        'Protected Property SeriesName = $"CDJOURNAL"
-
-        'Private Sub New()
-        '    TableName = "CashDisbursementJournal"
-        '    SeriesName = $"CDJOURNAL"
-        'End Sub
-
         Protected Overrides Function GetJiDao()
             Return New CashDisbursementJournalItemDao
         End Function
@@ -37,11 +29,13 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordById(idNo As Object) As CashDisbursementJournal Implements IDao(Of CashDisbursementJournal).GetRecordById
             TableName = "CashDisbursementJournal"
             SeriesName = $"CDJOURNAL"
-            Return CdGetRecordById(idNo)
+            Dim data As DisbursementJournal = CdGetRecordById(idNo)
+            Dim result As New CashDisbursementJournal
+            Return GlobalVariables.Mapper.Map(data,result)
         End Function
 
         Public Function AddRecord(ByRef recordData As CashDisbursementJournal) As Integer Implements IDao(Of CashDisbursementJournal).AddRecord
-            Return CdAddRecord()
+            Return CdAddRecord(recordData)
         End Function
 
         Public Function UpdateRecord(ByRef recordData As CashDisbursementJournal) As Integer Implements IDao(Of CashDisbursementJournal).UpdateRecord

@@ -137,7 +137,6 @@
     <Compile Include="BusinessLayer\Bank.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
-    <Compile Include="BusinessLayer\CadOiItem.vb" />
     <Compile Include="BusinessLayer\DepositType.vb" />
     <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
@@ -171,7 +170,6 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
@@ -189,7 +187,6 @@
     <Compile Include="DataLayer\AdoNet\ErJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CadOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepositTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
@@ -285,7 +282,6 @@
     <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Interfaces\ICadOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDisbursementJournalView.vb" />
@@ -571,7 +567,6 @@
     <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
     <Compile Include="PresentationLayer\Models\BankModel.vb" />
-    <Compile Include="PresentationLayer\Models\CadOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\DepositTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
@@ -637,7 +632,6 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\AccountReconciliationItemView.vb" />
-    <Compile Include="PresentationLayer\Views\CadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
@@ -665,7 +659,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IArJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBankView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBranchView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICadOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDepositTypeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashReceiptJournalView.vb" />
