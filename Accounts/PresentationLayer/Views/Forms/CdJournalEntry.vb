@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "CdJournal"
+            MainTableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
             _payeeOrigWidth = cboPayeeIdNo.Width

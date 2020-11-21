@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
         '            "RevCostCenterIdNo," &
         '            "Sequence," &
         '            "SpecialAccount" &
-        '            " FROM " & TableFileName &
+        '            " FROM " & TableName &
         '            " WHERE IdNo = @IdNo"
         '    Dim params() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -61,7 +61,7 @@ Namespace DataLayer.AdoNet
         '            "RevCostCenterIdNo," &
         '            "Sequence," &
         '            "SpecialAccount" &
-        '            " FROM " & TableFileName &
+        '            " FROM " & TableName &
         '            " WHERE JournalIdNo = @JournalIdNo" &
         '            " ORDER BY Sequence"
         '    Dim params() As Object = {"@JournalIdNo", journalIdNo}

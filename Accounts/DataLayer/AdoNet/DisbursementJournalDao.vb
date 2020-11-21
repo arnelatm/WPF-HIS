@@ -10,14 +10,17 @@ Namespace DataLayer.AdoNet
 
     Public MustInherit Class DisbursementJournalDao
         Inherits DaoAccounts
-        Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of CjOiItem)
 
         Private ReadOnly _db As New Db()
-        Protected TableName As String
-        Protected SeriesName As String
+        Protected Property TableName As String
+        Protected Property SeriesName As String
 
-        Public Function GetRecordById(idNo) As DisbursementJournal _
-            Implements IDao(Of DisbursementJournal).GetRecordById
+        'Public Sub New(cTableName, cSeriesName)
+        '    TableName = cTableName
+        '    SeriesName = cSeriesName
+        'End Sub
+
+        Protected Function CdGetRecordById(idNo) As DisbursementJournal
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -42,7 +45,7 @@ Namespace DataLayer.AdoNet
                     " FROM " & TableName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, CdMake, params).FirstOrDefault()
             Dim jiDao = GetJiDao()
             Dim oiDao = GetCjOiItemDao()
             Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
@@ -56,8 +59,7 @@ Namespace DataLayer.AdoNet
 
         Protected MustOverride Function GetCjOiItemDao()
 
-        Public Function UpdateRecord(ByRef DisbursementJournal As DisbursementJournal) As Integer _
-            Implements IDao(Of DisbursementJournal).UpdateRecord
+        Public Function CdUpdateRecord(ByRef journal As DisbursementJournal) As Integer
             Dim sql As String =
                     " UPDATE " & TableName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
@@ -78,11 +80,10 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, Take(DisbursementJournal))
+            Return _db.Update(sql, CdTake(journal))
         End Function
 
-        Public Function AddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer _
-            Implements IDao(Of DisbursementJournal).AddRecord
+        Public Function CdAddRecord()
             Dim sql As String = " INSERT INTO " & TableName &
                     "AccountIdNo," &
                     "Amount," &
@@ -120,10 +121,10 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return _db.Insert(sql, Take(disbursementJournal))
+            Return sql
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, DisbursementJournal) =
+        Private Shared ReadOnly CdMake As Func(Of IDataReader, DisbursementJournal) =
                                     Function(reader) _
             New DisbursementJournal() With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
@@ -147,7 +148,7 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Function Take(disbursementJournal As DisbursementJournal) As Object()
+        Private Function CdTake(disbursementJournal As DisbursementJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
@@ -171,7 +172,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef bizObj As DisbursementJournal) As Integer Implements IDaoJournals(Of DisbursementJournal).UpdateGlReferenceNumber
+        Public Function CdUpdateGlReferenceNumber(ByRef bizObj As DisbursementJournal) As Integer
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
@@ -181,8 +182,8 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetOpenInvoices(idNo As Integer) As List(Of CjOiItem) Implements IDaoOiItem(Of CjOiItem).GetOpenInvoices
-            Dim oiDao = GetCjOiItemDao()
+        Public Function CdGetOpenInvoices(idNo As Integer) As List(Of CjOiItem)
+            Dim oiDao = New CjOiItemDao
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 

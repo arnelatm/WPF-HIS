@@ -2,19 +2,23 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
-Public Class CdJournalPresenter
-    Inherits DisbursementJournalPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
+Namespace PresentationLayer.Presenters
 
-    Public Sub New(View As IDisbursementJournalView)
-        MyBase.New(View)
-        ModelPresenter = New ModelAccounts("CdJournal")
-        TableName = "CashDisbursementJournal"
-        SortOrderKey = "IdNo"
-        JournalCode = "CD"
-        ReportName = "Cash Disbursement Journal.Rpt"
-        OriginalModel = New CashDisbursementJournalModel()
-        DataModel = New CashDisbursementJournalModel
+    Public Class CdJournalPresenter
+        Inherits DisbursementJournalPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
 
-    End Sub
+        Public Sub New(view As IDisbursementJournalView)
+            MyBase.New(view)
+            ModelPresenter = New ModelAccounts("CashDisbursementJournal")
+            TableName = "CashDisbursementJournal"
+            SortOrderKey = "IdNo"
+            JournalCode = "CD"
+            ReportName = "Cash Disbursement Journal.Rpt"
+            OriginalModel = New DisbursementJournalModel()
+            DataModel = New DisbursementJournalModel
 
-End Class
+        End Sub
+
+    End Class
+
+End Namespace

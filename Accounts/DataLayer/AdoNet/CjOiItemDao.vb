@@ -13,9 +13,9 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Protected TableFileName As String
-        Protected DboTvpUpdateFileName As String
-        Protected DboTvpInsertFileName As String
+        Public TableName As String
+        Public DboTvpUpdateName As String
+        Public DboTvpInsertName As String
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of CjOiItem) Implements IDaoChild(Of CjOiItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                     "Amount," &
                     "ApOpenInvoiceIdNo," &
                     "Balance," &
-                    "CadIdNo," &
+                    "CjIdNo," &
                     "DiscountTaken," &
                     "IdNo," &
                     "InvoiceNo," &
@@ -36,8 +36,8 @@ Namespace DataLayer.AdoNet
                     "PreviousBalance," &
                     "Sequence," &
                     "TransactionDate" &
-                    " FROM " & TableFileName &
-                    " WHERE CadIdNo = " & idNo &
+                    " FROM " & TableName &
+                    " WHERE CjIdNo = " & idNo &
                     " ORDER BY " & sortExpression
             Dim x = _db.Read(sql, Make).ToList()
             Return x
@@ -45,11 +45,11 @@ Namespace DataLayer.AdoNet
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cadIdNo As Int32) As Integer _
             Implements IDaoChild(Of CjOiItem).DelUpdateTvp
-            Return _db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", cadIdNo)
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", cadIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of CjOiItem).InsertTvp
-            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return _db.InsertTvp(DboTvpInsertName, tvpTable, "@MParam")
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CjOiItem) =
