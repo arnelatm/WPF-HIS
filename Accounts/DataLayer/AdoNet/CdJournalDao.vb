@@ -13,16 +13,17 @@ Namespace DataLayer.AdoNet
 
         Private Sub New()
             TableName = "CashDisbursementJournal"
-            SeriesName = "CDJOURNAL"
+            SeriesName = $"CDJOURNAL"
         End Sub
 
         Protected Overrides Function GetJiDao()
             Return New CashDisbursementJournalItemDao
         End Function
 
-        Protected Overrides Function GetCjOiItemDao() 
-            Return New CadOiItemDao
+        Protected Overrides Function GetCjOiItemDao()
+            Return New CjOiItemDao
         End Function
 
     End Class
+
 End Namespace

@@ -205,7 +205,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cPayeeType As String
-                Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + GetEnumCode(SpecialAccountSelection.CheckingAccount)
+                Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount)
                 Dim specialAccount As String
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()

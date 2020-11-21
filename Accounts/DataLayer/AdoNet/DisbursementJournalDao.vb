@@ -8,12 +8,13 @@ Namespace DataLayer.AdoNet
     ' Data access object for DisbursementJournal
     ' ** DAO Pattern
 
-    Public Class DisbursementJournalDao
+    Public MustInherit Class DisbursementJournalDao
         Inherits DaoAccounts
         Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of CjOiItem)
 
         Private ReadOnly _db As New Db()
         Protected TableName As String
+        Protected SeriesName As String
 
         Public Function GetRecordById(idNo) As DisbursementJournal _
             Implements IDao(Of DisbursementJournal).GetRecordById
@@ -38,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM " & TableName  &
+                    " FROM " & TableName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
@@ -80,7 +81,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(DisbursementJournal))
         End Function
 
-        Public Function AddRecord(ByRef DisbursementJournal As DisbursementJournal) As Integer _
+        Public Function AddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer _
             Implements IDao(Of DisbursementJournal).AddRecord
             Dim sql As String = " INSERT INTO " & TableName &
                     "AccountIdNo," &
@@ -119,7 +120,7 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return _db.Insert(sql, Take(DisbursementJournal))
+            Return _db.Insert(sql, Take(disbursementJournal))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, DisbursementJournal) =
@@ -146,27 +147,27 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Function Take(DisbursementJournal As DisbursementJournal) As Object()
+        Private Function Take(disbursementJournal As DisbursementJournal) As Object()
             Return New Object() {
-                                    "@AccountIdNo", DisbursementJournal.AccountIdNo,
-                                    "@Amount", DisbursementJournal.Amount,
-                                    "@Applied", DisbursementJournal.Applied,
-                                    "@Cancelled", DisbursementJournal.Cancelled,
-                                    "@DateCreated", DisbursementJournal.DateCreated,
-                                    "@DiscountAccountIdNo", DisbursementJournal.DiscountAccountIdNo,
-                                    "@DiscountTaken", DisbursementJournal.DiscountTaken,
-                                    "@IdNo", DisbursementJournal.IdNo,
-                                    "@Notes", DisbursementJournal.Notes,
-                                    "@ORNumber", DisbursementJournal.OrNumber,
-                                    "@PayeeIdNo", DisbursementJournal.PayeeIdNo,
-                                    "@PayeeName", DisbursementJournal.PayeeName,
-                                    "@PaymentType", DisbursementJournal.PaymentType,
-                                    "@Posted", DisbursementJournal.Posted,
-                                    "@ReferenceNo", DisbursementJournal.ReferenceNo,
-                                    "@TransactionDate", DisbursementJournal.TransactionDate,
-                                    "@UnApplied", DisbursementJournal.UnApplied,
-                                    "@VatAmount", DisbursementJournal.VatAmount,
-                                    "@VatNumber", DisbursementJournal.VatNumber
+                                    "@AccountIdNo", disbursementJournal.AccountIdNo,
+                                    "@Amount", disbursementJournal.Amount,
+                                    "@Applied", disbursementJournal.Applied,
+                                    "@Cancelled", disbursementJournal.Cancelled,
+                                    "@DateCreated", disbursementJournal.DateCreated,
+                                    "@DiscountAccountIdNo", disbursementJournal.DiscountAccountIdNo,
+                                    "@DiscountTaken", disbursementJournal.DiscountTaken,
+                                    "@IdNo", disbursementJournal.IdNo,
+                                    "@Notes", disbursementJournal.Notes,
+                                    "@ORNumber", disbursementJournal.OrNumber,
+                                    "@PayeeIdNo", disbursementJournal.PayeeIdNo,
+                                    "@PayeeName", disbursementJournal.PayeeName,
+                                    "@PaymentType", disbursementJournal.PaymentType,
+                                    "@Posted", disbursementJournal.Posted,
+                                    "@ReferenceNo", disbursementJournal.ReferenceNo,
+                                    "@TransactionDate", disbursementJournal.TransactionDate,
+                                    "@UnApplied", disbursementJournal.UnApplied,
+                                    "@VatAmount", disbursementJournal.VatAmount,
+                                    "@VatNumber", disbursementJournal.VatNumber
                                 }
         End Function
 
@@ -174,20 +175,16 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            Const series As String = "CDJOURNAL"
-            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [DisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
+            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & SeriesName & "'"
+            sql2 = "Update [disbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & SeriesName & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of CjOiItem) Implements IDaoOiItem(Of CjOiItem).GetOpenInvoices
-            Dim oiDao = New CjOiItemDao
+            Dim oiDao = GetCjOiItemDao()
             Return oiDao.GetOpenInvoices(idNo)
         End Function
-
-        Protected MustOverride Property SeriesName As String
-
 
     End Class
 

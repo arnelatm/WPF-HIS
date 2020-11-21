@@ -514,7 +514,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCashDisbursementEntry.Click
-            ShowEntryForm(CashDisbursementJournalEntry)
+            ShowEntryForm(CdJournalEntry)
+            'ShowEntryForm(CashDisbursementJournalEntry)
         End Sub
 
         Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _

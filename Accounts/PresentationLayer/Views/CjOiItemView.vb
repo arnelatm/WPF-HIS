@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views
         Public Property Amount As Decimal Implements ICjOiItemView.Amount
         Public Property ApOpenInvoiceIdNo As Int32 Implements ICjOiItemView.ApOpenInvoiceIdNo
         Public Property Balance As Decimal Implements ICjOiItemView.Balance
-        Public Property CadIdNo As Int32 Implements ICjOiItemView.CjIdNo
+        Public Property CjIdNo As Int32 Implements ICjOiItemView.CjIdNo
         Public Property DiscountTaken As Decimal Implements ICjOiItemView.DiscountTaken
         Public Property IdNo As Int32 Implements ICjOiItemView.IdNo
         Public Property InvoiceNo As String Implements ICjOiItemView.InvoiceNo
