@@ -34,7 +34,7 @@ Namespace DataLayer.AdoNet
             Return cjOiItemDao
         End Function
 
-        Public Function GetRecordById(idNo As Object) As DisbursementJournal Implements IDao(Of DisbursementJournal).GetRecordById
+        Public Function GetRecordById(idNo As Object) As CashDisbursementJournal Implements IDao(Of CashDisbursementJournal).GetRecordById
             TableName = "CashDisbursementJournal"
             SeriesName = $"CDJOURNAL"
             Return CdGetRecordById(idNo)
