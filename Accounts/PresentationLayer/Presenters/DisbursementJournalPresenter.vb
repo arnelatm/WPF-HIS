@@ -118,6 +118,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 Next
+                _myView.CjOiItems= OiItemView
             End If
         End Sub
 
@@ -210,7 +211,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
+       Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CjOiItemModel)(supplierIdNo)
         End Function
 

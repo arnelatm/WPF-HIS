@@ -107,11 +107,11 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CadOiItem")
-            End Get
-        End Property
+        'Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
+        '    Get
+        '        Return DaoFactoryAccounts.CreateDao("CadOiItem")
+        '    End Get
+        'End Property
 
         Private ReadOnly Property DepositTypeDao As IDaoAll(Of DepositType)
             Get
