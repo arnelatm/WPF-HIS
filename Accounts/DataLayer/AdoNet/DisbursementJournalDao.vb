@@ -121,7 +121,7 @@ Namespace DataLayer.AdoNet
                     "@VatAmount," &
                     "@VatNumber" &
                     ")"
-            Return _db.Insert(sql, CdTake(DisbursementJournal))
+            Return _db.Insert(sql, CdTake(disbursementJournal))
         End Function
 
         Private Shared ReadOnly CdMake As Func(Of IDataReader, DisbursementJournal) =
@@ -183,7 +183,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function CdGetOpenInvoices(idNo As Integer) As List(Of CjOiItem)
-            Dim oiDao = New CjOiItemDao
+            Dim oiDao = GetCjOiItemDao()
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 

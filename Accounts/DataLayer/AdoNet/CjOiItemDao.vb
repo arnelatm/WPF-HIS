@@ -1,23 +1,21 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CjOiItem
     ' ** DAO Pattern
 
-    Public Class CjOiItemDao
+    Public MustInherit Class CjOiItemDao
         Inherits CommonDao
-        Implements IDaoChild(Of CjOiItem), IDaoOiItem(Of CjOiItem)
 
         Private ReadOnly _db As New Db()
 
-        Public TableName As String
-        Public DboTvpUpdateName As String
-        Public DboTvpInsertName As String
+        Public Property TableName As String
+        Public Property DboTvpUpdateName As String
+        Public Property DboTvpInsertName As String
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of CjOiItem) Implements IDaoChild(Of CjOiItem).GetRecordsWithIdNo
+        Protected Function CdGetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of CjOiItem)
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
@@ -43,12 +41,11 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cadIdNo As Int32) As Integer _
-            Implements IDaoChild(Of CjOiItem).DelUpdateTvp
-            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", cadIdNo)
+        Protected Function CdDelUpdateTvp(ByRef tvpTable As DataTable, cjIdNo As Int32) As Integer
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", cjIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of CjOiItem).InsertTvp
+        Public Function CdInsertTvp(ByRef tvpTable As DataTable) As Integer
             Return _db.InsertTvp(DboTvpInsertName, tvpTable, "@MParam")
         End Function
 
@@ -70,8 +67,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
 
-        Public Function GetOpenInvoices(idNo As Int32) _
-            As List(Of CjOiItem) Implements IDaoOiItem(Of CjOiItem).GetOpenInvoices
+        Public Function CdGetOpenInvoices(idNo As Int32) As List(Of CjOiItem)
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

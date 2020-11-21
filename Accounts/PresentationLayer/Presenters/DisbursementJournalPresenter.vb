@@ -22,8 +22,8 @@ Namespace PresentationLayer.Presenters
         Protected ReportName As String
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
 
-        Protected OiItemModel 
-        Protected JournalItemModel 
+        Protected OiItemModel
+        Protected CjItemModel
         Protected OiItemView
 
         Private ReadOnly _defaultPettyCashAccount As Int16
@@ -112,13 +112,13 @@ Namespace PresentationLayer.Presenters
                                     .TransactionDate = unpaidInvoice.TransactionDate
                                     }
                             If OiItemView Is Nothing Then
-                                OiItemView = New List(Of CjOiItemView)                      
+                                OiItemView = New List(Of CjOiItemView)
                             End If
                             OiItemView.Add(item)
                         End If
                     End If
                 Next
-                _myView.CjOiItems= OiItemView
+                _myView.CjOiItems = OiItemView
             End If
         End Sub
 
@@ -202,7 +202,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return JournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return CjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
@@ -211,7 +211,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-       Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of CjOiItemModel)(supplierIdNo)
         End Function
 
@@ -296,7 +296,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(JournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(CjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "CjIdNo")
                 If retVal >= 0 Then
@@ -719,7 +719,7 @@ Namespace PresentationLayer.Presenters
             End If
             If _myView.JournalItems IsNot Nothing And _myView.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                JournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                CjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
