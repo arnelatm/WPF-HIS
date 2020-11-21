@@ -117,7 +117,6 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\CdJournal.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CjOiItem.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
@@ -278,6 +277,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\CdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.designer.vb">
       <DependentUpon>CdJournalEntry.vb</DependentUpon>
@@ -318,12 +318,6 @@
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\BankEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.Designer.vb">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.Designer.vb">
@@ -610,7 +604,6 @@
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CashDisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CheckDisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DeductionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ErJournalPresenter.vb" />
@@ -1908,12 +1901,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.ar-SA.resx">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashDisbursementJournalEntry.resx">
-      <DependentUpon>CashDisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>

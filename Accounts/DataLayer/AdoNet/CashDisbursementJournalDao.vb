@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Net.Http.Headers
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -9,176 +10,50 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CashDisbursementJournalDao
-        Inherits DaoAccounts
-        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoOiItem(Of CadOiItem)
+        Inherits DisbursementJournalDao
+        Implements IDao(Of CashDisbursementJournal), IDaoJournals(Of CashDisbursementJournal), IDaoOiItem(Of CjOiItem)
 
-        Private ReadOnly _db As New Db()
+        'Protected Property TableName = "CashDisbursementJournal"
+        'Protected Property SeriesName = $"CDJOURNAL"
 
-        Public Function GetRecordById(idNo) As CashDisbursementJournal _
-            Implements IDao(Of CashDisbursementJournal).GetRecordById
-            Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
-                    "Amount," &
-                    "Applied," &
-                    "Cancelled," &
-                    "DateCreated," &
-                    "DiscountAccountIdNo," &
-                    "DiscountTaken," &
-                    "IdNo," &
-                    "Notes," &
-                    "ORNumber," &
-                    "PayeeIdNo," &
-                    "PayeeName," &
-                    "PaymentType," &
-                    "Posted," &
-                    "ReferenceNo," &
-                    "TransactionDate," &
-                    "UnApplied," &
-                    "VatAmount," &
-                    "VatNumber" &
-                    " FROM [CashDisbursementJournal]" &
-                    " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
-            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New CashDisbursementJournalItemDao
-            Dim oiDao = New CadOiItemDao
-            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            data.JournalItems = ji
-            data.CadOiItems = oi
-            Return data
+        'Private Sub New()
+        '    TableName = "CashDisbursementJournal"
+        '    SeriesName = $"CDJOURNAL"
+        'End Sub
+
+        Protected Overrides Function GetJiDao()
+            Return New CashDisbursementJournalItemDao
         End Function
 
-        Public Function UpdateRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
-            Implements IDao(Of CashDisbursementJournal).UpdateRecord
-            Dim sql As String =
-                    " UPDATE [CashDisbursementJournal] SET " &
-                    "AccountIdNo   = @AccountIdNo," &
-                    "Amount        = @Amount," &
-                    "Applied       = @Applied," &
-                    "Cancelled     = @Cancelled," &
-                    "DiscountAccountIdNo = @DiscountAccountIdNo," &
-                    "DiscountTaken = @DiscountTaken," &
-                    "Notes         = @Notes," &
-                    "ORNumber      = @ORNumber," &
-                    "PayeeIdNo     = @PayeeIdNo," &
-                    "PayeeName     = @PayeeName," &
-                    "PaymentType   = @PaymentType," &
-                    "Posted        = @Posted," &
-                    "ReferenceNo   = @ReferenceNo," &
-                    "TransactionDate = @TransactionDate," &
-                    "UnApplied     = @UnApplied," &
-                    "VatAmount     = @VatAmount," &
-                    "VatNumber     = @VatNumber" &
-                    " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, Take(cashDisbursementJournal))
+        Protected Overrides Function GetCjOiItemDao()
+            Dim cjOiItemDao As CjOiItemDao
+            cjOiItemDao = New CjOiItemDao()
+            cjOiItemDao.TableName = "CdOiItem_View"
+            cjOiItemDao.DboTvpInsertName = "InsertCdOiItemTVP"
+            cjOiItemDao.DboTvpUpdateName = "UpdateCdOiItemTVP"
+            Return cjOiItemDao
         End Function
 
-        Public Function AddRecord(ByRef cashDisbursementJournal As CashDisbursementJournal) As Integer _
-            Implements IDao(Of CashDisbursementJournal).AddRecord
-            Dim sql As String = " INSERT INTO [CashDisbursementJournal] (" &
-                    "AccountIdNo," &
-                    "Amount," &
-                    "Applied," &
-                    "Cancelled," &
-                    "DiscountAccountIdNo," &
-                    "DiscountTaken," &
-                    "Notes," &
-                    "ORNumber," &
-                    "PayeeIdNo," &
-                    "PayeeName," &
-                    "PaymentType," &
-                    "Posted," &
-                    "ReferenceNo," &
-                    "TransactionDate," &
-                    "UnApplied," &
-                    "VatAmount," &
-                    "VatNumber" &
-                    ") VALUES (" &
-                    "@AccountIdNo," &
-                    "@Amount," &
-                    "@Applied," &
-                    "@Cancelled," &
-                    "@DiscountAccountIdNo," &
-                    "@DiscountTaken," &
-                    "@Notes," &
-                    "@ORNumber," &
-                    "@PayeeIdNo," &
-                    "@PayeeName," &
-                    "@PaymentType," &
-                    "@Posted," &
-                    "@ReferenceNo," &
-                    "@TransactionDate," &
-                    "@UnApplied," &
-                    "@VatAmount," &
-                    "@VatNumber" &
-                    ")"
-            Return _db.Insert(sql, Take(cashDisbursementJournal))
+        Public Function GetRecordById(idNo As Object) As DisbursementJournal Implements IDao(Of DisbursementJournal).GetRecordById
+            TableName = "CashDisbursementJournal"
+            SeriesName = $"CDJOURNAL"
+            Return CdGetRecordById(idNo)
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, CashDisbursementJournal) =
-                                    Function(reader) _
-            New CashDisbursementJournal() With {
-            .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .Applied = Extensions.AsDecimal(reader("Applied")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .DiscountAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
-            .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .OrNumber = Extensions.AsString(reader("ORNumber")),
-            .PayeeIdNo = Extensions.AsNullable(Of Int32)(reader("PayeeIdNo")),
-            .PayeeName = Extensions.AsString(reader("PayeeName")),
-            .PaymentType = Extensions.AsString(reader("PaymentType")),
-            .Posted = Extensions.AsBool(reader("Posted")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
-            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-            .VatNumber = Extensions.AsString(reader("VatNumber"))
-            }
+        Public Function AddRecord(ByRef recordData As CashDisbursementJournal) As Integer Implements IDao(Of CashDisbursementJournal).AddRecord
+            Return CdAddRecord()
+        End Function
 
-        Private Function Take(cashDisbursementJournal As CashDisbursementJournal) As Object()
-            Return New Object() {
-                                    "@AccountIdNo", cashDisbursementJournal.AccountIdNo,
-                                    "@Amount", cashDisbursementJournal.Amount,
-                                    "@Applied", cashDisbursementJournal.Applied,
-                                    "@Cancelled", cashDisbursementJournal.Cancelled,
-                                    "@DateCreated", cashDisbursementJournal.DateCreated,
-                                    "@DiscountAccountIdNo", cashDisbursementJournal.DiscountAccountIdNo,
-                                    "@DiscountTaken", cashDisbursementJournal.DiscountTaken,
-                                    "@IdNo", cashDisbursementJournal.IdNo,
-                                    "@Notes", cashDisbursementJournal.Notes,
-                                    "@ORNumber", cashDisbursementJournal.OrNumber,
-                                    "@PayeeIdNo", cashDisbursementJournal.PayeeIdNo,
-                                    "@PayeeName", cashDisbursementJournal.PayeeName,
-                                    "@PaymentType", cashDisbursementJournal.PaymentType,
-                                    "@Posted", cashDisbursementJournal.Posted,
-                                    "@ReferenceNo", cashDisbursementJournal.ReferenceNo,
-                                    "@TransactionDate", cashDisbursementJournal.TransactionDate,
-                                    "@UnApplied", cashDisbursementJournal.UnApplied,
-                                    "@VatAmount", cashDisbursementJournal.VatAmount,
-                                    "@VatNumber", cashDisbursementJournal.VatNumber
-                                }
+        Public Function UpdateRecord(ByRef recordData As CashDisbursementJournal) As Integer Implements IDao(Of CashDisbursementJournal).UpdateRecord
+            Return CdUpdateRecord(recordData)
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As CashDisbursementJournal) As Integer Implements IDaoJournals(Of CashDisbursementJournal).UpdateGlReferenceNumber
-            Dim retVal As Boolean
-            Dim sql1 As String
-            Dim sql2 As String
-            Const series As String = "CDJOURNAL"
-            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [CashDisbursementJournal] set ReferenceNo = (select value from series where seriesName = '" & series & "') where IdNo = " & bizObj.IdNo
-            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-            Return retVal
+            Return CdUpdateGlReferenceNumber(bizObj)
         End Function
 
-        Public Function GetOpenInvoices(idNo As Integer) As List(Of CadOiItem) Implements IDaoOiItem(Of CadOiItem).GetOpenInvoices
-            Dim oiDao = New CadOiItemDao
-            Return oiDao.GetOpenInvoices(idNo)
+        Public Function GetOpenInvoices(idNo As Integer) As List(Of CjOiItem) Implements IDaoOiItem(Of CjOiItem).GetOpenInvoices
+            Return CdGetOpenInvoices(idNo)
         End Function
 
     End Class

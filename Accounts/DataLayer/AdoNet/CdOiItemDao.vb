@@ -6,9 +6,9 @@
         Inherits CjOiItemDao
 
         Public Sub New()
-            TableFileName = "CdOiItem_View"
-            DboTvpUpdateFileName = "dbo.UpdateCdOiItemTVP"
-            DboTvpInsertFileName = "dbo.InsertCdOiItemTVP"
+            TableName = "CdOiItem_View"
+            DboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
+            DboTvpInsertName = "dbo.InsertCdOiItemTVP"
         End Sub
 
     End Class

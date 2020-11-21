@@ -26,7 +26,7 @@ Namespace DataLayer.AdoNet
         'Public Function GetRecordById(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
         '    Dim sql As String =
         '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage" &
-        '            "   FROM " & TableFileName &
+        '            "   FROM " & TableName &
         '            " WHERE IdNo = @IdNo"
         '    Dim params() As Object = {"@IdNo", idNo}
         '    Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
         '    Implements IDaoAll(Of DistributionSchemeItem)
         '    Dim sql As String =
         '            " SELECT IdNo, DistributionSchemeIdNo,  " &
-        '            "   FROM " & TableFileName & " order by " & sortExpression
+        '            "   FROM " & TableName & " order by " & sortExpression
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 

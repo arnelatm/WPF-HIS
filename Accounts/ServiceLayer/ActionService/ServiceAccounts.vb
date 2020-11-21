@@ -20,6 +20,8 @@ Namespace ServiceLayer.ActionService
             Dim bizObject
             If accountName.Length > 11 AndAlso accountName.Right(11) = "JournalItem" Then
                 bizObject = $"AATM.Accounts.BusinessLayer.JournalItem"
+                'ElseIf accountName.Length > 19 AndAlso accountName.Right(19) = "DisbursementJournal" Then
+                '    bizObject = $"AATM.Accounts.BusinessLayer.DisbursementJournal"
             Else
                 bizObject = $"AATM.Accounts.BusinessLayer." + accountName
             End If

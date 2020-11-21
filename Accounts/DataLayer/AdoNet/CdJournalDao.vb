@@ -5,16 +5,11 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
-    ' Data access object for CdJournal
+    ' Data access object for DisbursementJournal
     ' ** DAO Pattern
 
     Public Class CdJournalDao
         Inherits DisbursementJournalDao
-
-        Private Sub New()
-            TableName = "CashDisbursementJournal"
-            SeriesName = $"CDJOURNAL"
-        End Sub
 
         Protected Overrides Function GetJiDao()
             Return New CashDisbursementJournalItemDao
