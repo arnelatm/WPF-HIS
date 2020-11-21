@@ -10,6 +10,8 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IDisbursementJournalView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("CashDisbursementJournal")
+            CjItemModel = New ModelAccounts("CashDisbursementJournalItem")
+            OiItemModel = New ModelAccounts("CdOiItem")
             TableName = "CashDisbursementJournal"
             SortOrderKey = "IdNo"
             JournalCode = "CD"

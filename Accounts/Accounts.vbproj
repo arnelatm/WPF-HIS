@@ -117,8 +117,8 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\CjOiItem.vb" />
+    <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
     <Compile Include="BusinessLayer\PensionScheme.vb" />
@@ -157,7 +157,6 @@
     <Compile Include="BusinessLayer\GeneralJournal.vb" />
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
-    <Compile Include="BusinessLayer\PcsOiItem.vb" />
     <Compile Include="BusinessLayer\PettyCashJournal.vb" />
     <Compile Include="BusinessLayer\PurchaseItem.vb" />
     <Compile Include="BusinessLayer\PurchaseJournal.vb" />
@@ -169,8 +168,9 @@
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CdJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PcOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CjOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionRateDao.vb" />
@@ -208,7 +208,6 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarnAccountDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PcsOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />

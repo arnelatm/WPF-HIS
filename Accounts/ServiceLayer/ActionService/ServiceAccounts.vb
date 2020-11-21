@@ -20,8 +20,8 @@ Namespace ServiceLayer.ActionService
             Dim bizObject
             If accountName.Length > 11 AndAlso accountName.Right(11) = "JournalItem" Then
                 bizObject = $"AATM.Accounts.BusinessLayer.JournalItem"
-                'ElseIf accountName.Length > 19 AndAlso accountName.Right(19) = "DisbursementJournal" Then
-                '    bizObject = $"AATM.Accounts.BusinessLayer.DisbursementJournal"
+            ElseIf accountName.Length > 6 AndAlso accountName.Right(6) = "OiItem" Then
+                bizObject = $"AATM.Accounts.BusinessLayer.CjOiItem"
             Else
                 bizObject = $"AATM.Accounts.BusinessLayer." + accountName
             End If
@@ -107,12 +107,6 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        'Private ReadOnly Property CadOiItemDao As IDaoChild(Of CadOiItem)
-        '    Get
-        '        Return DaoFactoryAccounts.CreateDao("CadOiItem")
-        '    End Get
-        'End Property
-
         Private ReadOnly Property DepositTypeDao As IDaoAll(Of DepositType)
             Get
                 Return DaoFactoryAccounts.CreateDao("DepositType")
@@ -158,6 +152,18 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
             Get
                 Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CdOiItemDao As IDaoChild(Of CjOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CdOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property PcOiItemDao As IDaoChild(Of CjOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcOiItem")
             End Get
         End Property
 
@@ -296,12 +302,6 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property PayrollEarnAccountDao As IDaoChild(Of PayrollEarnAccount)
             Get
                 Return DaoFactoryAccounts.CreateDao("PayrollEarnAccount")
-            End Get
-        End Property
-
-        Private ReadOnly Property PcsOiItemDao As IDaoChild(Of PcsOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PcsOiItem")
             End Get
         End Property
 
