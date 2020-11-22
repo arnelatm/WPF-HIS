@@ -293,6 +293,7 @@
     <Compile Include="PresentationLayer\Views\Forms\PcDisburementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IPcdJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDisbursementJournalView.vb" />
@@ -681,7 +682,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDistributionSchemeItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPettyCashJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesDepositsView.vb" />
