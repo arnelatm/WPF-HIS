@@ -383,6 +383,7 @@
     <Build Include="dbo\Stored Procedures\InsertCdJournalItemTVP.sql" />
     <Build Include="dbo\User Defined Types\PcOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\PcOiItemInsert.sql" />
+    <Build Include="dbo\Views\CdJournalItem_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
