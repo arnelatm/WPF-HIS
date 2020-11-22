@@ -1851,12 +1851,12 @@ FROM            dbo.CashReceiptJournalItem LEFT OUTER JOIN
                          dbo.Account ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CashReceiptJournalItem.IdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
-/****** Object:  Table [dbo].[PettyCashJournal]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[PcJournal]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PettyCashJournal](
+CREATE TABLE [dbo].[PcJournal](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionDate] [date] NOT NULL,
 	[ReferenceNo] [varchar](15) NULL,
@@ -1879,18 +1879,18 @@ CREATE TABLE [dbo].[PettyCashJournal](
 	[DateCreated] [datetime] NULL,
 	[Cancelled] [bit] NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK_PettyCashJournal1] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PcJournal1] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PettyCashJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  Table [dbo].[PcJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PettyCashJournalItem](
+CREATE TABLE [dbo].[PcJournalItem](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[Sequence] [int] NOT NULL,
 	[JournalIdNo] [int] NOT NULL,
@@ -1901,29 +1901,29 @@ CREATE TABLE [dbo].[PettyCashJournalItem](
 	[Notes] [nvarchar](300) NOT NULL,
 	[Posted] [bit] NOT NULL,
 	[DateTimeStamp] [timestamp] NOT NULL,
- CONSTRAINT [PK_PettyCashJournalItemsIdNo] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PcJournalItemsIdNo] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[PettyCashJournalItem_View]    Script Date: 3/28/2020 6:33:04 AM ******/
+/****** Object:  View [dbo].[PcJournalItem_View]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [dbo].[PettyCashJournalItem_View]
+CREATE VIEW [dbo].[PcJournalItem_View]
 AS
-SELECT        dbo.PettyCashJournalItem.AccountIdNo, dbo.PettyCashJournalItem.Credit, dbo.PettyCashJournalItem.Debit, dbo.PettyCashJournalItem.IdNo, 
-                         dbo.PettyCashJournalItem.JournalIdNo, dbo.PettyCashJournalItem.Notes, dbo.PettyCashJournalItem.RevCostCenterIdNo, dbo.PettyCashJournalItem.Sequence, 
-                         dbo.Account.AccountName, dbo.PettyCashJournalItem.Debit - dbo.PettyCashJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 
+SELECT        dbo.PcJournalItem.AccountIdNo, dbo.PcJournalItem.Credit, dbo.PcJournalItem.Debit, dbo.PcJournalItem.IdNo, 
+                         dbo.PcJournalItem.JournalIdNo, dbo.PcJournalItem.Notes, dbo.PcJournalItem.RevCostCenterIdNo, dbo.PcJournalItem.Sequence, 
+                         dbo.Account.AccountName, dbo.PcJournalItem.Debit - dbo.PcJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
-FROM            dbo.PettyCashJournal INNER JOIN
-                         dbo.PettyCashJournalItem ON dbo.PettyCashJournal.IdNo = dbo.PettyCashJournalItem.JournalIdNo INNER JOIN
-                         dbo.Account ON dbo.PettyCashJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
-                         dbo.ApOpenInvoice ON dbo.PettyCashJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
+FROM            dbo.PcJournal INNER JOIN
+                         dbo.PcJournalItem ON dbo.PcJournal.IdNo = dbo.PcJournalItem.JournalIdNo INNER JOIN
+                         dbo.Account ON dbo.PcJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
+                         dbo.ApOpenInvoice ON dbo.PcJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  Table [dbo].[PurchaseJournalItem]    Script Date: 3/28/2020 6:33:04 AM ******/
 SET ANSI_NULLS ON
@@ -2650,8 +2650,8 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
-  FROM [ISPDATA].[dbo].[PettyCashJournalItem] a
-  LEFT OUTER JOIN dbo.PettyCashJournal b
+  FROM [ISPDATA].[dbo].[PcJournalItem] a
+  LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
   on b.PayeeIdNo = c.IdNo 
@@ -4525,19 +4525,19 @@ ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_Re
 GO
 ALTER TABLE [dbo].[GeneralJournalItem] ADD  CONSTRAINT [DF_GeneralJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Sequence]  DEFAULT ((0)) FOR [Sequence]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_Sequence]  DEFAULT ((0)) FOR [Sequence]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_JournalIdNo]  DEFAULT ((0)) FOR [JournalIdNo]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_JournalIdNo]  DEFAULT ((0)) FOR [JournalIdNo]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_AccountIdNo]  DEFAULT ((0)) FOR [AccountIdNo]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_AccountIdNo]  DEFAULT ((0)) FOR [AccountIdNo]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Debit]  DEFAULT ((0)) FOR [Debit]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_Debit]  DEFAULT ((0)) FOR [Debit]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_Credit]  DEFAULT ((0)) FOR [Credit]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_RevCostCenterIdNo]  DEFAULT ((0)) FOR [RevCostCenterIdNo]
 GO
-ALTER TABLE [dbo].[PettyCashJournalItem] ADD  CONSTRAINT [DF_PettyCashJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
+ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
 ALTER TABLE [dbo].[PurchaseItem] ADD  CONSTRAINT [DF_Purchaseitem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
@@ -4893,7 +4893,7 @@ INSERT  INTO PcsOiItem ( Amount, PcsIdNo, DiscountTaken, JournalItemIdNo, Sequen
 SET IDENTITY_INSERT DBO.PcsOiItem ON;
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsertPettyCashJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
+/****** Object:  StoredProcedure [dbo].[InsertPcJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4903,13 +4903,13 @@ GO
 
 
 
-CREATE PROC [dbo].[InsertPettyCashJournalItemTVP]
+CREATE PROC [dbo].[InsertPcJournalItemTVP]
   @MParam JournalItemInsert READONLY
 AS 
-INSERT  INTO PettyCashJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
+INSERT  INTO PcJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
         SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
         FROM    @MParam
-SET IDENTITY_INSERT DBO.PettyCashJournalItem ON;
+SET IDENTITY_INSERT DBO.PcJournalItem ON;
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsertPurchaseJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
@@ -5515,7 +5515,7 @@ on a.IdNo = b.IdNo
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[UpdatePettyCashJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
+/****** Object:  StoredProcedure [dbo].[UpdatePcJournalItemTVP]    Script Date: 3/28/2020 6:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5529,7 +5529,7 @@ GO
 
 
 
-CREATE PROCEDURE  [dbo].[UpdatePettyCashJournalItemTVP]
+CREATE PROCEDURE  [dbo].[UpdatePcJournalItemTVP]
   @MParam JournalItemUpdate READONLY, @GroupIdNo as INT
 AS 
 
@@ -5537,9 +5537,9 @@ BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].PettyCashJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].PcJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
--- Update existing PettyCashJournalItems
+-- Update existing PcJournalItems
 UPDATE a 
 SET a.AccountIdNo = B.AccountIdNo,
 	a.Credit = B.Credit,
@@ -5548,7 +5548,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Notes = B.Notes,
 	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
-from PettyCashJournalItem a
+from PcJournalItem a
 JOIN @MParam b
 on a.IdNo = b.IdNo
 

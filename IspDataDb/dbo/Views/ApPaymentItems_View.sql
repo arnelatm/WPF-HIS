@@ -1,12 +1,13 @@
-﻿CREATE VIEW dbo.[ApPaymentItems_View] as
+﻿
+CREATE VIEW [dbo].[ApPaymentItems_View] as
 (SELECT [IdNo]
 	  ,'CD' AS 'JournalCode'
-      ,[CadIdNo] AS 'JournalIdNo'
+      ,[DjIdNo] AS 'JournalIdNo'
       ,[ApOpenInvoiceIdNo] 
       ,[Sequence] 
       ,[Amount]
       ,[DiscountTaken]
-  FROM [dbo].[CadOiItem]
+  FROM [dbo].[CdOiItem]
 )
 union
 (SELECT [IdNo] 
@@ -21,10 +22,10 @@ union
 UNION
 (SELECT [IdNo]
 	  ,'PC'
-      ,[PcsIdNo]
+      ,[DjIdNo]
       ,[ApOpenInvoiceIdNo]
       ,[Sequence]
       ,[Amount]
       ,[DiscountTaken]
-  FROM [dbo].[PcsOiItem]
+  FROM [dbo].[PcOiItem]
 )

@@ -2,7 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -23,8 +22,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
 
         Protected OiItemModel
-        Protected CjItemModel
-        Protected OiItemView
+        Protected DjItemModel
 
         Private ReadOnly _defaultPettyCashAccount As Int16
         Private ReadOnly _myView
@@ -32,8 +30,10 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             _myView = view
-            TableName = "PettyCashJournal"
+            TableName = "PcJournal"
             SortOrderKey = "IdNo"
+            OriginalModel = New DisbursementJournalModel()
+            DataModel = New DisbursementJournalModel
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
@@ -59,34 +59,34 @@ Namespace PresentationLayer.Presenters
             DtOiInsertTable.Columns.Add("Amount", GetType(Decimal))
             DtOiInsertTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtOiInsertTable.Columns.Add("CjIdNo", GetType(Int32))
+            DtOiInsertTable.Columns.Add("DjIdNo", GetType(Int32))
             DtOiInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
             DtOiUpdateTable.Columns.Add("ApOpenInvoiceIdNo", GetType(Int32))
             DtOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
+            DtOiUpdateTable.Columns.Add("DjIdNo", GetType(Int32))
             DtOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtOiUpdateTable.Columns.Add("CjIdNo", GetType(Int32))
             DtOiUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
         End Sub
 
-        Public Sub AddSupplierOpenInvoices(journalCode)
+        Public Sub AddSupplierOpenInvoices(pJournalCode)
             If _myView.PayeeIdNo <> 0 Then
                 Dim unpaidInvoices = GetSupplierOpenInvoices(_myView.PayeeIdNo)
                 Dim nSeq As Integer
                 If AddMode Then
-                    OiItemView.Clear()
+                    _myView.DjOiItems.Clear()
                 End If
-                If OiItemView IsNot Nothing Then
-                    nSeq = OiItemView.Count()
+                If _myView.DjOiItems IsNot Nothing Then
+                    nSeq = _myView.DjOiItems.Count()
                 Else
                     nSeq = 0
                 End If
                 For Each unpaidInvoice In unpaidInvoices
                     Dim itemFound = False
-                    If OiItemView IsNot Nothing Then
-                        For Each item In OiItemView
+                    If _myView.DjOiItems IsNot Nothing Then
+                        For Each item In _myView.DjOiItems
                             If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
                                 itemFound = True
                             End If
@@ -94,11 +94,11 @@ Namespace PresentationLayer.Presenters
                     End If
                     If Not itemFound Then
 
-                        If unpaidInvoice.JournalCode = journalCode And unpaidInvoice.JournalIdNo = _myView.IdNo Then
+                        If unpaidInvoice.JournalCode = pJournalCode And unpaidInvoice.JournalIdNo = _myView.IdNo Then
                             ' ignore advance payments if applied to this entry.
                         Else
                             nSeq += 1
-                            Dim item As New CjOiItemView With {
+                            Dim item As New DjOiItemView With {
                                     .AccountIdNo = unpaidInvoice.AccountIdNo,
                                     .Amount = unpaidInvoice.Amount,
                                     .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
@@ -111,14 +111,13 @@ Namespace PresentationLayer.Presenters
                                     .Sequence = nSeq,
                                     .TransactionDate = unpaidInvoice.TransactionDate
                                     }
-                            If OiItemView Is Nothing Then
-                                OiItemView = New List(Of CjOiItemView)
+                            If _myView.DjOiItems Is Nothing Then
+                                _myView.DjOiItems = New List(Of DjOiItemView)
                             End If
-                            OiItemView.Add(item)
+                            _myView.DjOiItems.Add(item)
                         End If
                     End If
                 Next
-                _myView.CjOiItems = OiItemView
             End If
         End Sub
 
@@ -133,7 +132,7 @@ Namespace PresentationLayer.Presenters
         Public Function OiItemDataIsValid() As Boolean
             Dim retVal = True
             Dim index As Int16 = 0
-            For Each item In OiItemView
+            For Each item In _myView.DjOiItems
                 If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
                     If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
                        (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
@@ -143,18 +142,18 @@ Namespace PresentationLayer.Presenters
                         Dim caption = Messaging.TranslateCaption("Invalid Payment")
                         message = Messaging.ReplaceValues(message, variables)
                         Messaging.Show(message, caption)
-                        If OiItemView(index).Errors Is Nothing Then
-                            OiItemView(index).Errors = New List(Of String)
+                        If _myView.DjOiItems(index).Errors Is Nothing Then
+                            _myView.DjOiItems(index).Errors = New List(Of String)
                         End If
-                        OiItemView(index).Errors.Add(message)
+                        _myView.DjOiItems(index).Errors.Add(message)
                         'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
                         retVal = False
                         Exit For
                     Else
                         ' clear error message
                         'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
-                        If OiItemView(index).Errors IsNot Nothing Then
-                            OiItemView(index).Errors.Clear()
+                        If _myView.DjOiItems(index).Errors IsNot Nothing Then
+                            _myView.DjOiItems(index).Errors.Clear()
                         End If
                     End If
                 End If
@@ -163,7 +162,7 @@ Namespace PresentationLayer.Presenters
             If retVal Then
                 If _myView.UnApplied <> 0 Then
                     Dim totalBalance As Decimal = 0D
-                    For Each item In OiItemView
+                    For Each item In _myView.DjOiItems
                         totalBalance += item.Balance
                     Next
                     If totalBalance > 0 Then
@@ -191,28 +190,28 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAdvancePaymentOpenIdNo(ByVal journalCode As String, ByVal idNo As Int32) As Integer
+        Public Function GetAdvancePaymentOpenIdNo(ByVal pJournalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Model.GetRecordFieldWith2Key(idNo, pJournalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
-        Public Function GetCjOiItems(cjOiIdNo As Int32) As List(Of CjOiItemModel)
-            Return OiItemModel.GetRecordsWithIdNo(Of CjOiItemModel)(cjOiIdNo, "Sequence")
+        Public Function GetDjOiItems(djOiIdNo As Int32) As List(Of DjOiItemModel)
+            Return OiItemModel.GetRecordsWithIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return CjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return DjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetPaymentType(ByRef idNo As Int32) As String
             Dim retVal As String
-            retVal = Model.GetRecordFieldWithKey(idNo, "PettyCashJournal", "IdNo", "PaymentType")
+            retVal = Model.GetRecordFieldWithKey(idNo, "PcJournal", "IdNo", "PaymentType")
             Return retVal
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of CjOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(Of CjOiItemModel)(supplierIdNo)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of DjOiItemModel)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
@@ -232,10 +231,10 @@ Namespace PresentationLayer.Presenters
                     .Notes = ""
                     }
             _myView.JournalItems.Add(item)
-            If OiItemView IsNot Nothing Then
-                OiItemView.Clear()
+            If _myView.DjOiItems IsNot Nothing Then
+                _myView.DjOiItems.Clear()
             Else
-                OiItemView = New List(Of CjOiItemView)
+                _myView.DjOiItems = New List(Of DjOiItemView)
             End If
 
         End Sub
@@ -254,7 +253,7 @@ Namespace PresentationLayer.Presenters
                     nRowCount = 1
                     _myView.TotalDebits = 0
                     _myView.TotalCredits = 0
-                    For Each ji In OiItemView
+                    For Each ji In _myView.DjOiItems
                         If ji.Amount <> 0 Or ji.DiscountTaken <> 0 Then
                             Dim workRow As DataRow
                             If ji.IdNo <= 0 Then
@@ -265,7 +264,7 @@ Namespace PresentationLayer.Presenters
                             End If
                             workRow("Amount") = ji.Amount
                             workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
-                            workRow("CjIdNo") = _myView.IdNo
+                            workRow("DjIdNo") = _myView.IdNo
                             workRow("DiscountTaken") = ji.DiscountTaken
                             workRow("Sequence") = nRowCount
                             If ji.IdNo <= 0 Then
@@ -286,7 +285,7 @@ Namespace PresentationLayer.Presenters
             If CodeToEnum(Of PaymentTypeSelection)(_myView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 _myView.TotalDebits = 0
                 _myView.TotalCredits = 0
-                For Each ji In OiItemView
+                For Each ji In _myView.DjOiItems
                     _myView.TotalDebits += ji.Amount + ji.DiscountTaken
                 Next
                 _myView.TotalCredits = _myView.TotalDebits
@@ -296,9 +295,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(CjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(DjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "CjIdNo")
+                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -331,12 +330,12 @@ Namespace PresentationLayer.Presenters
                     Else
                         retValue = False
                         Dim index As Int16 = 0
-                        For Each item In OiItemView
+                        For Each item In _myView.DjOiItems
                             If item.Errors IsNot Nothing Then
-                                OiItemView(index).Errors = item.Errors
+                                _myView.DjOiItems(index).Errors = item.Errors
                             Else
-                                If OiItemView(index).Errors IsNot Nothing Then
-                                    OiItemView(index).Errors.Clear()
+                                If _myView.DjOiItems(index).Errors IsNot Nothing Then
+                                    _myView.DjOiItems(index).Errors.Clear()
                                 End If
                             End If
                             index += 1
@@ -413,7 +412,7 @@ Namespace PresentationLayer.Presenters
                 Dim nSize As Integer = 0
                 Dim nIndex As Integer
                 ' summarize paid invoices per account
-                For Each item In OiItemView
+                For Each item In _myView.DjOiItems
                     Dim nAccountIdNo As Int16?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
@@ -560,7 +559,7 @@ Namespace PresentationLayer.Presenters
                     ' no advance payment so no advances to Supplier Account
                 End If
             Else
-                OiItemView.Clear()
+                _myView.DjOiItems.Clear()
             End If
         End Sub
 
@@ -713,20 +712,20 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
-            If OiItemView IsNot Nothing And OiItemView.Any() Then
+            If _myView.DjOiItems IsNot Nothing And _myView.DjOiItems.Any() Then
                 DtOiUpdateTable.Clear()
                 OiItemModel.DelUpdateTvp(DtOiUpdateTable, idNo)
             End If
             If _myView.JournalItems IsNot Nothing And _myView.JournalItems.Any() Then
                 DtUpdateTable.Clear()
-                CjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                DjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
         Public Sub AutoApplyAmount()
             Dim amountToApply = _myView.Amount
-            Dim appliedAmount As Decimal = 0D
-            For Each item In OiItemView
+            'Dim appliedAmount As Decimal = 0D
+            For Each item In _myView.DjOiItems
                 If amountToApply = 0D Then
                     item.Amount = 0D
                     item.DiscountTaken = 0D

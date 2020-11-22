@@ -87,8 +87,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes
-  FROM [dbo].[CashDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CashDisbursementJournal b
+  FROM [dbo].[CdJournalItem] A
+  LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='E'
 )
@@ -109,8 +109,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [dbo].[PettyCashJournalItem] A
-  LEFT OUTER JOIN dbo.PettyCashJournal b
+  FROM [dbo].[PcJournalItem] A
+  LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='E'
 )

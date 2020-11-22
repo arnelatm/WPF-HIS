@@ -192,7 +192,7 @@
     <value>SJ</value>
     <comment>Prefix for Purchase Sales Journal Entries</comment>
   </data>
-  <data name="PettyCashJournalPrefix" xml:space="preserve">
+  <data name="PcJournalPrefix" xml:space="preserve">
     <value>PC</value>
     <comment>Prefix for Petty CDash Journal Entries</comment>
   </data>

@@ -1659,12 +1659,6 @@
   <data name="DataGridViewTextBoxColumn6.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="PcsIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PcsIdNo</value>
-  </data>
-  <data name="PcsIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <metadata name="JournalItemIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1683,7 +1677,7 @@
   <data name="OpenInvoiceIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="bsCjOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="bsDjOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 17</value>
   </metadata>
   <data name="DataGridViewPcsOiItems.Location" type="System.Drawing.Point, System.Drawing">
@@ -90242,12 +90236,6 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PcsIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PcsIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PcsIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;JournalItemIdNo.Name" xml:space="preserve">
     <value>JournalItemIdNo</value>
   </data>
@@ -90260,10 +90248,10 @@
   <data name="&gt;&gt;OpenInvoiceIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bsCjOiItems.Name" xml:space="preserve">
-    <value>bsCjOiItems</value>
+  <data name="&gt;&gt;bsDjOiItems.Name" xml:space="preserve">
+    <value>bsDjOiItems</value>
   </data>
-  <data name="&gt;&gt;bsCjOiItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;bsDjOiItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

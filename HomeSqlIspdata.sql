@@ -2636,7 +2636,7 @@ INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], 
 GO
 INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (55, N'PurchaseItem', N'Unit1', 12, 10, NULL, NULL, NULL, NULL, N'pc.')
 GO
-INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (56, N'PettyCashJournal', N'AccountIdNo', 6, 3, NULL, NULL, NULL, NULL, N'104')
+INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (56, N'PcJournal', N'AccountIdNo', 6, 3, NULL, NULL, NULL, NULL, N'104')
 GO
 SET IDENTITY_INSERT [dbo].[DefaultFieldValue] OFF
 GO
@@ -24018,25 +24018,25 @@ INSERT [dbo].[PcsOiItem] ([IdNo], [PcsIdNo], [JournalItemIdNo], [Sequence], [Amo
 GO
 SET IDENTITY_INSERT [dbo].[PcsOiItem] OFF
 GO
-SET IDENTITY_INSERT [dbo].[PettyCashJournal] ON 
+SET IDENTITY_INSERT [dbo].[PcJournal] ON 
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (1, CAST(N'2020-03-18' AS Date), N'1001', 900.0000, 104, N'A', 1, NULL, NULL, NULL, N'555', 0.0000, 447, 900.0000, 0.0000, N'222222222222222', 0.0000, N'5555test', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (1, CAST(N'2020-03-18' AS Date), N'1001', 900.0000, 104, N'A', 1, NULL, NULL, NULL, N'555', 0.0000, 447, 900.0000, 0.0000, N'222222222222222', 0.0000, N'5555test', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (2, CAST(N'2020-03-19' AS Date), N'1002', 5.0000, 104, N'E', 55, NULL, NULL, NULL, N'1', 0.0000, 489, 0.0000, 0.0000, NULL, 0.0000, N'123', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (2, CAST(N'2020-03-19' AS Date), N'1002', 5.0000, 104, N'E', 55, NULL, NULL, NULL, N'1', 0.0000, 489, 0.0000, 0.0000, NULL, 0.0000, N'123', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (3, CAST(N'2020-03-19' AS Date), N'1003', 500.0000, 104, N'R', 1, NULL, NULL, NULL, NULL, 0.0000, 447, 0.0000, 0.0000, NULL, 0.0000, N'1111', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (3, CAST(N'2020-03-19' AS Date), N'1003', 500.0000, 104, N'R', 1, NULL, NULL, NULL, NULL, 0.0000, 447, 0.0000, 0.0000, NULL, 0.0000, N'1111', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (4, CAST(N'2020-03-20' AS Date), N'1004', 500.0000, 104, N'O', 0, N'fgl;flgfl;f', NULL, NULL, N'122', 0.0000, 447, 0.0000, 0.0000, N'133333333333333', 0.0000, N'500', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (4, CAST(N'2020-03-20' AS Date), N'1004', 500.0000, 104, N'O', 0, N'fgl;flgfl;f', NULL, NULL, N'122', 0.0000, 447, 0.0000, 0.0000, N'133333333333333', 0.0000, N'500', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (5, CAST(N'2020-03-20' AS Date), N'1006', 500.0000, 104, N'S', 1, NULL, NULL, NULL, NULL, 0.0000, 447, 0.0000, 0.0000, N'222222222222222', 0.0000, N'444', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (5, CAST(N'2020-03-20' AS Date), N'1006', 500.0000, 104, N'S', 1, NULL, NULL, NULL, NULL, 0.0000, 447, 0.0000, 0.0000, N'222222222222222', 0.0000, N'444', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (6, CAST(N'2020-03-20' AS Date), N'1007', 5.0000, 104, N'O', 0, N'1', NULL, NULL, N'1', 0.0000, 447, 0.0000, 0.0000, N'111111111111111', 5.0000, N'5', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (6, CAST(N'2020-03-20' AS Date), N'1007', 5.0000, 104, N'O', 0, N'1', NULL, NULL, N'1', 0.0000, 447, 0.0000, 0.0000, N'111111111111111', 5.0000, N'5', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (7, CAST(N'2020-03-20' AS Date), N'1008', 5.0000, 104, N'A', 1, NULL, NULL, NULL, N'1', 1.0000, 447, 5.0000, 0.0000, N'222222222222222', 0.0000, N'222', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (7, CAST(N'2020-03-20' AS Date), N'1008', 5.0000, 104, N'A', 1, NULL, NULL, NULL, N'1', 1.0000, 447, 5.0000, 0.0000, N'222222222222222', 0.0000, N'222', 0, NULL, 0)
 GO
-INSERT [dbo].[PettyCashJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (8, CAST(N'2020-03-20' AS Date), N'1009', 6.0000, 104, N'O', 0, N'fddfdsf', NULL, NULL, N'5', 0.0000, 447, 0.0000, 0.0000, N'111111111111111', 1.0000, N'5', 0, NULL, 0)
+INSERT [dbo].[PcJournal] ([IdNo], [TransactionDate], [ReferenceNo], [Amount], [AccountIdNo], [PaymentType], [PayeeIdNo], [PayeeName], [CheckNumber], [CheckDate], [ORNumber], [DiscountTaken], [DiscountAccountIdNo], [Applied], [UnApplied], [VatNumber], [VatAmount], [Notes], [Posted], [DateCreated], [Cancelled]) VALUES (8, CAST(N'2020-03-20' AS Date), N'1009', 6.0000, 104, N'O', 0, N'fddfdsf', NULL, NULL, N'5', 0.0000, 447, 0.0000, 0.0000, N'111111111111111', 1.0000, N'5', 0, NULL, 0)
 GO
-SET IDENTITY_INSERT [dbo].[PettyCashJournal] OFF
+SET IDENTITY_INSERT [dbo].[PcJournal] OFF
 GO
 SET IDENTITY_INSERT [dbo].[PhoneType] ON 
 GO
@@ -25424,7 +25424,7 @@ INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5008, N'SalesJournalEntr
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5009, N'AccountReconciliationEntry')
 GO
-INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5010, N'PettyCashJournalEntry')
+INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5010, N'PcJournalEntry')
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5011, N'DepartmentEntryTv')
 GO

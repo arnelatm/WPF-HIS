@@ -4,9 +4,9 @@
         Inherits JournalItemDao
 
         Public Sub New()
-            TableFileName = "CashDisbursementJournalItem_View"
-            DboTvpUpdateFileName = "dbo.UpdateCashDisbursementJournalItemTVP"
-            DboTvpInsertFileName = "dbo.InsertCashDisbursementJournalItemTVP"
+            TableFileName = "CdJournalItem_View"
+            DboTvpUpdateFileName = "dbo.UpdateCdJournalItemTVP"
+            DboTvpInsertFileName = "dbo.InsertCdJournalItemTVP"
         End Sub
 
     End Class

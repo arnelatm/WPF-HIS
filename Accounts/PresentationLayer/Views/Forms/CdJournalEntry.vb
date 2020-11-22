@@ -4,7 +4,6 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -25,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         Private _apFooter As DgvFooter
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _cjOiItems As List(Of CjOiItemView)
+        Private _djOiItems As List(Of DjOiItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
         Public Property MyPresenter As CdJournalPresenter
@@ -35,7 +34,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "CashDisbursementJournal"
+            MainTableName = "CdJournal"
             SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
             _payeeOrigWidth = cboPayeeIdNo.Width
@@ -44,7 +43,6 @@ Namespace PresentationLayer.Views.Forms
             MyPresenter = PresenterObj
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Field Items"
@@ -185,12 +183,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CjOiItems As List(Of CjOiItemView) Implements IDisbursementJournalView.CjOiItems
+        Public Property DjOiItems As List(Of DjOiItemView) Implements IDisbursementJournalView.DjOiItems
             Get
-                Return _cjOiItems
+                Return _djOiItems
             End Get
-            Set(value As List(Of CjOiItemView))
-                _cjOiItems = value
+            Set(value As List(Of DjOiItemView))
+                _djOiItems = value
                 BindPcsOiItem()
             End Set
         End Property
@@ -322,14 +320,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BindPcsOiItem()
             SuspendLayout()
-            bsCjOiItems.DataSource = Nothing
+            bsDjOiItems.DataSource = Nothing
             DataGridViewPcsOiItems.Refresh()
-            bsCjOiItems.DataSource = CjOiItems
-            bsCjOiItems.AllowNew = True
+            bsDjOiItems.DataSource = DjOiItems
+            bsDjOiItems.AllowNew = True
             With DataGridViewPcsOiItems
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsCjOiItems
+                .DataSource = bsDjOiItems
                 .Refresh()
             End With
             With DataGridViewPcsOiItems.Columns
@@ -394,13 +392,13 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPcsOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
-                        Dim selectedRow As PcsOiItemView
+                        Dim selectedRow As DjOiItemView
                         Dim amt = .Value
                         selectedRow = DataGridViewPcsOiItems.Rows(.RowIndex).DataBoundItem
                         selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
                         UpdateOiTotals()
                     Case $"dgvdiscounttaken"
-                        Dim selectedRow As PcsOiItemView
+                        Dim selectedRow As DjOiItemView
                         Dim amt = .Value
                         selectedRow = DataGridViewPcsOiItems.Rows(.RowIndex).DataBoundItem
                         selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
@@ -445,7 +443,7 @@ Namespace PresentationLayer.Views.Forms
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
-                        bsCjOiItems.Clear()
+                        bsDjOiItems.Clear()
                         UpdateOiTotals()
                     End If
                     PresenterObj.AddSupplierOpenInvoices("CD")

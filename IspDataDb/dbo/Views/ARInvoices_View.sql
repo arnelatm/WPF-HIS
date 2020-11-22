@@ -14,6 +14,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ARInvoices_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -76,8 +77,8 @@ UNION
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-  FROM [dbo].[CashDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CashDisbursementJournal b
+  FROM [dbo].[CdJournalItem] A
+  LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
@@ -93,8 +94,8 @@ UNION
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-  FROM [dbo].[PettyCashJournalItem] A
-  LEFT OUTER JOIN dbo.PettyCashJournal b
+  FROM [dbo].[PcJournalItem] A
+  LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno

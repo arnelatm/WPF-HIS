@@ -47,17 +47,17 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, CdMake, params).FirstOrDefault()
             Dim jiDao = GetJiDao()
-            Dim oiDao = GetCjOiItemDao()
+            Dim oiDao = GetDjOiItemDao()
             Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
-            data.CjOiItems = oi
+            data.DjOiItems = oi
             Return data
         End Function
 
         Protected MustOverride Function GetJiDao()
 
-        Protected MustOverride Function GetCjOiItemDao()
+        Protected MustOverride Function GetDjOiItemDao()
 
         Public Function CdUpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer
             Dim sql As String =
@@ -182,8 +182,8 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function CdGetOpenInvoices(idNo As Integer) As List(Of CjOiItem)
-            Dim oiDao = GetCjOiItemDao()
+        Public Function CdGetOpenInvoices(idNo As Integer) As List(Of DjOiItem)
+            Dim oiDao = GetDjOiItemDao()
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 

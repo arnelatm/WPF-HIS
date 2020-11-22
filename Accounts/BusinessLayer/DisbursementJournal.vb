@@ -29,7 +29,7 @@ Namespace BusinessLayer
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
-        Public Property CjOiItems As List(Of CjOiItem)
+        Public Property DjOiItems As List(Of DjOiItem)
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?

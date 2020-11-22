@@ -219,9 +219,9 @@ Friend Class AccountStrings
     '''<summary>
     '''  Looks up a localized string similar to PC.
     '''</summary>
-    Friend Shared ReadOnly Property PettyCashJournalPrefix() As String
+    Friend Shared ReadOnly Property PcJournalPrefix() As String
         Get
-            Return ResourceManager.GetString("PettyCashJournalPrefix", resourceCulture)
+            Return ResourceManager.GetString("PcJournalPrefix", resourceCulture)
         End Get
     End Property
     

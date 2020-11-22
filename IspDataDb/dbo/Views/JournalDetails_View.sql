@@ -2,6 +2,8 @@
 
 
 
+
+
 CREATE VIEW [dbo].[JournalDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
@@ -63,8 +65,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [CashDisbursementJournalItem] ai
-  LEFT OUTER JOIN dbo.CashDisbursementJournal b
+  FROM [CdJournalItem] ai
+  LEFT OUTER JOIN dbo.CdJournal b
   on ai.JournalIdNo = b.IDNo
   WHERE PaymentType='A'
 )
@@ -85,8 +87,8 @@ UNION
       ,b.[ReferenceNo]
 	  ,b.[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [PettyCashJournalItem] as ai
-  LEFT OUTER JOIN PettyCashJournal as b
+  FROM [PcJournalItem] as ai
+  LEFT OUTER JOIN PcJournal as b
   on ai.JournalIdNo = b.IDNo
   WHERE PaymentType='A'
 )
