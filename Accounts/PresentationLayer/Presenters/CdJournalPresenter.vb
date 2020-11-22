@@ -9,16 +9,13 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDisbursementJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("CashDisbursementJournal")
-            CjItemModel = New ModelAccounts("CashDisbursementJournalItem")
+            ModelPresenter = New ModelAccounts("CdJournal")
+            DjItemModel = New ModelAccounts("CdJournalItem")
             OiItemModel = New ModelAccounts("CdOiItem")
-            TableName = "CashDisbursementJournal"
+            TableName = "CdJournal"
             SortOrderKey = "IdNo"
             JournalCode = "CD"
             ReportName = "Cash Disbursement Journal.Rpt"
-            OriginalModel = New DisbursementJournalModel()
-            DataModel = New DisbursementJournalModel
-
         End Sub
 
     End Class

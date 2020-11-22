@@ -10,7 +10,7 @@
         Public Property Amount As Decimal
         Public Property OpenInvoiceIdNo As Int32
         Public Property Balance As Decimal
-        Public Property CjIdNo As Int32
+        Public Property DjIdNo As Int32
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

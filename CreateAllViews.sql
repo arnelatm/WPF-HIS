@@ -446,8 +446,8 @@ UNION
 			WHEN b.PaymentType = 'O' then b.PayeeName
 			ELSE b.PayeeName
 	   END
-  FROM [ISPDATA].[dbo].[PettyCashJournalItem] a
-  LEFT OUTER JOIN dbo.PettyCashJournal b
+  FROM [ISPDATA].[dbo].[PcJournalItem] a
+  LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
   on b.PayeeIdNo = c.IdNo 
@@ -955,23 +955,23 @@ SELECT        IdNo, AccountIdNo, AccountTypes, IdNo AS Expr1, AccountTypes AS Ex
 FROM            dbo.AccountTypes
 WHERE        (AccountTypes = 'VI')
 GO
-/****** Object:  View [dbo].[PettyCashJournalItem_View]    Script Date: 3/27/2020 6:57:40 AM ******/
+/****** Object:  View [dbo].[PcJournalItem_View]    Script Date: 3/27/2020 6:57:40 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [dbo].[PettyCashJournalItem_View]
+CREATE VIEW [dbo].[PcJournalItem_View]
 AS
-SELECT        dbo.PettyCashJournalItem.AccountIdNo, dbo.PettyCashJournalItem.Credit, dbo.PettyCashJournalItem.Debit, dbo.PettyCashJournalItem.IdNo, 
-                         dbo.PettyCashJournalItem.JournalIdNo, dbo.PettyCashJournalItem.Notes, dbo.PettyCashJournalItem.RevCostCenterIdNo, dbo.PettyCashJournalItem.Sequence, 
-                         dbo.Account.AccountName, dbo.PettyCashJournalItem.Debit - dbo.PettyCashJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 
+SELECT        dbo.PcJournalItem.AccountIdNo, dbo.PcJournalItem.Credit, dbo.PcJournalItem.Debit, dbo.PcJournalItem.IdNo, 
+                         dbo.PcJournalItem.JournalIdNo, dbo.PcJournalItem.Notes, dbo.PcJournalItem.RevCostCenterIdNo, dbo.PcJournalItem.Sequence, 
+                         dbo.Account.AccountName, dbo.PcJournalItem.Debit - dbo.PcJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 
                          0 AS PaidAmount, dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
-FROM            dbo.PettyCashJournal INNER JOIN
-                         dbo.PettyCashJournalItem ON dbo.PettyCashJournal.IdNo = dbo.PettyCashJournalItem.JournalIdNo INNER JOIN
-                         dbo.Account ON dbo.PettyCashJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
-                         dbo.ApOpenInvoice ON dbo.PettyCashJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
+FROM            dbo.PcJournal INNER JOIN
+                         dbo.PcJournalItem ON dbo.PcJournal.IdNo = dbo.PcJournalItem.JournalIdNo INNER JOIN
+                         dbo.Account ON dbo.PcJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
+                         dbo.ApOpenInvoice ON dbo.PcJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
 GO
 /****** Object:  View [dbo].[RevCostCenter_View]    Script Date: 3/27/2020 6:57:40 AM ******/
 SET ANSI_NULLS ON

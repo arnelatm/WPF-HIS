@@ -1,12 +1,12 @@
 ﻿Namespace DataLayer.AdoNet
 
-    Public Class PettyCashJournalItemDao
+    Public Class PcJournalItemDao
         Inherits JournalItemDao
 
         Public Sub New()
-            TableFileName = "PettyCashJournalItem_View"
-            DboTvpUpdateFileName = "dbo.UpdatePettyCashJournalItemTVP"
-            DboTvpInsertFileName = "dbo.InsertPettyCashJournalItemTVP"
+            TableFileName = "PcJournalItem_View"
+            DboTvpUpdateFileName = "dbo.UpdatePcJournalItemTVP"
+            DboTvpInsertFileName = "dbo.InsertPcJournalItemTVP"
         End Sub
 
     End Class

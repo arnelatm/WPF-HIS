@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IPettyCashJournalView
+    Public Interface IPcJournalView
         Inherits IDisbursementJournalView
 
     End Interface

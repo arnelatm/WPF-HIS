@@ -3,15 +3,15 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
     Public Class PostPettyCashPresenter
-        Inherits AccountsPresenter(Of IView, PettyCashJournalModel)
+        Inherits AccountsPresenter(Of IView, PcJournalModel)
 
         Public Sub New(view As IView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("PettyCashJournal")
-            TableName = "PettyCashJournal"
+            ModelPresenter = New ModelAccounts("PcJournal")
+            TableName = "PcJournal"
             SortOrderKey = "IdNo"
-            OriginalModel = New PettyCashJournalModel()
-            DataModel = New PettyCashJournalModel
+            OriginalModel = New PcJournalModel()
+            DataModel = New PcJournalModel
 
         End Sub
 

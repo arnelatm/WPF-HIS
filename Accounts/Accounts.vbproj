@@ -117,7 +117,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\CjOiItem.vb" />
+    <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
@@ -138,7 +138,7 @@
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
     <Compile Include="BusinessLayer\DepositType.vb" />
-    <Compile Include="BusinessLayer\CashDisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\CdJournal.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\ProductCategory.vb" />
     <Compile Include="BusinessLayer\Account.vb" />
@@ -157,7 +157,7 @@
     <Compile Include="BusinessLayer\GeneralJournal.vb" />
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
-    <Compile Include="BusinessLayer\PettyCashJournal.vb" />
+    <Compile Include="BusinessLayer\PcJournal.vb" />
     <Compile Include="BusinessLayer\PurchaseItem.vb" />
     <Compile Include="BusinessLayer\PurchaseJournal.vb" />
     <Compile Include="BusinessLayer\Reconciled.vb" />
@@ -169,7 +169,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CjOiItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
@@ -188,8 +188,7 @@
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepositTypeDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CashDisbursementJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CdJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountDao.vb" />
@@ -208,7 +207,7 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarnAccountDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PettyCashJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PcJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
@@ -249,7 +248,7 @@
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
-    <Compile Include="PresentationLayer\Models\CjOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductAccountModel.vb" />
@@ -261,6 +260,7 @@
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PcJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CdJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDeductAccountPresenter.vb" />
@@ -274,15 +274,27 @@
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Views\CdOiItemView.vb" />
-    <Compile Include="PresentationLayer\Views\CjOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.designer.vb">
       <DependentUpon>CdJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICjOiItemsView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.Designer.vb">
+      <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PcDisburementJournalEntry.Designer.vb">
+      <DependentUpon>PcDisburementJournalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PcDisburementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDisbursementJournalView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
@@ -459,12 +471,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.Designer.vb">
-      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.Designer.vb">
       <DependentUpon>PostPettyCash.vb</DependentUpon>
     </Compile>
@@ -567,7 +573,7 @@
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
     <Compile Include="PresentationLayer\Models\BankModel.vb" />
     <Compile Include="PresentationLayer\Models\DepositTypeModel.vb" />
-    <Compile Include="PresentationLayer\Models\CashDisbursementJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\CdJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\EarningModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductCategoryModel.vb" />
@@ -586,8 +592,7 @@
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\MainModel.vb" />
     <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
-    <Compile Include="PresentationLayer\Models\PcsOiItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\PettyCashJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\PcJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
@@ -619,9 +624,6 @@
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\MainPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PcsOiItemsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PettyCashJournalItemsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PettyCashJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PostPettyCashPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
@@ -659,7 +661,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IBankView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDepositTypeView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICashDisbursementJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICdJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashReceiptJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionSchemeView.vb" />
@@ -679,8 +681,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDistributionSchemeItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPcsOiItemsView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPcsOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPettyCashJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseJournalView.vb" />
@@ -699,7 +699,6 @@
     <Compile Include="PresentationLayer\Views\LeaveView.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\PcsOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\SalesDepositView.vb" />
     <Compile Include="Reports\Account Reconciliation Report.vb">
       <AutoGen>True</AutoGen>
@@ -1913,6 +1912,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollTvEntry.resx">
       <DependentUpon>PayrollTvEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
+      <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.resx">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1996,12 +1998,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.ar-SA.resx">
-      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashJournalEntry.resx">
-      <DependentUpon>PettyCashJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PostPettyCash.resx">
       <DependentUpon>PostPettyCash.vb</DependentUpon>

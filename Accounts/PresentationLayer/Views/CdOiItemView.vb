@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class CdOiItemView
-        Inherits CjOiItemView
+        Inherits DjOiItemView
 
     End Class
 

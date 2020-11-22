@@ -9,7 +9,7 @@
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
-        Public Property CjOiItems As List(Of CjOiItemModel)
+        Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?

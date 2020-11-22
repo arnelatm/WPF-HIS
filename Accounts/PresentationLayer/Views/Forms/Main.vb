@@ -1084,13 +1084,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
-            Dim childMdiForm As PettyCashJournalEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New PettyCashJournalEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            'Dim childMdiForm As DisbursementJournalEntry
+            ''Set the Parent Form of the Child window.
+            'childMdiForm = New PCDisbursementJournalEntry With {
+            '    .MdiParent = Me
+            '    }
+            ''Display the new form.
+            'childMdiForm.Show()
         End Sub
 
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click

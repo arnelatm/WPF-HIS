@@ -256,7 +256,7 @@
     <value>Patient</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource12" xml:space="preserve">
-    <value>PettyCashJournal</value>
+    <value>PcJournal</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource13" xml:space="preserve">
     <value>SalesJournal</value>
@@ -313,7 +313,7 @@
     <value>PayPeriod</value>
   </data>
   <data name="cboTableName.Items13" xml:space="preserve">
-    <value>PettyCashJournal</value>
+    <value>PcJournal</value>
   </data>
   <data name="cboTableName.Items14" xml:space="preserve">
     <value>ProductCategory</value>

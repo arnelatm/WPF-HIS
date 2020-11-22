@@ -76,35 +76,7 @@ Namespace PresentationLayer.Views
         Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
             Return New JournalItemView
         End Function
+
     End Class
-
-    'Public Class GeneralJournalItemView
-    '    Inherits JournalItemView
-
-    '    Public Sub New()
-    '        Ea = New EventAggregator()
-    '    End Sub
-
-    'End Class
-
-    'Public Class DebitChanged
-
-    '    Public Sub New(ByVal debit As Decimal)
-    '        Me.Debit = debit
-    '    End Sub
-
-    '    Public Property Debit As Decimal
-
-    'End Class
-
-    'Public Class CreditChanged
-
-    '    Public Sub New(ByVal credit As Decimal)
-    '        Me.Credit = credit
-    '    End Sub
-
-    '    Public Property Credit As Decimal
-
-    'End Class
 
 End Namespace

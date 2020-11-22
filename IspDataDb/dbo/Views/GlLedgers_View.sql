@@ -6,6 +6,7 @@
 
 
 
+
 CREATE VIEW [dbo].[GlLedgers_View]	
   AS
 (SELECT 'GJ' AS 'JournalCode'
@@ -185,8 +186,8 @@ UNION
 			ELSE b.PayeeName
 	   END
 	  ,CAST(0 AS BIT)
-  FROM [dbo].[CashDisbursementJournalItem] a
-  LEFT OUTER JOIN dbo.CashDisbursementJournal b
+  FROM [dbo].[CdJournalItem] a
+  LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
   on b.PayeeIdNo = c.IdNo 
@@ -277,8 +278,8 @@ UNION
 			ELSE b.PayeeName
 	   END
 	  ,CAST(0 AS BIT)
-  FROM [dbo].[PettyCashJournalItem] a
-  LEFT OUTER JOIN dbo.PettyCashJournal b
+  FROM [dbo].[PcJournalItem] a
+  LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
   on b.PayeeIdNo = c.IdNo 

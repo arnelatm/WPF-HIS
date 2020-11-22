@@ -117,10 +117,9 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PcsIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsCjOiItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -133,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewPcsOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsCjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floFooter.SuspendLayout
         Me.SuspendLayout
         '
@@ -999,9 +998,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPcsOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewPcsOiItems.AutoGenerateColumns = false
         Me.DataGridViewPcsOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewPcsOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePcsOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.PcsIdNoDataGridViewTextBoxColumn, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
+        Me.DataGridViewPcsOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePcsOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
         Me.DataGridViewPcsOiItems.DataInGridChanged = false
-        Me.DataGridViewPcsOiItems.DataSource = Me.bsCjOiItems
+        Me.DataGridViewPcsOiItems.DataSource = Me.bsDjOiItems
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -1154,13 +1153,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         Me.DataGridViewTextBoxColumn6.ReadOnly = true
         '
-        'PcsIdNoDataGridViewTextBoxColumn
-        '
-        Me.PcsIdNoDataGridViewTextBoxColumn.DataPropertyName = "PcsIdNo"
-        resources.ApplyResources(Me.PcsIdNoDataGridViewTextBoxColumn, "PcsIdNoDataGridViewTextBoxColumn")
-        Me.PcsIdNoDataGridViewTextBoxColumn.Name = "PcsIdNoDataGridViewTextBoxColumn"
-        Me.PcsIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
         'JournalItemIdNo
         '
         Me.JournalItemIdNo.DataPropertyName = "JournalItemIdNo"
@@ -1175,9 +1167,9 @@ Namespace PresentationLayer.Views.Forms
         Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
         Me.OpenInvoiceIdNo.ReadOnly = true
         '
-        'bsCjOiItems
+        'bsDjOiItems
         '
-        Me.bsCjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcsOiItemModel)
+        Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
         '
         'floFooter
         '
@@ -1224,7 +1216,7 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridViewPcsOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsCjOiItems,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.floFooter.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
@@ -1277,7 +1269,7 @@ End Sub
         Friend WithEvents txtVatAmount As CTextBox
         Friend WithEvents cboPayeeIdNo As CaComboBox
         Friend WithEvents DataGridViewPcsOiItems As CDataGridView
-        Friend WithEvents bsCjOiItems As Windows.Forms.BindingSource
+        Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents dgvJournalItemIdNo As CdgvColumnText
         Friend WithEvents dgvcadIdNo As Windows.Forms.DataGridViewTextBoxColumn

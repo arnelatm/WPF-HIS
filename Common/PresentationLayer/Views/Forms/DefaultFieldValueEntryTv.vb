@@ -180,7 +180,7 @@ End Namespace
 'PayCycle
 'PayGroup
 'PayPeriod
-'PettyCashJournal
+'PcJournal
 'ProductCategory
 'SalesJournal
 'SecurityGroup
