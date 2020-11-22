@@ -1,10 +1,5 @@
 ﻿
 
-
-
-
-
-
 CREATE PROCEDURE  [dbo].[UpdateCdOiItemTVP]
   @MParam CdOiItemUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -18,11 +13,11 @@ FROM [DBO].CdOiItem A WHERE A.DjIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM 
 -- Update existing CdOiItems
 UPDATE a 
 SET a.Amount = B.Amount,
-	a.DjIdNo = @GroupIdNo,
-	a.DiscountTaken = B.DiscountTaken,
 	a.ApOpenInvoiceIdNo = B.ApOpenInvoiceIdNo,
+	a.DiscountTaken = B.DiscountTaken,
+	a.DjIdNo = @GroupIdNo,
     a.[Sequence] = B.[Sequence]
 from CdOiItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+on a.IdNo = b.IdNo
 
 END
