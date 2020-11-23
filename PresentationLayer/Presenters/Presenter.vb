@@ -50,9 +50,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Private _undoMode As Boolean = False
 
-    Shared Sub New()
+    Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
+
+    Protected Sub New()
+        'ModelTblColProp = New ModelTblColProp
         Model = New Model()
-        ModelTblColProp = New ModelTblColProp
         'ModelDefaultFieldValue = New ModelDefaultFieldValue
     End Sub
 
@@ -173,7 +175,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Property NewlyAddedRecordIdNo As Int32
 
-    Public Shared Property RecordCount As Integer
+    'Public Shared Property RecordCount As Integer
+    Public Property RecordCount As Integer
 
     Public Property RecordPositionNumber As Integer
         Get
@@ -187,9 +190,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     'Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
 
-    Public Shared Property TableName As String
+    'Public Shared Property TableName As String
+    Public Property TableName As String
 
-    Public Shared Property TableProperties As Array
+    'Public Shared Property TableProperties As Array
+    Public Property TableProperties As Array
 
     'Public Property TableDefaultFieldValues
     <Description("This is the value of the current IdNo in the TxtIdNo Field ")>
@@ -233,9 +238,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     'End Sub
 
-    Protected Shared Property Model As New Model()
-
-    Protected Shared Property ModelTblColProp As IModelTblColProp
+    Protected Property Model As New Model()
 
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 

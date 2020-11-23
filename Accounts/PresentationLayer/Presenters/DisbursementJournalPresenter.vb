@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             _myView = view
-            TableName = "PcJournal"
+            'TableName = "PcJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New DisbursementJournalModel()
             DataModel = New DisbursementJournalModel

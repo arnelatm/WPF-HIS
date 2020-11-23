@@ -189,7 +189,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of DjOiItemView))
                 _djOiItems = value
-                BindPcsOiItem()
+                BindDjOiItem()
             End Set
         End Property
 
@@ -318,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub BindPcsOiItem()
+        Private Sub BindDjOiItem()
             SuspendLayout()
             bsDjOiItems.DataSource = Nothing
             DataGridViewPcsOiItems.Refresh()
@@ -447,7 +447,7 @@ Namespace PresentationLayer.Views.Forms
                         UpdateOiTotals()
                     End If
                     PresenterObj.AddSupplierOpenInvoices("CD")
-                    'BindPcsOiItem()
+                    'BindDjOiItem()
                 End If
                 Dim lVatNumber As String
                 lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
@@ -522,7 +522,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub InputsTurnedOn()
             PresenterObj.AddSupplierOpenInvoices("CD")
-            'BindPcsOiItem()
+            'BindDjOiItem()
             btnViewGL.Visible = False
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnAutoApply.Visible = True

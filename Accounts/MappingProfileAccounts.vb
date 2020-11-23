@@ -97,7 +97,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of PensionScheme, PensionSchemeModel)().ReverseMap()
         CreateMap(Of PensionSchemeModel, IPensionSchemeView)().ReverseMap()
         CreateMap(Of PcJournal, PcJournalModel)().ReverseMap()
-        CreateMap(Of PcJournalModel, IPcJournalView)().ReverseMap()
+        'CreateMap(Of PcJournalModel, IPcJournalView)().ReverseMap()
         CreateMap(Of ProductCategory, ProductCategoryModel)().ReverseMap()
         CreateMap(Of ProductCategoryModel, IProductCategoryView)().ReverseMap()
         CreateMap(Of PurchaseItem, PurchaseItemModel)().ReverseMap()

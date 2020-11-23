@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Common
@@ -514,8 +515,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCashDisbursementEntry.Click
-            ShowEntryForm(CdJournalEntry)
-            'ShowEntryForm(CashDisbursementJournalEntry)
+            Dim childMdiForm
+            childMdiForm = New DisbursementJournalEntry("CdJournal") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
         Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
@@ -1084,9 +1088,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
-            Dim childMdiForm As PcJournalEntry
+            Dim childMdiForm ' As New DisbursementJournalEntry("PcJournal")
             'Set the Parent Form of the Child window.
-            childMdiForm = New PcJournalEntry With {
+            childMdiForm = New DisbursementJournalEntry("PcJournal") With {
                 .MdiParent = Me
                 }
             'Display the new form.

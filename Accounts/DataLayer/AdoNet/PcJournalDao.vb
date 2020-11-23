@@ -13,6 +13,11 @@ Namespace DataLayer.AdoNet
         Inherits DisbursementJournalDao
         Implements IDao(Of PcJournal), IDaoJournals(Of PcJournal), IDaoOiItem(Of DjOiItem)
 
+        Public Sub New()
+            TableName = "PcJournal"
+            SeriesName = $"PCJOURNAL"
+        End Sub
+
         Public Function AddRecord(ByRef recordData As PcJournal) As Integer Implements IDao(Of PcJournal).AddRecord
             Return CdAddRecord(recordData)
         End Function
@@ -22,8 +27,6 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetRecordById(idNo As Object) As PcJournal Implements IDao(Of PcJournal).GetRecordById
-            TableName = "PcJournal"
-            SeriesName = $"PCJOURNAL"
             Dim data As DisbursementJournal = CdGetRecordById(idNo)
             Dim result As New PcJournal
             Return GlobalVariables.Mapper.Map(data, result)
