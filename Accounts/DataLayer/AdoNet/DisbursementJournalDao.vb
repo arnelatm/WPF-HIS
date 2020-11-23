@@ -12,8 +12,26 @@ Namespace DataLayer.AdoNet
         Inherits DaoAccounts
 
         Private ReadOnly _db As New Db()
+        Private _tableName As String
+        Private _seriesName As String
+
         Protected Property TableName As String
+            Get
+                Return _tableName
+            End Get
+            Set(value As String)
+                _tableName = value
+            End Set
+        End Property
+
         Protected Property SeriesName As String
+            Get
+                Return _seriesName
+            End Get
+            Set(value As String)
+                _seriesName = value
+            End Set
+        End Property
 
         'Public Sub New(cTableName, cSeriesName)
         '    TableName = cTableName
