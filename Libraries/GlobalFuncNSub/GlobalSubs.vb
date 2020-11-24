@@ -25,6 +25,16 @@ Public Module GlobalSubs
         End Try
     End Sub
 
+    Public Sub SwapPosition(c1 As Control, c2 As Control)
+        Dim tlp As TableLayoutPanel = TryCast(c1.Parent, TableLayoutPanel)
+        If tlp Is c2.Parent AndAlso tlp IsNot Nothing Then
+            Dim posC1 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c1)
+            Dim posC2 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c2)
+            tlp.SetCellPosition(c2, posC1)
+            tlp.SetCellPosition(c1, posC2)
+        End If
+    End Sub
+
     'Public Function InvokeMethod(ByVal obj As Object, ByVal methodName As String, ByVal propValue As Object, ByVal ParamArray arguments() As Object) As Integer
     '    Dim objType As Type = obj.GetType()
     '    Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(methodName, Reflection.BindingFlags.IgnoreCase Or Reflection.BindingFlags.IgnoreCase Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)

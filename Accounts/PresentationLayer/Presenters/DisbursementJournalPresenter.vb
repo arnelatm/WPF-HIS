@@ -12,14 +12,14 @@ Namespace PresentationLayer.Presenters
     Public MustInherit Class DisbursementJournalPresenter(Of T As IView, TM As New)
         Inherits AccountsPresenter(Of T, TM)
 
+        Private ReadOnly _advancesToSupplierAccountIdNo As Int16
+        Private ReadOnly _cdAccountCount As Int16 = 0
+        Protected CashIdNo As String
+        Protected DtInsertTable As New DataTable
         Protected DtOiInsertTable As New DataTable
         Protected DtOiUpdateTable As New DataTable
-        Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Protected CashIdNo As String
-        Protected JournalCode As String
         Protected ReportName As String
-        Private ReadOnly _advancesToSupplierAccountIdNo As Int16
 
         Protected OiItemModel
         Protected DjItemModel
@@ -30,7 +30,6 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             _myView = view
-            'TableName = "PcJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New DisbursementJournalModel()
             DataModel = New DisbursementJournalModel
@@ -71,7 +70,21 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub AddSupplierOpenInvoices(pJournalCode)
+        Public Property JournalCode As String
+
+        Public ReadOnly Property CdAccountCount As Int16
+            Get
+                Dim specialAccount As String
+                If JournalCode = "PC" Then
+                    specialAccount = "PC"
+                Else
+                    specialAccount = ""
+                End If
+                Return ModelPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+            End Get
+        End Property
+
+        Public Sub AddSupplierOpenInvoices()
             If _myView.PayeeIdNo <> 0 Then
                 Dim unpaidInvoices = GetSupplierOpenInvoices(_myView.PayeeIdNo)
                 Dim nSeq As Integer
@@ -94,7 +107,7 @@ Namespace PresentationLayer.Presenters
                     End If
                     If Not itemFound Then
 
-                        If unpaidInvoice.JournalCode = pJournalCode And unpaidInvoice.JournalIdNo = _myView.IdNo Then
+                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = _myView.IdNo Then
                             ' ignore advance payments if applied to this entry.
                         Else
                             nSeq += 1
