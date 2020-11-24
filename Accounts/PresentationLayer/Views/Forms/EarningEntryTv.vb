@@ -482,16 +482,6 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
-        Private Sub SwapPosition(c1 As Control, c2 As Control)
-            Dim tlp As TableLayoutPanel = TryCast(c1.Parent, TableLayoutPanel)
-            If tlpCalculation Is c2.Parent AndAlso tlp IsNot Nothing Then
-                Dim posC1 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c1)
-                Dim posC2 As TableLayoutPanelCellPosition = tlp.GetCellPosition(c2)
-                tlp.SetCellPosition(c2, posC1)
-                tlp.SetCellPosition(c1, posC2)
-            End If
-        End Sub
-
     End Class
 
 End Namespace
