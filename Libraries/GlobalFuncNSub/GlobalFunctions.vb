@@ -282,7 +282,6 @@ Public Module GlobalFunctions
 
     Public Function HijriMonthInEnglish(iMonth As Int16)
         Dim strMonth As String
-        strMonth = ""
         Select Case iMonth
             Case 1
                 strMonth = "Muḥarram"
@@ -418,7 +417,7 @@ Public Module GlobalFunctions
     ''' <param name="argStr">string value to handle</param>
     ''' <returns>returns string</returns>
     Public Function NullString(argStr As String) As String
-        Dim strReturnString = ""
+        Dim strReturnString As String
         If argStr.Equals(DBNull.Value) Then
             strReturnString = ""
         ElseIf Convert.ToString(argStr) = "" Then

@@ -272,15 +272,11 @@
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 187</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>926, 332</value>
+    <value>910, 332</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>287</value>
@@ -297,6 +293,10 @@
   <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDateCreated.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -310,7 +310,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 23</value>
+    <value>79, 25</value>
   </data>
   <data name="lblDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>268</value>
@@ -319,7 +319,7 @@
     <value>Date Added:</value>
   </data>
   <data name="lblDateCreated.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.Name" xml:space="preserve">
     <value>lblDateCreated</value>
@@ -347,6 +347,9 @@
   </data>
   <data name="chkPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="lblPosted.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="lblPosted.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -415,13 +418,13 @@
     <value>3</value>
   </data>
   <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>762, 158</value>
+    <value>772, 158</value>
   </data>
   <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 25</value>
+    <value>141, 25</value>
   </data>
   <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -453,6 +456,9 @@
   <data name="chkCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="lblCancelled.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="lblCancelled.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -466,7 +472,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>131, 24</value>
   </data>
   <data name="lblCancelled.TabIndex" type="System.Int32, mscorlib">
     <value>249</value>
@@ -590,6 +596,9 @@
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="cboPaymentType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="cboPaymentType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -726,6 +735,9 @@
   <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="TxtIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -788,6 +800,9 @@
   </data>
   <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="txtJournalCode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="txtJournalCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -858,6 +873,9 @@
   <data name="&gt;&gt;lblReferenceNo.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="cboDiscountAccountIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="cboDiscountAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -874,7 +892,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboDiscountAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 24</value>
+    <value>571, 24</value>
   </data>
   <data name="cboDiscountAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -926,6 +944,9 @@
   </data>
   <data name="&gt;&gt;lblInvoiceNo.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="txtORNumber.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="txtORNumber.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -993,6 +1014,9 @@
   <data name="&gt;&gt;lblCheckDate.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
+  <data name="txtReferenceNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="txtReferenceNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1003,7 +1027,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+    <value>115, 23</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1080,6 +1104,9 @@
   <data name="&gt;&gt;dtpTransactionDate.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
+  <data name="txtAmount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="txtAmount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1146,8 +1173,14 @@
   <data name="&gt;&gt;txtAmount.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
+  <data name="txtVatNumber.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="txtVatNumber.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblApplied.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="lblApplied.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1162,7 +1195,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblApplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 23</value>
+    <value>131, 24</value>
   </data>
   <data name="lblApplied.TabIndex" type="System.Int32, mscorlib">
     <value>277</value>
@@ -1212,6 +1245,9 @@
   <data name="&gt;&gt;txtVatNumber.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
+  <data name="lblTransactionDate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="lblTransactionDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1225,7 +1261,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 25</value>
+    <value>112, 25</value>
   </data>
   <data name="lblTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1351,7 +1387,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
+    <value>89, 23</value>
   </data>
   <data name="txtVatAmount.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1381,7 +1417,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtApplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
+    <value>89, 23</value>
   </data>
   <data name="txtApplied.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1404,6 +1440,9 @@
   <data name="txtUnapplied.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="CLabel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1417,7 +1456,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 18</value>
+    <value>131, 24</value>
   </data>
   <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>279</value>
@@ -1447,7 +1486,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtUnapplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
+    <value>89, 23</value>
   </data>
   <data name="txtUnapplied.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1467,6 +1506,9 @@
   <data name="&gt;&gt;txtUnapplied.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
+  <data name="lblVatAmount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="lblVatAmount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1480,7 +1522,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblVatAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+    <value>131, 25</value>
   </data>
   <data name="lblVatAmount.TabIndex" type="System.Int32, mscorlib">
     <value>283</value>
@@ -1506,6 +1548,9 @@
   <data name="txtDiscountTaken.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="lblDiscountTaken.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="lblDiscountTaken.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1519,7 +1564,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDiscountTaken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 18</value>
+    <value>131, 25</value>
   </data>
   <data name="lblDiscountTaken.TabIndex" type="System.Int32, mscorlib">
     <value>275</value>
@@ -1549,7 +1594,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDiscountTaken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
+    <value>89, 23</value>
   </data>
   <data name="txtDiscountTaken.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1569,6 +1614,9 @@
   <data name="&gt;&gt;txtDiscountTaken.ZOrder" xml:space="preserve">
     <value>38</value>
   </data>
+  <data name="cboPayeeIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="cboPayeeIdNo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
@@ -1585,7 +1633,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboPayeeIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 24</value>
+    <value>349, 24</value>
   </data>
   <data name="cboPayeeIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1710,8 +1758,11 @@
   <metadata name="bsDjOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 17</value>
   </metadata>
+  <data name="DataGridViewDjOiItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="DataGridViewDjOiItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>943, 187</value>
+    <value>919, 187</value>
   </data>
   <data name="DataGridViewDjOiItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>926, 332</value>
@@ -1734,6 +1785,9 @@
   <data name="&gt;&gt;DataGridViewDjOiItems.ZOrder" xml:space="preserve">
     <value>42</value>
   </data>
+  <data name="txtPayeeName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="txtPayeeName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1744,10 +1798,10 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPayeeName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
+    <value>376, 23</value>
   </data>
   <data name="txtPayeeName.TabIndex" type="System.Int32, mscorlib">
-    <value>286</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtPayeeName.Name" xml:space="preserve">
     <value>txtPayeeName</value>
@@ -1771,7 +1825,7 @@
     <value>9</value>
   </data>
   <data name="tlpDisbursement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1720, 564</value>
+    <value>1720, 552</value>
   </data>
   <data name="tlpDisbursement.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -90009,10 +90063,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1752, 617</value>
+    <value>929, 605</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>955, 590</value>
+    <value>945, 590</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Petty Cash Journal </value>

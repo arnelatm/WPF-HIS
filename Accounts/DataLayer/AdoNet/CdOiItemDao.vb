@@ -12,9 +12,12 @@ Namespace DataLayer.AdoNet
         Implements IDaoChild(Of DjOiItem), IDaoOiItem(Of DjOiItem)
 
         Private Shared ReadOnly Db As New Db()
-        Protected TableFileName As String = "CdOiItem_View"
-        Protected DboTvpUpdateFileName As String = "dbo.UpdateCdOiItemTVP"
-        Protected DboTvpInsertFileName As String = "dbo.InsertCdOiItemTVP"
+
+        Private Sub New()
+            TableName = "CdOiItem_View"
+            DboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
+            DboTvpInsertName = "dbo.InsertCdOiItemTVP"
+        End Sub
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
             As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo
@@ -22,11 +25,11 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, djIdNo As Int32) As Integer Implements IDaoChild(Of DjOiItem).DelUpdateTvp
-            Return Db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", djIdNo)
+            Return Db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", djIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DjOiItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertName, tvpTable, "@MParam")
         End Function
 
         Public Function GetOpenInvoices(idNo As Int32) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices

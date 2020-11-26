@@ -41,9 +41,9 @@ Namespace DataLayer.AdoNet
         Protected Overrides Function GetDjOiItemDao()
             Dim djOiItemDao As CdOiItemDao
             djOiItemDao = New CdOiItemDao()
-            djOiItemDao.TableName = "CdOiItem_View"
-            djOiItemDao.DboTvpInsertName = "InsertCdOiItemTVP"
-            djOiItemDao.DboTvpUpdateName = "UpdateCdOiItemTVP"
+            'djOiItemDao.TableName = "CdOiItem_View"
+            'djOiItemDao.DboTvpInsertName = "InsertCdOiItemTVP"
+            'djOiItemDao.DboTvpUpdateName = "UpdateCdOiItemTVP"
             Return djOiItemDao
         End Function
 

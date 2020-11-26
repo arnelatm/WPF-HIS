@@ -217,12 +217,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewJournalItems.DgvFooter = Nothing
         Me.DataGridViewJournalItems.DisplayOnly = false
-        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
         Me.DataGridViewJournalItems.Ea = EventAggregator1
         Me.DataGridViewJournalItems.EditingMode = false
         Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
+        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
@@ -386,8 +386,8 @@ Namespace PresentationLayer.Views.Forms
         'lblDateCreated
         '
         Me.lblDateCreated.DisplayOnly = true
-        Me.lblDateCreated.EditingMode = false
         resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
+        Me.lblDateCreated.EditingMode = false
         Me.lblDateCreated.Name = "lblDateCreated"
         '
         'chkPosted
@@ -409,8 +409,8 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.SetColumnSpan(Me.lblPosted, 2)
         Me.lblPosted.DisplayOnly = true
-        Me.lblPosted.EditingMode = false
         resources.ApplyResources(Me.lblPosted, "lblPosted")
+        Me.lblPosted.EditingMode = false
         Me.lblPosted.Name = "lblPosted"
         '
         'dtpDateCreated
@@ -455,8 +455,8 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.SetColumnSpan(Me.lblCancelled, 2)
         Me.lblCancelled.DisplayOnly = true
-        Me.lblCancelled.EditingMode = false
         resources.ApplyResources(Me.lblCancelled, "lblCancelled")
+        Me.lblCancelled.EditingMode = false
         Me.lblCancelled.Name = "lblCancelled"
         '
         'lblDiscountAccountIdNo
@@ -482,11 +482,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentType.CurrentSearchTerm = ""
         Me.cboPaymentType.DefaultValue = "0"
         Me.cboPaymentType.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboPaymentType, "cboPaymentType")
         Me.cboPaymentType.DropDownHeight = 1
-        Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboPaymentType.EditingMode = false
         Me.cboPaymentType.FilterRule = Nothing
-        resources.ApplyResources(Me.cboPaymentType, "cboPaymentType")
         Me.cboPaymentType.ForeColor = System.Drawing.Color.Black
         Me.cboPaymentType.HideWhenNotEditingOrAdding = false
         Me.cboPaymentType.LinkedLabel = Me.lblPaymentType
@@ -526,7 +526,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.DisplayMember = "Name"
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
         Me.cboAccountIdNo.DropDownHeight = 1
-        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -565,8 +565,8 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.CustomFormat = Nothing
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
         resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.TxtIdNo.EditingMode = true
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
         Me.TxtIdNo.MaximumValue = Nothing
@@ -591,8 +591,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtJournalCode.CustomFormat = Nothing
         Me.txtJournalCode.DataBoundControl = true
         Me.txtJournalCode.DisplayOnly = true
-        Me.txtJournalCode.EditingMode = true
         resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
+        Me.txtJournalCode.EditingMode = true
         Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
         Me.txtJournalCode.LinkedLabel = Nothing
         Me.txtJournalCode.MaximumValue = Nothing
@@ -620,11 +620,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
         Me.cboDiscountAccountIdNo.DefaultValue = Nothing
         Me.cboDiscountAccountIdNo.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
         Me.cboDiscountAccountIdNo.DropDownHeight = 1
-        Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboDiscountAccountIdNo.EditingMode = false
         Me.cboDiscountAccountIdNo.FilterRule = Nothing
-        resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
         Me.cboDiscountAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboDiscountAccountIdNo.FormattingEnabled = true
         Me.cboDiscountAccountIdNo.HideWhenNotEditingOrAdding = false
@@ -662,8 +662,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtORNumber.ComputedValue = false
         Me.txtORNumber.CustomFormat = Nothing
         Me.txtORNumber.DataBoundControl = true
-        Me.txtORNumber.EditingMode = false
         resources.ApplyResources(Me.txtORNumber, "txtORNumber")
+        Me.txtORNumber.EditingMode = false
         Me.txtORNumber.ForeColor = System.Drawing.Color.Black
         Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
         Me.txtORNumber.MaximumValue = Nothing
@@ -689,8 +689,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtReferenceNo.ComputedValue = false
         Me.txtReferenceNo.CustomFormat = Nothing
         Me.txtReferenceNo.DataBoundControl = true
-        Me.txtReferenceNo.EditingMode = false
         resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
+        Me.txtReferenceNo.EditingMode = false
         Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
         Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
         Me.txtReferenceNo.MaximumValue = Nothing
@@ -735,8 +735,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtAmount.ComputedValue = false
         Me.txtAmount.CustomFormat = "N2"
         Me.txtAmount.DataBoundControl = true
-        Me.txtAmount.EditingMode = false
         resources.ApplyResources(Me.txtAmount, "txtAmount")
+        Me.txtAmount.EditingMode = false
         Me.txtAmount.ForeColor = System.Drawing.Color.Black
         Me.txtAmount.LinkedLabel = Me.lblAmount
         Me.txtAmount.MaximumValue = Nothing
@@ -761,8 +761,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtVatNumber.ComputedValue = false
         Me.txtVatNumber.CustomFormat = Nothing
         Me.txtVatNumber.DataBoundControl = true
-        Me.txtVatNumber.EditingMode = false
         resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
+        Me.txtVatNumber.EditingMode = false
         Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
         Me.txtVatNumber.LinkedLabel = Me.lblApplied
         Me.txtVatNumber.MaximumValue = Nothing
@@ -777,15 +777,15 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.SetColumnSpan(Me.lblApplied, 2)
         Me.lblApplied.DisplayOnly = true
-        Me.lblApplied.EditingMode = false
         resources.ApplyResources(Me.lblApplied, "lblApplied")
+        Me.lblApplied.EditingMode = false
         Me.lblApplied.Name = "lblApplied"
         '
         'lblTransactionDate
         '
         Me.lblTransactionDate.DisplayOnly = true
-        Me.lblTransactionDate.EditingMode = false
         resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
+        Me.lblTransactionDate.EditingMode = false
         Me.lblTransactionDate.Name = "lblTransactionDate"
         '
         'lblVatNo
@@ -904,16 +904,16 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.SetColumnSpan(Me.CLabel2, 2)
         Me.CLabel2.DisplayOnly = true
-        Me.CLabel2.EditingMode = false
         resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.EditingMode = false
         Me.CLabel2.Name = "CLabel2"
         '
         'lblVatAmount
         '
         Me.tlpDisbursement.SetColumnSpan(Me.lblVatAmount, 2)
         Me.lblVatAmount.DisplayOnly = true
-        Me.lblVatAmount.EditingMode = false
         resources.ApplyResources(Me.lblVatAmount, "lblVatAmount")
+        Me.lblVatAmount.EditingMode = false
         Me.lblVatAmount.Name = "lblVatAmount"
         '
         'txtDiscountTaken
@@ -941,8 +941,8 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.SetColumnSpan(Me.lblDiscountTaken, 2)
         Me.lblDiscountTaken.DisplayOnly = true
-        Me.lblDiscountTaken.EditingMode = false
         resources.ApplyResources(Me.lblDiscountTaken, "lblDiscountTaken")
+        Me.lblDiscountTaken.EditingMode = false
         Me.lblDiscountTaken.Name = "lblDiscountTaken"
         '
         'cboPayeeIdNo
@@ -954,11 +954,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo.CurrentSearchTerm = ""
         Me.cboPayeeIdNo.DefaultValue = Nothing
         Me.cboPayeeIdNo.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboPayeeIdNo, "cboPayeeIdNo")
         Me.cboPayeeIdNo.DropDownHeight = 1
-        Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboPayeeIdNo.EditingMode = false
         Me.cboPayeeIdNo.FilterRule = Nothing
-        resources.ApplyResources(Me.cboPayeeIdNo, "cboPayeeIdNo")
         Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboPayeeIdNo.FormattingEnabled = true
         Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = false
@@ -1014,12 +1014,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDjOiItems.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewDjOiItems.DgvFooter = Nothing
         Me.DataGridViewDjOiItems.DisplayOnly = false
+        resources.ApplyResources(Me.DataGridViewDjOiItems, "DataGridViewDjOiItems")
         Me.DataGridViewDjOiItems.Ea = EventAggregator2
         Me.DataGridViewDjOiItems.EditingMode = false
         Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = false
         Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = false
-        resources.ApplyResources(Me.DataGridViewDjOiItems, "DataGridViewDjOiItems")
         Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
         Me.DataGridViewDjOiItems.ReadOnly = true
         Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
@@ -1182,8 +1182,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayeeName.ComputedValue = false
         Me.txtPayeeName.CustomFormat = Nothing
         Me.txtPayeeName.DataBoundControl = true
-        Me.txtPayeeName.EditingMode = false
         resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
+        Me.txtPayeeName.EditingMode = false
         Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
         Me.txtPayeeName.LinkedLabel = Me.lblAmount
         Me.txtPayeeName.MaximumValue = Nothing

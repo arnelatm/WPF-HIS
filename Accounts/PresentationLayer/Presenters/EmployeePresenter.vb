@@ -101,24 +101,24 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub EarningFillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-            workRow("Amount") = item.Amount
-            workRow("EarningIdNo") = item.EarningIdNo
-            workRow("EmployeeIdNo") = idNo
+        Private Sub EarningFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("Amount") = itemDataView.Amount
+            workRow("EarningIdNo") = itemDataView.EarningIdNo
+            workRow("EmployeeIdNo") = View.IdNo
         End Sub
 
-        Public Sub DeductionFillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-            workRow("Amount") = item.Amount
-            workRow("DeductionIdNo") = item.DeductionIdNo
-            workRow("EmployeeIdNo") = idNo
+        Private Sub DeductionFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("Amount") = itemDataView.Amount
+            workRow("DeductionIdNo") = itemDataView.DeductionIdNo
+            workRow("EmployeeIdNo") = View.IdNo
         End Sub
 
-        Public Sub PhoneFillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-            workRow("AreaCode") = item.AreaCode
-            workRow("CountryTelIdNo") = item.CountryTelIdNo
-            workRow("EmployeeIdNo") = idNo
-            workRow("PhoneNumber") = item.PhoneNumber
-            workRow("PhoneTypeIdNo") = item.PhoneTypeIdNo
+        Private Sub PhoneFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("AreaCode") = itemDataView.AreaCode
+            workRow("CountryTelIdNo") = itemDataView.CountryTelIdNo
+            workRow("EmployeeIdNo") = View.IdNo
+            workRow("PhoneNumber") = itemDataView.PhoneNumber
+            workRow("PhoneTypeIdNo") = itemDataView.PhoneTypeIdNo
         End Sub
 
         Public Function DeductionFilter(ByVal obj As Object) As Boolean

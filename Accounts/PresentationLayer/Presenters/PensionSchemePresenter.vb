@@ -46,12 +46,12 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub FillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-            workRow("EmployeeShare") = item.EmployeeShare
-            workRow("EmployerShare") = item.EmployerShare
-            workRow("LowRange") = item.LowRange
-            workRow("HighRange") = item.HighRange
-            workRow("MaxAmount") = item.MaxAmount
+        Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("EmployeeShare") = itemDataView.EmployeeShare
+            workRow("EmployerShare") = itemDataView.EmployerShare
+            workRow("LowRange") = itemDataView.LowRange
+            workRow("HighRange") = itemDataView.HighRange
+            workRow("MaxAmount") = itemDataView.MaxAmount
             workRow("PensionSchemeIdNo") = View.IdNo
         End Sub
 

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Accounts", "Accounts\Accounts.vbproj", "{826EE6DC-954A-4C18-9108-EBD592FCB1E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A6C79BF6-2C34-4AEA-9845-360F48976962}"
+	ProjectSection(SolutionItems) = preProject
+		Class1.cs = Class1.cs
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BaseControlsLibrary", "Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj", "{58F5EC33-2974-4823-AB62-1D4E5B3EF152}"
 EndProject

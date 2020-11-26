@@ -523,19 +523,13 @@ Public Class CFormEntryNew
             If PresenterObj.RecordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
-                'btnLast.Enabled = True
-                'btnNext.Enabled = True
             Else
                 btnFirst.Enabled = True
                 btnPrev.Enabled = True
-                'btnLast.Enabled = True
-                'btnNext.Enabled = True
             End If
             If PresenterObj.RecordPositionNumber >= RecordCount Then
                 btnLast.Enabled = False
                 btnNext.Enabled = False
-                'btnFirst.Enabled = True
-                'btnPrev.Enabled = True
             Else
                 btnLast.Enabled = True
                 btnNext.Enabled = True

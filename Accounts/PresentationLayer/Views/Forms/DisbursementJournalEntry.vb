@@ -18,7 +18,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-        Private ReadOnly _payeeOrigWidth As Integer
         Private _accountsByCode
 
         Private _apFooter As DgvFooter
@@ -32,6 +31,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            enableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = tableName
             If tableName = "PcJournal" Then
@@ -45,10 +45,9 @@ Namespace PresentationLayer.Views.Forms
                 PresenterObj.JournalCode = "CK"
                 Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
             End If
-            txtJournalCode.Text = PresenterObj.GetJournalCode()
+            txtJournalCode.Text = PresenterObj.JournalCode
             SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
-            _payeeOrigWidth = cboPayeeIdNo.Width
             _nfi.NumberDecimalDigits = 2
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
@@ -287,8 +286,7 @@ Namespace PresentationLayer.Views.Forms
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             PaymentType = eventType.Model.PaymentType
             SetPayeeDataSource(PaymentType)
-            cboPaymentType.SelectedValue = PaymentType
-            'SetPayeeProperty(PaymentType)
+            cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -331,8 +329,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+            MyBase.RecordPositionChanged(e)
             UpdateLayout()
-            'SetPayeeProperty(cboPaymentType.SelectedValue)
             UpdateTotals()
         End Sub
 
@@ -446,10 +444,9 @@ Namespace PresentationLayer.Views.Forms
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            If PresenterObj.CdCount = 1 Then
+            If PresenterObj.CdAccountCount = 1 Then
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
-                cboAccountIdNo.SelectedValue = PresenterObj.DefaultCdAccount
             End If
             If MainTableName <> "CkJournal" Then
                 dtpCheckDate.Visible = False
@@ -459,7 +456,7 @@ Namespace PresentationLayer.Views.Forms
                 lblCheckDate.Visible = True
             End If
 
-            If PresenterObj.GetCdAccountCount(txtJournalCode.Text) = 0 Then
+            If PresenterObj.CdAccountCount = 0 Then
                 If txtJournalCode.Text = "PC" Then
                     Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"Petty Cash", "specialAccountName"})
                 ElseIf txtJournalCode.Text = "CD" Then
@@ -484,8 +481,7 @@ Namespace PresentationLayer.Views.Forms
                         UpdateOiTotals()
                     End If
                     PresenterObj.AddSupplierOpenInvoices()
-
-                    'BindDjOiItem()
+                    BindDjOiItem()
                 End If
                 Dim lVatNumber As String
                 lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
@@ -496,16 +492,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
-            If cboPaymentType.Focused Then
+            If cboPaymentType.PreviousSelectedIndex <> cboPaymentType.SelectedIndex Then
                 SetPayeeDataSource(PaymentType)
-                'SetPayeeProperty(cboPaymentType.SelectedValue)
+                UpdateLayout()
             End If
-            'UpdateLayout()
         End Sub
 
         Private Sub UpdateLayout()
             SuspendLayout()
-            tlpDisbursement.Visible = False
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 ShowOpenInvoicesDataGrid()
@@ -578,7 +572,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub InputsTurnedOn()
             PresenterObj.AddSupplierOpenInvoices()
-            'BindDjOiItem()
+            BindDjOiItem()
             btnViewGL.Visible = False
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 btnAutoApply.Visible = True
@@ -606,7 +600,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
-            txtPayeeName.Width = _payeeOrigWidth
             DataGridViewJournalItems.Visible = True
             DataGridViewDjOiItems.Visible = False
             If tlpDisbursement.GetCellPosition(DataGridViewJournalItems) <> New TableLayoutPanelCellPosition(0, 7) Then
@@ -614,6 +607,7 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
+            cboDiscountAccountIdNo.Enabled = False
         End Sub
 
         Private Sub ShowOpenInvoicesDataGrid()
@@ -624,6 +618,7 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
+            cboDiscountAccountIdNo.Enabled = True
         End Sub
 
         Private Sub ShowPayee(paymentTypeEnum)
@@ -639,11 +634,6 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
             End If
         End Sub
-
-        'Private Sub ShowTxtPayee()
-        '    tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(7, 8))
-        '    tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
-        'End Sub
 
         Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then

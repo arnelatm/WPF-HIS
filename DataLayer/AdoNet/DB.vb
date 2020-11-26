@@ -321,7 +321,7 @@ Namespace AdoNet
 
         Public Function Scalar(sql As String, ParamArray ByVal params() As Object) As Object
             Dim c As Object = Nothing
-            Dim tryAgain = False
+            Dim tryAgain As Boolean
             '_waitForm.Show()
             Using connection = CreateConnection()
                 '_waitForm.Show()
@@ -539,7 +539,7 @@ Namespace AdoNet
         Public Function TvpMerge(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
             As Integer
             Dim retValue = 0
-            Dim tryAgain = False
+            Dim tryAgain As Boolean
             '_waitForm.Show()
             Do While True
                 tryAgain = False
@@ -588,7 +588,7 @@ Namespace AdoNet
         Public Function TvpUpdate(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
             As Integer
             Dim retValue = 0
-            Dim tryAgain = False
+            Dim tryAgain As Boolean
             '_waitForm.Show()
             Do While True
                 tryAgain = False
@@ -637,7 +637,7 @@ Namespace AdoNet
         Public Function DelUpdateTvp(Of TI)(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
                                      groupIdNo As TI) As Integer
             Dim retValue As Integer = 0
-            Dim tryAgain = False
+            Dim tryAgain As Boolean
             '_waitForm.Show()
             Do While True
                 tryAgain = False

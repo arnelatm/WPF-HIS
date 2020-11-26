@@ -117,7 +117,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CashReceiptJournal) =
                                     Function(reader) _
             New CashReceiptJournal() With {
-            .AccountIdNo = Extensions.AsNullable(Of Int16)(reader("AccountIdNo")),
+            .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),

@@ -184,6 +184,13 @@ Public Class CCustomDateTimePicker
             txtTime.DisplayOnly = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
+            If _displayOnly Then
+                dtp.Visible = False
+                btnCalendarType.Visible = False
+            Else
+                dtp.Visible = True
+                btnCalendarType.Visible = True
+            End If
         End Set
     End Property
 
@@ -340,7 +347,7 @@ Public Class CCustomDateTimePicker
             txtTime.Width = 0
             txtTime.Visible = False
         End If
-        Dim totalWidth As Integer = txtLongDate.Width + txtDate.Width + dtp.Width + txtTime.Width + btnCalendarType.Width
+        Dim totalWidth As Integer = txtLongDate.Width + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + txtTime.Width + IIf(DisplayOnly, 0, btnCalendarType.Width)
         Width = totalWidth
         floDatePicker.Width = totalWidth
     End Sub
