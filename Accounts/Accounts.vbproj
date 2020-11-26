@@ -168,6 +168,7 @@
     <Compile Include="Class1.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\Class2.vb" />
     <Compile Include="DataLayer\AdoNet\PcOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />

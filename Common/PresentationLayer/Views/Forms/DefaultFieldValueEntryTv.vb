@@ -166,7 +166,6 @@ Namespace PresentationLayer.Views.Forms
 
 End Namespace
 
-
 'ApJournal
 'ArJournal
 'CashDisbursementJournal

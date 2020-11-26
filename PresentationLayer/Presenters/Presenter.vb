@@ -76,7 +76,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Delegate Sub FillDataFunc(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
+    Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
 
     Public Event AddingRecordChanged(adding As Boolean)
 
@@ -867,19 +867,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                                AddMode = False
-                            Else
-                                EditMode = False
+                                'AddMode = False
+                                'Else
+                                'EditMode = False
                             End If
                             retValue = True
                         End If
                     Else
                         If AddMode Then
                             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                            AddMode = False
+                            'AddMode = False
                         Else
                             RecordPositionNumber = RecordPositionNumber
-                            EditMode = False
+                            'EditMode = False
                         End If
                         retValue = True
                     End If
@@ -1233,8 +1233,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '        End If
     '    End If
     'End Sub
-    Protected Function ViewToDataTables(ByRef myView As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
-                                      ByVal includeFilter As Predicate(Of Object), ByVal Optional idNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
+    Protected Function ViewToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
+                                      ByVal includeFilter As Predicate(Of Object), ByVal Optional dataViewIdNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
         If insertTable IsNot Nothing Then
             insertTable.Clear()
         End If
@@ -1243,17 +1243,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         Dim nRowCount As Int16 = 1
         Dim workRow As DataRow = Nothing
-        For Each item In myView
-            If includeFilter.Invoke(item) Then
-                Dim idNo As Integer = CallByName(item, idNoFieldName, CallType.Get)
+        For Each dataView In dataViews
+            If includeFilter.Invoke(dataView) Then
+                Dim idNo As Integer = CallByName(dataView, dataViewIdNoFieldName, CallType.Get)
                 If idNo <= 0 Then
                     workRow = insertTable.NewRow()
                 Else
                     workRow = updateTable.NewRow()
-                    workRow(idNoFieldName) = idNo
+                    workRow(dataViewIdNoFieldName) = idNo
                 End If
                 workRow(sequenceFieldName) = nRowCount
-                fillSub.Invoke(item, idNo, workRow)
+                fillSub.Invoke(dataView, workRow)
                 If idNo <= 0 Then
                     insertTable.Rows.Add(workRow)
                 Else

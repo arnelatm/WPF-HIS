@@ -112,10 +112,12 @@ Public Class CaComboBox
                 End If
                 DropDownHeight = 200
                 IntegralHeight = True
+                DropDownStyle = ComboBoxStyle.DropDownList
             Else
                 ReadOnlyCombo = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                DropDownStyle = ComboBoxStyle.Simple
                 DropDownHeight = 1
             End If
         End Set
@@ -528,82 +530,90 @@ Public Class CaComboBox
         If value Is Nothing Then
             Text = Nothing
         Else
-            Dim saveDisplayMember As String = DisplayMember
-            DisplayMember = ValueMember
-            Text = value
-            DisplayMember = saveDisplayMember
-            SelectedValue = value
             If ValueMember.ToLower() = "idno" Then
-                If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
+                If IsNumeric(value) Then
+                    IdNoSearch(value)
+                Else
                     SelectedIndex = -1
-                    Text = value.ToString()
-                    If value IsNot Nothing And value > 0 Then
-                        MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
-                        'Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
-                    End If
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
-                If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then
-                    SelectedIndex = -1
-                    Text = value.ToString()
-                    If value <> vbNullChar And Text <> "" Then
-                        MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", Text, "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
-                        'Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
-                    End If
-                Else
-                    If SelectedItem IsNot Nothing Then
-                        If SelectedItem.Code <> value Then
-                            Text = Nothing
-                        End If
-                    End If
-                End If
+                CodeSearch(value)
+            End If
+            '            'Dim saveDisplayMember As String = DisplayMember
+            ''DisplayMember = ValueMember
+            ''If Text <> value Then
+            ''    Text = value
+            ''End If
+            ''DisplayMember = saveDisplayMember
+            ''SelectedValue = value
+            'If ValueMember.ToLower() = "idno" Then
+            '    If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
+            '        SelectedIndex = -1
+            '        Text = value.ToString()
+            '        If value IsNot Nothing And value > 0 Then
+            '            MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+            '            'Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+            '        End If
+            '    End If
+            'ElseIf ValueMember.ToLower() = "code" Then
+            '    If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then
+            '        SelectedIndex = -1
+            '        Text = value.ToString()
+            '        If value <> vbNullChar And Text <> "" Then
+            '            MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", Text, "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+            '            'Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
+            '        End If
+            '    Else
+            '        If SelectedItem IsNot Nothing Then
+            '            If SelectedItem.Code <> value Then
+            '                Text = Nothing
+            '            End If
+            '        End If
+            '    End If
+            'End If
+        End If
+    End Sub
+
+    Private Sub IdNoSearch(value As Object)
+        Dim returnValue As Int32
+        Dim found As Boolean = False
+        Dim i = 0
+        For Each item In DataSource
+            If item.IdNo = value Then
+                SelectedItem = DataSource(i)
+                found = True
+                Exit For
+            End If
+            i += 1
+        Next
+        If Not found Then
+            SelectedIndex = -1
+            returnValue = Nothing
+            If value IsNot Nothing Then
+                Me.Text = value
+                'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
             End If
         End If
-        'If value Is Nothing Then
-        '    Text = Nothing
-        '    'Else
-        '    '    Text = value
-        'End If
-        'If IsNumeric(value) Then
-        '    If value = 0 Then
-        '        Text = ""
-        '    ElseIf ValueMember.ToLower() = "idno" AndAlso TextDisplayMember.ToLower() <> "idno" Then
-        '        Dim saveDisplayMember As String = DisplayMember
-        '        DisplayMember = "IdNo"
-        '        Text = value
-        '        DisplayMember = saveDisplayMember
-        '    ElseIf ValueMember.ToLower() = "code" Then
-        '        Dim saveDisplayMember As String = DisplayMember
-        '        DisplayMember = "Code"
-        '        Text = Val(value)
-        '        DisplayMember = saveDisplayMember
-        '    Else
-        '        Text = value
-        '    End If
-        'Else
-        'If ValueMember.ToLower() = "idno" Then
-        '    Dim saveDisplaymember As String = DisplayMember
-        '    If value = Nothing Then
-        '        Text = Nothing
-        '    Else
-        '        DisplayMember = "IdNo"
-        '        Text = value
-        '        DisplayMember = saveDisplaymember
-        '    End If
-        'ElseIf ValueMember.ToLower() = "code" Then
-        '    Dim saveDisplayMember As String = DisplayMember
-        '    DisplayMember = "Code"
-        '    If value = Nothing Then
-        '        Text = Nothing
-        '    Else
-        '        DisplayMember = "Code"
-        '        Text = Value
-        '        DisplayMember = saveDisplayMember
-        '    End If
-        'Else
-        '    Text = value
-        'End If
-        'End If
+    End Sub
+
+    Private Sub CodeSearch(value As Object)
+        Dim found As Boolean = False
+        Dim i = 0
+        For Each item In DataSource
+            If item.Code = value Then
+                SelectedItem = DataSource(i)
+                found = True
+                Exit For
+            End If
+            i += 1
+        Next
+        If Not found Then
+            If value IsNot Nothing Then
+                Me.Text = value
+                'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+            End If
+            SelectedIndex = -1
+        End If
     End Sub
 
     Protected Sub ContextHandler(sender As Object, e As EventArgs)
@@ -873,6 +883,31 @@ Public Class CaComboBox
     '    End If
     '    MyBase.OnSelectedIndexChanged(e)
     'End Sub
+
+    Public Function binarySearch(value)
+        Dim index As Int32
+        Dim lowerBound = 0
+        Dim upperBound = DataSource.Count() - 1
+        Dim found = False
+        While Not found
+
+        End While
+        Return index
+        '   If upperBound < lowerBound Then
+        '             Exit: x does Not exists.
+
+        '   set midPoint = lowerBound + ( upperBound - lowerBound ) / 2
+
+        '   If A Then[midPoint] < x
+        '      set lowerBound = midPoint + 1
+
+        '   If A Then[midPoint] > x
+        '      set upperBound = midPoint - 1
+
+        '   If A Then[midPoint] = x
+        '      Exit: x found at location midPoint
+        'End While
+    End Function
 
 End Class
 

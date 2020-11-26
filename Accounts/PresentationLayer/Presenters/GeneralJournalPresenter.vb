@@ -83,13 +83,13 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub FillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
+        Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("JournalIdNo") = View.IdNo
-            workRow("AccountIdNo") = item.AccountIdNo
-            workRow("Debit") = item.Debit
-            workRow("Credit") = item.Credit
-            workRow("RevCostCenterIdNo") = item.RevCostCenterIdNo
-            workRow("Notes") = If(item.Notes, "")
+            workRow("AccountIdNo") = itemDataView.AccountIdNo
+            workRow("Debit") = itemDataView.Debit
+            workRow("Credit") = itemDataView.Credit
+            workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
+            workRow("Notes") = If(itemDataView.Notes, "")
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean

@@ -280,13 +280,13 @@
     <value>ArJournal</value>
   </data>
   <data name="cboTableName.Items2" xml:space="preserve">
-    <value>CashDisbursementJournal</value>
+    <value>CdJournal</value>
   </data>
   <data name="cboTableName.Items3" xml:space="preserve">
     <value>CashReceiptJournal</value>
   </data>
   <data name="cboTableName.Items4" xml:space="preserve">
-    <value>CheckDisbursementJournal</value>
+    <value>CkJournal</value>
   </data>
   <data name="cboTableName.Items5" xml:space="preserve">
     <value>Customer</value>

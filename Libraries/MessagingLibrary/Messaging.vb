@@ -190,7 +190,7 @@
         Return result
     End Function
 
-    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As Array, ByVal parametrizedMessage As String, ByVal caption As String)
+    Public Overloads Shared Function ShowParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As String(), ByVal parametrizedMessage As String, ByVal caption As String)
         Dim cMessage = Messaging.GetMessage(translate, key, parametrizedMessage, caption)
         Dim message = Messaging.ReplaceValues(cMessage, variables)
         ' caption now holds the translated value because GetMessage function above 'caption' parameter is by reference

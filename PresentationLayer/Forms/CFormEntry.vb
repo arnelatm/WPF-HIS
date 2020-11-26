@@ -522,7 +522,6 @@ Public Class CFormEntry
             btnSave.Enabled = False
             btnFind.Enabled = False
             btnPrint.Enabled = False
-            'PresenterObj.RecordPositionNumber = 0
             If Not PresenterObj.AddMode Then
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
@@ -535,19 +534,13 @@ Public Class CFormEntry
             If PresenterObj.RecordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
-                'btnLast.Enabled = True
-                'btnNext.Enabled = True
             Else
                 btnFirst.Enabled = True
                 btnPrev.Enabled = True
-                'btnLast.Enabled = True
-                'btnNext.Enabled = True
             End If
             If PresenterObj.RecordPositionNumber >= RecordCount Then
                 btnLast.Enabled = False
                 btnNext.Enabled = False
-                'btnFirst.Enabled = True
-                'btnPrev.Enabled = True
             Else
                 btnLast.Enabled = True
                 btnNext.Enabled = True
@@ -780,6 +773,7 @@ Public Class CFormEntry
                 ' Visible property stored in first element of the array
                 HideButton(btnDebug)
             End If
+            UpdateButtonDisplays(False, False)
         End If
     End Sub
 
@@ -1046,6 +1040,11 @@ Public Class CFormEntry
         Debugger.Break()
         Return False
     End Function
+
+    Public Shared Sub enableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
+        Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
+        DemoProp.SetValue(cont, True, Nothing)
+    End Sub
 
     '#Region "Temporary Events"
 

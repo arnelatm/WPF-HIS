@@ -11,9 +11,9 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Property TableName As String
-        Public Property DboTvpUpdateName As String
-        Public Property DboTvpInsertName As String
+        Protected Property TableName As String
+        Protected Property DboTvpUpdateName As String
+        Protected Property DboTvpInsertName As String
 
         Protected Function CdGetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem)
             If sortExpression Is Nothing Then

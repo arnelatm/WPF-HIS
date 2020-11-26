@@ -47,104 +47,104 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
-            '
-            'TreeViewTableName
-            '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-            '
-            'TxtIdNo
-            '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = False
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
-            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
-            Me.TxtIdNo.TabStop = False
-            '
-            'txtFieldName
-            '
-            Me.txtFieldName.BackColor = System.Drawing.Color.White
-            Me.txtFieldName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtFieldName.ComputedValue = False
-            Me.txtFieldName.CustomFormat = Nothing
-            Me.txtFieldName.DataBoundControl = True
-            Me.txtFieldName.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.txtFieldName, True)
-            resources.ApplyResources(Me.txtFieldName, "txtFieldName")
-            Me.txtFieldName.ForeColor = System.Drawing.Color.Black
-            Me.txtFieldName.LinkedLabel = Nothing
-            Me.txtFieldName.MaximumValue = Nothing
-            Me.txtFieldName.MinimumValue = Nothing
-            Me.txtFieldName.Name = "txtFieldName"
-            Me.txtFieldName.OldValue = Nothing
-            Me.txtFieldName.ReadOnly = True
-            Me.txtFieldName.ValueIsMandatory = True
-            '
-            'floDataDisplay
-            '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-            Me.floDataDisplay.Controls.Add(Me.lblTableName)
-            Me.floDataDisplay.Controls.Add(Me.cboTableName)
-            Me.floDataDisplay.Controls.Add(Me.lblFieldName)
-            Me.floDataDisplay.Controls.Add(Me.txtFieldName)
-            Me.floDataDisplay.Controls.Add(Me.lblDataType)
-            Me.floDataDisplay.Controls.Add(Me.cboDataType)
-            Me.floDataDisplay.Controls.Add(Me.lblLength)
-            Me.floDataDisplay.Controls.Add(Me.txtLength)
-            Me.floDataDisplay.Controls.Add(Me.lblDecimalPart)
-            Me.floDataDisplay.Controls.Add(Me.txtDecimalPart)
-            Me.floDataDisplay.Controls.Add(Me.CLabel1)
-            Me.floDataDisplay.Controls.Add(Me.txtLinkedTable)
-            Me.floDataDisplay.Controls.Add(Me.CLabel2)
-            Me.floDataDisplay.Controls.Add(Me.txtLinkedField)
-            Me.floDataDisplay.Controls.Add(Me.CLabel3)
-            Me.floDataDisplay.Controls.Add(Me.txtDefaultValue)
-            Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'lblIdNo
-            '
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-            Me.lblIdNo.Name = "lblIdNo"
-            '
-            'lblTableName
-            '
-            Me.lblTableName.DisplayOnly = True
-            Me.lblTableName.EditingMode = False
-            resources.ApplyResources(Me.lblTableName, "lblTableName")
-            Me.lblTableName.Name = "lblTableName"
-            '
-            'cboTableName
-            '
-            Me.cboTableName.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("cboTableName.AutoCompleteCustomSource"), resources.GetString("cboTableName.AutoCompleteCustomSource1"), resources.GetString("cboTableName.AutoCompleteCustomSource2"), resources.GetString("cboTableName.AutoCompleteCustomSource3"), resources.GetString("cboTableName.AutoCompleteCustomSource4"), resources.GetString("cboTableName.AutoCompleteCustomSource5"), resources.GetString("cboTableName.AutoCompleteCustomSource6"), resources.GetString("cboTableName.AutoCompleteCustomSource7"), resources.GetString("cboTableName.AutoCompleteCustomSource8"), resources.GetString("cboTableName.AutoCompleteCustomSource9"), resources.GetString("cboTableName.AutoCompleteCustomSource10"), resources.GetString("cboTableName.AutoCompleteCustomSource11"), resources.GetString("cboTableName.AutoCompleteCustomSource12"), resources.GetString("cboTableName.AutoCompleteCustomSource13"), resources.GetString("cboTableName.AutoCompleteCustomSource14"), resources.GetString("cboTableName.AutoCompleteCustomSource15")})
-            Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-            Me.cboTableName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-            Me.cboTableName.BackColor = System.Drawing.Color.White
-            Me.cboTableName.DefaultValue = Nothing
-            Me.cboTableName.DisplayOnly = False
-            Me.cboTableName.EditingMode = True
-            resources.ApplyResources(Me.cboTableName, "cboTableName")
-            Me.cboTableName.ForeColor = System.Drawing.Color.Black
-            Me.cboTableName.FormattingEnabled = True
-            Me.cboTableName.HideWhenNotEditingOrAdding = False
-            Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15"), resources.GetString("cboTableName.Items16"), resources.GetString("cboTableName.Items17"), resources.GetString("cboTableName.Items18")})
-            Me.cboTableName.LinkedLabel = Nothing
+        '
+        'TreeViewTableName
+        '
+        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+        '
+        'TxtIdNo
+        '
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = false
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
+        Me.TxtIdNo.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
+        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.TabStop = false
+        '
+        'txtFieldName
+        '
+        Me.txtFieldName.BackColor = System.Drawing.Color.White
+        Me.txtFieldName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFieldName.ComputedValue = false
+        Me.txtFieldName.CustomFormat = Nothing
+        Me.txtFieldName.DataBoundControl = true
+        Me.txtFieldName.EditingMode = true
+        Me.floDataDisplay.SetFlowBreak(Me.txtFieldName, true)
+        resources.ApplyResources(Me.txtFieldName, "txtFieldName")
+        Me.txtFieldName.ForeColor = System.Drawing.Color.Black
+        Me.txtFieldName.LinkedLabel = Nothing
+        Me.txtFieldName.MaximumValue = Nothing
+        Me.txtFieldName.MinimumValue = Nothing
+        Me.txtFieldName.Name = "txtFieldName"
+        Me.txtFieldName.OldValue = Nothing
+        Me.txtFieldName.ReadOnly = true
+        Me.txtFieldName.ValueIsMandatory = true
+        '
+        'floDataDisplay
+        '
+        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+        Me.floDataDisplay.Controls.Add(Me.lblTableName)
+        Me.floDataDisplay.Controls.Add(Me.cboTableName)
+        Me.floDataDisplay.Controls.Add(Me.lblFieldName)
+        Me.floDataDisplay.Controls.Add(Me.txtFieldName)
+        Me.floDataDisplay.Controls.Add(Me.lblDataType)
+        Me.floDataDisplay.Controls.Add(Me.cboDataType)
+        Me.floDataDisplay.Controls.Add(Me.lblLength)
+        Me.floDataDisplay.Controls.Add(Me.txtLength)
+        Me.floDataDisplay.Controls.Add(Me.lblDecimalPart)
+        Me.floDataDisplay.Controls.Add(Me.txtDecimalPart)
+        Me.floDataDisplay.Controls.Add(Me.CLabel1)
+        Me.floDataDisplay.Controls.Add(Me.txtLinkedTable)
+        Me.floDataDisplay.Controls.Add(Me.CLabel2)
+        Me.floDataDisplay.Controls.Add(Me.txtLinkedField)
+        Me.floDataDisplay.Controls.Add(Me.CLabel3)
+        Me.floDataDisplay.Controls.Add(Me.txtDefaultValue)
+        Me.floDataDisplay.Name = "floDataDisplay"
+        '
+        'lblIdNo
+        '
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+        Me.lblIdNo.Name = "lblIdNo"
+        '
+        'lblTableName
+        '
+        Me.lblTableName.DisplayOnly = true
+        Me.lblTableName.EditingMode = false
+        resources.ApplyResources(Me.lblTableName, "lblTableName")
+        Me.lblTableName.Name = "lblTableName"
+        '
+        'cboTableName
+        '
+        Me.cboTableName.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("cboTableName.AutoCompleteCustomSource"), resources.GetString("cboTableName.AutoCompleteCustomSource1"), resources.GetString("cboTableName.AutoCompleteCustomSource2"), resources.GetString("cboTableName.AutoCompleteCustomSource3"), resources.GetString("cboTableName.AutoCompleteCustomSource4"), resources.GetString("cboTableName.AutoCompleteCustomSource5"), resources.GetString("cboTableName.AutoCompleteCustomSource6"), resources.GetString("cboTableName.AutoCompleteCustomSource7"), resources.GetString("cboTableName.AutoCompleteCustomSource8"), resources.GetString("cboTableName.AutoCompleteCustomSource9"), resources.GetString("cboTableName.AutoCompleteCustomSource10"), resources.GetString("cboTableName.AutoCompleteCustomSource11"), resources.GetString("cboTableName.AutoCompleteCustomSource12"), resources.GetString("cboTableName.AutoCompleteCustomSource13"), resources.GetString("cboTableName.AutoCompleteCustomSource14"), resources.GetString("cboTableName.AutoCompleteCustomSource15")})
+        Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboTableName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.cboTableName.BackColor = System.Drawing.Color.White
+        Me.cboTableName.DefaultValue = Nothing
+        Me.cboTableName.DisplayOnly = false
+        Me.cboTableName.EditingMode = true
+        resources.ApplyResources(Me.cboTableName, "cboTableName")
+        Me.cboTableName.ForeColor = System.Drawing.Color.Black
+        Me.cboTableName.FormattingEnabled = true
+        Me.cboTableName.HideWhenNotEditingOrAdding = false
+        Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15"), resources.GetString("cboTableName.Items16"), resources.GetString("cboTableName.Items17"), resources.GetString("cboTableName.Items18")})
+        Me.cboTableName.LinkedLabel = Nothing
         Me.cboTableName.MaximumValue = Nothing
         Me.cboTableName.MinimumValue = Nothing
         Me.cboTableName.Name = "cboTableName"

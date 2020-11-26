@@ -41,10 +41,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub FillData(ByRef item As Object, ByVal idNo As Integer, ByRef workRow As DataRow)
-            workRow("AccountIdNo") = item.AccountIdNo
+        Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("EarningIdNo") = View.IdNo
-            workRow("PayGroupIdNo") = item.PayGroupIdNo
+            workRow("PayGroupIdNo") = itemDataView.PayGroupIdNo
         End Sub
 
         Public Function PayrollEarnAccountFilter(ByVal obj As Object) As Boolean

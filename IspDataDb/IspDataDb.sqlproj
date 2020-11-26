@@ -384,6 +384,7 @@
     <Build Include="dbo\User Defined Types\PcOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\PcOiItemInsert.sql" />
     <Build Include="dbo\Views\CdJournalItem_View.sql" />
+    <Build Include="dbo\Views\PcJournalItem_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
