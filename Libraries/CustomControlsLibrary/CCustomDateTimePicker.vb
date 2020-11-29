@@ -36,7 +36,7 @@ Public Class CCustomDateTimePicker
     Private _targetCalendar As Calendar
     Private _calendarType As CalendarToUse = CalendarToUse.Gregorian
     Private _longDateWidth As Integer = 110
-    Private _dateWidth As Integer = 71
+    Private _dateWidth As Integer = 76
     Private _totalWidth As Integer = 0
     Private _buttonWidth As Integer = 21
     Private _btnCalendarTypeWidth As Integer = 15
@@ -444,7 +444,7 @@ Public Class CCustomDateTimePicker
     '    txtTime.SelectionLength = 8
     'End Sub
 
-    Private Sub txtTime_Validating(sender As Object, e As CancelEventArgs) Handles txtTime.Validating
+    Private Sub TxtTime_Validating(sender As Object, e As CancelEventArgs) Handles txtTime.Validating
         If _
             (txtDate.Text = "" Or txtDate.Text.TrimEnd = EmptyMask) AndAlso
             (txtTime.Text = "  :  :" Or txtTime.Text = "") Then Exit Sub
@@ -460,7 +460,7 @@ Public Class CCustomDateTimePicker
 
     Private _txtDateAlreadyFocused As Boolean
 
-    Private Sub txtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
+    Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
         ' Select all text only if the mouse isn't down.
         ' This makes tabbing to the textbox give focus.
         _lastDate = Value
@@ -471,12 +471,12 @@ Public Class CCustomDateTimePicker
         'End If
     End Sub
 
-    Private Sub txtDate_Leave(sender As Object, e As EventArgs) Handles txtDate.Leave
+    Private Sub TxtDate_Leave(sender As Object, e As EventArgs) Handles txtDate.Leave
         _txtDateAlreadyFocused = False
         txtDate.InsertKeyMode = InsertKeyMode.Default
     End Sub
 
-    Private Sub txtDate_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown
+    Private Sub TxtDate_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown
         ' The balloon tip is visible for five seconds; if the user types any data before it disappears, collapse it ourselves.
         ToolTip1.Hide(txtDate)
         'If e.KeyCode = Keys.Enter Then
@@ -485,7 +485,7 @@ Public Class CCustomDateTimePicker
         'End If
     End Sub
 
-    Private Sub txtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
+    Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
         If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
         If txtDate.Text.Length = MaxLength Then
             If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
@@ -508,7 +508,7 @@ Public Class CCustomDateTimePicker
         e.Cancel = True
     End Sub
 
-    Private Sub txtDate_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated
+    Private Sub TxtDate_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated
         If Not txtDate.ReadOnly Then
             If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
                 txtLongDate.Text = ""
@@ -530,7 +530,7 @@ Public Class CCustomDateTimePicker
         End If
     End Sub
 
-    Private Sub txtLongDate_Validating(sender As Object, e As CancelEventArgs) Handles txtLongDate.Validating
+    Private Sub TxtLongDate_Validating(sender As Object, e As CancelEventArgs) Handles txtLongDate.Validating
         Dim tDate As String = txtLongDate.Text
         Try
             If tDate.Trim() = "" Then
@@ -550,7 +550,7 @@ Public Class CCustomDateTimePicker
         End Try
     End Sub
 
-    Private Sub txtLongDate_Validated(sender As Object, e As EventArgs) Handles txtLongDate.Validated
+    Private Sub TxtLongDate_Validated(sender As Object, e As EventArgs) Handles txtLongDate.Validated
         If txtLongDate.Text.Trim = "" Then Exit Sub
         Dim tDate As String = txtLongDate.Text
         Dim curCulture = CultureInfo.CurrentCulture
@@ -559,10 +559,11 @@ Public Class CCustomDateTimePicker
         CultureInfo.CurrentCulture = curCulture
     End Sub
 
-    Private Sub dtp_Click(sender As Object, e As EventArgs) Handles dtp.Click
+    Private Sub Dtp_Click(sender As Object, e As EventArgs) Handles dtp.Click
         Dim retVal As DialogResult
-        Dim calendarForm = New CCalendar(Value, CalendarType)
-        calendarForm.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+        Dim calendarForm = New CCalendar(Value, CalendarType) With {
+            .RightToLeftLayout = GlobalVariables.RightToLeftLayout
+        }
         Do While True
 
             SetCalendarLocation(calendarForm)
@@ -656,7 +657,7 @@ Public Class CCustomDateTimePicker
     '    txtLongDate.MakeVisible(visibleControl)
     'End Sub
 
-    Private Sub btnCalendarType_Click(sender As Object, e As EventArgs) Handles btnCalendarType.Click
+    Private Sub BtnCalendarType_Click(sender As Object, e As EventArgs) Handles btnCalendarType.Click
         ToggleTargetCulture()
     End Sub
 

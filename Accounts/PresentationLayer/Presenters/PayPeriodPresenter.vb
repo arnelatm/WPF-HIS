@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
             If View.StartDate = Nothing And View.EndDate = Nothing Then
                 Dim nIdNoMax As Int32
-                Dim maxRecord As New PayPeriodModel
+                Dim maxRecord As PayPeriodModel
                 nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
                 maxRecord = ModelPresenter.GetRecordById(Of PayPeriodModel)(nIdNoMax)
                 View.StartDate = maxRecord.EndDate.AddDays(1)
@@ -30,11 +30,11 @@ Namespace PresentationLayer.Presenters
                 If View.StartDate.Day = 1 Then
                     View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
                     View.PayPeriodName = "Payroll for the Month of " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                    View.PayPeriodNameAra = " رواتب الشهر" + GetMonthNamesInCulture(Month(View.EndDate), arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                    View.PayPeriodNameAra = " رواتب الشهر" + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                 Else
                     View.EndDate = maxRecord.EndDate.AddMonths(1)
                     View.PayPeriodName = "Payroll for the Period " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                    View.PayPeriodNameAra = " رواتب الشهر" & GetMonthNamesInCulture(Month(View.EndDate), arabicCulture)
+                    View.PayPeriodNameAra = " رواتب الشهر" & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                 End If
                 View.PayPeriodCode = "M" + View.EndDate.ToString("yyMM")
             End If

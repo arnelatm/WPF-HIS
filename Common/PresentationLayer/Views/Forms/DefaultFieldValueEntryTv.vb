@@ -168,9 +168,9 @@ End Namespace
 
 'ApJournal
 'ArJournal
-'CashDisbursementJournal
+'CdJournal
 'CashReceiptJournal
-'CheckDisbursementJournal
+'CkJournal
 'Customer
 'Employee
 'ErJournal

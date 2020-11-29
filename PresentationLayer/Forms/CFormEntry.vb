@@ -95,7 +95,7 @@ Public Class CFormEntry
         Return FieldsDictionary
     End Function
 
-    Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         If GotoTargetRecordWorker.CancellationPending Then
             e.Cancel = True
             Return
@@ -207,7 +207,7 @@ Public Class CFormEntry
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
         'Dim IdNoTarget as Int32 = 0
         'waitMessageSetter.RunWorkerAsync(e.Argument)
@@ -582,11 +582,11 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Add)
     End Sub
 
-    Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
+    Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
         SwitchUiLanguage(False)
     End Sub
 
-    Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
+    Private Sub BtnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
         If _debugSwitch = 0 Then
             _debugSwitch = 1
             'Debugger.Break()
@@ -640,7 +640,7 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Next)
     End Sub
 
-    Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
+    Private Sub BtnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -685,7 +685,7 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Print)
     End Sub
 
-    Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
+    Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -1041,7 +1041,7 @@ Public Class CFormEntry
         Return False
     End Function
 
-    Public Shared Sub enableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
+    Public Shared Sub EnableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
         Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
         DemoProp.SetValue(cont, True, Nothing)
     End Sub

@@ -69,7 +69,6 @@
     <Folder Include="Snapshots" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\CheckDisbursementJournalItem.sql" />
     <Build Include="dbo\Tables\SJPrefix.sql" />
     <Build Include="dbo\Tables\Branch.sql" />
     <Build Include="dbo\Tables\Establishment.sql" />
@@ -115,7 +114,6 @@
     <Build Include="dbo\Tables\ArJournal.sql" />
     <Build Include="dbo\Tables\ApJournal.sql" />
     <Build Include="dbo\Tables\InterfaceObjectsSecurity.sql" />
-    <Build Include="dbo\Tables\CheckDisbursementJournal.sql" />
     <Build Include="dbo\Tables\FormItems.sql" />
     <Build Include="dbo\Tables\Languages.sql" />
     <Build Include="dbo\Tables\Reconciliation.sql" />
@@ -134,7 +132,6 @@
     <Build Include="dbo\Tables\SalesJournal.sql" />
     <Build Include="dbo\Tables\Customer.sql" />
     <Build Include="dbo\Tables\AccountTypes.sql" />
-    <Build Include="dbo\Tables\CkdOiItem.sql" />
     <Build Include="dbo\Tables\Supplier.sql" />
     <Build Include="dbo\Tables\Reconciled.sql" />
     <Build Include="dbo\Tables\Department.sql" />
@@ -146,9 +143,7 @@
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
     <Build Include="dbo\Views\Account_View.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
-    <Build Include="dbo\Views\CheckDisbursementJournalItem_View.sql" />
     <Build Include="dbo\Views\GlLedgers_View.sql" />
-    <Build Include="dbo\Views\CheckDisbursementJournal_View.sql" />
     <Build Include="dbo\Views\ApJournal_View.sql" />
     <Build Include="dbo\Views\CashReceiptJournalItem_View.sql" />
     <Build Include="dbo\Views\ApJournalItem_View.sql" />
@@ -174,7 +169,6 @@
     <Build Include="dbo\Views\GlReconciliation_View.sql" />
     <Build Include="dbo\Views\TranslatedMessages_View.sql" />
     <Build Include="dbo\Views\ApOpenInvoice_View.sql" />
-    <Build Include="dbo\Views\CkdOiItem_View.sql" />
     <Build Include="dbo\Views\Department_View.sql" />
     <Build Include="dbo\Views\GroupAccess_View.sql" />
     <Build Include="dbo\Views\SalesJournalItem_View.sql" />
@@ -196,8 +190,6 @@
     <Build Include="dbo\Stored Procedures\InsertApJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertArJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertCashReceiptJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertCheckDisbursementJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertCkdOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertCsrOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertDistributionSchemeItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertEmployeeLoanJournalItemTVP.sql" />
@@ -207,8 +199,6 @@
     <Build Include="dbo\Stored Procedures\UpdateApJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateArJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCashReceiptJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateCheckDisbursementJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateCkdOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCsrOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateDistributionSchemeItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertGroupAccessTVP.sql" />
@@ -275,12 +265,8 @@
     <Build Include="dbo\Views\GeneralJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ErJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\CostCenter_View_1.sql" />
-    <Build Include="dbo\Views\CkdJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ARJournalTransaction_View_1.sql" />
     <Build Include="dbo\Views\ApJournalTransaction_View_1.sql" />
-    <Build Include="dbo\User Defined Types\DistributionSchemeItemUpdatex.sql" />
-    <Build Include="dbo\User Defined Types\DistributionSchemeItemMergex.sql" />
-    <Build Include="dbo\User Defined Types\DistributionSchemeItemInsertx.sql" />
     <Build Include="dbo\Tables\ProfitCenterOrg_1.sql" />
     <Build Include="dbo\Tables\ProfitCenterOld_1.sql" />
     <Build Include="dbo\Tables\ProfitCenter_1.sql" />
@@ -358,7 +344,6 @@
     <Build Include="dbo\Tables\PatientNoGaps.sql" />
     <Build Include="dbo\Tables\EmpEarnings.sql" />
     <Build Include="dbo\Tables\BasicPay.sql" />
-    <Build Include="dbo\Views\EmployeeEarning_View2.sql" />
     <Build Include="dbo\Views\Payroll_View.sql" />
     <Build Include="dbo\Views\CdJournal_View.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCdOiItemTVP.sql" />
@@ -366,7 +351,6 @@
     <Build Include="dbo\User Defined Types\CdOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\CdOiItemInsert.sql" />
     <Build Include="dbo\Tables\CdOiItem_1.sql" />
-    <Build Include="dbo\Views\CdOiItem_View_1.sql" />
     <Build Include="dbo\Tables\PcOiItem.sql" />
     <Build Include="dbo\Tables\PcJournalItem.sql" />
     <Build Include="dbo\Tables\PcJournal.sql" />
@@ -385,6 +369,18 @@
     <Build Include="dbo\User Defined Types\PcOiItemInsert.sql" />
     <Build Include="dbo\Views\CdJournalItem_View.sql" />
     <Build Include="dbo\Views\PcJournalItem_View.sql" />
+    <Build Include="dbo\Tables\CkJournalItem.sql" />
+    <Build Include="dbo\Tables\CkJournal.sql" />
+    <Build Include="dbo\Views\CkJournalTransaction_View.sql" />
+    <Build Include="dbo\Views\CkJournalItem_View.sql" />
+    <Build Include="dbo\Views\CkJournal_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateCkOiItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertCkOiItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\CkOiItemUpdate.sql" />
+    <Build Include="dbo\User Defined Types\CkOiItemInsert.sql" />
+    <Build Include="dbo\Tables\CkOiItem.sql" />
+    <Build Include="dbo\Views\CkOiItem_View.sql" />
+    <Build Include="dbo\Views\CdOiItem_View_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

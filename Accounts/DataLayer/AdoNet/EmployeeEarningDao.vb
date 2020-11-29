@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of EmployeeEarning).InsertTvp
-            Return Db.InsertTvp("InsertEmployeeEarningTVP", tvpTable, "@MParam")
+            Return Db.InsertTvp("InsertEmployeeEarningTVP", tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeEarning) =

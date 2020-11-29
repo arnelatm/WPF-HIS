@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         End Sub
 
         Public Function AddRecord(ByRef recordData As CdJournal) As Integer Implements IDao(Of CdJournal).AddRecord
-            Return CdAddRecord(recordData)
+            Return DjAddRecord(recordData)
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
@@ -25,25 +25,22 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo As Object) As CdJournal Implements IDao(Of CdJournal).GetRecordById
 
-            Dim data As DisbursementJournal = CdGetRecordById(idNo)
+            Dim data As DisbursementJournal = DjGetRecordById(idNo)
             Dim result As New CdJournal
             Return GlobalVariables.Mapper.Map(data, result)
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As CdJournal) As Integer Implements IDaoJournals(Of CdJournal).UpdateGlReferenceNumber
-            Return CdUpdateGlReferenceNumber(bizObj)
+            Return DjUpdateGlReferenceNumber(bizObj)
         End Function
 
         Public Function UpdateRecord(ByRef recordData As CdJournal) As Integer Implements IDao(Of CdJournal).UpdateRecord
-            Return CdUpdateRecord(recordData)
+            Return DjUpdateRecord(recordData)
         End Function
 
         Protected Overrides Function GetDjOiItemDao()
             Dim djOiItemDao As CdOiItemDao
             djOiItemDao = New CdOiItemDao()
-            'djOiItemDao.TableName = "CdOiItem_View"
-            'djOiItemDao.DboTvpInsertName = "InsertCdOiItemTVP"
-            'djOiItemDao.DboTvpUpdateName = "UpdateCdOiItemTVP"
             Return djOiItemDao
         End Function
 

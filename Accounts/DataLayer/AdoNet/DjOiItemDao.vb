@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
         Protected Property DboTvpUpdateName As String
         Protected Property DboTvpInsertName As String
 
-        Protected Function CdGetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem)
+        Protected Function DjGetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem)
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
@@ -41,12 +41,12 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Protected Function CdDelUpdateTvp(ByRef tvpTable As DataTable, djIdNo As Int32) As Integer
+        Protected Function DjDelUpdateTvp(ByRef tvpTable As DataTable, djIdNo As Int32) As Integer
             Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", djIdNo)
         End Function
 
-        Public Function CdInsertTvp(ByRef tvpTable As DataTable) As Integer
-            Return _db.InsertTvp(DboTvpInsertName, tvpTable, "@MParam")
+        Public Function DjInsertTvp(ByRef tvpTable As DataTable) As Integer
+            Return _db.InsertTvp(DboTvpInsertName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, DjOiItem) =
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
 
-        Public Function CdGetOpenInvoices(idNo As Int32) As List(Of DjOiItem)
+        Public Function DjGetOpenInvoices(idNo As Int32) As List(Of DjOiItem)
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

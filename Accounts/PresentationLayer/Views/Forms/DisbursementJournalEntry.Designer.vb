@@ -46,6 +46,9 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -82,7 +85,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -106,6 +108,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
+        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
         Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -118,8 +122,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tlpDisbursement.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
@@ -140,6 +142,8 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.tlpDisbursement, "tlpDisbursement")
+        Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 11, 8)
+        Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 10, 8)
         Me.tlpDisbursement.Controls.Add(Me.btnViewGL, 0, 8)
         Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 7)
         Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
@@ -186,6 +190,39 @@ Namespace PresentationLayer.Views.Forms
         Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 6, 8)
         Me.tlpDisbursement.Name = "tlpDisbursement"
         '
+        'lblCheckNumber
+        '
+        Me.lblCheckNumber.DisplayOnly = true
+        Me.lblCheckNumber.EditingMode = false
+        resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
+        Me.lblCheckNumber.Name = "lblCheckNumber"
+        '
+        'txtCheckNumber
+        '
+        Me.txtCheckNumber.BackColor = System.Drawing.Color.White
+        Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tlpDisbursement.SetColumnSpan(Me.txtCheckNumber, 2)
+        Me.txtCheckNumber.ComputedValue = false
+        Me.txtCheckNumber.CustomFormat = Nothing
+        Me.txtCheckNumber.DataBoundControl = true
+        Me.txtCheckNumber.EditingMode = false
+        resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
+        Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
+        Me.txtCheckNumber.MaximumValue = Nothing
+        Me.txtCheckNumber.MinimumValue = Nothing
+        Me.txtCheckNumber.Name = "txtCheckNumber"
+        Me.txtCheckNumber.OldValue = Nothing
+        Me.txtCheckNumber.ReadOnly = true
+        Me.txtCheckNumber.ValueIsMandatory = true
+        '
+        'lblInvoiceNo
+        '
+        Me.lblInvoiceNo.DisplayOnly = true
+        Me.lblInvoiceNo.EditingMode = false
+        resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
+        Me.lblInvoiceNo.Name = "lblInvoiceNo"
+        '
         'btnViewGL
         '
         Me.tlpDisbursement.SetColumnSpan(Me.btnViewGL, 2)
@@ -217,12 +254,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewJournalItems.DgvFooter = Nothing
         Me.DataGridViewJournalItems.DisplayOnly = false
+        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
         Me.DataGridViewJournalItems.Ea = EventAggregator1
         Me.DataGridViewJournalItems.EditingMode = false
         Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
-        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
@@ -647,13 +684,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.ValueIsNumeric = false
         Me.cboDiscountAccountIdNo.ValueMember = "IdNo"
         '
-        'lblInvoiceNo
-        '
-        Me.lblInvoiceNo.DisplayOnly = true
-        Me.lblInvoiceNo.EditingMode = false
-        resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
-        Me.lblInvoiceNo.Name = "lblInvoiceNo"
-        '
         'txtORNumber
         '
         Me.txtORNumber.BackColor = System.Drawing.Color.White
@@ -1028,6 +1058,29 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = false
         Me.DataGridViewDjOiItems.StartTrackingChanges = false
         '
+        'bsDjOiItems
+        '
+        Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
+        '
+        'txtPayeeName
+        '
+        Me.txtPayeeName.BackColor = System.Drawing.Color.White
+        Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tlpDisbursement.SetColumnSpan(Me.txtPayeeName, 4)
+        Me.txtPayeeName.ComputedValue = false
+        Me.txtPayeeName.CustomFormat = Nothing
+        Me.txtPayeeName.DataBoundControl = true
+        Me.txtPayeeName.EditingMode = false
+        resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
+        Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
+        Me.txtPayeeName.LinkedLabel = Me.lblAmount
+        Me.txtPayeeName.MaximumValue = Nothing
+        Me.txtPayeeName.MinimumValue = Nothing
+        Me.txtPayeeName.Name = "txtPayeeName"
+        Me.txtPayeeName.OldValue = Nothing
+        Me.txtPayeeName.ReadOnly = true
+        Me.txtPayeeName.ValueIsMandatory = true
+        '
         'dgvSequenceDjOi
         '
         Me.dgvSequenceDjOi.DataPropertyName = "Sequence"
@@ -1035,7 +1088,7 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
         Me.dgvSequenceDjOi.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvSequenceDjOi.DisplayOnly = true
-        Me.dgvSequenceDjOi.EditingMode = false
+        Me.dgvSequenceDjOi.EditingMode = true
         resources.ApplyResources(Me.dgvSequenceDjOi, "dgvSequenceDjOi")
         Me.dgvSequenceDjOi.Name = "dgvSequenceDjOi"
         Me.dgvSequenceDjOi.ReadOnly = true
@@ -1170,29 +1223,6 @@ Namespace PresentationLayer.Views.Forms
         Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
         Me.OpenInvoiceIdNo.ReadOnly = true
         '
-        'bsDjOiItems
-        '
-        Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
-        '
-        'txtPayeeName
-        '
-        Me.txtPayeeName.BackColor = System.Drawing.Color.White
-        Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtPayeeName, 4)
-        Me.txtPayeeName.ComputedValue = false
-        Me.txtPayeeName.CustomFormat = Nothing
-        Me.txtPayeeName.DataBoundControl = true
-        resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
-        Me.txtPayeeName.EditingMode = false
-        Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
-        Me.txtPayeeName.LinkedLabel = Me.lblAmount
-        Me.txtPayeeName.MaximumValue = Nothing
-        Me.txtPayeeName.MinimumValue = Nothing
-        Me.txtPayeeName.Name = "txtPayeeName"
-        Me.txtPayeeName.OldValue = Nothing
-        Me.txtPayeeName.ReadOnly = true
-        Me.txtPayeeName.ValueIsMandatory = true
-        '
         'DisbursementJournalEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -1226,18 +1256,6 @@ End Sub
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents btnAutoApply As CButton
-        Friend WithEvents dgvSequenceDjOi As CdgvColumnText
-        Friend WithEvents dgvInvoiceNo As CdgvColumnText
-        Friend WithEvents DgvTransactionDate As CdgvColumnText
-        Friend WithEvents dgvJournalCode As CdgvColumnText
-        Friend WithEvents dgvJournalIdNoAp As CdgvColumnText
-        Friend WithEvents dgvPreviousBalance As CdgvColumnMoney
-        Friend WithEvents dgvAmount As CdgvColumnMoney
-        Friend WithEvents dgvDiscountTaken As CdgvColumnMoney
-        Friend WithEvents dgvBalance As CdgvColumnMoney
-        Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
-        Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
-        Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
         Friend WithEvents tlpDisbursement As TableLayoutPanel
         Friend WithEvents txtPayeeName As CTextBox
         Friend WithEvents lblAmount As CLabel
@@ -1296,5 +1314,19 @@ End Sub
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents txtCheckNumber As CTextBox
+        Friend WithEvents lblCheckNumber As CLabel
+        Friend WithEvents dgvSequenceDjOi As CdgvColumnText
+        Friend WithEvents dgvInvoiceNo As CdgvColumnText
+        Friend WithEvents DgvTransactionDate As CdgvColumnText
+        Friend WithEvents dgvJournalCode As CdgvColumnText
+        Friend WithEvents dgvJournalIdNoAp As CdgvColumnText
+        Friend WithEvents dgvPreviousBalance As CdgvColumnMoney
+        Friend WithEvents dgvAmount As CdgvColumnMoney
+        Friend WithEvents dgvDiscountTaken As CdgvColumnMoney
+        Friend WithEvents dgvBalance As CdgvColumnMoney
+        Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+        Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
     End Class
 End Namespace

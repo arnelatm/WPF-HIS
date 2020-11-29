@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
 
         Public ReadOnly Property CdAccountCount As Int16
             Get
-                Dim specialAccount As String = ""
+                Dim specialAccount As String
                 If JournalCode = "PC" Then
                     specialAccount = EnumToCode(SpecialAccountSelection.PettyCashAccount)
                     Return ModelPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
@@ -320,7 +320,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Seq <> 1) Then
+            If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
                 Return False
             End If
             Return True

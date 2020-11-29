@@ -11,8 +11,8 @@ Namespace PresentationLayer.Models
 
         End Sub
 
-        Public Sub New(accountName As String)
-            DataService = New ServiceAccounts(accountName)
+        Public Sub New(accountName As String, Optional daoTableOrViewName As String = "")
+            DataService = New ServiceAccounts(accountName, daoTableOrViewName)
         End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber

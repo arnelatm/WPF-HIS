@@ -71,8 +71,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [dbo].[CheckDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CheckDisbursementJournal b
+  FROM [dbo].[CkJournalItem] A
+  LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='R'
 )
