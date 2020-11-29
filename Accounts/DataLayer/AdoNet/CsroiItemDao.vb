@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of CsrOiItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, CsrOiItem) =

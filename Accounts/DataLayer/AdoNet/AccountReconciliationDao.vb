@@ -165,7 +165,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of AccountReconciliationItem).InsertTvp
-            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
         Public Function GetAcctReconItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) _

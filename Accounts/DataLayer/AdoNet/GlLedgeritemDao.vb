@@ -102,7 +102,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of GlLedgerItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
         Public Function GetGlLedger(ByRef AccountIdNo As Int16, transactionDate As Date, Optional sortExpression As String = "TransactionDate") _

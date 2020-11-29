@@ -49,8 +49,8 @@ UNION
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-  FROM [ISPDATA].[dbo].[CheckDisbursementJournalItem] A
-  RIGHT OUTER JOIN dbo.CheckDisbursementJournal b
+  FROM [ISPDATA].[dbo].[CkJournalItem] A
+  RIGHT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IdNo
   WHERE PaymentType='A'
 )

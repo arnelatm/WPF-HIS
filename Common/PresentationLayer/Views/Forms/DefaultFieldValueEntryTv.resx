@@ -235,7 +235,7 @@
     <value>ProductCategory</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource5" xml:space="preserve">
-    <value>CheckDisbursementJournal</value>
+    <value>CkJournal</value>
   </data>
   <data name="cboTableName.AutoCompleteCustomSource6" xml:space="preserve">
     <value>Customer</value>

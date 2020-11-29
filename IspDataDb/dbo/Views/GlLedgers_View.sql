@@ -142,8 +142,8 @@ UNION
 			ELSE b.PayeeName
 	   END
 	   ,CAST(0 AS BIT)
-  FROM [dbo].[CheckDisbursementJournalItem] a
-  LEFT OUTER JOIN dbo.CheckDisbursementJournal b
+  FROM [dbo].[CkJournalItem] a
+  LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.[Customer] c
   on b.PayeeIdNo = c.IdNo 

@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            enableDoubleBuff(tlpDisbursement)
+            EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = tableName
             If tableName = "PcJournal" Then
@@ -169,7 +169,11 @@ Namespace PresentationLayer.Views.Forms
                 Return cboPayeeIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                cboPayeeIdNo.SetValue(Value)
+                If cboPayeeIdNo.DataSource IsNot Nothing Then
+                    cboPayeeIdNo.SetValue(Value)
+                Else
+                    cboPayeeIdNo.SelectedValue = Nothing
+                End If
             End Set
         End Property
 
@@ -396,11 +400,21 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewJournalItems.Visible = False
                 DataGridViewDjOiItems.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                If tlpDisbursement.GetColumn(DataGridViewDjOiItems) <> 0 Then
+                    SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+                    tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
+                    tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
+                End If
             Else
                 _viewGl = True
                 DataGridViewJournalItems.Visible = True
                 DataGridViewDjOiItems.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                If tlpDisbursement.GetColumn(DataGridViewJournalItems) <> 1 Then
+                    SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+                    tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
+                    tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
+                End If
             End If
         End Sub
 
@@ -426,7 +440,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub PcJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
@@ -451,9 +465,23 @@ Namespace PresentationLayer.Views.Forms
             If MainTableName <> "CkJournal" Then
                 dtpCheckDate.Visible = False
                 lblCheckDate.Visible = False
+                lblCheckNumber.Visible = False
+                txtCheckNumber.Visible = False
+                'SwapPosition(txtORNumber, txtCheckNumber)
+                'tlpDisbursement.SetCellPosition(txtORNumber, New TableLayoutPanelCellPosition(1, 3))
+                'tlpDisbursement.SetCellPosition(txtCheckNumber, New TableLayoutPanelCellPosition(6, 8))
             Else
+                'tlpDisbursement.SetCellPosition(txtCheckNumber, New TableLayoutPanelCellPosition(11, 8))
+                'tlpDisbursement.SetCellPosition(txtOrNumber, New TableLayoutPanelCellPosition(1, 3))
+                SwapPosition(txtORNumber, txtCheckNumber)
+                tlpDisbursement.SetColumnSpan(lblCheckNumber, 1)
+                SwapPosition(lblInvoiceNo, lblCheckNumber)
                 dtpCheckDate.Visible = True
                 lblCheckDate.Visible = True
+                lblCheckNumber.Visible = True
+                txtCheckNumber.Visible = True
+                lblInvoiceNo.Visible = False
+                txtORNumber.Visible = False
             End If
 
             If PresenterObj.CdAccountCount = 0 Then

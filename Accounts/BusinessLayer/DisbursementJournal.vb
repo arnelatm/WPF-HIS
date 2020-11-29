@@ -31,6 +31,8 @@ Namespace BusinessLayer
         Public Property Applied As Decimal
         Public Property DjOiItems As List(Of DjOiItem)
         Public Property Cancelled As Boolean
+        Public Property CheckDate As Date?
+        Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
@@ -49,6 +51,7 @@ Namespace BusinessLayer
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+
     End Class
 
 End Namespace

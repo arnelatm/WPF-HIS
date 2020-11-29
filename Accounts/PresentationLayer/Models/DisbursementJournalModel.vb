@@ -11,6 +11,8 @@
         Public Property Applied As Decimal
         Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Cancelled As Boolean
+        Public Property CheckDate As Date?
+        Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal

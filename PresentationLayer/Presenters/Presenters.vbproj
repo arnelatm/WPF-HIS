@@ -89,6 +89,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="NewPresenter.vb" />
     <Compile Include="Presenter.vb" />
   </ItemGroup>
   <ItemGroup>

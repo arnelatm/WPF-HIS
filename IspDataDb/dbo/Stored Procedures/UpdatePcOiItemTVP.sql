@@ -13,9 +13,9 @@ FROM [DBO].PcOiItem A WHERE A.DjIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM 
 -- Update existing PcOiItems
 UPDATE a 
 SET a.Amount = B.Amount,
-	a.DjIdNo = @GroupIdNo,
-	a.DiscountTaken = B.DiscountTaken,
 	a.ApOpenInvoiceIdNo = B.ApOpenInvoiceIdNo,
+	a.DiscountTaken = B.DiscountTaken,
+	a.DjIdNo = @GroupIdNo,
     a.[Sequence] = B.[Sequence]
 from PcOiItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo

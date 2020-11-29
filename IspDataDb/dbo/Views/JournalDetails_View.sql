@@ -43,8 +43,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
-  FROM [CheckDisbursementJournalItem] ai
-  LEFT OUTER JOIN CheckDisbursementJournal b
+  FROM [CkJournalItem] ai
+  LEFT OUTER JOIN CkJournal b
   on ai.JournalIdNo = b.IDNo
   WHERE PaymentType='A'
 )

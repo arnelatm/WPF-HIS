@@ -24,7 +24,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of Reconciled).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
     End Class

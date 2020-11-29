@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CheckDisbursementJournalItem] (
+﻿CREATE TABLE [dbo].[CkJournalItem] (
     [IdNo]              INT            IDENTITY (1, 1) NOT NULL,
     [Sequence]          SMALLINT       CONSTRAINT [DF_ChequeDisbursementJournalItem_Sequence] DEFAULT ((0)) NOT NULL,
     [JournalIdNo]       INT            CONSTRAINT [DF_ChequeDisbursementJournalItem_JournalIdNo] DEFAULT ((0)) NOT NULL,
@@ -11,14 +11,4 @@
     [DateTimeStamp]     ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ChequeDisbursementJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
-
-
-
-
-
-
-
-
-
-
 

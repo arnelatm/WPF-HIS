@@ -83,7 +83,7 @@ Namespace PresentationLayer.Views.Forms
                                                                           cfg.AddProfile(New MappingProfileCommon)
                                                                       End Sub)
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
-            mapperConfigurationAccounts.AssertConfigurationIsValid()
+            'mapperConfigurationAccounts.AssertConfigurationIsValid()
         End Sub
 
         Public Event FormCultureChanged()
@@ -417,13 +417,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
-            Dim childMdiForm As ProductCategoryEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New ProductCategoryEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunBasicForm("Category", "Categories Maintenance Form")
         End Sub
 
         'Public Event FormCultureChanged()
@@ -494,11 +488,21 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
             Dim childMdiForm As BankEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New BankEntryTv() With {
+            ''Set the Parent Form of the Child window.
+            childMdiForm = New BankEntryTv With {
                 .MdiParent = Me
                 }
-            'Display the new form.
+            ''Display the new form.
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
+            Dim childMdiForm As BasicEntry
+            ''Set the Parent Form of the Child window.
+            childMdiForm = New BasicEntry(tableOrViewName, formCaption) With {
+                .MdiParent = Me
+                }
+            ''Display the new form.
             childMdiForm.Show()
         End Sub
 
@@ -1028,12 +1032,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem8.Click
-            Dim childMdiForm As CheckDisbursementJournalEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New CheckDisbursementJournalEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
+            Dim childMdiForm = New DisbursementJournalEntry("CkJournal") With {.MdiParent = Me}
             childMdiForm.Show()
         End Sub
 
@@ -1046,26 +1045,6 @@ Namespace PresentationLayer.Views.Forms
             'Display the new form.
             childMdiForm.Show()
         End Sub
-
-        'Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem.Click
-        '    Dim childMdiForm As ProductCategoryEntryTv
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New ProductCategoryEntryTv With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
-
-        'Private Sub ToolStripMenuItemTestForm_Click(sender As Object, e As EventArgs)
-        '    Dim childMdiForm As CheckDisbursementJournalEntry
-        '    'Set the Parent Form of the Child window.
-        '    childMdiForm = New CheckDisbursementJournalEntry With {
-        '        .MdiParent = Me
-        '        }
-        '    'Display the new form.
-        '    childMdiForm.Show()
-        'End Sub
 
         Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesJournalEntryToolStripMenuItem.Click
             Dim childMdiForm As SalesJournalEntry

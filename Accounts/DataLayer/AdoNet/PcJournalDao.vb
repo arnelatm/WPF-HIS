@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
         End Sub
 
         Public Function AddRecord(ByRef recordData As PcJournal) As Integer Implements IDao(Of PcJournal).AddRecord
-            Return CdAddRecord(recordData)
+            Return DjAddRecord(recordData)
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
@@ -27,25 +27,25 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetRecordById(idNo As Object) As PcJournal Implements IDao(Of PcJournal).GetRecordById
-            Dim data As DisbursementJournal = CdGetRecordById(idNo)
+            Dim data As DisbursementJournal = DjGetRecordById(idNo)
             Dim result As New PcJournal
             Return GlobalVariables.Mapper.Map(data, result)
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As PcJournal) As Integer Implements IDaoJournals(Of PcJournal).UpdateGlReferenceNumber
-            Return CdUpdateGlReferenceNumber(bizObj)
+            Return DjUpdateGlReferenceNumber(bizObj)
         End Function
 
         Public Function UpdateRecord(ByRef recordData As PcJournal) As Integer Implements IDao(Of PcJournal).UpdateRecord
-            Return CdUpdateRecord(recordData)
+            Return DjUpdateRecord(recordData)
         End Function
 
         Protected Overrides Function GetDjOiItemDao()
             Dim djOiItemDao As PcOiItemDao
             djOiItemDao = New PcOiItemDao()
-            djOiItemDao.TableName = "PcOiItem_View"
-            djOiItemDao.DboTvpInsertName = "InsertPcOiItemTVP"
-            djOiItemDao.DboTvpUpdateName = "UpdatePcOiItemTVP"
+            'djOiItemDao.TableName = "PcOiItem_View"
+            'djOiItemDao.DboTvpInsertName = "InsertPcOiItemTVP"
+            'djOiItemDao.DboTvpUpdateName = "UpdatePcOiItemTVP"
             Return djOiItemDao
         End Function
 

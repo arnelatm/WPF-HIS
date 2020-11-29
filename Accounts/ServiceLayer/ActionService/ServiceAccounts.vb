@@ -16,20 +16,20 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Public Sub New(accountName As String)
-            Dim bizObject
+        Public Sub New(accountName As String, Optional daoTableOrViewName As String = "")
+            Dim bizObjectName
             If accountName.Length > 11 AndAlso accountName.Right(11) = "JournalItem" Then
-                bizObject = $"AATM.Accounts.BusinessLayer.JournalItem"
+                bizObjectName = $"AATM.Accounts.BusinessLayer.JournalItem"
             ElseIf accountName.Length > 6 AndAlso accountName.Right(6) = "OiItem" Then
-                bizObject = $"AATM.Accounts.BusinessLayer.DjOiItem"
+                bizObjectName = $"AATM.Accounts.BusinessLayer.DjOiItem"
             Else
-                bizObject = $"AATM.Accounts.BusinessLayer." + accountName
+                bizObjectName = $"AATM.Accounts.BusinessLayer." + accountName
             End If
             Dim dao = accountName + "Dao"
-            DataBo = Activator.CreateInstance(Type.GetType(bizObject))
+            DataBo = Activator.CreateInstance(Type.GetType(bizObjectName))
             'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
-                MessageBox.Show("Missing Business Object " + bizObject)
+                MessageBox.Show("Missing Business Object " + bizObjectName)
                 Debugger.Break()
             End If
             'Dim fldInfo As FieldInfo = Me.GetType().GetField(dao, BindingFlags.NonPublic Or BindingFlags.Instance)
@@ -38,7 +38,16 @@ Namespace ServiceLayer.ActionService
             '    Debugger.Break()
             'End If
             DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
-            If DataDao Is Nothing Then
+            If DataDao IsNot Nothing Then
+                If dao = "BasicDao" Then
+                    If daoTableOrViewName Is Nothing Then
+                        MessageBox.Show("Please provide BasicDao table or view name.")
+                        Debugger.Break()
+                    Else
+                        DataDao.SetTableOrViewName(daoTableOrViewName)
+                    End If
+                End If
+            Else
                 MessageBox.Show("Missing Data Access Object " + dao)
                 Debugger.Break()
             End If
@@ -58,6 +67,16 @@ Namespace ServiceLayer.ActionService
             'End If
             'DataDao = fldInfo.GetValue(Me)
         End Sub
+
+        Protected Overrides Sub Finalize()
+            MyBase.Finalize()
+        End Sub
+
+        Private ReadOnly Property AccountDao As IDaoAll(Of Account)
+            Get
+                Return DaoFactoryAccounts.CreateDao("Account")
+            End Get
+        End Property
 
         Private ReadOnly Property AccountReconciliationDao As IDao(Of AccountReconciliation)
             Get
@@ -107,21 +126,9 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property DepositTypeDao As IDaoAll(Of DepositType)
+        Private ReadOnly Property BasicDao As IDaoAll(Of Basic)
             Get
-                Return DaoFactoryAccounts.CreateDao("DepositType")
-            End Get
-        End Property
-
-        Private ReadOnly Property CdJournalDao As IDao(Of CdJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CdJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property CdJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CdJournalItem")
+                Return DaoFactoryAccounts.CreateDao("Basic")
             End Get
         End Property
 
@@ -137,21 +144,15 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property AccountDao As IDaoAll(Of Account)
+        Private ReadOnly Property CdJournalDao As IDao(Of CdJournal)
             Get
-                Return DaoFactoryAccounts.CreateDao("Account")
+                Return DaoFactoryAccounts.CreateDao("CdJournal")
             End Get
         End Property
 
-        Private ReadOnly Property CheckDisbursementJournalDao As IDao(Of CheckDisbursementJournal)
+        Private ReadOnly Property CdJournalItemDao As IDaoChild(Of JournalItem)
             Get
-                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
+                Return DaoFactoryAccounts.CreateDao("CdJournalItem")
             End Get
         End Property
 
@@ -161,15 +162,32 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
-        Private ReadOnly Property PcOiItemDao As IDaoChild(Of DjOiItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PcOiItem")
-            End Get
-        End Property
-
         Private ReadOnly Property CkdOiItemDao As IDaoChild(Of CkdOiItem)
             Get
                 Return DaoFactoryAccounts.CreateDao("CkdOiItem")
+            End Get
+        End Property
+
+        Private ReadOnly Property CkJournalDao As IDao(Of CkJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CkJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property CkJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CkJournalItem")
+            End Get
+        End Property
+
+        'Private ReadOnly Property CheckDisbursementJournalItemDao As IDaoChild(Of JournalItem)
+        '    Get
+        '        Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournalItem")
+        '    End Get
+        'End Property
+        Private ReadOnly Property CkOiItemDao As IDaoChild(Of DjOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("CkOiItem")
             End Get
         End Property
 
@@ -188,6 +206,12 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property DeductionDao As IDao(Of Deduction)
             Get
                 Return DaoFactoryAccounts.CreateDao("Deduction")
+            End Get
+        End Property
+
+        Private ReadOnly Property DepositTypeDao As IDaoAll(Of DepositType)
+            Get
+                Return DaoFactoryAccounts.CreateDao("DepositType")
             End Get
         End Property
 
@@ -305,6 +329,29 @@ Namespace ServiceLayer.ActionService
             End Get
         End Property
 
+        Private ReadOnly Property PcJournalDao As IDao(Of PcJournal)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcJournal")
+            End Get
+        End Property
+
+        Private ReadOnly Property PcJournalItemDao As IDaoChild(Of JournalItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcJournalItem")
+            End Get
+        End Property
+
+        'Private ReadOnly Property CheckDisbursementJournalDao As IDao(Of CheckDisbursementJournal)
+        '    Get
+        '        Return DaoFactoryAccounts.CreateDao("CheckDisbursementJournal")
+        '    End Get
+        'End Property
+        Private ReadOnly Property PcOiItemDao As IDaoChild(Of DjOiItem)
+            Get
+                Return DaoFactoryAccounts.CreateDao("PcOiItem")
+            End Get
+        End Property
+
         Private ReadOnly Property PensionProviderDao As IDaoAll(Of PensionProvider)
             Get
                 Return DaoFactoryAccounts.CreateDao("PensionProvider")
@@ -320,18 +367,6 @@ Namespace ServiceLayer.ActionService
         Private ReadOnly Property PensionSchemeDao As IDao(Of PensionScheme)
             Get
                 Return DaoFactoryAccounts.CreateDao("PensionScheme")
-            End Get
-        End Property
-
-        Private ReadOnly Property PcJournalDao As IDao(Of PcJournal)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PcJournal")
-            End Get
-        End Property
-
-        Private ReadOnly Property PcJournalItemDao As IDaoChild(Of JournalItem)
-            Get
-                Return DaoFactoryAccounts.CreateDao("PcJournalItem")
             End Get
         End Property
 

@@ -60,8 +60,8 @@ UNION
 	  ,[ReferenceNo]
 	  ,[TransactionDate]
       ,[ReferenceNo]  
-  FROM [dbo].[CheckDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CheckDisbursementJournal b
+  FROM [dbo].[CkJournalItem] A
+  LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno

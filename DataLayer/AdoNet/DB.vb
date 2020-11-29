@@ -17,8 +17,9 @@ Namespace AdoNet
         'Protected ShowWaitForm As BackgroundWorker(Of DbCommand)
         Private ReadOnly Factory As DbProviderFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
 
-        Private _exInfo As ExceptionDispatchInfo
+        'Private _exInfo As ExceptionDispatchInfo
         Private Property ConnectionString As String
+
         'Private _waitForm As LoadingForm
 
         Public Sub New(Optional ByVal conn As String = Nothing)
@@ -571,7 +572,6 @@ Namespace AdoNet
                             '_waitForm.Show()
                             tryAgain = True
                         Case Else
-                            retValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -620,7 +620,6 @@ Namespace AdoNet
                             '_waitForm.Show()
                             tryAgain = True
                         Case Else
-                            retValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -684,7 +683,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function InsertTvp(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
+        Public Function InsertTvp(tableValuedProcedure As String, dataTableName As DataTable) _
             As Integer
             Dim returnValue As Integer
             Dim tryAgain As Boolean
@@ -717,7 +716,6 @@ Namespace AdoNet
                             tryAgain = True
                             '_waitForm.Show()
                         Case Else
-                            returnValue = -1
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
@@ -880,7 +878,10 @@ Namespace AdoNet
 
         ' creates an adapter object
 
+#Disable Warning IDE0051 ' Remove unused private members
+
         Private Function CreateAdapter(command As DbCommand) As DbDataAdapter
+#Enable Warning IDE0051 ' Remove unused private members
             ' ** Factory pattern in action
 
             Dim adapter = Factory.CreateDataAdapter()

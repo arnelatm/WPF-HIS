@@ -48,7 +48,7 @@ Namespace DataLayer.AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
             Implements IDaoChild(Of PayrollDeductAccount).InsertTvp
-            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable, "@MParam")
+            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollDeductAccount) =

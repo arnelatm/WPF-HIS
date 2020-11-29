@@ -191,7 +191,7 @@ Public Module GlobalFunctions
         End If
     End Function
 
-    Function GetMonthNamesInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo)
+    Function GetMonthNamesInCulture(ByRef targetCulture As CultureInfo)
         Return targetCulture.DateTimeFormat.MonthGenitiveNames()
     End Function
 
@@ -432,13 +432,13 @@ Public Module GlobalFunctions
     End Function
 
     Public Function NullValue(argDbl As Double) As Double
-        Dim dblReturnDouble = 0.0
+        Dim dblReturnDouble As Double
         If argDbl.Equals(DBNull.Value) Then
-            dblReturnDouble = 0.0
+            dblReturnDouble = 0D
         ElseIf Convert.ToString(argDbl) = "" Then
-            dblReturnDouble = 0.0
+            dblReturnDouble = 0D
         ElseIf Convert.ToString(argDbl) = "&nbsp;" Then
-            dblReturnDouble = 0.0
+            dblReturnDouble = 0D
         Else
             dblReturnDouble = Convert.ToDouble(argDbl)
         End If
@@ -658,17 +658,18 @@ Public Module GlobalFunctions
         As Boolean
         Try
             ' Create the mail message
-            Dim objMailMsg = New MailMessage(strFrom, strTo)
-
-            objMailMsg.BodyEncoding = Encoding.UTF8
-            objMailMsg.Subject = strSubject
-            objMailMsg.Body = strMsg
-            objMailMsg.Priority = MailPriority.High
-            objMailMsg.IsBodyHtml = True
+            Dim objMailMsg = New MailMessage(strFrom, strTo) With {
+                .BodyEncoding = Encoding.UTF8,
+                .Subject = strSubject,
+                .Body = strMsg,
+                .Priority = MailPriority.High,
+                .IsBodyHtml = True
+            }
 
             'prepare to send mail via SMTP transport
-            Dim objSMTPClient = New SmtpClient()
-            objSMTPClient.DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis
+            Dim objSMTPClient = New SmtpClient With {
+                .DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis
+            }
             objSMTPClient.Send(objMailMsg)
             Return True
         Catch ex As Exception
@@ -693,7 +694,7 @@ Public Module GlobalFunctions
         If IsCultureOk(cultureCode) Then
             CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
         Else
-            cultureCode = "en-US"
+            'cultureCode = "en-US"
             CultureInfo.CurrentCulture = New CultureInfo("en-US", False)
         End If
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then

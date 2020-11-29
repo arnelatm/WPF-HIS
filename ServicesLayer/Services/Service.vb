@@ -86,7 +86,7 @@ Namespace Services
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
 
-        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Int32, ByRef dataModel As TM, ByRef dbDataDao As TD, ByRef externalService As Object) As TM
+        Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Int32, ByRef externalService As Object) As TM
             Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
         End Function
 

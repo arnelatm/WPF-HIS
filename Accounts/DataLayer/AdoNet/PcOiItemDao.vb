@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Db As New Db()
 
-        Private Sub New()
+        Public Sub New()
             TableName = "PcOiItem_View"
             DboTvpUpdateName = "dbo.UpdatePcOiItemTVP"
             DboTvpInsertName = "dbo.InsertPcOiItemTVP"
@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
             As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo
-            Return CdGetRecordsWithIdNo(idNo)
+            Return DjGetRecordsWithIdNo(idNo)
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, djIdNo As Int32) As Integer Implements IDaoChild(Of DjOiItem).DelUpdateTvp
@@ -29,11 +29,11 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DjOiItem).InsertTvp
-            Return Db.InsertTvp(DboTvpInsertName, tvpTable, "@MParam")
+            Return Db.InsertTvp(DboTvpInsertName, tvpTable)
         End Function
 
         Public Function GetOpenInvoices(idNo As Int32) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
-            Return CdGetOpenInvoices(idNo)
+            Return DjGetOpenInvoices(idNo)
         End Function
 
     End Class

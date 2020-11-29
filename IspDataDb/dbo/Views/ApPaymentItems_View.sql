@@ -12,12 +12,12 @@ CREATE VIEW [dbo].[ApPaymentItems_View] as
 union
 (SELECT [IdNo] 
 	  ,'CK'
-      ,[CkdIdNo]
+      ,[DjIdNo]
       ,[ApOpenInvoiceIdNo]
       ,[Sequence]
       ,[Amount]
       ,[DiscountTaken]
-  FROM [dbo].[CkdOiItem]
+  FROM [dbo].[CkOiItem]
 )
 UNION
 (SELECT [IdNo]

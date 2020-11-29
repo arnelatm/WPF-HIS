@@ -65,8 +65,8 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes
-  FROM [dbo].[CheckDisbursementJournalItem] A
-  LEFT OUTER JOIN dbo.CheckDisbursementJournal b
+  FROM [dbo].[CkJournalItem] A
+  LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PaymentType='E'
 )
